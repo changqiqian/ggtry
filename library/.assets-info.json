@@ -1,0 +1,210 @@
+{
+  "/Users/yamiwang/SY/assets/scene.meta": {
+    "time": 1655098483932.8816
+  },
+  "/Users/yamiwang/SY/assets/scene": {
+    "time": 1655098487161.6792,
+    "uuid": "a5193095-f3de-4d39-85bb-0ad37bd8c241",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/scene/start.scene.meta": {
+    "time": 1655097156039.3855
+  },
+  "/Users/yamiwang/SY/assets/scene/start.scene": {
+    "time": 1655206042412.94,
+    "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/scripts.meta": {
+    "time": 1655097168782.6123
+  },
+  "/Users/yamiwang/SY/assets/scripts/base.meta": {
+    "time": 1655097697506.018
+  },
+  "/Users/yamiwang/SY/assets/scripts": {
+    "time": 1655181528786.0679,
+    "uuid": "24d8ce4b-3be9-4f4f-bd6e-c3ce45a7348a",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/scripts/base": {
+    "time": 1655135964649.713,
+    "uuid": "167c5519-10cd-416b-b8cd-84a9f0487d15",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/scripts/base/UIMgr.ts.meta": {
+    "time": 1655097686442.5505
+  },
+  "/Users/yamiwang/SY/assets/scripts/base/UIMgr.ts": {
+    "time": 1655442315663.1094,
+    "uuid": "4d942a49-fb0e-4c3e-87ff-ca87263c99c8",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/scripts/network.meta": {
+    "time": 1655098733444.8745
+  },
+  "/Users/yamiwang/SY/assets/scripts/network": {
+    "time": 1655098733442.2666,
+    "uuid": "7ef403bd-8e11-4105-8730-f439e7a4cb58",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/scripts/ui.meta": {
+    "time": 1655098742205.134
+  },
+  "/Users/yamiwang/SY/assets/scripts/ui": {
+    "time": 1655098742202.4932,
+    "uuid": "73cd545e-1756-45fd-b4e5-4afdb95f3472",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/scripts/base/ResMgr.ts.meta": {
+    "time": 1655112259215.4148
+  },
+  "/Users/yamiwang/SY/assets/scripts/base/ResMgr.ts": {
+    "time": 1655442234375.6194,
+    "uuid": "fdc43a30-c271-4b52-94af-3289bc54141f",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle.meta": {
+    "time": 1655097183084.0864
+  },
+  "/Users/yamiwang/SY/assets/bundle": {
+    "time": 1655112842515.7234,
+    "uuid": "ad83794c-b89a-4608-a7e3-4c38ab4eed33",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/common.meta": {
+    "time": 1655179162167.728
+  },
+  "/Users/yamiwang/SY/assets/bundle/common": {
+    "time": 1655112808642.663,
+    "uuid": "7f3b824a-de1c-45ad-9da3-7cbe9eba91b3",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/anm.meta": {
+    "time": 1655097231202.9067
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/anm": {
+    "time": 1655097231201.4875,
+    "uuid": "47b75ab9-01e0-4e0b-8188-f0c3edf30d65",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/music.meta": {
+    "time": 1655097254025.4587
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/music": {
+    "time": 1655097254022.3777,
+    "uuid": "9bbe6587-d4f6-4645-9f8c-eb305a28d21d",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/font.meta": {
+    "time": 1655097246281.089
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/font": {
+    "time": 1655097246278.6357,
+    "uuid": "490156ff-9bdd-4c1b-a9c4-90670510780e",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/texture.meta": {
+    "time": 1655097219371.0852
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/texture": {
+    "time": 1655097219366.935,
+    "uuid": "12924794-1fe8-4fec-962e-58586356dcd9",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/prefab.meta": {
+    "time": 1655097211382.1028
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/prefab": {
+    "time": 1655179343175.0664,
+    "uuid": "964f19d6-9a6a-462b-aff6-8700df1900b3",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall.meta": {
+    "time": 1655205463477.329
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall": {
+    "time": 1655205367845.938,
+    "uuid": "2cf12bd4-d1c5-477c-8e7c-4b789b884e22",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/scripts/base/BaseUI.ts.meta": {
+    "time": 1655135964651.958
+  },
+  "/Users/yamiwang/SY/assets/scripts/base/BaseUI.ts": {
+    "time": 1655199320824.702,
+    "uuid": "d67f35be-1632-439c-b35b-ab7602cf81bd",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/prefab/test.prefab.meta": {
+    "time": 1655179343179.368
+  },
+  "/Users/yamiwang/SY/assets/bundle/common/prefab/test.prefab": {
+    "time": 1655179343178.1514,
+    "uuid": "26735c26-786f-4ecb-af66-f7772fa84ecd",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/scripts/Start.ts.meta": {
+    "time": 1655098703062.6772
+  },
+  "/Users/yamiwang/SY/assets/scripts/Start.ts": {
+    "time": 1655206037110.383,
+    "uuid": "dddd4d98-653f-4df0-8b57-d35642a297b1",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/scripts/HotUpdate.ts.meta": {
+    "time": 1655181528788.981
+  },
+  "/Users/yamiwang/SY/assets/scripts/HotUpdate.ts": {
+    "time": 1655181528784.773,
+    "uuid": "29e61f73-c2ca-49b8-a736-669bfeea7bb6",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/anm.meta": {
+    "time": 1655205339239.2266
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/anm": {
+    "time": 1655205339237.3618,
+    "uuid": "ce07b9a2-caec-4b50-bf09-e65fd4a70d72",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/font.meta": {
+    "time": 1655205344354.9382
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/font": {
+    "time": 1655205344352.9045,
+    "uuid": "b67638e3-d332-42a2-9bf2-06cfa21bfd3f",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/music.meta": {
+    "time": 1655205352918.9165
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/music": {
+    "time": 1655205352916.7756,
+    "uuid": "bce51300-3f30-4d9c-a835-639639f92fa9",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/prefab.meta": {
+    "time": 1655205359684.3022
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/prefab": {
+    "time": 1655205392176.5518,
+    "uuid": "2e0929be-3cc3-49ff-bac5-35350eb098bc",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/texture.meta": {
+    "time": 1655205367847.064
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/texture": {
+    "time": 1655205367844.6516,
+    "uuid": "8eb66ea7-25ea-4c20-85ba-4f34752aacae",
+    "missing": false
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/prefab/hall.prefab.meta": {
+    "time": 1655205392178.2158
+  },
+  "/Users/yamiwang/SY/assets/bundle/hall/prefab/hall.prefab": {
+    "time": 1655206041046.5715,
+    "uuid": "94f30c20-6290-4620-9ba2-696f2b89ff48",
+    "missing": false
+  }
+}

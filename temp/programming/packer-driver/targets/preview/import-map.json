@@ -1,0 +1,60 @@
+{
+  "imports": {
+    "cce:/internal/x/cc": "./chunks/90/909f786ffe128f06f5aa1b4e1e3fbbd65262915e.js",
+    "cce:/internal/x/prerequisite-imports": "./chunks/52/52e8a9e14f500a509b526e3a9f1d96810f76ca10.js",
+    "file:///Users/yamiwang/SY/assets/scripts/HotUpdate.ts": "./chunks/c4/c49b1af5cdf8073ecc881896b424a3aecedbec36.js",
+    "file:///Users/yamiwang/SY/assets/scripts/Start.ts": "./chunks/e3/e37a1fb5041fb533fb9cc02d7d396e65c359d01a.js",
+    "file:///Users/yamiwang/SY/assets/scripts/base/BaseUI.ts": "./chunks/e3/e3d858c02084681b417e4c217fe809fe97174746.js",
+    "file:///Users/yamiwang/SY/assets/scripts/base/ResMgr.ts": "./chunks/7c/7ca9726e113c18c7a015282c9816939a0724d5ca.js",
+    "file:///Users/yamiwang/SY/assets/scripts/base/UIMgr.ts": "./chunks/45/4597bc4a1ec0894f1d5c94e509e907a00d5b1af0.js"
+  },
+  "scopes": {
+    "./chunks/90/909f786ffe128f06f5aa1b4e1e3fbbd65262915e.js": {
+      "__unresolved_0": "cce:/internal/x/cc-fu/2d",
+      "__unresolved_1": "cce:/internal/x/cc-fu/animation",
+      "__unresolved_10": "cce:/internal/x/cc-fu/physics-2d-framework",
+      "__unresolved_11": "cce:/internal/x/cc-fu/profiler",
+      "__unresolved_12": "cce:/internal/x/cc-fu/skeletal-animation",
+      "__unresolved_13": "cce:/internal/x/cc-fu/spine",
+      "__unresolved_14": "cce:/internal/x/cc-fu/tiled-map",
+      "__unresolved_15": "cce:/internal/x/cc-fu/tween",
+      "__unresolved_16": "cce:/internal/x/cc-fu/ui",
+      "__unresolved_17": "cce:/internal/x/cc-fu/video",
+      "__unresolved_18": "cce:/internal/x/cc-fu/webview",
+      "__unresolved_2": "cce:/internal/x/cc-fu/audio",
+      "__unresolved_3": "cce:/internal/x/cc-fu/base",
+      "__unresolved_4": "cce:/internal/x/cc-fu/dragon-bones",
+      "__unresolved_5": "cce:/internal/x/cc-fu/gfx-webgl",
+      "__unresolved_6": "cce:/internal/x/cc-fu/gfx-webgl2",
+      "__unresolved_7": "cce:/internal/x/cc-fu/intersection-2d",
+      "__unresolved_8": "cce:/internal/x/cc-fu/particle-2d",
+      "__unresolved_9": "cce:/internal/x/cc-fu/physics-2d-box2d"
+    },
+    "./chunks/52/52e8a9e14f500a509b526e3a9f1d96810f76ca10.js": {
+      "__unresolved_0": "./chunks/c4/c49b1af5cdf8073ecc881896b424a3aecedbec36.js",
+      "__unresolved_1": "./chunks/e3/e37a1fb5041fb533fb9cc02d7d396e65c359d01a.js",
+      "__unresolved_2": "./chunks/e3/e3d858c02084681b417e4c217fe809fe97174746.js",
+      "__unresolved_3": "./chunks/7c/7ca9726e113c18c7a015282c9816939a0724d5ca.js",
+      "__unresolved_4": "./chunks/45/4597bc4a1ec0894f1d5c94e509e907a00d5b1af0.js"
+    },
+    "./chunks/45/4597bc4a1ec0894f1d5c94e509e907a00d5b1af0.js": {
+      "__unresolved_0": "./chunks/3a/3a1fd7b13056478820ebedd306d3446d1aa408cc.js",
+      "__unresolved_1": "./chunks/7c/7ca9726e113c18c7a015282c9816939a0724d5ca.js",
+      "cc": "./chunks/90/909f786ffe128f06f5aa1b4e1e3fbbd65262915e.js"
+    },
+    "./chunks/7c/7ca9726e113c18c7a015282c9816939a0724d5ca.js": {
+      "cc": "./chunks/90/909f786ffe128f06f5aa1b4e1e3fbbd65262915e.js"
+    },
+    "./chunks/e3/e3d858c02084681b417e4c217fe809fe97174746.js": {
+      "cc": "./chunks/90/909f786ffe128f06f5aa1b4e1e3fbbd65262915e.js"
+    },
+    "./chunks/e3/e37a1fb5041fb533fb9cc02d7d396e65c359d01a.js": {
+      "__unresolved_0": "./chunks/3a/3a1fd7b13056478820ebedd306d3446d1aa408cc.js",
+      "__unresolved_1": "./chunks/45/4597bc4a1ec0894f1d5c94e509e907a00d5b1af0.js",
+      "cc": "./chunks/90/909f786ffe128f06f5aa1b4e1e3fbbd65262915e.js"
+    },
+    "./chunks/c4/c49b1af5cdf8073ecc881896b424a3aecedbec36.js": {
+      "cc": "./chunks/90/909f786ffe128f06f5aa1b4e1e3fbbd65262915e.js"
+    }
+  }
+}
