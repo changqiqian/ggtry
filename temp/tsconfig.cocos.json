@@ -15,7 +15,7 @@
         "/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/resources/3d/engine/editor/assets/*"
       ],
       "db://assets/*": [
-        "/Users/yamiwang/SY/assets/*"
+        "/Users/yamiwang/cowboy/assets/*"
       ]
     },
     "experimentalDecorators": true,

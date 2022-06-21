@@ -1,0 +1,10 @@
+{
+    "optionCreate": true,
+    "optionLimit": true,
+    "optionVerify": true,
+    "watchUpdate": false,
+    "filter": "\\.proto$",
+    "fileName": "cowboy",
+    "input": "/Users/yamiwang/cowboy/proto",
+    "output": "/Users/yamiwang/cowboy/assets/plugin"
+}

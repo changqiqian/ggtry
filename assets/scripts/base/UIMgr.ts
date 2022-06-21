@@ -163,7 +163,7 @@ export class UIMgr
 
     private GetSceneConfig(_sceneType :SceneType) : SceneConfig
     {
-        let index = this.mSceneConfig.findIndex((target) => target.type === _sceneType);
+        let index = this.mSceneConfig.findIndex((_item) => _item.type === _sceneType);
         if(index < 0)
         {
             console.log("GetSceneConfig 没有找到该场景 _sceneType ===" +_sceneType);
@@ -203,7 +203,7 @@ export class UIMgr
     private FindLayer(_key : string , _type :LayerType) : cc.Node
     {
         let targetList = this.GetList(_type);
-        let index = targetList.findIndex((target) => target.key === _key);
+        let index = targetList.findIndex((_item) => _item.key === _key);
         if(index >= 0)
         {
             return targetList[index].value;
