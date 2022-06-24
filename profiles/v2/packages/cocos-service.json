@@ -1,0 +1,17 @@
+{
+  "__version__": "3.0.3",
+  "options": {
+    "web-desktop": {
+      "configID": "437b18",
+      "services": []
+    },
+    "android": {
+      "configID": "437b18",
+      "services": []
+    }
+  },
+  "builder-options": {
+    "configID": "437b18",
+    "services": []
+  }
+}
