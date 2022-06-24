@@ -1,7 +1,7 @@
 {
   "modules": {
     "cce:/internal/x/cc": {
-      "mTimestamp": 12859.23418802023,
+      "mTimestamp": 15773.521551966667,
       "chunkId": "06905a76530cf57ee019d9d8bcfb507c2d037fd3",
       "imports": [
         {
@@ -493,8 +493,8 @@
       ]
     },
     "cce:/internal/x/prerequisite-imports": {
-      "mTimestamp": 527194.526763022,
-      "chunkId": "09e496b395f3362281c93269a29d6d47678870a4",
+      "mTimestamp": 6269091.658222914,
+      "chunkId": "7445ff4758084772bd924d4fde9f2179dae8a9aa",
       "imports": [
         {
           "value": "file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js",
@@ -539,7 +539,7 @@
           }
         },
         {
-          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts",
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts",
           "resolved": "__unresolved_3",
           "loc": {
             "start": {
@@ -548,49 +548,77 @@
             },
             "end": {
               "line": 5,
-              "column": 321
+              "column": 319
+            }
+          }
+        },
+        {
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts",
+          "resolved": "__unresolved_4",
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 335
+            },
+            "end": {
+              "line": 5,
+              "column": 396
+            }
+          }
+        },
+        {
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts",
+          "resolved": "__unresolved_5",
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 412
+            },
+            "end": {
+              "line": 5,
+              "column": 477
             }
           }
         },
         {
           "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts",
-          "resolved": "__unresolved_4",
+          "resolved": "__unresolved_6",
           "loc": {
             "start": {
               "line": 5,
-              "column": 337
+              "column": 493
             },
             "end": {
               "line": 5,
-              "column": 398
+              "column": 554
             }
           }
         },
         {
           "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts",
-          "resolved": "__unresolved_5",
+          "resolved": "__unresolved_7",
           "loc": {
             "start": {
               "line": 5,
-              "column": 414
+              "column": 570
             },
             "end": {
               "line": 5,
-              "column": 474
+              "column": 630
             }
           }
         },
         {
           "value": "file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts",
-          "resolved": "__unresolved_6",
+          "resolved": "__unresolved_8",
           "loc": {
             "start": {
               "line": 5,
-              "column": 490
+              "column": 646
             },
             "end": {
               "line": 5,
-              "column": 555
+              "column": 711
             }
           }
         }
@@ -621,7 +649,21 @@
         {
           "resolved": {
             "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
             "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts"
           },
           "messages": []
         },
@@ -986,7 +1028,7 @@
       ]
     },
     "cce:/internal/code-quality/cr.mjs": {
-      "mTimestamp": 1655802689747,
+      "mTimestamp": 1656037686982,
       "chunkId": "84741ad843cea9a440c5d8c2d379669b6551400d",
       "imports": [],
       "type": "esm",
@@ -1152,10 +1194,10 @@
     },
     "file:///Users/yamiwang/cowboy/assets/scripts/Start.ts": {
       "mTimestamp": {
-        "mtime": 1655206037110.383,
+        "mtime": 1656039442605.702,
         "uuid": "dddd4d98-653f-4df0-8b57-d35642a297b1"
       },
-      "chunkId": "52404fd185489a69dd007e18c7b353deb13af649",
+      "chunkId": "7f69b99c951f420d0005effa04c8a3869ead8be9",
       "imports": [
         {
           "value": "cce:/internal/code-quality/cr.mjs",
@@ -1190,6 +1232,20 @@
               "column": 47
             }
           }
+        },
+        {
+          "value": "./StartData",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 26
+            },
+            "end": {
+              "line": 5,
+              "column": 39
+            }
+          }
         }
       ],
       "type": "esm",
@@ -1221,15 +1277,22 @@
             "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts"
           },
           "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts"
+          },
+          "messages": []
         }
       ]
     },
     "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts": {
       "mTimestamp": {
-        "mtime": 1655800985331.9167,
+        "mtime": 1656039533381.8577,
         "uuid": "4d942a49-fb0e-4c3e-87ff-ca87263c99c8"
       },
-      "chunkId": "aa9c65314bfa77193dc9be05a8143095e9b658fe",
+      "chunkId": "a9864c68649b97789bb4e4b34c039f5d01e6e47b",
       "imports": [
         {
           "value": "cce:/internal/code-quality/cr.mjs",
@@ -1646,7 +1709,7 @@
       ]
     },
     "cce:/internal/ml/cjs-loader.mjs": {
-      "mTimestamp": 1655802689747,
+      "mTimestamp": 1656037686982,
       "chunkId": "5d6edb63c95512b9351b1539b146578dcb49e89b",
       "imports": [],
       "type": "esm",
@@ -1784,6 +1847,82 @@
           "resolved": {
             "type": "module",
             "url": "cce:/internal/ml/cjs-loader.mjs"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts": {
+      "mTimestamp": {
+        "mtime": 1656043867200.5574,
+        "uuid": "c781eea0-3e91-48a9-ab5a-8463e02a19f1"
+      },
+      "chunkId": "6a341c5b90ab83a36c869c75679cf2d0f243e10b",
+      "imports": [
+        {
+          "value": "cc"
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts": {
+      "mTimestamp": {
+        "mtime": 1656043869420.3247,
+        "uuid": "8fed452a-0dcc-448a-9df5-29500eaa0039"
+      },
+      "chunkId": "7be258de55085e0428b7985bab956a942642b80c",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "./base/DataNotify",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 27
+            },
+            "end": {
+              "line": 1,
+              "column": 46
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts"
           },
           "messages": []
         }

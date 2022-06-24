@@ -208,7 +208,6 @@ export class UIMgr
         {
             return targetList[index].value;
         }
-        console.log("FindNode  没有找到该layer   key ===" +_key );
         return null;
     }
 
