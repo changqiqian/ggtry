@@ -1,0 +1,171 @@
+debug: Mon, 27 Jun 2022 08:06:01 GMT
+debug: Project: /Users/yamiwang/cowboy
+debug: Targets: editor,preview
+debug: Packer deriver version file lost or format incorrect: Error: ENOENT: no such file or directory, open '/Users/yamiwang/cowboy/temp/programming/packer-driver/VERSION'
+debug: Clearing out the targets...
+debug: Engine path: /Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/resources/3d/engine
+debug: Initializing target [Editor]
+debug: Loading cache
+debug: Record file loaded failed with error: Error: ENOENT: no such file or directory, open '/Users/yamiwang/cowboy/temp/programming/packer-driver/targets/editor/main-record.json'
+debug: Loading cache costs 0.6277370452880859ms.
+debug: Engine features shipped in editor: base,gfx-webgl,gfx-webgl2,3d,animation,skeletal-animation,2d,ui,particle,particle-2d,physics-framework,physics-2d-framework,intersection-2d,primitive,profiler,audio,video,terrain,webview,tween,tiled-map,spine,dragon-bones,marionette
+debug: Initializing target [Preview]
+debug: Loading cache
+debug: Record file loaded failed with error: Error: ENOENT: no such file or directory, open '/Users/yamiwang/cowboy/temp/programming/packer-driver/targets/preview/main-record.json'
+debug: Loading cache costs 0.5555379390716553ms.
+debug: Sync engine features: 2d,animation,audio,base,dragon-bones,gfx-webgl,gfx-webgl2,intersection-2d,marionette,particle-2d,physics-2d-box2d,profiler,skeletal-animation,spine,tiled-map,tween,ui,video,webview
+debug: Pulling asset-db.
+debug: Fetch asset-db cost: 17.283831000328064ms.
+debug: Build iteration starts.
+Number of accumulated asset changes: 10
+Feature changed: false
+debug: Target(editor) build started.
+debug: Inspect cce:/internal/x/cc
+debug: Resolve cce:/internal/x/cc-fu/base from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/base.
+debug: Resolve cce:/internal/x/cc-fu/gfx-webgl from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/gfx-webgl.
+debug: Resolve cce:/internal/x/cc-fu/gfx-webgl2 from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/gfx-webgl2.
+debug: Resolve cce:/internal/x/cc-fu/3d from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/3d.
+debug: Resolve cce:/internal/x/cc-fu/animation from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/animation.
+debug: Resolve cce:/internal/x/cc-fu/skeletal-animation from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/skeletal-animation.
+debug: Resolve cce:/internal/x/cc-fu/2d from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/2d.
+debug: Resolve cce:/internal/x/cc-fu/ui from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/ui.
+debug: Resolve cce:/internal/x/cc-fu/particle from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/particle.
+debug: Resolve cce:/internal/x/cc-fu/particle-2d from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/particle-2d.
+debug: Resolve cce:/internal/x/cc-fu/physics-framework from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/physics-framework.
+debug: Resolve cce:/internal/x/cc-fu/physics-2d-framework from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/physics-2d-framework.
+debug: Resolve cce:/internal/x/cc-fu/intersection-2d from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/intersection-2d.
+debug: Resolve cce:/internal/x/cc-fu/primitive from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/primitive.
+debug: Resolve cce:/internal/x/cc-fu/profiler from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/profiler.
+debug: Resolve cce:/internal/x/cc-fu/audio from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/audio.
+debug: Resolve cce:/internal/x/cc-fu/video from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/video.
+debug: Resolve cce:/internal/x/cc-fu/terrain from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/terrain.
+debug: Resolve cce:/internal/x/cc-fu/webview from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/webview.
+debug: Resolve cce:/internal/x/cc-fu/tween from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/tween.
+debug: Resolve cce:/internal/x/cc-fu/tiled-map from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/tiled-map.
+debug: Resolve cce:/internal/x/cc-fu/spine from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/spine.
+debug: Resolve cce:/internal/x/cc-fu/dragon-bones from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/dragon-bones.
+debug: Inspect cce:/internal/x/prerequisite-imports
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Resolve file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js as cce:/internal/code-quality/cr.mjs.
+debug: Inspect cce:/internal/code-quality/cr.mjs
+debug: Resolve ./protobufcowboy.js from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js
+debug: Resolve cce:/internal/ml/cjs-loader.mjs from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js as cce:/internal/ml/cjs-loader.mjs.
+debug: Inspect cce:/internal/ml/cjs-loader.mjs
+debug: Resolve cce:/internal/ml/cjs-loader.mjs from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js as cce:/internal/ml/cjs-loader.mjs.
+debug: Resolve ./protobufcowboy.js from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js.
+debug: Resolve ./protobufcowboy.js from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts as cce:/internal/x/cc.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/Start.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/Start.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/Start.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/Start.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/Start.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/Start.ts as cce:/internal/x/cc.
+debug: Resolve ./base/UIMgr from file:///Users/yamiwang/cowboy/assets/scripts/Start.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts as cce:/internal/x/cc.
+debug: Resolve ./ResMgr from file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts as cce:/internal/x/cc.
+debug: Resolve ./StartData from file:///Users/yamiwang/cowboy/assets/scripts/Start.ts as file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts as cce:/internal/x/cc.
+debug: Resolve ./base/DataNotify from file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts as cce:/internal/x/cc.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts as cce:/internal/x/cc.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts as cce:/internal/x/cc.
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Target(editor) ends with cost 771.7353590726852ms.
+debug: Target(preview) build started.
+debug: Inspect cce:/internal/x/cc
+debug: Resolve cce:/internal/x/cc-fu/2d from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/2d.
+debug: Resolve cce:/internal/x/cc-fu/animation from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/animation.
+debug: Resolve cce:/internal/x/cc-fu/audio from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/audio.
+debug: Resolve cce:/internal/x/cc-fu/base from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/base.
+debug: Resolve cce:/internal/x/cc-fu/dragon-bones from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/dragon-bones.
+debug: Resolve cce:/internal/x/cc-fu/gfx-webgl from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/gfx-webgl.
+debug: Resolve cce:/internal/x/cc-fu/gfx-webgl2 from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/gfx-webgl2.
+debug: Resolve cce:/internal/x/cc-fu/intersection-2d from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/intersection-2d.
+debug: Resolve cce:/internal/x/cc-fu/particle-2d from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/particle-2d.
+debug: Resolve cce:/internal/x/cc-fu/physics-2d-box2d from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/physics-2d-box2d.
+debug: Resolve cce:/internal/x/cc-fu/physics-2d-framework from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/physics-2d-framework.
+debug: Resolve cce:/internal/x/cc-fu/profiler from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/profiler.
+debug: Resolve cce:/internal/x/cc-fu/skeletal-animation from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/skeletal-animation.
+debug: Resolve cce:/internal/x/cc-fu/spine from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/spine.
+debug: Resolve cce:/internal/x/cc-fu/tiled-map from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/tiled-map.
+debug: Resolve cce:/internal/x/cc-fu/tween from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/tween.
+debug: Resolve cce:/internal/x/cc-fu/ui from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/ui.
+debug: Resolve cce:/internal/x/cc-fu/video from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/video.
+debug: Resolve cce:/internal/x/cc-fu/webview from cce:/internal/x/cc as external dependency cce:/internal/x/cc-fu/webview.
+debug: Inspect cce:/internal/x/prerequisite-imports
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Resolve file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js as cce:/internal/code-quality/cr.mjs.
+debug: Inspect cce:/internal/code-quality/cr.mjs
+debug: Resolve ./protobufcowboy.js from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js
+debug: Resolve cce:/internal/ml/cjs-loader.mjs from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js as cce:/internal/ml/cjs-loader.mjs.
+debug: Inspect cce:/internal/ml/cjs-loader.mjs
+debug: Resolve cce:/internal/ml/cjs-loader.mjs from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js as cce:/internal/ml/cjs-loader.mjs.
+debug: Resolve ./protobufcowboy.js from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js.
+debug: Resolve ./protobufcowboy.js from file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts as cce:/internal/x/cc.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/Start.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/Start.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/Start.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/Start.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/Start.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/Start.ts as cce:/internal/x/cc.
+debug: Resolve ./base/UIMgr from file:///Users/yamiwang/cowboy/assets/scripts/Start.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts as cce:/internal/x/cc.
+debug: Resolve ./ResMgr from file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts as cce:/internal/x/cc.
+debug: Resolve ./StartData from file:///Users/yamiwang/cowboy/assets/scripts/Start.ts as file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts as cce:/internal/x/cc.
+debug: Resolve ./base/DataNotify from file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts as cce:/internal/x/cc.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts as cce:/internal/x/cc.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts as cce:/internal/x/cc.
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Target(preview) ends with cost 540.6138429641724ms.
