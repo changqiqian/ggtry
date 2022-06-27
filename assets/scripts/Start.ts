@@ -10,9 +10,8 @@ export class Start extends Component {
 
     start() 
     {
-        UIMgr.GetInstance().Init();
-        UIMgr.GetInstance().ChangeScene(SceneType.Hall);    
-        StartData.GetInstance().Test();
+        //UIMgr.GetInstance().Init();
+        //UIMgr.GetInstance().ChangeScene(SceneType.Hall);    
     }
 
 

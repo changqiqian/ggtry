@@ -7493,3 +7493,106 @@ at async BuildTask.handle (/Applications/CocosCreator/Creator/3.5.1/CocosCreator
 2022-06-27T08:06:03.433Z - verbose: [Scene] Open engine (351ms)
 2022-06-27T08:06:03.433Z - verbose: [Scene] Configure engine (0ms)
 2022-06-27T08:06:03.207Z - info: [Scene] Forward render pipeline initialized.
+2022-06-27T10:15:18.463Z - warn: [Build] Unexpected: entry chunk name protobufcowboy.mjs_cjs=&original= is not in list.[Build] Unexpected: entry chunk name protobufcowboy.mjs_cjs=&original= is not in list.  
+at NewConsole.warn (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/console.ccc:1:1286)  
+at buildScript (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/builder/build-task/script/project-scripts.ccc:1:6308)  
+at processTicksAndRejections (internal/process/task_queues.js:93:5)  
+at async Object.buildProjectScriptsX (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/builder/build-task/script/project-scripts.ccc:1:1957)  
+at async /Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/builder/build-task/script/index.ccc:1:863  
+at async BuildTask.handle (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/builder/build-task/script/index.ccc:1:585)
+2022-06-27T12:07:48.172Z - warn: Metrics: no valid info
+2022-06-27T12:09:21.797Z - log: [Package] menu@1.0.0 enable
+2022-06-27T12:09:21.800Z - log: [Package] profile@1.0.0 enable
+2022-06-27T12:09:21.814Z - log: [Package] project@1.0.2 enable
+2022-06-27T12:09:21.822Z - log: [Package] messages@1.0.0 enable
+2022-06-27T12:09:21.826Z - log: [Package] program@1.0.0 enable
+2022-06-27T12:09:21.834Z - log: [Package] tester@1.0.0 enable
+2022-06-27T12:09:21.841Z - log: [Package] preferences@1.0.0 enable
+2022-06-27T12:09:22.714Z - log: Setup mods mgr.: 350.427ms
+2022-06-27T12:09:22.718Z - log: Profile changed: engine (modules.includeModules: 2d,animation,audio,base,dragon-bones,gfx-webgl,gfx-webgl2,intersection-2d,marionette,particle-2d,physics-2d-box2d,profiler,skeletal-animation,spine,tiled-map,tween,ui,video,webview)
+2022-06-27T12:09:22.726Z - verbose: [Engine] QuickCompile engine (817ms)
+2022-06-27T12:09:22.730Z - log: [Package] engine@1.0.6 enable
+2022-06-27T12:09:23.672Z - log: [Package] programming@1.0.0 enable
+2022-06-27T12:09:24.010Z - log: [Package] device@1.0.1 enable
+2022-06-27T12:09:24.039Z - log: [Package] ui-kit@1.0.1 enable
+2022-06-27T12:09:24.062Z - log: [Package] engine-extends@1.0.0 enable
+2022-06-27T12:09:24.140Z - log: [Package] asset-db@1.0.0 enable
+2022-06-27T12:09:24.185Z - log: [Package] scene@1.0.0 enable
+2022-06-27T12:09:24.433Z - log: [Package] server@1.0.0 enable
+2022-06-27T12:09:24.476Z - log: [Package] utils@1.0.0 enable
+2022-06-27T12:09:29.158Z - log: [Package] preview@1.0.1 enable
+2022-06-27T12:09:29.190Z - log: [Package] animator@1.0.0 enable
+2022-06-27T12:09:30.118Z - log: [Package] builder@1.3.2 enable
+2022-06-27T12:09:30.151Z - log: [Package] shortcuts@1.0.1 enable
+2022-06-27T12:09:30.183Z - log: [Package] animation-graph@1.0.0 enable
+2022-06-27T12:09:30.208Z - log: [Package] runtime-dev-tools@1.0.0 enable
+2022-06-27T12:09:30.235Z - log: [Package] channel-upload-tools@1.0.0 enable
+2022-06-27T12:09:30.268Z - log: [Package] about@1.0.0 enable
+2022-06-27T12:09:30.300Z - log: [Package] assets@1.0.0 enable
+2022-06-27T12:09:30.342Z - log: [Package] console@1.0.0 enable
+2022-06-27T12:09:30.635Z - log: [Package] extension@3.0.16 enable
+2022-06-27T12:09:30.672Z - log: [Package] hierarchy@1.0.0 enable
+2022-06-27T12:09:30.707Z - log: [Package] inspector@1.0.0 enable
+2022-06-27T12:09:30.745Z - log: [Package] lightmap@1.0.4 enable
+2022-06-27T12:09:30.782Z - log: [Package] node-library@1.0.1 enable
+2022-06-27T12:09:30.811Z - log: [Package] package-asset@1.0.0 enable
+2022-06-27T12:09:30.849Z - log: [Package] process@1.0.0 enable
+2022-06-27T12:09:30.884Z - log: [Package] reference-image@1.0.0 enable
+2022-06-27T12:09:30.907Z - log: [Package] alipay-mini-game@1.0.0 enable
+2022-06-27T12:09:30.931Z - log: [Package] android@1.0.0 enable
+2022-06-27T12:09:30.961Z - log: [Package] baidu-mini-game@1.0.0 enable
+2022-06-27T12:09:30.987Z - log: [Package] bytedance-mini-game@1.0.1 enable
+2022-06-27T12:09:31.012Z - log: [Package] cocos-play@1.0.0 enable
+2022-06-27T12:09:31.041Z - log: [Package] huawei-agc@1.0.0 enable
+2022-06-27T12:09:31.069Z - log: [Package] huawei-quick-game@1.0.0 enable
+2022-06-27T12:09:31.180Z - log: [Package] ios@1.0.0 enable
+2022-06-27T12:09:31.196Z - verbose: [AssetDB] Require engine code (1309ms)
+2022-06-27T12:09:31.205Z - log: [Package] ios-app-clip@1.0.0 enable
+2022-06-27T12:09:31.229Z - log: [Package] link-sure@1.0.0 enable
+2022-06-27T12:09:31.257Z - log: [Package] linux@1.0.0 enable
+2022-06-27T12:09:31.286Z - log: [Package] mac@1.0.0 enable
+2022-06-27T12:09:31.415Z - log: [Package] native@1.0.0 enable
+2022-06-27T12:09:31.443Z - log: [Package] ohos@1.0.0 enable
+2022-06-27T12:09:31.472Z - log: [Package] open-harmonyos@1.0.0 enable
+2022-06-27T12:09:31.501Z - log: [Package] oppo-mini-game@1.0.0 enable
+2022-06-27T12:09:31.528Z - log: [Package] qtt@1.0.0 enable
+2022-06-27T12:09:31.559Z - log: [Package] vivo-mini-game@1.0.0 enable
+2022-06-27T12:09:31.602Z - log: [Package] web-desktop@1.0.0 enable
+2022-06-27T12:09:31.644Z - log: [Package] web-mobile@1.0.0 enable
+2022-06-27T12:09:31.687Z - log: [Package] wechatgame@1.0.1 enable
+2022-06-27T12:09:31.714Z - log: [Package] windows@1.0.0 enable
+2022-06-27T12:09:31.742Z - log: [Package] xiaomi-quick-game@1.0.0 enable
+2022-06-27T12:09:32.032Z - log: [Package] cocos-service@3.0.3 enable
+2022-06-27T12:09:32.074Z - log: [Package] importer@1.0.0 enable
+2022-06-27T12:09:32.419Z - log: [Im-plugin] Check im-plugin version.
+2022-06-27T12:09:32.433Z - log: [Package] im-plugin@3.0.8 enable
+2022-06-27T12:09:32.454Z - log: [Package] hot-update@0.0.2 enable
+2022-06-27T12:09:32.477Z - log: [Package] hot-update-local-ip@0.0.2 enable
+2022-06-27T12:09:32.520Z - log: [Package] protobuf-creator@1.2.1 enable
+2022-06-27T12:09:33.521Z - log: [Im-plugin] No online info of im-plugin.
+2022-06-27T12:09:36.842Z - verbose: [Scene] Require engine code (1ms)
+2022-06-27T12:09:36.844Z - verbose: [Scene] Startup engine (1ms)
+2022-06-27T12:09:36.875Z - log: [Scene] Cocos Creator v3.5.1
+2022-06-27T12:09:37.216Z - verbose: [Scene] Open engine (373ms)
+2022-06-27T12:09:37.217Z - verbose: [Scene] Configure engine (0ms)
+2022-06-27T12:09:36.994Z - info: [Scene] Forward render pipeline initialized.
+2022-06-27T12:54:09.122Z - warn: [Build] Unexpected: entry chunk name protobufcowboy.mjs_cjs=&original= is not in list.[Build] Unexpected: entry chunk name protobufcowboy.mjs_cjs=&original= is not in list.  
+at NewConsole.warn (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/console.ccc:1:1286)  
+at buildScript (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/builder/build-task/script/project-scripts.ccc:1:6308)  
+at processTicksAndRejections (internal/process/task_queues.js:93:5)  
+at async Object.buildProjectScriptsX (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/builder/build-task/script/project-scripts.ccc:1:1957)  
+at async /Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/builder/build-task/script/index.ccc:1:863  
+at async BuildTask.handle (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/builder/build-task/script/index.ccc:1:585)
+2022-06-27T12:54:09.497Z - warn: [Build] node version_generator.js -v 1.0.0 -u http://192.168.68.116:7879/ -s /Users/yamiwang/cowboy/build/android/data -d /Users/yamiwang/cowboy/assets[Build] node version_generator.js -v 1.0.0 -u http://192.168.68.116:7879/ -s /Users/yamiwang/cowboy/build/android/data -d /Users/yamiwang/cowboy/assets  
+at NewConsole.warn (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/console.ccc:1:1286)  
+at Object.onAfterBuild (/Users/yamiwang/cowboy/extensions/hot-update-local-ip/builder/hook.js:32:13)  
+at BuildTask.runPluginTask (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/builder/index.ccc:1:7262)  
+at async BuildTask.build (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/builder/index.ccc:1:3580)  
+at async Ipc.<anonymous> (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/index.ccc:1:3419)
+2022-06-27T12:54:09.514Z - warn: [Build] SearchPath updated in built main.js for hot update[Build] SearchPath updated in built main.js for hot update  
+at NewConsole.warn (/Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/builtin/builder/dist/worker/console.ccc:1:1286)  
+at /Users/yamiwang/cowboy/extensions/hot-update/builder/hook.js:60:21  
+at /Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/extension/cocos-service/node_modules/graceful-fs/graceful-fs.js:61:14  
+at /Applications/CocosCreator/Creator/3.5.1/CocosCreator.app/Contents/Resources/app.asar/node_modules/graceful-fs/graceful-fs.js:57:14  
+at FSReqCallback.oncomplete (fs.js:171:23)
+2022-06-27T13:40:48.552Z - warn: Metrics: no valid info

@@ -20,10 +20,5 @@ export class StartData extends DataNotify
     Data_Test : number = null;
     
 
-
-    public Test()
-    {
-
-    }
 }
 

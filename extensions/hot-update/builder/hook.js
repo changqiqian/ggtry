@@ -1,7 +1,8 @@
+
 'use strict';
 
-var Fs = require("fire-fs");
-var Path = require("fire-path");
+var Fs = require("fs");
+var Path = require("path");
 
 var inject_script = `
 (function () {
@@ -39,32 +40,24 @@ var inject_script = `
 })();
 `;
 
-module.exports = {
-    load: function () {
-        // 当 package 被正确加载的时候执行
-    },
+exports.onAfterBuild = function (options, result) {
+    var url = Path.join(result.dest, 'data', 'main.js');
 
-    unload: function () {
-        // 当 package 被正确卸载的时候执行
-    },
-
-    messages: {
-        'editor:build-finished': function (event, target) {
-            var root = Path.normalize(target.dest);
-            var url = Path.join(root, "main.js");
-            Fs.readFile(url, "utf8", function (err, data) {
-                if (err) {
-                    throw err;
-                }
-
-                var newStr = inject_script + data;
-                Fs.writeFile(url, newStr, function (error) {
-                    if (err) {
-                        throw err;
-                    }
-                    Editor.log("SearchPath updated in built main.js for hot update");
-                });
-            });
-        }
+    if (!Fs.existsSync(url)) {
+        url = Path.join(result.dest, 'assets', 'main.js');
     }
-};
+
+    Fs.readFile(url, "utf8", function (err, data) {
+        if (err) {
+            throw err;
+        }
+
+        var newStr = inject_script + data;
+        Fs.writeFile(url, newStr, function (error) {
+            if (err) {
+                throw err;
+            }
+            console.warn("SearchPath updated in built main.js for hot update");
+        });
+    });
+}

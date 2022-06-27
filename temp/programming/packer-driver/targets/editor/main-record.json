@@ -1,7 +1,7 @@
 {
   "modules": {
     "cce:/internal/x/cc": {
-      "mTimestamp": 16621.28629207611,
+      "mTimestamp": 13116.844327926636,
       "chunkId": "06905a76530cf57ee019d9d8bcfb507c2d037fd3",
       "imports": [
         {
@@ -493,7 +493,7 @@
       ]
     },
     "cce:/internal/x/prerequisite-imports": {
-      "mTimestamp": 16646.58925306797,
+      "mTimestamp": 5352458.968917966,
       "chunkId": "7445ff4758084772bd924d4fde9f2179dae8a9aa",
       "imports": [
         {
@@ -795,7 +795,7 @@
       ]
     },
     "cce:/internal/code-quality/cr.mjs": {
-      "mTimestamp": 1656317145153,
+      "mTimestamp": 1656331762864,
       "chunkId": "84741ad843cea9a440c5d8c2d379669b6551400d",
       "imports": [],
       "type": "esm",
@@ -835,7 +835,7 @@
       ]
     },
     "cce:/internal/ml/cjs-loader.mjs": {
-      "mTimestamp": 1656317145153,
+      "mTimestamp": 1656331762864,
       "chunkId": "5d6edb63c95512b9351b1539b146578dcb49e89b",
       "imports": [],
       "type": "esm",
@@ -843,10 +843,10 @@
     },
     "file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts": {
       "mTimestamp": {
-        "mtime": 1655181528784.7732,
+        "mtime": 1656335606471.2874,
         "uuid": "29e61f73-c2ca-49b8-a736-669bfeea7bb6"
       },
-      "chunkId": "d76506da8e813810f3fb84f8fff9be87a765d79f",
+      "chunkId": "5f314fdd992488f0d7bd3fd663d1fa9bd97fae95",
       "imports": [
         {
           "value": "cc"
@@ -855,12 +855,12 @@
           "value": "cc",
           "loc": {
             "start": {
-              "line": 1,
-              "column": 44
+              "line": 2,
+              "column": 89
             },
             "end": {
-              "line": 1,
-              "column": 48
+              "line": 2,
+              "column": 93
             }
           }
         }
@@ -885,15 +885,11 @@
     },
     "file:///Users/yamiwang/cowboy/assets/scripts/Start.ts": {
       "mTimestamp": {
-        "mtime": 1656039442605.702,
+        "mtime": 1656329065331.3486,
         "uuid": "dddd4d98-653f-4df0-8b57-d35642a297b1"
       },
-      "chunkId": "7f69b99c951f420d0005effa04c8a3869ead8be9",
+      "chunkId": "311b3951fe5da11760ca81582d213cfdc1f515e0",
       "imports": [
-        {
-          "value": "cce:/internal/code-quality/cr.mjs",
-          "resolved": "__unresolved_0"
-        },
         {
           "value": "cc"
         },
@@ -909,34 +905,6 @@
               "column": 54
             }
           }
-        },
-        {
-          "value": "./base/UIMgr",
-          "resolved": "__unresolved_1",
-          "loc": {
-            "start": {
-              "line": 4,
-              "column": 33
-            },
-            "end": {
-              "line": 4,
-              "column": 47
-            }
-          }
-        },
-        {
-          "value": "./StartData",
-          "resolved": "__unresolved_2",
-          "loc": {
-            "start": {
-              "line": 5,
-              "column": 26
-            },
-            "end": {
-              "line": 5,
-              "column": 39
-            }
-          }
         }
       ],
       "type": "esm",
@@ -944,13 +912,6 @@
         {
           "resolved": {
             "type": "module",
-            "url": "cce:/internal/code-quality/cr.mjs"
-          },
-          "messages": []
-        },
-        {
-          "resolved": {
-            "type": "module",
             "url": "cce:/internal/x/cc"
           },
           "messages": []
@@ -959,20 +920,6 @@
           "resolved": {
             "type": "module",
             "url": "cce:/internal/x/cc"
-          },
-          "messages": []
-        },
-        {
-          "resolved": {
-            "type": "module",
-            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts"
-          },
-          "messages": []
-        },
-        {
-          "resolved": {
-            "type": "module",
-            "url": "file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts"
           },
           "messages": []
         }

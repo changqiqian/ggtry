@@ -233,17 +233,17 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scene/start.scene": {
-    "time": 1656051051592.8462,
+    "time": 1656329927148.3838,
     "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts": {
-    "time": 1655181528784.7732,
+    "time": 1656335606471.2874,
     "uuid": "29e61f73-c2ca-49b8-a736-669bfeea7bb6",
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/Start.ts": {
-    "time": 1656039442605.702,
+    "time": 1656329065331.3486,
     "uuid": "dddd4d98-653f-4df0-8b57-d35642a297b1",
     "missing": false
   },
@@ -477,6 +477,22 @@
   "/Users/yamiwang/cowboy/assets/scripts/StartData.ts": {
     "time": 1656043869420.3247,
     "uuid": "8fed452a-0dcc-448a-9df5-29500eaa0039",
+    "missing": false
+  },
+  "/Users/yamiwang/cowboy/assets/project.manifest.meta": {
+    "time": 1656328983376.684
+  },
+  "/Users/yamiwang/cowboy/assets/version.manifest.meta": {
+    "time": 1656328983377.4768
+  },
+  "/Users/yamiwang/cowboy/assets/project.manifest": {
+    "time": 1656334449908.7024,
+    "uuid": "dffc81cb-1e5f-4bc0-83c3-7370d2e3eb9e",
+    "missing": false
+  },
+  "/Users/yamiwang/cowboy/assets/version.manifest": {
+    "time": 1656334449908.8867,
+    "uuid": "b5081245-cea2-458d-b12c-4974826cd7f9",
     "missing": false
   }
 }
