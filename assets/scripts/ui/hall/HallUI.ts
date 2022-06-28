@@ -29,6 +29,7 @@ export class HallUI extends BaseUI
         playerCards.push(new CardStruct(5,CardType.Diamond));
         playerCards.push(new CardStruct(4,CardType.Speades));
         Calculator.GetInstance().TryToCalculate(publicCards,playerCards);
+        
     }
     UnregDataNotify() 
     {
