@@ -1,6 +1,5 @@
 
 import { AssetManager, assetManager, Component, find, instantiate } from "cc";
-import { BaseUI } from "./BaseUI";
 import { ResMgr } from "./ResMgr";
 
 class LayerKeyPair

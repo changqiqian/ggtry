@@ -4,8 +4,6 @@
         "cpu": "Intel(R) Core(TM) i5-1038NG7 CPU @ 2.00GHz",
         "version": "Darwin Kernel Version 19.6.0: Tue Feb 15 21:39:11 PST 2022; root:xnu-6153.141.59~1/RELEASE_X86_64"
     },
-    "sceneListMap": {
-        "72b6b67a-8025-4f0e-8fb0-5b454d58bd94": "/Users/yamiwang/cowboy/assets/scene/start.scene"
-    },
+    "sceneListMap": {},
     "deviceMd5": "37d3c55d75eea1389d87d3a129e29126"
 }

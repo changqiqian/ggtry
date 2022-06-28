@@ -117,7 +117,7 @@
   "/Users/yamiwang/SY/assets/bundle/common/prefab": {
     "time": 1655179343175.0664,
     "uuid": "964f19d6-9a6a-462b-aff6-8700df1900b3",
-    "missing": false
+    "missing": true
   },
   "/Users/yamiwang/SY/assets/bundle/hall.meta": {
     "time": 1655205463477.329
@@ -141,7 +141,7 @@
   "/Users/yamiwang/SY/assets/bundle/common/prefab/test.prefab": {
     "time": 1655179343178.1514,
     "uuid": "26735c26-786f-4ecb-af66-f7772fa84ecd",
-    "missing": false
+    "missing": true
   },
   "/Users/yamiwang/SY/assets/scripts/Start.ts.meta": {
     "time": 1655098703062.6772
@@ -205,7 +205,7 @@
   "/Users/yamiwang/SY/assets/bundle/hall/prefab/hall.prefab": {
     "time": 1655206041046.5715,
     "uuid": "94f30c20-6290-4620-9ba2-696f2b89ff48",
-    "missing": false
+    "missing": true
   },
   "/Users/yamiwang/cowboy/assets/bundle": {
     "time": 1656395615667.138,
@@ -223,7 +223,7 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/bundle/common": {
-    "time": 1655112808642.663,
+    "time": 1656400671455.5894,
     "uuid": "7f3b824a-de1c-45ad-9da3-7cbe9eba91b3",
     "missing": false
   },
@@ -238,7 +238,7 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/base": {
-    "time": 1656037810636.487,
+    "time": 1656406121836.6455,
     "uuid": "167c5519-10cd-416b-b8cd-84a9f0487d15",
     "missing": false
   },
@@ -248,7 +248,7 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/ui": {
-    "time": 1656396384063.135,
+    "time": 1656406893624.077,
     "uuid": "73cd545e-1756-45fd-b4e5-4afdb95f3472",
     "missing": false
   },
@@ -270,7 +270,7 @@
   "/Users/yamiwang/cowboy/assets/bundle/common/prefab": {
     "time": 1656395332000.5696,
     "uuid": "964f19d6-9a6a-462b-aff6-8700df1900b3",
-    "missing": false
+    "missing": true
   },
   "/Users/yamiwang/cowboy/assets/bundle/common/texture": {
     "time": 1655097219366.935,
@@ -313,7 +313,7 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts": {
-    "time": 1656400312591.217,
+    "time": 1656406138328.353,
     "uuid": "4d942a49-fb0e-4c3e-87ff-ca87263c99c8",
     "missing": false
   },
@@ -611,7 +611,7 @@
     "time": 1656396329356.0276
   },
   "/Users/yamiwang/cowboy/assets/bundle/hall/prefab/HallUI.prefab": {
-    "time": 1656396329355.358,
+    "time": 1656406990585.9346,
     "uuid": "fd20abbe-81d5-4935-a095-894bdebccc50",
     "missing": false
   },
@@ -621,6 +621,30 @@
   "/Users/yamiwang/cowboy/assets/scripts/Start.ts": {
     "time": 1656396401336.4353,
     "uuid": "bdc8bc80-03d7-4139-b67b-a6aa954860bc",
+    "missing": false
+  },
+  "/Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts.meta": {
+    "time": 1656406121838.6538
+  },
+  "/Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts": {
+    "time": 1656416247672.1255,
+    "uuid": "f792cd6f-3483-4b91-987e-4d528b1a6a60",
+    "missing": false
+  },
+  "/Users/yamiwang/cowboy/assets/scripts/ui/hall.meta": {
+    "time": 1656406893624.9053
+  },
+  "/Users/yamiwang/cowboy/assets/scripts/ui/hall": {
+    "time": 1656406902991.4087,
+    "uuid": "d1eee140-f99c-402b-b2eb-b3a1b6621df9",
+    "missing": false
+  },
+  "/Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts.meta": {
+    "time": 1656406902992.7964
+  },
+  "/Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts": {
+    "time": 1656416023876.245,
+    "uuid": "98659754-be84-4017-8124-0f9f24936aef",
     "missing": false
   }
 }
