@@ -5,13 +5,15 @@ import { ResMgr } from "./ResMgr";
 
 class LayerKeyPair
 {
-    constructor(_key :string  , _value : cc.Node) 
+    constructor(_key :string  , _value : cc.Node , _belong :SceneType) 
     {
         this.key = _key;
         this.value = _value;
+        this.belong = _belong;
     }
     key : string ;
     value : cc.Node;
+    belong : SceneType;
 }
 
 class SceneConfig
@@ -73,9 +75,9 @@ export class UIMgr
 
         //场景配置
         let resFolder:Array<string> = ["anm","font","music","prefab","texture"];
-        let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/loading" ,["loading"],resFolder);
-        let loginConfig = new SceneConfig(SceneType.Login, "prefab/login" ,["login"],resFolder);
-        let hallConfig = new SceneConfig(SceneType.Hall, "prefab/hall",["hall"],resFolder);
+        let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,["loading"],resFolder);
+        let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,["login"],resFolder);
+        let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI",["hall","cowboy"],resFolder);
         this.mSceneConfig.push(loadingConfig);
         this.mSceneConfig.push(loginConfig);
         this.mSceneConfig.push(hallConfig);
@@ -117,21 +119,30 @@ export class UIMgr
         });
     }
 
+
     public ChangeScene(_sceneType :SceneType)
     {
-        let config = this.GetSceneConfig(_sceneType);
+        if(_sceneType == SceneType.None)
+        {
+            console.log("不能跳转目标场景====SceneType.None");
+            return;
+        }
+
         if(this.mCurrentScene != SceneType.None)
         {
-            for(let i = 0 ; i < config.bundleNames.length ; i++)
+            let configDeleteScene = this.GetSceneConfig(this.mCurrentScene);
+            this.DeleteScene( this.mCurrentScene);
+            for(let i = 0 ; i < configDeleteScene.bundleNames.length ; i++)
             {
-                ResMgr.ReleaseBundle(config.bundleNames[i]);
+                ResMgr.ReleaseBundle(configDeleteScene.bundleNames[i]);
             }
         }
 
-        this.PreloadSceneRes(config , ()=>
+        this.mCurrentScene = _sceneType;
+        let configNewScene = this.GetSceneConfig(_sceneType);
+        this.PreloadSceneRes(configNewScene , ()=>
         {
-            console.log("PreloadSceneRes loadFinish === ");
-            this.ShowLayer(config.bundleNames[0],config.prefabPath, LayerType.Layer);
+            this.ShowLayer(configNewScene.bundleNames[0],configNewScene.prefabPath, LayerType.Layer);
         });
     }
 
@@ -159,8 +170,6 @@ export class UIMgr
         }
     }
 
-    
-
     private GetSceneConfig(_sceneType :SceneType) : SceneConfig
     {
         let index = this.mSceneConfig.findIndex((_item) => _item.type === _sceneType);
@@ -173,6 +182,31 @@ export class UIMgr
         return this.mSceneConfig[index];
     }
 
+    private DeleteScene(_SceneType : SceneType)
+    {
+        this.DeleteLayer(LayerType.Layer,_SceneType);
+        this.DeleteLayer(LayerType.Window,_SceneType);
+    }
+
+
+    private DeleteLayer(_type :LayerType , _belong : SceneType)
+    {
+        let targetList = this.GetList(_type);
+        let step = 0;
+        while(step < targetList.length)
+        {
+            if(targetList[step].belong == _belong)
+            {
+                console.log("删除targetList[step]===" + targetList[step].key)
+                targetList[step].value.destroy();
+                targetList.splice(step , 1);
+            }
+            else
+            {
+                step++;
+            }
+        }
+    }
 
     private DeleteAllLayer(_type :LayerType)
     {
@@ -187,17 +221,13 @@ export class UIMgr
 
     private GetList(_type :LayerType) : Array<LayerKeyPair>
     {
-        let targetList;
         switch(_type)
         {
             case LayerType.Layer:
-                targetList = this.mLayerList;
-            break;
+                return this.mLayerList;
             case LayerType.Window:
-                targetList = this.mWindowList;
-            break;
+                return this.mWindowList;
         }
-        return targetList;
     }
 
     private FindLayer(_key : string , _type :LayerType) : cc.Node
@@ -228,7 +258,7 @@ export class UIMgr
 
     private RecordLayer(_key : string , _node : cc.Node , _type : LayerType)
     {
-        let keyPair = new LayerKeyPair(_key , _node);
+        let keyPair = new LayerKeyPair(_key , _node , this.mCurrentScene);
         this.GetList(_type).push(keyPair);
     }
 

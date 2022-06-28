@@ -1,7 +1,7 @@
 {
   "modules": {
     "cce:/internal/x/cc": {
-      "mTimestamp": 13121.202209949493,
+      "mTimestamp": 15163.655193924904,
       "chunkId": "909f786ffe128f06f5aa1b4e1e3fbbd65262915e",
       "imports": [
         {
@@ -409,8 +409,8 @@
       ]
     },
     "cce:/internal/x/prerequisite-imports": {
-      "mTimestamp": 5352641.122772932,
-      "chunkId": "6411f90c4190295b67aabbf0e2b7e84f48230598",
+      "mTimestamp": 9161933.750838995,
+      "chunkId": "08cf1b97de99ce4e9d8aefc881f776d3037827ad",
       "imports": [
         {
           "value": "file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js",
@@ -427,7 +427,7 @@
           }
         },
         {
-          "value": "file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts",
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/Start.ts",
           "resolved": "__unresolved_1",
           "loc": {
             "start": {
@@ -436,12 +436,12 @@
             },
             "end": {
               "line": 5,
-              "column": 66
+              "column": 62
             }
           }
         },
         {
-          "value": "file:///Users/yamiwang/cowboy/assets/scripts/Start.ts",
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts",
           "resolved": "__unresolved_2",
           "loc": {
             "start": {
@@ -450,12 +450,12 @@
             },
             "end": {
               "line": 6,
-              "column": 62
+              "column": 68
             }
           }
         },
         {
-          "value": "file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts",
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts",
           "resolved": "__unresolved_3",
           "loc": {
             "start": {
@@ -464,12 +464,12 @@
             },
             "end": {
               "line": 7,
-              "column": 66
+              "column": 72
             }
           }
         },
         {
-          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts",
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts",
           "resolved": "__unresolved_4",
           "loc": {
             "start": {
@@ -483,7 +483,7 @@
           }
         },
         {
-          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts",
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts",
           "resolved": "__unresolved_5",
           "loc": {
             "start": {
@@ -492,12 +492,12 @@
             },
             "end": {
               "line": 9,
-              "column": 72
+              "column": 67
             }
           }
         },
         {
-          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts",
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts",
           "resolved": "__unresolved_6",
           "loc": {
             "start": {
@@ -506,12 +506,12 @@
             },
             "end": {
               "line": 10,
-              "column": 68
+              "column": 72
             }
           }
         },
         {
-          "value": "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts",
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts",
           "resolved": "__unresolved_7",
           "loc": {
             "start": {
@@ -520,12 +520,12 @@
             },
             "end": {
               "line": 11,
-              "column": 67
+              "column": 75
             }
           }
         },
         {
-          "value": "file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts",
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts",
           "resolved": "__unresolved_8",
           "loc": {
             "start": {
@@ -534,7 +534,35 @@
             },
             "end": {
               "line": 12,
-              "column": 72
+              "column": 77
+            }
+          }
+        },
+        {
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts",
+          "resolved": "__unresolved_9",
+          "loc": {
+            "start": {
+              "line": 13,
+              "column": 7
+            },
+            "end": {
+              "line": 13,
+              "column": 79
+            }
+          }
+        },
+        {
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts",
+          "resolved": "__unresolved_10",
+          "loc": {
+            "start": {
+              "line": 14,
+              "column": 7
+            },
+            "end": {
+              "line": 14,
+              "column": 77
             }
           }
         }
@@ -551,21 +579,7 @@
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts"
-          },
-          "messages": []
-        },
-        {
-          "resolved": {
-            "type": "module",
             "url": "file:///Users/yamiwang/cowboy/assets/scripts/Start.ts"
-          },
-          "messages": []
-        },
-        {
-          "resolved": {
-            "type": "module",
-            "url": "file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts"
           },
           "messages": []
         },
@@ -601,6 +615,34 @@
           "resolved": {
             "type": "module",
             "url": "file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts"
           },
           "messages": []
         }
@@ -711,7 +753,7 @@
       ]
     },
     "cce:/internal/code-quality/cr.mjs": {
-      "mTimestamp": 1656331762864,
+      "mTimestamp": 1656391234754,
       "chunkId": "3a1fd7b13056478820ebedd306d3446d1aa408cc",
       "imports": [],
       "type": "esm",
@@ -751,7 +793,7 @@
       ]
     },
     "cce:/internal/ml/cjs-loader.mjs": {
-      "mTimestamp": 1656331762864,
+      "mTimestamp": 1656391234754,
       "chunkId": "54868504c6ec482db0446484e0819fc622d1c357",
       "imports": [],
       "type": "esm",
@@ -759,11 +801,15 @@
     },
     "file:///Users/yamiwang/cowboy/assets/scripts/HotUpdate.ts": {
       "mTimestamp": {
-        "mtime": 1656335606471.2874,
+        "mtime": 1656394003123.9436,
         "uuid": "29e61f73-c2ca-49b8-a736-669bfeea7bb6"
       },
-      "chunkId": "d9eda3e0e564ccc60677e56fce4ff12c6b4d983e",
+      "chunkId": "c26fe48beb8816bf70a3f5937961eee06a596ffb",
       "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
         {
           "value": "cc"
         },
@@ -779,46 +825,18 @@
               "column": 93
             }
           }
-        }
-      ],
-      "type": "esm",
-      "resolutions": [
-        {
-          "resolved": {
-            "type": "module",
-            "url": "cce:/internal/x/cc"
-          },
-          "messages": []
         },
         {
-          "resolved": {
-            "type": "module",
-            "url": "cce:/internal/x/cc"
-          },
-          "messages": []
-        }
-      ]
-    },
-    "file:///Users/yamiwang/cowboy/assets/scripts/Start.ts": {
-      "mTimestamp": {
-        "mtime": 1656329065331.3486,
-        "uuid": "dddd4d98-653f-4df0-8b57-d35642a297b1"
-      },
-      "chunkId": "311b3951fe5da11760ca81582d213cfdc1f515e0",
-      "imports": [
-        {
-          "value": "cc"
-        },
-        {
-          "value": "cc",
+          "value": "./LoadingData",
+          "resolved": "__unresolved_1",
           "loc": {
             "start": {
-              "line": 1,
-              "column": 50
+              "line": 3,
+              "column": 28
             },
             "end": {
-              "line": 1,
-              "column": 54
+              "line": 3,
+              "column": 43
             }
           }
         }
@@ -828,6 +846,13 @@
         {
           "resolved": {
             "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
             "url": "cce:/internal/x/cc"
           },
           "messages": []
@@ -838,15 +863,96 @@
             "url": "cce:/internal/x/cc"
           },
           "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/LoadingData.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/Start.ts": {
+      "mTimestamp": {
+        "mtime": 1656396401336.4353,
+        "uuid": "bdc8bc80-03d7-4139-b67b-a6aa954860bc"
+      },
+      "chunkId": "c501880e1f58a10904709c2ff84e4e2ad916e5a7",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 44
+            },
+            "end": {
+              "line": 1,
+              "column": 48
+            }
+          }
+        },
+        {
+          "value": "./base/UIMgr",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 33
+            },
+            "end": {
+              "line": 2,
+              "column": 47
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts"
+          },
+          "messages": []
         }
       ]
     },
     "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts": {
       "mTimestamp": {
-        "mtime": 1656039533381.8577,
+        "mtime": 1656400312591.217,
         "uuid": "4d942a49-fb0e-4c3e-87ff-ca87263c99c8"
       },
-      "chunkId": "b729d3f40bf7e0184f2c4be2027b6ac52d4b1b74",
+      "chunkId": "0b2fcc1d9d902cb752200016771465995209c1f0",
       "imports": [
         {
           "value": "cce:/internal/code-quality/cr.mjs",
@@ -957,60 +1063,6 @@
         }
       ]
     },
-    "file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts": {
-      "mTimestamp": {
-        "mtime": 1656043869420.3247,
-        "uuid": "8fed452a-0dcc-448a-9df5-29500eaa0039"
-      },
-      "chunkId": "7fc116f4f9842de7b65f5ac0a49b2f385b3b1342",
-      "imports": [
-        {
-          "value": "cce:/internal/code-quality/cr.mjs",
-          "resolved": "__unresolved_0"
-        },
-        {
-          "value": "cc"
-        },
-        {
-          "value": "./base/DataNotify",
-          "resolved": "__unresolved_1",
-          "loc": {
-            "start": {
-              "line": 1,
-              "column": 27
-            },
-            "end": {
-              "line": 1,
-              "column": 46
-            }
-          }
-        }
-      ],
-      "type": "esm",
-      "resolutions": [
-        {
-          "resolved": {
-            "type": "module",
-            "url": "cce:/internal/code-quality/cr.mjs"
-          },
-          "messages": []
-        },
-        {
-          "resolved": {
-            "type": "module",
-            "url": "cce:/internal/x/cc"
-          },
-          "messages": []
-        },
-        {
-          "resolved": {
-            "type": "module",
-            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts"
-          },
-          "messages": []
-        }
-      ]
-    },
     "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts": {
       "mTimestamp": {
         "mtime": 1656043867200.5574,
@@ -1035,10 +1087,10 @@
     },
     "file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts": {
       "mTimestamp": {
-        "mtime": 1655199320824.702,
+        "mtime": 1656394884585.2258,
         "uuid": "d67f35be-1632-439c-b35b-ab7602cf81bd"
       },
-      "chunkId": "8847b4d83130b313075aa03e2e61671f1ac47033",
+      "chunkId": "de067c910ea06056b90047a9152d7f6b1117f925",
       "imports": [
         {
           "value": "cc"
@@ -1112,6 +1164,810 @@
           "resolved": {
             "type": "module",
             "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/cow.ts": {
+      "mTimestamp": {
+        "mtime": 1656393050170.8652,
+        "uuid": "48b53878-379a-4884-a5b4-fd0585b70d2a"
+      },
+      "chunkId": "df1908d4493f2aaf48aeff6ae855bef25c511ecf",
+      "imports": [
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 44
+            },
+            "end": {
+              "line": 1,
+              "column": 48
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/cowboy.ts": {
+      "mTimestamp": {
+        "mtime": 1656393070169.9075,
+        "uuid": "48b53878-379a-4884-a5b4-fd0585b70d2a"
+      },
+      "chunkId": "9b38fb529f1d83f669960e78c40ba200d26cc888",
+      "imports": [
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 44
+            },
+            "end": {
+              "line": 1,
+              "column": 48
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/Cowboy.ts": {
+      "mTimestamp": {
+        "mtime": 1656393108707.9128,
+        "uuid": "48b53878-379a-4884-a5b4-fd0585b70d2a"
+      },
+      "chunkId": "bfd15c54eeea786f5877a9c03d7929fe635cb1c6",
+      "imports": [
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 44
+            },
+            "end": {
+              "line": 1,
+              "column": 48
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/StartUI.ts": {
+      "mTimestamp": {
+        "mtime": 1656393443698.1162,
+        "uuid": "dddd4d98-653f-4df0-8b57-d35642a297b1"
+      },
+      "chunkId": "dd2938da30edaa41da92f9ea0d657f08ff723062",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 50
+            },
+            "end": {
+              "line": 1,
+              "column": 54
+            }
+          }
+        },
+        {
+          "value": "./base/BaseUI",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 23
+            },
+            "end": {
+              "line": 2,
+              "column": 38
+            }
+          }
+        },
+        {
+          "value": "./base/UIMgr",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 33
+            },
+            "end": {
+              "line": 4,
+              "column": 47
+            }
+          }
+        },
+        {
+          "value": "./StartData",
+          "resolved": "__unresolved_3",
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 26
+            },
+            "end": {
+              "line": 5,
+              "column": 39
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/StartData.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts": {
+      "mTimestamp": {
+        "mtime": 1656395273031.7231,
+        "uuid": "48b53878-379a-4884-a5b4-fd0585b70d2a"
+      },
+      "chunkId": "10e852b180719ce8aa3d46df5338e347a69ed09b",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 44
+            },
+            "end": {
+              "line": 1,
+              "column": 48
+            }
+          }
+        },
+        {
+          "value": "../../base/BaseUI",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 23
+            },
+            "end": {
+              "line": 2,
+              "column": 42
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/LoadingUI.ts": {
+      "mTimestamp": {
+        "mtime": 1656394901072.927,
+        "uuid": "dddd4d98-653f-4df0-8b57-d35642a297b1"
+      },
+      "chunkId": "3d4dbcd50db7dfb71d339fe4f239cff902d3c083",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 50
+            },
+            "end": {
+              "line": 1,
+              "column": 54
+            }
+          }
+        },
+        {
+          "value": "./base/BaseUI",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 23
+            },
+            "end": {
+              "line": 2,
+              "column": 38
+            }
+          }
+        },
+        {
+          "value": "./base/UIMgr",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 33
+            },
+            "end": {
+              "line": 4,
+              "column": 47
+            }
+          }
+        },
+        {
+          "value": "./LoadingData",
+          "resolved": "__unresolved_3",
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 28
+            },
+            "end": {
+              "line": 5,
+              "column": 43
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/LoadingData.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/LoadingData.ts": {
+      "mTimestamp": {
+        "mtime": 1656393834223.336,
+        "uuid": "8fed452a-0dcc-448a-9df5-29500eaa0039"
+      },
+      "chunkId": "9a11aac4aa6aec84f33e745dfa399ccf4a06be08",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "./base/DataNotify",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 27
+            },
+            "end": {
+              "line": 1,
+              "column": 46
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts": {
+      "mTimestamp": {
+        "mtime": 1656395494265.0945,
+        "uuid": "29e61f73-c2ca-49b8-a736-669bfeea7bb6"
+      },
+      "chunkId": "2816cfb42714f791f544bf201370aab74d906b28",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 89
+            },
+            "end": {
+              "line": 2,
+              "column": 93
+            }
+          }
+        },
+        {
+          "value": "./LoadingData",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 28
+            },
+            "end": {
+              "line": 3,
+              "column": 43
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts": {
+      "mTimestamp": {
+        "mtime": 1656395520100.303,
+        "uuid": "8fed452a-0dcc-448a-9df5-29500eaa0039"
+      },
+      "chunkId": "b186ff641f7cccfdaa4c7e953990135674ca9834",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "../../base/DataNotify",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 27
+            },
+            "end": {
+              "line": 1,
+              "column": 50
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts": {
+      "mTimestamp": {
+        "mtime": 1656400170152.718,
+        "uuid": "dddd4d98-653f-4df0-8b57-d35642a297b1"
+      },
+      "chunkId": "eadd38d2ffca64e5409fa9ad02a6781f4925453d",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 50
+            },
+            "end": {
+              "line": 1,
+              "column": 54
+            }
+          }
+        },
+        {
+          "value": "../../base/BaseUI",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 23
+            },
+            "end": {
+              "line": 2,
+              "column": 42
+            }
+          }
+        },
+        {
+          "value": "../../base/UIMgr",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 33
+            },
+            "end": {
+              "line": 3,
+              "column": 51
+            }
+          }
+        },
+        {
+          "value": "./LoadingData",
+          "resolved": "__unresolved_3",
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 28
+            },
+            "end": {
+              "line": 4,
+              "column": 43
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/ui/Start.ts": {
+      "mTimestamp": {
+        "mtime": 1656396232148.0571,
+        "uuid": "bdc8bc80-03d7-4139-b67b-a6aa954860bc"
+      },
+      "chunkId": "f7c9b59673a4f6ce616c75f3549699104c31148b",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 44
+            },
+            "end": {
+              "line": 1,
+              "column": 48
+            }
+          }
+        },
+        {
+          "value": "../base/UIMgr",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 33
+            },
+            "end": {
+              "line": 2,
+              "column": 48
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts"
           },
           "messages": []
         }

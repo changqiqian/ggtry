@@ -1,8 +1,6 @@
 import { _decorator, Component, Node, instantiate } from 'cc';
-import { ResMgr } from './ResMgr';
-export class BaseUI extends Component {
-
-
+export abstract class BaseUI extends Component 
+{
     onLoad() 
     {
         this.InitParam();
@@ -22,39 +20,16 @@ export class BaseUI extends Component {
     }
 
     //“把UI节点与代码变量”绑定起来
-    InitParam()
-    {
-
-    }
-
-
+    abstract InitParam();
     //绑定ui事件
-    BindUI()
-    {
-
-    }
-
+    abstract BindUI();
     //数据驱动注册
-    RegDataNotify()
-    {
-
-    }
+    abstract RegDataNotify();
     //延迟一贞初始化的内容
-    LateInit()
-    {
-
-    }
+    abstract LateInit()
     //数据驱动注销
-    UnregDataNotify()
-    {
-
-    }
+    abstract UnregDataNotify();
     //自定义析构
-    CustmoerDestory()
-    {
-
-    }
-
-
+    abstract CustmoerDestory();
 }
 
