@@ -63,7 +63,7 @@ export class UIMgr
     mWindowList  : Array<LayerKeyPair>;
     mCurrentScene : SceneType;
     mSceneConfig : Array<SceneConfig>;
-    public Init()
+    public Init(_loadFinish : Function)
     {
         this.mLayerRoot = cc.find("Canvas/LayerRoot");
         this.mWindowRoot = cc.find("Canvas/WindowRoot");
@@ -82,6 +82,11 @@ export class UIMgr
         this.mSceneConfig.push(hallConfig);
         
         //公用资源加载
+        
+        this.PreloadRes(["common"], resFolder , ()=>
+        {
+            _loadFinish();
+        });
     }
 
     public ShowLayer(_bundleName :string , _prefabPath:string , _type : LayerType) : cc.Node
@@ -139,24 +144,24 @@ export class UIMgr
 
         this.mCurrentScene = _sceneType;
         let configNewScene = this.GetSceneConfig(_sceneType);
-        this.PreloadSceneRes(configNewScene , ()=>
+        this.PreloadRes(configNewScene.bundleNames , configNewScene.resFolders , ()=>
         {
             this.ShowLayer(configNewScene.bundleNames[0],configNewScene.prefabPath, LayerType.Layer);
         });
     }
 
-    public PreloadSceneRes(_config : SceneConfig , _loadFinish : Function)
+    public PreloadRes(_bundleNames : Array<string> , _resFolders : Array<string> , _loadFinish : Function)
     {
-        let loadCount = _config.bundleNames.length * _config.resFolders.length;
-        console.log("total loadCount === " +loadCount);
-        for(let i = 0 ; i < _config.bundleNames.length ; i++)
+        let loadCount = _bundleNames.length * _resFolders.length;
+        //console.log("total loadCount === " +loadCount);
+        for(let i = 0 ; i < _bundleNames.length ; i++)
         {
-            ResMgr.PreloadBundle(_config.bundleNames[i] , (_bundle)=>
+            ResMgr.PreloadBundle(_bundleNames[i] , (_bundle)=>
             {
-                ResMgr.PreloadAssetsInBundle(_bundle , _config.resFolders , ()=>
+                ResMgr.PreloadAssetsInBundle(_bundle , _resFolders , ()=>
                 {
                     loadCount--;
-                    console.log("rest loadCount === " +loadCount);
+                    //console.log("rest loadCount === " +loadCount);
                     if(loadCount == 0)
                     {
                         if(_loadFinish)

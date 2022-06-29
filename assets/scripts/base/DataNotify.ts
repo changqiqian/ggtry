@@ -136,6 +136,15 @@ export class DataNotify
         this.__created = true;
     }
 
+    SetValueByParamName(_paramName: string , _value : any)
+    {
+        this[_paramName] = _value;
+    }
+
+    GetValueByParamName(_paramName: string) : any
+    {
+        return this[_paramName];
+    }
 
     Reset()
     {

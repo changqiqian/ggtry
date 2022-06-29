@@ -1,0 +1,30 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "9d",
+    "atlas": "",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 93,
+      "height": 121
+    },
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "originalSize": {
+      "width": 93,
+      "height": 121
+    },
+    "rotated": false,
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "texture": "7ed078a2-c02e-46be-9780-f52082729c09@6c48a",
+    "packable": true
+  }
+}

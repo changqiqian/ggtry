@@ -14,7 +14,6 @@ export class StartUI extends BaseUI
             setTimeout(() => {
                 UIMgr.GetInstance().ChangeScene(SceneType.Hall);  
             }, 1000)
-
         },this);
 
 

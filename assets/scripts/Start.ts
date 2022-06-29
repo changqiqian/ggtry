@@ -8,8 +8,10 @@ export class Start extends Component
 {
     start() 
     {
-        UIMgr.GetInstance().Init();
-        UIMgr.GetInstance().ChangeScene(SceneType.Loading);  
+        UIMgr.GetInstance().Init(()=>
+        {
+            UIMgr.GetInstance().ChangeScene(SceneType.Loading);  
+        });
     }
 
 

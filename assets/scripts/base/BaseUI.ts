@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, instantiate } from 'cc';
+import { ResMgr } from './ResMgr';
 export abstract class BaseUI extends Component 
 {
     onLoad() 
@@ -31,5 +32,24 @@ export abstract class BaseUI extends Component
     abstract UnregDataNotify();
     //自定义析构
     abstract CustmoerDestory();
+
+
+
+    LoadSprite(_bundleName : string, _assetPath : string ,  _loadFinish : Function)
+    {
+        ResMgr.GetAssetInBundle(_bundleName,_assetPath,cc.SpriteFrame,(_asset)=>
+        {
+            _loadFinish(_asset)
+        });
+    }
+
+    LoadPrefab(_bundleName : string, _assetPath : string ,  _loadFinish : Function)
+    {
+        ResMgr.GetAssetInBundle(_bundleName,_assetPath,cc.Prefab,(_asset)=>
+        {
+            _loadFinish(_asset)
+        });
+    }
+
 }
 
