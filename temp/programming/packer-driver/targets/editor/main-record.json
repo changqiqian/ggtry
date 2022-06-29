@@ -493,8 +493,8 @@
       ]
     },
     "cce:/internal/x/prerequisite-imports": {
-      "mTimestamp": 226756.96106505394,
-      "chunkId": "9cf229abfa71884e036c6807b179e78ad5c3b870",
+      "mTimestamp": 12844381.411637068,
+      "chunkId": "d2a469b18dd3806af6b4b4f47a791d61efe03601",
       "imports": [
         {
           "value": "file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js",
@@ -623,7 +623,7 @@
           }
         },
         {
-          "value": "file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts",
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts",
           "resolved": "__unresolved_9",
           "loc": {
             "start": {
@@ -632,49 +632,63 @@
             },
             "end": {
               "line": 5,
-              "column": 806
+              "column": 808
+            }
+          }
+        },
+        {
+          "value": "file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts",
+          "resolved": "__unresolved_10",
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 824
+            },
+            "end": {
+              "line": 5,
+              "column": 888
             }
           }
         },
         {
           "value": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts",
-          "resolved": "__unresolved_10",
+          "resolved": "__unresolved_11",
           "loc": {
             "start": {
               "line": 5,
-              "column": 822
+              "column": 904
             },
             "end": {
               "line": 5,
-              "column": 892
+              "column": 974
             }
           }
         },
         {
           "value": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts",
-          "resolved": "__unresolved_11",
+          "resolved": "__unresolved_12",
           "loc": {
             "start": {
               "line": 5,
-              "column": 908
+              "column": 990
             },
             "end": {
               "line": 5,
-              "column": 980
+              "column": 1062
             }
           }
         },
         {
           "value": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts",
-          "resolved": "__unresolved_12",
+          "resolved": "__unresolved_13",
           "loc": {
             "start": {
               "line": 5,
-              "column": 996
+              "column": 1078
             },
             "end": {
               "line": 5,
-              "column": 1066
+              "column": 1148
             }
           }
         }
@@ -741,6 +755,13 @@
           "resolved": {
             "type": "module",
             "url": "file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts"
           },
           "messages": []
         },
@@ -1181,10 +1202,10 @@
     },
     "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts": {
       "mTimestamp": {
-        "mtime": 1656043867200.5574,
+        "mtime": 1656429403202.5916,
         "uuid": "c781eea0-3e91-48a9-ab5a-8463e02a19f1"
       },
-      "chunkId": "6a341c5b90ab83a36c869c75679cf2d0f243e10b",
+      "chunkId": "42d99682a78df2a2206be584ec2cf9f4caa9ddee",
       "imports": [
         {
           "value": "cc"
@@ -1488,10 +1509,10 @@
     },
     "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts": {
       "mTimestamp": {
-        "mtime": 1656395520100.303,
+        "mtime": 1656429429232.7554,
         "uuid": "8fed452a-0dcc-448a-9df5-29500eaa0039"
       },
-      "chunkId": "85a29ef09834ddd32d2d1301870fab82326a6f56",
+      "chunkId": "c165a4287e740812523a6aad4583033132fb6403",
       "imports": [
         {
           "value": "cce:/internal/code-quality/cr.mjs",
@@ -1542,10 +1563,10 @@
     },
     "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts": {
       "mTimestamp": {
-        "mtime": 1656400170152.718,
+        "mtime": 1656429316716.5488,
         "uuid": "dddd4d98-653f-4df0-8b57-d35642a297b1"
       },
-      "chunkId": "eadd38d2ffca64e5409fa9ad02a6781f4925453d",
+      "chunkId": "fae3f54a28cdc1d39771e45ba245f851708ad9a7",
       "imports": [
         {
           "value": "cce:/internal/code-quality/cr.mjs",
@@ -1651,6 +1672,60 @@
           "resolved": {
             "type": "module",
             "url": "file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts": {
+      "mTimestamp": {
+        "mtime": 1656429456118.3389,
+        "uuid": "7ae241b1-d957-474a-b3b3-b5a86f96679e"
+      },
+      "chunkId": "6a2c45618d6bbe2b9f76c7325aa8039ab1af923f",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "../../base/DataNotify",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 27
+            },
+            "end": {
+              "line": 2,
+              "column": 50
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts"
           },
           "messages": []
         }

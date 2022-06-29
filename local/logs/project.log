@@ -82,3 +82,11 @@
 2022-06-28T11:43:56.451Z - info: [Scene] Forward render pipeline initialized.
 2022-06-28T11:45:20.678Z - warn: [Window] (electron) The remote module is deprecated. Use https://github.com/electron/remote instead.
 2022-06-28T11:45:32.269Z - log: [Window] 执行完成
+2022-06-28T15:17:40.021Z - warn: Metrics: no valid info
+2022-06-28T15:17:40.041Z - error: Error occurred in handler for 'GUEST_VIEW_MANAGER_CALL': Error: Invalid guestInstanceId: 6
+    at getGuestForWebContents (electron/js2c/browser_init.js:181:6307)
+    at electron/js2c/browser_init.js:181:5372
+    at electron/js2c/browser_init.js:181:1637
+    at electron/js2c/browser_init.js:197:579
+    at Object.<anonymous> (electron/js2c/browser_init.js:161:9782)
+    at Object.emit (events.js:315:20)

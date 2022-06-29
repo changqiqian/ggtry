@@ -107,12 +107,6 @@ export class DataNotify
         }
     }
 
-    ClearListeners()
-    {
-        this.__listeners = null;
-        this.__listeners = {};
-    }
-
     CreateNotify()
     {
         if(this.__created) return;
@@ -139,18 +133,11 @@ export class DataNotify
             }
         });
         Object.defineProperties(this, propertyDefine);
-
         this.__created = true;
     }
 
 
-    reset()
-    {
-        this.resetDataToDefault();
-        this.ClearListeners();
-    }
-
-    resetDataToDefault()
+    Reset()
     {
         var props = Object.keys(this);
         props.forEach((prop) => 
@@ -162,6 +149,9 @@ export class DataNotify
                 this[prop]  = DefaultValue;
             }
         })
+
+        this.__listeners = null;
+        this.__listeners = {};
     }
 }
 

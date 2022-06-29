@@ -200,7 +200,7 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts": {
-    "time": 1656043867200.5574,
+    "time": 1656429403202.5916,
     "uuid": "c781eea0-3e91-48a9-ab5a-8463e02a19f1",
     "missing": false
   },
@@ -225,7 +225,7 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/ui/hall": {
-    "time": 1656406902991.4087,
+    "time": 1656429139748.2415,
     "uuid": "d1eee140-f99c-402b-b2eb-b3a1b6621df9",
     "missing": false
   },
@@ -260,12 +260,12 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts": {
-    "time": 1656395520100.303,
+    "time": 1656429429232.7554,
     "uuid": "8fed452a-0dcc-448a-9df5-29500eaa0039",
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts": {
-    "time": 1656400170152.718,
+    "time": 1656429316716.5488,
     "uuid": "dddd4d98-653f-4df0-8b57-d35642a297b1",
     "missing": false
   },
@@ -430,5 +430,13 @@
   },
   "/Users/yamiwang/cowboy/assets/bundle/loading/prefab/LoadingUI.prefab.meta": {
     "time": 1656396171737.425
+  },
+  "/Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts.meta": {
+    "time": 1656429139750.451
+  },
+  "/Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts": {
+    "time": 1656429456118.3389,
+    "uuid": "7ae241b1-d957-474a-b3b3-b5a86f96679e",
+    "missing": false
   }
 }

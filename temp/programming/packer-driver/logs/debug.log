@@ -393,3 +393,193 @@ debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingDa
 debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts.
 debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
 debug: Target(preview) ends with cost 88.39821207523346ms.
+debug: Dispatch build request for time accumulated 1 asset changes.
+debug: Build iteration starts.
+Number of accumulated asset changes: 1
+Feature changed: false
+debug: Target(editor) build started.
+debug: Detected change: cce:/internal/x/prerequisite-imports. Last mtime: Thu Jan 01 1970 08:03:46 GMT+0800 (Philippine Standard Time), Current mtime: Thu Jan 01 1970 11:28:46 GMT+0800 (Philippine Standard Time)
+debug: Inspect cce:/internal/x/prerequisite-imports
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Resolve file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/Start.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/Start.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/x/cc.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts.
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Target(editor) ends with cost 60.00361096858978ms.
+debug: Target(preview) build started.
+debug: Detected change: cce:/internal/x/prerequisite-imports. Last mtime: Thu Jan 01 1970 08:03:46 GMT+0800 (Philippine Standard Time), Current mtime: Thu Jan 01 1970 11:28:46 GMT+0800 (Philippine Standard Time)
+debug: Inspect cce:/internal/x/prerequisite-imports
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Resolve file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/Start.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/Start.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts.
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/x/cc.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts.
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Target(preview) ends with cost 74.43726301193237ms.
+debug: Dispatch build request for time accumulated 1 asset changes.
+debug: Build iteration starts.
+Number of accumulated asset changes: 1
+Feature changed: false
+debug: Target(editor) build started.
+debug: Detected change: cce:/internal/x/prerequisite-imports. Last mtime: Thu Jan 01 1970 11:28:46 GMT+0800 (Philippine Standard Time), Current mtime: Thu Jan 01 1970 11:30:09 GMT+0800 (Philippine Standard Time)
+debug: Inspect cce:/internal/x/prerequisite-imports
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Resolve file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/Start.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/Start.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts.
+debug: Detected change: file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts. Last mtime: Tue Jun 28 2022 23:12:19 GMT+0800 (Philippine Standard Time)@7ae241b1-d957-474a-b3b3-b5a86f96679e, Current mtime: Tue Jun 28 2022 23:13:36 GMT+0800 (Philippine Standard Time)@7ae241b1-d957-474a-b3b3-b5a86f96679e
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/x/cc.
+debug: Resolve ../../base/DataNotify from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts.
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Target(editor) ends with cost 59.497113943099976ms.
+debug: Target(preview) build started.
+debug: Detected change: cce:/internal/x/prerequisite-imports. Last mtime: Thu Jan 01 1970 11:28:46 GMT+0800 (Philippine Standard Time), Current mtime: Thu Jan 01 1970 11:30:09 GMT+0800 (Philippine Standard Time)
+debug: Inspect cce:/internal/x/prerequisite-imports
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Resolve file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/Start.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/Start.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts.
+debug: Detected change: file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts. Last mtime: Tue Jun 28 2022 23:12:19 GMT+0800 (Philippine Standard Time)@7ae241b1-d957-474a-b3b3-b5a86f96679e, Current mtime: Tue Jun 28 2022 23:13:36 GMT+0800 (Philippine Standard Time)@7ae241b1-d957-474a-b3b3-b5a86f96679e
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/x/cc.
+debug: Resolve ../../base/DataNotify from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts.
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Target(preview) ends with cost 77.20871901512146ms.
+debug: Dispatch build request for time accumulated 4 asset changes.
+debug: Build iteration starts.
+Number of accumulated asset changes: 4
+Feature changed: false
+debug: Target(editor) build started.
+debug: Detected change: cce:/internal/x/prerequisite-imports. Last mtime: Thu Jan 01 1970 11:30:09 GMT+0800 (Philippine Standard Time), Current mtime: Thu Jan 01 1970 11:34:04 GMT+0800 (Philippine Standard Time)
+debug: Inspect cce:/internal/x/prerequisite-imports
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Resolve file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/Start.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/Start.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Detected change: file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts. Last mtime: Fri Jun 24 2022 12:11:07 GMT+0800 (Philippine Standard Time)@c781eea0-3e91-48a9-ab5a-8463e02a19f1, Current mtime: Tue Jun 28 2022 23:16:43 GMT+0800 (Philippine Standard Time)@c781eea0-3e91-48a9-ab5a-8463e02a19f1
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts as cce:/internal/x/cc.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts.
+debug: Detected change: file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts. Last mtime: Tue Jun 28 2022 23:13:36 GMT+0800 (Philippine Standard Time)@7ae241b1-d957-474a-b3b3-b5a86f96679e, Current mtime: Tue Jun 28 2022 23:17:36 GMT+0800 (Philippine Standard Time)@7ae241b1-d957-474a-b3b3-b5a86f96679e
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/x/cc.
+debug: Resolve ../../base/DataNotify from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts.
+debug: Detected change: file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts. Last mtime: Tue Jun 28 2022 13:52:00 GMT+0800 (Philippine Standard Time)@8fed452a-0dcc-448a-9df5-29500eaa0039, Current mtime: Tue Jun 28 2022 23:17:09 GMT+0800 (Philippine Standard Time)@8fed452a-0dcc-448a-9df5-29500eaa0039
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts as cce:/internal/x/cc.
+debug: Resolve ../../base/DataNotify from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts.
+debug: Detected change: file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts. Last mtime: Tue Jun 28 2022 15:09:30 GMT+0800 (Philippine Standard Time)@dddd4d98-653f-4df0-8b57-d35642a297b1, Current mtime: Tue Jun 28 2022 23:15:16 GMT+0800 (Philippine Standard Time)@dddd4d98-653f-4df0-8b57-d35642a297b1
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as cce:/internal/x/cc.
+debug: Resolve ../../base/BaseUI from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts.
+debug: Resolve ../../base/UIMgr from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Resolve ./LoadingData from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts.
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Target(editor) ends with cost 178.14750802516937ms.
+debug: Target(preview) build started.
+debug: Detected change: cce:/internal/x/prerequisite-imports. Last mtime: Thu Jan 01 1970 11:30:09 GMT+0800 (Philippine Standard Time), Current mtime: Thu Jan 01 1970 11:34:04 GMT+0800 (Philippine Standard Time)
+debug: Inspect cce:/internal/x/prerequisite-imports
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Resolve file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.mjs?cjs=&original=.js.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/Start.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/Start.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/Calculator.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Detected change: file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts. Last mtime: Fri Jun 24 2022 12:11:07 GMT+0800 (Philippine Standard Time)@c781eea0-3e91-48a9-ab5a-8463e02a19f1, Current mtime: Tue Jun 28 2022 23:16:43 GMT+0800 (Philippine Standard Time)@c781eea0-3e91-48a9-ab5a-8463e02a19f1
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts as cce:/internal/x/cc.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/ResMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/network/Network.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts.
+debug: Detected change: file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts. Last mtime: Tue Jun 28 2022 23:13:36 GMT+0800 (Philippine Standard Time)@7ae241b1-d957-474a-b3b3-b5a86f96679e, Current mtime: Tue Jun 28 2022 23:17:36 GMT+0800 (Philippine Standard Time)@7ae241b1-d957-474a-b3b3-b5a86f96679e
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as cce:/internal/x/cc.
+debug: Resolve ../../base/DataNotify from file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallData.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/HotUpdate.ts.
+debug: Detected change: file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts. Last mtime: Tue Jun 28 2022 13:52:00 GMT+0800 (Philippine Standard Time)@8fed452a-0dcc-448a-9df5-29500eaa0039, Current mtime: Tue Jun 28 2022 23:17:09 GMT+0800 (Philippine Standard Time)@8fed452a-0dcc-448a-9df5-29500eaa0039
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts as cce:/internal/x/cc.
+debug: Resolve ../../base/DataNotify from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/DataNotify.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts.
+debug: Resolve file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts from cce:/internal/x/prerequisite-imports as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts.
+debug: Detected change: file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts. Last mtime: Tue Jun 28 2022 15:09:30 GMT+0800 (Philippine Standard Time)@dddd4d98-653f-4df0-8b57-d35642a297b1, Current mtime: Tue Jun 28 2022 23:15:16 GMT+0800 (Philippine Standard Time)@dddd4d98-653f-4df0-8b57-d35642a297b1
+debug: Inspect file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts
+debug: Resolve cce:/internal/code-quality/cr.mjs from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as cce:/internal/code-quality/cr.mjs.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as cce:/internal/x/cc.
+debug: Resolve cc from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as cce:/internal/x/cc.
+debug: Resolve ../../base/BaseUI from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/BaseUI.ts.
+debug: Resolve ../../base/UIMgr from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as file:///Users/yamiwang/cowboy/assets/scripts/base/UIMgr.ts.
+debug: Resolve ./LoadingData from file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingUI.ts as file:///Users/yamiwang/cowboy/assets/scripts/ui/loading/LoadingData.ts.
+debug: Create cjs interop url for 'file:///Users/yamiwang/cowboy/assets/plugin/protobufcowboy.js'
+debug: Target(preview) ends with cost 190.67790806293488ms.

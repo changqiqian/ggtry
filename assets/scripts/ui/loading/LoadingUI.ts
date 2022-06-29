@@ -33,7 +33,7 @@ export class StartUI extends BaseUI
     UnregDataNotify() 
     {
         LoadingData.GetInstance().RemoveListenerByTarget(this);
-
+        LoadingData.GetInstance().Reset();
     }
 
     CustmoerDestory()

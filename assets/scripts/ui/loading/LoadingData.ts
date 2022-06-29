@@ -3,17 +3,17 @@ import { DataNotify } from "../../base/DataNotify";
 
 export class LoadingData extends DataNotify 
 {
-    public static __ins:LoadingData = null;
+    public static Instance:LoadingData = null;
 
     public static GetInstance() : LoadingData
     {
-        if(LoadingData.__ins == null)
+        if(LoadingData.Instance == null)
         {
-            LoadingData.__ins = new LoadingData();
-            LoadingData.__ins.CreateNotify();
+            LoadingData.Instance = new LoadingData();
+            LoadingData.Instance.CreateNotify();
         }
 
-        return LoadingData.__ins;
+        return LoadingData.Instance;
     }
     
  
