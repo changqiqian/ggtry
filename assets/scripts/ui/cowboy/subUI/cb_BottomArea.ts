@@ -21,7 +21,7 @@ export class cb_BottomArea extends BaseUI {
     }
     BindUI() 
     {
-        CowboyData.GetInstance().Data_SelectedChip = 1500;
+      
         this.mChipCtr.InitWithData();
     }
 
@@ -37,11 +37,11 @@ export class cb_BottomArea extends BaseUI {
     }
     UnregDataNotify() 
     {
-
+        CowboyData.GetInstance().RemoveListenerByTarget(this);
     }
     CustmoerDestory() 
     {
-
+    
     }
 
 }

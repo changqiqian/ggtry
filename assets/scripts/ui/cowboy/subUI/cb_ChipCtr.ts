@@ -1,6 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { DataNotify } from '../../../base/DataNotify';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { ToggleBtn } from '../../common/ToggleBtn';
 import { CowboyData } from '../CowboyData';
 
@@ -15,21 +16,25 @@ export class cb_ChipCtr extends BaseUI
     BindUI() {
 
     }
-    RegDataNotify() {
-
+    RegDataNotify() 
+    {
+        LocalPlayerData.GetInstance().AddListener("Data_Money" , this.Data_Money.bind(this) , this );
     }
     LateInit() {
 
     }
-    UnregDataNotify() {
-
+    UnregDataNotify() 
+    {
+        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
     }
-    CustmoerDestory() {
+    CustmoerDestory() 
+    {
 
     }
 
     public InitWithData()
     {
+        CowboyData.GetInstance().Data_SelectedChip = 1;
         this.SetChipData(CowboyData.GetInstance(),"Data_SelectedChip" , 1 , 0);
         this.SetChipData(CowboyData.GetInstance(),"Data_SelectedChip" , 10 , 1);
         this.SetChipData(CowboyData.GetInstance(),"Data_SelectedChip" , 100 , 2);
@@ -54,6 +59,16 @@ export class cb_ChipCtr extends BaseUI
         let tempAmount = _amount/1000;
         let tempStr = tempAmount.toString() + "k";
         return tempStr;
+    }
+
+
+    Data_Money(_val , _bef)
+    {
+        for(let i = 0 ; i < this.node.children.length ; i++)
+        {
+            let currentChild = this.node.children[i].getComponent(ToggleBtn);
+            currentChild.SetForbidden(currentChild.mCustmoerData > _val);
+        }
     }
 
 }

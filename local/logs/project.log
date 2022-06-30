@@ -757,3 +757,4 @@ Class ID: "62d2bKpBiRG0Z3v1ou2ND9Q"
 2022-06-30T02:24:33.449Z - verbose: [Scene] Open engine (467ms)
 2022-06-30T02:24:33.449Z - verbose: [Scene] Configure engine (1ms)
 2022-06-30T02:24:33.177Z - info: [Scene] Forward render pipeline initialized.
+2022-06-30T03:03:23.823Z - warn: Metrics: no valid info

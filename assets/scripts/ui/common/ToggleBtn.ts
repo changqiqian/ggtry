@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Button, Label } from 'cc';
+import { _decorator, Component, Node, Button, Label, Sprite } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { DataNotify } from '../../base/DataNotify';
 const { ccclass, property } = _decorator;
@@ -18,7 +18,7 @@ export class ToggleBtn extends BaseUI {
     mTargetParam : string;
     mCustmoerData:number = 0;
     mDataNotify : DataNotify = null;
-
+    mForbidden : boolean = false;
     InitParam() 
     {
 
@@ -38,14 +38,16 @@ export class ToggleBtn extends BaseUI {
     }
     UnregDataNotify() 
     {
-
-    }
-    CustmoerDestory() 
-    {
         if(this.mDataNotify != null)
         {
             this.mDataNotify.RemoveListenerByTarget(this);
         }
+    }
+    CustmoerDestory() 
+    {
+        this.mSelected.node.off(Node.EventType.TOUCH_END,this.OnSelected.bind(this),this);
+        this.mDisabled.node.off(Node.EventType.TOUCH_END,this.OnDisabled.bind(this),this);
+        this.mDataNotify = null;
     }
 
     public SetDataNotify(_dataNotify : DataNotify ,_targetParam : string , _custmoerData : number)
@@ -62,13 +64,27 @@ export class ToggleBtn extends BaseUI {
         this.mDisableLabel.string = _title;
     }
 
+    public SetForbidden(_val : boolean)
+    {
+        this.mForbidden = _val;
+        this.mSelected.interactable = !this.mForbidden;
+        this.mDisabled.interactable = !this.mForbidden;
+        this.mSelected.getComponent(Sprite).grayscale = this.mForbidden;
+        this.mDisabled.getComponent(Sprite).grayscale = this.mForbidden;
+    }
+
     OnSelected()
     {
-        console.log("OnSelected");
+        
     }
 
     OnDisabled()
     {
+        if(this.mForbidden)
+        {
+            return;
+        }
+
         if(this.mDataNotify == null)
         {
             return;

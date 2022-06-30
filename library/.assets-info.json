@@ -70,7 +70,7 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scene/start.scene": {
-    "time": 1656483767150.0645,
+    "time": 1656558202646.4397,
     "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
     "missing": false
   },
@@ -80,7 +80,7 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/base": {
-    "time": 1656406121836.6455,
+    "time": 1656557078874.4143,
     "uuid": "167c5519-10cd-416b-b8cd-84a9f0487d15",
     "missing": false
   },
@@ -250,7 +250,7 @@
     "missing": false
   },
   "/Users/yamiwang/cowboy/assets/scripts/ui/hall/HallUI.ts": {
-    "time": 1656511213506.32,
+    "time": 1656557281367.3608,
     "uuid": "98659754-be84-4017-8124-0f9f24936aef",
     "missing": false
   },
@@ -995,7 +995,7 @@
     "time": 1656513861868.1418
   },
   "/Users/yamiwang/cowboy/assets/scripts/ui/common/ToggleBtn.ts": {
-    "time": 1656517888657.0046,
+    "time": 1656557944152.5408,
     "uuid": "ac00a7f1-d4be-45c6-a9dc-b2be7a90c5dd",
     "missing": false
   },
@@ -1011,7 +1011,7 @@
     "time": 1656512916419.7202
   },
   "/Users/yamiwang/cowboy/assets/scripts/ui/cowboy/subUI/cb_BottomArea.ts": {
-    "time": 1656517207028.4907,
+    "time": 1656557897829.3809,
     "uuid": "62d2b2a9-0624-46d1-9def-d68bb6343f50",
     "missing": false
   },
@@ -1019,7 +1019,7 @@
     "time": 1656515673619.9773
   },
   "/Users/yamiwang/cowboy/assets/scripts/ui/cowboy/subUI/cb_ChipCtr.ts": {
-    "time": 1656517525350.3347,
+    "time": 1656558189788.4607,
     "uuid": "0c489ef0-feab-487d-9c17-e49e57e19f90",
     "missing": false
   },
@@ -1069,6 +1069,14 @@
   "/Users/yamiwang/cowboy/assets/scripts/ui/cowboy/CowboyData.ts": {
     "time": 1656517106151.2551,
     "uuid": "4e42f3af-a968-48e0-925b-6f8b08ca2454",
+    "missing": false
+  },
+  "/Users/yamiwang/cowboy/assets/scripts/base/LocalPlayerData.ts.meta": {
+    "time": 1656557078876.5078
+  },
+  "/Users/yamiwang/cowboy/assets/scripts/base/LocalPlayerData.ts": {
+    "time": 1656557262323.218,
+    "uuid": "59e774e1-c4a8-436c-95ed-7c46f533777b",
     "missing": false
   }
 }
