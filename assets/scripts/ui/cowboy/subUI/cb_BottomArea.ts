@@ -21,7 +21,6 @@ export class cb_BottomArea extends BaseUI {
     }
     BindUI() 
     {
-      
         this.mChipCtr.InitWithData();
     }
 

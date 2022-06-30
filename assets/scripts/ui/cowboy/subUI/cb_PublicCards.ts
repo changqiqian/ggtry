@@ -2,6 +2,7 @@ import { _decorator, Component, Node, Vec3, Tween, easing } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { CardStruct, CardType } from '../../../base/Calculator';
 import { Poker } from '../../common/Poker';
+import { CowboyData } from '../CowboyData';
 const { ccclass, property } = _decorator;
 
 @ccclass('cb_PublicCards')
@@ -11,7 +12,7 @@ export class cb_PublicCards extends BaseUI
     @property(Node) 
     mLayout: Node = null;
 
-    public static TotalCards : number = 5; 
+
 
     InitParam() {
 
@@ -45,7 +46,7 @@ export class cb_PublicCards extends BaseUI
 
     DealCards()
     {
-        let count = cb_PublicCards.TotalCards;
+        let count = CowboyData.TotalCards;
         for(let i = 0 ; i < this.mLayout.children.length ; i++)
         {
             let baseDelayTime = 0.1;

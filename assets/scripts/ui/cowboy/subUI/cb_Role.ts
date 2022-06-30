@@ -29,6 +29,14 @@ export class cb_Role extends BaseUI {
 
     }
 
+    public ShowAllCards(_cards : Array<CardStruct> )
+    {
+        for(let i = 0 ; i < this.mCards.children.length ; i++)
+        {
+            let currentCard = _cards[i];
+            this.ShowCard(currentCard , i);
+        }
+    }
 
     public ShowCard(_card : CardStruct , _index : number)
     {

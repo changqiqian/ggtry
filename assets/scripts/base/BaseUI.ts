@@ -49,9 +49,9 @@ export abstract class BaseUI extends Component
 
     LoadPrefab(_bundleName : string, _assetPath : string ,  _loadFinish : Function)
     {
-        ResMgr.GetAssetInBundle(_bundleName,_assetPath,Prefab,(_asset)=>
+        ResMgr.GetAssetInBundle(_bundleName,_assetPath,Prefab,(_prefab)=>
         {
-            _loadFinish(_asset)
+            _loadFinish(_prefab)
         });
     }
 

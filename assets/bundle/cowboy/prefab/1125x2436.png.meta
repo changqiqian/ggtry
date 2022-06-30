@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "04748175-6306-48c5-9c6a-3c989c757f3e",
+  "uuid": "341b8c07-bf26-47a2-9a79-89ad8c8096b4",
   "files": [
     ".png",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "04748175-6306-48c5-9c6a-3c989c757f3e@6c48a",
-      "displayName": "GameIcon@2x",
+      "uuid": "341b8c07-bf26-47a2-9a79-89ad8c8096b4@6c48a",
+      "displayName": "1125x2436",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "04748175-6306-48c5-9c6a-3c989c757f3e"
+        "imageUuidOrDatabaseUri": "341b8c07-bf26-47a2-9a79-89ad8c8096b4"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "04748175-6306-48c5-9c6a-3c989c757f3e@f9941",
-      "displayName": "GameIcon@2x",
+      "uuid": "341b8c07-bf26-47a2-9a79-89ad8c8096b4@f9941",
+      "displayName": "1125x2436",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 512,
-        "height": 512,
-        "rawWidth": 512,
-        "rawHeight": 512,
+        "width": 1125,
+        "height": 2436,
+        "rawWidth": 1125,
+        "rawHeight": 2436,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "04748175-6306-48c5-9c6a-3c989c757f3e@6c48a",
+        "imageUuidOrDatabaseUri": "341b8c07-bf26-47a2-9a79-89ad8c8096b4@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,7 +69,7 @@
   "userData": {
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
-    "hasAlpha": false,
-    "redirect": "04748175-6306-48c5-9c6a-3c989c757f3e@f9941"
+    "hasAlpha": true,
+    "redirect": "341b8c07-bf26-47a2-9a79-89ad8c8096b4@f9941"
   }
 }

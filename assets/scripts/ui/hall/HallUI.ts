@@ -15,7 +15,7 @@ export class HallUI extends BaseUI
     BindUI() 
     {
         LocalPlayerData.GetInstance().TestData();
-        this.AddSubView("cowboy","prefab/CowboyUI");
+        this.AddSubView("cowboy","prefab/CowboyUI_X");
     }
 
     RegDataNotify() 

@@ -2,12 +2,12 @@
   "ver": "1.1.38",
   "importer": "prefab",
   "imported": true,
-  "uuid": "331eb9ad-6902-4660-a545-db11323b5414",
+  "uuid": "42a73060-86f0-43b0-8322-f3bd391c981d",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "CowboyUI"
+    "syncNodeName": "cb_Dot"
   }
 }
