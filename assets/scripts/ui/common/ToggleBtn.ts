@@ -89,7 +89,6 @@ export class ToggleBtn extends BaseUI {
         {
             return;
         }
-        console.log("OnDisabled");
         this.mDataNotify.SetValueByParamName(this.mTargetParam , this.mCustmoerData);
     }
 

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite } from 'cc';
+import { _decorator, Component, Node, Sprite, Tween, Vec2, v2, math, Vec3 } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { CardStruct, CardType } from '../../base/Calculator';
 const { ccclass, property } = _decorator;
@@ -17,6 +17,7 @@ export class Poker extends BaseUI {
     }
     BindUI() 
     {
+        this.ShowBack();
     }
     RegDataNotify() 
     {
@@ -52,7 +53,7 @@ export class Poker extends BaseUI {
             break;
         }
 
-        let finalPath = path + num + type;
+        let finalPath = path + num + type ;
         return finalPath;
     }
 
@@ -70,6 +71,26 @@ export class Poker extends BaseUI {
             this.Front.getComponent(Sprite).spriteFrame = _spirteFrame;
         });
     }
+
+    public FlipToFront(_duration : number = 1)
+    {
+        let halfDuration = _duration / 2;
+
+        let tempTweenBack = new Tween(this.Back); 
+        tempTweenBack.to(halfDuration , {scale: new Vec3(0,1,1)});
+        tempTweenBack.start();
+
+        let tempTweenFront = new Tween(this.Front); 
+        tempTweenFront.to(halfDuration , {scale: new Vec3(0,1,1)});
+        tempTweenFront.call(()=>
+        {
+            this.Front.active = true;
+        });
+        tempTweenFront.to(halfDuration , {scale: new Vec3(1,1,1)});
+        tempTweenFront.start();
+    }
+
+
 
     public ShowFront()
     {

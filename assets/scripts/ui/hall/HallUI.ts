@@ -15,12 +15,7 @@ export class HallUI extends BaseUI
     BindUI() 
     {
         LocalPlayerData.GetInstance().TestData();
-
-        this.LoadPrefab("cowboy","prefab/CowboyUI",(_prefab)=>
-        {
-            let tempNode =  instantiate(_prefab);
-            this.node.addChild(tempNode);
-        });
+        this.AddSubView("cowboy","prefab/CowboyUI");
     }
 
     RegDataNotify() 

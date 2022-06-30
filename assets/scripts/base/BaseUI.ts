@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, instantiate } from 'cc';
+import { _decorator, Component, Node, instantiate, Sprite, Prefab, SpriteFrame, ImageAsset, Texture2D } from 'cc';
 import { ResMgr } from './ResMgr';
 export abstract class BaseUI extends Component 
 {
@@ -37,18 +37,32 @@ export abstract class BaseUI extends Component
 
     LoadSprite(_bundleName : string, _assetPath : string ,  _loadFinish : Function)
     {
-        ResMgr.GetAssetInBundle(_bundleName,_assetPath,cc.SpriteFrame,(_asset)=>
+        ResMgr.GetAssetInBundle(_bundleName,_assetPath,ImageAsset,(_imageAsset)=>
         {
-            _loadFinish(_asset)
+            let tempSpriteFrame = new SpriteFrame();
+            let tempTexuture = new Texture2D();
+            tempTexuture.image = _imageAsset;
+            tempSpriteFrame.texture = tempTexuture;
+            _loadFinish(tempSpriteFrame)
         });
     }
 
     LoadPrefab(_bundleName : string, _assetPath : string ,  _loadFinish : Function)
     {
-        ResMgr.GetAssetInBundle(_bundleName,_assetPath,cc.Prefab,(_asset)=>
+        ResMgr.GetAssetInBundle(_bundleName,_assetPath,Prefab,(_asset)=>
         {
             _loadFinish(_asset)
         });
+    }
+
+    AddSubView(_bundleName : string, _assetPath : string)
+    {
+        this.LoadPrefab(_bundleName , _assetPath  ,  (_prefab)=>
+        {
+            let tempNode =  instantiate(_prefab);
+            this.node.addChild(tempNode);
+        });
+
     }
 
 }

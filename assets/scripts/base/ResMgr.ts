@@ -49,7 +49,8 @@ export class ResMgr
         {
             if(_error != null)
             {
-                console.log("GetAssetInBundle error   _bundleName:_assetName===" + _bundleName + ":" + _assetPath);
+                console.log("GetAssetInBundle _bundleName:_assetName===" + _bundleName + ":" + _assetPath);
+                console.log("GetAssetInBundle error  ===" + _error);
             }
             else
             {

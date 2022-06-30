@@ -11,17 +11,7 @@ export class CowboyUI extends BaseUI
     }
     BindUI() 
     {
-        this.LoadPrefab("cowboy","prefab/subUI/TopMenu",(_prefab)=>
-        {
-            let tempNode =  instantiate(_prefab);
-            this.node.addChild(tempNode);
-        });
-
-        this.LoadPrefab("cowboy","prefab/subUI/cb_BottomArea",(_prefab)=>
-        {
-            let tempNode =  instantiate(_prefab);
-            this.node.addChild(tempNode);
-        });
+  
     }
     RegDataNotify() 
     {
