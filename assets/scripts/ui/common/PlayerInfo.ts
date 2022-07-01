@@ -37,5 +37,10 @@ export class PlayerInfo extends BaseUI
     {
 
     }
+
+    public SetName(_name : string)
+    {
+        this.mName.string = _name;
+    }
 }
 

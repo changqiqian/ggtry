@@ -17,11 +17,8 @@ export class LocalPlayerData extends DataNotify {
         return LocalPlayerData.Instance;
     }
 
+    Data_Uid : number = null ; //玩家uid
     Data_Money : number = null;//玩家金币
-
-    TestData()
-    {
-        this.Data_Money = 300;
-    }
+    Data_Name : string = null; //玩家名字
 }
 
