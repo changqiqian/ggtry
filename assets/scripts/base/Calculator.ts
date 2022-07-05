@@ -60,6 +60,7 @@ export class Calculator{
         this.mCurrentCombineList.push(Combiantion.Straight);
         this.mCurrentCombineList.push(Combiantion.Flush);
         this.mCurrentCombineList.push(Combiantion.FullHouse);
+        this.mCurrentCombineList.push(Combiantion.FourOfKind);
         this.mCurrentCombineList.push(Combiantion.StraightFlush);
         this.mCurrentCombineList.push(Combiantion.RoyalStraightFlush);
 
@@ -102,7 +103,7 @@ export class Calculator{
             return null;
         }
 
-        for (let i = this.mCurrentCombineList.length; i >= 1; i--)
+        for (let i = this.mCurrentCombineList.length - 1 ; i >= 1; i--)
         {
             let result = this.mCurrentFindFunctions[i](_targetCards);
             if (result != null)
@@ -235,22 +236,34 @@ export class Calculator{
         {
             return null;
         }
+        let resTrible = null;
         while (tribleResult.length > 1)
         {
+            resTrible = tribleResult[0];
             tribleResult.shift();
         }
-        let restCards = this.RemoveCards(_targetCards, tribleResult[0]);
-        let pairResult = this.FindSameNumCards(restCards,2);
-        if (pairResult.length == 0)
+
+        if(resTrible != null)
         {
-            return null;
+            resTrible.shift();
+            let result = tribleResult[0].concat(resTrible);
+            return result;
         }
-        while (pairResult.length > 1)
+        else
         {
-            pairResult.shift();
+            let restCards = this.RemoveCards(_targetCards, tribleResult[0]);
+            let pairResult = this.FindSameNumCards(restCards,2);
+            if (pairResult.length == 0)
+            {
+                return null;
+            }
+            while (pairResult.length > 1)
+            {
+                pairResult.shift();
+            }
+            let result = tribleResult[0].concat(pairResult[0]);
+            return result;
         }
-        let result = tribleResult[0].concat(pairResult[0]);
-        return result;
     }
         
     public FindFourOfKind(_targetCards : Array<CardStruct>): Array<CardStruct>
