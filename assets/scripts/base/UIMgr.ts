@@ -1,5 +1,7 @@
 
 import { AssetManager, assetManager, Component, find, instantiate } from "cc";
+import { BaseUI } from "./BaseUI";
+import { BaseWindow } from "./BaseWindow";
 import { ResMgr } from "./ResMgr";
 
 class LayerKeyPair
@@ -11,7 +13,7 @@ class LayerKeyPair
         this.belong = _belong;
     }
     key : string ;
-    value : cc.Node;
+    value : any;
     belong : SceneType;
 }
 
@@ -89,24 +91,67 @@ export class UIMgr
         });
     }
 
-    public ShowLayer(_bundleName :string , _prefabPath:string , _type : LayerType) : cc.Node
+    public ShowLayer(_bundleName :string , _prefabPath:string )
     {
         let key = _bundleName + "/"  + _prefabPath;
-        let targetNode = this.FindLayer(key,_type);
-        
-        if(targetNode != null)
+        let target = this.FindLayer(key,LayerType.Layer);
+
+        if(target != null && target.value == null)
         {
-            let nodeCount = this.GetRootNode(_type).childrenCount;
-            targetNode.setSiblingIndex(nodeCount);
-            targetNode.active = true;
-            return targetNode;
+            console.log("ShowLayer 正在创建中，请不要重复创建 ===key" + key);
+            return;
+        }
+        
+        if(target != null && target.value!=null)
+        {
+            let nodeCount = this.GetRootNode(LayerType.Layer).childrenCount;
+            target.value.setSiblingIndex(nodeCount);
+            let tempScript = target.value.getComponent(BaseUI);
+            tempScript.Show(true);
+            return;
         }
 
+        this.CreateRecordItem(key , LayerType.Layer);
         this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
         {
-            this.GetRootNode(_type).addChild(_tempNode);
-            this.RecordLayer(key , _tempNode , _type);
-            return _tempNode;
+            this.GetRootNode(LayerType.Layer).addChild(_tempNode);
+            this.RecordLayer(key , _tempNode , LayerType.Layer);
+            let tempScript = _tempNode.getComponent(BaseUI);
+            tempScript.Show(true);
+        });
+    }
+
+    public ShowWindow(_bundleName :string , _prefabPath:string)
+    {
+        let key = _bundleName + "/"  + _prefabPath;
+        let target = this.FindLayer(key,LayerType.Window);
+
+        if(target != null && target.value == null)
+        {
+            console.log("ShowWindow 正在创建中，请不要重复创建 ===key" + key);
+            return;
+        }
+
+        if(target != null && target.value!=null)
+        {
+            let nodeCount = this.GetRootNode(LayerType.Window).childrenCount;
+            target.value.setSiblingIndex(nodeCount);
+            let tempScript = target.value.getComponent(BaseWindow);
+            tempScript.Show(true);
+            return;
+        }
+
+        this.CreateRecordItem(key , LayerType.Window);
+        this.CreatePrefab("common","prefab/BaseWindow" , (_tempWindow)=>
+        {
+            this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
+            {
+                this.GetRootNode(LayerType.Window).addChild(_tempWindow);
+                this.RecordLayer(key , _tempWindow , LayerType.Window);
+                let tempScript = _tempWindow.getComponent(BaseWindow);
+                tempScript.SetContent(_tempNode);
+                tempScript.Show(true);
+            });
         });
     }
 
@@ -146,7 +191,7 @@ export class UIMgr
         let configNewScene = this.GetSceneConfig(_sceneType);
         this.PreloadRes(configNewScene.bundleNames , configNewScene.resFolders , ()=>
         {
-            this.ShowLayer(configNewScene.bundleNames[0],configNewScene.prefabPath, LayerType.Layer);
+            this.ShowLayer(configNewScene.bundleNames[0],configNewScene.prefabPath);
         });
     }
 
@@ -234,35 +279,42 @@ export class UIMgr
         }
     }
 
-    private FindLayer(_key : string , _type :LayerType) : cc.Node
+    private FindLayer(_key : string , _type :LayerType) : LayerKeyPair
     {
         let targetList = this.GetList(_type);
         let index = targetList.findIndex((_item) => _item.key === _key);
         if(index >= 0)
         {
-            return targetList[index].value;
+            return targetList[index];
         }
         return null;
     }
 
     private GetRootNode( _type :LayerType) : cc.Node
     {
-        let target;
         switch(_type)
         {
             case LayerType.Layer:
-                target = this.mLayerRoot;
-            break;
+                return this.mLayerRoot;
             case LayerType.Window:
-                target = this.mWindowRoot;
-            break;
+                return this.mWindowRoot;
         }
-        return target;
     }
 
     private RecordLayer(_key : string , _node : cc.Node , _type : LayerType)
     {
-        let keyPair = new LayerKeyPair(_key , _node , this.mCurrentScene);
+        let target = this.FindLayer(_key,_type);
+        if(target == null)
+        {
+            console.log("RecordLayer error 没有当前key ====" + _key);
+            return;
+        }
+        target.value = _node;
+    }
+
+    private CreateRecordItem(_key : string ,  _type : LayerType)
+    {
+        let keyPair = new LayerKeyPair(_key , null , this.mCurrentScene);
         this.GetList(_type).push(keyPair);
     }
 

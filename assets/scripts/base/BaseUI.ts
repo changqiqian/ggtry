@@ -1,5 +1,11 @@
 import { _decorator, Component, Node, instantiate, Sprite, Prefab, SpriteFrame, ImageAsset, Texture2D } from 'cc';
 import { ResMgr } from './ResMgr';
+import { UIMgr } from './UIMgr';
+
+
+const { ccclass, property } = _decorator;
+
+@ccclass('BaseUI')
 export abstract class BaseUI extends Component 
 {
     onLoad() 
@@ -33,7 +39,11 @@ export abstract class BaseUI extends Component
     //自定义析构
     abstract CustmoerDestory();
 
-
+    public Show(_val : boolean)
+    {
+        console.log("base Show ");
+        this.node.active = _val;
+    }
 
     LoadSprite(_bundleName : string, _assetPath : string ,  _loadFinish : Function)
     {
@@ -49,7 +59,7 @@ export abstract class BaseUI extends Component
 
     LoadPrefab(_bundleName : string, _assetPath : string ,  _loadFinish : Function)
     {
-        ResMgr.GetAssetInBundle(_bundleName,_assetPath,Prefab,(_prefab)=>
+        UIMgr.GetInstance().CreatePrefab(_bundleName,_assetPath,(_prefab)=>
         {
             _loadFinish(_prefab)
         });
