@@ -5,5 +5,9 @@
   "uuid": "b54fb181-acb2-42f3-b2fe-2ab29bd6b185",
   "files": [],
   "subMetas": {},
-  "userData": {}
+  "userData": {
+    "isPlugin": false,
+    "loadPluginInWeb": true,
+    "loadPluginInNative": true
+  }
 }
