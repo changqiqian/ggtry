@@ -26,7 +26,6 @@ export class cb_BetArea extends BaseUI {
     BindUI() 
     {
         this.mBetBtn.node.on(Node.EventType.TOUCH_END,this.OnBetBtn.bind(this),this);
-        this.SetAreaConfig("hahah","1.02x" , 1);
     }
     RegDataNotify() 
     {

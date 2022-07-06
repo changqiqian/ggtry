@@ -91,7 +91,7 @@ export class CowboyUI extends BaseUI
     ChipFlyToBetArea(_config : ChipConfig , _pos : Vec3)
     {
         let tween = new Tween(_config.mNode);
-        tween.to(0.8,{position:_pos},{easing:easing.quadOut});
+        tween.to(0.5,{position:_pos},{easing:easing.quadOut});
         tween.start();
     }
 

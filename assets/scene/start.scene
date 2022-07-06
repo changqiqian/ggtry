@@ -445,7 +445,8 @@
   },
   {
     "__type__": "cc.PrefabInfo",
-    "fileId": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94"
+    "fileId": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
+    "targetOverrides": []
   },
   {
     "__type__": "cc.SceneGlobals",

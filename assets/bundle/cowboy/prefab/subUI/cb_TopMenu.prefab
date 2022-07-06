@@ -1416,6 +1416,18 @@
     "__prefab": {
       "__id__": 61
     },
+    "mSettingBtn": {
+      "__id__": 11
+    },
+    "mRuleBtn": {
+      "__id__": 25
+    },
+    "mMoreBtn": {
+      "__id__": 39
+    },
+    "mPlayerBtn": {
+      "__id__": 53
+    },
     "_id": ""
   },
   {
