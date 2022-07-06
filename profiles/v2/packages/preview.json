@@ -2,5 +2,9 @@
   "__version__": "1.0.1",
   "general": {
     "start_scene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94"
+  },
+  "preview": {
+    "simulator_resolution": 3,
+    "simulator_orientation": "portrait"
   }
 }

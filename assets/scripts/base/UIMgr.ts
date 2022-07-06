@@ -110,7 +110,7 @@ export class UIMgr
             tempScript.Show(true);
             return;
         }
-
+        console.log("111111");
         this.CreateRecordItem(key , LayerType.Layer);
         this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
         {
@@ -118,7 +118,9 @@ export class UIMgr
             this.RecordLayer(key , _tempNode , LayerType.Layer);
             let tempScript = _tempNode.getComponent(BaseUI);
             tempScript.Show(true);
+            console.log("2222");
         });
+        console.log("33333");
     }
 
     public ShowWindow(_bundleName :string , _prefabPath:string)

@@ -1,10 +1,11 @@
-import { _decorator, Component, Node, Sprite, Label } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, Color } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 const { ccclass, property } = _decorator;
 
 @ccclass('CircleTimer')
 export class CircleTimer extends BaseUI {
-
+    @property(Sprite) 
+    mBG: Sprite = null;
     @property(Sprite) 
     mProgress: Sprite = null;
     @property(Label) 
@@ -38,7 +39,7 @@ export class CircleTimer extends BaseUI {
 
     }
 
-    public StartTimer(_totalTime : number , _SecondCallback : Function)
+    public StartTimer(_totalTime : number , _SecondCallback : Function = null)
     {
         this.mTotalTime = _totalTime;
         this.mRestTime = _totalTime;
@@ -85,12 +86,30 @@ export class CircleTimer extends BaseUI {
         {
             this.mSecondCallback(this.mCurrentSecond);
         }
+
+        this.UpdateColor();
     }
 
     UpdateProgress()
     {
         let ratio = this.mRestTime/this.mTotalTime;
         this.mProgress.fillRange = ratio;
+    }
+
+    UpdateColor()
+    {
+        let color;
+        if(this.mCurrentSecond<=3)
+        {
+            color = new Color(220,34,34);
+        }
+        else
+        {
+            color = new Color(34,220,82);
+        }
+        this.mBG.color = color;
+        this.mProgress.color = color;
+        this.mCount.color = color;
     }
 }
 

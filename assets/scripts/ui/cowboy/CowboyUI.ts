@@ -41,7 +41,7 @@ export class CowboyUI extends BaseUI
     }
     BindUI() 
     {
-        
+        this.mCircleTimer.StartTimer(7);
     }
     RegDataNotify() 
     {
