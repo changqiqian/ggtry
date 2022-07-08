@@ -1,4 +1,4 @@
-const jsb = (<any>window).jsb;
+// const jsb = (<any>window).jsb;
 import { _decorator, Component, Node, Label, ProgressBar, Asset, game, sys, debug } from 'cc';
 import { LoadingData } from './LoadingData';
 

@@ -2,12 +2,8 @@
   "ver": "4.0.23",
   "importer": "javascript",
   "imported": true,
-  "uuid": "b54fb181-acb2-42f3-b2fe-2ab29bd6b185",
+  "uuid": "e8bdd4d6-ea78-4d3c-85dd-0cd93a1b77ad",
   "files": [],
   "subMetas": {},
-  "userData": {
-    "isPlugin": false,
-    "loadPluginInWeb": true,
-    "loadPluginInNative": true
-  }
+  "userData": {}
 }

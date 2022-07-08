@@ -17,6 +17,8 @@ export class cb_BetArea extends BaseUI {
     mAreaRatio: Label = null;
     @property(cb_HistoryLayout) 
     mHistory: cb_HistoryLayout = null;
+    @property(Node) 
+    mWin: Node = null;
 
     mBetID : number;
     InitParam() 
@@ -26,6 +28,7 @@ export class cb_BetArea extends BaseUI {
     BindUI() 
     {
         this.mBetBtn.node.on(Node.EventType.TOUCH_END,this.OnBetBtn.bind(this),this);
+        this.mWin.active = false;
     }
     RegDataNotify() 
     {

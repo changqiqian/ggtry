@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, instantiate, Sprite, Prefab, SpriteFrame, ImageAsset, Texture2D } from 'cc';
+import { _decorator, Component, Node, instantiate, Sprite, Prefab, SpriteFrame, ImageAsset, Texture2D, assetManager, Asset, LoadCompleteCallback } from 'cc';
 import { ResMgr } from './ResMgr';
 import { UIMgr } from './UIMgr';
 
@@ -41,7 +41,6 @@ export abstract class BaseUI extends Component
 
     public Show(_val : boolean)
     {
-        console.log("base Show ");
         this.node.active = _val;
     }
 
@@ -49,18 +48,43 @@ export abstract class BaseUI extends Component
     {
         ResMgr.GetAssetInBundle(_bundleName,_assetPath,ImageAsset,(_imageAsset)=>
         {
-            let tempSpriteFrame = new SpriteFrame();
-            let tempTexuture = new Texture2D();
-            tempTexuture.image = _imageAsset;
-            tempSpriteFrame.texture = tempTexuture;
+            if(cc.isValid(this.node , true) == false)
+            {
+                return;
+            }
+            let tempSpriteFrame = SpriteFrame.createWithImage(_imageAsset);
             _loadFinish(tempSpriteFrame)
         });
+    }
+
+    LoadRemoteSprite(_url : string , _finish : Function)
+    {
+        assetManager.loadRemote(_url,(_err:Error | null , _imageAsset :ImageAsset)=>
+        {
+            if(_err)
+            {
+                console.error(_err.message || _err);
+            }
+            else if(_finish != null)
+            {
+                if(cc.isValid(this.node , true) == false)
+                {
+                    return;
+                }
+                let tempSpriteFrame = SpriteFrame.createWithImage(_imageAsset);
+                _finish(tempSpriteFrame);
+            }
+        })
     }
 
     LoadPrefab(_bundleName : string, _assetPath : string ,  _loadFinish : Function)
     {
         UIMgr.GetInstance().CreatePrefab(_bundleName,_assetPath,(_prefab)=>
         {
+            if(cc.isValid(this.node , true) == false)
+            {
+                return;
+            }
             _loadFinish(_prefab)
         });
     }
@@ -69,6 +93,10 @@ export abstract class BaseUI extends Component
     {
         this.LoadPrefab(_bundleName , _assetPath  ,  (_prefab)=>
         {
+            if(cc.isValid(this.node , true) == false)
+            {
+                return;
+            }
             let tempNode =  instantiate(_prefab);
             this.node.addChild(tempNode);
         });
