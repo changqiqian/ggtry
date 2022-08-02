@@ -2,14 +2,26 @@ import { _decorator, Component, Node, instantiate, Sprite, Prefab, SpriteFrame, 
 import { ResMgr } from './ResMgr';
 import { UIMgr } from './UIMgr';
 
+class SubViewKeyPair
+{
+    constructor(_key :string  , _value : Node) 
+    {
+        this.key = _key;
+        this.value = _value;
+    }
+    key : string ;
+    value :  any;
+}
 
 const { ccclass, property } = _decorator;
 
 @ccclass('BaseUI')
 export abstract class BaseUI extends Component 
 {
+    mLayerList : Array<SubViewKeyPair>;
     onLoad() 
     {
+        this.mLayerList = new Array<SubViewKeyPair>();
         this.InitParam();
         this.BindUI();
         this.RegDataNotify();
@@ -24,6 +36,7 @@ export abstract class BaseUI extends Component
     {
         this.UnregDataNotify();
         this.CustmoerDestory();
+        this.mLayerList = null;
     }
 
     //“把UI节点与代码变量”绑定起来
@@ -41,7 +54,7 @@ export abstract class BaseUI extends Component
 
     public Show(_val : boolean)
     {
-        this.node.active = _val;
+        //this.node.active = _val;
     }
 
     LoadSprite(_bundleName : string, _assetPath : string ,  _loadFinish : Function)
@@ -89,19 +102,38 @@ export abstract class BaseUI extends Component
         });
     }
 
-    AddSubView(_bundleName : string, _assetPath : string)
+    ShowSubView(_bundleName : string, _assetPath : string , _show : boolean = true)
     {
-        this.LoadPrefab(_bundleName , _assetPath  ,  (_prefab)=>
+        let key = _bundleName + _assetPath;
+        let index = this.mLayerList.findIndex((_item) => _item.key === key);
+        if(index >= 0)
         {
-            if(cc.isValid(this.node , true) == false)
+            this.mLayerList[index].value.getComponent(BaseUI).Show(_show);
+        }
+        else
+        {
+            if(_show == false)
             {
                 return;
             }
-            let tempNode =  instantiate(_prefab);
-            this.node.addChild(tempNode);
-        });
-
+            this.LoadPrefab(_bundleName , _assetPath  ,  (_prefab)=>
+            {
+                if(cc.isValid(this.node , true) == false)
+                {
+                    return;
+                }
+                let tempNode =  instantiate(_prefab);
+                this.node.addChild(tempNode);
+                tempNode.getComponent(BaseUI).Show(_show);
+                let keyPair = new SubViewKeyPair(key , tempNode);
+                this.mLayerList.push(keyPair)
+            });
+        }
     }
 
+    Delete()
+    {
+        this.node.destroy();
+    }
 }
 

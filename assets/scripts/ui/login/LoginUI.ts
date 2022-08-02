@@ -56,7 +56,7 @@ export class LoginUI extends BaseUI {
 
     private OnLoginBtn()
     {
-        
+        this.ShowSubView("login","prefab/Login_LoginView");
     }
 
     private OnSignBtn()

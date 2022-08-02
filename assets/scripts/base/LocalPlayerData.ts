@@ -20,5 +20,6 @@ export class LocalPlayerData extends DataNotify {
     Data_Uid : number = null ; //玩家uid
     Data_Money : number = null;//玩家金币
     Data_Name : string = null; //玩家名字
+    Data_AreaCode : number = null; //区号
 }
 

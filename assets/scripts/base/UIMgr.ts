@@ -95,7 +95,7 @@ export class UIMgr
         });
     }
 
-    public ShowLayer(_bundleName :string , _prefabPath:string )
+    public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true )
     {
         let key = _bundleName + "/"  + _prefabPath;
         let target = this.FindLayer(key,LayerType.Layer);
@@ -111,7 +111,7 @@ export class UIMgr
             let nodeCount = this.GetRootNode(LayerType.Layer).childrenCount;
             target.value.setSiblingIndex(nodeCount);
             let tempScript = target.value.getComponent(BaseUI);
-            tempScript.Show(true);
+            tempScript.Show(_show);
             return;
         }
         this.CreateRecordItem(key , LayerType.Layer);
@@ -120,11 +120,11 @@ export class UIMgr
             this.GetRootNode(LayerType.Layer).addChild(_tempNode);
             this.RecordLayer(key , _tempNode , LayerType.Layer);
             let tempScript = _tempNode.getComponent(BaseUI);
-            tempScript.Show(true);
+            tempScript.Show(_show);
         });
     }
 
-    public ShowWindow(_bundleName :string , _prefabPath:string)
+    public ShowWindow(_bundleName :string , _prefabPath:string , _show : boolean = true)
     {
         let key = _bundleName + "/"  + _prefabPath;
         let target = this.FindLayer(key,LayerType.Window);
@@ -140,7 +140,7 @@ export class UIMgr
             let nodeCount = this.GetRootNode(LayerType.Window).childrenCount;
             target.value.setSiblingIndex(nodeCount);
             let tempScript = target.value.getComponent(BaseWindow);
-            tempScript.Show(true);
+            tempScript.Show(_show);
             return;
         }
 
@@ -153,7 +153,7 @@ export class UIMgr
                 this.RecordLayer(key , _tempWindow , LayerType.Window);
                 let tempScript = _tempWindow.getComponent(BaseWindow);
                 tempScript.SetContent(_tempNode);
-                tempScript.Show(true);
+                tempScript.Show(_show);
             });
         });
     }
