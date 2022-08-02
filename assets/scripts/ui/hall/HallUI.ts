@@ -8,13 +8,19 @@ const { ccclass, property } = _decorator;
 @ccclass('HallUI')
 export class HallUI extends BaseUI 
 {
+    public static GetUsingBundleFolder() : Array<string>
+    {
+        return ["hall","cowboy"];
+    }
+    
+
     InitParam() 
     {
         
     }
     BindUI() 
     {
-        this.AddSubView("cowboy","prefab/CowboyUI_X");
+        //this.AddSubView("cowboy","prefab/CowboyUI_X");
     }
 
     RegDataNotify() 

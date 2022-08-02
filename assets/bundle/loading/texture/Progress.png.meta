@@ -1,0 +1,75 @@
+{
+  "ver": "1.0.23",
+  "importer": "image",
+  "imported": true,
+  "uuid": "1b448e42-afe4-4539-9179-e253c186ff1f",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "1b448e42-afe4-4539-9179-e253c186ff1f@6c48a",
+      "displayName": "Progress",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "1b448e42-afe4-4539-9179-e253c186ff1f"
+      },
+      "ver": "1.0.21",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "1b448e42-afe4-4539-9179-e253c186ff1f@f9941",
+      "displayName": "Progress",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "none",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 513,
+        "height": 12,
+        "rawWidth": 513,
+        "rawHeight": 12,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 10,
+        "borderRight": 10,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "1b448e42-afe4-4539-9179-e253c186ff1f@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "redirect": "1b448e42-afe4-4539-9179-e253c186ff1f@f9941"
+  }
+}

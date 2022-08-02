@@ -1,5 +1,8 @@
 
 import { AssetManager, assetManager, Component, find, instantiate } from "cc";
+import { HallUI } from "../ui/hall/HallUI";
+import { LoadingUI } from "../ui/loading/LoadingUI";
+import { LoginUI } from "../ui/login/LoginUI";
 import { BaseUI } from "./BaseUI";
 import { BaseWindow } from "./BaseWindow";
 import { ResMgr } from "./ResMgr";
@@ -19,18 +22,19 @@ class LayerKeyPair
 
 class SceneConfig
 {
-    constructor(_type :SceneType ,_prefabPath : string , _bundles : Array<string> , _folders : Array<string>) 
+    constructor(_type :SceneType ,_prefabPath : string, _defaultBundle : string , _bundles : Array<string> , _folders : Array<string>) 
     {
         this.type = _type;
         this.bundleNames = _bundles;
         this.resFolders = _folders;
         this.prefabPath = _prefabPath;
+        this.defaultBundle = _defaultBundle;
     }
     type : SceneType;
-    bundleNames : Array<string>;
-    resFolders : Array<string>;
-    
-    prefabPath : string;
+    bundleNames : Array<string>; //依赖的所有bundle
+    resFolders : Array<string>; //每个bundle下的目录结构
+    defaultBundle : string; //作为当前场景的prefab属于哪一个bundle
+    prefabPath : string; //作为当前场景的prefab的路径
 }
 
 export enum LayerType
@@ -76,9 +80,9 @@ export class UIMgr
 
         //场景配置
         let resFolder:Array<string> = ["anm","font","music","prefab","texture"];
-        let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,["loading"],resFolder);
-        let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,["login"],resFolder);
-        let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI",["hall","cowboy"],resFolder);
+        let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,"loading" ,LoadingUI.GetUsingBundleFolder(),resFolder);
+        let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,"login",LoginUI.GetUsingBundleFolder(),resFolder);
+        let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI" ,"hall",HallUI.GetUsingBundleFolder(),resFolder);
         this.mSceneConfig.push(loadingConfig);
         this.mSceneConfig.push(loginConfig);
         this.mSceneConfig.push(hallConfig);
@@ -190,7 +194,7 @@ export class UIMgr
         let configNewScene = this.GetSceneConfig(_sceneType);
         this.PreloadRes(configNewScene.bundleNames , configNewScene.resFolders , ()=>
         {
-            this.ShowLayer(configNewScene.bundleNames[0],configNewScene.prefabPath);
+            this.ShowLayer(configNewScene.defaultBundle,configNewScene.prefabPath);
         });
     }
 

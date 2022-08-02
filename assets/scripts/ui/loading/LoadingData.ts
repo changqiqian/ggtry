@@ -19,7 +19,11 @@ export class LoadingData extends DataNotify
  
 
     Data_HotUpdateEnd : boolean = null;
-    
+    Data_HotUpdateProgress : number = null;
+    Data_HotUpdateTips : string = null;
 
+
+    //常量
+    public static Version : string = "0.0.0"; 
 }
 
