@@ -21,7 +21,7 @@ export class AreaCodeView extends BaseUI {
 
     InitParam() 
     {
-        LocalPlayerData.GetInstance().Data_AreaCode = 0;
+        
     }
     BindUI() 
     {

@@ -1,5 +1,7 @@
 import { _decorator, Component, Node, find, Label, Sprite } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { JsbScript } from '../../base/JsbScript';
+import { Localization } from '../../base/Localization';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { LoadingData } from './LoadingData';
 const { ccclass, property } = _decorator;
@@ -24,6 +26,10 @@ export class LoadingUI extends BaseUI
         this.mTips.string = "";
         this.mPercent.string = "";
         this.mProgress.fillRange = 0;
+
+        let systemLanguage = JsbScript.getSysLanguage();
+        Localization.SetLanguage(systemLanguage);
+        
     }
     BindUI() 
     {

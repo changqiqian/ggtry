@@ -19,14 +19,15 @@ export class ToggleBtn extends BaseUI {
     mCustmoerData:number = 0;
     mDataNotify : DataNotify = null;
     mForbidden : boolean = false;
+
+    mClickCallback : Function = null;
     InitParam() 
     {
 
     }
     BindUI() 
     {
-        this.mSelected.node.on(Node.EventType.TOUCH_END,this.OnSelected.bind(this),this);
-        this.mDisabled.node.on(Node.EventType.TOUCH_END,this.OnDisabled.bind(this),this);
+
     }
     RegDataNotify() 
     {
@@ -45,8 +46,6 @@ export class ToggleBtn extends BaseUI {
     }
     CustmoerDestory() 
     {
-        this.mSelected.node.off(Node.EventType.TOUCH_END,this.OnSelected.bind(this),this);
-        this.mDisabled.node.off(Node.EventType.TOUCH_END,this.OnDisabled.bind(this),this);
         this.mDataNotify = null;
     }
 
@@ -56,6 +55,26 @@ export class ToggleBtn extends BaseUI {
         this.mCustmoerData = _custmoerData;
         this.mTargetParam = _targetParam;
         this.mDataNotify.AddListener(this.mTargetParam , this.NotifyCallback.bind(this), this);
+        this.mSelected.node.on(Node.EventType.TOUCH_END,this.OnSelected.bind(this),this);
+        this.mDisabled.node.on(Node.EventType.TOUCH_END,this.OnDisabled.bind(this),this);
+    }
+
+    public SetClickCallback(_callback : Function)
+    {
+        this.mClickCallback = _callback;
+        if(this.mClickCallback != null)
+        {
+            this.mSelected.node.on(Node.EventType.TOUCH_END,()=>
+            {
+                this.ShowUnselected();
+                this.mClickCallback(false);
+            },this);
+            this.mDisabled.node.on(Node.EventType.TOUCH_END,()=>
+            {
+                this.ShowSelected();
+                this.mClickCallback(true);
+            },this);
+        }
     }
 
     public SetTitle(_title :string)
@@ -64,13 +83,22 @@ export class ToggleBtn extends BaseUI {
         this.mDisableLabel.string = _title;
     }
 
+    public GetTitle()
+    {
+        return this.mSelectedLabel.string;
+    }
+
     public SetForbidden(_val : boolean)
     {
         this.mForbidden = _val;
         this.mSelected.interactable = !this.mForbidden;
         this.mDisabled.interactable = !this.mForbidden;
-        this.mSelected.getComponent(Sprite).grayscale = this.mForbidden;
-        this.mDisabled.getComponent(Sprite).grayscale = this.mForbidden;
+    }
+
+    public SetGray(_val : boolean)
+    {
+        this.mSelected.getComponent(Sprite).grayscale = _val;
+        this.mDisabled.getComponent(Sprite).grayscale = _val;
     }
 
     OnSelected()
@@ -96,15 +124,29 @@ export class ToggleBtn extends BaseUI {
     {
         if(_val == this.mCustmoerData)
         {
-            this.mSelected.node.active = true;
-            this.mDisabled.node.active = false;
+            this.ShowSelected();
         }
         else
         {
-            this.mSelected.node.active = false;
-            this.mDisabled.node.active = true;
+            this.ShowUnselected();
         }
     }
 
+    ShowSelected()
+    {
+        this.mSelected.node.active = true;
+        this.mDisabled.node.active = false;
+    }
+
+    ShowUnselected()
+    {
+        this.mSelected.node.active = false;
+        this.mDisabled.node.active = true;
+    }
+
+    public IsSelected() : Boolean
+    {
+        return this.mSelected.node.active;
+    }
 }
 

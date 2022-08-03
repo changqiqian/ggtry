@@ -1,8 +1,12 @@
 import { _decorator, Component, Node, Button, Label, EditBox } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
+import { Network, SmsCodeType } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
+import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Login_LoginView')
@@ -10,8 +14,6 @@ export class Login_LoginView extends BaseUI {
 
     @property(BaseButton) 
     mBackBtn: BaseButton = null;
-    @property(Label) 
-    mSubTitle: Label = null;
     @property(BaseButton) 
     mAreaCodeBtn: BaseButton = null;
     @property(EditBox) 
@@ -21,29 +23,43 @@ export class Login_LoginView extends BaseUI {
     @property(BaseButton) 
     mPasswordLoginBtn: BaseButton = null;
     
-    InitParam() {
+    InitParam() 
+    {
 
     }
-    BindUI() {
-       this.mBackBtn.SetClickCallback(()=>
-       {
-            this.Delete();
-       });
+    BindUI() 
+    {
+        this.mBackBtn.SetClickCallback(()=>
+        {
+            this.Show(false)
+        });
 
-       this.mAreaCodeBtn.SetClickCallback(()=>
-       {
-            this.ShowSubView("common","prefab/AreaCodeView");
-       });
+        this.mAreaCodeBtn.SetClickCallback(()=>
+        {
+            this.ShowLayer("common","prefab/AreaCodeView");
+        });
 
-       this.mConfirmBtn.SetClickCallback(()=>
-       {
-            console.log("mConfirmBtn")
-       });
+        this.mConfirmBtn.SetClickCallback(()=>
+        {
+            if(this.mAccountEditBox.string.length < 7) 
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00002"));
+                return
+            }
+            LoginData.GetInstance().Data_LastInputPhoneNum = this.mAccountEditBox.string;
+            
+            let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
+            let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
+            let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
+            Network.GetInstance().SendGetSMSCode(fullPhoneNumber, SmsCodeType.USER_SET_PWD);
+            this.ShowLayer("common","prefab/SMSCodeView");
+        });
 
-       this.mPasswordLoginBtn.SetClickCallback(()=>
-       {
-            console.log("mPasswordLoginBtn")
-       });
+        this.mPasswordLoginBtn.SetClickCallback(()=>
+        {
+            this.ShowLayer("login","prefab/Login_LoginViewPwd");
+            this.Show(false)
+        });
     }
     RegDataNotify() 
     {

@@ -34,10 +34,6 @@ export class CowboyUI extends BaseUI
     InitParam() 
     {
         this.mChipList = new Array<ChipConfig>();
-
-        LocalPlayerData.GetInstance().Data_Uid = 9527;
-        LocalPlayerData.GetInstance().Data_Money = 9527;
-        LocalPlayerData.GetInstance().Data_Name = "ggtry";
     }
     BindUI() 
     {

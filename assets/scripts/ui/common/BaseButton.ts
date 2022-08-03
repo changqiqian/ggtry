@@ -10,22 +10,28 @@ export class BaseButton extends BaseUI {
 
     private mCustomerData : any = null;
     private mCallback : Function = null;
-    InitParam() {
+    InitParam() 
+    {
 
     }
-    BindUI() {
+    BindUI() 
+    {
         this.node.on(Node.EventType.TOUCH_END,this.OnClick.bind(this),this);
     }
-    RegDataNotify() {
+    RegDataNotify() 
+    {
 
     }
-    LateInit() {
+    LateInit() 
+    {
 
     }
-    UnregDataNotify() {
+    UnregDataNotify() 
+    {
 
     }
-    CustmoerDestory() {
+    CustmoerDestory() 
+    {
         this.mCustomerData = null;
         this.mCallback = null;
     }

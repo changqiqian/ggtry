@@ -68,6 +68,7 @@ export class cb_ChipCtr extends BaseUI
         {
             let currentChild = this.node.children[i].getComponent(ToggleBtn);
             currentChild.SetForbidden(currentChild.mCustmoerData > _val);
+            currentChild.SetGray(currentChild.mCustmoerData > _val);
         }
     }
 

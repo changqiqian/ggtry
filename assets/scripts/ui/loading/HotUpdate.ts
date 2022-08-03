@@ -1,5 +1,6 @@
 const jsb = (<any>window).jsb;
 import { _decorator, Component, Node, Label, ProgressBar, Asset, game, sys, debug } from 'cc';
+import { GameConfig } from '../../GameConfig';
 import { LoadingData } from './LoadingData';
 
 
@@ -36,7 +37,7 @@ export class HotUpdate extends Component {
         // if the return value smaller than 0, versionA is smaller than B.
         this.versionCompareHandle = function (versionA: string, versionB: string) {
             console.log("JS Custom Version Compare: version A is " + versionA + ', version B is ' + versionB);
-            LoadingData.Version = versionB;
+            GameConfig.Version = versionB;
             var vA = versionA.split('.');
             var vB = versionB.split('.');
             for (var i = 0; i < vA.length; ++i) {
@@ -85,7 +86,7 @@ export class HotUpdate extends Component {
         //this.panel.info.string = 'Hot update is ready, please check or directly update.';
         //this.panel.fileProgress.progress = 0;
         //this.panel.byteProgress.progress = 0;
-        if (cc.sys.os === cc.sys.OS_ANDROID) 
+        if (sys.os === sys.OS.ANDROID) 
         {
             // Some Android device may slow down the download process when concurrent tasks is too much.
             // The value may not be accurate, please do more test and find what's most suitable for your game.

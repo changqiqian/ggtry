@@ -1,5 +1,42 @@
 export class GameConfig
 {
+    public static SeverUrl = "ws://13.229.222.39:9008/ws/";
+    //发布的版本号
+    public static Version = "1.1.3"
+    //发布的版本信息
+    public static VersionInfo = "alpha"
+    //手机标识
+    public static Imei = "";                 
+     //手机型号
+    public static Model = "";               
+
+     //渠道
+    public static Channel = "德州";             
+    //渠道号
+    public static ChannelInt = 100;       
+    //经度
+    public static JingDu = 0;              
+    //维度
+    public static WeiDu = 0;       
+    
+    public static ClientInfo = 
+    {
+        appName : "",
+        deviceBrand : "",
+        deviceOsVersion : "",
+        ip : "",
+        deviceOs : "",
+        appVersion : "",
+        deviceId : "",
+        version  : "",
+        channel : "",
+    }
+
+    public static LOGIN_TOKEN;
+    public static LOGIN_USER;
+
+
+
     public static AreaCodeList=[
         {"name":"CountryName0", "areaCode": "+852"},
         {"name":"CountryName1", "areaCode": "+63"},
@@ -46,4 +83,54 @@ export class GameConfig
         {"name":"CountryName41", "areaCode": "+84"},
         {"name":"CountryName42", "areaCode": "+971"},
     ]
+
+
+    public static LoadToken()
+    {
+        GameConfig.LOGIN_TOKEN = GameConfig.ReadSimpleData("LOGIN_TOKEN", null);
+        GameConfig.LOGIN_USER = GameConfig.ReadSimpleData("LOGIN_USER", null);
+    }
+
+    public static ClearToken()
+    {
+        GameConfig.LOGIN_TOKEN = null;
+        GameConfig.LOGIN_USER = null;
+        GameConfig.WriteSimpleData("LOGIN_TOKEN", null);
+        GameConfig.WriteSimpleData("LOGIN_USER", null);
+    }
+
+    public static SaveToken(_token:string , _user:string =null)
+    {
+        GameConfig.LOGIN_TOKEN = _token;
+        GameConfig.LOGIN_USER = _user;
+        GameConfig.WriteSimpleData("LOGIN_TOKEN", _token);
+        GameConfig.WriteSimpleData("LOGIN_USER", _user);
+    }
+    
+
+    public static GetRandChar()
+    {
+        var str = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz23456789';
+        var randstr = "";
+        for (var i = 0; i < 9; i++) {
+            var index = Math.floor(str.length * Math.random());
+            randstr += str.charAt(index);
+        }
+        return randstr;
+    };
+
+    public static WriteSimpleData = function (key, data)
+    {
+        localStorage.setItem(key, data);
+    };
+    //读取简单数据
+    public static ReadSimpleData = function (key, defaultDate = null) 
+    {
+        var data = localStorage.getItem(key);
+        if(data === "null" || data === null) 
+        {
+            data = defaultDate
+        }
+        return data;
+    };
 } 

@@ -1,5 +1,10 @@
-import { _decorator, Component, Node, Label, Button } from 'cc';
+import { _decorator, Component, Node, Label, Button, sys } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { JsbScript } from '../../base/JsbScript';
+import { SceneType, UIMgr } from '../../base/UIMgr';
+import { CommonNotify } from '../../CommonNotify';
+import { GameConfig } from '../../GameConfig';
+import { MsgID, MsgStatus, Network } from '../../network/Network';
 import { LoadingData } from '../loading/LoadingData';
 const { ccclass, property } = _decorator;
 
@@ -26,11 +31,14 @@ export class LoginUI extends BaseUI {
     mBroadcastBtn: Button = null;
     InitParam() 
     {
+        JsbScript.getDevicesImei();
+        JsbScript.getDevicesInfo();
+        GameConfig.LoadToken();
 
     }
     BindUI() 
     {
-        this.mVersion.string = LoadingData.Version;
+        this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.node.on(Node.EventType.TOUCH_END,this.OnLoginBtn.bind(this),this);
         this.mSignBtn.node.on(Node.EventType.TOUCH_END,this.OnSignBtn.bind(this),this);
         this.mAgreementBtn.node.on(Node.EventType.TOUCH_END,this.OnAgreementBtn.bind(this),this);
@@ -39,15 +47,39 @@ export class LoginUI extends BaseUI {
     }
     RegDataNotify() 
     {
+        CommonNotify.GetInstance().AddListener("Data_SocketOpen",(_current , _before)=>
+        {
+            if(!_before && _current)
+            {
+                Network.GetInstance().SendVisitorLogin();
+            }
+        },this);
+
+        CommonNotify.GetInstance().AddListener("Data_LoginSuccessData",(_current , _before)=>
+        {
+            if(_current == null)
+            {
+                return;
+            }
+            if(_current.isComplete)
+            {
+                UIMgr.GetInstance().ChangeScene(SceneType.Hall);
+            }
+            else
+            {
+                
+            }
+        },this);
+
 
     }
     LateInit() 
     {
-
+        Network.GetInstance().CreateWS();
     }
     UnregDataNotify() 
     {
-
+        CommonNotify.GetInstance().RemoveListenerByTarget(this);
     }
     CustmoerDestory() 
     {
@@ -56,7 +88,7 @@ export class LoginUI extends BaseUI {
 
     private OnLoginBtn()
     {
-        this.ShowSubView("login","prefab/Login_LoginView");
+        this.ShowLayer("login","prefab/Login_LoginView");
     }
 
     private OnSignBtn()

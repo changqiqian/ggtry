@@ -39,7 +39,7 @@ export class cb_BottomArea extends BaseUI {
             this.mMoney.string = _current;
         },this);
 
-        LocalPlayerData.GetInstance().AddListener("Data_Name",(_current , _before)=>
+        LocalPlayerData.GetInstance().AddListener("Data_NickName",(_current , _before)=>
         {
             this.mPlayerInfo.SetName(_current);
         },this);

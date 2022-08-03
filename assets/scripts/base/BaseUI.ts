@@ -54,7 +54,7 @@ export abstract class BaseUI extends Component
 
     public Show(_val : boolean)
     {
-        //this.node.active = _val;
+        this.node.active = _val;
     }
 
     LoadSprite(_bundleName : string, _assetPath : string ,  _loadFinish : Function)
@@ -102,20 +102,21 @@ export abstract class BaseUI extends Component
         });
     }
 
-    ShowSubView(_bundleName : string, _assetPath : string , _show : boolean = true)
+    ShowSubView(_bundleName : string, _assetPath : string ,  _loadFinish : Function = null)
     {
         let key = _bundleName + _assetPath;
         let index = this.mLayerList.findIndex((_item) => _item.key === key);
         if(index >= 0)
         {
-            this.mLayerList[index].value.getComponent(BaseUI).Show(_show);
+            let currentScript = this.mLayerList[index].value.getComponent(BaseUI);
+            currentScript.Show(true);
+            if(_loadFinish != null)
+            {
+                _loadFinish(currentScript);
+            }
         }
         else
         {
-            if(_show == false)
-            {
-                return;
-            }
             this.LoadPrefab(_bundleName , _assetPath  ,  (_prefab)=>
             {
                 if(cc.isValid(this.node , true) == false)
@@ -124,11 +125,22 @@ export abstract class BaseUI extends Component
                 }
                 let tempNode =  instantiate(_prefab);
                 this.node.addChild(tempNode);
-                tempNode.getComponent(BaseUI).Show(_show);
+                let currentScript = tempNode.getComponent(BaseUI);
+                currentScript.Show(true);
                 let keyPair = new SubViewKeyPair(key , tempNode);
                 this.mLayerList.push(keyPair)
+
+                if(_loadFinish != null)
+                {
+                    _loadFinish(currentScript);
+                }
             });
         }
+    }
+
+    ShowLayer(_bundleName:string , _assetPath:string , _show:boolean = true)
+    {
+        UIMgr.GetInstance().ShowLayer(_bundleName,_assetPath,_show);
     }
 
     Delete()

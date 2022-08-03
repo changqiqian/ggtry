@@ -12,24 +12,28 @@ export class cb_PublicCards extends BaseUI
     @property(Node) 
     mLayout: Node = null;
 
-
-
-    InitParam() {
+    InitParam() 
+    {
 
     }
-    BindUI() {
+    BindUI() 
+    {
         this.HideAllCards();
     }
-    RegDataNotify() {
+    RegDataNotify() 
+    {
 
     }
-    LateInit() {
+    LateInit() 
+    {
         this.DealCards();
     }
-    UnregDataNotify() {
+    UnregDataNotify() 
+    {
 
     }
-    CustmoerDestory() {
+    CustmoerDestory() 
+    {
 
     }
 

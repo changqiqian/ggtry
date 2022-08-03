@@ -1,10 +1,31 @@
+
+export enum LanguageType
+{
+    EN = 0,//英文
+	HK = 1,//繁体中文
+	CN = 2,//简体中文
+}
+
 export class Localization
 {
-    public static CurrentLanguage = "ch";
+    public static CurrentLanguage;
+    public static CurrentLanguageType : LanguageType = LanguageType.CN;
 
-    public static SetLanguage(_language : string)
+    public static SetLanguage(_languageType : LanguageType)
     {
-        this.CurrentLanguage = _language;
+        this.CurrentLanguageType = _languageType;
+        switch(this.CurrentLanguageType)
+        {
+            case LanguageType.EN:
+                Localization.CurrentLanguage = "en"
+                break;
+            case LanguageType.HK:
+                Localization.CurrentLanguage = "ch"
+                break;
+            case LanguageType.CN:
+                Localization.CurrentLanguage = "ch"
+                break;
+        }
     }
 
     public static GetString(_key:string)
@@ -70,6 +91,12 @@ export class Localization
         {"name":"CountryName40", "ch": "丹麦" , "en": "Denmark"},
         {"name":"CountryName41", "ch": "越南" , "en": "Vietnam"},
         {"name":"CountryName42", "ch": "阿联酋" , "en": "United Arab Emirates"},
+
+        {"name":"00001", "ch": "本应用软件在该地区无法使用，造成不便请见谅。" , "en": "This application is not available in your region.Sorry for the inconvenience."},
+        {"name":"00002", "ch": "无效的电话号码！" , "en": "Invalid Phone Number!"},
+        {"name":"00003", "ch": "操作无法完成。（错误代码：" , "en": "The operation couldn't be completed.(Error code:"},
+        
+        
     ]
 
     

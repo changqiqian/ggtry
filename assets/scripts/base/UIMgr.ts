@@ -1,5 +1,7 @@
 
 import { AssetManager, assetManager, Component, find, instantiate } from "cc";
+import { LoadingMask } from "../ui/common/LoadingMask";
+import { Toast } from "../ui/common/Toast";
 import { HallUI } from "../ui/hall/HallUI";
 import { LoadingUI } from "../ui/loading/LoadingUI";
 import { LoginUI } from "../ui/login/LoginUI";
@@ -65,14 +67,18 @@ export class UIMgr
 
     mLayerRoot : cc.Node = null;
     mWindowRoot : cc.Node = null;
+    mTopRoot : cc.Node = null;
     mLayerList : Array<LayerKeyPair>;
     mWindowList  : Array<LayerKeyPair>;
     mCurrentScene : SceneType;
     mSceneConfig : Array<SceneConfig>;
+    mLoadingMask : LoadingMask = null;
+    mToast : Toast = null;
     public Init(_loadFinish : Function)
     {
         this.mLayerRoot = cc.find("Canvas/LayerRoot");
         this.mWindowRoot = cc.find("Canvas/WindowRoot");
+        this.mTopRoot = cc.find("Canvas/TopRoot");
         this.mLayerList = new Array<LayerKeyPair>();
         this.mWindowList = new Array<LayerKeyPair>();
         this.mCurrentScene = SceneType.None;
@@ -88,11 +94,40 @@ export class UIMgr
         this.mSceneConfig.push(hallConfig);
         
         //公用资源加载
-        
         this.PreloadRes(["common"], resFolder , ()=>
         {
+            //初始化菊花图
+            this.CreatePrefab("common","prefab/LoadingMask" , (_tempNode)=>
+            {
+                let tempScript = _tempNode.getComponent(LoadingMask);
+                this.mTopRoot.addChild(_tempNode);
+                this.mLoadingMask = tempScript;
+                this.mLoadingMask.ShowLoading(false);
+            });
+            this.CreatePrefab("common","prefab/Toast" , (_tempNode)=>
+            {
+                let tempScript = _tempNode.getComponent(Toast);
+                this.mTopRoot.addChild(_tempNode);
+                this.mToast = tempScript;
+                this.mToast.Show(false);
+            });
+
+
+            
             _loadFinish();
         });
+    }
+
+    public ShowLoading(_show:boolean , _tips:string = "Loading...")
+    {
+        this.mLoadingMask.ShowLoading(_show , _tips);
+    }
+
+    public ShowToast(_tips:string)
+    {
+        let childCount = this.mTopRoot.children.length;
+        this.mToast.node.setSiblingIndex(childCount);
+        this.mToast.ShowToast(_tips);
     }
 
     public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true )
@@ -108,7 +143,7 @@ export class UIMgr
         
         if(target != null && target.value!=null)
         {
-            let nodeCount = this.GetRootNode(LayerType.Layer).childrenCount;
+            let nodeCount = this.GetRootNode(LayerType.Layer).children.length;
             target.value.setSiblingIndex(nodeCount);
             let tempScript = target.value.getComponent(BaseUI);
             tempScript.Show(_show);
@@ -137,7 +172,7 @@ export class UIMgr
 
         if(target != null && target.value!=null)
         {
-            let nodeCount = this.GetRootNode(LayerType.Window).childrenCount;
+            let nodeCount = this.GetRootNode(LayerType.Window).children.length;
             target.value.setSiblingIndex(nodeCount);
             let tempScript = target.value.getComponent(BaseWindow);
             tempScript.Show(_show);
