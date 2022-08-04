@@ -1,5 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { Localization } from '../base/Localization';
+import { Gender } from '../base/LocalPlayerData';
 import { CommonNotify } from '../CommonNotify';
 import { GameConfig } from '../GameConfig';
 const { ccclass, property } = _decorator;
@@ -168,7 +169,6 @@ export class Network
         var data = JSON.parse(event.data);
         if(data.msgId == MsgID.Ping)
         {
-            console.log("收到了心跳");
             this.RecvPing();
             return;
         }
@@ -232,6 +232,7 @@ export class Network
     ////////////////////////////////////////////////////////////////////////////////////
     public SendPing()
     {
+        this.StopPing();
         clearTimeout(this.mPingSendTimer);
         this.mPingRevTimer = setTimeout(this.OnPingTimeOut.bind(this), this.mPingSpace);
         this.SendMsg(MsgID.Ping , {});
@@ -320,7 +321,7 @@ export class Network
         this.SendMsg(MsgID.VisitorLogin,body);
     }
 
-    SendTokenLogin(_userName, _pwd , _verifyCode) 
+    SendLogin(_userName, _pwd , _verifyCode : LoginType) 
     {
         var body = 
         { 
@@ -338,7 +339,7 @@ export class Network
             "clientInfo": GameConfig.ClientInfo 
         }
         console.log("Token登录");
-        this.SendMsg(MsgID.TokenLogin , body);
+        this.SendMsg(MsgID.Login , body);
     }
 
     SendGetUserInfo() 
@@ -365,6 +366,59 @@ export class Network
         console.log("获取验证码 _codeType ==" + _codeType);
         this.SendMsg(MsgID.GetSMSCode , body);
     }
+
+    SendVerifyCode(mobile, code) 
+    {
+        var body = 
+        { 
+            "mobile": mobile, 
+            "code": code 
+        }
+        console.log("验证 验证码码是否正确");
+        this.SendMsg(MsgID.VeryifySmsCode , body);
+    }
+
+    SendResetPwd(phoneNumber, password) 
+    {
+        var body = 
+        { 
+            "password": password, 
+            "verifyCode": "", 
+            "phoneNumber": phoneNumber 
+        };
+        console.log("重置密码");
+        this.SendMsg(MsgID.ResetPwd , body);
+    };
+
+    SendRegister(phoneNumber, password, nickname, photoUrl) 
+    {
+        let tphotoUrl = photoUrl + ''
+        var body = 
+        { 
+            "phoneNumber": phoneNumber, 
+            "verifyCode": "", 
+            "password": password, 
+            "channel": "德州", 
+            'nickname': nickname, 
+            'photoUrl': tphotoUrl, 
+            "clientInfo": GameConfig.ClientInfo 
+        }
+        console.log("请求注册");
+        this.SendMsg(MsgID.Register , body);
+    };
+
+    SendSetUserInfo(vnickname : string, vgender:Gender, vsigniture, vphotoUrl) 
+    {
+        var body = 
+        { 
+            "nickname": vnickname, 
+            "gender": vgender, 
+            "signiture": vsigniture, 
+            "photoUrl": vphotoUrl 
+        }
+        console.log("完善个人资料");
+        this.SendMsg(MsgID.SetUserInfo , body);
+    };
 }
 
 export enum MsgStatus
@@ -376,19 +430,28 @@ export enum MsgStatus
 export enum SmsCodeType
 {
     USER_REGISTER = 1,	//注册用户
-    USER_SET_PWD = 2,	//完善用户信息 /登录
+    USER_Login = 2,	//完善用户信息 /登录
     USER_RESET_PWD = 3,	//用户找回密码
 }
 
-
+export enum LoginType
+{
+    Password = 1,	
+    SmsCode = 2,
+    Token = 3,	
+}
 
 export enum MsgID
 {
     VisitorLogin = 1,
-    TokenLogin = 201,
+    Login = 201,
     Ping = 202,
     GetUserInfo = 204,
     GetSMSCode = 233,
+    Register = 234,
+    ResetPwd = 235,
+    SetUserInfo = 236,
     GetAssets = 246,
+    VeryifySmsCode = 387,
 }
 

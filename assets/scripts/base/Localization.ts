@@ -95,8 +95,17 @@ export class Localization
         {"name":"00001", "ch": "本应用软件在该地区无法使用，造成不便请见谅。" , "en": "This application is not available in your region.Sorry for the inconvenience."},
         {"name":"00002", "ch": "无效的电话号码！" , "en": "Invalid Phone Number!"},
         {"name":"00003", "ch": "操作无法完成。（错误代码：" , "en": "The operation couldn't be completed.(Error code:"},
-        
-        
+        {"name":"00004", "ch": "请输入密码", "en": "Please input password"},
+        {"name":"00005", "ch": "请输入验证码", "en": "Please input sms-code"},
+        {"name":"00006", "ch": "验证码无效", "en": "Invalid Confirmation Code!"},
+        {"name":"00007", "ch": "输入的两个密码不一致！", "en": "The two passwords entered are inconsistent!"},
+        {"name":"00008", "ch": "密码重置失败！", "en": "Password reset failed!"},
+        {"name":"00009", "ch": "密码重置成功！", "en": "Password reset successfully!"},
+        {"name":"00010", "ch": "注册失败!", "en": "Registration failed!"},
+        {"name":"00011", "ch": "请输入昵称!", "en": "Please input nickname"},
+        {"name":"00012", "ch": "请选择头像!", "en": "Please choose an avatar!"},
+        {"name":"00013", "ch": "个人信息设置成功！", "en": "Complete personal information success!"},
+        {"name":"00014", "ch": "操作無法完成。（錯誤代碼：", "en": "The operation couldn't be completed.(Error code:"},
     ]
 
     

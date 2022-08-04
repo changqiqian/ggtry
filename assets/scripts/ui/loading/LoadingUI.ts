@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { JsbScript } from '../../base/JsbScript';
 import { Localization } from '../../base/Localization';
 import { SceneType, UIMgr } from '../../base/UIMgr';
+import { GameConfig } from '../../GameConfig';
 import { LoadingData } from './LoadingData';
 const { ccclass, property } = _decorator;
 
@@ -23,13 +24,14 @@ export class LoadingUI extends BaseUI
     mProgress: Sprite = null;
     InitParam() 
     {
+        //测试代码
+        GameConfig.ClearToken();
+
         this.mTips.string = "";
         this.mPercent.string = "";
         this.mProgress.fillRange = 0;
-
         let systemLanguage = JsbScript.getSysLanguage();
         Localization.SetLanguage(systemLanguage);
-        
     }
     BindUI() 
     {

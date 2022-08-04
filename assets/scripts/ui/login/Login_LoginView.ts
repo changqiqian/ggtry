@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
+import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import { Network, SmsCodeType } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
@@ -23,6 +24,12 @@ export class Login_LoginView extends BaseUI {
     @property(BaseButton) 
     mPasswordLoginBtn: BaseButton = null;
     
+    onEnable()
+    {
+        this.mAccountEditBox.string = "";
+    }
+
+
     InitParam() 
     {
 
@@ -46,13 +53,13 @@ export class Login_LoginView extends BaseUI {
                 UIMgr.GetInstance().ShowToast(Localization.GetString("00002"));
                 return
             }
-            LoginData.GetInstance().Data_LastInputPhoneNum = this.mAccountEditBox.string;
+            CommonNotify.GetInstance().Data_LastInputPhoneNum = this.mAccountEditBox.string;
             
             let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
-            Network.GetInstance().SendGetSMSCode(fullPhoneNumber, SmsCodeType.USER_SET_PWD);
-            this.ShowLayer("common","prefab/SMSCodeView");
+            CommonNotify.GetInstance().Data_SmsCodeType = SmsCodeType.USER_Login;
+            Network.GetInstance().SendGetSMSCode(fullPhoneNumber, SmsCodeType.USER_Login);
         });
 
         this.mPasswordLoginBtn.SetClickCallback(()=>
@@ -67,6 +74,17 @@ export class Login_LoginView extends BaseUI {
         {
             this.mAreaCodeBtn.SetTitle(GameConfig.AreaCodeList[_current].areaCode);
         },this);
+
+        CommonNotify.GetInstance().AddListener("Data_SmsCodeSuccess",(_current , _before)=>
+        {
+            if(_current)
+            {
+                if(CommonNotify.GetInstance().Data_SmsCodeType == SmsCodeType.USER_Login)
+                {
+                    this.ShowLayer("common","prefab/SMSCodeView");
+                }
+            }
+        },this);
     }
     LateInit() 
     {
@@ -75,6 +93,7 @@ export class Login_LoginView extends BaseUI {
     UnregDataNotify() 
     {
         LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
+        CommonNotify.GetInstance().RemoveListenerByTarget(this);
     }
     CustmoerDestory() 
     {

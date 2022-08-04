@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, Color } from 'cc';
+import { _decorator, Component, Node, Label, Color, SpriteFrame, Sprite } from 'cc';
 import { Color3 } from '../../../../@types/packages/scene/@types/public';
 import { BaseUI } from '../../base/BaseUI';
 const { ccclass, property } = _decorator;
@@ -34,6 +34,11 @@ export class BaseButton extends BaseUI {
     {
         this.mCustomerData = null;
         this.mCallback = null;
+    }
+
+    public SetSprite(_spriteFrame : SpriteFrame)
+    {
+        this.node.getComponent(Sprite).spriteFrame = _spriteFrame;
     }
 
     public SetTitle(_title : string) 

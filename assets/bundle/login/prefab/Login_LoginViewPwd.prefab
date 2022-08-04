@@ -920,7 +920,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 470.79,
+      "width": 626.45,
       "height": 100.8
     },
     "_anchorPoint": {
@@ -956,7 +956,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Log in via SMS",
+    "_string": "Log in via Password",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 70,

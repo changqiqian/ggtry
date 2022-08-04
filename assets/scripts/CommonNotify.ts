@@ -3,7 +3,7 @@ import { Localization } from "./base/Localization";
 import { LocalPlayerData } from "./base/LocalPlayerData";
 import { UIMgr } from "./base/UIMgr";
 import { GameConfig } from "./GameConfig";
-import { MsgID, MsgStatus, Network } from "./network/Network";
+import { LoginType, MsgID, MsgStatus, Network, SmsCodeType } from "./network/Network";
 
 export class CommonNotify extends DataNotify 
 {
@@ -27,6 +27,19 @@ export class CommonNotify extends DataNotify
     Data_SocketError: boolean = null;
     Data_LoginType : number = null;
     Data_LoginSuccessData : any = null;
+    Data_SmsCodeSuccess : boolean = null;   //服务器已经对你的手机发送了验证码
+    Data_SmsCodeVerifySuccess :  boolean = null; //验证码验证成功
+    Data_SmsCodeType : SmsCodeType = null; //短信验证用途
+    Data_LastInputPhoneNum : string = null; //最后一次输入的手机号
+    Data_LastInputPwd : string = null;//最后一次输入的密码
+    Data_SetUserInfoSuccess : boolean = null; //设置玩家信息成功
+
+    ClearData()
+    {
+        this.Data_SmsCodeSuccess = false;
+        this.Data_SmsCodeVerifySuccess = false;
+        this.Data_SetUserInfoSuccess = false;
+    }
 
     RegisteMsg()
     {
@@ -46,16 +59,16 @@ export class CommonNotify extends DataNotify
             //如果存在token直接token登录
             if(GameConfig.LOGIN_TOKEN != null)
             {
-                Network.GetInstance().SendTokenLogin(GameConfig.LOGIN_USER, GameConfig.LOGIN_TOKEN, 3);//我也不晓得3是啥意思
+                Network.GetInstance().SendLogin(GameConfig.LOGIN_USER, GameConfig.LOGIN_TOKEN, LoginType.Token);
             }
 
         },this);
 
-        Network.GetInstance().AddMsgListenner(MsgID.TokenLogin ,(_msgBody)=>
+        Network.GetInstance().AddMsgListenner(MsgID.Login ,(_msgBody)=>
         {
             if (_msgBody.code === MsgStatus.FAILED) 
             {
-                console.log("Token 登录失败");
+                console.log("登录失败");
                 UIMgr.GetInstance().ShowToast(_msgBody.reason);
                 GameConfig.ClearToken();
             }
@@ -69,7 +82,7 @@ export class CommonNotify extends DataNotify
                 GameConfig.SaveToken(_msgBody.token , _msgBody.userName);
                 LocalPlayerData.GetInstance().Data_Uid = _msgBody.userId;
                 LocalPlayerData.GetInstance().Data_AdminRole = _msgBody.adminRole;
-                this.Data_LoginType = MsgID.TokenLogin;
+                this.Data_LoginType = MsgID.Login;
                 Network.GetInstance().SendGetUserInfo();
                 Network.GetInstance().SendGetAssets();
                 Network.GetInstance().SendPing();
@@ -109,7 +122,7 @@ export class CommonNotify extends DataNotify
         {
             if(_msgBody.code == MsgStatus.SUCCESS) 
             {
-                
+                this.Data_SmsCodeSuccess = true;
             } 
             else 
             {   
@@ -121,6 +134,62 @@ export class CommonNotify extends DataNotify
                 {
                     UIMgr.GetInstance().ShowToast(Localization.GetString("00003") + _msgBody.code + ")");
                 }
+            }
+        },this);
+
+        Network.GetInstance().AddMsgListenner(MsgID.VeryifySmsCode ,(_msgBody)=>
+        {
+            if(_msgBody.code == MsgStatus.SUCCESS) 
+            {
+                this.Data_SmsCodeVerifySuccess = true;
+            } 
+            else 
+            {   
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00006"));
+            }
+        },this);
+
+        Network.GetInstance().AddMsgListenner(MsgID.ResetPwd ,(_msgBody)=>
+        {
+            if(_msgBody.code == MsgStatus.SUCCESS) 
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00009"));
+                let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
+                let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
+                let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.GetInstance().Data_LastInputPhoneNum;
+                Network.GetInstance().SendLogin(fullPhoneNumber , this.Data_LastInputPwd , LoginType.Password);
+            } 
+            else 
+            {   
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00008"));
+            }
+        },this);
+
+        Network.GetInstance().AddMsgListenner(MsgID.Register ,(_msgBody)=>
+        {
+            if(_msgBody.code == MsgStatus.SUCCESS) 
+            {
+                let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
+                let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
+                let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.GetInstance().Data_LastInputPhoneNum;
+                Network.GetInstance().SendLogin(fullPhoneNumber , this.Data_LastInputPwd , LoginType.Password);
+            } 
+            else 
+            {   
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00010"));
+            }
+        },this);
+
+        Network.GetInstance().AddMsgListenner(MsgID.SetUserInfo ,(_msgBody)=>
+        {
+            if(_msgBody.code == MsgStatus.SUCCESS) 
+            {
+                this.Data_SetUserInfoSuccess = true;
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00013"));
+            } 
+            else 
+            {   
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00014")  + _msgBody.code + ")!" );
             }
         },this);
     }

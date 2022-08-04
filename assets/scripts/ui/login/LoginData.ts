@@ -1,4 +1,5 @@
 import { DataNotify } from "../../base/DataNotify";
+import { SmsCodeType } from "../../network/Network";
 
 
 export class LoginData extends DataNotify 
@@ -15,9 +16,5 @@ export class LoginData extends DataNotify
 
         return LoginData.Instance;
     }
-    
- 
-
-    Data_LastInputPhoneNum : string = null;
 }
 

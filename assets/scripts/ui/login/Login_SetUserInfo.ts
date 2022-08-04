@@ -1,0 +1,85 @@
+import { _decorator, Component, Node, Sprite, EditBox } from 'cc';
+import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
+import { Gender, LocalPlayerData } from '../../base/LocalPlayerData';
+import { UIMgr } from '../../base/UIMgr';
+import { Network } from '../../network/Network';
+import { BaseButton } from '../common/BaseButton';
+const { ccclass, property } = _decorator;
+
+@ccclass('Login_SetUserInfo')
+export class Login_SetUserInfo extends BaseUI 
+{
+    @property(Node) 
+    mHeadMask: Node = null;
+    @property(Sprite) 
+    mHead: Sprite = null;
+    @property(EditBox) 
+    mNickNameEditBox: EditBox = null;
+    @property(BaseButton) 
+    mConfirmBtn: BaseButton = null;
+
+    onEnable()
+    {
+        this.mNickNameEditBox.string = "";
+    }
+    InitParam() 
+    {
+
+    }
+    BindUI() 
+    {
+        this.mHeadMask.on(Node.EventType.TOUCH_END,this.OnEditHeadBtn.bind(this),this);
+        this.mConfirmBtn.SetClickCallback(()=>
+        {
+            if(this.mNickNameEditBox.string.length == 0) 
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00011"));
+                return
+            }
+            let headPicUrl = LocalPlayerData.GetInstance().Data_PhotoUrl;
+            if(headPicUrl ==null || headPicUrl === '') 
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00012"));
+                return
+            }
+
+            LocalPlayerData.GetInstance().Data_NickName = this.mNickNameEditBox.string;
+            Network.GetInstance().SendSetUserInfo(this.mNickNameEditBox.string,Gender.Male, "" , headPicUrl);
+        });
+    }
+    RegDataNotify() 
+    {
+        LocalPlayerData.GetInstance().AddListener("Data_PhotoUrl",(_current , _before)=>
+        {
+            if(_current == null || _current == "")
+            {
+                return;
+            }
+
+            this.LoadSprite("common" , "texture/head/" + _current , (_spriteFrame)=>
+            {
+                this.mHead.spriteFrame = _spriteFrame;
+            });
+        },this);
+    }
+    LateInit() 
+    {
+
+    }
+    UnregDataNotify() 
+    {
+        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
+    }
+    CustmoerDestory() 
+    {
+
+    }
+
+    OnEditHeadBtn()
+    {
+        this.ShowLayer("common" , "prefab/HeadChoserView");
+    }
+
+}
+
