@@ -4,10 +4,10 @@
     "android": {
       "packageName": "SY.TEXAS.COM",
       "orientation": {
-        "portrait": false,
+        "portrait": true,
         "upsideDown": false,
-        "landscapeRight": true,
-        "landscapeLeft": true
+        "landscapeRight": false,
+        "landscapeLeft": false
       },
       "apiLevel": "android-33",
       "appABIs": [

@@ -21,8 +21,9 @@ export class HotUpdate extends Component {
     private versionCompareHandle: (versionA: string, versionB: string) => number = null!;
     onLoad() 
     {
+        LoadingData.GetInstance().Data_HotUpdateEnd = true;
+        return;
         // Hot update is only available in Native build
-
         if (!jsb) 
         {
             LoadingData.GetInstance().Data_HotUpdateEnd = true;

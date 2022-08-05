@@ -10,11 +10,11 @@
   },
   "BuildTaskManager": {
     "taskMap": {
-      "1656334441510": {
-        "id": "1656334441510",
+      "1659682310274": {
+        "id": "1659682310274",
         "progress": 1,
         "state": "success",
-        "message": "6-27-2022 20:54 Build success in 7990 ms!",
+        "message": "8-5-2022 14:52 Build success in 69448 ms!",
         "options": {
           "name": "SY",
           "platform": "android",
@@ -43,10 +43,10 @@
             "android": {
               "packageName": "SY.TEXAS.COM",
               "orientation": {
-                "portrait": false,
+                "portrait": true,
                 "upsideDown": false,
-                "landscapeRight": true,
-                "landscapeLeft": true
+                "landscapeRight": false,
+                "landscapeLeft": false
               },
               "apiLevel": "android-33",
               "appABIs": [
@@ -73,21 +73,22 @@
               "configID": "437b18",
               "services": []
             },
-            "hot-update": null,
             "hot-update-local-ip": null,
+            "hot-update": null,
             "native": {
               "polyfills": {
                 "asyncFunctions": true
               },
               "encrypted": false,
-              "xxteaKey": "c2vbh8J7RGCLNKrj",
+              "xxteaKey": "b4+MWoCdtExIoZ0s",
               "compressZip": false,
               "makeAfterBuild": false,
-              "JobSystem": "none"
+              "JobSystem": "none",
+              "remoteServerAddress": "http://13.229.222.39/remote-assets/"
             }
           }
         },
-        "time": "6-27-2022 20:54",
+        "time": "8-5-2022 14:51",
         "dirty": false
       }
     }

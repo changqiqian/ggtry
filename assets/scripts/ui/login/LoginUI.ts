@@ -102,15 +102,15 @@ export class LoginUI extends BaseUI {
     }
     private OnAgreementBtn()
     {
-        
+        sys.openURL("http://pokerlife.live/user_agreement.html");
     }
     private OnPrivacyBtn()
     {
-        
+        sys.openURL("http://pokerlife.live/privacy_policy.html");
     }
     private OnBroadcastBtn()
     {
-        
+        sys.openURL("http://pokerlife.live/broadcaster_agreement.html");
     }
 }
 
