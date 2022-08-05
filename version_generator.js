@@ -12,7 +12,7 @@ var manifest = {
 };
 
 var dest = './remote-assets/';
-var src = './build/native/assets/';
+var src = './build/android/assets/';
 
 // Parse arguments
 var i = 2;

@@ -6,15 +6,16 @@
   "common": {
     "outputName": "android",
     "mainBundleCompressionType": "merge_dep",
-    "platform": "android"
+    "platform": "android",
+    "debug": true
   },
   "BuildTaskManager": {
     "taskMap": {
       "1659682310274": {
         "id": "1659682310274",
         "progress": 1,
-        "state": "success",
-        "message": "8-5-2022 14:52 Build success in 69448 ms!",
+        "state": "failure",
+        "message": "8-5-2022 15:10 run package /Users/yamiwang/cowboy/build/android failed!",
         "options": {
           "name": "SY",
           "platform": "android",

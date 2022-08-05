@@ -41,9 +41,10 @@ export class LoadingUI extends BaseUI
     {
         LoadingData.GetInstance().AddListener("Data_HotUpdateEnd",(_current , _before)=>
         {
-            setTimeout(() => {
-                UIMgr.GetInstance().ChangeScene(SceneType.Login);  
-            }, 1000)
+            this.scheduleOnce(()=>
+            {
+                UIMgr.GetInstance().ChangeScene(SceneType.Login);
+            },1);
         },this);
 
         LoadingData.GetInstance().AddListener("Data_HotUpdateProgress",(_current , _before)=>
