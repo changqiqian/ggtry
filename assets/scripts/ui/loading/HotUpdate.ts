@@ -279,7 +279,10 @@ export class HotUpdate extends Component {
         {
             return;
         }
-        this._am.setEventCallback(null!);
+        if(this._am != null)
+        {
+            this._am.setEventCallback(null!);
+        }
     }
 }
 

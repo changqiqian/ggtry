@@ -11,16 +11,16 @@
   },
   "BuildTaskManager": {
     "taskMap": {
-      "1659682310274": {
-        "id": "1659682310274",
+      "1659692964959": {
+        "id": "1659692964959",
         "progress": 1,
-        "state": "failure",
-        "message": "8-5-2022 15:10 run package /Users/yamiwang/cowboy/build/android failed!",
+        "state": "success",
+        "message": "8-5-2022 17:56 make package /Users/yamiwang/cowboy/build/android success!",
         "options": {
           "name": "SY",
           "platform": "android",
           "buildPath": "project://build",
-          "debug": false,
+          "debug": true,
           "md5Cache": false,
           "skipCompressTexture": false,
           "sourceMaps": false,
@@ -51,7 +51,8 @@
               },
               "apiLevel": "android-33",
               "appABIs": [
-                "arm64-v8a"
+                "arm64-v8a",
+                "armeabi-v7a"
               ],
               "useDebugKeystore": true,
               "keystorePath": "",
@@ -74,14 +75,14 @@
               "configID": "437b18",
               "services": []
             },
-            "hot-update-local-ip": null,
             "hot-update": null,
+            "hot-update-local-ip": null,
             "native": {
               "polyfills": {
                 "asyncFunctions": true
               },
               "encrypted": false,
-              "xxteaKey": "b4+MWoCdtExIoZ0s",
+              "xxteaKey": "1ffVE5ocJKTLZ5HO",
               "compressZip": false,
               "makeAfterBuild": false,
               "JobSystem": "none",
@@ -89,7 +90,7 @@
             }
           }
         },
-        "time": "8-5-2022 14:51",
+        "time": "8-5-2022 17:49",
         "dirty": false
       }
     }

@@ -142,45 +142,45 @@ export class JsbScript
 
     public static getSysLanguage() 
     {
-        if (sys.os === sys.OS.ANDROID) 
-        {
-            let result = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getSysLanguage", "()Ljava/lang/String;");
-            if(Object.prototype.toString.call(result)=="[object String]")
-            {
-                if( -1 != result.indexOf('en') ) 
-                {
-                    return LanguageType.EN;
-                }
-                else if( -1 != result.indexOf('zh-CN') ) 
-                {
-                    return LanguageType.CN;
-                } 
-                else if( -1 != result.indexOf('zh-HK') || -1 != result.indexOf('zh-TW') )
-                {
-                    return LanguageType.HK;
-                }
-            }
-        } 
-        else if (cc.sys.os === cc.sys.OS_IOS) 
-        {
-            //  "en"、"zh"、“zh-Hans-CN"、"zh-Hant-CN"
-            let langRet = jsb.reflection.callStaticMethod("AppController", "getCurrentLanguage");    
-            if(Object.prototype.toString.call(langRet) =="[object String]")
-            {
-                if (-1 != langRet.indexOf('en')) 
-                {
-                    return LanguageType.EN;
-                } 
-                else if (-1 != langRet.indexOf('zh')) 
-                {
-                    return LanguageType.CN;
-                } 
-                else if (-1 != langRet.indexOf('zh-Hans-CN') || -1 != langRet.indexOf('zh-Hant-CN')) 
-                {
-                    return LanguageType.HK;
-                }
-            }   
-        } 
+        // if (sys.os === sys.OS.ANDROID) 
+        // {
+        //     let result = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getSysLanguage", "()Ljava/lang/String;");
+        //     if(Object.prototype.toString.call(result)=="[object String]")
+        //     {
+        //         if( -1 != result.indexOf('en') ) 
+        //         {
+        //             return LanguageType.EN;
+        //         }
+        //         else if( -1 != result.indexOf('zh-CN') ) 
+        //         {
+        //             return LanguageType.CN;
+        //         } 
+        //         else if( -1 != result.indexOf('zh-HK') || -1 != result.indexOf('zh-TW') )
+        //         {
+        //             return LanguageType.HK;
+        //         }
+        //     }
+        // } 
+        // else if (cc.sys.os === cc.sys.OS_IOS) 
+        // {
+        //     //  "en"、"zh"、“zh-Hans-CN"、"zh-Hant-CN"
+        //     let langRet = jsb.reflection.callStaticMethod("AppController", "getCurrentLanguage");    
+        //     if(Object.prototype.toString.call(langRet) =="[object String]")
+        //     {
+        //         if (-1 != langRet.indexOf('en')) 
+        //         {
+        //             return LanguageType.EN;
+        //         } 
+        //         else if (-1 != langRet.indexOf('zh')) 
+        //         {
+        //             return LanguageType.CN;
+        //         } 
+        //         else if (-1 != langRet.indexOf('zh-Hans-CN') || -1 != langRet.indexOf('zh-Hant-CN')) 
+        //         {
+        //             return LanguageType.HK;
+        //         }
+        //     }   
+        // } 
 
         return LanguageType.CN;
     };
