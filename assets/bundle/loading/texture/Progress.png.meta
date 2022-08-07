@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "1b448e42-afe4-4539-9179-e253c186ff1f",
+  "uuid": "76b96ff9-188e-429d-bfaf-145fa9428c56",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "1b448e42-afe4-4539-9179-e253c186ff1f@6c48a",
+      "uuid": "76b96ff9-188e-429d-bfaf-145fa9428c56@6c48a",
       "displayName": "Progress",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1b448e42-afe4-4539-9179-e253c186ff1f"
+        "imageUuidOrDatabaseUri": "76b96ff9-188e-429d-bfaf-145fa9428c56"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "1b448e42-afe4-4539-9179-e253c186ff1f@f9941",
+      "uuid": "76b96ff9-188e-429d-bfaf-145fa9428c56@f9941",
       "displayName": "Progress",
       "id": "f9941",
       "name": "spriteFrame",
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 513,
-        "height": 12,
-        "rawWidth": 513,
-        "rawHeight": 12,
+        "width": 933,
+        "height": 9,
+        "rawWidth": 933,
+        "rawHeight": 9,
         "borderTop": 0,
         "borderBottom": 0,
-        "borderLeft": 10,
-        "borderRight": 10,
+        "borderLeft": 0,
+        "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1b448e42-afe4-4539-9179-e253c186ff1f@6c48a",
+        "imageUuidOrDatabaseUri": "76b96ff9-188e-429d-bfaf-145fa9428c56@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "1b448e42-afe4-4539-9179-e253c186ff1f@f9941"
+    "redirect": "76b96ff9-188e-429d-bfaf-145fa9428c56@f9941"
   }
 }

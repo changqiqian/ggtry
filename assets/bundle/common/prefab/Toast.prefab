@@ -95,7 +95,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 211.921,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -294,13 +294,13 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "7d8f9b89-4fd1-4c9f-a3ab-38ec7cded7ca@f9941",
+      "__uuid__": "e989cebe-eb2c-469c-b165-a1d5659c0a68@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -383,7 +383,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1125,
-      "height": 2000
+      "height": 2436
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

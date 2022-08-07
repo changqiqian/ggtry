@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "6165653b-11a1-4705-8392-1ae976d13a3c",
+  "uuid": "666e75e0-d998-4548-b261-6da9f91e5a87",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "6165653b-11a1-4705-8392-1ae976d13a3c@6c48a",
+      "uuid": "666e75e0-d998-4548-b261-6da9f91e5a87@6c48a",
       "displayName": "InputBg",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6165653b-11a1-4705-8392-1ae976d13a3c"
+        "imageUuidOrDatabaseUri": "666e75e0-d998-4548-b261-6da9f91e5a87"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "6165653b-11a1-4705-8392-1ae976d13a3c@f9941",
+      "uuid": "666e75e0-d998-4548-b261-6da9f91e5a87@f9941",
       "displayName": "InputBg",
       "id": "f9941",
       "name": "spriteFrame",
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 240,
-        "height": 144,
-        "rawWidth": 240,
-        "rawHeight": 144,
+        "width": 985,
+        "height": 148,
+        "rawWidth": 985,
+        "rawHeight": 148,
         "borderTop": 0,
         "borderBottom": 0,
-        "borderLeft": 90,
-        "borderRight": 90,
+        "borderLeft": 50,
+        "borderRight": 50,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6165653b-11a1-4705-8392-1ae976d13a3c@6c48a",
+        "imageUuidOrDatabaseUri": "666e75e0-d998-4548-b261-6da9f91e5a87@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "6165653b-11a1-4705-8392-1ae976d13a3c@f9941"
+    "redirect": "666e75e0-d998-4548-b261-6da9f91e5a87@f9941"
   }
 }

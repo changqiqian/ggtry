@@ -11,11 +11,11 @@
   },
   "BuildTaskManager": {
     "taskMap": {
-      "1659692964959": {
-        "id": "1659692964959",
+      "1659696518240": {
+        "id": "1659696518240",
         "progress": 1,
         "state": "success",
-        "message": "8-5-2022 17:56 make package /Users/yamiwang/cowboy/build/android success!",
+        "message": "8-5-2022 18:54 make package /Users/yamiwang/cowboy/build/android success!",
         "options": {
           "name": "SY",
           "platform": "android",
@@ -90,7 +90,7 @@
             }
           }
         },
-        "time": "8-5-2022 17:49",
+        "time": "8-5-2022 18:48",
         "dirty": false
       }
     }

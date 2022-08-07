@@ -7,7 +7,7 @@ const { ccclass, property } = _decorator;
 export class QuickInputNumView extends BaseUI 
 {
     @property(Node) 
-    mBG: Node = null;
+    mContainer: Node = null;
 
     mNumberClickCallback : Function = null;
     mDeleteClickCallback : Function = null;
@@ -19,9 +19,9 @@ export class QuickInputNumView extends BaseUI
     {
         this.node.on(Node.EventType.TOUCH_END,this.OnClickBG.bind(this),this);
 
-        for(let i = 0 ; i < this.mBG.children.length ; i++)
+        for(let i = 0 ; i < this.mContainer.children.length ; i++)
         {
-            let currentBtn = this.mBG.children[i].getComponent(BaseButton);
+            let currentBtn = this.mContainer.children[i].getComponent(BaseButton);
             if(i < 9)
             {
                 let currentIndex = i+1;

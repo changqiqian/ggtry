@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "6642d21d-8121-48ca-b37a-6c8a4be27f9e",
+  "uuid": "88b3228f-fec9-4cd9-8668-9672378d7a5b",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "6642d21d-8121-48ca-b37a-6c8a4be27f9e@6c48a",
+      "uuid": "88b3228f-fec9-4cd9-8668-9672378d7a5b@6c48a",
       "displayName": "BackWard",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6642d21d-8121-48ca-b37a-6c8a4be27f9e"
+        "imageUuidOrDatabaseUri": "88b3228f-fec9-4cd9-8668-9672378d7a5b"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "6642d21d-8121-48ca-b37a-6c8a4be27f9e@f9941",
+      "uuid": "88b3228f-fec9-4cd9-8668-9672378d7a5b@f9941",
       "displayName": "BackWard",
       "id": "f9941",
       "name": "spriteFrame",
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 351,
-        "height": 138,
-        "rawWidth": 351,
-        "rawHeight": 138,
+        "width": 72,
+        "height": 72,
+        "rawWidth": 72,
+        "rawHeight": 72,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6642d21d-8121-48ca-b37a-6c8a4be27f9e@6c48a",
+        "imageUuidOrDatabaseUri": "88b3228f-fec9-4cd9-8668-9672378d7a5b@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "6642d21d-8121-48ca-b37a-6c8a4be27f9e@f9941"
+    "redirect": "88b3228f-fec9-4cd9-8668-9672378d7a5b@f9941"
   }
 }

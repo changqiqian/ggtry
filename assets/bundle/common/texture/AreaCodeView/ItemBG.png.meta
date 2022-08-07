@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "946d5efd-c032-4c96-ba2b-787227b99c23",
+  "uuid": "0b4b8da2-f8b5-4f30-bd0f-2cdd620f1929",
   "files": [
     ".json",
     ".png"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "946d5efd-c032-4c96-ba2b-787227b99c23@6c48a",
-      "displayName": "Btn0",
+      "uuid": "0b4b8da2-f8b5-4f30-bd0f-2cdd620f1929@6c48a",
+      "displayName": "ItemBG",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "946d5efd-c032-4c96-ba2b-787227b99c23"
+        "imageUuidOrDatabaseUri": "0b4b8da2-f8b5-4f30-bd0f-2cdd620f1929"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "946d5efd-c032-4c96-ba2b-787227b99c23@f9941",
-      "displayName": "Btn0",
+      "uuid": "0b4b8da2-f8b5-4f30-bd0f-2cdd620f1929@f9941",
+      "displayName": "ItemBG",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 168,
-        "height": 72,
-        "rawWidth": 168,
-        "rawHeight": 72,
+        "width": 51,
+        "height": 132,
+        "rawWidth": 51,
+        "rawHeight": 132,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "946d5efd-c032-4c96-ba2b-787227b99c23@6c48a",
+        "imageUuidOrDatabaseUri": "0b4b8da2-f8b5-4f30-bd0f-2cdd620f1929@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "946d5efd-c032-4c96-ba2b-787227b99c23@f9941"
+    "redirect": "0b4b8da2-f8b5-4f30-bd0f-2cdd620f1929@f9941"
   }
 }
