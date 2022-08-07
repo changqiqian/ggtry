@@ -1,6 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
 import { Localization } from '../base/Localization';
 import { Gender } from '../base/LocalPlayerData';
+import { UIMgr } from '../base/UIMgr';
 import { CommonNotify } from '../CommonNotify';
 import { GameConfig } from '../GameConfig';
 const { ccclass, property } = _decorator;
@@ -83,7 +84,7 @@ export class Network
     private mPingSendTimer : number;
     private mPingSpace : number = 5000;
     private mMsgListenner : Array<MsgEvent>;
-
+    private mForceClose : boolean = false;
     constructor() 
     {
         this.mMsgListenner = new Array<MsgEvent>();
@@ -97,7 +98,8 @@ export class Network
             console.log("上一根ws还没有清理，不能重新连接");
             return;
         }
-
+        this.mForceClose = false;
+        UIMgr.GetInstance().ShowLoading(true,"连接服务器中...");
         this.mWebSocket = new WebSocket(GameConfig.SeverUrl);
         this.mWebSocket.onopen = this.OnOpen.bind(this);
         this.mWebSocket.onmessage = this.OnMessage.bind(this);
@@ -106,12 +108,15 @@ export class Network
         this.mConnectTimer = setTimeout( this.OnConnectTimeOut.bind(this), 3000);
     }
 
-    public ClearWS()
+    public ClearWS(_forceClose : boolean = false)
     {
+        this.mForceClose  = _forceClose;
         clearTimeout(this.mConnectTimer);
         this.StopPing();
-        this.mWebSocket.close();
-
+        if (this.mWebSocket!=null && this.mWebSocket.readyState === WebSocket.OPEN) 
+        {
+            this.mWebSocket.close();
+        }
     }
 
     public SendMsg(_msgID: number , _msg)
@@ -134,6 +139,7 @@ export class Network
 
     private OnOpen(event)
     {
+        UIMgr.GetInstance().ShowLoading(false);
         console.log("Socket OnOpen = " + event);
         clearTimeout(this.mConnectTimer);
         CommonNotify.GetInstance().Data_SocketClose = false;
@@ -143,6 +149,7 @@ export class Network
     private OnError(event)
     {
         console.log("Socket OnError = " + event);
+        clearTimeout(this.mConnectTimer);
         CommonNotify.GetInstance().Data_SocketError = true;
     }
 
@@ -150,7 +157,7 @@ export class Network
     {
         console.log("Socket OnClose  =  " + event );
         this.StopPing();
-
+        clearTimeout(this.mConnectTimer);
         if(this.mWebSocket != null)
         {
             this.mWebSocket.onopen = null;
@@ -160,8 +167,13 @@ export class Network
             this.mWebSocket = null;
         }
 
-        CommonNotify.GetInstance().Data_SocketClose = true;
-        CommonNotify.GetInstance().Data_SocketOpen = false;
+        if(this.mForceClose == false)
+        {
+            CommonNotify.GetInstance().Data_SocketClose = true;
+            CommonNotify.GetInstance().Data_SocketOpen = false;
+    
+            setTimeout(this.CreateWS.bind(this), 1000);
+        }
     }
 
     private OnMessage(event)
