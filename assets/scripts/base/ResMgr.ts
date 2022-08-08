@@ -25,7 +25,8 @@ export class ResMgr
     {
         for(let i = 0 ; i < _folders.length ; i++)
         {
-            _bundle.loadDir(_folders[i],()=>
+           
+            _bundle.preloadDir(_folders[i],()=>
             {
                 if(_loadFinish)
                 {
