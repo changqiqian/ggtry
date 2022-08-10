@@ -43,7 +43,7 @@ export class SMSCodeView extends BaseUI
     {
         this.mInputCodeIndicator.SetClickCallback(()=>
         {
-            this.ShowSubView("common","prefab/QuickInputNumView",(_script)=>
+            this.AddSubView("common","prefab/QuickInputNumView", true, (_script)=>
             {
                 let tempQuickInput = _script as QuickInputNumView;
                 tempQuickInput.SetCallback(

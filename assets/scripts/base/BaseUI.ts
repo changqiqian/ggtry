@@ -102,14 +102,14 @@ export abstract class BaseUI extends Component
         });
     }
 
-    ShowSubView(_bundleName : string, _assetPath : string ,  _loadFinish : Function = null)
+    AddSubView(_bundleName : string, _assetPath : string , _show : boolean,  _loadFinish : Function = null)
     {
         let key = _bundleName + _assetPath;
         let index = this.mLayerList.findIndex((_item) => _item.key === key);
         if(index >= 0)
         {
             let currentScript = this.mLayerList[index].value.getComponent(BaseUI);
-            currentScript.Show(true);
+            currentScript.Show(_show);
             if(_loadFinish != null)
             {
                 _loadFinish(currentScript);
@@ -126,7 +126,7 @@ export abstract class BaseUI extends Component
                 let tempNode =  instantiate(_prefab);
                 this.node.addChild(tempNode);
                 let currentScript = tempNode.getComponent(BaseUI);
-                currentScript.Show(true);
+                currentScript.Show(_show);
                 let keyPair = new SubViewKeyPair(key , tempNode);
                 this.mLayerList.push(keyPair)
 

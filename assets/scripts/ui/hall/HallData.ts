@@ -1,5 +1,6 @@
 
 import { DataNotify } from '../../base/DataNotify';
+import { Hall_SubPage } from './subUI/Hall_Bottom';
 
 
 export class HallData extends DataNotify {
@@ -15,6 +16,8 @@ export class HallData extends DataNotify {
 
         return HallData.Instance;
     }
+
+    Data_SubPage : Hall_SubPage = null;
     
 
 }

@@ -224,13 +224,13 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 200
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "438f4350-4b8e-4201-9ab4-085e6400920d@f9941",
+      "__uuid__": "d31cdc55-522c-4e05-987d-b2f3abe02ab3@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -5008,7 +5008,7 @@
     "node": {
       "__id__": 356
     },
-    "_enabled": true,
+    "_enabled": false,
     "__prefab": {
       "__id__": 370
     },

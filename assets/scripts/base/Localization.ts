@@ -106,6 +106,7 @@ export class Localization
         {"name":"00012", "ch": "请选择头像!", "en": "Please choose an avatar!"},
         {"name":"00013", "ch": "个人信息设置成功！", "en": "Complete personal information success!"},
         {"name":"00014", "ch": "操作無法完成。（錯誤代碼：", "en": "The operation couldn't be completed.(Error code:"},
+        {"name":"00015", "ch": "输入内容不能包含空格", "en": "Input can not contain charactor \"space\""},
     ]
 
     

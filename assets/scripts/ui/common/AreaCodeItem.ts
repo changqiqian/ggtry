@@ -22,7 +22,8 @@ export class AreaCodeItem extends BaseUI {
             LocalPlayerData.GetInstance().Data_AreaCode = this.mIndex;
         });
     }
-    RegDataNotify() {
+    RegDataNotify() 
+    {
         LocalPlayerData.GetInstance().AddListener("Data_AreaCode",(_current , _before)=>
         {
             this.UpdateSelectStatus(_current);
@@ -60,6 +61,12 @@ export class AreaCodeItem extends BaseUI {
         {
             this.mBtn.SetTitleColor(new Color(142,144,149));
         }
+    }
+
+    ContainTargetContent(_targetContent : string) : boolean
+    {
+        let result =  this.mBtn.GetTitle().indexOf(_targetContent) != -1;
+        return result;
     }
 
 }

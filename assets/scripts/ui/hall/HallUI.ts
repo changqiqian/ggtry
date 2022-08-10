@@ -20,7 +20,7 @@ export class HallUI extends BaseUI
     }
     BindUI() 
     {
-        this.ShowSubView("cowboy","prefab/CowboyUI_X");
+        this.AddSubView("hall","prefab/Hall_Bottom",true);
     }
 
     RegDataNotify() 

@@ -45,6 +45,12 @@ export class Login_ForgetPwd extends BaseUI {
                 return
             }
 
+            if(this.mAccountEditBox.string.indexOf(" ") != -1) 
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                return
+            }
+
             CommonNotify.GetInstance().Data_LastInputPhoneNum = this.mAccountEditBox.string;
             let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;

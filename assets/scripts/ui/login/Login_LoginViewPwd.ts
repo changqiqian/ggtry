@@ -78,12 +78,26 @@ export class Login_LoginViewPwd extends BaseUI {
                 UIMgr.GetInstance().ShowToast(Localization.GetString("00002"));
                 return
             }
+
+            if(this.mAccountEditBox.string.indexOf(" ") != -1) 
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                return
+            }
+
             let password = this.mPwdEditbox.string;
             if(password === "")
             {
                 UIMgr.GetInstance().ShowToast(Localization.GetString("00004"));
                 return
             }
+
+            if(password.indexOf(" ") != -1) 
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                return
+            }
+
 
             CommonNotify.GetInstance().Data_LastInputPhoneNum = this.mAccountEditBox.string;
             CommonNotify.GetInstance().Data_LastInputPwd = password;

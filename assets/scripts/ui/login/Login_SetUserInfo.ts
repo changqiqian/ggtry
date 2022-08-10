@@ -11,7 +11,7 @@ const { ccclass, property } = _decorator;
 export class Login_SetUserInfo extends BaseUI 
 {
     @property(Node) 
-    mHeadMask: Node = null;
+    mHeadBG: Node = null;
     @property(Sprite) 
     mHead: Sprite = null;
     @property(EditBox) 
@@ -29,7 +29,7 @@ export class Login_SetUserInfo extends BaseUI
     }
     BindUI() 
     {
-        this.mHeadMask.on(Node.EventType.TOUCH_END,this.OnEditHeadBtn.bind(this),this);
+        this.mHeadBG.on(Node.EventType.TOUCH_END,this.OnEditHeadBtn.bind(this),this);
         this.mConfirmBtn.SetClickCallback(()=>
         {
             if(this.mNickNameEditBox.string.length == 0) 
@@ -37,6 +37,13 @@ export class Login_SetUserInfo extends BaseUI
                 UIMgr.GetInstance().ShowToast(Localization.GetString("00011"));
                 return
             }
+
+            if(this.mNickNameEditBox.string.indexOf(" ") != -1) 
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                return
+            }
+
             let headPicUrl = LocalPlayerData.GetInstance().Data_PhotoUrl;
             if(headPicUrl ==null || headPicUrl === '') 
             {

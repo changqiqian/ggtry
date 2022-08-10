@@ -189,7 +189,7 @@ export class Network
         if(data.languageKey) 
         {
             msg.languageKey = data.languageKey
-            console.log("收到服务msg：" + msg);
+            //console.log("收到服务msg：" + msg);
         }
         console.log("收到服务器消息：" + event.data);
         for(let i = 0 ; i < this.mMsgListenner.length ; i++)
@@ -350,7 +350,7 @@ export class Network
             "verify": _verifyCode,  
             "clientInfo": GameConfig.ClientInfo 
         }
-        console.log("Token登录");
+        console.log("账号密码登录 or Token登录");
         this.SendMsg(MsgID.Login , body);
     }
 

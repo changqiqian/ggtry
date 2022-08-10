@@ -79,11 +79,24 @@ export class ResetPwdView extends BaseUI
                 return;
             }
 
+            if(this.mPwdEditbox.string.indexOf(" ") != -1)
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                return;
+            }
+
+            if(this.mRePwdEditbox.string.indexOf(" ") != -1)
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                return;
+            }
+
             if(this.mRePwdEditbox.string != this.mPwdEditbox.string)
             {
                 UIMgr.GetInstance().ShowToast(Localization.GetString("00007"));
                 return;
             }
+            
             CommonNotify.GetInstance().Data_LastInputPwd = this.mPwdEditbox.string;
             let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;

@@ -17,7 +17,11 @@ export class AreaCodeView extends BaseUI {
     @property(Node) 
     mContent: Node = null;
 
-
+    onEnable()
+    {
+        this.mSearchEditBox.string = "";
+        this.ExcutiveSearch();
+    }
 
     InitParam() 
     {
@@ -37,6 +41,11 @@ export class AreaCodeView extends BaseUI {
                 tempNode.getComponent(AreaCodeItem).InitWithData(countryName,currentData.areaCode , i);
             });
         }
+
+        this.mSearchBtn.SetClickCallback((_data)=>
+        {
+            this.ExcutiveSearch();
+        });
 
     }
     RegDataNotify() 
@@ -85,7 +94,22 @@ export class AreaCodeView extends BaseUI {
     }
 
 
-
+    ExcutiveSearch()
+    {
+        for(let i = 0 ; i < this.mContent.children.length ; i++)
+        {
+            let current = this.mContent.children[i].getComponent(AreaCodeItem);
+            if(this.mSearchEditBox.string == "")
+            {
+                current.Show(true);
+            }
+            else
+            {
+                let contain = current.ContainTargetContent(this.mSearchEditBox.string);
+                current.Show(contain);
+            }
+        }
+    }
 
 }
 

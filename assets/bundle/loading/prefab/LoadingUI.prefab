@@ -1059,10 +1059,10 @@
     "__prefab": {
       "__id__": 48
     },
-    "_alignFlags": 4,
+    "_alignFlags": 44,
     "_target": null,
-    "_left": 0,
-    "_right": 0,
+    "_left": 96,
+    "_right": 96,
     "_top": 0,
     "_bottom": 521.633,
     "_horizontalCenter": 0,
@@ -1073,7 +1073,7 @@
     "_isAbsBottom": true,
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
-    "_originalWidth": 0,
+    "_originalWidth": 933,
     "_originalHeight": 0,
     "_alignMode": 2,
     "_lockFlags": 0,
