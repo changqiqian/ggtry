@@ -18,7 +18,7 @@ export class LocalPlayerData extends DataNotify {
     }
 
     Data_Uid : number = null ; //玩家uid
-    Data_Money : number = null;//玩家金币
+    Data_Coin : number = null;//玩家金币
     Data_Diamond : number = null; //钻石
     Data_FrozenMoney : number = null ; //冻结的钱
     Data_NickName : string = null; //玩家名字

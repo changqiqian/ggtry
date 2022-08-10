@@ -100,8 +100,8 @@ export class CommonNotify extends DataNotify
             LocalPlayerData.GetInstance().Data_Signiture = _msgBody.signiture;
             LocalPlayerData.GetInstance().Data_IsBind = _msgBody.isBind;
             LocalPlayerData.GetInstance().Data_PhotoUrl = _msgBody.photoUrl;
-            LocalPlayerData.GetInstance().Data_Diamond = _msgBody.score;
-            LocalPlayerData.GetInstance().Data_Money = _msgBody.coins;
+            LocalPlayerData.GetInstance().Data_Diamond = _msgBody.balance;
+            LocalPlayerData.GetInstance().Data_Coin = _msgBody.coins;
             LocalPlayerData.GetInstance().Data_SafeToken = _msgBody.safeToken;
             LocalPlayerData.GetInstance().Data_InviteUserId = _msgBody.inviteUserId;
             LocalPlayerData.GetInstance().Data_UserName = _msgBody.userName;
@@ -113,8 +113,8 @@ export class CommonNotify extends DataNotify
 
         Network.GetInstance().AddMsgListenner(MsgID.GetAssets ,(_msgBody)=>
         {
-            LocalPlayerData.GetInstance().Data_Diamond = _msgBody.score;
-            LocalPlayerData.GetInstance().Data_Money = _msgBody.coins;
+            LocalPlayerData.GetInstance().Data_Diamond = _msgBody.balance;
+            LocalPlayerData.GetInstance().Data_Coin = _msgBody.coins;
             LocalPlayerData.GetInstance().Data_FrozenMoney = _msgBody.frozen;
         },this);
 

@@ -34,7 +34,7 @@ export class cb_BottomArea extends BaseUI {
         },this);
 
 
-        LocalPlayerData.GetInstance().AddListener("Data_Money",(_current , _before)=>
+        LocalPlayerData.GetInstance().AddListener("Data_Coin",(_current , _before)=>
         {
             this.mMoney.string = _current;
         },this);

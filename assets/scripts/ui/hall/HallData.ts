@@ -1,6 +1,7 @@
 
 import { DataNotify } from '../../base/DataNotify';
-import { Hall_SubPage } from './subUI/Hall_Bottom';
+
+
 
 
 export class HallData extends DataNotify {
@@ -21,4 +22,15 @@ export class HallData extends DataNotify {
     
 
 }
+
+
+export enum Hall_SubPage //大厅底部分页
+{
+    MTT, 
+    Cash,
+    Club,
+    Activity,
+    Me,
+}
+
 

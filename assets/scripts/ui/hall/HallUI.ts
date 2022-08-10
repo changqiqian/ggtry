@@ -10,7 +10,7 @@ export class HallUI extends BaseUI
 {
     public static GetUsingBundleFolder() : Array<string>
     {
-        return ["hall","cowboy"];
+        return ["hall","mePage","cowboy"];
     }
     
 
@@ -20,6 +20,7 @@ export class HallUI extends BaseUI
     }
     BindUI() 
     {
+        this.AddSubView("mePage","prefab/Me_Page",false);
         this.AddSubView("hall","prefab/Hall_Bottom",true);
     }
 
@@ -39,4 +40,3 @@ export class HallUI extends BaseUI
     }
 
 }
-

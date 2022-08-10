@@ -1,13 +1,14 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { ToggleBtn } from '../../common/ToggleBtn';
-import { HallData } from '../HallData';
+import { HallData, Hall_SubPage } from '../HallData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Hall_Bottom')
 export class Hall_Bottom extends BaseUI 
 {
-    
+    @property(Node) 
+    mLayout: Node = null;
 
     InitParam() 
     {
@@ -15,9 +16,9 @@ export class Hall_Bottom extends BaseUI
     }
     BindUI() 
     {
-        for(let i = 0 ; i < this.node.children.length ; i++)
+        for(let i = 0 ; i < this.mLayout.children.length ; i++)
         {
-            let current = this.node.children[i].getComponent(ToggleBtn);
+            let current = this.mLayout.children[i].getComponent(ToggleBtn);
             current.SetDataNotify(HallData.GetInstance(),"Data_SubPage" , i);
         }
     }
@@ -27,7 +28,7 @@ export class Hall_Bottom extends BaseUI
     }
     LateInit() 
     {
-
+        HallData.GetInstance().Data_SubPage = Hall_SubPage.MTT;
     }
     UnregDataNotify() 
     {
@@ -41,9 +42,3 @@ export class Hall_Bottom extends BaseUI
 }
 
 
-export enum Hall_SubPage //大厅底部分页
-{
-    MTT,
-    Club,
-    Me,
-}

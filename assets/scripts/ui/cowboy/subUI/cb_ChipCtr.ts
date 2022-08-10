@@ -18,7 +18,7 @@ export class cb_ChipCtr extends BaseUI
     }
     RegDataNotify() 
     {
-        LocalPlayerData.GetInstance().AddListener("Data_Money" , this.Data_Money.bind(this) , this );
+        LocalPlayerData.GetInstance().AddListener("Data_Coin" , this.Data_Coin.bind(this) , this );
     }
     LateInit() {
 
@@ -62,7 +62,7 @@ export class cb_ChipCtr extends BaseUI
     }
 
 
-    Data_Money(_val , _bef)
+    Data_Coin(_val , _bef)
     {
         for(let i = 0 ; i < this.node.children.length ; i++)
         {
