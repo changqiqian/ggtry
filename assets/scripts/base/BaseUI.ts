@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, instantiate, Sprite, Prefab, SpriteFrame, ImageAsset, Texture2D, assetManager, Asset, LoadCompleteCallback } from 'cc';
+import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager } from 'cc';
 import { ResMgr } from './ResMgr';
 import { UIMgr } from './UIMgr';
 
@@ -102,7 +102,9 @@ export abstract class BaseUI extends Component
         });
     }
 
-    AddSubView(_bundleName : string, _assetPath : string , _show : boolean,  _loadFinish : Function = null)
+    
+
+    AddSubView(_bundleName : string, _assetPath : string , _show : boolean,  _loadFinish : Function = null , _parent : Node = null)
     {
         let key = _bundleName + _assetPath;
         let index = this.mLayerList.findIndex((_item) => _item.key === key);
@@ -124,7 +126,14 @@ export abstract class BaseUI extends Component
                     return;
                 }
                 let tempNode =  instantiate(_prefab);
-                this.node.addChild(tempNode);
+                if(_parent!=null)
+                {
+                    _parent.addChild(tempNode);
+                }
+                else
+                {
+                    this.node.addChild(tempNode);
+                }
                 let currentScript = tempNode.getComponent(BaseUI);
                 currentScript.Show(_show);
                 let keyPair = new SubViewKeyPair(key , tempNode);
@@ -138,9 +147,9 @@ export abstract class BaseUI extends Component
         }
     }
 
-    ShowLayer(_bundleName:string , _assetPath:string , _show:boolean = true)
+    ShowLayer(_bundleName:string , _assetPath:string , _show:boolean = true , _finishFunction : Function = null)
     {
-        UIMgr.GetInstance().ShowLayer(_bundleName,_assetPath,_show);
+        UIMgr.GetInstance().ShowLayer(_bundleName,_assetPath,_show,_finishFunction);
     }
 
     Delete()

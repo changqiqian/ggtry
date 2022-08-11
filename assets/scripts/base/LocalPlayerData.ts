@@ -4,7 +4,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('LocalPlayerData')
 export class LocalPlayerData extends DataNotify {
-    public static Instance:LocalPlayerData = null;
+    private static Instance:LocalPlayerData = null;
 
     public static GetInstance() : LocalPlayerData
     {

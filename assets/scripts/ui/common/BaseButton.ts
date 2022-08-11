@@ -7,7 +7,9 @@ const { ccclass, property } = _decorator;
 export class BaseButton extends BaseUI {
     @property(Label) 
     mTitle: Label = null;
-
+    mProtectDoubleClick : boolean = false;
+    mClickProtected : boolean = false;
+    mClickProtectedDuration : number = 0.2;
     private mCustomerData : any = null;
     private mCallback : Function = null;
     InitParam() 
@@ -78,8 +80,29 @@ export class BaseButton extends BaseUI {
         return "";
     }
 
+    public SetProtectDoubleClick(_enable:boolean , _duration:number = 0.2)
+    {
+        this.mProtectDoubleClick = _enable;
+        this.mClickProtectedDuration = _duration;
+    }
+
     private OnClick()
     {
+        if(this.mProtectDoubleClick == true)
+        {
+            if(this.mClickProtected == true)
+            {
+                return;
+            }
+    
+            this.mClickProtected = true;
+            this.scheduleOnce(()=>
+            {
+                this.mClickProtected = false;
+            },this.mClickProtectedDuration);
+        }
+
+
         if(this.mCallback != null)
         {
             this.mCallback(this.mCustomerData);

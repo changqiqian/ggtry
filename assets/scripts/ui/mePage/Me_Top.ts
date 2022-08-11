@@ -25,12 +25,12 @@ export class Me_Top extends BaseUI
     }
     BindUI() 
     {
-        this.mHeadBtn.SetClickCallback((data)=>
+        this.mHeadBtn.SetClickCallback(()=>
         {
 
         });
 
-        this.mCyberBtn.SetClickCallback((data)=>
+        this.mCyberBtn.SetClickCallback(()=>
         {
 
         });

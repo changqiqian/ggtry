@@ -4,7 +4,7 @@ import { SmsCodeType } from "../../network/Network";
 
 export class LoginData extends DataNotify 
 {
-    public static Instance:LoginData = null;
+    private static Instance:LoginData = null;
 
     public static GetInstance() : LoginData
     {

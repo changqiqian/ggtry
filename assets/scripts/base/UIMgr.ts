@@ -130,7 +130,7 @@ export class UIMgr
         this.mToast.ShowToast(_tips);
     }
 
-    public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true )
+    public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null)
     {
         let key = _bundleName + "/"  + _prefabPath;
         let target = this.FindLayer(key,LayerType.Layer);
@@ -147,6 +147,10 @@ export class UIMgr
             target.value.setSiblingIndex(nodeCount);
             let tempScript = target.value.getComponent(BaseUI);
             tempScript.Show(_show);
+            if(_finishFunction != null)
+            {
+                _finishFunction(tempScript);
+            }
             return;
         }
         this.CreateRecordItem(key , LayerType.Layer);
@@ -156,10 +160,14 @@ export class UIMgr
             this.RecordLayer(key , _tempNode , LayerType.Layer);
             let tempScript = _tempNode.getComponent(BaseUI);
             tempScript.Show(_show);
+            if(_finishFunction != null)
+            {
+                _finishFunction(tempScript);
+            }
         });
     }
 
-    public ShowWindow(_bundleName :string , _prefabPath:string , _show : boolean = true)
+    public ShowWindow(_bundleName :string , _prefabPath:string , _show : boolean = true, _finishFunction : Function = null)
     {
         let key = _bundleName + "/"  + _prefabPath;
         let target = this.FindLayer(key,LayerType.Window);
@@ -176,6 +184,10 @@ export class UIMgr
             target.value.setSiblingIndex(nodeCount);
             let tempScript = target.value.getComponent(BaseWindow);
             tempScript.Show(_show);
+            if(_finishFunction != null)
+            {
+                _finishFunction(tempScript.GetContentScript());
+            }
             return;
         }
 
@@ -187,8 +199,13 @@ export class UIMgr
                 this.GetRootNode(LayerType.Window).addChild(_tempWindow);
                 this.RecordLayer(key , _tempWindow , LayerType.Window);
                 let tempScript = _tempWindow.getComponent(BaseWindow);
-                tempScript.SetContent(_tempNode);
+                let contentScript = _tempNode.getComponent(BaseUI);
+                tempScript.SetContent(_tempNode , contentScript);
                 tempScript.Show(_show);
+                if(_finishFunction != null)
+                {
+                    _finishFunction(contentScript);
+                }
             });
         });
     }

@@ -43,9 +43,6 @@ export class Localization
         return "None";
     }
 
-
-
-
     public static LocationData=[
         {"name":"CountryName0", "ch": "香港" , "en": "Hong Kong"},
         {"name":"CountryName1", "ch": "菲律宾" , "en": "Philippines"},
@@ -107,6 +104,8 @@ export class Localization
         {"name":"00013", "ch": "个人信息设置成功！", "en": "Complete personal information success!"},
         {"name":"00014", "ch": "操作無法完成。（錯誤代碼：", "en": "The operation couldn't be completed.(Error code:"},
         {"name":"00015", "ch": "输入内容不能包含空格", "en": "Input can not contain charactor \"space\""},
+        {"name":"00016", "ch": "请打开Cyber官网，扫描二维码,", "en": "Please access Cyber website and scan"},
+
     ]
 
     

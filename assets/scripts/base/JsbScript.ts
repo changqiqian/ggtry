@@ -25,7 +25,7 @@ export class JsbScript
                 // {
                 //     jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getDevicesImei", "()V");
                 // } 
-                // else if (sys.os === cc.sys.OS_IOS) 
+                // else if (sys.os === sys.OS.IOS) 
                 // {
                 //     jsb.reflection.callStaticMethod("LocationTest", "getiPhoneimei:", "获取设备型号uuid");
                 //     JsbScript.getUUID();
@@ -55,7 +55,7 @@ export class JsbScript
         {
             return;
         }
-        // if (cc.sys.os === cc.sys.OS_IOS) 
+        // if (cc.sys.os === sys.OS.IOS) 
         // {
         //     jsb.reflection.callStaticMethod("AppController", "getUUID");
         // }
@@ -76,7 +76,7 @@ export class JsbScript
         {
             GameConfig.ClientInfo.deviceOs = 'Android';
         } 
-        else if (cc.sys.os === cc.sys.OS_IOS) 
+        else if (cc.sys.os === sys.OS.IOS) 
         {
             GameConfig.ClientInfo.deviceOs = 'iOS';
         } 
@@ -93,7 +93,7 @@ export class JsbScript
         // {
         //     jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getDevicesInfo", "()V");
         // } 
-        // else if (cc.sys.os === cc.sys.OS_IOS) 
+        // else if (cc.sys.os === sys.OS.IOS) 
         // {
         //     jsb.reflection.callStaticMethod("LocationTest", "getDevicesInfo");
         // }
@@ -125,7 +125,7 @@ export class JsbScript
         // {
         //     jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getChannelID", "()V");
         // } 
-        // else if (cc.sys.os === cc.sys.OS_IOS) 
+        // else if (cc.sys.os === sys.OS.IOS) 
         // {
         //     jsb.reflection.callStaticMethod("LocationTest", "getChannelID");
         // }
@@ -142,45 +142,37 @@ export class JsbScript
 
     public static getSysLanguage() 
     {
-        // if (sys.os === sys.OS.ANDROID) 
-        // {
-        //     let result = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "getSysLanguage", "()Ljava/lang/String;");
-        //     if(Object.prototype.toString.call(result)=="[object String]")
-        //     {
-        //         if( -1 != result.indexOf('en') ) 
-        //         {
-        //             return LanguageType.EN;
-        //         }
-        //         else if( -1 != result.indexOf('zh-CN') ) 
-        //         {
-        //             return LanguageType.CN;
-        //         } 
-        //         else if( -1 != result.indexOf('zh-HK') || -1 != result.indexOf('zh-TW') )
-        //         {
-        //             return LanguageType.HK;
-        //         }
-        //     }
-        // } 
-        // else if (cc.sys.os === cc.sys.OS_IOS) 
-        // {
-        //     //  "en"、"zh"、“zh-Hans-CN"、"zh-Hant-CN"
-        //     let langRet = jsb.reflection.callStaticMethod("AppController", "getCurrentLanguage");    
-        //     if(Object.prototype.toString.call(langRet) =="[object String]")
-        //     {
-        //         if (-1 != langRet.indexOf('en')) 
-        //         {
-        //             return LanguageType.EN;
-        //         } 
-        //         else if (-1 != langRet.indexOf('zh')) 
-        //         {
-        //             return LanguageType.CN;
-        //         } 
-        //         else if (-1 != langRet.indexOf('zh-Hans-CN') || -1 != langRet.indexOf('zh-Hant-CN')) 
-        //         {
-        //             return LanguageType.HK;
-        //         }
-        //     }   
-        // } 
+        let currentLanguage = sys.language;
+        if (sys.os === sys.OS.ANDROID) 
+        {
+            if( -1 != currentLanguage.indexOf('en') ) 
+            {
+                return LanguageType.EN;
+            }
+            else if( -1 != currentLanguage.indexOf('zh-CN') ) 
+            {
+                return LanguageType.CN;
+            } 
+            else if( -1 != currentLanguage.indexOf('zh-HK') || -1 != currentLanguage.indexOf('zh-TW') )
+            {
+                return LanguageType.HK;
+            }
+        } 
+        else if (cc.sys.os === sys.OS.IOS) 
+        {
+            if (-1 != currentLanguage.indexOf('en')) 
+            {
+                return LanguageType.EN;
+            } 
+            else if (-1 != currentLanguage.indexOf('zh')) 
+            {
+                return LanguageType.CN;
+            } 
+            else if (-1 != currentLanguage.indexOf('zh-Hans-CN') || -1 != currentLanguage.indexOf('zh-Hant-CN')) 
+            {
+                return LanguageType.HK;
+            }
+        } 
 
         return LanguageType.CN;
     };

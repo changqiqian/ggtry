@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, find, Label, Sprite } from 'cc';
+import { _decorator, Component, Node, find, Label, Sprite, sys } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { JsbScript } from '../../base/JsbScript';
 import { Localization } from '../../base/Localization';
@@ -25,7 +25,7 @@ export class LoadingUI extends BaseUI
     InitParam() 
     {
         //测试代码
-        GameConfig.ClearToken();
+        //GameConfig.ClearToken();
 
         this.mTips.string = "";
         this.mPercent.string = "";

@@ -42,7 +42,7 @@ export class AreaCodeView extends BaseUI {
             });
         }
 
-        this.mSearchBtn.SetClickCallback((_data)=>
+        this.mSearchBtn.SetClickCallback(()=>
         {
             this.ExcutiveSearch();
         });

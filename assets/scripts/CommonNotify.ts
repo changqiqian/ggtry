@@ -7,7 +7,7 @@ import { LoginType, MsgID, MsgStatus, Network, SmsCodeType } from "./network/Net
 
 export class CommonNotify extends DataNotify 
 {
-    public static Instance:CommonNotify = null;
+    private static Instance:CommonNotify = null;
 
     public static GetInstance() : CommonNotify
     {

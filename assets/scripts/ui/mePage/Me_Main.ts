@@ -2,6 +2,7 @@ import { _decorator, Component, Node, ScrollView, UITransform, Size, Label } fro
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { BaseButton } from '../common/BaseButton';
+import { InsertWebView } from '../common/InsertWebView';
 const { ccclass, property } = _decorator;
 
 @ccclass('Me_Main')
@@ -37,47 +38,52 @@ export class Me_Main extends BaseUI
     }
     BindUI() 
     {
-        this.mBankBtn.SetClickCallback((data)=>
+        this.mBankBtn.SetClickCallback(()=>
+        {
+            this.ShowLayer("common","prefab/InsertWebView",true , (_script)=>
+            {
+                let tempScript = _script as InsertWebView;
+                tempScript.SetTile(this.mBankBtn.GetTitle());
+                tempScript.SetUrl("https://world.taobao.com");
+            });
+        });
+
+        this.mMsgBtn.SetClickCallback(()=>
         {
 
         });
 
-        this.mMsgBtn.SetClickCallback((data)=>
+        this.mTableBtn.SetClickCallback(()=>
         {
 
         });
 
-        this.mTableBtn.SetClickCallback((data)=>
+        this.mQuestBtn.SetClickCallback(()=>
         {
 
         });
 
-        this.mQuestBtn.SetClickCallback((data)=>
+        this.mProfitBtn.SetClickCallback(()=>
         {
 
         });
 
-        this.mProfitBtn.SetClickCallback((data)=>
+        this.mGameRecordBtn.SetClickCallback(()=>
         {
 
         });
 
-        this.mGameRecordBtn.SetClickCallback((data)=>
+        this.mSettingBtn.SetClickCallback(()=>
         {
 
         });
 
-        this.mSettingBtn.SetClickCallback((data)=>
+        this.mAgentBtn.SetClickCallback(()=>
         {
 
         });
 
-        this.mAgentBtn.SetClickCallback((data)=>
-        {
-
-        });
-
-        this.mServiceBtn.SetClickCallback((data)=>
+        this.mServiceBtn.SetClickCallback(()=>
         {
 
         });

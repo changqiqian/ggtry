@@ -431,6 +431,26 @@ export class Network
         console.log("完善个人资料");
         this.SendMsg(MsgID.SetUserInfo , body);
     };
+
+    SendGetLunBoTu() 
+    {
+        var body = 
+        { 
+
+        }
+        console.log("获取轮播图");
+        this.SendMsg(MsgID.GetLunBoTu , body);
+    };
+
+    SendGetMttList() 
+    {
+        var body = 
+        { 
+
+        }
+        console.log("获取mtt比赛列表");
+        this.SendMsg(MsgID.GetMttList , body);
+    };
 }
 
 export enum MsgStatus
@@ -464,6 +484,8 @@ export enum MsgID
     ResetPwd = 235,
     SetUserInfo = 236,
     GetAssets = 246,
+    GetLunBoTu = 296, 
     VeryifySmsCode = 387,
+    GetMttList = 702,
 }
 

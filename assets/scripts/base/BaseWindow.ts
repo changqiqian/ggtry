@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Tween, tween, Vec3, instantiate, BlockInputEvents } from 'cc';
 import { BaseUI } from './BaseUI';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('BaseWindow')
@@ -9,6 +10,7 @@ export class BaseWindow extends BaseUI {
     mDarkBG: Node = null;
     mAnimating : boolean  = false;
     mContent : Node = null;
+    mContentScript : BaseUI = null;
     InitParam() 
     {
 
@@ -31,14 +33,22 @@ export class BaseWindow extends BaseUI {
     }
     CustmoerDestory() 
     {
-        this.mDarkBG.off(Node.EventType.TOUCH_END,this.OnClickDarkBG.bind(this),this);
     }
 
-    public SetContent(_target : Node)
+    public SetContent(_target : Node , _script : BaseUI)
     {
         this.node.addChild(_target);
         this.mContent = _target;
-        this.mContent.addComponent(BlockInputEvents);
+        this.mContentScript = _script;
+        if(!this.mContent.getComponent(BlockInputEvents))
+        {
+            this.mContent.addComponent(BlockInputEvents);
+        }
+    }
+
+    public GetContentScript() : BaseUI
+    {
+        return this.mContentScript;
     }
 
     public Show(_val : boolean)
@@ -49,7 +59,6 @@ export class BaseWindow extends BaseUI {
             return;
         }
 
-        console.log("BaseWindow Show ");
         if(_val)
         {
             this.ShowAnm();
@@ -68,7 +77,7 @@ export class BaseWindow extends BaseUI {
     private ShowAnm()
     {
         this.node.active =true;
-        let duration = 0.3;
+        let duration = 0.15;
         this.mAnimating = true;
         this.mContent.setScale(new Vec3(0.1,0.1,0.1));
         let tempTween = new Tween(this.mContent);
@@ -85,7 +94,7 @@ export class BaseWindow extends BaseUI {
 
     private HideAnm()
     {
-        let duration = 0.3;
+        let duration = 0.15;
         this.mAnimating = true;
         this.mContent.setScale(Vec3.ONE);
         let tempTween = new Tween(this.mContent);

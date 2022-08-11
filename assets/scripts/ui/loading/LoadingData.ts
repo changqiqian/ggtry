@@ -3,7 +3,7 @@ import { DataNotify } from "../../base/DataNotify";
 
 export class LoadingData extends DataNotify 
 {
-    public static Instance:LoadingData = null;
+    private static Instance:LoadingData = null;
 
     public static GetInstance() : LoadingData
     {

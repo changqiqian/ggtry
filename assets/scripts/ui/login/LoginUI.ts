@@ -1,34 +1,34 @@
 import { _decorator, Component, Node, Label, Button, sys } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { JsbScript } from '../../base/JsbScript';
+import { Localization } from '../../base/Localization';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import { MsgID, MsgStatus, Network } from '../../network/Network';
+import { BaseButton } from '../common/BaseButton';
+import { TipsWindow } from '../common/TipsWindow';
 import { LoadingData } from '../loading/LoadingData';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoginUI')
-export class LoginUI extends BaseUI {
+export class LoginUI extends BaseUI 
+{
 
     public static GetUsingBundleFolder() : Array<string>
     {
         return ["login"];
     }
     
-
     @property(Label) 
     mVersion: Label = null;
     @property(Button) 
     mLoginBtn: Button = null;
     @property(Button) 
     mSignBtn: Button = null;
-    @property(Button) 
-    mAgreementBtn: Button = null;
-    @property(Button) 
-    mPrivacyBtn: Button = null;
-    @property(Button) 
-    mBroadcastBtn: Button = null;
+    @property(BaseButton) 
+    mCyberBtn: BaseButton = null;
+
     InitParam() 
     {
         JsbScript.getDevicesImei();
@@ -41,9 +41,19 @@ export class LoginUI extends BaseUI {
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.node.on(Node.EventType.TOUCH_END,this.OnLoginBtn.bind(this),this);
         this.mSignBtn.node.on(Node.EventType.TOUCH_END,this.OnSignBtn.bind(this),this);
-        this.mAgreementBtn.node.on(Node.EventType.TOUCH_END,this.OnAgreementBtn.bind(this),this);
-        this.mPrivacyBtn.node.on(Node.EventType.TOUCH_END,this.OnPrivacyBtn.bind(this),this);
-        this.mBroadcastBtn.node.on(Node.EventType.TOUCH_END,this.OnBroadcastBtn.bind(this),this);
+        this.mCyberBtn.SetClickCallback(()=>
+        {
+            UIMgr.GetInstance().ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            {
+                let tempScript = _script as TipsWindow;
+                let tips = Localization.GetString("00016");
+                tempScript.SetTips(tips);
+                tempScript.SetCallback(()=>
+                {
+                    UIMgr.GetInstance().ShowToast("摄像头功能还没做");
+                })
+            })
+        });
     }
     RegDataNotify() 
     {
@@ -99,18 +109,6 @@ export class LoginUI extends BaseUI {
     private OnSignBtn()
     {
         this.ShowLayer("login","prefab/Login_SignView");
-    }
-    private OnAgreementBtn()
-    {
-        sys.openURL("http://pokerlife.live/user_agreement.html");
-    }
-    private OnPrivacyBtn()
-    {
-        sys.openURL("http://pokerlife.live/privacy_policy.html");
-    }
-    private OnBroadcastBtn()
-    {
-        sys.openURL("http://pokerlife.live/broadcaster_agreement.html");
     }
 }
 
