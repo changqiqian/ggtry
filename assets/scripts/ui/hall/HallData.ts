@@ -37,6 +37,22 @@ export class HallData extends DataNotify {
         {
             if(_msgBody.list != null && _msgBody.list.length != 0) 
             {
+                //排序
+                {
+                    for(let i = 0; i < _msgBody.list.length; i++) 
+                    {
+                        _msgBody.list[i].sortValue = -i
+                        if(_msgBody.list[i].mttInfo.strapConfig.isTop) 
+                        {
+                            _msgBody.list[i].sortValue = 10000 - i 
+                        }
+                    }
+                    _msgBody.list.sort((a, b) => 
+                    {
+                        return a.sortValue > b.sortValue ? -1 : 1
+                    });
+                }
+
                 this.Data_MttList = _msgBody.list;
             }
         },this);
@@ -60,4 +76,21 @@ export enum Hall_SubPage //大厅底部分页
     Me,
 }
 
+export enum Mtt_MatchStatus
+{
+    ManualStart = 0, //手动开始
+    NotStart = 1, //未开始 
+    DelayReg = 2, //延迟报名
+    MatchStarted = 3, //已开始 
+    RestTime = 4, //休息中
+    MatchEnd = 5, //比赛结束
+}
 
+export enum Mtt_RegType //mtt报名费类型
+{
+    Coin = 1 ,
+    Diamond = 2,
+    Ticket = 3,
+    CoinAndTicket = 4,
+    DiamondAndTicket = 5,
+}

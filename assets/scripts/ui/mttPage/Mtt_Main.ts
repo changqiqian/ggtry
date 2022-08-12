@@ -3,7 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
-import { Hall_LunBoItem } from '../hall/subUI/Hall_LunBoItem';
+import { Mtt_MatchItem } from './Mtt_MatchItem';
 
 
 
@@ -34,7 +34,18 @@ export class Mtt_Main extends BaseUI
     {
         HallData.GetInstance().AddListener("Data_MttList",(_current , _before)=>
         {
-
+            this.mScrollView.content.destroyAllChildren();
+            for(let i = 0; i < _current.length; i++) 
+            {
+                this.LoadPrefab("mttPage","prefab/Mtt_MatchItem",(_prefab)=>
+                {
+                    let currentData = _current[i];
+                    let mttItem = instantiate(_prefab);
+                    this.mScrollView.content.insertChild(mttItem , i);
+                    let script = mttItem.getComponent(Mtt_MatchItem);
+                    script.InitWithData(currentData);
+                });
+            }
         },this);
     }
     LateInit() 
@@ -49,7 +60,7 @@ export class Mtt_Main extends BaseUI
     }
     CustmoerDestory() 
     {
-
+        
     }
 
 }

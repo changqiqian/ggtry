@@ -47,6 +47,7 @@ export class Me_Main extends BaseUI
                 tempScript.SetUrl("https://world.taobao.com");
             });
         });
+        this.mBankBtn.SetProtectDoubleClick(true,1);
 
         this.mMsgBtn.SetClickCallback(()=>
         {

@@ -105,7 +105,14 @@ export class Localization
         {"name":"00014", "ch": "操作無法完成。（錯誤代碼：", "en": "The operation couldn't be completed.(Error code:"},
         {"name":"00015", "ch": "输入内容不能包含空格", "en": "Input can not contain charactor \"space\""},
         {"name":"00016", "ch": "请打开Cyber官网，扫描二维码,", "en": "Please access Cyber website and scan"},
-
+        {"name":"00017", "ch": "免费,", "en": "Freeroll"},
+        {"name":"00018", "ch": "手动开始,", "en": "Manual Start"},
+        {"name":"00019", "ch": "未开始,", "en": "Preparing"},
+        {"name":"00020", "ch": "比赛结束,", "en": "Match End"},
+        {"name":"00021", "ch": "延迟报名,", "en": "Delay Reg"},
+        {"name":"00022", "ch": "休息中,", "en": "Breaking time"},
+        {"name":"00023", "ch": "进行中,", "en": "Started"},
+        {"name":"00024", "ch": "即将开始,", "en": "Start Soon"},
     ]
 
     

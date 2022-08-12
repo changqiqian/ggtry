@@ -74,16 +74,16 @@ export abstract class BaseUI extends Component
     {
         assetManager.loadRemote(_url,(_err:Error | null , _imageAsset :ImageAsset)=>
         {
+            if(cc.isValid(this.node , true) == false)
+            {
+                return;
+            }
             if(_err)
             {
                 console.error(_err.message || _err);
             }
             else if(_finish != null)
             {
-                if(cc.isValid(this.node , true) == false)
-                {
-                    return;
-                }
                 let tempSpriteFrame = SpriteFrame.createWithImage(_imageAsset);
                 _finish(tempSpriteFrame);
             }
