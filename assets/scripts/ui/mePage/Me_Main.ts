@@ -1,7 +1,9 @@
 import { _decorator, Component, Node, ScrollView, UITransform, Size, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { GameConfig } from '../../GameConfig';
 import { BaseButton } from '../common/BaseButton';
+import { FullScreenWebView } from '../common/FullScreenWebView';
 import { InsertWebView } from '../common/InsertWebView';
 const { ccclass, property } = _decorator;
 
@@ -40,11 +42,11 @@ export class Me_Main extends BaseUI
     {
         this.mBankBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("common","prefab/InsertWebView",true , (_script)=>
+            this.ShowLayer("common","prefab/FullScreenWebView",true , (_script)=>
             {
-                let tempScript = _script as InsertWebView;
-                tempScript.SetTile(this.mBankBtn.GetTitle());
-                tempScript.SetUrl("https://world.taobao.com");
+                let tempScript = _script as FullScreenWebView;
+                let param = "/?userId=" + LocalPlayerData.GetInstance().Data_Uid + "&token=" + GameConfig.LOGIN_TOKEN;
+                tempScript.SetUrl("http://www.m.jiayoux.com",param);
             });
         });
         this.mBankBtn.SetProtectDoubleClick(true,1);
