@@ -60,9 +60,10 @@ export class InsertWebView extends BaseUI
         this.mTitle.string = _title;
     }
 
-    public SetUrl(_url : string)
+    public SetUrl(_url : string , _param : string = "")
     {
-        this.mWebView.url = _url;
+        let final = _url + _param;
+        this.mWebView.url = final;
     }
 
     ShowAnmiation()

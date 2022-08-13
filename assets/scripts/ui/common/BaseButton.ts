@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, Color, SpriteFrame, Sprite } from 'cc';
+import { _decorator, Component, Node, Label, Color, SpriteFrame, Sprite, Button } from 'cc';
 import { Color3 } from '../../../../@types/packages/scene/@types/public';
 import { BaseUI } from '../../base/BaseUI';
 const { ccclass, property } = _decorator;
@@ -86,6 +86,24 @@ export class BaseButton extends BaseUI {
         this.mClickProtectedDuration = _duration;
     }
 
+    public SetGray(_value : boolean)
+    {
+        if(this.node.getComponent(Sprite))
+        {
+            this.node.getComponent(Sprite).grayscale = _value;
+        }
+    }
+
+    public SetInteractable(_value : boolean)
+    {
+        if(this.node.getComponent(Button))
+        {
+            this.node.getComponent(Button).interactable = _value;
+        }
+
+        this.SetGray(!_value);
+    }
+
     private OnClick()
     {
         if(this.mProtectDoubleClick == true)
@@ -108,5 +126,7 @@ export class BaseButton extends BaseUI {
             this.mCallback(this.mCustomerData);
         }
     }
+
+
 }
 

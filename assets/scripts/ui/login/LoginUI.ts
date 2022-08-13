@@ -29,6 +29,12 @@ export class LoginUI extends BaseUI
     @property(BaseButton) 
     mCyberBtn: BaseButton = null;
 
+    @property(Node) 
+    DebugFunction: Node = null;
+    @property(BaseButton) 
+    DevIpBtn: BaseButton = null;
+    @property(BaseButton) 
+    TestIpBtn: BaseButton = null;
     InitParam() 
     {
         JsbScript.getDevicesImei();
@@ -38,6 +44,8 @@ export class LoginUI extends BaseUI
     }
     BindUI() 
     {
+    
+
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.node.on(Node.EventType.TOUCH_END,this.OnLoginBtn.bind(this),this);
         this.mSignBtn.node.on(Node.EventType.TOUCH_END,this.OnSignBtn.bind(this),this);
@@ -53,6 +61,24 @@ export class LoginUI extends BaseUI
                     UIMgr.GetInstance().ShowToast("摄像头功能还没做");
                 })
             })
+        });
+
+        //debug mode
+        this.DebugFunction.active = GameConfig.DebugMode;
+        this.DevIpBtn.SetTitle("开发环境：" + GameConfig.DevelopIP);
+        this.DevIpBtn.SetClickCallback(()=>
+        {
+            GameConfig.SetSeverUrl(GameConfig.DevelopIP);
+            Network.GetInstance().CreateWS();
+            this.DebugFunction.active = false;
+        });
+
+        this.TestIpBtn.SetTitle("测试环境：" + GameConfig.TestIP);
+        this.TestIpBtn.SetClickCallback(()=>
+        {
+            GameConfig.SetSeverUrl(GameConfig.TestIP);
+            Network.GetInstance().CreateWS();
+            this.DebugFunction.active = false;
         });
     }
     RegDataNotify() 
@@ -90,7 +116,10 @@ export class LoginUI extends BaseUI
     }
     LateInit() 
     {
-        Network.GetInstance().CreateWS();
+        if(GameConfig.DebugMode == false)
+        {
+            Network.GetInstance().CreateWS();
+        }
     }
     UnregDataNotify() 
     {

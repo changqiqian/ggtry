@@ -1,8 +1,11 @@
 import { _decorator, Component, Node, Sprite, Label, Color } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
+import { UIMgr } from '../../base/UIMgr';
+import { GameConfig } from '../../GameConfig';
+import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
-import { Mtt_MatchStatus, Mtt_RegType } from '../hall/HallData';
+import { Mtt_MatchListStatus, Mtt_RegType } from '../hall/HallData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Mtt_MatchItem')
@@ -58,7 +61,7 @@ export class Mtt_MatchItem extends BaseUI
     mStatusSpr: Sprite = null;
     
     mData : any = null;
-    mMatchStatus : Mtt_MatchStatus = null;
+    mMatchStatus : Mtt_MatchListStatus = null;
     mCurrentTime : number = null;
     InitParam() 
     {
@@ -83,7 +86,8 @@ export class Mtt_MatchItem extends BaseUI
 
         this.mBtn.SetClickCallback(()=>
         {
-
+            UIMgr.GetInstance().ShowLoading(true);
+            Network.GetInstance().SendGetMttMatchDetails(900, this.mData.mttInfo.matchId)
         });
     }
     RegDataNotify() 
@@ -115,7 +119,7 @@ export class Mtt_MatchItem extends BaseUI
         //liveInfo
         {
             this.mMatchName.string = liveInfo.clubName;
-            this.mLiveTag.active = liveInfo.isLive || liveInfo.isLiving
+            this.mLiveTag.active = liveInfo.isLive;
             this.LoadRemoteSprite(liveInfo.liveCover , (_spriteFrame)=>
             {
                 this.mBG.spriteFrame = _spriteFrame;
@@ -134,7 +138,7 @@ export class Mtt_MatchItem extends BaseUI
             }
             else if(mttInfo.rewardConfig.rewardType == 2)
             {
-                this.mWeiPoBaoTag.active = mttInfo.rewardConfig.TotalRewardUser > mttInfo.rewardConfig.protectReward;
+                this.mWeiPoBaoTag.active = mttInfo.rewardConfig.TotalRewardUser < mttInfo.rewardConfig.protectReward;
             }
 
             if(mttInfo.enterFee == 0 && mttInfo.serviceFee == 0)
@@ -159,13 +163,13 @@ export class Mtt_MatchItem extends BaseUI
             else if(mttInfo.enterFeeType ==  Mtt_RegType.Ticket)
             {
                 this.mRegByTicketRoot.active = true;
-                this.mRegTicketDescribe.string = this.GetStrWithLen(mttInfo.enterFeeTicket.name, 35) + ' *' + mttInfo.enterFeeTicket.nums;
+                this.mRegTicketDescribe.string = GameConfig.GetStrWithLen(mttInfo.enterFeeTicket.name, 35) + ' *' + mttInfo.enterFeeTicket.nums;
             } // 4门票 金币
             else if(mttInfo.enterFeeType == Mtt_RegType.CoinAndTicket) 
             {
                 this.mRegCoin.active = true;
                 this.mRegByTicketRoot.active = true;
-                this.mRegTicketDescribe.string = this.GetStrWithLen(mttInfo.enterFeeTicket.name, 35) + ' *' + mttInfo.enterFeeTicket.nums;
+                this.mRegTicketDescribe.string = GameConfig.GetStrWithLen(mttInfo.enterFeeTicket.name, 35) + ' *' + mttInfo.enterFeeTicket.nums;
 
             
             } // 5门票 钻石
@@ -173,7 +177,7 @@ export class Mtt_MatchItem extends BaseUI
             {
                 this.mRegDiamond.active = true;
                 this.mRegByTicketRoot.active = true;
-                this.mRegTicketDescribe.string = this.GetStrWithLen(mttInfo.enterFeeTicket.name, 35) + ' *' + mttInfo.enterFeeTicket.nums;
+                this.mRegTicketDescribe.string = GameConfig.GetStrWithLen(mttInfo.enterFeeTicket.name, 35) + ' *' + mttInfo.enterFeeTicket.nums;
 
             }
         }
@@ -192,36 +196,36 @@ export class Mtt_MatchItem extends BaseUI
            //计算比赛状态
            if(_mttInfo.status == 1 || _mttInfo.beginTime == 0)
            {
-               this.mMatchStatus = Mtt_MatchStatus.ManualStart;
-               this.mStatusTitle.string = Localization.GetString("00018");
+               this.mMatchStatus = Mtt_MatchListStatus.ManualStart;
+               this.mStatusTitle.string = Localization.GetString("00019");
            }
            else if(_mttInfo.status == 2)
            {
-               this.mMatchStatus = Mtt_MatchStatus.NotStart;
+               this.mMatchStatus = Mtt_MatchListStatus.NotStart;
                this.mStatusTitle.string = Localization.GetString("00019");
            }
            else if(_mttInfo.status == 10)
            {
-               this.mMatchStatus = Mtt_MatchStatus.MatchEnd;
+               this.mMatchStatus = Mtt_MatchListStatus.MatchEnd;
                this.mStatusTitle.string = Localization.GetString("00020");
            }
            else
            {
                if(_mttInfo.stopJoinTime > 0)
                {
-                   this.mMatchStatus = Mtt_MatchStatus.DelayReg;
+                   this.mMatchStatus = Mtt_MatchListStatus.DelayReg;
                    this.mStatusTitle.string = Localization.GetString("00021");
                }
                else
                {
                    if(_mttInfo.status == 5)
                    {
-                       this.mMatchStatus = Mtt_MatchStatus.RestTime;
+                       this.mMatchStatus = Mtt_MatchListStatus.RestTime;
                        this.mStatusTitle.string = Localization.GetString("00022");
                    }
                    else
                    {
-                       this.mMatchStatus = Mtt_MatchStatus.MatchStarted;
+                       this.mMatchStatus = Mtt_MatchListStatus.MatchStarted;
                        this.mStatusTitle.string = Localization.GetString("00023");
                    }
                }
@@ -234,8 +238,8 @@ export class Mtt_MatchItem extends BaseUI
             })
            
 
-            if(this.mMatchStatus == Mtt_MatchStatus.DelayReg || 
-                this.mMatchStatus == Mtt_MatchStatus.MatchStarted)
+            if(this.mMatchStatus == Mtt_MatchListStatus.DelayReg || 
+                this.mMatchStatus == Mtt_MatchListStatus.MatchStarted)
             {
                 this.mPlayerAmount.string = _mttInfo.playerCount + '/' + _mttInfo.totalPlayer;
             }
@@ -245,13 +249,13 @@ export class Mtt_MatchItem extends BaseUI
             }
 
 
-            if(this.mMatchStatus == Mtt_MatchStatus.DelayReg)
+            if(this.mMatchStatus == Mtt_MatchListStatus.DelayReg)
             {
                 this.mCurrentTime = _mttInfo.stopJoinTime;
                 this.StartCountDown();
             }
-            else if(this.mMatchStatus == Mtt_MatchStatus.MatchStarted || 
-                this.mMatchStatus == Mtt_MatchStatus.MatchEnd)
+            else if(this.mMatchStatus == Mtt_MatchListStatus.MatchStarted || 
+                this.mMatchStatus == Mtt_MatchListStatus.MatchEnd)
             {
                 this.mStatusSubTitle.string = "-";
                 this.mCountDown.string = "-"
@@ -340,52 +344,7 @@ export class Mtt_MatchItem extends BaseUI
         this.mCountDown.string =  min + ':' + s
     }
 
-    GetStrWithLen (str, len)
-    {
-        var playernName = str + '';
-     
-        var nameLength = 0;
-        var cutIndex = 0;
-         
-        for(var i=0; i<playernName.length; i++) 
-        {
-            if(escape(playernName[i]).indexOf("%u")<0)
-            {//不是中文
-                
-                if(playernName[i] >= 'A' && playernName[i] <= 'Z') 
-                {
-                    nameLength += 2;
-                } 
-                else 
-                {
-                    nameLength += 1;
-                }
-    
-            }
-            else
-            {//中文
-                nameLength += 3;
-            }
-            
-            if(nameLength > len)
-            {
-                cutIndex = i;
-                break;
-            }
-        }
-    
-        let strPoint = ''
-        if(nameLength <= len)
-        {
-            cutIndex = playernName.length;
-        } 
-        else 
-        {
-            strPoint = '...'
-        }
-        var finalName =  playernName.slice(0, cutIndex) + strPoint; //
-        return finalName;
-    };
+
 
 }
 

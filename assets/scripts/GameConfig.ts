@@ -1,6 +1,15 @@
 export class GameConfig
 {
+    public static DebugMode =  false;
+    public static DevelopIP = "18.140.238.52:9008"; //研发环境ip
+    public static TestIP = "13.229.222.39:9008"; //测试环境ip
+    public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip
     public static SeverUrl = "ws://13.229.222.39:9008/ws/";
+    public static SetSeverUrl(_ip : string)
+    {
+        GameConfig.UsingIp = _ip;
+        GameConfig.SeverUrl = "ws://" + _ip +"/ws/";
+    }
     //发布的版本号
     public static Version = "1.1.3"
     //发布的版本信息
@@ -35,6 +44,7 @@ export class GameConfig
     public static LOGIN_TOKEN;
     public static LOGIN_USER;
 
+    public static WebberAddr= "http://18.142.237.115:9487"; //打开收银台web
 
 
     public static AreaCodeList=[
@@ -132,5 +142,52 @@ export class GameConfig
             data = defaultDate
         }
         return data;
+    };
+
+    public static GetStrWithLen (str, len)
+    {
+        var playernName = str + '';
+     
+        var nameLength = 0;
+        var cutIndex = 0;
+         
+        for(var i=0; i<playernName.length; i++) 
+        {
+            if(escape(playernName[i]).indexOf("%u")<0)
+            {//不是中文
+                
+                if(playernName[i] >= 'A' && playernName[i] <= 'Z') 
+                {
+                    nameLength += 2;
+                } 
+                else 
+                {
+                    nameLength += 1;
+                }
+    
+            }
+            else
+            {//中文
+                nameLength += 3;
+            }
+            
+            if(nameLength > len)
+            {
+                cutIndex = i;
+                break;
+            }
+        }
+    
+        let strPoint = ''
+        if(nameLength <= len)
+        {
+            cutIndex = playernName.length;
+        } 
+        else 
+        {
+            strPoint = '...'
+        }
+        var finalName =  playernName.slice(0, cutIndex) + strPoint; //
+        return finalName;
     };
 } 

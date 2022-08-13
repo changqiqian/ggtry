@@ -42,11 +42,12 @@ export class ToggleBtn extends BaseUI {
         if(this.mDataNotify != null)
         {
             this.mDataNotify.RemoveListenerByTarget(this);
+            this.mDataNotify = null;
         }
     }
     CustmoerDestory() 
     {
-        this.mDataNotify = null;
+
     }
 
     public SetDataNotify(_dataNotify : DataNotify ,_targetParam : string , _custmoerData : number)

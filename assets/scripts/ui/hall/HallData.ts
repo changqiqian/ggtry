@@ -1,5 +1,7 @@
 
 import { DataNotify } from '../../base/DataNotify';
+import { Localization } from '../../base/Localization';
+import { UIMgr } from '../../base/UIMgr';
 import { MsgID, MsgStatus, Network } from '../../network/Network';
 
 
@@ -19,10 +21,11 @@ export class HallData extends DataNotify {
         return HallData.Instance;
     }
 
-    Data_SubPage : Hall_SubPage = null;
+    Data_SubPage : Hall_SubPage = null; //大厅底部 分页
     Data_LunBoTu : any = null;
     Data_MttList : any = null;
-    
+    Data_MttInfoSubPage : Mtt_InfoSubPage = null; //Mtt详细信息页面 分页
+    Data_MttMatchDetails  : any = null; //进入mtt详细页面的数据
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.GetLunBoTu ,(_msgBody)=>
@@ -56,6 +59,20 @@ export class HallData extends DataNotify {
                 this.Data_MttList = _msgBody.list;
             }
         },this);
+
+        Network.GetInstance().AddMsgListenner(MsgID.GetMttMatchDetails ,(_msgBody)=>
+        {
+            UIMgr.GetInstance().ShowLoading(false);
+            if (_msgBody.code == MsgStatus.FAILED) 
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00029"));
+            } 
+            else if (_msgBody.code == MsgStatus.SUCCESS) 
+            {
+                this.Data_MttMatchDetails = _msgBody;
+            }
+        },this);
+
         
     }
 
@@ -76,7 +93,7 @@ export enum Hall_SubPage //大厅底部分页
     Me,
 }
 
-export enum Mtt_MatchStatus
+export enum Mtt_MatchListStatus //Mtt列表中的Item状态
 {
     ManualStart = 0, //手动开始
     NotStart = 1, //未开始 
@@ -93,4 +110,38 @@ export enum Mtt_RegType //mtt报名费类型
     Ticket = 3,
     CoinAndTicket = 4,
     DiamondAndTicket = 5,
+}
+
+export enum Mtt_InfoSubPage //mtt详细信息页面 分页
+{
+    InfoPage = 0,
+    PlayerPage = 1,
+    PrizePage = 2,
+    TablePage = 3,
+}
+
+export enum Mtt_UserStatus //mtt比赛玩家状态
+{
+    NotAttend = 1 , //没有报名
+    WaitingApply = 2, //等待审核
+    Registed = 3, //已报名
+    Attending = 4 ,//已经参加
+    Lose = 5, //已经淘汰
+}
+
+export enum Mtt_MatchStatus //Mtt详细信息页面的比赛状态
+{
+    Registring = 1, //报名中
+    Only_15mins = 2, //准备开始 提前15分钟
+    Only_10s = 3 , //预备开始 10秒倒计时
+    Started = 4 , //正式开始
+    Rest = 5 , //休息
+    Pause = 6 ,//暂停
+    End = 7 , //结束
+}
+
+export enum Mtt_StartMode
+{
+    ManualStart = 1,  //手动开始
+    AutoStart = 2, //自动开始
 }

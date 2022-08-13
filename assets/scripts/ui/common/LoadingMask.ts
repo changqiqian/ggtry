@@ -37,7 +37,7 @@ export class LoadingMask extends BaseUI {
 
     }
 
-    public ShowLoading(_show : boolean , _tips : string  = "Loading...")
+    public ShowLoading(_show : boolean , _tips : string  = "")
     {
         this.node.active = _show;
         this.mTips.string = _tips;

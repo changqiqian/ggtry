@@ -451,6 +451,29 @@ export class Network
         console.log("获取mtt比赛列表");
         this.SendMsg(MsgID.GetMttList , body);
     };
+
+    SendGetMttMatchDetails(_gameType : number , _matchId : number) 
+    {
+        var body = 
+        { 
+            "gameType" : _gameType,
+            "matchId" : _matchId
+        }
+        console.log("获取mtt详细信息");
+        this.SendMsg(MsgID.GetMttMatchDetails , body);
+    };
+
+    
+    SendSetMttMacthKeepTop(_matchId : number  , _isTop : boolean) 
+    {
+        var body = 
+        { 
+            matchId : _matchId,
+            isTop : _isTop
+        }
+        console.log("设置mtt比赛为置顶比赛");
+        this.SendMsg(MsgID.SetMttMacthKeepTop , body);
+    };
 }
 
 export enum MsgStatus
@@ -485,7 +508,9 @@ export enum MsgID
     SetUserInfo = 236,
     GetAssets = 246,
     GetLunBoTu = 296, 
+    GetMttMatchDetails = 340,
     VeryifySmsCode = 387,
     GetMttList = 702,
+    SetMttMacthKeepTop = 927,
 }
 

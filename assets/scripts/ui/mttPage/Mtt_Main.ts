@@ -47,6 +47,13 @@ export class Mtt_Main extends BaseUI
                 });
             }
         },this);
+
+        HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
+        {
+            this.ShowLayer("mttPage","prefab/Mtt_DetailPage");
+        },this);
+
+        
     }
     LateInit() 
     {

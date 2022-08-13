@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, ScrollView, UITransform, Size, Label } from 'cc';
+import { _decorator, Component, Node, ScrollView, UITransform, Size, Label, sys } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { GameConfig } from '../../GameConfig';
@@ -42,12 +42,27 @@ export class Me_Main extends BaseUI
     {
         this.mBankBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("common","prefab/FullScreenWebView",true , (_script)=>
+            if(sys.isBrowser)
             {
-                let tempScript = _script as FullScreenWebView;
-                let param = "/?userId=" + LocalPlayerData.GetInstance().Data_Uid + "&token=" + GameConfig.LOGIN_TOKEN;
-                tempScript.SetUrl("http://www.m.jiayoux.com",param);
-            });
+                this.ShowLayer("common","prefab/InsertWebView",true , (_script)=>
+                {
+                    let tempScript = _script as InsertWebView;
+                    let param = "/?userId=" + LocalPlayerData.GetInstance().Data_Uid + 
+                    "&token=" + GameConfig.LOGIN_TOKEN + "&apiUrl=http://" + GameConfig.UsingIp;
+                    tempScript.SetUrl(GameConfig.WebberAddr , param);    
+                });
+            }
+            else
+            {
+                this.ShowLayer("common","prefab/FullScreenWebView",true , (_script)=>
+                {
+                    let tempScript = _script as FullScreenWebView;
+                    let param = "/?userId=" + LocalPlayerData.GetInstance().Data_Uid + 
+                    "&token=" + GameConfig.LOGIN_TOKEN + "&apiUrl=http://" + GameConfig.UsingIp;
+                    tempScript.SetUrl(GameConfig.WebberAddr , param);      
+                });
+            }
+
         });
         this.mBankBtn.SetProtectDoubleClick(true,1);
 
@@ -58,7 +73,24 @@ export class Me_Main extends BaseUI
 
         this.mTableBtn.SetClickCallback(()=>
         {
-
+            if(sys.isBrowser)
+            {
+                this.ShowLayer("common","prefab/InsertWebView",true , (_script)=>
+                {
+                    let tempScript = _script as InsertWebView;
+                    let param = "/manage-table";
+                    tempScript.SetUrl(GameConfig.WebberAddr , param);    
+                });
+            }
+            else
+            {
+                this.ShowLayer("common","prefab/FullScreenWebView",true , (_script)=>
+                {
+                    let tempScript = _script as FullScreenWebView;
+                    let param = "/manage-table";
+                    tempScript.SetUrl(GameConfig.WebberAddr , param);      
+                });
+            }
         });
 
         this.mQuestBtn.SetClickCallback(()=>
