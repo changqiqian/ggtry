@@ -14,7 +14,30 @@ class SubViewKeyPair
 }
 
 const { ccclass, property } = _decorator;
+// InitParam() 
+// {
 
+// }
+// BindUI() 
+// {
+
+// }
+// RegDataNotify() 
+// {
+
+// }
+// LateInit() 
+// {
+
+// }
+// UnregDataNotify() 
+// {
+
+// }
+// CustmoerDestory() 
+// {
+
+// }
 @ccclass('BaseUI')
 export abstract class BaseUI extends Component 
 {
@@ -29,7 +52,10 @@ export abstract class BaseUI extends Component
 
     start()
     {
-        this.LateInit();
+        this.scheduleOnce(()=>
+        {
+            this.LateInit();
+        },0);
     }
 
     onDestroy()

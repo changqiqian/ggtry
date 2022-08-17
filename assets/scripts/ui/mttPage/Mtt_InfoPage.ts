@@ -2,6 +2,7 @@ import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { ToggleBtn } from '../common/ToggleBtn';
@@ -107,6 +108,10 @@ export class Mtt_InfoPage extends BaseUI
         BlindInfoBtn.SetClickCallback(()=>
         {
         });
+
+        this.mAvgStacks.active = false;
+        this.mCurrentLevel.active = false;
+        this.mNextLevel.active = false;
     }
     RegDataNotify() 
     {
@@ -151,7 +156,6 @@ export class Mtt_InfoPage extends BaseUI
                         this.mData.matchConfig.enterFeeType == Mtt_RegType.DiamondAndTicket)
                     {
                         tempScript.InitWithData(Mtt_RegType.Diamond , tempReward);
-        
                     }
                 }
             }
@@ -240,24 +244,20 @@ export class Mtt_InfoPage extends BaseUI
             }
 
             {
-                this.mBinldUpInfo.getChildByName("Content").getComponent(Label).string = this.mData.matchConfig.riseBlindTime.toString();
-                let tempStartChip = this.mData.matchConfig.beginScore.toString();
-                tempStartChip += "(" + Math.floor(this.mData.matchConfig.beginScore/(this.mData.statusInfo.beginBlind*2)) + "BB)";
-                this.mStartChips.getChildByName("Content").getComponent(Label).string = tempStartChip;
-                let tempStartBlind = this.mData.matchConfig.beginBlind.toString() + "/" + (this.mData.matchConfig.beginBlind*2).toString();
-                this.mStartBlind.getChildByName("Content").getComponent(Label).string = tempStartBlind;
-                this.mCurrentPlayerinfo.getChildByName("Content").getComponent(Label).string = this.mData.statusInfo.totalUser.toString();
-                this.mTalbelSeat.getChildByName("Content").getComponent(Label).string = this.mData.matchConfig.seatCount.toString();
-                let minMaxPlayer = this.mData.matchConfig.minPlayer + "-" + this.mData.matchConfig.maxPlayer;
-                this.mMinMaxPlayer.getChildByName("Content").getComponent(Label).string = minMaxPlayer;
-
-
+ 
+                
                 this.mBreakTime.active = this.mData.matchConfig.isRest;
                 if(this.mData.matchConfig.isRest)
                 {
-                    this.mBreakTime.getChildByName("Content").getComponent(Label).string = "";
+                    let levelTime = GameConfig.GetLevel(this.mData.matchConfig.riseBlindTime);
+                    let takeTime = GameConfig.GetTakeTime(this.mData.matchConfig.riseBlindTime);
+                    let breakTimeDescribe =   "5mins every" + takeTime + "mins" + "-" + levelTime;
+                    this.mBreakTime.getChildByName("Content").getComponent(Label).string = breakTimeDescribe;
                 }
-                
+                else
+                {
+                    this.mBreakTime.getChildByName("Content").getComponent(Label).string = "-";
+                }
                 
                 if(this.mData.matchConfig.delayLevel <= 0)
                 {
@@ -309,7 +309,7 @@ export class Mtt_InfoPage extends BaseUI
 
                 if(this.mData.statusInfo.status < Mtt_MatchStatus.Started)
                 {
-                    if(this.mData.matchConfig.beginMode == Mtt_StartMode.AutoStart)
+                    if(this.mData.matchConfig.matchMode == 2)
                     {
                         this.mAccessBtn.node.active = isCreator;
                     } 
@@ -317,6 +317,36 @@ export class Mtt_InfoPage extends BaseUI
                     {
                         this.mAccessBtn.node.active = false;
                     }
+                    this.mBinldUpInfo.getChildByName("Content").getComponent(Label).string = this.mData.matchConfig.riseBlindTime.toString();
+                    let tempStartChip = this.mData.matchConfig.beginScore.toString();
+                    tempStartChip += "(" + Math.floor(this.mData.matchConfig.beginScore/(this.mData.matchConfig.beginBlind*2)) + "BB)";
+                    this.mStartChips.getChildByName("Content").getComponent(Label).string = tempStartChip;
+                    let tempStartBlind = this.mData.matchConfig.beginBlind.toString() + "/" + (this.mData.matchConfig.beginBlind*2).toString();
+                    this.mStartBlind.getChildByName("Content").getComponent(Label).string = tempStartBlind;
+                    this.mCurrentPlayerinfo.getChildByName("Content").getComponent(Label).string = this.mData.statusInfo.totalUser.toString();
+                    this.mTalbelSeat.getChildByName("Content").getComponent(Label).string = this.mData.matchConfig.seatCount.toString();
+                    let minMaxPlayer = this.mData.matchConfig.minPlayer + "-" + this.mData.matchConfig.maxPlayer;
+                    this.mMinMaxPlayer.getChildByName("Content").getComponent(Label).string = minMaxPlayer;
+                }
+                else
+                {
+                    this.mCurrentPlayerinfo.getChildByName("Content").getComponent(Label).string =
+                                            this.mData.statusInfo.playerUser +"/" + this.mData.statusInfo.totalUser;
+                    let averScore = ((this.mData.matchConfig.beginScore * this.mData.statusInfo.totalUser)/this.mData.statusInfo.playerUser);
+                    let averBB = Math.floor(averScore/(this.mData.statusInfo.curBlind*2));
+                    this.mAvgStacks.active = true;
+                    this.mAvgStacks.getChildByName("Content").getComponent(Label).string = averScore.toFixed(2) +"(" + averBB + ")";
+                    this.StartBlindTimeCountDown();
+                    this.mCurrentLevel.active = true;
+                    let currentLevel = "L" + this.mData.statusInfo.curLevel;
+                    let currentBlindInfo = this.mData.statusInfo.curBlind + "/" + this.mData.statusInfo.curBlind * 2 + "(" + this.mData.statusInfo.beforeScore + ")";
+                    this.mCurrentLevel.getChildByName("Content").getComponent(Label).string = currentLevel + currentBlindInfo;
+
+                    this.mNextLevel.active = true;
+                    let nextLevel = "L" + this.mData.statusInfo.nextLevel;
+                    let nextBlindInfo = this.mData.statusInfo.nextBlind + "/" + this.mData.statusInfo.nextBlind * 2 + "(" + this.mData.statusInfo.nextBeforeScore + ")";
+                    this.mNextLevel.getChildByName("Content").getComponent(Label).string = nextLevel + nextBlindInfo;
+                    this.MatchPlayingTimeCount();
                 }
             }
             
@@ -421,10 +451,13 @@ export class Mtt_InfoPage extends BaseUI
         return null;
     }
 
+    //比赛还有多久开始
     StartMatchCountDown()
     {
+        this.mStatusDescribe.string = Localization.GetString("00037");
         this.MatchCountDownLogic();
         this.unschedule(this.MatchCountDownLogic);
+        this.unschedule(this.MatchPlayingTimeCountLogic);
         this.schedule(this.MatchCountDownLogic, 1);
     }
 
@@ -444,6 +477,68 @@ export class Mtt_InfoPage extends BaseUI
         }
         this.mCountDown.string = "" + timeStr;
     }
+
+    MatchPlayingTimeCount()
+    {
+        this.mStatusDescribe.string = Localization.GetString("00038");
+        this.MatchPlayingTimeCountLogic();
+        this.unschedule(this.MatchPlayingTimeCountLogic);
+        this.unschedule(this.MatchPlayingTimeCountLogic);
+        this.schedule(this.MatchPlayingTimeCountLogic, 1);
+    }
+
+    
+    MatchPlayingTimeCountLogic()
+    {
+        this.mData.statusInfo.playTotalTime++;
+        let timeStr = this.GetDownTime(this.mData.statusInfo.playTotalTime);
+        this.mCountDown.string = "" + timeStr;
+    }
+
+    StartBlindTimeCountDown()
+    {
+        this.BlindTimeCountDownLogic();
+        this.unschedule(this.BlindTimeCountDownLogic);
+        if(this.mData.statusInfo.leftTime > 0)
+        {
+            this.schedule(this.BlindTimeCountDownLogic, 1);
+        }
+
+    }
+
+    BlindTimeCountDownLogic()
+    {
+        this.mData.statusInfo.leftTime--;
+        let m = Math.floor(this.mData.statusInfo.leftTime/60);
+        let s = (this.mData.statusInfo.leftTime % 60);
+        let strMin;
+        let strSecond;
+        if (m < 10) 
+        {
+            strMin = "0" + m;
+        }
+        else
+        {
+            strMin = m + "";
+        }
+
+        if (s < 10) 
+        {
+            strSecond = "0" + s;
+        }
+        else
+        {
+            strSecond = s + "";
+        }
+
+        let finalTime = m + ":" + s;
+        this.mBinldUpInfo.getChildByName("Content").getComponent(Label).string = finalTime;
+        if (this.mData.statusInfo.leftTime <= 0) 
+        {
+            this.unschedule(this.BlindTimeCountDownLogic);
+        }
+    }
+
 
     GetDownTime(_time) 
     {

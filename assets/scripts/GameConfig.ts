@@ -190,4 +190,23 @@ export class GameConfig
         var finalName =  playernName.slice(0, cutIndex) + strPoint; //
         return finalName;
     };
+
+
+    //老工程里面的配置，看不懂 我也不晓得啥子意思 只能照抄
+    public static BlindTime = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 15, 20, 25, 30, 40, 45, 50, 60];
+    public static TakeTime = [40, 40, 45, 40, 45, 42, 42, 48, 50, 48, 45, 40, 50, 60, 40, 45, 50, 60];
+    public static Level = [40, 20, 15, 10, 9, 7, 6, 6, 5, 4, 3, 2, 2, 2, 1, 1, 1, 1];
+
+    public static GetTakeTime(_time : number) : number
+    {
+        let index = GameConfig.BlindTime.findIndex((_item) => _item === _time);
+        return GameConfig.TakeTime[index];
+    }
+
+    public static GetLevel(_time : number) : number
+    {
+        let index = GameConfig.BlindTime.findIndex((_item) => _item === _time);
+        return GameConfig.Level[index];
+    }
+
 } 

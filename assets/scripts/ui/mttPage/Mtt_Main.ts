@@ -34,14 +34,14 @@ export class Mtt_Main extends BaseUI
     {
         HallData.GetInstance().AddListener("Data_MttList",(_current , _before)=>
         {
-            this.mScrollView.content.destroyAllChildren();
+            this.DestoryMatchItems();
             for(let i = 0; i < _current.length; i++) 
             {
                 this.LoadPrefab("mttPage","prefab/Mtt_MatchItem",(_prefab)=>
                 {
                     let currentData = _current[i];
                     let mttItem = instantiate(_prefab);
-                    this.mScrollView.content.insertChild(mttItem , i);
+                    this.mScrollView.content.addChild(mttItem);
                     let script = mttItem.getComponent(Mtt_MatchItem);
                     script.InitWithData(currentData);
                 });
@@ -68,6 +68,16 @@ export class Mtt_Main extends BaseUI
     CustmoerDestory() 
     {
         
+    }
+
+
+    DestoryMatchItems()
+    {
+        let startStep = 2;
+        while(this.mScrollView.content.children.length > startStep)   
+        {
+            this.mScrollView.content.children[startStep].destroy();
+        }
     }
 
 }
