@@ -30,6 +30,7 @@ export class HallData extends DataNotify {
     Data_MttPlayerList : any = null; //进入mtt玩家页面的数据
     Data_MttTableList : any = null; //进入mtt桌号信息页面
     Data_MttStatusChange : any = null; //mtt比赛状态变化
+    Data_MttGetRebuyInfo : any = null; //mtt报名时候，报名类型信息
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.GetLunBoTu ,(_msgBody)=>
@@ -93,6 +94,11 @@ export class HallData extends DataNotify {
         {
             this.Data_MttStatusChange = _msgBody;
         },this);
+        Network.GetInstance().AddMsgListenner(MsgID.MttGetRebuyInfo ,(_msgBody)=>
+        {
+            this.Data_MttGetRebuyInfo = _msgBody;
+        },this);
+        
         
     }
 

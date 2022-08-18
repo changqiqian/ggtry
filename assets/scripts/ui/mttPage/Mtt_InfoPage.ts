@@ -91,6 +91,28 @@ export class Mtt_InfoPage extends BaseUI
 
         this.mAttendBtn.SetClickCallback(()=>
         {
+            switch(this.mData.userStatus)
+            {
+                case Mtt_UserStatus.NotAttend:
+                {
+                    if(this.mData.statusInfo.status == Mtt_MatchStatus.Registring)
+                    {
+                        Network.GetInstance().SendMttGetRebuyInfo(this.mData.matchConfig.matchId);
+                    }
+                }
+                break;
+                case Mtt_UserStatus.Registed:
+                {
+                    //弹出确认框
+                    Network.GetInstance().SendMttCancelReg(900 , this.mData.matchConfig.matchId);
+                }
+                break;
+                case Mtt_UserStatus.Attending:
+                {
+                    //  cc.director.loadScene("game");
+                }
+                break;
+            }
         });
 
         this.mDismissBtn.SetClickCallback(()=>
@@ -115,8 +137,20 @@ export class Mtt_InfoPage extends BaseUI
         this.mNextLevel.active = false;
         this.mNextBreakTime.active = false;
     }
+
+
     RegDataNotify() 
     {
+
+        HallData.GetInstance().AddListener("Data_MttGetRebuyInfo",(_current , _before)=>
+        {
+            let haveRealReward = this.HaveRealReward();
+            if(_current.reBuyCount > 0)
+            {
+
+            }
+        },this);
+        
         HallData.GetInstance().AddListener("Data_MttInfoSubPage",(_current , _before)=>
         {
             this.Show(_current == Mtt_InfoSubPage.InfoPage);
@@ -686,6 +720,27 @@ export class Mtt_InfoPage extends BaseUI
             time += "00";
         }
         return (time == "") ? 0 : time;
+    }
+
+    //是否含有实物奖励
+    HaveRealReward() : boolean
+    {
+        let arr  = this.mData.rewardConfig.rewards;
+        for (let i = 0; i < arr.length; i++) 
+        {
+            if(arr[i].reward) 
+            {
+                for(let j = 0; j < arr[i].reward.length; j++) 
+                {
+                    let awdItem = arr[i].reward[j]
+                    if(awdItem.rewardType == 1) 
+                    {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
 }
 

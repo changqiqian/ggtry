@@ -475,31 +475,54 @@ export class Network
         this.SendMsg(MsgID.SetMttMacthKeepTop , body);
     };
 
-    SendGetMttPlayerList(gameType:number, matchID:number, page:number, pageCount:number) 
+    SendGetMttPlayerList(_gameType:number, _matchID:number, _page:number, _pageCount:number) 
     {
         var body = 
         { 
-            "gameType" : gameType, //搞不懂
-            "matchID" : matchID,
-            "index" : page, //申请第几页
-            "count" : pageCount, //每一页多少个数据
+            "gameType" : _gameType, //搞不懂
+            "matchID" : _matchID,
+            "index" : _page, //申请第几页
+            "count" : _pageCount, //每一页多少个数据
         }
         console.log("获取mtt当前玩家列表");
         this.SendMsg(MsgID.GetMttPlayerList , body);
     };
-    SendGetMttTableInfo(gameType:number, matchID:number, page:number, pageCount:number) 
+    SendGetMttTableInfo(_gameType:number, _matchID:number, _page:number, _pageCount:number) 
     {
         var body = 
         { 
-            "gameType" : gameType, //搞不懂
-            "matchID" : matchID,
-            "index" : page, //申请第几页
-            "count" : pageCount, //每一页多少个数据
+            "gameType" : _gameType, //搞不懂
+            "matchID" : _matchID,
+            "index" : _page, //申请第几页
+            "count" : _pageCount, //每一页多少个数据
         }
         console.log("获取mtt当前玩家列表");
         this.SendMsg(MsgID.GetMttTableInfo , body);
     };
+
+    SendMttGetRebuyInfo(_matchID:number) 
+    {
+        var body = 
+        { 
+            "matchId" : _matchID, 
+        }
+        console.log("获取mtt 买入类型信息");
+        this.SendMsg(MsgID.MttGetRebuyInfo , body);
+    };
+    
+    SendMttCancelReg(_gameType:number ,_matchID:number) 
+    {
+        var body = 
+        { 
+            "matchId" : _matchID, 
+            "gameType" : _gameType,
+        }
+        console.log("获取mtt 取消报名");
+        this.SendMsg(MsgID.MttCancelReg , body);
+    };
 }
+
+
 
 export enum MsgStatus
 {
@@ -534,10 +557,12 @@ export enum MsgID
     GetAssets = 246,
     GetLunBoTu = 296, 
     GetMttMatchDetails = 340,
+    MttCancelReg = 342,
     MttStatusChange = 353, //比赛状态通知
     VeryifySmsCode = 387,
     GetMttTableInfo = 556,
     GetMttPlayerList = 557,
+    MttGetRebuyInfo = 685,
     GetMttList = 702,
     SetMttMacthKeepTop = 927,
 }
