@@ -2,7 +2,7 @@ import { _decorator, Component, Node, PageView, ScrollView, instantiate } from '
 import { BaseUI } from '../../base/BaseUI';
 import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
-import { HallData } from '../hall/HallData';
+import { HallData, Mtt_MatchStatus } from '../hall/HallData';
 import { Mtt_MatchItem } from './Mtt_MatchItem';
 
 
@@ -48,29 +48,33 @@ export class Mtt_Main extends BaseUI
             }
         },this);
 
-        HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
+        HallData.GetInstance().AddListener("Data_CurrentMttMatchID",(_current , _before)=>
         {
             this.ShowLayer("mttPage","prefab/Mtt_DetailPage");
         },this);
 
+        HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
+        {
+            if(Mtt_MatchStatus.Rest == _current.statusInfo.status)
+            {
+                this.ShowLayer("mttPage","prefab/Mtt_DetailPage",false);
+                Network.GetInstance().SendGetMttList();
+            }
+        },this);
         
     }
     LateInit() 
     {
         Network.GetInstance().SendGetMttList();
-        
     }
     UnregDataNotify() 
     {
         HallData.GetInstance().RemoveListenerByTarget(this);
-
     }
     CustmoerDestory() 
     {
         
     }
-
-
     DestoryMatchItems()
     {
         let startStep = 2;

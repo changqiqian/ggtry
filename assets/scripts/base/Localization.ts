@@ -127,6 +127,10 @@ export class Localization
         {"name":"00036", "ch": "免费", "en": "Free"},
         {"name":"00037", "ch": "比赛还没开始,", "en": "Registering"},
         {"name":"00038", "ch": "比赛进行中", "en": "Runing"},
+        {"name":"00039", "ch": "钱圈", "en": "Reward range"},
+        {"name":"00040", "ch": "分钟", "en": "mins"},
+        
+    
     ]
 
     

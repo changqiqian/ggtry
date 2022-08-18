@@ -2,6 +2,7 @@ import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
@@ -112,19 +113,22 @@ export class Mtt_InfoPage extends BaseUI
         this.mAvgStacks.active = false;
         this.mCurrentLevel.active = false;
         this.mNextLevel.active = false;
+        this.mNextBreakTime.active = false;
     }
     RegDataNotify() 
     {
         HallData.GetInstance().AddListener("Data_MttInfoSubPage",(_current , _before)=>
         {
             this.Show(_current == Mtt_InfoSubPage.InfoPage);
+            if(_current == Mtt_InfoSubPage.InfoPage)
+            {
+                this.Refresh();
+            }
         },this);
         
         HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
         {
             this.mData = _current;
-
-            let dynamicReward = _current.dynamicReward;
             let isCreator = this.mData.matchConfig.creatorUserId == LocalPlayerData.GetInstance().Data_Uid;
 
             //保底奖金
@@ -196,13 +200,8 @@ export class Mtt_InfoPage extends BaseUI
                 let dateValue = startDate.getDate();  
                 let hoursValue = startDate.getHours();
                 let minutesValue = startDate.getMinutes();
-                // if(minutesValue < 10) 
-                // {
-                //     minutesValue = '0' + minutesValue
-                // }
                 timeStr = dateValue + "/"+monthValue+" "+hoursValue + ":" + minutesValue;
                 this.mStartTime.string = Localization.GetString("00035") +" " + timeStr;
-
             }
             
             //开赛倒计时相关
@@ -243,15 +242,13 @@ export class Mtt_InfoPage extends BaseUI
                 }
             }
 
-            {
- 
-                
+            {   
                 this.mBreakTime.active = this.mData.matchConfig.isRest;
                 if(this.mData.matchConfig.isRest)
                 {
                     let levelTime = GameConfig.GetLevel(this.mData.matchConfig.riseBlindTime);
                     let takeTime = GameConfig.GetTakeTime(this.mData.matchConfig.riseBlindTime);
-                    let breakTimeDescribe =   "5mins every" + takeTime + "mins" + "-" + levelTime;
+                    let breakTimeDescribe =   "5mins every" + takeTime + "mins" + " - Lv" + levelTime;
                     this.mBreakTime.getChildByName("Content").getComponent(Label).string = breakTimeDescribe;
                 }
                 else
@@ -317,7 +314,8 @@ export class Mtt_InfoPage extends BaseUI
                     {
                         this.mAccessBtn.node.active = false;
                     }
-                    this.mBinldUpInfo.getChildByName("Content").getComponent(Label).string = this.mData.matchConfig.riseBlindTime.toString();
+                    this.mBinldUpInfo.getChildByName("Content").getComponent(Label).string = this.mData.matchConfig.riseBlindTime.toString() 
+                    + Localization.GetString("00040");
                     let tempStartChip = this.mData.matchConfig.beginScore.toString();
                     tempStartChip += "(" + Math.floor(this.mData.matchConfig.beginScore/(this.mData.matchConfig.beginBlind*2)) + "BB)";
                     this.mStartChips.getChildByName("Content").getComponent(Label).string = tempStartChip;
@@ -347,9 +345,41 @@ export class Mtt_InfoPage extends BaseUI
                     let nextBlindInfo = this.mData.statusInfo.nextBlind + "/" + this.mData.statusInfo.nextBlind * 2 + "(" + this.mData.statusInfo.nextBeforeScore + ")";
                     this.mNextLevel.getChildByName("Content").getComponent(Label).string = nextLevel + nextBlindInfo;
                     this.MatchPlayingTimeCount();
+                    this.StartRestTimeCountDown();
                 }
             }
-            
+        },this);
+
+        HallData.GetInstance().AddListener("Data_MttStatusChange",(_current , _before)=>
+        {
+            this.Refresh();
+            if(_current.reason == 8)
+            {
+                // this.mCurrentLevel.active = true;
+                // let currentLevel = "L" + _current.curLevel;
+                // let currentBlindInfo = _current.curBlind + "/" + _current.curBlind * 2 + "(" +_current.beforeScore + ")";
+                // this.mCurrentLevel.getChildByName("Content").getComponent(Label).string = currentLevel + currentBlindInfo;
+
+                // this.mNextLevel.active = true;
+                // let nextLevel = "L" + _current.nextLevel;
+                // let nextBlindInfo = _current.nextBlind + "/" + _current.nextBlind * 2 + "(" + _current.nextBeforeScore + ")";
+                // this.mNextLevel.getChildByName("Content").getComponent(Label).string = nextLevel + nextBlindInfo;
+                
+                // this.mData.statusInfo.leftTime = _current.leftTime;
+                // this.StartBlindTimeCountDown();
+                // this.mData.statusInfo.restLeftTime = _current.restLeftTime;
+                // this.mCurrentPlayerinfo.getChildByName("Content").getComponent(Label).string = _current.playerUser +"/" + _current.totalUser;
+                // this.StartRestTimeCountDown();
+            }
+            else if (_current.reason == 7)
+            {
+                
+            }
+            else if (_current.reason == 9)
+            {
+                
+            }
+
         },this);
     }
     LateInit() 
@@ -363,6 +393,12 @@ export class Mtt_InfoPage extends BaseUI
     CustmoerDestory() 
     {
         this.unscheduleAllCallbacks();
+    }
+
+    Refresh()
+    {
+        UIMgr.GetInstance().ShowLoading(true);
+        Network.GetInstance().SendGetMttMatchDetails(900, HallData.GetInstance().Data_CurrentMttMatchID);
     }
 
     UpdateBottomBtn()
@@ -482,7 +518,7 @@ export class Mtt_InfoPage extends BaseUI
     {
         this.mStatusDescribe.string = Localization.GetString("00038");
         this.MatchPlayingTimeCountLogic();
-        this.unschedule(this.MatchPlayingTimeCountLogic);
+        this.unschedule(this.MatchCountDownLogic);
         this.unschedule(this.MatchPlayingTimeCountLogic);
         this.schedule(this.MatchPlayingTimeCountLogic, 1);
     }
@@ -511,8 +547,8 @@ export class Mtt_InfoPage extends BaseUI
         this.mData.statusInfo.leftTime--;
         let m = Math.floor(this.mData.statusInfo.leftTime/60);
         let s = (this.mData.statusInfo.leftTime % 60);
-        let strMin;
-        let strSecond;
+        let strMin = "";
+        let strSecond = "";
         if (m < 10) 
         {
             strMin = "0" + m;
@@ -538,6 +574,53 @@ export class Mtt_InfoPage extends BaseUI
             this.unschedule(this.BlindTimeCountDownLogic);
         }
     }
+
+    StartRestTimeCountDown()
+    {
+        this.mNextBreakTime.active = true;
+        this.RestTimeCountDownLogic();
+        this.unschedule(this.RestTimeCountDownLogic);
+        if(this.mData.statusInfo.restLeftTime > 0)
+        {
+            this.schedule(this.RestTimeCountDownLogic, 1);
+        }
+
+    }
+
+    RestTimeCountDownLogic()
+    {
+        this.mData.statusInfo.restLeftTime--;
+        let m = Math.floor(this.mData.statusInfo.restLeftTime/60);
+        let s = (this.mData.statusInfo.restLeftTime % 60);
+        let strMin = "";
+        let strSecond = "";
+        if (m < 10) 
+        {
+            strMin = "0" + m;
+        }
+        else
+        {
+            strMin = m + "";
+        }
+
+        if (s < 10) 
+        {
+            strSecond = "0" + s;
+        }
+        else
+        {
+            strSecond = s + "";
+        }
+
+        let finalTime = m + ":" + s;
+        this.mNextBreakTime.getChildByName("Content").getComponent(Label).string = finalTime;
+        if (this.mData.statusInfo.restLeftTime <= 0) 
+        {
+            this.mNextBreakTime.active = false;
+            this.unschedule(this.RestTimeCountDownLogic);
+        }
+    }
+
 
 
     GetDownTime(_time) 

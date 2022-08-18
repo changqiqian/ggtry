@@ -24,8 +24,12 @@ export class HallData extends DataNotify {
     Data_SubPage : Hall_SubPage = null; //大厅底部 分页
     Data_LunBoTu : any = null;
     Data_MttList : any = null;
+    Data_CurrentMttMatchID : number = null ; //当前查看的mtt matchid
     Data_MttInfoSubPage : Mtt_InfoSubPage = null; //Mtt详细信息页面 分页
     Data_MttMatchDetails  : any = null; //进入mtt详细页面的数据
+    Data_MttPlayerList : any = null; //进入mtt玩家页面的数据
+    Data_MttTableList : any = null; //进入mtt桌号信息页面
+    Data_MttStatusChange : any = null; //mtt比赛状态变化
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.GetLunBoTu ,(_msgBody)=>
@@ -73,6 +77,22 @@ export class HallData extends DataNotify {
             }
         },this);
 
+        Network.GetInstance().AddMsgListenner(MsgID.GetMttPlayerList ,(_msgBody)=>
+        {
+            UIMgr.GetInstance().ShowLoading(false);
+            this.Data_MttPlayerList = _msgBody;
+        },this);
+
+        Network.GetInstance().AddMsgListenner(MsgID.GetMttTableInfo ,(_msgBody)=>
+        {
+            UIMgr.GetInstance().ShowLoading(false);
+            this.Data_MttTableList = _msgBody;
+        },this);
+
+        Network.GetInstance().AddMsgListenner(MsgID.MttStatusChange ,(_msgBody)=>
+        {
+            this.Data_MttStatusChange = _msgBody;
+        },this);
         
     }
 
@@ -116,7 +136,7 @@ export enum Mtt_InfoSubPage //mtt详细信息页面 分页
 {
     InfoPage = 0,
     PlayerPage = 1,
-    PrizePage = 2,
+    RewardPage = 2,
     TablePage = 3,
 }
 

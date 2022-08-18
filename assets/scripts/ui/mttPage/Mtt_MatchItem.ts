@@ -5,7 +5,7 @@ import { UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
-import { Mtt_MatchListStatus, Mtt_RegType } from '../hall/HallData';
+import { HallData, Mtt_MatchListStatus, Mtt_RegType } from '../hall/HallData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Mtt_MatchItem')
@@ -86,8 +86,7 @@ export class Mtt_MatchItem extends BaseUI
 
         this.mBtn.SetClickCallback(()=>
         {
-            UIMgr.GetInstance().ShowLoading(true);
-            Network.GetInstance().SendGetMttMatchDetails(900, this.mData.mttInfo.matchId)
+            HallData.GetInstance().Data_CurrentMttMatchID = this.mData.mttInfo.matchId;
         });
     }
     RegDataNotify() 
