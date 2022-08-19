@@ -7,11 +7,11 @@ import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import { Network, SmsCodeType } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
-import { LoginData } from './LoginData';
+
 const { ccclass, property } = _decorator;
 
-@ccclass('Login_ForgetPwd')
-export class Login_ForgetPwd extends BaseUI {
+@ccclass('ForgetPwd')
+export class ForgetPwd extends BaseUI {
     @property(BaseButton) 
     mBackBtn: BaseButton = null;
     @property(BaseButton) 
