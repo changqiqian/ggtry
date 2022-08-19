@@ -40,7 +40,7 @@ export class Localization
             console.log("没有找到对应的多语言 key====" + _key);
         }
 
-        return "None";
+        return _key;
     }
 
     public static LocationData=[
@@ -129,8 +129,19 @@ export class Localization
         {"name":"00038", "ch": "比赛进行中", "en": "Runing"},
         {"name":"00039", "ch": "钱圈", "en": "Reward range"},
         {"name":"00040", "ch": "分钟", "en": "mins"},
+        {"name":"00041", "ch": "重购", "en": "Confirm Rebuy"},
+        {"name":"00042", "ch": "报名", "en": "Confirm Registration"},
+        {"name":"00043", "ch": "请选择支付方式", "en": "Please select the payment"},
+        {"name":"00044", "ch": "没有可用门票", "en": "No Tickets Useable"},
+        {"name":"00045", "ch": "mtt开赛失败", "en": "Start mtt failed"},
+        {"name":"00046", "ch": "确定解散比赛吗？\n报名费将退还给用户", "en": "Confirm to dismiss? \n Fees will be returned to registered player"},
+        {"name":"00047", "ch": "确定开始比赛吗？", "en": "Start match now?"},
+
+
+
+        //服务器发过来的key
+        {"name":"key10925", "ch": "比赛不存在", "en": "Tournament does not exist"},
         
-    
     ]
 
     

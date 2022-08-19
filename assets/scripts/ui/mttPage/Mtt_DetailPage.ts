@@ -71,9 +71,14 @@ export class Mtt_DetailPage extends BaseUI
         this.AddSubView("mttPage","prefab/Mtt_InfoPage",false , null , this.mSubLayer);
         this.AddSubView("mttPage","prefab/Mtt_PlayersPage",false , null , this.mSubLayer);
         this.AddSubView("mttPage","prefab/Mtt_RewardPage",false , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_TableInfoPage",false , null , this.mSubLayer);
     }
     RegDataNotify() 
-    {
+    {        
+        HallData.GetInstance().AddListener("Data_MttDismiss",(_current , _before)=>
+        {
+            this.Show(false);
+        },this);
         HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
         {
             this.mMatchName.string = _current.matchConfig.matchName;
@@ -92,6 +97,9 @@ export class Mtt_DetailPage extends BaseUI
             });
 
         },this);
+
+
+        
     }
     LateInit() 
     {

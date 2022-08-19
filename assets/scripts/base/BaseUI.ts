@@ -41,9 +41,11 @@ const { ccclass, property } = _decorator;
 @ccclass('BaseUI')
 export abstract class BaseUI extends Component 
 {
+    mIsWindow : boolean = false;
     mLayerList : Array<SubViewKeyPair>;
     onLoad() 
     {
+        this.mIsWindow = false;
         this.mLayerList = new Array<SubViewKeyPair>();
         this.InitParam();
         this.BindUI();
@@ -178,9 +180,28 @@ export abstract class BaseUI extends Component
         UIMgr.GetInstance().ShowLayer(_bundleName,_assetPath,_show,_finishFunction);
     }
 
+    ShowWindow(_bundleName :string , _prefabPath:string , _show : boolean = true, _finishFunction : Function = null)
+    {
+        UIMgr.GetInstance().ShowWindow(_bundleName,_prefabPath,_show,_finishFunction);
+    }
+
     Delete()
     {
         this.node.destroy();
+    }
+
+    CloseAsWindow()
+    {
+        let parentNode = this.node.parent;
+        let parentScript = parentNode.getComponent(BaseUI);
+        if(parentScript.mIsWindow)
+        {
+            parentScript.Show(false);
+        }
+        else
+        {
+            this.Show(false);
+        }
     }
 }
 

@@ -91,6 +91,18 @@ export class Mtt_RegisterFee extends BaseUI
             this.mAmount.string = _amount;
             this.ShowTicket(_ticketAmount , _ticketName);
         }
+        else if(_type== Mtt_RegType.Point)
+        {
+            this.mPoint.active = true;     
+            this.mAmount.node.active = true;
+            this.mAmount.string = _amount;
+        }
+        else if(_type== Mtt_RegType.UnionCoin)
+        {
+            this.mLeaIcon.active = true;     
+            this.mAmount.node.active = true;
+            this.mAmount.string = _amount;
+        }
     }
 
 

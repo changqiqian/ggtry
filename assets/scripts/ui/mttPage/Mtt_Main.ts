@@ -28,6 +28,18 @@ export class Mtt_Main extends BaseUI
     }
     BindUI() 
     {
+        this.mRankBtn.SetClickCallback(()=>
+        {
+            this.ShowLayer("hall","prefab/Hall_RankPage");
+        });
+        this.mTicketBtn.SetClickCallback(()=>
+        {
+
+        });
+        this.mSearchBtn.SetClickCallback(()=>
+        {
+
+        });
         this.AddSubView("hall","prefab/Hall_LunBo",true,null,this.mTop);
     }
     RegDataNotify() 
@@ -60,6 +72,16 @@ export class Mtt_Main extends BaseUI
                 this.ShowLayer("mttPage","prefab/Mtt_DetailPage",false);
                 Network.GetInstance().SendGetMttList();
             }
+        },this);
+
+        HallData.GetInstance().AddListener("Data_MttDismiss",(_current , _before)=>
+        {
+            Network.GetInstance().SendGetMttList();
+        },this);
+
+        HallData.GetInstance().AddListener("Data_MttReadyNotify",(_current , _before)=>
+        {
+            //跳转到游戏中
         },this);
         
     }

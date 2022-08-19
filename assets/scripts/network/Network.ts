@@ -520,6 +520,69 @@ export class Network
         console.log("获取mtt 取消报名");
         this.SendMsg(MsgID.MttCancelReg , body);
     };
+    SendAttendMtt(_gameType : number, _matchId : number, _tid :number = 0, _clubId:number = 0) 
+    {
+        let tmp;
+        if(_tid == 0) 
+        {
+            tmp = ''
+        }
+        else
+        {
+            tmp = _tid;
+        }
+
+        var body = 
+        { 
+            "gameType" : _gameType, 
+            "matchId" : _gameType,
+            "ticketId" : tmp,
+            "clubId" : _clubId
+
+        }
+        console.log("mtt 报名");
+        this.SendMsg(MsgID.AttendMtt , body);
+    };
+    SendGetUnionAssets(_clubId:number ) 
+    {
+        var body = 
+        { 
+            id : _clubId, 
+        }
+        console.log("获取联盟资产");
+        this.SendMsg(MsgID.GetUnionAssets , body);
+    };
+    SendGetSelfTicket(_ticketId:number) 
+    {
+        var body = 
+        { 
+            "tpId" : _ticketId, 
+        }
+        console.log("获取自己的门票");
+        this.SendMsg(MsgID.GetSelfTicket , body);
+    };
+    SendMttDismiss(_gameType : number, _matchId : number) 
+    {
+        var body = 
+        { 
+            "gameType" : _gameType, 
+            "matchId" : _matchId, 
+        }
+        console.log("Mtt 解散比赛");
+        this.SendMsg(MsgID.MttDismiss , body);
+    };
+    SendMttManualStart(_matchId : number) 
+    {
+        var body = 
+        { 
+            "matchId" : _matchId, 
+        }
+        console.log("Mtt 手动开始比赛");
+        this.SendMsg(MsgID.MttManualStart , body);
+    };
+
+    
+    
 }
 
 
@@ -557,13 +620,20 @@ export enum MsgID
     GetAssets = 246,
     GetLunBoTu = 296, 
     GetMttMatchDetails = 340,
+    AttendMtt = 341,
     MttCancelReg = 342,
+    MttDismiss = 343,
+    MttJoinNotify = 345, //推送有人报名
+    MttReadyNotify = 346 , //Mtt比赛准备开始了
     MttStatusChange = 353, //比赛状态通知
+    MttManualStart =  354,
     VeryifySmsCode = 387,
     GetMttTableInfo = 556,
     GetMttPlayerList = 557,
     MttGetRebuyInfo = 685,
+    GetSelfTicket = 693,
     GetMttList = 702,
     SetMttMacthKeepTop = 927,
+    GetUnionAssets = 994,
 }
 

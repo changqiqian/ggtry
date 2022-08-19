@@ -31,6 +31,16 @@ export class HallData extends DataNotify {
     Data_MttTableList : any = null; //进入mtt桌号信息页面
     Data_MttStatusChange : any = null; //mtt比赛状态变化
     Data_MttGetRebuyInfo : any = null; //mtt报名时候，报名类型信息
+    Data_MttAttendOption : Mtt_RegType = null ; //当前选中的报名方式
+    Data_UnionAssets : any = null ; //联盟资产
+    Data_SelfTickets : any = null; //自己拥有的门票
+    Data_AttendMttResp : any = null; //报名mtt的返回数据
+    Data_CancelMttResp : any = null; //取消报名mtt
+    Data_MttJoinNotify : any = null; //服务器主动推送的mtt有人报名
+    Data_MttReadyNotify : any = null; //mtt比赛准备开始了
+    Data_MttDismiss : any = null; //解散比赛
+    Data_MttManualStart : any = null;// 手动开始比赛
+    Data_HallRankSubPage : Hall_RankSubPage = null; //大厅排行榜 分页面
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.GetLunBoTu ,(_msgBody)=>
@@ -98,6 +108,76 @@ export class HallData extends DataNotify {
         {
             this.Data_MttGetRebuyInfo = _msgBody;
         },this);
+        Network.GetInstance().AddMsgListenner(MsgID.GetUnionAssets ,(_msgBody)=>
+        {
+            this.Data_UnionAssets = _msgBody;
+        },this);
+        Network.GetInstance().AddMsgListenner(MsgID.GetSelfTicket ,(_msgBody)=>
+        {
+            this.Data_SelfTickets = _msgBody;
+        },this);
+        
+        Network.GetInstance().AddMsgListenner(MsgID.AttendMtt ,(_msgBody)=>
+        {
+            if (_msgBody.code == MsgStatus.SUCCESS) 
+            {
+                this.Data_AttendMttResp = _msgBody;
+            }
+            else
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString(_msgBody.reason));
+            } 
+            
+        },this);
+
+        Network.GetInstance().AddMsgListenner(MsgID.MttCancelReg ,(_msgBody)=>
+        {
+            this.Data_CancelMttResp = _msgBody;
+            UIMgr.GetInstance().ShowToast(_msgBody.reason);
+        },this);
+
+        Network.GetInstance().AddMsgListenner(MsgID.MttJoinNotify ,(_msgBody)=>
+        {
+            this.Data_MttJoinNotify = _msgBody;
+        },this);
+
+        Network.GetInstance().AddMsgListenner(MsgID.MttReadyNotify ,(_msgBody)=>
+        {
+            if (_msgBody.code == MsgStatus.SUCCESS) 
+            {
+                this.Data_MttReadyNotify = _msgBody;
+            }
+            else
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00045"));
+            } 
+            
+        },this);
+        Network.GetInstance().AddMsgListenner(MsgID.MttDismiss ,(_msgBody)=>
+        {
+            if (_msgBody.code == MsgStatus.SUCCESS) 
+            {
+                this.Data_MttDismiss = _msgBody;
+            }
+            else
+            {
+                UIMgr.GetInstance().ShowToast("MttDismiss code ==" + _msgBody.code);
+            }
+            
+        },this);
+        Network.GetInstance().AddMsgListenner(MsgID.MttManualStart ,(_msgBody)=>
+        {
+            if (_msgBody.code == MsgStatus.SUCCESS) 
+            {
+                this.Data_MttManualStart = _msgBody;
+            }
+            else
+            {
+                UIMgr.GetInstance().ShowToast("MttManualStart code ==" + _msgBody.code);
+            }
+            
+        },this);
+        
         
         
     }
@@ -131,11 +211,22 @@ export enum Mtt_MatchListStatus //Mtt列表中的Item状态
 
 export enum Mtt_RegType //mtt报名费类型
 {
+    None = 0 ,
     Coin = 1 ,
     Diamond = 2,
     Ticket = 3,
     CoinAndTicket = 4,
     DiamondAndTicket = 5,
+    Point = 6,
+    UnionCoin = 7,
+}
+
+export enum Hall_RankSubPage //mtt详细信息页面 分页
+{
+    Season = 0,
+    Month = 1,
+    Week = 2,
+    All = 3,
 }
 
 export enum Mtt_InfoSubPage //mtt详细信息页面 分页

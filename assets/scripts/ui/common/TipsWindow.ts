@@ -27,7 +27,7 @@ export class TipsWindow extends BaseUI
             {
                 this.mCancelCallback();
             }
-            UIMgr.GetInstance().ShowWindow("common" , "prefab/TipsWindow",false);
+            this.CloseAsWindow();
             
         });
 
@@ -37,7 +37,7 @@ export class TipsWindow extends BaseUI
             {
                 this.mConfirmCallback();
             }
-            UIMgr.GetInstance().ShowWindow("common" , "prefab/TipsWindow",false);
+            this.CloseAsWindow();
         });
     }
     RegDataNotify() 

@@ -51,7 +51,7 @@ export class LoginUI extends BaseUI
         this.mSignBtn.node.on(Node.EventType.TOUCH_END,this.OnSignBtn.bind(this),this);
         this.mCyberBtn.SetClickCallback(()=>
         {
-            UIMgr.GetInstance().ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
                 let tips = Localization.GetString("00016");

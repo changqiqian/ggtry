@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "959b0246-8e2a-4a00-b0ef-399fed8446c1",
+  "uuid": "b7dd505b-3bb4-423c-8a19-4d8bdd4a657a",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "959b0246-8e2a-4a00-b0ef-399fed8446c1@6c48a",
-      "displayName": "Ticket",
+      "uuid": "b7dd505b-3bb4-423c-8a19-4d8bdd4a657a@6c48a",
+      "displayName": "C6",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "959b0246-8e2a-4a00-b0ef-399fed8446c1",
+        "imageUuidOrDatabaseUri": "b7dd505b-3bb4-423c-8a19-4d8bdd4a657a",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "959b0246-8e2a-4a00-b0ef-399fed8446c1@f9941",
-      "displayName": "Ticket",
+      "uuid": "b7dd505b-3bb4-423c-8a19-4d8bdd4a657a@f9941",
+      "displayName": "C6",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -44,9 +44,9 @@
         "offsetX": 0,
         "offsetY": 0,
         "trimX": 0,
-        "trimY": 6,
+        "trimY": 0,
         "width": 48,
-        "height": 36,
+        "height": 48,
         "rawWidth": 48,
         "rawHeight": 48,
         "borderTop": 0,
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "959b0246-8e2a-4a00-b0ef-399fed8446c1@6c48a",
+        "imageUuidOrDatabaseUri": "b7dd505b-3bb4-423c-8a19-4d8bdd4a657a@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "959b0246-8e2a-4a00-b0ef-399fed8446c1@f9941"
+    "redirect": "b7dd505b-3bb4-423c-8a19-4d8bdd4a657a@f9941"
   }
 }

@@ -6,8 +6,10 @@ import { UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
+import { TipsWindow } from '../common/TipsWindow';
 import { ToggleBtn } from '../common/ToggleBtn';
 import { HallData, Mtt_InfoSubPage, Mtt_MatchStatus, Mtt_RegType, Mtt_StartMode, Mtt_UserStatus } from '../hall/HallData';
+import { Mtt_AttendPage } from './Mtt_AttendPage';
 import { Mtt_RegisterFee } from './Mtt_RegisterFee';
 const { ccclass, property } = _decorator;
 
@@ -79,44 +81,62 @@ export class Mtt_InfoPage extends BaseUI
     {
 
     }
+
+    ButtonLogic()
+    {
+        switch(this.mData.userStatus)
+        {
+            case Mtt_UserStatus.NotAttend:
+            {
+                if(this.mData.statusInfo.status == Mtt_MatchStatus.Registring)
+                {
+                    Network.GetInstance().SendMttGetRebuyInfo(this.mData.matchConfig.matchId);
+                }
+            }
+            break;
+            case Mtt_UserStatus.Registed:
+            {
+                Network.GetInstance().SendMttCancelReg(900 , this.mData.matchConfig.matchId);
+            }
+            break;
+            case Mtt_UserStatus.Attending:
+            {
+                //  cc.director.loadScene("game");
+            }
+            break;
+        }
+    }
+
     BindUI() 
     {
         this.mObBtn.SetClickCallback(()=>
         {
+            //去游戏房间
         });
 
         this.mRebuy.SetClickCallback(()=>
         {
+            this.ButtonLogic();
         });
 
         this.mAttendBtn.SetClickCallback(()=>
         {
-            switch(this.mData.userStatus)
-            {
-                case Mtt_UserStatus.NotAttend:
-                {
-                    if(this.mData.statusInfo.status == Mtt_MatchStatus.Registring)
-                    {
-                        Network.GetInstance().SendMttGetRebuyInfo(this.mData.matchConfig.matchId);
-                    }
-                }
-                break;
-                case Mtt_UserStatus.Registed:
-                {
-                    //弹出确认框
-                    Network.GetInstance().SendMttCancelReg(900 , this.mData.matchConfig.matchId);
-                }
-                break;
-                case Mtt_UserStatus.Attending:
-                {
-                    //  cc.director.loadScene("game");
-                }
-                break;
-            }
+            this.ButtonLogic();
         });
 
         this.mDismissBtn.SetClickCallback(()=>
         {
+            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            {
+                let tempScript = _script as TipsWindow;
+                let tips = Localization.GetString("00046");
+                tempScript.SetTips(tips);
+                tempScript.SetCallback(()=>
+                {
+                    Network.GetInstance().SendMttDismiss(900,this.mData.matchConfig.matchId);
+                })
+            })
+            
         });
 
         this.mAccessBtn.SetClickCallback(()=>
@@ -125,6 +145,18 @@ export class Mtt_InfoPage extends BaseUI
 
         this.mManualStartBtn.SetClickCallback(()=>
         {
+            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            {
+                let tempScript = _script as TipsWindow;
+                let tips = Localization.GetString("00047");
+                tempScript.SetTips(tips);
+                tempScript.SetCallback(()=>
+                {
+                    Network.GetInstance().SendMttManualStart(this.mData.matchConfig.matchId);
+                })
+            })
+
+            
         });
 
         let BlindInfoBtn = this.mBinldUpInfo.getChildByName("BlindUpBtn").getComponent(BaseButton);
@@ -142,13 +174,35 @@ export class Mtt_InfoPage extends BaseUI
     RegDataNotify() 
     {
 
+        HallData.GetInstance().AddListener("Data_MttManualStart",(_current , _before)=>
+        {
+            this.Refresh();
+        },this);
+        HallData.GetInstance().AddListener("Data_CancelMttResp",(_current , _before)=>
+        {
+            this.Refresh();
+        },this);
+        HallData.GetInstance().AddListener("Data_MttJoinNotify",(_current , _before)=>
+        {
+            this.Refresh();
+        },this);
+        
+
+        HallData.GetInstance().AddListener("Data_AttendMttResp",(_current , _before)=>
+        {
+            this.Refresh();
+        },this);
+        
+
         HallData.GetInstance().AddListener("Data_MttGetRebuyInfo",(_current , _before)=>
         {
-            let haveRealReward = this.HaveRealReward();
-            if(_current.reBuyCount > 0)
+            this.ShowWindow("mttPage" , "prefab/Mtt_AttendPage",true,(_script)=>
             {
+                let haveRealReward = this.HaveRealReward();
+                let tempScript = _script as Mtt_AttendPage;
+                tempScript.InitWithData(_current , haveRealReward);
+            })
 
-            }
         },this);
         
         HallData.GetInstance().AddListener("Data_MttInfoSubPage",(_current , _before)=>

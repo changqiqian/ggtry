@@ -20,7 +20,10 @@ export class LocalPlayerData extends DataNotify {
     Data_Uid : number = null ; //玩家uid
     Data_Coin : number = null;//玩家金币
     Data_Diamond : number = null; //钻石
+    Data_Point : number = 0; //point积分
+    Data_UnionCoin : number = 0; //联盟币
     Data_FrozenMoney : number = null ; //冻结的钱
+    Data_CurrentClubId : number = 0 ; //当前clubID
     Data_NickName : string = null; //玩家名字
     Data_AdminRole : number = null; //角色类型， 100是运营账户
     Data_AreaCode : number = 0; //区号
