@@ -536,7 +536,7 @@ export class Network
         var body = 
         { 
             "gameType" : _gameType, 
-            "matchId" : _gameType,
+            "matchId" : _matchId,
             "ticketId" : tmp,
             "clubId" : _clubId
 
