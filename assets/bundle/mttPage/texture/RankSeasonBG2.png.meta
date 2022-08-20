@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "38c70684-14ea-4883-a890-50c22fc39640",
+  "uuid": "acba1580-879a-44b7-af6f-f3187fe5505c",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "38c70684-14ea-4883-a890-50c22fc39640@6c48a",
-      "displayName": "SeasonBG1",
+      "uuid": "acba1580-879a-44b7-af6f-f3187fe5505c@6c48a",
+      "displayName": "RankSeasonBG2",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "38c70684-14ea-4883-a890-50c22fc39640",
+        "imageUuidOrDatabaseUri": "acba1580-879a-44b7-af6f-f3187fe5505c",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "38c70684-14ea-4883-a890-50c22fc39640@f9941",
-      "displayName": "SeasonBG1",
+      "uuid": "acba1580-879a-44b7-af6f-f3187fe5505c@f9941",
+      "displayName": "RankSeasonBG2",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 1041,
-        "height": 372,
-        "rawWidth": 1041,
-        "rawHeight": 372,
+        "width": 1029,
+        "height": 360,
+        "rawWidth": 1029,
+        "rawHeight": 360,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "38c70684-14ea-4883-a890-50c22fc39640@6c48a",
+        "imageUuidOrDatabaseUri": "acba1580-879a-44b7-af6f-f3187fe5505c@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "38c70684-14ea-4883-a890-50c22fc39640@f9941"
+    "redirect": "acba1580-879a-44b7-af6f-f3187fe5505c@f9941"
   }
 }

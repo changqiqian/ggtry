@@ -30,7 +30,7 @@ export class Mtt_Main extends BaseUI
     {
         this.mRankBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("hall","prefab/Hall_RankPage");
+            this.ShowLayer("mttPage","prefab/Mtt_RankPage");
         });
         this.mTicketBtn.SetClickCallback(()=>
         {

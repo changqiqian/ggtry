@@ -101,7 +101,6 @@ export class Mtt_PlayersPage extends BaseUI
 
     Refresh()
     {
-        UIMgr.GetInstance().ShowLoading(true);
         Network.GetInstance().SendGetMttPlayerList(900, HallData.GetInstance().Data_CurrentMttMatchID, 
         this.mCurrentPage , this.mPageCount);
     }

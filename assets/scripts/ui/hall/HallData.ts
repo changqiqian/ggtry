@@ -40,7 +40,8 @@ export class HallData extends DataNotify {
     Data_MttReadyNotify : any = null; //mtt比赛准备开始了
     Data_MttDismiss : any = null; //解散比赛
     Data_MttManualStart : any = null;// 手动开始比赛
-    Data_HallRankSubPage : Hall_RankSubPage = null; //大厅排行榜 分页面
+    Data_MttRankSubPage : Mtt_RankSubPage = null; //Mtt排行榜 分页面
+    Data_MttRankData : any = null ; //Mtt排行榜数据
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.GetLunBoTu ,(_msgBody)=>
@@ -77,7 +78,6 @@ export class HallData extends DataNotify {
 
         Network.GetInstance().AddMsgListenner(MsgID.GetMttMatchDetails ,(_msgBody)=>
         {
-            UIMgr.GetInstance().ShowLoading(false);
             if (_msgBody.code == MsgStatus.FAILED) 
             {
                 UIMgr.GetInstance().ShowToast(Localization.GetString("00029"));
@@ -90,13 +90,11 @@ export class HallData extends DataNotify {
 
         Network.GetInstance().AddMsgListenner(MsgID.GetMttPlayerList ,(_msgBody)=>
         {
-            UIMgr.GetInstance().ShowLoading(false);
             this.Data_MttPlayerList = _msgBody;
         },this);
 
         Network.GetInstance().AddMsgListenner(MsgID.GetMttTableInfo ,(_msgBody)=>
         {
-            UIMgr.GetInstance().ShowLoading(false);
             this.Data_MttTableList = _msgBody;
         },this);
 
@@ -177,6 +175,10 @@ export class HallData extends DataNotify {
             }
             
         },this);
+        Network.GetInstance().AddMsgListenner(MsgID.GetMttRank ,(_msgBody)=>
+        {
+            this.Data_MttRankData = _msgBody;
+        },this);
         
         
         
@@ -221,12 +223,12 @@ export enum Mtt_RegType //mtt报名费类型
     UnionCoin = 7,
 }
 
-export enum Hall_RankSubPage //mtt详细信息页面 分页
+export enum Mtt_RankSubPage //mtt详细信息页面 分页
 {
-    Season = 0,
+    All = 0,
     Month = 1,
     Week = 2,
-    All = 3,
+    Season = 3,
 }
 
 export enum Mtt_InfoSubPage //mtt详细信息页面 分页

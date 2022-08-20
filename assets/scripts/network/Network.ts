@@ -127,6 +127,7 @@ export class Network
             var final = JSON.stringify({ "msgId": _msgID, "msgBody": body });
             if(_msgID != MsgID.Ping)
             {
+                UIMgr.GetInstance().ShowLoading(true);
                 console.log("发送消息：" + final);
             }
             this.mWebSocket.send(final);
@@ -184,7 +185,7 @@ export class Network
             this.RecvPing();
             return;
         }
-
+        UIMgr.GetInstance().ShowLoading(false);
         var msg = JSON.parse(data.msgBody);
         if(data.languageKey) 
         {
@@ -496,7 +497,7 @@ export class Network
             "index" : _page, //申请第几页
             "count" : _pageCount, //每一页多少个数据
         }
-        console.log("获取mtt当前玩家列表");
+        console.log("获取mtt当前分桌信息");
         this.SendMsg(MsgID.GetMttTableInfo , body);
     };
 
@@ -580,6 +581,17 @@ export class Network
         console.log("Mtt 手动开始比赛");
         this.SendMsg(MsgID.MttManualStart , body);
     };
+    SendGetMttRank(_mode : number, _page : number, _pageSize : number) 
+    {
+        var body = 
+        { 
+            "mode" : _mode, 
+            "page" : _page, 
+            "pageSize" : _pageSize, 
+        }
+        console.log("Mtt 获取排行榜");
+        this.SendMsg(MsgID.GetMttRank , body);
+    };
 
     
     
@@ -630,6 +642,7 @@ export enum MsgID
     VeryifySmsCode = 387,
     GetMttTableInfo = 556,
     GetMttPlayerList = 557,
+    GetMttRank = 681,
     MttGetRebuyInfo = 685,
     GetSelfTicket = 693,
     GetMttList = 702,

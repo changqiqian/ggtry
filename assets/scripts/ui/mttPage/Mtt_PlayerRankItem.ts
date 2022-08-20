@@ -53,11 +53,11 @@ export class Mtt_PlayerRankItem extends BaseUI
         this.mTableNum.string = _tableId + "";
         this.mScore.string = _score + "";
         this.mBigBlind.string = _bb + "";
-        this.LoadSprite("common" , "texture/head/" + _photoUrl , (_spriteFrame)=>
+
+        this.LoadLocalHead(parseInt(_photoUrl),(_spriteFrame)=>
         {
             this.mHead.spriteFrame = _spriteFrame;
         });
-
     }
 }
 

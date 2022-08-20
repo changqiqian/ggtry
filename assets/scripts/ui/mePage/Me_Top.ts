@@ -54,7 +54,7 @@ export class Me_Top extends BaseUI
                 return;
             }
 
-            this.LoadSprite("common" , "texture/head/" + _current , (_spriteFrame)=>
+            this.LoadLocalHead(_current,(_spriteFrame)=>
             {
                 this.mHead.spriteFrame = _spriteFrame;
             });

@@ -98,6 +98,17 @@ export abstract class BaseUI extends Component
         });
     }
 
+    LoadLocalHead(_headIndex : number ,  _loadFinish : Function)
+    {
+        this.LoadSprite("common" , "texture/head/" + _headIndex.toString() , (_spriteFrame)=>
+        {
+            if(_loadFinish)
+            {
+                _loadFinish(_spriteFrame)
+            }
+        })
+    }
+
     LoadRemoteSprite(_url : string , _finish : Function)
     {
         assetManager.loadRemote(_url,(_err:Error | null , _imageAsset :ImageAsset)=>

@@ -485,7 +485,6 @@ export class Mtt_InfoPage extends BaseUI
 
     Refresh()
     {
-        UIMgr.GetInstance().ShowLoading(true);
         Network.GetInstance().SendGetMttMatchDetails(900, HallData.GetInstance().Data_CurrentMttMatchID);
     }
 

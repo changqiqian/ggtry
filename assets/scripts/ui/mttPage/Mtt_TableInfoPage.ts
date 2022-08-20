@@ -91,7 +91,6 @@ export class Mtt_TableInfoPage extends BaseUI
 
     Refresh()
     {
-        UIMgr.GetInstance().ShowLoading(true);
         Network.GetInstance().SendGetMttTableInfo(900, HallData.GetInstance().Data_CurrentMttMatchID, 
         this.mCurrentPage , this.mPageCount);
     }

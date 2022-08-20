@@ -136,9 +136,11 @@ export class Localization
         {"name":"00045", "ch": "mtt开赛失败", "en": "Start mtt failed"},
         {"name":"00046", "ch": "确定解散比赛吗？\n报名费将退还给用户", "en": "Confirm to dismiss? \n Fees will be returned to registered player"},
         {"name":"00047", "ch": "确定开始比赛吗？", "en": "Start match now?"},
-
-
-
+        {"name":"00048", "ch": "Season", "en": "Season"},
+        {"name":"00049", "ch": "Month", "en": "Month"},
+        {"name":"00050", "ch": "Week", "en": "Week"},
+        {"name":"00051", "ch": "All", "en": "All"},
+        {"name":"00052", "ch": "暂无数据", "en": "No data"},
         //服务器发过来的key
         {"name":"key10925", "ch": "比赛不存在", "en": "Tournament does not exist"},
         

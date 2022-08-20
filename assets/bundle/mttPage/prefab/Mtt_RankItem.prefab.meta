@@ -2,12 +2,12 @@
   "ver": "1.1.38",
   "importer": "prefab",
   "imported": true,
-  "uuid": "3adf0af1-1e64-4db3-80d7-cf9f29e97c78",
+  "uuid": "6e668ea6-6998-4c23-893d-5fa973dcc8b5",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Hall_RankPage"
+    "syncNodeName": "Mtt_RankItem"
   }
 }
