@@ -99,9 +99,13 @@ export class Network {
     public SendMsg(_msgID: number, _msg) {
         if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) {
             var body = JSON.stringify(_msg);
-            var final = JSON.stringify({ msgId: _msgID, msgBody: body });
-            if (_msgID != MsgID.Ping) {
-                console.log('发送消息：' + final);
+
+            var final = JSON.stringify({ "msgId": _msgID, "msgBody": body });
+            if(_msgID != MsgID.Ping)
+            {
+                UIMgr.GetInstance().ShowLoading(true);
+                console.log("发送消息：" + final);
+
             }
             this.mWebSocket.send(final);
         } else {
@@ -149,7 +153,7 @@ export class Network {
             this.RecvPing();
             return;
         }
-
+        UIMgr.GetInstance().ShowLoading(false);
         var msg = JSON.parse(data.msgBody);
         if (data.languageKey) {
             msg.languageKey = data.languageKey;
@@ -371,15 +375,6 @@ export class Network {
         this.SendMsg(MsgID.GetMttMatchDetails, body);
     }
 
-    SendSetMttMacthKeepTop(_matchId: number, _isTop: boolean) {
-        var body = {
-            matchId: _matchId,
-            isTop: _isTop,
-        };
-        console.log('设置mtt比赛为置顶比赛');
-        this.SendMsg(MsgID.SetMttMacthKeepTop, body);
-    }
-
     SendActionData(_visitGroup: string, _visitAction: string, _data: any) {
         var body = {
             visitGroup: _visitGroup,
@@ -409,9 +404,147 @@ export class Network {
         console.log('删除帐号' + body);
         this.SendMsg(MsgID.deleteAccount, body);
     }
+
+    SendSetMttMacthKeepTop(_matchId : number  , _isTop : boolean) 
+    {
+        var body = 
+        { 
+            matchId : _matchId,
+            isTop : _isTop
+        }
+        console.log("设置mtt比赛为置顶比赛");
+        this.SendMsg(MsgID.SetMttMacthKeepTop , body);
+    };
+
+    SendGetMttPlayerList(_gameType:number, _matchID:number, _page:number, _pageCount:number) 
+    {
+        var body = 
+        { 
+            "gameType" : _gameType, //搞不懂
+            "matchID" : _matchID,
+            "index" : _page, //申请第几页
+            "count" : _pageCount, //每一页多少个数据
+        }
+        console.log("获取mtt当前玩家列表");
+        this.SendMsg(MsgID.GetMttPlayerList , body);
+    };
+    SendGetMttTableInfo(_gameType:number, _matchID:number, _page:number, _pageCount:number) 
+    {
+        var body = 
+        { 
+            "gameType" : _gameType, //搞不懂
+            "matchID" : _matchID,
+            "index" : _page, //申请第几页
+            "count" : _pageCount, //每一页多少个数据
+        }
+        console.log("获取mtt当前分桌信息");
+        this.SendMsg(MsgID.GetMttTableInfo , body);
+    };
+
+    SendMttGetRebuyInfo(_matchID:number) 
+    {
+        var body = 
+        { 
+            "matchId" : _matchID, 
+        }
+        console.log("获取mtt 买入类型信息");
+        this.SendMsg(MsgID.MttGetRebuyInfo , body);
+    };
+    
+    SendMttCancelReg(_gameType:number ,_matchID:number) 
+    {
+        var body = 
+        { 
+            "matchId" : _matchID, 
+            "gameType" : _gameType,
+        }
+        console.log("获取mtt 取消报名");
+        this.SendMsg(MsgID.MttCancelReg , body);
+    };
+    SendAttendMtt(_gameType : number, _matchId : number, _tid :number = 0, _clubId:number = 0) 
+    {
+        let tmp;
+        if(_tid == 0) 
+        {
+            tmp = ''
+        }
+        else
+        {
+            tmp = _tid;
+        }
+
+        var body = 
+        { 
+            "gameType" : _gameType, 
+            "matchId" : _matchId,
+            "ticketId" : tmp,
+            "clubId" : _clubId
+
+        }
+        console.log("mtt 报名");
+        this.SendMsg(MsgID.AttendMtt , body);
+    };
+    SendGetUnionAssets(_clubId:number ) 
+    {
+        var body = 
+        { 
+            id : _clubId, 
+        }
+        console.log("获取联盟资产");
+        this.SendMsg(MsgID.GetUnionAssets , body);
+    };
+    SendGetSelfTicket(_ticketId:number) 
+    {
+        var body = 
+        { 
+            "tpId" : _ticketId, 
+        }
+        console.log("获取自己的门票");
+        this.SendMsg(MsgID.GetSelfTicket , body);
+    };
+    SendMttDismiss(_gameType : number, _matchId : number) 
+    {
+        var body = 
+        { 
+            "gameType" : _gameType, 
+            "matchId" : _matchId, 
+        }
+        console.log("Mtt 解散比赛");
+        this.SendMsg(MsgID.MttDismiss , body);
+    };
+    SendMttManualStart(_matchId : number) 
+    {
+        var body = 
+        { 
+            "matchId" : _matchId, 
+        }
+        console.log("Mtt 手动开始比赛");
+        this.SendMsg(MsgID.MttManualStart , body);
+    };
+    SendGetMttRank(_mode : number, _page : number, _pageSize : number) 
+    {
+        var body = 
+        { 
+            "mode" : _mode, 
+            "page" : _page, 
+            "pageSize" : _pageSize, 
+        }
+        console.log("Mtt 获取排行榜");
+        this.SendMsg(MsgID.GetMttRank , body);
+    };
 }
 
-export enum MsgStatus {
+
+
+
+    
+    
+
+
+
+
+export enum MsgStatus
+{
     SUCCESS = 1,
     FAILED = 2,
 }
@@ -441,10 +574,23 @@ export enum MsgID {
     GetAssets = 246,
     GetLunBoTu = 296,
     GetMttMatchDetails = 340,
+    AttendMtt = 341,
+    MttCancelReg = 342,
+    MttDismiss = 343,
+    MttJoinNotify = 345, //推送有人报名
+    MttReadyNotify = 346 , //Mtt比赛准备开始了
+    MttStatusChange = 353, //比赛状态通知
+    MttManualStart =  354,
     VeryifySmsCode = 387,
+    GetMttTableInfo = 556,
+    GetMttPlayerList = 557,
+    GetMttRank = 681,
+    MttGetRebuyInfo = 685,
+    GetSelfTicket = 693,
     GetMttList = 702,
     SetMttMacthKeepTop = 927,
     detectCanDeleteAccount = 988,
     GetLogOffCode = 989,
     deleteAccount = 990,
+    GetUnionAssets = 994,
 }

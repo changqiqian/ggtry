@@ -40,7 +40,7 @@ export class Localization
             console.log("没有找到对应的多语言 key====" + _key);
         }
 
-        return "None";
+        return _key;
     }
 
     public static LocationData=[
@@ -104,27 +104,46 @@ export class Localization
         {"name":"00013", "ch": "个人信息设置成功！", "en": "Complete personal information success!"},
         {"name":"00014", "ch": "操作無法完成。（錯誤代碼：", "en": "The operation couldn't be completed.(Error code:"},
         {"name":"00015", "ch": "输入内容不能包含空格", "en": "Input can not contain charactor \"space\""},
-        {"name":"00016", "ch": "请打开Cyber官网，扫描二维码,", "en": "Please access Cyber website and scan"},
-        {"name":"00017", "ch": "免费,", "en": "Freeroll"},
-        {"name":"00018", "ch": "手动开始,", "en": "Manual Start"},
-        {"name":"00019", "ch": "报名中,", "en": "Registering"},
-        {"name":"00020", "ch": "比赛结束,", "en": "Match End"},
-        {"name":"00021", "ch": "延迟报名,", "en": "Delay Reg"},
-        {"name":"00022", "ch": "休息中,", "en": "Breaking time"},
-        {"name":"00023", "ch": "进行中,", "en": "Started"},
-        {"name":"00024", "ch": "即将开始,", "en": "Start Soon"},
-        {"name":"00025", "ch": "赛事信息,", "en": "Info"},
-        {"name":"00026", "ch": "玩家信息,", "en": "Players"},
-        {"name":"00027", "ch": "奖励,", "en": "Prize"},
-        {"name":"00028", "ch": "牌桌,", "en": "Table"},
-        {"name":"00029", "ch": "获取比赛信息失败,", "en": "Get mtt info failed"},
-        {"name":"00030", "ch": "已破保,", "en": "Smashed"},
-        {"name":"00031", "ch": "报名,", "en": "Register"},
-        {"name":"00032", "ch": "审核中,", "en": "Waiting for review"},
-        {"name":"00033", "ch": "取消报名,", "en": "Unregister"},
-        {"name":"00034", "ch": "回到比赛,", "en": "Back to game"},
-        {"name":"00035", "ch": "开始时间,", "en": "Start time"},
-        {"name":"00036", "ch": "免费,", "en": "Free"},
+        {"name":"00016", "ch": "请打开Cyber官网，扫描二维码", "en": "Please access Cyber website and scan"},
+        {"name":"00017", "ch": "免费", "en": "Freeroll"},
+        {"name":"00018", "ch": "手动开始", "en": "Manual Start"},
+        {"name":"00019", "ch": "报名中", "en": "Registering"},
+        {"name":"00020", "ch": "比赛结束", "en": "Match End"},
+        {"name":"00021", "ch": "延迟报名", "en": "Delay Reg"},
+        {"name":"00022", "ch": "休息中", "en": "Breaking time"},
+        {"name":"00023", "ch": "进行中", "en": "Started"},
+        {"name":"00024", "ch": "即将开始", "en": "Start Soon"},
+        {"name":"00025", "ch": "赛事信息", "en": "Info"},
+        {"name":"00026", "ch": "玩家信息", "en": "Players"},
+        {"name":"00027", "ch": "奖励", "en": "Prize"},
+        {"name":"00028", "ch": "牌桌", "en": "Table"},
+        {"name":"00029", "ch": "获取比赛信息失败", "en": "Get mtt info failed"},
+        {"name":"00030", "ch": "已破保", "en": "Smashed"},
+        {"name":"00031", "ch": "报名", "en": "Register"},
+        {"name":"00032", "ch": "审核中", "en": "Waiting for review"},
+        {"name":"00033", "ch": "取消报名", "en": "Unregister"},
+        {"name":"00034", "ch": "回到比赛", "en": "Back to game"},
+        {"name":"00035", "ch": "开始时间", "en": "Start time"},
+        {"name":"00036", "ch": "免费", "en": "Free"},
+        {"name":"00037", "ch": "比赛还没开始,", "en": "Registering"},
+        {"name":"00038", "ch": "比赛进行中", "en": "Runing"},
+        {"name":"00039", "ch": "钱圈", "en": "Reward range"},
+        {"name":"00040", "ch": "分钟", "en": "mins"},
+        {"name":"00041", "ch": "重购", "en": "Confirm Rebuy"},
+        {"name":"00042", "ch": "报名", "en": "Confirm Registration"},
+        {"name":"00043", "ch": "请选择支付方式", "en": "Please select the payment"},
+        {"name":"00044", "ch": "没有可用门票", "en": "No Tickets Useable"},
+        {"name":"00045", "ch": "mtt开赛失败", "en": "Start mtt failed"},
+        {"name":"00046", "ch": "确定解散比赛吗？\n报名费将退还给用户", "en": "Confirm to dismiss? \n Fees will be returned to registered player"},
+        {"name":"00047", "ch": "确定开始比赛吗？", "en": "Start match now?"},
+        {"name":"00048", "ch": "Season", "en": "Season"},
+        {"name":"00049", "ch": "Month", "en": "Month"},
+        {"name":"00050", "ch": "Week", "en": "Week"},
+        {"name":"00051", "ch": "All", "en": "All"},
+        {"name":"00052", "ch": "暂无数据", "en": "No data"},
+        //服务器发过来的key
+        {"name":"key10925", "ch": "比赛不存在", "en": "Tournament does not exist"},
+        
     ]
 
     

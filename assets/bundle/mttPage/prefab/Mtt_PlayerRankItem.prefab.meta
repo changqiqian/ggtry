@@ -1,0 +1,13 @@
+{
+  "ver": "1.1.38",
+  "importer": "prefab",
+  "imported": true,
+  "uuid": "23a8bc6a-07d8-4596-8e6c-a49b0e0c0869",
+  "files": [
+    ".json"
+  ],
+  "subMetas": {},
+  "userData": {
+    "syncNodeName": "Mtt_PlayerRankItem"
+  }
+}

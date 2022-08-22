@@ -24,6 +24,14 @@ export class Mtt_DetailPage extends BaseUI
     @property(Node) 
     mSubLayer: Node = null;
 
+    
+    onEnable()
+    {
+        this.scheduleOnce(()=>
+        {
+            HallData.GetInstance().Data_MttInfoSubPage = Mtt_InfoSubPage.InfoPage;
+        },0);
+    }
 
     InitParam() 
     {
@@ -49,7 +57,7 @@ export class Mtt_DetailPage extends BaseUI
                 case Mtt_InfoSubPage.PlayerPage:
                     title = Localization.GetString("00026")
                     break;
-                case Mtt_InfoSubPage.PrizePage:
+                case Mtt_InfoSubPage.RewardPage:
                     title = Localization.GetString("00027")
                     break;
                 case Mtt_InfoSubPage.TablePage:
@@ -61,32 +69,41 @@ export class Mtt_DetailPage extends BaseUI
         }
 
         this.AddSubView("mttPage","prefab/Mtt_InfoPage",false , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_PlayersPage",false , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_RewardPage",false , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_TableInfoPage",false , null , this.mSubLayer);
     }
     RegDataNotify() 
-    {
+    {        
+        HallData.GetInstance().AddListener("Data_MttDismiss",(_current , _before)=>
+        {
+            this.Show(false);
+        },this);
         HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
         {
+            this.mMatchName.string = _current.matchConfig.matchName;
+            this.mGiftDescribe.string = _current.matchConfig.strapConfig.rewardDesc;
+            if(_current.matchConfig.strapConfig.rewardDesc != "")
+            {
+                this.mGiftTag.active = true;
+            }
+            else
+            {
+                this.mGiftTag.active = false;
+            }
             this.LoadRemoteSprite(_current.matchConfig.strapConfig.backgroundImg,(_spriteFrame)=>
             {
                 this.mBG.spriteFrame = _spriteFrame;
-                this.mMatchName = _current.matchConfig.matchName;
-
-                if(_current.matchConfig.strapConfig.rewardDesc.length>=0)
-                {
-                    this.mGiftTag.active = true;
-                    this.mGiftDescribe.string = _current.matchConfig.strapConfig.rewardDesc;
-                }
-                else
-                {
-                    this.mGiftTag.active = false;
-                }
             });
 
         },this);
+
+
+        
     }
     LateInit() 
     {
-        HallData.GetInstance().Data_MttInfoSubPage = Mtt_InfoSubPage.InfoPage;
+
     }
     UnregDataNotify() 
     {

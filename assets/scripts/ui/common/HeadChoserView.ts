@@ -31,10 +31,11 @@ export class HeadChoserView extends BaseUI
                 this.Show(false);
             },i);
 
-            this.LoadSprite("common" , "texture/head/" + i.toString() , (_spriteFrame)=>
+            this.LoadLocalHead(i,(_spriteFrame)=>
             {
                 currentBtn.SetSprite(_spriteFrame);
-            })
+            });
+
         }
 
         this.mCameraBtn.SetClickCallback(()=>

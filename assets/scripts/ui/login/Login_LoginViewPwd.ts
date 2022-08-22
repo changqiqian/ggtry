@@ -56,7 +56,7 @@ export class Login_LoginViewPwd extends BaseUI {
 
         this.mForgetBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("login","prefab/Login_ForgetPwd");
+            this.ShowLayer("common","prefab/ForgetPwd");
         });
 
         this.mSeePwdToggle.SetClickCallback((_result)=>

@@ -2,10 +2,14 @@ import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { UIMgr } from '../../base/UIMgr';
+import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
+import { TipsWindow } from '../common/TipsWindow';
 import { ToggleBtn } from '../common/ToggleBtn';
 import { HallData, Mtt_InfoSubPage, Mtt_MatchStatus, Mtt_RegType, Mtt_StartMode, Mtt_UserStatus } from '../hall/HallData';
+import { Mtt_AttendPage } from './Mtt_AttendPage';
 import { Mtt_RegisterFee } from './Mtt_RegisterFee';
 const { ccclass, property } = _decorator;
 
@@ -77,22 +81,62 @@ export class Mtt_InfoPage extends BaseUI
     {
 
     }
+
+    ButtonLogic()
+    {
+        switch(this.mData.userStatus)
+        {
+            case Mtt_UserStatus.NotAttend:
+            {
+                if(this.mData.statusInfo.status == Mtt_MatchStatus.Registring)
+                {
+                    Network.GetInstance().SendMttGetRebuyInfo(this.mData.matchConfig.matchId);
+                }
+            }
+            break;
+            case Mtt_UserStatus.Registed:
+            {
+                Network.GetInstance().SendMttCancelReg(900 , this.mData.matchConfig.matchId);
+            }
+            break;
+            case Mtt_UserStatus.Attending:
+            {
+                //  cc.director.loadScene("game");
+            }
+            break;
+        }
+    }
+
     BindUI() 
     {
         this.mObBtn.SetClickCallback(()=>
         {
+            //去游戏房间
         });
 
         this.mRebuy.SetClickCallback(()=>
         {
+            this.ButtonLogic();
         });
 
         this.mAttendBtn.SetClickCallback(()=>
         {
+            this.ButtonLogic();
         });
 
         this.mDismissBtn.SetClickCallback(()=>
         {
+            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            {
+                let tempScript = _script as TipsWindow;
+                let tips = Localization.GetString("00046");
+                tempScript.SetTips(tips);
+                tempScript.SetCallback(()=>
+                {
+                    Network.GetInstance().SendMttDismiss(900,this.mData.matchConfig.matchId);
+                })
+            })
+            
         });
 
         this.mAccessBtn.SetClickCallback(()=>
@@ -101,25 +145,78 @@ export class Mtt_InfoPage extends BaseUI
 
         this.mManualStartBtn.SetClickCallback(()=>
         {
+            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            {
+                let tempScript = _script as TipsWindow;
+                let tips = Localization.GetString("00047");
+                tempScript.SetTips(tips);
+                tempScript.SetCallback(()=>
+                {
+                    Network.GetInstance().SendMttManualStart(this.mData.matchConfig.matchId);
+                })
+            })
+
+            
         });
 
         let BlindInfoBtn = this.mBinldUpInfo.getChildByName("BlindUpBtn").getComponent(BaseButton);
         BlindInfoBtn.SetClickCallback(()=>
         {
         });
+
+        this.mAvgStacks.active = false;
+        this.mCurrentLevel.active = false;
+        this.mNextLevel.active = false;
+        this.mNextBreakTime.active = false;
     }
+
+
     RegDataNotify() 
     {
+
+        HallData.GetInstance().AddListener("Data_MttManualStart",(_current , _before)=>
+        {
+            this.Refresh();
+        },this);
+        HallData.GetInstance().AddListener("Data_CancelMttResp",(_current , _before)=>
+        {
+            this.Refresh();
+        },this);
+        HallData.GetInstance().AddListener("Data_MttJoinNotify",(_current , _before)=>
+        {
+            this.Refresh();
+        },this);
+        
+
+        HallData.GetInstance().AddListener("Data_AttendMttResp",(_current , _before)=>
+        {
+            this.Refresh();
+        },this);
+        
+
+        HallData.GetInstance().AddListener("Data_MttGetRebuyInfo",(_current , _before)=>
+        {
+            this.ShowWindow("mttPage" , "prefab/Mtt_AttendPage",true,(_script)=>
+            {
+                let haveRealReward = this.HaveRealReward();
+                let tempScript = _script as Mtt_AttendPage;
+                tempScript.InitWithData(_current , haveRealReward);
+            })
+
+        },this);
+        
         HallData.GetInstance().AddListener("Data_MttInfoSubPage",(_current , _before)=>
         {
             this.Show(_current == Mtt_InfoSubPage.InfoPage);
+            if(_current == Mtt_InfoSubPage.InfoPage)
+            {
+                this.Refresh();
+            }
         },this);
         
         HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
         {
             this.mData = _current;
-
-            let dynamicReward = _current.dynamicReward;
             let isCreator = this.mData.matchConfig.creatorUserId == LocalPlayerData.GetInstance().Data_Uid;
 
             //保底奖金
@@ -151,7 +248,6 @@ export class Mtt_InfoPage extends BaseUI
                         this.mData.matchConfig.enterFeeType == Mtt_RegType.DiamondAndTicket)
                     {
                         tempScript.InitWithData(Mtt_RegType.Diamond , tempReward);
-        
                     }
                 }
             }
@@ -192,13 +288,8 @@ export class Mtt_InfoPage extends BaseUI
                 let dateValue = startDate.getDate();  
                 let hoursValue = startDate.getHours();
                 let minutesValue = startDate.getMinutes();
-                // if(minutesValue < 10) 
-                // {
-                //     minutesValue = '0' + minutesValue
-                // }
                 timeStr = dateValue + "/"+monthValue+" "+hoursValue + ":" + minutesValue;
                 this.mStartTime.string = Localization.GetString("00035") +" " + timeStr;
-
             }
             
             //开赛倒计时相关
@@ -239,25 +330,19 @@ export class Mtt_InfoPage extends BaseUI
                 }
             }
 
-            {
-                this.mBinldUpInfo.getChildByName("Content").getComponent(Label).string = this.mData.matchConfig.riseBlindTime.toString();
-                let tempStartChip = this.mData.matchConfig.beginScore.toString();
-                tempStartChip += "(" + Math.floor(this.mData.matchConfig.beginScore/(this.mData.statusInfo.beginBlind*2)) + "BB)";
-                this.mStartChips.getChildByName("Content").getComponent(Label).string = tempStartChip;
-                let tempStartBlind = this.mData.matchConfig.beginBlind.toString() + "/" + (this.mData.matchConfig.beginBlind*2).toString();
-                this.mStartBlind.getChildByName("Content").getComponent(Label).string = tempStartBlind;
-                this.mCurrentPlayerinfo.getChildByName("Content").getComponent(Label).string = this.mData.statusInfo.totalUser.toString();
-                this.mTalbelSeat.getChildByName("Content").getComponent(Label).string = this.mData.matchConfig.seatCount.toString();
-                let minMaxPlayer = this.mData.matchConfig.minPlayer + "-" + this.mData.matchConfig.maxPlayer;
-                this.mMinMaxPlayer.getChildByName("Content").getComponent(Label).string = minMaxPlayer;
-
-
+            {   
                 this.mBreakTime.active = this.mData.matchConfig.isRest;
                 if(this.mData.matchConfig.isRest)
                 {
-                    this.mBreakTime.getChildByName("Content").getComponent(Label).string = "";
+                    let levelTime = GameConfig.GetLevel(this.mData.matchConfig.riseBlindTime);
+                    let takeTime = GameConfig.GetTakeTime(this.mData.matchConfig.riseBlindTime);
+                    let breakTimeDescribe =   "5mins every" + takeTime + "mins" + " - Lv" + levelTime;
+                    this.mBreakTime.getChildByName("Content").getComponent(Label).string = breakTimeDescribe;
                 }
-                
+                else
+                {
+                    this.mBreakTime.getChildByName("Content").getComponent(Label).string = "-";
+                }
                 
                 if(this.mData.matchConfig.delayLevel <= 0)
                 {
@@ -309,7 +394,7 @@ export class Mtt_InfoPage extends BaseUI
 
                 if(this.mData.statusInfo.status < Mtt_MatchStatus.Started)
                 {
-                    if(this.mData.matchConfig.beginMode == Mtt_StartMode.AutoStart)
+                    if(this.mData.matchConfig.matchMode == 2)
                     {
                         this.mAccessBtn.node.active = isCreator;
                     } 
@@ -317,9 +402,72 @@ export class Mtt_InfoPage extends BaseUI
                     {
                         this.mAccessBtn.node.active = false;
                     }
+                    this.mBinldUpInfo.getChildByName("Content").getComponent(Label).string = this.mData.matchConfig.riseBlindTime.toString() 
+                    + Localization.GetString("00040");
+                    let tempStartChip = this.mData.matchConfig.beginScore.toString();
+                    tempStartChip += "(" + Math.floor(this.mData.matchConfig.beginScore/(this.mData.matchConfig.beginBlind*2)) + "BB)";
+                    this.mStartChips.getChildByName("Content").getComponent(Label).string = tempStartChip;
+                    let tempStartBlind = this.mData.matchConfig.beginBlind.toString() + "/" + (this.mData.matchConfig.beginBlind*2).toString();
+                    this.mStartBlind.getChildByName("Content").getComponent(Label).string = tempStartBlind;
+                    this.mCurrentPlayerinfo.getChildByName("Content").getComponent(Label).string = this.mData.statusInfo.totalUser.toString();
+                    this.mTalbelSeat.getChildByName("Content").getComponent(Label).string = this.mData.matchConfig.seatCount.toString();
+                    let minMaxPlayer = this.mData.matchConfig.minPlayer + "-" + this.mData.matchConfig.maxPlayer;
+                    this.mMinMaxPlayer.getChildByName("Content").getComponent(Label).string = minMaxPlayer;
+                }
+                else
+                {
+                    this.mCurrentPlayerinfo.getChildByName("Content").getComponent(Label).string =
+                                            this.mData.statusInfo.playerUser +"/" + this.mData.statusInfo.totalUser;
+                    let averScore = ((this.mData.matchConfig.beginScore * this.mData.statusInfo.totalUser)/this.mData.statusInfo.playerUser);
+                    let averBB = Math.floor(averScore/(this.mData.statusInfo.curBlind*2));
+                    this.mAvgStacks.active = true;
+                    this.mAvgStacks.getChildByName("Content").getComponent(Label).string = averScore.toFixed(2) +"(" + averBB + ")";
+                    this.StartBlindTimeCountDown();
+                    this.mCurrentLevel.active = true;
+                    let currentLevel = "L" + this.mData.statusInfo.curLevel;
+                    let currentBlindInfo = this.mData.statusInfo.curBlind + "/" + this.mData.statusInfo.curBlind * 2 + "(" + this.mData.statusInfo.beforeScore + ")";
+                    this.mCurrentLevel.getChildByName("Content").getComponent(Label).string = currentLevel + currentBlindInfo;
+
+                    this.mNextLevel.active = true;
+                    let nextLevel = "L" + this.mData.statusInfo.nextLevel;
+                    let nextBlindInfo = this.mData.statusInfo.nextBlind + "/" + this.mData.statusInfo.nextBlind * 2 + "(" + this.mData.statusInfo.nextBeforeScore + ")";
+                    this.mNextLevel.getChildByName("Content").getComponent(Label).string = nextLevel + nextBlindInfo;
+                    this.MatchPlayingTimeCount();
+                    this.StartRestTimeCountDown();
                 }
             }
-            
+        },this);
+
+        HallData.GetInstance().AddListener("Data_MttStatusChange",(_current , _before)=>
+        {
+            this.Refresh();
+            if(_current.reason == 8)
+            {
+                // this.mCurrentLevel.active = true;
+                // let currentLevel = "L" + _current.curLevel;
+                // let currentBlindInfo = _current.curBlind + "/" + _current.curBlind * 2 + "(" +_current.beforeScore + ")";
+                // this.mCurrentLevel.getChildByName("Content").getComponent(Label).string = currentLevel + currentBlindInfo;
+
+                // this.mNextLevel.active = true;
+                // let nextLevel = "L" + _current.nextLevel;
+                // let nextBlindInfo = _current.nextBlind + "/" + _current.nextBlind * 2 + "(" + _current.nextBeforeScore + ")";
+                // this.mNextLevel.getChildByName("Content").getComponent(Label).string = nextLevel + nextBlindInfo;
+                
+                // this.mData.statusInfo.leftTime = _current.leftTime;
+                // this.StartBlindTimeCountDown();
+                // this.mData.statusInfo.restLeftTime = _current.restLeftTime;
+                // this.mCurrentPlayerinfo.getChildByName("Content").getComponent(Label).string = _current.playerUser +"/" + _current.totalUser;
+                // this.StartRestTimeCountDown();
+            }
+            else if (_current.reason == 7)
+            {
+                
+            }
+            else if (_current.reason == 9)
+            {
+                
+            }
+
         },this);
     }
     LateInit() 
@@ -333,6 +481,11 @@ export class Mtt_InfoPage extends BaseUI
     CustmoerDestory() 
     {
         this.unscheduleAllCallbacks();
+    }
+
+    Refresh()
+    {
+        Network.GetInstance().SendGetMttMatchDetails(900, HallData.GetInstance().Data_CurrentMttMatchID);
     }
 
     UpdateBottomBtn()
@@ -421,10 +574,13 @@ export class Mtt_InfoPage extends BaseUI
         return null;
     }
 
+    //比赛还有多久开始
     StartMatchCountDown()
     {
+        this.mStatusDescribe.string = Localization.GetString("00037");
         this.MatchCountDownLogic();
         this.unschedule(this.MatchCountDownLogic);
+        this.unschedule(this.MatchPlayingTimeCountLogic);
         this.schedule(this.MatchCountDownLogic, 1);
     }
 
@@ -444,6 +600,115 @@ export class Mtt_InfoPage extends BaseUI
         }
         this.mCountDown.string = "" + timeStr;
     }
+
+    MatchPlayingTimeCount()
+    {
+        this.mStatusDescribe.string = Localization.GetString("00038");
+        this.MatchPlayingTimeCountLogic();
+        this.unschedule(this.MatchCountDownLogic);
+        this.unschedule(this.MatchPlayingTimeCountLogic);
+        this.schedule(this.MatchPlayingTimeCountLogic, 1);
+    }
+
+    
+    MatchPlayingTimeCountLogic()
+    {
+        this.mData.statusInfo.playTotalTime++;
+        let timeStr = this.GetDownTime(this.mData.statusInfo.playTotalTime);
+        this.mCountDown.string = "" + timeStr;
+    }
+
+    StartBlindTimeCountDown()
+    {
+        this.BlindTimeCountDownLogic();
+        this.unschedule(this.BlindTimeCountDownLogic);
+        if(this.mData.statusInfo.leftTime > 0)
+        {
+            this.schedule(this.BlindTimeCountDownLogic, 1);
+        }
+
+    }
+
+    BlindTimeCountDownLogic()
+    {
+        this.mData.statusInfo.leftTime--;
+        let m = Math.floor(this.mData.statusInfo.leftTime/60);
+        let s = (this.mData.statusInfo.leftTime % 60);
+        let strMin = "";
+        let strSecond = "";
+        if (m < 10) 
+        {
+            strMin = "0" + m;
+        }
+        else
+        {
+            strMin = m + "";
+        }
+
+        if (s < 10) 
+        {
+            strSecond = "0" + s;
+        }
+        else
+        {
+            strSecond = s + "";
+        }
+
+        let finalTime = m + ":" + s;
+        this.mBinldUpInfo.getChildByName("Content").getComponent(Label).string = finalTime;
+        if (this.mData.statusInfo.leftTime <= 0) 
+        {
+            this.unschedule(this.BlindTimeCountDownLogic);
+        }
+    }
+
+    StartRestTimeCountDown()
+    {
+        this.mNextBreakTime.active = true;
+        this.RestTimeCountDownLogic();
+        this.unschedule(this.RestTimeCountDownLogic);
+        if(this.mData.statusInfo.restLeftTime > 0)
+        {
+            this.schedule(this.RestTimeCountDownLogic, 1);
+        }
+
+    }
+
+    RestTimeCountDownLogic()
+    {
+        this.mData.statusInfo.restLeftTime--;
+        let m = Math.floor(this.mData.statusInfo.restLeftTime/60);
+        let s = (this.mData.statusInfo.restLeftTime % 60);
+        let strMin = "";
+        let strSecond = "";
+        if (m < 10) 
+        {
+            strMin = "0" + m;
+        }
+        else
+        {
+            strMin = m + "";
+        }
+
+        if (s < 10) 
+        {
+            strSecond = "0" + s;
+        }
+        else
+        {
+            strSecond = s + "";
+        }
+
+        let finalTime = m + ":" + s;
+        this.mNextBreakTime.getChildByName("Content").getComponent(Label).string = finalTime;
+        if (this.mData.statusInfo.restLeftTime <= 0) 
+        {
+            this.mNextBreakTime.active = false;
+            this.unschedule(this.RestTimeCountDownLogic);
+        }
+    }
+
+
 
     GetDownTime(_time) 
     {
@@ -508,6 +773,27 @@ export class Mtt_InfoPage extends BaseUI
             time += "00";
         }
         return (time == "") ? 0 : time;
+    }
+
+    //是否含有实物奖励
+    HaveRealReward() : boolean
+    {
+        let arr  = this.mData.rewardConfig.rewards;
+        for (let i = 0; i < arr.length; i++) 
+        {
+            if(arr[i].reward) 
+            {
+                for(let j = 0; j < arr[i].reward.length; j++) 
+                {
+                    let awdItem = arr[i].reward[j]
+                    if(awdItem.rewardType == 1) 
+                    {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
 }
 
