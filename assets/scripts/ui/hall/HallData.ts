@@ -22,8 +22,8 @@ export class HallData extends DataNotify {
     }
 
     Data_SubPage : Hall_SubPage = null; //大厅底部 分页
-    Data_LunBoTu : any = null;
-    Data_MttList : any = null;
+    Data_LunBoTu : any = null; //轮播图数据
+    Data_MttList : any = null; //mtt 比赛列表数据
     Data_CurrentMttMatchID : number = null ; //当前查看的mtt matchid
     Data_MttInfoSubPage : Mtt_InfoSubPage = null; //Mtt详细信息页面 分页
     Data_MttMatchDetails  : any = null; //进入mtt详细页面的数据
@@ -56,7 +56,7 @@ export class HallData extends DataNotify {
         {
             if(_msgBody.list != null && _msgBody.list.length != 0) 
             {
-                //排序
+                //排序 照搬原来的代码 反正就是排序的意思
                 {
                     for(let i = 0; i < _msgBody.list.length; i++) 
                     {
@@ -181,7 +181,7 @@ export class HallData extends DataNotify {
         },this);
         
         
-        
+    
     }
 
     UnregisteMsg()

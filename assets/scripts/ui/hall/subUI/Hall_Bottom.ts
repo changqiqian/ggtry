@@ -28,7 +28,7 @@ export class Hall_Bottom extends BaseUI
     }
     LateInit() 
     {
-        HallData.GetInstance().Data_SubPage = Hall_SubPage.MTT;
+        
     }
     UnregDataNotify() 
     {

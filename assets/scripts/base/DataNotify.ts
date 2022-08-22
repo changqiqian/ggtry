@@ -146,7 +146,13 @@ export class DataNotify
         return this[_paramName];
     }
 
-    Reset()
+    RemoveAllListenner()
+    {
+        this.__listeners = null;
+        this.__listeners = {};
+    }
+
+    ResetAllData()
     {
         var props = Object.keys(this);
         props.forEach((prop) => 
@@ -158,9 +164,6 @@ export class DataNotify
                 this[prop]  = DefaultValue;
             }
         })
-
-        this.__listeners = null;
-        this.__listeners = {};
     }
 }
 

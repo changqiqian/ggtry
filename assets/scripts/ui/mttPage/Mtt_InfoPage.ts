@@ -592,8 +592,8 @@ export class Mtt_InfoPage extends BaseUI
         let timeValue = this.mData.matchConfig.beginTime - timestamp;
         let timeStr;
         timeValue = --this.mData.statusInfo.leftTime;
-        timeStr = this.GetDownTime(timeValue);
-        if(timeStr <= 0)
+        timeStr = GameConfig.GetRestTime_D_H_M_S(timeValue);
+        if(timeValue <= 0)
         {
             this.unschedule(this.MatchCountDownLogic)
             this.mCountDown.string = "";
@@ -614,7 +614,7 @@ export class Mtt_InfoPage extends BaseUI
     MatchPlayingTimeCountLogic()
     {
         this.mData.statusInfo.playTotalTime++;
-        let timeStr = this.GetDownTime(this.mData.statusInfo.playTotalTime);
+        let timeStr = GameConfig.GetRestTime_D_H_M_S(this.mData.statusInfo.playTotalTime);
         this.mCountDown.string = "" + timeStr;
     }
 
@@ -632,29 +632,7 @@ export class Mtt_InfoPage extends BaseUI
     BlindTimeCountDownLogic()
     {
         this.mData.statusInfo.leftTime--;
-        let m = Math.floor(this.mData.statusInfo.leftTime/60);
-        let s = (this.mData.statusInfo.leftTime % 60);
-        let strMin = "";
-        let strSecond = "";
-        if (m < 10) 
-        {
-            strMin = "0" + m;
-        }
-        else
-        {
-            strMin = m + "";
-        }
-
-        if (s < 10) 
-        {
-            strSecond = "0" + s;
-        }
-        else
-        {
-            strSecond = s + "";
-        }
-
-        let finalTime = m + ":" + s;
+        let finalTime = GameConfig.GetRestTime_M_S(this.mData.statusInfo.leftTime);
         this.mBinldUpInfo.getChildByName("Content").getComponent(Label).string = finalTime;
         if (this.mData.statusInfo.leftTime <= 0) 
         {
@@ -677,29 +655,7 @@ export class Mtt_InfoPage extends BaseUI
     RestTimeCountDownLogic()
     {
         this.mData.statusInfo.restLeftTime--;
-        let m = Math.floor(this.mData.statusInfo.restLeftTime/60);
-        let s = (this.mData.statusInfo.restLeftTime % 60);
-        let strMin = "";
-        let strSecond = "";
-        if (m < 10) 
-        {
-            strMin = "0" + m;
-        }
-        else
-        {
-            strMin = m + "";
-        }
-
-        if (s < 10) 
-        {
-            strSecond = "0" + s;
-        }
-        else
-        {
-            strSecond = s + "";
-        }
-
-        let finalTime = m + ":" + s;
+        let finalTime = GameConfig.GetRestTime_M_S(this.mData.statusInfo.restLeftTime);
         this.mNextBreakTime.getChildByName("Content").getComponent(Label).string = finalTime;
         if (this.mData.statusInfo.restLeftTime <= 0) 
         {
@@ -708,72 +664,6 @@ export class Mtt_InfoPage extends BaseUI
         }
     }
 
-
-
-    GetDownTime(_time) 
-    {
-        let days = parseInt((_time / 60 / 60 / 24).toString() , 10); //计算剩余的天数 
-        let hours = parseInt((_time / 60 / 60 % 24).toString() , 10); //计算剩余的小时 
-        let minutes = parseInt((_time / 60 % 60).toString(), 10);//计算剩余的分钟 
-        let seconds = parseInt((_time % 60).toString(), 10);//计算剩余的秒数
-        let time = '';
-        
-        if (days > 0) 
-        {
-            if (days < 10)
-                time = days + "Days ";
-                if(days==1)
-                {
-                    time =days + "Day ";
-                }
-            else
-            {
-                time = days + "Days ";
-            }
-        }
-        if (hours > 0) 
-        {
-            if (hours < 10)
-            {
-                time += "0" + hours + ":";
-            }
-            else
-            {
-                time += hours + ":";
-            }
-        }
-        if (minutes > 0) 
-        {
-            if (minutes < 10)
-            {
-                time += "0" + minutes + ":";
-            }
-            else
-            {
-                time += minutes + ":";
-            }
-        } 
-        else 
-        {
-            time += "00:";
-        }
-        if (seconds > 0) 
-        {
-            if (seconds < 10)
-            {
-                time += "0" + seconds;
-            }
-            else
-            {
-                time += seconds;
-            }
-        } 
-        else 
-        {
-            time += "00";
-        }
-        return (time == "") ? 0 : time;
-    }
 
     //是否含有实物奖励
     HaveRealReward() : boolean

@@ -4,7 +4,7 @@ import { Calculator, CardStruct, CardType } from '../../base/Calculator';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { Network } from '../../network/Network';
 import { Poker } from '../common/Poker';
-import { HallData } from './HallData';
+import { HallData, Hall_SubPage } from './HallData';
 const { ccclass, property } = _decorator;
 
 @ccclass('HallUI')
@@ -35,7 +35,7 @@ export class HallUI extends BaseUI
     }
     LateInit() 
     {
-        
+        HallData.GetInstance().Data_SubPage = Hall_SubPage.MTT;
     }
     UnregDataNotify() 
     {
@@ -43,7 +43,7 @@ export class HallUI extends BaseUI
     CustmoerDestory() 
     {
         HallData.GetInstance().UnregisteMsg();
-        HallData.GetInstance().Reset();
+        HallData.GetInstance().RemoveAllListenner();
     }
 
 }

@@ -44,8 +44,6 @@ export class LoginUI extends BaseUI
     }
     BindUI() 
     {
-    
-
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.node.on(Node.EventType.TOUCH_END,this.OnLoginBtn.bind(this),this);
         this.mSignBtn.node.on(Node.EventType.TOUCH_END,this.OnSignBtn.bind(this),this);

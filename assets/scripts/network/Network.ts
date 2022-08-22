@@ -532,6 +532,18 @@ export class Network {
         console.log("Mtt 获取排行榜");
         this.SendMsg(MsgID.GetMttRank , body);
     };
+
+    SendRefreshMttInfo( _matchId : number) 
+    {
+        var body = 
+        { 
+            "matchId" : _matchId, 
+        }
+        console.log("刷新mtt最新状态数据");
+        this.SendMsg(MsgID.RefreshMttInfo , body);
+    };
+
+    
 }
 
 
@@ -584,6 +596,7 @@ export enum MsgID {
     VeryifySmsCode = 387,
     GetMttTableInfo = 556,
     GetMttPlayerList = 557,
+    RefreshMttInfo = 558,
     GetMttRank = 681,
     MttGetRebuyInfo = 685,
     GetSelfTicket = 693,
