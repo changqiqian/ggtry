@@ -117,6 +117,14 @@ export class GameConfig
         GameConfig.WriteSimpleData("LOGIN_USER", _user);
     }
     
+    public static SaveBBTroggle(_isChecked: boolean) 
+    {
+        GameConfig.WriteSimpleData('SHOWBB_LOACAL_D', _isChecked);
+    }
+    public static SavePlayBGMTroggle(_isChecked: number) 
+    {
+        GameConfig.WriteSimpleData('IS_CAN_PLAY_BGM', _isChecked);
+    }
 
     public static GetRandChar()
     {
