@@ -223,7 +223,7 @@ export enum Mtt_RegType //mtt报名费类型
     UnionCoin = 7,
 }
 
-export enum Mtt_RankSubPage //mtt详细信息页面 分页
+export enum Mtt_RankSubPage //mtt排行榜页面 分页
 {
     All = 0,
     Month = 1,
