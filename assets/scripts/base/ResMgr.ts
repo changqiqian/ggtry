@@ -1,5 +1,5 @@
 
-import { AssetManager, assetManager } from "cc";
+import { AssetManager, assetManager, debug } from "cc";
 
 export class ResMgr 
 {
@@ -25,9 +25,10 @@ export class ResMgr
     {
         for(let i = 0 ; i < _folders.length ; i++)
         {
-           
-            _bundle.preloadDir(_folders[i],()=>
+            _bundle.loadDir(_folders[i],(_param0 , _param1)=>
             {
+                // console.log("_param0 ===" + _param0);
+                // console.log("_param1 ===" + _param1.length);
                 if(_loadFinish)
                 {
                     _loadFinish();

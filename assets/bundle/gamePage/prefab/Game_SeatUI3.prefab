@@ -176,13 +176,13 @@
     "_left": 0,
     "_right": 0,
     "_top": 995.4300000000001,
-    "_bottom": 360,
+    "_bottom": 0.2,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
     "_isAbsRight": true,
     "_isAbsTop": true,
-    "_isAbsBottom": true,
+    "_isAbsBottom": false,
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
@@ -256,7 +256,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -786,
+      "y": -658.8,
       "z": 0
     }
   },

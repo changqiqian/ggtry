@@ -543,6 +543,17 @@ export class Network {
         this.SendMsg(MsgID.RefreshMttInfo , body);
     };
 
+    SendMttGetRoomInfo( _gameType : number, _matchId : number, _isBack : boolean) 
+    {
+        var body = 
+        { 
+            "gameType" : _gameType,
+            "matchId" : _matchId, 
+            "isBack" : _isBack,
+        }
+        console.log("进入mtt比赛房间后，获取房间消息");
+        this.SendMsg(MsgID.MttGetRoomInfo , body);
+    };
     
 }
 
@@ -551,7 +562,11 @@ export class Network {
 
     
     
-
+export enum GameType
+{
+    Cash = 1,
+    Mtt = 900,
+}
 
 
 
@@ -589,6 +604,7 @@ export enum MsgID {
     AttendMtt = 341,
     MttCancelReg = 342,
     MttDismiss = 343,
+    MttGetRoomInfo = 344,
     MttJoinNotify = 345, //推送有人报名
     MttReadyNotify = 346 , //Mtt比赛准备开始了
     MttStatusChange = 353, //比赛状态通知

@@ -40,7 +40,7 @@ export class Localization
             console.log("没有找到对应的多语言 key====" + _key);
         }
 
-        return _key;
+        return "";
     }
 
     public static LocationData=[
@@ -141,6 +141,7 @@ export class Localization
         {"name":"00050", "ch": "Week", "en": "Week"},
         {"name":"00051", "ch": "All", "en": "All"},
         {"name":"00052", "ch": "暂无数据", "en": "No data"},
+        {"name":"00053", "ch": "获取mtt比赛信息失败,返回大厅", "en": "Get mtt info failed,back to hall"},
         //服务器发过来的key
         {"name":"key10925", "ch": "比赛不存在", "en": "Tournament does not exist"},
         

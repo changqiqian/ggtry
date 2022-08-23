@@ -4,7 +4,7 @@ import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
-import { Network } from '../../network/Network';
+import { GameType, Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { TipsWindow } from '../common/TipsWindow';
 import { ToggleBtn } from '../common/ToggleBtn';
@@ -96,7 +96,7 @@ export class Mtt_InfoPage extends BaseUI
             break;
             case Mtt_UserStatus.Registed:
             {
-                Network.GetInstance().SendMttCancelReg(900 , this.mData.matchConfig.matchId);
+                Network.GetInstance().SendMttCancelReg(GameType.Mtt , this.mData.matchConfig.matchId);
             }
             break;
             case Mtt_UserStatus.Attending:
@@ -133,7 +133,7 @@ export class Mtt_InfoPage extends BaseUI
                 tempScript.SetTips(tips);
                 tempScript.SetCallback(()=>
                 {
-                    Network.GetInstance().SendMttDismiss(900,this.mData.matchConfig.matchId);
+                    Network.GetInstance().SendMttDismiss(GameType.Mtt,this.mData.matchConfig.matchId);
                 })
             })
             
@@ -485,7 +485,7 @@ export class Mtt_InfoPage extends BaseUI
 
     Refresh()
     {
-        Network.GetInstance().SendGetMttMatchDetails(900, HallData.GetInstance().Data_CurrentMttMatchID);
+        Network.GetInstance().SendGetMttMatchDetails(GameType.Mtt, HallData.GetInstance().Data_CurrentMttMatchID);
     }
 
     UpdateBottomBtn()

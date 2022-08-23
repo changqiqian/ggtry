@@ -15,6 +15,17 @@ export class TipsWindow extends BaseUI
     mTips: Label = null;
     mConfirmCallback : Function = null;
     mCancelCallback : Function = null;
+    onEnable()
+    {
+        this.mConfirmCallback = null;
+        this.mCancelCallback = null;
+    }
+
+    onDisable()
+    {
+        this.mCancelBtn.node.active = true;
+    }
+
     InitParam() 
     {
 
@@ -57,12 +68,6 @@ export class TipsWindow extends BaseUI
 
     }
 
-    onEnable()
-    {
-        this.mConfirmCallback = null;
-        this.mCancelCallback = null;
-    }
-
     public SetTips(_tips : string)
     {
         this.mTips.string = _tips;
@@ -72,6 +77,12 @@ export class TipsWindow extends BaseUI
     {
         this.mConfirmCallback = _confirm;
         this.mCancelCallback = _cancel;
+    }
+
+    public ShowConfirmBtnOnly()
+    {
+        this.mCancelBtn.node.active = false;
+        this.mConfirm.node.active = true;
     }
 
 }

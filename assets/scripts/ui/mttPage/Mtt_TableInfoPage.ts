@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { UIMgr } from '../../base/UIMgr';
-import { Network } from '../../network/Network';
+import { GameType, Network } from '../../network/Network';
 import { HallData, Mtt_InfoSubPage } from '../hall/HallData';
 import { Mtt_TableInfoItem } from './Mtt_TableInfoItem';
 const { ccclass, property } = _decorator;
@@ -91,7 +91,7 @@ export class Mtt_TableInfoPage extends BaseUI
 
     Refresh()
     {
-        Network.GetInstance().SendGetMttTableInfo(900, HallData.GetInstance().Data_CurrentMttMatchID, 
+        Network.GetInstance().SendGetMttTableInfo(GameType.Mtt, HallData.GetInstance().Data_CurrentMttMatchID, 
         this.mCurrentPage , this.mPageCount);
     }
 

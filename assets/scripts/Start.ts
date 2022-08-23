@@ -19,7 +19,7 @@ export class Start extends Component
     {
         UIMgr.GetInstance().Init(()=>
         {
-            UIMgr.GetInstance().ChangeScene(SceneType.Loading);  
+            UIMgr.GetInstance().ChangeScene(SceneType.Game);  
         });
     }
 

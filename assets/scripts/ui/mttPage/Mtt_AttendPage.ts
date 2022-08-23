@@ -3,7 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
-import { Network } from '../../network/Network';
+import { GameType, Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { HallData, Mtt_RegType } from '../hall/HallData';
 import { Mtt_AttendBtn } from './Mtt_AttendBtn';
@@ -62,11 +62,11 @@ export class Mtt_AttendPage extends BaseUI
                 }
                 
                 let ticketId = currentOption.GetTicketId();
-                Network.GetInstance().SendAttendMtt(900,matchId,ticketId,clubId);
+                Network.GetInstance().SendAttendMtt(GameType.Mtt,matchId,ticketId,clubId);
             }
             else
             {
-                Network.GetInstance().SendAttendMtt(900,matchId,0,clubId);
+                Network.GetInstance().SendAttendMtt(GameType.Mtt,matchId,0,clubId);
             }
             this.CloseAsWindow();
         });

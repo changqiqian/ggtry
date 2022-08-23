@@ -7,13 +7,18 @@ const { ccclass, property } = _decorator;
 @ccclass('GameUI')
 export class GameUI extends BaseUI 
 {
+    public static GetUsingBundleFolder() : Array<string>
+    {
+        return ["gamePage"];
+    }
+
     InitParam() 
     {
         GameData.GetInstance().RegisteMsg();
     }
     BindUI() 
     {
-        if(HallData.GetInstance().Data_CurrentMttMatchID != 0)
+        if(HallData.GetInstance().Data_CurrentMttMatchID)
         {
             this.AddSubView("gamePage","prefab/Game_Mtt",true);
         }

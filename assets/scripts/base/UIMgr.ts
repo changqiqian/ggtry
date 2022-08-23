@@ -2,6 +2,7 @@
 import { AssetManager, assetManager, Component, find, instantiate } from "cc";
 import { LoadingMask } from "../ui/common/LoadingMask";
 import { Toast } from "../ui/common/Toast";
+import { GameUI } from "../ui/gamePage/GameUI";
 import { HallUI } from "../ui/hall/HallUI";
 import { LoadingUI } from "../ui/loading/LoadingUI";
 import { LoginUI } from "../ui/login/LoginUI";
@@ -51,6 +52,7 @@ export enum SceneType
     Loading,
     Login,
     Hall,
+    Game,
 }
 
 export class UIMgr 
@@ -89,9 +91,12 @@ export class UIMgr
         let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,"loading" ,LoadingUI.GetUsingBundleFolder(),resFolder);
         let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,"login",LoginUI.GetUsingBundleFolder(),resFolder);
         let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI" ,"hall",HallUI.GetUsingBundleFolder(),resFolder);
+        let gameConfig = new SceneConfig(SceneType.Game, "prefab/GameUI" ,"gamePage",GameUI.GetUsingBundleFolder(),resFolder);
+
         this.mSceneConfig.push(loadingConfig);
         this.mSceneConfig.push(loginConfig);
         this.mSceneConfig.push(hallConfig);
+        this.mSceneConfig.push(gameConfig);
         
         //公用资源加载
         this.PreloadRes(["common"], resFolder , ()=>
@@ -104,6 +109,7 @@ export class UIMgr
                 this.mLoadingMask = tempScript;
                 this.mLoadingMask.ShowLoading(false);
             });
+            //初始化快捷提示
             this.CreatePrefab("common","prefab/Toast" , (_tempNode)=>
             {
                 let tempScript = _tempNode.getComponent(Toast);
@@ -111,9 +117,6 @@ export class UIMgr
                 this.mToast = tempScript;
                 this.mToast.Show(false);
             });
-
-
-            
             _loadFinish();
         });
     }

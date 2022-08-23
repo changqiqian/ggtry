@@ -81,6 +81,7 @@ export class Mtt_Main extends BaseUI
 
         HallData.GetInstance().AddListener("Data_MttReadyNotify",(_current , _before)=>
         {
+            
             //跳转到游戏中
         },this);
         

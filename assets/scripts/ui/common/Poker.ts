@@ -1,23 +1,35 @@
 import { _decorator, Component, Node, Sprite, Tween, Vec2, v2, math, Vec3 } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { CardStruct, CardType } from '../../base/Calculator';
+import { BaseButton } from './BaseButton';
 const { ccclass, property } = _decorator;
 
 @ccclass('Poker')
-export class Poker extends BaseUI {
-
+export class Poker extends BaseUI 
+{
     @property(Node) 
-    Front: Node = null;
+    mFront: Node = null;
     @property(Node) 
-    Back: Node = null;
-
+    mBack: Node = null;
+    @property(Node) 
+    mGlow: Node = null;
+    @property(BaseButton) 
+    mShowBtn: BaseButton = null;
+    @property(Node) 
+    mIcon: Node = null;
     InitParam() 
     {
         
     }
     BindUI() 
     {
+        this.mIcon.active = false;
         this.ShowBack();
+        this.mShowBtn.node.active = false;
+        this.mShowBtn.SetClickCallback(()=>
+        {
+            this.mIcon.active = !this.mIcon.active;
+        })
     }
     RegDataNotify() 
     {
@@ -68,7 +80,7 @@ export class Poker extends BaseUI {
         let path = Poker.GetPokerTexturePath(_card);
         this.LoadSprite(bundleName,path,(_spirteFrame)=>
         {
-            this.Front.getComponent(Sprite).spriteFrame = _spirteFrame;
+            this.mFront.getComponent(Sprite).spriteFrame = _spirteFrame;
         });
     }
 
@@ -76,15 +88,15 @@ export class Poker extends BaseUI {
     {
         let halfDuration = _duration / 2;
 
-        let tempTweenBack = new Tween(this.Back); 
+        let tempTweenBack = new Tween(this.mBack); 
         tempTweenBack.to(halfDuration , {scale: new Vec3(0,1,1)});
         tempTweenBack.start();
 
-        let tempTweenFront = new Tween(this.Front); 
+        let tempTweenFront = new Tween(this.mFront); 
         tempTweenFront.to(halfDuration , {scale: new Vec3(0,1,1)});
         tempTweenFront.call(()=>
         {
-            this.Front.active = true;
+            this.mFront.active = true;
         });
         tempTweenFront.to(halfDuration , {scale: new Vec3(1,1,1)});
         tempTweenFront.start();
@@ -94,14 +106,19 @@ export class Poker extends BaseUI {
 
     public ShowFront()
     {
-        this.Back.active = false;
-        this.Front.active = true;
+        this.mBack.active = false;
+        this.mFront.active = true;
     }
 
     public ShowBack() 
     {
-        this.Back.active = true;
-        this.Front.active = false;
+        this.mBack.active = true;
+        this.mFront.active = false;
+    }
+
+    public SetClickAble()
+    {
+        this.mShowBtn.node.active = true;
     }
 
 }

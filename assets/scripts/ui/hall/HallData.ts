@@ -42,8 +42,11 @@ export class HallData extends DataNotify {
     Data_MttManualStart : any = null;// 手动开始比赛
     Data_MttRankSubPage : Mtt_RankSubPage = null; //Mtt排行榜 分页面
     Data_MttRankData : any = null ; //Mtt排行榜数据
+
+    Data_IsBackToGame : boolean = null ; //老项目代码里面需要用这个值来获取比赛信息，我也不知道有什么用
     RegisteMsg()
     {
+        this.Data_IsBackToGame = false;
         Network.GetInstance().AddMsgListenner(MsgID.GetLunBoTu ,(_msgBody)=>
         {
             if(_msgBody != null && _msgBody.adverts != null && _msgBody.adverts.length !=0)
@@ -143,6 +146,7 @@ export class HallData extends DataNotify {
         {
             if (_msgBody.code == MsgStatus.SUCCESS) 
             {
+                this.Data_IsBackToGame = true;
                 this.Data_MttReadyNotify = _msgBody;
             }
             else

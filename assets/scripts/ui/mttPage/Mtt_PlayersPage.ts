@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, Label, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { UIMgr } from '../../base/UIMgr';
-import { Network } from '../../network/Network';
+import { GameType, Network } from '../../network/Network';
 import { HallData, Mtt_InfoSubPage } from '../hall/HallData';
 import { Mtt_PlayerRankItem } from './Mtt_PlayerRankItem';
 const { ccclass, property } = _decorator;
@@ -101,7 +101,7 @@ export class Mtt_PlayersPage extends BaseUI
 
     Refresh()
     {
-        Network.GetInstance().SendGetMttPlayerList(900, HallData.GetInstance().Data_CurrentMttMatchID, 
+        Network.GetInstance().SendGetMttPlayerList(GameType.Mtt, HallData.GetInstance().Data_CurrentMttMatchID, 
         this.mCurrentPage , this.mPageCount);
     }
 
