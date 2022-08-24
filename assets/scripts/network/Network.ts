@@ -554,6 +554,17 @@ export class Network {
         console.log("进入mtt比赛房间后，获取房间消息");
         this.SendMsg(MsgID.MttGetRoomInfo , body);
     };
+
+    SendCheckPublicCards() 
+    {
+        var body = 
+        { 
+
+        }
+        console.log("发发看");
+        this.SendMsg(MsgID.CheckPublicCards , body);
+    };
+
     
 }
 
@@ -594,11 +605,14 @@ export enum MsgID {
     Login = 201,
     Ping = 202,
     GetUserInfo = 204,
+    GameStart = 216,
+    SendPublicCards = 219,
     GetSMSCode = 233,
     Register = 234,
     ResetPwd = 235,
     SetUserInfo = 236,
     GetAssets = 246,
+    CheckPublicCards = 288,
     GetLunBoTu = 296,
     GetMttMatchDetails = 340,
     AttendMtt = 341,

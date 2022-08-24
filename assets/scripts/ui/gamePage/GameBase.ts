@@ -22,7 +22,10 @@ export class GameBase extends BaseUI
         this.InitSelfPreAction();
         this.InitSelfUI();
         this.InitTopUI();
+        this.InitControlBtns();
+        this.InitOtherUI();
         this.InitSeatUI();
+    
     }
     RegDataNotify() 
     {
@@ -86,7 +89,17 @@ export class GameBase extends BaseUI
         this.AddSubView("gamePage","prefab/Game_TopUI",true);
     }
 
+    InitControlBtns()
+    {
+        this.AddSubView("gamePage","prefab/Game_ControlBtns",true);
+    }
+
     InitSeatUI()
+    {
+
+    }
+
+    InitOtherUI()
     {
 
     }

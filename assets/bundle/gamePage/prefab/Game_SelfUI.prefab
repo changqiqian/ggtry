@@ -1595,12 +1595,12 @@
     "__prefab": {
       "__id__": 118
     },
-    "_alignFlags": 8,
+    "_alignFlags": 12,
     "_target": null,
     "_left": 42.25599999999997,
     "_right": 0,
     "_top": 0,
-    "_bottom": 0,
+    "_bottom": 317.392,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -1678,7 +1678,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": -465.244,
-      "y": -48.26,
+      "y": 67.13,
       "z": 0
     }
   },

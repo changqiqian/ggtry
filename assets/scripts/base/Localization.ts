@@ -142,6 +142,10 @@ export class Localization
         {"name":"00051", "ch": "All", "en": "All"},
         {"name":"00052", "ch": "暂无数据", "en": "No data"},
         {"name":"00053", "ch": "获取mtt比赛信息失败,返回大厅", "en": "Get mtt info failed,back to hall"},
+        {"name":"00054", "ch": "当前级别", "en": "Now Level"},
+        {"name":"00055", "ch": "下一级别", "en": "Next Level"},
+        {"name":"00056", "ch": "桌号", "en": "Table No."},
+        {"name":"00057", "ch": "您没有足够的钻石", "en": "Not enough diamond"},
         //服务器发过来的key
         {"name":"key10925", "ch": "比赛不存在", "en": "Tournament does not exist"},
         

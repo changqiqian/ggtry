@@ -39,7 +39,7 @@ export class Game_Mtt extends GameBase
 
     GetGameInfoMsg()
     {
-        //let mttMatchId = HallData.GetInstance().Data_CurrentMttMatchID;
+        //let mttMatchId = GameData.GetInstance().Data_CurrentMttMatchId;
         //Network.GetInstance().SendMttGetRoomInfo(GameType.Mtt , mttMatchId , HallData.GetInstance().Data_IsBackToGame)
         //Network.GetInstance().SendRefreshMttInfo(mttMatchId);
     }
@@ -47,6 +47,12 @@ export class Game_Mtt extends GameBase
     InitTableinfo()
     {
         this.AddSubView("gamePage","prefab/Game_MttInfo",true);
+    }
+
+    InitOtherUI()
+    {
+        this.AddSubView("gamePage","prefab/Game_MttBottomTips",true);
+        this.AddSubView("gamePage","prefab/Game_MttRestTimeTips",true);
     }
 
     InitSeatUI()
