@@ -100,12 +100,10 @@ export class Network {
         if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) {
             var body = JSON.stringify(_msg);
 
-            var final = JSON.stringify({ "msgId": _msgID, "msgBody": body });
-            if(_msgID != MsgID.Ping)
-            {
+            var final = JSON.stringify({ msgId: _msgID, msgBody: body });
+            if (_msgID != MsgID.Ping) {
                 UIMgr.GetInstance().ShowLoading(true);
-                console.log("发送消息：" + final);
-
+                console.log('发送消息：' + final);
             }
             this.mWebSocket.send(final);
         } else {
@@ -405,143 +403,107 @@ export class Network {
         this.SendMsg(MsgID.deleteAccount, body);
     }
 
-    SendSetMttMacthKeepTop(_matchId : number  , _isTop : boolean) 
-    {
-        var body = 
-        { 
-            matchId : _matchId,
-            isTop : _isTop
-        }
-        console.log("设置mtt比赛为置顶比赛");
-        this.SendMsg(MsgID.SetMttMacthKeepTop , body);
-    };
+    SendSetMttMacthKeepTop(_matchId: number, _isTop: boolean) {
+        var body = {
+            matchId: _matchId,
+            isTop: _isTop,
+        };
+        console.log('设置mtt比赛为置顶比赛');
+        this.SendMsg(MsgID.SetMttMacthKeepTop, body);
+    }
 
-    SendGetMttPlayerList(_gameType:number, _matchID:number, _page:number, _pageCount:number) 
-    {
-        var body = 
-        { 
-            "gameType" : _gameType, //搞不懂
-            "matchID" : _matchID,
-            "index" : _page, //申请第几页
-            "count" : _pageCount, //每一页多少个数据
-        }
-        console.log("获取mtt当前玩家列表");
-        this.SendMsg(MsgID.GetMttPlayerList , body);
-    };
-    SendGetMttTableInfo(_gameType:number, _matchID:number, _page:number, _pageCount:number) 
-    {
-        var body = 
-        { 
-            "gameType" : _gameType, //搞不懂
-            "matchID" : _matchID,
-            "index" : _page, //申请第几页
-            "count" : _pageCount, //每一页多少个数据
-        }
-        console.log("获取mtt当前分桌信息");
-        this.SendMsg(MsgID.GetMttTableInfo , body);
-    };
+    SendGetMttPlayerList(_gameType: number, _matchID: number, _page: number, _pageCount: number) {
+        var body = {
+            gameType: _gameType, //搞不懂
+            matchID: _matchID,
+            index: _page, //申请第几页
+            count: _pageCount, //每一页多少个数据
+        };
+        console.log('获取mtt当前玩家列表');
+        this.SendMsg(MsgID.GetMttPlayerList, body);
+    }
+    SendGetMttTableInfo(_gameType: number, _matchID: number, _page: number, _pageCount: number) {
+        var body = {
+            gameType: _gameType, //搞不懂
+            matchID: _matchID,
+            index: _page, //申请第几页
+            count: _pageCount, //每一页多少个数据
+        };
+        console.log('获取mtt当前分桌信息');
+        this.SendMsg(MsgID.GetMttTableInfo, body);
+    }
 
-    SendMttGetRebuyInfo(_matchID:number) 
-    {
-        var body = 
-        { 
-            "matchId" : _matchID, 
-        }
-        console.log("获取mtt 买入类型信息");
-        this.SendMsg(MsgID.MttGetRebuyInfo , body);
-    };
-    
-    SendMttCancelReg(_gameType:number ,_matchID:number) 
-    {
-        var body = 
-        { 
-            "matchId" : _matchID, 
-            "gameType" : _gameType,
-        }
-        console.log("获取mtt 取消报名");
-        this.SendMsg(MsgID.MttCancelReg , body);
-    };
-    SendAttendMtt(_gameType : number, _matchId : number, _tid :number = 0, _clubId:number = 0) 
-    {
+    SendMttGetRebuyInfo(_matchID: number) {
+        var body = {
+            matchId: _matchID,
+        };
+        console.log('获取mtt 买入类型信息');
+        this.SendMsg(MsgID.MttGetRebuyInfo, body);
+    }
+
+    SendMttCancelReg(_gameType: number, _matchID: number) {
+        var body = {
+            matchId: _matchID,
+            gameType: _gameType,
+        };
+        console.log('获取mtt 取消报名');
+        this.SendMsg(MsgID.MttCancelReg, body);
+    }
+    SendAttendMtt(_gameType: number, _matchId: number, _tid: number = 0, _clubId: number = 0) {
         let tmp;
-        if(_tid == 0) 
-        {
-            tmp = ''
-        }
-        else
-        {
+        if (_tid == 0) {
+            tmp = '';
+        } else {
             tmp = _tid;
         }
 
-        var body = 
-        { 
-            "gameType" : _gameType, 
-            "matchId" : _matchId,
-            "ticketId" : tmp,
-            "clubId" : _clubId
-
-        }
-        console.log("mtt 报名");
-        this.SendMsg(MsgID.AttendMtt , body);
-    };
-    SendGetUnionAssets(_clubId:number ) 
-    {
-        var body = 
-        { 
-            id : _clubId, 
-        }
-        console.log("获取联盟资产");
-        this.SendMsg(MsgID.GetUnionAssets , body);
-    };
-    SendGetSelfTicket(_ticketId:number) 
-    {
-        var body = 
-        { 
-            "tpId" : _ticketId, 
-        }
-        console.log("获取自己的门票");
-        this.SendMsg(MsgID.GetSelfTicket , body);
-    };
-    SendMttDismiss(_gameType : number, _matchId : number) 
-    {
-        var body = 
-        { 
-            "gameType" : _gameType, 
-            "matchId" : _matchId, 
-        }
-        console.log("Mtt 解散比赛");
-        this.SendMsg(MsgID.MttDismiss , body);
-    };
-    SendMttManualStart(_matchId : number) 
-    {
-        var body = 
-        { 
-            "matchId" : _matchId, 
-        }
-        console.log("Mtt 手动开始比赛");
-        this.SendMsg(MsgID.MttManualStart , body);
-    };
-    SendGetMttRank(_mode : number, _page : number, _pageSize : number) 
-    {
-        var body = 
-        { 
-            "mode" : _mode, 
-            "page" : _page, 
-            "pageSize" : _pageSize, 
-        }
-        console.log("Mtt 获取排行榜");
-        this.SendMsg(MsgID.GetMttRank , body);
-    };
-
-    SendRefreshMttInfo( _matchId : number) 
-    {
-        var body = 
-        { 
-            "matchId" : _matchId, 
-        }
-        console.log("刷新mtt最新状态数据");
-        this.SendMsg(MsgID.RefreshMttInfo , body);
-    };
+        var body = {
+            gameType: _gameType,
+            matchId: _matchId,
+            ticketId: tmp,
+            clubId: _clubId,
+        };
+        console.log('mtt 报名');
+        this.SendMsg(MsgID.AttendMtt, body);
+    }
+    SendGetUnionAssets(_clubId: number) {
+        var body = {
+            id: _clubId,
+        };
+        console.log('获取联盟资产');
+        this.SendMsg(MsgID.GetUnionAssets, body);
+    }
+    SendGetSelfTicket(_ticketId: number) {
+        var body = {
+            tpId: _ticketId,
+        };
+        console.log('获取自己的门票');
+        this.SendMsg(MsgID.GetSelfTicket, body);
+    }
+    SendMttDismiss(_gameType: number, _matchId: number) {
+        var body = {
+            gameType: _gameType,
+            matchId: _matchId,
+        };
+        console.log('Mtt 解散比赛');
+        this.SendMsg(MsgID.MttDismiss, body);
+    }
+    SendMttManualStart(_matchId: number) {
+        var body = {
+            matchId: _matchId,
+        };
+        console.log('Mtt 手动开始比赛');
+        this.SendMsg(MsgID.MttManualStart, body);
+    }
+    SendGetMttRank(_mode: number, _page: number, _pageSize: number) {
+        var body = {
+            mode: _mode,
+            page: _page,
+            pageSize: _pageSize,
+        };
+        console.log('Mtt 获取排行榜');
+        this.SendMsg(MsgID.GetMttRank, body);
+    }
 
     SendMttGetRoomInfo( _gameType : number, _matchId : number, _isBack : boolean) 
     {
@@ -610,6 +572,36 @@ export class Network {
         console.log("牌局中 获取mtt自己的牌桌状态");
         this.SendMsg(MsgID.GetSelfMttStatus , body);
     };
+
+    SendRefreshMttInfo(_matchId: number) {
+        var body = {
+            matchId: _matchId,
+        };
+        console.log('刷新mtt最新状态数据');
+        this.SendMsg(MsgID.RefreshMttInfo, body);
+    }
+    SendGetMessageAllRead() {
+        var body = {};
+        console.log('查看公告红点');
+        this.SendMsg(MsgID.GetMessageAllRead, body);
+    }
+    SendMessageInfo(_mode: number, _page: number, _pageSize: number) {
+        var body = {
+            mode: _mode,
+            page: _page,
+            pageSize: _pageSize,
+        };
+        console.log('取得公告消息:' + body);
+        this.SendMsg(MsgID.GetMessageInfo, body);
+    }
+    SendMessageIsRead(_mode: number, _messageId) {
+        var body = {
+            mode: _mode,
+            messageid: _messageId,
+        };
+        console.log('发送已读消息:' + body);
+        this.SendMsg(MsgID.MessageIsRead, body);
+    }
     
 }
 
@@ -672,7 +664,7 @@ export enum MsgID {
     MttDismiss = 343,
     MttGetRoomInfo = 344,
     MttJoinNotify = 345, //推送有人报名
-    MttReadyNotify = 346 , //Mtt比赛准备开始了
+    MttReadyNotify = 346, //Mtt比赛准备开始了
     MttStatusChange = 353, //比赛状态通知
     MttManualStart =  354,
     MttSelfStatus = 356,
@@ -690,4 +682,7 @@ export enum MsgID {
     GetLogOffCode = 989,
     deleteAccount = 990,
     GetUnionAssets = 994,
+    GetMessageAllRead = 684,
+    GetMessageInfo = 682,
+    MessageIsRead = 683,
 }

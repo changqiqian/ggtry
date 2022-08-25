@@ -1,93 +1,84 @@
-
-export enum LanguageType
-{
-    EN = 0,//英文
-	HK = 1,//繁体中文
-	CN = 2,//简体中文
+export enum LanguageType {
+    EN = 0, //英文
+    HK = 1, //繁体中文
+    CN = 2, //简体中文
 }
 
-export class Localization
-{
+export class Localization {
     public static CurrentLanguage;
-    public static CurrentLanguageType : LanguageType = LanguageType.CN;
+    public static CurrentLanguageType: LanguageType = LanguageType.CN;
 
-    public static SetLanguage(_languageType : LanguageType)
-    {
+    public static SetLanguage(_languageType: LanguageType) {
         this.CurrentLanguageType = _languageType;
-        switch(this.CurrentLanguageType)
-        {
+        switch (this.CurrentLanguageType) {
             case LanguageType.EN:
-                Localization.CurrentLanguage = "en"
+                Localization.CurrentLanguage = 'en';
                 break;
             case LanguageType.HK:
-                Localization.CurrentLanguage = "ch"
+                Localization.CurrentLanguage = 'ch';
                 break;
             case LanguageType.CN:
-                Localization.CurrentLanguage = "ch"
+                Localization.CurrentLanguage = 'ch';
                 break;
         }
     }
 
-    public static GetString(_key:string)
-    {
+    public static GetString(_key: string) {
         let index = this.LocationData.findIndex((_item) => _item.name === _key);
-        if(index >= 0)
-        {
+        if (index >= 0) {
             return this.LocationData[index][this.CurrentLanguage];
-        }
-        else
-        {
-            console.log("没有找到对应的多语言 key====" + _key);
+        } else {
+            console.log('没有找到对应的多语言 key====' + _key);
         }
 
         return "";
     }
 
-    public static LocationData=[
-        {"name":"CountryName0", "ch": "香港" , "en": "Hong Kong"},
-        {"name":"CountryName1", "ch": "菲律宾" , "en": "Philippines"},
-        {"name":"CountryName2", "ch": "台湾" , "en": "Taiwan"},
-        {"name":"CountryName3", "ch": "泰国" , "en": "Thailand"},
-        {"name":"CountryName4", "ch": "马来西亚" , "en": "Malaysia"},
-        {"name":"CountryName5", "ch": "澳门" , "en": "Macao"},
-        {"name":"CountryName6", "ch": "老挝" , "en": "Laos"},
-        {"name":"CountryName7", "ch": "意大利" , "en": "Italy"},
-        {"name":"CountryName8", "ch": "美国" , "en": "USA"},
-        {"name":"CountryName9", "ch": "日本" , "en": "Japan"},
-        {"name":"CountryName10", "ch": "英国" , "en": "UK"},
-        {"name":"CountryName11", "ch": "法国" , "en": "France"},
-        {"name":"CountryName12", "ch": "韩国" , "en": "Korea"},
-        {"name":"CountryName13", "ch": "澳大利亚" , "en": "Australia"},
-        {"name":"CountryName14", "ch": "加拿大" , "en": "Canada"},
-        {"name":"CountryName15", "ch": "缅甸" , "en": "Myanmar"},
-        {"name":"CountryName16", "ch": "新加坡" , "en": "Singapore"},
-        {"name":"CountryName17", "ch": "印尼" , "en": "Indonesia"},
-        {"name":"CountryName17", "ch": "朝鲜" , "en": "North Korea"},
-        {"name":"CountryName18", "ch": "俄罗斯" , "en": "Russia"},
-        {"name":"CountryName19", "ch": "白俄罗斯" , "en": "Belarus"},
-        {"name":"CountryName20", "ch": "阿根廷" , "en": "Argentina"},
-        {"name":"CountryName21", "ch": "巴拉圭" , "en": "Paraguay"},
-        {"name":"CountryName22", "ch": "巴西" , "en": "Brazil"},
-        {"name":"CountryName23", "ch": "比利时" , "en": "Belgium"},
-        {"name":"CountryName24", "ch": "波兰" , "en": "Poland"},
-        {"name":"CountryName25", "ch": "德国" , "en": "Germany"},
-        {"name":"CountryName26", "ch": "芬兰" , "en": "Finland"},
-        {"name":"CountryName27", "ch": "柬埔寨" , "en": "Cambodia"},
-        {"name":"CountryName28", "ch": "埃及" , "en": "Egypt"},
-        {"name":"CountryName29", "ch": "荷兰" , "en": "Holland"},
-        {"name":"CountryName30", "ch": "瑞典" , "en": "Sweden"},
-        {"name":"CountryName31", "ch": "瑞士" , "en": "Switzerland"},
-        {"name":"CountryName32", "ch": "新西兰" , "en": "New Zealand"},
-        {"name":"CountryName33", "ch": "印度" , "en": "India"},
-        {"name":"CountryName34", "ch": "以色列" , "en": "Israel"},
-        {"name":"CountryName35", "ch": "约旦" , "en": "Jordan"},
-        {"name":"CountryName36", "ch": "智利" , "en": "Chile"},
-        {"name":"CountryName37", "ch": "葡萄牙" , "en": "Portugal"},
-        {"name":"CountryName38", "ch": "萨特阿拉伯" , "en": "Saudi Arabia"},
-        {"name":"CountryName39", "ch": "土耳其" , "en": "turkey"},
-        {"name":"CountryName40", "ch": "丹麦" , "en": "Denmark"},
-        {"name":"CountryName41", "ch": "越南" , "en": "Vietnam"},
-        {"name":"CountryName42", "ch": "阿联酋" , "en": "United Arab Emirates"},
+    public static LocationData = [
+        { name: 'CountryName0', ch: '香港', en: 'Hong Kong' },
+        { name: 'CountryName1', ch: '菲律宾', en: 'Philippines' },
+        { name: 'CountryName2', ch: '台湾', en: 'Taiwan' },
+        { name: 'CountryName3', ch: '泰国', en: 'Thailand' },
+        { name: 'CountryName4', ch: '马来西亚', en: 'Malaysia' },
+        { name: 'CountryName5', ch: '澳门', en: 'Macao' },
+        { name: 'CountryName6', ch: '老挝', en: 'Laos' },
+        { name: 'CountryName7', ch: '意大利', en: 'Italy' },
+        { name: 'CountryName8', ch: '美国', en: 'USA' },
+        { name: 'CountryName9', ch: '日本', en: 'Japan' },
+        { name: 'CountryName10', ch: '英国', en: 'UK' },
+        { name: 'CountryName11', ch: '法国', en: 'France' },
+        { name: 'CountryName12', ch: '韩国', en: 'Korea' },
+        { name: 'CountryName13', ch: '澳大利亚', en: 'Australia' },
+        { name: 'CountryName14', ch: '加拿大', en: 'Canada' },
+        { name: 'CountryName15', ch: '缅甸', en: 'Myanmar' },
+        { name: 'CountryName16', ch: '新加坡', en: 'Singapore' },
+        { name: 'CountryName17', ch: '印尼', en: 'Indonesia' },
+        { name: 'CountryName17', ch: '朝鲜', en: 'North Korea' },
+        { name: 'CountryName18', ch: '俄罗斯', en: 'Russia' },
+        { name: 'CountryName19', ch: '白俄罗斯', en: 'Belarus' },
+        { name: 'CountryName20', ch: '阿根廷', en: 'Argentina' },
+        { name: 'CountryName21', ch: '巴拉圭', en: 'Paraguay' },
+        { name: 'CountryName22', ch: '巴西', en: 'Brazil' },
+        { name: 'CountryName23', ch: '比利时', en: 'Belgium' },
+        { name: 'CountryName24', ch: '波兰', en: 'Poland' },
+        { name: 'CountryName25', ch: '德国', en: 'Germany' },
+        { name: 'CountryName26', ch: '芬兰', en: 'Finland' },
+        { name: 'CountryName27', ch: '柬埔寨', en: 'Cambodia' },
+        { name: 'CountryName28', ch: '埃及', en: 'Egypt' },
+        { name: 'CountryName29', ch: '荷兰', en: 'Holland' },
+        { name: 'CountryName30', ch: '瑞典', en: 'Sweden' },
+        { name: 'CountryName31', ch: '瑞士', en: 'Switzerland' },
+        { name: 'CountryName32', ch: '新西兰', en: 'New Zealand' },
+        { name: 'CountryName33', ch: '印度', en: 'India' },
+        { name: 'CountryName34', ch: '以色列', en: 'Israel' },
+        { name: 'CountryName35', ch: '约旦', en: 'Jordan' },
+        { name: 'CountryName36', ch: '智利', en: 'Chile' },
+        { name: 'CountryName37', ch: '葡萄牙', en: 'Portugal' },
+        { name: 'CountryName38', ch: '萨特阿拉伯', en: 'Saudi Arabia' },
+        { name: 'CountryName39', ch: '土耳其', en: 'turkey' },
+        { name: 'CountryName40', ch: '丹麦', en: 'Denmark' },
+        { name: 'CountryName41', ch: '越南', en: 'Vietnam' },
+        { name: 'CountryName42', ch: '阿联酋', en: 'United Arab Emirates' },
 
         {"name":"00001", "ch": "本应用软件在该地区无法使用，造成不便请见谅。" , "en": "This application is not available in your region.Sorry for the inconvenience."},
         {"name":"00002", "ch": "无效的电话号码！" , "en": "Invalid Phone Number!"},
@@ -153,18 +144,9 @@ export class Localization
         {"name":"00062", "ch": "排名", "en": "Rank"},
         {"name":"00063", "ch": "涨盲通知：当前盲注级别为", "en": "Level up:Current level:"},
         {"name":"00064", "ch": "底池", "en": "Pot"},
-        
-        
+        { name: '01000', ch: '公告', en: 'Notification' },
+        { name: '01001', ch: '消息', en: 'MESSAGES' },
         //服务器发过来的key
-        {"name":"key10925", "ch": "比赛不存在", "en": "Tournament does not exist"},
-        
-    ]
-
-    
-   
-    
-} 
-
-
-
-
+        { name: 'key10925', ch: '比赛不存在', en: 'Tournament does not exist' },
+    ];
+}

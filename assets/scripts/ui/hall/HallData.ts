@@ -1,25 +1,20 @@
-
 import { DataNotify } from '../../base/DataNotify';
 import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
 import { MsgID, MsgStatus, Network } from '../../network/Network';
 
-
-
-
 export class HallData extends DataNotify {
-    private static Instance:HallData = null;
+    private static Instance: HallData = null;
 
-    public static GetInstance() : HallData
-    {
-        if(HallData.Instance == null)
-        {
+    public static GetInstance(): HallData {
+        if (HallData.Instance == null) {
             HallData.Instance = new HallData();
             HallData.Instance.CreateNotify();
         }
 
         return HallData.Instance;
     }
+
 
     Data_SubPage : Hall_SubPage = null; //大厅底部 分页
     Data_LunBoTu : any = null; //轮播图数据
@@ -42,105 +37,138 @@ export class HallData extends DataNotify {
     Data_MttManualStart : any = null;// 手动开始比赛
     Data_MttRankSubPage : Mtt_RankSubPage = null; //Mtt排行榜 分页面
     Data_MttRankData : any = null ; //Mtt排行榜数据
+    Data_MeMessageSubPage: number = null; //消息页展示内容
+    Data_MeMessageReadAllRead: any = null; // 公告红点数据
+    Data_MeMessageData: any = null; // 公告或消息资料
+    Data_MeMessagDetailId: any = null; // 消息id
+    Data_MeMessagDetailData: any = null; // 消息资料
 
     Data_IsBackToGame : boolean = null ; //老项目代码里面需要用这个值来获取比赛信息，我也不知道有什么用
-    RegisteMsg()
-    {
-        this.Data_IsBackToGame = false;
-        Network.GetInstance().AddMsgListenner(MsgID.GetLunBoTu ,(_msgBody)=>
-        {
-            if(_msgBody != null && _msgBody.adverts != null && _msgBody.adverts.length !=0)
-            {
-                this.Data_LunBoTu = _msgBody;
-            }
-        },this);
 
-        Network.GetInstance().AddMsgListenner(MsgID.GetMttList ,(_msgBody)=>
-        {
-            if(_msgBody.list != null && _msgBody.list.length != 0) 
-            {
-                //排序 照搬原来的代码 反正就是排序的意思
-                {
-                    for(let i = 0; i < _msgBody.list.length; i++) 
-                    {
-                        _msgBody.list[i].sortValue = -i
-                        if(_msgBody.list[i].mttInfo.strapConfig.isTop) 
-                        {
-                            _msgBody.list[i].sortValue = 10000 - i 
-                        }
-                    }
-                    _msgBody.list.sort((a, b) => 
-                    {
-                        return a.sortValue > b.sortValue ? -1 : 1
-                    });
+
+
+
+
+    RegisteMsg() {
+        Network.GetInstance().AddMsgListenner(
+            MsgID.GetLunBoTu,
+            (_msgBody) => {
+                if (_msgBody != null && _msgBody.adverts != null && _msgBody.adverts.length != 0) {
+                    this.Data_LunBoTu = _msgBody;
                 }
+            },
+            this
+        );
 
-                this.Data_MttList = _msgBody.list;
-            }
-        },this);
 
-        Network.GetInstance().AddMsgListenner(MsgID.GetMttMatchDetails ,(_msgBody)=>
-        {
-            if (_msgBody.code == MsgStatus.FAILED) 
-            {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00029"));
-            } 
-            else if (_msgBody.code == MsgStatus.SUCCESS) 
-            {
-                this.Data_MttMatchDetails = _msgBody;
-            }
-        },this);
+        Network.GetInstance().AddMsgListenner(
+            MsgID.GetMttList,
+            (_msgBody) => {
+                if (_msgBody.list != null && _msgBody.list.length != 0) {
+                    //排序 照搬原来的代码 反正就是排序的意思
+                    {
+                        for (let i = 0; i < _msgBody.list.length; i++) {
+                            _msgBody.list[i].sortValue = -i;
+                            if (_msgBody.list[i].mttInfo.strapConfig.isTop) {
+                                _msgBody.list[i].sortValue = 10000 - i;
+                            }
+                        }
+                        _msgBody.list.sort((a, b) => {
+                            return a.sortValue > b.sortValue ? -1 : 1;
+                        });
+                    }
 
-        Network.GetInstance().AddMsgListenner(MsgID.GetMttPlayerList ,(_msgBody)=>
-        {
-            this.Data_MttPlayerList = _msgBody;
-        },this);
+                    this.Data_MttList = _msgBody.list;
+                }
+            },
+            this
+        );
 
-        Network.GetInstance().AddMsgListenner(MsgID.GetMttTableInfo ,(_msgBody)=>
-        {
-            this.Data_MttTableList = _msgBody;
-        },this);
+        Network.GetInstance().AddMsgListenner(
+            MsgID.GetMttMatchDetails,
+            (_msgBody) => {
+                if (_msgBody.code == MsgStatus.FAILED) {
+                    UIMgr.GetInstance().ShowToast(Localization.GetString('00029'));
+                } else if (_msgBody.code == MsgStatus.SUCCESS) {
+                    this.Data_MttMatchDetails = _msgBody;
+                }
+            },
+            this
+        );
 
-        Network.GetInstance().AddMsgListenner(MsgID.MttStatusChange ,(_msgBody)=>
-        {
-            this.Data_MttStatusChange = _msgBody;
-        },this);
-        Network.GetInstance().AddMsgListenner(MsgID.MttGetRebuyInfo ,(_msgBody)=>
-        {
-            this.Data_MttGetRebuyInfo = _msgBody;
-        },this);
-        Network.GetInstance().AddMsgListenner(MsgID.GetUnionAssets ,(_msgBody)=>
-        {
-            this.Data_UnionAssets = _msgBody;
-        },this);
-        Network.GetInstance().AddMsgListenner(MsgID.GetSelfTicket ,(_msgBody)=>
-        {
-            this.Data_SelfTickets = _msgBody;
-        },this);
-        
-        Network.GetInstance().AddMsgListenner(MsgID.AttendMtt ,(_msgBody)=>
-        {
-            if (_msgBody.code == MsgStatus.SUCCESS) 
-            {
-                this.Data_AttendMttResp = _msgBody;
-            }
-            else
-            {
-                UIMgr.GetInstance().ShowToast(Localization.GetString(_msgBody.reason));
-            } 
-            
-        },this);
+        Network.GetInstance().AddMsgListenner(
+            MsgID.GetMttPlayerList,
+            (_msgBody) => {
+                this.Data_MttPlayerList = _msgBody;
+            },
+            this
+        );
 
-        Network.GetInstance().AddMsgListenner(MsgID.MttCancelReg ,(_msgBody)=>
-        {
-            this.Data_CancelMttResp = _msgBody;
-            UIMgr.GetInstance().ShowToast(_msgBody.reason);
-        },this);
+        Network.GetInstance().AddMsgListenner(
+            MsgID.GetMttTableInfo,
+            (_msgBody) => {
+                this.Data_MttTableList = _msgBody;
+            },
+            this
+        );
 
-        Network.GetInstance().AddMsgListenner(MsgID.MttJoinNotify ,(_msgBody)=>
-        {
-            this.Data_MttJoinNotify = _msgBody;
-        },this);
+        Network.GetInstance().AddMsgListenner(
+            MsgID.MttStatusChange,
+            (_msgBody) => {
+                this.Data_MttStatusChange = _msgBody;
+            },
+            this
+        );
+        Network.GetInstance().AddMsgListenner(
+            MsgID.MttGetRebuyInfo,
+            (_msgBody) => {
+                this.Data_MttGetRebuyInfo = _msgBody;
+            },
+            this
+        );
+        Network.GetInstance().AddMsgListenner(
+            MsgID.GetUnionAssets,
+            (_msgBody) => {
+                this.Data_UnionAssets = _msgBody;
+            },
+            this
+        );
+        Network.GetInstance().AddMsgListenner(
+            MsgID.GetSelfTicket,
+            (_msgBody) => {
+                this.Data_SelfTickets = _msgBody;
+            },
+            this
+        );
+
+        Network.GetInstance().AddMsgListenner(
+            MsgID.AttendMtt,
+            (_msgBody) => {
+                if (_msgBody.code == MsgStatus.SUCCESS) {
+                    this.Data_AttendMttResp = _msgBody;
+                } else {
+                    UIMgr.GetInstance().ShowToast(Localization.GetString(_msgBody.reason));
+                }
+            },
+            this
+        );
+
+        Network.GetInstance().AddMsgListenner(
+            MsgID.MttCancelReg,
+            (_msgBody) => {
+                this.Data_CancelMttResp = _msgBody;
+                UIMgr.GetInstance().ShowToast(_msgBody.reason);
+            },
+            this
+        );
+
+        Network.GetInstance().AddMsgListenner(
+            MsgID.MttJoinNotify,
+            (_msgBody) => {
+                this.Data_MttJoinNotify = _msgBody;
+            },
+            this
+        );
 
         Network.GetInstance().AddMsgListenner(MsgID.MttReadyNotify ,(_msgBody)=>
         {
@@ -184,41 +212,51 @@ export class HallData extends DataNotify {
             this.Data_MttRankData = _msgBody;
         },this);
         
-        
-    
+        Network.GetInstance().AddMsgListenner(
+            MsgID.GetMessageAllRead,
+            (_msgBody) => {
+                if (_msgBody != null) {
+                    this.Data_MeMessageReadAllRead = _msgBody;
+                }
+            },
+            this
+        );
+        Network.GetInstance().AddMsgListenner(
+            MsgID.GetMessageInfo,
+            (_msgBody) => {
+                if (_msgBody != null) {
+                    this.Data_MeMessageData = _msgBody;
+                }
+            },
+            this
+        );
     }
 
-    UnregisteMsg()
-    {
+    UnregisteMsg() {
         Network.GetInstance().RemoveListenner(this);
     }
-
 }
 
-
-export enum Hall_SubPage //大厅底部分页
-{
-    MTT, 
+export enum Hall_SubPage { //大厅底部分页
+    MTT,
     Cash,
     Club,
     Activity,
     Me,
 }
 
-export enum Mtt_MatchListStatus //Mtt列表中的Item状态
-{
+export enum Mtt_MatchListStatus { //Mtt列表中的Item状态
     ManualStart = 0, //手动开始
-    NotStart = 1, //未开始 
+    NotStart = 1, //未开始
     DelayReg = 2, //延迟报名
-    MatchStarted = 3, //已开始 
+    MatchStarted = 3, //已开始
     RestTime = 4, //休息中
     MatchEnd = 5, //比赛结束
 }
 
-export enum Mtt_RegType //mtt报名费类型
-{
-    None = 0 ,
-    Coin = 1 ,
+export enum Mtt_RegType { //mtt报名费类型
+    None = 0,
+    Coin = 1,
     Diamond = 2,
     Ticket = 3,
     CoinAndTicket = 4,
@@ -226,6 +264,7 @@ export enum Mtt_RegType //mtt报名费类型
     Point = 6,
     UnionCoin = 7,
 }
+
 
 export enum Mtt_RankSubPage //mtt排行榜页面 分页
 {
@@ -235,25 +274,22 @@ export enum Mtt_RankSubPage //mtt排行榜页面 分页
     Season = 3,
 }
 
-export enum Mtt_InfoSubPage //mtt详细信息页面 分页
-{
+export enum Mtt_InfoSubPage { //mtt详细信息页面 分页
     InfoPage = 0,
     PlayerPage = 1,
     RewardPage = 2,
     TablePage = 3,
 }
 
-export enum Mtt_UserStatus //mtt比赛玩家状态
-{
-    NotAttend = 1 , //没有报名
+export enum Mtt_UserStatus { //mtt比赛玩家状态
+    NotAttend = 1, //没有报名
     WaitingApply = 2, //等待审核
     Registed = 3, //已报名
-    Attending = 4 ,//已经参加
+    Attending = 4, //已经参加
     Lose = 5, //已经淘汰
 }
 
-export enum Mtt_MatchStatus //Mtt详细信息页面的比赛状态
-{
+export enum Mtt_MatchStatus { //Mtt详细信息页面的比赛状态
     Registring = 1, //报名中
     Only_15mins = 2, //准备开始 提前15分钟
     Only_10s = 3 , //预备开始 10秒倒计时
@@ -264,8 +300,12 @@ export enum Mtt_MatchStatus //Mtt详细信息页面的比赛状态
     LevelUp = 8 , //涨盲通知
 }
 
-export enum Mtt_StartMode
-{
-    ManualStart = 1,  //手动开始
+export enum Mtt_StartMode {
+    ManualStart = 1, //手动开始
     AutoStart = 2, //自动开始
+}
+
+export enum Me_MessageSubPage { //消息页内容
+    Announcement = 0,
+    Message = 1,
 }
