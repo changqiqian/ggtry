@@ -13,7 +13,6 @@ export class Game_BetAmount extends BaseUI
     }
     BindUI() 
     {
-
     }
     RegDataNotify() 
     {

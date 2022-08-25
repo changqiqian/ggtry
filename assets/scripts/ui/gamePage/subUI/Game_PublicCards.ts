@@ -25,8 +25,12 @@ export class Game_PublicCards extends BaseUI
         GameData.GetInstance().AddListener("Data_SendPublicCards",(_current , _before)=>
         {
             //_current.centerCard
-
         },this);
+        GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
+        {
+            this.ClearPublicCards();
+        },this);
+
     }
     LateInit() 
     {
@@ -37,6 +41,11 @@ export class Game_PublicCards extends BaseUI
         GameData.GetInstance().RemoveListenerByTarget(this);
     }
     CustmoerDestory() 
+    {
+
+    }
+
+    ClearPublicCards()
     {
 
     }

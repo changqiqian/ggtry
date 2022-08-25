@@ -142,6 +142,13 @@ export abstract class BaseUI extends Component
     }
 
     
+    HaveSubView(_bundleName : string, _assetPath : string ) : boolean
+    {
+        let key = _bundleName + _assetPath;
+        let index = this.mLayerList.findIndex((_item) => _item.key === key);
+        return index >= 0;
+    }
+
 
     AddSubView(_bundleName : string, _assetPath : string , _show : boolean,  _loadFinish : Function = null , _parent : Node = null)
     {

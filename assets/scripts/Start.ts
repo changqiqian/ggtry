@@ -25,4 +25,3 @@ export class Start extends Component
 
 
 }
-

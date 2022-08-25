@@ -28,30 +28,33 @@ export class Game_MttRestTimeTips extends BaseUI
     }
     BindUI() 
     {
-        this.mBG.active = false;
-        this.mCountDown.string = "";
+
     }
     RegDataNotify() 
     {
         GameData.GetInstance().AddListener("Data_MttGetRoomInfo",(_current , _before)=>
         {
-            this.mBG.active = _current.status == Mtt_MatchStatus.Rest;
+            this.node.active = _current.status == Mtt_MatchStatus.Rest;
             if(_current.status == Mtt_MatchStatus.Rest)
             {
                 var leftTime = _current.status.leftTime
                 this.StartCountDown(leftTime);
             }
-
         },this);
-
         GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
         {
-            let matchConfig = _current.matchConfig;
-            let statusInfo = _current.statusInfo;
-            this.mBG.active = statusInfo.status == Mtt_MatchStatus.Rest;
-            if(statusInfo.status == Mtt_MatchStatus.Rest)
+            this.node.active = _current.statusInfo.status == Mtt_MatchStatus.Rest;
+            if(_current.statusInfo.status == Mtt_MatchStatus.Rest)
             {
-                var leftTime = statusInfo.restLeftTime;
+                var leftTime = _current.statusInfo.restLeftTime;
+                this.StartCountDown(leftTime);
+            }
+        },this);
+        GameData.GetInstance().AddListener("Data_MttStatusChange",(_current , _before)=>
+        {
+            if(_current.reason == Mtt_MatchStatus.Rest)
+            {
+                var leftTime = _current.leftTime;
                 this.StartCountDown(leftTime);
             }
 
@@ -102,7 +105,8 @@ export class Game_MttRestTimeTips extends BaseUI
         else
         {
             this.mCountDown.string = preffix + "00:00";
-            Network.GetInstance().SendRefreshMttInfo(GameData.GetInstance().Data_CurrentMttMatchId);
+            let matchId = GameData.GetInstance().Data_RefreshMttInfo.matchConfig.matchId;
+            Network.GetInstance().SendRefreshMttInfo(matchId);
         }
     }
 }

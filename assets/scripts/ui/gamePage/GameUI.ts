@@ -1,5 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Network } from '../../network/Network';
 import { HallData } from '../hall/HallData';
 import { GameData } from './GameData';
 const { ccclass, property } = _decorator;
@@ -20,7 +21,7 @@ export class GameUI extends BaseUI
     {
         if(HallData.GetInstance().Data_CurrentMttMatchID)
         {
-            GameData.GetInstance().Data_CurrentMttMatchId = HallData.GetInstance().Data_CurrentMttMatchID;
+            Network.GetInstance().SendRefreshMttInfo(HallData.GetInstance().Data_CurrentMttMatchID);
             this.AddSubView("gamePage","prefab/Game_Mtt",true);
         }
         else
@@ -38,7 +39,7 @@ export class GameUI extends BaseUI
     }
     UnregDataNotify() 
     {
-
+        //GameData.GetInstance().RemoveListenerByTarget(this);
     }
     CustmoerDestory() 
     {

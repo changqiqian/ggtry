@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Sprite, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { GameData } from '../gamePage/GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('PlayerInfo')
@@ -9,22 +10,27 @@ export class PlayerInfo extends BaseUI
     mHead: Sprite = null;
     @property(Label) 
     mName: Label = null;
-    InitParam() {
+    InitParam() 
+    {
 
     }
-    BindUI() {
+    BindUI() 
+    {
 
     }
-    RegDataNotify() {
+    RegDataNotify() 
+    {
 
     }
-    LateInit() {
+    LateInit() 
+    {
 
     }
-    UnregDataNotify() {
-
+    UnregDataNotify() 
+    {
     }
-    CustmoerDestory() {
+    CustmoerDestory() 
+    {
 
     }
 

@@ -1,5 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Network } from '../../network/Network';
 import { GameBase } from './GameBase';
 const { ccclass, property } = _decorator;
 
@@ -9,6 +10,7 @@ export class Game_Cash extends GameBase
     GetGameInfoMsg()
     {
 
+
     }
 
     InitTableinfo()
@@ -16,14 +18,16 @@ export class Game_Cash extends GameBase
         this.AddSubView("gamePage","prefab/Game_TableInfo",true);
     }
 
-
-
-    InitSeatUI()
+    DealEnterMsg(_data : any)
     {
-        //let seatCount = HallData.GetInstance().Data_MttMatchDetails.matchConfig.seatCount;
-        let seatCount = 5;
-        let prefabName = "Game_SeatUI" + seatCount;
-        this.AddSubView("gamePage","prefab/" + prefabName , true);
+
+        if(_data.deskConfig.isInsurance) 
+        {
+            //gc.ws.getInsDetail(gc.data.gameId)
+        }
+        //let matchId = 
+        //Network.GetInstance().SendRecordDuringMatch();
     }
+
 }
 

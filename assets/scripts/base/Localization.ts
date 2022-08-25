@@ -141,11 +141,20 @@ export class Localization
         {"name":"00050", "ch": "Week", "en": "Week"},
         {"name":"00051", "ch": "All", "en": "All"},
         {"name":"00052", "ch": "暂无数据", "en": "No data"},
-        {"name":"00053", "ch": "获取mtt比赛信息失败,返回大厅", "en": "Get mtt info failed,back to hall"},
+        {"name":"00053", "ch": "进入游戏失败", "en": "Enter game failed"},
         {"name":"00054", "ch": "当前级别", "en": "Now Level"},
         {"name":"00055", "ch": "下一级别", "en": "Next Level"},
         {"name":"00056", "ch": "桌号", "en": "Table No."},
         {"name":"00057", "ch": "您没有足够的钻石", "en": "Not enough diamond"},
+        {"name":"00058", "ch": "莊位2倍前注", "en": "Dealer double score"},
+        {"name":"00059", "ch": "最小保留記分牌數", "en": "Min score keep"},
+        {"name":"00060", "ch": "保险", "en": "Insurance"},
+        {"name":"00061", "ch": "剩余时间", "en": "Left time"},
+        {"name":"00062", "ch": "排名", "en": "Rank"},
+        {"name":"00063", "ch": "涨盲通知：当前盲注级别为", "en": "Level up:Current level:"},
+        {"name":"00064", "ch": "底池", "en": "Pot"},
+        
+        
         //服务器发过来的key
         {"name":"key10925", "ch": "比赛不存在", "en": "Tournament does not exist"},
         

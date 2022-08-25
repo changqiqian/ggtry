@@ -22,28 +22,32 @@ export class Game_BottomUI extends BaseUI
     mMttTableBtn: BaseButton = null;
     InitParam() 
     {
-        this.mMttTableBtn.node.active = false;
+        
     }
     BindUI() 
     {
-        this.mMttTableBtn.SetClickCallback(()=>{})
+        this.mMttTableBtn.node.active = false;
+        this.mMttTableBtn.SetClickCallback(()=>
         {
 
-        }
+        });
 
-        this.mInfoBtn.SetClickCallback(()=>{})
+
+        this.mInfoBtn.SetClickCallback(()=>
         {
 
-        }
+        });
 
-        this.mHistoryBtn.SetClickCallback(()=>{})
+        this.mHistoryBtn.SetClickCallback(()=>
         {
 
-        }
-        this.mChatBtn.SetClickCallback(()=>{})
+        });
+
+        this.mChatBtn.SetClickCallback(()=>
         {
 
-        }
+        });
+
     }
     RegDataNotify() 
     {
@@ -59,14 +63,12 @@ export class Game_BottomUI extends BaseUI
 
         GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
         {
-            let matchConfig = _current.matchConfig;
-            let statusInfo = _current.statusInfo;
-            this.mMttTableBtn.node.active = statusInfo.status >=  Mtt_MatchStatus.Started;
+            this.mMttTableBtn.node.active = _current.statusInfo.status >=  Mtt_MatchStatus.Started;
             if(this.mMttTableBtn.node.active)
             {
-
+                var tableStr = Localization.GetString("00056") + _current.user.tableId;
+                this.mMttTableBtn.SetTitle(tableStr);
             }
-
         },this);
 
     }

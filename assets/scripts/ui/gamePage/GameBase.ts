@@ -23,17 +23,23 @@ export class GameBase extends BaseUI
         this.InitSelfUI();
         this.InitTopUI();
         this.InitControlBtns();
-        this.InitOtherUI();
-        this.InitSeatUI();
-    
+        this.InitOtherUI();    
     }
     RegDataNotify() 
     {
+        GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
+        {
+            this.InitSeatUI(_current.matchConfig.seatCount);
+        },this);
 
+        GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
+        {
+            this.DealEnterMsg(_current);
+        },this);
     }
     LateInit() 
     {
-        this.GetGameInfoMsg();
+        
     }
     UnregDataNotify() 
     {
@@ -56,32 +62,32 @@ export class GameBase extends BaseUI
 
     InitGameStartInfo()
     {
-        this.AddSubView("gamePage","prefab/Game_GameStartInfo",true);
+        this.AddSubView("gamePage","prefab/Game_GameStartInfo",false);
     }
 
     InitPot()
     {
-        this.AddSubView("gamePage","prefab/Game_Pot",true);
+        this.AddSubView("gamePage","prefab/Game_Pot",false);
     }
 
     InitPublicCards()
     {
-        this.AddSubView("gamePage","prefab/Game_PublicCards",true);
+        this.AddSubView("gamePage","prefab/Game_PublicCards",false);
     }
 
     InitSelfAction()
     {
-        this.AddSubView("gamePage","prefab/Game_SelfAction",true);
+        this.AddSubView("gamePage","prefab/Game_SelfAction",false);
     }
 
     InitSelfPreAction()
     {
-        this.AddSubView("gamePage","prefab/Game_SelfPreAction",true);
+        this.AddSubView("gamePage","prefab/Game_SelfPreAction",false);
     }
 
     InitSelfUI()
     {
-        this.AddSubView("gamePage","prefab/Game_SelfUI",true);
+        this.AddSubView("gamePage","prefab/Game_SelfUI",false);
     }
 
     InitTopUI()
@@ -91,12 +97,19 @@ export class GameBase extends BaseUI
 
     InitControlBtns()
     {
-        this.AddSubView("gamePage","prefab/Game_ControlBtns",true);
+        this.AddSubView("gamePage","prefab/Game_ControlBtns",false);
     }
 
-    InitSeatUI()
+    InitSeatUI(_seatCount : number)
     {
-
+        let prefabName = "prefab/Game_SeatUI" + _seatCount;
+        if(this.HaveSubView("gamePage" , prefabName ) == false)
+        {
+            this.AddSubView("gamePage",  prefabName , true , (_script) =>
+            {
+                this.GetGameInfoMsg();
+            });
+        }
     }
 
     InitOtherUI()
@@ -105,6 +118,11 @@ export class GameBase extends BaseUI
     }
 
     GetGameInfoMsg()
+    {
+
+    }
+
+    DealEnterMsg(_data : any)
     {
 
     }

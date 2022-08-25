@@ -565,6 +565,51 @@ export class Network {
         this.SendMsg(MsgID.CheckPublicCards , body);
     };
 
+    SendEnterGame(_gameType : number, _matchId : number, _changeDesk : boolean , _is213Broadable : boolean) 
+    {
+        var body = 
+        { 
+            "gameType" :_gameType,
+            "gameId" : _matchId,
+            "ChangeDesk" : _changeDesk,
+            "is213Broadable" : _is213Broadable,
+        }
+        console.log("进入房间消息");
+        this.SendMsg(MsgID.EnterGame , body);
+    };
+    
+    SendRecordDuringMatch(_matchId : number) 
+    {
+        var body = 
+        { 
+            "gameId" : _matchId,
+        }
+        console.log("获取打牌实时战绩");
+        this.SendMsg(MsgID.RecordDuringMatch , body);
+    };
+    SendPlayerAction(_actionType : number , _score : number , _commandId : number) 
+    {
+        var body = 
+        { 
+            "gameOpType" : _actionType,
+            "score" : _score,
+            "commandId" : _commandId
+        }
+        console.log("牌局中 玩家执行行动");
+        this.SendMsg(MsgID.PlayerAction , body);
+    };
+
+    SendGetSelfMttStatus(_gameType : number , _matchID : number ) 
+    {
+        var body = 
+        { 
+            "gameType" : _gameType,
+            "matchID" : _matchID,
+
+        }
+        console.log("牌局中 获取mtt自己的牌桌状态");
+        this.SendMsg(MsgID.GetSelfMttStatus , body);
+    };
     
 }
 
@@ -605,12 +650,19 @@ export enum MsgID {
     Login = 201,
     Ping = 202,
     GetUserInfo = 204,
+    EnterGame = 207,
     GameStart = 216,
+    WhosTurn = 217,
+    PlayerAction = 218,
     SendPublicCards = 219,
+    UpdatePlayerScore = 222,
+    RecordDuringMatch = 223,
     GetSMSCode = 233,
     Register = 234,
     ResetPwd = 235,
     SetUserInfo = 236,
+    DecideConbination = 237,
+    PotChange = 238,
     GetAssets = 246,
     CheckPublicCards = 288,
     GetLunBoTu = 296,
@@ -623,7 +675,9 @@ export enum MsgID {
     MttReadyNotify = 346 , //Mtt比赛准备开始了
     MttStatusChange = 353, //比赛状态通知
     MttManualStart =  354,
+    MttSelfStatus = 356,
     VeryifySmsCode = 387,
+    GetSelfMttStatus =  555,//获取mtt 我在桌子内的状态，观看，主播，在玩
     GetMttTableInfo = 556,
     GetMttPlayerList = 557,
     RefreshMttInfo = 558,

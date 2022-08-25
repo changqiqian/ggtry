@@ -15,12 +15,8 @@ export class Game_Mtt extends GameBase
 
     RegDataNotify() 
     {
-        GameData.GetInstance().AddListener("Data_MttGetRoomInfo",(_current , _before)=>
-        {
 
-        },this);
-
-        GameData.GetInstance().AddListener("Data_MttErrorAndBackHall",(_current , _before)=>
+        GameData.GetInstance().AddListener("Data_ErrorAndBackHall",(_current , _before)=>
         {
             this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
@@ -39,9 +35,8 @@ export class Game_Mtt extends GameBase
 
     GetGameInfoMsg()
     {
-        //let mttMatchId = GameData.GetInstance().Data_CurrentMttMatchId;
-        //Network.GetInstance().SendMttGetRoomInfo(GameType.Mtt , mttMatchId , HallData.GetInstance().Data_IsBackToGame)
-        //Network.GetInstance().SendRefreshMttInfo(mttMatchId);
+        let matchId = GameData.GetInstance().Data_RefreshMttInfo.matchConfig.matchId;
+        Network.GetInstance().SendMttGetRoomInfo(GameType.Mtt , matchId , HallData.GetInstance().Data_IsBackToGame)
     }
 
     InitTableinfo()
@@ -55,12 +50,10 @@ export class Game_Mtt extends GameBase
         this.AddSubView("gamePage","prefab/Game_MttRestTimeTips",true);
     }
 
-    InitSeatUI()
+    DealEnterMsg(_data : any)
     {
-        //let seatCount = HallData.GetInstance().Data_MttMatchDetails.matchConfig.seatCount;
-        let seatCount = 5;
-        let prefabName = "Game_SeatUI" + seatCount;
-        this.AddSubView("gamePage","prefab/" + prefabName , true);
+
     }
+
 }
 

@@ -261,6 +261,7 @@ export enum Mtt_MatchStatus //Mtt详细信息页面的比赛状态
     Rest = 5 , //休息
     Pause = 6 ,//暂停
     End = 7 , //结束
+    LevelUp = 8 , //涨盲通知
 }
 
 export enum Mtt_StartMode
