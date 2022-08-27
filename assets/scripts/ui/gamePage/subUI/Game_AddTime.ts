@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { BaseButton } from '../../common/BaseButton';
 const { ccclass, property } = _decorator;
 
@@ -50,6 +51,17 @@ export class Game_AddTime extends BaseUI
 
     SetButtonTitle(_title : string)
     {
+        if(_title == "延时已上限")
+        {
+            this.node.active = false;
+            return;
+        }
+        if(_title == "key10141")
+        {
+            this.mAddBtn.SetTitle(Localization.GetString("key10141"));
+            return;
+        }
+
         this.mAddBtn.SetTitle(_title);
     }
 }

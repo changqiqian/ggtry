@@ -8,14 +8,14 @@ const { ccclass, property } = _decorator;
 
 class ChipConfig
 {
-    constructor(_uid : number , _betID : number , _node : Node)
+    constructor(_uid : string , _betID : number , _node : Node)
     {
         this.mUid = _uid;
         this.mBetID = _betID;
         this.mNode = _node;
     }
 
-    mUid : number;
+    mUid : string;
     mBetID : number;
     mNode : Node;
 }

@@ -16,6 +16,12 @@ export class CircleTimer extends BaseUI {
     mCurrentSecond : number = 0;
     mSecondCallback : Function = null;
     mStartTimer : boolean = false;
+
+    OnDisabled()
+    {
+        this.StopTimer();
+    }
+
     InitParam() 
     {
         
@@ -59,6 +65,10 @@ export class CircleTimer extends BaseUI {
 
     update(deltaTime: number) 
     {
+        if(this.node.active == false)
+        {
+            return;
+        }
         if(this.mStartTimer == false)
         {
             return;

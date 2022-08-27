@@ -18,13 +18,7 @@ export class Game_MttBottomTips extends BaseUI
     }
     BindUI() 
     {
-        GameData.GetInstance().AddListener("Data_MttGetRoomInfo",(_current , _before)=>
-        {
-            if(_current.status >=  Mtt_MatchStatus.Started)
-            {
-                
-            }
-        },this);
+
     }
     RegDataNotify() 
     {

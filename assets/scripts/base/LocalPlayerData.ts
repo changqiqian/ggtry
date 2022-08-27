@@ -17,7 +17,7 @@ export class LocalPlayerData extends DataNotify {
         return LocalPlayerData.Instance;
     }
 
-    Data_Uid : number = null ; //玩家uid
+    Data_Uid : string = null ; //玩家uid
     Data_Coin : number = null;//玩家金币
     Data_Diamond : number = null; //钻石
     Data_Point : number = 0; //point积分

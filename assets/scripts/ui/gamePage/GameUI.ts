@@ -21,7 +21,6 @@ export class GameUI extends BaseUI
     {
         if(HallData.GetInstance().Data_CurrentMttMatchID)
         {
-            Network.GetInstance().SendRefreshMttInfo(HallData.GetInstance().Data_CurrentMttMatchID);
             this.AddSubView("gamePage","prefab/Game_Mtt",true);
         }
         else

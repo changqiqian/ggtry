@@ -19,14 +19,14 @@ export enum cbEnum_TotalHistory //总记录
 
 export class cb_BetConfig //下注数据
 {
-    constructor(_targetWorldPos:Vec3,_offset:Size, _betID : number , _uid : number)
+    constructor(_targetWorldPos:Vec3,_offset:Size, _betID : number , _uid : string)
     {
         this.mTargetWorldPos = _targetWorldPos;
         this.mOffset = _offset;
         this.mBetID = _betID;
         this.mUid = _uid;
     }
-    mUid : number;
+    mUid : string;
     mOffset : Size;
     mTargetWorldPos : Vec3;
     mBetID : number;

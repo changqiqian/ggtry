@@ -1,5 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Network } from '../../network/Network';
 import { HallData } from '../hall/HallData';
 import { GameData } from './GameData';
 const { ccclass, property } = _decorator;
@@ -14,7 +15,6 @@ export class GameBase extends BaseUI
     BindUI() 
     {
         this.InitBottom();
-        this.InitTableinfo();
         this.InitGameStartInfo();
         this.InitPot();
         this.InitPublicCards();
@@ -23,18 +23,13 @@ export class GameBase extends BaseUI
         this.InitSelfUI();
         this.InitTopUI();
         this.InitControlBtns();
-        this.InitOtherUI();    
+        this.InitOtherUI();
     }
     RegDataNotify() 
     {
         GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
         {
             this.InitSeatUI(_current.matchConfig.seatCount);
-        },this);
-
-        GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
-        {
-            this.DealEnterMsg(_current);
         },this);
     }
     LateInit() 
@@ -53,11 +48,6 @@ export class GameBase extends BaseUI
     InitBottom()
     {
         this.AddSubView("gamePage","prefab/Game_BottomUI",true);
-    }
-
-    InitTableinfo()
-    {
-       
     }
 
     InitGameStartInfo()
@@ -118,11 +108,6 @@ export class GameBase extends BaseUI
     }
 
     GetGameInfoMsg()
-    {
-
-    }
-
-    DealEnterMsg(_data : any)
     {
 
     }

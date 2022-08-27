@@ -2,6 +2,7 @@ import { _decorator, Component, Node } from 'cc';
 import { DataNotify } from '../../base/DataNotify';
 import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
+import { Msg_deskConfig, Msg_deskInfo, Msg_matchConfig, Msg_status, Msg_userFullInfo } from '../../network/MsgStruct';
 import { MsgID, MsgStatus, Network } from '../../network/Network';
 const { ccclass, property } = _decorator;
 
@@ -20,32 +21,50 @@ export class GameData extends DataNotify
 
         return GameData.Instance;
     }
-
-    Data_PlayingPlayers : Array<any> = new Array<any>(); // 坐下玩牌的玩家
+    
     Data_UpdatePlayingPlayer : boolean = null;//立即更新正在玩牌的玩家数据
     
+    
+    Data_MatchConfig : Msg_matchConfig; //把服务器发过来的核心数据我自己定义了一份
+    Data_StatusInfo : Msg_status; //把服务器发过来的核心数据我自己定义了一份
+    Data_DeskConfig : Msg_deskConfig;//把服务器发过来的核心数据我自己定义了一份
+    Data_DeskInfo : Msg_deskInfo;//把服务器发过来的核心数据我自己定义了一份
+    Data_PlayingUserList : Array<Msg_userFullInfo>;//把服务器发过来的核心数据我自己定义了一份
+    //mtt专有消息
+
+
     Data_MttGetRoomInfo : any = null; //Mtt房间内信息
     Data_RefreshMttInfo : any = null; //刷新mtt的最新状态数据
     Data_ErrorAndBackHall : any = null; //获取mtt房间内信息出错
     Data_MttSelfStatus : any = null; //更新自己的mtt比赛状态
+    Data_MttStatusChange : any = null; //mtt比赛状态改变
+    Data_GetSelfMttStatus : any = null;//获取自己在mtt桌子内的状态
+
+
+    //打牌公有消息
     Data_EnterGame : any = null; //进入游戏
     Data_RecordDuringMatch : any = null; //获取比赛中实时数据
     Data_CheckPublicCards : any = null ; //发发看数据
     Data_SendPublicCards : any = null; //发公共牌
     Data_GameStart : any = null; //游戏开始消息
-    Data_MttStatusChange : any = null; //mtt比赛状态改变
     Data_UpdatePlayerScore : any = null;//更新玩家分数
     Data_WhosTurn : any = null;// 该谁行动
     Data_PlayerAction : any = null; //玩家执行行动
     Data_PotChange:any = null; //底池变化
-    Data_DecideConbination : any = null; //通知玩家当前排行
-    Data_GetSelfMttStatus : any = null;//获取自己在mtt桌子内的状态
+    Data_DecideConbination : any = null; //通知玩家当前牌型
+    Data_GamePlayerStatusChange : any = null;//玩家状态改变
+    Data_GameResult : any = null; //游戏结算
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.MttGetRoomInfo ,(_msgBody)=>
         {
             if(_msgBody.code == MsgStatus.SUCCESS)
             {
+                this.Data_DeskConfig = _msgBody.deskConfig as Msg_deskConfig;
+                this.Data_DeskInfo = _msgBody.deskInfo as Msg_deskInfo;
+                this.Data_StatusInfo = _msgBody.status as Msg_status;
+                this.Data_PlayingUserList = this.Data_DeskInfo.userList;
+                this.Data_UpdatePlayingPlayer = true;
                 this.Data_MttGetRoomInfo = _msgBody;
             }
             else
@@ -57,6 +76,8 @@ export class GameData extends DataNotify
         
         Network.GetInstance().AddMsgListenner(MsgID.RefreshMttInfo ,(_msgBody)=>
         {
+            this.Data_MatchConfig = _msgBody.matchConfig as Msg_matchConfig;
+            this.Data_StatusInfo = _msgBody.statusInfo as Msg_status;
             this.Data_RefreshMttInfo = _msgBody;
         },this);
 
@@ -82,13 +103,16 @@ export class GameData extends DataNotify
         Network.GetInstance().AddMsgListenner(MsgID.GameStart ,(_msgBody)=>
         {
             this.UpdatePlayerPlayingStatus(_msgBody.playingUserIds);
-            this.Data_UpdatePlayingPlayer = true;
             this.Data_GameStart = _msgBody;
         },this);
         Network.GetInstance().AddMsgListenner(MsgID.EnterGame ,(_msgBody)=>
         {
             if(_msgBody.code == MsgStatus.SUCCESS)
             {
+                this.Data_DeskConfig = _msgBody.deskConfig as Msg_deskConfig;
+                this.Data_DeskInfo = _msgBody.deskInfo as Msg_deskInfo;
+                this.Data_PlayingUserList = this.Data_DeskInfo.userList;
+                this.Data_UpdatePlayingPlayer = true;
                 this.Data_EnterGame = _msgBody;
             }
             else
@@ -146,8 +170,14 @@ export class GameData extends DataNotify
         {
             this.Data_GetSelfMttStatus = _msgBody;
         },this);
-
-        
+        Network.GetInstance().AddMsgListenner(MsgID.GamePlayerStatusChange ,(_msgBody)=>
+        {
+            this.Data_GamePlayerStatusChange = _msgBody;
+        },this);
+        Network.GetInstance().AddMsgListenner(MsgID.GameResult ,(_msgBody)=>
+        {
+            this.Data_GameResult = _msgBody;
+        },this);
         
         
     }
@@ -158,75 +188,78 @@ export class GameData extends DataNotify
     }
 
 
-    OverridePlayingPlayer(_data : any)
+    AddPlayingPlayer(_data : Msg_userFullInfo)
     {
         let currentPlayer =  this.FindPlayerByUserId(_data.userInfo.userId);
         if(currentPlayer == null)
         {
-            this.Data_PlayingPlayers.push(_data);
+            this.Data_PlayingUserList.push(_data);
         }
         else
         {
             currentPlayer = _data;
         }
+        this.Data_UpdatePlayingPlayer = true;
     }
 
-    UpdatePlayerPlayingStatus(_Playinglist : Array<number>)
+    UpdatePlayerPlayingStatus(_Playinglist : Array<string>)
     {
         let step = 0 ;
-        while(step < this.Data_PlayingPlayers.length)
+        while(step < this.Data_PlayingUserList.length)
         {
-            let currentPlayer = this.Data_PlayingPlayers[step];
+            let currentPlayer = this.Data_PlayingUserList[step];
             let index = _Playinglist.findIndex((_item) => _item === currentPlayer.userInfo.userId);
             if(index < 0)
             {
-                this.Data_PlayingPlayers.splice(step , 1);
+                this.Data_PlayingUserList.splice(step , 1);
             }
             else
             {
                 step++;
                 currentPlayer.isPlaying = true;
+                currentPlayer.isSendHandCard = true;
+                currentPlayer.isGiveUp = false;
             }
         }
+        this.Data_UpdatePlayingPlayer = true;
     }
 
-    RemovePlayingPlayer(_userId : number)
+    RemovePlayingPlayer(_userId : string)
     {
-        let index = this.Data_PlayingPlayers.findIndex((_item) => _item.userInfo.userId === _userId);
+        let index = this.Data_PlayingUserList.findIndex((_item) => _item.userInfo.userId === _userId);
         if(index >= 0)
         {
-            this.Data_PlayingPlayers.splice(index , 1);
+            this.Data_PlayingUserList.splice(index , 1);
         }
+        this.Data_UpdatePlayingPlayer = true;
     }
 
-    FindPlayerByUserId(_userId : number) : any
+    FindPlayerByUserId(_userId : string) : Msg_userFullInfo
     {
-        let index = this.Data_PlayingPlayers.findIndex((_item) => _item.userInfo.userId === _userId);
+        let index = this.Data_PlayingUserList.findIndex((_item) => _item.userInfo.userId === _userId);
         if(index >= 0)
         {
-           return this.Data_PlayingPlayers[index];
+           return this.Data_PlayingUserList[index];
         }
         console.log("gamedata FindPlayerByUserId--没有找到玩家_userId==" + _userId);
         return null;
     }
 
-    FindPlayerBySeatId(_seatId : number) : any
+    FindPlayerBySeatId(_seatId : number) : Msg_userFullInfo
     {
-        let index = this.Data_PlayingPlayers.findIndex((_item) => _item.pos === _seatId);
+        let index = this.Data_PlayingUserList.findIndex((_item) => _item.pos === _seatId);
         if(index >= 0)
         {
-           return this.Data_PlayingPlayers[index];
+           return this.Data_PlayingUserList[index];
         }
         console.log("gamedata FindPlayerBySeatId--没有找到玩家_userId==" + _seatId);
         return null;
     }
 
-    
-
 }
 
 
-export enum GameType
+export enum Game_RoomType
 {
     //1是密码局，2是俱乐部，3是直播局
     Password = 1,
@@ -245,8 +278,6 @@ export enum Game_ActionType
     Allin,
     Delay,
     Straddle,
-    SB, 
-    BB,
 }
 
 export enum Game_PlayerStauts
@@ -257,6 +288,57 @@ export enum Game_PlayerStauts
 	SITDOWN = 3,
 	STANDUP = 4,
 }
+
+export enum Game_MttPlayerStauts
+{
+    //1 没有报名， 2 等待审核， 3 已经报名， 4 已经参加比赛, 5 已经被淘汰
+    NotAttend = 1,
+    Waiting = 2,
+    Registed = 3,
+    Attending = 4,
+    Lose = 5,
+}
+
+
+export enum Game_RoomStatus
+{
+//房间状态, 1没开始，2开始，3暂停
+	Waiting = 1, 
+	Started = 2, 
+	Paused = 3,
+}
+
+
+//          流程
+//发送RefreshMttInfo  - 发送MttGetRoomInfo - 接收EnterGame -  发送请求声网 - 发送请求消息展示 
+//      558                     344              207           364           960          
+
+//- 接收MttSelfStatus - 发送修改mic状态  -- 发送 RecordDuringMatch -- 接收 得到的麦克风状态
+//      356                375                    223                  376
+
+// - MttStatusChange - RefreshMttInfo - UpdatePlayerScore
+//         353             558                 222
+
+//GameStart - whosturn - PlayerAction - PotChange - SendPublicCards - DecideConbination
+//   216         217        218            238          219                 237
+
+//GamePlayerStatusChange -  GameResult --更新比分等消息后-- GameStart
+//          213                 221                         216
+
+
+////////////////////////////////////////////////////////////////////////////////////
+//          GameStart
+//{"msgId":216,"msgBody":"{"dUserId":"131222","sUserId":"131222","bUserId":"132539","baseScore":10,"beforeScore":0,"basePool":30,"handCard":[27,2],"playingUserIds":["131222","132539"],"tableScores":[10,20],"beforeScores":[0,0],"straddleUsers":[]}","languageKey":""}
+
+
+////////////////////////////////////////////////////////////////////////////////////
+//                      RecordDuringMatch
+//{"msgId":223,"msgBody":"{"players":[{"userId":"131222","nickname":"ggtry","take":200,"score":40,"isOnline":true,"takeOut":0,"plays":3,"inPot":1},{"userId":"210857","nickname":"cellatst1","take":200,"score":-40,"isOnline":false,"takeOut":0,"plays":3,"inPot":0}],"lookers":null,"leftTime":0,"gameId":9469791,"clubName":"","isStart":true,"isPause":false,"inSurePool":"0","isInsurance":false}","languageKey":""}
+
+
+////////////////////////////////////////////////////////////////////////////////////
+//                      MttSelfStatus
+// {"msgId":356,"msgBody":"{"code":1,"isCanRebuy":false,"userStatus":4,"rank":1,"totalPlayer":2}","languageKey":""}
 
 ////////////////////////////////////////////////////////////////////////////////////
 //                      GetSelfMttStatus
@@ -317,686 +399,6 @@ export enum Game_PlayerStauts
 //         "minRaise":400,
 //         "isInvalidRaise":false,
 //         "preElection":null
-//     },
-//     "languageKey":""
-// }
-
-////////////////////////////////////////////////////////////////////////////////////
-// {                                MttGetRoomInfo
-//     "msgId":344,
-//     "msgBody":{
-//         "code":1,
-//         "reason":"success",
-//         "deskConfig":{
-//             "gameId":9113543,
-//             "gameName":"20220824cellatest",
-//             "matchType":900,
-//             "matchID":9308947,
-//             "baseScore":100,
-//             "beforeScore":0,
-//             "playTimes":0,
-//             "playerCount":2,
-//             "minTake":20000,
-//             "maxTake":30000,
-//             "hostId":"1000",
-//             "ownerControl":false,
-//             "isGameStart":false,
-//             "roomStatus":1,
-//             "isStraddle":false,
-//             "isInsurance":false,
-//             "ipNotify":false,
-//             "gpsNotify":false,
-//             "isShortCard":false,
-//             "shortType":0,
-//             "isCanOutScore":false,
-//             "isDUserDouble":false,
-//             "minHoldScore":0,
-//             "minOutScore":0,
-//             "minTakeD":0,
-//             "maxTakeD":0,
-//             "maxTotalTakeD":0,
-//             "currencyType":2,
-//             "tableId":1,
-//             "isLive":true,
-//             "roomType":3,
-//             "delayCount":0,
-//             "pauseCount":0,
-//             "pauseTimeCut":0,
-//             "isReplay":false,
-//             "replayState":false,
-//             "replayTimeCut":0,
-//             "tableMicroIsOpen":false,
-//             "posRandom":false,
-//             "isSelectOuts":false,
-//             "isOpenEqOuts":false,
-//             "turnExpiredTime":15,
-//             "liveAuthSwitch":false,
-//             "delayHandCard":false,
-//             "channelMode":0
-//         },
-//         "deskInfo":{
-//             "userList":[
-//                 {
-//                     "userInfo":{
-//                         "userId":"131222",
-//                         "nickname":"ggtry",
-//                         "gender":1,
-//                         "signiture":"",
-//                         "photoUrl":"15",
-//                         "ip":"112.211.183.208",
-//                         "jingDu":0,
-//                         "weiDu":0,
-//                         "score":20000,
-//                         "idType":0,
-//                         "adminRole":0,
-//                         "isOpenMic":false,
-//                         "matchInfo":{
-//                             "gameTimes":0,
-//                             "playTimes":0,
-//                             "vPIP":0,
-//                             "winRate":0
-//                         },
-//                         "decoration":{
-//                             "pos1":0,
-//                             "pos2":0,
-//                             "pos3":0,
-//                             "pos4":0,
-//                             "pos5":0
-//                         }
-//                     },
-//                     "tableScore":0,
-//                     "totalScore":0,
-//                     "isPlaying":false,
-//                     "isGiveUp":false,
-//                     "isAllIn":false,
-//                     "pos":1,
-//                     "posLeftTime":0,
-//                     "take":20000,
-//                     "status":3,
-//                     "cards":null,
-//                     "cardType":0,
-//                     "operateCard":0,
-//                     "maxCards":null,
-//                     "isHaveCards":false,
-//                     "showCards":[
-//                         0,
-//                         0
-//                     ],
-//                     "delayTimes":0,
-//                     "straddleNextCnt":0,
-//                     "isLeave":false,
-//                     "isOpenMic":false,
-//                     "insureDelayTimes":0,
-//                     "preElection":{
-//                         "gameOpType":0,
-//                         "score":0,
-//                         "commandId":0
-//                     },
-//                     "mttBet":"",
-//                     "liveAuthAsk":false,
-//                     "isSendHandCard":false
-//                 },
-//                 {
-//                     "userInfo":{
-//                         "userId":"210857",
-//                         "nickname":"cellatst1",
-//                         "gender":1,
-//                         "signiture":"",
-//                         "photoUrl":"29",
-//                         "ip":"155.137.110.24",
-//                         "jingDu":0,
-//                         "weiDu":0,
-//                         "score":20000,
-//                         "idType":0,
-//                         "adminRole":0,
-//                         "isOpenMic":false,
-//                         "matchInfo":{
-//                             "gameTimes":0,
-//                             "playTimes":47,
-//                             "vPIP":0,
-//                             "winRate":46
-//                         },
-//                         "decoration":{
-//                             "pos1":0,
-//                             "pos2":0,
-//                             "pos3":0,
-//                             "pos4":0,
-//                             "pos5":0
-//                         }
-//                     },
-//                     "tableScore":0,
-//                     "totalScore":0,
-//                     "isPlaying":false,
-//                     "isGiveUp":false,
-//                     "isAllIn":false,
-//                     "pos":0,
-//                     "posLeftTime":0,
-//                     "take":20000,
-//                     "status":3,
-//                     "cards":[
-
-//                     ],
-//                     "cardType":0,
-//                     "operateCard":0,
-//                     "maxCards":[
-
-//                     ],
-//                     "isHaveCards":false,
-//                     "showCards":[
-
-//                     ],
-//                     "delayTimes":0,
-//                     "straddleNextCnt":0,
-//                     "isLeave":false,
-//                     "isOpenMic":false,
-//                     "insureDelayTimes":0,
-//                     "preElection":{
-//                         "gameOpType":0,
-//                         "score":0,
-//                         "commandId":0
-//                     },
-//                     "mttBet":"",
-//                     "liveAuthAsk":false,
-//                     "isSendHandCard":false
-//                 }
-//             ],
-//             "basePool":0,
-//             "poolInfos":null,
-//             "curTurnUserId":"",
-//             "curTurnTime":-62135596800,
-//             "lastEndTime":-62135596800,
-//             "leftTime":-9223372021,
-//             "centerCards":null,
-//             "dUserId":"",
-//             "sUserId":"",
-//             "bUserId":"",
-//             "callCount":0,
-//             "isAllIn":false,
-//             "isGameResult":false,
-//             "commandId":0,
-//             "isCanDelay":false,
-//             "leftDelayCount":0,
-//             "delaySpend":"",
-//             "raiseCount":200,
-//             "minRaise":200,
-//             "totalTime":0,
-//             "straddleUsers":[
-
-//             ],
-//             "inSureUsers":null,
-//             "inSurePools":null,
-//             "turnInSure":null,
-//             "winRates":null,
-//             "livingUserId":"",
-//             "anchorPhotoUrl":"",
-//             "anchorNickName":"",
-//             "delayTimes":0,
-//             "isInvalidRaise":false,
-//             "lookerNumber":0,
-//             "posHistory":{
-
-//             },
-//             "channelMode":0,
-//             "deviceDenyMode":0
-//         },
-//         "status":{
-//             "status":3,
-//             "leftTime":4,
-//             "curLevel":1,
-//             "nextLevel":2,
-//             "totalUser":2,
-//             "totalReBuy":0,
-//             "playerUser":2,
-//             "restLeftTime":0,
-//             "curBlind":100,
-//             "beforeScore":0,
-//             "nextBlind":200,
-//             "nextBeforeScore":0,
-//             "delayCount":0,
-//             "reason":3,
-//             "playTotalTime":0,
-//             "ticketEnter":0,
-//             "ticketReBuy":0,
-//             "valueCut":0
-//         }
-//     },
-//     "languageKey":"success"
-// }
-
-
-////////////////////////////////////////////////////////////////////////////////////
-// {                        EnterGame
-//     "msgId":207,
-//     "msgBody":{
-//         "code":1,
-//         "reason":"success",
-//         "deskConfig":{
-//             "gameId":9113543,
-//             "gameName":"20220824cellatest",
-//             "matchType":900,
-//             "matchID":9308947,
-//             "baseScore":100,
-//             "beforeScore":0,
-//             "playTimes":0,
-//             "playerCount":2,
-//             "minTake":20000,
-//             "maxTake":30000,
-//             "hostId":"1000",
-//             "ownerControl":false,
-//             "isGameStart":false,
-//             "roomStatus":1,
-//             "isStraddle":false,
-//             "isInsurance":false,
-//             "ipNotify":false,
-//             "gpsNotify":false,
-//             "isShortCard":false,
-//             "shortType":0,
-//             "isCanOutScore":false,
-//             "isDUserDouble":false,
-//             "minHoldScore":0,
-//             "minOutScore":0,
-//             "minTakeD":0,
-//             "maxTakeD":0,
-//             "maxTotalTakeD":0,
-//             "currencyType":2,
-//             "tableId":1,
-//             "isLive":true,
-//             "roomType":3,
-//             "delayCount":0,
-//             "pauseCount":0,
-//             "pauseTimeCut":0,
-//             "isReplay":false,
-//             "replayState":false,
-//             "replayTimeCut":0,
-//             "tableMicroIsOpen":false,
-//             "posRandom":false,
-//             "isSelectOuts":false,
-//             "isOpenEqOuts":false,
-//             "turnExpiredTime":15,
-//             "liveAuthSwitch":false,
-//             "delayHandCard":false,
-//             "channelMode":0
-//         },
-//         "deskInfo":{
-//             "userList":[
-//                 {
-//                     "userInfo":{
-//                         "userId":"210857",
-//                         "nickname":"cellatst1",
-//                         "gender":1,
-//                         "signiture":"",
-//                         "photoUrl":"29",
-//                         "ip":"155.137.110.24",
-//                         "jingDu":0,
-//                         "weiDu":0,
-//                         "score":20000,
-//                         "idType":0,
-//                         "adminRole":0,
-//                         "isOpenMic":false,
-//                         "matchInfo":{
-//                             "gameTimes":0,
-//                             "playTimes":47,
-//                             "vPIP":0,
-//                             "winRate":46
-//                         },
-//                         "decoration":{
-//                             "pos1":0,
-//                             "pos2":0,
-//                             "pos3":0,
-//                             "pos4":0,
-//                             "pos5":0
-//                         }
-//                     },
-//                     "tableScore":0,
-//                     "totalScore":0,
-//                     "isPlaying":false,
-//                     "isGiveUp":false,
-//                     "isAllIn":false,
-//                     "pos":0,
-//                     "posLeftTime":0,
-//                     "take":20000,
-//                     "status":3,
-//                     "cards":[
-
-//                     ],
-//                     "cardType":0,
-//                     "operateCard":0,
-//                     "maxCards":[
-
-//                     ],
-//                     "isHaveCards":false,
-//                     "showCards":[
-
-//                     ],
-//                     "delayTimes":0,
-//                     "straddleNextCnt":0,
-//                     "isLeave":false,
-//                     "isOpenMic":false,
-//                     "insureDelayTimes":0,
-//                     "preElection":{
-//                         "gameOpType":0,
-//                         "score":0,
-//                         "commandId":0
-//                     },
-//                     "mttBet":"",
-//                     "liveAuthAsk":false,
-//                     "isSendHandCard":false
-//                 },
-//                 {
-//                     "userInfo":{
-//                         "userId":"131222",
-//                         "nickname":"ggtry",
-//                         "gender":1,
-//                         "signiture":"",
-//                         "photoUrl":"15",
-//                         "ip":"112.211.183.208",
-//                         "jingDu":0,
-//                         "weiDu":0,
-//                         "score":20000,
-//                         "idType":0,
-//                         "adminRole":0,
-//                         "isOpenMic":false,
-//                         "matchInfo":{
-//                             "gameTimes":0,
-//                             "playTimes":0,
-//                             "vPIP":0,
-//                             "winRate":0
-//                         },
-//                         "decoration":{
-//                             "pos1":0,
-//                             "pos2":0,
-//                             "pos3":0,
-//                             "pos4":0,
-//                             "pos5":0
-//                         }
-//                     },
-//                     "tableScore":0,
-//                     "totalScore":0,
-//                     "isPlaying":false,
-//                     "isGiveUp":false,
-//                     "isAllIn":false,
-//                     "pos":1,
-//                     "posLeftTime":0,
-//                     "take":20000,
-//                     "status":3,
-//                     "cards":null,
-//                     "cardType":0,
-//                     "operateCard":0,
-//                     "maxCards":null,
-//                     "isHaveCards":false,
-//                     "showCards":[
-//                         0,
-//                         0
-//                     ],
-//                     "delayTimes":0,
-//                     "straddleNextCnt":0,
-//                     "isLeave":false,
-//                     "isOpenMic":false,
-//                     "insureDelayTimes":0,
-//                     "preElection":{
-//                         "gameOpType":0,
-//                         "score":0,
-//                         "commandId":0
-//                     },
-//                     "mttBet":"",
-//                     "liveAuthAsk":false,
-//                     "isSendHandCard":false
-//                 }
-//             ],
-//             "basePool":0,
-//             "poolInfos":null,
-//             "curTurnUserId":"",
-//             "curTurnTime":-62135596800,
-//             "lastEndTime":-62135596800,
-//             "leftTime":-9223372021,
-//             "centerCards":null,
-//             "dUserId":"",
-//             "sUserId":"",
-//             "bUserId":"",
-//             "callCount":0,
-//             "isAllIn":false,
-//             "isGameResult":false,
-//             "commandId":0,
-//             "isCanDelay":false,
-//             "leftDelayCount":0,
-//             "delaySpend":"",
-//             "raiseCount":200,
-//             "minRaise":200,
-//             "totalTime":0,
-//             "straddleUsers":[
-
-//             ],
-//             "inSureUsers":null,
-//             "inSurePools":null,
-//             "turnInSure":null,
-//             "winRates":null,
-//             "livingUserId":"",
-//             "anchorPhotoUrl":"",
-//             "anchorNickName":"",
-//             "delayTimes":0,
-//             "isInvalidRaise":false,
-//             "lookerNumber":0,
-//             "posHistory":{
-
-//             },
-//             "channelMode":0,
-//             "deviceDenyMode":0
-//         },
-//         "giftInfo":null,
-//         "roomType":3,
-//         "anchorSettingValue":{
-
-//         },
-//         "disableMicphoneUsers":null,
-//         "closeMicphoneUsers":[
-//             "131222",
-//             "210857"
-//         ],
-//         "disableAllDefaultUsers":[
-//             "210857",
-//             "131222"
-//         ],
-//         "liverId":"",
-//         "liverNickName":"",
-//         "liverPhotoUrl":"",
-//         "isAnchorInRoom":false,
-//         "clubId":0,
-//         "clubRole":0,
-//         "ownerIsStart":false,
-//         "isOnceLived":false,
-//         "raisCount":0,
-//         "dismissLeftTime":0,
-//         "userId":"131222"
-//     },
-//     "languageKey":"success"
-// }
-
-
-// {
-//     "msgId":558,
-//     "msgBody":{
-//         "matchConfig":{
-//             "gameType":900,
-//             "matchId":9308947,
-//             "matchName":"20220824cellatest",
-//             "enterFee":1000,
-//             "enterFeeType":1,
-//             "enterFeeTicket":{
-//                 "tpId":0,
-//                 "name":"",
-//                 "desc":"",
-//                 "img":"",
-//                 "typeExpired":0,
-//                 "nums":1
-//             },
-//             "serviceFee":10,
-//             "riseBlindTime":3,
-//             "isRest":true,
-//             "beginScore":20000,
-//             "beginBlind":100,
-//             "seatCount":2,
-//             "beginTime":1661334900,
-//             "minPlayer":2,
-//             "maxPlayer":10,
-//             "delayLevel":0,
-//             "isAddBuy":false,
-//             "reBuyCount":0,
-//             "reBuyFee":100,
-//             "reBuyFeeType":1,
-//             "reBuyFeeTicket":{
-//                 "tpId":0,
-//                 "name":"",
-//                 "desc":"",
-//                 "img":"",
-//                 "typeExpired":0,
-//                 "nums":1
-//             },
-//             "rewardPlayerCount":0,
-//             "isIpLimit":false,
-//             "isGpsLimit":false,
-//             "creatorNickname":"Admin",
-//             "creatorUserId":"1000",
-//             "clubId":14674,
-//             "clubName":"20220824cellatest",
-//             "allianceId":0,
-//             "allianceName":"",
-//             "gameTime":1661334900,
-//             "ownerId":"0",
-//             "roomType":3,
-//             "liverId":"",
-//             "isLive":true,
-//             "tableMicroIsOpen":false,
-//             "releaseTime":3600,
-//             "beginMode":0,
-//             "matchMode":0,
-//             "allowPlayer":null,
-//             "is_reload":false,
-//             "strapConfig":{
-//                 "tag":"豪客赛",
-//                 "isTop":true,
-//                 "rewardDesc":"10金币",
-//                 "titleImg":"",
-//                 "titleColor":[
-//                     15,
-//                     6,
-//                     232
-//                 ],
-//                 "backgroundImg":"",
-//                 "coverImg":""
-//             },
-//             "satelliteId":0
-//         },
-//         "statusInfo":{
-//             "status":3,
-//             "leftTime":4,
-//             "curLevel":1,
-//             "nextLevel":2,
-//             "totalUser":2,
-//             "totalReBuy":0,
-//             "playerUser":2,
-//             "restLeftTime":0,
-//             "curBlind":100,
-//             "beforeScore":0,
-//             "nextBlind":200,
-//             "nextBeforeScore":0,
-//             "delayCount":0,
-//             "reason":3,
-//             "playTotalTime":0,
-//             "ticketEnter":0,
-//             "ticketReBuy":0,
-//             "valueCut":0
-//         },
-//         "rewardConfig":{
-//             "rewardType":1,
-//             "totalReward":0,
-//             "protectReward":1000,
-//             "rewardDynamicId":1,
-//             "slReward":false,
-//             "dynamicData":{
-//                 "describe":"",
-//                 "photoUrl":"",
-//                 "rewardCount":1,
-//                 "rewardTicket":{
-//                     "tpId":0,
-//                     "name":"",
-//                     "desc":"",
-//                     "img":"",
-//                     "typeExpired":0,
-//                     "nums":0
-//                 },
-//                 "rewardType":0
-//             },
-//             "dynamicTicketValue":0,
-//             "rewards":[
-
-//             ],
-//             "rewardDescribe":"",
-//             "TotalRewardUser":0,
-//             "TotalRewardEnd":0
-//         },
-//         "dynamicReward":{
-//             "rewardId":0,
-//             "rewardName":"",
-//             "dynamicPercent":""
-//         },
-//         "nowTime":1661334901,
-//         "rank":2,
-//         "user":{
-//             "ranking":2,
-//             "userId":"131222",
-//             "nickname":"ggtry",
-//             "tableId":1,
-//             "score":20000,
-//             "userStatus":4,
-//             "photoUrl":"15",
-//             "reBuy":0,
-//             "decorations":{
-//                 "pos1":0,
-//                 "pos2":0,
-//                 "pos3":0,
-//                 "pos4":0,
-//                 "pos5":0
-//             }
-//         }
-//     },
-//     "languageKey":""
-// }
-
-
-////////////////////////////////////////////////////////////////////////////////////
-// {                    RecordDuringMatch
-//     "msgId":223,
-//     "msgBody":{
-//         "players":[
-//             {
-//                 "userId":"210857",
-//                 "nickname":"cellatst1",
-//                 "take":20000,
-//                 "score":0,
-//                 "isOnline":true,
-//                 "takeOut":0,
-//                 "plays":0,
-//                 "inPot":0
-//             },
-//             {
-//                 "userId":"131222",
-//                 "nickname":"ggtry",
-//                 "take":20000,
-//                 "score":0,
-//                 "isOnline":true,
-//                 "takeOut":0,
-//                 "plays":0,
-//                 "inPot":0
-//             }
-//         ],
-//         "lookers":null,
-//         "leftTime":0,
-//         "gameId":9113543,
-//         "clubName":"",
-//         "isStart":false,
-//         "isPause":true,
-//         "inSurePool":"0",
-//         "isInsurance":false
 //     },
 //     "languageKey":""
 // }

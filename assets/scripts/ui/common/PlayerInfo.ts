@@ -28,6 +28,7 @@ export class PlayerInfo extends BaseUI
     }
     UnregDataNotify() 
     {
+        
     }
     CustmoerDestory() 
     {

@@ -24,7 +24,6 @@ export class Game_Pot extends BaseUI
         GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
         {
             this.SetTotalPot(_current.basePool);
-            this.SetCurrentTurnPot(_current.basePool);
         },this);
         GameData.GetInstance().AddListener("Data_PotChange",(_current , _before)=>
         {
@@ -37,10 +36,24 @@ export class Game_Pot extends BaseUI
             }
 
             this.SetTotalPot(totalPot);
-            this.SetCurrentTurnPot(0);
+            this.CollectChip();
         },this);
 
-        
+        GameData.GetInstance().AddListener("Data_MttGetRoomInfo",(_current , _before)=>
+        {
+            let deskInfo = GameData.GetInstance().Data_DeskInfo;
+            this.SetTotalPot(deskInfo.basePool);
+        },this);
+
+        GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
+        {
+            let deskInfo = GameData.GetInstance().Data_DeskInfo;
+            this.SetTotalPot(deskInfo.basePool);
+        },this);
+        GameData.GetInstance().AddListener("Data_GameResult",(_current , _before)=>
+        {
+            this.SendChip();
+        },this);
     }
     LateInit() 
     {
@@ -68,6 +81,16 @@ export class Game_Pot extends BaseUI
     SetCurrentTurnPot(_amount : number)
     {
         this.mCurrent.string = "" + _amount;
+    }
+
+    CollectChip()
+    {
+
+    }
+
+    SendChip()
+    {
+
     }
 }
 

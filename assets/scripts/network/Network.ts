@@ -606,17 +606,11 @@ export class Network {
 }
 
 
-
-
-    
-    
 export enum GameType
 {
     Cash = 1,
     Mtt = 900,
 }
-
-
 
 export enum MsgStatus
 {
@@ -643,10 +637,12 @@ export enum MsgID {
     Ping = 202,
     GetUserInfo = 204,
     EnterGame = 207,
+    GamePlayerStatusChange = 213,
     GameStart = 216,
     WhosTurn = 217,
     PlayerAction = 218,
     SendPublicCards = 219,
+    GameResult = 221,
     UpdatePlayerScore = 222,
     RecordDuringMatch = 223,
     GetSMSCode = 233,
@@ -677,6 +673,7 @@ export enum MsgID {
     MttGetRebuyInfo = 685,
     GetSelfTicket = 693,
     GetMttList = 702,
+    MatchAnouncement = 910, //比赛通知信息
     SetMttMacthKeepTop = 927,
     detectCanDeleteAccount = 988,
     GetLogOffCode = 989,

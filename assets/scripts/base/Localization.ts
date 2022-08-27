@@ -144,9 +144,28 @@ export class Localization {
         {"name":"00062", "ch": "排名", "en": "Rank"},
         {"name":"00063", "ch": "涨盲通知：当前盲注级别为", "en": "Level up:Current level:"},
         {"name":"00064", "ch": "底池", "en": "Pot"},
+        {"name":"00065", "ch": "弃牌", "en": "Fold"},
+        {"name":"00066", "ch": "过牌", "en": "Check"},
+        {"name":"00067", "ch": "更注", "en": "Call"},
+        {"name":"00068", "ch": "加注", "en": "Raise"},
+        {"name":"00069", "ch": "全下", "en": "All in"},
+        {"name":"00070", "ch": "抓头", "en": "Straddle"},
+        {"name":"00071", "ch": "高牌", "en": "High"},
+        {"name":"00072", "ch": "一对", "en": "One pair"},
+        {"name":"00073", "ch": "两对", "en": "Two pair"},
+        {"name":"00074", "ch": "三条", "en": "Three of kind"},
+        {"name":"00075", "ch": "顺子", "en": "Straight"},
+        {"name":"00076", "ch": "同花", "en": "Flush"},
+        {"name":"00077", "ch": "葫芦", "en": "Full house"},
+        {"name":"00078", "ch": "四条", "en": "Four of kind"},
+        {"name":"00079", "ch": "同花顺", "en": "Flush straight"},
+        {"name":"00080", "ch": "皇家同花顺", "en": "Royal flush straight"},
+
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },
         //服务器发过来的key
         { name: 'key10925', ch: '比赛不存在', en: 'Tournament does not exist' },
+        { name: 'key10141', ch: '免费', en: 'Free' },
+        
     ];
 }

@@ -53,17 +53,21 @@ export class Game_BottomUI extends BaseUI
     {
         GameData.GetInstance().AddListener("Data_MttGetRoomInfo",(_current , _before)=>
         {
-            this.mMttTableBtn.node.active = _current.status >=  Mtt_MatchStatus.Started;
+            let statusInfo = GameData.GetInstance().Data_StatusInfo;
+            let deskConfig = GameData.GetInstance().Data_DeskConfig;
+            this.mMttTableBtn.node.active = statusInfo.status >=  Mtt_MatchStatus.Started;
             if(this.mMttTableBtn.node.active )
             {
-                var tableStr = (_current.deskConfig.tableId > 0) ? (Localization.GetString("00056") + _current.deskConfig.tableId) : Localization.GetString("00056");
+                var tableStr = (deskConfig.tableId > 0) ? (Localization.GetString("00056") + deskConfig.tableId) : Localization.GetString("00056");
                 this.mMttTableBtn.SetTitle(tableStr);
             }
         },this);
+        
 
         GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
         {
-            this.mMttTableBtn.node.active = _current.statusInfo.status >=  Mtt_MatchStatus.Started;
+            let statusInfo = GameData.GetInstance().Data_StatusInfo;
+            this.mMttTableBtn.node.active = statusInfo.status >=  Mtt_MatchStatus.Started;
             if(this.mMttTableBtn.node.active)
             {
                 var tableStr = Localization.GetString("00056") + _current.user.tableId;

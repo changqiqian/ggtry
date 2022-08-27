@@ -30,5 +30,11 @@ export class Game_BetAmount extends BaseUI
     {
 
     }
+
+    Bet(_amount : number)
+    {
+        this.node.active =  true;
+        this.mAmount.string = _amount + "";
+    }
 }
 

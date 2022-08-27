@@ -3,6 +3,7 @@ import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { UIMgr } from '../../../base/UIMgr';
 import { GameConfig } from '../../../GameConfig';
+import { Msg_status } from '../../../network/MsgStruct';
 import { Mtt_MatchStatus } from '../../hall/HallData';
 import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
@@ -35,8 +36,8 @@ export class Game_MttInfo extends BaseUI
 
         GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
         {
-            let matchConfig = _current.matchConfig;
-            let statusInfo = _current.statusInfo;
+            let matchConfig = GameData.GetInstance().Data_MatchConfig;
+            let statusInfo = GameData.GetInstance().Data_StatusInfo;
             this.node.active = statusInfo.status >= Mtt_MatchStatus.Started;
             if(this.node.active == false)
             {
@@ -44,7 +45,7 @@ export class Game_MttInfo extends BaseUI
             }
             this.UpdateBlindInfo(statusInfo);
             this.UpdateUI(statusInfo);
-            this.UpdateRank(_current.rank  , _current.totalUser );
+            this.UpdateRank(_current.rank  , statusInfo.totalUser);
             let avgScore = (matchConfig.beginScore * (statusInfo.totalUser + statusInfo.totalReBuy)) / statusInfo.playerUser;
             let bbStr = Math.floor(avgScore/(statusInfo.curBlind*2));
             this.mAvgChip.string = avgScore.toFixed(2) + "(" + bbStr + "BB)" ;
@@ -52,13 +53,15 @@ export class Game_MttInfo extends BaseUI
         },this);
         GameData.GetInstance().AddListener("Data_MttGetRoomInfo",(_current , _before)=>
         {
-            this.node.active = _current.status.status >= Mtt_MatchStatus.Started;
+            let statusInfo = GameData.GetInstance().Data_StatusInfo;
+            this.node.active = statusInfo.status >= Mtt_MatchStatus.Started;
             if(this.node.active == false)
             {
                 return;
             }
-            this.UpdateUI(_current.status);
+            this.UpdateUI(statusInfo);
         },this);
+
 
         GameData.GetInstance().AddListener("Data_MttSelfStatus",(_current , _before)=>
         {
@@ -106,7 +109,7 @@ export class Game_MttInfo extends BaseUI
 
     }
 
-    UpdateBlindInfo(_data)
+    UpdateBlindInfo(_data : Msg_status)
     {
         let anteNow = "";
         if(_data.beforeScore)
@@ -123,7 +126,7 @@ export class Game_MttInfo extends BaseUI
         this.mBlindInfoNext.string = Localization.GetString("00055") + _data.nextBlind + "/" + _data.nextBlind * 2 + anteNext;
     }
 
-    UpdateUI(_data)
+    UpdateUI(_data : Msg_status)
     {
         if(_data.status != Mtt_MatchStatus.Rest && _data.status != Mtt_MatchStatus.End)
         {

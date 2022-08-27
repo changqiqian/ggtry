@@ -22,6 +22,9 @@ export class Game_SelfAction extends BaseUI
     @property(Game_Slider) 
     mGame_Slider: Game_Slider = null;
     
+
+    mCallAmount : number = null;
+    mMinRaiseAmount : number = null;
     onEnable()
     {
 
@@ -33,39 +36,64 @@ export class Game_SelfAction extends BaseUI
     }
     BindUI() 
     {
-
+        
     }
     RegDataNotify() 
     {
         GameData.GetInstance().AddListener("Data_WhosTurn",(_current , _before)=>
         {
             let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            this.node.active = currentPlayer != null;
             if(currentPlayer == null)
             {
+                this.node.active = false;
                 return;
             }
-            
+            this.node.active = true;
             this.HideAll();
-            this.mRaiseNode.active = true;
-            this.mSliderRaiseBtn.node.active = true;
-            this.mFoldBtn.node.active = true;
-            if(_current.callCount >0)
-            {
-                this.mCallBtn.node.active = true;
-                this.mCallBtn.SetTitle(_current.callCount);
-            }
-            else
-            {
-                this.mCheckBtn.node.active = true;
-            }
-
+            this.ShowBasicUI(_current.callCount , _current.minRaise);
             
         },this);
 
         GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
         {
             this.node.active = false;
+        },this);
+
+
+        GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
+        {
+            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
+            if(currentPlayer == null)
+            {
+                this.node.active  = false;
+                return;
+            }
+
+            let deskInfo = GameData.GetInstance().Data_DeskInfo;
+            if(currentPlayer.userInfo.userId != deskInfo.curTurnUserId)
+            {
+                this.node.active  = false;
+                return;
+            }
+            this.node.active  = true;
+            this.HideAll();
+            this.ShowBasicUI(deskInfo.callCount , deskInfo.minRaise);
+
+        },this);
+
+        GameData.GetInstance().AddListener("Data_PlayerAction",(_current , _before)=>
+        {
+            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
+            if(currentPlayer == null)
+            {
+                return;
+            }
+            if(currentPlayer.userInfo.userId != _current.userId)
+            {
+                return;
+            }
+            this.node.active = false;
+
         },this);
     }
     LateInit() 
@@ -89,6 +117,25 @@ export class Game_SelfAction extends BaseUI
         this.mRaiseNode.active = false;
         this.mSliderRaiseBtn.node.active = false;
         this.mGame_Slider.node.active = false;
+    }
+
+    ShowBasicUI(_callAmount : number , _minRaise : number)
+    {
+        this.mCallAmount = _callAmount;
+        this.mMinRaiseAmount = _minRaise;
+
+        this.mRaiseNode.active = true;
+        this.mSliderRaiseBtn.node.active = true;
+        this.mFoldBtn.node.active = true;
+        if(this.mCallAmount >0)
+        {
+            this.mCallBtn.node.active = true;
+            this.mCallBtn.SetTitle(this.mCallAmount + "");
+        }
+        else
+        {
+            this.mCheckBtn.node.active = true;
+        }
     }
 
     CalculateToShowRaiseNode()

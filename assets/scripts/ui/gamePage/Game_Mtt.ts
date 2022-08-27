@@ -15,7 +15,7 @@ export class Game_Mtt extends GameBase
 
     RegDataNotify() 
     {
-
+        super.RegDataNotify();
         GameData.GetInstance().AddListener("Data_ErrorAndBackHall",(_current , _before)=>
         {
             this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
@@ -33,27 +33,24 @@ export class Game_Mtt extends GameBase
 
     }
 
-    GetGameInfoMsg()
+    LateInit() 
     {
-        let matchId = GameData.GetInstance().Data_RefreshMttInfo.matchConfig.matchId;
-        Network.GetInstance().SendMttGetRoomInfo(GameType.Mtt , matchId , HallData.GetInstance().Data_IsBackToGame)
-    }
-
-    InitTableinfo()
-    {
-        this.AddSubView("gamePage","prefab/Game_MttInfo",true);
+        Network.GetInstance().SendRefreshMttInfo(HallData.GetInstance().Data_CurrentMttMatchID);
     }
 
     InitOtherUI()
     {
+        this.AddSubView("gamePage","prefab/Game_MttInfo",true);
         this.AddSubView("gamePage","prefab/Game_MttBottomTips",true);
         this.AddSubView("gamePage","prefab/Game_MttRestTimeTips",true);
     }
 
-    DealEnterMsg(_data : any)
+    GetGameInfoMsg()
     {
-
+        let matchID = GameData.GetInstance().Data_MatchConfig.matchId;
+        Network.GetInstance().SendMttGetRoomInfo(GameType.Mtt , matchID , HallData.GetInstance().Data_IsBackToGame);
     }
+
 
 }
 

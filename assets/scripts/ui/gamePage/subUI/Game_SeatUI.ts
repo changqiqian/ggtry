@@ -22,17 +22,7 @@ export class Game_SeatUI extends BaseUI
     }
     RegDataNotify() 
     {
-        GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
-        {
-            let userList = _current.deskInfo.userList;
-            for(let i = 0 ; i < userList.length ; i++)
-            {
-                let currentUser = userList[i];
-                GameData.GetInstance().ModifyPlayingPlayer(currentUser);
-            }
-            GameData.GetInstance().Data_UpdatePlayingPlayer = true;
-            
-        },this);
+
     }
     LateInit() 
     {

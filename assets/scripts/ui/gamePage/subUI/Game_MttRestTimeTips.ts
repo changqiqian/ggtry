@@ -34,19 +34,22 @@ export class Game_MttRestTimeTips extends BaseUI
     {
         GameData.GetInstance().AddListener("Data_MttGetRoomInfo",(_current , _before)=>
         {
-            this.node.active = _current.status == Mtt_MatchStatus.Rest;
-            if(_current.status == Mtt_MatchStatus.Rest)
+            let statusInfo = GameData.GetInstance().Data_StatusInfo;
+            this.node.active = statusInfo.status == Mtt_MatchStatus.Rest;
+            if(statusInfo.status == Mtt_MatchStatus.Rest)
             {
-                var leftTime = _current.status.leftTime
+                var leftTime = statusInfo.leftTime;
                 this.StartCountDown(leftTime);
             }
         },this);
         GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
         {
-            this.node.active = _current.statusInfo.status == Mtt_MatchStatus.Rest;
-            if(_current.statusInfo.status == Mtt_MatchStatus.Rest)
+            let matchConfig = GameData.GetInstance().Data_MatchConfig;
+            let statusInfo = GameData.GetInstance().Data_StatusInfo;
+            this.node.active = statusInfo.status == Mtt_MatchStatus.Rest;
+            if(statusInfo.status == Mtt_MatchStatus.Rest)
             {
-                var leftTime = _current.statusInfo.restLeftTime;
+                var leftTime = statusInfo.restLeftTime;
                 this.StartCountDown(leftTime);
             }
         },this);
