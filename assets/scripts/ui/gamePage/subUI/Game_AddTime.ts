@@ -11,6 +11,8 @@ export class Game_AddTime extends BaseUI
     mAddBtn: BaseButton = null;
     @property(Label) 
     mTitle: Label = null;
+    @property(Node) 
+    mDiamond: Node = null;
 
     mCallback : Function = null;
     InitParam() 
@@ -51,6 +53,7 @@ export class Game_AddTime extends BaseUI
 
     SetButtonTitle(_title : string)
     {
+        this.mDiamond.active = false;
         if(_title == "延时已上限")
         {
             this.node.active = false;
@@ -62,6 +65,7 @@ export class Game_AddTime extends BaseUI
             return;
         }
 
+        this.mDiamond.active = true;
         this.mAddBtn.SetTitle(_title);
     }
 }
