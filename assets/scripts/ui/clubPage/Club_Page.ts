@@ -12,8 +12,8 @@ export class Club_Page extends BaseUI
     }
     BindUI() 
     {
-        this.AddSubView("hall","prefab/Hall_PlayerInfoBar",true);
-        this.AddSubView("clubPage","prefab/Club_Main",true);
+        this.AddSubView("hall","prefab/Hall_PlayerInfoBar");
+        this.AddSubView("clubPage","prefab/Club_Main");
     }
     RegDataNotify() 
     {

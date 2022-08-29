@@ -10,16 +10,12 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_MttRestTimeTips')
 export class Game_MttRestTimeTips extends BaseUI 
 {
-    @property(Node) 
-    mBG: Node = null;
     @property(Label) 
     mCountDown: Label = null;
 
-    mCurrentTime : number = null;
-
     onDisable()
     {
-        this.unschedule(this.CountDownLogic);
+        
     }
 
     InitParam() 
@@ -28,7 +24,7 @@ export class Game_MttRestTimeTips extends BaseUI
     }
     BindUI() 
     {
-
+        this.node.active = false;
     }
     RegDataNotify() 
     {
@@ -55,8 +51,10 @@ export class Game_MttRestTimeTips extends BaseUI
         },this);
         GameData.GetInstance().AddListener("Data_MttStatusChange",(_current , _before)=>
         {
+            this.node.active = false;
             if(_current.reason == Mtt_MatchStatus.Rest)
             {
+                this.node.active = true;
                 var leftTime = _current.leftTime;
                 this.StartCountDown(leftTime);
             }
@@ -78,32 +76,17 @@ export class Game_MttRestTimeTips extends BaseUI
 
     StartCountDown(_time : number)
     {
-        this.mCurrentTime = _time;
-        this.unschedule(this.CountDownLogic);
-        if(this.mCurrentTime > 0)
-        {
-            this.schedule(this.CountDownLogic, 1);
-        }
-        this.UpdateCountDownUI();
+        this.StartSecondsTimer(_time);
+        this.OnSecondTimer(_time);
     }
 
-    CountDownLogic()
-    {
-        this.mCurrentTime--;
-        if(this.mCurrentTime <= 0)
-        {
-            this.unschedule(this.CountDownLogic);
-        }
-        this.UpdateCountDownUI();
-    }
-
-    UpdateCountDownUI()
+    OnSecondTimer(_restTime : number)
     {
         let preffix = Localization.GetString("00022");
-        this.mBG.active = this.mCurrentTime >=0;
-        if(this.mCurrentTime >=0)
+        this.node.active = _restTime >0;
+        if(this.node.active)
         {
-            this.mCountDown.string = preffix + GameConfig.GetRestTime_M_S(this.mCurrentTime);
+            this.mCountDown.string = preffix + GameConfig.GetRestTime_M_S(_restTime);
         }
         else
         {
@@ -112,5 +95,6 @@ export class Game_MttRestTimeTips extends BaseUI
             Network.GetInstance().SendRefreshMttInfo(matchId);
         }
     }
+
 }
 

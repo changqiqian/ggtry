@@ -126,11 +126,11 @@ export class UIMgr
         this.mLoadingMask.ShowLoading(_show , _tips);
     }
 
-    public ShowToast(_tips:string)
+    public ShowToast(_tips:string ,  _duration:number = 3)
     {
         let childCount = this.mTopRoot.children.length;
         this.mToast.node.setSiblingIndex(childCount);
-        this.mToast.ShowToast(_tips);
+        this.mToast.ShowToast(_tips , _duration);
     }
 
     public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null)

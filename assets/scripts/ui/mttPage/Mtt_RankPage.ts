@@ -76,10 +76,10 @@ export class Mtt_RankPage extends BaseUI
             current.SetDataNotify(HallData.GetInstance(),"Data_MttRankSubPage",i);
         }
 
-        this.AddSubView("mttPage","prefab/Mtt_SeasonRankPage",false , null , this.mSubLayer);
-        this.AddSubView("mttPage","prefab/Mtt_MonthRankPage",false , null , this.mSubLayer);
-        this.AddSubView("mttPage","prefab/Mtt_WeekRankPage",false , null , this.mSubLayer);
-        this.AddSubView("mttPage","prefab/Mtt_AllRankPage",false , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_SeasonRankPage" , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_MonthRankPage" , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_WeekRankPage" , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_AllRankPage" , null , this.mSubLayer);
     }
     RegDataNotify() 
     {

@@ -27,10 +27,7 @@ export class Mtt_DetailPage extends BaseUI
     
     onEnable()
     {
-        this.scheduleOnce(()=>
-        {
-            HallData.GetInstance().Data_MttInfoSubPage = Mtt_InfoSubPage.InfoPage;
-        },0);
+        HallData.GetInstance().Data_MttInfoSubPage = Mtt_InfoSubPage.InfoPage;
     }
 
     InitParam() 
@@ -68,10 +65,10 @@ export class Mtt_DetailPage extends BaseUI
             current.SetDataNotify(HallData.GetInstance(),"Data_MttInfoSubPage",i);
         }
 
-        this.AddSubView("mttPage","prefab/Mtt_InfoPage",false , null , this.mSubLayer);
-        this.AddSubView("mttPage","prefab/Mtt_PlayersPage",false , null , this.mSubLayer);
-        this.AddSubView("mttPage","prefab/Mtt_RewardPage",false , null , this.mSubLayer);
-        this.AddSubView("mttPage","prefab/Mtt_TableInfoPage",false , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_InfoPage" , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_PlayersPage" , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_RewardPage" , null , this.mSubLayer);
+        this.AddSubView("mttPage","prefab/Mtt_TableInfoPage" , null , this.mSubLayer);
     }
     RegDataNotify() 
     {        

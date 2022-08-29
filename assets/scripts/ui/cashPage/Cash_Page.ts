@@ -12,8 +12,8 @@ export class Cash_Page extends BaseUI {
     }
     BindUI() 
     {
-        this.AddSubView("hall","prefab/Hall_PlayerInfoBar",true);
-        this.AddSubView("cashPage","prefab/Cash_Main",true);
+        this.AddSubView("hall","prefab/Hall_PlayerInfoBar");
+        this.AddSubView("cashPage","prefab/Cash_Main");
     }
     RegDataNotify() 
     {

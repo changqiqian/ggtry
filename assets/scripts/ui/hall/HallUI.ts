@@ -22,11 +22,11 @@ export class HallUI extends BaseUI
     }
     BindUI() 
     {
-        this.AddSubView("mttPage","prefab/Mtt_Page",false);
-        this.AddSubView("cashPage","prefab/Cash_Page",false);
-        this.AddSubView("clubPage","prefab/Club_Page",false);
-        this.AddSubView("mePage","prefab/Me_Page",false);
-        this.AddSubView("hall","prefab/Hall_Bottom",true);
+        this.AddSubView("mttPage","prefab/Mtt_Page");
+        this.AddSubView("cashPage","prefab/Cash_Page");
+        this.AddSubView("clubPage","prefab/Club_Page");
+        this.AddSubView("mePage","prefab/Me_Page");
+        this.AddSubView("hall","prefab/Hall_Bottom");
     }
 
     RegDataNotify() 

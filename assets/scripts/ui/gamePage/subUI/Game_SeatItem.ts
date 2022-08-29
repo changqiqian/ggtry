@@ -1,5 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { BaseButton } from '../../common/BaseButton';
 import { GameData } from '../GameData';
 import { Game_Player } from './Game_Player';
@@ -32,18 +33,30 @@ export class Game_SeatItem extends BaseUI
 
         });
 
-        this.mGame_Player.Show(false);
     }
     RegDataNotify() 
     {
         GameData.GetInstance().AddListener("Data_UpdatePlayingPlayer",(_current , _before)=>
         {
             let currentPlayer = GameData.GetInstance().FindPlayerBySeatId(this.mSeatID);
-            this.mSitBtn.node.active = currentPlayer == null;
-            this.mEmptyBtn.node.active = currentPlayer != null;
+            let selfPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
             if(currentPlayer == null)
             {
-                return;
+                if(selfPlayer == null)
+                {
+                    this.mSitBtn.node.active = true;
+                    this.mEmptyBtn.node.active = false;
+                }
+                else
+                {
+                    this.mSitBtn.node.active = false;
+                    this.mEmptyBtn.node.active = true;
+                }
+            }
+            else
+            {
+                this.mSitBtn.node.active = false;
+                this.mEmptyBtn.node.active = false;
             }
         },this);
     }

@@ -126,6 +126,59 @@ export class GameConfig
         GameConfig.WriteSimpleData('IS_CAN_PLAY_BGM', _isChecked);
     }
 
+    public static SaveCustomerRaise(_index : number , _ratio : number , _title : string)
+    {
+        if(_index >= 3)//我们只有3个自定义加注按钮
+        {
+            console.log("我们只有3个自定义加注按钮 你当前想修改_index===" + _index);
+            return;
+        }
+        let ratioName = "CUSTOMER_RAISE_RATIO" + _index;
+        GameConfig.WriteSimpleData(ratioName, _ratio);
+        
+        let titleName = "CUSTOMER_RAISE_TITLE" + _index; 
+        GameConfig.WriteSimpleData(titleName, _title);
+    }
+
+    public static GetCustomerRaiseRatio(_index : number) : number
+    {
+        if(_index >= 3)//我们只有3个自定义加注按钮
+        {
+            console.log("我们只有3个自定义加注按钮 你当前想获取_index===" + _index);
+            return 0;
+        }
+
+        let titleName = "CUSTOMER_RAISE_RATIO" + _index; 
+        let defualtTitle = [1/3 , 0.5 , 1];
+        let result = GameConfig.ReadSimpleData(titleName, null);
+        if(result == null)
+        {
+            return defualtTitle[_index];
+        }
+        
+        return Number(result);
+    }
+
+    public static GetCustomerRaiseTitle(_index : number) : string
+    {
+        if(_index >= 3)//我们只有3个自定义加注按钮
+        {
+            console.log("我们只有3个自定义加注按钮 你当前想获取_index===" + _index);
+            return "None";
+        }
+
+        let titleName = "CUSTOMER_RAISE_TITLE" + _index; 
+
+        let defualtTitle = ["1/3" , "1/2" , "1"];
+        let result = GameConfig.ReadSimpleData(titleName, null);
+        if(result == null)
+        {
+            return defualtTitle[_index];
+        }
+
+        return result;
+    }
+
     public static GetRandChar()
     {
         var str = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz23456789';

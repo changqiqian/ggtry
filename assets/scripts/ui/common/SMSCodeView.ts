@@ -27,7 +27,6 @@ export class SMSCodeView extends BaseUI
     mResendBtn: BaseButton = null;
     @property(BaseButton) 
     mConfirmBtn: BaseButton = null;
-    mCurrentCountDownTime = 60;
 
     onEnable()
     {
@@ -43,7 +42,7 @@ export class SMSCodeView extends BaseUI
     {
         this.mInputCodeIndicator.SetClickCallback(()=>
         {
-            this.AddSubView("common","prefab/QuickInputNumView", true, (_script)=>
+            this.AddSubView("common","prefab/QuickInputNumView", (_script)=>
             {
                 let tempQuickInput = _script as QuickInputNumView;
                 tempQuickInput.SetCallback(
@@ -156,34 +155,22 @@ export class SMSCodeView extends BaseUI
 
     StartCountDown()
     {
-        this.StopCountDown();
-        this.mCurrentCountDownTime = 60;
+        this.StartSecondsTimer(60);
+        this.OnSecondTimer(60);
         this.mCountDown.node.active = true;
         this.mResendBtn.node.active = false;
-        this.UpdateCountDownUI();
-        this.schedule(this.CountDownLogic.bind(this),1);
     }
 
-    StopCountDown()
+    OnSecondTimer(_restTime : number)
     {
-        this.mCountDown.node.active = false;
-        this.mResendBtn.node.active = true;
-        this.unscheduleAllCallbacks();
-    }
-
-    CountDownLogic()
-    {
-        this.mCurrentCountDownTime--;
-        this.UpdateCountDownUI();
-        if(this.mCurrentCountDownTime == 0)
+        this.mCountDown.string = _restTime.toString() + "s";
+        if(_restTime == 0)
         {
-            this.StopCountDown();
+            this.mCountDown.node.active = false;
+            this.mResendBtn.node.active = true;
         }
     }
 
-    UpdateCountDownUI()
-    {
-        this.mCountDown.string = this.mCurrentCountDownTime.toString() + "s";
-    }
+
 }
 

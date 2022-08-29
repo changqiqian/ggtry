@@ -17,7 +17,7 @@ export class Game_Pot extends BaseUI
     }
     BindUI() 
     {
-
+        
     }
     RegDataNotify() 
     {
@@ -25,6 +25,13 @@ export class Game_Pot extends BaseUI
         {
             this.SetTotalPot(_current.basePool);
         },this);
+
+        GameData.GetInstance().AddListener("Data_PlayerAction",(_current , _before)=>
+        {
+            let deskInfo = GameData.GetInstance().Data_DeskInfo;
+            this.SetTotalPot(deskInfo.basePool);
+        },this);
+
         GameData.GetInstance().AddListener("Data_PotChange",(_current , _before)=>
         {
             let totalPot = 0;

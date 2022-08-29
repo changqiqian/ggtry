@@ -16,7 +16,7 @@ export class Game_SelfPreAction extends BaseUI
     }
     BindUI() 
     {
-
+        this.node.active = false;
     }
     RegDataNotify() 
     {

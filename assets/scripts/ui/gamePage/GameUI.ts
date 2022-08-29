@@ -21,11 +21,11 @@ export class GameUI extends BaseUI
     {
         if(HallData.GetInstance().Data_CurrentMttMatchID)
         {
-            this.AddSubView("gamePage","prefab/Game_Mtt",true);
+            this.AddSubView("gamePage","prefab/Game_Mtt");
         }
         else
         {
-            this.AddSubView("gamePage","prefab/Game_Cash",true);
+            this.AddSubView("gamePage","prefab/Game_Cash");
         }
     }
     RegDataNotify() 

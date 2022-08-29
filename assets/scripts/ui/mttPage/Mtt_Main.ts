@@ -1,5 +1,7 @@
 import { _decorator, Component, Node, PageView, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
+import { UIMgr } from '../../base/UIMgr';
 import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { HallData, Mtt_MatchStatus } from '../hall/HallData';
@@ -22,6 +24,12 @@ export class Mtt_Main extends BaseUI
     mSearchBtn: BaseButton = null;
     @property(ScrollView) 
     mScrollView: ScrollView = null;
+
+    onEnable()
+    {
+        Network.GetInstance().SendGetMttList();
+    }
+
     InitParam() 
     {
 
@@ -40,7 +48,7 @@ export class Mtt_Main extends BaseUI
         {
 
         });
-        this.AddSubView("hall","prefab/Hall_LunBo",true,null,this.mTop);
+        this.AddSubView("hall","prefab/Hall_LunBo",null,this.mTop);
     }
     RegDataNotify() 
     {
@@ -67,28 +75,27 @@ export class Mtt_Main extends BaseUI
 
         HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
         {
-            if(Mtt_MatchStatus.Rest == _current.statusInfo.status)
-            {
-                this.ShowLayer("mttPage","prefab/Mtt_DetailPage",false);
-                Network.GetInstance().SendGetMttList();
-            }
+            //Network.GetInstance().SendGetMttList();
+            // if(Mtt_MatchStatus.Rest == _current.statusInfo.status)
+            // {
+            //     this.ShowLayer("mttPage","prefab/Mtt_DetailPage",false);
+            //     Network.GetInstance().SendGetMttList();
+            // }
         },this);
 
         HallData.GetInstance().AddListener("Data_MttDismiss",(_current , _before)=>
         {
-            Network.GetInstance().SendGetMttList();
+            //Network.GetInstance().SendGetMttList();
         },this);
 
         HallData.GetInstance().AddListener("Data_MttReadyNotify",(_current , _before)=>
         {
-            
-            //跳转到游戏中
+            UIMgr.GetInstance().ShowToast(Localization.GetString("00081"));
         },this);
-        
     }
     LateInit() 
     {
-        Network.GetInstance().SendGetMttList();
+        
     }
     UnregDataNotify() 
     {
@@ -103,7 +110,9 @@ export class Mtt_Main extends BaseUI
         let startStep = 2;
         while(this.mScrollView.content.children.length > startStep)   
         {
-            this.mScrollView.content.children[startStep].destroy();
+            let currentNode = this.mScrollView.content.children[startStep];
+            currentNode.removeFromParent();
+            currentNode.destroy();
         }
     }
 

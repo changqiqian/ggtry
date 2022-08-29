@@ -23,7 +23,6 @@ export class Game_TableInfo extends BaseUI
     @property(Label) 
     mLeftTime: Label = null;
 
-    mCurrentTime : number = null;
     InitParam() 
     {
 
@@ -97,31 +96,16 @@ export class Game_TableInfo extends BaseUI
 
     StartCountDown(_time : number)
     {
-        this.mCurrentTime = _time;
-        this.unschedule(this.CountDownLogic);
-        if(this.mCurrentTime > 0)
-        {
-            this.schedule(this.CountDownLogic, 1);
-        }
-        this.UpdateCountDownUI();
+        this.StartSecondsTimer(_time);
+        this.OnSecondTimer(_time);
     }
 
-    CountDownLogic()
-    {
-        this.mCurrentTime--;
-        if(this.mCurrentTime <= 0)
-        {
-            this.unschedule(this.CountDownLogic);
-        }
-        this.UpdateCountDownUI();
-    }
-
-    UpdateCountDownUI()
+    OnSecondTimer(_restTime : number)
     {
         let preffix = Localization.GetString("00061");
-        if(this.mCurrentTime >=0)
+        if(_restTime >=0)
         {
-            this.mLeftTime.string = preffix + GameConfig.GetRestTime_M_S(this.mCurrentTime);
+            this.mLeftTime.string = preffix + GameConfig.GetRestTime_M_S(_restTime);
         }
         else
         {

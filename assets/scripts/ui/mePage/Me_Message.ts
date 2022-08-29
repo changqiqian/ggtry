@@ -27,10 +27,9 @@ export class Me_Message extends BaseUI {
     mIsLastPage: boolean = false;
     mCurrentData: Array<any>;
 
-    onEnable() {
-        this.scheduleOnce(() => {
-            HallData.GetInstance().Data_MeMessageSubPage = Me_MessageSubPage.Announcement;
-        }, 0);
+    onEnable() 
+    {
+        HallData.GetInstance().Data_MeMessageSubPage = Me_MessageSubPage.Announcement;
     }
 
     InitParam() {}

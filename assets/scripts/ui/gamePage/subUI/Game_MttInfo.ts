@@ -3,7 +3,6 @@ import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { UIMgr } from '../../../base/UIMgr';
 import { GameConfig } from '../../../GameConfig';
-import { Msg_status } from '../../../network/MsgStruct';
 import { Mtt_MatchStatus } from '../../hall/HallData';
 import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
@@ -22,7 +21,6 @@ export class Game_MttInfo extends BaseUI
     @property(Label) 
     mAvgChip: Label = null;
 
-    mCurrentTime : number = null;
     InitParam() 
     {
 
@@ -109,7 +107,7 @@ export class Game_MttInfo extends BaseUI
 
     }
 
-    UpdateBlindInfo(_data : Msg_status)
+    UpdateBlindInfo(_data : any)
     {
         let anteNow = "";
         if(_data.beforeScore)
@@ -126,7 +124,7 @@ export class Game_MttInfo extends BaseUI
         this.mBlindInfoNext.string = Localization.GetString("00055") + _data.nextBlind + "/" + _data.nextBlind * 2 + anteNext;
     }
 
-    UpdateUI(_data : Msg_status)
+    UpdateUI(_data : any)
     {
         if(_data.status != Mtt_MatchStatus.Rest && _data.status != Mtt_MatchStatus.End)
         {
@@ -140,35 +138,21 @@ export class Game_MttInfo extends BaseUI
 
     StartCountDown(_time : number)
     {
-        this.mCurrentTime = _time;
-        this.unschedule(this.CountDownLogic);
-        if(this.mCurrentTime > 0)
-        {
-            this.schedule(this.CountDownLogic, 1);
-        }
-        this.UpdateCountDownUI();
+        this.StartSecondsTimer(_time);
+        this.OnSecondTimer(_time);
     }
 
-    CountDownLogic()
+    OnSecondTimer(_restTime : number)
     {
-        this.mCurrentTime--;
-        if(this.mCurrentTime <= 0)
+        if(_restTime >=0)
         {
-            this.unschedule(this.CountDownLogic);
-        }
-        this.UpdateCountDownUI();
-    }
-
-    UpdateCountDownUI()
-    {
-        if(this.mCurrentTime >=0)
-        {
-            this.mCountDown.string = GameConfig.GetRestTime_M_S(this.mCurrentTime);
+            this.mCountDown.string = GameConfig.GetRestTime_M_S(_restTime);
         }
         else
         {
             this.mCountDown.string = "00:00";
         }
     }
+
 }
 

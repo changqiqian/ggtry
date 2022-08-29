@@ -62,7 +62,6 @@ export class Mtt_MatchItem extends BaseUI
     
     mData : any = null;
     mMatchStatus : Mtt_MatchListStatus = null;
-    mCurrentTime : number = null;
     InitParam() 
     {
 
@@ -250,8 +249,7 @@ export class Mtt_MatchItem extends BaseUI
 
             if(this.mMatchStatus == Mtt_MatchListStatus.DelayReg)
             {
-                this.mCurrentTime = _mttInfo.stopJoinTime;
-                this.StartCountDown();
+                this.StartCountDown(_mttInfo.stopJoinTime);
             }
             else if(this.mMatchStatus == Mtt_MatchListStatus.MatchStarted || 
                 this.mMatchStatus == Mtt_MatchListStatus.MatchEnd)
@@ -261,28 +259,19 @@ export class Mtt_MatchItem extends BaseUI
             }
             else
             {
-                this.mCurrentTime = _mttInfo.leftTime;
-                this.StartCountDown();
+                this.StartCountDown(_mttInfo.leftTime);
             }
     }
 
-    StartCountDown()
+    StartCountDown(_time : number)
     {
-        this.unschedule(this.CountDownLogic);
-        this.schedule(this.CountDownLogic, 1);
+        this.StartSecondsTimer(_time);
+        this.OnSecondTimer(_time);
     }
 
-    CountDownLogic()
+    OnSecondTimer(_restTime : number)
     {
-        this.mCurrentTime = this.mCurrentTime - 1;
-
-        if(this.mCurrentTime <= 0) 
-        {
-            this.mCurrentTime = 0;
-            this.unschedule(this.CountDownLogic);
-        }
-
-        this.CalculateTime(this.mCurrentTime, this.mData.mttInfo.beginTime);
+        this.CalculateTime(_restTime, this.mData.mttInfo.beginTime);
     }
 
     CalculateTime(_time , _beginTime) 

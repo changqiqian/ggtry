@@ -9,7 +9,7 @@ export class Game_Cash extends GameBase
 {
     InitOtherUI()
     {
-        this.AddSubView("gamePage","prefab/Game_TableInfo",true);
+        this.AddSubView("gamePage","prefab/Game_TableInfo");
     }
 
 

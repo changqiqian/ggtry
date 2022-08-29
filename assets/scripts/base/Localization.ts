@@ -160,6 +160,7 @@ export class Localization {
         {"name":"00078", "ch": "四条", "en": "Four of kind"},
         {"name":"00079", "ch": "同花顺", "en": "Flush straight"},
         {"name":"00080", "ch": "皇家同花顺", "en": "Royal flush straight"},
+        {"name":"00081", "ch": "您报名的mtt比赛已经开始，请前往参加", "en": "Mtt match started,join now~"},
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

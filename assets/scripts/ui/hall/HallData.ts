@@ -61,28 +61,29 @@ export class HallData extends DataNotify {
         );
 
 
-        Network.GetInstance().AddMsgListenner(
-            MsgID.GetMttList,
-            (_msgBody) => {
-                if (_msgBody.list != null && _msgBody.list.length != 0) {
-                    //排序 照搬原来的代码 反正就是排序的意思
+        Network.GetInstance().AddMsgListenner(MsgID.GetMttList,(_msgBody) => 
+        {
+            if (_msgBody.list != null && _msgBody.list.length != 0) 
+            {
+                //排序 照搬原来的代码 反正就是排序的意思
+                {
+                    for (let i = 0; i < _msgBody.list.length; i++) 
                     {
-                        for (let i = 0; i < _msgBody.list.length; i++) {
-                            _msgBody.list[i].sortValue = -i;
-                            if (_msgBody.list[i].mttInfo.strapConfig.isTop) {
-                                _msgBody.list[i].sortValue = 10000 - i;
-                            }
+                        _msgBody.list[i].sortValue = -i;
+                        if (_msgBody.list[i].mttInfo.strapConfig.isTop) 
+                        {
+                            _msgBody.list[i].sortValue = 10000 - i;
                         }
-                        _msgBody.list.sort((a, b) => {
-                            return a.sortValue > b.sortValue ? -1 : 1;
-                        });
                     }
-
-                    this.Data_MttList = _msgBody.list;
+                    _msgBody.list.sort((a, b) => 
+                    {
+                        return a.sortValue > b.sortValue ? -1 : 1;
+                    });
                 }
-            },
-            this
-        );
+
+                this.Data_MttList = _msgBody.list;
+            }
+        },this);
 
         Network.GetInstance().AddMsgListenner(
             MsgID.GetMttMatchDetails,

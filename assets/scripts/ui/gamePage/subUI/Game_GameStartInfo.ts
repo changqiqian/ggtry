@@ -18,7 +18,7 @@ export class Game_GameStartInfo extends BaseUI
     }
     BindUI() 
     {
-
+        this.node.active = false;
     }
     RegDataNotify() 
     {

@@ -23,11 +23,11 @@ export class SettingWindow extends BaseUI {
 
     BindUI() {
         this.mCloseBtn.SetClickCallback(() => {
-            UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_SettingWindow', false);
+            this.CloseAsWindow();
         });
         this.mDeleteAccountBtn.SetClickCallback(() => {
             UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect');
-            UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_SettingWindow', false);
+            this.CloseAsWindow();
         });
         this.mSwitchAccountBtn.SetClickCallback(() => {
             GameConfig.ClearToken();

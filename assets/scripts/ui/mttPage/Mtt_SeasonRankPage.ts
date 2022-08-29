@@ -38,6 +38,7 @@ export class Mtt_SeasonRankPage extends BaseUI
     }
     BindUI() 
     {
+        this.node.active = false;
         this.mNoData.active = false;
         this.mScrollView.node.on(ScrollView.EventType.SCROLL_TO_BOTTOM, this.OnDragBottom, this);
 

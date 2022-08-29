@@ -1,7 +1,6 @@
-import { _decorator, Component, Node } from 'cc';
-const { ccclass, property } = _decorator;
 
-export interface Msg_matchConfig
+
+export class Msg_matchConfig
 {
     gameType:number;
     matchId:number;
@@ -16,7 +15,7 @@ export interface Msg_matchConfig
         img:string;
         typeExpired:number;
         nums:number;
-    },
+    };
     serviceFee:number;
     riseBlindTime:number;
     isRest:boolean;
@@ -39,7 +38,7 @@ export interface Msg_matchConfig
         img:string;
         typeExpired:number;
         nums:number;
-    },
+    };
     rewardPlayerCount:number;
     isIpLimit:boolean;
     isGpsLimit:boolean;
@@ -58,7 +57,7 @@ export interface Msg_matchConfig
     releaseTime:number;
     beginMode:number;
     matchMode:number;
-    allowPlayer:any,
+    allowPlayer:any;
     is_reload:boolean;
     strapConfig:
     {
@@ -69,11 +68,11 @@ export interface Msg_matchConfig
         titleColor:Array<number>;
         backgroundImg:string;
         coverImg:string;
-    },
+    };
     satelliteId:number;
 }
 
-export interface Msg_deskConfig
+export class Msg_deskConfig
 {
     gameId:number;
     gameName:string;
@@ -122,10 +121,10 @@ export interface Msg_deskConfig
     channelMode:number;
 }
 
-export interface Msg_deskInfo
+export class Msg_deskInfo
 {
     basePool:number;
-    poolInfos:any,
+    poolInfos:any;
     curTurnUserId:string;
     curTurnTime:number;
     lastEndTime:number;
@@ -146,9 +145,9 @@ export interface Msg_deskInfo
     totalTime:number;
     straddleUsers:Array<any>;
     inSureUsers:Array<number>;
-    inSurePools:any,
-    turnInSure:any,
-    winRates:any,
+    inSurePools:any;
+    turnInSure:any;
+    winRates:any;
     livingUserId:string;
     anchorPhotoUrl:string;
     anchorNickName:string;
@@ -162,7 +161,7 @@ export interface Msg_deskInfo
 }
 
 
-export interface Msg_status
+export class Msg_status
 {
     status:number;
     leftTime:number;
@@ -184,7 +183,7 @@ export interface Msg_status
     valueCut:number;
 }
 
-export interface Msg_userFullInfo
+export class Msg_userFullInfo
 {
     userInfo : Msg_userInfo;
     tableScore:number;
@@ -219,7 +218,7 @@ export interface Msg_userFullInfo
 }
 
 
-export interface Msg_userInfo
+export class Msg_userInfo
 {
     userId: string;
     nickname:string;
@@ -239,7 +238,7 @@ export interface Msg_userInfo
         playTimes:number;
         vPIP:number;
         winRate:number;
-    },
+    };
     decoration:
     {
         pos1:number;

@@ -13,7 +13,7 @@ export class Cash_Main extends BaseUI
     }
     BindUI() 
     {
-        this.AddSubView("hall","prefab/Hall_LunBo",true,null,this.mTop);
+        this.AddSubView("hall","prefab/Hall_LunBo",null,this.mTop);
     }
     RegDataNotify() 
     {

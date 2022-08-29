@@ -40,6 +40,11 @@ const { ccclass, property } = _decorator;
 export abstract class BaseUI extends Component {
     mIsWindow: boolean = false;
     mLayerList: Array<SubViewKeyPair>;
+
+    //计时器，可以自动补偿切到后台的时间，防止时间对不上
+    mTotalCountTime : number;
+    mTimerStart : number;
+    mTimerPast : number;
     onLoad() {
         this.mIsWindow = false;
         this.mLayerList = new Array<SubViewKeyPair>();
@@ -49,12 +54,11 @@ export abstract class BaseUI extends Component {
     }
 
     start() {
-        this.scheduleOnce(() => {
-            this.LateInit();
-        }, 0);
+        this.LateInit();
     }
 
     onDestroy() {
+        this.StopSecondsTimer();
         this.UnregDataNotify();
         this.CustmoerDestory();
         this.mLayerList = null;
@@ -96,6 +100,10 @@ export abstract class BaseUI extends Component {
     }
 
     LoadRemoteSprite(_url: string, _finish: Function) {
+        if(_url == "")
+        {
+            return;
+        }
         assetManager.loadRemote(_url, (_err: Error | null, _imageAsset: ImageAsset) => {
             if (cc.isValid(this.node, true) == false) {
                 return;
@@ -128,52 +136,65 @@ export abstract class BaseUI extends Component {
     }
 
 
-    AddSubView(_bundleName : string, _assetPath : string , _show : boolean,  _loadFinish : Function = null , _parent : Node = null)
+    AddSubView(_bundleName : string, _assetPath : string ,  _loadFinish : Function = null , _parent : Node = null)
     {
         let key = _bundleName + _assetPath;
         let index = this.mLayerList.findIndex((_item) => _item.key === key);
-        if (index >= 0) {
+        if (index >= 0) 
+        {
             let currentScript = this.mLayerList[index].value.getComponent(BaseUI);
-            currentScript.Show(_show);
+            currentScript.Show(true);
             if (_loadFinish != null) {
                 _loadFinish(currentScript);
             }
-        } else {
-            this.LoadPrefab(_bundleName, _assetPath, (_prefab) => {
-                if (cc.isValid(this.node, true) == false) {
+        } 
+        else 
+        {
+            this.LoadPrefab(_bundleName, _assetPath, (_prefab) => 
+            {
+                if (cc.isValid(this.node, true) == false) 
+                {
                     return;
                 }
                 let tempNode = instantiate(_prefab);
-                if (_parent != null) {
+                if (_parent != null) 
+                {
                     _parent.addChild(tempNode);
-                } else {
+                } 
+                else 
+                {
                     this.node.addChild(tempNode);
                 }
                 let currentScript = tempNode.getComponent(BaseUI);
-                currentScript.Show(_show);
+                //currentScript.Show(_show);
                 let keyPair = new SubViewKeyPair(key, tempNode);
                 this.mLayerList.push(keyPair);
 
-                if (_loadFinish != null) {
+                if (_loadFinish != null) 
+                {
                     _loadFinish(currentScript);
                 }
             });
         }
     }
 
-    ShowLayer(_bundleName: string, _assetPath: string, _show: boolean = true, _finishFunction: Function = null) {
+    ShowLayer(_bundleName: string, _assetPath: string, _show: boolean = true, _finishFunction: Function = null) 
+    {
         UIMgr.GetInstance().ShowLayer(_bundleName, _assetPath, _show, _finishFunction);
     }
 
-    ShowWindow(_bundleName: string, _prefabPath: string, _show: boolean = true, _finishFunction: Function = null) {
+    ShowWindow(_bundleName: string, _prefabPath: string, _show: boolean = true, _finishFunction: Function = null) 
+    {
         UIMgr.GetInstance().ShowWindow(_bundleName, _prefabPath, _show, _finishFunction);
     }
 
-    Delete() {
+    Delete()
+    {
         this.node.destroy();
     }
 
-    CloseAsWindow() {
+    CloseAsWindow() 
+    {
         let parentNode = this.node.parent;
         let parentScript = parentNode.getComponent(BaseUI);
         if (parentScript.mIsWindow) {
@@ -182,4 +203,45 @@ export abstract class BaseUI extends Component {
             this.Show(false);
         }
     }
+
+
+
+    StartSecondsTimer(_totalTime : number)
+    {
+        if(_totalTime <= 0)
+        {
+            return;
+        }
+        this.mTotalCountTime = _totalTime;
+        let tempDate = new Date();
+        this.mTimerStart = tempDate.getSeconds(); 
+        this.StopSecondsTimer();
+        this.schedule(this.SecondsTimerLogic, 1);
+    }
+
+    StopSecondsTimer()
+    {
+        this.unschedule(this.SecondsTimerLogic);
+    }
+
+    SecondsTimerLogic()
+    {
+        let tempDate = new Date();
+        let nowTime = tempDate.getSeconds(); 
+        let timePast = nowTime - this.mTimerStart;
+        let restTime = this.mTotalCountTime - timePast;
+        if(restTime <= 0)
+        {
+            restTime = 0;
+            this.StopSecondsTimer();
+        }
+        this.OnSecondTimer(restTime);
+    }
+
+    OnSecondTimer(_restTime : number)
+    {
+
+    }
+
+
 }

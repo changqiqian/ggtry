@@ -2,7 +2,6 @@ import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Combiantion } from '../../../base/Calculator';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
-import { Msg_deskInfo, Msg_userFullInfo } from '../../../network/MsgStruct';
 import { Poker } from '../../common/Poker';
 import { GameData, Game_ActionType } from '../GameData';
 import { Game_ActionTag } from './Game_ActionTag';
@@ -35,6 +34,7 @@ export class Game_SelfUI extends BaseUI
     }
     BindUI() 
     {
+        this.node.active = false;
         this.HideAllUI();
         this.mGame_AddTime.SetCallback(()=>
         {
@@ -43,6 +43,8 @@ export class Game_SelfUI extends BaseUI
     }
     RegDataNotify() 
     {
+
+        
         GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
         {
             let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
@@ -56,14 +58,13 @@ export class Game_SelfUI extends BaseUI
             let deskInfo = GameData.GetInstance().Data_DeskInfo;
             this.HideAllUI();
             this.UpdateCards(currentPlayer);
-
             let showAddTimeBtn = currentPlayer.userInfo.userId == deskInfo.curTurnUserId && deskInfo.isCanDelay;
             this.UpdateAddTimeBtn(showAddTimeBtn , deskInfo.delaySpend);
             this.Bet(currentPlayer.tableScore);
             this.SetActionTag(currentPlayer.operateCard);
             this.UpdateDealer(deskInfo.dUserId == currentPlayer.userInfo.userId);
             this.UpdateConbination(currentPlayer.cardType);
-            this.UpdateMoney(currentPlayer.userInfo.score);
+            this.UpdateMoney(currentPlayer.userInfo.score , deskInfo);
         },this);
         GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
         {
@@ -133,7 +134,8 @@ export class Game_SelfUI extends BaseUI
             {
                 return;
             }
-            this.UpdateMoney(_current.score);
+            let deskInfo = GameData.GetInstance().Data_DeskInfo;
+            this.UpdateMoney(_current.score , deskInfo);
         },this);
 
         GameData.GetInstance().AddListener("Data_DecideConbination",(_current , _before)=>
@@ -200,12 +202,16 @@ export class Game_SelfUI extends BaseUI
                 }
             }
 
-            for(let i = 0 ; i < _current.loseList.length ; i++)
+            if(_current.loseList != null)
             {
-                let currentLoseData = _current.loseList[i];
-                if(currentPlayer.userInfo.userId == currentLoseData.userId)
+                for(let i = 0 ; i < _current.loseList.length ; i++)
                 {
+                    let currentLoseData = _current.loseList[i];
+                    if(currentPlayer.userInfo.userId == currentLoseData.userId)
+                    {
+                    }
                 }
+    
             }
 
         },this);
@@ -241,7 +247,7 @@ export class Game_SelfUI extends BaseUI
     }
 
 
-    UpdateCards(_playerData : Msg_userFullInfo)
+    UpdateCards(_playerData : any)
     {
         this.mCards.active = _playerData.isSendHandCard;
         if(_playerData.isSendHandCard)
@@ -308,9 +314,17 @@ export class Game_SelfUI extends BaseUI
         this.mConbination.string = Poker.GetConbinationName(_conbination);
     }
 
-    UpdateMoney(_amount : number)
+    UpdateMoney(_amount : number , _deskInfo : any)
     {
-        this.mMoney.node.active = true;
+        if(_deskInfo.curTurnUserId == LocalPlayerData.GetInstance().Data_Uid)
+        {
+            this.mMoney.node.active = true;
+        }
+        else
+        {
+            this.mMoney.node.active = false;
+        }
+        
         this.mMoney.string = _amount + "";
     }
 }

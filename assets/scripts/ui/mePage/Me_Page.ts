@@ -14,8 +14,8 @@ export class Me_Page extends BaseUI
     }
     BindUI() 
     {
-        this.AddSubView("mePage","prefab/Me_Top",true);
-        this.AddSubView("mePage","prefab/Me_Main",true);
+        this.AddSubView("mePage","prefab/Me_Top");
+        this.AddSubView("mePage","prefab/Me_Main");
     }
     RegDataNotify() 
     {

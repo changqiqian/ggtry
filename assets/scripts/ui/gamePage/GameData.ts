@@ -2,7 +2,6 @@ import { _decorator, Component, Node } from 'cc';
 import { DataNotify } from '../../base/DataNotify';
 import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
-import { Msg_deskConfig, Msg_deskInfo, Msg_matchConfig, Msg_status, Msg_userFullInfo } from '../../network/MsgStruct';
 import { MsgID, MsgStatus, Network } from '../../network/Network';
 const { ccclass, property } = _decorator;
 
@@ -25,11 +24,11 @@ export class GameData extends DataNotify
     Data_UpdatePlayingPlayer : boolean = null;//立即更新正在玩牌的玩家数据
     
     
-    Data_MatchConfig : Msg_matchConfig; //把服务器发过来的核心数据我自己定义了一份
-    Data_StatusInfo : Msg_status; //把服务器发过来的核心数据我自己定义了一份
-    Data_DeskConfig : Msg_deskConfig;//把服务器发过来的核心数据我自己定义了一份
-    Data_DeskInfo : Msg_deskInfo;//把服务器发过来的核心数据我自己定义了一份
-    Data_PlayingUserList : Array<Msg_userFullInfo>;//把服务器发过来的核心数据我自己定义了一份
+    Data_MatchConfig : any;
+    Data_StatusInfo : any; 
+    Data_DeskConfig : any;
+    Data_DeskInfo : any;
+    Data_PlayingUserList : Array<any>;
     //mtt专有消息
 
 
@@ -54,15 +53,17 @@ export class GameData extends DataNotify
     Data_DecideConbination : any = null; //通知玩家当前牌型
     Data_GamePlayerStatusChange : any = null;//玩家状态改变
     Data_GameResult : any = null; //游戏结算
+    Data_MttGameResult : any = null; //比赛结束
+    Data_BackAndKeepPlaying : any = null; //取消离开状态
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.MttGetRoomInfo ,(_msgBody)=>
         {
             if(_msgBody.code == MsgStatus.SUCCESS)
             {
-                this.Data_DeskConfig = _msgBody.deskConfig as Msg_deskConfig;
-                this.Data_DeskInfo = _msgBody.deskInfo as Msg_deskInfo;
-                this.Data_StatusInfo = _msgBody.status as Msg_status;
+                this.Data_DeskConfig = _msgBody.deskConfig;
+                this.Data_DeskInfo = _msgBody.deskInfo;
+                this.Data_StatusInfo = _msgBody.status;
                 this.Data_PlayingUserList = this.Data_DeskInfo.userList;
                 this.Data_UpdatePlayingPlayer = true;
                 this.Data_MttGetRoomInfo = _msgBody;
@@ -76,8 +77,8 @@ export class GameData extends DataNotify
         
         Network.GetInstance().AddMsgListenner(MsgID.RefreshMttInfo ,(_msgBody)=>
         {
-            this.Data_MatchConfig = _msgBody.matchConfig as Msg_matchConfig;
-            this.Data_StatusInfo = _msgBody.statusInfo as Msg_status;
+            this.Data_MatchConfig = _msgBody.matchConfig;
+            this.Data_StatusInfo = _msgBody.statusInfo;
             this.Data_RefreshMttInfo = _msgBody;
         },this);
 
@@ -102,15 +103,17 @@ export class GameData extends DataNotify
         
         Network.GetInstance().AddMsgListenner(MsgID.GameStart ,(_msgBody)=>
         {
+            this.Data_DeskInfo.basePool = _msgBody.basePool;
             this.UpdatePlayerPlayingStatus(_msgBody.playingUserIds);
+            this.Data_UpdatePlayingPlayer = true;
             this.Data_GameStart = _msgBody;
         },this);
         Network.GetInstance().AddMsgListenner(MsgID.EnterGame ,(_msgBody)=>
         {
             if(_msgBody.code == MsgStatus.SUCCESS)
             {
-                this.Data_DeskConfig = _msgBody.deskConfig as Msg_deskConfig;
-                this.Data_DeskInfo = _msgBody.deskInfo as Msg_deskInfo;
+                this.Data_DeskConfig = _msgBody.deskConfig;
+                this.Data_DeskInfo = _msgBody.deskInfo;
                 this.Data_PlayingUserList = this.Data_DeskInfo.userList;
                 this.Data_UpdatePlayingPlayer = true;
                 this.Data_EnterGame = _msgBody;
@@ -152,10 +155,16 @@ export class GameData extends DataNotify
         
         Network.GetInstance().AddMsgListenner(MsgID.WhosTurn ,(_msgBody)=>
         {
+            this.Data_DeskInfo.commandId = _msgBody.commandId;
+            this.Data_DeskInfo.callCount = _msgBody.callCount;
+            this.Data_DeskInfo.minRaise = _msgBody.minRaise;
+            this.Data_DeskInfo.curTurnUserId = _msgBody.userId;
             this.Data_WhosTurn = _msgBody;
         },this);
         Network.GetInstance().AddMsgListenner(MsgID.PlayerAction ,(_msgBody)=>
         {
+            this.Data_DeskInfo.commandId = _msgBody.commandId;
+            this.Data_DeskInfo.basePool = _msgBody.basePool;
             this.Data_PlayerAction = _msgBody;
         },this);
         Network.GetInstance().AddMsgListenner(MsgID.PotChange ,(_msgBody)=>
@@ -172,6 +181,40 @@ export class GameData extends DataNotify
         },this);
         Network.GetInstance().AddMsgListenner(MsgID.GamePlayerStatusChange ,(_msgBody)=>
         {
+            let currentPlayer = this.FindPlayerByUserId(_msgBody.userInfo.userId);
+            if(currentPlayer == null)
+            {
+                if(currentPlayer.status == Game_PlayerStauts.LOOKER || 
+                    currentPlayer.status == Game_PlayerStauts.STANDUP  )
+                {
+                    return;
+                }
+                let tempUser
+                {
+                    userInfo : _msgBody.userInfo;
+                    status : _msgBody.status;
+                    pos :  _msgBody.pos;
+                    take :  _msgBody.take;
+                    isLeave :  _msgBody.isLeave;
+                }
+                this.AddPlayingPlayer(tempUser);
+            }
+            else
+            {
+                currentPlayer.userInfo = _msgBody.userInfo;
+                currentPlayer.status = _msgBody.status;
+                currentPlayer.pos =  _msgBody.pos;
+                currentPlayer.take =  _msgBody.take;
+                currentPlayer.isLeave =  _msgBody.isLeave;
+                if(currentPlayer.status == Game_PlayerStauts.LOOKER || 
+                    currentPlayer.status == Game_PlayerStauts.STANDUP  )
+                {
+                    this.RemovePlayingPlayer(_msgBody.userInfo);
+                }
+    
+            }
+
+            this.Data_UpdatePlayingPlayer = true;
             this.Data_GamePlayerStatusChange = _msgBody;
         },this);
         Network.GetInstance().AddMsgListenner(MsgID.GameResult ,(_msgBody)=>
@@ -179,6 +222,22 @@ export class GameData extends DataNotify
             this.Data_GameResult = _msgBody;
         },this);
         
+        Network.GetInstance().AddMsgListenner(MsgID.MttGameResult ,(_msgBody)=>
+        {
+            this.Data_MttGameResult = _msgBody;
+        },this);
+        
+        Network.GetInstance().AddMsgListenner(MsgID.BackAndKeepPlaying ,(_msgBody)=>
+        {
+            if(_msgBody.code == MsgStatus.SUCCESS)
+            {
+                this.Data_BackAndKeepPlaying = _msgBody;
+            }
+            else
+            {
+            }
+            
+        },this);
         
     }
 
@@ -188,7 +247,7 @@ export class GameData extends DataNotify
     }
 
 
-    AddPlayingPlayer(_data : Msg_userFullInfo)
+    AddPlayingPlayer(_data : any)
     {
         let currentPlayer =  this.FindPlayerByUserId(_data.userInfo.userId);
         if(currentPlayer == null)
@@ -199,7 +258,6 @@ export class GameData extends DataNotify
         {
             currentPlayer = _data;
         }
-        this.Data_UpdatePlayingPlayer = true;
     }
 
     UpdatePlayerPlayingStatus(_Playinglist : Array<string>)
@@ -221,7 +279,7 @@ export class GameData extends DataNotify
                 currentPlayer.isGiveUp = false;
             }
         }
-        this.Data_UpdatePlayingPlayer = true;
+    
     }
 
     RemovePlayingPlayer(_userId : string)
@@ -231,10 +289,9 @@ export class GameData extends DataNotify
         {
             this.Data_PlayingUserList.splice(index , 1);
         }
-        this.Data_UpdatePlayingPlayer = true;
     }
 
-    FindPlayerByUserId(_userId : string) : Msg_userFullInfo
+    FindPlayerByUserId(_userId : string) : any
     {
         let index = this.Data_PlayingUserList.findIndex((_item) => _item.userInfo.userId === _userId);
         if(index >= 0)
@@ -245,7 +302,7 @@ export class GameData extends DataNotify
         return null;
     }
 
-    FindPlayerBySeatId(_seatId : number) : Msg_userFullInfo
+    FindPlayerBySeatId(_seatId : number) : any
     {
         let index = this.Data_PlayingUserList.findIndex((_item) => _item.pos === _seatId);
         if(index >= 0)

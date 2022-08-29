@@ -2,7 +2,7 @@ import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
-import { UIMgr } from '../../base/UIMgr';
+import { SceneType, UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
 import { GameType, Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
@@ -82,36 +82,13 @@ export class Mtt_InfoPage extends BaseUI
 
     }
 
-    ButtonLogic()
-    {
-        switch(this.mData.userStatus)
-        {
-            case Mtt_UserStatus.NotAttend:
-            {
-                if(this.mData.statusInfo.status == Mtt_MatchStatus.Registring)
-                {
-                    Network.GetInstance().SendMttGetRebuyInfo(this.mData.matchConfig.matchId);
-                }
-            }
-            break;
-            case Mtt_UserStatus.Registed:
-            {
-                Network.GetInstance().SendMttCancelReg(GameType.Mtt , this.mData.matchConfig.matchId);
-            }
-            break;
-            case Mtt_UserStatus.Attending:
-            {
-                //  cc.director.loadScene("game");
-            }
-            break;
-        }
-    }
-
     BindUI() 
     {
+        this.node.active = false;
+
         this.mObBtn.SetClickCallback(()=>
         {
-            //去游戏房间
+            UIMgr.GetInstance().ChangeScene(SceneType.Game);
         });
 
         this.mRebuy.SetClickCallback(()=>
@@ -186,7 +163,6 @@ export class Mtt_InfoPage extends BaseUI
         {
             this.Refresh();
         },this);
-        
 
         HallData.GetInstance().AddListener("Data_AttendMttResp",(_current , _before)=>
         {
@@ -426,12 +402,15 @@ export class Mtt_InfoPage extends BaseUI
                     this.mCurrentLevel.active = true;
                     let currentLevel = "L" + this.mData.statusInfo.curLevel;
                     let currentBlindInfo = this.mData.statusInfo.curBlind + "/" + this.mData.statusInfo.curBlind * 2 + "(" + this.mData.statusInfo.beforeScore + ")";
-                    this.mCurrentLevel.getChildByName("Content").getComponent(Label).string = currentLevel + currentBlindInfo;
+                    this.mCurrentLevel.getChildByName("Content").getComponent(Label).string = currentLevel ;
+                    this.mCurrentLevel.getChildByName("Content2").getComponent(Label).string =  currentBlindInfo;
+
 
                     this.mNextLevel.active = true;
                     let nextLevel = "L" + this.mData.statusInfo.nextLevel;
                     let nextBlindInfo = this.mData.statusInfo.nextBlind + "/" + this.mData.statusInfo.nextBlind * 2 + "(" + this.mData.statusInfo.nextBeforeScore + ")";
-                    this.mNextLevel.getChildByName("Content").getComponent(Label).string = nextLevel + nextBlindInfo;
+                    this.mNextLevel.getChildByName("Content").getComponent(Label).string = nextLevel;
+                    this.mNextLevel.getChildByName("Content2").getComponent(Label).string = nextBlindInfo;
                     this.MatchPlayingTimeCount();
                     this.StartRestTimeCountDown();
                 }
@@ -481,6 +460,31 @@ export class Mtt_InfoPage extends BaseUI
     CustmoerDestory() 
     {
         this.unscheduleAllCallbacks();
+    }
+
+    ButtonLogic()
+    {
+        switch(this.mData.userStatus)
+        {
+            case Mtt_UserStatus.NotAttend:
+            {
+                if(this.mData.statusInfo.status == Mtt_MatchStatus.Registring)
+                {
+                    Network.GetInstance().SendMttGetRebuyInfo(this.mData.matchConfig.matchId);
+                }
+            }
+            break;
+            case Mtt_UserStatus.Registed:
+            {
+                Network.GetInstance().SendMttCancelReg(GameType.Mtt , this.mData.matchConfig.matchId);
+            }
+            break;
+            case Mtt_UserStatus.Attending:
+            {
+                UIMgr.GetInstance().ChangeScene(SceneType.Game);
+            }
+            break;
+        }
     }
 
     Refresh()

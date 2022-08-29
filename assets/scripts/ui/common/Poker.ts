@@ -18,6 +18,10 @@ export class Poker extends BaseUI
     mShowBtn: BaseButton = null;
     @property(Node) 
     mIcon: Node = null;
+
+
+    mTweenBack = null;
+    mTweenFront = null;
     InitParam() 
     {
         
@@ -121,8 +125,25 @@ export class Poker extends BaseUI
 
     public SetFrontByServerData(_serverData : number)
     {
-        var type = _serverData / 16;
-        type++;//我的算法是从1开始，服务器从0
+        var type = Math.floor(_serverData / 16)
+        switch (type) 
+        {
+            case 0:
+                type = CardType.Diamond;
+                break;
+            case 1:
+                type = CardType.Club;
+                break;
+            case 2:
+                type = CardType.Heart;
+                break;
+            case 3:
+                type = CardType.Speades;
+                break;
+            default:
+                break;
+        }
+
         var num = _serverData % 16;
         let cardStruct = new CardStruct(num , type);
         this.SetFront(cardStruct);
@@ -141,23 +162,34 @@ export class Poker extends BaseUI
     public FlipToFront(_duration : number = 1)
     {
         let halfDuration = _duration / 2;
+        
+        if(this.mTweenBack !=null)
+        {
+            this.mTweenBack.stop();
+        }
 
-        let tempTweenBack = new Tween(this.mBack); 
-        tempTweenBack.to(halfDuration , {scale: new Vec3(0,1,1)});
-        tempTweenBack.call(()=>
+        this.mTweenBack = new Tween(this.mBack); 
+        this.mTweenBack .to(halfDuration , {scale: new Vec3(0,1,1)});
+        this.mTweenBack .call(()=>
         {
             this.mBack.active = false;
         });
-        tempTweenBack.start();
+        this.mTweenBack .start();
 
-        let tempTweenFront = new Tween(this.mFront); 
-        tempTweenFront.to(halfDuration , {scale: new Vec3(0,1,1)});
-        tempTweenFront.call(()=>
+
+        if(this.mTweenFront !=null)
+        {
+            this.mTweenFront.stop();
+        }
+    
+        this.mTweenFront = new Tween(this.mFront); 
+        this.mTweenFront.to(halfDuration , {scale: new Vec3(0,1,1)});
+        this.mTweenFront.call(()=>
         {
             this.mFront.active = true;
         });
-        tempTweenFront.to(halfDuration , {scale: new Vec3(1,1,1)});
-        tempTweenFront.start();
+        this.mTweenFront.to(halfDuration , {scale: Vec3.ONE});
+        this.mTweenFront.start();
     }
 
 

@@ -102,7 +102,6 @@ export class Network {
 
             var final = JSON.stringify({ msgId: _msgID, msgBody: body });
             if (_msgID != MsgID.Ping) {
-                UIMgr.GetInstance().ShowLoading(true);
                 console.log('发送消息：' + final);
             }
             this.mWebSocket.send(final);
@@ -151,7 +150,6 @@ export class Network {
             this.RecvPing();
             return;
         }
-        UIMgr.GetInstance().ShowLoading(false);
         var msg = JSON.parse(data.msgBody);
         if (data.languageKey) {
             msg.languageKey = data.languageKey;
@@ -602,6 +600,14 @@ export class Network {
         console.log('发送已读消息:' + body);
         this.SendMsg(MsgID.MessageIsRead, body);
     }
+    SendBackAndKeepPlaying() {
+        var body = {
+
+        };
+        console.log('取消离开状态:' + body);
+        this.SendMsg(MsgID.BackAndKeepPlaying, body);
+    }
+
     
 }
 
@@ -663,7 +669,9 @@ export enum MsgID {
     MttReadyNotify = 346, //Mtt比赛准备开始了
     MttStatusChange = 353, //比赛状态通知
     MttManualStart =  354,
+    MttGameResult = 355,
     MttSelfStatus = 356,
+    BackAndKeepPlaying = 357,
     VeryifySmsCode = 387,
     GetSelfMttStatus =  555,//获取mtt 我在桌子内的状态，观看，主播，在玩
     GetMttTableInfo = 556,

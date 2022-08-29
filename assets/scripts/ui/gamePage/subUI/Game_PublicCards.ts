@@ -74,10 +74,12 @@ export class Game_PublicCards extends BaseUI
 
     DealOnCard(_cardData : number)
     {
+        console.log("DealOnCard");
         for(let i = 0 ; i < this.node.children.length ; i++)
         {
             if(this.node.children[i].active == true)
             {
+                console.log("DealOnCard continue");
                 continue;
             }
 

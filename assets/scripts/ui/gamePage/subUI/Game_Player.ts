@@ -1,7 +1,6 @@
 import { _decorator, Component, Node, Sprite, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
-import { Msg_deskInfo, Msg_userFullInfo } from '../../../network/MsgStruct';
 import { BaseButton } from '../../common/BaseButton';
 import { CircleTimer } from '../../common/CircleTimer';
 import { Poker } from '../../common/Poker';
@@ -36,27 +35,56 @@ export class Game_Player extends BaseUI
     mSeatID : number = null; //座位编号
     InitParam() 
     {
-
     }
     BindUI() 
     {
+        this.node.active = false;
         this.mSelfBtn.SetClickCallback(()=>
         {
 
         });
+
+        this.HideAllUI();
     }
+
+
+    HideAllUI()
+    {
+        this.mMiniCard.active = false;
+        this.mCircleTimer.node.active = false;
+        this.mDealer.active = false;
+        this.mGame_ActionTag.node.active = false;
+        this.mGame_BetAmount.node.active = false;
+        this.mCards.active = false;
+
+    }
+
     RegDataNotify() 
     {
         GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
         {
             let currentPlayer = GameData.GetInstance().FindPlayerBySeatId(this.mSeatID);
-            this.node.active = currentPlayer != null;
             if(currentPlayer == null)
             {
+                this.node.active = false;
                 return;
             }
             let deskInfo = GameData.GetInstance().Data_DeskInfo;
-            
+            if(currentPlayer.userInfo.userId == LocalPlayerData.GetInstance().Data_Uid)
+            {
+                if(deskInfo.curTurnUserId == LocalPlayerData.GetInstance().Data_Uid)
+                {
+                    this.node.active = false;
+                }
+                else
+                {
+                    this.node.active = true;
+                }
+            }
+            else
+            {
+                this.node.active = true;
+            }
             this.UpdatePlayer(currentPlayer , deskInfo);
         },this);
 
@@ -67,15 +95,45 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            let showTimer = currentPlayer.userInfo.userId == _current.userId;
+
+            if(currentPlayer.userInfo.userId != _current.userId)
+            {
+                return;
+            }
+
+            if(currentPlayer.userInfo.userId == LocalPlayerData.GetInstance().Data_Uid)
+            {
+                this.node.active = false;
+                return;
+            }
+            this.node.active = true;
             let time = GameData.GetInstance().Data_EnterGame.deskConfig.turnExpiredTime;
-            this.UpdateTimer(showTimer , time);
+            this.UpdateTimer(true , time);
         },this);
 
         GameData.GetInstance().AddListener("Data_UpdatePlayingPlayer",(_current , _before)=>
         {
             let currentPlayer = GameData.GetInstance().FindPlayerBySeatId(this.mSeatID);
-            this.node.active = currentPlayer != null;
+            this.node.active = false;
+            if(currentPlayer == null)
+            {
+                return;
+            }
+
+            if(currentPlayer.userInfo.userId == LocalPlayerData.GetInstance().Data_Uid)
+            {
+                let deskInfo = GameData.GetInstance().Data_DeskInfo;
+                if(deskInfo.curTurnUserId == LocalPlayerData.GetInstance().Data_Uid)
+                {
+                    return;
+                }
+                this.node.active = true;
+            }
+            else
+            {
+                this.node.active = currentPlayer != null;
+            }
+           
         },this);
 
         GameData.GetInstance().AddListener("Data_UpdatePlayerScore",(_current , _before)=>
@@ -109,11 +167,10 @@ export class Game_Player extends BaseUI
             }
             else 
             {
-                //straddle
+                this.Bet(-1);
             }
             this.ShowCards(null);
             this.UpdateTimer(false,0);
-            this.Bet(-1);
             this.ShowMiniCards(true);
             this.UpdateDealer(_current.dUserId);
         },this);
@@ -216,7 +273,7 @@ export class Game_Player extends BaseUI
         this.mSeatID = _id;
     }
 
-    UpdatePlayer(_playerData : Msg_userFullInfo , _deskInfo : Msg_deskInfo)
+    UpdatePlayer(_playerData : any , _deskInfo : any)
     {
         this.LoadLocalHead(parseInt(_playerData.userInfo.photoUrl) , (_spriteFrame)=>
         {
@@ -232,11 +289,12 @@ export class Game_Player extends BaseUI
         this.UpdateTimer(showTimer, _deskInfo.leftTime);
         this.SetActionTag(_playerData.operateCard);
         this.ShowCards(_playerData.cards);
+
     }
 
     SetActionTag(_actionType : Game_ActionType)
     {
-        if(this.IsLocalPlayer())
+        if(this.NeedHide())
         {
             this.mGame_ActionTag.node.active = false;
             return;
@@ -246,7 +304,7 @@ export class Game_Player extends BaseUI
 
     UpdateTimer(_show : boolean , _leftTime : number)
     {
-        if(this.IsLocalPlayer())
+        if(this.NeedHide())
         {
             this.mCircleTimer.node.active = false;
             return;
@@ -261,7 +319,7 @@ export class Game_Player extends BaseUI
 
     UpdateDealer(_dealerId : string)
     {
-        if(this.IsLocalPlayer())
+        if(this.NeedHide())
         {
             this.mDealer.active = false;
             return;
@@ -284,7 +342,7 @@ export class Game_Player extends BaseUI
             return;
         }
 
-        if(this.IsLocalPlayer())
+        if(this.NeedHide())
         {
             return;
         }
@@ -298,7 +356,7 @@ export class Game_Player extends BaseUI
     //发牌后，显示头像上的小扑克牌
     ShowMiniCards(_show : boolean)
     {
-        if(this.IsLocalPlayer())
+        if(this.NeedHide())
         {
             this.mMiniCard.active = false;
             return;
@@ -309,6 +367,10 @@ export class Game_Player extends BaseUI
     ShowCards(_cards : Array<number>)
     {
         this.mCards.active = false;
+        if(this.NeedHide())
+        {
+            return;
+        }
         if(_cards == null)
         {
             return;
@@ -334,7 +396,7 @@ export class Game_Player extends BaseUI
 
     ShowWin(_winScore:number , _totalScore : number)
     {
-
+        
     }
 
     ShowLose(_winScore:number , _totalScore : number)
@@ -352,12 +414,12 @@ export class Game_Player extends BaseUI
         this.mCards.active = false;
     }
 
-    IsLocalPlayer()  : boolean
+    NeedHide()  : boolean
     {
         let currentPlayer = GameData.GetInstance().FindPlayerBySeatId(this.mSeatID);
         if(currentPlayer == null)
         {
-            return false;
+            return true;
         }
         if(currentPlayer.userInfo.userId == LocalPlayerData.GetInstance().Data_Uid)
         {

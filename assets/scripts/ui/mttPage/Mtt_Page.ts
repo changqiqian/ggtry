@@ -13,8 +13,8 @@ export class Mtt_Page extends BaseUI
     }
     BindUI() 
     {
-        this.AddSubView("hall","prefab/Hall_PlayerInfoBar",true);
-        this.AddSubView("mttPage","prefab/Mtt_Main",true);
+        this.AddSubView("hall","prefab/Hall_PlayerInfoBar");
+        this.AddSubView("mttPage","prefab/Mtt_Main");
     }
     RegDataNotify() 
     {

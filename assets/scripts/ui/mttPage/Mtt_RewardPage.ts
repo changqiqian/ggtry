@@ -21,11 +21,11 @@ export class Mtt_RewardPage extends BaseUI
     
     InitParam() 
     {
-
+        
     }
     BindUI() 
     {
-
+        this.node.active = false;
     }
     RegDataNotify() 
     {

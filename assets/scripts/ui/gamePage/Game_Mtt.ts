@@ -31,6 +31,10 @@ export class Game_Mtt extends GameBase
             })
         },this);
 
+        GameData.GetInstance().AddListener("Data_MttGameResult",(_current , _before)=>
+        {
+            UIMgr.GetInstance().ShowToast("比赛结束" , 10);
+        },this);
     }
 
     LateInit() 
@@ -40,9 +44,9 @@ export class Game_Mtt extends GameBase
 
     InitOtherUI()
     {
-        this.AddSubView("gamePage","prefab/Game_MttInfo",true);
-        this.AddSubView("gamePage","prefab/Game_MttBottomTips",true);
-        this.AddSubView("gamePage","prefab/Game_MttRestTimeTips",true);
+        this.AddSubView("gamePage","prefab/Game_MttInfo");
+        this.AddSubView("gamePage","prefab/Game_MttBottomTips");
+        this.AddSubView("gamePage","prefab/Game_MttRestTimeTips");
     }
 
     GetGameInfoMsg()

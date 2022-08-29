@@ -9,6 +9,7 @@ export class Toast extends BaseUI
     mTips: Label = null;
 
     mTween = null;
+    mDuration : number;
     InitParam() 
     {
 
@@ -34,18 +35,19 @@ export class Toast extends BaseUI
         this.StopAnm();
     }
 
-    ShowToast(_tips : string)
+    ShowToast(_tips : string , _duration:number = 3)
     {
         this.mTips.string = _tips;
         this.Show(true);
         this.StartAnm();
+        this.mDuration = _duration;
     }
 
     StartAnm()
     {
         this.StopAnm();
         this.mTween = new Tween(this.node); 
-        this.mTween.delay(3);
+        this.mTween.delay( this.mDuration);
         this.mTween.call(()=>
         {
             this.Show(false);

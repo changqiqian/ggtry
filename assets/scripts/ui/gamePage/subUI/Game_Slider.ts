@@ -20,6 +20,8 @@ export class Game_Slider extends BaseUI
     
     mCallback :Function = null;
 
+    mTotalNum : number;
+    mMinRaiseNum : number;
     onEnable()
     {
         this.ResetSlider();
@@ -33,22 +35,26 @@ export class Game_Slider extends BaseUI
     {
         this.mHadnle.on(Node.EventType.TOUCH_END,()=>
         {
-            this.mProgress.fillRange = this.mSlider.progress;
+            let amount = this.DragLogic();
             if(this.mCallback)
             {
-                this.mCallback(this.mSlider.progress);
+                this.mCallback(amount);
+            }
+        });
+
+        this.mHadnle.on(Node.EventType.TOUCH_CANCEL,()=>
+        {
+            let amount = this.DragLogic();
+            if(this.mCallback)
+            {
+                this.mCallback(amount);
             }
         });
 
 
         this.mSlider.node.on("slide",()=>
         {
-            this.mProgress.fillRange = this.mSlider.progress;
-            this.mTotalBG.active = this.mProgress.fillRange < 1;
-            if(this.mCallback)
-            {
-                this.mCallback(this.mSlider.progress);
-            }
+            this.DragLogic();
         });
     }
     RegDataNotify() 
@@ -73,9 +79,11 @@ export class Game_Slider extends BaseUI
         this.mCallback = _callback;
     }
 
-    SetTotalAmount(_TotalAmount : number)
+    SetTotalAmountAndMinRaise(_totalAmount : number , _minRaise : number)
     {
-        this.mTotalAmount.string = _TotalAmount + "";
+        this.mTotalNum = _totalAmount;
+        this.mMinRaiseNum = _minRaise;
+        this.mTotalAmount.string = _totalAmount + "";
     }
 
     SetCurrentAmount(_CurrentAmount : number)
@@ -89,6 +97,36 @@ export class Game_Slider extends BaseUI
         this.mProgress.fillRange = 0;
         this.mSlider.progress = 0;
         this.mTotalBG.active = true;
+    }
+
+    DragLogic(): number
+    {
+        this.mProgress.fillRange = this.mSlider.progress;
+        this.mTotalBG.active = this.mProgress.fillRange < 1;
+        let currentAmount = this.CalculateCurrentAmount(this.mProgress.fillRange);
+        this.mAmount.string = currentAmount + "";
+        return currentAmount;
+    }
+
+    CalculateCurrentAmount(_ratio : number) : number
+    {
+        if(_ratio <= 0)
+        {
+            return  0;
+        }
+        else if(_ratio >= 1)
+        {
+            return this.mTotalNum;
+        }
+        else
+        {
+            let tempAmount = this.mTotalNum - this.mMinRaiseNum;
+            let finalAmount = _ratio * tempAmount + this.mMinRaiseNum;
+            let fixed = finalAmount.toFixed(0);
+            return Number(fixed);
+        }
+
+        
     }
 }
 
