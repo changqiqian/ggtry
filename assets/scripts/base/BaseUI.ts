@@ -43,8 +43,7 @@ export abstract class BaseUI extends Component {
 
     //计时器，可以自动补偿切到后台的时间，防止时间对不上
     mTotalCountTime : number;
-    mTimerStart : number;
-    mTimerPast : number;
+    mTimerStartingTime : number;
     onLoad() {
         this.mIsWindow = false;
         this.mLayerList = new Array<SubViewKeyPair>();
@@ -126,13 +125,23 @@ export abstract class BaseUI extends Component {
         });
     }
 
-
-    
     HaveSubView(_bundleName : string, _assetPath : string ) : boolean
     {
         let key = _bundleName + _assetPath;
         let index = this.mLayerList.findIndex((_item) => _item.key === key);
         return index >= 0;
+    }
+
+    GetSubView(_bundleName : string, _assetPath : string) : Node
+    {
+        let key = _bundleName + _assetPath;
+        let index = this.mLayerList.findIndex((_item) => _item.key === key);
+        if(index < 0)
+        {
+            return null;
+        }
+
+        return this.mLayerList[index].value;
     }
 
 
@@ -188,10 +197,6 @@ export abstract class BaseUI extends Component {
         UIMgr.GetInstance().ShowWindow(_bundleName, _prefabPath, _show, _finishFunction);
     }
 
-    Delete()
-    {
-        this.node.destroy();
-    }
 
     CloseAsWindow() 
     {
@@ -214,7 +219,7 @@ export abstract class BaseUI extends Component {
         }
         this.mTotalCountTime = _totalTime;
         let tempDate = new Date();
-        this.mTimerStart = tempDate.getSeconds(); 
+        this.mTimerStartingTime = tempDate.getSeconds(); 
         this.StopSecondsTimer();
         this.schedule(this.SecondsTimerLogic, 1);
     }
@@ -228,7 +233,7 @@ export abstract class BaseUI extends Component {
     {
         let tempDate = new Date();
         let nowTime = tempDate.getSeconds(); 
-        let timePast = nowTime - this.mTimerStart;
+        let timePast = nowTime - this.mTimerStartingTime;
         let restTime = this.mTotalCountTime - timePast;
         if(restTime <= 0)
         {
@@ -244,4 +249,9 @@ export abstract class BaseUI extends Component {
     }
 
 
+    DeleteSelf()
+    {
+        this.node.removeFromParent();
+        this.node.destroy();
+    }
 }

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite, Tween, Vec2, v2, math, Vec3 } from 'cc';
+import { _decorator, Component, Node, Sprite, Tween, Vec2, v2, math, Vec3, Color } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { CardStruct, CardType, Combiantion } from '../../base/Calculator';
 import { Localization } from '../../base/Localization';
@@ -19,6 +19,8 @@ export class Poker extends BaseUI
     @property(Node) 
     mIcon: Node = null;
 
+    mClickCallback : Function = null;
+    mIndex : number = null;
 
     mTweenBack = null;
     mTweenFront = null;
@@ -28,12 +30,15 @@ export class Poker extends BaseUI
     }
     BindUI() 
     {
-        this.mIcon.active = false;
         this.ShowBack();
         this.mShowBtn.node.active = false;
         this.mShowBtn.SetClickCallback(()=>
         {
             this.mIcon.active = !this.mIcon.active;
+            if(this.mClickCallback)
+            {
+                this.mClickCallback(this.mIndex);
+            }
         })
     }
     RegDataNotify() 
@@ -161,7 +166,7 @@ export class Poker extends BaseUI
 
     public FlipToFront(_duration : number = 1)
     {
-        let halfDuration = _duration / 2;
+        let halfDuration = _duration / 3;
         
         if(this.mTweenBack !=null)
         {
@@ -192,24 +197,35 @@ export class Poker extends BaseUI
         this.mTweenFront.start();
     }
 
-
-
     public ShowFront()
     {
+        this.mBack.scale =Vec3.ONE;
+        this.mFront.scale =Vec3.ONE;
         this.mBack.active = false;
         this.mFront.active = true;
     }
 
     public ShowBack() 
     {
+        this.mBack.scale =Vec3.ONE;
+        this.mFront.scale =Vec3.ONE;
+        this.mGlow.active = false;
+        this.mIcon.active = false;
         this.mBack.active = true;
         this.mFront.active = false;
+        this.mFront.getComponent(Sprite).color = Color.WHITE;
     }
 
-    public SetClickAble()
+    public SetClickAble(_callback : Function , _index : number)
     {
         this.mShowBtn.node.active = true;
+        this.mIndex = _index;
+        this.mClickCallback = _callback;
     }
 
+    public SetGary()
+    {
+        this.mFront.getComponent(Sprite).color = Color.GRAY;
+    }
 }
 

@@ -92,7 +92,7 @@ export class Game_MttRestTimeTips extends BaseUI
         {
             this.mCountDown.string = preffix + "00:00";
             let matchId = GameData.GetInstance().Data_RefreshMttInfo.matchConfig.matchId;
-            Network.GetInstance().SendRefreshMttInfo(matchId);
+            //Network.GetInstance().SendRefreshMttInfo(matchId);
         }
     }
 

@@ -1,6 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { GameType, Network } from '../../network/Network';
 import { TipsWindow } from '../common/TipsWindow';
@@ -33,13 +34,13 @@ export class Game_Mtt extends GameBase
 
         GameData.GetInstance().AddListener("Data_MttGameResult",(_current , _before)=>
         {
-            UIMgr.GetInstance().ShowToast("比赛结束" , 10);
+            this.ShowLayer("gamePage","prefab/Game_MttResultLayer");
         },this);
     }
 
     LateInit() 
     {
-        Network.GetInstance().SendRefreshMttInfo(HallData.GetInstance().Data_CurrentMttMatchID);
+        Network.GetInstance().SendRefreshMttInfo(LocalPlayerData.GetInstance().Data_CurrentUsingMttMatchID);
     }
 
     InitOtherUI()

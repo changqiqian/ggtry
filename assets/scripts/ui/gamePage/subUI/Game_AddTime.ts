@@ -65,6 +65,12 @@ export class Game_AddTime extends BaseUI
             return;
         }
 
+        if(_title == "Insufficient diamonds")
+        {
+            this.mAddBtn.SetTitle(Localization.GetString("00082"));   
+            return;
+        }
+
         this.mDiamond.active = true;
         this.mAddBtn.SetTitle(_title);
     }

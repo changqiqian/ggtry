@@ -75,7 +75,7 @@ export class Mtt_Main extends BaseUI
 
         HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
         {
-            //Network.GetInstance().SendGetMttList();
+            Network.GetInstance().SendGetMttList();
             // if(Mtt_MatchStatus.Rest == _current.statusInfo.status)
             // {
             //     this.ShowLayer("mttPage","prefab/Mtt_DetailPage",false);
@@ -85,11 +85,19 @@ export class Mtt_Main extends BaseUI
 
         HallData.GetInstance().AddListener("Data_MttDismiss",(_current , _before)=>
         {
-            //Network.GetInstance().SendGetMttList();
+            Network.GetInstance().SendGetMttList();
         },this);
+
+        HallData.GetInstance().AddListener("Data_NewPlayerAttendingMtt",(_current , _before)=>
+        {
+            Network.GetInstance().SendGetMttList();
+        },this);
+
+        
 
         HallData.GetInstance().AddListener("Data_MttReadyNotify",(_current , _before)=>
         {
+            Network.GetInstance().SendGetMttList();
             UIMgr.GetInstance().ShowToast(Localization.GetString("00081"));
         },this);
     }

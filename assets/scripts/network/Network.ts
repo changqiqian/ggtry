@@ -198,11 +198,11 @@ export class Network {
         clearTimeout(this.mPingSendTimer);
         this.mPingRevTimer = setTimeout(this.OnPingTimeOut.bind(this), this.mPingSpace);
         this.SendMsg(MsgID.Ping, {});
-        console.log('发送 心跳');
+        //console.log('发送 心跳');
     }
 
     private RecvPing() {
-        console.log('收到 心跳');
+        //console.log('收到 心跳');
         clearTimeout(this.mPingRevTimer);
         this.mPingSendTimer = setTimeout(this.SendPing.bind(this), this.mPingSpace);
     }
@@ -681,6 +681,7 @@ export enum MsgID {
     MttGetRebuyInfo = 685,
     GetSelfTicket = 693,
     GetMttList = 702,
+    NewPlayerAttendingMtt = 904,
     MatchAnouncement = 910, //比赛通知信息
     SetMttMacthKeepTop = 927,
     detectCanDeleteAccount = 988,

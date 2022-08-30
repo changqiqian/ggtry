@@ -152,7 +152,17 @@ export class Game_SelfAction extends BaseUI
             {
                 return;
             }
-            this.node.active = false;
+
+            if(_current.gameOpType == Game_ActionType.Delay)
+            {
+                this.UpdateTimer(true , _current.leftTime);
+            }
+            else
+            {
+                this.node.active = false;
+            }
+
+        
 
         },this);
     }

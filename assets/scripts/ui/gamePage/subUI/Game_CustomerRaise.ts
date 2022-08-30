@@ -10,18 +10,17 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_CustomerRaise')
 export class Game_CustomerRaise extends BaseUI 
 {
-
+    @property([BaseButton]) 
+    mBtns: [BaseButton];
     InitParam()
     {
 
     }
     BindUI()
     {
-        for(let i = 0 ; i < this.node.children.length ; i++)
+        for(let i = 0 ; i < this.mBtns.length ; i++)
         {
-            let currentChild = this.node.children[i];
-            let currentBaseButton = currentChild.getComponent(BaseButton);
-            currentBaseButton.SetClickCallback(this.RaiseBtnLogic.bind(this),i);
+            this.mBtns[i].SetClickCallback(this.RaiseBtnLogic.bind(this),i);
         }
     }
     RegDataNotify()
@@ -38,9 +37,8 @@ export class Game_CustomerRaise extends BaseUI
             {
                 return;
             }
-            let currentPool = GameData.GetInstance().Data_DeskInfo.basePool;
-            let minRaise = _current.minRaise;
-            this.UpdateUI(currentPool,minRaise);
+            this.ShowRaiseUI(_current.minRaise);
+
         },this);
 
 
@@ -58,11 +56,8 @@ export class Game_CustomerRaise extends BaseUI
                 return;
             }
 
-            let currentPool = GameData.GetInstance().Data_DeskInfo.basePool;
             let minRaise = GameData.GetInstance().Data_DeskInfo.minRaise;
-            this.UpdateUI(currentPool,minRaise);
-
-
+            this.ShowRaiseUI(minRaise);
         },this);
     }
     LateInit()
@@ -80,9 +75,7 @@ export class Game_CustomerRaise extends BaseUI
 
     RaiseBtnLogic(_index : number)
     {
-        let currentChild = this.node.children[_index];
-        let currentBaseButton = currentChild.getComponent(BaseButton);
-        let amount = Number(currentBaseButton.GetTitle());
+        let amount = Number(this.mBtns[_index].GetTitle());
         let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
 
         let commandId = GameData.GetInstance().Data_DeskInfo.commandId;
@@ -108,17 +101,45 @@ export class Game_CustomerRaise extends BaseUI
         return Number(fixed);
     }
 
-    UpdateUI(_currentPool : number , _minRaise : number)
+    ShowRaiseUI(_minRaise : number)
     {
-        for(let i = 0 ; i < this.node.children.length ; i++)
+        let currentPool = GameData.GetInstance().Data_DeskInfo.basePool;
+        let deskConfig = GameData.GetInstance().Data_DeskConfig;
+        let playingPlayers = GameData.GetInstance().Data_PlayingUserList;
+        let totalAnte = deskConfig.beforeScore * playingPlayers.length;
+        let sb = deskConfig.baseScore ;
+        let bb = deskConfig.baseScore * 2;
+        if(currentPool == sb + bb + totalAnte) //第一次下注
+        {
+            this.UpdateUIWithBBMode(bb);
+        }
+        else
+        {
+            this.UpdateUIWithRatioMode(currentPool,_minRaise);
+        }
+    }
+
+    UpdateUIWithRatioMode(_currentPool : number , _minRaise : number)
+    {
+        for(let i = 0 ; i < this.mBtns.length ; i++)
         {
             let ratio = GameConfig.GetCustomerRaiseRatio(i);
             let title = GameConfig.GetCustomerRaiseTitle(i);
-            let currentNode = this.node.children[i];
-            let currentBaseButton = currentNode.getComponent(BaseButton);
             let amount = this.GetAmount(ratio,_currentPool , _minRaise);
-            currentNode.getChildByName("Describe").getComponent(Label).string = title;
-            currentBaseButton.SetTitle(amount + "");
+            this.mBtns[i].node.getChildByName("Describe").getComponent(Label).string = title;
+            this.mBtns[i].SetTitle(amount + "");
+        }
+    }
+
+    UpdateUIWithBBMode(_bigBlind : number)
+    {
+        for(let i = 0 ; i < this.node.children.length ; i++)
+        {
+            let ratio = i + 2;// 至少加注2个大盲
+            let title = ratio + "bb";
+            let amount = ratio * _bigBlind;
+            this.mBtns[i].node.getChildByName("Describe").getComponent(Label).string = title;
+            this.mBtns[i].SetTitle(amount + "");
         }
     }
 }

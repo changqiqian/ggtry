@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Label, Sprite } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
+import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { ToggleBtn } from '../common/ToggleBtn';
 import { HallData, Mtt_InfoSubPage } from '../hall/HallData';

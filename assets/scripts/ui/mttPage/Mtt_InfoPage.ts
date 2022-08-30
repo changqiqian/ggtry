@@ -88,6 +88,7 @@ export class Mtt_InfoPage extends BaseUI
 
         this.mObBtn.SetClickCallback(()=>
         {
+            LocalPlayerData.GetInstance().Data_CurrentUsingMttMatchID = HallData.GetInstance().Data_CurrentMttMatchID;
             UIMgr.GetInstance().ChangeScene(SceneType.Game);
         });
 
@@ -481,6 +482,7 @@ export class Mtt_InfoPage extends BaseUI
             break;
             case Mtt_UserStatus.Attending:
             {
+                LocalPlayerData.GetInstance().Data_CurrentUsingMttMatchID = HallData.GetInstance().Data_CurrentMttMatchID;
                 UIMgr.GetInstance().ChangeScene(SceneType.Game);
             }
             break;

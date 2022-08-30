@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, Vec3 } from 'cc';
 import { DataNotify } from '../../base/DataNotify';
 import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
@@ -24,11 +24,11 @@ export class GameData extends DataNotify
     Data_UpdatePlayingPlayer : boolean = null;//立即更新正在玩牌的玩家数据
     
     
-    Data_MatchConfig : any;
-    Data_StatusInfo : any; 
-    Data_DeskConfig : any;
+    Data_MatchConfig : any = null;
+    Data_StatusInfo : any = null;
+    Data_DeskConfig : any = null;
     Data_DeskInfo : any;
-    Data_PlayingUserList : Array<any>;
+    Data_PlayingUserList : Array<any> = null;
     //mtt专有消息
 
 
@@ -38,6 +38,8 @@ export class GameData extends DataNotify
     Data_MttSelfStatus : any = null; //更新自己的mtt比赛状态
     Data_MttStatusChange : any = null; //mtt比赛状态改变
     Data_GetSelfMttStatus : any = null;//获取自己在mtt桌子内的状态
+    Data_MttGameResult : any = null; //比赛结束
+
 
 
     //打牌公有消息
@@ -53,8 +55,10 @@ export class GameData extends DataNotify
     Data_DecideConbination : any = null; //通知玩家当前牌型
     Data_GamePlayerStatusChange : any = null;//玩家状态改变
     Data_GameResult : any = null; //游戏结算
-    Data_MttGameResult : any = null; //比赛结束
     Data_BackAndKeepPlaying : any = null; //取消离开状态
+    Data_CollectChipFromPlayer : Vec3 = null; //需要被收集筹码的玩家位置 （世界坐标）
+    Data_SendChipToWinner : Vec3 = null; // 赢家坐标 筹码飞到玩家去（世界坐标）
+
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.MttGetRoomInfo ,(_msgBody)=>
@@ -165,6 +169,11 @@ export class GameData extends DataNotify
         {
             this.Data_DeskInfo.commandId = _msgBody.commandId;
             this.Data_DeskInfo.basePool = _msgBody.basePool;
+            let currentPlayer = this.FindPlayerByUserId(_msgBody.userId);
+            if(currentPlayer != null)
+            {
+                currentPlayer.tableScore = _msgBody.tableScore;
+            }
             this.Data_PlayerAction = _msgBody;
         },this);
         Network.GetInstance().AddMsgListenner(MsgID.PotChange ,(_msgBody)=>
@@ -284,6 +293,11 @@ export class GameData extends DataNotify
 
     RemovePlayingPlayer(_userId : string)
     {
+        if(this.Data_PlayingUserList == null)
+        {
+            return;
+        }
+
         let index = this.Data_PlayingUserList.findIndex((_item) => _item.userInfo.userId === _userId);
         if(index >= 0)
         {
@@ -293,6 +307,10 @@ export class GameData extends DataNotify
 
     FindPlayerByUserId(_userId : string) : any
     {
+        if(this.Data_PlayingUserList == null)
+        {
+            return null;
+        }
         let index = this.Data_PlayingUserList.findIndex((_item) => _item.userInfo.userId === _userId);
         if(index >= 0)
         {
@@ -304,6 +322,10 @@ export class GameData extends DataNotify
 
     FindPlayerBySeatId(_seatId : number) : any
     {
+        if(this.Data_PlayingUserList == null)
+        {
+            return null;
+        }
         let index = this.Data_PlayingUserList.findIndex((_item) => _item.pos === _seatId);
         if(index >= 0)
         {

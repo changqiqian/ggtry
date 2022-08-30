@@ -1,5 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { Network } from '../../network/Network';
 import { HallData } from '../hall/HallData';
 import { GameData } from './GameData';
@@ -19,7 +20,7 @@ export class GameUI extends BaseUI
     }
     BindUI() 
     {
-        if(HallData.GetInstance().Data_CurrentMttMatchID)
+        if(LocalPlayerData.GetInstance().Data_CurrentUsingMttMatchID)
         {
             this.AddSubView("gamePage","prefab/Game_Mtt");
         }
@@ -28,6 +29,7 @@ export class GameUI extends BaseUI
             this.AddSubView("gamePage","prefab/Game_Cash");
         }
     }
+    
     RegDataNotify() 
     {
 

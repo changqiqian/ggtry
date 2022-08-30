@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite, Label } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, instantiate, AudioSource, Vec3, view } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { BaseButton } from '../../common/BaseButton';
@@ -7,6 +7,8 @@ import { Poker } from '../../common/Poker';
 import { GameData, Game_ActionType } from '../GameData';
 import { Game_ActionTag } from './Game_ActionTag';
 import { Game_BetAmount } from './Game_BetAmount';
+import { Game_MovingCards } from './Game_MovingCards';
+import { Game_MovingChip } from './Game_MovingChip';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Player')
@@ -29,9 +31,14 @@ export class Game_Player extends BaseUI
     @property(Game_BetAmount) 
     mGame_BetAmount: Game_BetAmount = null;
     @property(Node) 
+    mFold: Node = null;
+    @property(Node) 
     mCards: Node = null;
+    @property(Node) 
+    mLeaveStatus: Node = null;
     @property(BaseButton) 
     mSelfBtn: BaseButton = null;
+
     mSeatID : number = null; //座位编号
     InitParam() 
     {
@@ -93,9 +100,11 @@ export class Game_Player extends BaseUI
             let currentPlayer = GameData.GetInstance().FindPlayerBySeatId(this.mSeatID);
             if(currentPlayer == null)
             {
+                this.node.active = false;
                 return;
             }
 
+            this.node.active = true;
             if(currentPlayer.userInfo.userId != _current.userId)
             {
                 return;
@@ -104,9 +113,11 @@ export class Game_Player extends BaseUI
             if(currentPlayer.userInfo.userId == LocalPlayerData.GetInstance().Data_Uid)
             {
                 this.node.active = false;
-                return;
             }
-            this.node.active = true;
+            else
+            {
+                
+            }
             let time = GameData.GetInstance().Data_EnterGame.deskConfig.turnExpiredTime;
             this.UpdateTimer(true , time);
         },this);
@@ -123,17 +134,23 @@ export class Game_Player extends BaseUI
             if(currentPlayer.userInfo.userId == LocalPlayerData.GetInstance().Data_Uid)
             {
                 let deskInfo = GameData.GetInstance().Data_DeskInfo;
-                if(deskInfo.curTurnUserId == LocalPlayerData.GetInstance().Data_Uid)
+                if(deskInfo.curTurnUserId != LocalPlayerData.GetInstance().Data_Uid)
                 {
-                    return;
+                    this.node.active = true;
                 }
-                this.node.active = true;
+                
             }
             else
             {
                 this.node.active = currentPlayer != null;
             }
-           
+
+            if(currentPlayer.isGiveUp)
+            {
+
+            }
+
+            this.mLeaveStatus.active = currentPlayer.isLeave;
         },this);
 
         GameData.GetInstance().AddListener("Data_UpdatePlayerScore",(_current , _before)=>
@@ -143,8 +160,11 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            this.mAmount.string = _current.score;
 
+            if(currentPlayer.userInfo.userId == _current.userId)
+            {
+                this.mAmount.string = _current.score;
+            }
         },this);
 
         GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
@@ -169,6 +189,8 @@ export class Game_Player extends BaseUI
             {
                 this.Bet(-1);
             }
+
+            this.SetActionTag(Game_ActionType.None);
             this.ShowCards(null);
             this.UpdateTimer(false,0);
             this.ShowMiniCards(true);
@@ -182,14 +204,61 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-
             if(currentPlayer.userInfo.userId != _current.userId)
             {
                 return;
             }
-            this.UpdateTimer(false,0);
-            this.SetActionTag(_current.gameOpType);
-            this.Bet(_current.tableScore);
+
+            if(currentPlayer.userInfo.userId == LocalPlayerData.GetInstance().Data_Uid)
+            {
+                this.node.active = _current.gameOpType != Game_ActionType.Delay
+            }
+
+            if(_current.gameOpType == Game_ActionType.Delay)
+            {
+                this.UpdateTimer(true,_current.leftTime);
+            }
+            else
+            {
+                if(currentPlayer.userInfo.userId == LocalPlayerData.GetInstance().Data_Uid)
+                {
+                    return
+                }
+
+                if(_current.gameOpType == Game_ActionType.Fold)
+                {
+                    this.LoadPrefab("gamePage" , "prefab/Game_MovingCards" , (_prefab)=>
+                    {
+                        let tempNode = instantiate(_prefab);
+                        this.node.addChild(tempNode);
+                        let tempScript = tempNode.getComponent(Game_MovingCards);
+                        let startWolrdPos = this.node.worldPosition;
+                        let screenSize = view.getVisibleSize();
+                        let endWolrdPos = new Vec3(screenSize.width/2, screenSize.height * 0.6 , 0);
+                        tempScript.FlyTo(startWolrdPos , endWolrdPos);
+                    });
+                }
+
+                if(_current.gameOpType == Game_ActionType.Call ||
+                    _current.gameOpType == Game_ActionType.Raise ||
+                    _current.gameOpType == Game_ActionType.Allin )
+                {
+                    this.LoadPrefab("gamePage" , "prefab/Game_MovingChip" , (_prefab)=>
+                    {
+                        let tempNode = instantiate(_prefab);
+                        this.node.addChild(tempNode);
+                        let tempScript = tempNode.getComponent(Game_MovingChip);
+                        let startWolrdPos = this.node.worldPosition;
+                        let endWolrdPos = this.mGame_BetAmount.node.worldPosition;
+                        tempScript.FlyToBet(startWolrdPos , endWolrdPos);
+                    });
+                    this.Bet(_current.tableScore);
+                }
+                this.UpdateTimer(false,0);
+                this.SetActionTag(_current.gameOpType);
+            }
+            this.ShowMiniCards(_current.gameOpType != Game_ActionType.Fold);
+
         },this);
         GameData.GetInstance().AddListener("Data_SendPublicCards",(_current , _before)=>
         {
@@ -198,10 +267,19 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-
             this.UpdateTimer(false,0);
             this.SetActionTag(Game_ActionType.None);
             this.Bet(-1);
+
+            if(currentPlayer.userInfo.userId == LocalPlayerData.GetInstance().Data_Uid)
+            {
+                return;
+            }
+
+            if(currentPlayer.tableScore > 0) //收筹码
+            {
+                GameData.GetInstance().Data_CollectChipFromPlayer = this.mGame_BetAmount.node.worldPosition;
+            }
 
         },this);
 
@@ -213,6 +291,16 @@ export class Game_Player extends BaseUI
                 return;
             }
 
+            this.UpdateTimer(false,0);
+            this.SetActionTag(Game_ActionType.None);
+            this.Bet(-1);
+            if(currentPlayer.tableScore > 0) //收筹码
+            {
+                GameData.GetInstance().Data_CollectChipFromPlayer = this.mGame_BetAmount.node.worldPosition;
+            }
+
+
+
             if(_current.showInfo != null)
             {
                 for(let i = 0 ; i < _current.showInfo.length ; i++)
@@ -223,7 +311,6 @@ export class Game_Player extends BaseUI
                         this.ShowCards(currentShowData.cards);
                     }
                 }
-    
             }
 
             for(let i = 0 ; i < _current.cardList.length ; i++)
@@ -235,24 +322,33 @@ export class Game_Player extends BaseUI
                 }
             }
 
-            for(let i = 0 ; i < _current.winList.length ; i++)
+            if( _current.loseList != null)
             {
-                let currentWinData = _current.winList[i];
-                if(currentPlayer.userInfo.userId == currentWinData.userId)
+                for(let i = 0 ; i < _current.loseList.length ; i++)
                 {
-                    this.ShowWin(currentWinData.winScore , currentWinData.totalScore);
+                    let currentLoseData = _current.loseList[i];
+                    if(currentPlayer.userInfo.userId == currentLoseData.userId)
+                    {
+                        this.ShowLose(currentLoseData.winScore , currentLoseData.totalScore);
+                    }
                 }
             }
 
-            for(let i = 0 ; i < _current.loseList.length ; i++)
+            this.scheduleOnce(()=>
             {
-                let currentLoseData = _current.loseList[i];
-                if(currentPlayer.userInfo.userId == currentLoseData.userId)
+                for(let i = 0 ; i < _current.winList.length ; i++)
                 {
-                    this.ShowLose(currentLoseData.winScore , currentLoseData.totalScore);
+                    let currentWinData = _current.winList[i];
+                    if(currentPlayer.userInfo.userId == currentWinData.userId)
+                    {
+                        GameData.GetInstance().Data_SendChipToWinner = this.mGame_BetAmount.node.worldPosition;
+                        this.scheduleOnce(()=>
+                        {
+                            this.ShowWin(currentWinData.winScore , currentWinData.totalScore);
+                        },1.0);
+                    }
                 }
-            }
-
+            },1.5);
         },this);
 
     }
@@ -289,7 +385,6 @@ export class Game_Player extends BaseUI
         this.UpdateTimer(showTimer, _deskInfo.leftTime);
         this.SetActionTag(_playerData.operateCard);
         this.ShowCards(_playerData.cards);
-
     }
 
     SetActionTag(_actionType : Game_ActionType)
@@ -301,7 +396,6 @@ export class Game_Player extends BaseUI
         }
         this.mGame_ActionTag.SetType(_actionType);
     }
-
     UpdateTimer(_show : boolean , _leftTime : number)
     {
         if(this.NeedHide())
@@ -356,11 +450,13 @@ export class Game_Player extends BaseUI
     //发牌后，显示头像上的小扑克牌
     ShowMiniCards(_show : boolean)
     {
+        this.mFold.active = !_show;
         if(this.NeedHide())
         {
             this.mMiniCard.active = false;
             return;
         }
+
         this.mMiniCard.active = _show;
     }
 

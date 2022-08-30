@@ -34,6 +34,12 @@ export class Localization {
         return "";
     }
 
+    public static ReplaceString(_target : string , _to : string) : string
+    {
+        var newstr = _target.replace("xxx", _to); 
+        return newstr;
+    }
+
     public static LocationData = [
         { name: 'CountryName0', ch: '香港', en: 'Hong Kong' },
         { name: 'CountryName1', ch: '菲律宾', en: 'Philippines' },
@@ -161,7 +167,11 @@ export class Localization {
         {"name":"00079", "ch": "同花顺", "en": "Flush straight"},
         {"name":"00080", "ch": "皇家同花顺", "en": "Royal flush straight"},
         {"name":"00081", "ch": "您报名的mtt比赛已经开始，请前往参加", "en": "Mtt match started,join now~"},
-
+        {"name":"00082", "ch": "钻石不足", "en": "No diamonds"},
+        {"name":"00083", "ch": "恭喜", "en": "Congratulations"},
+        {"name":"00084", "ch": "比赛结束", "en": "Match End"},
+        {"name":"00085", "ch": "您获得了第xxx名", "en": "You are the xxx place"},
+        {"name":"00086", "ch": "无缘前三，再接再厉", "en": "Out of top 3,try harder next time"},
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },
         //服务器发过来的key

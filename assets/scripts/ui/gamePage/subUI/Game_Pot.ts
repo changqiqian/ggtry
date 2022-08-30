@@ -1,7 +1,8 @@
-import { _decorator, Component, Node, Label } from 'cc';
+import { _decorator, Component, Node, Label, instantiate } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { GameData } from '../GameData';
+import { Game_MovingChip } from './Game_MovingChip';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Pot')
@@ -43,7 +44,6 @@ export class Game_Pot extends BaseUI
             }
 
             this.SetTotalPot(totalPot);
-            this.CollectChip();
         },this);
 
         GameData.GetInstance().AddListener("Data_MttGetRoomInfo",(_current , _before)=>
@@ -59,7 +59,33 @@ export class Game_Pot extends BaseUI
         },this);
         GameData.GetInstance().AddListener("Data_GameResult",(_current , _before)=>
         {
-            this.SendChip();
+            
+        },this);
+
+        GameData.GetInstance().AddListener("Data_SendChipToWinner",(_current , _before)=>
+        {
+            this.LoadPrefab("gamePage" , "prefab/Game_MovingChip" , (_prefab)=>
+            {
+                let tempNode = instantiate(_prefab);
+                this.node.addChild(tempNode);
+                let tempScript = tempNode.getComponent(Game_MovingChip);
+                let startWolrdPos = this.mTotal.node.worldPosition;
+                let endWolrdPos = _current ;
+                tempScript.FlyToCollect(startWolrdPos , endWolrdPos);
+            });
+        },this);
+
+        GameData.GetInstance().AddListener("Data_CollectChipFromPlayer",(_current , _before)=>
+        {
+            this.LoadPrefab("gamePage" , "prefab/Game_MovingChip" , (_prefab)=>
+            {
+                let tempNode = instantiate(_prefab);
+                this.node.addChild(tempNode);
+                let tempScript = tempNode.getComponent(Game_MovingChip);
+                let startWolrdPos = _current;
+                let endWolrdPos = this.mTotal.node.worldPosition;
+                tempScript.FlyToCollect(startWolrdPos , endWolrdPos);
+            });
         },this);
     }
     LateInit() 
@@ -88,16 +114,6 @@ export class Game_Pot extends BaseUI
     SetCurrentTurnPot(_amount : number)
     {
         this.mCurrent.string = "" + _amount;
-    }
-
-    CollectChip()
-    {
-
-    }
-
-    SendChip()
-    {
-
     }
 }
 

@@ -1,8 +1,10 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Network } from '../../network/Network';
 import { HallData } from '../hall/HallData';
 import { GameData } from './GameData';
+import { Game_MovingChip } from './subUI/Game_MovingChip';
+import { Game_SeatUI } from './subUI/Game_SeatUI';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameBase')

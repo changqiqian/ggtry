@@ -91,7 +91,6 @@ export class Game_MttInfo extends BaseUI
     }
     CustmoerDestory() 
     {
-        this.unschedule(this.CountDownLogic);
     }
 
     UpdateRank(_rank : number , _totalPlayer : number)
@@ -112,7 +111,7 @@ export class Game_MttInfo extends BaseUI
         let anteNow = "";
         if(_data.beforeScore)
         {
-            anteNow = "(" + _data.nextBeforeScore + ")";
+            anteNow = "(" + _data.beforeScore + ")";
         }
         this.mBlindInfoNow.string = Localization.GetString("00054") + _data.curBlind + "/" + _data.curBlind * 2 + anteNow;
 

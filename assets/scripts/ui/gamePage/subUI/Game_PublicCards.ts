@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, AudioSource } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Poker } from '../../common/Poker';
 import { GameData } from '../GameData';
@@ -7,6 +7,8 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_PublicCards')
 export class Game_PublicCards extends BaseUI 
 {
+    @property(AudioSource) 
+    mAudio: AudioSource = null;
     InitParam() 
     {
 
@@ -25,6 +27,7 @@ export class Game_PublicCards extends BaseUI
         },this);
         GameData.GetInstance().AddListener("Data_SendPublicCards",(_current , _before)=>
         {
+            this.mAudio.play();
             for(let i = 0 ; i < _current.centerCard.length ; i++)
             {
                 let currentData = _current.centerCard[i];

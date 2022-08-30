@@ -1,9 +1,5 @@
 import { _decorator, Component, Node, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
-import { Calculator, CardStruct, CardType } from '../../base/Calculator';
-import { LocalPlayerData } from '../../base/LocalPlayerData';
-import { Network } from '../../network/Network';
-import { Poker } from '../common/Poker';
 import { HallData, Hall_SubPage } from './HallData';
 const { ccclass, property } = _decorator;
 
@@ -14,7 +10,6 @@ export class HallUI extends BaseUI
     {
         return ["hall","mttPage","cashPage" ,"clubPage","mePage","cowboy"];
     }
-    
 
     InitParam() 
     {
@@ -44,6 +39,7 @@ export class HallUI extends BaseUI
     {
         HallData.GetInstance().UnregisteMsg();
         HallData.GetInstance().RemoveAllListenner();
+        HallData.GetInstance().ResetAllData();
     }
 
 }

@@ -17,6 +17,7 @@ export class LocalPlayerData extends DataNotify {
         return LocalPlayerData.Instance;
     }
 
+    Data_CurrentUsingMttMatchID : number = null ; ////当前尝试进入的mtt游戏
     Data_Uid : string = null ; //玩家uid
     Data_Coin : number = null;//玩家金币
     Data_Diamond : number = null; //钻石

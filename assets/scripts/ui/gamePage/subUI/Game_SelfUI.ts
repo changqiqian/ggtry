@@ -1,12 +1,15 @@
-import { _decorator, Component, Node, Label } from 'cc';
+import { _decorator, Component, Node, Label, instantiate, Vec3, view } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Combiantion } from '../../../base/Calculator';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { Network } from '../../../network/Network';
 import { Poker } from '../../common/Poker';
 import { GameData, Game_ActionType } from '../GameData';
 import { Game_ActionTag } from './Game_ActionTag';
 import { Game_AddTime } from './Game_AddTime';
 import { Game_BetAmount } from './Game_BetAmount';
+import { Game_MovingBigCard } from './Game_MovingBigCard';
+import { Game_MovingChip } from './Game_MovingChip';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_SelfUI')
@@ -38,8 +41,15 @@ export class Game_SelfUI extends BaseUI
         this.HideAllUI();
         this.mGame_AddTime.SetCallback(()=>
         {
-
+            let commandId = GameData.GetInstance().Data_DeskInfo.commandId;
+            Network.GetInstance().SendPlayerAction(Game_ActionType.Delay , 0 , commandId);
         });
+
+        for(let i = 0 ; i < this.mCards.children.length ; i++)
+        {
+            let currentCard = this.mCards.children[i].getComponent(Poker);
+            currentCard.SetClickAble(this.ClickPoker.bind(this),i);
+        }
     }
     RegDataNotify() 
     {
@@ -57,7 +67,10 @@ export class Game_SelfUI extends BaseUI
 
             let deskInfo = GameData.GetInstance().Data_DeskInfo;
             this.HideAllUI();
-            this.UpdateCards(currentPlayer);
+            if(currentPlayer.isSendHandCard)
+            {
+                this.ShowCards(currentPlayer.cards);
+            }
             let showAddTimeBtn = currentPlayer.userInfo.userId == deskInfo.curTurnUserId && deskInfo.isCanDelay;
             this.UpdateAddTimeBtn(showAddTimeBtn , deskInfo.delaySpend);
             this.Bet(currentPlayer.tableScore);
@@ -69,9 +82,9 @@ export class Game_SelfUI extends BaseUI
         GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
         {
             let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
+            this.node.active = false;
             if(currentPlayer == null)
             {
-                this.node.active = false;
                 return;
             }
             this.node.active = true;
@@ -91,7 +104,7 @@ export class Game_SelfUI extends BaseUI
                 //straddle
             }
             this.UpdateAddTimeBtn(false , "");
-            this.Bet(-1);
+            //this.Bet(-1);
             this.SetActionTag(Game_ActionType.None);
             this.ShowCards(_current.handCard);
             this.UpdateConbination(Combiantion.None);
@@ -107,6 +120,8 @@ export class Game_SelfUI extends BaseUI
 
             let showAddTimeBtn = (currentPlayer.userInfo.userId == _current.userId) && _current.isCanDelay;
             this.UpdateAddTimeBtn(showAddTimeBtn , _current.delaySpend);
+            let deskInfo = GameData.GetInstance().Data_DeskInfo;
+            this.UpdateMoney(currentPlayer.userInfo.score , deskInfo);
         },this);
 
         GameData.GetInstance().AddListener("Data_PlayerAction",(_current , _before)=>
@@ -121,9 +136,46 @@ export class Game_SelfUI extends BaseUI
             {
                 return;
             }
-            this.UpdateAddTimeBtn(false , "");
-            this.SetActionTag(_current.gameOpType);
-            this.Bet(_current.tableScore);
+
+            if(_current.gameOpType == Game_ActionType.Delay)
+            {
+                this.UpdateAddTimeBtn(_current.isCanDelay , _current.delaySpend);
+            }
+            else
+            {
+                this.UpdateAddTimeBtn(false , "");
+                this.SetActionTag(_current.gameOpType);
+                this.Bet(_current.tableScore);
+                this.mMoney.node.active = false;
+                if(_current.gameOpType == Game_ActionType.Fold)
+                {
+                    this.LoadPrefab("gamePage" , "prefab/Game_MovingBigCard" , (_prefab)=>
+                    {
+                        let tempNode = instantiate(_prefab);
+                        this.node.addChild(tempNode);
+                        let tempScript = tempNode.getComponent(Game_MovingBigCard);
+                        let startWolrdPos = this.mCards.worldPosition;
+                        let screenSize = view.getVisibleSize();
+                        let endWolrdPos = new Vec3(screenSize.width/2, screenSize.height/2 , 0);
+                        tempScript.FlyTo(startWolrdPos , endWolrdPos);
+                    });
+                }
+                
+                if(_current.gameOpType == Game_ActionType.Call || 
+                    _current.gameOpType == Game_ActionType.Raise ||
+                    _current.gameOpType == Game_ActionType.Allin)
+                {
+                    this.LoadPrefab("gamePage" , "prefab/Game_MovingChip" , (_prefab)=>
+                    {
+                        let tempNode = instantiate(_prefab);
+                        this.node.addChild(tempNode);
+                        let tempScript = tempNode.getComponent(Game_MovingChip);
+                        let startWolrdPos = this.mCards.worldPosition;
+                        let endWolrdPos = this.mGame_BetAmount.node.worldPosition;
+                        tempScript.FlyToBet(startWolrdPos , endWolrdPos);
+                    });
+                }
+            }
 
         },this);
         
@@ -134,8 +186,7 @@ export class Game_SelfUI extends BaseUI
             {
                 return;
             }
-            let deskInfo = GameData.GetInstance().Data_DeskInfo;
-            this.UpdateMoney(_current.score , deskInfo);
+            this.mMoney.string = _current.score + "";
         },this);
 
         GameData.GetInstance().AddListener("Data_DecideConbination",(_current , _before)=>
@@ -247,15 +298,6 @@ export class Game_SelfUI extends BaseUI
     }
 
 
-    UpdateCards(_playerData : any)
-    {
-        this.mCards.active = _playerData.isSendHandCard;
-        if(_playerData.isSendHandCard)
-        {
-            //_playerData.cards
-        }
-    }
-
     UpdateAddTimeBtn(_show : boolean , _delaySpend : string)
     {
         this.mGame_AddTime.node.active = _show;
@@ -267,6 +309,10 @@ export class Game_SelfUI extends BaseUI
     SetActionTag(_actionType : Game_ActionType)
     {
         this.mGame_ActionTag.SetType(_actionType);
+        if(_actionType == Game_ActionType.Fold)
+        {
+            this.Fold();
+        }
     }
 
 
@@ -298,8 +344,21 @@ export class Game_SelfUI extends BaseUI
             let currentCard = this.mCards.children[i].getComponent(Poker);
             currentCard.ShowBack();
             currentCard.SetFrontByServerData(data);
-            currentCard.SetClickAble();
             currentCard.FlipToFront();
+        }
+    }
+
+    ClickPoker(_index : number)
+    {
+
+    }
+
+    Fold()
+    {
+        for(let i = 0 ; i < this.mCards.children.length ; i++)
+        {
+            let currentCard = this.mCards.children[i].getComponent(Poker);
+            currentCard.SetGary();
         }
     }
 
