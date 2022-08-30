@@ -714,6 +714,8 @@
     "__prefab": {
       "__id__": 33
     },
+    "mCurrentPotBG": null,
+    "mTotalPotBG": null,
     "mCurrent": {
       "__id__": 6
     },

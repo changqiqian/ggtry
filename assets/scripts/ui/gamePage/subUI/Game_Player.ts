@@ -6,6 +6,7 @@ import { CircleTimer } from '../../common/CircleTimer';
 import { Poker } from '../../common/Poker';
 import { GameData, Game_ActionType } from '../GameData';
 import { Game_ActionTag } from './Game_ActionTag';
+import { Game_AddMoneyLabel } from './Game_AddMoneyLabel';
 import { Game_BetAmount } from './Game_BetAmount';
 import { Game_MovingCards } from './Game_MovingCards';
 import { Game_MovingChip } from './Game_MovingChip';
@@ -492,7 +493,19 @@ export class Game_Player extends BaseUI
 
     ShowWin(_winScore:number , _totalScore : number)
     {
-        
+        this.LoadPrefab("gamePage" , "prefab/Game_AddMoneyLabel" , (_prefab)=>
+        {
+            let tempNode = instantiate(_prefab);
+            this.node.addChild(tempNode);
+            let tempScript = tempNode.getComponent(Game_AddMoneyLabel);
+            tempScript.InitWithData(_winScore);
+        });
+
+        this.LoadPrefab("gamePage" , "prefab/Game_WinEffect" , (_prefab)=>
+        {
+            let tempNode = instantiate(_prefab);
+            this.node.addChild(tempNode);
+        });
     }
 
     ShowLose(_winScore:number , _totalScore : number)

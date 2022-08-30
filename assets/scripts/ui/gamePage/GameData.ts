@@ -103,6 +103,7 @@ export class GameData extends DataNotify
         Network.GetInstance().AddMsgListenner(MsgID.SendPublicCards ,(_msgBody)=>
         {
             this.Data_SendPublicCards = _msgBody;
+            this.ClearPlayerTableScore();
         },this);
         
         Network.GetInstance().AddMsgListenner(MsgID.GameStart ,(_msgBody)=>
@@ -333,6 +334,32 @@ export class GameData extends DataNotify
         }
         console.log("gamedata FindPlayerBySeatId--没有找到玩家_userId==" + _seatId);
         return null;
+    }
+
+    ClearPlayerTableScore()
+    {
+        if(this.Data_PlayingUserList == null)
+        {
+            return;
+        }
+        for(let i = 0 ; i < this.Data_PlayingUserList.length ; i++)
+        {
+            this.Data_PlayingUserList[i].tableScore = 0;
+        }
+    }
+
+    GetTotalTableScore() : number
+    {
+        if(this.Data_PlayingUserList == null)
+        {
+            return 0;
+        }
+        let totalTableScore = 0;
+        for(let i = 0 ; i < this.Data_PlayingUserList.length ; i++)
+        {
+            totalTableScore += this.Data_PlayingUserList[i].tableScore
+        }
+        return totalTableScore;
     }
 
 }
