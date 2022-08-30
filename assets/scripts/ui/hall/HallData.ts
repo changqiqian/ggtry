@@ -41,6 +41,7 @@ export class HallData extends DataNotify {
     Data_MeMessageData: any = null; // 公告或消息资料
     Data_MeMessagDetailId: any = null; // 消息id
     Data_MeMessagDetailData: any = null; // 消息资料
+    Data_MeRankData: any = null; //我的mtt战绩资料
 
     RegisteMsg() {
         Network.GetInstance().AddMsgListenner(
@@ -216,6 +217,15 @@ export class HallData extends DataNotify {
             (_msgBody) => {
                 if (_msgBody != null) {
                     this.Data_MeMessageData = _msgBody;
+                }
+            },
+            this
+        );
+        Network.GetInstance().AddMsgListenner(
+            MsgID.MeRank,
+            (_msgBody) => {
+                if (_msgBody != null) {
+                    this.Data_MeRankData = _msgBody;
                 }
             },
             this

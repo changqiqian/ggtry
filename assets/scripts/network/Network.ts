@@ -534,6 +534,14 @@ export class Network {
         console.log('发送已读消息:' + body);
         this.SendMsg(MsgID.MessageIsRead, body);
     }
+    SendMyMttRank(_page: number, _clubId = null) {
+        var body = {
+            page: _page,
+            clubId: _clubId,
+        };
+        console.log('查询我的mtt战绩:' + body);
+        this.SendMsg(MsgID.MeRank, body);
+    }
 }
 
 export enum MsgStatus {
@@ -589,4 +597,5 @@ export enum MsgID {
     GetMessageAllRead = 684,
     GetMessageInfo = 682,
     MessageIsRead = 683,
+    MeRank = 402,
 }
