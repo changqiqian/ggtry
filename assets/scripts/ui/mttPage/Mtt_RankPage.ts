@@ -36,10 +36,7 @@ export class Mtt_RankPage extends BaseUI
     
     onEnable()
     {
-        this.scheduleOnce(()=>
-        {
-            HallData.GetInstance().Data_MttRankSubPage = Mtt_RankSubPage.All;
-        },0);
+        HallData.GetInstance().Data_MttRankSubPage = Mtt_RankSubPage.All;
     }
 
     InitParam() 

@@ -142,7 +142,7 @@ export class SMSCodeView extends BaseUI
     }
     LateInit() 
     {
-
+        
     }
     UnregDataNotify() 
     {
