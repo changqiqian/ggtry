@@ -64,7 +64,7 @@ export class HallData extends DataNotify {
 
         Network.GetInstance().AddMsgListenner(MsgID.GetMttList,(_msgBody) => 
         {
-            if (_msgBody.list != null && _msgBody.list.length != 0) 
+            if (_msgBody.list != null) 
             {
                 //排序 照搬原来的代码 反正就是排序的意思
                 {

@@ -32,7 +32,7 @@ export class SettingWindow extends BaseUI {
         this.mSwitchAccountBtn.SetClickCallback(() => {
             GameConfig.ClearToken();
             Network.GetInstance().SendActionData('mine', 'change_account', []);
-            Network.GetInstance().ClearWS();
+            Network.GetInstance().ClearWS(true);
             UIMgr.GetInstance().ChangeScene(SceneType.Login);
         });
         this.mBBToggleBtn.isChecked = Boolean(GameConfig.ReadSimpleData('SHOWBB_LOACAL_D', false));

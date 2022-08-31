@@ -44,6 +44,7 @@ export abstract class BaseUI extends Component {
     //计时器，可以自动补偿切到后台的时间，定时器停止造成的时间对不上
     mTotalCountTime : number;
     mTimerStartingTime : number;
+    mTimerForward : boolean = null;
 
     //
     onLoad() {
@@ -211,8 +212,9 @@ export abstract class BaseUI extends Component {
         }
     }
     //启动秒表  
-    StartSecondsTimer(_totalTime : number , _timeSpace :number = 1)
+    StartSecondsTimer(_totalTime : number , _timeSpace :number = 1 , _forward : boolean = false)
     {
+        this.mTimerForward = _forward;
         if(_totalTime <= 0)
         {
             return;
@@ -234,7 +236,16 @@ export abstract class BaseUI extends Component {
         let tempDate = new Date();
         let nowTime = tempDate.getTime(); 
         let timePast = nowTime - this.mTimerStartingTime;
-        let restTime = this.mTotalCountTime - timePast;
+
+        let restTime;
+        if(this.mTimerForward)
+        {
+            restTime = this.mTotalCountTime + timePast;
+        }
+        else
+        {
+            restTime = this.mTotalCountTime - timePast;
+        }
 
         if(restTime <= 0)
         {
@@ -248,7 +259,15 @@ export abstract class BaseUI extends Component {
         let tempDate = new Date();
         let nowTime = tempDate.getTime(); 
         let timePast = nowTime - this.mTimerStartingTime;
-        let restTime = this.mTotalCountTime - timePast;
+        let restTime ;
+        if(this.mTimerForward)
+        {
+            restTime = this.mTotalCountTime + timePast;
+        }
+        else
+        {
+            restTime = this.mTotalCountTime - timePast;
+        }
 
         if(restTime <= 0)
         {

@@ -59,6 +59,7 @@ export class GameData extends DataNotify
     Data_CollectChipFromPlayer : Vec3 = null; //需要被收集筹码的玩家位置 （世界坐标）
     Data_SendChipToWinner : Vec3 = null; // 赢家坐标 筹码飞到玩家去（世界坐标）
     Data_PreShowCards : any = null; //提前亮牌，一般情况为大家allin的时候
+    Data_UpdatePlayerUI : boolean = null; //座位旋转结束后，左右调换调整玩家的操作ui，防止ui超出屏幕边缘
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.MttGetRoomInfo ,(_msgBody)=>
@@ -84,6 +85,21 @@ export class GameData extends DataNotify
             this.Data_MatchConfig = _msgBody.matchConfig;
             this.Data_StatusInfo = _msgBody.statusInfo;
             this.Data_RefreshMttInfo = _msgBody;
+        },this);
+        Network.GetInstance().AddMsgListenner(MsgID.EnterGame ,(_msgBody)=>
+        {
+            if(_msgBody.code == MsgStatus.SUCCESS)
+            {
+                this.Data_DeskConfig = _msgBody.deskConfig;
+                this.Data_DeskInfo = _msgBody.deskInfo;
+                this.Data_PlayingUserList = this.Data_DeskInfo.userList;
+                this.Data_UpdatePlayingPlayer = true;
+                this.Data_EnterGame = _msgBody;
+            }
+            else
+            {
+                this.Data_ErrorAndBackHall = _msgBody.reason;
+            }
         },this);
 
         Network.GetInstance().AddMsgListenner(MsgID.CheckPublicCards ,(_msgBody)=>
@@ -115,21 +131,6 @@ export class GameData extends DataNotify
             this.UpdatePlayerPlayingStatus(_msgBody.playingUserIds);
             this.Data_UpdatePlayingPlayer = true;
             this.Data_GameStart = _msgBody;
-        },this);
-        Network.GetInstance().AddMsgListenner(MsgID.EnterGame ,(_msgBody)=>
-        {
-            if(_msgBody.code == MsgStatus.SUCCESS)
-            {
-                this.Data_DeskConfig = _msgBody.deskConfig;
-                this.Data_DeskInfo = _msgBody.deskInfo;
-                this.Data_PlayingUserList = this.Data_DeskInfo.userList;
-                this.Data_UpdatePlayingPlayer = true;
-                this.Data_EnterGame = _msgBody;
-            }
-            else
-            {
-                this.Data_ErrorAndBackHall = _msgBody.reason;
-            }
         },this);
         Network.GetInstance().AddMsgListenner(MsgID.RecordDuringMatch ,(_msgBody)=>
         {

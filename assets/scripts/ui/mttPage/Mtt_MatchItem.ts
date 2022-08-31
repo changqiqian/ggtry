@@ -117,7 +117,6 @@ export class Mtt_MatchItem extends BaseUI
         //liveInfo
         {
             this.mMatchName.string = liveInfo.clubName;
-            this.mLiveTag.active = liveInfo.isLive;
             this.LoadRemoteSprite(liveInfo.liveCover , (_spriteFrame)=>
             {
                 this.mBG.spriteFrame = _spriteFrame;
@@ -125,6 +124,7 @@ export class Mtt_MatchItem extends BaseUI
         }
         //mttInfo
         {
+            this.mLiveTag.active = mttInfo.isLive;
             if(mttInfo.matchMode == 3)
             {
                 this.mSatelliteTag.active = true;
@@ -147,7 +147,6 @@ export class Mtt_MatchItem extends BaseUI
             {
                 this.mRegAmount.string = mttInfo.enterFee + "+" + mttInfo.serviceFee;
             }
-            this.UpdateStatus(mttInfo);
 
             if(mttInfo.enterFeeType == Mtt_RegType.Coin) 
             {
@@ -178,6 +177,8 @@ export class Mtt_MatchItem extends BaseUI
                 this.mRegTicketDescribe.string = GameConfig.GetStrWithLen(mttInfo.enterFeeTicket.name, 35) + ' *' + mttInfo.enterFeeTicket.nums;
 
             }
+
+            this.UpdateStatus(mttInfo);
         }
         //strapConfig
         {
@@ -188,94 +189,134 @@ export class Mtt_MatchItem extends BaseUI
             }
         }
     }
-
+    // export enum Mtt_MatchStatus { //Mtt详细信息页面的比赛状态
+    //     Registring = 1, //报名中
+    //     Only_15mins = 2, //准备开始 提前15分钟
+    //     Only_10s = 3 , //预备开始 10秒倒计时
+    //     Started = 4 , //正式开始
+    //     Rest = 5 , //休息
+    //     Pause = 6 ,//暂停
+    //     End = 7 , //结束
+    //     LevelUp = 8 , //涨盲通知
+    // }
     UpdateStatus(_mttInfo)
     {
-           //计算比赛状态
-           if(_mttInfo.status == 1 || _mttInfo.beginTime == 0)
-           {
-               this.mMatchStatus = Mtt_MatchListStatus.ManualStart;
-               this.mStatusTitle.string = Localization.GetString("00019");
-           }
-           else if(_mttInfo.status == 2)
-           {
-               this.mMatchStatus = Mtt_MatchListStatus.NotStart;
-               this.mStatusTitle.string = Localization.GetString("00019");
-           }
-           else if(_mttInfo.status == 10)
-           {
-               this.mMatchStatus = Mtt_MatchListStatus.MatchEnd;
-               this.mStatusTitle.string = Localization.GetString("00020");
-           }
-           else
-           {
-               if(_mttInfo.stopJoinTime > 0)
-               {
-                   this.mMatchStatus = Mtt_MatchListStatus.DelayReg;
-                   this.mStatusTitle.string = Localization.GetString("00021");
-               }
-               else
-               {
-                   if(_mttInfo.status == 5)
-                   {
-                       this.mMatchStatus = Mtt_MatchListStatus.RestTime;
-                       this.mStatusTitle.string = Localization.GetString("00022");
-                   }
-                   else
-                   {
-                       this.mMatchStatus = Mtt_MatchListStatus.MatchStarted;
-                       this.mStatusTitle.string = Localization.GetString("00023");
-                   }
-               }
-           }
-           /////////////////////////////////////////////////////////////
-
-            this.LoadSprite("mttPage","texture/StateBtn" + this.mMatchStatus , (_spriteFrame)=>
+        console.log("_mttInfo.status==" + _mttInfo.status);
+        //计算比赛状态
+        if(_mttInfo.status == 1)
+        {
+            console.log("tttttttttttt ===111")
+            this.mMatchStatus = Mtt_MatchListStatus.NotStart;
+            this.mStatusTitle.string = Localization.GetString("00019");
+        }
+        else if(_mttInfo.status == 2)
+        {
+            console.log("tttttttttttt ===222")
+            this.mMatchStatus = Mtt_MatchListStatus.NotStart;
+            this.mStatusTitle.string = Localization.GetString("00019");
+        }
+        else if(_mttInfo.status == 10)
+        {
+            console.log("tttttttttttt ===333")
+            this.mMatchStatus = Mtt_MatchListStatus.MatchEnd;
+            this.mStatusTitle.string = Localization.GetString("00020");
+        }
+        else
+        {
+            console.log("tttttttttttt ===444")
+            if(_mttInfo.stopJoinTime > 0)
             {
-                this.mStatusSpr.spriteFrame = _spriteFrame;
-            })
-           
-
-            if(this.mMatchStatus == Mtt_MatchListStatus.DelayReg || 
-                this.mMatchStatus == Mtt_MatchListStatus.MatchStarted)
-            {
-                this.mPlayerAmount.string = _mttInfo.playerCount + '/' + _mttInfo.totalPlayer;
+                console.log("tttttttttttt ===555")
+                this.mMatchStatus = Mtt_MatchListStatus.DelayReg;
+                this.mStatusTitle.string = Localization.GetString("00021");
             }
             else
             {
-                this.mPlayerAmount.string = _mttInfo.totalPlayer;
+                console.log("tttttttttttt ===666")
+                if(_mttInfo.status == 5)
+                {
+                    console.log("tttttttttttt ===777")
+                    this.mMatchStatus = Mtt_MatchListStatus.RestTime;
+                    this.mStatusTitle.string = Localization.GetString("00022");
+                }
+                else
+                {
+                    console.log("tttttttttttt ===888")
+                    this.mMatchStatus = Mtt_MatchListStatus.MatchStarted;
+                    this.mStatusTitle.string = Localization.GetString("00023");
+                }
             }
+        }
+        /////////////////////////////////////////////////////////////
 
+        this.LoadSprite("mttPage","texture/StateBtn" + this.mMatchStatus , (_spriteFrame)=>
+        {
+            this.mStatusSpr.spriteFrame = _spriteFrame;
+        })
+        
+        console.log("tttttttttttt ===999")
+        if(this.mMatchStatus == Mtt_MatchListStatus.DelayReg || 
+            this.mMatchStatus == Mtt_MatchListStatus.MatchStarted)
+        {
+            console.log("tttttttttttt ===aaa")
+            this.mPlayerAmount.string = _mttInfo.playerCount + '/' + _mttInfo.totalPlayer;
+        }
+        else
+        {
+            console.log("tttttttttttt ===bbb")
+            this.mPlayerAmount.string = _mttInfo.totalPlayer;
+        }
 
-            if(this.mMatchStatus == Mtt_MatchListStatus.DelayReg)
-            {
-                this.StartCountDown(_mttInfo.stopJoinTime);
-            }
-            else if(this.mMatchStatus == Mtt_MatchListStatus.MatchStarted || 
-                this.mMatchStatus == Mtt_MatchListStatus.MatchEnd)
-            {
-                this.mStatusSubTitle.string = "-";
-                this.mCountDown.string = "-"
-            }
-            else
-            {
-                this.StartCountDown(_mttInfo.leftTime);
-            }
+        console.log("tttttttttttt ===ccc")
+        if(this.mMatchStatus == Mtt_MatchListStatus.DelayReg)
+        {
+            console.log("tttttttttttt ===ddd")
+            this.StartCountDown(_mttInfo.stopJoinTime);
+        }
+        else if(this.mMatchStatus == Mtt_MatchListStatus.MatchStarted)
+        {
+            console.log("tttttttttttt ===eee")
+            this.mStatusSubTitle.string = Localization.GetString("00087");
+            let gameBeginDate = new Date(_mttInfo.gameTime * 1000);
+            let gameBeginTime = gameBeginDate.getTime();
+            let nowDate = new Date().getTime();
+            let durationSeconds = (nowDate - gameBeginTime)/1000;
+            console.log("durationSeconds=====" + durationSeconds);
+            this.StartCountDown(durationSeconds , 1 , true);
+        }
+        else if(this.mMatchStatus == Mtt_MatchListStatus.MatchEnd)
+        {
+            this.mStatusSubTitle.string = "-";
+            this.mCountDown.string = "-"
+            console.log("tttttttttttt ===fff")
+        }
+        else
+        {
+            console.log("tttttttttttt ===ggg")
+            this.StartCountDown(_mttInfo.leftTime);
+        }
     }
 
-    StartCountDown(_time : number)
+    StartCountDown(_time : number , _timeSpace : number = 1, _forward : boolean = false)
     {
-        this.StartSecondsTimer(_time);
+        this.StartSecondsTimer(_time , _timeSpace  , _forward);
         this.OnSecondTimer();
     }
 
     OnSecondTimer()
     {
         let seconds = this.GetRestSeconds();
-        this.CalculateTime(seconds, this.mData.mttInfo.beginTime);
+        if(this.mMatchStatus == Mtt_MatchListStatus.MatchStarted)
+        {
+            this.mCountDown.string = GameConfig.GetRestTime_M_S(seconds);
+        }
+        else
+        {
+            this.CalculateWhenMatchStart(seconds, this.mData.mttInfo.beginTime);
+        }
     }
 
-    CalculateTime(_time , _beginTime) 
+    CalculateWhenMatchStart(_time , _beginTime) 
     {
         let date = new Date(_time * 1000);
         let h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()

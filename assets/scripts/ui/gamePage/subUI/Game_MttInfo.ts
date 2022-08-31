@@ -27,7 +27,7 @@ export class Game_MttInfo extends BaseUI
     }
     BindUI() 
     {
-
+        this.node.active = false;
     }
     RegDataNotify() 
     {

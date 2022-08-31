@@ -81,14 +81,6 @@ export class LoginUI extends BaseUI
     }
     RegDataNotify() 
     {
-        CommonNotify.GetInstance().AddListener("Data_SocketOpen",(_current , _before)=>
-        {
-            if(!_before && _current)
-            {
-                Network.GetInstance().SendVisitorLogin();
-            }
-        },this);
-
         CommonNotify.GetInstance().AddListener("Data_LoginSuccessData",(_current , _before)=>
         {
             if(_current == null)

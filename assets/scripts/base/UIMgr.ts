@@ -235,6 +235,12 @@ export class UIMgr
             return;
         }
 
+        if(this.mCurrentScene == _sceneType)
+        {
+            console.log("不能跳转到同一个场景 _sceneType==" + _sceneType);
+            return;
+        }
+
         if(this.mCurrentScene != SceneType.None)
         {
             let configDeleteScene = this.GetSceneConfig(this.mCurrentScene);

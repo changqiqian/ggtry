@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
-import { Localization } from '../../base/Localization';
+import { LanguageType, Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
@@ -313,8 +313,10 @@ export class Mtt_InfoPage extends BaseUI
                 {
                     let levelTime = GameConfig.GetLevel(this.mData.matchConfig.riseBlindTime);
                     let takeTime = GameConfig.GetTakeTime(this.mData.matchConfig.riseBlindTime);
-                    let breakTimeDescribe =   "5mins every" + takeTime + "mins" + " - Lv" + levelTime;
-                    this.mBreakTime.getChildByName("Content").getComponent(Label).string = breakTimeDescribe;
+                    let restDescribe = Localization.GetString("00088");
+                    restDescribe = Localization.ReplaceString(restDescribe,takeTime +"");
+                    restDescribe += " - Lv" + levelTime;
+                    this.mBreakTime.getChildByName("Content").getComponent(Label).string = restDescribe;
                 }
                 else
                 {
@@ -323,7 +325,7 @@ export class Mtt_InfoPage extends BaseUI
                 
                 if(this.mData.matchConfig.delayLevel <= 0)
                 {
-                    this.mLateRegInfo.getChildByName("Content").getComponent(Label).string = "None";
+                    this.mLateRegInfo.getChildByName("Content").getComponent(Label).string = Localization.GetString("00089")
                 }
                 else
                 {
@@ -506,22 +508,26 @@ export class Mtt_InfoPage extends BaseUI
         {
             case Mtt_UserStatus.NotAttend:
             {
-                if(this.mData.statusInfo.status == Mtt_MatchStatus.Registring)
+                if(this.mData.statusInfo.status == Mtt_MatchStatus.Registring ||
+                    this.mData.statusInfo.status == Mtt_MatchStatus.Only_15mins || 
+                    this.mData.statusInfo.status == Mtt_MatchStatus.Only_10s)
                 {
                     this.mAttendBtn.node.active = true;
                     this.mAttendBtn.SetTitle(Localization.GetString("00031"));
                 }
-                else
+                else if(this.mData.statusInfo.status != Mtt_MatchStatus.End)
                 {
                     if(this.mData.statusInfo.curLevel <= this.mData.matchConfig.delayLevel)
                     {
                         this.mObBtn.node.active = true;
                         this.mRebuy.node.active = true;
+                        this.mRebuy.SetTitle(Localization.GetString("00021"))
                     }
                     else
                     {
                         this.mObBtn.node.active = true;
                         this.mRebuy.node.active = true;
+                        this.mRebuy.SetTitle(Localization.GetString("00042"))
                         this.mRebuy.SetInteractable(false);
                     }
                 }
@@ -554,12 +560,14 @@ export class Mtt_InfoPage extends BaseUI
                 {
                     this.mObBtn.node.active = true;
                     this.mRebuy.node.active = true;
+                    this.mRebuy.SetTitle(Localization.GetString("00041"));
                 }
                 else
                 {
                     this.mObBtn.node.active = true;
                     this.mRebuy.node.active = true;
                     this.mRebuy.SetInteractable(false);
+                    this.mRebuy.SetTitle(Localization.GetString("00041"));
                 }
             }
             break;
@@ -590,7 +598,6 @@ export class Mtt_InfoPage extends BaseUI
         this.schedule(this.MatchCountDownLogic, 1);
     }
 
-    
     MatchCountDownLogic()
     {
         let myDate = new Date();

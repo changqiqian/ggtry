@@ -1,6 +1,8 @@
 import { _decorator, Component, Node, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { CommonNotify } from '../../CommonNotify';
+import { Network } from '../../network/Network';
 import { HallData, Hall_SubPage } from './HallData';
 const { ccclass, property } = _decorator;
 
@@ -28,7 +30,13 @@ export class HallUI extends BaseUI
 
     RegDataNotify() 
     {
-
+        CommonNotify.GetInstance().AddListener("Data_LoginSuccessData",(_current , _before)=>
+        {
+            if(_current == null)
+            {
+                return;
+            }
+        },this);
     }
     LateInit() 
     {
@@ -36,6 +44,7 @@ export class HallUI extends BaseUI
     }
     UnregDataNotify() 
     {
+        CommonNotify.GetInstance().RemoveListenerByTarget(this);
     }
     CustmoerDestory() 
     {

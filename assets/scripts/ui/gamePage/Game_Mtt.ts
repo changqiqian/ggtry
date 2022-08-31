@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { SceneType, UIMgr } from '../../base/UIMgr';
+import { CommonNotify } from '../../CommonNotify';
 import { GameType, Network } from '../../network/Network';
 import { TipsWindow } from '../common/TipsWindow';
 import { HallData } from '../hall/HallData';
@@ -36,6 +37,8 @@ export class Game_Mtt extends GameBase
         {
             this.ShowLayer("gamePage","prefab/Game_MttResultLayer");
         },this);
+
+
     }
 
     LateInit() 

@@ -11,11 +11,11 @@
   },
   "BuildTaskManager": {
     "taskMap": {
-      "1660977674665": {
-        "id": "1660977674665",
+      "1661943520935": {
+        "id": "1661943520935",
         "progress": 1,
         "state": "success",
-        "message": "8-20-2022 14:46 make package /Users/yamiwang/cowboy/build/android success!",
+        "message": "8-31-2022 19:07 make package /Users/yamiwang/cowboy/build/android success!",
         "options": {
           "name": "SY",
           "platform": "android",
@@ -82,7 +82,7 @@
                 "asyncFunctions": true
               },
               "encrypted": false,
-              "xxteaKey": "c5Due6Q+hFposSen",
+              "xxteaKey": "d6OJwJAAtEjKYYJ5",
               "compressZip": false,
               "makeAfterBuild": false,
               "JobSystem": "none",
@@ -90,7 +90,7 @@
             }
           }
         },
-        "time": "8-20-2022 14:41",
+        "time": "8-31-2022 18:58",
         "dirty": false
       }
     }

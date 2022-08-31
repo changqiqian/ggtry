@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { CommonNotify } from '../../CommonNotify';
 import { Network } from '../../network/Network';
 import { HallData } from '../hall/HallData';
 import { GameData } from './GameData';
@@ -33,6 +34,15 @@ export class GameBase extends BaseUI
         {
             this.InitSeatUI(_current.matchConfig.seatCount);
         },this);
+
+        CommonNotify.GetInstance().AddListener("Data_LoginSuccessData",(_current , _before)=>
+        {
+            if(_current == null)
+            {
+                return;
+            }
+            this.GetGameInfoMsg();
+        },this);
     }
     LateInit() 
     {
@@ -41,6 +51,7 @@ export class GameBase extends BaseUI
     UnregDataNotify() 
     {
         GameData.GetInstance().RemoveListenerByTarget(this);
+        CommonNotify.GetInstance().RemoveListenerByTarget(this);
     }
     CustmoerDestory() 
     {

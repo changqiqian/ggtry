@@ -172,6 +172,10 @@ export class Localization {
         {"name":"00084", "ch": "比赛结束", "en": "Match End"},
         {"name":"00085", "ch": "您获得了第xxx名", "en": "You are the xxx place"},
         {"name":"00086", "ch": "无缘前三，再接再厉", "en": "Out of top 3,try harder next time"},
+        {"name":"00087", "ch": "持续时间", "en": "Duration"},
+        {"name":"00088", "ch": "每xxx分钟休息5分钟", "en": "after every xxx mins rest 5 mins"},
+        {"name":"00089", "ch": "关闭", "en": "closed"},
+        
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },
         //服务器发过来的key

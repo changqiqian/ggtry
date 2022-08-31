@@ -116,6 +116,8 @@ export class Network {
         clearTimeout(this.mConnectTimer);
         CommonNotify.GetInstance().Data_SocketClose = false;
         CommonNotify.GetInstance().Data_SocketOpen = true;
+        CommonNotify.GetInstance().ClearData();
+        Network.GetInstance().SendVisitorLogin();
     }
 
     private OnError(event) {

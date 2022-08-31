@@ -107,7 +107,7 @@ export class Game_ControlBtns extends BaseUI
     }
     UnregDataNotify() 
     {
-        GameData.GetInstance().UnregisteMsg();
+        GameData.GetInstance().RemoveListenerByTarget(this);
     }
     CustmoerDestory() 
     {

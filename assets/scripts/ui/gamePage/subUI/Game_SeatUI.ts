@@ -32,6 +32,8 @@ export class Game_SeatUI extends BaseUI
                 return;
             }
             this.TryRotateSeats(selfPlayer.pos);
+
+            GameData.GetInstance().Data_UpdatePlayerUI = true;
         },this);
     }
     LateInit() 

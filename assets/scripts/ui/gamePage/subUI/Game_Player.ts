@@ -186,6 +186,32 @@ export class Game_Player extends BaseUI
             }
 
         },this);
+
+        GameData.GetInstance().AddListener("Data_UpdatePlayerUI",(_current , _before)=>
+        {
+            let currentPlayer = GameData.GetInstance().FindPlayerBySeatId(this.mSeatID);
+            if(currentPlayer == null)
+            {
+                return;
+            }
+
+            let screenSize = view.getVisibleSize();
+            let originBetPos = new Vec3(this.mGame_BetAmount.node.position);
+            let originDealerPos = new Vec3(this.mDealer.position);
+            if(this.node.worldPosition.x > screenSize.width*0.55)
+            {
+                originBetPos.x = - Math.abs(originBetPos.x);
+                originDealerPos.x = - Math.abs(originDealerPos.x);
+            }
+            else
+            {
+                originBetPos.x = Math.abs(originBetPos.x);
+                originDealerPos.x =  Math.abs(originDealerPos.x);
+            }
+            this.mGame_BetAmount.node.setPosition(originBetPos);
+            this.mDealer.setPosition(originDealerPos);
+        },this);
+        
         
 
         GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
@@ -316,9 +342,6 @@ export class Game_Player extends BaseUI
             this.UpdateTimer(false,0);
             this.SetActionTag(Game_ActionType.None);
             this.Bet(-1);
-
-
-
             if(currentPlayer.userInfo.userId != LocalPlayerData.GetInstance().Data_Uid)
             {
                 if(currentPlayer.tableScore > 0) //收筹码
@@ -326,9 +349,6 @@ export class Game_Player extends BaseUI
                     GameData.GetInstance().Data_CollectChipFromPlayer = this.mGame_BetAmount.node.worldPosition;
                 }            
             }
-
-
-
 
             if(_current.showInfo != null)
             {

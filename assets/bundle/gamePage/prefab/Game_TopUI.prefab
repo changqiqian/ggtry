@@ -4261,6 +4261,17 @@
       "__id__": 0
     },
     "fileId": "b6wgaTYnZDxpQzvhwzDMj2",
+    "targetOverrides": [
+      {
+        "__id__": 244
+      },
+      {
+        "__id__": 246
+      },
+      {
+        "__id__": 248
+      }
+    ],
     "nestedPrefabInstanceRoots": [
       {
         "__id__": 2
@@ -4268,6 +4279,72 @@
       {
         "__id__": 174
       }
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 239
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "mMenuBtn"
+    ],
+    "target": {
+      "__id__": 2
+    },
+    "targetInfo": {
+      "__id__": 245
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "eaLy0KjgNMzpJZxdZXV5DR"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 239
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "mAmount"
+    ],
+    "target": {
+      "__id__": 174
+    },
+    "targetInfo": {
+      "__id__": 247
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "e1qbYCyH1EKKZ0D+/HHWjk"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 239
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "mObBtn"
+    ],
+    "target": {
+      "__id__": 174
+    },
+    "targetInfo": {
+      "__id__": 249
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "eaLy0KjgNMzpJZxdZXV5DR"
     ]
   }
 ]

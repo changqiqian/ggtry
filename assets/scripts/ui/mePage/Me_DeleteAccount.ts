@@ -44,7 +44,7 @@ export class Me_DeleteAccount extends BaseUI {
                 if (_msgBody != null && _msgBody.code === 1) {
                     GameConfig.ClearToken();
                     Network.GetInstance().SendActionData('mine', 'change_account', []);
-                    Network.GetInstance().ClearWS();
+                    Network.GetInstance().ClearWS(true);
                     UIMgr.GetInstance().ChangeScene(SceneType.Login);
                 }
             },

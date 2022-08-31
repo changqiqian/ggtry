@@ -1,7 +1,7 @@
 import { DataNotify } from "./base/DataNotify";
 import { Localization } from "./base/Localization";
 import { LocalPlayerData } from "./base/LocalPlayerData";
-import { UIMgr } from "./base/UIMgr";
+import { SceneType, UIMgr } from "./base/UIMgr";
 import { GameConfig } from "./GameConfig";
 import { LoginType, MsgID, MsgStatus, Network, SmsCodeType } from "./network/Network";
 
@@ -36,9 +36,13 @@ export class CommonNotify extends DataNotify
 
     ClearData()
     {
+        this.Data_LoginSuccessData = null;
         this.Data_SmsCodeSuccess = false;
         this.Data_SmsCodeVerifySuccess = false;
         this.Data_SetUserInfoSuccess = false;
+        this.Data_SocketOpen = false;
+        this.Data_SocketClose = false;
+        this.Data_SocketError = false;
     }
 
     RegisteMsg()
@@ -71,11 +75,13 @@ export class CommonNotify extends DataNotify
                 console.log("登录失败");
                 UIMgr.GetInstance().ShowToast(_msgBody.reason);
                 GameConfig.ClearToken();
+                UIMgr.GetInstance().ChangeScene(SceneType.Login);
             }
             else if (_msgBody.code === 10)  //ip限制
             {
                 UIMgr.GetInstance().ShowToast(Localization.GetString("00001"));
                 GameConfig.ClearToken();
+                UIMgr.GetInstance().ChangeScene(SceneType.Login);
             } 
             else if (_msgBody.code === MsgStatus.SUCCESS)  
             {
@@ -87,6 +93,7 @@ export class CommonNotify extends DataNotify
                 Network.GetInstance().SendGetAssets();
                 Network.GetInstance().SendPing();
                 this.Data_LoginSuccessData = _msgBody;
+                this.Data_LoginSuccessData = null;
             }
         },this);
 
