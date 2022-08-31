@@ -44,6 +44,7 @@ export class HallData extends DataNotify {
     Data_MeMessagDetailData: any = null; // 消息资料
     Data_NewPlayerAttendingMtt : any = null; //mtt比赛有新用户报名或取消报名
     Data_IsBackToGame : boolean = null ; //老项目代码里面需要用这个值来获取比赛信息，我也不知道有什么用
+    Data_MeRankData: any = null; //我的mtt战绩资料
 
 
 
@@ -241,7 +242,15 @@ export class HallData extends DataNotify {
             },
             this
         );
-        
+        Network.GetInstance().AddMsgListenner(
+            MsgID.MeRank,
+            (_msgBody) => {
+                if (_msgBody != null) {
+                    this.Data_MeRankData = _msgBody;
+                }
+            },
+            this
+        );
     }
 
     UnregisteMsg() {

@@ -600,6 +600,7 @@ export class Network {
         console.log('发送已读消息:' + body);
         this.SendMsg(MsgID.MessageIsRead, body);
     }
+
     SendBackAndKeepPlaying() {
         var body = {
 
@@ -607,7 +608,14 @@ export class Network {
         console.log('取消离开状态:' + body);
         this.SendMsg(MsgID.BackAndKeepPlaying, body);
     }
-
+    SendMyMttRank(_page: number, _clubId = null) {
+        var body = {
+            page: _page,
+            clubId: _clubId,
+        };
+        console.log('查询我的mtt战绩:' + body);
+        this.SendMsg(MsgID.MeRank, body);
+    }
     
 }
 
@@ -616,6 +624,7 @@ export enum GameType
 {
     Cash = 1,
     Mtt = 900,
+
 }
 
 export enum MsgStatus
@@ -693,4 +702,5 @@ export enum MsgID {
     GetMessageAllRead = 684,
     GetMessageInfo = 682,
     MessageIsRead = 683,
+    MeRank = 402,
 }
