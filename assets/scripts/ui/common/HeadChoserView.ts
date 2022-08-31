@@ -61,10 +61,7 @@ export class HeadChoserView extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

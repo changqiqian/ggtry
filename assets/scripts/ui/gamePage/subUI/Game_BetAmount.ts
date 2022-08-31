@@ -22,10 +22,7 @@ export class Game_BetAmount extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

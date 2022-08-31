@@ -42,10 +42,7 @@ export class HallUI extends BaseUI
     {
         HallData.GetInstance().Data_SubPage = Hall_SubPage.MTT;
     }
-    UnregDataNotify() 
-    {
-        CommonNotify.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
         HallData.GetInstance().UnregisteMsg();

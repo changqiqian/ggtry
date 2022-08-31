@@ -97,11 +97,7 @@ export class Login_LoginView extends BaseUI {
     {
 
     }
-    UnregDataNotify() 
-    {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-        CommonNotify.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

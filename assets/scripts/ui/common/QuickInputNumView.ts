@@ -48,10 +48,7 @@ export class QuickInputNumView extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
         this.mNumberClickCallback = null;

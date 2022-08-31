@@ -29,10 +29,7 @@ export class Mtt_RewardItem extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

@@ -39,11 +39,7 @@ export class Hall_LunBo extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        HallData.GetInstance().RemoveListenerByTarget(this);
 
-    }
     CustmoerDestory() 
     {
 

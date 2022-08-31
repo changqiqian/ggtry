@@ -64,10 +64,7 @@ export class Me_Top extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

@@ -128,10 +128,7 @@ export class Mtt_WeekRankPage extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        HallData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

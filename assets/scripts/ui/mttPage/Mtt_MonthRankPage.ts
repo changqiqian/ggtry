@@ -131,10 +131,7 @@ export class Mtt_MonthRankPage extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        HallData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

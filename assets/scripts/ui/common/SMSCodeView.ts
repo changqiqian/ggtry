@@ -144,10 +144,7 @@ export class SMSCodeView extends BaseUI
     {
         
     }
-    UnregDataNotify() 
-    {
-        CommonNotify.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
         this.unscheduleAllCallbacks();

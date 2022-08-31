@@ -285,10 +285,7 @@ export class Game_SelfUI extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

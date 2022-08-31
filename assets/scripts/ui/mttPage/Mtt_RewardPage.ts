@@ -64,10 +64,7 @@ export class Mtt_RewardPage extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        HallData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

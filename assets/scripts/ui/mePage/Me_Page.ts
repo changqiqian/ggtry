@@ -28,10 +28,7 @@ export class Me_Page extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        HallData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

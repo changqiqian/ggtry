@@ -109,9 +109,7 @@ export class Me_Main extends BaseUI {
     LateInit() {
         this.EnableScroll();
     }
-    UnregDataNotify() {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() {}
 
     EnableScroll() {

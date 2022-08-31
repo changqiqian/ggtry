@@ -33,10 +33,7 @@ export class AreaCodeItem extends BaseUI {
     {
 
     }
-    UnregDataNotify() 
-    {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

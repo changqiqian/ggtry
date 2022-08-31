@@ -38,10 +38,7 @@ export class Hall_LunBoItem extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

@@ -80,10 +80,7 @@ export class Game_BottomUI extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        GameData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

@@ -52,8 +52,6 @@ export class SettingWindow extends BaseUI {
 
     LateInit() {}
 
-    UnregDataNotify() {}
-
     CustmoerDestory() {}
 
     BBToggle(toggle: ToggleComponent) {

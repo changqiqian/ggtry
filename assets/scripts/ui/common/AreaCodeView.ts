@@ -62,10 +62,7 @@ export class AreaCodeView extends BaseUI {
     {
 
     }
-    UnregDataNotify() 
-    {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

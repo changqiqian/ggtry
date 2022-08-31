@@ -32,7 +32,6 @@ export class Me_MessageItem extends BaseUI {
     }
     RegDataNotify() {}
     LateInit() {}
-    UnregDataNotify() {}
     CustmoerDestory() {}
     public InitWithData(_data: any) {
         this.mTitle.string = _data.subject;

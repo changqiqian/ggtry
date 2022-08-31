@@ -27,10 +27,7 @@ export class FullScreenWebView extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
         this.StopAnimation();

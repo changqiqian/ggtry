@@ -132,10 +132,7 @@ export class ResetPwdView extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

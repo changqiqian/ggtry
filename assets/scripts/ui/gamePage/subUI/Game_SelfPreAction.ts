@@ -26,10 +26,7 @@ export class Game_SelfPreAction extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

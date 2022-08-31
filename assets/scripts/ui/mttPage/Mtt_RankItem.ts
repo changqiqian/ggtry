@@ -35,10 +35,7 @@ export class Mtt_RankItem extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

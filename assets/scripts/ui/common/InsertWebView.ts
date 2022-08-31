@@ -32,10 +32,7 @@ export class InsertWebView extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
         this.StopAnimation();

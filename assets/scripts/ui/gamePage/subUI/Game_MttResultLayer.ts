@@ -57,10 +57,7 @@ export class Game_MttResultLayer extends BaseUI
     {
 
     }
-    UnregDataNotify()
-    {
-        GameData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory()
     {
 

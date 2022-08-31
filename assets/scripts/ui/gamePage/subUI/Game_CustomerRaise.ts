@@ -64,10 +64,7 @@ export class Game_CustomerRaise extends BaseUI
     {
 
     }
-    UnregDataNotify()
-    {
-        GameData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory()
     {
 

@@ -37,10 +37,7 @@ export class Game_AddTime extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

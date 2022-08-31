@@ -86,11 +86,7 @@ export class Login_SignView extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-        CommonNotify.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

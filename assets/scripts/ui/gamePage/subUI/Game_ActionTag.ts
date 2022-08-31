@@ -26,10 +26,7 @@ export class Game_ActionTag extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

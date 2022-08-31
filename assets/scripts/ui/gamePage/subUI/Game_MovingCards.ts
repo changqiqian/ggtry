@@ -23,10 +23,7 @@ export class Game_MovingCards extends BaseUI
     {
 
     }
-    UnregDataNotify()
-    {
 
-    }
     CustmoerDestory()
     {
 

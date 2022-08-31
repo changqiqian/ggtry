@@ -17,7 +17,6 @@ export class Me_PrizeItem extends BaseUI {
     BindUI() {}
     RegDataNotify() {}
     LateInit() {}
-    UnregDataNotify() {}
     CustmoerDestory() {}
     public InitWithData(_data: any) {
         this.mPrizeName.string = _data.describe;

@@ -96,10 +96,7 @@ export class Mtt_MatchItem extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
         this.unscheduleAllCallbacks();

@@ -30,29 +30,6 @@ export class Me_DeleteAccount extends BaseUI {
     BindUI() {
         Network.GetInstance().SendGetLogOffCode();
 
-
-        Network.GetInstance().AddMsgListenner(
-            MsgID.GetLogOffCode,
-            (_msgBody) => {
-                if (_msgBody != null) {
-                    this.Reciprocal();
-                }
-            },
-            this
-        );
-        Network.GetInstance().AddMsgListenner(
-            MsgID.deleteAccount,
-            (_msgBody) => {
-                if (_msgBody != null && _msgBody.code === 1) {
-                    GameConfig.ClearToken();
-                    Network.GetInstance().SendActionData('mine', 'change_account', []);
-                    Network.GetInstance().ClearWS(true);
-                    UIMgr.GetInstance().ChangeScene(SceneType.Login);
-                }
-            },
-            this
-        );
-
         this.mCloseBtn.SetClickCallback(() => {
             UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccount', false);
         });
@@ -109,9 +86,7 @@ export class Me_DeleteAccount extends BaseUI {
         );
     }
     LateInit() {}
-    UnregDataNotify() {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() {}
     Reciprocal() {
         const _this = this;

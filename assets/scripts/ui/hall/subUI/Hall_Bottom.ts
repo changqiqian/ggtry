@@ -30,10 +30,7 @@ export class Hall_Bottom extends BaseUI
     {
         
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

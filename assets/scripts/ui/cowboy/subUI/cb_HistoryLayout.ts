@@ -36,9 +36,7 @@ export class cb_HistoryLayout extends BaseUI {
     LateInit() {
 
     }
-    UnregDataNotify() {
 
-    }
     CustmoerDestory() {
 
     }

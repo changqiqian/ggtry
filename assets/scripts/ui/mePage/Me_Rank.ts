@@ -57,7 +57,6 @@ export class Me_Rank extends BaseUI {
         );
     }
     LateInit() {}
-    UnregDataNotify() {}
     CustmoerDestory() {}
 
     Refresh() {

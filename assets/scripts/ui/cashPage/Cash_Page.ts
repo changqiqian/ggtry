@@ -25,10 +25,7 @@ export class Cash_Page extends BaseUI {
     LateInit() 
     {
     }
-    UnregDataNotify() 
-    {
-        HallData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

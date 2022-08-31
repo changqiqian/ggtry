@@ -65,10 +65,7 @@ export class Game_Slider extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

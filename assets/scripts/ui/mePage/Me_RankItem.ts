@@ -30,7 +30,6 @@ export class Me_RankItem extends BaseUI {
     BindUI() {}
     RegDataNotify() {}
     LateInit() {}
-    UnregDataNotify() {}
     CustmoerDestory() {}
     public InitWithData(_data: any) {
         this._data = _data;

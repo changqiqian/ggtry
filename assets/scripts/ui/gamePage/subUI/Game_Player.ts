@@ -408,10 +408,7 @@ export class Game_Player extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        GameData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
     }

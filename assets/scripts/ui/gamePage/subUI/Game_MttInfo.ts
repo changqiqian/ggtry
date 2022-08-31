@@ -85,10 +85,7 @@ export class Game_MttInfo extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        GameData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
     }

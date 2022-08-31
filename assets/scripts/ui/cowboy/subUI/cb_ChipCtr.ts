@@ -23,10 +23,7 @@ export class cb_ChipCtr extends BaseUI
     LateInit() {
 
     }
-    UnregDataNotify() 
-    {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

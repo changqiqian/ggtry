@@ -20,9 +20,7 @@ export class cb_RoleCtr extends BaseUI {
     LateInit() {
 
     }
-    UnregDataNotify() {
 
-    }
     CustmoerDestory() {
 
     }

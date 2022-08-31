@@ -456,10 +456,7 @@ export class Mtt_InfoPage extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        HallData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
         this.unscheduleAllCallbacks();

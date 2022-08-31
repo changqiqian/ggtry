@@ -74,10 +74,7 @@ export class Login_SetUserInfo extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

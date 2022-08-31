@@ -49,9 +49,7 @@ export class Poker extends BaseUI
     LateInit() 
     {
     }
-    UnregDataNotify() 
-    {
-    }
+
     CustmoerDestory() 
     {
     }

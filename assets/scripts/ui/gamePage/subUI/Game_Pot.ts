@@ -112,10 +112,7 @@ export class Game_Pot extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        GameData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

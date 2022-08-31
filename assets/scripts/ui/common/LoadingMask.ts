@@ -28,10 +28,7 @@ export class LoadingMask extends BaseUI {
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

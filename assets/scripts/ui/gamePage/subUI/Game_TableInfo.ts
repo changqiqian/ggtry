@@ -84,11 +84,7 @@ export class Game_TableInfo extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        GameData.GetInstance().RemoveListenerByTarget(this);
 
-    }
     CustmoerDestory() 
     {
 

@@ -26,10 +26,7 @@ export class Game_WinEffect extends BaseUI
             this.DeleteSelf();
         },this.mParticular.duration * 2);
     }
-    UnregDataNotify()
-    {
 
-    }
     CustmoerDestory()
     {
 

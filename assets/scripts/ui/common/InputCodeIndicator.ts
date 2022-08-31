@@ -38,10 +38,7 @@ export class InputCodeIndicator extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
         this.mCallback = null;

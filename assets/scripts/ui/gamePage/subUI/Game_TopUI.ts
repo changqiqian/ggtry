@@ -36,10 +36,7 @@ export class Game_TopUI extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

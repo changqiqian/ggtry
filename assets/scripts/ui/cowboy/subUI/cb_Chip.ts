@@ -18,9 +18,7 @@ export class cb_Chip extends BaseUI {
     LateInit() {
 
     }
-    UnregDataNotify() {
 
-    }
     CustmoerDestory() {
 
     }

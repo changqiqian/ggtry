@@ -28,10 +28,7 @@ export class BaseButton extends BaseUI {
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
         this.mCustomerData = null;

@@ -23,10 +23,7 @@ export class Cash_Main extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

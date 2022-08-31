@@ -48,11 +48,7 @@ export class GameBase extends BaseUI
     {
         
     }
-    UnregDataNotify() 
-    {
-        GameData.GetInstance().RemoveListenerByTarget(this);
-        CommonNotify.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

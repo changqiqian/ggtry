@@ -31,10 +31,7 @@ export class Mtt_TableInfoItem extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

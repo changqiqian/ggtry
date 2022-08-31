@@ -94,10 +94,7 @@ export class Mtt_AttendPage extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

@@ -27,10 +27,7 @@ export class BaseWindow extends BaseUI {
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
     }

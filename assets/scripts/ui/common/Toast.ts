@@ -26,10 +26,7 @@ export class Toast extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
         this.StopAnm();

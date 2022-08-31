@@ -25,10 +25,7 @@ export class LadderRank extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-
-    }
+=
     CustmoerDestory() 
     {
 

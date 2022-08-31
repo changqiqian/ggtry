@@ -22,9 +22,7 @@ export class cb_Role extends BaseUI {
     LateInit() {
 
     }
-    UnregDataNotify() {
 
-    }
     CustmoerDestory() {
 
     }

@@ -30,6 +30,5 @@ export class Me_MessageDetail extends BaseUI {
         );
     }
     LateInit() {}
-    UnregDataNotify() {}
     CustmoerDestory() {}
 }

@@ -28,10 +28,7 @@ export class cb_PublicCards extends BaseUI
     {
         this.DealCards();
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

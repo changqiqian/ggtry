@@ -30,10 +30,7 @@ export class CircleTimer extends BaseUI {
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

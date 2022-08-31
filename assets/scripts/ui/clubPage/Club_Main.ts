@@ -21,10 +21,7 @@ export class Club_Main extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

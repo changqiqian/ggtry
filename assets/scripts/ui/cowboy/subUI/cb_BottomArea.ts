@@ -47,11 +47,7 @@ export class cb_BottomArea extends BaseUI {
     LateInit() {
 
     }
-    UnregDataNotify() 
-    {
-        CowboyData.GetInstance().RemoveListenerByTarget(this);
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
     

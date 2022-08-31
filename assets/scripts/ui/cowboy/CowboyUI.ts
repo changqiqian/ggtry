@@ -47,10 +47,7 @@ export class CowboyUI extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        CowboyData.GetInstance().RemoveListenerByTarget(this);
-    }
+
 
     CustmoerDestory()
     {

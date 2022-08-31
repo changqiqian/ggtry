@@ -23,10 +23,7 @@ export class Game_AddMoneyLabel extends BaseUI
     {
 
     }
-    UnregDataNotify()
-    {
 
-    }
     CustmoerDestory()
     {
 

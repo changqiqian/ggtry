@@ -67,10 +67,7 @@ export class Hall_PlayerInfoBar extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

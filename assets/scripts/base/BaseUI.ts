@@ -1,4 +1,11 @@
 import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager } from 'cc';
+import { CommonNotify } from '../CommonNotify';
+import { CowboyData } from '../ui/cowboy/CowboyData';
+import { GameData } from '../ui/gamePage/GameData';
+import { HallData } from '../ui/hall/HallData';
+import { LoadingData } from '../ui/loading/LoadingData';
+import { LoginData } from '../ui/login/LoginData';
+import { LocalPlayerData } from './LocalPlayerData';
 import { ResMgr } from './ResMgr';
 import { UIMgr } from './UIMgr';
 
@@ -25,10 +32,6 @@ const { ccclass, property } = _decorator;
 
 // }
 // LateInit()
-// {
-
-// }
-// UnregDataNotify()
 // {
 
 // }
@@ -60,8 +63,14 @@ export abstract class BaseUI extends Component {
     }
 
     onDestroy() {
+        CowboyData.GetInstance().RemoveListenerByTarget(this);
+        LoadingData.GetInstance().RemoveListenerByTarget(this);
+        LoginData.GetInstance().RemoveListenerByTarget(this);
+        HallData.GetInstance().RemoveListenerByTarget(this);
+        GameData.GetInstance().RemoveListenerByTarget(this);
+        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
+        CommonNotify.GetInstance().RemoveListenerByTarget(this);
         this.StopSecondsTimer();
-        this.UnregDataNotify();
         this.CustmoerDestory();
         this.mLayerList = null;
     }
@@ -74,8 +83,6 @@ export abstract class BaseUI extends Component {
     abstract RegDataNotify();
     //延迟一贞初始化的内容
     abstract LateInit();
-    //数据驱动注销
-    abstract UnregDataNotify();
     //自定义析构
     abstract CustmoerDestory();
 

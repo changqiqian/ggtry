@@ -66,7 +66,5 @@ export class Me_DeleteAccountDetect extends BaseUI {
 
     LateInit() {}
 
-    UnregDataNotify() {}
-
     CustmoerDestory() {}
 }

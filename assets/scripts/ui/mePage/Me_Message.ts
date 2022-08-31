@@ -105,7 +105,6 @@ export class Me_Message extends BaseUI {
         );
     }
     LateInit() {}
-    UnregDataNotify() {}
     CustmoerDestory() {}
     Refresh() {
         this.mCurrentPage++;

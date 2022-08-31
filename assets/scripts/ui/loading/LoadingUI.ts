@@ -63,16 +63,11 @@ export class LoadingUI extends BaseUI
 
     }
 
-    UnregDataNotify() 
-    {
-        LoadingData.GetInstance().RemoveListenerByTarget(this);
-        LoadingData.GetInstance().RemoveAllListenner();
-        LoadingData.GetInstance().ResetAllData();
-    }
 
     CustmoerDestory()
     {
-        
+        LoadingData.GetInstance().RemoveAllListenner();
+        LoadingData.GetInstance().ResetAllData();
     }
     
 

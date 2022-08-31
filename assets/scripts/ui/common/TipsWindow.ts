@@ -59,10 +59,7 @@ export class TipsWindow extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

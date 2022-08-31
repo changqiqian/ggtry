@@ -23,10 +23,7 @@ export class Game_MovingBigCard extends BaseUI
     {
 
     }
-    UnregDataNotify()
-    {
 
-    }
     CustmoerDestory()
     {
 

@@ -41,10 +41,7 @@ export class Mtt_RegisterFee extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

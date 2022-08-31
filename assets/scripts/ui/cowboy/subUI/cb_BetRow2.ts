@@ -21,9 +21,7 @@ export class cb_BetRow2 extends BaseUI {
     LateInit() {
 
     }
-    UnregDataNotify() {
 
-    }
     CustmoerDestory() {
 
     }

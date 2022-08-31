@@ -27,10 +27,7 @@ export class Mtt_Page extends BaseUI
     {
         Network.GetInstance().SendGetLunBoTu();
     }
-    UnregDataNotify() 
-    {
-        HallData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

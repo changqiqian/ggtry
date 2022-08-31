@@ -31,15 +31,12 @@ export class cb_TopMenu extends BaseUI {
     LateInit() {
 
     }
-    UnregDataNotify() {
 
+    CustmoerDestory() {
         this.mSettingBtn.node.off(Node.EventType.TOUCH_END,this.OnSettingBtn.bind(this),this);
         this.mRuleBtn.node.off(Node.EventType.TOUCH_END,this.OnRuleBtn.bind(this),this);
         this.mMoreBtn.node.off(Node.EventType.TOUCH_END,this.OnMoreBtn.bind(this),this);
         this.mPlayerBtn.node.off(Node.EventType.TOUCH_END,this.OnPlayerBtn.bind(this),this);
-    }
-    CustmoerDestory() {
-
     }
 
     OnSettingBtn()

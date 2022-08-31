@@ -105,10 +105,7 @@ export class Mtt_Main extends BaseUI
     {
         
     }
-    UnregDataNotify() 
-    {
-        HallData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
         

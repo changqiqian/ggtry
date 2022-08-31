@@ -124,10 +124,7 @@ export class Login_LoginViewPwd extends BaseUI {
     {
 
     }
-    UnregDataNotify() 
-    {
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
 

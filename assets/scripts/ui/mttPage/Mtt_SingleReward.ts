@@ -26,10 +26,7 @@ export class Mtt_SingleReward extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

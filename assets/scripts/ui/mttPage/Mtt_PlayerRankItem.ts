@@ -35,10 +35,7 @@ export class Mtt_PlayerRankItem extends BaseUI
     {
     
     }
-    UnregDataNotify() 
-    {
-    
-    }
+
     CustmoerDestory() 
     {
     

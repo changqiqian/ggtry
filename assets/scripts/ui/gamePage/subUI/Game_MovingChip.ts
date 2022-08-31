@@ -25,10 +25,7 @@ export class Game_MovingChip extends BaseUI
     {
 
     }
-    UnregDataNotify()
-    {
 
-    }
     CustmoerDestory()
     {
 

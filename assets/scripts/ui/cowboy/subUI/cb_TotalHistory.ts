@@ -43,9 +43,7 @@ export class cb_TotalHistory extends BaseUI {
     LateInit() {
 
     }
-    UnregDataNotify() {
 
-    }
     CustmoerDestory() {
 
     }

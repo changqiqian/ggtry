@@ -28,10 +28,7 @@ export class Game_GameStartInfo extends BaseUI
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
 

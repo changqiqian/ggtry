@@ -111,10 +111,7 @@ export class LoginUI extends BaseUI
             Network.GetInstance().CreateWS();
         }
     }
-    UnregDataNotify() 
-    {
-        CommonNotify.GetInstance().RemoveListenerByTarget(this);
-    }
+
     CustmoerDestory() 
     {
         CommonNotify.GetInstance().ClearData();

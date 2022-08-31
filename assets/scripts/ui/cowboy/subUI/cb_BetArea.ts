@@ -38,10 +38,7 @@ export class cb_BetArea extends BaseUI {
     {
 
     }
-    UnregDataNotify() 
-    {
 
-    }
     CustmoerDestory() 
     {
         this.mBetBtn.node.off(Node.EventType.TOUCH_END,this.OnBetBtn.bind(this),this);
