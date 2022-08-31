@@ -17,6 +17,8 @@ export class SettingWindow extends BaseUI {
     @property(ToggleComponent)
     mMusicToggleBtn: ToggleComponent | null = null;
     @property(BaseButton)
+    mEditPasswordBtn: BaseButton = null;
+    @property(BaseButton)
     mDeleteAccountBtn: BaseButton = null;
 
     InitParam() {}
@@ -34,6 +36,10 @@ export class SettingWindow extends BaseUI {
             Network.GetInstance().SendActionData('mine', 'change_account', []);
             Network.GetInstance().ClearWS(true);
             UIMgr.GetInstance().ChangeScene(SceneType.Login);
+        });
+        this.mEditPasswordBtn.SetClickCallback(() => {
+            UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_SettingWindow', false);
+            this.ShowLayer('common', 'prefab/ForgetPwd');
         });
         this.mBBToggleBtn.isChecked = Boolean(GameConfig.ReadSimpleData('SHOWBB_LOACAL_D', false));
         this.mMusicToggleBtn.isChecked = GameConfig.ReadSimpleData('setting_background_sound', false) === '1' ? true : false;

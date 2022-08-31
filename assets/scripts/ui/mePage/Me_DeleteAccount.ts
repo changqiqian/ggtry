@@ -4,8 +4,9 @@ import { Localization } from '../../base/Localization';
 import { BaseButton } from '../common/BaseButton';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
-import { Network, MsgID } from '../../network/Network';
+import { MsgID, Network } from '../../network/Network';
 import { GameConfig } from '../../GameConfig';
+import { HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Me_DeleteAccount')
@@ -29,6 +30,7 @@ export class Me_DeleteAccount extends BaseUI {
     BindUI() {
         Network.GetInstance().SendGetLogOffCode();
 
+
         Network.GetInstance().AddMsgListenner(
             MsgID.GetLogOffCode,
             (_msgBody) => {
@@ -50,6 +52,7 @@ export class Me_DeleteAccount extends BaseUI {
             },
             this
         );
+
         this.mCloseBtn.SetClickCallback(() => {
             UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccount', false);
         });
@@ -83,6 +86,27 @@ export class Me_DeleteAccount extends BaseUI {
             },
             this
         );
+        HallData.GetInstance().AddListener(
+            'Data_LogOffCode',
+            (_current, _before) => {
+                if (_current != null) {
+                    this.StartCountDown();
+                }
+            },
+            this
+        );
+        HallData.GetInstance().AddListener(
+            'Data_DeleteAccountData',
+            (_current, _before) => {
+                if (_current.code === 1) {
+                    GameConfig.ClearToken();
+                    Network.GetInstance().SendActionData('mine', 'change_account', []);
+                    Network.GetInstance().ClearWS();
+                    UIMgr.GetInstance().ChangeScene(SceneType.Login);
+                }
+            },
+            this
+        );
     }
     LateInit() {}
     UnregDataNotify() {
@@ -97,12 +121,27 @@ export class Me_DeleteAccount extends BaseUI {
             if (_this.count !== 1) {
                 _this.count = _this.count - 1;
                 _this.mReSendText.string = '重新发送' + _this.count + 's';
-                console.log('time:' + _this.count);
                 setTimeout(startTimer, 1000);
             } else {
                 _this.mReSendText.string = '';
                 _this.mReSendSmsBtn.node.active = true;
             }
+        }
+    }
+
+    StartCountDown() {
+        this.StartSecondsTimer(60);
+        this.OnSecondTimer();
+    }
+
+    OnSecondTimer() {
+        let seconds = this.GetRestSeconds();
+        if (seconds == 0) {
+            this.mReSendText.string = '';
+            this.mReSendSmsBtn.node.active = true;
+        } else {
+            this.count = this.count - 1;
+            this.mReSendText.string = '重新发送' + seconds + 's';
         }
     }
 }
