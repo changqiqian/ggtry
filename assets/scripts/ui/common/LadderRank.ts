@@ -25,7 +25,7 @@ export class LadderRank extends BaseUI
     {
 
     }
-=
+
     CustmoerDestory() 
     {
 
