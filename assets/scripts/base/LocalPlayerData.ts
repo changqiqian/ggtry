@@ -39,6 +39,12 @@ export class LocalPlayerData extends DataNotify {
     Data_UserName : number = null; //实际上是手机号
     Data_GiftScore : number = null;
     Data_Clubs : any = null;//俱乐部信息 "clubs\":[{\"clubId\":14834,\"role\":1,\"time\":1658200159,\"isPushOpen\":true,\"clubScore\":0,\"decorations\":{\"pos1\":0,\"pos2\":0,\"pos3\":0,\"pos4\":0,\"pos5\":0}},{\"clubId\":47850,\"role\":0,\"time\":1658214502,\"isPushOpen\":true,\"clubScore\":0,\"decorations\":{\"pos1\":0,\"pos2\":0,\"pos3\":0,\"pos4\":0,\"pos5\":0}}]
+
+    ClearData()
+    {
+        this.Data_CurrentUsingMttMatchID = null;
+
+    }
 }
 
 

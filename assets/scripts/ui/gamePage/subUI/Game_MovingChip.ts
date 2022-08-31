@@ -56,8 +56,7 @@ export class Game_MovingChip extends BaseUI
         tween.to(0.5,{position:localEndPos},{easing:easing.quadOut});
         tween.call(()=>
         {
-            this.node.removeFromParent();
-            this.node.destroy();
+            this.DeleteSelf();
         });
         tween.start();
     }

@@ -168,6 +168,26 @@ export class Game_Player extends BaseUI
             }
         },this);
 
+        GameData.GetInstance().AddListener("Data_PreShowCards",(_current , _before)=>
+        {
+            let currentPlayer = GameData.GetInstance().FindPlayerBySeatId(this.mSeatID);
+            if(currentPlayer == null)
+            {
+                return;
+            }
+
+            for(let i = 0 ; i < _current.cardList.length ; i++)
+            {
+                if(_current.cardList[i].userId == currentPlayer.userInfo.userId)
+                {
+                    this.ShowCards(_current.cardList[i].cards);
+                    break;
+                }
+            }
+
+        },this);
+        
+
         GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
         {
             let currentPlayer = GameData.GetInstance().FindPlayerBySeatId(this.mSeatID);
@@ -277,6 +297,7 @@ export class Game_Player extends BaseUI
                 return;
             }
 
+
             if(currentPlayer.tableScore > 0) //收筹码
             {
                 GameData.GetInstance().Data_CollectChipFromPlayer = this.mGame_BetAmount.node.worldPosition;
@@ -295,10 +316,17 @@ export class Game_Player extends BaseUI
             this.UpdateTimer(false,0);
             this.SetActionTag(Game_ActionType.None);
             this.Bet(-1);
-            if(currentPlayer.tableScore > 0) //收筹码
+
+
+
+            if(currentPlayer.userInfo.userId != LocalPlayerData.GetInstance().Data_Uid)
             {
-                GameData.GetInstance().Data_CollectChipFromPlayer = this.mGame_BetAmount.node.worldPosition;
+                if(currentPlayer.tableScore > 0) //收筹码
+                {
+                    GameData.GetInstance().Data_CollectChipFromPlayer = this.mGame_BetAmount.node.worldPosition;
+                }            
             }
+
 
 
 
@@ -310,6 +338,7 @@ export class Game_Player extends BaseUI
                     if(currentPlayer.userInfo.userId == currentShowData.userId)
                     {
                         this.ShowCards(currentShowData.cards);
+                        break;
                     }
                 }
             }
@@ -320,6 +349,7 @@ export class Game_Player extends BaseUI
                 if(currentPlayer.userInfo.userId == currentCardData.userId)
                 {
                     this.ShowCards(currentCardData.cards);
+                    break;
                 }
             }
 
@@ -340,13 +370,14 @@ export class Game_Player extends BaseUI
                 for(let i = 0 ; i < _current.winList.length ; i++)
                 {
                     let currentWinData = _current.winList[i];
-                    if(currentPlayer.userInfo.userId == currentWinData.userId)
+                    if(currentPlayer.userInfo.userId == currentWinData.userId )
                     {
-                        GameData.GetInstance().Data_SendChipToWinner = this.mGame_BetAmount.node.worldPosition;
+                        GameData.GetInstance().Data_SendChipToWinner = this.node.worldPosition;
                         this.scheduleOnce(()=>
                         {
                             this.ShowWin(currentWinData.winScore , currentWinData.totalScore);
                         },1.0);
+                        break;
                     }
                 }
             },1.5);

@@ -24,6 +24,8 @@ export class Poker extends BaseUI
 
     mTweenBack = null;
     mTweenFront = null;
+    mCardStruct : CardStruct = null;
+    mServerData : number = null;
     InitParam() 
     {
         
@@ -130,6 +132,7 @@ export class Poker extends BaseUI
 
     public SetFrontByServerData(_serverData : number)
     {
+        this.mServerData = _serverData;
         var type = Math.floor(_serverData / 16)
         switch (type) 
         {
@@ -156,6 +159,7 @@ export class Poker extends BaseUI
 
     public SetFront(_card : CardStruct)
     {
+        this.mCardStruct = _card;
         let bundleName = Poker.GetPokerTexutureBundleName();
         let path = Poker.GetPokerTexturePath(_card);
         this.LoadSprite(bundleName,path,(_spirteFrame)=>

@@ -138,14 +138,15 @@ export class Game_MttInfo extends BaseUI
     StartCountDown(_time : number)
     {
         this.StartSecondsTimer(_time);
-        this.OnSecondTimer(_time);
+        this.OnSecondTimer();
     }
 
-    OnSecondTimer(_restTime : number)
+    OnSecondTimer()
     {
-        if(_restTime >=0)
+        let seconds = this.GetRestSeconds();
+        if(seconds >=0)
         {
-            this.mCountDown.string = GameConfig.GetRestTime_M_S(_restTime);
+            this.mCountDown.string = GameConfig.GetRestTime_M_S(seconds);
         }
         else
         {

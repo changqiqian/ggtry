@@ -24,7 +24,6 @@ export class Game_ControlBtns extends BaseUI
         this.mDealCardsBtn.SetClickCallback(()=>
         {
             Network.GetInstance().SendCheckPublicCards();
-            this.mDealCardsBtn.node.active = false;
         });
         this.mDealCardsBtn.node.active = false;
 
@@ -48,6 +47,17 @@ export class Game_ControlBtns extends BaseUI
             //显示重购按钮
         },this);
 
+        GameData.GetInstance().AddListener("Data_CheckPublicCards",(_current , _before)=>
+        {
+            if(this.mDealCardsBtn.node.active == false)
+            {
+                return;
+            }
+
+            this.mDealCardsBtn.node.active = _current.length < 5;
+        },this);
+
+
         GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
         {
             this.mRebuyBtn.node.active = _current.userStatus == Game_MttPlayerStauts.Lose && _current.isCanRebuy;
@@ -68,7 +78,27 @@ export class Game_ControlBtns extends BaseUI
             this.mBackToGameBtn.node.active = currentPlayer.isLeave;
             
         },this);
+
+        GameData.GetInstance().AddListener("Data_GameResult",(_current , _before)=>
+        {
+            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
+            if(currentPlayer == null)
+            {
+                return;
+            }
+
+            this.mDealCardsBtn.node.active = _current.isLookCenterCard;
+        },this);
         
+        GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
+        {
+            this.mDealCardsBtn.node.active = false;
+        },this);
+
+        GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
+        {
+            this.mDealCardsBtn.node.active = false;
+        },this);
         
     }
     LateInit() 

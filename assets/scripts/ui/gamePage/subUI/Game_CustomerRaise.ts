@@ -91,12 +91,7 @@ export class Game_CustomerRaise extends BaseUI
 
     GetAmount(_ratio : number , _basePool : number , _minRaise : number) : number
     {
-        let amount = _ratio * _basePool;
-        if(amount < _minRaise)
-        {
-            amount = _minRaise;
-        }
-
+        let amount = _ratio * _basePool + _minRaise;
         let fixed = amount.toFixed(0);
         return Number(fixed);
     }
@@ -104,19 +99,20 @@ export class Game_CustomerRaise extends BaseUI
     ShowRaiseUI(_minRaise : number)
     {
         let currentPool = GameData.GetInstance().Data_DeskInfo.basePool;
-        let deskConfig = GameData.GetInstance().Data_DeskConfig;
-        let playingPlayers = GameData.GetInstance().Data_PlayingUserList;
-        let totalAnte = deskConfig.beforeScore * playingPlayers.length;
-        let sb = deskConfig.baseScore ;
-        let bb = deskConfig.baseScore * 2;
-        if(currentPool == sb + bb + totalAnte) //第一次下注
-        {
-            this.UpdateUIWithBBMode(bb);
-        }
-        else
-        {
-            this.UpdateUIWithRatioMode(currentPool,_minRaise);
-        }
+        //let deskConfig = GameData.GetInstance().Data_DeskConfig;
+        this.UpdateUIWithRatioMode(currentPool,_minRaise);
+        // let playingPlayers = GameData.GetInstance().Data_PlayingUserList;
+        // let totalAnte = deskConfig.beforeScore * playingPlayers.length;
+        // let sb = deskConfig.baseScore ;
+        // let bb = deskConfig.baseScore * 2;
+        // if(currentPool == sb + bb + totalAnte) //第一次下注
+        // {
+        //     this.UpdateUIWithBBMode(bb);
+        // }
+        // else
+        // {
+        //     this.UpdateUIWithRatioMode(currentPool,_minRaise);
+        // }
     }
 
     UpdateUIWithRatioMode(_currentPool : number , _minRaise : number)

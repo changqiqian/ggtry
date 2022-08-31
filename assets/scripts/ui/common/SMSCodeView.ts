@@ -156,15 +156,16 @@ export class SMSCodeView extends BaseUI
     StartCountDown()
     {
         this.StartSecondsTimer(60);
-        this.OnSecondTimer(60);
+        this.OnSecondTimer();
         this.mCountDown.node.active = true;
         this.mResendBtn.node.active = false;
     }
 
-    OnSecondTimer(_restTime : number)
+    OnSecondTimer()
     {
-        this.mCountDown.string = _restTime.toString() + "s";
-        if(_restTime == 0)
+        let seconds = this.GetRestSeconds();
+        this.mCountDown.string = seconds.toString() + "s";
+        if(seconds == 0)
         {
             this.mCountDown.node.active = false;
             this.mResendBtn.node.active = true;

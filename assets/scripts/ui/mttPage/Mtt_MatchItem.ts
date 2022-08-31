@@ -266,12 +266,13 @@ export class Mtt_MatchItem extends BaseUI
     StartCountDown(_time : number)
     {
         this.StartSecondsTimer(_time);
-        this.OnSecondTimer(_time);
+        this.OnSecondTimer();
     }
 
-    OnSecondTimer(_restTime : number)
+    OnSecondTimer()
     {
-        this.CalculateTime(_restTime, this.mData.mttInfo.beginTime);
+        let seconds = this.GetRestSeconds();
+        this.CalculateTime(seconds, this.mData.mttInfo.beginTime);
     }
 
     CalculateTime(_time , _beginTime) 

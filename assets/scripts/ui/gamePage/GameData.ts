@@ -58,7 +58,7 @@ export class GameData extends DataNotify
     Data_BackAndKeepPlaying : any = null; //取消离开状态
     Data_CollectChipFromPlayer : Vec3 = null; //需要被收集筹码的玩家位置 （世界坐标）
     Data_SendChipToWinner : Vec3 = null; // 赢家坐标 筹码飞到玩家去（世界坐标）
-
+    Data_PreShowCards : any = null; //提前亮牌，一般情况为大家allin的时候
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.MttGetRoomInfo ,(_msgBody)=>
@@ -90,13 +90,16 @@ export class GameData extends DataNotify
         {
             if(_msgBody.code == MsgStatus.SUCCESS)
             {
-                this.Data_CheckPublicCards = _msgBody;
+                if(_msgBody.centerCard == null)
+                {
+                    return;
+                }                
+                this.Data_CheckPublicCards = _msgBody.centerCard;
             }
             else
             {
                 UIMgr.GetInstance().ShowToast(Localization.GetString("00057"));
             }
-            
         },this);
 
 
@@ -246,6 +249,12 @@ export class GameData extends DataNotify
             else
             {
             }
+            
+        },this);
+     
+        Network.GetInstance().AddMsgListenner(MsgID.ShowCards ,(_msgBody)=>
+        {
+            this.Data_PreShowCards = _msgBody;
             
         },this);
         

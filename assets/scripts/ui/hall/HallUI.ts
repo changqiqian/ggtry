@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { HallData, Hall_SubPage } from './HallData';
 const { ccclass, property } = _decorator;
 
@@ -14,6 +15,7 @@ export class HallUI extends BaseUI
     InitParam() 
     {
         HallData.GetInstance().RegisteMsg();
+        LocalPlayerData.GetInstance().ClearData();
     }
     BindUI() 
     {

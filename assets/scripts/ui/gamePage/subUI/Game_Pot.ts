@@ -22,13 +22,13 @@ export class Game_Pot extends BaseUI
     }
     BindUI() 
     {
-        this.node.active = false;
+        this.ShowUI(false);
     }
     RegDataNotify() 
     {
         GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
         {
-            this.node.active = true;
+            this.ShowUI(true);
             this.SetTotalPot(_current.basePool);
             this.SetCurrentTurnPot(_current.basePool);
         },this);
@@ -66,10 +66,10 @@ export class Game_Pot extends BaseUI
             let totalTableScore = GameData.GetInstance().GetTotalTableScore();
             if(totalTableScore == 0)
             {
-                this.node.active = false;
+                this.ShowUI(false);
                 return;
             }
-            this.node.active = true;
+            this.ShowUI(true);
             this.SetTotalPot(deskInfo.basePool);
             this.SetCurrentTurnPot(totalTableScore);
         },this);
@@ -82,7 +82,7 @@ export class Game_Pot extends BaseUI
         {
             this.SetTotalPot(0);
             this.SetCurrentTurnPot(0);
-            this.node.active = false;
+            this.ShowUI(false);
             this.LoadPrefab("gamePage" , "prefab/Game_MovingChip" , (_prefab)=>
             {
                 let tempNode = instantiate(_prefab);
@@ -130,9 +130,12 @@ export class Game_Pot extends BaseUI
         this.mCurrent.string = "" + _amount;
     }
 
-    AddCurrentTurnPot(_amount : number)
+
+
+    ShowUI(_value : boolean)
     {
-        let current = Number()
+        this.mCurrentPotBG.active = _value;
+        this.mTotalPotBG.active = _value;
     }
 }
 

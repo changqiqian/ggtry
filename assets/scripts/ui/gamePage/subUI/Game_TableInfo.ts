@@ -97,15 +97,16 @@ export class Game_TableInfo extends BaseUI
     StartCountDown(_time : number)
     {
         this.StartSecondsTimer(_time);
-        this.OnSecondTimer(_time);
+        this.OnSecondTimer();
     }
 
-    OnSecondTimer(_restTime : number)
+    OnSecondTimer()
     {
+        let seconds = this.GetRestSeconds();
         let preffix = Localization.GetString("00061");
-        if(_restTime >=0)
+        if(seconds >=0)
         {
-            this.mLeftTime.string = preffix + GameConfig.GetRestTime_M_S(_restTime);
+            this.mLeftTime.string = preffix + GameConfig.GetRestTime_M_S(seconds);
         }
         else
         {

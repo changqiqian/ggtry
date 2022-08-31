@@ -10,13 +10,7 @@ export class CircleTimer extends BaseUI {
     mProgress: Sprite = null;
     @property(Label) 
     mCount: Label = null;
-
-    mTotalTime : number = 0;
-    mRestTime : number = 0;
-    mCurrentSecond : number = 0;
     mSecondCallback : Function = null;
-    mStartTimer : boolean = false;
-
     OnDisabled()
     {
         this.StopTimer();
@@ -47,69 +41,48 @@ export class CircleTimer extends BaseUI {
 
     public StartTimer(_totalTime : number , _SecondCallback : Function = null)
     {
-        this.mTotalTime = _totalTime;
-        this.mRestTime = _totalTime;
-        this.mCurrentSecond = Math.ceil(this.mRestTime);
+        this.StartSecondsTimer(_totalTime , 0.01);
         this.mSecondCallback = _SecondCallback;
-        this.mStartTimer = true;
         this.node.active = true;
-        this.UpdateCount();
-        this.UpdateProgress();
+        this.OnSecondTimer();
     }
 
     public StopTimer()
     {
-        this.mStartTimer = false;
+        this.StopSecondsTimer();
         this.node.active = false;
     }
 
-    update(deltaTime: number) 
+    OnSecondTimer()
     {
-        if(this.node.active == false)
-        {
-            return;
-        }
-        if(this.mStartTimer == false)
-        {
-            return;
-        }
-
-        this.mRestTime -= deltaTime;
-        let tempSecond = Math.ceil(this.mRestTime);
-        if(tempSecond != this.mCurrentSecond)
-        {
-            this.mCurrentSecond = tempSecond;
-            this.UpdateCount();
-        }
+        this.UpdateCount();
         this.UpdateProgress();
-        if(this.mRestTime < 0)
-        {
-            this.mStartTimer = false;
-            this.mProgress.fillRange = 0;
-        }
     }
 
     UpdateCount()
     {
-        this.mCount.string = this.mCurrentSecond.toString();
+        let seconds = this.GetRestSeconds();
+        this.mCount.string = seconds.toString();
         if(this.mSecondCallback != null)
         {
-            this.mSecondCallback(this.mCurrentSecond);
+            this.mSecondCallback(seconds);
         }
-
+        
         this.UpdateColor();
     }
 
     UpdateProgress()
     {
-        let ratio = this.mRestTime/this.mTotalTime;
+        let millSeconds = this.GetRestMillSeconds();
+        let ratio = millSeconds/this.mTotalCountTime;
         this.mProgress.fillRange = ratio;
     }
 
     UpdateColor()
     {
+        let seconds = this.GetRestSeconds();
         let color;
-        if(this.mCurrentSecond<=3)
+        if(seconds<=3)
         {
             color = new Color(220,34,34);
         }

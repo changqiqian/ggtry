@@ -19,10 +19,19 @@ export class Game_PublicCards extends BaseUI
     }
     RegDataNotify() 
     {
-
         GameData.GetInstance().AddListener("Data_CheckPublicCards",(_current , _before)=>
         {
-
+            this.mAudio.play();
+            let nowCardList = this.GetCurrentCardList();
+            for(let i = 0 ; i < _current.length ; i++)
+            {
+                let currentData = _current[i];
+                let index = nowCardList.findIndex((_item) => _item === currentData);
+                if(index < 0)
+                {
+                    this.DealOnCard(currentData);
+                }
+            }
 
         },this);
         GameData.GetInstance().AddListener("Data_SendPublicCards",(_current , _before)=>
@@ -77,12 +86,10 @@ export class Game_PublicCards extends BaseUI
 
     DealOnCard(_cardData : number)
     {
-        console.log("DealOnCard");
         for(let i = 0 ; i < this.node.children.length ; i++)
         {
             if(this.node.children[i].active == true)
             {
-                console.log("DealOnCard continue");
                 continue;
             }
 
@@ -106,6 +113,22 @@ export class Game_PublicCards extends BaseUI
     GetCardNode(_index : number) : Poker
     {
         return this.node.children[_index].getComponent(Poker);
+    }
+
+    GetCurrentCardList() : Array<number>
+    {
+        let result = new Array<number>();
+        for(let k = 0 ; k < this.node.children.length ; k++)
+        {
+            if(this.node.children[k].active == false)
+            {
+                continue;
+            }
+
+            let poker = this.GetCardNode(k);
+            result.push(poker.mServerData);
+        }
+        return result;
     }
 }
 

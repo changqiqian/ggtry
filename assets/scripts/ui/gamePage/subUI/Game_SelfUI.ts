@@ -210,6 +210,11 @@ export class Game_SelfUI extends BaseUI
                 return;
             }
             
+            if(currentPlayer.tableScore > 0) //收筹码
+            {
+                GameData.GetInstance().Data_CollectChipFromPlayer = this.mGame_BetAmount.node.worldPosition;
+            }
+
             this.Bet(-1);
             this.SetActionTag(Game_ActionType.None);
             this.UpdateAddTimeBtn(false,"");
@@ -221,6 +226,14 @@ export class Game_SelfUI extends BaseUI
             if(currentPlayer == null)
             {
                 return;
+            }
+
+            this.Bet(-1);
+            this.SetActionTag(Game_ActionType.None);
+            this.UpdateAddTimeBtn(false,"");
+            if(currentPlayer.tableScore > 0) //收筹码
+            {
+                GameData.GetInstance().Data_CollectChipFromPlayer = this.mGame_BetAmount.node.worldPosition;
             }
 
             if(_current.showInfo != null)

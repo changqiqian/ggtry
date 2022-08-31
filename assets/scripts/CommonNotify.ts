@@ -118,6 +118,15 @@ export class CommonNotify extends DataNotify
             LocalPlayerData.GetInstance().Data_FrozenMoney = _msgBody.frozen;
         },this);
 
+        Network.GetInstance().AddMsgListenner(MsgID.UpdateAssets ,(_msgBody)=>
+        {
+            LocalPlayerData.GetInstance().Data_Diamond = _msgBody.balance;
+            LocalPlayerData.GetInstance().Data_Coin = _msgBody.coins;
+            LocalPlayerData.GetInstance().Data_FrozenMoney = _msgBody.frozen;
+            LocalPlayerData.GetInstance().Data_GiftScore = _msgBody.giftScore;
+        },this);
+        
+
         Network.GetInstance().AddMsgListenner(MsgID.GetSMSCode ,(_msgBody)=>
         {
             if(_msgBody.code == MsgStatus.SUCCESS) 

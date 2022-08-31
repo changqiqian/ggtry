@@ -108,6 +108,8 @@ export class Game_SelfAction extends BaseUI
             let time = GameData.GetInstance().Data_EnterGame.deskConfig.turnExpiredTime;
             this.node.active = true;
             this.HideAll();
+
+            console.log("ShowBasicUI in Data_WhosTurn")
             this.ShowBasicUI(_current.callCount , _current.minRaise , time);
             
         },this);
@@ -136,7 +138,8 @@ export class Game_SelfAction extends BaseUI
             this.node.active  = true;
             this.HideAll();
 
-            let time = GameData.GetInstance().Data_EnterGame.deskConfig.curTurnTime;
+            let time = deskInfo.leftTime;
+            console.log("ShowBasicUI in Data_EnterGame")
             this.ShowBasicUI(deskInfo.callCount , deskInfo.minRaise , time);
 
         },this);
@@ -155,6 +158,7 @@ export class Game_SelfAction extends BaseUI
 
             if(_current.gameOpType == Game_ActionType.Delay)
             {
+                console.log("Data_PlayerAction  UpdateTimer===" + _current.leftTime);
                 this.UpdateTimer(true , _current.leftTime);
             }
             else
@@ -206,7 +210,7 @@ export class Game_SelfAction extends BaseUI
         {
             this.mCheckBtn.node.active = true;
         }
-
+        console.log("Data_PlayerAction  ShowBasicUI===" + _turnTime);
         this.UpdateTimer(true , _turnTime);
     }
 

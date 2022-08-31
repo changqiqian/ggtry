@@ -41,9 +41,11 @@ export abstract class BaseUI extends Component {
     mIsWindow: boolean = false;
     mLayerList: Array<SubViewKeyPair>;
 
-    //计时器，可以自动补偿切到后台的时间，防止时间对不上
+    //计时器，可以自动补偿切到后台的时间，定时器停止造成的时间对不上
     mTotalCountTime : number;
     mTimerStartingTime : number;
+
+    //
     onLoad() {
         this.mIsWindow = false;
         this.mLayerList = new Array<SubViewKeyPair>();
@@ -208,20 +210,18 @@ export abstract class BaseUI extends Component {
             this.Show(false);
         }
     }
-
-
-
-    StartSecondsTimer(_totalTime : number)
+    //启动秒表  
+    StartSecondsTimer(_totalTime : number , _timeSpace :number = 1)
     {
         if(_totalTime <= 0)
         {
             return;
         }
-        this.mTotalCountTime = _totalTime;
+        this.mTotalCountTime = _totalTime * 1000;
         let tempDate = new Date();
-        this.mTimerStartingTime = tempDate.getSeconds(); 
+        this.mTimerStartingTime = tempDate.getTime(); 
         this.StopSecondsTimer();
-        this.schedule(this.SecondsTimerLogic, 1);
+        this.schedule(this.SecondsTimerLogic, _timeSpace);
     }
 
     StopSecondsTimer()
@@ -229,21 +229,47 @@ export abstract class BaseUI extends Component {
         this.unschedule(this.SecondsTimerLogic);
     }
 
-    SecondsTimerLogic()
+    GetRestSeconds():number
     {
         let tempDate = new Date();
-        let nowTime = tempDate.getSeconds(); 
+        let nowTime = tempDate.getTime(); 
         let timePast = nowTime - this.mTimerStartingTime;
         let restTime = this.mTotalCountTime - timePast;
+
+        if(restTime <= 0)
+        {
+            return 0;
+        }
+        return Math.ceil(restTime/1000);
+    }
+
+    GetRestMillSeconds():number
+    {
+        let tempDate = new Date();
+        let nowTime = tempDate.getTime(); 
+        let timePast = nowTime - this.mTimerStartingTime;
+        let restTime = this.mTotalCountTime - timePast;
+
+        if(restTime <= 0)
+        {
+            return 0;
+        }
+        
+        return restTime;
+    }
+
+    SecondsTimerLogic()
+    {
+        let restTime = this.GetRestMillSeconds();
         if(restTime <= 0)
         {
             restTime = 0;
             this.StopSecondsTimer();
         }
-        this.OnSecondTimer(restTime);
+        this.OnSecondTimer();
     }
 
-    OnSecondTimer(_restTime : number)
+    OnSecondTimer()
     {
 
     }

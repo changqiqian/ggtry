@@ -13,7 +13,7 @@
     "life": 1.5,
     "lifeVar": 0.2,
     "emissionRate": 100,
-    "duration": 2,
+    "duration": 1,
     "srcBlendFactor": 770,
     "dstBlendFactor": 771,
     "startColor": {
@@ -59,7 +59,7 @@
     "tangentialAccel": 0,
     "tangentialAccelVar": 0,
     "rotationIsDir": false,
-    "startRadius": 100,
+    "startRadius": 80,
     "startRadiusVar": 0,
     "endRadius": 100,
     "endRadiusVar": 0,

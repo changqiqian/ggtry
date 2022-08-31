@@ -77,16 +77,17 @@ export class Game_MttRestTimeTips extends BaseUI
     StartCountDown(_time : number)
     {
         this.StartSecondsTimer(_time);
-        this.OnSecondTimer(_time);
+        this.OnSecondTimer();
     }
 
-    OnSecondTimer(_restTime : number)
+    OnSecondTimer()
     {
+        let seconds = this.GetRestSeconds();
         let preffix = Localization.GetString("00022");
-        this.node.active = _restTime >0;
+        this.node.active = seconds >0;
         if(this.node.active)
         {
-            this.mCountDown.string = preffix + GameConfig.GetRestTime_M_S(_restTime);
+            this.mCountDown.string = preffix + GameConfig.GetRestTime_M_S(seconds);
         }
         else
         {
