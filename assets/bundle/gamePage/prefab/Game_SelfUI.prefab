@@ -2732,10 +2732,6 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "66ea03c3-5a02-4554-8089-27a451b744c2@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
