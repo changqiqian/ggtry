@@ -7,7 +7,7 @@ export class FullScreenWebView extends BaseUI
 {
     @property(WebView) 
     mWebView: WebView = null;
-    mTween : any = null;
+    mTween : Tween = null;
     mScheme : string = "backapp";
     InitParam() 
     {

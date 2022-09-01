@@ -8,7 +8,7 @@ export class Toast extends BaseUI
     @property(Label) 
     mTips: Label = null;
 
-    mTween = null;
+    mTween :Tween = null;
     mDuration : number;
     InitParam() 
     {

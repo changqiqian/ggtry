@@ -202,43 +202,35 @@ export class Mtt_MatchItem extends BaseUI
         //计算比赛状态
         if(_mttInfo.status == 1)
         {
-            console.log("tttttttttttt ===111")
             this.mMatchStatus = Mtt_MatchListStatus.NotStart;
             this.mStatusTitle.string = Localization.GetString("00019");
         }
         else if(_mttInfo.status == 2)
         {
-            console.log("tttttttttttt ===222")
             this.mMatchStatus = Mtt_MatchListStatus.NotStart;
             this.mStatusTitle.string = Localization.GetString("00019");
         }
         else if(_mttInfo.status == 10)
         {
-            console.log("tttttttttttt ===333")
             this.mMatchStatus = Mtt_MatchListStatus.MatchEnd;
             this.mStatusTitle.string = Localization.GetString("00020");
         }
         else
         {
-            console.log("tttttttttttt ===444")
             if(_mttInfo.stopJoinTime > 0)
             {
-                console.log("tttttttttttt ===555")
                 this.mMatchStatus = Mtt_MatchListStatus.DelayReg;
                 this.mStatusTitle.string = Localization.GetString("00021");
             }
             else
             {
-                console.log("tttttttttttt ===666")
                 if(_mttInfo.status == 5)
                 {
-                    console.log("tttttttttttt ===777")
                     this.mMatchStatus = Mtt_MatchListStatus.RestTime;
                     this.mStatusTitle.string = Localization.GetString("00022");
                 }
                 else
                 {
-                    console.log("tttttttttttt ===888")
                     this.mMatchStatus = Mtt_MatchListStatus.MatchStarted;
                     this.mStatusTitle.string = Localization.GetString("00023");
                 }
@@ -251,45 +243,36 @@ export class Mtt_MatchItem extends BaseUI
             this.mStatusSpr.spriteFrame = _spriteFrame;
         })
         
-        console.log("tttttttttttt ===999")
         if(this.mMatchStatus == Mtt_MatchListStatus.DelayReg || 
             this.mMatchStatus == Mtt_MatchListStatus.MatchStarted)
         {
-            console.log("tttttttttttt ===aaa")
             this.mPlayerAmount.string = _mttInfo.playerCount + '/' + _mttInfo.totalPlayer;
         }
         else
         {
-            console.log("tttttttttttt ===bbb")
             this.mPlayerAmount.string = _mttInfo.totalPlayer;
         }
 
-        console.log("tttttttttttt ===ccc")
         if(this.mMatchStatus == Mtt_MatchListStatus.DelayReg)
         {
-            console.log("tttttttttttt ===ddd")
             this.StartCountDown(_mttInfo.stopJoinTime);
         }
         else if(this.mMatchStatus == Mtt_MatchListStatus.MatchStarted)
         {
-            console.log("tttttttttttt ===eee")
             this.mStatusSubTitle.string = Localization.GetString("00087");
             let gameBeginDate = new Date(_mttInfo.gameTime * 1000);
             let gameBeginTime = gameBeginDate.getTime();
             let nowDate = new Date().getTime();
             let durationSeconds = (nowDate - gameBeginTime)/1000;
-            console.log("durationSeconds=====" + durationSeconds);
             this.StartCountDown(durationSeconds , 1 , true);
         }
         else if(this.mMatchStatus == Mtt_MatchListStatus.MatchEnd)
         {
             this.mStatusSubTitle.string = "-";
             this.mCountDown.string = "-"
-            console.log("tttttttttttt ===fff")
         }
         else
         {
-            console.log("tttttttttttt ===ggg")
             this.StartCountDown(_mttInfo.leftTime);
         }
     }

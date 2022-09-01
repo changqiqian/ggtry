@@ -22,8 +22,8 @@ export class Poker extends BaseUI
     mClickCallback : Function = null;
     mIndex : number = null;
 
-    mTweenBack = null;
-    mTweenFront = null;
+    mTweenBack :Tween = null;
+    mTweenFront :Tween = null;
     mCardStruct : CardStruct = null;
     mServerData : number = null;
     InitParam() 

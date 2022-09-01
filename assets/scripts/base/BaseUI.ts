@@ -185,7 +185,6 @@ export abstract class BaseUI extends Component {
                     this.node.addChild(tempNode);
                 }
                 let currentScript = tempNode.getComponent(BaseUI);
-                //currentScript.Show(_show);
                 let keyPair = new SubViewKeyPair(key, tempNode);
                 this.mLayerList.push(keyPair);
 

@@ -12,7 +12,7 @@ export class InsertWebView extends BaseUI
     mTitle: Label = null;
     @property(WebView) 
     mWebView: WebView = null;
-    mTween : any = null;
+    mTween : Tween = null;
     InitParam() 
     {
         this.node.setPosition(0, - view.getVisibleSize().height);

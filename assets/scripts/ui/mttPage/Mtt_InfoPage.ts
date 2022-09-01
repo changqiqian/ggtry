@@ -395,13 +395,16 @@ export class Mtt_InfoPage extends BaseUI
                 }
                 else
                 {
+                    if(this.mData.statusInfo.status == Mtt_MatchStatus.Started)
+                    {
+                        this.StartBlindTimeCountDown();
+                    }
                     this.mCurrentPlayerinfo.getChildByName("Content").getComponent(Label).string =
                                             this.mData.statusInfo.playerUser +"/" + this.mData.statusInfo.totalUser;
                     let averScore = ((this.mData.matchConfig.beginScore * this.mData.statusInfo.totalUser)/this.mData.statusInfo.playerUser);
                     let averBB = Math.floor(averScore/(this.mData.statusInfo.curBlind*2));
                     this.mAvgStacks.active = true;
                     this.mAvgStacks.getChildByName("Content").getComponent(Label).string = averScore.toFixed(2) +"(" + averBB + ")";
-                    this.StartBlindTimeCountDown();
                     this.mCurrentLevel.active = true;
                     let currentLevel = "L" + this.mData.statusInfo.curLevel;
                     let currentBlindInfo = this.mData.statusInfo.curBlind + "/" + this.mData.statusInfo.curBlind * 2 + "(" + this.mData.statusInfo.beforeScore + ")";

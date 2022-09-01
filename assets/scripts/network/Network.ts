@@ -87,11 +87,13 @@ export class Network {
         this.mConnectTimer = setTimeout(this.OnConnectTimeOut.bind(this), 3000);
     }
 
-    public ClearWS(_forceClose: boolean = false) {
+    public ClearWS(_forceClose: boolean = true) {
         this.mForceClose = _forceClose;
         clearTimeout(this.mConnectTimer);
         this.StopPing();
+        console.log("ClearWS _forceClose== " + _forceClose );
         if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) {
+            console.log("ClearWS this.mWebSocket.close();" );
             this.mWebSocket.close();
         }
     }
@@ -141,7 +143,7 @@ export class Network {
         if (this.mForceClose == false) {
             CommonNotify.GetInstance().Data_SocketClose = true;
             CommonNotify.GetInstance().Data_SocketOpen = false;
-
+            console.log(" OnClose setTimeout(this.CreateWS.bind(this), 1000);" );
             setTimeout(this.CreateWS.bind(this), 1000);
         }
     }
@@ -189,7 +191,7 @@ export class Network {
     private OnConnectTimeOut() {
         if (this.mWebSocket.readyState === WebSocket.OPEN) {
         } else {
-            this.ClearWS();
+            this.ClearWS(false);
         }
     }
     ////////////////////////////////////////////////////////////////////////////////////
@@ -217,7 +219,7 @@ export class Network {
     private OnPingTimeOut() {
         //to do  心跳超时
         console.log('心跳超时');
-        this.ClearWS();
+        this.ClearWS(false);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////

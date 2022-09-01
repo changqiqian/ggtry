@@ -34,7 +34,7 @@ export class SettingWindow extends BaseUI {
         this.mSwitchAccountBtn.SetClickCallback(() => {
             GameConfig.ClearToken();
             Network.GetInstance().SendActionData('mine', 'change_account', []);
-            Network.GetInstance().ClearWS(true);
+            Network.GetInstance().ClearWS();
             UIMgr.GetInstance().ChangeScene(SceneType.Login);
         });
         this.mEditPasswordBtn.SetClickCallback(() => {
