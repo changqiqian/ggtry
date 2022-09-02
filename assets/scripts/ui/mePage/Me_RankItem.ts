@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Me_PrizeItem } from './Me_PrizeItem';
 import { Mtt_RegisterFee } from '../mttPage/Mtt_RegisterFee';
 import { Localization } from '../../base/Localization';
+import { BaseButton } from '../common/BaseButton';
 const { ccclass, property } = _decorator;
 
 @ccclass('Me_RankItem')
@@ -23,6 +24,8 @@ export class Me_RankItem extends BaseUI {
     mPrizeNode: Node = null;
     @property(Node)
     mRegisterFee: Node = null;
+    // @property(BaseButton)
+    // mRankItemBtn: BaseButton = null;
 
     _data: any = null;
 
