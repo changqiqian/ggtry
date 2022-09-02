@@ -75,7 +75,9 @@ export class Me_Main extends BaseUI {
 
         this.mQuestBtn.SetClickCallback(() => {});
 
-        this.mProfitBtn.SetClickCallback(() => {});
+        this.mProfitBtn.SetClickCallback(() => {
+            this.ShowLayer('mePage', 'prefab/Me_Record');
+        });
 
         this.mGameRecordBtn.SetClickCallback(() => {
             this.ShowLayer('mePage', 'prefab/Me_Rank');

@@ -47,6 +47,7 @@ export class HallData extends DataNotify {
     Data_DetectCanDeleteData: any = null; //是否可删除帐号资料
     Data_LogOffCode: any = null; //删除帐号验证码
     Data_DeleteAccountData: any = null; //删除帐号讯息
+    Data_MeRecodeSubPage: number = null; //收支记录当前页
 
     RegisteMsg() {
         Network.GetInstance().AddMsgListenner(
@@ -58,7 +59,6 @@ export class HallData extends DataNotify {
             },
             this
         );
-
 
         Network.GetInstance().AddMsgListenner(
             MsgID.GetMttList,
@@ -351,4 +351,9 @@ export enum Mtt_StartMode {
 export enum Me_MessageSubPage { //消息页内容
     Announcement = 0,
     Message = 1,
+}
+
+export enum Me_ReocordSubPage { //收支记录内容
+    CyberRecord = 0,
+    DiamondReocd = 1,
 }
