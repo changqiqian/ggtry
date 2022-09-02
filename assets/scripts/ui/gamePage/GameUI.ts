@@ -32,7 +32,10 @@ export class GameUI extends BaseUI
     
     RegDataNotify() 
     {
-
+        GameData.GetInstance().AddListener("Data_BGSetting",(_current , _before)=>
+        {
+            
+        },this)
     }
     LateInit() 
     {

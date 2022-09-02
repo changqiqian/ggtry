@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, director, debug, setDisplayStats } from 'cc';
 import { SceneType, UIMgr } from './base/UIMgr';
+import { GameConfig } from './GameConfig';
 
 const { ccclass, property } = _decorator;
 

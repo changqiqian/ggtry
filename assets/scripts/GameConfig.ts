@@ -117,16 +117,60 @@ export class GameConfig
         GameConfig.WriteSimpleData("LOGIN_USER", _user);
     }
     
-    public static SaveBBTroggle(_isChecked: boolean) 
+    public static SaveBBTroggle(_value: boolean) 
     {
-        GameConfig.WriteSimpleData('SHOWBB_LOACAL_D', _isChecked);
+        let key = "SHOWBB_LOACAL_D";
+        GameConfig.WriteSimpleData(key, _value == true ? 1 : 0);
     }
+
+    public static GetBBToggleSetting() : boolean
+    {
+        let key = "SHOWBB_LOACAL_D";
+        let result = GameConfig.ReadSimpleData(key, null);
+        if(result == null)
+        {
+            return false;
+        }
+        return Number(result) == 1 ? true : false;
+    }
+
+    public static SaveBGMSetting(_value : boolean)
+    {
+        let key = "BGM_SETTING";
+        GameConfig.WriteSimpleData(key, _value == true ? 1 : 0);
+    }
+
+    public static GetBGMSetting() : boolean
+    {
+        let key = "BGM_SETTING";
+        let result = GameConfig.ReadSimpleData(key, null);
+        if(result == null)
+        {
+            return false;
+        }
+        return Number(result) == 1 ? true : false;
+    }
+
+
     public static SavePlayBGMTroggle(_isChecked: number) 
     {
         GameConfig.WriteSimpleData('IS_CAN_PLAY_BGM', _isChecked);
     }
 
-    public static SaveCustomerRaise(_index : number , _ratio : number , _title : string)
+
+    public static GetDefaultCustomerRaiseTitle(_index : number) : string
+    {
+        let defualtTitle = ["1/4" , "1/3" , "1/2" , "2/3" , "1x"];
+        return defualtTitle[_index];
+    }
+
+    public static GetDefaultCustomerRaiseRatio(_option : number) : number
+    {
+        let defualtRatio = [1/4 , 1/3 , 1/2 , 2/3 , 1];
+        return defualtRatio[_option];
+    }
+
+    public static SaveCustomerRaise(_index : number , _optionNum : number)
     {
         if(_index >= 3)//我们只有3个自定义加注按钮
         {
@@ -134,10 +178,10 @@ export class GameConfig
             return;
         }
         let ratioName = "CUSTOMER_RAISE_RATIO" + _index;
-        GameConfig.WriteSimpleData(ratioName, _ratio);
+        GameConfig.WriteSimpleData(ratioName, _optionNum);
         
         let titleName = "CUSTOMER_RAISE_TITLE" + _index; 
-        GameConfig.WriteSimpleData(titleName, _title);
+        GameConfig.WriteSimpleData(titleName, _optionNum);
     }
 
     public static GetCustomerRaiseRatio(_index : number) : number
@@ -149,14 +193,17 @@ export class GameConfig
         }
 
         let titleName = "CUSTOMER_RAISE_RATIO" + _index; 
-        let defualtTitle = [1/3 , 0.5 , 1];
-        let result = GameConfig.ReadSimpleData(titleName, null);
-        if(result == null)
+        let optionNum = GameConfig.ReadSimpleData(titleName, null);
+        let result;
+        if(optionNum == null)
         {
-            return defualtTitle[_index];
+            result = GameConfig.GetDefaultCustomerRaiseRatio(_index);
         }
-        
-        return Number(result);
+        else
+        {
+            result = GameConfig.GetDefaultCustomerRaiseRatio(Number(optionNum));
+        }
+        return result;
     }
 
     public static GetCustomerRaiseTitle(_index : number) : string
@@ -168,16 +215,77 @@ export class GameConfig
         }
 
         let titleName = "CUSTOMER_RAISE_TITLE" + _index; 
-
-        let defualtTitle = ["1/3" , "1/2" , "1"];
-        let result = GameConfig.ReadSimpleData(titleName, null);
-        if(result == null)
+        let optionNum = GameConfig.ReadSimpleData(titleName, null);
+        let result;
+        if(optionNum == null)
         {
-            return defualtTitle[_index];
+            result = GameConfig.GetDefaultCustomerRaiseTitle(_index);
+        }
+        else
+        {
+            result = GameConfig.GetDefaultCustomerRaiseTitle(Number(optionNum));
         }
 
         return result;
     }
+
+    public static SaveGameBGSetting(_index : number)
+    {
+        let Key = "CUSTOMER_BG";
+        GameConfig.WriteSimpleData(Key, _index);
+    }
+
+    public static GetBGSetting() : number
+    {
+        let Key = "CUSTOMER_BG";
+        let value = GameConfig.ReadSimpleData(Key, null);
+        if(value == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return Number(value);
+        }
+    }
+
+    public static SaveGamePokerSetting(_index : number)
+    {
+        let Key = "CUSTOMER_POKER";
+        GameConfig.WriteSimpleData(Key, _index);
+    }
+
+    public static GetPokerSetting() : number
+    {
+        let key = "CUSTOMER_POKER";
+        let value = GameConfig.ReadSimpleData(key, null);
+        if(value == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return Number(value);
+        }
+    }
+
+    public static SaveCustomerSliderSetting(_value : boolean)
+    {
+        let key = "CUSTOMER_SLIDER";
+        GameConfig.WriteSimpleData(key, _value==true? 1: 0);
+    }
+
+    public static GaveCustomerSliderSetting() : boolean
+    {
+        let key = "CUSTOMER_SLIDER";
+        let value = GameConfig.ReadSimpleData(key, null);
+        if(value == null)
+        {
+            return false;
+        }
+        return Number(value) == 1 ? true : false;
+    }
+
 
     public static GetRandChar()
     {
@@ -204,6 +312,7 @@ export class GameConfig
         }
         return data;
     };
+    
 
     public static GetStrWithLen (str, len)
     {

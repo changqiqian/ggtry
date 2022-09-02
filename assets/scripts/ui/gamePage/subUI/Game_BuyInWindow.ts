@@ -48,6 +48,12 @@ export class Game_BuyInWindow extends BaseUI
             this.CloseAsWindow();
         });
 
+        this.mConfirmBtn.SetClickCallback(()=>
+        {
+            this.CloseAsWindow();
+        });
+
+
         this.mProgressSlider.SetCallback((_ratio)=>
         {
 

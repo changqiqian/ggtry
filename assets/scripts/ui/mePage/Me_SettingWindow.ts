@@ -4,6 +4,8 @@ import { BaseButton } from '../common/BaseButton';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { ToggleBtn } from '../common/ToggleBtn';
 const { ccclass, property } = _decorator;
 
 @ccclass('SettingWindow')
@@ -12,10 +14,10 @@ export class SettingWindow extends BaseUI {
     mCloseBtn: BaseButton = null;
     @property(BaseButton)
     mSwitchAccountBtn: BaseButton = null;
-    @property(ToggleComponent)
-    mBBToggleBtn: ToggleComponent | null = null;
-    @property(ToggleComponent)
-    mMusicToggleBtn: ToggleComponent | null = null;
+    @property(ToggleBtn)
+    mBBModeToggle: ToggleBtn = null;
+    @property(ToggleBtn)
+    mBGMToggle: ToggleBtn = null;
     @property(BaseButton)
     mEditPasswordBtn: BaseButton = null;
     @property(BaseButton)
@@ -41,29 +43,34 @@ export class SettingWindow extends BaseUI {
             UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_SettingWindow', false);
             this.ShowLayer('common', 'prefab/ForgetPwd');
         });
-        this.mBBToggleBtn.isChecked = Boolean(GameConfig.ReadSimpleData('SHOWBB_LOACAL_D', false));
-        this.mMusicToggleBtn.isChecked = GameConfig.ReadSimpleData('setting_background_sound', false) === '1' ? true : false;
 
-        this.mBBToggleBtn.node.on('toggle', this.BBToggle, this);
-        this.mMusicToggleBtn.node.on('toggle', this.musicToggle, this);
+        this.mBBModeToggle.SetClickCallback((_value)=>
+        {
+            LocalPlayerData.GetInstance().Data_BBModeSetting = _value;
+        })
+        this.mBGMToggle.SetClickCallback((_value)=>
+        {
+            LocalPlayerData.GetInstance().Data_BGMSetting = _value;
+        })
     }
 
-    RegDataNotify() {}
+    RegDataNotify() 
+    {
+        LocalPlayerData.GetInstance().AddListener("Data_BBModeSetting",(_current , _before)=>
+        {
+            this.mBBModeToggle.SetShowStauts(_current);
+            GameConfig.SaveBBTroggle(_current);
+        },this);
+        LocalPlayerData.GetInstance().AddListener("Data_BGMSetting",(_current , _before)=>
+        {
+            this.mBGMToggle.SetShowStauts(_current);
+            GameConfig.SaveBGMSetting(_current);
+            Network.GetInstance().SendActionData('mine', 'setting_background_sound', [_current]);
+        },this);
+    }
 
     LateInit() {}
 
     CustmoerDestory() {}
 
-    BBToggle(toggle: ToggleComponent) {
-        GameConfig.SaveBBTroggle(toggle.isChecked);
-    }
-    musicToggle(toggle: ToggleComponent) {
-        GameConfig.SavePlayBGMTroggle(toggle.isChecked ? 1 : 0);
-        Network.GetInstance().SendActionData('mine', 'setting_background_sound', [toggle.isChecked]);
-        if (toggle.isChecked) {
-            //Todo 播音乐
-        } else {
-            // 停止播放
-        }
-    }
 }

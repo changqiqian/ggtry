@@ -2,22 +2,22 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "2c3ea9de-1b34-4cf6-b495-1d939efff4e7",
+  "uuid": "ca8a73ac-0601-4012-a70e-7de34ef634ca",
   "files": [
-    ".jpg",
-    ".json"
+    ".json",
+    ".png"
   ],
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "2c3ea9de-1b34-4cf6-b495-1d939efff4e7@6c48a",
-      "displayName": "个人卡片加按钮",
+      "uuid": "ca8a73ac-0601-4012-a70e-7de34ef634ca@6c48a",
+      "displayName": "jiatelin_tex",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "2c3ea9de-1b34-4cf6-b495-1d939efff4e7",
+        "imageUuidOrDatabaseUri": "ca8a73ac-0601-4012-a70e-7de34ef634ca",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,29 +33,29 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "2c3ea9de-1b34-4cf6-b495-1d939efff4e7@f9941",
-      "displayName": "个人卡片加按钮",
+      "uuid": "ca8a73ac-0601-4012-a70e-7de34ef634ca@f9941",
+      "displayName": "jiatelin_tex",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 0,
-        "offsetY": 0,
-        "trimX": 0,
-        "trimY": 0,
-        "width": 1125,
-        "height": 2436,
-        "rawWidth": 1125,
-        "rawHeight": 2436,
+        "offsetX": -0.5,
+        "offsetY": 25.5,
+        "trimX": 1,
+        "trimY": 1,
+        "width": 253,
+        "height": 459,
+        "rawWidth": 256,
+        "rawHeight": 512,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "2c3ea9de-1b34-4cf6-b495-1d939efff4e7@6c48a",
+        "imageUuidOrDatabaseUri": "ca8a73ac-0601-4012-a70e-7de34ef634ca@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,7 +69,7 @@
   "userData": {
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
-    "hasAlpha": false,
-    "redirect": "2c3ea9de-1b34-4cf6-b495-1d939efff4e7@f9941"
+    "hasAlpha": true,
+    "redirect": "ca8a73ac-0601-4012-a70e-7de34ef634ca@f9941"
   }
 }

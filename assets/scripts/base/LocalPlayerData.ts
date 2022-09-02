@@ -1,4 +1,5 @@
 import { _decorator, Component, Node } from 'cc';
+import { GameConfig } from '../GameConfig';
 import { DataNotify } from './DataNotify';
 const { ccclass, property } = _decorator;
 
@@ -12,6 +13,7 @@ export class LocalPlayerData extends DataNotify {
         {
             LocalPlayerData.Instance = new LocalPlayerData();
             LocalPlayerData.Instance.CreateNotify();
+            LocalPlayerData.Instance.CustomerInit();
         }
 
         return LocalPlayerData.Instance;
@@ -40,10 +42,32 @@ export class LocalPlayerData extends DataNotify {
     Data_GiftScore : number = null;
     Data_Clubs : any = null;//俱乐部信息 "clubs\":[{\"clubId\":14834,\"role\":1,\"time\":1658200159,\"isPushOpen\":true,\"clubScore\":0,\"decorations\":{\"pos1\":0,\"pos2\":0,\"pos3\":0,\"pos4\":0,\"pos5\":0}},{\"clubId\":47850,\"role\":0,\"time\":1658214502,\"isPushOpen\":true,\"clubScore\":0,\"decorations\":{\"pos1\":0,\"pos2\":0,\"pos3\":0,\"pos4\":0,\"pos5\":0}}]
 
+
+    //自定义设置
+    CustomerInit()
+    {
+        this.Data_CustomerRaise0 = GameConfig.GetCustomerRaiseRatio(0);
+        this.Data_CustomerRaise1 = GameConfig.GetCustomerRaiseRatio(1);
+        this.Data_CustomerRaise2 = GameConfig.GetCustomerRaiseRatio(2);
+        this.Data_BGSetting = GameConfig.GetBGSetting();
+        this.Data_PokerSetting = GameConfig.GetPokerSetting();
+        this.Data_CustomerSliderSetting = GameConfig.GaveCustomerSliderSetting();
+        this.Data_BBModeSetting = GameConfig.GetBBToggleSetting();
+        this.Data_BGMSetting = GameConfig.GetBGMSetting();
+    }
+    Data_CustomerRaise0 : number = null;
+    Data_CustomerRaise1 : number = null;
+    Data_CustomerRaise2 : number = null;
+    Data_BGSetting : number = null;
+    Data_PokerSetting : number = null;
+    Data_CustomerSliderSetting : boolean = null;
+    Data_BBModeSetting : boolean = null;
+    Data_BGMSetting : boolean = null;
+
+
     ClearData()
     {
         this.Data_CurrentUsingMttMatchID = null;
-
     }
 }
 

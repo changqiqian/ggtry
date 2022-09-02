@@ -142,6 +142,18 @@ export class ToggleBtn extends BaseUI {
         this.mDisabled.node.active = true;
     }
 
+    SetShowStauts(_value : boolean)
+    {
+        if(_value)
+        {
+            this.ShowSelected();
+        }
+        else
+        {
+            this.ShowUnselected();
+        }
+    }
+
     public IsSelected() : boolean
     {
         return this.mSelected.node.active;

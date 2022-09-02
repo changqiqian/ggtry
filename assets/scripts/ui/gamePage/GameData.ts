@@ -2,6 +2,7 @@ import { _decorator, Component, Node, Vec3 } from 'cc';
 import { DataNotify } from '../../base/DataNotify';
 import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
+import { GameConfig } from '../../GameConfig';
 import { MsgID, MsgStatus, Network } from '../../network/Network';
 const { ccclass, property } = _decorator;
 
@@ -20,7 +21,8 @@ export class GameData extends DataNotify
 
         return GameData.Instance;
     }
-    
+
+
     Data_UpdatePlayingPlayer : boolean = null;//立即更新正在玩牌的玩家数据
     
     
