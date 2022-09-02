@@ -24,13 +24,17 @@ export class Me_RankItem extends BaseUI {
     mPrizeNode: Node = null;
     @property(Node)
     mRegisterFee: Node = null;
-    // @property(BaseButton)
-    // mRankItemBtn: BaseButton = null;
+    @property(BaseButton)
+    mRankItemBtn: BaseButton = null;
 
     _data: any = null;
 
     InitParam() {}
-    BindUI() {}
+    BindUI() {
+        this.mRankItemBtn.SetClickCallback(() => {
+            this.ShowLayer('mePage', 'prefab/Me_RankDetail');
+        });
+    }
     RegDataNotify() {}
     LateInit() {}
     CustmoerDestory() {}
