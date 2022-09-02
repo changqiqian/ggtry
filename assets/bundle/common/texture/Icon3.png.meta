@@ -2,27 +2,27 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "70326ec8-9752-4efc-981d-1a75700c3798",
+  "uuid": "8d339156-597c-48a5-8212-0d58daf5634e",
   "files": [
-    ".jpg",
-    ".json"
+    ".json",
+    ".png"
   ],
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "70326ec8-9752-4efc-981d-1a75700c3798@6c48a",
-      "displayName": "2.1.2 游戏内-游戏设置",
+      "uuid": "8d339156-597c-48a5-8212-0d58daf5634e@6c48a",
+      "displayName": "Icon3",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "70326ec8-9752-4efc-981d-1a75700c3798",
-        "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
         "mipfilter": "none",
-        "anisotropy": 0
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "8d339156-597c-48a5-8212-0d58daf5634e"
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,29 +33,29 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "70326ec8-9752-4efc-981d-1a75700c3798@f9941",
-      "displayName": "2.1.2 游戏内-游戏设置",
+      "uuid": "8d339156-597c-48a5-8212-0d58daf5634e@f9941",
+      "displayName": "Icon3",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
-        "trimType": "auto",
+        "trimType": "none",
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 1125,
-        "height": 2436,
-        "rawWidth": 1125,
-        "rawHeight": 2436,
+        "width": 45,
+        "height": 32,
+        "rawWidth": 45,
+        "rawHeight": 32,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "70326ec8-9752-4efc-981d-1a75700c3798@6c48a",
+        "imageUuidOrDatabaseUri": "8d339156-597c-48a5-8212-0d58daf5634e@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,7 +69,7 @@
   "userData": {
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
-    "hasAlpha": false,
-    "redirect": "70326ec8-9752-4efc-981d-1a75700c3798@f9941"
+    "hasAlpha": true,
+    "redirect": "8d339156-597c-48a5-8212-0d58daf5634e@f9941"
   }
 }

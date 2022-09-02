@@ -96,20 +96,7 @@ export class Game_CustomerRaise extends BaseUI
     ShowRaiseUI(_minRaise : number)
     {
         let currentPool = GameData.GetInstance().Data_DeskInfo.basePool;
-        //let deskConfig = GameData.GetInstance().Data_DeskConfig;
         this.UpdateUIWithRatioMode(currentPool,_minRaise);
-        // let playingPlayers = GameData.GetInstance().Data_PlayingUserList;
-        // let totalAnte = deskConfig.beforeScore * playingPlayers.length;
-        // let sb = deskConfig.baseScore ;
-        // let bb = deskConfig.baseScore * 2;
-        // if(currentPool == sb + bb + totalAnte) //第一次下注
-        // {
-        //     this.UpdateUIWithBBMode(bb);
-        // }
-        // else
-        // {
-        //     this.UpdateUIWithRatioMode(currentPool,_minRaise);
-        // }
     }
 
     UpdateUIWithRatioMode(_currentPool : number , _minRaise : number)
@@ -119,18 +106,6 @@ export class Game_CustomerRaise extends BaseUI
             let ratio = GameConfig.GetCustomerRaiseRatio(i);
             let title = GameConfig.GetCustomerRaiseTitle(i);
             let amount = this.GetAmount(ratio,_currentPool , _minRaise);
-            this.mBtns[i].node.getChildByName("Describe").getComponent(Label).string = title;
-            this.mBtns[i].SetTitle(amount + "");
-        }
-    }
-
-    UpdateUIWithBBMode(_bigBlind : number)
-    {
-        for(let i = 0 ; i < this.node.children.length ; i++)
-        {
-            let ratio = i + 2;// 至少加注2个大盲
-            let title = ratio + "bb";
-            let amount = ratio * _bigBlind;
             this.mBtns[i].node.getChildByName("Describe").getComponent(Label).string = title;
             this.mBtns[i].SetTitle(amount + "");
         }

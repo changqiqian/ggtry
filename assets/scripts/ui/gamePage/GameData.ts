@@ -62,6 +62,7 @@ export class GameData extends DataNotify
     Data_SendChipToWinner : Vec3 = null; // 赢家坐标 筹码飞到玩家去（世界坐标）
     Data_PreShowCards : any = null; //提前亮牌，一般情况为大家allin的时候
     Data_UpdatePlayerUI : boolean = null; //座位旋转结束后，左右调换调整玩家的操作ui，防止ui超出屏幕边缘
+    Data_ChatingSubLayer : Game_ChattingSubLayer = null ; //聊天页面子页面
     RegisteMsg()
     {
         Network.GetInstance().AddMsgListenner(MsgID.MttGetRoomInfo ,(_msgBody)=>
@@ -426,6 +427,12 @@ export enum Game_RoomStatus
 	Paused = 3,
 }
 
+export enum Game_ChattingSubLayer
+{
+    Chat,
+    Shortcut,
+    Emoji,
+}
 
 //          流程
 //发送RefreshMttInfo  - 发送MttGetRoomInfo - 接收EnterGame -  发送请求声网 - 发送请求消息展示 
