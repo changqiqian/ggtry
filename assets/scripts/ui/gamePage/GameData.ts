@@ -429,7 +429,7 @@ export enum Game_RoomStatus
 
 export enum Game_ChattingSubLayer
 {
-    Chat,
+    ChatHistory,
     Shortcut,
     Emoji,
 }

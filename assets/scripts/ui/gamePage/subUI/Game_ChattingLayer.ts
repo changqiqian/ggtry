@@ -22,7 +22,7 @@ export class Game_ChattingLayer extends BaseUI
     mVipSendBtn: BaseButton = null;
     InitParam()
     {
-        GameData.GetInstance().Data_ChatingSubLayer = Game_ChattingSubLayer.Chat;
+        GameData.GetInstance().Data_ChatingSubLayer = Game_ChattingSubLayer.ChatHistory;
     }
     BindUI()
     {
@@ -50,6 +50,8 @@ export class Game_ChattingLayer extends BaseUI
         {
 
         })
+
+        this.AddSubView("gamePage" , "prefab/Game_ChatHistoryLayer",null ,this.mSubLayer);
     }
     RegDataNotify()
     {
