@@ -12,28 +12,6 @@ message C2S_GetUserInfo {
 message S2C_GetUserInfo {
     required UserInfo userInfo = 1; 
 }
-//获取用户基础信息
-message C2S_GetUserBaseInfo {
-    required int32 uid = 1; 
-}
-message S2C_GetUserBaseInfo {
-    required UserBaseInfo userBaseInfo = 1; 
-}
-//获取用户资产
-message C2S_GetUserAssets {
-    required int32 uid = 1; 
-}
-message S2C_GetUserAssets {
-    required UserAssets userAssets = 1; 
-}
-//获取用户账户信息
-message C2S_UserAccountInfo {
-    required int32 uid = 1; 
-}
-//获取用户账户信息
-message S2C_UserAccountInfo {
-    required UserAccountInfo userAccountInfo = 1; 
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
