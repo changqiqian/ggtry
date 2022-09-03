@@ -1,0 +1,33 @@
+syntax = "proto3";
+package PokerLife.msgId;
+
+
+enum MsgId {
+    //注册
+    C2S_Register = 0;  
+    S2C_Register = 1;  
+    //获取短信验证码
+    C2S_GetSmsCode =2; 
+    S2C_GetSmsCode =3; 
+    //验证码登录
+    C2S_LoginWithSmsCode = 4;
+    S2C_LoginWithSmsCode = 5;
+    //密码登录
+    C2S_LoginWithPwd = 6;
+    S2C_LoginWithPwd = 7;
+    //获取用户信息
+    C2S_GetUserInfo = 8;
+    S2C_GetUserInfo = 9;
+    //获取用户基础信息
+    C2S_GetUserBaseInfo = 10;
+    S2C_GetUserBaseInfo = 11;
+    //获取用户资产
+    C2S_GetUserAssets = 10;
+    S2C_GetUserAssets = 11;
+    //获取用户账户信息
+    C2S_UserAccountInfo = 12;
+    S2C_UserAccountInfo = 13;
+    //重设密码
+    C2S_ResetPassword = 14;
+    S2C_ResetPassword = 15;
+}

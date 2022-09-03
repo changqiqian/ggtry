@@ -4,7 +4,7 @@
     "optionVerify": true,
     "watchUpdate": false,
     "filter": "\\.proto$",
-    "fileName": "cowboy",
+    "fileName": "PokerLifeSY",
     "input": "/Users/yamiwang/cowboy/proto",
     "output": "/Users/yamiwang/cowboy/assets/plugin"
 }
