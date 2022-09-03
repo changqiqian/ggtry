@@ -1,9 +1,7 @@
 import { _decorator, Component, Node, Label, UI } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
-import { UIMgr } from '../../../base/UIMgr';
 import { GameConfig } from '../../../GameConfig';
-import { Mtt_MatchStatus } from '../../hall/HallData';
 import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
@@ -31,55 +29,6 @@ export class Game_MttInfo extends BaseUI
     }
     RegDataNotify() 
     {
-
-        GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
-        {
-            let matchConfig = GameData.GetInstance().Data_MatchConfig;
-            let statusInfo = GameData.GetInstance().Data_StatusInfo;
-            this.node.active = statusInfo.status >= Mtt_MatchStatus.Started;
-            if(this.node.active == false)
-            {
-                return;
-            }
-            this.UpdateBlindInfo(statusInfo);
-            this.UpdateUI(statusInfo);
-            this.UpdateRank(_current.rank  , statusInfo.totalUser);
-            let avgScore = (matchConfig.beginScore * (statusInfo.totalUser + statusInfo.totalReBuy)) / statusInfo.playerUser;
-            let bbStr = Math.floor(avgScore/(statusInfo.curBlind*2));
-            this.mAvgChip.string = avgScore.toFixed(2) + "(" + bbStr + "BB)" ;
-
-        },this);
-        GameData.GetInstance().AddListener("Data_MttGetRoomInfo",(_current , _before)=>
-        {
-            let statusInfo = GameData.GetInstance().Data_StatusInfo;
-            this.node.active = statusInfo.status >= Mtt_MatchStatus.Started;
-            if(this.node.active == false)
-            {
-                return;
-            }
-            this.UpdateUI(statusInfo);
-        },this);
-
-
-        GameData.GetInstance().AddListener("Data_MttSelfStatus",(_current , _before)=>
-        {
-            this.UpdateRank(_current.rank  , _current.totalPlayer );
-        },this);
-
-        GameData.GetInstance().AddListener("Data_MttStatusChange",(_current , _before)=>
-        {
-            if(_current.reason == Mtt_MatchStatus.Pause)
-            {
-
-            }
-            else if(_current.reason == Mtt_MatchStatus.LevelUp)
-            {
-                let tips = Localization.GetString("00063") + ":";
-                tips += _current.curLevel;
-                UIMgr.GetInstance().ShowToast(tips);
-                this.UpdateBlindInfo(_current);
-            }
-        },this);
     }
     LateInit() 
     {
@@ -120,16 +69,9 @@ export class Game_MttInfo extends BaseUI
         this.mBlindInfoNext.string = Localization.GetString("00055") + _data.nextBlind + "/" + _data.nextBlind * 2 + anteNext;
     }
 
-    UpdateUI(_data : any)
+    UpdateUI()
     {
-        if(_data.status != Mtt_MatchStatus.Rest && _data.status != Mtt_MatchStatus.End)
-        {
-            this.StartCountDown(_data.leftTime);
-        }
-        else
-        {
-            this.StartCountDown(0);
-        }
+
     }
 
     StartCountDown(_time : number)
@@ -140,15 +82,7 @@ export class Game_MttInfo extends BaseUI
 
     OnSecondTimer()
     {
-        let seconds = this.GetRestSeconds();
-        if(seconds >=0)
-        {
-            this.mCountDown.string = GameConfig.GetRestTime_M_S(seconds);
-        }
-        else
-        {
-            this.mCountDown.string = "00:00";
-        }
+
     }
 
 }

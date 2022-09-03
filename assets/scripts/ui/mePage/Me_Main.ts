@@ -92,21 +92,7 @@ export class Me_Main extends BaseUI {
         this.mServiceBtn.SetClickCallback(() => {});
     }
     RegDataNotify() {
-        LocalPlayerData.GetInstance().AddListener(
-            'Data_Coin',
-            (_current, _before) => {
-                this.mCoin.string = _current;
-            },
-            this
-        );
-
-        LocalPlayerData.GetInstance().AddListener(
-            'Data_Diamond',
-            (_current, _before) => {
-                this.mDiamond.string = _current;
-            },
-            this
-        );
+      
     }
     LateInit() {
         this.EnableScroll();

@@ -1,7 +1,6 @@
 import { _decorator, Component, Node, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { UIMgr } from '../../base/UIMgr';
-import { GameType, Network } from '../../network/Network';
 import { HallData, Mtt_InfoSubPage } from '../hall/HallData';
 import { Mtt_TableInfoItem } from './Mtt_TableInfoItem';
 const { ccclass, property } = _decorator;
@@ -37,35 +36,6 @@ export class Mtt_TableInfoPage extends BaseUI
             }
         },this);
 
-
-        HallData.GetInstance().AddListener("Data_MttTableList",(_current , _before)=>
-        {
-            this.mCurrentPage = _current.Index;
-            this.mTotalData = _current.total;
-
-            if(_current.tablesInfo == null)
-            {
-                return;
-            }
-            
-            for(let i = 0 ; i < _current.tablesInfo.length ; i++)
-            {
-                let currentData =  _current.tablesInfo[i];
-                let index = this.mCurrentUserData.findIndex((_item) => _item.tableId === currentData.tableId);
-                if(index < 0) //去重
-                {
-                    this.mCurrentUserData.push(currentData);
-                    this.LoadPrefab("mttPage","prefab/Mtt_TableInfoItem",(_prefab)=>
-                    {
-                        let tableItem = instantiate(_prefab);
-                        this.mScrollView.content.addChild(tableItem);
-                        let script = tableItem.getComponent(Mtt_TableInfoItem);
-                        script.InitWithData(currentData.tableId , currentData.userCount , currentData.maxScore,
-                            currentData.minScore , currentData.averageScore);
-                    });
-                }
-            }
-        },this);
     }
     LateInit() 
     {
@@ -89,8 +59,7 @@ export class Mtt_TableInfoPage extends BaseUI
 
     Refresh()
     {
-        Network.GetInstance().SendGetMttTableInfo(GameType.Mtt, HallData.GetInstance().Data_CurrentMttMatchID, 
-        this.mCurrentPage , this.mPageCount);
+
     }
 
     ResetPage()

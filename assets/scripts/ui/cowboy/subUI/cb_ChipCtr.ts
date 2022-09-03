@@ -18,7 +18,6 @@ export class cb_ChipCtr extends BaseUI
     }
     RegDataNotify() 
     {
-        LocalPlayerData.GetInstance().AddListener("Data_Coin" , this.Data_Coin.bind(this) , this );
     }
     LateInit() {
 
@@ -59,15 +58,6 @@ export class cb_ChipCtr extends BaseUI
     }
 
 
-    Data_Coin(_val , _bef)
-    {
-        for(let i = 0 ; i < this.node.children.length ; i++)
-        {
-            let currentChild = this.node.children[i].getComponent(ToggleBtn);
-            currentChild.SetForbidden(currentChild.mCustmoerData > _val);
-            currentChild.SetGray(currentChild.mCustmoerData > _val);
-        }
-    }
 
 }
 

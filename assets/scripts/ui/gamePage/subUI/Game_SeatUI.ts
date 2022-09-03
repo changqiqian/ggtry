@@ -23,18 +23,7 @@ export class Game_SeatUI extends BaseUI
     }
     RegDataNotify() 
     {
-        GameData.GetInstance().AddListener("Data_UpdatePlayingPlayer",(_current , _before)=>
-        {
-            let localUid = LocalPlayerData.GetInstance().Data_Uid;
-            let selfPlayer = GameData.GetInstance().FindPlayerByUserId(localUid);
-            if(selfPlayer == null)
-            {
-                return;
-            }
-            this.TryRotateSeats(selfPlayer.pos);
 
-            GameData.GetInstance().Data_UpdatePlayerUI = true;
-        },this);
     }
     LateInit() 
     {

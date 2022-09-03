@@ -36,29 +36,7 @@ export class Game_SeatItem extends BaseUI
     }
     RegDataNotify() 
     {
-        GameData.GetInstance().AddListener("Data_UpdatePlayingPlayer",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerBySeatId(this.mSeatID);
-            let selfPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            if(currentPlayer == null)
-            {
-                if(selfPlayer == null)
-                {
-                    this.mSitBtn.node.active = true;
-                    this.mEmptyBtn.node.active = false;
-                }
-                else
-                {
-                    this.mSitBtn.node.active = false;
-                    this.mEmptyBtn.node.active = true;
-                }
-            }
-            else
-            {
-                this.mSitBtn.node.active = false;
-                this.mEmptyBtn.node.active = false;
-            }
-        },this);
+      
     }
     LateInit() 
     {

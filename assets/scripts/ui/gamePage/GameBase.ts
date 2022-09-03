@@ -30,10 +30,7 @@ export class GameBase extends BaseUI
     }
     RegDataNotify() 
     {
-        GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
-        {
-            this.InitSeatUI(_current.matchConfig.seatCount);
-        },this);
+    
 
         CommonNotify.GetInstance().AddListener("Data_LoginSuccessData",(_current , _before)=>
         {

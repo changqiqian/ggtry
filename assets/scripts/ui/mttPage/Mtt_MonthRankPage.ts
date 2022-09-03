@@ -53,77 +53,7 @@ export class Mtt_MonthRankPage extends BaseUI
             }
         },this);
 
-        HallData.GetInstance().AddListener("Data_MttRankData",(_current , _before)=>
-        {
-            if(this.node.active == false)
-            {
-                return;
-            }
-
-            this.mNoData.active = false;
-            if(_current.code == 2)
-            {
-                this.mNoData.active = true;
-                return;
-            }
-
-            if(_current.code != 0) 
-            {
-                return
-            }
-
- 
-            if(_current.rankingConfig == null) 
-            {
-                return 
-            }
-
-            if(_current.rankingConfig.mode != Mtt_RankSubPage.Month) 
-            {
-                return 
-            }
-
-            this.mTime.string = _current.rankingConfig.title;
-
-            let championInfo = _current.rankingConfig.lastTop;
-            let haveChampion = championInfo.userId != "";
-            this.mDetails.active = haveChampion;
-            if(haveChampion)
-            {
-                this.mName.string = championInfo.nickName;
-                this.mID.string = championInfo.userId;
-                this.mPower.string = championInfo.score;
-                this.LoadLocalHead(parseInt(championInfo.photo),(_spriteFrame)=>
-                {
-                    this.mHead.spriteFrame = _spriteFrame;
-                });
-            }
-
-            let itemList = _current.rankingList;
-            if(!itemList || itemList.length == 0)
-            {
-                this.mIsLastPage = true;
-                return;
-            }
-
-            for(let i = 0 ; i <itemList.length ; i++)
-            {
-                let currentData =  itemList[i];
-                let index = this.mCurrentData.findIndex((_item) => _item.userId === currentData.userId);
-                if(index < 0) //去重
-                {
-                    this.mCurrentData.push(currentData);
-                    this.LoadPrefab("mttPage","prefab/Mtt_RankItem",(_prefab)=>
-                    {
-                        let playerItem = instantiate(_prefab);
-                        this.mScrollView.content.addChild(playerItem);
-                        let script = playerItem.getComponent(Mtt_RankItem);
-                        script.InitWithData(currentData);
-                    });
-                }
-            }
-
-        },this);
+       
         
 
     }
@@ -139,7 +69,6 @@ export class Mtt_MonthRankPage extends BaseUI
     Refresh()
     {
         this.mCurrentPage++;
-        Network.GetInstance().SendGetMttRank(Mtt_RankSubPage.Month,this.mCurrentPage , this.mPageCount);
     }
 
     OnDragBottom() 

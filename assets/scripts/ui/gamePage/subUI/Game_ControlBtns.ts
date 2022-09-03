@@ -3,7 +3,6 @@ import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Network } from '../../../network/Network';
 import { BaseButton } from '../../common/BaseButton';
-import { GameData, Game_MttPlayerStauts } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_ControlBtns')
@@ -23,7 +22,6 @@ export class Game_ControlBtns extends BaseUI
     {
         this.mDealCardsBtn.SetClickCallback(()=>
         {
-            Network.GetInstance().SendCheckPublicCards();
         });
         this.mDealCardsBtn.node.active = false;
 
@@ -35,70 +33,12 @@ export class Game_ControlBtns extends BaseUI
 
         this.mBackToGameBtn.SetClickCallback(()=>
         {
-            Network.GetInstance().SendBackAndKeepPlaying();
         });
         this.mBackToGameBtn.node.active = false;
     }
     RegDataNotify() 
     {
-        GameData.GetInstance().AddListener("Data_MttSelfStatus",(_current , _before)=>
-        {
-            //_current.isCanRebuy
-            //显示重购按钮
-        },this);
-
-        GameData.GetInstance().AddListener("Data_CheckPublicCards",(_current , _before)=>
-        {
-            if(this.mDealCardsBtn.node.active == false)
-            {
-                return;
-            }
-
-            this.mDealCardsBtn.node.active = _current.length < 5;
-        },this);
-
-
-        GameData.GetInstance().AddListener("Data_RefreshMttInfo",(_current , _before)=>
-        {
-            this.mRebuyBtn.node.active = _current.userStatus == Game_MttPlayerStauts.Lose && _current.isCanRebuy;
-        },this);
-
-        GameData.GetInstance().AddListener("Data_BackAndKeepPlaying",(_current , _before)=>
-        {
-            this.mBackToGameBtn.node.active = false;
-        },this);
-
-        GameData.GetInstance().AddListener("Data_UpdatePlayingPlayer",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            if(currentPlayer == null)
-            {
-                return;
-            }
-            this.mBackToGameBtn.node.active = currentPlayer.isLeave;
-            
-        },this);
-
-        GameData.GetInstance().AddListener("Data_GameResult",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            if(currentPlayer == null)
-            {
-                return;
-            }
-
-            this.mDealCardsBtn.node.active = _current.isLookCenterCard;
-        },this);
-        
-        GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
-        {
-            this.mDealCardsBtn.node.active = false;
-        },this);
-
-        GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
-        {
-            this.mDealCardsBtn.node.active = false;
-        },this);
+       
         
     }
     LateInit() 

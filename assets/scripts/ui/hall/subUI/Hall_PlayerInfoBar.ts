@@ -39,28 +39,7 @@ export class Hall_PlayerInfoBar extends BaseUI
     }
     RegDataNotify() 
     {
-        LocalPlayerData.GetInstance().AddListener("Data_Coin",(_current , _before)=>
-        {
-            this.mCoinBtn.SetTitle(_current);
-        },this);
-
-        LocalPlayerData.GetInstance().AddListener("Data_Diamond",(_current , _before)=>
-        {
-            this.mDiamondBtn.SetTitle(_current);
-        },this);
-
-        LocalPlayerData.GetInstance().AddListener("Data_PhotoUrl",(_current , _before)=>
-        {
-            if(_current == null || _current == "")
-            {
-                return;
-            }
-
-            this.LoadLocalHead(_current,(_spriteFrame)=>
-            {
-                this.mHead.spriteFrame = _spriteFrame;
-            });
-        },this);
+       
         
     }
     LateInit() 

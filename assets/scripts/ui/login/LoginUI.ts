@@ -87,22 +87,9 @@ export class LoginUI extends BaseUI
             {
                 return;
             }
-            if(_current.isComplete)
-            {
-                UIMgr.GetInstance().ChangeScene(SceneType.Hall);
-            }
-            else
-            {
-                this.ShowLayer("login","prefab/Login_SetUserInfo");
-            }
+            UIMgr.GetInstance().ChangeScene(SceneType.Hall);
         },this);
-        CommonNotify.GetInstance().AddListener("Data_SetUserInfoSuccess",(_current , _before)=>
-        {
-            if(_current)
-            {
-                UIMgr.GetInstance().ChangeScene(SceneType.Hall);
-            }
-        },this);
+
     }
     LateInit() 
     {
@@ -114,7 +101,6 @@ export class LoginUI extends BaseUI
 
     CustmoerDestory() 
     {
-        CommonNotify.GetInstance().ClearData();
     }
 
     private OnLoginBtn()

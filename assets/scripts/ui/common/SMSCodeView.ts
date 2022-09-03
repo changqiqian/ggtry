@@ -5,8 +5,7 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
-import { LoginType, Network, SmsCodeType } from '../../network/Network';
-import { LoginData } from '../login/LoginData';
+
 import { BaseButton } from './BaseButton';
 import { InputCodeIndicator } from './InputCodeIndicator';
 import { QuickInputNumView } from './QuickInputNumView';
@@ -64,7 +63,6 @@ export class SMSCodeView extends BaseUI
 
         this.mResendBtn.SetClickCallback(()=>
         {
-            Network.GetInstance().SendGetSMSCode(this.mPhoneNum.string, CommonNotify.GetInstance().Data_SmsCodeType);
             this.StartCountDown();
         });
 
@@ -75,26 +73,6 @@ export class SMSCodeView extends BaseUI
             {
                 UIMgr.GetInstance().ShowToast(Localization.GetString("00005"));
                 return;
-            }
-
-            let currentSmsType = CommonNotify.GetInstance().Data_SmsCodeType;
-            switch(currentSmsType)
-            {
-                case SmsCodeType.USER_REGISTER:
-                    {
-                        Network.GetInstance().SendVerifyCode(this.mPhoneNum.string , currentInput);
-                    }
-                    break;
-                case SmsCodeType.USER_Login:
-                    {
-                        Network.GetInstance().SendLogin( this.mPhoneNum.string , currentInput , LoginType.SmsCode);
-                    }
-                    break;
-                case SmsCodeType.USER_RESET_PWD:
-                    {
-                        Network.GetInstance().SendVerifyCode(this.mPhoneNum.string , currentInput);
-                    }
-                    break;
             }
            
         });
@@ -109,35 +87,6 @@ export class SMSCodeView extends BaseUI
             this.mPhoneNum.string = fullPhoneNumber;
         },this);
 
-        CommonNotify.GetInstance().AddListener("Data_SmsCodeVerifySuccess",(_current , _before)=>
-        {
-            if(this.node.active == false)
-            {
-                return;
-            }
-
-            let currentSmsType = CommonNotify.GetInstance().Data_SmsCodeType;
-            switch(currentSmsType)
-            {
-                case SmsCodeType.USER_REGISTER:
-                    {
-                        this.ShowLayer("common" , "prefab/ResetPwdView");
-                        this.Show(false);
-                    }
-                    break;
-                case SmsCodeType.USER_Login:
-                    {
-
-                    }
-                    break;
-                case SmsCodeType.USER_RESET_PWD:
-                    {
-                        this.ShowLayer("common" , "prefab/ResetPwdView");
-                        this.Show(false);
-                    }
-                    break;
-            }
-        },this);
         
     }
     LateInit() 

@@ -51,8 +51,6 @@ export class Login_SetUserInfo extends BaseUI
                 return
             }
 
-            LocalPlayerData.GetInstance().Data_NickName = this.mNickNameEditBox.string;
-            Network.GetInstance().SendSetUserInfo(this.mNickNameEditBox.string,Gender.Male, "" , headPicUrl);
         });
     }
     RegDataNotify() 

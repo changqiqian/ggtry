@@ -37,10 +37,7 @@ export class Me_Top extends BaseUI
     }
     RegDataNotify() 
     {
-        LocalPlayerData.GetInstance().AddListener("Data_NickName",(_current , _before)=>
-        {
-            this.mNickName.string = _current;
-        },this);
+       
 
         LocalPlayerData.GetInstance().AddListener("Data_Uid",(_current , _before)=>
         {

@@ -1,7 +1,6 @@
 import { _decorator, Component, Node, Label, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { UIMgr } from '../../base/UIMgr';
-import { GameType, Network } from '../../network/Network';
 import { HallData, Mtt_InfoSubPage } from '../hall/HallData';
 import { Mtt_PlayerRankItem } from './Mtt_PlayerRankItem';
 const { ccclass, property } = _decorator;
@@ -41,41 +40,9 @@ export class Mtt_PlayersPage extends BaseUI
             }
         },this);
 
-        HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
-        {
-            this.mPlayerAmount.string = _current.statusInfo.totalUser.toString();
-            this.mPrizeLevel.string = _current.dynamicReward.dynamicPercent+"%";
-        },this);
 
-        HallData.GetInstance().AddListener("Data_MttPlayerList",(_current , _before)=>
-        {
-            this.mCurrentPage = _current.Index;
-            this.mTotalData = _current.total;
 
-            if(_current.users == null)
-            {
-                return;
-            }
-            
-            for(let i = 0 ; i < _current.users.length ; i++)
-            {
-                let currentData =  _current.users[i];
-                let index = this.mCurrentUserData.findIndex((_item) => _item.userId === currentData.userId);
-                if(index < 0) //去重
-                {
-                    this.mCurrentUserData.push(currentData);
-                    this.LoadPrefab("mttPage","prefab/Mtt_PlayerRankItem",(_prefab)=>
-                    {
-                        let playerItem = instantiate(_prefab);
-                        this.mScrollView.content.addChild(playerItem);
-                        let script = playerItem.getComponent(Mtt_PlayerRankItem);
-                        let bigBlind = HallData.GetInstance().Data_MttMatchDetails.statusInfo.curBlind * 2;
-                        script.InitWithData(currentData.userId , currentData.photoUrl , currentData.nickname ,
-                            currentData.tableId , currentData.score , bigBlind , i );
-                    });
-                }
-            }
-        },this);
+     
     }
     LateInit() 
     {
@@ -99,8 +66,7 @@ export class Mtt_PlayersPage extends BaseUI
 
     Refresh()
     {
-        Network.GetInstance().SendGetMttPlayerList(GameType.Mtt, HallData.GetInstance().Data_CurrentMttMatchID, 
-        this.mCurrentPage , this.mPageCount);
+
     }
 
     ResetPage()

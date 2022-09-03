@@ -5,7 +5,7 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
-import { Network, SmsCodeType } from '../../network/Network';
+import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 
 const { ccclass, property } = _decorator;
@@ -55,8 +55,7 @@ export class ForgetPwd extends BaseUI {
             let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
-            CommonNotify.GetInstance().Data_SmsCodeType = SmsCodeType.USER_RESET_PWD;
-            Network.GetInstance().SendGetSMSCode(fullPhoneNumber, SmsCodeType.USER_RESET_PWD);
+
             
         });
     }
@@ -68,16 +67,7 @@ export class ForgetPwd extends BaseUI {
             this.mAreaCodeBtn.SetTitle(GameConfig.AreaCodeList[_current].areaCode);
         },this);
 
-        CommonNotify.GetInstance().AddListener("Data_SmsCodeSuccess",(_current , _before)=>
-        {
-            if(_current)
-            {
-                if(CommonNotify.GetInstance().Data_SmsCodeType == SmsCodeType.USER_RESET_PWD)
-                {
-                    this.ShowLayer("common","prefab/SMSCodeView");
-                }
-            }
-        },this);
+
     }
     LateInit() 
     {

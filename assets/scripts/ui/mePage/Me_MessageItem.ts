@@ -24,10 +24,6 @@ export class Me_MessageItem extends BaseUI {
     BindUI() {
         this.mMessageItemBtn.SetClickCallback(() => {
             this.ShowLayer('mePage', 'prefab/Me_MessageDetail');
-            console.log('data:' + JSON.stringify(this._data));
-            HallData.GetInstance().Data_MeMessagDetailId = this._data.mid;
-            HallData.GetInstance().Data_MeMessagDetailData = this._data.content;
-            Network.GetInstance().SendMessageIsRead(this._data.mode, this._data.mid);
         });
     }
     RegDataNotify() {}

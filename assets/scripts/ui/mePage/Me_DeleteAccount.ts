@@ -51,39 +51,8 @@ export class Me_DeleteAccount extends BaseUI {
         });
     }
     RegDataNotify() {
-        LocalPlayerData.GetInstance().AddListener(
-            'Data_UserName',
-            (_current, _before) => {
-                let index = _current.indexOf(' ');
-                let phoneNo = _current;
-                let phoneNoLen = phoneNo.length;
-                let phoneNoLast4 = phoneNo.substr(phoneNoLen - 4, 4);
-                let phoneNoFirst6 = phoneNo.substr(0, index);
-                this.mPhoneNumber.string = phoneNoFirst6 + ' **** ' + phoneNoLast4;
-            },
-            this
-        );
-        HallData.GetInstance().AddListener(
-            'Data_LogOffCode',
-            (_current, _before) => {
-                if (_current != null) {
-                    this.StartCountDown();
-                }
-            },
-            this
-        );
-        HallData.GetInstance().AddListener(
-            'Data_DeleteAccountData',
-            (_current, _before) => {
-                if (_current.code === 1) {
-                    GameConfig.ClearToken();
-                    Network.GetInstance().SendActionData('mine', 'change_account', []);
-                    Network.GetInstance().ClearWS();
-                    UIMgr.GetInstance().ChangeScene(SceneType.Login);
-                }
-            },
-            this
-        );
+
+
     }
     LateInit() {}
 

@@ -49,19 +49,7 @@ export class Me_DeleteAccountDetect extends BaseUI {
     }
 
     RegDataNotify() {
-        HallData.GetInstance().AddListener(
-            'Data_DetectCanDeleteData',
-            (_current, _before) => {
-                this.RegisterDayText.string = '3.账号注册时长需超过' + _current.registerDays + '天';
-                this.mMatchOkIcon.active = _current.hasMatchIsOk;
-                this.mMatchNotOkIcon.active = !_current.hasMatchIsOk;
-                this.mClubOkIcon.active = _current.hasClubSsOk;
-                this.mClubNotOkIcon.active = !_current.hasClubSsOk;
-                this.mRegisterTimeOkIcon.active = _current.registerTimeIsOk;
-                this.mRegisterTimeNotOkIcon.active = !_current.registerTimeIsOk;
-            },
-            this
-        );
+
     }
 
     LateInit() {}

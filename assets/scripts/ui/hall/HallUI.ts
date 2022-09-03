@@ -17,7 +17,6 @@ export class HallUI extends BaseUI
     InitParam() 
     {
         HallData.GetInstance().RegisteMsg();
-        LocalPlayerData.GetInstance().ClearData();
     }
     BindUI() 
     {

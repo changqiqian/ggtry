@@ -5,7 +5,7 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
-import { Network, SmsCodeType } from '../../network/Network';
+import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 const { ccclass, property } = _decorator;
 
@@ -59,8 +59,7 @@ export class Login_SignView extends BaseUI
             let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
-            CommonNotify.GetInstance().Data_SmsCodeType = SmsCodeType.USER_REGISTER;
-            Network.GetInstance().SendGetSMSCode(fullPhoneNumber, SmsCodeType.USER_REGISTER);
+   
             
         });
     }
@@ -71,16 +70,7 @@ export class Login_SignView extends BaseUI
             this.mAreaCodeBtn.SetTitle(GameConfig.AreaCodeList[_current].areaCode);
         },this);
 
-        CommonNotify.GetInstance().AddListener("Data_SmsCodeSuccess",(_current , _before)=>
-        {
-            if(_current)
-            {
-                if(CommonNotify.GetInstance().Data_SmsCodeType == SmsCodeType.USER_REGISTER)
-                {
-                    this.ShowLayer("common","prefab/SMSCodeView");
-                }
-            }
-        },this);
+
     }
     LateInit() 
     {

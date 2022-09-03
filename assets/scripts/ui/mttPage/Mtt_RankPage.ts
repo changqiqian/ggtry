@@ -80,61 +80,7 @@ export class Mtt_RankPage extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_MttRankData",(_current , _before)=>
-        {
-
-            if(_current.rankingConfig == null) 
-            {
-                this.mBottom.active = false;
-                return 
-            }
-            let rewardUrl = _current.rankingConfig.rewardImg
-            if(rewardUrl && rewardUrl != '') 
-            {
-                //rewardUrl
-            }
-
-
-
-            if(_current.mine == null || _current.mine.userId == '')
-            {
-                this.mBottom.active = false;
-                return;
-            } 
-            this.mBottom.active = true;
-            this.LoadLocalHead(parseInt(_current.mine.photo),(_spriteFrame)=>
-            {
-                this.mHead.spriteFrame = _spriteFrame;
-            });
-            
-            let lastPlayerScore = 0;
-            if(_current.rankingList && _current.rankingList.length > 0) 
-            {
-                lastPlayerScore = _current.rankingList[_current.rankingList.length - 1].score;
-            }
-            let willScore = lastPlayerScore - _current.mine.score;
-            this.mWillScoreDescribe.active = willScore > 0;
-            if(willScore > 0)
-            {
-                this.mWillScore.string = willScore + "";
-            }
-            else
-            {
-                this.mWillScore.string = "--";
-            }
-
-            this.mName.string = _current.mine.nickName;
-            this.mPowerScore.string = _current.mine.score;
-            if(_current.mine.rankingId == 0)
-            {
-                this.mRank.string = "--";
-            }
-            else
-            {
-                this.mRank.string = _current.mine.rankingId + "";
-            }
-            
-        },this);
+      
     }
     LateInit() 
     {

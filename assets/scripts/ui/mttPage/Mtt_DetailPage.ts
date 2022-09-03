@@ -73,28 +73,8 @@ export class Mtt_DetailPage extends BaseUI
     }
     RegDataNotify() 
     {        
-        HallData.GetInstance().AddListener("Data_MttDismiss",(_current , _before)=>
-        {
-            this.Show(false);
-        },this);
-        HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
-        {
-            this.mMatchName.string = _current.matchConfig.matchName;
-            this.mGiftDescribe.string = _current.matchConfig.strapConfig.rewardDesc;
-            if(_current.matchConfig.strapConfig.rewardDesc != "")
-            {
-                this.mGiftTag.active = true;
-            }
-            else
-            {
-                this.mGiftTag.active = false;
-            }
-            this.LoadRemoteSprite(_current.matchConfig.strapConfig.backgroundImg,(_spriteFrame)=>
-            {
-                this.mBG.spriteFrame = _spriteFrame;
-            });
 
-        },this);
+
 
 
         

@@ -5,7 +5,7 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
-import { Network, SmsCodeType } from '../../network/Network';
+import { Network } from '../../network/Network';
 import { LoginData } from '../login/LoginData';
 import { BaseButton } from './BaseButton';
 import { ToggleBtn } from './ToggleBtn';
@@ -102,25 +102,7 @@ export class ResetPwdView extends BaseUI
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.GetInstance().Data_LastInputPhoneNum;
 
-            let currentSmsType = CommonNotify.GetInstance().Data_SmsCodeType;
-            switch(currentSmsType)
-            {
-                case SmsCodeType.USER_REGISTER:
-                    {
-                        Network.GetInstance().SendRegister(fullPhoneNumber,this.mPwdEditbox.string,fullPhoneNumber,"");
-                    }
-                    break;
-                case SmsCodeType.USER_Login:
-                    {
 
-                    }
-                    break;
-                case SmsCodeType.USER_RESET_PWD:
-                    {
-                        Network.GetInstance().SendResetPwd(fullPhoneNumber , this.mPwdEditbox.string);
-                    }
-                    break;
-            }
             
         });
     }

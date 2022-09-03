@@ -34,15 +34,8 @@ export class cb_BottomArea extends BaseUI {
         },this);
 
 
-        LocalPlayerData.GetInstance().AddListener("Data_Coin",(_current , _before)=>
-        {
-            this.mMoney.string = _current;
-        },this);
 
-        LocalPlayerData.GetInstance().AddListener("Data_NickName",(_current , _before)=>
-        {
-            this.mPlayerInfo.SetName(_current);
-        },this);
+
     }
     LateInit() {
 

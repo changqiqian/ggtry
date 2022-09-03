@@ -1,10 +1,5 @@
 import { _decorator, Component, Node } from 'cc';
-import { BaseUI } from '../../base/BaseUI';
-import { Localization } from '../../base/Localization';
-import { LocalPlayerData } from '../../base/LocalPlayerData';
-import { SceneType, UIMgr } from '../../base/UIMgr';
-import { CommonNotify } from '../../CommonNotify';
-import { GameType, Network } from '../../network/Network';
+
 import { TipsWindow } from '../common/TipsWindow';
 import { HallData } from '../hall/HallData';
 import { GameBase } from './GameBase';
@@ -18,32 +13,12 @@ export class Game_Mtt extends GameBase
     RegDataNotify() 
     {
         super.RegDataNotify();
-        GameData.GetInstance().AddListener("Data_ErrorAndBackHall",(_current , _before)=>
-        {
-            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
-            {
-                let tempScript = _script as TipsWindow;
-                let tips = Localization.GetString("00053");
-                tempScript.SetTips(tips);
-                tempScript.ShowConfirmBtnOnly();
-                tempScript.SetCallback(()=>
-                {
-                    UIMgr.GetInstance().ChangeScene(SceneType.Hall);
-                })
-            })
-        },this);
-
-        GameData.GetInstance().AddListener("Data_MttGameResult",(_current , _before)=>
-        {
-            this.ShowLayer("gamePage","prefab/Game_MttResultLayer");
-        },this);
-
+       
 
     }
 
     LateInit() 
     {
-        Network.GetInstance().SendRefreshMttInfo(LocalPlayerData.GetInstance().Data_CurrentUsingMttMatchID);
     }
 
     InitOtherUI()
@@ -55,8 +30,6 @@ export class Game_Mtt extends GameBase
 
     GetGameInfoMsg()
     {
-        let matchID = GameData.GetInstance().Data_MatchConfig.matchId;
-        Network.GetInstance().SendMttGetRoomInfo(GameType.Mtt , matchID , HallData.GetInstance().Data_IsBackToGame);
     }
 
 

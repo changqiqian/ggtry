@@ -5,7 +5,7 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
-import { LoginType, Network } from '../../network/Network';
+import {  Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { ToggleBtn } from '../common/ToggleBtn';
 import { LoginData } from './LoginData';
@@ -104,7 +104,6 @@ export class Login_LoginViewPwd extends BaseUI {
             let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
-            Network.GetInstance().SendLogin(fullPhoneNumber, password, LoginType.Password);
         });
  
         this.mSMSLoginBtn.SetClickCallback(()=>

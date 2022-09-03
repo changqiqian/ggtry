@@ -1,15 +1,11 @@
 import { _decorator, Component, Node, Label, instantiate, Vec3, view } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Combiantion } from '../../../base/Calculator';
-import { LocalPlayerData } from '../../../base/LocalPlayerData';
-import { Network } from '../../../network/Network';
 import { Poker } from '../../common/Poker';
-import { GameData, Game_ActionType } from '../GameData';
 import { Game_ActionTag } from './Game_ActionTag';
 import { Game_AddTime } from './Game_AddTime';
 import { Game_BetAmount } from './Game_BetAmount';
-import { Game_MovingBigCard } from './Game_MovingBigCard';
-import { Game_MovingChip } from './Game_MovingChip';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_SelfUI')
@@ -41,8 +37,7 @@ export class Game_SelfUI extends BaseUI
         this.HideAllUI();
         this.mGame_AddTime.SetCallback(()=>
         {
-            let commandId = GameData.GetInstance().Data_DeskInfo.commandId;
-            Network.GetInstance().SendPlayerAction(Game_ActionType.Delay , 0 , commandId);
+
         });
 
         for(let i = 0 ; i < this.mCards.children.length ; i++)
@@ -55,230 +50,7 @@ export class Game_SelfUI extends BaseUI
     {
 
         
-        GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            if(currentPlayer == null)
-            {
-                this.node.active = false;
-                return;
-            }
-            this.node.active = true;
-
-            let deskInfo = GameData.GetInstance().Data_DeskInfo;
-            this.HideAllUI();
-            if(currentPlayer.isSendHandCard)
-            {
-                this.ShowCards(currentPlayer.cards);
-            }
-            let showAddTimeBtn = currentPlayer.userInfo.userId == deskInfo.curTurnUserId && deskInfo.isCanDelay;
-            this.UpdateAddTimeBtn(showAddTimeBtn , deskInfo.delaySpend);
-            this.Bet(currentPlayer.tableScore);
-            this.SetActionTag(currentPlayer.operateCard);
-            this.UpdateDealer(deskInfo.dUserId == currentPlayer.userInfo.userId);
-            this.UpdateConbination(currentPlayer.cardType);
-            this.UpdateMoney(currentPlayer.userInfo.score , deskInfo);
-        },this);
-        GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            this.node.active = false;
-            if(currentPlayer == null)
-            {
-                return;
-            }
-            this.node.active = true;
-
-            if(currentPlayer.userInfo.userId == _current.sUserId)
-            {
-                let sb = _current.baseScore;
-                this.Bet(sb);
-            }
-            else if(currentPlayer.userInfo.userId == _current.bUserId)
-            {
-                let bb = _current.baseScore * 2;
-                this.Bet(bb);
-            }
-            else 
-            {
-                //straddle
-            }
-            this.UpdateAddTimeBtn(false , "");
-            //this.Bet(-1);
-            this.SetActionTag(Game_ActionType.None);
-            this.ShowCards(_current.handCard);
-            this.UpdateConbination(Combiantion.None);
-            this.UpdateDealer(_current.dUserId == currentPlayer.userInfo.userId);
-        },this);
-        GameData.GetInstance().AddListener("Data_WhosTurn",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            if(currentPlayer == null)
-            {
-                return;
-            }
-
-            let showAddTimeBtn = (currentPlayer.userInfo.userId == _current.userId) && _current.isCanDelay;
-            this.UpdateAddTimeBtn(showAddTimeBtn , _current.delaySpend);
-            let deskInfo = GameData.GetInstance().Data_DeskInfo;
-            this.UpdateMoney(currentPlayer.userInfo.score , deskInfo);
-        },this);
-
-        GameData.GetInstance().AddListener("Data_PlayerAction",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            if(currentPlayer == null)
-            {
-                return;
-            }
-
-            if(currentPlayer.userInfo.userId != _current.userId)
-            {
-                return;
-            }
-
-            if(_current.gameOpType == Game_ActionType.Delay)
-            {
-                this.UpdateAddTimeBtn(_current.isCanDelay , _current.delaySpend);
-            }
-            else
-            {
-                this.UpdateAddTimeBtn(false , "");
-                this.SetActionTag(_current.gameOpType);
-                this.Bet(_current.tableScore);
-                this.mMoney.node.active = false;
-                if(_current.gameOpType == Game_ActionType.Fold)
-                {
-                    this.LoadPrefab("gamePage" , "prefab/Game_MovingBigCard" , (_prefab)=>
-                    {
-                        let tempNode = instantiate(_prefab);
-                        this.node.addChild(tempNode);
-                        let tempScript = tempNode.getComponent(Game_MovingBigCard);
-                        let startWolrdPos = this.mCards.worldPosition;
-                        let screenSize = view.getVisibleSize();
-                        let endWolrdPos = new Vec3(screenSize.width/2, screenSize.height/2 , 0);
-                        tempScript.FlyTo(startWolrdPos , endWolrdPos);
-                    });
-                }
-                
-                if(_current.gameOpType == Game_ActionType.Call || 
-                    _current.gameOpType == Game_ActionType.Raise ||
-                    _current.gameOpType == Game_ActionType.Allin)
-                {
-                    this.LoadPrefab("gamePage" , "prefab/Game_MovingChip" , (_prefab)=>
-                    {
-                        let tempNode = instantiate(_prefab);
-                        this.node.addChild(tempNode);
-                        let tempScript = tempNode.getComponent(Game_MovingChip);
-                        let startWolrdPos = this.mCards.worldPosition;
-                        let endWolrdPos = this.mGame_BetAmount.node.worldPosition;
-                        tempScript.FlyToBet(startWolrdPos , endWolrdPos);
-                    });
-                }
-            }
-
-        },this);
-        
-        GameData.GetInstance().AddListener("Data_UpdatePlayerScore",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            if(currentPlayer == null)
-            {
-                return;
-            }
-            this.mMoney.string = _current.score + "";
-        },this);
-
-        GameData.GetInstance().AddListener("Data_DecideConbination",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            if(currentPlayer == null)
-            {
-                return;
-            }
-            this.UpdateConbination(_current.cardType);
-            
-            
-        },this);
-
-
-        GameData.GetInstance().AddListener("Data_SendPublicCards",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            if(currentPlayer == null)
-            {
-                return;
-            }
-            
-            if(currentPlayer.tableScore > 0) //收筹码
-            {
-                GameData.GetInstance().Data_CollectChipFromPlayer = this.mGame_BetAmount.node.worldPosition;
-            }
-
-            this.Bet(-1);
-            this.SetActionTag(Game_ActionType.None);
-            this.UpdateAddTimeBtn(false,"");
-        },this);
-
-        GameData.GetInstance().AddListener("Data_GameResult",(_current , _before)=>
-        {
-            let currentPlayer = GameData.GetInstance().FindPlayerByUserId(LocalPlayerData.GetInstance().Data_Uid);
-            if(currentPlayer == null)
-            {
-                return;
-            }
-
-            this.Bet(-1);
-            this.SetActionTag(Game_ActionType.None);
-            this.UpdateAddTimeBtn(false,"");
-            if(currentPlayer.tableScore > 0) //收筹码
-            {
-                GameData.GetInstance().Data_CollectChipFromPlayer = this.mGame_BetAmount.node.worldPosition;
-            }
-
-            if(_current.showInfo != null)
-            {
-                for(let i = 0 ; i < _current.showInfo.length ; i++)
-                {
-                    let currentShowData = _current.showInfo[i];
-                    if(currentPlayer.userInfo.userId == currentShowData.userId)
-                    {
-                        this.ShowCards(currentShowData.cards);
-                    }
-                }
-    
-            }
-
-            for(let i = 0 ; i < _current.cardList.length ; i++)
-            {
-                let currentCardData = _current.cardList[i];
-                if(currentPlayer.userInfo.userId == currentCardData.userId)
-                {
-                    
-                }
-            }
-
-            for(let i = 0 ; i < _current.winList.length ; i++)
-            {
-                let currentWinData = _current.winList[i];
-                if(currentPlayer.userInfo.userId == currentWinData.userId)
-                {
-                }
-            }
-
-            if(_current.loseList != null)
-            {
-                for(let i = 0 ; i < _current.loseList.length ; i++)
-                {
-                    let currentLoseData = _current.loseList[i];
-                    if(currentPlayer.userInfo.userId == currentLoseData.userId)
-                    {
-                    }
-                }
-    
-            }
-
-        },this);
+       
         
     }
     LateInit() 
@@ -316,13 +88,10 @@ export class Game_SelfUI extends BaseUI
             this.mGame_AddTime.SetButtonTitle(_delaySpend);
         }
     }
-    SetActionTag(_actionType : Game_ActionType)
+    SetActionTag()
     {
-        this.mGame_ActionTag.SetType(_actionType);
-        if(_actionType == Game_ActionType.Fold)
-        {
-            this.Fold();
-        }
+        this.mGame_ActionTag.SetType();
+
     }
 
 
@@ -341,21 +110,9 @@ export class Game_SelfUI extends BaseUI
         } 
     }
 
-    ShowCards(_cards : Array<number>)
+    ShowCards()
     {
-        this.mCards.active = true;
-        for(let i = 0 ; i < _cards.length ; i++)
-        {
-            let data = _cards[i];
-            if(data <= 0)
-            {
-                continue;
-            }
-            let currentCard = this.mCards.children[i].getComponent(Poker);
-            currentCard.ShowBack();
-            currentCard.SetFrontByServerData(data);
-            currentCard.FlipToFront();
-        }
+
     }
 
     ClickPoker(_index : number)
@@ -383,18 +140,5 @@ export class Game_SelfUI extends BaseUI
         this.mConbination.string = Poker.GetConbinationName(_conbination);
     }
 
-    UpdateMoney(_amount : number , _deskInfo : any)
-    {
-        if(_deskInfo.curTurnUserId == LocalPlayerData.GetInstance().Data_Uid)
-        {
-            this.mMoney.node.active = true;
-        }
-        else
-        {
-            this.mMoney.node.active = false;
-        }
-        
-        this.mMoney.string = _amount + "";
-    }
 }
 

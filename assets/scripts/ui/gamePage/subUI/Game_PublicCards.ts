@@ -19,56 +19,7 @@ export class Game_PublicCards extends BaseUI
     }
     RegDataNotify() 
     {
-        GameData.GetInstance().AddListener("Data_CheckPublicCards",(_current , _before)=>
-        {
-            this.mAudio.play();
-            let nowCardList = this.GetCurrentCardList();
-            for(let i = 0 ; i < _current.length ; i++)
-            {
-                let currentData = _current[i];
-                let index = nowCardList.findIndex((_item) => _item === currentData);
-                if(index < 0)
-                {
-                    this.DealOnCard(currentData);
-                }
-            }
 
-        },this);
-        GameData.GetInstance().AddListener("Data_SendPublicCards",(_current , _before)=>
-        {
-            this.mAudio.play();
-            for(let i = 0 ; i < _current.centerCard.length ; i++)
-            {
-                let currentData = _current.centerCard[i];
-                this.DealOnCard(currentData);
-            }
-        },this);
-        GameData.GetInstance().AddListener("Data_GameStart",(_current , _before)=>
-        {
-            this.ClearPublicCards();
-        },this);
-
-        GameData.GetInstance().AddListener("Data_EnterGame",(_current , _before)=>
-        {
-            let deskInfo = GameData.GetInstance().Data_DeskInfo;
-            if(deskInfo.centerCards == null || deskInfo.centerCards.length == 0)
-            {
-                this.ClearPublicCards();
-            }
-            else
-            {
-                for(let i = 0 ; i < deskInfo.centerCards.length ; i++)
-                {
-                    let currentCard = deskInfo.centerCards[i];
-                    if(currentCard <= 0)
-                    {
-                        continue;
-                    }
-                    this.DealOnCard(currentCard);
-                }
-            }
-           
-        },this);
 
     }
     LateInit() 

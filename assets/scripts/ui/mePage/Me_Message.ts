@@ -4,8 +4,7 @@ import { Localization } from '../../base/Localization';
 import { HallData, Me_MessageSubPage } from '../hall/HallData';
 import { BaseButton } from '../common/BaseButton';
 import { ToggleBtn } from '../common/ToggleBtn';
-import { Network } from '../../network/Network';
-import { Me_MessageItem } from './Me_MessageItem';
+
 
 const { ccclass, property } = _decorator;
 
@@ -55,18 +54,9 @@ export class Me_Message extends BaseUI {
             current.SetDataNotify(HallData.GetInstance(), 'Data_MeMessageSubPage', i);
         }
 
-        Network.GetInstance().SendGetMessageAllRead();
     }
     RegDataNotify() {
-        HallData.GetInstance().AddListener(
-            'Data_MeMessageReadAllRead',
-            (_current, _before) => {
-                this.mAnnouncementDot.active = _current.sysNoRead;
-                this.mMessageDot.active = _current.selfNoRead;
-            },
-            this
-        );
-
+       
         HallData.GetInstance().AddListener(
             'Data_MeMessageSubPage',
             (_current, _before) => {
@@ -76,39 +66,12 @@ export class Me_Message extends BaseUI {
             },
             this
         );
-        HallData.GetInstance().AddListener(
-            'Data_MeMessageData',
-            (_current, _before) => {
-                console.log('有资料变化罗');
-                let itemList = _current.list;
-                if (!itemList || itemList.length === 0) {
-                    this.mIsLastPage = true;
-                    return;
-                }
-
-                for (let i = 0; i < itemList.length; i++) {
-                    let currentData = itemList[i];
-                    let index = this.mCurrentData.findIndex((_item) => _item.mid === currentData.mid);
-                    if (index < 0) {
-                        //去重
-                        this.mCurrentData.push(currentData);
-                        this.LoadPrefab('mePage', 'prefab/Me_MessageItem', (_prefab) => {
-                            let playerItem = instantiate(_prefab);
-                            this.mScrollView.content.addChild(playerItem);
-                            let script = playerItem.getComponent(Me_MessageItem);
-                            script.InitWithData(currentData);
-                        });
-                    }
-                }
-            },
-            this
-        );
+        
     }
     LateInit() {}
     CustmoerDestory() {}
     Refresh() {
         this.mCurrentPage++;
-        Network.GetInstance().SendMessageInfo(HallData.GetInstance().Data_MeMessageSubPage + 1, this.mCurrentPage, this.mPageCount);
     }
 
     OnDragBottom() {

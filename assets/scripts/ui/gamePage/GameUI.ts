@@ -20,14 +20,14 @@ export class GameUI extends BaseUI
     }
     BindUI() 
     {
-        if(LocalPlayerData.GetInstance().Data_CurrentUsingMttMatchID)
-        {
-            this.AddSubView("gamePage","prefab/Game_Mtt");
-        }
-        else
-        {
-            this.AddSubView("gamePage","prefab/Game_Cash");
-        }
+        // if(LocalPlayerData.GetInstance().Data_CurrentUsingMttMatchID)
+        // {
+        //     this.AddSubView("gamePage","prefab/Game_Mtt");
+        // }
+        // else
+        // {
+        //     this.AddSubView("gamePage","prefab/Game_Cash");
+        // }
     }
     
     RegDataNotify() 

@@ -13,21 +13,13 @@ export class Me_MessageDetail extends BaseUI {
 
     InitParam() {}
     BindUI() {
-        console.log('data:' + HallData.GetInstance().Data_MeMessagDetailData);
-        this.mDetail.string = HallData.GetInstance().Data_MeMessagDetailData;
 
         this.mBackBtn.SetClickCallback(() => {
             this.Show(false);
         });
     }
     RegDataNotify() {
-        HallData.GetInstance().AddListener(
-            'Data_MeMessagDetailData',
-            (_current, _before) => {
-                this.mDetail.string = _current;
-            },
-            this
-        );
+
     }
     LateInit() {}
     CustmoerDestory() {}

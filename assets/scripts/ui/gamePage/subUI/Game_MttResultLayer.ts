@@ -30,28 +30,7 @@ export class Game_MttResultLayer extends BaseUI
     }
     RegDataNotify()
     {
-        GameData.GetInstance().AddListener("Data_MttGameResult",(_current , _before)=>
-        {
-            let selfRank = _current.result.ranking;            
-            if(selfRank == 0 || selfRank > 3)
-            {
-                this.mIcon.node.active = false;
-                this.mTitle.string = Localization.GetString("00084");
-                this.mDescribe.string = Localization.GetString("00086");
-            }
-            else
-            {
-                this.mIcon.node.active = true;
-                let picName = "Cup" + selfRank;
-                this.LoadSprite("common","texture/" + picName , (_spriteFrame)=>
-                {
-                    this.mIcon.spriteFrame = _spriteFrame;
-                })
-                this.mTitle.string = Localization.GetString("00083");
-                let rankDescribe = Localization.GetString("00085");
-                this.mDescribe.string = Localization.ReplaceString(rankDescribe , selfRank + "");
-            }
-        },this);
+       
     }
     LateInit()
     {

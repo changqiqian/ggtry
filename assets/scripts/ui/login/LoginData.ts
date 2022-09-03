@@ -1,5 +1,5 @@
 import { DataNotify } from "../../base/DataNotify";
-import { SmsCodeType } from "../../network/Network";
+
 
 
 export class LoginData extends DataNotify 
