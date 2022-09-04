@@ -23,7 +23,6 @@ export class Mtt_Main extends BaseUI
 
     onEnable()
     {
-        Network.GetInstance().SendGetMttList();
     }
 
     InitParam() 

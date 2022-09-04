@@ -28,14 +28,12 @@ export class Me_DeleteAccount extends BaseUI {
 
     InitParam() {}
     BindUI() {
-        Network.GetInstance().SendGetLogOffCode();
 
         this.mCloseBtn.SetClickCallback(() => {
             UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccount', false);
         });
         this.mReSendSmsBtn.SetClickCallback(() => {
             this.mReSendSmsBtn.node.active = false;
-            Network.GetInstance().SendGetLogOffCode();
         });
         this.mDeleteBtn.SetClickCallback(() => {
             if (this.mSmsEditBox.string.length !== 6) {
@@ -47,7 +45,6 @@ export class Me_DeleteAccount extends BaseUI {
                 UIMgr.GetInstance().ShowToast(Localization.GetString('00005'));
                 return;
             }
-            Network.GetInstance().SendLogOff(this.mSmsEditBox.string);
         });
     }
     RegDataNotify() {

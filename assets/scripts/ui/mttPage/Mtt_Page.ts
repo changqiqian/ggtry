@@ -25,7 +25,6 @@ export class Mtt_Page extends BaseUI
     }
     LateInit() 
     {
-        Network.GetInstance().SendGetLunBoTu();
     }
 
     CustmoerDestory() 

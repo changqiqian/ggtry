@@ -45,7 +45,6 @@ export class Me_DeleteAccountDetect extends BaseUI {
             }
         });
 
-        Network.GetInstance().SendCheckIsCanDeleteAccount();
     }
 
     RegDataNotify() {

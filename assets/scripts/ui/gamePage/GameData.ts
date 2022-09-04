@@ -1,12 +1,7 @@
-import { _decorator, Component, Node, Vec3 } from 'cc';
+import { _decorator} from 'cc';
 import { DataNotify } from '../../base/DataNotify';
-import { Localization } from '../../base/Localization';
-import { UIMgr } from '../../base/UIMgr';
-import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
-const { ccclass, property } = _decorator;
 
-@ccclass('GameData')
 export class GameData extends DataNotify 
 {
     private static Instance:GameData = null;

@@ -67,7 +67,6 @@ export class Mtt_WeekRankPage extends BaseUI
     Refresh()
     {
         this.mCurrentPage++;
-        Network.GetInstance().SendGetMttRank(Mtt_RankSubPage.Week,this.mCurrentPage , this.mPageCount);
     }
 
     OnDragBottom() 

@@ -25,7 +25,6 @@ export class Me_Rank extends BaseUI {
         this.mBackBtn.SetClickCallback(() => {
             this.Show(false);
         });
-        Network.GetInstance().SendMyMttRank(this.mCurrentPage, null);
     }
     RegDataNotify() {
        
@@ -35,7 +34,6 @@ export class Me_Rank extends BaseUI {
 
     Refresh() {
         this.mCurrentPage++;
-        Network.GetInstance().SendMyMttRank(this.mCurrentPage, null);
     }
 
     OnDragBottom() {
