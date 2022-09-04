@@ -112,7 +112,7 @@ export class Game_Setting extends BaseUI
         LocalPlayerData.GetInstance().AddListener("Data_BBModeSetting",(_current , _before)=>
         {
             this.mBBModeToggle.SetShowStauts(_current);
-            GameConfig.SaveBBTroggle(_current);
+            GameConfig.SaveBBToggle(_current);
         },this);
     }
     LateInit()

@@ -14,33 +14,7 @@ export class GameConfig
     public static Version = "1.1.3"
     //发布的版本信息
     public static VersionInfo = "alpha"
-    //手机标识
-    public static Imei = "";                 
-     //手机型号
-    public static Model = "";               
-
-     //渠道
-    public static Channel = "德州";             
-    //渠道号
-    public static ChannelInt = 100;       
-    //经度
-    public static JingDu = 0;              
-    //维度
-    public static WeiDu = 0;       
-    
-    public static ClientInfo = 
-    {
-        appName : "",
-        deviceBrand : "",
-        deviceOsVersion : "",
-        ip : "",
-        deviceOs : "",
-        appVersion : "",
-        deviceId : "",
-        version  : "",
-        channel : "",
-    }
-
+      
     public static LOGIN_TOKEN;
     public static LOGIN_USER;
 
@@ -117,44 +91,28 @@ export class GameConfig
         GameConfig.WriteSimpleData("LOGIN_USER", _user);
     }
     
-    public static SaveBBTroggle(_value: boolean) 
+    public static SaveBBToggle(_value: boolean) 
     {
         let key = "SHOWBB_LOACAL_D";
-        GameConfig.WriteSimpleData(key, _value == true ? 1 : 0);
+        GameConfig.WriteSimpleData_Bool(key , _value);
     }
 
     public static GetBBToggleSetting() : boolean
     {
         let key = "SHOWBB_LOACAL_D";
-        let result = GameConfig.ReadSimpleData(key, null);
-        if(result == null)
-        {
-            return false;
-        }
-        return Number(result) == 1 ? true : false;
+        return GameConfig.ReadSimpleData_Bool(key);
     }
 
     public static SaveBGMSetting(_value : boolean)
     {
         let key = "BGM_SETTING";
-        GameConfig.WriteSimpleData(key, _value == true ? 1 : 0);
+        GameConfig.WriteSimpleData_Bool(key , _value);
     }
 
     public static GetBGMSetting() : boolean
     {
         let key = "BGM_SETTING";
-        let result = GameConfig.ReadSimpleData(key, null);
-        if(result == null)
-        {
-            return false;
-        }
-        return Number(result) == 1 ? true : false;
-    }
-
-
-    public static SavePlayBGMTroggle(_isChecked: number) 
-    {
-        GameConfig.WriteSimpleData('IS_CAN_PLAY_BGM', _isChecked);
+        return GameConfig.ReadSimpleData_Bool(key);
     }
 
 
@@ -272,38 +230,22 @@ export class GameConfig
     public static SaveCustomerSliderSetting(_value : boolean)
     {
         let key = "CUSTOMER_SLIDER";
-        GameConfig.WriteSimpleData(key, _value==true? 1: 0);
+        GameConfig.WriteSimpleData_Bool(key , _value);
     }
 
     public static GaveCustomerSliderSetting() : boolean
     {
         let key = "CUSTOMER_SLIDER";
-        let value = GameConfig.ReadSimpleData(key, null);
-        if(value == null)
-        {
-            return false;
-        }
-        return Number(value) == 1 ? true : false;
+        return GameConfig.ReadSimpleData_Bool(key);
     }
 
 
-    public static GetRandChar()
-    {
-        var str = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz23456789';
-        var randstr = "";
-        for (var i = 0; i < 9; i++) {
-            var index = Math.floor(str.length * Math.random());
-            randstr += str.charAt(index);
-        }
-        return randstr;
-    };
-
-    public static WriteSimpleData = function (key, data)
+    public static WriteSimpleData(key, data)
     {
         localStorage.setItem(key, data);
     };
     //读取简单数据
-    public static ReadSimpleData = function (key, defaultDate = null) 
+    public static ReadSimpleData(key, defaultDate = null) 
     {
         var data = localStorage.getItem(key);
         if(data === "null" || data === null) 
@@ -312,165 +254,20 @@ export class GameConfig
         }
         return data;
     };
+
+    public static WriteSimpleData_Bool(_key : string , _data : boolean)
+    {
+        GameConfig.WriteSimpleData(_key, _data == true ? 1 : 0);
+    }
+
+    public static ReadSimpleData_Bool(_key : string) : boolean
+    {
+        let result = GameConfig.ReadSimpleData(_key, null);
+        if(result == null)
+        {
+            return false;
+        }
+        return Number(result) == 1 ? true : false;
+    }
     
-
-    public static GetStrWithLen (str, len)
-    {
-        var playernName = str + '';
-     
-        var nameLength = 0;
-        var cutIndex = 0;
-         
-        for(var i=0; i<playernName.length; i++) 
-        {
-            if(escape(playernName[i]).indexOf("%u")<0)
-            {//不是中文
-                
-                if(playernName[i] >= 'A' && playernName[i] <= 'Z') 
-                {
-                    nameLength += 2;
-                } 
-                else 
-                {
-                    nameLength += 1;
-                }
-    
-            }
-            else
-            {//中文
-                nameLength += 3;
-            }
-            
-            if(nameLength > len)
-            {
-                cutIndex = i;
-                break;
-            }
-        }
-    
-        let strPoint = ''
-        if(nameLength <= len)
-        {
-            cutIndex = playernName.length;
-        } 
-        else 
-        {
-            strPoint = '...'
-        }
-        var finalName =  playernName.slice(0, cutIndex) + strPoint; //
-        return finalName;
-    };
-
-    //获取几分几秒对应的字符串时间显示格式  00:00
-    public static GetRestTime_M_S(_time :number ) : string
-    {
-        let mins = Math.floor(_time/60);
-        let seconds = (_time % 60);
-        let strMin = "";
-        let strSecond = "";
-        if (mins < 10) 
-        {
-            strMin = "0" + mins;
-        }
-        else
-        {
-            strMin = mins + "";
-        }
-
-        if (seconds < 10) 
-        {
-            strSecond = "0" + seconds;
-        }
-        else
-        {
-            strSecond = seconds + "";
-        }
-
-        let finalTime = strMin + ":" + strSecond;
-        return finalTime;
-    }
-
-    //获取对应的时间格式  xx天xx小时xx分xx秒
-    public static GetRestTime_D_H_M_S(_time) : string
-    {
-        let days = parseInt((_time / 60 / 60 / 24).toString() , 10); //计算剩余的天数 
-        let hours = parseInt((_time / 60 / 60 % 24).toString() , 10); //计算剩余的小时 
-        let minutes = parseInt((_time / 60 % 60).toString(), 10);//计算剩余的分钟 
-        let seconds = parseInt((_time % 60).toString(), 10);//计算剩余的秒数
-        let time = '';
-        
-        if (days > 0) 
-        {
-            if (days < 10)
-                time = days + "Days ";
-                if(days==1)
-                {
-                    time =days + "Day ";
-                }
-            else
-            {
-                time = days + "Days ";
-            }
-        }
-        if (hours > 0) 
-        {
-            if (hours < 10)
-            {
-                time += "0" + hours + ":";
-            }
-            else
-            {
-                time += hours + ":";
-            }
-        }
-        if (minutes > 0) 
-        {
-            if (minutes < 10)
-            {
-                time += "0" + minutes + ":";
-            }
-            else
-            {
-                time += minutes + ":";
-            }
-        } 
-        else 
-        {
-            time += "00:";
-        }
-        if (seconds > 0) 
-        {
-            if (seconds < 10)
-            {
-                time += "0" + seconds;
-            }
-            else
-            {
-                time += seconds;
-            }
-        } 
-        else 
-        {
-            time += "00";
-        }
-        return (time == "") ? "0" : time;
-    }
-
-    //老工程里面的配置，看不懂 我也不晓得啥子意思 只能照抄
-    public static BlindTime = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 15, 20, 25, 30, 40, 45, 50, 60];
-    public static TakeTime = [40, 40, 45, 40, 45, 42, 42, 48, 50, 48, 45, 40, 50, 60, 40, 45, 50, 60];
-    public static Level = [40, 20, 15, 10, 9, 7, 6, 6, 5, 4, 3, 2, 2, 2, 1, 1, 1, 1];
-
-    public static GetTakeTime(_time : number) : number
-    {
-        let index = GameConfig.BlindTime.findIndex((_item) => _item === _time);
-        return GameConfig.TakeTime[index];
-    }
-
-    public static GetLevel(_time : number) : number
-    {
-        let index = GameConfig.BlindTime.findIndex((_item) => _item === _time);
-        return GameConfig.Level[index];
-    }
-
 } 

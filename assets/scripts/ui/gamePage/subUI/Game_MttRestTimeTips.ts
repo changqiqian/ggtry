@@ -3,6 +3,7 @@ import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { GameConfig } from '../../../GameConfig';
 import { Network } from '../../../network/Network';
+import { Tool } from '../../../Tool';
 import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
@@ -53,7 +54,7 @@ export class Game_MttRestTimeTips extends BaseUI
         this.node.active = seconds >0;
         if(this.node.active)
         {
-            this.mCountDown.string = preffix + GameConfig.GetRestTime_M_S(seconds);
+            this.mCountDown.string = preffix + Tool.GetRestTime_M_S(seconds);
         }
         else
         {

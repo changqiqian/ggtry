@@ -81,7 +81,7 @@ export class Mtt_RegisterFee extends BaseUI
         this.mTicket.active = true;
         this.mTicketName.node.active = true;
         this.mTicketAmount.node.active = true;
-        this.mTicketName.string = GameConfig.GetStrWithLen(_ticketName, 35);
+        this.mTicketName.string = _ticketName;
         this.mTicketAmount.string = _ticketAmount;
     }
 }

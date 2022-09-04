@@ -5,7 +5,7 @@ import { Localization } from '../../base/Localization';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
-import { MsgID, MsgStatus, Network } from '../../network/Network';
+import {  Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { TipsWindow } from '../common/TipsWindow';
 import { LoadingData } from '../loading/LoadingData';
@@ -37,10 +37,7 @@ export class LoginUI extends BaseUI
     TestIpBtn: BaseButton = null;
     InitParam() 
     {
-        JsbScript.getDevicesImei();
-        JsbScript.getDevicesInfo();
         GameConfig.LoadToken();
-
     }
     BindUI() 
     {

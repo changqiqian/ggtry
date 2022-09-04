@@ -35,7 +35,6 @@ export class SettingWindow extends BaseUI {
         });
         this.mSwitchAccountBtn.SetClickCallback(() => {
             GameConfig.ClearToken();
-            Network.GetInstance().SendActionData('mine', 'change_account', []);
             Network.GetInstance().ClearWS();
             UIMgr.GetInstance().ChangeScene(SceneType.Login);
         });
@@ -59,13 +58,12 @@ export class SettingWindow extends BaseUI {
         LocalPlayerData.GetInstance().AddListener("Data_BBModeSetting",(_current , _before)=>
         {
             this.mBBModeToggle.SetShowStauts(_current);
-            GameConfig.SaveBBTroggle(_current);
+            GameConfig.SaveBBToggle(_current);
         },this);
         LocalPlayerData.GetInstance().AddListener("Data_BGMSetting",(_current , _before)=>
         {
             this.mBGMToggle.SetShowStauts(_current);
             GameConfig.SaveBGMSetting(_current);
-            Network.GetInstance().SendActionData('mine', 'setting_background_sound', [_current]);
         },this);
     }
 

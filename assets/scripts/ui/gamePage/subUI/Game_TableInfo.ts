@@ -2,6 +2,7 @@ import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { GameConfig } from '../../../GameConfig';
+import { Tool } from '../../../Tool';
 import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
@@ -57,7 +58,7 @@ export class Game_TableInfo extends BaseUI
         let preffix = Localization.GetString("00061");
         if(seconds >=0)
         {
-            this.mLeftTime.string = preffix + GameConfig.GetRestTime_M_S(seconds);
+            this.mLeftTime.string = preffix + Tool.GetRestTime_M_S(seconds);
         }
         else
         {
