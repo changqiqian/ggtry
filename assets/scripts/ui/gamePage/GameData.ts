@@ -47,6 +47,5 @@ export enum Game_ChattingSubLayer
 {
     ChatHistory,
     Shortcut,
-    Emoji,
 }
 

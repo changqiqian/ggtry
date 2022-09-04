@@ -40,11 +40,11 @@ export class Emoji_Item extends BaseUI
 
     }
 
-    public InitWithData(_emoji : Emoji , _costAmount : number)
+    public InitWithData(_type : Emoji , _costAmount : number)
     {
-        this.mEmoji = _emoji;
+        this.mEmoji = _type;
         this.mCostAmount = _costAmount;
-        this.LoadSprite("emoji","texture/" + _emoji , (_spriteFrame)=>
+        this.LoadSprite("emoji","texture/" + _type , (_spriteFrame)=>
         {
             this.mEmojiIcon.spriteFrame = _spriteFrame;
         });

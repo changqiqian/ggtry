@@ -777,10 +777,37 @@
       "__id__": 0
     },
     "fileId": "9fzz0YXcZNb6sng1boyilY",
+    "targetOverrides": [
+      {
+        "__id__": 45
+      }
+    ],
     "nestedPrefabInstanceRoots": [
       {
         "__id__": 20
       }
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 42
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "mSelfBtn"
+    ],
+    "target": {
+      "__id__": 20
+    },
+    "targetInfo": {
+      "__id__": 46
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "eaLy0KjgNMzpJZxdZXV5DR"
     ]
   }
 ]

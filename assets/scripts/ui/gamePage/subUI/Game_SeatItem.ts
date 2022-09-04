@@ -9,7 +9,6 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_SeatItem')
 export class Game_SeatItem extends BaseUI 
 {
-
     @property(BaseButton) 
     mSitBtn: BaseButton = null;
     @property(BaseButton) 

@@ -15,5 +15,24 @@ export enum Emoji
     Shit,
     Surffing,
     Foot,
-    Total,
+}
+
+
+export enum SelfEmoji
+{
+    Alarm = 0,
+    Laugh,
+    Cry,
+    Love,
+    Beg,
+    Thanks,
+    Confuse,
+    WaveHand,
+    Shy,
+    Stun,
+    WordsLess,
+    Disapoint,
+    Angry,
+    Bye,
+    Mute,
 }
