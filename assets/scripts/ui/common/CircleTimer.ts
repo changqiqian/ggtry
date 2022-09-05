@@ -36,6 +36,22 @@ export class CircleTimer extends BaseUI {
 
     }
 
+    public SetTimerTitle(_title : string)
+    {
+        this.mCount.string = _title;
+    }
+
+    public SetColor(_color : Color)
+    {
+        this.mProgress.color = _color;
+        this.mCount.color = _color;
+    }
+
+    public SetProgress(_progress : number)
+    {
+        this.mProgress.fillRange = _progress;
+    }
+
     public StartTimer(_totalTime : number , _SecondCallback : Function = null)
     {
         this.StartSecondsTimer(_totalTime , 0.01);
@@ -87,7 +103,7 @@ export class CircleTimer extends BaseUI {
         {
             color = new Color(34,220,82);
         }
-        this.mBG.color = color;
+        //this.mBG.color = color;
         this.mProgress.color = color;
         this.mCount.color = color;
     }

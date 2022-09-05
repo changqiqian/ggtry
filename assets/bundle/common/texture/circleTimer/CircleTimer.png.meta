@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "2e48ffdb-763f-447b-bea0-eb3d19f2243d",
+  "uuid": "92bdc732-e202-4322-bdb7-9cf8bb7ee864",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "2e48ffdb-763f-447b-bea0-eb3d19f2243d@6c48a",
-      "displayName": "CircleTimerProgres",
+      "uuid": "92bdc732-e202-4322-bdb7-9cf8bb7ee864@6c48a",
+      "displayName": "CircleTimer",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "2e48ffdb-763f-447b-bea0-eb3d19f2243d",
+        "imageUuidOrDatabaseUri": "92bdc732-e202-4322-bdb7-9cf8bb7ee864",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "2e48ffdb-763f-447b-bea0-eb3d19f2243d@f9941",
-      "displayName": "CircleTimerProgres",
+      "uuid": "92bdc732-e202-4322-bdb7-9cf8bb7ee864@f9941",
+      "displayName": "CircleTimer",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "2e48ffdb-763f-447b-bea0-eb3d19f2243d@6c48a",
+        "imageUuidOrDatabaseUri": "92bdc732-e202-4322-bdb7-9cf8bb7ee864@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "2e48ffdb-763f-447b-bea0-eb3d19f2243d@f9941"
+    "redirect": "92bdc732-e202-4322-bdb7-9cf8bb7ee864@f9941"
   }
 }

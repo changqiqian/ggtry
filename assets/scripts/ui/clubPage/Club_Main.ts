@@ -32,10 +32,19 @@ export class Club_Main extends BaseUI
                 let tempNode = instantiate(_prefab);
                 this.mPageView.addPage(tempNode);
                 let tempScript = tempNode.getComponent(Club_MainEnter);
-                tempScript.InitWithData(i , (_data)=>
+                tempScript.InitWithData(i , (_data , _enter)=>
                 {
-                    this.mPageView.scrollToPage(_data);
+                    if(_enter)
+                    {
+                        //enter club 
+                    }
+                    else
+                    {
+                        this.mPageView.scrollToPage(_data);
+                    }
+                    
                 });
+
 
                 
             });

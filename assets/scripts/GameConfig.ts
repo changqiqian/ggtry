@@ -21,6 +21,9 @@ export class GameConfig
     public static WebberAddr= "http://18.142.237.115:9487"; //打开收银台web
 
 
+    public static ClubLogoNumber = 8;
+    public static ClubStampNumber = 4;
+
     public static AreaCodeList=[
         {"name":"CountryName0", "areaCode": "+852"},
         {"name":"CountryName1", "areaCode": "+63"},

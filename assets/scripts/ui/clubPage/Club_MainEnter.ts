@@ -31,6 +31,7 @@ export class Club_MainEnter extends BaseUI
     mData : any = null;
     mCallback : Function = null;
     mLastTimeScale : number = null;
+
     InitParam()
     {
         let screenSize = view.getVisibleSize();
@@ -44,13 +45,16 @@ export class Club_MainEnter extends BaseUI
             let currentScale = this.CalculateCurrentScaleRatio();
             if(currentScale == 1)
             {
-                console.log("Enter club page == " + this.mData);
+                if(this.mCallback != null)
+                {
+                    this.mCallback(this.mData ,  true);
+                }
             }
             else
             {
                 if(this.mCallback != null)
                 {
-                    this.mCallback(this.mData);
+                    this.mCallback(this.mData , false);
                 }
             }
         });
@@ -69,7 +73,7 @@ export class Club_MainEnter extends BaseUI
         this.unscheduleAllCallbacks();
     }
 
-    public InitWithData(_data : any , _clickCallback :Function= null)
+    public InitWithData(_data : any , _clickCallback :Function= null , )
     {
         this.mData = _data;
         this.mCallback = _clickCallback;

@@ -21,7 +21,7 @@ message S2C_GetUserInfo {
 //用户信息总结构
 message UserInfo { 
     required int32 uid = 1; //用户唯一id
-    required UserBaseInfo baseInfo = 2;//用户基础资料
+    required UserBaseInfo userBaseInfo = 2;//用户基础资料
     required UserAssets userAssets = 3;//用户财产资料
     required UserAccountInfo userAccountInfo = 4;//用户账户信息
 }
@@ -49,7 +49,7 @@ message UserAccountInfo {
 
 //账号权限等级
 enum AccountLevel {
-    Norma = 0 ;//普通用户 --正常玩家
+    Normal = 0 ;//普通用户 --正常玩家
     Agent = 1 ; //代理  -- 可以创建俱乐部
     Boss = 2 ; //厅主  ---可以创建联盟，可以创建俱乐部
 }

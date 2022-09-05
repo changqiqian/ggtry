@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Button, Label, Sprite } from 'cc';
+import { _decorator, Component, Node, Button, Label, Sprite, SpriteFrame } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { DataNotify } from '../../base/DataNotify';
 const { ccclass, property } = _decorator;
@@ -84,6 +84,12 @@ export class ToggleBtn extends BaseUI {
     public GetTitle()
     {
         return this.mSelectedLabel.string;
+    }
+
+    public SetImage(_spriteFrame : SpriteFrame)
+    {
+        this.mSelected.getComponent(Sprite).spriteFrame = _spriteFrame;
+        this.mDisabled.getComponent(Sprite).spriteFrame = _spriteFrame;
     }
 
     public SetForbidden(_val : boolean)
