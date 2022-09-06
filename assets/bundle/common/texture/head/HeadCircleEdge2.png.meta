@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "666e75e0-d998-4548-b261-6da9f91e5a87",
+  "uuid": "ad318572-e314-42b1-87fc-1fe0fc2a85c5",
   "files": [
     ".json",
     ".png"
@@ -10,19 +10,19 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "666e75e0-d998-4548-b261-6da9f91e5a87@6c48a",
-      "displayName": "InputBg",
+      "uuid": "ad318572-e314-42b1-87fc-1fe0fc2a85c5@6c48a",
+      "displayName": "HeadCircleEdge2",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "ad318572-e314-42b1-87fc-1fe0fc2a85c5",
+        "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
         "mipfilter": "none",
-        "anisotropy": 0,
-        "isUuid": true,
-        "imageUuidOrDatabaseUri": "666e75e0-d998-4548-b261-6da9f91e5a87"
+        "anisotropy": 0
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,29 +33,29 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "666e75e0-d998-4548-b261-6da9f91e5a87@f9941",
-      "displayName": "InputBg",
+      "uuid": "ad318572-e314-42b1-87fc-1fe0fc2a85c5@f9941",
+      "displayName": "HeadCircleEdge2",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
-        "trimType": "none",
+        "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 985,
-        "height": 148,
-        "rawWidth": 985,
-        "rawHeight": 148,
+        "width": 132,
+        "height": 132,
+        "rawWidth": 132,
+        "rawHeight": 132,
         "borderTop": 0,
         "borderBottom": 0,
-        "borderLeft": 90,
-        "borderRight": 90,
+        "borderLeft": 0,
+        "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "666e75e0-d998-4548-b261-6da9f91e5a87@6c48a",
+        "imageUuidOrDatabaseUri": "ad318572-e314-42b1-87fc-1fe0fc2a85c5@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "666e75e0-d998-4548-b261-6da9f91e5a87@f9941"
+    "redirect": "ad318572-e314-42b1-87fc-1fe0fc2a85c5@f9941"
   }
 }
