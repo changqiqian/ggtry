@@ -87,13 +87,13 @@ export class Me_Main extends BaseUI {
             UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_SettingWindow');
         });
 
-        this.mAgentBtn.SetClickCallback(() => {});
+        this.mAgentBtn.SetClickCallback(() => {
+            this.ShowLayer('mePage', 'prefab/Me_Proxy');
+        });
 
         this.mServiceBtn.SetClickCallback(() => {});
     }
-    RegDataNotify() {
-      
-    }
+    RegDataNotify() {}
     LateInit() {
         this.EnableScroll();
     }
