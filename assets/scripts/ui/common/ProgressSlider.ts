@@ -11,10 +11,11 @@ export class ProgressSlider extends BaseUI
     mHadnle: Node = null;
     @property(Sprite) 
     mProgress: Sprite = null;
-    mCallback :Function = null;
+    mEndCallback :Function = null;
+    mDragCallback:Function = null;
     onEnable()
     {
-        this.ResetSlider();
+        this.SetPercent(0);
     }
     InitParam()
     {
@@ -24,26 +25,30 @@ export class ProgressSlider extends BaseUI
     {
         this.mHadnle.on(Node.EventType.TOUCH_END,()=>
         {
-            this.DragLogic();
-            if(this.mCallback)
+            this.mProgress.fillRange = this.mSlider.progress;
+            if(this.mEndCallback)
             {
-                this.mCallback(this.mSlider.progress);
+                this.mEndCallback(this.mSlider.progress);
             }
         });
 
         this.mHadnle.on(Node.EventType.TOUCH_CANCEL,()=>
         {
-            this.DragLogic();
-            if(this.mCallback)
+            this.mProgress.fillRange = this.mSlider.progress;
+            if(this.mEndCallback)
             {
-                this.mCallback(this.mSlider.progress);
+                this.mEndCallback(this.mSlider.progress);
             }
         });
 
 
         this.mSlider.node.on("slide",()=>
         {
-            this.DragLogic();
+            this.mProgress.fillRange = this.mSlider.progress;
+            if(this.mDragCallback)
+            {
+                this.mDragCallback(this.mSlider.progress);
+            }
         });
     }
     RegDataNotify()
@@ -59,20 +64,26 @@ export class ProgressSlider extends BaseUI
 
     }
 
-    private ResetSlider()
+    public GetPercent():number
     {
-        this.mProgress.fillRange = 0;
-        this.mSlider.progress = 0;
+        return this.mSlider.progress;
     }
 
-    private DragLogic()
+
+    public SetEndCallback(_callback : Function)
     {
+        this.mEndCallback = _callback;
+    }
+
+    public SetDragCallback(_callback : Function)
+    {
+        this.mDragCallback = _callback;
+    }
+
+    public SetPercent(_value)
+    {
+        this.mSlider.progress = _value;
         this.mProgress.fillRange = this.mSlider.progress;
-    }
-
-    public SetCallback(_callback : Function)
-    {
-        this.mCallback = _callback;
     }
 }
 

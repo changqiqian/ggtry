@@ -33,7 +33,7 @@ export class Game_BringOut extends BaseUI
             this.CloseAsWindow();
         });
 
-        this.mProgressSlider.SetCallback((_ratio)=>
+        this.mProgressSlider.SetEndCallback((_ratio)=>
         {
 
         });

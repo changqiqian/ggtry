@@ -54,7 +54,7 @@ export class Game_BuyInWindow extends BaseUI
         });
 
 
-        this.mProgressSlider.SetCallback((_ratio)=>
+        this.mProgressSlider.SetEndCallback((_ratio)=>
         {
 
         });

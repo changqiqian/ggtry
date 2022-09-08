@@ -1,3 +1,5 @@
+import { Club_TaxType } from "./ui/hall/HallData";
+
 export class GameConfig
 {
     public static DebugMode =  false;
@@ -71,6 +73,134 @@ export class GameConfig
         {"name":"CountryName42", "areaCode": "+971"},
     ]
 
+    //俱乐部创建德州房间的时候，选择的抽水类型滑动条对应的标题
+    public static GetTexasCreateRoomTaxTitle(_type : Club_TaxType) : Array<string>
+    {
+        if(_type == Club_TaxType.EveryRound)
+        {
+            return ["0%","1%","2%","3%","4%","5%","6%","7%","8%","9%","10%"];
+        }
+        else
+        {
+            return ["0%","3%","3.5%","4%","4.5%","5%","6%","7%","8%","9%","10%"];
+        }
+    }
+
+    //俱乐部创建德州房间的时候，选择的抽水类型滑动条对应的值
+    public static GetTexasCreateRoomTaxValue(_type : Club_TaxType) : Array<number>
+    {
+        if(_type == Club_TaxType.EveryRound)
+        {
+            return [0 , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1];
+        }
+        else
+        {
+            return [0 , 0.03, 0.035, 0.04, 0.045, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1];
+        }
+    }
+
+    public static GetTexasCreateRoomBlindTitle(): Array<string>
+    {
+        return ["1/2" , "2/4" ,"3/6" , "4/8" , "5/10" , "10/20" , "20/40" , "25/50" , "50/100", "100/200"];
+    }
+    public static GetTexasCreateRoomBlindValue(): Array<number>
+    {
+        return [1 , 2, 3 ,4 ,5 ,10 ,20 ,25 , 50 , 100];
+    }
+
+    public static GetTexasCreateRoomAnteTitle(_smallBlind : number)
+    {
+        if(_smallBlind == 1 || _smallBlind == 2 || _smallBlind == 3 || _smallBlind == 4)
+        {
+            return ["0" , "1" , "2" , "3" , "4" , "5"];
+        }
+        else if(_smallBlind == 5)
+        {
+            return ["0" , "1" , "2" , "3" , "5" , "10"];
+        }
+        else if(_smallBlind == 10)
+        {
+            return ["0" , "2" , "5" , "10" , "20" , "40"];
+        }
+        else if(_smallBlind == 20)
+        {
+            return ["0" , "5" , "10" , "20" , "40" , "80"];
+        }
+        else if(_smallBlind == 25)
+        {
+            return ["0" , "5" , "10" , "25" , "50" , "100"];
+        }
+        else if(_smallBlind == 50)
+        {
+            return ["0" , "10" , "25" , "50" , "100" , "200"];
+        }
+        else if(_smallBlind == 100)
+        {
+            return ["0" , "25" , "50" , "100" , "200" , "400"];
+        }
+    }
+
+    public static GetTexasCreateRoomAnteValue(_smallBlind : number)
+    {
+        if(_smallBlind == 1 || _smallBlind == 2 || _smallBlind == 3 || _smallBlind == 4)
+        {
+            return [0 , 1  , 2 , 3 , 4 , 5];
+        }
+        else if(_smallBlind == 5)
+        {
+            return [0 , 1 , 2 , 3 , 5 , 10];
+        }
+        else if(_smallBlind == 10)
+        {
+            return [0 , 2 , 5 , 10 , 20 , 40];
+        }
+        else if(_smallBlind == 20)
+        {
+            return [0 , 5 , 10 , 20 , 40 , 80];
+        }
+        else if(_smallBlind == 25)
+        {
+            return [0 , 5 , 10 , 25 , 50 , 100];
+        }
+        else if(_smallBlind == 50)
+        {
+            return [0 , 10 , 25 , 50 , 100 , 200];
+        }
+        else if(_smallBlind == 100)
+        {
+            return [0 , 25 , 50 , 100 , 200 , 400];
+        }
+    }
+
+    public static GetTexasCreateRoomMaxBuyInTitle()
+    {
+        return ["4" , "6" , "8" , "10" , "15" , "20" , "40" , "50" , "100"];
+    }
+
+    public static GetTexasCreateRoomMaxBuyInValue()
+    {
+        return [4 , 6 , 8 , 10 , 15 , 20 , 40 , 50 , 100];
+    }
+
+    public static GetTexasCreateRoomBringInTitle()
+    {
+        return ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9"];
+    }
+
+    public static GetTexasCreateRoomBringInValue()
+    {
+        return [1 , 2 , 3, 4, 5, 6, 7, 8, 9];
+    }
+
+    public static GetTexasCreateRoomBringOutTitle()
+    {
+        return ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" ];
+    }
+
+    public static GetTexasCreateRoomBringOutValue()
+    {
+        return [1 , 2 , 3, 4, 5, 6, 7, 8];
+    }
 
     public static LoadToken()
     {

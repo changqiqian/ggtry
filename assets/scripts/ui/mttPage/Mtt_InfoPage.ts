@@ -16,7 +16,6 @@ const { ccclass, property } = _decorator;
 @ccclass('Mtt_InfoPage')
 export class Mtt_InfoPage extends BaseUI 
 {
-    //top
     @property(Label) 
     mStatusDescribe: Label = null;
     @property(Label) 

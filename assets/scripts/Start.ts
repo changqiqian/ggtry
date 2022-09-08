@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, director, debug, setDisplayStats } from 'cc';
 import { SceneType, UIMgr } from './base/UIMgr';
 import { GameConfig } from './GameConfig';
+import { MeassureSlider } from './ui/common/MeassureSlider';
 
 const { ccclass, property } = _decorator;
 

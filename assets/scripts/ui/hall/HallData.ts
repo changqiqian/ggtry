@@ -30,6 +30,8 @@ export class HallData extends DataNotify {
     //Club
     Data_ClubLogoIndex : number = null; //创建俱乐部时候选择的logo编号
     Data_ClubStampIndex : number = null; //创建俱乐部时候选的封面编号
+    Data_ClubCreateGameCurrencyType :Club_CurrencyType = null; //俱乐部创建游戏的时候，货币类型设定
+    Data_ClubCreateGameTaxType : Club_TaxType = null; //俱乐部创建游戏的时候，抽水设定
     RegisteMsg() {
        
     }
@@ -78,4 +80,14 @@ export enum Club_GameType{ //俱乐部创建的游戏类型
     ShortCash ,
     Mtt , 
     Omh,
+}
+
+export enum Club_TaxType{ //牌局抽水类型
+    EveryRound = 0, //没轮都抽
+    WholeGameEnd = 1, //游戏结束抽赢家
+}
+
+export enum Club_CurrencyType{ //牌局货币类型
+    Point = 0, //积分
+    Coin = 1 ,//金币
 }
