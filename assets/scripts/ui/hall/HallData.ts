@@ -32,6 +32,7 @@ export class HallData extends DataNotify {
     Data_ClubStampIndex : number = null; //创建俱乐部时候选的封面编号
     Data_ClubCreateGameCurrencyType :Club_CurrencyType = null; //俱乐部创建游戏的时候，货币类型设定
     Data_ClubCreateGameTaxType : Club_TaxType = null; //俱乐部创建游戏的时候，抽水设定
+    Data_ClubCreateGameCurrentSB : number = null; //俱乐部创建房间时，选中的小盲
     RegisteMsg() {
        
     }
