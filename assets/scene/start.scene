@@ -3079,7 +3079,7 @@
       "y": 0,
       "z": 0
     },
-    "_id": "b79+k3YwZKOJMZQeHz+arq"
+    "_id": "39aqin0PZLf4TFNCMwtZ39"
   },
   {
     "__type__": "cc.UITransform",
@@ -3100,7 +3100,7 @@
       "x": 0.5,
       "y": 0.5
     },
-    "_id": "cb4OOfgeRKSIYje7Gohzk+"
+    "_id": "ecqNR+GUVDOrVMDy/KZPQE"
   },
   {
     "__type__": "cc.Sprite",
@@ -3139,7 +3139,7 @@
     "_isTrimmedMode": true,
     "_useGrayscale": false,
     "_atlas": null,
-    "_id": "e7hCn9PsVCXqmhT5Jps4XW"
+    "_id": "e0BKM63R1KXrnVx6nK4EWZ"
   },
   {
     "__type__": "cc.MountedComponentsInfo",
@@ -3192,7 +3192,7 @@
     "_originalHeight": 0,
     "_alignMode": 2,
     "_lockFlags": 0,
-    "_id": "b9aoUwlaVAMpaz0FSNR3Gx"
+    "_id": "bevS9sMtRDyZjhIojzTH+l"
   },
   {
     "__type__": "cc.CompPrefabInfo",
