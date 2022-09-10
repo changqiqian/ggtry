@@ -15,7 +15,7 @@ export class ProgressSlider extends BaseUI
     mDragCallback:Function = null;
     onEnable()
     {
-        this.SetPercent(0);
+
     }
     InitParam()
     {

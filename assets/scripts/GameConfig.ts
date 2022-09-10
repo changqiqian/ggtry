@@ -101,7 +101,8 @@ export class GameConfig
 
     public static GetTexasCreateRoomBlindTitle(): Array<string>
     {
-        return ["1/2" , "2/4" ,"3/6" , "4/8" , "5/10" , "10/20" , "20/40" , "25/50" , "50/100", "100/200"];
+        return ["","","","","","","","","",""];
+        //return ["1/2" , "2/4" ,"3/6" , "4/8" , "5/10" , "10/20" , "20/40" , "25/50" , "50/100", "100/200"];
     }
     public static GetTexasCreateRoomBlindValue(): Array<number>
     {
@@ -200,6 +201,47 @@ export class GameConfig
     public static GetTexasCreateRoomBringOutValue()
     {
         return [1 , 2 , 3, 4, 5, 6, 7, 8];
+    }
+
+    public static GetTexasCreateRoomGameDurationTitle()
+    {
+        return ["1" , "1.5" , "2" , "2.5" , "3" , "4" , "5" , "6" ];
+    }
+
+    public static GetTexasCreateRoomGameDurationValue()
+    {
+        return [1 , 1.5 , 2, 2.5, 3, 4, 5, 6];
+    }
+
+    public static GetTexasCreateRoomThinkingTimeTitle()
+    {
+        return ["8s" , "12s" , "15s" , "20s"];
+    }
+
+    public static GetTexasCreateRoomThinkingTimeValue()
+    {
+        return [8, 12 , 15, 20];
+    }
+
+    public static GetTexasCreateRoomSeatNumTitle()
+    {
+        return ["2" , "3" , "4" , "5" , "6" , "7" , "8" , "9"];
+    }
+
+    public static GetTexasCreateRoomSeatNumValue()
+    {
+        return [2,3,4,5,6,7,8,9];
+    }
+
+
+    public static GetTexasCreateRoomAutoStartTitle()
+    {
+        return ["0" , "2" , "3" , "4" , "5" , "6"];
+    }
+
+    public static GetTexasCreateRoomAutoStartValue()
+    {
+        return [0,2,3,4,5,6];
     }
 
     public static LoadToken()

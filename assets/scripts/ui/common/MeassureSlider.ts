@@ -14,10 +14,6 @@ export class MeassureSlider extends BaseUI
     mValues : Array<number>;
 
     mOnValueChange : Function = null;
-    onEnable()
-    {
-        this.Reset();
-    }
 
     InitParam()
     {
@@ -64,19 +60,28 @@ export class MeassureSlider extends BaseUI
 
         this.mProgressSlider.SetDragCallback(this.OnDragMove.bind(this));
         this.mProgressSlider.SetEndCallback(this.OnDragEnd.bind(this));
-        this.Reset();
+    }
+
+    public SetIndex(_index : number)
+    {
+        if(_index >= this.mValues.length)
+        {
+            console.log("MeassureSlider SetIndex 越界 _index===" + _index);
+            return;
+        }
+        this.HighLightItem(_index);
+        let value = this.GetPercentByIndex(_index);
+        this.mProgressSlider.SetPercent(value);
+        if(this.mOnValueChange)
+        {
+            this.mOnValueChange(this.mValues[_index]);
+        }
     }
 
     OnDragEnd(_value)
     {
         let currentIndex = this.CalculateCurrentIndex(_value);
-        this.HighLightItem(currentIndex);
-        let value = this.GetPercentByIndex(currentIndex);
-        this.mProgressSlider.SetPercent(value);
-        if(this.mOnValueChange)
-        {
-            this.mOnValueChange(this.mValues[currentIndex]);
-        }
+        this.SetIndex(currentIndex);
     }
 
     OnDragMove(_value)
@@ -85,15 +90,6 @@ export class MeassureSlider extends BaseUI
         this.HighLightItem(currentIndex);
     }
 
-    Reset()
-    {
-        this.mProgressSlider.SetPercent(0);
-        this.HighLightItem(0);
-        if(this.mOnValueChange)
-        {
-            this.mOnValueChange(this.mValues[0]);
-        }
-    }
 
     HighLightItem(_index : number)
     {

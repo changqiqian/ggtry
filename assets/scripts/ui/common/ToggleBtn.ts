@@ -148,7 +148,7 @@ export class ToggleBtn extends BaseUI {
         this.mDisabled.node.active = true;
     }
 
-    SetShowStauts(_value : boolean)
+    SetShowStauts(_value : boolean , _triggerCallback : boolean = false)
     {
         if(_value)
         {
@@ -157,6 +157,14 @@ export class ToggleBtn extends BaseUI {
         else
         {
             this.ShowUnselected();
+        }
+
+        if(_triggerCallback)
+        {
+            if(this.mClickCallback != null)
+            {
+                this.mClickCallback(_value);
+            }
         }
     }
 

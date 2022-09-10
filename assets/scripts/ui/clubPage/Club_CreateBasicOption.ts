@@ -18,9 +18,7 @@ export class Club_CreateBasicOption extends BaseUI
     @property(Node) 
     mTaxToggle: Node = null;
     @property(MeassureSlider) 
-    mMeassureSliderRound: MeassureSlider = null;
-    @property(MeassureSlider) 
-    mMeassureSliderGame: MeassureSlider = null;
+    mMeassureSliderTax: MeassureSlider = null;
     @property(Label) 
     mTaxTips: Label = null;
     InitParam()
@@ -45,36 +43,30 @@ export class Club_CreateBasicOption extends BaseUI
             let currentToggle = this.mTaxToggle.children[i].getComponent(ToggleBtn);
             currentToggle.SetDataNotify(HallData.GetInstance(),"Data_ClubCreateGameTaxType",i);  
         }
-
-
-        this.mMeassureSliderRound.InitWithData(GameConfig.GetTexasCreateRoomTaxTitle(Club_TaxType.EveryRound),
-            GameConfig.GetTexasCreateRoomTaxValue(Club_TaxType.EveryRound),
-            (_value)=>
-            {
-
-            });
-        this.mMeassureSliderGame.InitWithData(GameConfig.GetTexasCreateRoomTaxTitle(Club_TaxType.WholeGameEnd),
-            GameConfig.GetTexasCreateRoomTaxValue(Club_TaxType.WholeGameEnd),
-            (_value)=>
-            {
-
-            });
     }
     RegDataNotify()
     {
         HallData.GetInstance().AddListener("Data_ClubCreateGameTaxType",(_current , _before)=>
         {
-            this.mMeassureSliderRound.node.active = _current == Club_TaxType.EveryRound;
-            this.mMeassureSliderGame.node.active = _current == Club_TaxType.WholeGameEnd;
-
+            this.mMeassureSliderTax.InitWithData(GameConfig.GetTexasCreateRoomTaxTitle(_current),
+            GameConfig.GetTexasCreateRoomTaxValue(_current),
+            (_value)=>
+            {
+    
+            });
             if(_current == Club_TaxType.EveryRound)
             {
-                this.mTaxTips = Localization.GetString("00090");
+                this.mTaxTips.string = Localization.GetString("00090");
             }
             else if(_current == Club_TaxType.WholeGameEnd)
             {
-                this.mTaxTips = Localization.GetString("00091");
+                this.mTaxTips.string = Localization.GetString("00091");
             }
+        },this);
+
+        HallData.GetInstance().AddListener("Data_ClubCreateGameTaxRate",(_current , _before)=>
+        {
+            this.mMeassureSliderTax.SetIndex(_current);
         },this);
     }
     LateInit()

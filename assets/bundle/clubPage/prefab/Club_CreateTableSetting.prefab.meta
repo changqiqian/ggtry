@@ -2,12 +2,12 @@
   "ver": "1.1.38",
   "importer": "prefab",
   "imported": true,
-  "uuid": "52800652-0be6-401b-8a9a-6d8f4124ad0a",
+  "uuid": "4f7861d1-0383-414b-9acc-2ec4fd1c4c67",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Club_TexasScoreSetting"
+    "syncNodeName": "Club_CreateTableSetting"
   }
 }

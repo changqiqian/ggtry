@@ -175,7 +175,7 @@ export class Localization {
         { name: '00088', ch: '每xxx分钟休息5分钟', en: 'after every xxx mins rest 5 mins' },
         { name: '00089', ch: '关闭', en: 'closed' },
         { name: '00090', ch: '每手牌获胜的玩家都会被抽取服务费', en: 'Collect tax from winner in every hands' },
-        { name: '00090', ch: '游戏结束后，针对赢家收取服务费', en: 'Collect tax from winner when game end' },
+        { name: '00091', ch: '游戏结束后，针对赢家收取服务费', en: 'Collect tax from winner when game end' },
 
 
         { name: '01000', ch: '公告', en: 'Notification' },
