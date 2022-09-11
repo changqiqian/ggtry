@@ -1,6 +1,4 @@
 import { DataNotify } from '../../base/DataNotify';
-import { Localization } from '../../base/Localization';
-import { UIMgr } from '../../base/UIMgr';
 import { Network } from '../../network/Network';
 
 export class HallData extends DataNotify {
@@ -31,11 +29,14 @@ export class HallData extends DataNotify {
                     //创建俱乐部
     Data_ClubLogoIndex : number = null; //创建俱乐部时候选择的logo编号
     Data_ClubStampIndex : number = null; //创建俱乐部时候选的封面编号
-                    //创建牌局
-    Data_ClubCreateGameType : Club_GameType = Club_GameType.TexasCash; //俱乐部创建牌局时候，游戏类型
+
+                    //创建牌局,追踪每个选项最终值，用于最后生成数据
+    Data_Club_CreateTexasConfig : Club_CreateTexasConfig = new Club_CreateTexasConfig();
+                    //创建牌局，初始化选项会用到的驱动
+    Data_ClubCreateGameType : PokerLife.Club.GameType = PokerLife.Club.GameType.TexasCash; //俱乐部创建牌局时候，游戏类型
     Data_ClubCreateGameName : string = null; //俱乐部创建牌局时候，牌局名称
-    Data_ClubCreateGameCurrencyType :Club_GameCurrencyType = null; //俱乐部创建游戏的时候，货币类型设定
-    Data_ClubCreateGameTaxType : Club_TaxType = null; //俱乐部创建游戏的时候，抽水设定
+    Data_ClubCreateGameCurrencyType :PokerLife.Club.GameCurrencyType = null; //俱乐部创建游戏的时候，货币类型设定
+    Data_ClubCreateGameTaxType : PokerLife.Club.GameTaxType = null; //俱乐部创建游戏的时候，抽水设定
     Data_ClubCreateGameTaxRate : number = null; //俱乐部创建牌局时候，抽水数值
     Data_ClubCreateGameCurrentSB : number = null; //俱乐部创建房间时，选中的小盲
     Data_ClubCreateGameStraddle : boolean = null; //俱乐部创建牌局时候，抓头设定
@@ -43,7 +44,7 @@ export class HallData extends DataNotify {
     Data_ClubCreateMaxBuying : number = null; //俱乐部创建牌局时候，最大买入设定, 买了很多次后的总数量不能超过这个值
     Data_ClubCreateMaxBringin : number = null; //俱乐部创建牌局时候，最大带入设定，单次最多带入多少
     Data_ClubCreateAllowBringOut : boolean = null; //俱乐部创建牌局时候，是否允许带出
-    Data_ClubCreateMinBringOut : number = null; //俱乐部创建牌局时候，带出后，必须至少保留的积分
+    Data_ClubMinScoreAfterBringOut : number = null; //俱乐部创建牌局时候，带出后，必须至少保留的积分
     Data_ClubCreateInsurance : boolean = null; //俱乐部创建牌局时候，是否开通保险功能
     Data_ClubCreateGameDuration : number = null;//俱乐部创建牌局时候，牌局时间长度
     Data_ClubCreateThinkingTime : number = null;//俱乐部创建牌局时候，思考时间长度
@@ -52,23 +53,22 @@ export class HallData extends DataNotify {
     Data_ClubCreateGPS : boolean = null; //俱乐部创建牌局时候，gps
     Data_ClubCreateIP : boolean = null; //俱乐部创建牌局时候，ip
 
-                    //短牌
-    Data_ClubCreateGameShortScoreMode : Club_ShortScoreType = Club_ShortScoreType.AnteMode; //俱乐部创建牌局时候，短牌底池模式选择
 
 
     ResetCreateTexasRoomParam()
     {
+        this.Data_ClubCreateGameType = PokerLife.Club.GameType.TexasCash;
         this.Data_ClubCreateGameName = "";
-        this.Data_ClubCreateGameCurrencyType = Club_GameCurrencyType.Point;
-        this.Data_ClubCreateGameTaxType = Club_TaxType.WholeGameEnd;
+        this.Data_ClubCreateGameCurrencyType = PokerLife.Club.GameCurrencyType.Point;
+        this.Data_ClubCreateGameTaxType = PokerLife.Club.GameTaxType.WholeGameEnd;
         this.Data_ClubCreateGameTaxRate = 0;
-        this.Data_ClubCreateGameCurrentSB = 1;
+        this.Data_ClubCreateGameCurrentSB = 0;
         this.Data_ClubCreateGameStraddle = false;
         this.Data_ClubCreateGameAnte = 0;
         this.Data_ClubCreateMaxBuying = 0;
         this.Data_ClubCreateMaxBringin = 0;
         this.Data_ClubCreateAllowBringOut = false;
-        this.Data_ClubCreateMinBringOut = 0;
+        this.Data_ClubMinScoreAfterBringOut = 0;
         this.Data_ClubCreateInsurance = false;
         this.Data_ClubCreateGameDuration = 0;
         this.Data_ClubCreateThinkingTime = 0;
@@ -76,6 +76,26 @@ export class HallData extends DataNotify {
         this.Data_ClubCreateAutoStart = 0;
         this.Data_ClubCreateGPS = false;
         this.Data_ClubCreateIP = false;
+
+        this.Data_Club_CreateTexasConfig.gameType = this.Data_ClubCreateGameType;
+        this.Data_Club_CreateTexasConfig.gameName = this.Data_ClubCreateGameName;
+        this.Data_Club_CreateTexasConfig.currencyType = this.Data_ClubCreateGameCurrencyType;
+        this.Data_Club_CreateTexasConfig.taxType = this.Data_ClubCreateGameTaxType;
+        this.Data_Club_CreateTexasConfig.taxRatio = this.Data_ClubCreateGameTaxRate;
+        this.Data_Club_CreateTexasConfig.smallBlind = this.Data_ClubCreateGameCurrentSB;
+        this.Data_Club_CreateTexasConfig.straddle = this.Data_ClubCreateGameStraddle;
+        this.Data_Club_CreateTexasConfig.ante =  this.Data_ClubCreateGameAnte;
+        this.Data_Club_CreateTexasConfig.maxTotalBuyIn = this.Data_ClubCreateMaxBuying;
+        this.Data_Club_CreateTexasConfig.maxBringIn = this.Data_ClubCreateMaxBringin;
+        this.Data_Club_CreateTexasConfig.allowBringOut = this.Data_ClubCreateAllowBringOut;
+        this.Data_Club_CreateTexasConfig.minScoreAfterBringOut = this.Data_ClubMinScoreAfterBringOut;
+        this.Data_Club_CreateTexasConfig.insurance = this.Data_ClubCreateInsurance;
+        this.Data_Club_CreateTexasConfig.gameDuration = this.Data_ClubCreateGameDuration;
+        this.Data_Club_CreateTexasConfig.thinkingTime = this.Data_ClubCreateThinkingTime;
+        this.Data_Club_CreateTexasConfig.seatNum = this.Data_ClubCreateSeatNum;
+        this.Data_Club_CreateTexasConfig.autoStartNum = this.Data_ClubCreateAutoStart;
+        this.Data_Club_CreateTexasConfig.gpsLimit = this.Data_ClubCreateGPS;
+        this.Data_Club_CreateTexasConfig.ipLimit = this.Data_ClubCreateIP;
     }
 
     RegisteMsg() {
@@ -121,25 +141,29 @@ export enum Me_ReocordSubPage { //收支记录内容
     DiamondReocd = 1,
 }
 
-export enum Club_GameType{ //俱乐部创建的游戏类型
-    TexasCash = 0,
-    ShortCash ,
-    Mtt , 
-    Omh,
-}
+class Club_CreateTexasConfig
+{
+    constructor()
+    {
 
-export enum Club_TaxType{ //牌局抽水类型
-    EveryRound = 0, //没轮都抽
-    WholeGameEnd = 1, //游戏结束抽赢家
+    }
+    gameType :PokerLife.Club.GameType;
+    gameName : string;
+    currencyType :PokerLife.Club.GameCurrencyType;
+    taxType : PokerLife.Club.GameTaxType;
+    taxRatio : number;
+    smallBlind : number;
+    straddle : boolean;
+    ante : number;
+    maxTotalBuyIn  : number;
+    maxBringIn: number;
+    allowBringOut : boolean;
+    minScoreAfterBringOut : number;
+    insurance :boolean;
+    gameDuration : number;
+    thinkingTime : number;
+    seatNum : number;
+    autoStartNum : number;
+    gpsLimit :boolean;
+    ipLimit :boolean;
 }
-
-export enum Club_GameCurrencyType{ //牌局货币类型
-    Point = 0, //积分
-    Coin = 1 ,//金币
-}
-
-export enum Club_ShortScoreType{ //短牌底池类型
-    AnteMode = 0, 
-    BlindMode = 1 ,
-}
-

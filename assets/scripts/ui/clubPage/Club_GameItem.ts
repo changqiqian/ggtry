@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, Label, Color } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { CircleTimer } from '../common/CircleTimer';
-import { Club_GameType } from '../hall/HallData';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_GameItem')
@@ -48,25 +48,25 @@ export class Club_GameItem extends BaseUI
 
     }
 
-    public InitWithData(_type : Club_GameType)
+    public InitWithData(_type : PokerLife.Club.GameType)
     {
         let tempColor;
         let gameType;
         switch(_type)
         {
-            case Club_GameType.TexasCash:
+            case PokerLife.Club.GameType.TexasCash:
                 tempColor = new Color(109,176,99);
                 gameType = "NLH";
             break
-            case Club_GameType.ShortCash:
+            case PokerLife.Club.GameType.ShortCash:
                 tempColor = new Color(98,174,175);
                 gameType = "Short";
             break
-            case Club_GameType.Mtt:
+            case PokerLife.Club.GameType.Mtt:
                 gameType = "Mtt"
                 tempColor = new Color(59,52,122);
             break
-            case Club_GameType.Omh:
+            case PokerLife.Club.GameType.Omh:
                 gameType = "Omh"
                 tempColor = Color.WHITE;
             break

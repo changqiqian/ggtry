@@ -1,4 +1,4 @@
-import { Club_TaxType } from "./ui/hall/HallData";
+
 
 export class GameConfig
 {
@@ -74,9 +74,9 @@ export class GameConfig
     ]
 
     //俱乐部创建德州房间的时候，选择的抽水类型滑动条对应的标题
-    public static GetTexasCreateRoomTaxTitle(_type : Club_TaxType) : Array<string>
+    public static GetTexasCreateRoomTaxTitle(_type : PokerLife.Club.GameTaxType) : Array<string>
     {
-        if(_type == Club_TaxType.EveryRound)
+        if(_type == PokerLife.Club.GameTaxType.EveryRound)
         {
             return ["0%","1%","2%","3%","4%","5%","6%","7%","8%","9%","10%"];
         }
@@ -87,9 +87,9 @@ export class GameConfig
     }
 
     //俱乐部创建德州房间的时候，选择的抽水类型滑动条对应的值
-    public static GetTexasCreateRoomTaxValue(_type : Club_TaxType) : Array<number>
+    public static GetTexasCreateRoomTaxValue(_type : PokerLife.Club.GameTaxType) : Array<number>
     {
-        if(_type == Club_TaxType.EveryRound)
+        if(_type == PokerLife.Club.GameTaxType.EveryRound)
         {
             return [0 , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1];
         }

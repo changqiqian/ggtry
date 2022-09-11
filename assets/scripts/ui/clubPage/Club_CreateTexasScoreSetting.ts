@@ -35,6 +35,7 @@ export class Club_CreateTexasScoreSetting extends BaseUI
     mMeassureSliderBringOut: MeassureSlider = null;
     @property(ToggleBtn) 
     mInsuranceToggle: ToggleBtn = null;
+
     InitParam()
     {
 
@@ -43,15 +44,28 @@ export class Club_CreateTexasScoreSetting extends BaseUI
     {
         this.mMeassureSliderBlind.InitWithData(GameConfig.GetTexasCreateRoomBlindTitle(), 
         GameConfig.GetTexasCreateRoomBlindValue(),
-        (_value)=>
+        (_value , _index)=>
         {
-            this.mBlindValue.string = _value + " / " + _value*2;
-            HallData.GetInstance().Data_ClubCreateGameCurrentSB  = _value; 
+            let bigBlind = _value * 2;
+            let bigBlind100 = bigBlind * 100;
+            this.mMeassureSliderAnte.InitWithData(GameConfig.GetTexasCreateRoomAnteTitle(_value),
+            GameConfig.GetTexasCreateRoomAnteValue(_value),
+            (_value , _index)=>
+            {
+                HallData.GetInstance().Data_Club_CreateTexasConfig.ante = _index;
+            });
+
+            this.mBlindValue.string = _value + " / " + bigBlind;
+            this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * bigBlind100 + "";
+            this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * bigBlind100 + "";
+            this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* bigBlind100 + "";
+            HallData.GetInstance().Data_Club_CreateTexasConfig.smallBlind = _index;
         });
 
         this.mStraddleToggle.ShowUnselected();
         this.mStraddleToggle.SetClickCallback((_value)=>
         {
+            HallData.GetInstance().Data_Club_CreateTexasConfig.straddle = _value;
         });
         
 
@@ -59,60 +73,54 @@ export class Club_CreateTexasScoreSetting extends BaseUI
         this.mBringOutToggle.ShowUnselected();
         this.mBringOutToggle.SetClickCallback((_value)=>
         {
+            HallData.GetInstance().Data_Club_CreateTexasConfig.allowBringOut = _value;
             this.mBiringOutSettingNode.active = _value;
         });
 
 
         this.mMeassureSliderMaxBuyIn.InitWithData(GameConfig.GetTexasCreateRoomMaxBuyInTitle(),
-        GameConfig.GetTexasCreateRoomMaxBuyInValue(),(_value)=>
+        GameConfig.GetTexasCreateRoomMaxBuyInValue(),(_value , _index)=>
         {
-            let bigBlind = HallData.GetInstance().Data_ClubCreateGameCurrentSB * 2;
+            let smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[HallData.GetInstance().Data_Club_CreateTexasConfig.smallBlind];
+            let bigBlind = smallBlind * 2;
             this.mMaxBuyInAmount.string = _value * bigBlind * 100 + "";
+            HallData.GetInstance().Data_Club_CreateTexasConfig.maxTotalBuyIn = _index;
         })
 
         this.mMeassureSliderBringin.InitWithData(GameConfig.GetTexasCreateRoomBringInTitle(),
-        GameConfig.GetTexasCreateRoomBringInValue(),(_value)=>
+        GameConfig.GetTexasCreateRoomBringInValue(),(_value , _index)=>
         {
-            let bigBlind = HallData.GetInstance().Data_ClubCreateGameCurrentSB * 2;
+            let smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[HallData.GetInstance().Data_Club_CreateTexasConfig.smallBlind];
+            let bigBlind = smallBlind * 2;
             this.mBringInAmount.string = _value * bigBlind * 100 + "";
+            HallData.GetInstance().Data_Club_CreateTexasConfig.maxBringIn = _index;
         })
 
         this.mMeassureSliderBringOut.InitWithData(GameConfig.GetTexasCreateRoomBringOutTitle(),
-        GameConfig.GetTexasCreateRoomBringOutValue(),(_value)=>
+        GameConfig.GetTexasCreateRoomBringOutValue(),(_value , _index)=>
         {
-            let bigBlind = HallData.GetInstance().Data_ClubCreateGameCurrentSB * 2;
+            let smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[HallData.GetInstance().Data_Club_CreateTexasConfig.smallBlind];
+            let bigBlind = smallBlind * 2;
             this.mBringOutAmount.string = _value * bigBlind * 100 + "";
+            HallData.GetInstance().Data_Club_CreateTexasConfig.minScoreAfterBringOut = _index;
         })
 
         this.mInsuranceToggle.ShowUnselected();
         this.mInsuranceToggle.SetClickCallback((_value)=>
         {
-
+            HallData.GetInstance().Data_Club_CreateTexasConfig.insurance = _value;
         });
-
-
     }
     RegDataNotify()
     {
         HallData.GetInstance().AddListener("Data_ClubCreateGameCurrentSB",(_current , _before)=>
         {
-            let bigBlind = _current * 2;
-            let bigBlind100 = bigBlind * 100;
-            this.mMeassureSliderAnte.InitWithData(GameConfig.GetTexasCreateRoomAnteTitle(_current),
-            GameConfig.GetTexasCreateRoomAnteValue(_current),
-            (_value)=>
-            {
-
-            });
-
-            this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * bigBlind100 + "";
-            this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * bigBlind100 + "";
-            this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* bigBlind100 + "";
+            this.mMeassureSliderBlind.SetIndex(_current);
         },this);
 
         HallData.GetInstance().AddListener("Data_ClubCreateGameStraddle",(_current , _before)=>
         {
-            this.mStraddleToggle.SetShowStauts(_current);
+            this.mStraddleToggle.SetShowStauts(_current , true);
         },this);
         
         HallData.GetInstance().AddListener("Data_ClubCreateGameAnte",(_current , _before)=>
@@ -131,17 +139,14 @@ export class Club_CreateTexasScoreSetting extends BaseUI
         {
             this.mBringOutToggle.SetShowStauts(_current,true);
         },this);
-        HallData.GetInstance().AddListener("Data_ClubCreateMinBringOut",(_current , _before)=>
+        HallData.GetInstance().AddListener("Data_ClubMinScoreAfterBringOut",(_current , _before)=>
         {
             this.mMeassureSliderBringOut.SetIndex(_current);
         },this);
         HallData.GetInstance().AddListener("Data_ClubCreateInsurance",(_current , _before)=>
         {
-            this.mInsuranceToggle.SetShowStauts(_current);
+            this.mInsuranceToggle.SetShowStauts(_current,true);
         },this);
-
-        
-        
         
     }
     LateInit()

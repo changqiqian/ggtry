@@ -5,7 +5,7 @@ import { GameConfig } from '../../GameConfig';
 import { BaseButton } from '../common/BaseButton';
 import { MeassureSlider } from '../common/MeassureSlider';
 import { ToggleBtn } from '../common/ToggleBtn';
-import { Club_TaxType, HallData } from '../hall/HallData';
+import { HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_CreateBasicOption')
@@ -23,7 +23,7 @@ export class Club_CreateBasicOption extends BaseUI
     mTaxTips: Label = null;
     InitParam()
     {
-
+        
     }
     BindUI()
     {
@@ -50,23 +50,29 @@ export class Club_CreateBasicOption extends BaseUI
         {
             this.mMeassureSliderTax.InitWithData(GameConfig.GetTexasCreateRoomTaxTitle(_current),
             GameConfig.GetTexasCreateRoomTaxValue(_current),
-            (_value)=>
+            (_value , _index)=>
             {
-    
+                HallData.GetInstance().Data_Club_CreateTexasConfig.taxRatio = _index;
             });
-            if(_current == Club_TaxType.EveryRound)
+            if(_current == PokerLife.Club.GameTaxType.EveryRound)
             {
                 this.mTaxTips.string = Localization.GetString("00090");
             }
-            else if(_current == Club_TaxType.WholeGameEnd)
+            else if(_current == PokerLife.Club.GameTaxType.WholeGameEnd)
             {
                 this.mTaxTips.string = Localization.GetString("00091");
             }
+            HallData.GetInstance().Data_Club_CreateTexasConfig.taxType = _current;
         },this);
 
         HallData.GetInstance().AddListener("Data_ClubCreateGameTaxRate",(_current , _before)=>
         {
             this.mMeassureSliderTax.SetIndex(_current);
+        },this);
+
+        HallData.GetInstance().AddListener("Data_ClubCreateGameCurrencyType",(_current , _before)=>
+        {
+            HallData.GetInstance().Data_Club_CreateTexasConfig.currencyType = _current;
         },this);
     }
     LateInit()

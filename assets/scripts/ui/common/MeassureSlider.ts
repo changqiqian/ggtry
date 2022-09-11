@@ -74,7 +74,7 @@ export class MeassureSlider extends BaseUI
         this.mProgressSlider.SetPercent(value);
         if(this.mOnValueChange)
         {
-            this.mOnValueChange(this.mValues[_index]);
+            this.mOnValueChange(this.mValues[_index],_index);
         }
     }
 
