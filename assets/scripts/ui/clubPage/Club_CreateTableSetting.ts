@@ -71,24 +71,24 @@ export class Club_CreateTableSetting extends BaseUI
             this.mMeassureSliderGameDuration.SetIndex(_current);
         },this);
         
-        HallData.GetInstance().AddListener("Data_ClubCreateThinkingTime",(_current , _before)=>
+        HallData.GetInstance().AddListener("Data_ClubCreateGameThinkingTime",(_current , _before)=>
         {
             this.mMeassureSliderThinkingTime.SetIndex(_current);
         },this);
-        HallData.GetInstance().AddListener("Data_ClubCreateSeatNum",(_current , _before)=>
+        HallData.GetInstance().AddListener("Data_ClubCreateGameSeatNum",(_current , _before)=>
         {
             this.mMeassureSliderSeatNum.SetIndex(_current);
         },this);
-        HallData.GetInstance().AddListener("Data_ClubCreateAutoStart",(_current , _before)=>
+        HallData.GetInstance().AddListener("Data_ClubCreateGameAutoStart",(_current , _before)=>
         {
             this.mMeassureSliderAutoStart.SetIndex(_current);
         },this);
 
-        HallData.GetInstance().AddListener("Data_ClubCreateGPS",(_current , _before)=>
+        HallData.GetInstance().AddListener("Data_ClubCreateGameGPS",(_current , _before)=>
         {
             this.mGPSToggle.SetShowStauts(_current , true);
         },this);
-        HallData.GetInstance().AddListener("Data_ClubCreateIP",(_current , _before)=>
+        HallData.GetInstance().AddListener("Data_ClubCreateGameIP",(_current , _before)=>
         {
             this.mIPToggle.SetShowStauts(_current , true);
         },this);

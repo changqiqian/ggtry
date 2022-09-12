@@ -2,7 +2,7 @@ syntax = "proto3";
 package PokerLife.Club;
 
 
-message CreateTexasRoom{
+message CreateTexasConfig{
     required GameType gameType = 1; //俱乐部创建牌局时候，游戏类型
     required string gameName = 2; //俱乐部创建牌局时候，牌局名称
     required GameCurrencyType currencyType = 3; //俱乐部创建游戏的时候，货币类型设定
@@ -22,6 +22,13 @@ message CreateTexasRoom{
     required int64 autoStartNum = 17; //俱乐部创建牌局时候，自动开始人数
     required bool gpsLimit = 18;  //俱乐部创建牌局时候，gps
     required bool ipLimit = 19;  //俱乐部创建牌局时候，ip
+}
+
+message CreateShortConfig {
+    required CreateTexasConfig texasConfig = 1;
+    required ShortScoreMode scoreMode = 2;
+    required int64 baseScore = 3;
+    required bool buttonDouble = 4;
 }
 
 

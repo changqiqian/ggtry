@@ -4,8 +4,8 @@ import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
 
-@ccclass('Club_CreateTexas')
-export class Club_CreateTexas extends BaseUI 
+@ccclass('Club_CreateShort')
+export class Club_CreateShort extends BaseUI 
 {
     @property(BaseButton) 
     mBackBtn: BaseButton = null;
@@ -14,9 +14,11 @@ export class Club_CreateTexas extends BaseUI
     @property(ScrollView) 
     mScrollView: ScrollView = null;
 
+    mShortSetting : BaseUI = null;
+    mTexasSetting : BaseUI = null;
     InitParam()
     {
-        
+        HallData.GetInstance().ResetCreateTexasRoomParam();
     }
     BindUI()
     {
@@ -31,7 +33,15 @@ export class Club_CreateTexas extends BaseUI
         }, this);
 
         this.AddSubView("clubPage","prefab/Club_CreateBasicOption",null,this.mScrollView.content);
-        this.AddSubView("clubPage","prefab/Club_CreateTexasScoreSetting",null,this.mScrollView.content);
+        this.AddSubView("clubPage","prefab/Club_ShortScoreMode",null,this.mScrollView.content);
+        this.AddSubView("clubPage","prefab/Club_CreateShortScoreSetting",(_script)=>
+        {
+            this.mShortSetting = _script;
+        },this.mScrollView.content);
+        this.AddSubView("clubPage","prefab/Club_CreateTexasScoreSetting",(_script)=>
+        {
+            this.mTexasSetting = _script;
+        },this.mScrollView.content);
         this.AddSubView("clubPage","prefab/Club_CreateBringScoreSetting",null,this.mScrollView.content);
         this.AddSubView("clubPage","prefab/Club_CreateTableSetting",null,this.mScrollView.content);
         
@@ -42,6 +52,8 @@ export class Club_CreateTexas extends BaseUI
         {
             this.mNameEditBox.string = _current;
         },this);
+
+        this.scheduleOnce(this.DelayRegDataNotify.bind(this),0);
     }
     LateInit()
     {
@@ -50,6 +62,23 @@ export class Club_CreateTexas extends BaseUI
     CustmoerDestory()
     {
 
+    }
+
+    DelayRegDataNotify()
+    {
+        HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
+        {
+            this.mShortSetting.Show(false);
+            this.mTexasSetting.Show(false);
+            if(_current == PokerLife.Club.ShortScoreMode.AnteMode)
+            {
+                this.mShortSetting.Show(true);
+            }
+            else if(_current == PokerLife.Club.ShortScoreMode.BlindMode)
+            {
+                this.mTexasSetting.Show(true);
+            }
+        },this);
     }
 }
 

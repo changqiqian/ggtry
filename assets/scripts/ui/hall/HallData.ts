@@ -31,6 +31,9 @@ export class HallData extends DataNotify {
     Data_ClubStampIndex : number = null; //创建俱乐部时候选的封面编号
 
                     //创建牌局,追踪每个选项最终值，用于最后生成数据
+    Data_ClubCreateNewSmallBlind : number = null; //小盲选项值发生了变化
+    Data_ClubCreateNewShortBaseScore : number = null;//短牌底分选项发生了变化
+
     Data_Club_CreateTexasConfig : Club_CreateTexasConfig = new Club_CreateTexasConfig();
                     //创建牌局，初始化选项会用到的驱动
     Data_ClubCreateGameType : PokerLife.Club.GameType = PokerLife.Club.GameType.TexasCash; //俱乐部创建牌局时候，游戏类型
@@ -41,22 +44,25 @@ export class HallData extends DataNotify {
     Data_ClubCreateGameCurrentSB : number = null; //俱乐部创建房间时，选中的小盲
     Data_ClubCreateGameStraddle : boolean = null; //俱乐部创建牌局时候，抓头设定
     Data_ClubCreateGameAnte : number = null; //俱乐部创建牌局时候，前注设定
-    Data_ClubCreateMaxBuying : number = null; //俱乐部创建牌局时候，最大买入设定, 买了很多次后的总数量不能超过这个值
-    Data_ClubCreateMaxBringin : number = null; //俱乐部创建牌局时候，最大带入设定，单次最多带入多少
-    Data_ClubCreateAllowBringOut : boolean = null; //俱乐部创建牌局时候，是否允许带出
+    Data_ClubCreateGameMaxBuying : number = null; //俱乐部创建牌局时候，最大买入设定, 买了很多次后的总数量不能超过这个值
+    Data_ClubCreateGameMaxBringin : number = null; //俱乐部创建牌局时候，最大带入设定，单次最多带入多少
+    Data_ClubCreateGameAllowBringOut : boolean = null; //俱乐部创建牌局时候，是否允许带出
     Data_ClubMinScoreAfterBringOut : number = null; //俱乐部创建牌局时候，带出后，必须至少保留的积分
-    Data_ClubCreateInsurance : boolean = null; //俱乐部创建牌局时候，是否开通保险功能
+    Data_ClubCreateGameInsurance : boolean = null; //俱乐部创建牌局时候，是否开通保险功能
     Data_ClubCreateGameDuration : number = null;//俱乐部创建牌局时候，牌局时间长度
-    Data_ClubCreateThinkingTime : number = null;//俱乐部创建牌局时候，思考时间长度
-    Data_ClubCreateSeatNum : number = null;//俱乐部创建牌局时候，座位数
-    Data_ClubCreateAutoStart : number = null;//俱乐部创建牌局时候，自动开始人数
-    Data_ClubCreateGPS : boolean = null; //俱乐部创建牌局时候，gps
-    Data_ClubCreateIP : boolean = null; //俱乐部创建牌局时候，ip
-
-
+    Data_ClubCreateGameThinkingTime : number = null;//俱乐部创建牌局时候，思考时间长度
+    Data_ClubCreateGameSeatNum : number = null;//俱乐部创建牌局时候，座位数
+    Data_ClubCreateGameAutoStart : number = null;//俱乐部创建牌局时候，自动开始人数
+    Data_ClubCreateGameGPS : boolean = null; //俱乐部创建牌局时候，gps
+    Data_ClubCreateGameIP : boolean = null; //俱乐部创建牌局时候，ip
+                    //创建短牌，初始化选项用到的数据驱动
+    Data_ClubCreateShortScoreMode : PokerLife.Club.ShortScoreMode = null; //俱乐部创建牌局时候，短牌底池类型
+    Data_ClubCreateShortBaseScore : number = null; //短牌创建时候的底分选择
+    Data_ClubCreateShortButtonDouble : boolean = null ;//短牌创建时候的 庄前双倍底分
 
     ResetCreateTexasRoomParam()
     {
+
         this.Data_ClubCreateGameType = PokerLife.Club.GameType.TexasCash;
         this.Data_ClubCreateGameName = "";
         this.Data_ClubCreateGameCurrencyType = PokerLife.Club.GameCurrencyType.Point;
@@ -65,17 +71,20 @@ export class HallData extends DataNotify {
         this.Data_ClubCreateGameCurrentSB = 0;
         this.Data_ClubCreateGameStraddle = false;
         this.Data_ClubCreateGameAnte = 0;
-        this.Data_ClubCreateMaxBuying = 0;
-        this.Data_ClubCreateMaxBringin = 0;
-        this.Data_ClubCreateAllowBringOut = false;
+        this.Data_ClubCreateGameMaxBuying = 0;
+        this.Data_ClubCreateGameMaxBringin = 0;
+        this.Data_ClubCreateGameAllowBringOut = false;
         this.Data_ClubMinScoreAfterBringOut = 0;
-        this.Data_ClubCreateInsurance = false;
+        this.Data_ClubCreateGameInsurance = false;
         this.Data_ClubCreateGameDuration = 0;
-        this.Data_ClubCreateThinkingTime = 0;
-        this.Data_ClubCreateSeatNum = 0;
-        this.Data_ClubCreateAutoStart = 0;
-        this.Data_ClubCreateGPS = false;
-        this.Data_ClubCreateIP = false;
+        this.Data_ClubCreateGameThinkingTime = 0;
+        this.Data_ClubCreateGameSeatNum = 0;
+        this.Data_ClubCreateGameAutoStart = 0;
+        this.Data_ClubCreateGameGPS = false;
+        this.Data_ClubCreateGameIP = false;
+
+        this.Data_ClubCreateShortScoreMode = PokerLife.Club.ShortScoreMode.BlindMode;
+        this.Data_ClubCreateShortBaseScore = 0;
 
         this.Data_Club_CreateTexasConfig.gameType = this.Data_ClubCreateGameType;
         this.Data_Club_CreateTexasConfig.gameName = this.Data_ClubCreateGameName;
@@ -85,17 +94,21 @@ export class HallData extends DataNotify {
         this.Data_Club_CreateTexasConfig.smallBlind = this.Data_ClubCreateGameCurrentSB;
         this.Data_Club_CreateTexasConfig.straddle = this.Data_ClubCreateGameStraddle;
         this.Data_Club_CreateTexasConfig.ante =  this.Data_ClubCreateGameAnte;
-        this.Data_Club_CreateTexasConfig.maxTotalBuyIn = this.Data_ClubCreateMaxBuying;
-        this.Data_Club_CreateTexasConfig.maxBringIn = this.Data_ClubCreateMaxBringin;
-        this.Data_Club_CreateTexasConfig.allowBringOut = this.Data_ClubCreateAllowBringOut;
+        this.Data_Club_CreateTexasConfig.maxTotalBuyIn = this.Data_ClubCreateGameMaxBuying;
+        this.Data_Club_CreateTexasConfig.maxBringIn = this.Data_ClubCreateGameMaxBringin;
+        this.Data_Club_CreateTexasConfig.allowBringOut = this.Data_ClubCreateGameAllowBringOut;
         this.Data_Club_CreateTexasConfig.minScoreAfterBringOut = this.Data_ClubMinScoreAfterBringOut;
-        this.Data_Club_CreateTexasConfig.insurance = this.Data_ClubCreateInsurance;
+        this.Data_Club_CreateTexasConfig.insurance = this.Data_ClubCreateGameInsurance;
         this.Data_Club_CreateTexasConfig.gameDuration = this.Data_ClubCreateGameDuration;
-        this.Data_Club_CreateTexasConfig.thinkingTime = this.Data_ClubCreateThinkingTime;
-        this.Data_Club_CreateTexasConfig.seatNum = this.Data_ClubCreateSeatNum;
-        this.Data_Club_CreateTexasConfig.autoStartNum = this.Data_ClubCreateAutoStart;
-        this.Data_Club_CreateTexasConfig.gpsLimit = this.Data_ClubCreateGPS;
-        this.Data_Club_CreateTexasConfig.ipLimit = this.Data_ClubCreateIP;
+        this.Data_Club_CreateTexasConfig.thinkingTime = this.Data_ClubCreateGameThinkingTime;
+        this.Data_Club_CreateTexasConfig.seatNum = this.Data_ClubCreateGameSeatNum;
+        this.Data_Club_CreateTexasConfig.autoStartNum = this.Data_ClubCreateGameAutoStart;
+        this.Data_Club_CreateTexasConfig.gpsLimit = this.Data_ClubCreateGameGPS;
+        this.Data_Club_CreateTexasConfig.ipLimit = this.Data_ClubCreateGameIP;
+
+        this.Data_Club_CreateTexasConfig.shortScoreMode = this.Data_ClubCreateShortScoreMode;
+        this.Data_Club_CreateTexasConfig.shortBaseScore = this.Data_ClubCreateShortBaseScore;
+        this.Data_Club_CreateTexasConfig.buttonDouble = this.Data_ClubCreateShortButtonDouble;
     }
 
     RegisteMsg() {
@@ -166,4 +179,9 @@ class Club_CreateTexasConfig
     autoStartNum : number;
     gpsLimit :boolean;
     ipLimit :boolean;
+
+    //short
+    shortScoreMode : PokerLife.Club.ShortScoreMode;
+    shortBaseScore : number;
+    buttonDouble : boolean;
 }
