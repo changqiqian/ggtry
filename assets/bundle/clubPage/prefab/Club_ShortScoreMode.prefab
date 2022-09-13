@@ -35,10 +35,13 @@
       },
       {
         "__id__": 170
+      },
+      {
+        "__id__": 172
       }
     ],
     "_prefab": {
-      "__id__": 172
+      "__id__": 174
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -93,7 +96,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -510.0920000000001,
+      "x": 0,
       "y": -58.213,
       "z": 0
     },
@@ -137,7 +140,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 0.5,
       "y": 0.5
     },
     "_id": ""
@@ -204,7 +207,7 @@
     },
     "_alignFlags": 9,
     "_target": null,
-    "_left": 52.4079999999999,
+    "_left": 488.5,
     "_right": 0,
     "_top": 26.713,
     "_bottom": 0,
@@ -266,7 +269,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -160,
+      "y": -190,
       "z": 0
     },
     "_lrot": {
@@ -2275,7 +2278,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1125,
-      "height": 220
+      "height": 250
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2342,6 +2345,51 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "f4H2Hu/y1NDK49pfxlQjVo"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 173
+    },
+    "_visFlags": 0,
+    "_customMaterial": null,
+    "_srcBlendFactor": 2,
+    "_dstBlendFactor": 4,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_spriteFrame": {
+      "__uuid__": "dd5803fc-e5ea-4fc6-8702-10299c5f4275@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "_type": 1,
+    "_fillType": 0,
+    "_sizeMode": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_useGrayscale": false,
+    "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "f7MWm7QlNNwbxNKX9wx87M"
   },
   {
     "__type__": "cc.PrefabInfo",

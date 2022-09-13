@@ -1,4 +1,5 @@
 import { DataNotify } from '../../base/DataNotify';
+import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 
 export class HallData extends DataNotify {
@@ -16,25 +17,43 @@ export class HallData extends DataNotify {
     Data_SubPage: Hall_SubPage = null; //大厅底部 分页
     Data_LunBoTu: any = null; //轮播图数据
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Mtt
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Data_MttInfoSubPage: Mtt_InfoSubPage = null; //Mtt详细信息页面 分页
     Data_MttRankSubPage: Mtt_RankSubPage = null; //Mtt排行榜 分页面
 
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Me
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Data_MeMessageSubPage: number = null; //消息页展示内容
     Data_MeRecodeSubPage: number = null; //收支记录当前页
 
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Club
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //俱乐部战绩
+    Data_ClubRecordSubPage : Club_RecordSubPage = null; //俱乐部战绩 子页面
+    Data_ClubRecordCoinType : PokerLife.Club.GameCurrencyType = null;//俱乐部战绩 货币类型
+    Data_ClubRecordDateType : PokerLife.Club.RecordDateType = null;//俱乐部战绩 战绩时间段
                     //创建俱乐部
     Data_ClubLogoIndex : number = null; //创建俱乐部时候选择的logo编号
     Data_ClubStampIndex : number = null; //创建俱乐部时候选的封面编号
 
                     //创建牌局,追踪每个选项最终值，用于最后生成数据
-    Data_ClubCreateNewSmallBlind : number = null; //小盲选项值发生了变化
-    Data_ClubCreateNewShortBaseScore : number = null;//短牌底分选项发生了变化
+    Data_ClubRefreshSmallBlind : number = null; //小盲选项值发生了变化
+    Data_ClubRefreshShortBaseScore : number = null;//短牌底分选项发生了变化
 
     Data_Club_CreateTexasConfig : Club_CreateTexasConfig = new Club_CreateTexasConfig();
+    Data_ClubRefreshGameModule : boolean = null;//刷新创建房间模版数据
+    Data_ClubCurrentModuleIndex : number = null; //当前操作的模版编号
                     //创建牌局，初始化选项会用到的驱动
     Data_ClubCreateGameType : PokerLife.Club.GameType = PokerLife.Club.GameType.TexasCash; //俱乐部创建牌局时候，游戏类型
     Data_ClubCreateGameName : string = null; //俱乐部创建牌局时候，牌局名称
@@ -56,14 +75,14 @@ export class HallData extends DataNotify {
     Data_ClubCreateGameGPS : boolean = null; //俱乐部创建牌局时候，gps
     Data_ClubCreateGameIP : boolean = null; //俱乐部创建牌局时候，ip
                     //创建短牌，初始化选项用到的数据驱动
-    Data_ClubCreateShortScoreMode : PokerLife.Club.ShortScoreMode = null; //俱乐部创建牌局时候，短牌底池类型
+    Data_ClubCreateShortScoreMode : PokerLife.Club.ShortGameScoreMode = null; //俱乐部创建牌局时候，短牌底池类型
     Data_ClubCreateShortBaseScore : number = null; //短牌创建时候的底分选择
     Data_ClubCreateShortButtonDouble : boolean = null ;//短牌创建时候的 庄前双倍底分
 
-    ResetCreateTexasRoomParam()
-    {
 
-        this.Data_ClubCreateGameType = PokerLife.Club.GameType.TexasCash;
+    ResetCreateRoomParam(_type : PokerLife.Club.GameType)
+    {
+        this.Data_ClubCreateGameType = _type;
         this.Data_ClubCreateGameName = "";
         this.Data_ClubCreateGameCurrencyType = PokerLife.Club.GameCurrencyType.Point;
         this.Data_ClubCreateGameTaxType = PokerLife.Club.GameTaxType.WholeGameEnd;
@@ -82,9 +101,9 @@ export class HallData extends DataNotify {
         this.Data_ClubCreateGameAutoStart = 0;
         this.Data_ClubCreateGameGPS = false;
         this.Data_ClubCreateGameIP = false;
-
-        this.Data_ClubCreateShortScoreMode = PokerLife.Club.ShortScoreMode.BlindMode;
+        this.Data_ClubCreateShortScoreMode = PokerLife.Club.ShortGameScoreMode.BlindMode;
         this.Data_ClubCreateShortBaseScore = 0;
+        this.Data_ClubCreateShortButtonDouble = false;
 
         this.Data_Club_CreateTexasConfig.gameType = this.Data_ClubCreateGameType;
         this.Data_Club_CreateTexasConfig.gameName = this.Data_ClubCreateGameName;
@@ -105,11 +124,106 @@ export class HallData extends DataNotify {
         this.Data_Club_CreateTexasConfig.autoStartNum = this.Data_ClubCreateGameAutoStart;
         this.Data_Club_CreateTexasConfig.gpsLimit = this.Data_ClubCreateGameGPS;
         this.Data_Club_CreateTexasConfig.ipLimit = this.Data_ClubCreateGameIP;
-
         this.Data_Club_CreateTexasConfig.shortScoreMode = this.Data_ClubCreateShortScoreMode;
         this.Data_Club_CreateTexasConfig.shortBaseScore = this.Data_ClubCreateShortBaseScore;
         this.Data_Club_CreateTexasConfig.buttonDouble = this.Data_ClubCreateShortButtonDouble;
     }
+
+    ReadModule(_index : number)
+    {
+        let strData = GameConfig.GetCreateRoomModule(_index);
+        if(strData == null)
+        {
+            console.log("halldata ReadModule error strData =null  _index ==" + _index);
+            return;
+        }
+    
+        this.Data_Club_CreateTexasConfig = JSON.parse(strData) as Club_CreateTexasConfig;
+        this.Data_ClubCreateGameType = this.Data_Club_CreateTexasConfig.gameType
+        this.Data_ClubCreateGameName = this.Data_Club_CreateTexasConfig.gameName
+        this.Data_ClubCreateGameCurrencyType = this.Data_Club_CreateTexasConfig.currencyType
+        this.Data_ClubCreateGameTaxType = this.Data_Club_CreateTexasConfig.taxType
+        this.Data_ClubCreateGameTaxRate = this.Data_Club_CreateTexasConfig.taxRatio
+        this.Data_ClubCreateGameCurrentSB = this.Data_Club_CreateTexasConfig.smallBlind
+        this.Data_ClubCreateGameStraddle = this.Data_Club_CreateTexasConfig.straddle
+        this.Data_ClubCreateGameAnte = this.Data_Club_CreateTexasConfig.ante
+        this.Data_ClubCreateGameMaxBuying = this.Data_Club_CreateTexasConfig.maxTotalBuyIn
+        this.Data_ClubCreateGameMaxBringin = this.Data_Club_CreateTexasConfig.maxBringIn
+        this.Data_ClubCreateGameAllowBringOut = this.Data_Club_CreateTexasConfig.allowBringOut
+        this.Data_ClubMinScoreAfterBringOut = this.Data_Club_CreateTexasConfig.minScoreAfterBringOut
+        this.Data_ClubCreateGameInsurance = this.Data_Club_CreateTexasConfig.insurance
+        this.Data_ClubCreateGameDuration = this.Data_Club_CreateTexasConfig.gameDuration
+        this.Data_ClubCreateGameThinkingTime = this.Data_Club_CreateTexasConfig.thinkingTime
+        this.Data_ClubCreateGameSeatNum = this.Data_Club_CreateTexasConfig.seatNum
+        this.Data_ClubCreateGameAutoStart = this.Data_Club_CreateTexasConfig.autoStartNum
+        this.Data_ClubCreateGameGPS = this.Data_Club_CreateTexasConfig.gpsLimit
+        this.Data_ClubCreateGameIP = this.Data_Club_CreateTexasConfig.ipLimit
+        this.Data_ClubCreateShortScoreMode = this.Data_Club_CreateTexasConfig.shortScoreMode
+        this.Data_ClubCreateShortBaseScore = this.Data_Club_CreateTexasConfig.shortBaseScore
+        this.Data_ClubCreateShortButtonDouble = this.Data_Club_CreateTexasConfig.buttonDouble
+    }
+
+    ConvertCreateTexasConfigToProto(_config : Club_CreateTexasConfig) : PokerLife.Club.GameConfig
+    {
+        let finalData = new PokerLife.Club.GameConfig();
+        finalData.basicConfig = new PokerLife.Club.GameBasicConfig();
+        finalData.texasConfig = new PokerLife.Club.TexasConfig();
+        finalData.shortConfig = new PokerLife.Club.ShortConfig();
+
+        finalData.basicConfig.gameType = _config.gameType;
+        finalData.basicConfig.gameName = _config.gameName;
+        finalData.basicConfig.currencyType = _config.currencyType;
+        finalData.basicConfig.taxType = _config.taxType;
+        finalData.basicConfig.taxRatio = GameConfig.GetTexasCreateRoomTaxValue(_config.taxType)[_config.taxRatio];
+        finalData.texasConfig.smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[_config.smallBlind];
+        finalData.shortConfig.baseScore = GameConfig.GetShortCreateRoomBaseScoreValue()[_config.shortBaseScore];
+        finalData.shortConfig.scoreMode = _config.shortScoreMode;
+        finalData.shortConfig.buttonDouble = _config.buttonDouble;
+        
+        let bigBlind = finalData.texasConfig.smallBlind * 2;
+        let bigBliind100 = bigBlind* 100;
+        let baseScore100 = finalData.shortConfig.baseScore * 100;
+        finalData.texasConfig.straddle = _config.straddle;
+        finalData.texasConfig.ante = GameConfig.GetTexasCreateRoomAnteValue(finalData.texasConfig.smallBlind)[_config.ante];
+        
+        if( _config.gameType == PokerLife.Club.GameType.TexasCash)
+        {
+            finalData.texasConfig.maxTotalBuyIn = GameConfig.GetTexasCreateRoomMaxBuyInValue()[_config.maxTotalBuyIn] * bigBliind100;
+            finalData.texasConfig.minBringIn = bigBliind100 / 2;
+            finalData.texasConfig.maxBringIn = bigBliind100 * GameConfig.GetTexasCreateRoomBringInValue()[_config.maxBringIn];
+        }
+        else if( _config.gameType == PokerLife.Club.GameType.ShortCash)
+        {
+            finalData.texasConfig.maxTotalBuyIn = GameConfig.GetTexasCreateRoomMaxBuyInValue()[_config.maxTotalBuyIn] * baseScore100;
+            finalData.texasConfig.minBringIn = baseScore100 / 2;
+            finalData.texasConfig.maxBringIn = baseScore100 * GameConfig.GetTexasCreateRoomBringInValue()[_config.maxBringIn];
+        }
+
+        finalData.texasConfig.allowBringOut = _config.allowBringOut;
+        finalData.texasConfig.minScoreAfterBringOut = _config.minScoreAfterBringOut;
+        finalData.texasConfig.insurance = _config.insurance;
+        finalData.texasConfig.gameDuration = GameConfig.GetTexasCreateRoomGameDurationValue()[_config.gameDuration];
+        finalData.texasConfig.thinkingTime = GameConfig.GetTexasCreateRoomThinkingTimeValue()[_config.thinkingTime];
+        finalData.texasConfig.seatNum = GameConfig.GetTexasCreateRoomSeatNumValue()[_config.seatNum];
+        finalData.texasConfig.autoStartNum = GameConfig.GetTexasCreateRoomAutoStartValue()[_config.autoStartNum];
+        finalData.texasConfig.gpsLimit = _config.gpsLimit;
+        finalData.texasConfig.ipLimit = _config.ipLimit;
+        return finalData;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Cash
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //activity
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     RegisteMsg() {
        
@@ -154,7 +268,13 @@ export enum Me_ReocordSubPage { //收支记录内容
     DiamondReocd = 1,
 }
 
-class Club_CreateTexasConfig
+export enum Club_RecordSubPage { //俱乐部战绩页面 子页面
+    Texas = 0,
+    Short = 1,
+    Omh = 2,
+}
+
+export class Club_CreateTexasConfig
 {
     constructor()
     {
@@ -181,7 +301,7 @@ class Club_CreateTexasConfig
     ipLimit :boolean;
 
     //short
-    shortScoreMode : PokerLife.Club.ShortScoreMode;
+    shortScoreMode : PokerLife.Club.ShortGameScoreMode;
     shortBaseScore : number;
     buttonDouble : boolean;
 }

@@ -32,7 +32,7 @@ export class LocalPlayerData extends DataNotify {
         this.Data_CustomerRaise2 = GameConfig.GetCustomerRaiseRatio(2);
         this.Data_BGSetting = GameConfig.GetBGSetting();
         this.Data_PokerSetting = GameConfig.GetPokerSetting();
-        this.Data_CustomerSliderSetting = GameConfig.GaveCustomerSliderSetting();
+        this.Data_CustomerSliderSetting = GameConfig.GetCustomerSliderSetting();
         this.Data_BBModeSetting = GameConfig.GetBBToggleSetting();
         this.Data_BGMSetting = GameConfig.GetBGMSetting();
     }

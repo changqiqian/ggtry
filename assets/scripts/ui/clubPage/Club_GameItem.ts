@@ -1,6 +1,9 @@
 import { _decorator, Component, Node, Label, Color } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
+import { GameConfig } from '../../GameConfig';
 import { CircleTimer } from '../common/CircleTimer';
+import { Club_CreateTexasConfig, HallData } from '../hall/HallData';
 
 const { ccclass, property } = _decorator;
 
@@ -24,9 +27,11 @@ export class Club_GameItem extends BaseUI
     @property(Node) 
     mIpTag: Node = null;
     @property(Label) 
-    mBringIn: Label = null;
-
+    mMinBringIn: Label = null;
+    @property(Label) 
+    mMaxBringIn: Label = null;
     
+
     InitParam()
     {
 
@@ -48,32 +53,112 @@ export class Club_GameItem extends BaseUI
 
     }
 
-    public InitWithData(_type : PokerLife.Club.GameType)
+    public InitWithData(_data : Club_CreateTexasConfig)
+    {
+        let tempData = HallData.GetInstance().ConvertCreateTexasConfigToProto(_data);
+        this.InitWithServerData(tempData);
+    }
+
+    public InitWithServerData(_data : PokerLife.Club.GameConfig)
     {
         let tempColor;
-        let gameType;
-        switch(_type)
+        let gameTypeName;
+
+        switch(_data.basicConfig.gameType)
         {
             case PokerLife.Club.GameType.TexasCash:
                 tempColor = new Color(109,176,99);
-                gameType = "NLH";
+                gameTypeName = "NLH";
+                this.mBlindInfo.string = _data.texasConfig.smallBlind + "/" + _data.texasConfig.smallBlind * 2;
+                if(_data.texasConfig.straddle)
+                {
+                    this.mBlindInfo.string += "/" + _data.texasConfig.smallBlind * 4;
+                }
+                if(_data.texasConfig.ante > 0)
+                {
+                    this.mBlindInfo.string += "(" + _data.texasConfig.ante+ ")";
+                }
+                this.mMinBringIn.string = _data.texasConfig.minBringIn + "";
+                this.mMaxBringIn.string = _data.texasConfig.maxBringIn + "";
             break
             case PokerLife.Club.GameType.ShortCash:
                 tempColor = new Color(98,174,175);
-                gameType = "Short";
+                gameTypeName = "Short";
+                if(_data.shortConfig.scoreMode == PokerLife.Club.ShortGameScoreMode.BlindMode)
+                {
+                    this.mBlindInfo.string = _data.texasConfig.smallBlind + "/" + _data.texasConfig.smallBlind * 2;
+                    if(_data.texasConfig.straddle)
+                    {
+                        this.mBlindInfo.string += "/" + _data.texasConfig.smallBlind * 4;
+                    }
+                    if(_data.texasConfig.ante > 0)
+                    {
+                        this.mBlindInfo.string += "(" + _data.texasConfig.ante+ ")";
+                    }
+                    this.mMinBringIn.string = _data.texasConfig.minBringIn + "";
+                    this.mMaxBringIn.string = _data.texasConfig.maxBringIn + "";
+                }
+                else if(_data.shortConfig.scoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+                {
+                    this.mBlindInfo.string = _data.shortConfig.baseScore + " ante";
+                    this.mMinBringIn.string = _data.shortConfig.baseScore * 50 + "";
+                    this.mMaxBringIn.string = _data.shortConfig.baseScore * 100 + "";
+                }
             break
             case PokerLife.Club.GameType.Mtt:
-                gameType = "Mtt"
+                gameTypeName = "Mtt"
                 tempColor = new Color(59,52,122);
             break
             case PokerLife.Club.GameType.Omh:
-                gameType = "Omh"
+                gameTypeName = "Omh"
                 tempColor = Color.WHITE;
             break
         }
         this.mCircleTimer.SetColor(tempColor);
-        this.mGameType.string = gameType;
+        this.mGameType.string = gameTypeName;
         this.mGameType.color = tempColor;
+
+
+        if(_data.matchingConfig != null)
+        {
+            this.mCircleTimer.SetProgress(_data.matchingConfig.currentPlayerNum / _data.texasConfig.seatNum);
+            this.mCircleTimer.SetTimerTitle(_data.matchingConfig.currentPlayerNum + "/"+_data.texasConfig.seatNum);
+            this.mLeftTime.string = "00:00" + "/" + _data.texasConfig.gameDuration + "h";
+        }
+        else
+        {
+            this.mCircleTimer.SetProgress(1);
+            this.mCircleTimer.SetTimerTitle(_data.texasConfig.seatNum + "");
+            this.mLeftTime.string = _data.texasConfig.gameDuration + "h";
+        }
+
+        this.mGameName.string = _data.basicConfig.gameName;
+        if(_data.basicConfig.currencyType == PokerLife.Club.GameCurrencyType.Coin)
+        {
+            this.mScoreTag.getChildByName("Label").getComponent(Label).string = Localization.GetString("00092");
+        }
+        else if(_data.basicConfig.currencyType == PokerLife.Club.GameCurrencyType.Point)
+        {
+            this.mScoreTag.getChildByName("Label").getComponent(Label).string = Localization.GetString("00093");
+        }
+
+        this.mInsuranceTag.active = _data.texasConfig.insurance;
+
+        this.mIpTag.active = _data.texasConfig.gpsLimit || _data.texasConfig.ipLimit;
+        let gpsAndIp = "";
+        if(_data.texasConfig.gpsLimit)
+        {
+            gpsAndIp = "GPS";
+            if(_data.texasConfig.ipLimit)
+            {
+                gpsAndIp += "/IP";
+            }
+        }
+        else if(_data.texasConfig.ipLimit)
+        {
+            gpsAndIp = "IP";
+        }
+        this.mIpTag.getChildByName("Label").getComponent(Label).string = gpsAndIp;
     }
 }
 

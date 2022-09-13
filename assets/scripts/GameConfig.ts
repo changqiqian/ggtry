@@ -1,3 +1,4 @@
+import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
 
 export class GameConfig
@@ -244,6 +245,16 @@ export class GameConfig
         return [0,2,3,4,5,6];
     }
 
+    public static GetShortCreateRoomBaseScoreTitle()
+    {
+        return ["" , "" , "" , "" , "" , "", "" , "" , "" , ""];
+    }
+
+    public static GetShortCreateRoomBaseScoreValue()
+    {
+        return [1 , 2 , 5 , 10 , 20 , 40 , 50 , 100 , 200 , 500];
+    }
+
     public static LoadToken()
     {
         GameConfig.LOGIN_TOKEN = GameConfig.ReadSimpleData("LOGIN_TOKEN", null);
@@ -408,12 +419,101 @@ export class GameConfig
         GameConfig.WriteSimpleData_Bool(key , _value);
     }
 
-    public static GaveCustomerSliderSetting() : boolean
+    public static GetCustomerSliderSetting() : boolean
     {
         let key = "CUSTOMER_SLIDER";
         return GameConfig.ReadSimpleData_Bool(key);
     }
 
+    public static MaxModule = 10; //最大储存的创建房间模版数量
+    public static TryToSaveCreateRoomModule(_data : Club_CreateTexasConfig , _index : number) : boolean
+    {
+        let newIndex;
+
+        if(_index != null)
+        {
+            newIndex = _index;
+        }
+        else
+        {
+            newIndex =GameConfig.GetCreateRoomModuleNewIndex();
+        }
+
+        if(newIndex == -1)
+        {
+            return false;
+        }
+        GameConfig.SaveCreateRoomModule(JSON.stringify(_data) , newIndex);
+        return true;
+    }
+
+    public static GetCreateRoomModuleNewIndex()
+    {
+        for(let i = 0 ; i < GameConfig.MaxModule ; i++)
+        {
+            let value = GameConfig.GetCreateRoomModule(i);
+            if(value == null)
+            {
+                return i;
+            }
+        }
+
+        console.log("模版空间已满")
+        return -1;
+    }
+
+    public static DeleteCreateRoomModule(_index : number)
+    {
+        GameConfig.SaveCreateRoomModule( null , _index);
+    }
+
+    public static SaveCreateRoomModule(_data : string , _index : number)
+    {
+        let preffix = "CREATE_GAME_MODULE";
+        let currentKey = preffix + _index;
+        GameConfig.WriteSimpleData(currentKey, _data);
+        console.log("SaveCreateRoomModule index ==" + _index)
+        console.log("SaveCreateRoomModule _data ==" + _data)
+    }
+
+    public static GetCreateRoomModule(_index : number)
+    {
+        let preffix = "CREATE_GAME_MODULE";
+        let currentKey = preffix + _index;
+        let value = GameConfig.ReadSimpleData(currentKey, null);
+        return value;
+    }
+    //删除模版后，把模版重新排序，往前补齐，让模版占用索引永远从0开始，依次排列
+    //例如目前有5个模版，用户删除了第三个模版，然么第三个模版就处于空缺状态，于是用这个方法把后面的模版依次往前挪动一格
+    public static ReoderCreateRoomModuleData()
+    {
+        let step = 0;
+        while(step < GameConfig.MaxModule)
+        {
+            let currentModule = GameConfig.GetCreateRoomModule(step);
+            if(currentModule == null)
+            {
+                let nextModuleIndex= -1;
+                for(let i = step + 1 ; i < GameConfig.MaxModule ; i++)
+                {
+                    let tempModuleData = GameConfig.GetCreateRoomModule(i);
+                    if(tempModuleData == null)
+                    {
+                        continue;
+                    }
+                    nextModuleIndex = i;
+                    break;
+                }
+                if(nextModuleIndex != -1)
+                {
+                    let nextModuleData = GameConfig.GetCreateRoomModule(nextModuleIndex); 
+                    GameConfig.DeleteCreateRoomModule(nextModuleIndex);
+                    GameConfig.SaveCreateRoomModule(nextModuleData , step);
+                }
+            }
+            step++;
+        }
+    }
 
     public static WriteSimpleData(key, data)
     {

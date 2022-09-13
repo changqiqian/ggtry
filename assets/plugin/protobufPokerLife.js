@@ -22,42 +22,27 @@ $root.PokerLife = (function() {
          */
         var Club = {};
 
-        Club.CreateTexasRoom = (function() {
+        Club.GameConfig = (function() {
 
             /**
-             * Properties of a CreateTexasRoom.
+             * Properties of a GameConfig.
              * @memberof PokerLife.Club
-             * @interface ICreateTexasRoom
-             * @property {PokerLife.Club.GameType} gameType CreateTexasRoom gameType
-             * @property {string} gameName CreateTexasRoom gameName
-             * @property {PokerLife.Club.GameCurrencyType} currencyType CreateTexasRoom currencyType
-             * @property {PokerLife.Club.GameTaxType} taxType CreateTexasRoom taxType
-             * @property {number} taxRatio CreateTexasRoom taxRatio
-             * @property {number} smallBlind CreateTexasRoom smallBlind
-             * @property {boolean} straddle CreateTexasRoom straddle
-             * @property {number} ante CreateTexasRoom ante
-             * @property {number} maxTotalBuyIn CreateTexasRoom maxTotalBuyIn
-             * @property {number} maxBringIn CreateTexasRoom maxBringIn
-             * @property {boolean} allowBringOut CreateTexasRoom allowBringOut
-             * @property {number} minScoreAfterBringOut CreateTexasRoom minScoreAfterBringOut
-             * @property {boolean} insurance CreateTexasRoom insurance
-             * @property {number} gameDuration CreateTexasRoom gameDuration
-             * @property {number} thinkingTime CreateTexasRoom thinkingTime
-             * @property {number} seatNum CreateTexasRoom seatNum
-             * @property {number} autoStartNum CreateTexasRoom autoStartNum
-             * @property {boolean} gpsLimit CreateTexasRoom gpsLimit
-             * @property {boolean} ipLimit CreateTexasRoom ipLimit
+             * @interface IGameConfig
+             * @property {PokerLife.Club.IGameBasicConfig} basicConfig GameConfig basicConfig
+             * @property {PokerLife.Club.ITexasConfig} texasConfig GameConfig texasConfig
+             * @property {PokerLife.Club.IShortConfig|null} [shortConfig] GameConfig shortConfig
+             * @property {PokerLife.Club.IMatchingConfig|null} [matchingConfig] GameConfig matchingConfig
              */
 
             /**
-             * Constructs a new CreateTexasRoom.
+             * Constructs a new GameConfig.
              * @memberof PokerLife.Club
-             * @classdesc Represents a CreateTexasRoom.
-             * @implements ICreateTexasRoom
+             * @classdesc Represents a GameConfig.
+             * @implements IGameConfig
              * @constructor
-             * @param {PokerLife.Club.ICreateTexasRoom=} [p] Properties to set
+             * @param {PokerLife.Club.IGameConfig=} [p] Properties to set
              */
-            function CreateTexasRoom(p) {
+            function GameConfig(p) {
                 if (p)
                     for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                         if (p[ks[i]] != null)
@@ -65,167 +50,278 @@ $root.PokerLife = (function() {
             }
 
             /**
-             * CreateTexasRoom gameType.
-             * @member {PokerLife.Club.GameType} gameType
-             * @memberof PokerLife.Club.CreateTexasRoom
+             * GameConfig basicConfig.
+             * @member {PokerLife.Club.IGameBasicConfig} basicConfig
+             * @memberof PokerLife.Club.GameConfig
              * @instance
              */
-            CreateTexasRoom.prototype.gameType = 0;
+            GameConfig.prototype.basicConfig = null;
 
             /**
-             * CreateTexasRoom gameName.
-             * @member {string} gameName
-             * @memberof PokerLife.Club.CreateTexasRoom
+             * GameConfig texasConfig.
+             * @member {PokerLife.Club.ITexasConfig} texasConfig
+             * @memberof PokerLife.Club.GameConfig
              * @instance
              */
-            CreateTexasRoom.prototype.gameName = "";
+            GameConfig.prototype.texasConfig = null;
 
             /**
-             * CreateTexasRoom currencyType.
-             * @member {PokerLife.Club.GameCurrencyType} currencyType
-             * @memberof PokerLife.Club.CreateTexasRoom
+             * GameConfig shortConfig.
+             * @member {PokerLife.Club.IShortConfig|null|undefined} shortConfig
+             * @memberof PokerLife.Club.GameConfig
              * @instance
              */
-            CreateTexasRoom.prototype.currencyType = 0;
+            GameConfig.prototype.shortConfig = null;
 
             /**
-             * CreateTexasRoom taxType.
-             * @member {PokerLife.Club.GameTaxType} taxType
-             * @memberof PokerLife.Club.CreateTexasRoom
+             * GameConfig matchingConfig.
+             * @member {PokerLife.Club.IMatchingConfig|null|undefined} matchingConfig
+             * @memberof PokerLife.Club.GameConfig
              * @instance
              */
-            CreateTexasRoom.prototype.taxType = 0;
+            GameConfig.prototype.matchingConfig = null;
 
             /**
-             * CreateTexasRoom taxRatio.
-             * @member {number} taxRatio
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.taxRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-            /**
-             * CreateTexasRoom smallBlind.
-             * @member {number} smallBlind
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.smallBlind = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-            /**
-             * CreateTexasRoom straddle.
-             * @member {boolean} straddle
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.straddle = false;
-
-            /**
-             * CreateTexasRoom ante.
-             * @member {number} ante
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.ante = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-            /**
-             * CreateTexasRoom maxTotalBuyIn.
-             * @member {number} maxTotalBuyIn
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.maxTotalBuyIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-            /**
-             * CreateTexasRoom maxBringIn.
-             * @member {number} maxBringIn
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.maxBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-            /**
-             * CreateTexasRoom allowBringOut.
-             * @member {boolean} allowBringOut
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.allowBringOut = false;
-
-            /**
-             * CreateTexasRoom minScoreAfterBringOut.
-             * @member {number} minScoreAfterBringOut
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.minScoreAfterBringOut = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-            /**
-             * CreateTexasRoom insurance.
-             * @member {boolean} insurance
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.insurance = false;
-
-            /**
-             * CreateTexasRoom gameDuration.
-             * @member {number} gameDuration
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.gameDuration = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-            /**
-             * CreateTexasRoom thinkingTime.
-             * @member {number} thinkingTime
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.thinkingTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-            /**
-             * CreateTexasRoom seatNum.
-             * @member {number} seatNum
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.seatNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-            /**
-             * CreateTexasRoom autoStartNum.
-             * @member {number} autoStartNum
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.autoStartNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-            /**
-             * CreateTexasRoom gpsLimit.
-             * @member {boolean} gpsLimit
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.gpsLimit = false;
-
-            /**
-             * CreateTexasRoom ipLimit.
-             * @member {boolean} ipLimit
-             * @memberof PokerLife.Club.CreateTexasRoom
-             * @instance
-             */
-            CreateTexasRoom.prototype.ipLimit = false;
-
-            /**
-             * Encodes the specified CreateTexasRoom message. Does not implicitly {@link PokerLife.Club.CreateTexasRoom.verify|verify} messages.
+             * Encodes the specified GameConfig message. Does not implicitly {@link PokerLife.Club.GameConfig.verify|verify} messages.
              * @function encode
-             * @memberof PokerLife.Club.CreateTexasRoom
+             * @memberof PokerLife.Club.GameConfig
              * @static
-             * @param {PokerLife.Club.ICreateTexasRoom} m CreateTexasRoom message or plain object to encode
+             * @param {PokerLife.Club.IGameConfig} m GameConfig message or plain object to encode
              * @param {protobuf.Writer} [w] Writer to encode to
              * @returns {protobuf.Writer} Writer
              */
-            CreateTexasRoom.encode = function encode(m, w) {
+            GameConfig.encode = function encode(m, w) {
+                if (!w)
+                    w = $Writer.create();
+                $root.PokerLife.Club.GameBasicConfig.encode(m.basicConfig, w.uint32(10).fork()).ldelim();
+                $root.PokerLife.Club.TexasConfig.encode(m.texasConfig, w.uint32(18).fork()).ldelim();
+                if (m.shortConfig != null && Object.hasOwnProperty.call(m, "shortConfig"))
+                    $root.PokerLife.Club.ShortConfig.encode(m.shortConfig, w.uint32(26).fork()).ldelim();
+                if (m.matchingConfig != null && Object.hasOwnProperty.call(m, "matchingConfig"))
+                    $root.PokerLife.Club.MatchingConfig.encode(m.matchingConfig, w.uint32(34).fork()).ldelim();
+                return w;
+            };
+
+            /**
+             * Decodes a GameConfig message from the specified reader or buffer.
+             * @function decode
+             * @memberof PokerLife.Club.GameConfig
+             * @static
+             * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+             * @param {number} [l] Message length if known beforehand
+             * @returns {PokerLife.Club.GameConfig} GameConfig
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            GameConfig.decode = function decode(r, l) {
+                if (!(r instanceof $Reader))
+                    r = $Reader.create(r);
+                var c = l === undefined ? r.len : r.pos + l, m = new $root.PokerLife.Club.GameConfig();
+                while (r.pos < c) {
+                    var t = r.uint32();
+                    switch (t >>> 3) {
+                    case 1:
+                        m.basicConfig = $root.PokerLife.Club.GameBasicConfig.decode(r, r.uint32());
+                        break;
+                    case 2:
+                        m.texasConfig = $root.PokerLife.Club.TexasConfig.decode(r, r.uint32());
+                        break;
+                    case 3:
+                        m.shortConfig = $root.PokerLife.Club.ShortConfig.decode(r, r.uint32());
+                        break;
+                    case 4:
+                        m.matchingConfig = $root.PokerLife.Club.MatchingConfig.decode(r, r.uint32());
+                        break;
+                    default:
+                        r.skipType(t & 7);
+                        break;
+                    }
+                }
+                if (!m.hasOwnProperty("basicConfig"))
+                    throw $util.ProtocolError("missing required 'basicConfig'", { instance: m });
+                if (!m.hasOwnProperty("texasConfig"))
+                    throw $util.ProtocolError("missing required 'texasConfig'", { instance: m });
+                return m;
+            };
+
+            return GameConfig;
+        })();
+
+        Club.MatchingConfig = (function() {
+
+            /**
+             * Properties of a MatchingConfig.
+             * @memberof PokerLife.Club
+             * @interface IMatchingConfig
+             * @property {number} currentPlayerNum MatchingConfig currentPlayerNum
+             * @property {number} startTime MatchingConfig startTime
+             */
+
+            /**
+             * Constructs a new MatchingConfig.
+             * @memberof PokerLife.Club
+             * @classdesc Represents a MatchingConfig.
+             * @implements IMatchingConfig
+             * @constructor
+             * @param {PokerLife.Club.IMatchingConfig=} [p] Properties to set
+             */
+            function MatchingConfig(p) {
+                if (p)
+                    for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                        if (p[ks[i]] != null)
+                            this[ks[i]] = p[ks[i]];
+            }
+
+            /**
+             * MatchingConfig currentPlayerNum.
+             * @member {number} currentPlayerNum
+             * @memberof PokerLife.Club.MatchingConfig
+             * @instance
+             */
+            MatchingConfig.prototype.currentPlayerNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * MatchingConfig startTime.
+             * @member {number} startTime
+             * @memberof PokerLife.Club.MatchingConfig
+             * @instance
+             */
+            MatchingConfig.prototype.startTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * Encodes the specified MatchingConfig message. Does not implicitly {@link PokerLife.Club.MatchingConfig.verify|verify} messages.
+             * @function encode
+             * @memberof PokerLife.Club.MatchingConfig
+             * @static
+             * @param {PokerLife.Club.IMatchingConfig} m MatchingConfig message or plain object to encode
+             * @param {protobuf.Writer} [w] Writer to encode to
+             * @returns {protobuf.Writer} Writer
+             */
+            MatchingConfig.encode = function encode(m, w) {
+                if (!w)
+                    w = $Writer.create();
+                w.uint32(8).int64(m.currentPlayerNum);
+                w.uint32(16).int64(m.startTime);
+                return w;
+            };
+
+            /**
+             * Decodes a MatchingConfig message from the specified reader or buffer.
+             * @function decode
+             * @memberof PokerLife.Club.MatchingConfig
+             * @static
+             * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+             * @param {number} [l] Message length if known beforehand
+             * @returns {PokerLife.Club.MatchingConfig} MatchingConfig
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            MatchingConfig.decode = function decode(r, l) {
+                if (!(r instanceof $Reader))
+                    r = $Reader.create(r);
+                var c = l === undefined ? r.len : r.pos + l, m = new $root.PokerLife.Club.MatchingConfig();
+                while (r.pos < c) {
+                    var t = r.uint32();
+                    switch (t >>> 3) {
+                    case 1:
+                        m.currentPlayerNum = r.int64();
+                        break;
+                    case 2:
+                        m.startTime = r.int64();
+                        break;
+                    default:
+                        r.skipType(t & 7);
+                        break;
+                    }
+                }
+                if (!m.hasOwnProperty("currentPlayerNum"))
+                    throw $util.ProtocolError("missing required 'currentPlayerNum'", { instance: m });
+                if (!m.hasOwnProperty("startTime"))
+                    throw $util.ProtocolError("missing required 'startTime'", { instance: m });
+                return m;
+            };
+
+            return MatchingConfig;
+        })();
+
+        Club.GameBasicConfig = (function() {
+
+            /**
+             * Properties of a GameBasicConfig.
+             * @memberof PokerLife.Club
+             * @interface IGameBasicConfig
+             * @property {PokerLife.Club.GameType} gameType GameBasicConfig gameType
+             * @property {string} gameName GameBasicConfig gameName
+             * @property {PokerLife.Club.GameCurrencyType} currencyType GameBasicConfig currencyType
+             * @property {PokerLife.Club.GameTaxType} taxType GameBasicConfig taxType
+             * @property {number} taxRatio GameBasicConfig taxRatio
+             */
+
+            /**
+             * Constructs a new GameBasicConfig.
+             * @memberof PokerLife.Club
+             * @classdesc Represents a GameBasicConfig.
+             * @implements IGameBasicConfig
+             * @constructor
+             * @param {PokerLife.Club.IGameBasicConfig=} [p] Properties to set
+             */
+            function GameBasicConfig(p) {
+                if (p)
+                    for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                        if (p[ks[i]] != null)
+                            this[ks[i]] = p[ks[i]];
+            }
+
+            /**
+             * GameBasicConfig gameType.
+             * @member {PokerLife.Club.GameType} gameType
+             * @memberof PokerLife.Club.GameBasicConfig
+             * @instance
+             */
+            GameBasicConfig.prototype.gameType = 0;
+
+            /**
+             * GameBasicConfig gameName.
+             * @member {string} gameName
+             * @memberof PokerLife.Club.GameBasicConfig
+             * @instance
+             */
+            GameBasicConfig.prototype.gameName = "";
+
+            /**
+             * GameBasicConfig currencyType.
+             * @member {PokerLife.Club.GameCurrencyType} currencyType
+             * @memberof PokerLife.Club.GameBasicConfig
+             * @instance
+             */
+            GameBasicConfig.prototype.currencyType = 0;
+
+            /**
+             * GameBasicConfig taxType.
+             * @member {PokerLife.Club.GameTaxType} taxType
+             * @memberof PokerLife.Club.GameBasicConfig
+             * @instance
+             */
+            GameBasicConfig.prototype.taxType = 0;
+
+            /**
+             * GameBasicConfig taxRatio.
+             * @member {number} taxRatio
+             * @memberof PokerLife.Club.GameBasicConfig
+             * @instance
+             */
+            GameBasicConfig.prototype.taxRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * Encodes the specified GameBasicConfig message. Does not implicitly {@link PokerLife.Club.GameBasicConfig.verify|verify} messages.
+             * @function encode
+             * @memberof PokerLife.Club.GameBasicConfig
+             * @static
+             * @param {PokerLife.Club.IGameBasicConfig} m GameBasicConfig message or plain object to encode
+             * @param {protobuf.Writer} [w] Writer to encode to
+             * @returns {protobuf.Writer} Writer
+             */
+            GameBasicConfig.encode = function encode(m, w) {
                 if (!w)
                     w = $Writer.create();
                 w.uint32(8).int32(m.gameType);
@@ -233,38 +329,24 @@ $root.PokerLife = (function() {
                 w.uint32(24).int32(m.currencyType);
                 w.uint32(32).int32(m.taxType);
                 w.uint32(40).int64(m.taxRatio);
-                w.uint32(48).int64(m.smallBlind);
-                w.uint32(56).bool(m.straddle);
-                w.uint32(64).int64(m.ante);
-                w.uint32(72).int64(m.maxTotalBuyIn);
-                w.uint32(80).int64(m.maxBringIn);
-                w.uint32(88).bool(m.allowBringOut);
-                w.uint32(96).int64(m.minScoreAfterBringOut);
-                w.uint32(104).bool(m.insurance);
-                w.uint32(112).int64(m.gameDuration);
-                w.uint32(120).int64(m.thinkingTime);
-                w.uint32(128).int64(m.seatNum);
-                w.uint32(136).int64(m.autoStartNum);
-                w.uint32(144).bool(m.gpsLimit);
-                w.uint32(152).bool(m.ipLimit);
                 return w;
             };
 
             /**
-             * Decodes a CreateTexasRoom message from the specified reader or buffer.
+             * Decodes a GameBasicConfig message from the specified reader or buffer.
              * @function decode
-             * @memberof PokerLife.Club.CreateTexasRoom
+             * @memberof PokerLife.Club.GameBasicConfig
              * @static
              * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
              * @param {number} [l] Message length if known beforehand
-             * @returns {PokerLife.Club.CreateTexasRoom} CreateTexasRoom
+             * @returns {PokerLife.Club.GameBasicConfig} GameBasicConfig
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {protobuf.util.ProtocolError} If required fields are missing
              */
-            CreateTexasRoom.decode = function decode(r, l) {
+            GameBasicConfig.decode = function decode(r, l) {
                 if (!(r instanceof $Reader))
                     r = $Reader.create(r);
-                var c = l === undefined ? r.len : r.pos + l, m = new $root.PokerLife.Club.CreateTexasRoom();
+                var c = l === undefined ? r.len : r.pos + l, m = new $root.PokerLife.Club.GameBasicConfig();
                 while (r.pos < c) {
                     var t = r.uint32();
                     switch (t >>> 3) {
@@ -283,48 +365,6 @@ $root.PokerLife = (function() {
                     case 5:
                         m.taxRatio = r.int64();
                         break;
-                    case 6:
-                        m.smallBlind = r.int64();
-                        break;
-                    case 7:
-                        m.straddle = r.bool();
-                        break;
-                    case 8:
-                        m.ante = r.int64();
-                        break;
-                    case 9:
-                        m.maxTotalBuyIn = r.int64();
-                        break;
-                    case 10:
-                        m.maxBringIn = r.int64();
-                        break;
-                    case 11:
-                        m.allowBringOut = r.bool();
-                        break;
-                    case 12:
-                        m.minScoreAfterBringOut = r.int64();
-                        break;
-                    case 13:
-                        m.insurance = r.bool();
-                        break;
-                    case 14:
-                        m.gameDuration = r.int64();
-                        break;
-                    case 15:
-                        m.thinkingTime = r.int64();
-                        break;
-                    case 16:
-                        m.seatNum = r.int64();
-                        break;
-                    case 17:
-                        m.autoStartNum = r.int64();
-                        break;
-                    case 18:
-                        m.gpsLimit = r.bool();
-                        break;
-                    case 19:
-                        m.ipLimit = r.bool();
-                        break;
                     default:
                         r.skipType(t & 7);
                         break;
@@ -340,6 +380,268 @@ $root.PokerLife = (function() {
                     throw $util.ProtocolError("missing required 'taxType'", { instance: m });
                 if (!m.hasOwnProperty("taxRatio"))
                     throw $util.ProtocolError("missing required 'taxRatio'", { instance: m });
+                return m;
+            };
+
+            return GameBasicConfig;
+        })();
+
+        Club.TexasConfig = (function() {
+
+            /**
+             * Properties of a TexasConfig.
+             * @memberof PokerLife.Club
+             * @interface ITexasConfig
+             * @property {number} smallBlind TexasConfig smallBlind
+             * @property {boolean} straddle TexasConfig straddle
+             * @property {number} ante TexasConfig ante
+             * @property {number} maxTotalBuyIn TexasConfig maxTotalBuyIn
+             * @property {number} minBringIn TexasConfig minBringIn
+             * @property {number} maxBringIn TexasConfig maxBringIn
+             * @property {boolean} allowBringOut TexasConfig allowBringOut
+             * @property {number} minScoreAfterBringOut TexasConfig minScoreAfterBringOut
+             * @property {boolean} insurance TexasConfig insurance
+             * @property {number} gameDuration TexasConfig gameDuration
+             * @property {number} thinkingTime TexasConfig thinkingTime
+             * @property {number} seatNum TexasConfig seatNum
+             * @property {number} autoStartNum TexasConfig autoStartNum
+             * @property {boolean} gpsLimit TexasConfig gpsLimit
+             * @property {boolean} ipLimit TexasConfig ipLimit
+             */
+
+            /**
+             * Constructs a new TexasConfig.
+             * @memberof PokerLife.Club
+             * @classdesc Represents a TexasConfig.
+             * @implements ITexasConfig
+             * @constructor
+             * @param {PokerLife.Club.ITexasConfig=} [p] Properties to set
+             */
+            function TexasConfig(p) {
+                if (p)
+                    for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                        if (p[ks[i]] != null)
+                            this[ks[i]] = p[ks[i]];
+            }
+
+            /**
+             * TexasConfig smallBlind.
+             * @member {number} smallBlind
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.smallBlind = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * TexasConfig straddle.
+             * @member {boolean} straddle
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.straddle = false;
+
+            /**
+             * TexasConfig ante.
+             * @member {number} ante
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.ante = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * TexasConfig maxTotalBuyIn.
+             * @member {number} maxTotalBuyIn
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.maxTotalBuyIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * TexasConfig minBringIn.
+             * @member {number} minBringIn
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.minBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * TexasConfig maxBringIn.
+             * @member {number} maxBringIn
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.maxBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * TexasConfig allowBringOut.
+             * @member {boolean} allowBringOut
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.allowBringOut = false;
+
+            /**
+             * TexasConfig minScoreAfterBringOut.
+             * @member {number} minScoreAfterBringOut
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.minScoreAfterBringOut = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * TexasConfig insurance.
+             * @member {boolean} insurance
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.insurance = false;
+
+            /**
+             * TexasConfig gameDuration.
+             * @member {number} gameDuration
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.gameDuration = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * TexasConfig thinkingTime.
+             * @member {number} thinkingTime
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.thinkingTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * TexasConfig seatNum.
+             * @member {number} seatNum
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.seatNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * TexasConfig autoStartNum.
+             * @member {number} autoStartNum
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.autoStartNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * TexasConfig gpsLimit.
+             * @member {boolean} gpsLimit
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.gpsLimit = false;
+
+            /**
+             * TexasConfig ipLimit.
+             * @member {boolean} ipLimit
+             * @memberof PokerLife.Club.TexasConfig
+             * @instance
+             */
+            TexasConfig.prototype.ipLimit = false;
+
+            /**
+             * Encodes the specified TexasConfig message. Does not implicitly {@link PokerLife.Club.TexasConfig.verify|verify} messages.
+             * @function encode
+             * @memberof PokerLife.Club.TexasConfig
+             * @static
+             * @param {PokerLife.Club.ITexasConfig} m TexasConfig message or plain object to encode
+             * @param {protobuf.Writer} [w] Writer to encode to
+             * @returns {protobuf.Writer} Writer
+             */
+            TexasConfig.encode = function encode(m, w) {
+                if (!w)
+                    w = $Writer.create();
+                w.uint32(8).int64(m.smallBlind);
+                w.uint32(16).bool(m.straddle);
+                w.uint32(24).int64(m.ante);
+                w.uint32(32).int64(m.maxTotalBuyIn);
+                w.uint32(40).int64(m.minBringIn);
+                w.uint32(48).int64(m.maxBringIn);
+                w.uint32(56).bool(m.allowBringOut);
+                w.uint32(64).int64(m.minScoreAfterBringOut);
+                w.uint32(72).bool(m.insurance);
+                w.uint32(80).int64(m.gameDuration);
+                w.uint32(88).int64(m.thinkingTime);
+                w.uint32(96).int64(m.seatNum);
+                w.uint32(104).int64(m.autoStartNum);
+                w.uint32(112).bool(m.gpsLimit);
+                w.uint32(120).bool(m.ipLimit);
+                return w;
+            };
+
+            /**
+             * Decodes a TexasConfig message from the specified reader or buffer.
+             * @function decode
+             * @memberof PokerLife.Club.TexasConfig
+             * @static
+             * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+             * @param {number} [l] Message length if known beforehand
+             * @returns {PokerLife.Club.TexasConfig} TexasConfig
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            TexasConfig.decode = function decode(r, l) {
+                if (!(r instanceof $Reader))
+                    r = $Reader.create(r);
+                var c = l === undefined ? r.len : r.pos + l, m = new $root.PokerLife.Club.TexasConfig();
+                while (r.pos < c) {
+                    var t = r.uint32();
+                    switch (t >>> 3) {
+                    case 1:
+                        m.smallBlind = r.int64();
+                        break;
+                    case 2:
+                        m.straddle = r.bool();
+                        break;
+                    case 3:
+                        m.ante = r.int64();
+                        break;
+                    case 4:
+                        m.maxTotalBuyIn = r.int64();
+                        break;
+                    case 5:
+                        m.minBringIn = r.int64();
+                        break;
+                    case 6:
+                        m.maxBringIn = r.int64();
+                        break;
+                    case 7:
+                        m.allowBringOut = r.bool();
+                        break;
+                    case 8:
+                        m.minScoreAfterBringOut = r.int64();
+                        break;
+                    case 9:
+                        m.insurance = r.bool();
+                        break;
+                    case 10:
+                        m.gameDuration = r.int64();
+                        break;
+                    case 11:
+                        m.thinkingTime = r.int64();
+                        break;
+                    case 12:
+                        m.seatNum = r.int64();
+                        break;
+                    case 13:
+                        m.autoStartNum = r.int64();
+                        break;
+                    case 14:
+                        m.gpsLimit = r.bool();
+                        break;
+                    case 15:
+                        m.ipLimit = r.bool();
+                        break;
+                    default:
+                        r.skipType(t & 7);
+                        break;
+                    }
+                }
                 if (!m.hasOwnProperty("smallBlind"))
                     throw $util.ProtocolError("missing required 'smallBlind'", { instance: m });
                 if (!m.hasOwnProperty("straddle"))
@@ -348,6 +650,8 @@ $root.PokerLife = (function() {
                     throw $util.ProtocolError("missing required 'ante'", { instance: m });
                 if (!m.hasOwnProperty("maxTotalBuyIn"))
                     throw $util.ProtocolError("missing required 'maxTotalBuyIn'", { instance: m });
+                if (!m.hasOwnProperty("minBringIn"))
+                    throw $util.ProtocolError("missing required 'minBringIn'", { instance: m });
                 if (!m.hasOwnProperty("maxBringIn"))
                     throw $util.ProtocolError("missing required 'maxBringIn'", { instance: m });
                 if (!m.hasOwnProperty("allowBringOut"))
@@ -371,7 +675,119 @@ $root.PokerLife = (function() {
                 return m;
             };
 
-            return CreateTexasRoom;
+            return TexasConfig;
+        })();
+
+        Club.ShortConfig = (function() {
+
+            /**
+             * Properties of a ShortConfig.
+             * @memberof PokerLife.Club
+             * @interface IShortConfig
+             * @property {PokerLife.Club.ShortGameScoreMode} scoreMode ShortConfig scoreMode
+             * @property {number} baseScore ShortConfig baseScore
+             * @property {boolean} buttonDouble ShortConfig buttonDouble
+             */
+
+            /**
+             * Constructs a new ShortConfig.
+             * @memberof PokerLife.Club
+             * @classdesc Represents a ShortConfig.
+             * @implements IShortConfig
+             * @constructor
+             * @param {PokerLife.Club.IShortConfig=} [p] Properties to set
+             */
+            function ShortConfig(p) {
+                if (p)
+                    for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                        if (p[ks[i]] != null)
+                            this[ks[i]] = p[ks[i]];
+            }
+
+            /**
+             * ShortConfig scoreMode.
+             * @member {PokerLife.Club.ShortGameScoreMode} scoreMode
+             * @memberof PokerLife.Club.ShortConfig
+             * @instance
+             */
+            ShortConfig.prototype.scoreMode = 0;
+
+            /**
+             * ShortConfig baseScore.
+             * @member {number} baseScore
+             * @memberof PokerLife.Club.ShortConfig
+             * @instance
+             */
+            ShortConfig.prototype.baseScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * ShortConfig buttonDouble.
+             * @member {boolean} buttonDouble
+             * @memberof PokerLife.Club.ShortConfig
+             * @instance
+             */
+            ShortConfig.prototype.buttonDouble = false;
+
+            /**
+             * Encodes the specified ShortConfig message. Does not implicitly {@link PokerLife.Club.ShortConfig.verify|verify} messages.
+             * @function encode
+             * @memberof PokerLife.Club.ShortConfig
+             * @static
+             * @param {PokerLife.Club.IShortConfig} m ShortConfig message or plain object to encode
+             * @param {protobuf.Writer} [w] Writer to encode to
+             * @returns {protobuf.Writer} Writer
+             */
+            ShortConfig.encode = function encode(m, w) {
+                if (!w)
+                    w = $Writer.create();
+                w.uint32(8).int32(m.scoreMode);
+                w.uint32(16).int64(m.baseScore);
+                w.uint32(24).bool(m.buttonDouble);
+                return w;
+            };
+
+            /**
+             * Decodes a ShortConfig message from the specified reader or buffer.
+             * @function decode
+             * @memberof PokerLife.Club.ShortConfig
+             * @static
+             * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+             * @param {number} [l] Message length if known beforehand
+             * @returns {PokerLife.Club.ShortConfig} ShortConfig
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            ShortConfig.decode = function decode(r, l) {
+                if (!(r instanceof $Reader))
+                    r = $Reader.create(r);
+                var c = l === undefined ? r.len : r.pos + l, m = new $root.PokerLife.Club.ShortConfig();
+                while (r.pos < c) {
+                    var t = r.uint32();
+                    switch (t >>> 3) {
+                    case 1:
+                        m.scoreMode = r.int32();
+                        break;
+                    case 2:
+                        m.baseScore = r.int64();
+                        break;
+                    case 3:
+                        m.buttonDouble = r.bool();
+                        break;
+                    default:
+                        r.skipType(t & 7);
+                        break;
+                    }
+                }
+                if (!m.hasOwnProperty("scoreMode"))
+                    throw $util.ProtocolError("missing required 'scoreMode'", { instance: m });
+                if (!m.hasOwnProperty("baseScore"))
+                    throw $util.ProtocolError("missing required 'baseScore'", { instance: m });
+                if (!m.hasOwnProperty("buttonDouble"))
+                    throw $util.ProtocolError("missing required 'buttonDouble'", { instance: m });
+                return m;
+            };
+
+            return ShortConfig;
         })();
 
         /**
@@ -421,16 +837,32 @@ $root.PokerLife = (function() {
         })();
 
         /**
-         * ShortScoreMode enum.
-         * @name PokerLife.Club.ShortScoreMode
+         * ShortGameScoreMode enum.
+         * @name PokerLife.Club.ShortGameScoreMode
          * @enum {number}
          * @property {number} AnteMode=0 AnteMode value
          * @property {number} BlindMode=1 BlindMode value
          */
-        Club.ShortScoreMode = (function() {
+        Club.ShortGameScoreMode = (function() {
             var valuesById = {}, values = Object.create(valuesById);
             values[valuesById[0] = "AnteMode"] = 0;
             values[valuesById[1] = "BlindMode"] = 1;
+            return values;
+        })();
+
+        /**
+         * RecordDateType enum.
+         * @name PokerLife.Club.RecordDateType
+         * @enum {number}
+         * @property {number} Today=0 Today value
+         * @property {number} Week=1 Week value
+         * @property {number} Month=2 Month value
+         */
+        Club.RecordDateType = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[0] = "Today"] = 0;
+            values[valuesById[1] = "Week"] = 1;
+            values[valuesById[2] = "Month"] = 2;
             return values;
         })();
 

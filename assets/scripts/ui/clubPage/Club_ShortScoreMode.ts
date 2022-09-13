@@ -23,7 +23,10 @@ export class Club_ShortScoreMode extends BaseUI
     }
     RegDataNotify()
     {
-
+        HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
+        {
+            HallData.GetInstance().Data_Club_CreateTexasConfig.shortScoreMode = _current;
+        },this);
     }
     LateInit()
     {

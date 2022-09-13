@@ -7,150 +7,338 @@ export namespace PokerLife {
     /** Namespace Club. */
     namespace Club {
 
-        /** Properties of a CreateTexasRoom. */
-        interface ICreateTexasRoom {
+        /** Properties of a GameConfig. */
+        interface IGameConfig {
 
-            /** CreateTexasRoom gameType */
-            gameType: PokerLife.Club.GameType;
+            /** GameConfig basicConfig */
+            basicConfig: PokerLife.Club.IGameBasicConfig;
 
-            /** CreateTexasRoom gameName */
-            gameName: string;
+            /** GameConfig texasConfig */
+            texasConfig: PokerLife.Club.ITexasConfig;
 
-            /** CreateTexasRoom currencyType */
-            currencyType: PokerLife.Club.GameCurrencyType;
+            /** GameConfig shortConfig */
+            shortConfig?: (PokerLife.Club.IShortConfig|null);
 
-            /** CreateTexasRoom taxType */
-            taxType: PokerLife.Club.GameTaxType;
-
-            /** CreateTexasRoom taxRatio */
-            taxRatio: number;
-
-            /** CreateTexasRoom smallBlind */
-            smallBlind: number;
-
-            /** CreateTexasRoom straddle */
-            straddle: boolean;
-
-            /** CreateTexasRoom ante */
-            ante: number;
-
-            /** CreateTexasRoom maxTotalBuyIn */
-            maxTotalBuyIn: number;
-
-            /** CreateTexasRoom maxBringIn */
-            maxBringIn: number;
-
-            /** CreateTexasRoom allowBringOut */
-            allowBringOut: boolean;
-
-            /** CreateTexasRoom minScoreAfterBringOut */
-            minScoreAfterBringOut: number;
-
-            /** CreateTexasRoom insurance */
-            insurance: boolean;
-
-            /** CreateTexasRoom gameDuration */
-            gameDuration: number;
-
-            /** CreateTexasRoom thinkingTime */
-            thinkingTime: number;
-
-            /** CreateTexasRoom seatNum */
-            seatNum: number;
-
-            /** CreateTexasRoom autoStartNum */
-            autoStartNum: number;
-
-            /** CreateTexasRoom gpsLimit */
-            gpsLimit: boolean;
-
-            /** CreateTexasRoom ipLimit */
-            ipLimit: boolean;
+            /** GameConfig matchingConfig */
+            matchingConfig?: (PokerLife.Club.IMatchingConfig|null);
         }
 
-        /** Represents a CreateTexasRoom. */
-        class CreateTexasRoom implements ICreateTexasRoom {
+        /** Represents a GameConfig. */
+        class GameConfig implements IGameConfig {
 
             /**
-             * Constructs a new CreateTexasRoom.
+             * Constructs a new GameConfig.
              * @param [p] Properties to set
              */
-            constructor(p?: PokerLife.Club.ICreateTexasRoom);
+            constructor(p?: PokerLife.Club.IGameConfig);
 
-            /** CreateTexasRoom gameType. */
-            public gameType: PokerLife.Club.GameType;
+            /** GameConfig basicConfig. */
+            public basicConfig: PokerLife.Club.IGameBasicConfig;
 
-            /** CreateTexasRoom gameName. */
-            public gameName: string;
+            /** GameConfig texasConfig. */
+            public texasConfig: PokerLife.Club.ITexasConfig;
 
-            /** CreateTexasRoom currencyType. */
-            public currencyType: PokerLife.Club.GameCurrencyType;
+            /** GameConfig shortConfig. */
+            public shortConfig?: (PokerLife.Club.IShortConfig|null);
 
-            /** CreateTexasRoom taxType. */
-            public taxType: PokerLife.Club.GameTaxType;
-
-            /** CreateTexasRoom taxRatio. */
-            public taxRatio: number;
-
-            /** CreateTexasRoom smallBlind. */
-            public smallBlind: number;
-
-            /** CreateTexasRoom straddle. */
-            public straddle: boolean;
-
-            /** CreateTexasRoom ante. */
-            public ante: number;
-
-            /** CreateTexasRoom maxTotalBuyIn. */
-            public maxTotalBuyIn: number;
-
-            /** CreateTexasRoom maxBringIn. */
-            public maxBringIn: number;
-
-            /** CreateTexasRoom allowBringOut. */
-            public allowBringOut: boolean;
-
-            /** CreateTexasRoom minScoreAfterBringOut. */
-            public minScoreAfterBringOut: number;
-
-            /** CreateTexasRoom insurance. */
-            public insurance: boolean;
-
-            /** CreateTexasRoom gameDuration. */
-            public gameDuration: number;
-
-            /** CreateTexasRoom thinkingTime. */
-            public thinkingTime: number;
-
-            /** CreateTexasRoom seatNum. */
-            public seatNum: number;
-
-            /** CreateTexasRoom autoStartNum. */
-            public autoStartNum: number;
-
-            /** CreateTexasRoom gpsLimit. */
-            public gpsLimit: boolean;
-
-            /** CreateTexasRoom ipLimit. */
-            public ipLimit: boolean;
+            /** GameConfig matchingConfig. */
+            public matchingConfig?: (PokerLife.Club.IMatchingConfig|null);
 
             /**
-             * Encodes the specified CreateTexasRoom message. Does not implicitly {@link PokerLife.Club.CreateTexasRoom.verify|verify} messages.
-             * @param m CreateTexasRoom message or plain object to encode
+             * Encodes the specified GameConfig message. Does not implicitly {@link PokerLife.Club.GameConfig.verify|verify} messages.
+             * @param m GameConfig message or plain object to encode
              * @param [w] Writer to encode to
              * @returns Writer
              */
-            public static encode(m: PokerLife.Club.ICreateTexasRoom, w?: protobuf.Writer): protobuf.Writer;
+            public static encode(m: PokerLife.Club.IGameConfig, w?: protobuf.Writer): protobuf.Writer;
 
             /**
-             * Decodes a CreateTexasRoom message from the specified reader or buffer.
+             * Decodes a GameConfig message from the specified reader or buffer.
              * @param r Reader or buffer to decode from
              * @param [l] Message length if known beforehand
-             * @returns CreateTexasRoom
+             * @returns GameConfig
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.CreateTexasRoom;
+            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.GameConfig;
+        }
+
+        /** Properties of a MatchingConfig. */
+        interface IMatchingConfig {
+
+            /** MatchingConfig currentPlayerNum */
+            currentPlayerNum: number;
+
+            /** MatchingConfig startTime */
+            startTime: number;
+        }
+
+        /** Represents a MatchingConfig. */
+        class MatchingConfig implements IMatchingConfig {
+
+            /**
+             * Constructs a new MatchingConfig.
+             * @param [p] Properties to set
+             */
+            constructor(p?: PokerLife.Club.IMatchingConfig);
+
+            /** MatchingConfig currentPlayerNum. */
+            public currentPlayerNum: number;
+
+            /** MatchingConfig startTime. */
+            public startTime: number;
+
+            /**
+             * Encodes the specified MatchingConfig message. Does not implicitly {@link PokerLife.Club.MatchingConfig.verify|verify} messages.
+             * @param m MatchingConfig message or plain object to encode
+             * @param [w] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(m: PokerLife.Club.IMatchingConfig, w?: protobuf.Writer): protobuf.Writer;
+
+            /**
+             * Decodes a MatchingConfig message from the specified reader or buffer.
+             * @param r Reader or buffer to decode from
+             * @param [l] Message length if known beforehand
+             * @returns MatchingConfig
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.MatchingConfig;
+        }
+
+        /** Properties of a GameBasicConfig. */
+        interface IGameBasicConfig {
+
+            /** GameBasicConfig gameType */
+            gameType: PokerLife.Club.GameType;
+
+            /** GameBasicConfig gameName */
+            gameName: string;
+
+            /** GameBasicConfig currencyType */
+            currencyType: PokerLife.Club.GameCurrencyType;
+
+            /** GameBasicConfig taxType */
+            taxType: PokerLife.Club.GameTaxType;
+
+            /** GameBasicConfig taxRatio */
+            taxRatio: number;
+        }
+
+        /** Represents a GameBasicConfig. */
+        class GameBasicConfig implements IGameBasicConfig {
+
+            /**
+             * Constructs a new GameBasicConfig.
+             * @param [p] Properties to set
+             */
+            constructor(p?: PokerLife.Club.IGameBasicConfig);
+
+            /** GameBasicConfig gameType. */
+            public gameType: PokerLife.Club.GameType;
+
+            /** GameBasicConfig gameName. */
+            public gameName: string;
+
+            /** GameBasicConfig currencyType. */
+            public currencyType: PokerLife.Club.GameCurrencyType;
+
+            /** GameBasicConfig taxType. */
+            public taxType: PokerLife.Club.GameTaxType;
+
+            /** GameBasicConfig taxRatio. */
+            public taxRatio: number;
+
+            /**
+             * Encodes the specified GameBasicConfig message. Does not implicitly {@link PokerLife.Club.GameBasicConfig.verify|verify} messages.
+             * @param m GameBasicConfig message or plain object to encode
+             * @param [w] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(m: PokerLife.Club.IGameBasicConfig, w?: protobuf.Writer): protobuf.Writer;
+
+            /**
+             * Decodes a GameBasicConfig message from the specified reader or buffer.
+             * @param r Reader or buffer to decode from
+             * @param [l] Message length if known beforehand
+             * @returns GameBasicConfig
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.GameBasicConfig;
+        }
+
+        /** Properties of a TexasConfig. */
+        interface ITexasConfig {
+
+            /** TexasConfig smallBlind */
+            smallBlind: number;
+
+            /** TexasConfig straddle */
+            straddle: boolean;
+
+            /** TexasConfig ante */
+            ante: number;
+
+            /** TexasConfig maxTotalBuyIn */
+            maxTotalBuyIn: number;
+
+            /** TexasConfig minBringIn */
+            minBringIn: number;
+
+            /** TexasConfig maxBringIn */
+            maxBringIn: number;
+
+            /** TexasConfig allowBringOut */
+            allowBringOut: boolean;
+
+            /** TexasConfig minScoreAfterBringOut */
+            minScoreAfterBringOut: number;
+
+            /** TexasConfig insurance */
+            insurance: boolean;
+
+            /** TexasConfig gameDuration */
+            gameDuration: number;
+
+            /** TexasConfig thinkingTime */
+            thinkingTime: number;
+
+            /** TexasConfig seatNum */
+            seatNum: number;
+
+            /** TexasConfig autoStartNum */
+            autoStartNum: number;
+
+            /** TexasConfig gpsLimit */
+            gpsLimit: boolean;
+
+            /** TexasConfig ipLimit */
+            ipLimit: boolean;
+        }
+
+        /** Represents a TexasConfig. */
+        class TexasConfig implements ITexasConfig {
+
+            /**
+             * Constructs a new TexasConfig.
+             * @param [p] Properties to set
+             */
+            constructor(p?: PokerLife.Club.ITexasConfig);
+
+            /** TexasConfig smallBlind. */
+            public smallBlind: number;
+
+            /** TexasConfig straddle. */
+            public straddle: boolean;
+
+            /** TexasConfig ante. */
+            public ante: number;
+
+            /** TexasConfig maxTotalBuyIn. */
+            public maxTotalBuyIn: number;
+
+            /** TexasConfig minBringIn. */
+            public minBringIn: number;
+
+            /** TexasConfig maxBringIn. */
+            public maxBringIn: number;
+
+            /** TexasConfig allowBringOut. */
+            public allowBringOut: boolean;
+
+            /** TexasConfig minScoreAfterBringOut. */
+            public minScoreAfterBringOut: number;
+
+            /** TexasConfig insurance. */
+            public insurance: boolean;
+
+            /** TexasConfig gameDuration. */
+            public gameDuration: number;
+
+            /** TexasConfig thinkingTime. */
+            public thinkingTime: number;
+
+            /** TexasConfig seatNum. */
+            public seatNum: number;
+
+            /** TexasConfig autoStartNum. */
+            public autoStartNum: number;
+
+            /** TexasConfig gpsLimit. */
+            public gpsLimit: boolean;
+
+            /** TexasConfig ipLimit. */
+            public ipLimit: boolean;
+
+            /**
+             * Encodes the specified TexasConfig message. Does not implicitly {@link PokerLife.Club.TexasConfig.verify|verify} messages.
+             * @param m TexasConfig message or plain object to encode
+             * @param [w] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(m: PokerLife.Club.ITexasConfig, w?: protobuf.Writer): protobuf.Writer;
+
+            /**
+             * Decodes a TexasConfig message from the specified reader or buffer.
+             * @param r Reader or buffer to decode from
+             * @param [l] Message length if known beforehand
+             * @returns TexasConfig
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.TexasConfig;
+        }
+
+        /** Properties of a ShortConfig. */
+        interface IShortConfig {
+
+            /** ShortConfig scoreMode */
+            scoreMode: PokerLife.Club.ShortGameScoreMode;
+
+            /** ShortConfig baseScore */
+            baseScore: number;
+
+            /** ShortConfig buttonDouble */
+            buttonDouble: boolean;
+        }
+
+        /** Represents a ShortConfig. */
+        class ShortConfig implements IShortConfig {
+
+            /**
+             * Constructs a new ShortConfig.
+             * @param [p] Properties to set
+             */
+            constructor(p?: PokerLife.Club.IShortConfig);
+
+            /** ShortConfig scoreMode. */
+            public scoreMode: PokerLife.Club.ShortGameScoreMode;
+
+            /** ShortConfig baseScore. */
+            public baseScore: number;
+
+            /** ShortConfig buttonDouble. */
+            public buttonDouble: boolean;
+
+            /**
+             * Encodes the specified ShortConfig message. Does not implicitly {@link PokerLife.Club.ShortConfig.verify|verify} messages.
+             * @param m ShortConfig message or plain object to encode
+             * @param [w] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(m: PokerLife.Club.IShortConfig, w?: protobuf.Writer): protobuf.Writer;
+
+            /**
+             * Decodes a ShortConfig message from the specified reader or buffer.
+             * @param r Reader or buffer to decode from
+             * @param [l] Message length if known beforehand
+             * @returns ShortConfig
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.ShortConfig;
         }
 
         /** GameType enum. */
@@ -173,10 +361,17 @@ export namespace PokerLife {
             Coin = 1
         }
 
-        /** ShortScoreMode enum. */
-        enum ShortScoreMode {
+        /** ShortGameScoreMode enum. */
+        enum ShortGameScoreMode {
             AnteMode = 0,
             BlindMode = 1
+        }
+
+        /** RecordDateType enum. */
+        enum RecordDateType {
+            Today = 0,
+            Week = 1,
+            Month = 2
         }
     }
 

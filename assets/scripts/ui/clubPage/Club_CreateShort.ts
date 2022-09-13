@@ -1,5 +1,8 @@
 import { _decorator, Component, Node, EditBox, ScrollView } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
+import { UIMgr } from '../../base/UIMgr';
+import { GameConfig } from '../../GameConfig';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
@@ -14,11 +17,12 @@ export class Club_CreateShort extends BaseUI
     @property(ScrollView) 
     mScrollView: ScrollView = null;
 
-    mShortSetting : BaseUI = null;
-    mTexasSetting : BaseUI = null;
+    @property(BaseButton) 
+    mSaveBtn: BaseButton = null;
+    @property(BaseButton) 
+    mCreateBtn: BaseButton = null;
     InitParam()
     {
-        HallData.GetInstance().ResetCreateTexasRoomParam();
     }
     BindUI()
     {
@@ -34,17 +38,31 @@ export class Club_CreateShort extends BaseUI
 
         this.AddSubView("clubPage","prefab/Club_CreateBasicOption",null,this.mScrollView.content);
         this.AddSubView("clubPage","prefab/Club_ShortScoreMode",null,this.mScrollView.content);
-        this.AddSubView("clubPage","prefab/Club_CreateShortScoreSetting",(_script)=>
-        {
-            this.mShortSetting = _script;
-        },this.mScrollView.content);
-        this.AddSubView("clubPage","prefab/Club_CreateTexasScoreSetting",(_script)=>
-        {
-            this.mTexasSetting = _script;
-        },this.mScrollView.content);
+        this.AddSubView("clubPage","prefab/Club_CreateShortScoreSetting",null,this.mScrollView.content);
+        this.AddSubView("clubPage","prefab/Club_CreateTexasScoreSetting",null,this.mScrollView.content);
         this.AddSubView("clubPage","prefab/Club_CreateBringScoreSetting",null,this.mScrollView.content);
         this.AddSubView("clubPage","prefab/Club_CreateTableSetting",null,this.mScrollView.content);
         
+
+        this.mSaveBtn.SetClickCallback(()=>
+        {
+            let currentModuleIndex = HallData.GetInstance().Data_ClubCurrentModuleIndex;
+            let saveResult = GameConfig.TryToSaveCreateRoomModule(HallData.GetInstance().Data_Club_CreateTexasConfig , currentModuleIndex);
+            if(saveResult)
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00094"));
+                HallData.GetInstance().Data_ClubRefreshGameModule = true;
+            }
+            else
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00095"));
+            }
+        });
+
+        this.mCreateBtn.SetClickCallback(()=>
+        {
+
+        });
     }
     RegDataNotify()
     {
@@ -52,8 +70,6 @@ export class Club_CreateShort extends BaseUI
         {
             this.mNameEditBox.string = _current;
         },this);
-
-        this.scheduleOnce(this.DelayRegDataNotify.bind(this),0);
     }
     LateInit()
     {
@@ -64,21 +80,5 @@ export class Club_CreateShort extends BaseUI
 
     }
 
-    DelayRegDataNotify()
-    {
-        HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
-        {
-            this.mShortSetting.Show(false);
-            this.mTexasSetting.Show(false);
-            if(_current == PokerLife.Club.ShortScoreMode.AnteMode)
-            {
-                this.mShortSetting.Show(true);
-            }
-            else if(_current == PokerLife.Club.ShortScoreMode.BlindMode)
-            {
-                this.mTexasSetting.Show(true);
-            }
-        },this);
-    }
 }
 

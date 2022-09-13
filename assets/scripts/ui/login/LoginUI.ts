@@ -1,6 +1,5 @@
 import { _decorator, Component, Node, Label, Button, sys } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
-import { JsbScript } from '../../base/JsbScript';
 import { Localization } from '../../base/Localization';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
@@ -8,7 +7,6 @@ import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { TipsWindow } from '../common/TipsWindow';
-import { LoadingData } from '../loading/LoadingData';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoginUI')
@@ -86,7 +84,6 @@ export class LoginUI extends BaseUI
             }
             UIMgr.GetInstance().ChangeScene(SceneType.Hall);
         },this);
-
     }
     LateInit() 
     {

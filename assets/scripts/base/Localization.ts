@@ -176,7 +176,11 @@ export class Localization {
         { name: '00089', ch: '关闭', en: 'closed' },
         { name: '00090', ch: '每手牌获胜的玩家都会被抽取服务费', en: 'Collect tax from winner in every hands' },
         { name: '00091', ch: '游戏结束后，针对赢家收取服务费', en: 'Collect tax from winner when game end' },
-
+        { name: '00092', ch: '金币场', en: 'Cash' },
+        { name: '00093', ch: '积分场', en: 'Point' },
+        { name: '00094', ch: '保存模版成功', en: 'Save success' },
+        { name: '00095', ch: '保存模版失败', en: 'Save failed' },
+        { name: '00096', ch: '您确定要删除模版吗？', en: 'Are you sure to delete?' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

@@ -1,5 +1,8 @@
 import { _decorator, Component, Node, EditBox, ScrollView } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
+import { UIMgr } from '../../base/UIMgr';
+import { GameConfig } from '../../GameConfig';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
@@ -13,7 +16,10 @@ export class Club_CreateTexas extends BaseUI
     mNameEditBox: EditBox = null;
     @property(ScrollView) 
     mScrollView: ScrollView = null;
-
+    @property(BaseButton) 
+    mSaveBtn: BaseButton = null;
+    @property(BaseButton) 
+    mCreateBtn: BaseButton = null;
     InitParam()
     {
         
@@ -35,6 +41,25 @@ export class Club_CreateTexas extends BaseUI
         this.AddSubView("clubPage","prefab/Club_CreateBringScoreSetting",null,this.mScrollView.content);
         this.AddSubView("clubPage","prefab/Club_CreateTableSetting",null,this.mScrollView.content);
         
+        this.mSaveBtn.SetClickCallback(()=>
+        {
+            let currentModuleIndex = HallData.GetInstance().Data_ClubCurrentModuleIndex;
+            let saveResult = GameConfig.TryToSaveCreateRoomModule(HallData.GetInstance().Data_Club_CreateTexasConfig , currentModuleIndex);
+            if(saveResult)
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00094"));
+                HallData.GetInstance().Data_ClubRefreshGameModule = true;
+            }
+            else
+            {
+                UIMgr.GetInstance().ShowToast(Localization.GetString("00095"));
+            }
+        });
+
+        this.mCreateBtn.SetClickCallback(()=>
+        {
+
+        });
     }
     RegDataNotify()
     {

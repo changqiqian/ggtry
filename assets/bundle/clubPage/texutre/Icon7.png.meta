@@ -2,22 +2,22 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "c17318f5-9631-454c-b4eb-67de200a0d78",
+  "uuid": "6b541d70-c9af-424e-9731-0502953ba00a",
   "files": [
-    ".jpg",
-    ".json"
+    ".json",
+    ".png"
   ],
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "c17318f5-9631-454c-b4eb-67de200a0d78@6c48a",
-      "displayName": "创建牌局 德州",
+      "uuid": "6b541d70-c9af-424e-9731-0502953ba00a@6c48a",
+      "displayName": "Icon7",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "c17318f5-9631-454c-b4eb-67de200a0d78",
+        "imageUuidOrDatabaseUri": "6b541d70-c9af-424e-9731-0502953ba00a",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "c17318f5-9631-454c-b4eb-67de200a0d78@f9941",
-      "displayName": "创建牌局 德州",
+      "uuid": "6b541d70-c9af-424e-9731-0502953ba00a@f9941",
+      "displayName": "Icon7",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": 0,
-        "trimX": 0,
-        "trimY": 0,
-        "width": 1125,
-        "height": 2436,
-        "rawWidth": 1125,
-        "rawHeight": 2436,
+        "offsetY": -1,
+        "trimX": 3,
+        "trimY": 3,
+        "width": 42,
+        "height": 44,
+        "rawWidth": 48,
+        "rawHeight": 48,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "c17318f5-9631-454c-b4eb-67de200a0d78@6c48a",
+        "imageUuidOrDatabaseUri": "6b541d70-c9af-424e-9731-0502953ba00a@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -69,7 +69,7 @@
   "userData": {
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
-    "hasAlpha": false,
-    "redirect": "c17318f5-9631-454c-b4eb-67de200a0d78@f9941"
+    "hasAlpha": true,
+    "redirect": "6b541d70-c9af-424e-9731-0502953ba00a@f9941"
   }
 }

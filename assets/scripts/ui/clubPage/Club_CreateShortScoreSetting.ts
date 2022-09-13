@@ -23,13 +23,12 @@ export class Club_CreateShortScoreSetting extends BaseUI
     }
     BindUI()
     {
-        this.mMeassureSliderBaseScore.InitWithData(GameConfig.GetTexasCreateRoomMaxBuyInTitle(),
-        GameConfig.GetTexasCreateRoomMaxBuyInValue(),(_value , _index)=>
+        this.mMeassureSliderBaseScore.InitWithData(GameConfig.GetShortCreateRoomBaseScoreTitle(),
+        GameConfig.GetShortCreateRoomBaseScoreValue(),(_value , _index)=>
         {
-            // let smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[HallData.GetInstance().Data_Club_CreateTexasConfig.smallBlind];
-            // let bigBlind = smallBlind * 2;
-            // this.mBaseScore.string = _value * bigBlind * 100 + "";
-            // HallData.GetInstance().Data_Club_CreateTexasConfig.maxTotalBuyIn = _index;
+            this.mBaseScore.string = _value;
+            HallData.GetInstance().Data_ClubRefreshShortBaseScore = _value;
+            HallData.GetInstance().Data_Club_CreateTexasConfig.shortBaseScore = _index;
         })
 
         this.mButtonDoubbleToggle.ShowUnselected();
@@ -37,7 +36,6 @@ export class Club_CreateShortScoreSetting extends BaseUI
         {
             HallData.GetInstance().Data_Club_CreateTexasConfig.buttonDouble = _value;
         });
-
     }
     RegDataNotify()
     {
@@ -48,6 +46,11 @@ export class Club_CreateShortScoreSetting extends BaseUI
         HallData.GetInstance().AddListener("Data_ClubCreateShortButtonDouble",(_current , _before)=>
         {
             this.mButtonDoubbleToggle.SetShowStauts(_current , true);
+        },this);
+
+        HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
+        {
+            this.Show(_current == PokerLife.Club.ShortGameScoreMode.AnteMode);
         },this);
         
     }

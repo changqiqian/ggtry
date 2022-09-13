@@ -66,6 +66,25 @@ export class Club_CreateTexasScoreSetting extends BaseUI
         {
             this.mMeassureSliderAnte.SetIndex(_current);
         },this); 
+
+        HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
+        {
+            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.TexasCash)
+            {
+                this.Show(true);
+            }
+            else if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash)
+            {
+                if(_current == PokerLife.Club.ShortGameScoreMode.AnteMode)
+                {
+                    this.Show(false);
+                }
+                else if(_current == PokerLife.Club.ShortGameScoreMode.BlindMode)
+                {
+                    this.Show(true);
+                }
+            }
+        },this);
     }
     LateInit()
     {

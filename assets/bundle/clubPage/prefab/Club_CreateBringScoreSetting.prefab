@@ -33308,10 +33308,6 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "c17318f5-9631-454c-b4eb-67de200a0d78@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -35955,10 +35951,6 @@
       "g": 255,
       "b": 255,
       "a": 255
-    },
-    "_spriteFrame": {
-      "__uuid__": "c17318f5-9631-454c-b4eb-67de200a0d78@f9941",
-      "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,

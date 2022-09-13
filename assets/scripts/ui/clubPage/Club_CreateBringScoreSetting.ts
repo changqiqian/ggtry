@@ -44,27 +44,54 @@ export class Club_CreateBringScoreSetting extends BaseUI {
         this.mMeassureSliderMaxBuyIn.InitWithData(GameConfig.GetTexasCreateRoomMaxBuyInTitle(),
         GameConfig.GetTexasCreateRoomMaxBuyInValue(),(_value , _index)=>
         {
-            let smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[HallData.GetInstance().Data_Club_CreateTexasConfig.smallBlind];
-            let bigBlind = smallBlind * 2;
-            this.mMaxBuyInAmount.string = _value * bigBlind * 100 + "";
+            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
+            && HallData.GetInstance().Data_ClubCreateShortScoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            {
+                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
+                this.mMaxBuyInAmount.string = _value * baseScore * 100 + "";
+            }
+            else
+            {
+                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind;
+                let bigBlind = smallBlind * 2;
+                this.mMaxBuyInAmount.string = _value * bigBlind * 100 + "";
+            }
             HallData.GetInstance().Data_Club_CreateTexasConfig.maxTotalBuyIn = _index;
         })
 
         this.mMeassureSliderBringin.InitWithData(GameConfig.GetTexasCreateRoomBringInTitle(),
         GameConfig.GetTexasCreateRoomBringInValue(),(_value , _index)=>
         {
-            let smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[HallData.GetInstance().Data_Club_CreateTexasConfig.smallBlind];
-            let bigBlind = smallBlind * 2;
-            this.mBringInAmount.string = _value * bigBlind * 100 + "";
+            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
+            && HallData.GetInstance().Data_ClubCreateShortScoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            {
+                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
+                this.mBringInAmount.string = _value * baseScore * 100 + "";
+            }
+            else
+            {
+                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind;
+                let bigBlind = smallBlind * 2;
+                this.mBringInAmount.string = _value * bigBlind * 100 + "";
+            }
             HallData.GetInstance().Data_Club_CreateTexasConfig.maxBringIn = _index;
         })
 
         this.mMeassureSliderBringOut.InitWithData(GameConfig.GetTexasCreateRoomBringOutTitle(),
         GameConfig.GetTexasCreateRoomBringOutValue(),(_value , _index)=>
         {
-            let smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[HallData.GetInstance().Data_Club_CreateTexasConfig.smallBlind];
-            let bigBlind = smallBlind * 2;
-            this.mBringOutAmount.string = _value * bigBlind * 100 + "";
+            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
+            && HallData.GetInstance().Data_ClubCreateShortScoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            {
+                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
+                this.mBringOutAmount.string = _value * baseScore * 100 + "";
+            }
+            else
+            {
+                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind;
+                let bigBlind = smallBlind * 2;
+                this.mBringOutAmount.string = _value * bigBlind * 100 + "";
+            }
             HallData.GetInstance().Data_Club_CreateTexasConfig.minScoreAfterBringOut = _index;
         })
 
@@ -96,19 +123,61 @@ export class Club_CreateBringScoreSetting extends BaseUI {
         {
             this.mInsuranceToggle.SetShowStauts(_current,true);
         },this);
-        HallData.GetInstance().AddListener("Data_ClubCreateNewSmallBlind",(_current , _before)=>
+        HallData.GetInstance().AddListener("Data_ClubRefreshSmallBlind",(_current , _before)=>
         {
-            let bigBlind = _current * 2;
-            let bigBlind100 = bigBlind * 100;
-            this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * bigBlind100 + "";
-            this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * bigBlind100 + "";
-            this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* bigBlind100 + "";
+            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
+              && HallData.GetInstance().Data_ClubCreateShortScoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            {
+
+            }
+            else
+            {
+                let bigBlind = _current * 2;
+                let bigBlind100 = bigBlind * 100;
+                this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * bigBlind100 + "";
+                this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * bigBlind100 + "";
+                this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* bigBlind100 + "";
+            }
+
         },this);
 
-        HallData.GetInstance().AddListener("Data_ClubCreateNewShortBaseScore",(_current , _before)=>
+        HallData.GetInstance().AddListener("Data_ClubRefreshShortBaseScore",(_current , _before)=>
         {
+            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
+              && HallData.GetInstance().Data_ClubCreateShortScoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            {
+                let baseScore100 = _current * 100;
+                this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * baseScore100 + "";
+                this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * baseScore100 + "";
+                this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* baseScore100 + "";
+            }
+            else
+            {
 
+            }
         },this); 
+
+        HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
+        {
+            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
+              && _current == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            {
+                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
+                let baseScore100 = baseScore * 100;
+                this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * baseScore100 + "";
+                this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * baseScore100 + "";
+                this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* baseScore100 + "";
+            }
+            else
+            {
+                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind;
+                let bigBlind = smallBlind * 2;
+                let bigBlind100 = bigBlind * 100;
+                this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * bigBlind100 + "";
+                this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * bigBlind100 + "";
+                this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* bigBlind100 + "";
+            }
+        },this);
     }
     LateInit()
     {
