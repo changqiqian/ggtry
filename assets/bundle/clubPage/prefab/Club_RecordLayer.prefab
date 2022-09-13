@@ -320,7 +320,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 192,
+      "width": 96,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -356,7 +356,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "牌局模版",
+    "_string": "战绩",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 48,
