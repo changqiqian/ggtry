@@ -187,7 +187,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 260,
+      "width": 208,
       "height": 100.8
     },
     "_anchorPoint": {
@@ -223,7 +223,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "俱乐部头像",
+    "_string": "积分管理",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 52,

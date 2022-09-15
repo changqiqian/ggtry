@@ -37,6 +37,10 @@ export class Club_PrivateLayer extends BaseUI
     }
     BindUI()
     {
+        this.mAseetsBtn.SetClickCallback(()=>
+        {
+            this.ShowLayer("clubPage","prefab/Club_AssetsManage");
+        });
         this.mRecordBtn.SetClickCallback(()=>
         {
             this.ShowLayer("clubPage","prefab/Club_RecordLayer");
