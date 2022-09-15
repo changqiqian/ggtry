@@ -38,7 +38,7 @@ export class Club_CreateTexasScoreSetting extends BaseUI
             });
             this.mBlindValue.string = _value + " / " + bigBlind;
             HallData.GetInstance().Data_Club_CreateTexasConfig.smallBlind = _index;
-            HallData.GetInstance().Data_ClubCreateNewSmallBlind = _value;
+            HallData.GetInstance().Data_ClubRefreshSmallBlind = _value;
         });
 
         this.mStraddleToggle.ShowUnselected();

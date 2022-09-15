@@ -41,6 +41,7 @@ export class HallData extends DataNotify {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     //俱乐部战绩
     Data_ClubRecordSubPage : Club_RecordSubPage = null; //俱乐部战绩 子页面
+    Data_ClubRecordDetailSubPage : Club_RecordDetailSubPage = null; //俱乐部战绩详情 子页面
     Data_ClubRecordCoinType : PokerLife.Club.GameCurrencyType = null;//俱乐部战绩 货币类型
     Data_ClubRecordDateType : PokerLife.Club.RecordDateType = null;//俱乐部战绩 战绩时间段
                     //创建俱乐部
@@ -273,6 +274,12 @@ export enum Club_RecordSubPage { //俱乐部战绩页面 子页面
     Short = 1,
     Omh = 2,
 }
+
+export enum Club_RecordDetailSubPage { //俱乐部战绩详情 子页面
+    General = 0, //牌局概述页面
+    Recipe = 1, //牌铺页面
+}
+
 
 export class Club_CreateTexasConfig
 {

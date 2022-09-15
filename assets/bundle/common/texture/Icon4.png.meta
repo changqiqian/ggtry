@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "1f4a58ed-ed1e-4cf3-a321-e9d687ee263a",
+  "uuid": "9169eb54-7cc9-42cb-b3a7-90da9215f602",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "1f4a58ed-ed1e-4cf3-a321-e9d687ee263a@6c48a",
-      "displayName": "本局牌普@3x",
+      "uuid": "9169eb54-7cc9-42cb-b3a7-90da9215f602@6c48a",
+      "displayName": "Icon4",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "1f4a58ed-ed1e-4cf3-a321-e9d687ee263a",
+        "imageUuidOrDatabaseUri": "9169eb54-7cc9-42cb-b3a7-90da9215f602",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "1f4a58ed-ed1e-4cf3-a321-e9d687ee263a@f9941",
-      "displayName": "本局牌普@3x",
+      "uuid": "9169eb54-7cc9-42cb-b3a7-90da9215f602@f9941",
+      "displayName": "Icon4",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": 0,
+        "offsetY": -0.5,
         "trimX": 0,
-        "trimY": 0,
-        "width": 1125,
-        "height": 2436,
-        "rawWidth": 1125,
-        "rawHeight": 2436,
+        "trimY": 1,
+        "width": 120,
+        "height": 120,
+        "rawWidth": 120,
+        "rawHeight": 121,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1f4a58ed-ed1e-4cf3-a321-e9d687ee263a@6c48a",
+        "imageUuidOrDatabaseUri": "9169eb54-7cc9-42cb-b3a7-90da9215f602@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "1f4a58ed-ed1e-4cf3-a321-e9d687ee263a@f9941"
+    "redirect": "9169eb54-7cc9-42cb-b3a7-90da9215f602@f9941"
   }
 }

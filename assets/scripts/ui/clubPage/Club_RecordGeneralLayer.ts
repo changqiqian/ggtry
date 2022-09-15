@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Label, ScrollView } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Club_RecordDetailSubPage, HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_RecordGeneralLayer')
@@ -41,7 +42,11 @@ export class Club_RecordGeneralLayer extends BaseUI
     }
     RegDataNotify()
     {
-
+        HallData.GetInstance().AddListener("Data_ClubRecordDetailSubPage",(_current , _before)=>
+        {
+            this.Show(_current == Club_RecordDetailSubPage.General);
+        },this);
+        
     }
     LateInit()
     {

@@ -37,7 +37,18 @@ export class Club_PrivateLayer extends BaseUI
     }
     BindUI()
     {
-        //Club_GameItem
+        this.mRecordBtn.SetClickCallback(()=>
+        {
+            this.ShowLayer("clubPage","prefab/Club_RecordLayer");
+        });
+        this.mDataBtn.SetClickCallback(()=>
+        {
+            this.ShowLayer("clubPage","prefab/Club_DataLayer");
+        });
+        this.mCreateBtn.SetClickCallback(()=>
+        {
+            this.ShowLayer("clubPage","prefab/Club_CreateGameOption");
+        });
     }
     RegDataNotify()
     {
