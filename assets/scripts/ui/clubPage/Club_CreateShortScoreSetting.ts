@@ -28,30 +28,29 @@ export class Club_CreateShortScoreSetting extends BaseUI
         {
             this.mBaseScore.string = _value;
             HallData.GetInstance().Data_ClubRefreshShortBaseScore = _value;
-            HallData.GetInstance().Data_Club_CreateTexasConfig.shortBaseScore = _index;
+            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.shortBaseScore = _index;
         })
 
         this.mButtonDoubbleToggle.ShowUnselected();
         this.mButtonDoubbleToggle.SetClickCallback((_value)=>
         {
-            HallData.GetInstance().Data_Club_CreateTexasConfig.buttonDouble = _value;
+            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.buttonDouble = _value;
         });
     }
     RegDataNotify()
     {
-        HallData.GetInstance().AddListener("Data_ClubCreateShortBaseScore",(_current , _before)=>
+        HallData.GetInstance().Data_ClubCreateShortBaseScore.AddListenner(this,(_data)=>
         {
-            this.mMeassureSliderBaseScore.SetIndex(_current)
-        },this);
-        HallData.GetInstance().AddListener("Data_ClubCreateShortButtonDouble",(_current , _before)=>
+            this.mMeassureSliderBaseScore.SetIndex(_data)
+        })
+        HallData.GetInstance().Data_ClubCreateShortButtonDouble.AddListenner(this,(_data)=>
         {
-            this.mButtonDoubbleToggle.SetShowStauts(_current , true);
-        },this);
-
-        HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
+            this.mButtonDoubbleToggle.SetShowStauts(_data , true);
+        })
+        HallData.GetInstance().Data_ClubCreateShortScoreMode.AddListenner(this,(_data)=>
         {
-            this.Show(_current == ShortGameScoreMode.AnteMode);
-        },this);
+            this.Show(_data == ShortGameScoreMode.ShortGameScoreMode_AnteMode);
+        })
         
     }
     LateInit()

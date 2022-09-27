@@ -5,6 +5,7 @@ import { SceneType, UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
+import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { TipsWindow } from '../common/TipsWindow';
 const { ccclass, property } = _decorator;
@@ -76,14 +77,15 @@ export class LoginUI extends BaseUI
     }
     RegDataNotify() 
     {
-        CommonNotify.GetInstance().AddListener("Data_LoginSuccessData",(_current , _before)=>
+        CommonNotify.GetInstance().Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
-            if(_current == null)
-            {
-                return;
-            }
             UIMgr.GetInstance().ChangeScene(SceneType.Hall);
-        },this);
+        });
+        
+        CommonNotify.GetInstance().Data_SocketOpen.AddListenner(this,(_data)=>
+        {
+            NetworkSend.SendLogin();
+        });
     }
     LateInit() 
     {
@@ -95,6 +97,7 @@ export class LoginUI extends BaseUI
 
     CustmoerDestory() 
     {
+        
     }
 
     private OnLoginBtn()

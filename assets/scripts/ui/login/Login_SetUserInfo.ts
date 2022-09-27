@@ -44,7 +44,7 @@ export class Login_SetUserInfo extends BaseUI
                 return
             }
 
-            let headPicUrl = LocalPlayerData.GetInstance().Data_PhotoUrl;
+            let headPicUrl = LocalPlayerData.GetInstance().Data_PhotoUrl.mData;
             if(headPicUrl ==null || headPicUrl === '') 
             {
                 UIMgr.GetInstance().ShowToast(Localization.GetString("00012"));
@@ -55,18 +55,20 @@ export class Login_SetUserInfo extends BaseUI
     }
     RegDataNotify() 
     {
-        LocalPlayerData.GetInstance().AddListener("Data_PhotoUrl",(_current , _before)=>
+
+
+        LocalPlayerData.GetInstance().Data_PhotoUrl.AddListenner(this,(_data)=>
         {
-            if(_current == null || _current == "")
+            if(_data == null || _data == "")
             {
                 return;
             }
 
-            this.LoadLocalHead(_current,(_spriteFrame)=>
+            this.LoadLocalHead(_data,(_spriteFrame)=>
             {
                 this.mHead.spriteFrame = _spriteFrame;
             });
-        },this);
+        })
     }
     LateInit() 
     {

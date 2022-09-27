@@ -37,25 +37,24 @@ export class Me_Top extends BaseUI
     }
     RegDataNotify() 
     {
-       
-
-        LocalPlayerData.GetInstance().AddListener("Data_Uid",(_current , _before)=>
+        LocalPlayerData.GetInstance().Data_Uid.AddListenner(this,(_data)=>
         {
-            this.mID.string = _current;
-        },this);
+            this.mID.string = _data;
+        })
 
-        LocalPlayerData.GetInstance().AddListener("Data_PhotoUrl",(_current , _before)=>
+        LocalPlayerData.GetInstance().Data_PhotoUrl.AddListenner(this,(_data)=>
         {
-            if(_current == null || _current == "")
+            if(_data == null || _data == "")
             {
                 return;
             }
 
-            this.LoadLocalHead(_current,(_spriteFrame)=>
+            this.LoadLocalHead(_data,(_spriteFrame)=>
             {
                 this.mHead.spriteFrame = _spriteFrame;
             });
-        },this);
+        })
+
     }
     LateInit() 
     {

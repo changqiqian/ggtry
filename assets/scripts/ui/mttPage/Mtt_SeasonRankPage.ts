@@ -49,16 +49,17 @@ export class Mtt_SeasonRankPage extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_MttRankSubPage",(_current , _before)=>
+
+
+        HallData.GetInstance().Data_MttRankSubPage.AddListenner(this,(_data)=>
         {
-            this.Show(_current == Mtt_RankSubPage.Season);
-            if(_current == Mtt_RankSubPage.Season)
+            this.Show(_data == Mtt_RankSubPage.Season);
+            if(_data == Mtt_RankSubPage.Season)
             {
                 this.ResetPage();
                 this.Refresh();
             }
-        },this);
-        
+        })
 
     }
     LateInit() 

@@ -42,10 +42,11 @@ export class Club_RecordGeneralLayer extends BaseUI
     }
     RegDataNotify()
     {
-        HallData.GetInstance().AddListener("Data_ClubRecordDetailSubPage",(_current , _before)=>
+
+        HallData.GetInstance().Data_ClubRecordDetailSubPage.AddListenner(this,(_data)=>
         {
-            this.Show(_current == Club_RecordDetailSubPage.General);
-        },this);
+            this.Show(_data == Club_RecordDetailSubPage.General);
+        })
         
     }
     LateInit()

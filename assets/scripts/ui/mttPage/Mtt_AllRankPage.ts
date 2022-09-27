@@ -32,15 +32,17 @@ export class Mtt_AllRankPage extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_MttRankSubPage",(_current , _before)=>
+
+
+        HallData.GetInstance().Data_MttRankSubPage.AddListenner(this , (_data)=>
         {
-            this.Show(_current == Mtt_RankSubPage.All);
-            if(_current == Mtt_RankSubPage.All)
+            this.Show(_data == Mtt_RankSubPage.All);
+            if(_data == Mtt_RankSubPage.All)
             {
                 this.ResetPage();
                 this.Refresh();
             }
-        },this);
+        })
     }
     LateInit() 
     {

@@ -43,18 +43,17 @@ export class Mtt_MonthRankPage extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_MttRankSubPage",(_current , _before)=>
+
+
+        HallData.GetInstance().Data_MttRankSubPage.AddListenner(this , (_data)=>
         {
-            this.Show(_current == Mtt_RankSubPage.Month);
-            if(_current == Mtt_RankSubPage.Month)
+            this.Show(_data == Mtt_RankSubPage.Month);
+            if(_data == Mtt_RankSubPage.Month)
             {
                 this.ResetPage();
                 this.Refresh();
             }
-        },this);
-
-       
-        
+        })
 
     }
     LateInit() 

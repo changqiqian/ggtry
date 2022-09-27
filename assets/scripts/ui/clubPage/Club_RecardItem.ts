@@ -53,19 +53,19 @@ export class Club_RecardItem extends BaseUI
         let gameTypeName;
         switch(_gameType)
         {
-            case GameType.TexasCash:
+            case GameType.GameType_TexasCash:
                 tempColor = new Color(109,176,99);
                 gameTypeName = "NLH";
 
             break
-            case GameType.ShortCash:
+            case GameType.GameType_ShortCash:
                 tempColor = new Color(98,174,175);
             break
-            case GameType.Mtt:
+            case GameType.GameType_Mtt:
                 gameTypeName = "Mtt"
                 tempColor = new Color(59,52,122);
             break
-            case GameType.Omh:
+            case GameType.GameType_Omh:
                 gameTypeName = "Omh"
                 tempColor = Color.WHITE;
             break

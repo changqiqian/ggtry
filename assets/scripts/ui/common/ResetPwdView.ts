@@ -97,10 +97,10 @@ export class ResetPwdView extends BaseUI
                 return;
             }
             
-            CommonNotify.GetInstance().Data_LastInputPwd = this.mPwdEditbox.string;
-            let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
+            CommonNotify.GetInstance().Data_LastInputPwd.mData = this.mPwdEditbox.string;
+            let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode.mData;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.GetInstance().Data_LastInputPhoneNum;
+            let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.GetInstance().Data_LastInputPhoneNum.mData;
 
 
             

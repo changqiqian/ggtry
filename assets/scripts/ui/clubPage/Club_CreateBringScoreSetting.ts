@@ -36,7 +36,7 @@ export class Club_CreateBringScoreSetting extends BaseUI {
         this.mBringOutToggle.ShowUnselected();
         this.mBringOutToggle.SetClickCallback((_value)=>
         {
-            HallData.GetInstance().Data_Club_CreateTexasConfig.allowBringOut = _value;
+            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.allowBringOut = _value;
             this.mBiringOutSettingNode.active = _value;
         });
 
@@ -44,140 +44,149 @@ export class Club_CreateBringScoreSetting extends BaseUI {
         this.mMeassureSliderMaxBuyIn.InitWithData(GameConfig.GetTexasCreateRoomMaxBuyInTitle(),
         GameConfig.GetTexasCreateRoomMaxBuyInValue(),(_value , _index)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
-            && HallData.GetInstance().Data_ClubCreateShortScoreMode == ShortGameScoreMode.AnteMode)
+            if(HallData.GetInstance().Data_ClubCreateGameType.mData == GameType.GameType_ShortCash
+            && HallData.GetInstance().Data_ClubCreateShortScoreMode.mData == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
             {
-                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
+                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore.mData;
                 this.mMaxBuyInAmount.string = _value * baseScore * 100 + "";
             }
             else
             {
-                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind;
+                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind.mData;
                 let bigBlind = smallBlind * 2;
                 this.mMaxBuyInAmount.string = _value * bigBlind * 100 + "";
             }
-            HallData.GetInstance().Data_Club_CreateTexasConfig.maxTotalBuyIn = _index;
+            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.maxTotalBuyIn = _index;
         })
 
         this.mMeassureSliderBringin.InitWithData(GameConfig.GetTexasCreateRoomBringInTitle(),
         GameConfig.GetTexasCreateRoomBringInValue(),(_value , _index)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
-            && HallData.GetInstance().Data_ClubCreateShortScoreMode == ShortGameScoreMode.AnteMode)
+            if(HallData.GetInstance().Data_ClubCreateGameType.mData == GameType.GameType_ShortCash
+            && HallData.GetInstance().Data_ClubCreateShortScoreMode.mData == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
             {
-                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
+                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore.mData;
                 this.mBringInAmount.string = _value * baseScore * 100 + "";
             }
             else
             {
-                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind;
+                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind.mData;
                 let bigBlind = smallBlind * 2;
                 this.mBringInAmount.string = _value * bigBlind * 100 + "";
             }
-            HallData.GetInstance().Data_Club_CreateTexasConfig.maxBringIn = _index;
+            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.maxBringIn = _index;
         })
 
         this.mMeassureSliderBringOut.InitWithData(GameConfig.GetTexasCreateRoomBringOutTitle(),
         GameConfig.GetTexasCreateRoomBringOutValue(),(_value , _index)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
-            && HallData.GetInstance().Data_ClubCreateShortScoreMode == ShortGameScoreMode.AnteMode)
+            if(HallData.GetInstance().Data_ClubCreateGameType.mData == GameType.GameType_ShortCash
+            && HallData.GetInstance().Data_ClubCreateShortScoreMode.mData == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
             {
-                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
+                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore.mData;
                 this.mBringOutAmount.string = _value * baseScore * 100 + "";
             }
             else
             {
-                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind;
+                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind.mData;
                 let bigBlind = smallBlind * 2;
                 this.mBringOutAmount.string = _value * bigBlind * 100 + "";
             }
-            HallData.GetInstance().Data_Club_CreateTexasConfig.minScoreAfterBringOut = _index;
+            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.minScoreAfterBringOut = _index;
         })
 
         this.mInsuranceToggle.ShowUnselected();
         this.mInsuranceToggle.SetClickCallback((_value)=>
         {
-            HallData.GetInstance().Data_Club_CreateTexasConfig.insurance = _value;
+            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.insurance = _value;
         });
     }
     RegDataNotify()
     {
-        HallData.GetInstance().AddListener("Data_ClubCreateGameMaxBuying",(_current , _before)=>
+        HallData.GetInstance().Data_ClubCreateGameMaxBuying.AddListenner(this,(_data)=>
         {
-            this.mMeassureSliderMaxBuyIn.SetIndex(_current);
-        },this);
-        HallData.GetInstance().AddListener("Data_ClubCreateGameMaxBringin",(_current , _before)=>
+            this.mMeassureSliderMaxBuyIn.SetIndex(_data);
+        })
+
+        HallData.GetInstance().Data_ClubCreateGameMaxBringin.AddListenner(this,(_data)=>
         {
-            this.mMeassureSliderBringin.SetIndex(_current);
-        },this);
-        HallData.GetInstance().AddListener("Data_ClubCreateGameAllowBringOut",(_current , _before)=>
+            this.mMeassureSliderBringin.SetIndex(_data);
+        })
+
+        HallData.GetInstance().Data_ClubCreateGameAllowBringOut.AddListenner(this,(_data)=>
         {
-            this.mBringOutToggle.SetShowStauts(_current,true);
-        },this);
-        HallData.GetInstance().AddListener("Data_ClubMinScoreAfterBringOut",(_current , _before)=>
+            this.mBringOutToggle.SetShowStauts(_data,true);
+        })
+
+        HallData.GetInstance().Data_ClubMinScoreAfterBringOut.AddListenner(this,(_data)=>
         {
-            this.mMeassureSliderBringOut.SetIndex(_current);
-        },this);
-        HallData.GetInstance().AddListener("Data_ClubCreateGameInsurance",(_current , _before)=>
+            this.mMeassureSliderBringOut.SetIndex(_data);
+        })
+
+
+        HallData.GetInstance().Data_ClubCreateGameInsurance.AddListenner(this,(_data)=>
         {
-            this.mInsuranceToggle.SetShowStauts(_current,true);
-        },this);
-        HallData.GetInstance().AddListener("Data_ClubRefreshSmallBlind",(_current , _before)=>
+            this.mInsuranceToggle.SetShowStauts(_data,true);
+        })
+
+        HallData.GetInstance().Data_ClubRefreshSmallBlind.AddListenner(this,(_data)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
-              && HallData.GetInstance().Data_ClubCreateShortScoreMode == ShortGameScoreMode.AnteMode)
+            if(HallData.GetInstance().Data_ClubCreateGameType.mData == GameType.GameType_ShortCash
+              && HallData.GetInstance().Data_ClubCreateShortScoreMode.mData == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
             {
 
             }
             else
             {
-                let bigBlind = _current * 2;
+                let bigBlind = _data * 2;
                 let bigBlind100 = bigBlind * 100;
                 this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * bigBlind100 + "";
                 this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * bigBlind100 + "";
                 this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* bigBlind100 + "";
             }
+        })
 
-        },this);
 
-        HallData.GetInstance().AddListener("Data_ClubRefreshShortBaseScore",(_current , _before)=>
+        HallData.GetInstance().Data_ClubRefreshShortBaseScore.AddListenner(this,(_data)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
-              && HallData.GetInstance().Data_ClubCreateShortScoreMode == ShortGameScoreMode.AnteMode)
-            {
-                let baseScore100 = _current * 100;
-                this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * baseScore100 + "";
-                this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * baseScore100 + "";
-                this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* baseScore100 + "";
-            }
-            else
-            {
+            if(HallData.GetInstance().Data_ClubCreateGameType.mData == GameType.GameType_ShortCash
+            && HallData.GetInstance().Data_ClubCreateShortScoreMode.mData == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
+          {
+              let baseScore100 = _data * 100;
+              this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * baseScore100 + "";
+              this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * baseScore100 + "";
+              this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* baseScore100 + "";
+          }
+          else
+          {
 
-            }
-        },this); 
+          }
+        })
 
-        HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
+        HallData.GetInstance().Data_ClubCreateShortScoreMode.AddListenner(this,(_data)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
-              && _current == ShortGameScoreMode.AnteMode)
-            {
-                let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
-                let baseScore100 = baseScore * 100;
-                this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * baseScore100 + "";
-                this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * baseScore100 + "";
-                this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* baseScore100 + "";
-            }
-            else
-            {
-                let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind;
-                let bigBlind = smallBlind * 2;
-                let bigBlind100 = bigBlind * 100;
-                this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * bigBlind100 + "";
-                this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * bigBlind100 + "";
-                this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* bigBlind100 + "";
-            }
-        },this);
+            if(HallData.GetInstance().Data_ClubCreateGameType.mData == GameType.GameType_ShortCash
+            && _data == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
+          {
+              let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore.mData;
+              let baseScore100 = baseScore * 100;
+              this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * baseScore100 + "";
+              this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * baseScore100 + "";
+              this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* baseScore100 + "";
+          }
+          else
+          {
+              let smallBlind = HallData.GetInstance().Data_ClubRefreshSmallBlind.mData;
+              let bigBlind = smallBlind * 2;
+              let bigBlind100 = bigBlind * 100;
+              this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * bigBlind100 + "";
+              this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * bigBlind100 + "";
+              this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* bigBlind100 + "";
+          }
+        })
+
+
+
     }
     LateInit()
     {

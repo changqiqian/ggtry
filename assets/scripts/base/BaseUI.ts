@@ -63,13 +63,13 @@ export abstract class BaseUI extends Component {
     }
 
     onDestroy() {
-        CowboyData.GetInstance().RemoveListenerByTarget(this);
-        LoadingData.GetInstance().RemoveListenerByTarget(this);
-        LoginData.GetInstance().RemoveListenerByTarget(this);
-        HallData.GetInstance().RemoveListenerByTarget(this);
-        GameData.GetInstance().RemoveListenerByTarget(this);
-        LocalPlayerData.GetInstance().RemoveListenerByTarget(this);
-        CommonNotify.GetInstance().RemoveListenerByTarget(this);
+        CowboyData.GetInstance().RemoveAllDataListennerByTarget(this);
+        LoadingData.GetInstance().RemoveAllDataListennerByTarget(this);
+        LoginData.GetInstance().RemoveAllDataListennerByTarget(this);
+        HallData.GetInstance().RemoveAllDataListennerByTarget(this);
+        GameData.GetInstance().RemoveAllDataListennerByTarget(this);
+        LocalPlayerData.GetInstance().RemoveAllDataListennerByTarget(this);
+        CommonNotify.GetInstance().RemoveAllDataListennerByTarget(this);
         this.StopSecondsTimer();
         this.CustmoerDestory();
         this.mLayerList = null;

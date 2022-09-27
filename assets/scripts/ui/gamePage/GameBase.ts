@@ -30,16 +30,16 @@ export class GameBase extends BaseUI
     }
     RegDataNotify() 
     {
-    
-
-        CommonNotify.GetInstance().AddListener("Data_LoginSuccessData",(_current , _before)=>
+        CommonNotify.GetInstance().Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
-            if(_current == null)
+            if(_data)
             {
                 return;
             }
             this.GetGameInfoMsg();
-        },this);
+        });
+
+
     }
     LateInit() 
     {

@@ -24,7 +24,7 @@ export class Club_RecordDetailsLayer extends BaseUI
         for(let i = 0 ; i < this.mToggleLayout.children.length ; i++)
         {
             let currentToggle = this.mToggleLayout.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(HallData.GetInstance(),"Data_ClubRecordDetailSubPage" , i);
+            currentToggle.SetDataNotify(HallData.GetInstance().Data_ClubRecordDetailSubPage, i);
         }
 
         this.AddSubView("clubPage" , "prefab/Club_RecordGeneralLayer" ,null , this.mSubLayer);

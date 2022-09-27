@@ -41,31 +41,31 @@ export class Game_Setting extends BaseUI
         for(let i = 0 ; i < this.mBGToggleGroup.children.length ; i++)
         {
             let currentToggle = this.mBGToggleGroup.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(LocalPlayerData.GetInstance(),"Data_BGSetting",i);
+            currentToggle.SetDataNotify(LocalPlayerData.GetInstance().Data_BGSetting,i);
         }
         for(let i = 0 ; i < this.mPokerToggleGroup.children.length ; i++)
         {
             let currentToggle = this.mPokerToggleGroup.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(LocalPlayerData.GetInstance(),"Data_PokerSetting",i);
+            currentToggle.SetDataNotify(LocalPlayerData.GetInstance().Data_PokerSetting,i);
         }
         for(let i = 0 ; i < this.RaiseToggleGroup0.children.length ; i++)
         {
             let currentToggle = this.RaiseToggleGroup0.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(LocalPlayerData.GetInstance(),"Data_CustomerRaise0",i);
+            currentToggle.SetDataNotify(LocalPlayerData.GetInstance().Data_CustomerRaise0,i);
             let currentTitle = GameConfig.GetDefaultCustomerRaiseTitle(i);
             currentToggle.SetTitle(currentTitle);
         }
         for(let i = 0 ; i < this.RaiseToggleGroup1.children.length ; i++)
         {
             let currentToggle = this.RaiseToggleGroup1.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(LocalPlayerData.GetInstance(),"Data_CustomerRaise1",i);
+            currentToggle.SetDataNotify(LocalPlayerData.GetInstance().Data_CustomerRaise1,i);
             let currentTitle = GameConfig.GetDefaultCustomerRaiseTitle(i);
             currentToggle.SetTitle(currentTitle);
         }
         for(let i = 0 ; i < this.RaiseToggleGroup2.children.length ; i++)
         {
             let currentToggle = this.RaiseToggleGroup2.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(LocalPlayerData.GetInstance(),"Data_CustomerRaise2",i);
+            currentToggle.SetDataNotify(LocalPlayerData.GetInstance().Data_CustomerRaise2,i);
             let currentTitle = GameConfig.GetDefaultCustomerRaiseTitle(i);
             currentToggle.SetTitle(currentTitle);
         }
@@ -83,37 +83,38 @@ export class Game_Setting extends BaseUI
     }
     RegDataNotify()
     {
-        LocalPlayerData.GetInstance().AddListener("Data_BGSetting",(_current , _before)=>
+        LocalPlayerData.GetInstance().Data_BGSetting.AddListenner(this,(_data)=>
         {
-            GameConfig.SaveGameBGSetting(_current);
-        },this);
+            GameConfig.SaveGameBGSetting(_data);
+        })
+        LocalPlayerData.GetInstance().Data_PokerSetting.AddListenner(this,(_data)=>
+        {
+            GameConfig.SaveGamePokerSetting(_data);
+        })
+        LocalPlayerData.GetInstance().Data_CustomerRaise0.AddListenner(this,(_data)=>
+        {
+            GameConfig.SaveCustomerRaise(0,_data);
+        })
+        LocalPlayerData.GetInstance().Data_CustomerRaise1.AddListenner(this,(_data)=>
+        {
+            GameConfig.SaveCustomerRaise(1,_data);
+        })
+        LocalPlayerData.GetInstance().Data_CustomerRaise2.AddListenner(this,(_data)=>
+        {
+            GameConfig.SaveCustomerRaise(2,_data);
+        })
+        LocalPlayerData.GetInstance().Data_CustomerSliderSetting.AddListenner(this,(_data)=>
+        {
+            this.mSliderToggle.SetShowStauts(_data);
+            GameConfig.SaveCustomerSliderSetting(_data);
+        })
+        LocalPlayerData.GetInstance().Data_BBModeSetting.AddListenner(this,(_data)=>
+        {
+            this.mBBModeToggle.SetShowStauts(_data);
+            GameConfig.SaveBBToggle(_data);
+        })
 
-        LocalPlayerData.GetInstance().AddListener("Data_PokerSetting",(_current , _before)=>
-        {
-            GameConfig.SaveGamePokerSetting(_current);
-        },this);
-        LocalPlayerData.GetInstance().AddListener("Data_CustomerRaise0",(_current , _before)=>
-        {
-            GameConfig.SaveCustomerRaise(0,_current);
-        },this);
-        LocalPlayerData.GetInstance().AddListener("Data_CustomerRaise1",(_current , _before)=>
-        {
-            GameConfig.SaveCustomerRaise(1,_current);
-        },this);
-        LocalPlayerData.GetInstance().AddListener("Data_CustomerRaise2",(_current , _before)=>
-        {
-            GameConfig.SaveCustomerRaise(2,_current);
-        },this);
-        LocalPlayerData.GetInstance().AddListener("Data_CustomerSliderSetting",(_current , _before)=>
-        {
-            this.mSliderToggle.SetShowStauts(_current);
-            GameConfig.SaveCustomerSliderSetting(_current);
-        },this);
-        LocalPlayerData.GetInstance().AddListener("Data_BBModeSetting",(_current , _before)=>
-        {
-            this.mBBModeToggle.SetShowStauts(_current);
-            GameConfig.SaveBBToggle(_current);
-        },this);
+
     }
     LateInit()
     {

@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Button, Label, Sprite, SpriteFrame } from 'cc';
+import { BaseData } from '../../base/BaseData';
 import { BaseUI } from '../../base/BaseUI';
 import { DataNotify } from '../../base/DataNotify';
 const { ccclass, property } = _decorator;
@@ -15,9 +16,8 @@ export class ToggleBtn extends BaseUI {
     @property(Label) 
     mDisableLabel: Label = null;
 
-    mTargetParam : string;
     mCustmoerData:number = 0;
-    mDataNotify : DataNotify = null;
+    mDataNotify : BaseData<number> = null;
     mForbidden : boolean = false;
 
     mClickCallback : Function = null;
@@ -42,17 +42,16 @@ export class ToggleBtn extends BaseUI {
     {
         if(this.mDataNotify != null)
         {
-            this.mDataNotify.RemoveListenerByTarget(this);
+            this.mDataNotify.RemoveListennerByTarget(this);
             this.mDataNotify = null;
         }
     }
 
-    public SetDataNotify(_dataNotify : DataNotify ,_targetParam : string , _custmoerData : number)
+    public SetDataNotify(_baseData : BaseData<number> , _custmoerData : number)
     {
-        this.mDataNotify = _dataNotify;
+        this.mDataNotify = _baseData;
         this.mCustmoerData = _custmoerData;
-        this.mTargetParam = _targetParam;
-        this.mDataNotify.AddListener(this.mTargetParam , this.NotifyCallback.bind(this), this);
+        this.mDataNotify.AddListenner(this , this.NotifyCallback.bind(this));
         this.mSelected.node.on(Node.EventType.TOUCH_END,this.OnSelected.bind(this),this);
         this.mDisabled.node.on(Node.EventType.TOUCH_END,this.OnDisabled.bind(this),this);
     }
@@ -121,7 +120,8 @@ export class ToggleBtn extends BaseUI {
         {
             return;
         }
-        this.mDataNotify.SetValueByParamName(this.mTargetParam , this.mCustmoerData);
+        this.mDataNotify.mData = this.mCustmoerData;
+
     }
 
     NotifyCallback(_val , _bef)

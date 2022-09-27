@@ -1,7 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
+import { BaseData } from '../../../base/BaseData';
 import { BaseUI } from '../../../base/BaseUI';
-import { DataNotify } from '../../../base/DataNotify';
-import { LocalPlayerData } from '../../../base/LocalPlayerData';
+
 import { ToggleBtn } from '../../common/ToggleBtn';
 import { CowboyData } from '../CowboyData';
 
@@ -30,18 +30,18 @@ export class cb_ChipCtr extends BaseUI
 
     public InitWithData()
     {
-        CowboyData.GetInstance().Data_SelectedChip = 1;
-        this.SetChipData(CowboyData.GetInstance(),"Data_SelectedChip" , 1 , 0);
-        this.SetChipData(CowboyData.GetInstance(),"Data_SelectedChip" , 10 , 1);
-        this.SetChipData(CowboyData.GetInstance(),"Data_SelectedChip" , 100 , 2);
-        this.SetChipData(CowboyData.GetInstance(),"Data_SelectedChip" , 1000 , 3);
-        this.SetChipData(CowboyData.GetInstance(),"Data_SelectedChip" , 5000 , 4);
+        CowboyData.GetInstance().Data_SelectedChip.mData = 1;
+        this.SetChipData(CowboyData.GetInstance().Data_SelectedChip , 1 , 0);
+        this.SetChipData(CowboyData.GetInstance().Data_SelectedChip , 10 , 1);
+        this.SetChipData(CowboyData.GetInstance().Data_SelectedChip , 100 , 2);
+        this.SetChipData(CowboyData.GetInstance().Data_SelectedChip , 1000 , 3);
+        this.SetChipData(CowboyData.GetInstance().Data_SelectedChip , 5000 , 4);
     }
 
-    SetChipData(_dataNotify : DataNotify , _param : string , _custmoerData : number , _index : number)
+    SetChipData(_baseData : BaseData<number> , _custmoerData : number , _index : number)
     {
         let currentChild = this.node.children[_index].getComponent(ToggleBtn);
-        currentChild.SetDataNotify(_dataNotify,_param,_custmoerData);
+        currentChild.SetDataNotify(_baseData,_custmoerData);
         currentChild.SetTitle(this.ConvertNumber(_custmoerData));
     }
 

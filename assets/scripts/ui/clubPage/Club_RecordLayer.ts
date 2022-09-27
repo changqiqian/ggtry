@@ -38,17 +38,17 @@ export class Club_RecordLayer extends BaseUI
         for(let i = 0 ; i < this.mGameTypeLayout.children.length ; i++)
         {
             let currentToggle = this.mGameTypeLayout.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(HallData.GetInstance(),"Data_ClubRecordSubPage" , i);
+            currentToggle.SetDataNotify(HallData.GetInstance().Data_ClubRecordSubPage , i);
         }
         for(let i = 0 ; i < this.mCurrencyLayout.children.length ; i++)
         {
             let currentToggle = this.mCurrencyLayout.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(HallData.GetInstance(),"Data_ClubRecordCoinType" , i);
+            currentToggle.SetDataNotify(HallData.GetInstance().Data_ClubRecordCoinType, i);
         }
         for(let i = 0 ; i < this.mDateLayout.children.length ; i++)
         {
             let currentToggle = this.mDateLayout.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(HallData.GetInstance(),"Data_ClubRecordDateType" , i);
+            currentToggle.SetDataNotify(HallData.GetInstance().Data_ClubRecordDateType, i);
         }
 
     }

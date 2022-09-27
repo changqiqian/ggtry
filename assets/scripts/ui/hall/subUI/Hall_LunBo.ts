@@ -19,13 +19,13 @@ export class Hall_LunBo extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_LunBoTu",(_current , _before)=>
+        HallData.GetInstance().Data_LunBoTu.AddListenner(this , (_data)=>
         {
-            for(let i = 0 ; i < _current.adverts.length ; i++)
+            for(let i = 0 ; i < _data.adverts.length ; i++)
             {
                 this.LoadPrefab("hall","prefab/Hall_LunBoItem",(_prefab)=>
                 {
-                    let currentLunBoData = _current.adverts[i];
+                    let currentLunBoData = _data.adverts[i];
                     let url = currentLunBoData.url;
                     let picUrl = currentLunBoData.thumb;
                     let tempNode =  instantiate(_prefab);
@@ -33,7 +33,7 @@ export class Hall_LunBo extends BaseUI
                     this.mPageView.addPage(tempNode);
                 });
             }
-        },this);
+        })
     }
     LateInit() 
     {

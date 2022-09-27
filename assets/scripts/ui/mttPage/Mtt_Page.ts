@@ -18,10 +18,11 @@ export class Mtt_Page extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_SubPage",(_current , _before)=>
+
+        HallData.GetInstance().Data_SubPage.AddListenner(this , (_data)=>
         {
-            this.Show(_current == Hall_SubPage.MTT);
-        },this);
+            this.Show(_data == Hall_SubPage.MTT);
+        })
     }
     LateInit() 
     {

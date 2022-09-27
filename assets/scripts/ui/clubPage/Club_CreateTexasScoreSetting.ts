@@ -34,17 +34,17 @@ export class Club_CreateTexasScoreSetting extends BaseUI
             GameConfig.GetTexasCreateRoomAnteValue(_value),
             (_value , _index)=>
             {
-                HallData.GetInstance().Data_Club_CreateTexasConfig.ante = _index;
+                HallData.GetInstance().Data_Club_CreateTexasConfig.mData.ante = _index;
             });
             this.mBlindValue.string = _value + " / " + bigBlind;
-            HallData.GetInstance().Data_Club_CreateTexasConfig.smallBlind = _index;
-            HallData.GetInstance().Data_ClubRefreshSmallBlind = _value;
+            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.smallBlind = _index;
+            HallData.GetInstance().Data_ClubRefreshSmallBlind.mData = _value;
         });
 
         this.mStraddleToggle.ShowUnselected();
         this.mStraddleToggle.SetClickCallback((_value)=>
         {
-            HallData.GetInstance().Data_Club_CreateTexasConfig.straddle = _value;
+            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.straddle = _value;
         });
         
 
@@ -52,39 +52,42 @@ export class Club_CreateTexasScoreSetting extends BaseUI
     }
     RegDataNotify()
     {
-        HallData.GetInstance().AddListener("Data_ClubCreateGameCurrentSB",(_current , _before)=>
+        HallData.GetInstance().Data_ClubCreateGameCurrentSB.AddListenner(this,(_data)=>
         {
-            this.mMeassureSliderBlind.SetIndex(_current);
-        },this);
+            this.mMeassureSliderBlind.SetIndex(_data);
+        })
 
-        HallData.GetInstance().AddListener("Data_ClubCreateGameStraddle",(_current , _before)=>
+        HallData.GetInstance().Data_ClubCreateGameStraddle.AddListenner(this,(_data)=>
         {
-            this.mStraddleToggle.SetShowStauts(_current , true);
-        },this);
-        
-        HallData.GetInstance().AddListener("Data_ClubCreateGameAnte",(_current , _before)=>
-        {
-            this.mMeassureSliderAnte.SetIndex(_current);
-        },this); 
+            this.mStraddleToggle.SetShowStauts(_data , true);
+        })
 
-        HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
+        HallData.GetInstance().Data_ClubCreateGameAnte.AddListenner(this,(_data)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.TexasCash)
+            this.mMeassureSliderAnte.SetIndex(_data);
+        })
+
+        HallData.GetInstance().Data_ClubCreateShortScoreMode.AddListenner(this,(_data)=>
+        {
+            if(HallData.GetInstance().Data_ClubCreateGameType.mData == GameType.GameType_TexasCash)
             {
                 this.Show(true);
             }
-            else if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash)
+            else if(HallData.GetInstance().Data_ClubCreateGameType.mData == GameType.GameType_ShortCash)
             {
-                if(_current == ShortGameScoreMode.AnteMode)
+                if(_data == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
                 {
                     this.Show(false);
                 }
-                else if(_current == ShortGameScoreMode.BlindMode)
+                else if(_data == ShortGameScoreMode.ShortGameScoreMode_BlindMode)
                 {
                     this.Show(true);
                 }
             }
-        },this);
+        })
+
+
+
     }
     LateInit()
     {

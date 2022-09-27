@@ -41,7 +41,7 @@ export class CowboyUI extends BaseUI
     }
     RegDataNotify() 
     {
-        CowboyData.GetInstance().AddListener("Data_BetConfig",this.Data_BetConfig.bind(this),this);
+        CowboyData.GetInstance().Data_BetConfig.AddListenner(this,this.Data_BetConfig.bind(this))
     }
     LateInit() 
     {
@@ -67,10 +67,10 @@ export class CowboyUI extends BaseUI
         let config = new ChipConfig(_current.mUid,_current.mBetID,tempChip);
         this.mChipList.push(config);
         //自己下注
-        if(LocalPlayerData.GetInstance().Data_Uid == _current.mUid)
+        if(LocalPlayerData.GetInstance().Data_Uid.mData == _current.mUid)
         {   
             this.node.addChild(tempChip);
-            let localPlayerWorldPos = CowboyData.GetInstance().Data_LocalPlayerPos;
+            let localPlayerWorldPos = CowboyData.GetInstance().Data_LocalPlayerPos.mData;
             let localPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(localPlayerWorldPos);
             tempChip.setPosition(localPlayerPos);
             this.ChipFlyToBetArea(config,finalPos);
@@ -91,10 +91,10 @@ export class CowboyUI extends BaseUI
     ChipFlyToPlayer(_config : ChipConfig)
     {
         //自己回收筹码
-        if(_config.mUid == LocalPlayerData.GetInstance().Data_Uid)
+        if(_config.mUid == LocalPlayerData.GetInstance().Data_Uid.mData)
         {
             let duration = 0.5;
-            let localPlayerWorldPos = CowboyData.GetInstance().Data_LocalPlayerPos;
+            let localPlayerWorldPos = CowboyData.GetInstance().Data_LocalPlayerPos.mData;
             let localPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(localPlayerWorldPos);
             let tween = new Tween(_config.mNode);
             tween.to(duration,{position:localPlayerPos},{easing:easing.quadOut});

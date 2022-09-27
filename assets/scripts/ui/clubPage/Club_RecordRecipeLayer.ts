@@ -18,10 +18,11 @@ export class Club_RecordRecipeLayer extends BaseUI
     }
     RegDataNotify()
     {
-        HallData.GetInstance().AddListener("Data_ClubRecordDetailSubPage",(_current , _before)=>
+
+        HallData.GetInstance().Data_ClubRecordDetailSubPage.AddListenner(this,(_data)=>
         {
-            this.Show(_current == Club_RecordDetailSubPage.Recipe);
-        },this);
+            this.Show(_data == Club_RecordDetailSubPage.Recipe);
+        })
     }
     LateInit()
     {

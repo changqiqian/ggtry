@@ -32,10 +32,7 @@ export class GameUI extends BaseUI
     
     RegDataNotify() 
     {
-        GameData.GetInstance().AddListener("Data_BGSetting",(_current , _before)=>
-        {
-            
-        },this)
+
     }
     LateInit() 
     {
@@ -44,8 +41,6 @@ export class GameUI extends BaseUI
 
     CustmoerDestory() 
     {
-        GameData.GetInstance().RemoveAllListenner();
-        GameData.GetInstance().ResetAllData();
         GameData.GetInstance().UnregisteMsg();
     }
 }

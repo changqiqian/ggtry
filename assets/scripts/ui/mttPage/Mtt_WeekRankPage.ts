@@ -42,18 +42,15 @@ export class Mtt_WeekRankPage extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_MttRankSubPage",(_current , _before)=>
+        HallData.GetInstance().Data_MttRankSubPage.AddListenner(this,(_data)=>
         {
-            this.Show(_current == Mtt_RankSubPage.Week);
-            if(_current == Mtt_RankSubPage.Week)
+            this.Show(_data == Mtt_RankSubPage.Week);
+            if(_data == Mtt_RankSubPage.Week)
             {
                 this.ResetPage();
                 this.Refresh();
             }
-        },this);
-
-       
-
+        })
     }
     LateInit() 
     {

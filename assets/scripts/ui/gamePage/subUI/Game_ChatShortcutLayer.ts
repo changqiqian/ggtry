@@ -38,10 +38,11 @@ export class Game_ChatShortcutLayer extends BaseUI
     }
     RegDataNotify()
     {
-        GameData.GetInstance().AddListener("Data_ChatingSubLayer" , (_current , _before) =>
+
+        GameData.GetInstance().Data_ChatingSubLayer.AddListenner(this , (_data)=>
         {
-            this.node.active = _current == Game_ChattingSubLayer.Shortcut;
-        },this);
+            this.node.active = _data == Game_ChattingSubLayer.ChatHistory
+        });
     }
     LateInit()
     {

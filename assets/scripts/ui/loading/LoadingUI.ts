@@ -39,24 +39,30 @@ export class LoadingUI extends BaseUI
 
     RegDataNotify() 
     {
-        LoadingData.GetInstance().AddListener("Data_HotUpdateEnd",(_current , _before)=>
+        LoadingData.GetInstance().Data_HotUpdateEnd.AddListenner(this,(_data)=>
         {
-            this.scheduleOnce(()=>
+            if(_data)
             {
-                UIMgr.GetInstance().ChangeScene(SceneType.Login);
-            },1);
-        },this);
+                this.scheduleOnce(()=>
+                {
+                    UIMgr.GetInstance().ChangeScene(SceneType.Login);
+                },1);
+            }
 
-        LoadingData.GetInstance().AddListener("Data_HotUpdateProgress",(_current , _before)=>
-        {
-            this.mPercent.string = _current * 100 + "%";
-            this.mProgress.fillRange = _current;
-        },this);
+        });
 
-        LoadingData.GetInstance().AddListener("Data_HotUpdateTips",(_current , _before)=>
+        LoadingData.GetInstance().Data_HotUpdateProgress.AddListenner(this,(_data)=>
         {
-            this.mTips.string = _current;
-        },this);
+            this.mPercent.string = _data * 100 + "%";
+            this.mProgress.fillRange = _data;
+
+        });
+
+        LoadingData.GetInstance().Data_HotUpdateTips.AddListenner(this,(_data)=>
+        {
+            this.mTips.string = _data;
+
+        });
     }
     LateInit()
     {
@@ -66,8 +72,7 @@ export class LoadingUI extends BaseUI
 
     CustmoerDestory()
     {
-        LoadingData.GetInstance().RemoveAllListenner();
-        LoadingData.GetInstance().ResetAllData();
+
     }
     
 

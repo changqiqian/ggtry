@@ -45,26 +45,28 @@ export class SettingWindow extends BaseUI {
 
         this.mBBModeToggle.SetClickCallback((_value)=>
         {
-            LocalPlayerData.GetInstance().Data_BBModeSetting = _value;
+            LocalPlayerData.GetInstance().Data_BBModeSetting.mData = _value;
         })
         this.mBGMToggle.SetClickCallback((_value)=>
         {
-            LocalPlayerData.GetInstance().Data_BGMSetting = _value;
+            LocalPlayerData.GetInstance().Data_BGMSetting.mData = _value;
         })
     }
 
     RegDataNotify() 
     {
-        LocalPlayerData.GetInstance().AddListener("Data_BBModeSetting",(_current , _before)=>
+
+        LocalPlayerData.GetInstance().Data_BBModeSetting.AddListenner(this,(_data)=>
         {
-            this.mBBModeToggle.SetShowStauts(_current);
-            GameConfig.SaveBBToggle(_current);
-        },this);
-        LocalPlayerData.GetInstance().AddListener("Data_BGMSetting",(_current , _before)=>
+            this.mBBModeToggle.SetShowStauts(_data);
+            GameConfig.SaveBBToggle(_data);
+        })
+
+        LocalPlayerData.GetInstance().Data_BGMSetting.AddListenner(this,(_data)=>
         {
-            this.mBGMToggle.SetShowStauts(_current);
-            GameConfig.SaveBGMSetting(_current);
-        },this);
+            this.mBGMToggle.SetShowStauts(_data);
+            GameConfig.SaveBGMSetting(_data);
+        })
     }
 
     LateInit() {}

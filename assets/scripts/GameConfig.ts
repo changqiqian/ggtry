@@ -3,15 +3,15 @@ import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
 export class GameConfig
 {
-    public static DebugMode =  false;
-    public static DevelopIP = "18.140.238.52:9008"; //研发环境ip
+    public static DebugMode =  true;
+    public static DevelopIP = "192.168.1.12:9001"; //研发环境ip
     public static TestIP = "13.229.222.39:9008"; //测试环境ip
     public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip
-    public static SeverUrl = "ws://13.229.222.39:9008/ws/";
+    public static SeverUrl = "ws://13.229.222.39:9008/pokerlife";
     public static SetSeverUrl(_ip : string)
     {
         GameConfig.UsingIp = _ip;
-        GameConfig.SeverUrl = "ws://" + _ip +"/ws/";
+        GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
     }
     //发布的版本号
     public static Version = "1.1.3"
@@ -77,7 +77,7 @@ export class GameConfig
     //俱乐部创建德州房间的时候，选择的抽水类型滑动条对应的标题
     public static GetTexasCreateRoomTaxTitle(_type : GameTaxType) : Array<string>
     {
-        if(_type == GameTaxType.EveryRound)
+        if(_type == GameTaxType.GameTaxType_EveryRound)
         {
             return ["0%","1%","2%","3%","4%","5%","6%","7%","8%","9%","10%"];
         }
@@ -90,7 +90,7 @@ export class GameConfig
     //俱乐部创建德州房间的时候，选择的抽水类型滑动条对应的值
     public static GetTexasCreateRoomTaxValue(_type : GameTaxType) : Array<number>
     {
-        if(_type == GameTaxType.EveryRound)
+        if(_type == GameTaxType.GameTaxType_EveryRound)
         {
             return [0 , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1];
         }

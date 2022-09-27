@@ -30,16 +30,16 @@ export class Mtt_PlayersPage extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_MttInfoSubPage",(_current , _before)=>
+
+        HallData.GetInstance().Data_MttInfoSubPage.AddListenner(this , (_data)=>
         {
-            this.Show(_current == Mtt_InfoSubPage.PlayerPage);
-            if(_current == Mtt_InfoSubPage.PlayerPage)
+            this.Show(_data == Mtt_InfoSubPage.PlayerPage);
+            if(_data == Mtt_InfoSubPage.PlayerPage)
             {
                 this.ResetPage();
                 this.Refresh();
             }
-        },this);
-
+        })
 
 
      

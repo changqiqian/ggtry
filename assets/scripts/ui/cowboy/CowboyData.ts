@@ -1,4 +1,6 @@
 import { _decorator, Component, Node, Vec3, Rect, Vec2, Size } from 'cc';
+import { BaseData } from '../../base/BaseData';
+import { BaseDataNotify } from '../../base/BaseDataNotify';
 import { DataNotify } from '../../base/DataNotify';
 const { ccclass, property } = _decorator;
 
@@ -32,7 +34,8 @@ export class cb_BetConfig //下注数据
     mBetID : number;
 }
 
-export class CowboyData extends DataNotify {
+export class CowboyData extends BaseDataNotify 
+{
     public static Instance:CowboyData = null;
 
     public static GetInstance() : CowboyData
@@ -40,15 +43,14 @@ export class CowboyData extends DataNotify {
         if(CowboyData.Instance == null)
         {
             CowboyData.Instance = new CowboyData();
-            CowboyData.Instance.CreateNotify();
         }
 
         return CowboyData.Instance;
     }
 
-    Data_SelectedChip : number = null; //本地玩家选中的下注筹码
-    Data_BetConfig :cb_BetConfig = null; //下注数据
-    Data_LocalPlayerPos : Vec3 = null; //本地玩家位置，记录下来，筹码从这里飞出来
+    Data_SelectedChip : BaseData<number> = new BaseData<number>(); //本地玩家选中的下注筹码
+    Data_BetConfig :  BaseData<cb_BetConfig> = new BaseData<cb_BetConfig>(); //下注数据 
+    Data_LocalPlayerPos :  BaseData<Vec3> = new BaseData<Vec3>();//本地玩家位置，记录下来，筹码从这里飞出来
 
 
     //常量

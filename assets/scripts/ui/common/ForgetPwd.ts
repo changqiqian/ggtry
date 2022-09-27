@@ -51,8 +51,8 @@ export class ForgetPwd extends BaseUI {
                 return
             }
 
-            CommonNotify.GetInstance().Data_LastInputPhoneNum = this.mAccountEditBox.string;
-            let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
+            CommonNotify.GetInstance().Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
+            let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode.mData;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
 
@@ -62,11 +62,10 @@ export class ForgetPwd extends BaseUI {
 
     RegDataNotify() 
     {
-        LocalPlayerData.GetInstance().AddListener("Data_AreaCode",(_current , _before)=>
+        LocalPlayerData.GetInstance().Data_AreaCode.AddListenner(this,(_data)=>
         {
-            this.mAreaCodeBtn.SetTitle(GameConfig.AreaCodeList[_current].areaCode);
-        },this);
-
+            this.mAreaCodeBtn.SetTitle(GameConfig.AreaCodeList[_data].areaCode);
+        })
 
     }
     LateInit() 

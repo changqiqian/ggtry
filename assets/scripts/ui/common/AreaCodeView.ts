@@ -50,13 +50,14 @@ export class AreaCodeView extends BaseUI {
     }
     RegDataNotify() 
     {
-        LocalPlayerData.GetInstance().AddListener("Data_AreaCode",(_current , _before)=>
+
+        LocalPlayerData.GetInstance().Data_AreaCode.AddListenner(this,(_data)=>
         {
-            if(_before != null)
+            if(_data != null)
             {
                 this.HideAnm();
             }
-        },this);
+        })
     }
     LateInit() 
     {

@@ -51,7 +51,7 @@ export class Mtt_RankItem extends BaseUI
             this.mHead.spriteFrame = _spriteFrame;
         });
 
-        this.mMeBG.active = _data.userId == LocalPlayerData.GetInstance().Data_Uid;
+        this.mMeBG.active = _data.userId == LocalPlayerData.GetInstance().Data_Uid.mData;
     }
 }
 

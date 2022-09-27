@@ -29,36 +29,13 @@ export class Mtt_RewardPage extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_MttInfoSubPage",(_current , _before)=>
+
+
+        HallData.GetInstance().Data_MttInfoSubPage.AddListenner(this , (_data)=>
         {
-            this.Show(_current == Mtt_InfoSubPage.RewardPage);
-        },this);
+            this.Show(_data == Mtt_InfoSubPage.RewardPage);
+        })
 
-
-        HallData.GetInstance().AddListener("Data_MttMatchDetails",(_current , _before)=>
-        {
-            this.mScrollView.content.destroyAllChildren();
-            let rewardTips = _current.rewardConfig.rewardDescribe;
-            if(rewardTips != null && rewardTips != "")
-            {
-                this.mRewardTips.string = rewardTips;
-            }
-            
-
-            this.mRewardCircle.string = Localization.GetString("00039") + ":" + _current.dynamicReward.dynamicPercent+"%";;
-
-            for(let i = 0 ; i < _current.rewardConfig.rewards.length ; i++)
-            {
-                this.LoadPrefab("mttPage","prefab/Mtt_RewardItem",(_prefab)=>
-                {
-                    let currentReward = _current.rewardConfig.rewards[i];
-                    let rewardItem = instantiate(_prefab);
-                    this.mScrollView.content.addChild(rewardItem);
-                    let script = rewardItem.getComponent(Mtt_RewardItem);
-                    script.InitWithData(currentReward);
-                });
-            }
-        },this);
     }
     LateInit() 
     {

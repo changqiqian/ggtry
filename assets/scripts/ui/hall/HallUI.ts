@@ -29,24 +29,19 @@ export class HallUI extends BaseUI
 
     RegDataNotify() 
     {
-        CommonNotify.GetInstance().AddListener("Data_LoginSuccessData",(_current , _before)=>
+        CommonNotify.GetInstance().Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
-            if(_current == null)
-            {
-                return;
-            }
-        },this);
+            
+        })
     }
     LateInit() 
     {
-        HallData.GetInstance().Data_SubPage = Hall_SubPage.MTT;
+        HallData.GetInstance().Data_SubPage.mData = Hall_SubPage.MTT;
     }
 
     CustmoerDestory() 
     {
         HallData.GetInstance().UnregisteMsg();
-        HallData.GetInstance().RemoveAllListenner();
-        HallData.GetInstance().ResetAllData();
     }
 
 }

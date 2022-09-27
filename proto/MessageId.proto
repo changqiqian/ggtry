@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-package sy.game.message;
 
 option java_package = "sy.game.message";
 option java_outer_classname = "MsgId";

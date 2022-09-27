@@ -749,17 +749,17 @@ $root.ShortConfig = (function() {
  * GameType enum.
  * @exports GameType
  * @enum {number}
- * @property {number} TexasCash=0 TexasCash value
- * @property {number} ShortCash=1 ShortCash value
- * @property {number} Mtt=2 Mtt value
- * @property {number} Omh=3 Omh value
+ * @property {number} GameType_TexasCash=0 GameType_TexasCash value
+ * @property {number} GameType_ShortCash=1 GameType_ShortCash value
+ * @property {number} GameType_Mtt=2 GameType_Mtt value
+ * @property {number} GameType_Omh=3 GameType_Omh value
  */
 $root.GameType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "TexasCash"] = 0;
-    values[valuesById[1] = "ShortCash"] = 1;
-    values[valuesById[2] = "Mtt"] = 2;
-    values[valuesById[3] = "Omh"] = 3;
+    values[valuesById[0] = "GameType_TexasCash"] = 0;
+    values[valuesById[1] = "GameType_ShortCash"] = 1;
+    values[valuesById[2] = "GameType_Mtt"] = 2;
+    values[valuesById[3] = "GameType_Omh"] = 3;
     return values;
 })();
 
@@ -767,13 +767,13 @@ $root.GameType = (function() {
  * GameTaxType enum.
  * @exports GameTaxType
  * @enum {number}
- * @property {number} EveryRound=0 EveryRound value
- * @property {number} WholeGameEnd=1 WholeGameEnd value
+ * @property {number} GameTaxType_EveryRound=0 GameTaxType_EveryRound value
+ * @property {number} GameTaxType_WholeGameEnd=1 GameTaxType_WholeGameEnd value
  */
 $root.GameTaxType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "EveryRound"] = 0;
-    values[valuesById[1] = "WholeGameEnd"] = 1;
+    values[valuesById[0] = "GameTaxType_EveryRound"] = 0;
+    values[valuesById[1] = "GameTaxType_WholeGameEnd"] = 1;
     return values;
 })();
 
@@ -781,13 +781,13 @@ $root.GameTaxType = (function() {
  * GameCurrencyType enum.
  * @exports GameCurrencyType
  * @enum {number}
- * @property {number} Point=0 Point value
- * @property {number} Coin=1 Coin value
+ * @property {number} GameCurrencyType_Point=0 GameCurrencyType_Point value
+ * @property {number} GameCurrencyType_Coin=1 GameCurrencyType_Coin value
  */
 $root.GameCurrencyType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "Point"] = 0;
-    values[valuesById[1] = "Coin"] = 1;
+    values[valuesById[0] = "GameCurrencyType_Point"] = 0;
+    values[valuesById[1] = "GameCurrencyType_Coin"] = 1;
     return values;
 })();
 
@@ -795,13 +795,13 @@ $root.GameCurrencyType = (function() {
  * ShortGameScoreMode enum.
  * @exports ShortGameScoreMode
  * @enum {number}
- * @property {number} AnteMode=0 AnteMode value
- * @property {number} BlindMode=1 BlindMode value
+ * @property {number} ShortGameScoreMode_AnteMode=0 ShortGameScoreMode_AnteMode value
+ * @property {number} ShortGameScoreMode_BlindMode=1 ShortGameScoreMode_BlindMode value
  */
 $root.ShortGameScoreMode = (function() {
     var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "AnteMode"] = 0;
-    values[valuesById[1] = "BlindMode"] = 1;
+    values[valuesById[0] = "ShortGameScoreMode_AnteMode"] = 0;
+    values[valuesById[1] = "ShortGameScoreMode_BlindMode"] = 1;
     return values;
 })();
 
@@ -809,15 +809,15 @@ $root.ShortGameScoreMode = (function() {
  * RecordDateType enum.
  * @exports RecordDateType
  * @enum {number}
- * @property {number} Today=0 Today value
- * @property {number} Week=1 Week value
- * @property {number} Month=2 Month value
+ * @property {number} RecordDateType_Today=0 RecordDateType_Today value
+ * @property {number} RecordDateType_Week=1 RecordDateType_Week value
+ * @property {number} RecordDateType_Month=2 RecordDateType_Month value
  */
 $root.RecordDateType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "Today"] = 0;
-    values[valuesById[1] = "Week"] = 1;
-    values[valuesById[2] = "Month"] = 2;
+    values[valuesById[0] = "RecordDateType_Today"] = 0;
+    values[valuesById[1] = "RecordDateType_Week"] = 1;
+    values[valuesById[2] = "RecordDateType_Month"] = 2;
     return values;
 })();
 
@@ -2472,79 +2472,43 @@ $root.S2CGetSmsCode = (function() {
     return S2CGetSmsCode;
 })();
 
-$root.sy = (function() {
-
-    /**
-     * Namespace sy.
-     * @exports sy
-     * @namespace
-     */
-    var sy = {};
-
-    sy.game = (function() {
-
-        /**
-         * Namespace game.
-         * @memberof sy
-         * @namespace
-         */
-        var game = {};
-
-        game.message = (function() {
-
-            /**
-             * Namespace message.
-             * @memberof sy.game
-             * @namespace
-             */
-            var message = {};
-
-            /**
-             * Login(1001-2000)
-             * Hall(2001-4000)
-             * @name sy.game.message.MessageId
-             * @enum {number}
-             * @property {number} MSG_UnKnow=0 MSG_UnKnow value
-             * @property {number} MSG_LoginBegin=1001 MSG_LoginBegin value
-             * @property {number} C2S_Login=1002 C2S_Login value
-             * @property {number} C2S_Logout=1003 C2S_Logout value
-             * @property {number} C2S_Register=1004 C2S_Register value
-             * @property {number} C2S_GetSmsCode=1005 C2S_GetSmsCode value
-             * @property {number} S2C_Login=1100 S2C_Login value
-             * @property {number} S2C_Logout=1101 S2C_Logout value
-             * @property {number} S2C_Register=1102 S2C_Register value
-             * @property {number} S2C_GetSmsCode=1103 S2C_GetSmsCode value
-             * @property {number} MSG_LoginEnd=2000 MSG_LoginEnd value
-             * @property {number} MSG_HallBegin=2001 MSG_HallBegin value
-             * @property {number} C2S_GetUserInfo=2002 C2S_GetUserInfo value
-             * @property {number} S2C_GetUserInfo=3000 S2C_GetUserInfo value
-             * @property {number} MSG_HallEnd=4000 MSG_HallEnd value
-             */
-            message.MessageId = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "MSG_UnKnow"] = 0;
-                values[valuesById[1001] = "MSG_LoginBegin"] = 1001;
-                values[valuesById[1002] = "C2S_Login"] = 1002;
-                values[valuesById[1003] = "C2S_Logout"] = 1003;
-                values[valuesById[1004] = "C2S_Register"] = 1004;
-                values[valuesById[1005] = "C2S_GetSmsCode"] = 1005;
-                values[valuesById[1100] = "S2C_Login"] = 1100;
-                values[valuesById[1101] = "S2C_Logout"] = 1101;
-                values[valuesById[1102] = "S2C_Register"] = 1102;
-                values[valuesById[1103] = "S2C_GetSmsCode"] = 1103;
-                values[valuesById[2000] = "MSG_LoginEnd"] = 2000;
-                values[valuesById[2001] = "MSG_HallBegin"] = 2001;
-                values[valuesById[2002] = "C2S_GetUserInfo"] = 2002;
-                values[valuesById[3000] = "S2C_GetUserInfo"] = 3000;
-                values[valuesById[4000] = "MSG_HallEnd"] = 4000;
-                return values;
-            })();
-
-            return message;
-        })();
-
-        return game;
-    })();
-
-    return sy;
+/**
+ * Login(1001-2000)
+ * Hall(2001-4000)
+ * @exports MessageId
+ * @enum {number}
+ * @property {number} MSG_UnKnow=0 MSG_UnKnow value
+ * @property {number} MSG_LoginBegin=1001 MSG_LoginBegin value
+ * @property {number} C2S_Login=1002 C2S_Login value
+ * @property {number} C2S_Logout=1003 C2S_Logout value
+ * @property {number} C2S_Register=1004 C2S_Register value
+ * @property {number} C2S_GetSmsCode=1005 C2S_GetSmsCode value
+ * @property {number} S2C_Login=1100 S2C_Login value
+ * @property {number} S2C_Logout=1101 S2C_Logout value
+ * @property {number} S2C_Register=1102 S2C_Register value
+ * @property {number} S2C_GetSmsCode=1103 S2C_GetSmsCode value
+ * @property {number} MSG_LoginEnd=2000 MSG_LoginEnd value
+ * @property {number} MSG_HallBegin=2001 MSG_HallBegin value
+ * @property {number} C2S_GetUserInfo=2002 C2S_GetUserInfo value
+ * @property {number} S2C_GetUserInfo=3000 S2C_GetUserInfo value
+ * @property {number} MSG_HallEnd=4000 MSG_HallEnd value
+ */
+$root.MessageId = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "MSG_UnKnow"] = 0;
+    values[valuesById[1001] = "MSG_LoginBegin"] = 1001;
+    values[valuesById[1002] = "C2S_Login"] = 1002;
+    values[valuesById[1003] = "C2S_Logout"] = 1003;
+    values[valuesById[1004] = "C2S_Register"] = 1004;
+    values[valuesById[1005] = "C2S_GetSmsCode"] = 1005;
+    values[valuesById[1100] = "S2C_Login"] = 1100;
+    values[valuesById[1101] = "S2C_Logout"] = 1101;
+    values[valuesById[1102] = "S2C_Register"] = 1102;
+    values[valuesById[1103] = "S2C_GetSmsCode"] = 1103;
+    values[valuesById[2000] = "MSG_LoginEnd"] = 2000;
+    values[valuesById[2001] = "MSG_HallBegin"] = 2001;
+    values[valuesById[2002] = "C2S_GetUserInfo"] = 2002;
+    values[valuesById[3000] = "S2C_GetUserInfo"] = 3000;
+    values[valuesById[4000] = "MSG_HallEnd"] = 4000;
+    return values;
 })();

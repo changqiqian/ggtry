@@ -337,35 +337,35 @@ export class ShortConfig implements IShortConfig {
 
 /** GameType enum. */
 export enum GameType {
-    TexasCash = 0,
-    ShortCash = 1,
-    Mtt = 2,
-    Omh = 3
+    GameType_TexasCash = 0,
+    GameType_ShortCash = 1,
+    GameType_Mtt = 2,
+    GameType_Omh = 3
 }
 
 /** GameTaxType enum. */
 export enum GameTaxType {
-    EveryRound = 0,
-    WholeGameEnd = 1
+    GameTaxType_EveryRound = 0,
+    GameTaxType_WholeGameEnd = 1
 }
 
 /** GameCurrencyType enum. */
 export enum GameCurrencyType {
-    Point = 0,
-    Coin = 1
+    GameCurrencyType_Point = 0,
+    GameCurrencyType_Coin = 1
 }
 
 /** ShortGameScoreMode enum. */
 export enum ShortGameScoreMode {
-    AnteMode = 0,
-    BlindMode = 1
+    ShortGameScoreMode_AnteMode = 0,
+    ShortGameScoreMode_BlindMode = 1
 }
 
 /** RecordDateType enum. */
 export enum RecordDateType {
-    Today = 0,
-    Week = 1,
-    Month = 2
+    RecordDateType_Today = 0,
+    RecordDateType_Week = 1,
+    RecordDateType_Month = 2
 }
 
 /** Represents a Result. */
@@ -968,38 +968,26 @@ export class S2CGetSmsCode implements IS2CGetSmsCode {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetSmsCode;
 }
 
-/** Namespace sy. */
-export namespace sy {
-
-    /** Namespace game. */
-    namespace game {
-
-        /** Namespace message. */
-        namespace message {
-
-            /**
-             * Login(1001-2000)
-             * Hall(2001-4000)
-             */
-            enum MessageId {
-                MSG_UnKnow = 0,
-                MSG_LoginBegin = 1001,
-                C2S_Login = 1002,
-                C2S_Logout = 1003,
-                C2S_Register = 1004,
-                C2S_GetSmsCode = 1005,
-                S2C_Login = 1100,
-                S2C_Logout = 1101,
-                S2C_Register = 1102,
-                S2C_GetSmsCode = 1103,
-                MSG_LoginEnd = 2000,
-                MSG_HallBegin = 2001,
-                C2S_GetUserInfo = 2002,
-                S2C_GetUserInfo = 3000,
-                MSG_HallEnd = 4000
-            }
-        }
-    }
+/**
+ * Login(1001-2000)
+ * Hall(2001-4000)
+ */
+export enum MessageId {
+    MSG_UnKnow = 0,
+    MSG_LoginBegin = 1001,
+    C2S_Login = 1002,
+    C2S_Logout = 1003,
+    C2S_Register = 1004,
+    C2S_GetSmsCode = 1005,
+    S2C_Login = 1100,
+    S2C_Logout = 1101,
+    S2C_Register = 1102,
+    S2C_GetSmsCode = 1103,
+    MSG_LoginEnd = 2000,
+    MSG_HallBegin = 2001,
+    C2S_GetUserInfo = 2002,
+    S2C_GetUserInfo = 3000,
+    MSG_HallEnd = 4000
 }
  
 }

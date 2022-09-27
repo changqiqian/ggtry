@@ -17,10 +17,10 @@ export class Cash_Page extends BaseUI {
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_SubPage",(_current , _before)=>
+        HallData.GetInstance().Data_SubPage.AddListenner(this,(_data)=>
         {
-            this.Show(_current == Hall_SubPage.Cash);
-        },this);
+            this.Show(_data == Hall_SubPage.Cash);
+        })
     }
     LateInit() 
     {

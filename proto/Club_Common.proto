@@ -54,32 +54,32 @@ message ShortConfig {
 
 //俱乐部房间类型
 enum GameType {
-  TexasCash = 0; //德州现金
-  ShortCash = 1;  //短牌现金
-  Mtt = 2; //MTT比赛
-  Omh = 3; //奥马哈
+    GameType_TexasCash = 0; //德州现金
+    GameType_ShortCash = 1;  //短牌现金
+    GameType_Mtt = 2; //MTT比赛
+    GameType_Omh = 3; //奥马哈
 }
 
 //俱乐部房间 抽水类型
 enum GameTaxType {
-  EveryRound = 0;//每轮都抽
-  WholeGameEnd = 1;//游戏结束抽赢家
+    GameTaxType_EveryRound = 0;//每轮都抽
+    GameTaxType_WholeGameEnd = 1;//游戏结束抽赢家
 }
 
 //俱乐部房间 货币类型
 enum GameCurrencyType {
-  Point = 0;//积分
-  Coin = 1;//金币
+    GameCurrencyType_Point = 0;//积分
+    GameCurrencyType_Coin = 1;//金币
 }
 
 //俱乐部房间 短牌底池类型
 enum ShortGameScoreMode {
-  AnteMode = 0;
-  BlindMode = 1;
+    ShortGameScoreMode_AnteMode = 0;
+    ShortGameScoreMode_BlindMode = 1;
 }
 
 enum RecordDateType {
-  Today = 0; //今天
-  Week = 1; //本周
-  Month = 2; //本月
+    RecordDateType_Today = 0; //今天
+    RecordDateType_Week = 1; //本周
+    RecordDateType_Month = 2; //本月
 }

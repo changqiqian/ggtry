@@ -1,3 +1,5 @@
+import { BaseData } from "./base/BaseData";
+import { BaseDataNotify } from "./base/BaseDataNotify";
 import { DataNotify } from "./base/DataNotify";
 import { Localization } from "./base/Localization";
 import { LocalPlayerData } from "./base/LocalPlayerData";
@@ -5,7 +7,7 @@ import { SceneType, UIMgr } from "./base/UIMgr";
 import { GameConfig } from "./GameConfig";
 import { Network } from "./network/Network";
 
-export class CommonNotify extends DataNotify 
+export class CommonNotify extends BaseDataNotify 
 {
     private static Instance:CommonNotify = null;
 
@@ -14,7 +16,6 @@ export class CommonNotify extends DataNotify
         if(CommonNotify.Instance == null)
         {
             CommonNotify.Instance = new CommonNotify();
-            CommonNotify.Instance.CreateNotify();
             CommonNotify.Instance.RegisteMsg();
         }
 
@@ -22,20 +23,14 @@ export class CommonNotify extends DataNotify
     }
     
     
-    Data_SocketOpen : boolean = null;
-    Data_SocketClose : boolean = null;
-    Data_SocketError: boolean = null;
-    Data_LoginSuccessData : any = null;
+    Data_SocketOpen : BaseData<boolean> = new BaseData<boolean>(true);
+    Data_SocketClose : BaseData<boolean> = new BaseData<boolean>(true);
+    Data_SocketError : BaseData<boolean> = new BaseData<boolean>(true);
+    Data_LoginSuccessData : BaseData<boolean> = new BaseData<boolean>(true);
 
-    Data_LastInputPhoneNum : string = null; //最后一次输入的手机号
-    Data_LastInputPwd : string = null;//最后一次输入的密码
+    Data_LastInputPhoneNum : BaseData<string> = new BaseData<string>(); //最后一次输入的手机号
+    Data_LastInputPwd : BaseData<string> = new BaseData<string>();//最后一次输入的密码
 
-    ClearData()
-    {
-        this.Data_SocketOpen = false;
-        this.Data_SocketClose = false;
-        this.Data_SocketError = false;
-    }
 
     RegisteMsg()
     {

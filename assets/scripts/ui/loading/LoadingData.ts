@@ -1,7 +1,7 @@
-import { DataNotify } from "../../base/DataNotify";
+import { BaseData } from "../../base/BaseData";
+import { BaseDataNotify } from "../../base/BaseDataNotify";
 
-
-export class LoadingData extends DataNotify 
+export class LoadingData extends BaseDataNotify 
 {
     private static Instance:LoadingData = null;
 
@@ -10,7 +10,6 @@ export class LoadingData extends DataNotify
         if(LoadingData.Instance == null)
         {
             LoadingData.Instance = new LoadingData();
-            LoadingData.Instance.CreateNotify();
         }
 
         return LoadingData.Instance;
@@ -18,8 +17,8 @@ export class LoadingData extends DataNotify
     
  
 
-    Data_HotUpdateEnd : boolean = null;
-    Data_HotUpdateProgress : number = null;
-    Data_HotUpdateTips : string = null;
+    Data_HotUpdateEnd : BaseData<boolean> = new BaseData<boolean>(true);
+    Data_HotUpdateProgress : BaseData<number> = new BaseData<number>();
+    Data_HotUpdateTips : BaseData<string> = new BaseData<string>();
 }
 

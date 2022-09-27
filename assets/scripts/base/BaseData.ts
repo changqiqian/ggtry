@@ -1,0 +1,113 @@
+
+
+class DataEvent 
+{
+    constructor(_target: any, _callfunc: Function) 
+    {
+        this.mtarget = _target;
+        this.mCallfunc = _callfunc;
+    }
+    mtarget: any;
+    mCallfunc: Function;
+}
+
+export class BaseData <T>
+{
+    constructor(_autoReset: boolean = false , _defaultValue : T = null)
+    {
+        this.mAutoReset = _autoReset;
+        var propertyDefine = {};
+        propertyDefine["mData"] =
+        {
+            get()
+            { 
+                return this.mSavingData;
+            },
+            set(val)
+            { 
+                this.UpdateData(val);
+            }
+        }
+        Object.defineProperties(this, propertyDefine);
+        this.mEventArray = new Array<DataEvent>();
+
+        this.UpdateData(_defaultValue);
+    }
+
+
+
+    public mData : T = null;
+    private mSavingData : T = null;
+    private mEventArray : Array<DataEvent>;
+    private mSetValueAlready : boolean = false;
+    private mAutoReset : boolean = false;
+    private UpdateData(_value : T)
+    {
+        if(_value == null || _value == undefined)
+        {
+            return;
+        }
+
+        this.mSetValueAlready = true;
+        this.mSavingData = _value;
+
+        for(let i = 0 ; i < this.mEventArray.length ; i++)
+        {
+            let current = this.mEventArray[i];
+            current.mCallfunc(this.mSavingData);
+        }
+
+        if(this.mAutoReset)
+        {
+            this.ResetData();
+        }
+    }
+
+    public AddListenner(_target : any , _callfunc : Function)
+    {
+        let index = this.mEventArray.findIndex((_item) => _item.mtarget === _target);
+        if(index >= 0)
+        {
+            console.log("当前target已经添加过 相同的数据监听了  _target==" + _target.name);
+            return;
+        }
+
+        let dataEvent = new DataEvent(_target , _callfunc);
+        this.mEventArray.push(dataEvent);
+
+        if(this.mSetValueAlready)
+        {
+            this.UpdateData(this.mSavingData);
+        }
+    }
+
+    public RemoveListennerByTarget(_target : any)
+    {
+        let index = this.mEventArray.findIndex((_item) => _item.mtarget === _target);
+        if(index < 0)
+        {
+            //console.log("当前target并没有添加这个数据监听  _target==" + _target.name);
+            return;
+        }
+
+        this.mEventArray.splice(index , 1);
+    }
+
+    public RemoveAllListenner()
+    {
+        this.mEventArray.splice(0 , this.mEventArray.length - 1);
+    }
+
+    public ResetData()
+    {
+        this.mSetValueAlready = false;
+        this.mSavingData = null;
+    }
+
+    public Clear()
+    {
+        this.ResetData();
+        this.RemoveAllListenner();
+    }
+}
+

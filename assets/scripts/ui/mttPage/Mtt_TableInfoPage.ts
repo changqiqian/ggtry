@@ -26,15 +26,16 @@ export class Mtt_TableInfoPage extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_MttInfoSubPage",(_current , _before)=>
+
+        HallData.GetInstance().Data_MttInfoSubPage.AddListenner(this,(_data)=>
         {
-            this.Show(_current == Mtt_InfoSubPage.TablePage);
-            if(_current == Mtt_InfoSubPage.TablePage)
+            this.Show(_data == Mtt_InfoSubPage.TablePage);
+            if(_data == Mtt_InfoSubPage.TablePage)
             {
                 this.ResetPage();
                 this.Refresh();
             }
-        },this);
+        })
 
     }
     LateInit() 

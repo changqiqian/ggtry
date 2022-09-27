@@ -17,7 +17,7 @@ export class Club_CreateGameModuleLayer extends BaseUI
 
     InitParam()
     {
-        HallData.GetInstance().Data_ClubRefreshGameModule = true;
+        HallData.GetInstance().Data_ClubRefreshGameModule.mData = true;
     }
     BindUI()
     {
@@ -28,13 +28,13 @@ export class Club_CreateGameModuleLayer extends BaseUI
     }
     RegDataNotify()
     {
-        HallData.GetInstance().AddListener("Data_ClubRefreshGameModule",(_current , _before)=>
+        HallData.GetInstance().Data_ClubRefreshGameModule.AddListenner(this,(_data)=>
         {
-            if(_current)
+            if(_data)
             {
                 this.Refresh();
             }
-        },this);
+        })
     }
     LateInit()
     {

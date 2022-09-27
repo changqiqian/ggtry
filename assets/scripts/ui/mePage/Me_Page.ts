@@ -19,10 +19,12 @@ export class Me_Page extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().AddListener("Data_SubPage",(_current , _before)=>
+
+
+        HallData.GetInstance().Data_SubPage.AddListenner(this , (_data)=>
         {
-            this.Show(_current == Hall_SubPage.Me);
-        },this);
+            this.Show(_data == Hall_SubPage.Me);
+        })
     }
     LateInit() 
     {

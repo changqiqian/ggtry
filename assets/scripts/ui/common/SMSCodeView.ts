@@ -79,15 +79,14 @@ export class SMSCodeView extends BaseUI
     }
     RegDataNotify() 
     {
-        CommonNotify.GetInstance().AddListener("Data_LastInputPhoneNum",(_current , _before)=>
-        {
-            let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode;
-            let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.GetInstance().Data_LastInputPhoneNum;
-            this.mPhoneNum.string = fullPhoneNumber;
-        },this);
 
-        
+        CommonNotify.GetInstance().Data_LastInputPhoneNum.AddListenner(this,(_data)=>
+        {
+            let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode.mData;
+            let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
+            let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.GetInstance().Data_LastInputPhoneNum.mData;
+            this.mPhoneNum.string = fullPhoneNumber;
+        });
     }
     LateInit() 
     {
