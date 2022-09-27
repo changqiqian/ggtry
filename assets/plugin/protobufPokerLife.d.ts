@@ -1,1194 +1,1003 @@
 declare global {
  // DO NOT EDIT! This is a generated file. Edit the JSDoc in src/*.js instead and run 'npm run types'.
 
-/** Namespace PokerLife. */
-export namespace PokerLife {
+/** Properties of a ClubGameConfig. */
+export interface IClubGameConfig {
+
+    /** ClubGameConfig basicConfig */
+    basicConfig?: (IGameBasicConfig|null);
+
+    /** ClubGameConfig texasConfig */
+    texasConfig?: (ITexasConfig|null);
+
+    /** ClubGameConfig shortConfig */
+    shortConfig?: (IShortConfig|null);
+
+    /** ClubGameConfig matchingConfig */
+    matchingConfig?: (IMatchingConfig|null);
+}
+
+/** Represents a ClubGameConfig. */
+export class ClubGameConfig implements IClubGameConfig {
+
+    /**
+     * Constructs a new ClubGameConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IClubGameConfig);
+
+    /** ClubGameConfig basicConfig. */
+    public basicConfig?: (IGameBasicConfig|null);
+
+    /** ClubGameConfig texasConfig. */
+    public texasConfig?: (ITexasConfig|null);
+
+    /** ClubGameConfig shortConfig. */
+    public shortConfig?: (IShortConfig|null);
+
+    /** ClubGameConfig matchingConfig. */
+    public matchingConfig?: (IMatchingConfig|null);
+
+    /**
+     * Encodes the specified ClubGameConfig message. Does not implicitly {@link ClubGameConfig.verify|verify} messages.
+     * @param m ClubGameConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IClubGameConfig, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a ClubGameConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns ClubGameConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubGameConfig;
+}
+
+/** Properties of a MatchingConfig. */
+export interface IMatchingConfig {
+
+    /** MatchingConfig currentPlayerNum */
+    currentPlayerNum?: (number|null);
+
+    /** MatchingConfig startTime */
+    startTime?: (number|null);
+}
+
+/** Represents a MatchingConfig. */
+export class MatchingConfig implements IMatchingConfig {
+
+    /**
+     * Constructs a new MatchingConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IMatchingConfig);
+
+    /** MatchingConfig currentPlayerNum. */
+    public currentPlayerNum: number;
+
+    /** MatchingConfig startTime. */
+    public startTime: number;
+
+    /**
+     * Encodes the specified MatchingConfig message. Does not implicitly {@link MatchingConfig.verify|verify} messages.
+     * @param m MatchingConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IMatchingConfig, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a MatchingConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns MatchingConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): MatchingConfig;
+}
+
+/** Properties of a GameBasicConfig. */
+export interface IGameBasicConfig {
 
-    /** Namespace Club. */
-    namespace Club {
+    /** GameBasicConfig gameType */
+    gameType?: (GameType|null);
 
-        /** Properties of a GameConfig. */
-        interface IGameConfig {
+    /** GameBasicConfig gameName */
+    gameName?: (string|null);
 
-            /** GameConfig basicConfig */
-            basicConfig: PokerLife.Club.IGameBasicConfig;
+    /** GameBasicConfig currencyType */
+    currencyType?: (GameCurrencyType|null);
 
-            /** GameConfig texasConfig */
-            texasConfig: PokerLife.Club.ITexasConfig;
+    /** GameBasicConfig taxType */
+    taxType?: (GameTaxType|null);
 
-            /** GameConfig shortConfig */
-            shortConfig?: (PokerLife.Club.IShortConfig|null);
+    /** GameBasicConfig taxRatio */
+    taxRatio?: (number|null);
+}
 
-            /** GameConfig matchingConfig */
-            matchingConfig?: (PokerLife.Club.IMatchingConfig|null);
-        }
+/** Represents a GameBasicConfig. */
+export class GameBasicConfig implements IGameBasicConfig {
 
-        /** Represents a GameConfig. */
-        class GameConfig implements IGameConfig {
+    /**
+     * Constructs a new GameBasicConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IGameBasicConfig);
 
-            /**
-             * Constructs a new GameConfig.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Club.IGameConfig);
-
-            /** GameConfig basicConfig. */
-            public basicConfig: PokerLife.Club.IGameBasicConfig;
-
-            /** GameConfig texasConfig. */
-            public texasConfig: PokerLife.Club.ITexasConfig;
-
-            /** GameConfig shortConfig. */
-            public shortConfig?: (PokerLife.Club.IShortConfig|null);
-
-            /** GameConfig matchingConfig. */
-            public matchingConfig?: (PokerLife.Club.IMatchingConfig|null);
-
-            /**
-             * Encodes the specified GameConfig message. Does not implicitly {@link PokerLife.Club.GameConfig.verify|verify} messages.
-             * @param m GameConfig message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Club.IGameConfig, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a GameConfig message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns GameConfig
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.GameConfig;
-        }
-
-        /** Properties of a MatchingConfig. */
-        interface IMatchingConfig {
-
-            /** MatchingConfig currentPlayerNum */
-            currentPlayerNum: number;
-
-            /** MatchingConfig startTime */
-            startTime: number;
-        }
-
-        /** Represents a MatchingConfig. */
-        class MatchingConfig implements IMatchingConfig {
-
-            /**
-             * Constructs a new MatchingConfig.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Club.IMatchingConfig);
-
-            /** MatchingConfig currentPlayerNum. */
-            public currentPlayerNum: number;
-
-            /** MatchingConfig startTime. */
-            public startTime: number;
-
-            /**
-             * Encodes the specified MatchingConfig message. Does not implicitly {@link PokerLife.Club.MatchingConfig.verify|verify} messages.
-             * @param m MatchingConfig message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Club.IMatchingConfig, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a MatchingConfig message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns MatchingConfig
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.MatchingConfig;
-        }
-
-        /** Properties of a GameBasicConfig. */
-        interface IGameBasicConfig {
-
-            /** GameBasicConfig gameType */
-            gameType: PokerLife.Club.GameType;
-
-            /** GameBasicConfig gameName */
-            gameName: string;
-
-            /** GameBasicConfig currencyType */
-            currencyType: PokerLife.Club.GameCurrencyType;
-
-            /** GameBasicConfig taxType */
-            taxType: PokerLife.Club.GameTaxType;
-
-            /** GameBasicConfig taxRatio */
-            taxRatio: number;
-        }
-
-        /** Represents a GameBasicConfig. */
-        class GameBasicConfig implements IGameBasicConfig {
-
-            /**
-             * Constructs a new GameBasicConfig.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Club.IGameBasicConfig);
-
-            /** GameBasicConfig gameType. */
-            public gameType: PokerLife.Club.GameType;
-
-            /** GameBasicConfig gameName. */
-            public gameName: string;
-
-            /** GameBasicConfig currencyType. */
-            public currencyType: PokerLife.Club.GameCurrencyType;
-
-            /** GameBasicConfig taxType. */
-            public taxType: PokerLife.Club.GameTaxType;
-
-            /** GameBasicConfig taxRatio. */
-            public taxRatio: number;
-
-            /**
-             * Encodes the specified GameBasicConfig message. Does not implicitly {@link PokerLife.Club.GameBasicConfig.verify|verify} messages.
-             * @param m GameBasicConfig message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Club.IGameBasicConfig, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a GameBasicConfig message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns GameBasicConfig
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.GameBasicConfig;
-        }
-
-        /** Properties of a TexasConfig. */
-        interface ITexasConfig {
-
-            /** TexasConfig smallBlind */
-            smallBlind: number;
-
-            /** TexasConfig straddle */
-            straddle: boolean;
-
-            /** TexasConfig ante */
-            ante: number;
-
-            /** TexasConfig maxTotalBuyIn */
-            maxTotalBuyIn: number;
-
-            /** TexasConfig minBringIn */
-            minBringIn: number;
-
-            /** TexasConfig maxBringIn */
-            maxBringIn: number;
-
-            /** TexasConfig allowBringOut */
-            allowBringOut: boolean;
-
-            /** TexasConfig minScoreAfterBringOut */
-            minScoreAfterBringOut: number;
-
-            /** TexasConfig insurance */
-            insurance: boolean;
-
-            /** TexasConfig gameDuration */
-            gameDuration: number;
-
-            /** TexasConfig thinkingTime */
-            thinkingTime: number;
-
-            /** TexasConfig seatNum */
-            seatNum: number;
-
-            /** TexasConfig autoStartNum */
-            autoStartNum: number;
-
-            /** TexasConfig gpsLimit */
-            gpsLimit: boolean;
-
-            /** TexasConfig ipLimit */
-            ipLimit: boolean;
-        }
-
-        /** Represents a TexasConfig. */
-        class TexasConfig implements ITexasConfig {
-
-            /**
-             * Constructs a new TexasConfig.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Club.ITexasConfig);
-
-            /** TexasConfig smallBlind. */
-            public smallBlind: number;
-
-            /** TexasConfig straddle. */
-            public straddle: boolean;
-
-            /** TexasConfig ante. */
-            public ante: number;
-
-            /** TexasConfig maxTotalBuyIn. */
-            public maxTotalBuyIn: number;
-
-            /** TexasConfig minBringIn. */
-            public minBringIn: number;
-
-            /** TexasConfig maxBringIn. */
-            public maxBringIn: number;
-
-            /** TexasConfig allowBringOut. */
-            public allowBringOut: boolean;
-
-            /** TexasConfig minScoreAfterBringOut. */
-            public minScoreAfterBringOut: number;
-
-            /** TexasConfig insurance. */
-            public insurance: boolean;
-
-            /** TexasConfig gameDuration. */
-            public gameDuration: number;
-
-            /** TexasConfig thinkingTime. */
-            public thinkingTime: number;
-
-            /** TexasConfig seatNum. */
-            public seatNum: number;
-
-            /** TexasConfig autoStartNum. */
-            public autoStartNum: number;
-
-            /** TexasConfig gpsLimit. */
-            public gpsLimit: boolean;
-
-            /** TexasConfig ipLimit. */
-            public ipLimit: boolean;
-
-            /**
-             * Encodes the specified TexasConfig message. Does not implicitly {@link PokerLife.Club.TexasConfig.verify|verify} messages.
-             * @param m TexasConfig message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Club.ITexasConfig, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a TexasConfig message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns TexasConfig
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.TexasConfig;
-        }
-
-        /** Properties of a ShortConfig. */
-        interface IShortConfig {
-
-            /** ShortConfig scoreMode */
-            scoreMode: PokerLife.Club.ShortGameScoreMode;
-
-            /** ShortConfig baseScore */
-            baseScore: number;
-
-            /** ShortConfig buttonDouble */
-            buttonDouble: boolean;
-        }
-
-        /** Represents a ShortConfig. */
-        class ShortConfig implements IShortConfig {
-
-            /**
-             * Constructs a new ShortConfig.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Club.IShortConfig);
-
-            /** ShortConfig scoreMode. */
-            public scoreMode: PokerLife.Club.ShortGameScoreMode;
-
-            /** ShortConfig baseScore. */
-            public baseScore: number;
-
-            /** ShortConfig buttonDouble. */
-            public buttonDouble: boolean;
-
-            /**
-             * Encodes the specified ShortConfig message. Does not implicitly {@link PokerLife.Club.ShortConfig.verify|verify} messages.
-             * @param m ShortConfig message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Club.IShortConfig, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a ShortConfig message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns ShortConfig
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Club.ShortConfig;
-        }
-
-        /** GameType enum. */
-        enum GameType {
-            TexasCash = 0,
-            ShortCash = 1,
-            Mtt = 2,
-            Omh = 3
-        }
-
-        /** GameTaxType enum. */
-        enum GameTaxType {
-            EveryRound = 0,
-            WholeGameEnd = 1
-        }
-
-        /** GameCurrencyType enum. */
-        enum GameCurrencyType {
-            Point = 0,
-            Coin = 1
-        }
-
-        /** ShortGameScoreMode enum. */
-        enum ShortGameScoreMode {
-            AnteMode = 0,
-            BlindMode = 1
-        }
-
-        /** RecordDateType enum. */
-        enum RecordDateType {
-            Today = 0,
-            Week = 1,
-            Month = 2
-        }
-    }
-
-    /** Namespace Common. */
-    namespace Common {
-
-        /** Properties of a MessageHeader. */
-        interface IMessageHeader {
-
-            /** MessageHeader msgStatus */
-            msgStatus: PokerLife.Common.MsgStatus;
-
-            /** MessageHeader errorCode */
-            errorCode?: (PokerLife.Common.ErrorCode|null);
-
-            /** MessageHeader errorContent */
-            errorContent?: (string|null);
-        }
-
-        /** Represents a MessageHeader. */
-        class MessageHeader implements IMessageHeader {
-
-            /**
-             * Constructs a new MessageHeader.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Common.IMessageHeader);
-
-            /** MessageHeader msgStatus. */
-            public msgStatus: PokerLife.Common.MsgStatus;
-
-            /** MessageHeader errorCode. */
-            public errorCode: PokerLife.Common.ErrorCode;
-
-            /** MessageHeader errorContent. */
-            public errorContent: string;
-
-            /**
-             * Encodes the specified MessageHeader message. Does not implicitly {@link PokerLife.Common.MessageHeader.verify|verify} messages.
-             * @param m MessageHeader message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Common.IMessageHeader, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a MessageHeader message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns MessageHeader
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Common.MessageHeader;
-        }
-
-        /** MsgStatus enum. */
-        enum MsgStatus {
-            Success = 0,
-            Failed = 1
-        }
-
-        /** ErrorCode enum. */
-        enum ErrorCode {
-            Unknow = 0
-        }
-    }
-
-    /** Namespace MsgId. */
-    namespace MsgId {
-
-        /** MsgId enum. */
-        enum MsgId {
-            C2S_Register = 0,
-            S2C_Register = 1,
-            C2S_GetSmsCode = 2,
-            S2C_GetSmsCode = 3,
-            C2S_LoginWithSmsCode = 4,
-            S2C_LoginWithSmsCode = 5,
-            C2S_LoginWithPwd = 6,
-            S2C_LoginWithPwd = 7,
-            C2S_GetUserInfo = 8,
-            S2C_GetUserInfo = 9,
-            C2S_ResetPassword = 10,
-            S2C_ResetPassword = 11
-        }
-    }
-
-    /** Namespace Register. */
-    namespace Register {
-
-        /** Properties of a C2S_Register. */
-        interface IC2S_Register {
-
-            /** C2S_Register baseInfo */
-            baseInfo: PokerLife.UserInfo.IUserBaseInfo;
-
-            /** C2S_Register password */
-            password: string;
-
-            /** C2S_Register smsCode */
-            smsCode: string;
-        }
-
-        /** Represents a C2S_Register. */
-        class C2S_Register implements IC2S_Register {
-
-            /**
-             * Constructs a new C2S_Register.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Register.IC2S_Register);
-
-            /** C2S_Register baseInfo. */
-            public baseInfo: PokerLife.UserInfo.IUserBaseInfo;
-
-            /** C2S_Register password. */
-            public password: string;
-
-            /** C2S_Register smsCode. */
-            public smsCode: string;
-
-            /**
-             * Encodes the specified C2S_Register message. Does not implicitly {@link PokerLife.Register.C2S_Register.verify|verify} messages.
-             * @param m C2S_Register message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Register.IC2S_Register, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a C2S_Register message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns C2S_Register
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Register.C2S_Register;
-        }
-
-        /** Properties of a S2C_Register. */
-        interface IS2C_Register {
-
-            /** S2C_Register result */
-            result: boolean;
-        }
-
-        /** Represents a S2C_Register. */
-        class S2C_Register implements IS2C_Register {
-
-            /**
-             * Constructs a new S2C_Register.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Register.IS2C_Register);
-
-            /** S2C_Register result. */
-            public result: boolean;
-
-            /**
-             * Encodes the specified S2C_Register message. Does not implicitly {@link PokerLife.Register.S2C_Register.verify|verify} messages.
-             * @param m S2C_Register message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Register.IS2C_Register, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a S2C_Register message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns S2C_Register
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Register.S2C_Register;
-        }
-
-        /** Properties of a C2S_GetSmsCode. */
-        interface IC2S_GetSmsCode {
-
-            /** C2S_GetSmsCode smsCodeType */
-            smsCodeType: PokerLife.Register.SmsCodeType;
-        }
-
-        /** Represents a C2S_GetSmsCode. */
-        class C2S_GetSmsCode implements IC2S_GetSmsCode {
-
-            /**
-             * Constructs a new C2S_GetSmsCode.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Register.IC2S_GetSmsCode);
-
-            /** C2S_GetSmsCode smsCodeType. */
-            public smsCodeType: PokerLife.Register.SmsCodeType;
-
-            /**
-             * Encodes the specified C2S_GetSmsCode message. Does not implicitly {@link PokerLife.Register.C2S_GetSmsCode.verify|verify} messages.
-             * @param m C2S_GetSmsCode message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Register.IC2S_GetSmsCode, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a C2S_GetSmsCode message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns C2S_GetSmsCode
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Register.C2S_GetSmsCode;
-        }
-
-        /** Properties of a S2C_GetSmsCode. */
-        interface IS2C_GetSmsCode {
-
-            /** S2C_GetSmsCode smsCodeType */
-            smsCodeType: PokerLife.Register.SmsCodeType;
-
-            /** S2C_GetSmsCode smsCode */
-            smsCode: number;
-        }
+    /** GameBasicConfig gameType. */
+    public gameType: GameType;
 
-        /** Represents a S2C_GetSmsCode. */
-        class S2C_GetSmsCode implements IS2C_GetSmsCode {
+    /** GameBasicConfig gameName. */
+    public gameName: string;
 
-            /**
-             * Constructs a new S2C_GetSmsCode.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Register.IS2C_GetSmsCode);
-
-            /** S2C_GetSmsCode smsCodeType. */
-            public smsCodeType: PokerLife.Register.SmsCodeType;
-
-            /** S2C_GetSmsCode smsCode. */
-            public smsCode: number;
-
-            /**
-             * Encodes the specified S2C_GetSmsCode message. Does not implicitly {@link PokerLife.Register.S2C_GetSmsCode.verify|verify} messages.
-             * @param m S2C_GetSmsCode message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Register.IS2C_GetSmsCode, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a S2C_GetSmsCode message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns S2C_GetSmsCode
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Register.S2C_GetSmsCode;
-        }
-
-        /** Properties of a C2S_LoginWithSmsCode. */
-        interface IC2S_LoginWithSmsCode {
-
-            /** C2S_LoginWithSmsCode phoneNum */
-            phoneNum: string;
-
-            /** C2S_LoginWithSmsCode smsCode */
-            smsCode: string;
-        }
-
-        /** Represents a C2S_LoginWithSmsCode. */
-        class C2S_LoginWithSmsCode implements IC2S_LoginWithSmsCode {
-
-            /**
-             * Constructs a new C2S_LoginWithSmsCode.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Register.IC2S_LoginWithSmsCode);
-
-            /** C2S_LoginWithSmsCode phoneNum. */
-            public phoneNum: string;
-
-            /** C2S_LoginWithSmsCode smsCode. */
-            public smsCode: string;
-
-            /**
-             * Encodes the specified C2S_LoginWithSmsCode message. Does not implicitly {@link PokerLife.Register.C2S_LoginWithSmsCode.verify|verify} messages.
-             * @param m C2S_LoginWithSmsCode message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Register.IC2S_LoginWithSmsCode, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a C2S_LoginWithSmsCode message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns C2S_LoginWithSmsCode
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Register.C2S_LoginWithSmsCode;
-        }
-
-        /** Properties of a S2C_LoginWithSmsCode. */
-        interface IS2C_LoginWithSmsCode {
-
-            /** S2C_LoginWithSmsCode result */
-            result: boolean;
-        }
-
-        /** Represents a S2C_LoginWithSmsCode. */
-        class S2C_LoginWithSmsCode implements IS2C_LoginWithSmsCode {
-
-            /**
-             * Constructs a new S2C_LoginWithSmsCode.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Register.IS2C_LoginWithSmsCode);
-
-            /** S2C_LoginWithSmsCode result. */
-            public result: boolean;
-
-            /**
-             * Encodes the specified S2C_LoginWithSmsCode message. Does not implicitly {@link PokerLife.Register.S2C_LoginWithSmsCode.verify|verify} messages.
-             * @param m S2C_LoginWithSmsCode message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Register.IS2C_LoginWithSmsCode, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a S2C_LoginWithSmsCode message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns S2C_LoginWithSmsCode
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Register.S2C_LoginWithSmsCode;
-        }
-
-        /** Properties of a C2S_LoginWithPwd. */
-        interface IC2S_LoginWithPwd {
-
-            /** C2S_LoginWithPwd phoneNum */
-            phoneNum: string;
-
-            /** C2S_LoginWithPwd password */
-            password: string;
-        }
-
-        /** Represents a C2S_LoginWithPwd. */
-        class C2S_LoginWithPwd implements IC2S_LoginWithPwd {
-
-            /**
-             * Constructs a new C2S_LoginWithPwd.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Register.IC2S_LoginWithPwd);
-
-            /** C2S_LoginWithPwd phoneNum. */
-            public phoneNum: string;
-
-            /** C2S_LoginWithPwd password. */
-            public password: string;
-
-            /**
-             * Encodes the specified C2S_LoginWithPwd message. Does not implicitly {@link PokerLife.Register.C2S_LoginWithPwd.verify|verify} messages.
-             * @param m C2S_LoginWithPwd message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Register.IC2S_LoginWithPwd, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a C2S_LoginWithPwd message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns C2S_LoginWithPwd
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Register.C2S_LoginWithPwd;
-        }
-
-        /** Properties of a S2C_LoginWithPwd. */
-        interface IS2C_LoginWithPwd {
-
-            /** S2C_LoginWithPwd result */
-            result: boolean;
-        }
-
-        /** Represents a S2C_LoginWithPwd. */
-        class S2C_LoginWithPwd implements IS2C_LoginWithPwd {
-
-            /**
-             * Constructs a new S2C_LoginWithPwd.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Register.IS2C_LoginWithPwd);
-
-            /** S2C_LoginWithPwd result. */
-            public result: boolean;
-
-            /**
-             * Encodes the specified S2C_LoginWithPwd message. Does not implicitly {@link PokerLife.Register.S2C_LoginWithPwd.verify|verify} messages.
-             * @param m S2C_LoginWithPwd message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Register.IS2C_LoginWithPwd, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a S2C_LoginWithPwd message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns S2C_LoginWithPwd
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Register.S2C_LoginWithPwd;
-        }
-
-        /** Properties of a C2S_ResetPassword. */
-        interface IC2S_ResetPassword {
-
-            /** C2S_ResetPassword phoneNum */
-            phoneNum: string;
-
-            /** C2S_ResetPassword password */
-            password: string;
-
-            /** C2S_ResetPassword smsCode */
-            smsCode: string;
-        }
-
-        /** Represents a C2S_ResetPassword. */
-        class C2S_ResetPassword implements IC2S_ResetPassword {
-
-            /**
-             * Constructs a new C2S_ResetPassword.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Register.IC2S_ResetPassword);
-
-            /** C2S_ResetPassword phoneNum. */
-            public phoneNum: string;
-
-            /** C2S_ResetPassword password. */
-            public password: string;
-
-            /** C2S_ResetPassword smsCode. */
-            public smsCode: string;
-
-            /**
-             * Encodes the specified C2S_ResetPassword message. Does not implicitly {@link PokerLife.Register.C2S_ResetPassword.verify|verify} messages.
-             * @param m C2S_ResetPassword message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Register.IC2S_ResetPassword, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a C2S_ResetPassword message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns C2S_ResetPassword
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Register.C2S_ResetPassword;
-        }
-
-        /** Properties of a S2C_ResetPassword. */
-        interface IS2C_ResetPassword {
-
-            /** S2C_ResetPassword result */
-            result: boolean;
-        }
-
-        /** Represents a S2C_ResetPassword. */
-        class S2C_ResetPassword implements IS2C_ResetPassword {
-
-            /**
-             * Constructs a new S2C_ResetPassword.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.Register.IS2C_ResetPassword);
-
-            /** S2C_ResetPassword result. */
-            public result: boolean;
-
-            /**
-             * Encodes the specified S2C_ResetPassword message. Does not implicitly {@link PokerLife.Register.S2C_ResetPassword.verify|verify} messages.
-             * @param m S2C_ResetPassword message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.Register.IS2C_ResetPassword, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a S2C_ResetPassword message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns S2C_ResetPassword
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.Register.S2C_ResetPassword;
-        }
-
-        /** SmsCodeType enum. */
-        enum SmsCodeType {
-            Register = 0,
-            Login = 1,
-            ResetPassword = 2
-        }
-    }
-
-    /** Namespace UserInfo. */
-    namespace UserInfo {
-
-        /** Properties of a C2S_GetUserInfo. */
-        interface IC2S_GetUserInfo {
-
-            /** C2S_GetUserInfo uid */
-            uid: number;
-        }
-
-        /** Represents a C2S_GetUserInfo. */
-        class C2S_GetUserInfo implements IC2S_GetUserInfo {
-
-            /**
-             * Constructs a new C2S_GetUserInfo.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.UserInfo.IC2S_GetUserInfo);
-
-            /** C2S_GetUserInfo uid. */
-            public uid: number;
-
-            /**
-             * Encodes the specified C2S_GetUserInfo message. Does not implicitly {@link PokerLife.UserInfo.C2S_GetUserInfo.verify|verify} messages.
-             * @param m C2S_GetUserInfo message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.UserInfo.IC2S_GetUserInfo, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a C2S_GetUserInfo message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns C2S_GetUserInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.UserInfo.C2S_GetUserInfo;
-        }
-
-        /** Properties of a S2C_GetUserInfo. */
-        interface IS2C_GetUserInfo {
-
-            /** S2C_GetUserInfo userInfo */
-            userInfo: PokerLife.UserInfo.IUserInfo;
-        }
-
-        /** Represents a S2C_GetUserInfo. */
-        class S2C_GetUserInfo implements IS2C_GetUserInfo {
-
-            /**
-             * Constructs a new S2C_GetUserInfo.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.UserInfo.IS2C_GetUserInfo);
-
-            /** S2C_GetUserInfo userInfo. */
-            public userInfo: PokerLife.UserInfo.IUserInfo;
-
-            /**
-             * Encodes the specified S2C_GetUserInfo message. Does not implicitly {@link PokerLife.UserInfo.S2C_GetUserInfo.verify|verify} messages.
-             * @param m S2C_GetUserInfo message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.UserInfo.IS2C_GetUserInfo, w?: protobuf.Writer): protobuf.Writer;
-
-            /**
-             * Decodes a S2C_GetUserInfo message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns S2C_GetUserInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.UserInfo.S2C_GetUserInfo;
-        }
-
-        /** Properties of a UserInfo. */
-        interface IUserInfo {
-
-            /** UserInfo uid */
-            uid: number;
-
-            /** UserInfo userBaseInfo */
-            userBaseInfo: PokerLife.UserInfo.IUserBaseInfo;
-
-            /** UserInfo userAssets */
-            userAssets: PokerLife.UserInfo.IUserAssets;
-
-            /** UserInfo userAccountInfo */
-            userAccountInfo: PokerLife.UserInfo.IUserAccountInfo;
-        }
+    /** GameBasicConfig currencyType. */
+    public currencyType: GameCurrencyType;
 
-        /** Represents a UserInfo. */
-        class UserInfo implements IUserInfo {
-
-            /**
-             * Constructs a new UserInfo.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.UserInfo.IUserInfo);
-
-            /** UserInfo uid. */
-            public uid: number;
-
-            /** UserInfo userBaseInfo. */
-            public userBaseInfo: PokerLife.UserInfo.IUserBaseInfo;
-
-            /** UserInfo userAssets. */
-            public userAssets: PokerLife.UserInfo.IUserAssets;
-
-            /** UserInfo userAccountInfo. */
-            public userAccountInfo: PokerLife.UserInfo.IUserAccountInfo;
-
-            /**
-             * Encodes the specified UserInfo message. Does not implicitly {@link PokerLife.UserInfo.UserInfo.verify|verify} messages.
-             * @param m UserInfo message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.UserInfo.IUserInfo, w?: protobuf.Writer): protobuf.Writer;
+    /** GameBasicConfig taxType. */
+    public taxType: GameTaxType;
 
-            /**
-             * Decodes a UserInfo message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns UserInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.UserInfo.UserInfo;
-        }
+    /** GameBasicConfig taxRatio. */
+    public taxRatio: number;
 
-        /** Properties of a UserBaseInfo. */
-        interface IUserBaseInfo {
+    /**
+     * Encodes the specified GameBasicConfig message. Does not implicitly {@link GameBasicConfig.verify|verify} messages.
+     * @param m GameBasicConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IGameBasicConfig, w?: protobuf.Writer): protobuf.Writer;
 
-            /** UserBaseInfo nickName */
-            nickName: string;
+    /**
+     * Decodes a GameBasicConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns GameBasicConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): GameBasicConfig;
+}
 
-            /** UserBaseInfo phoneNum */
-            phoneNum: string;
+/** Properties of a TexasConfig. */
+export interface ITexasConfig {
 
-            /** UserBaseInfo head */
-            head: string;
-        }
+    /** TexasConfig smallBlind */
+    smallBlind?: (number|null);
 
-        /** Represents a UserBaseInfo. */
-        class UserBaseInfo implements IUserBaseInfo {
+    /** TexasConfig straddle */
+    straddle?: (boolean|null);
 
-            /**
-             * Constructs a new UserBaseInfo.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.UserInfo.IUserBaseInfo);
+    /** TexasConfig ante */
+    ante?: (number|null);
 
-            /** UserBaseInfo nickName. */
-            public nickName: string;
+    /** TexasConfig maxTotalBuyIn */
+    maxTotalBuyIn?: (number|null);
 
-            /** UserBaseInfo phoneNum. */
-            public phoneNum: string;
+    /** TexasConfig minBringIn */
+    minBringIn?: (number|null);
 
-            /** UserBaseInfo head. */
-            public head: string;
+    /** TexasConfig maxBringIn */
+    maxBringIn?: (number|null);
 
-            /**
-             * Encodes the specified UserBaseInfo message. Does not implicitly {@link PokerLife.UserInfo.UserBaseInfo.verify|verify} messages.
-             * @param m UserBaseInfo message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.UserInfo.IUserBaseInfo, w?: protobuf.Writer): protobuf.Writer;
+    /** TexasConfig allowBringOut */
+    allowBringOut?: (boolean|null);
 
-            /**
-             * Decodes a UserBaseInfo message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns UserBaseInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.UserInfo.UserBaseInfo;
-        }
+    /** TexasConfig minScoreAfterBringOut */
+    minScoreAfterBringOut?: (number|null);
 
-        /** Properties of a UserAssets. */
-        interface IUserAssets {
+    /** TexasConfig insurance */
+    insurance?: (boolean|null);
 
-            /** UserAssets coin */
-            coin: number;
+    /** TexasConfig gameDuration */
+    gameDuration?: (number|null);
 
-            /** UserAssets diamond */
-            diamond: number;
+    /** TexasConfig thinkingTime */
+    thinkingTime?: (number|null);
 
-            /** UserAssets clubPoint */
-            clubPoint: number;
+    /** TexasConfig seatNum */
+    seatNum?: (number|null);
 
-            /** UserAssets unionCoin */
-            unionCoin: number;
-        }
+    /** TexasConfig autoStartNum */
+    autoStartNum?: (number|null);
 
-        /** Represents a UserAssets. */
-        class UserAssets implements IUserAssets {
+    /** TexasConfig gpsLimit */
+    gpsLimit?: (boolean|null);
 
-            /**
-             * Constructs a new UserAssets.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.UserInfo.IUserAssets);
+    /** TexasConfig ipLimit */
+    ipLimit?: (boolean|null);
+}
 
-            /** UserAssets coin. */
-            public coin: number;
+/** Represents a TexasConfig. */
+export class TexasConfig implements ITexasConfig {
 
-            /** UserAssets diamond. */
-            public diamond: number;
+    /**
+     * Constructs a new TexasConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ITexasConfig);
 
-            /** UserAssets clubPoint. */
-            public clubPoint: number;
+    /** TexasConfig smallBlind. */
+    public smallBlind: number;
 
-            /** UserAssets unionCoin. */
-            public unionCoin: number;
+    /** TexasConfig straddle. */
+    public straddle: boolean;
 
-            /**
-             * Encodes the specified UserAssets message. Does not implicitly {@link PokerLife.UserInfo.UserAssets.verify|verify} messages.
-             * @param m UserAssets message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.UserInfo.IUserAssets, w?: protobuf.Writer): protobuf.Writer;
+    /** TexasConfig ante. */
+    public ante: number;
 
-            /**
-             * Decodes a UserAssets message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns UserAssets
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.UserInfo.UserAssets;
-        }
+    /** TexasConfig maxTotalBuyIn. */
+    public maxTotalBuyIn: number;
 
-        /** Properties of a UserAccountInfo. */
-        interface IUserAccountInfo {
+    /** TexasConfig minBringIn. */
+    public minBringIn: number;
 
-            /** UserAccountInfo accountLevel */
-            accountLevel: PokerLife.UserInfo.AccountLevel;
+    /** TexasConfig maxBringIn. */
+    public maxBringIn: number;
 
-            /** UserAccountInfo accountStatus */
-            accountStatus: PokerLife.UserInfo.AccountStauts;
-        }
+    /** TexasConfig allowBringOut. */
+    public allowBringOut: boolean;
 
-        /** Represents a UserAccountInfo. */
-        class UserAccountInfo implements IUserAccountInfo {
+    /** TexasConfig minScoreAfterBringOut. */
+    public minScoreAfterBringOut: number;
 
-            /**
-             * Constructs a new UserAccountInfo.
-             * @param [p] Properties to set
-             */
-            constructor(p?: PokerLife.UserInfo.IUserAccountInfo);
+    /** TexasConfig insurance. */
+    public insurance: boolean;
 
-            /** UserAccountInfo accountLevel. */
-            public accountLevel: PokerLife.UserInfo.AccountLevel;
+    /** TexasConfig gameDuration. */
+    public gameDuration: number;
 
-            /** UserAccountInfo accountStatus. */
-            public accountStatus: PokerLife.UserInfo.AccountStauts;
+    /** TexasConfig thinkingTime. */
+    public thinkingTime: number;
 
-            /**
-             * Encodes the specified UserAccountInfo message. Does not implicitly {@link PokerLife.UserInfo.UserAccountInfo.verify|verify} messages.
-             * @param m UserAccountInfo message or plain object to encode
-             * @param [w] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(m: PokerLife.UserInfo.IUserAccountInfo, w?: protobuf.Writer): protobuf.Writer;
+    /** TexasConfig seatNum. */
+    public seatNum: number;
 
-            /**
-             * Decodes a UserAccountInfo message from the specified reader or buffer.
-             * @param r Reader or buffer to decode from
-             * @param [l] Message length if known beforehand
-             * @returns UserAccountInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PokerLife.UserInfo.UserAccountInfo;
-        }
-
-        /** AccountLevel enum. */
-        enum AccountLevel {
-            Normal = 0,
-            Agent = 1,
-            Boss = 2
-        }
-
-        /** AccountStauts enum. */
-        enum AccountStauts {
-            Normal = 0,
-            Frozen = 1
+    /** TexasConfig autoStartNum. */
+    public autoStartNum: number;
+
+    /** TexasConfig gpsLimit. */
+    public gpsLimit: boolean;
+
+    /** TexasConfig ipLimit. */
+    public ipLimit: boolean;
+
+    /**
+     * Encodes the specified TexasConfig message. Does not implicitly {@link TexasConfig.verify|verify} messages.
+     * @param m TexasConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ITexasConfig, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a TexasConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns TexasConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): TexasConfig;
+}
+
+/** Properties of a ShortConfig. */
+export interface IShortConfig {
+
+    /** ShortConfig scoreMode */
+    scoreMode?: (ShortGameScoreMode|null);
+
+    /** ShortConfig baseScore */
+    baseScore?: (number|null);
+
+    /** ShortConfig buttonDouble */
+    buttonDouble?: (boolean|null);
+}
+
+/** Represents a ShortConfig. */
+export class ShortConfig implements IShortConfig {
+
+    /**
+     * Constructs a new ShortConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IShortConfig);
+
+    /** ShortConfig scoreMode. */
+    public scoreMode: ShortGameScoreMode;
+
+    /** ShortConfig baseScore. */
+    public baseScore: number;
+
+    /** ShortConfig buttonDouble. */
+    public buttonDouble: boolean;
+
+    /**
+     * Encodes the specified ShortConfig message. Does not implicitly {@link ShortConfig.verify|verify} messages.
+     * @param m ShortConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IShortConfig, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a ShortConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns ShortConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ShortConfig;
+}
+
+/** GameType enum. */
+export enum GameType {
+    TexasCash = 0,
+    ShortCash = 1,
+    Mtt = 2,
+    Omh = 3
+}
+
+/** GameTaxType enum. */
+export enum GameTaxType {
+    EveryRound = 0,
+    WholeGameEnd = 1
+}
+
+/** GameCurrencyType enum. */
+export enum GameCurrencyType {
+    Point = 0,
+    Coin = 1
+}
+
+/** ShortGameScoreMode enum. */
+export enum ShortGameScoreMode {
+    AnteMode = 0,
+    BlindMode = 1
+}
+
+/** RecordDateType enum. */
+export enum RecordDateType {
+    Today = 0,
+    Week = 1,
+    Month = 2
+}
+
+/** Represents a Result. */
+export class Result implements IResult {
+
+    /**
+     * Constructs a new Result.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IResult);
+
+    /** Result resId. */
+    public resId: number;
+
+    /** Result resMessage. */
+    public resMessage: string;
+
+    /**
+     * Encodes the specified Result message. Does not implicitly {@link Result.verify|verify} messages.
+     * @param m Result message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IResult, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a Result message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns Result
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Result;
+}
+
+/** Represents a C2SGetUserInfo. */
+export class C2SGetUserInfo implements IC2SGetUserInfo {
+
+    /**
+     * Constructs a new C2SGetUserInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SGetUserInfo);
+
+    /**
+     * Encodes the specified C2SGetUserInfo message. Does not implicitly {@link C2SGetUserInfo.verify|verify} messages.
+     * @param m C2SGetUserInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SGetUserInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SGetUserInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SGetUserInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetUserInfo;
+}
+
+/** Represents a C2SChangeUserInfo. */
+export class C2SChangeUserInfo implements IC2SChangeUserInfo {
+
+    /**
+     * Constructs a new C2SChangeUserInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SChangeUserInfo);
+
+    /** C2SChangeUserInfo baseInfo. */
+    public baseInfo?: (IUserBaseInfo|null);
+
+    /**
+     * Encodes the specified C2SChangeUserInfo message. Does not implicitly {@link C2SChangeUserInfo.verify|verify} messages.
+     * @param m C2SChangeUserInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SChangeUserInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SChangeUserInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SChangeUserInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SChangeUserInfo;
+}
+
+/** AccountLevel enum. */
+export enum AccountLevel {
+    AccountLevel_Normal = 0,
+    AccountLevel_Agent = 1,
+    AccountLevel_Boss = 2
+}
+
+/** AccountStauts enum. */
+export enum AccountStauts {
+    AccountStauts_Normal = 0,
+    AccountStauts_Frozen = 1
+}
+
+/** Represents a UserInfo. */
+export class UserInfo implements IUserInfo {
+
+    /**
+     * Constructs a new UserInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IUserInfo);
+
+    /** UserInfo uid. */
+    public uid: number;
+
+    /** UserInfo phoneNum. */
+    public phoneNum: string;
+
+    /** UserInfo userBaseInfo. */
+    public userBaseInfo?: (IUserBaseInfo|null);
+
+    /** UserInfo userAssets. */
+    public userAssets?: (IUserAssets|null);
+
+    /** UserInfo userAccountInfo. */
+    public userAccountInfo?: (IUserAccountInfo|null);
+
+    /**
+     * Encodes the specified UserInfo message. Does not implicitly {@link UserInfo.verify|verify} messages.
+     * @param m UserInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IUserInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a UserInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns UserInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserInfo;
+}
+
+/** Represents a UserBaseInfo. */
+export class UserBaseInfo implements IUserBaseInfo {
+
+    /**
+     * Constructs a new UserBaseInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IUserBaseInfo);
+
+    /** UserBaseInfo nickName. */
+    public nickName: string;
+
+    /** UserBaseInfo head. */
+    public head: string;
+
+    /**
+     * Encodes the specified UserBaseInfo message. Does not implicitly {@link UserBaseInfo.verify|verify} messages.
+     * @param m UserBaseInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IUserBaseInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a UserBaseInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns UserBaseInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserBaseInfo;
+}
+
+/** Represents a UserAssets. */
+export class UserAssets implements IUserAssets {
+
+    /**
+     * Constructs a new UserAssets.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IUserAssets);
+
+    /** UserAssets coin. */
+    public coin: number;
+
+    /** UserAssets diamond. */
+    public diamond: number;
+
+    /** UserAssets clubPoint. */
+    public clubPoint: number;
+
+    /** UserAssets unionCoin. */
+    public unionCoin: number;
+
+    /**
+     * Encodes the specified UserAssets message. Does not implicitly {@link UserAssets.verify|verify} messages.
+     * @param m UserAssets message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IUserAssets, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a UserAssets message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns UserAssets
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserAssets;
+}
+
+/** Represents a UserAccountInfo. */
+export class UserAccountInfo implements IUserAccountInfo {
+
+    /**
+     * Constructs a new UserAccountInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IUserAccountInfo);
+
+    /** UserAccountInfo accountLevel. */
+    public accountLevel: AccountLevel;
+
+    /** UserAccountInfo accountStatus. */
+    public accountStatus: AccountStauts;
+
+    /**
+     * Encodes the specified UserAccountInfo message. Does not implicitly {@link UserAccountInfo.verify|verify} messages.
+     * @param m UserAccountInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IUserAccountInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a UserAccountInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns UserAccountInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserAccountInfo;
+}
+
+/** Represents a S2CGetUserInfo. */
+export class S2CGetUserInfo implements IS2CGetUserInfo {
+
+    /**
+     * Constructs a new S2CGetUserInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CGetUserInfo);
+
+    /** S2CGetUserInfo userInfo. */
+    public userInfo?: (IUserInfo|null);
+
+    /**
+     * Encodes the specified S2CGetUserInfo message. Does not implicitly {@link S2CGetUserInfo.verify|verify} messages.
+     * @param m S2CGetUserInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CGetUserInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CGetUserInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CGetUserInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetUserInfo;
+}
+
+/** Represents a S2CChangeUserInfo. */
+export class S2CChangeUserInfo implements IS2CChangeUserInfo {
+
+    /**
+     * Constructs a new S2CChangeUserInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CChangeUserInfo);
+
+    /** S2CChangeUserInfo result. */
+    public result?: (IResult|null);
+
+    /** S2CChangeUserInfo baseInfo. */
+    public baseInfo?: (IUserBaseInfo|null);
+
+    /**
+     * Encodes the specified S2CChangeUserInfo message. Does not implicitly {@link S2CChangeUserInfo.verify|verify} messages.
+     * @param m S2CChangeUserInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CChangeUserInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CChangeUserInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CChangeUserInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CChangeUserInfo;
+}
+
+/** Represents a C2SLogin. */
+export class C2SLogin implements IC2SLogin {
+
+    /**
+     * Constructs a new C2SLogin.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SLogin);
+
+    /** C2SLogin loginType. */
+    public loginType: LoginType;
+
+    /** C2SLogin phoneNumber. */
+    public phoneNumber: number;
+
+    /** C2SLogin code. */
+    public code: string;
+
+    /** C2SLogin psw. */
+    public psw: string;
+
+    /** C2SLogin token. */
+    public token: string;
+
+    /**
+     * Encodes the specified C2SLogin message. Does not implicitly {@link C2SLogin.verify|verify} messages.
+     * @param m C2SLogin message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SLogin, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SLogin message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SLogin
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SLogin;
+}
+
+/** Represents a C2SLogout. */
+export class C2SLogout implements IC2SLogout {
+
+    /**
+     * Constructs a new C2SLogout.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SLogout);
+
+    /**
+     * Encodes the specified C2SLogout message. Does not implicitly {@link C2SLogout.verify|verify} messages.
+     * @param m C2SLogout message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SLogout, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SLogout message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SLogout
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SLogout;
+}
+
+/** Represents a C2SRegister. */
+export class C2SRegister implements IC2SRegister {
+
+    /**
+     * Constructs a new C2SRegister.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SRegister);
+
+    /** C2SRegister phoneNumber. */
+    public phoneNumber: number;
+
+    /** C2SRegister code. */
+    public code: string;
+
+    /**
+     * Encodes the specified C2SRegister message. Does not implicitly {@link C2SRegister.verify|verify} messages.
+     * @param m C2SRegister message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SRegister, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SRegister message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SRegister
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SRegister;
+}
+
+/** Represents a C2SGetSmsCode. */
+export class C2SGetSmsCode implements IC2SGetSmsCode {
+
+    /**
+     * Constructs a new C2SGetSmsCode.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SGetSmsCode);
+
+    /** C2SGetSmsCode phoneNumber. */
+    public phoneNumber: number;
+
+    /** C2SGetSmsCode type. */
+    public type: SmsCodeType;
+
+    /**
+     * Encodes the specified C2SGetSmsCode message. Does not implicitly {@link C2SGetSmsCode.verify|verify} messages.
+     * @param m C2SGetSmsCode message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SGetSmsCode, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SGetSmsCode message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SGetSmsCode
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetSmsCode;
+}
+
+/** SmsCodeType enum. */
+export enum SmsCodeType {
+    Register = 0,
+    Login = 1,
+    ResetPassword = 2
+}
+
+/** LoginType enum. */
+export enum LoginType {
+    LoginType_UnKnow = 0,
+    LoginType_PhoneCode = 1,
+    LoginType_PhonePsw = 2,
+    LoginType_Token = 3
+}
+
+/** Represents a S2CLogin. */
+export class S2CLogin implements IS2CLogin {
+
+    /**
+     * Constructs a new S2CLogin.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CLogin);
+
+    /** S2CLogin result. */
+    public result?: (IResult|null);
+
+    /**
+     * Encodes the specified S2CLogin message. Does not implicitly {@link S2CLogin.verify|verify} messages.
+     * @param m S2CLogin message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CLogin, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CLogin message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CLogin
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CLogin;
+}
+
+/** Represents a S2CLogout. */
+export class S2CLogout implements IS2CLogout {
+
+    /**
+     * Constructs a new S2CLogout.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CLogout);
+
+    /**
+     * Encodes the specified S2CLogout message. Does not implicitly {@link S2CLogout.verify|verify} messages.
+     * @param m S2CLogout message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CLogout, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CLogout message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CLogout
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CLogout;
+}
+
+/** Represents a S2CRegister. */
+export class S2CRegister implements IS2CRegister {
+
+    /**
+     * Constructs a new S2CRegister.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CRegister);
+
+    /** S2CRegister result. */
+    public result?: (IResult|null);
+
+    /**
+     * Encodes the specified S2CRegister message. Does not implicitly {@link S2CRegister.verify|verify} messages.
+     * @param m S2CRegister message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CRegister, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CRegister message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CRegister
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CRegister;
+}
+
+/** Represents a S2CGetSmsCode. */
+export class S2CGetSmsCode implements IS2CGetSmsCode {
+
+    /**
+     * Constructs a new S2CGetSmsCode.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CGetSmsCode);
+
+    /** S2CGetSmsCode code. */
+    public code: number;
+
+    /** S2CGetSmsCode type. */
+    public type: SmsCodeType;
+
+    /**
+     * Encodes the specified S2CGetSmsCode message. Does not implicitly {@link S2CGetSmsCode.verify|verify} messages.
+     * @param m S2CGetSmsCode message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CGetSmsCode, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CGetSmsCode message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CGetSmsCode
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetSmsCode;
+}
+
+/** Namespace sy. */
+export namespace sy {
+
+    /** Namespace game. */
+    namespace game {
+
+        /** Namespace message. */
+        namespace message {
+
+            /**
+             * Login(1001-2000)
+             * Hall(2001-4000)
+             */
+            enum MessageId {
+                MSG_UnKnow = 0,
+                MSG_LoginBegin = 1001,
+                C2S_Login = 1002,
+                C2S_Logout = 1003,
+                C2S_Register = 1004,
+                C2S_GetSmsCode = 1005,
+                S2C_Login = 1100,
+                S2C_Logout = 1101,
+                S2C_Register = 1102,
+                S2C_GetSmsCode = 1103,
+                MSG_LoginEnd = 2000,
+                MSG_HallBegin = 2001,
+                C2S_GetUserInfo = 2002,
+                S2C_GetUserInfo = 3000,
+                MSG_HallEnd = 4000
+            }
         }
     }
 }

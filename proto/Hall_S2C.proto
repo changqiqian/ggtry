@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_package = "sy.game.message";
+option java_outer_classname = "HallS2C";
+
+import "Hall_Common.proto";
+import "Common.proto";
+
+//// 心跳返回
+////G2C_HeartBeatResp
+//message HeartBeatResp {
+//
+//}
+
+//获取用户数据
+message S2CGetUserInfo {
+  UserInfo userInfo = 1;
+}
+
+//修改用户数据
+message S2CChangeUserInfo {
+  Result result = 1;
+  UserBaseInfo baseInfo = 2;
+}

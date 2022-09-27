@@ -50,7 +50,7 @@ export class Club_CreateShortScoreSetting extends BaseUI
 
         HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
         {
-            this.Show(_current == PokerLife.Club.ShortGameScoreMode.AnteMode);
+            this.Show(_current == ShortGameScoreMode.AnteMode);
         },this);
         
     }

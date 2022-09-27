@@ -44,8 +44,8 @@ export class Club_CreateBringScoreSetting extends BaseUI {
         this.mMeassureSliderMaxBuyIn.InitWithData(GameConfig.GetTexasCreateRoomMaxBuyInTitle(),
         GameConfig.GetTexasCreateRoomMaxBuyInValue(),(_value , _index)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
-            && HallData.GetInstance().Data_ClubCreateShortScoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
+            && HallData.GetInstance().Data_ClubCreateShortScoreMode == ShortGameScoreMode.AnteMode)
             {
                 let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
                 this.mMaxBuyInAmount.string = _value * baseScore * 100 + "";
@@ -62,8 +62,8 @@ export class Club_CreateBringScoreSetting extends BaseUI {
         this.mMeassureSliderBringin.InitWithData(GameConfig.GetTexasCreateRoomBringInTitle(),
         GameConfig.GetTexasCreateRoomBringInValue(),(_value , _index)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
-            && HallData.GetInstance().Data_ClubCreateShortScoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
+            && HallData.GetInstance().Data_ClubCreateShortScoreMode == ShortGameScoreMode.AnteMode)
             {
                 let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
                 this.mBringInAmount.string = _value * baseScore * 100 + "";
@@ -80,8 +80,8 @@ export class Club_CreateBringScoreSetting extends BaseUI {
         this.mMeassureSliderBringOut.InitWithData(GameConfig.GetTexasCreateRoomBringOutTitle(),
         GameConfig.GetTexasCreateRoomBringOutValue(),(_value , _index)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
-            && HallData.GetInstance().Data_ClubCreateShortScoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
+            && HallData.GetInstance().Data_ClubCreateShortScoreMode == ShortGameScoreMode.AnteMode)
             {
                 let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
                 this.mBringOutAmount.string = _value * baseScore * 100 + "";
@@ -125,8 +125,8 @@ export class Club_CreateBringScoreSetting extends BaseUI {
         },this);
         HallData.GetInstance().AddListener("Data_ClubRefreshSmallBlind",(_current , _before)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
-              && HallData.GetInstance().Data_ClubCreateShortScoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
+              && HallData.GetInstance().Data_ClubCreateShortScoreMode == ShortGameScoreMode.AnteMode)
             {
 
             }
@@ -143,8 +143,8 @@ export class Club_CreateBringScoreSetting extends BaseUI {
 
         HallData.GetInstance().AddListener("Data_ClubRefreshShortBaseScore",(_current , _before)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
-              && HallData.GetInstance().Data_ClubCreateShortScoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
+              && HallData.GetInstance().Data_ClubCreateShortScoreMode == ShortGameScoreMode.AnteMode)
             {
                 let baseScore100 = _current * 100;
                 this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * baseScore100 + "";
@@ -159,8 +159,8 @@ export class Club_CreateBringScoreSetting extends BaseUI {
 
         HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash
-              && _current == PokerLife.Club.ShortGameScoreMode.AnteMode)
+            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash
+              && _current == ShortGameScoreMode.AnteMode)
             {
                 let baseScore = HallData.GetInstance().Data_ClubRefreshShortBaseScore;
                 let baseScore100 = baseScore * 100;

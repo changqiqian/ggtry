@@ -1,4 +1,5 @@
 import { _decorator, Component, Node } from 'cc';
+import { Writer } from '../../plugin/protobuf';
 import { Localization } from '../base/Localization';
 import { Gender } from '../base/LocalPlayerData';
 import { UIMgr } from '../base/UIMgr';
@@ -84,6 +85,7 @@ export class Network {
         this.mWebSocket.onmessage = this.OnMessage.bind(this);
         this.mWebSocket.onerror = this.OnError.bind(this);
         this.mWebSocket.onclose = this.OnClose.bind(this);
+        this.mWebSocket.binaryType = "arraybuffer";
         this.mConnectTimer = setTimeout(this.OnConnectTimeOut.bind(this), 3000);
     }
 
@@ -98,18 +100,46 @@ export class Network {
         }
     }
 
-    public SendMsg(_msgID: number, _msg) {
-        // if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) {
-        //     var body = JSON.stringify(_msg);
+    public SendMsg(_msgID: number, _protoBytes : Uint8Array) 
+    {
+        let headerLength = 12;
+        let totalLength = headerLength +  _protoBytes.length;
+        let currentOffset = 0;
 
-        //     var final = JSON.stringify({ msgId: _msgID, msgBody: body });
-        //     if (_msgID != MsgID.Ping) {
-        //         console.log('发送消息：' + final);
-        //     }
-        //     this.mWebSocket.send(final);
-        // } else {
-        //     console.log('给服务器发送消息失败：' + _msgID);
-        // }
+
+        let totalBuffer = new ArrayBuffer(totalLength);
+
+        let flagDataView = new DataView(totalBuffer,currentOffset,2);
+        flagDataView.setUint16(0,99);
+        currentOffset += 2;
+
+        let lengthDataView = new DataView(totalBuffer , currentOffset , 4);
+        lengthDataView.setUint32(0, totalLength);
+        currentOffset += 4;
+
+        let extensionDataView = new DataView(totalBuffer,currentOffset,2);
+        extensionDataView.setUint16(currentOffset,0);
+        currentOffset += 2;
+
+        let msgIdDataView = new DataView(totalBuffer,currentOffset,4);
+        msgIdDataView.setUint32(currentOffset,_msgID);
+        currentOffset += 4;
+
+        for(let i = 0 ; i < _protoBytes.length ; i++)
+        {
+            let msgDataView = new DataView(totalBuffer , currentOffset , 1);
+            msgDataView.setUint8(currentOffset,_protoBytes[i]);
+            currentOffset++;
+        }
+
+        if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) 
+        {
+            this.mWebSocket.send(totalBuffer);
+        } 
+        else 
+        {
+            console.log('给服务器发送消息失败：' + _msgID);
+        }
     }
 
     private OnOpen(event) {

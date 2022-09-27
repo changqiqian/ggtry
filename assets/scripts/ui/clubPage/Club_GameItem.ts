@@ -59,14 +59,14 @@ export class Club_GameItem extends BaseUI
         this.InitWithServerData(tempData);
     }
 
-    public InitWithServerData(_data : PokerLife.Club.GameConfig)
+    public InitWithServerData(_data : ClubGameConfig)
     {
         let tempColor;
         let gameTypeName;
 
         switch(_data.basicConfig.gameType)
         {
-            case PokerLife.Club.GameType.TexasCash:
+            case GameType.TexasCash:
                 tempColor = new Color(109,176,99);
                 gameTypeName = "NLH";
                 this.mBlindInfo.string = _data.texasConfig.smallBlind + "/" + _data.texasConfig.smallBlind * 2;
@@ -81,10 +81,10 @@ export class Club_GameItem extends BaseUI
                 this.mMinBringIn.string = _data.texasConfig.minBringIn + "";
                 this.mMaxBringIn.string = _data.texasConfig.maxBringIn + "";
             break
-            case PokerLife.Club.GameType.ShortCash:
+            case GameType.ShortCash:
                 tempColor = new Color(98,174,175);
                 gameTypeName = "Short";
-                if(_data.shortConfig.scoreMode == PokerLife.Club.ShortGameScoreMode.BlindMode)
+                if(_data.shortConfig.scoreMode == ShortGameScoreMode.BlindMode)
                 {
                     this.mBlindInfo.string = _data.texasConfig.smallBlind + "/" + _data.texasConfig.smallBlind * 2;
                     if(_data.texasConfig.straddle)
@@ -98,18 +98,18 @@ export class Club_GameItem extends BaseUI
                     this.mMinBringIn.string = _data.texasConfig.minBringIn + "";
                     this.mMaxBringIn.string = _data.texasConfig.maxBringIn + "";
                 }
-                else if(_data.shortConfig.scoreMode == PokerLife.Club.ShortGameScoreMode.AnteMode)
+                else if(_data.shortConfig.scoreMode == ShortGameScoreMode.AnteMode)
                 {
                     this.mBlindInfo.string = _data.shortConfig.baseScore + " ante";
                     this.mMinBringIn.string = _data.shortConfig.baseScore * 50 + "";
                     this.mMaxBringIn.string = _data.shortConfig.baseScore * 100 + "";
                 }
             break
-            case PokerLife.Club.GameType.Mtt:
+            case GameType.Mtt:
                 gameTypeName = "Mtt"
                 tempColor = new Color(59,52,122);
             break
-            case PokerLife.Club.GameType.Omh:
+            case GameType.Omh:
                 gameTypeName = "Omh"
                 tempColor = Color.WHITE;
             break
@@ -133,11 +133,11 @@ export class Club_GameItem extends BaseUI
         }
 
         this.mGameName.string = _data.basicConfig.gameName;
-        if(_data.basicConfig.currencyType == PokerLife.Club.GameCurrencyType.Coin)
+        if(_data.basicConfig.currencyType == GameCurrencyType.Coin)
         {
             this.mScoreTag.getChildByName("Label").getComponent(Label).string = Localization.GetString("00092");
         }
-        else if(_data.basicConfig.currencyType == PokerLife.Club.GameCurrencyType.Point)
+        else if(_data.basicConfig.currencyType == GameCurrencyType.Point)
         {
             this.mScoreTag.getChildByName("Label").getComponent(Label).string = Localization.GetString("00093");
         }

@@ -69,17 +69,17 @@ export class Club_CreateTexasScoreSetting extends BaseUI
 
         HallData.GetInstance().AddListener("Data_ClubCreateShortScoreMode",(_current , _before)=>
         {
-            if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.TexasCash)
+            if(HallData.GetInstance().Data_ClubCreateGameType == GameType.TexasCash)
             {
                 this.Show(true);
             }
-            else if(HallData.GetInstance().Data_ClubCreateGameType == PokerLife.Club.GameType.ShortCash)
+            else if(HallData.GetInstance().Data_ClubCreateGameType == GameType.ShortCash)
             {
-                if(_current == PokerLife.Club.ShortGameScoreMode.AnteMode)
+                if(_current == ShortGameScoreMode.AnteMode)
                 {
                     this.Show(false);
                 }
-                else if(_current == PokerLife.Club.ShortGameScoreMode.BlindMode)
+                else if(_current == ShortGameScoreMode.BlindMode)
                 {
                     this.Show(true);
                 }

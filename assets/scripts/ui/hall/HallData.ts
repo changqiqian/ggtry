@@ -42,8 +42,8 @@ export class HallData extends DataNotify {
                     //俱乐部战绩
     Data_ClubRecordSubPage : Club_RecordSubPage = null; //俱乐部战绩 子页面
     Data_ClubRecordDetailSubPage : Club_RecordDetailSubPage = null; //俱乐部战绩详情 子页面
-    Data_ClubRecordCoinType : PokerLife.Club.GameCurrencyType = null;//俱乐部战绩 货币类型
-    Data_ClubRecordDateType : PokerLife.Club.RecordDateType = null;//俱乐部战绩 战绩时间段
+    Data_ClubRecordCoinType : GameCurrencyType = null;//俱乐部战绩 货币类型
+    Data_ClubRecordDateType : RecordDateType = null;//俱乐部战绩 战绩时间段
                     //创建俱乐部
     Data_ClubLogoIndex : number = null; //创建俱乐部时候选择的logo编号
     Data_ClubStampIndex : number = null; //创建俱乐部时候选的封面编号
@@ -56,10 +56,10 @@ export class HallData extends DataNotify {
     Data_ClubRefreshGameModule : boolean = null;//刷新创建房间模版数据
     Data_ClubCurrentModuleIndex : number = null; //当前操作的模版编号
                     //创建牌局，初始化选项会用到的驱动
-    Data_ClubCreateGameType : PokerLife.Club.GameType = PokerLife.Club.GameType.TexasCash; //俱乐部创建牌局时候，游戏类型
+    Data_ClubCreateGameType :GameType = GameType.TexasCash; //俱乐部创建牌局时候，游戏类型
     Data_ClubCreateGameName : string = null; //俱乐部创建牌局时候，牌局名称
-    Data_ClubCreateGameCurrencyType :PokerLife.Club.GameCurrencyType = null; //俱乐部创建游戏的时候，货币类型设定
-    Data_ClubCreateGameTaxType : PokerLife.Club.GameTaxType = null; //俱乐部创建游戏的时候，抽水设定
+    Data_ClubCreateGameCurrencyType :GameCurrencyType = null; //俱乐部创建游戏的时候，货币类型设定
+    Data_ClubCreateGameTaxType : GameTaxType = null; //俱乐部创建游戏的时候，抽水设定
     Data_ClubCreateGameTaxRate : number = null; //俱乐部创建牌局时候，抽水数值
     Data_ClubCreateGameCurrentSB : number = null; //俱乐部创建房间时，选中的小盲
     Data_ClubCreateGameStraddle : boolean = null; //俱乐部创建牌局时候，抓头设定
@@ -76,17 +76,17 @@ export class HallData extends DataNotify {
     Data_ClubCreateGameGPS : boolean = null; //俱乐部创建牌局时候，gps
     Data_ClubCreateGameIP : boolean = null; //俱乐部创建牌局时候，ip
                     //创建短牌，初始化选项用到的数据驱动
-    Data_ClubCreateShortScoreMode : PokerLife.Club.ShortGameScoreMode = null; //俱乐部创建牌局时候，短牌底池类型
+    Data_ClubCreateShortScoreMode : ShortGameScoreMode = null; //俱乐部创建牌局时候，短牌底池类型
     Data_ClubCreateShortBaseScore : number = null; //短牌创建时候的底分选择
     Data_ClubCreateShortButtonDouble : boolean = null ;//短牌创建时候的 庄前双倍底分
 
 
-    ResetCreateRoomParam(_type : PokerLife.Club.GameType)
+    ResetCreateRoomParam(_type : GameType)
     {
         this.Data_ClubCreateGameType = _type;
         this.Data_ClubCreateGameName = "";
-        this.Data_ClubCreateGameCurrencyType = PokerLife.Club.GameCurrencyType.Point;
-        this.Data_ClubCreateGameTaxType = PokerLife.Club.GameTaxType.WholeGameEnd;
+        this.Data_ClubCreateGameCurrencyType = GameCurrencyType.Point;
+        this.Data_ClubCreateGameTaxType = GameTaxType.WholeGameEnd;
         this.Data_ClubCreateGameTaxRate = 0;
         this.Data_ClubCreateGameCurrentSB = 0;
         this.Data_ClubCreateGameStraddle = false;
@@ -102,7 +102,7 @@ export class HallData extends DataNotify {
         this.Data_ClubCreateGameAutoStart = 0;
         this.Data_ClubCreateGameGPS = false;
         this.Data_ClubCreateGameIP = false;
-        this.Data_ClubCreateShortScoreMode = PokerLife.Club.ShortGameScoreMode.BlindMode;
+        this.Data_ClubCreateShortScoreMode = ShortGameScoreMode.BlindMode;
         this.Data_ClubCreateShortBaseScore = 0;
         this.Data_ClubCreateShortButtonDouble = false;
 
@@ -164,12 +164,12 @@ export class HallData extends DataNotify {
         this.Data_ClubCreateShortButtonDouble = this.Data_Club_CreateTexasConfig.buttonDouble
     }
 
-    ConvertCreateTexasConfigToProto(_config : Club_CreateTexasConfig) : PokerLife.Club.GameConfig
+    ConvertCreateTexasConfigToProto(_config : Club_CreateTexasConfig) : ClubGameConfig
     {
-        let finalData = new PokerLife.Club.GameConfig();
-        finalData.basicConfig = new PokerLife.Club.GameBasicConfig();
-        finalData.texasConfig = new PokerLife.Club.TexasConfig();
-        finalData.shortConfig = new PokerLife.Club.ShortConfig();
+        let finalData = new ClubGameConfig();
+        finalData.basicConfig = new GameBasicConfig();
+        finalData.texasConfig = new TexasConfig();
+        finalData.shortConfig = new ShortConfig();
 
         finalData.basicConfig.gameType = _config.gameType;
         finalData.basicConfig.gameName = _config.gameName;
@@ -187,13 +187,13 @@ export class HallData extends DataNotify {
         finalData.texasConfig.straddle = _config.straddle;
         finalData.texasConfig.ante = GameConfig.GetTexasCreateRoomAnteValue(finalData.texasConfig.smallBlind)[_config.ante];
         
-        if( _config.gameType == PokerLife.Club.GameType.TexasCash)
+        if( _config.gameType == GameType.TexasCash)
         {
             finalData.texasConfig.maxTotalBuyIn = GameConfig.GetTexasCreateRoomMaxBuyInValue()[_config.maxTotalBuyIn] * bigBliind100;
             finalData.texasConfig.minBringIn = bigBliind100 / 2;
             finalData.texasConfig.maxBringIn = bigBliind100 * GameConfig.GetTexasCreateRoomBringInValue()[_config.maxBringIn];
         }
-        else if( _config.gameType == PokerLife.Club.GameType.ShortCash)
+        else if( _config.gameType == GameType.ShortCash)
         {
             finalData.texasConfig.maxTotalBuyIn = GameConfig.GetTexasCreateRoomMaxBuyInValue()[_config.maxTotalBuyIn] * baseScore100;
             finalData.texasConfig.minBringIn = baseScore100 / 2;
@@ -287,10 +287,10 @@ export class Club_CreateTexasConfig
     {
 
     }
-    gameType :PokerLife.Club.GameType;
+    gameType :GameType;
     gameName : string;
-    currencyType :PokerLife.Club.GameCurrencyType;
-    taxType : PokerLife.Club.GameTaxType;
+    currencyType :GameCurrencyType;
+    taxType : GameTaxType;
     taxRatio : number;
     smallBlind : number;
     straddle : boolean;
@@ -308,7 +308,7 @@ export class Club_CreateTexasConfig
     ipLimit :boolean;
 
     //short
-    shortScoreMode : PokerLife.Club.ShortGameScoreMode;
+    shortScoreMode : ShortGameScoreMode;
     shortBaseScore : number;
     buttonDouble : boolean;
 }

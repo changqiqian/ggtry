@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package sy.game.message;
+
+option java_package = "sy.game.message";
+option java_outer_classname = "MsgId";
+
+/**
+ * Login(1001-2000)
+ * Hall(2001-4000)
+ */
+enum MessageId {
+  MSG_UnKnow = 0;
+
+  // ================ 登陆服务协议开始 ================
+  MSG_LoginBegin = 1001;
+  C2S_Login = 1002;  //登陆
+  C2S_Logout = 1003; //登出
+  C2S_Register = 1004; //注册
+  C2S_GetSmsCode = 1005;  //获取短信验证码
+
+
+  S2C_Login = 1100;
+  S2C_Logout = 1101;
+  S2C_Register = 1102; //注册
+  S2C_GetSmsCode = 1103;  //获取短信验证码返回
+  MSG_LoginEnd = 2000;
+  // ================ 登陆服务协议结束 ================
+
+
+
+  // ================ 大厅服务协议开始 ================
+  MSG_HallBegin = 2001;
+  C2S_GetUserInfo = 2002; //获取用户信息
+  //  C2G_HeartBeat = 2002;  // 心跳
+
+  S2C_GetUserInfo = 3000; //获取用户信息返回
+  MSG_HallEnd = 4000;  // 大厅相关消息结束
+  // ================ 大厅服务协议结束 ==============
+}

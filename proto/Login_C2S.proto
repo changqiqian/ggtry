@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_package = "sy.game.message";
+option java_outer_classname = "LoginC2S";
+
+import "Login_Common.proto";
+import "Common.proto";
+//登录
+message C2SLogin {
+  LoginType loginType = 1; //登录类型
+  int32 phoneNumber = 2;  //电话号码
+  optional string code = 3;  //验证码
+  optional string psw = 4; //密码
+  optional string token = 5; //token
+}
+
+//登出
+message C2SLogout {
+}
+
+//注册
+message C2SRegister {
+  int32 phoneNumber = 1;
+  optional string code = 2;  //验证码
+}
+
+//获取短信验证码
+message C2SGetSmsCode {
+  int32 phoneNumber = 1; //手机号码
+  optional SmsCodeType type = 2;
+}
+

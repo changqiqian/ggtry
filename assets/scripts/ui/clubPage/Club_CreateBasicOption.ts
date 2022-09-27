@@ -54,11 +54,11 @@ export class Club_CreateBasicOption extends BaseUI
             {
                 HallData.GetInstance().Data_Club_CreateTexasConfig.taxRatio = _index;
             });
-            if(_current == PokerLife.Club.GameTaxType.EveryRound)
+            if(_current == GameTaxType.EveryRound)
             {
                 this.mTaxTips.string = Localization.GetString("00090");
             }
-            else if(_current == PokerLife.Club.GameTaxType.WholeGameEnd)
+            else if(_current == GameTaxType.WholeGameEnd)
             {
                 this.mTaxTips.string = Localization.GetString("00091");
             }

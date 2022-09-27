@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "sy.game.message";
+option java_outer_classname = "LoginCommon";
+
+//验证码类型
+enum SmsCodeType {
+  Register = 0; //用验证码注册
+  Login = 1; //用验证码登录
+  ResetPassword = 2; //用验证码重设密码
+}
+
+//登陆类型
+enum LoginType {
+  LoginType_UnKnow = 0;
+  LoginType_PhoneCode = 1;    //手机号 + 验证码登录
+  LoginType_PhonePsw = 2;    //手机号 + 密码登录
+  LoginType_Token = 3;  //token登录
+}

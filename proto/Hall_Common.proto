@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option java_package = "sy.game.message";
+option java_outer_classname = "HallCommon";
+
+import "Common.proto";
+
+//账号权限等级
+enum AccountLevel {
+  AccountLevel_Normal = 0 ;//普通用户 --正常玩家
+  AccountLevel_Agent = 1 ; //代理  -- 可以创建俱乐部
+  AccountLevel_Boss = 2 ; //厅主  ---可以创建联盟，可以创建俱乐部
+}
+
+//账户状态
+enum AccountStauts {
+  AccountStauts_Normal = 0; //状态正常
+  AccountStauts_Frozen = 1; //冻结 - 不能提现
+}
+
+//用户信息总结构
+message UserInfo {
+  int32 uid = 1; //用户唯一id
+  string phoneNum = 2; //手机号码
+  UserBaseInfo userBaseInfo = 3;//用户基础资料
+  UserAssets userAssets = 4;//用户财产资料
+  UserAccountInfo userAccountInfo = 5;//用户账户信息
+}
+
+//用户基础资料
+message UserBaseInfo {
+  string nickName = 1; //用户昵称
+  string head = 2; //头像
+}
+
+//用户财产资料
+message UserAssets {
+  int64 coin = 1; //金币
+  int64 diamond = 2; //钻石
+  int64 clubPoint = 3; //俱乐部积分
+  int64 unionCoin = 4; //联盟货币
+}
+
+//用户额外账户信息
+message UserAccountInfo {
+  AccountLevel accountLevel = 1; //用户权限等级
+  AccountStauts accountStatus = 2; //账户状态
+}

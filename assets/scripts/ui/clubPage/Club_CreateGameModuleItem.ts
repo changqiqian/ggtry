@@ -29,11 +29,11 @@ export class Club_CreateGameModuleItem extends BaseUI
         {
             HallData.GetInstance().ReadModule(this.mIndex);
             HallData.GetInstance().Data_ClubCurrentModuleIndex = this.mIndex;
-            if(HallData.GetInstance().Data_Club_CreateTexasConfig.gameType == PokerLife.Club.GameType.TexasCash)
+            if(HallData.GetInstance().Data_Club_CreateTexasConfig.gameType == GameType.TexasCash)
             {
                 this.ShowLayer("clubPage" , "prefab/Club_CreateTexas")
             }
-            else if(HallData.GetInstance().Data_Club_CreateTexasConfig.gameType == PokerLife.Club.GameType.ShortCash)
+            else if(HallData.GetInstance().Data_Club_CreateTexasConfig.gameType == GameType.ShortCash)
             {
                 this.ShowLayer("clubPage" , "prefab/Club_CreateShort")
             }

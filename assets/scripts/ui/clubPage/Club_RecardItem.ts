@@ -47,25 +47,25 @@ export class Club_RecardItem extends BaseUI
 
     }
 
-    public InitWithData(_gameType : PokerLife.Club.GameType)
+    public InitWithData(_gameType : GameType)
     {
         let tempColor;
         let gameTypeName;
         switch(_gameType)
         {
-            case PokerLife.Club.GameType.TexasCash:
+            case GameType.TexasCash:
                 tempColor = new Color(109,176,99);
                 gameTypeName = "NLH";
 
             break
-            case PokerLife.Club.GameType.ShortCash:
+            case GameType.ShortCash:
                 tempColor = new Color(98,174,175);
             break
-            case PokerLife.Club.GameType.Mtt:
+            case GameType.Mtt:
                 gameTypeName = "Mtt"
                 tempColor = new Color(59,52,122);
             break
-            case PokerLife.Club.GameType.Omh:
+            case GameType.Omh:
                 gameTypeName = "Omh"
                 tempColor = Color.WHITE;
             break

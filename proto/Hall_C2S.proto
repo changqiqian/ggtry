@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_package = "sy.game.message";
+option java_outer_classname = "HallC2S";
+
+import "Hall_Common.proto";
+import "Common.proto";
+
+//// 心跳
+//message HeartBeat {
+//}
+
+//获取用户数据
+message C2SGetUserInfo {
+  //待补充
+}
+
+//修改用户数据
+message C2SChangeUserInfo {
+  UserBaseInfo baseInfo = 1;
+}
