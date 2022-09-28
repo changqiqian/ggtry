@@ -6,7 +6,9 @@ import { UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
+import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
+import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Login_SignView')
@@ -23,7 +25,15 @@ export class Login_SignView extends BaseUI
     onEnable()
     {
         this.mAccountEditBox.string = "";
+        LoginData.Instance.Data_InSignInProgress.mData = true;
     }
+
+    onDisable()
+    {
+        LoginData.Instance.Data_InSignInProgress.mData = false;
+    }
+
+
     InitParam() 
     {
 
@@ -54,18 +64,12 @@ export class Login_SignView extends BaseUI
                 return
             }
 
-
-            CommonNotify.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
-            let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
-            let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
-   
-            
+            LocalPlayerData.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
+            this.ShowLayer("login","prefab/Login_SetUserInfo");
         });
     }
     RegDataNotify() 
     {
-
         LocalPlayerData.Instance.Data_AreaCode.AddListenner(this,(_data)=>
         {
             this.mAreaCodeBtn.SetTitle(GameConfig.AreaCodeList[_data].areaCode);

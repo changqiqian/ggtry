@@ -60,14 +60,12 @@ export class Login_LoginView extends BaseUI {
                 UIMgr.Instance.ShowToast(Localization.GetString("00015"));
                 return
             }
-
-            CommonNotify.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
-            
+            LoginData.Instance.Data_SmsCodeType
+            LocalPlayerData.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
             let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
-
-            //NetworkSend.Instance.SendLoginWithSmsCode();
+            NetworkSend.Instance.GetSmsCode(fullPhoneNumber , SmsCodeType.Login);
         });
 
         this.mPasswordLoginBtn.SetClickCallback(()=>

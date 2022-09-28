@@ -4,7 +4,8 @@ import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 export class GameConfig
 {
     public static DebugMode =  true;
-    public static DevelopIP = "192.168.68.112:9001"; //研发环境ip
+    public static PrivateIP = "192.168.68.112:9001"; //私人电脑ip
+    public static DevelopIP = "52.77.219.158:9001"; //开发环境ip
     public static TestIP = "13.229.222.39:9008"; //测试环境ip
     public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip
     public static SeverUrl = "ws://13.229.222.39:9008/pokerlife";

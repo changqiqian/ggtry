@@ -15,9 +15,13 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     }
 
     Data_Uid : BaseData<string> = new BaseData<string>(); //玩家uid
+    Data_NickName : BaseData<string> = new BaseData<string>(); //玩家姓名
     Data_AreaCode : BaseData<number> = new BaseData<number>(false , 0); //区号
-    Data_PhotoUrl : BaseData<string> = new BaseData<string>(); //头像地址
+    Data_PhotoUrl : BaseData<string> = new BaseData<string>(false , null); //头像地址
+    Data_SupervisorInviteCode : BaseData<string> = new BaseData<string>(false , ""); //谁邀请的我
 
+    Data_LastInputPhoneNum : BaseData<string> = new BaseData<string>(); //最后一次输入的手机号
+    Data_LastInputPwd : BaseData<string> = new BaseData<string>();//最后一次输入的密码
 
     //自定义设置
     CustomerInit()

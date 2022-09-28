@@ -6,6 +6,7 @@ import { UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
+import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { ToggleBtn } from '../common/ToggleBtn';
 import { LoginData } from './LoginData';
@@ -99,11 +100,12 @@ export class Login_LoginViewPwd extends BaseUI {
             }
 
 
-            CommonNotify.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
-            CommonNotify.Instance.Data_LastInputPwd.mData = password;
+            LocalPlayerData.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
+            LocalPlayerData.Instance.Data_LastInputPwd.mData = password;
             let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
+            NetworkSend.Instance.LoginWithPwd(fullPhoneNumber,password);
         });
  
         this.mSMSLoginBtn.SetClickCallback(()=>

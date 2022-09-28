@@ -6,6 +6,7 @@ import { UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
+import { NetworkSend } from '../../network/NetworkSend';
 import { LoginData } from '../login/LoginData';
 import { BaseButton } from './BaseButton';
 import { ToggleBtn } from './ToggleBtn';
@@ -97,13 +98,19 @@ export class ResetPwdView extends BaseUI
                 return;
             }
             
-            CommonNotify.Instance.Data_LastInputPwd.mData = this.mPwdEditbox.string;
+            LocalPlayerData.Instance.Data_LastInputPwd.mData = this.mPwdEditbox.string;
             let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.Instance.Data_LastInputPhoneNum.mData;
+            let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
 
-
-            
+            if(LoginData.Instance.Data_InSignInProgress.mData)
+            {
+                NetworkSend.Instance.GetSmsCode(fullPhoneNumber , SmsCodeType.Register);
+            }
+            else
+            {
+                //发送重制密码
+            }
         });
     }
     RegDataNotify() 

@@ -32,6 +32,8 @@ export class LoginUI extends BaseUI
     @property(Node) 
     DebugFunction: Node = null;
     @property(BaseButton) 
+    PrivateIP: BaseButton = null;
+    @property(BaseButton) 
     DevIpBtn: BaseButton = null;
     @property(BaseButton) 
     TestIpBtn: BaseButton = null;
@@ -60,6 +62,14 @@ export class LoginUI extends BaseUI
 
         //debug mode
         this.DebugFunction.active = GameConfig.DebugMode;
+        this.PrivateIP.SetTitle("私人电脑" + GameConfig.PrivateIP);
+        this.PrivateIP.SetClickCallback(()=>
+        {
+            GameConfig.SetSeverUrl(GameConfig.PrivateIP);
+            Network.Instance.CreateWS();
+            this.DebugFunction.active = false;
+        });
+
         this.DevIpBtn.SetTitle("开发环境：" + GameConfig.DevelopIP);
         this.DevIpBtn.SetClickCallback(()=>
         {
@@ -78,18 +88,39 @@ export class LoginUI extends BaseUI
     }
     RegDataNotify() 
     {
-        CommonNotify.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
+        LoginData.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
-            UIMgr.Instance.ChangeScene(SceneType.Hall);
+            if(_data == true)
+            {
+                UIMgr.Instance.ChangeScene(SceneType.Hall);
+            }
+        });
+
+        LoginData.Instance.Data_RegisterSuccessData.AddListenner(this,(_data)=>
+        {
+            if(_data == true)
+            {
+                UIMgr.Instance.ChangeScene(SceneType.Hall);
+            }
         });
         
         CommonNotify.Instance.Data_SocketOpen.AddListenner(this,(_data)=>
         {
+            if(GameConfig.DebugMode)
+            {
+                return;
+            }
+
             if(GameConfig.LOGIN_TOKEN != null)
             {
                 console.log("Token 自动登录")
-                NetworkSend.Instance.SendLoginWithToken(GameConfig.LOGIN_PHONE,GameConfig.LOGIN_TOKEN);
+                NetworkSend.Instance.LoginWithToken(GameConfig.LOGIN_PHONE,GameConfig.LOGIN_TOKEN);
             }
+        });
+
+        LoginData.Instance.Data_SmsCodeType.AddListenner(this,(_data)=>
+        {
+            this.ShowLayer("common","prefab/SMSCodeView");
         });
     }
     LateInit() 

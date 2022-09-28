@@ -23,6 +23,6 @@ message S2CRegister {
 
 //获取验证码返回
 message S2CGetSmsCode {
-  int32 code = 1; //验证码
+  optional int32 code = 1; //验证码
   optional SmsCodeType type = 2;
 }

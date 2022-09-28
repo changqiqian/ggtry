@@ -162,7 +162,7 @@ export class Network  extends Singleton<Network>()
         {
             this.mWebSocket.send(totalBuffer);
             console.log('给服务器发送消息：' + _msgID);
-            console.log('数据长度====' + totalLength);
+            //console.log('数据长度====' + totalLength);
         } 
         else 
         {

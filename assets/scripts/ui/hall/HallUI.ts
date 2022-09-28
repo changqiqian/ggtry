@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { CommonNotify } from '../../CommonNotify';
 import { Network } from '../../network/Network';
+import { LoginData } from '../login/LoginData';
 import { HallData, Hall_SubPage } from './HallData';
 const { ccclass, property } = _decorator;
 
@@ -28,7 +29,7 @@ export class HallUI extends BaseUI
 
     RegDataNotify() 
     {
-        CommonNotify.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
+        LoginData.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
             
         })

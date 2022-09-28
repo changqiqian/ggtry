@@ -20,13 +20,17 @@ message C2SLogout {
 
 //注册
 message C2SRegister {
-  int32 phoneNumber = 1;
+  string phoneNumber = 1; //手机号
   optional string code = 2;  //验证码
+  optional string nickName = 3; //昵称
+  optional string psw = 4; //密码
+  optional string head = 5; //头像
+  optional string inviteCode = 6; //邀请码
 }
 
 //获取短信验证码
 message C2SGetSmsCode {
-  int32 phoneNumber = 1; //手机号码
+  string phoneNumber = 1; //手机号码
   optional SmsCodeType type = 2;
 }
 

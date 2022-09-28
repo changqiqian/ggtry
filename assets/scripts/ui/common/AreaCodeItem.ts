@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, color, Color } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { LoginData } from '../login/LoginData';
 import { BaseButton } from './BaseButton';
 const { ccclass, property } = _decorator;
 
@@ -20,6 +21,7 @@ export class AreaCodeItem extends BaseUI {
         this.mBtn.SetClickCallback(()=>
         {
             LocalPlayerData.Instance.Data_AreaCode.mData = this.mIndex;
+            LoginData.Instance.Data_ShowAreaCodeView.mData = false;
         });
     }
     RegDataNotify() 

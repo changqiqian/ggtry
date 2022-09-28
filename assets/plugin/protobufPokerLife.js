@@ -1930,8 +1930,12 @@ $root.C2SRegister = (function() {
      * Properties of a C2SRegister.
      * @exports IC2SRegister
      * @interface IC2SRegister
-     * @property {number|null} [phoneNumber] C2SRegister phoneNumber
+     * @property {string|null} [phoneNumber] C2SRegister phoneNumber
      * @property {string|null} [code] C2SRegister code
+     * @property {string|null} [nickName] C2SRegister nickName
+     * @property {string|null} [psw] C2SRegister psw
+     * @property {string|null} [head] C2SRegister head
+     * @property {string|null} [inviteCode] C2SRegister inviteCode
      */
 
     /**
@@ -1951,11 +1955,11 @@ $root.C2SRegister = (function() {
 
     /**
      * C2SRegister phoneNumber.
-     * @member {number} phoneNumber
+     * @member {string} phoneNumber
      * @memberof C2SRegister
      * @instance
      */
-    C2SRegister.prototype.phoneNumber = 0;
+    C2SRegister.prototype.phoneNumber = "";
 
     /**
      * C2SRegister code.
@@ -1964,6 +1968,38 @@ $root.C2SRegister = (function() {
      * @instance
      */
     C2SRegister.prototype.code = "";
+
+    /**
+     * C2SRegister nickName.
+     * @member {string} nickName
+     * @memberof C2SRegister
+     * @instance
+     */
+    C2SRegister.prototype.nickName = "";
+
+    /**
+     * C2SRegister psw.
+     * @member {string} psw
+     * @memberof C2SRegister
+     * @instance
+     */
+    C2SRegister.prototype.psw = "";
+
+    /**
+     * C2SRegister head.
+     * @member {string} head
+     * @memberof C2SRegister
+     * @instance
+     */
+    C2SRegister.prototype.head = "";
+
+    /**
+     * C2SRegister inviteCode.
+     * @member {string} inviteCode
+     * @memberof C2SRegister
+     * @instance
+     */
+    C2SRegister.prototype.inviteCode = "";
 
     /**
      * Encodes the specified C2SRegister message. Does not implicitly {@link C2SRegister.verify|verify} messages.
@@ -1978,9 +2014,17 @@ $root.C2SRegister = (function() {
         if (!w)
             w = $Writer.create();
         if (m.phoneNumber != null && Object.hasOwnProperty.call(m, "phoneNumber"))
-            w.uint32(8).int32(m.phoneNumber);
+            w.uint32(10).string(m.phoneNumber);
         if (m.code != null && Object.hasOwnProperty.call(m, "code"))
             w.uint32(18).string(m.code);
+        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
+            w.uint32(26).string(m.nickName);
+        if (m.psw != null && Object.hasOwnProperty.call(m, "psw"))
+            w.uint32(34).string(m.psw);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(42).string(m.head);
+        if (m.inviteCode != null && Object.hasOwnProperty.call(m, "inviteCode"))
+            w.uint32(50).string(m.inviteCode);
         return w;
     };
 
@@ -2003,10 +2047,22 @@ $root.C2SRegister = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.phoneNumber = r.int32();
+                m.phoneNumber = r.string();
                 break;
             case 2:
                 m.code = r.string();
+                break;
+            case 3:
+                m.nickName = r.string();
+                break;
+            case 4:
+                m.psw = r.string();
+                break;
+            case 5:
+                m.head = r.string();
+                break;
+            case 6:
+                m.inviteCode = r.string();
                 break;
             default:
                 r.skipType(t & 7);
@@ -2025,7 +2081,7 @@ $root.C2SGetSmsCode = (function() {
      * Properties of a C2SGetSmsCode.
      * @exports IC2SGetSmsCode
      * @interface IC2SGetSmsCode
-     * @property {number|null} [phoneNumber] C2SGetSmsCode phoneNumber
+     * @property {string|null} [phoneNumber] C2SGetSmsCode phoneNumber
      * @property {SmsCodeType|null} [type] C2SGetSmsCode type
      */
 
@@ -2046,11 +2102,11 @@ $root.C2SGetSmsCode = (function() {
 
     /**
      * C2SGetSmsCode phoneNumber.
-     * @member {number} phoneNumber
+     * @member {string} phoneNumber
      * @memberof C2SGetSmsCode
      * @instance
      */
-    C2SGetSmsCode.prototype.phoneNumber = 0;
+    C2SGetSmsCode.prototype.phoneNumber = "";
 
     /**
      * C2SGetSmsCode type.
@@ -2073,7 +2129,7 @@ $root.C2SGetSmsCode = (function() {
         if (!w)
             w = $Writer.create();
         if (m.phoneNumber != null && Object.hasOwnProperty.call(m, "phoneNumber"))
-            w.uint32(8).int32(m.phoneNumber);
+            w.uint32(10).string(m.phoneNumber);
         if (m.type != null && Object.hasOwnProperty.call(m, "type"))
             w.uint32(16).int32(m.type);
         return w;
@@ -2098,7 +2154,7 @@ $root.C2SGetSmsCode = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.phoneNumber = r.int32();
+                m.phoneNumber = r.string();
                 break;
             case 2:
                 m.type = r.int32();

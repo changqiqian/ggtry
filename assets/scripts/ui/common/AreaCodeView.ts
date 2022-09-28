@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { GameConfig } from '../../GameConfig';
+import { LoginData } from '../login/LoginData';
 import { AreaCodeItem } from './AreaCodeItem';
 import { BaseButton } from './BaseButton';
 const { ccclass, property } = _decorator;
@@ -50,10 +51,9 @@ export class AreaCodeView extends BaseUI {
     }
     RegDataNotify() 
     {
-
-        LocalPlayerData.Instance.Data_AreaCode.AddListenner(this,(_data)=>
+        LoginData.Instance.Data_ShowAreaCodeView.AddListenner(this,(_data)=>
         {
-            if(_data != null)
+            if(_data == false)
             {
                 this.HideAnm();
             }

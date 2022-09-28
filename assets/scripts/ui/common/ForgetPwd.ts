@@ -51,7 +51,7 @@ export class ForgetPwd extends BaseUI {
                 return
             }
 
-            CommonNotify.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
+            LocalPlayerData.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
             let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;

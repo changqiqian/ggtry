@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { CommonNotify } from '../../CommonNotify';
 import { Network } from '../../network/Network';
 import { HallData } from '../hall/HallData';
+import { LoginData } from '../login/LoginData';
 import { GameData } from './GameData';
 import { Game_MovingChip } from './subUI/Game_MovingChip';
 import { Game_SeatUI } from './subUI/Game_SeatUI';
@@ -30,7 +31,7 @@ export class GameBase extends BaseUI
     }
     RegDataNotify() 
     {
-        CommonNotify.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
+        LoginData.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
             if(_data)
             {

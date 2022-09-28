@@ -771,10 +771,22 @@ export class C2SRegister implements IC2SRegister {
     constructor(p?: IC2SRegister);
 
     /** C2SRegister phoneNumber. */
-    public phoneNumber: number;
+    public phoneNumber: string;
 
     /** C2SRegister code. */
     public code: string;
+
+    /** C2SRegister nickName. */
+    public nickName: string;
+
+    /** C2SRegister psw. */
+    public psw: string;
+
+    /** C2SRegister head. */
+    public head: string;
+
+    /** C2SRegister inviteCode. */
+    public inviteCode: string;
 
     /**
      * Encodes the specified C2SRegister message. Does not implicitly {@link C2SRegister.verify|verify} messages.
@@ -805,7 +817,7 @@ export class C2SGetSmsCode implements IC2SGetSmsCode {
     constructor(p?: IC2SGetSmsCode);
 
     /** C2SGetSmsCode phoneNumber. */
-    public phoneNumber: number;
+    public phoneNumber: string;
 
     /** C2SGetSmsCode type. */
     public type: SmsCodeType;

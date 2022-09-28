@@ -12,7 +12,6 @@ export function Singleton<T>()
         {
             if(this.sInstance == null) 
             {
-                console.log(" new Singleton ===" + this.name);
                 this.sInstance = new this();
         
             }
@@ -21,7 +20,6 @@ export function Singleton<T>()
 
         public static ClearInstance()
         {
-            console.log(" ClearInstance Singleton ===" + this.name);
             this.sInstance = null;
         }
 

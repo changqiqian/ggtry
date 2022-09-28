@@ -5,6 +5,9 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
+import { NetworkSend } from '../../network/NetworkSend';
+import { HallData } from '../hall/HallData';
+import { LoginData } from '../login/LoginData';
 
 import { BaseButton } from './BaseButton';
 import { InputCodeIndicator } from './InputCodeIndicator';
@@ -64,6 +67,7 @@ export class SMSCodeView extends BaseUI
         this.mResendBtn.SetClickCallback(()=>
         {
             this.StartCountDown();
+            NetworkSend.Instance.GetSmsCode(this.mPhoneNum.string , LoginData.Instance.Data_SmsCodeType.mData);
         });
 
         this.mConfirmBtn.SetClickCallback(()=>
@@ -74,17 +78,36 @@ export class SMSCodeView extends BaseUI
                 UIMgr.Instance.ShowToast(Localization.GetString("00005"));
                 return;
             }
-           
+            
+            let smsCodeType = LoginData.Instance.Data_SmsCodeType.mData;
+            if(smsCodeType == SmsCodeType.Login)
+            {
+                NetworkSend.Instance.LoginWithSmsCode(this.mPhoneNum.string , currentInput);
+            }
+            else if(smsCodeType == SmsCodeType.Register)
+            {
+                let inviteCode = LocalPlayerData.Instance.Data_SupervisorInviteCode.mData;
+                let nickName = LocalPlayerData.Instance.Data_NickName.mData;
+                let psw = LocalPlayerData.Instance.Data_LastInputPwd.mData;
+                let head = LocalPlayerData.Instance.Data_PhotoUrl.mData;
+                let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
+                let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
+                let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
+                NetworkSend.Instance.Register(fullPhoneNumber , currentInput,nickName,psw,head,inviteCode);
+            }
+            else if(smsCodeType == SmsCodeType.ResetPassword)
+            {
+
+            }
         });
     }
     RegDataNotify() 
     {
-
-        CommonNotify.Instance.Data_LastInputPhoneNum.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_LastInputPhoneNum.AddListenner(this,(_data)=>
         {
             let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.Instance.Data_LastInputPhoneNum.mData;
+            let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
             this.mPhoneNum.string = fullPhoneNumber;
         });
     }
