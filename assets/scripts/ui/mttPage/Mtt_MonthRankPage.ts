@@ -45,7 +45,7 @@ export class Mtt_MonthRankPage extends BaseUI
     {
 
 
-        HallData.GetInstance().Data_MttRankSubPage.AddListenner(this , (_data)=>
+        HallData.Instance.Data_MttRankSubPage.AddListenner(this , (_data)=>
         {
             this.Show(_data == Mtt_RankSubPage.Month);
             if(_data == Mtt_RankSubPage.Month)

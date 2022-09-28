@@ -24,14 +24,14 @@ export class Game_ChattingLayer extends BaseUI
 
     InitParam()
     {
-        GameData.GetInstance().Data_ChatingSubLayer.mData = Game_ChattingSubLayer.ChatHistory;
+        GameData.Instance.Data_ChatingSubLayer.mData = Game_ChattingSubLayer.ChatHistory;
     }
     BindUI()
     {
         for(let i = 0 ; i < this.mLayout.children.length ; i++)
         {
             let current = this.mLayout.children[i].getComponent(ToggleBtn);
-            current.SetDataNotify(GameData.GetInstance().Data_ChatingSubLayer, i);
+            current.SetDataNotify(GameData.Instance.Data_ChatingSubLayer, i);
         }
 
 

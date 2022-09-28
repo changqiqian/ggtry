@@ -31,17 +31,17 @@ export class Me_DeleteAccountDetect extends BaseUI {
 
     BindUI() {
         this.mCloseBtn.SetClickCallback(() => {
-            UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect', false);
+            UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect', false);
         });
         this.mDeleteBtn.SetClickCallback(() => {
             if (this.mMatchOkIcon.active && this.mClubOkIcon.active && this.mRegisterTimeOkIcon.active) {
                 console.log('可以删帐号');
-                UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccount');
-                UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect', false);
+                UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccount');
+                UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect', false);
             } else {
                 console.log('不可以删帐号');
-                UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccount');
-                UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect', false);
+                UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccount');
+                UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect', false);
             }
         });
 

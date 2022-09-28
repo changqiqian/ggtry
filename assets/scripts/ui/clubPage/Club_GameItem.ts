@@ -55,7 +55,7 @@ export class Club_GameItem extends BaseUI
 
     public InitWithData(_data : Club_CreateTexasConfig)
     {
-        let tempData = HallData.GetInstance().ConvertCreateTexasConfigToProto(_data);
+        let tempData = HallData.Instance.ConvertCreateTexasConfigToProto(_data);
         this.InitWithServerData(tempData);
     }
 

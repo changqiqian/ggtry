@@ -44,19 +44,19 @@ export class Login_SignView extends BaseUI
         {
             if(this.mAccountEditBox.string.length < 7) 
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00002"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00002"));
                 return
             }
 
             if(this.mAccountEditBox.string.indexOf(" ") != -1) 
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
                 return
             }
 
 
-            CommonNotify.GetInstance().Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
-            let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode.mData;
+            CommonNotify.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
+            let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
    
@@ -66,7 +66,7 @@ export class Login_SignView extends BaseUI
     RegDataNotify() 
     {
 
-        LocalPlayerData.GetInstance().Data_AreaCode.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_AreaCode.AddListenner(this,(_data)=>
         {
             this.mAreaCodeBtn.SetTitle(GameConfig.AreaCodeList[_data].areaCode);
         })

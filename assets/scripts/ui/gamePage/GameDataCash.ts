@@ -1,33 +1,12 @@
 import { DataNotify } from "../../base/DataNotify";
+import { SingletonBaseNotify } from "../../base/Singleton";
 import { Network } from "../../network/Network";
 
 
-export class GameDataCash extends DataNotify 
+export class GameDataCash extends SingletonBaseNotify<GameDataCash>()
 {
-    private static Instance:GameDataCash = null;
-
-    public static GetInstance() : GameDataCash
+    protected ResetInstance() 
     {
-        if(GameDataCash.Instance == null)
-        {
-            GameDataCash.Instance = new GameDataCash();
-            GameDataCash.Instance.CreateNotify();
-        }
-
-        return GameDataCash.Instance;
+        GameDataCash.ClearInstance();
     }
-
-
-    RegisteMsg()
-    {
-
-        
-    }
-
-    UnregisteMsg()
-    {
-        Network.GetInstance().RemoveListenner(this);
-    }
-
-
 }

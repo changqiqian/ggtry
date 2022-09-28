@@ -34,20 +34,20 @@ export class Login_SetUserInfo extends BaseUI
         {
             if(this.mNickNameEditBox.string.length == 0) 
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00011"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00011"));
                 return
             }
 
             if(this.mNickNameEditBox.string.indexOf(" ") != -1) 
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
                 return
             }
 
-            let headPicUrl = LocalPlayerData.GetInstance().Data_PhotoUrl.mData;
+            let headPicUrl = LocalPlayerData.Instance.Data_PhotoUrl.mData;
             if(headPicUrl ==null || headPicUrl === '') 
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00012"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00012"));
                 return
             }
 
@@ -57,7 +57,7 @@ export class Login_SetUserInfo extends BaseUI
     {
 
 
-        LocalPlayerData.GetInstance().Data_PhotoUrl.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_PhotoUrl.AddListenner(this,(_data)=>
         {
             if(_data == null || _data == "")
             {

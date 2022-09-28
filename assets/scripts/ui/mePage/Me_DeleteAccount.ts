@@ -3,10 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { BaseButton } from '../common/BaseButton';
 import { SceneType, UIMgr } from '../../base/UIMgr';
-import { LocalPlayerData } from '../../base/LocalPlayerData';
-import { MsgID, Network } from '../../network/Network';
-import { GameConfig } from '../../GameConfig';
-import { HallData } from '../hall/HallData';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('Me_DeleteAccount')
@@ -30,19 +27,19 @@ export class Me_DeleteAccount extends BaseUI {
     BindUI() {
 
         this.mCloseBtn.SetClickCallback(() => {
-            UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccount', false);
+            UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccount', false);
         });
         this.mReSendSmsBtn.SetClickCallback(() => {
             this.mReSendSmsBtn.node.active = false;
         });
         this.mDeleteBtn.SetClickCallback(() => {
             if (this.mSmsEditBox.string.length !== 6) {
-                UIMgr.GetInstance().ShowToast(Localization.GetString('00006'));
+                UIMgr.Instance.ShowToast(Localization.GetString('00006'));
                 return;
             }
 
             if (this.mSmsEditBox.string.indexOf(' ') != -1) {
-                UIMgr.GetInstance().ShowToast(Localization.GetString('00005'));
+                UIMgr.Instance.ShowToast(Localization.GetString('00005'));
                 return;
             }
         });

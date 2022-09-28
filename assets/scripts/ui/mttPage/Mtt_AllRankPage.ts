@@ -34,7 +34,7 @@ export class Mtt_AllRankPage extends BaseUI
     {
 
 
-        HallData.GetInstance().Data_MttRankSubPage.AddListenner(this , (_data)=>
+        HallData.Instance.Data_MttRankSubPage.AddListenner(this , (_data)=>
         {
             this.Show(_data == Mtt_RankSubPage.All);
             if(_data == Mtt_RankSubPage.All)

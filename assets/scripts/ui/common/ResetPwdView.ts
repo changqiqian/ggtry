@@ -75,32 +75,32 @@ export class ResetPwdView extends BaseUI
         {
             if(this.mPwdEditbox.string == "")
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00004"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00004"));
                 return;
             }
 
             if(this.mPwdEditbox.string.indexOf(" ") != -1)
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
                 return;
             }
 
             if(this.mRePwdEditbox.string.indexOf(" ") != -1)
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
                 return;
             }
 
             if(this.mRePwdEditbox.string != this.mPwdEditbox.string)
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00007"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00007"));
                 return;
             }
             
-            CommonNotify.GetInstance().Data_LastInputPwd.mData = this.mPwdEditbox.string;
-            let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode.mData;
+            CommonNotify.Instance.Data_LastInputPwd.mData = this.mPwdEditbox.string;
+            let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.GetInstance().Data_LastInputPhoneNum.mData;
+            let fullPhoneNumber = currentAreaCode + ' ' + CommonNotify.Instance.Data_LastInputPhoneNum.mData;
 
 
             

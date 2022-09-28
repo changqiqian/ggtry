@@ -37,12 +37,12 @@ export class Me_Top extends BaseUI
     }
     RegDataNotify() 
     {
-        LocalPlayerData.GetInstance().Data_Uid.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_Uid.AddListenner(this,(_data)=>
         {
             this.mID.string = _data;
         })
 
-        LocalPlayerData.GetInstance().Data_PhotoUrl.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_PhotoUrl.AddListenner(this,(_data)=>
         {
             if(_data == null || _data == "")
             {

@@ -33,7 +33,7 @@ export class Club_CreateShort extends BaseUI
 
         this.mNameEditBox.node.on('text-changed', (_param)=>
         {
-            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.gameName = this.mNameEditBox.string;
+            HallData.Instance.Data_Club_CreateTexasConfig.mData.gameName = this.mNameEditBox.string;
         }, this);
 
         this.AddSubView("clubPage","prefab/Club_CreateBasicOption",null,this.mScrollView.content);
@@ -46,16 +46,16 @@ export class Club_CreateShort extends BaseUI
 
         this.mSaveBtn.SetClickCallback(()=>
         {
-            let currentModuleIndex = HallData.GetInstance().Data_ClubCurrentModuleIndex.mData;
-            let saveResult = GameConfig.TryToSaveCreateRoomModule(HallData.GetInstance().Data_Club_CreateTexasConfig.mData , currentModuleIndex);
+            let currentModuleIndex = HallData.Instance.Data_ClubCurrentModuleIndex.mData;
+            let saveResult = GameConfig.TryToSaveCreateRoomModule(HallData.Instance.Data_Club_CreateTexasConfig.mData , currentModuleIndex);
             if(saveResult)
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00094"));
-                HallData.GetInstance().Data_ClubRefreshGameModule.mData = true;
+                UIMgr.Instance.ShowToast(Localization.GetString("00094"));
+                HallData.Instance.Data_ClubRefreshGameModule.mData = true;
             }
             else
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00095"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00095"));
             }
         });
 
@@ -67,7 +67,7 @@ export class Club_CreateShort extends BaseUI
     RegDataNotify()
     {
 
-        HallData.GetInstance().Data_ClubCreateGameName.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ClubCreateGameName.AddListenner(this,(_data)=>
         {
             this.mNameEditBox.string = _data;
         })

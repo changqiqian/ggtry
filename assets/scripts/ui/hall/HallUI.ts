@@ -16,7 +16,6 @@ export class HallUI extends BaseUI
 
     InitParam() 
     {
-        HallData.GetInstance().RegisteMsg();
     }
     BindUI() 
     {
@@ -29,19 +28,19 @@ export class HallUI extends BaseUI
 
     RegDataNotify() 
     {
-        CommonNotify.GetInstance().Data_LoginSuccessData.AddListenner(this,(_data)=>
+        CommonNotify.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
             
         })
     }
     LateInit() 
     {
-        HallData.GetInstance().Data_SubPage.mData = Hall_SubPage.MTT;
+        HallData.Instance.Data_SubPage.mData = Hall_SubPage.MTT;
     }
 
     CustmoerDestory() 
     {
-        HallData.GetInstance().UnregisteMsg();
+        HallData.Instance.Clear();
     }
 
 }

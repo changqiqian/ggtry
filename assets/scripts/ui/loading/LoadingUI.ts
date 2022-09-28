@@ -24,9 +24,6 @@ export class LoadingUI extends BaseUI
     mProgress: Sprite = null;
     InitParam() 
     {
-        //测试代码
-        //GameConfig.ClearToken();
-
         this.mTips.string = "";
         this.mPercent.string = "";
         this.mProgress.fillRange = 0;
@@ -39,26 +36,26 @@ export class LoadingUI extends BaseUI
 
     RegDataNotify() 
     {
-        LoadingData.GetInstance().Data_HotUpdateEnd.AddListenner(this,(_data)=>
+        LoadingData.Instance.Data_HotUpdateEnd.AddListenner(this,(_data)=>
         {
             if(_data)
             {
                 this.scheduleOnce(()=>
                 {
-                    UIMgr.GetInstance().ChangeScene(SceneType.Login);
+                    UIMgr.Instance.ChangeScene(SceneType.Login);
                 },1);
             }
 
         });
 
-        LoadingData.GetInstance().Data_HotUpdateProgress.AddListenner(this,(_data)=>
+        LoadingData.Instance.Data_HotUpdateProgress.AddListenner(this,(_data)=>
         {
             this.mPercent.string = _data * 100 + "%";
             this.mProgress.fillRange = _data;
 
         });
 
-        LoadingData.GetInstance().Data_HotUpdateTips.AddListenner(this,(_data)=>
+        LoadingData.Instance.Data_HotUpdateTips.AddListenner(this,(_data)=>
         {
             this.mTips.string = _data;
 
@@ -72,7 +69,7 @@ export class LoadingUI extends BaseUI
 
     CustmoerDestory()
     {
-
+        LoadingData.Instance.Clear();
     }
     
 

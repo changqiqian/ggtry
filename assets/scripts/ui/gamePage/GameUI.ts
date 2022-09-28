@@ -16,11 +16,11 @@ export class GameUI extends BaseUI
 
     InitParam() 
     {
-        GameData.GetInstance().RegisteMsg();
+      
     }
     BindUI() 
     {
-        // if(LocalPlayerData.GetInstance().Data_CurrentUsingMttMatchID)
+        // if(LocalPlayerData.Instance.Data_CurrentUsingMttMatchID)
         // {
         //     this.AddSubView("gamePage","prefab/Game_Mtt");
         // }
@@ -41,7 +41,7 @@ export class GameUI extends BaseUI
 
     CustmoerDestory() 
     {
-        GameData.GetInstance().UnregisteMsg();
+
     }
 }
 

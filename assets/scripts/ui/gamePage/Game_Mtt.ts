@@ -30,6 +30,7 @@ export class Game_Mtt extends GameBase
 
     GetGameInfoMsg()
     {
+        
     }
 
 

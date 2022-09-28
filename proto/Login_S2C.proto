@@ -8,7 +8,7 @@ import "Common.proto";
 
 //登录返回
 message S2CLogin {
-  Result result = 1;  //结果
+  CommonResult result = 1;  //结果
   // 待补充
 }
 
@@ -18,7 +18,7 @@ message S2CLogout {
 
 //注册返回
 message S2CRegister {
-  Result result = 1;  //结果
+  CommonResult result = 1;  //结果
 }
 
 //获取验证码返回

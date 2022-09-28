@@ -30,39 +30,39 @@ export class SettingWindow extends BaseUI {
             this.CloseAsWindow();
         });
         this.mDeleteAccountBtn.SetClickCallback(() => {
-            UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect');
+            UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect');
             this.CloseAsWindow();
         });
         this.mSwitchAccountBtn.SetClickCallback(() => {
             GameConfig.ClearToken();
-            Network.GetInstance().ClearWS();
-            UIMgr.GetInstance().ChangeScene(SceneType.Login);
+            Network.Instance.ClearWS();
+            UIMgr.Instance.ChangeScene(SceneType.Login);
         });
         this.mEditPasswordBtn.SetClickCallback(() => {
-            UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_SettingWindow', false);
+            UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_SettingWindow', false);
             this.ShowLayer('common', 'prefab/ForgetPwd');
         });
 
         this.mBBModeToggle.SetClickCallback((_value)=>
         {
-            LocalPlayerData.GetInstance().Data_BBModeSetting.mData = _value;
+            LocalPlayerData.Instance.Data_BBModeSetting.mData = _value;
         })
         this.mBGMToggle.SetClickCallback((_value)=>
         {
-            LocalPlayerData.GetInstance().Data_BGMSetting.mData = _value;
+            LocalPlayerData.Instance.Data_BGMSetting.mData = _value;
         })
     }
 
     RegDataNotify() 
     {
 
-        LocalPlayerData.GetInstance().Data_BBModeSetting.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_BBModeSetting.AddListenner(this,(_data)=>
         {
             this.mBBModeToggle.SetShowStauts(_data);
             GameConfig.SaveBBToggle(_data);
         })
 
-        LocalPlayerData.GetInstance().Data_BGMSetting.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_BGMSetting.AddListenner(this,(_data)=>
         {
             this.mBGMToggle.SetShowStauts(_data);
             GameConfig.SaveBGMSetting(_data);

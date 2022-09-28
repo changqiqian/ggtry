@@ -17,7 +17,7 @@ export class Club_Page extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().Data_SubPage.AddListenner(this,(_data)=>
+        HallData.Instance.Data_SubPage.AddListenner(this,(_data)=>
         {
             this.Show(_data == Hall_SubPage.Club);
         })

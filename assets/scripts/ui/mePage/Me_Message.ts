@@ -28,7 +28,7 @@ export class Me_Message extends BaseUI {
 
     onEnable() 
     {
-        HallData.GetInstance().Data_MeMessageSubPage.mData = Me_MessageSubPage.Announcement;
+        HallData.Instance.Data_MeMessageSubPage.mData = Me_MessageSubPage.Announcement;
     }
 
     InitParam() {}
@@ -51,13 +51,13 @@ export class Me_Message extends BaseUI {
                     break;
             }
             current.SetTitle(title);
-            current.SetDataNotify(HallData.GetInstance().Data_MeMessageSubPage, i);
+            current.SetDataNotify(HallData.Instance.Data_MeMessageSubPage, i);
         }
 
     }
     RegDataNotify() {
        
-        HallData.GetInstance().Data_MeMessageSubPage.AddListenner(this , (_data)=>
+        HallData.Instance.Data_MeMessageSubPage.AddListenner(this , (_data)=>
         {
             console.log('点击:' + _data);
             this.ResetPage();

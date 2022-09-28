@@ -27,7 +27,7 @@ export class HeadChoserView extends BaseUI
             let currentBtn = this.mHeadLayout.children[i].getComponent(BaseButton);
             currentBtn.SetClickCallback((_data)=>
             {
-                LocalPlayerData.GetInstance().Data_PhotoUrl.mData = _data.toString();
+                LocalPlayerData.Instance.Data_PhotoUrl.mData = _data.toString();
                 this.Show(false);
             },i);
 
@@ -40,12 +40,12 @@ export class HeadChoserView extends BaseUI
 
         this.mCameraBtn.SetClickCallback(()=>
         {
-            UIMgr.GetInstance().ShowToast("打开相机，需要在原生工程里面添加平台代码");
+            UIMgr.Instance.ShowToast("打开相机，需要在原生工程里面添加平台代码");
         });
 
         this.mPhotoLibrayBtn.SetClickCallback(()=>
         {
-            UIMgr.GetInstance().ShowToast("打开相册，需要在原生工程里面添加平台代码");
+            UIMgr.Instance.ShowToast("打开相册，需要在原生工程里面添加平台代码");
         });
 
         this.mCancelBtn.SetClickCallback(()=>

@@ -2,6 +2,7 @@ import { _decorator, Component, Node } from 'cc';
 import { Writer } from '../../plugin/protobuf';
 import { Localization } from '../base/Localization';
 import { Gender } from '../base/LocalPlayerData';
+import { Singleton } from '../base/Singleton';
 import { UIMgr } from '../base/UIMgr';
 import { CommonNotify } from '../CommonNotify';
 import { GameConfig } from '../GameConfig';
@@ -53,15 +54,8 @@ class MsgEvent {
     }
 }
 
-export class Network {
-    private static instance: Network = null;
-    public static GetInstance(): Network {
-        if (Network.instance == null) {
-            Network.instance = new Network();
-        }
-        return Network.instance;
-    }
-
+export class Network  extends Singleton<Network>()
+{
     private mWebSocket: WebSocket = null;
     private mConnectTimer: number;
     private mPingRevTimer: number;
@@ -69,7 +63,9 @@ export class Network {
     private mPingSpace: number = 5000;
     private mMsgListenner: Array<MsgEvent>;
     private mForceClose: boolean = false;
-    constructor() {
+    constructor() 
+    {
+        super();
         this.mMsgListenner = new Array<MsgEvent>();
     }
 
@@ -79,7 +75,7 @@ export class Network {
             return;
         }
         this.mForceClose = false;
-        UIMgr.GetInstance().ShowLoading(true, '连接服务器中...');
+        UIMgr.Instance.ShowLoading(true, '连接服务器中...');
         this.mWebSocket = new WebSocket(GameConfig.SeverUrl);
         this.mWebSocket.onopen = this.OnOpen.bind(this);
         this.mWebSocket.onmessage = this.OnMessage.bind(this);
@@ -101,21 +97,21 @@ export class Network {
     }
 
     private OnOpen(event) {
-        UIMgr.GetInstance().ShowLoading(false);
-        console.log('Socket OnOpen = ' + event);
+        UIMgr.Instance.ShowLoading(false);
+        console.log('Socket OnOpen = ');
         clearTimeout(this.mConnectTimer);
-        CommonNotify.GetInstance().Data_SocketOpen.mData = true;
+        CommonNotify.Instance.Data_SocketOpen.mData = true;
         this.SendPing();
     }
 
     private OnError(event) {
-        console.log('Socket OnError = ' + event);
+        console.log('Socket OnError = ');
         clearTimeout(this.mConnectTimer);
-        CommonNotify.GetInstance().Data_SocketError.mData = true;
+        CommonNotify.Instance.Data_SocketError.mData = true;
     }
 
     private OnClose(event) {
-        console.log('Socket OnClose  =  ' + event);
+        console.log('Socket OnClose  =  ');
         this.StopPing();
         clearTimeout(this.mConnectTimer);
         if (this.mWebSocket != null) {
@@ -127,7 +123,7 @@ export class Network {
         }
 
         if (this.mForceClose == false) {
-            CommonNotify.GetInstance().Data_SocketClose.mData = true;
+            CommonNotify.Instance.Data_SocketClose.mData = true;
             console.log(" OnClose setTimeout(this.CreateWS.bind(this), 1000);" );
             setTimeout(this.CreateWS.bind(this), 1000);
         }
@@ -136,7 +132,6 @@ export class Network {
     static HeaderLength = 12;
     public SendMsg(_msgID: number, _protoBytes : Uint8Array) 
     {
-        
         let totalLength = Network.HeaderLength +  _protoBytes.length;
         let currentOffset = 0;
 
@@ -167,6 +162,7 @@ export class Network {
         {
             this.mWebSocket.send(totalBuffer);
             console.log('给服务器发送消息：' + _msgID);
+            console.log('数据长度====' + totalLength);
         } 
         else 
         {
@@ -193,12 +189,6 @@ export class Network {
         {
             msgDataArray[i] = dataView.getUint8(i + currentOffset);
         }
-        // if (msgId == MsgID.Ping) 
-        // {
-        //     this.RecvPing();
-        //     return;
-        // }
-
         console.log('收到 消息  msgId====' + msgId);
         for (let i = 0; i < this.mMsgListenner.length; i++) 
         {

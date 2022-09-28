@@ -1,33 +1,13 @@
 import { DataNotify } from "../../base/DataNotify";
+import { SingletonBaseNotify } from "../../base/Singleton";
 import { Network } from "../../network/Network";
 
 
-export class GameDataMtt extends DataNotify 
+
+export class GameDataMtt extends SingletonBaseNotify<GameDataMtt>()
 {
-    private static Instance:GameDataMtt = null;
-
-    public static GetInstance() : GameDataMtt
+    protected ResetInstance() 
     {
-        if(GameDataMtt.Instance == null)
-        {
-            GameDataMtt.Instance = new GameDataMtt();
-            GameDataMtt.Instance.CreateNotify();
-        }
-
-        return GameDataMtt.Instance;
+        GameDataMtt.ClearInstance();
     }
-
-
-    RegisteMsg()
-    {
-
-        
-    }
-
-    UnregisteMsg()
-    {
-        Network.GetInstance().RemoveListenner(this);
-    }
-
-
 }

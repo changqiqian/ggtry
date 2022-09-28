@@ -146,7 +146,7 @@ export class Mtt_InfoPage extends BaseUI
     RegDataNotify() 
     {
 
-        HallData.GetInstance().Data_MttInfoSubPage.AddListenner(this , (_data)=>
+        HallData.Instance.Data_MttInfoSubPage.AddListenner(this , (_data)=>
         {
             this.Show(_data == Mtt_InfoSubPage.InfoPage);
             if(_data == Mtt_InfoSubPage.InfoPage)

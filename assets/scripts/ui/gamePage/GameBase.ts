@@ -30,7 +30,7 @@ export class GameBase extends BaseUI
     }
     RegDataNotify() 
     {
-        CommonNotify.GetInstance().Data_LoginSuccessData.AddListenner(this,(_data)=>
+        CommonNotify.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
             if(_data)
             {

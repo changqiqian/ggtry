@@ -43,7 +43,7 @@ export class Mtt_AttendPage extends BaseUI
             let currentOption = this.GetCurrentSelectOption();
             if(currentOption == null)
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00043"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00043"));
                 return;
             }
 

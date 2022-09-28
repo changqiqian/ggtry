@@ -27,13 +27,13 @@ export class Club_CreateGameModuleItem extends BaseUI
     {
         this.mEditBtn.SetClickCallback(()=>
         {
-            HallData.GetInstance().ReadModule(this.mIndex);
-            HallData.GetInstance().Data_ClubCurrentModuleIndex.mData = this.mIndex;
-            if(HallData.GetInstance().Data_Club_CreateTexasConfig.mData.gameType == GameType.GameType_TexasCash)
+            HallData.Instance.ReadModule(this.mIndex);
+            HallData.Instance.Data_ClubCurrentModuleIndex.mData = this.mIndex;
+            if(HallData.Instance.Data_Club_CreateTexasConfig.mData.gameType == GameType.GameType_TexasCash)
             {
                 this.ShowLayer("clubPage" , "prefab/Club_CreateTexas")
             }
-            else if(HallData.GetInstance().Data_Club_CreateTexasConfig.mData.gameType == GameType.GameType_ShortCash)
+            else if(HallData.Instance.Data_Club_CreateTexasConfig.mData.gameType == GameType.GameType_ShortCash)
             {
                 this.ShowLayer("clubPage" , "prefab/Club_CreateShort")
             }
@@ -48,7 +48,7 @@ export class Club_CreateGameModuleItem extends BaseUI
                 tempScript.SetCallback(()=>
                 {
                     GameConfig.DeleteCreateRoomModule(this.mIndex);
-                    HallData.GetInstance().Data_ClubRefreshGameModule.mData = true;
+                    HallData.Instance.Data_ClubRefreshGameModule.mData = true;
                 })
             })
         });

@@ -19,7 +19,7 @@ export class Hall_LunBo extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().Data_LunBoTu.AddListenner(this , (_data)=>
+        HallData.Instance.Data_LunBoTu.AddListenner(this , (_data)=>
         {
             for(let i = 0 ; i < _data.adverts.length ; i++)
             {

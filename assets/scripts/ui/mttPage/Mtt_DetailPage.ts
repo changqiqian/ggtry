@@ -28,7 +28,7 @@ export class Mtt_DetailPage extends BaseUI
     
     onEnable()
     {
-        HallData.GetInstance().Data_MttInfoSubPage.mData = Mtt_InfoSubPage.InfoPage;
+        HallData.Instance.Data_MttInfoSubPage.mData = Mtt_InfoSubPage.InfoPage;
     }
 
     InitParam() 
@@ -63,7 +63,7 @@ export class Mtt_DetailPage extends BaseUI
                     break;
             }
             current.SetTitle(title);
-            current.SetDataNotify(HallData.GetInstance().Data_MttInfoSubPage,i);
+            current.SetDataNotify(HallData.Instance.Data_MttInfoSubPage,i);
         }
 
         this.AddSubView("mttPage","prefab/Mtt_InfoPage" , null , this.mSubLayer);

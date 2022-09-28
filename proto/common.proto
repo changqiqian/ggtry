@@ -4,7 +4,7 @@ option java_package = "sy.game.message";
 option java_outer_classname = "Common";
 
 // 各种操作检验结果
-message Result {
+message CommonResult {
   int32 resId = 1;//1为成功， 其余值不成功，对应resMessage描述
   string resMessage = 2;//内容描述
 }

@@ -19,7 +19,7 @@ export class Hall_Bottom extends BaseUI
         for(let i = 0 ; i < this.mLayout.children.length ; i++)
         {
             let current = this.mLayout.children[i].getComponent(ToggleBtn);
-            current.SetDataNotify(HallData.GetInstance().Data_SubPage, i);
+            current.SetDataNotify(HallData.Instance.Data_SubPage, i);
         }
     }
     RegDataNotify() 

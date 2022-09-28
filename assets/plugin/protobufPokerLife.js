@@ -821,25 +821,25 @@ $root.RecordDateType = (function() {
     return values;
 })();
 
-$root.Result = (function() {
+$root.CommonResult = (function() {
 
     /**
-     * Properties of a Result.
-     * @exports IResult
-     * @interface IResult
-     * @property {number|null} [resId] Result resId
-     * @property {string|null} [resMessage] Result resMessage
+     * Properties of a CommonResult.
+     * @exports ICommonResult
+     * @interface ICommonResult
+     * @property {number|null} [resId] CommonResult resId
+     * @property {string|null} [resMessage] CommonResult resMessage
      */
 
     /**
-     * Constructs a new Result.
-     * @exports Result
-     * @classdesc Represents a Result.
-     * @implements IResult
+     * Constructs a new CommonResult.
+     * @exports CommonResult
+     * @classdesc Represents a CommonResult.
+     * @implements ICommonResult
      * @constructor
-     * @param {IResult=} [p] Properties to set
+     * @param {ICommonResult=} [p] Properties to set
      */
-    function Result(p) {
+    function CommonResult(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -847,31 +847,31 @@ $root.Result = (function() {
     }
 
     /**
-     * Result resId.
+     * CommonResult resId.
      * @member {number} resId
-     * @memberof Result
+     * @memberof CommonResult
      * @instance
      */
-    Result.prototype.resId = 0;
+    CommonResult.prototype.resId = 0;
 
     /**
-     * Result resMessage.
+     * CommonResult resMessage.
      * @member {string} resMessage
-     * @memberof Result
+     * @memberof CommonResult
      * @instance
      */
-    Result.prototype.resMessage = "";
+    CommonResult.prototype.resMessage = "";
 
     /**
-     * Encodes the specified Result message. Does not implicitly {@link Result.verify|verify} messages.
+     * Encodes the specified CommonResult message. Does not implicitly {@link CommonResult.verify|verify} messages.
      * @function encode
-     * @memberof Result
+     * @memberof CommonResult
      * @static
-     * @param {IResult} m Result message or plain object to encode
+     * @param {ICommonResult} m CommonResult message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    Result.encode = function encode(m, w) {
+    CommonResult.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.resId != null && Object.hasOwnProperty.call(m, "resId"))
@@ -882,20 +882,20 @@ $root.Result = (function() {
     };
 
     /**
-     * Decodes a Result message from the specified reader or buffer.
+     * Decodes a CommonResult message from the specified reader or buffer.
      * @function decode
-     * @memberof Result
+     * @memberof CommonResult
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {Result} Result
+     * @returns {CommonResult} CommonResult
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    Result.decode = function decode(r, l) {
+    CommonResult.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Result();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CommonResult();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -913,7 +913,7 @@ $root.Result = (function() {
         return m;
     };
 
-    return Result;
+    return CommonResult;
 })();
 
 $root.C2SGetUserInfo = (function() {
@@ -1631,7 +1631,7 @@ $root.S2CChangeUserInfo = (function() {
      * Properties of a S2CChangeUserInfo.
      * @exports IS2CChangeUserInfo
      * @interface IS2CChangeUserInfo
-     * @property {IResult|null} [result] S2CChangeUserInfo result
+     * @property {ICommonResult|null} [result] S2CChangeUserInfo result
      * @property {IUserBaseInfo|null} [baseInfo] S2CChangeUserInfo baseInfo
      */
 
@@ -1652,7 +1652,7 @@ $root.S2CChangeUserInfo = (function() {
 
     /**
      * S2CChangeUserInfo result.
-     * @member {IResult|null|undefined} result
+     * @member {ICommonResult|null|undefined} result
      * @memberof S2CChangeUserInfo
      * @instance
      */
@@ -1679,7 +1679,7 @@ $root.S2CChangeUserInfo = (function() {
         if (!w)
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.Result.encode(m.result, w.uint32(10).fork()).ldelim();
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         if (m.baseInfo != null && Object.hasOwnProperty.call(m, "baseInfo"))
             $root.UserBaseInfo.encode(m.baseInfo, w.uint32(18).fork()).ldelim();
         return w;
@@ -1704,7 +1704,7 @@ $root.S2CChangeUserInfo = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.result = $root.Result.decode(r, r.uint32());
+                m.result = $root.CommonResult.decode(r, r.uint32());
                 break;
             case 2:
                 m.baseInfo = $root.UserBaseInfo.decode(r, r.uint32());
@@ -1727,7 +1727,7 @@ $root.C2SLogin = (function() {
      * @exports IC2SLogin
      * @interface IC2SLogin
      * @property {LoginType|null} [loginType] C2SLogin loginType
-     * @property {number|null} [phoneNumber] C2SLogin phoneNumber
+     * @property {string|null} [phoneNumber] C2SLogin phoneNumber
      * @property {string|null} [code] C2SLogin code
      * @property {string|null} [psw] C2SLogin psw
      * @property {string|null} [token] C2SLogin token
@@ -1758,11 +1758,11 @@ $root.C2SLogin = (function() {
 
     /**
      * C2SLogin phoneNumber.
-     * @member {number} phoneNumber
+     * @member {string} phoneNumber
      * @memberof C2SLogin
      * @instance
      */
-    C2SLogin.prototype.phoneNumber = 0;
+    C2SLogin.prototype.phoneNumber = "";
 
     /**
      * C2SLogin code.
@@ -1803,7 +1803,7 @@ $root.C2SLogin = (function() {
         if (m.loginType != null && Object.hasOwnProperty.call(m, "loginType"))
             w.uint32(8).int32(m.loginType);
         if (m.phoneNumber != null && Object.hasOwnProperty.call(m, "phoneNumber"))
-            w.uint32(16).int32(m.phoneNumber);
+            w.uint32(18).string(m.phoneNumber);
         if (m.code != null && Object.hasOwnProperty.call(m, "code"))
             w.uint32(26).string(m.code);
         if (m.psw != null && Object.hasOwnProperty.call(m, "psw"))
@@ -1835,7 +1835,7 @@ $root.C2SLogin = (function() {
                 m.loginType = r.int32();
                 break;
             case 2:
-                m.phoneNumber = r.int32();
+                m.phoneNumber = r.string();
                 break;
             case 3:
                 m.code = r.string();
@@ -2154,7 +2154,7 @@ $root.S2CLogin = (function() {
      * Properties of a S2CLogin.
      * @exports IS2CLogin
      * @interface IS2CLogin
-     * @property {IResult|null} [result] S2CLogin result
+     * @property {ICommonResult|null} [result] S2CLogin result
      */
 
     /**
@@ -2174,7 +2174,7 @@ $root.S2CLogin = (function() {
 
     /**
      * S2CLogin result.
-     * @member {IResult|null|undefined} result
+     * @member {ICommonResult|null|undefined} result
      * @memberof S2CLogin
      * @instance
      */
@@ -2193,7 +2193,7 @@ $root.S2CLogin = (function() {
         if (!w)
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.Result.encode(m.result, w.uint32(10).fork()).ldelim();
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         return w;
     };
 
@@ -2216,7 +2216,7 @@ $root.S2CLogin = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.result = $root.Result.decode(r, r.uint32());
+                m.result = $root.CommonResult.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);
@@ -2302,7 +2302,7 @@ $root.S2CRegister = (function() {
      * Properties of a S2CRegister.
      * @exports IS2CRegister
      * @interface IS2CRegister
-     * @property {IResult|null} [result] S2CRegister result
+     * @property {ICommonResult|null} [result] S2CRegister result
      */
 
     /**
@@ -2322,7 +2322,7 @@ $root.S2CRegister = (function() {
 
     /**
      * S2CRegister result.
-     * @member {IResult|null|undefined} result
+     * @member {ICommonResult|null|undefined} result
      * @memberof S2CRegister
      * @instance
      */
@@ -2341,7 +2341,7 @@ $root.S2CRegister = (function() {
         if (!w)
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.Result.encode(m.result, w.uint32(10).fork()).ldelim();
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         return w;
     };
 
@@ -2364,7 +2364,7 @@ $root.S2CRegister = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.result = $root.Result.decode(r, r.uint32());
+                m.result = $root.CommonResult.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);

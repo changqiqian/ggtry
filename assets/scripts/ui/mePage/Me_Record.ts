@@ -14,7 +14,7 @@ export class Me_Record extends BaseUI {
     mLayout: Node = null;
 
     onEnable() {
-        HallData.GetInstance().Data_MeRecodeSubPage.mData = Me_ReocordSubPage.CyberRecord;
+        HallData.Instance.Data_MeRecodeSubPage.mData = Me_ReocordSubPage.CyberRecord;
     }
 
     InitParam() {}
@@ -35,13 +35,13 @@ export class Me_Record extends BaseUI {
                     break;
             }
             current.SetTitle(title);
-            current.SetDataNotify(HallData.GetInstance().Data_MeRecodeSubPage, i);
+            current.SetDataNotify(HallData.Instance.Data_MeRecodeSubPage, i);
         }
     }
     RegDataNotify() {
 
 
-        HallData.GetInstance().Data_MeRecodeSubPage.AddListenner(this , (_data)=>
+        HallData.Instance.Data_MeRecodeSubPage.AddListenner(this , (_data)=>
         {
             console.log('点击:' + _data);
         })

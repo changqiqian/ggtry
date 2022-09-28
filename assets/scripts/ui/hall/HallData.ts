@@ -1,20 +1,16 @@
 import { BaseData } from '../../base/BaseData';
-import { BaseDataNotify } from '../../base/BaseDataNotify';
 import { DataNotify } from '../../base/DataNotify';
+import { SingletonBaseNotify } from '../../base/Singleton';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 
-export class HallData extends BaseDataNotify {
-    private static Instance: HallData = null;
+export class HallData extends SingletonBaseNotify<HallData>()
+{
 
-    public static GetInstance(): HallData {
-        if (HallData.Instance == null) {
-            HallData.Instance = new HallData();
-        }
-
-        return HallData.Instance;
+    protected ResetInstance() 
+    {
+        HallData.ClearInstance();
     }
-
     Data_SubPage:  BaseData<Hall_SubPage> = new BaseData<Hall_SubPage>(); //大厅底部 分页
     Data_LunBoTu: BaseData<any> = new BaseData<any>();//轮播图数据
 
@@ -229,13 +225,6 @@ export class HallData extends BaseDataNotify {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    RegisteMsg() {
-       
-    }
-
-    UnregisteMsg() {
-        Network.GetInstance().RemoveListenner(this);
-    }
 }
 
 export enum Hall_SubPage { //大厅底部分页

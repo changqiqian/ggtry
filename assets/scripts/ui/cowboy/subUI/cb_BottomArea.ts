@@ -18,7 +18,7 @@ export class cb_BottomArea extends BaseUI {
     mChipCtr: cb_ChipCtr = null;
     InitParam() 
     {
-        CowboyData.GetInstance().Data_LocalPlayerPos.mData = this.mPlayerInfo.node.worldPosition;
+        CowboyData.Instance.Data_LocalPlayerPos.mData = this.mPlayerInfo.node.worldPosition;
     }
     BindUI() 
     {
@@ -28,7 +28,7 @@ export class cb_BottomArea extends BaseUI {
     RegDataNotify() 
     {
 
-        CowboyData.GetInstance().Data_SelectedChip.AddListenner(this,(_data)=>
+        CowboyData.Instance.Data_SelectedChip.AddListenner(this,(_data)=>
         {
             console.log("Current Chip = " + _data);
         })

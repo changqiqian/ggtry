@@ -1,23 +1,17 @@
 import { _decorator, Component, Node } from 'cc';
 import { GameConfig } from '../GameConfig';
 import { BaseData } from './BaseData';
-import { BaseDataNotify } from './BaseDataNotify';
+
 import { DataNotify } from './DataNotify';
+import { SingletonBaseNotify } from './Singleton';
 const { ccclass, property } = _decorator;
 
 @ccclass('LocalPlayerData')
-export class LocalPlayerData extends BaseDataNotify {
-    private static Instance:LocalPlayerData = null;
-
-    public static GetInstance() : LocalPlayerData
+export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
+{
+    protected ResetInstance() 
     {
-        if(LocalPlayerData.Instance == null)
-        {
-            LocalPlayerData.Instance = new LocalPlayerData();
-            LocalPlayerData.Instance.CustomerInit();
-        }
-
-        return LocalPlayerData.Instance;
+        LocalPlayerData.ClearInstance();
     }
 
     Data_Uid : BaseData<string> = new BaseData<string>(); //玩家uid

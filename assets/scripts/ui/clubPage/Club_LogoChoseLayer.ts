@@ -16,7 +16,7 @@ export class Club_LogoChoseLayer extends BaseUI
     
     onEnable()
     {
-        HallData.GetInstance().Data_ClubLogoIndex.mData = 0;
+        HallData.Instance.Data_ClubLogoIndex.mData = 0;
     }
 
     InitParam()
@@ -32,7 +32,7 @@ export class Club_LogoChoseLayer extends BaseUI
             this.LoadSprite("common" , "texutre/club/" + logoName , (_spriteFrame)=>
             {
                 currentToggle.SetImage(_spriteFrame)
-                currentToggle.SetDataNotify(HallData.GetInstance().Data_ClubLogoIndex,i);
+                currentToggle.SetDataNotify(HallData.Instance.Data_ClubLogoIndex,i);
             })
         }
     }

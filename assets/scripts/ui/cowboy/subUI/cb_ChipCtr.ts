@@ -30,12 +30,12 @@ export class cb_ChipCtr extends BaseUI
 
     public InitWithData()
     {
-        CowboyData.GetInstance().Data_SelectedChip.mData = 1;
-        this.SetChipData(CowboyData.GetInstance().Data_SelectedChip , 1 , 0);
-        this.SetChipData(CowboyData.GetInstance().Data_SelectedChip , 10 , 1);
-        this.SetChipData(CowboyData.GetInstance().Data_SelectedChip , 100 , 2);
-        this.SetChipData(CowboyData.GetInstance().Data_SelectedChip , 1000 , 3);
-        this.SetChipData(CowboyData.GetInstance().Data_SelectedChip , 5000 , 4);
+        CowboyData.Instance.Data_SelectedChip.mData = 1;
+        this.SetChipData(CowboyData.Instance.Data_SelectedChip , 1 , 0);
+        this.SetChipData(CowboyData.Instance.Data_SelectedChip , 10 , 1);
+        this.SetChipData(CowboyData.Instance.Data_SelectedChip , 100 , 2);
+        this.SetChipData(CowboyData.Instance.Data_SelectedChip , 1000 , 3);
+        this.SetChipData(CowboyData.Instance.Data_SelectedChip , 5000 , 4);
     }
 
     SetChipData(_baseData : BaseData<number> , _custmoerData : number , _index : number)

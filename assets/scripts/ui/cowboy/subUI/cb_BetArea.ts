@@ -49,9 +49,9 @@ export class cb_BetArea extends BaseUI {
         let worldPos = this.mBetBtn.node.worldPosition; 
         let offset = this.mBetBtn.node.getComponent(UITransform).contentSize;
         let haflOffset = new Size(offset.width/2 , offset.height/2);
-        let localUid = LocalPlayerData.GetInstance().Data_Uid.mData;
+        let localUid = LocalPlayerData.Instance.Data_Uid.mData;
         let betConfig = new cb_BetConfig(worldPos,haflOffset,this.mBetID ,localUid );
-        CowboyData.GetInstance().Data_BetConfig.mData = betConfig;
+        CowboyData.Instance.Data_BetConfig.mData = betConfig;
     }
 
 

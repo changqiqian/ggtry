@@ -1,18 +1,12 @@
 import { BaseData } from "../../base/BaseData";
-import { BaseDataNotify } from "../../base/BaseDataNotify";
+import { SingletonBaseNotify } from "../../base/Singleton";
 
-export class LoadingData extends BaseDataNotify 
+
+export class LoadingData extends SingletonBaseNotify<LoadingData>()
 {
-    private static Instance:LoadingData = null;
-
-    public static GetInstance() : LoadingData
+    protected ResetInstance() 
     {
-        if(LoadingData.Instance == null)
-        {
-            LoadingData.Instance = new LoadingData();
-        }
-
-        return LoadingData.Instance;
+        LoadingData.ClearInstance();
     }
     
  

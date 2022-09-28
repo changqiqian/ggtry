@@ -25,7 +25,7 @@ export class Game_MttResultLayer extends BaseUI
     {
         this.mRecrodBtn.SetClickCallback(()=>
         {
-            UIMgr.GetInstance().ChangeScene(SceneType.Hall);
+            UIMgr.Instance.ChangeScene(SceneType.Hall);
         });
     }
     RegDataNotify()

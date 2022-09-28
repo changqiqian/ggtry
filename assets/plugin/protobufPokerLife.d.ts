@@ -368,38 +368,38 @@ export enum RecordDateType {
     RecordDateType_Month = 2
 }
 
-/** Represents a Result. */
-export class Result implements IResult {
+/** Represents a CommonResult. */
+export class CommonResult implements ICommonResult {
 
     /**
-     * Constructs a new Result.
+     * Constructs a new CommonResult.
      * @param [p] Properties to set
      */
-    constructor(p?: IResult);
+    constructor(p?: ICommonResult);
 
-    /** Result resId. */
+    /** CommonResult resId. */
     public resId: number;
 
-    /** Result resMessage. */
+    /** CommonResult resMessage. */
     public resMessage: string;
 
     /**
-     * Encodes the specified Result message. Does not implicitly {@link Result.verify|verify} messages.
-     * @param m Result message or plain object to encode
+     * Encodes the specified CommonResult message. Does not implicitly {@link CommonResult.verify|verify} messages.
+     * @param m CommonResult message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IResult, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: ICommonResult, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a Result message from the specified reader or buffer.
+     * Decodes a CommonResult message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns Result
+     * @returns CommonResult
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Result;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CommonResult;
 }
 
 /** Represents a C2SGetUserInfo. */
@@ -666,7 +666,7 @@ export class S2CChangeUserInfo implements IS2CChangeUserInfo {
     constructor(p?: IS2CChangeUserInfo);
 
     /** S2CChangeUserInfo result. */
-    public result?: (IResult|null);
+    public result?: (ICommonResult|null);
 
     /** S2CChangeUserInfo baseInfo. */
     public baseInfo?: (IUserBaseInfo|null);
@@ -703,7 +703,7 @@ export class C2SLogin implements IC2SLogin {
     public loginType: LoginType;
 
     /** C2SLogin phoneNumber. */
-    public phoneNumber: number;
+    public phoneNumber: string;
 
     /** C2SLogin code. */
     public code: string;
@@ -854,7 +854,7 @@ export class S2CLogin implements IS2CLogin {
     constructor(p?: IS2CLogin);
 
     /** S2CLogin result. */
-    public result?: (IResult|null);
+    public result?: (ICommonResult|null);
 
     /**
      * Encodes the specified S2CLogin message. Does not implicitly {@link S2CLogin.verify|verify} messages.
@@ -913,7 +913,7 @@ export class S2CRegister implements IS2CRegister {
     constructor(p?: IS2CRegister);
 
     /** S2CRegister result. */
-    public result?: (IResult|null);
+    public result?: (ICommonResult|null);
 
     /**
      * Encodes the specified S2CRegister message. Does not implicitly {@link S2CRegister.verify|verify} messages.

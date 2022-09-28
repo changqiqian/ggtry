@@ -19,7 +19,7 @@ export class Club_RecordRecipeLayer extends BaseUI
     RegDataNotify()
     {
 
-        HallData.GetInstance().Data_ClubRecordDetailSubPage.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ClubRecordDetailSubPage.AddListenner(this,(_data)=>
         {
             this.Show(_data == Club_RecordDetailSubPage.Recipe);
         })

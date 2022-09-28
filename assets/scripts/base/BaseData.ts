@@ -26,7 +26,8 @@ export class BaseData <T>
             set(val)
             { 
                 this.UpdateData(val);
-            }
+            },
+            
         }
         Object.defineProperties(this, propertyDefine);
         this.mEventArray = new Array<DataEvent>();

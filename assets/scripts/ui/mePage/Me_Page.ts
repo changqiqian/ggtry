@@ -21,7 +21,7 @@ export class Me_Page extends BaseUI
     {
 
 
-        HallData.GetInstance().Data_SubPage.AddListenner(this , (_data)=>
+        HallData.Instance.Data_SubPage.AddListenner(this , (_data)=>
         {
             this.Show(_data == Hall_SubPage.Me);
         })

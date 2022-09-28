@@ -4,7 +4,7 @@ import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 export class GameConfig
 {
     public static DebugMode =  true;
-    public static DevelopIP = "192.168.1.12:9001"; //研发环境ip
+    public static DevelopIP = "192.168.68.112:9001"; //研发环境ip
     public static TestIP = "13.229.222.39:9008"; //测试环境ip
     public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip
     public static SeverUrl = "ws://13.229.222.39:9008/pokerlife";
@@ -19,7 +19,7 @@ export class GameConfig
     public static VersionInfo = "alpha"
       
     public static LOGIN_TOKEN;
-    public static LOGIN_USER;
+    public static LOGIN_PHONE;
 
     public static WebberAddr= "http://18.142.237.115:9487"; //打开收银台web
 
@@ -258,23 +258,23 @@ export class GameConfig
     public static LoadToken()
     {
         GameConfig.LOGIN_TOKEN = GameConfig.ReadSimpleData("LOGIN_TOKEN", null);
-        GameConfig.LOGIN_USER = GameConfig.ReadSimpleData("LOGIN_USER", null);
+        GameConfig.LOGIN_PHONE = GameConfig.ReadSimpleData("LOGIN_PHONE", null);
     }
 
     public static ClearToken()
     {
         GameConfig.LOGIN_TOKEN = null;
-        GameConfig.LOGIN_USER = null;
+        GameConfig.LOGIN_PHONE = null;
         GameConfig.WriteSimpleData("LOGIN_TOKEN", null);
-        GameConfig.WriteSimpleData("LOGIN_USER", null);
+        GameConfig.WriteSimpleData("LOGIN_PHONE", null);
     }
 
     public static SaveToken(_token:string , _user:string =null)
     {
         GameConfig.LOGIN_TOKEN = _token;
-        GameConfig.LOGIN_USER = _user;
+        GameConfig.LOGIN_PHONE = _user;
         GameConfig.WriteSimpleData("LOGIN_TOKEN", _token);
-        GameConfig.WriteSimpleData("LOGIN_USER", _user);
+        GameConfig.WriteSimpleData("LOGIN_PHONE", _user);
     }
     
     public static SaveBBToggle(_value: boolean) 

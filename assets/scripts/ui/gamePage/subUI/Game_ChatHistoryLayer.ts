@@ -19,7 +19,7 @@ export class Game_ChatHistoryLayer extends BaseUI
     RegDataNotify()
     {
 
-        GameData.GetInstance().Data_ChatingSubLayer.AddListenner(this , (_data)=>
+        GameData.Instance.Data_ChatingSubLayer.AddListenner(this , (_data)=>
         {
             this.node.active = _data == Game_ChattingSubLayer.ChatHistory
         });

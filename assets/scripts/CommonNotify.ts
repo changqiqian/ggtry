@@ -1,26 +1,19 @@
 import { BaseData } from "./base/BaseData";
-import { BaseDataNotify } from "./base/BaseDataNotify";
 import { DataNotify } from "./base/DataNotify";
 import { Localization } from "./base/Localization";
 import { LocalPlayerData } from "./base/LocalPlayerData";
+import { SingletonBaseNotify } from "./base/Singleton";
 import { SceneType, UIMgr } from "./base/UIMgr";
 import { GameConfig } from "./GameConfig";
 import { Network } from "./network/Network";
 
-export class CommonNotify extends BaseDataNotify 
+export class CommonNotify extends SingletonBaseNotify<CommonNotify>()
 {
-    private static Instance:CommonNotify = null;
-
-    public static GetInstance() : CommonNotify
+    protected ResetInstance() 
     {
-        if(CommonNotify.Instance == null)
-        {
-            CommonNotify.Instance = new CommonNotify();
-            CommonNotify.Instance.RegisteMsg();
-        }
-
-        return CommonNotify.Instance;
+        CommonNotify.ClearInstance();
     }
+
     
     
     Data_SocketOpen : BaseData<boolean> = new BaseData<boolean>(true);
@@ -30,17 +23,6 @@ export class CommonNotify extends BaseDataNotify
 
     Data_LastInputPhoneNum : BaseData<string> = new BaseData<string>(); //最后一次输入的手机号
     Data_LastInputPwd : BaseData<string> = new BaseData<string>();//最后一次输入的密码
-
-
-    RegisteMsg()
-    {
-
-    }
-
-    UnregisteMsg()
-    {
-        Network.GetInstance().RemoveListenner(this);
-    }
 
 }
 

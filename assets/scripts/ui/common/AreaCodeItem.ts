@@ -19,12 +19,12 @@ export class AreaCodeItem extends BaseUI {
     {
         this.mBtn.SetClickCallback(()=>
         {
-            LocalPlayerData.GetInstance().Data_AreaCode.mData = this.mIndex;
+            LocalPlayerData.Instance.Data_AreaCode.mData = this.mIndex;
         });
     }
     RegDataNotify() 
     {
-        LocalPlayerData.GetInstance().Data_AreaCode.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_AreaCode.AddListenner(this,(_data)=>
         {
             this.UpdateSelectStatus(_data);
         })
@@ -44,7 +44,7 @@ export class AreaCodeItem extends BaseUI {
     {
         this.mBtn.SetTitle(_countryName + " " + _areaCode);
         this.mIndex = _index;
-        this.UpdateSelectStatus(LocalPlayerData.GetInstance().Data_AreaCode.mData);
+        this.UpdateSelectStatus(LocalPlayerData.Instance.Data_AreaCode.mData);
     }
 
     UpdateSelectStatus(_index : number)

@@ -36,7 +36,7 @@ export class Mtt_RankPage extends BaseUI
     
     onEnable()
     {
-        HallData.GetInstance().Data_MttRankSubPage.mData = Mtt_RankSubPage.All;
+        HallData.Instance.Data_MttRankSubPage.mData = Mtt_RankSubPage.All;
     }
 
     InitParam() 
@@ -70,7 +70,7 @@ export class Mtt_RankPage extends BaseUI
                     break;
             }
             current.SetTitle(title);
-            current.SetDataNotify(HallData.GetInstance().Data_MttRankSubPage,i);
+            current.SetDataNotify(HallData.Instance.Data_MttRankSubPage,i);
         }
 
         this.AddSubView("mttPage","prefab/Mtt_SeasonRankPage" , null , this.mSubLayer);

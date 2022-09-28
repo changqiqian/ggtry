@@ -63,13 +63,13 @@ export abstract class BaseUI extends Component {
     }
 
     onDestroy() {
-        CowboyData.GetInstance().RemoveAllDataListennerByTarget(this);
-        LoadingData.GetInstance().RemoveAllDataListennerByTarget(this);
-        LoginData.GetInstance().RemoveAllDataListennerByTarget(this);
-        HallData.GetInstance().RemoveAllDataListennerByTarget(this);
-        GameData.GetInstance().RemoveAllDataListennerByTarget(this);
-        LocalPlayerData.GetInstance().RemoveAllDataListennerByTarget(this);
-        CommonNotify.GetInstance().RemoveAllDataListennerByTarget(this);
+        CowboyData.Instance.RemoveAllDataListennerByTarget(this);
+        LoadingData.Instance.RemoveAllDataListennerByTarget(this);
+        LoginData.Instance.RemoveAllDataListennerByTarget(this);
+        HallData.Instance.RemoveAllDataListennerByTarget(this);
+        GameData.Instance.RemoveAllDataListennerByTarget(this);
+        LocalPlayerData.Instance.RemoveAllDataListennerByTarget(this);
+        CommonNotify.Instance.RemoveAllDataListennerByTarget(this);
         this.StopSecondsTimer();
         this.CustmoerDestory();
         this.mLayerList = null;
@@ -127,7 +127,7 @@ export abstract class BaseUI extends Component {
     }
 
     LoadPrefab(_bundleName: string, _assetPath: string, _loadFinish: Function) {
-        UIMgr.GetInstance().CreatePrefab(_bundleName, _assetPath, (_prefab) => {
+        UIMgr.Instance.CreatePrefab(_bundleName, _assetPath, (_prefab) => {
             if (cc.isValid(this.node, true) == false) {
                 return;
             }
@@ -198,12 +198,12 @@ export abstract class BaseUI extends Component {
 
     ShowLayer(_bundleName: string, _assetPath: string, _show: boolean = true, _finishFunction: Function = null) 
     {
-        UIMgr.GetInstance().ShowLayer(_bundleName, _assetPath, _show, _finishFunction);
+        UIMgr.Instance.ShowLayer(_bundleName, _assetPath, _show, _finishFunction);
     }
 
     ShowWindow(_bundleName: string, _prefabPath: string, _show: boolean = true, _finishFunction: Function = null) 
     {
-        UIMgr.GetInstance().ShowWindow(_bundleName, _prefabPath, _show, _finishFunction);
+        UIMgr.Instance.ShowWindow(_bundleName, _prefabPath, _show, _finishFunction);
     }
 
 

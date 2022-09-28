@@ -18,14 +18,14 @@ export class Club_ShortScoreMode extends BaseUI
         for(let i = 0 ; i < this.mScoreModeToggles.children.length ; i++)
         {
             let currentToggle = this.mScoreModeToggles.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(HallData.GetInstance().Data_ClubCreateShortScoreMode,i);  
+            currentToggle.SetDataNotify(HallData.Instance.Data_ClubCreateShortScoreMode,i);  
         }
     }
     RegDataNotify()
     {
-        HallData.GetInstance().Data_ClubCreateShortScoreMode.AddListenner(this , (_data)=>
+        HallData.Instance.Data_ClubCreateShortScoreMode.AddListenner(this , (_data)=>
         {
-            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.shortScoreMode = _data;
+            HallData.Instance.Data_Club_CreateTexasConfig.mData.shortScoreMode = _data;
         })
     }
     LateInit()

@@ -8,6 +8,7 @@ import {  Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { TipsWindow } from '../common/TipsWindow';
+import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoginUI')
@@ -36,7 +37,7 @@ export class LoginUI extends BaseUI
     TestIpBtn: BaseButton = null;
     InitParam() 
     {
-        GameConfig.LoadToken();
+        
     }
     BindUI() 
     {
@@ -52,7 +53,7 @@ export class LoginUI extends BaseUI
                 tempScript.SetTips(tips);
                 tempScript.SetCallback(()=>
                 {
-                    UIMgr.GetInstance().ShowToast("摄像头功能还没做");
+                    UIMgr.Instance.ShowToast("摄像头功能还没做");
                 })
             })
         });
@@ -63,7 +64,7 @@ export class LoginUI extends BaseUI
         this.DevIpBtn.SetClickCallback(()=>
         {
             GameConfig.SetSeverUrl(GameConfig.DevelopIP);
-            Network.GetInstance().CreateWS();
+            Network.Instance.CreateWS();
             this.DebugFunction.active = false;
         });
 
@@ -71,33 +72,37 @@ export class LoginUI extends BaseUI
         this.TestIpBtn.SetClickCallback(()=>
         {
             GameConfig.SetSeverUrl(GameConfig.TestIP);
-            Network.GetInstance().CreateWS();
+            Network.Instance.CreateWS();
             this.DebugFunction.active = false;
         });
     }
     RegDataNotify() 
     {
-        CommonNotify.GetInstance().Data_LoginSuccessData.AddListenner(this,(_data)=>
+        CommonNotify.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
-            UIMgr.GetInstance().ChangeScene(SceneType.Hall);
+            UIMgr.Instance.ChangeScene(SceneType.Hall);
         });
         
-        CommonNotify.GetInstance().Data_SocketOpen.AddListenner(this,(_data)=>
+        CommonNotify.Instance.Data_SocketOpen.AddListenner(this,(_data)=>
         {
-            NetworkSend.SendLogin();
+            if(GameConfig.LOGIN_TOKEN != null)
+            {
+                console.log("Token 自动登录")
+                NetworkSend.Instance.SendLoginWithToken(GameConfig.LOGIN_PHONE,GameConfig.LOGIN_TOKEN);
+            }
         });
     }
     LateInit() 
     {
         if(GameConfig.DebugMode == false)
         {
-            Network.GetInstance().CreateWS();
+            Network.Instance.CreateWS();
         }
     }
 
     CustmoerDestory() 
     {
-        
+        LoginData.Instance.Clear();
     }
 
     private OnLoginBtn()

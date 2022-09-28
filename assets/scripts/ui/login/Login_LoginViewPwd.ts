@@ -75,33 +75,33 @@ export class Login_LoginViewPwd extends BaseUI {
         {
             if(this.mAccountEditBox.string.length < 7) 
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00002"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00002"));
                 return
             }
 
             if(this.mAccountEditBox.string.indexOf(" ") != -1) 
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
                 return
             }
 
             let password = this.mPwdEditbox.string;
             if(password === "")
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00004"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00004"));
                 return
             }
 
             if(password.indexOf(" ") != -1) 
             {
-                UIMgr.GetInstance().ShowToast(Localization.GetString("00015"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
                 return
             }
 
 
-            CommonNotify.GetInstance().Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
-            CommonNotify.GetInstance().Data_LastInputPwd.mData = password;
-            let currentAreaCodeIndex = LocalPlayerData.GetInstance().Data_AreaCode.mData;
+            CommonNotify.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
+            CommonNotify.Instance.Data_LastInputPwd.mData = password;
+            let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
             let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
             let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
         });
@@ -115,7 +115,7 @@ export class Login_LoginViewPwd extends BaseUI {
     RegDataNotify() 
     {
 
-        LocalPlayerData.GetInstance().Data_AreaCode.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_AreaCode.AddListenner(this,(_data)=>
         {
             this.mAreaCodeBtn.SetTitle(GameConfig.AreaCodeList[_data].areaCode);
         })

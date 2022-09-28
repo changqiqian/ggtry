@@ -42,7 +42,7 @@ export class Mtt_WeekRankPage extends BaseUI
     }
     RegDataNotify() 
     {
-        HallData.GetInstance().Data_MttRankSubPage.AddListenner(this,(_data)=>
+        HallData.Instance.Data_MttRankSubPage.AddListenner(this,(_data)=>
         {
             this.Show(_data == Mtt_RankSubPage.Week);
             if(_data == Mtt_RankSubPage.Week)

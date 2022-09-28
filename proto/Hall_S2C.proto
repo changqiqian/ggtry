@@ -19,6 +19,6 @@ message S2CGetUserInfo {
 
 //修改用户数据
 message S2CChangeUserInfo {
-  Result result = 1;
+  CommonResult result = 1;
   UserBaseInfo baseInfo = 2;
 }

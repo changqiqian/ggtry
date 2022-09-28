@@ -35,24 +35,24 @@ export class Club_CreateBasicOption extends BaseUI
         for(let i = 0 ; i < this.mCurrencyModeToggle.children.length ; i++)
         {
             let currentToggle = this.mCurrencyModeToggle.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(HallData.GetInstance().Data_ClubCreateGameCurrencyType,i);  
+            currentToggle.SetDataNotify(HallData.Instance.Data_ClubCreateGameCurrencyType,i);  
         }
 
         for(let i = 0 ; i < this.mTaxToggle.children.length ; i++)
         {
             let currentToggle = this.mTaxToggle.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(HallData.GetInstance().Data_ClubCreateGameTaxType,i);  
+            currentToggle.SetDataNotify(HallData.Instance.Data_ClubCreateGameTaxType,i);  
         }
     }
     RegDataNotify()
     {
-        HallData.GetInstance().Data_ClubCreateGameTaxType.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ClubCreateGameTaxType.AddListenner(this,(_data)=>
         {
             this.mMeassureSliderTax.InitWithData(GameConfig.GetTexasCreateRoomTaxTitle(_data),
             GameConfig.GetTexasCreateRoomTaxValue(_data),
             (_value , _index)=>
             {
-                HallData.GetInstance().Data_Club_CreateTexasConfig.mData.taxRatio = _index;
+                HallData.Instance.Data_Club_CreateTexasConfig.mData.taxRatio = _index;
             });
             if(_data == GameTaxType.GameTaxType_EveryRound)
             {
@@ -62,18 +62,18 @@ export class Club_CreateBasicOption extends BaseUI
             {
                 this.mTaxTips.string = Localization.GetString("00091");
             }
-            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.taxType = _data;
+            HallData.Instance.Data_Club_CreateTexasConfig.mData.taxType = _data;
         })
 
-        HallData.GetInstance().Data_ClubCreateGameTaxRate.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ClubCreateGameTaxRate.AddListenner(this,(_data)=>
         {
             this.mMeassureSliderTax.SetIndex(_data);
         })
 
 
-        HallData.GetInstance().Data_ClubCreateGameCurrencyType.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ClubCreateGameCurrencyType.AddListenner(this,(_data)=>
         {
-            HallData.GetInstance().Data_Club_CreateTexasConfig.mData.currencyType = _data;
+            HallData.Instance.Data_Club_CreateTexasConfig.mData.currencyType = _data;
         })
 
     }

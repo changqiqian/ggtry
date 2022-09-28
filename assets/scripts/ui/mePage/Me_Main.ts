@@ -40,13 +40,13 @@ export class Me_Main extends BaseUI {
             if (sys.isBrowser) {
                 this.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => {
                     let tempScript = _script as InsertWebView;
-                    let param = '/?userId=' + LocalPlayerData.GetInstance().Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
+                    let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
                     tempScript.SetUrl(GameConfig.WebberAddr, param);
                 });
             } else {
                 this.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => {
                     let tempScript = _script as FullScreenWebView;
-                    let param = '/?userId=' + LocalPlayerData.GetInstance().Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
+                    let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
                     tempScript.SetUrl(GameConfig.WebberAddr, param);
                 });
             }
@@ -84,7 +84,7 @@ export class Me_Main extends BaseUI {
         });
 
         this.mSettingBtn.SetClickCallback(() => {
-            UIMgr.GetInstance().ShowWindow('mePage', 'prefab/Me_SettingWindow');
+            UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_SettingWindow');
         });
 
         this.mAgentBtn.SetClickCallback(() => {

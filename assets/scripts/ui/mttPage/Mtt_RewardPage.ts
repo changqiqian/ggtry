@@ -31,7 +31,7 @@ export class Mtt_RewardPage extends BaseUI
     {
 
 
-        HallData.GetInstance().Data_MttInfoSubPage.AddListenner(this , (_data)=>
+        HallData.Instance.Data_MttInfoSubPage.AddListenner(this , (_data)=>
         {
             this.Show(_data == Mtt_InfoSubPage.RewardPage);
         })

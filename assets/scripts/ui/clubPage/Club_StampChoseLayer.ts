@@ -15,7 +15,7 @@ export class Club_StampChoseLayer extends BaseUI
     mScrollView: ScrollView = null;
     InitParam()
     {
-        HallData.GetInstance().Data_ClubStampIndex.mData = 0;
+        HallData.Instance.Data_ClubStampIndex.mData = 0;
     }
     BindUI()
     {
@@ -26,7 +26,7 @@ export class Club_StampChoseLayer extends BaseUI
             this.LoadSprite("common" , "texutre/club/" + logoName , (_spriteFrame)=>
             {
                 currentToggle.SetImage(_spriteFrame)
-                currentToggle.SetDataNotify(HallData.GetInstance().Data_ClubStampIndex,i);
+                currentToggle.SetDataNotify(HallData.Instance.Data_ClubStampIndex,i);
             })
         }
     }

@@ -9,6 +9,7 @@ import { LoginUI } from "../ui/login/LoginUI";
 import { BaseUI } from "./BaseUI";
 import { BaseWindow } from "./BaseWindow";
 import { ResMgr } from "./ResMgr";
+import { Singleton } from "./Singleton";
 
 class LayerKeyPair
 {
@@ -55,17 +56,9 @@ export enum SceneType
     Game,
 }
 
-export class UIMgr 
+export class UIMgr extends Singleton<UIMgr>()
 {
-    private static instance : UIMgr = null;
-    public static GetInstance() :UIMgr
-    {
-        if(UIMgr.instance == null)
-        {
-            UIMgr.instance = new UIMgr();
-        }
-        return UIMgr.instance;
-    }
+    
 
     mLayerRoot : cc.Node = null;
     mWindowRoot : cc.Node = null;

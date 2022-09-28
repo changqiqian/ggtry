@@ -1,9 +1,8 @@
 import { _decorator, Component, Node, director, debug, setDisplayStats } from 'cc';
-import { BaseData } from './base/BaseData';
-import { BaseDataNotify } from './base/BaseDataNotify';
 import { SceneType, UIMgr } from './base/UIMgr';
 import { GameConfig } from './GameConfig';
-import { MeassureSlider } from './ui/common/MeassureSlider';
+import { NetworkReceive } from './network/NetworkReceive';
+
 
 const { ccclass, property } = _decorator;
 
@@ -21,13 +20,15 @@ export class Start extends Component
     }
     start() 
     {
-
-        UIMgr.GetInstance().Init(()=>
+        //注册所有网络消息
+        NetworkReceive.Instance.RegisterMsg();
+        GameConfig.LoadToken();
+        //初始化UIMgr
+        UIMgr.Instance.Init(()=>
         {
-            UIMgr.GetInstance().ChangeScene(SceneType.Loading);  
+            //初始化UIMgr成功后   跳转到Loading页面
+            UIMgr.Instance.ChangeScene(SceneType.Loading);  
         });
-    
-
     }
 
 

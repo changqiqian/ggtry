@@ -1,4 +1,5 @@
 import { _decorator, Component, Node } from 'cc';
+import { Singleton } from './Singleton';
 
 
 
@@ -38,19 +39,13 @@ export enum Combiantion
     RoyalStraightFlush,
 }
 
-export class Calculator{
-    private static instance : Calculator = null;
-    public static GetInstance() :Calculator
-    {
-        if(Calculator.instance == null)
-        {
-            Calculator.instance = new Calculator();
-        }
-        return Calculator.instance;
-    }
+export class Calculator extends Singleton<Calculator>()
+{
+
 
     constructor()
     {
+        super();
         this.mCurrentCombineList = new Array<Combiantion>();
         this.mCurrentCombineList.push(Combiantion.None);
         this.mCurrentCombineList.push(Combiantion.High);

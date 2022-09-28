@@ -51,7 +51,7 @@ export class AreaCodeView extends BaseUI {
     RegDataNotify() 
     {
 
-        LocalPlayerData.GetInstance().Data_AreaCode.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_AreaCode.AddListenner(this,(_data)=>
         {
             if(_data != null)
             {
