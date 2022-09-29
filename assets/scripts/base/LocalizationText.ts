@@ -11,7 +11,10 @@ export class LocalizationText extends Component
     start() 
     {
         this.mLabel = this.node.getComponent(Label);
-        this.mLabel.string = Localization.GetString(this.mKey);
+        if(this.mLabel)
+        {
+            this.mLabel.string = Localization.GetString(this.mKey);
+        }
     }
 }
 

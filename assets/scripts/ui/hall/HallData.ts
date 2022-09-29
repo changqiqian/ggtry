@@ -77,7 +77,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubCreateShortBaseScore : BaseData<number> = new BaseData<number>(); //短牌创建时候的底分选择
     Data_ClubCreateShortButtonDouble : BaseData<boolean> = new BaseData<boolean>();//短牌创建时候的 庄前双倍底分
 
-
+    //创建俱乐部房间时候的 生成基础配置
     ResetCreateRoomParam(_type : GameType)
     {
         this.Data_ClubCreateGameType.mData = _type;
