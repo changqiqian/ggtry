@@ -149,10 +149,14 @@
       {
         "__uuid__": "28067731-2d1f-46d3-98d7-b8cf5a739fe1",
         "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "2667e87d-0463-4a1d-8232-ec2364e61d86",
+        "__expectedType__": "cc.AnimationClip"
       }
     ],
     "_defaultClip": {
-      "__uuid__": "28067731-2d1f-46d3-98d7-b8cf5a739fe1",
+      "__uuid__": "2667e87d-0463-4a1d-8232-ec2364e61d86",
       "__expectedType__": "cc.AnimationClip"
     },
     "_id": ""
