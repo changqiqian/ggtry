@@ -27,8 +27,6 @@ export class LoadingUI extends BaseUI
         this.mTips.string = "";
         this.mPercent.string = "";
         this.mProgress.fillRange = 0;
-        let systemLanguage = JsbScript.getSysLanguage();
-        Localization.SetLanguage(systemLanguage);
     }
     BindUI() 
     {
