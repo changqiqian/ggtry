@@ -32,7 +32,7 @@ export function SingletonBaseNotify<T>()
 {
     class SingletonB 
     {
-        protected constructor() 
+        public constructor() 
         {
 
         }

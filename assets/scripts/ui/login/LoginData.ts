@@ -1,9 +1,7 @@
 
+import { js, _decorator } from "cc";
 import { BaseData } from "../../base/BaseData";
-import { DataNotify } from "../../base/DataNotify";
 import { SingletonBaseNotify } from "../../base/Singleton";
-import { Network } from "../../network/Network";
-
 
 
 export class LoginData extends SingletonBaseNotify<LoginData>()
@@ -19,6 +17,6 @@ export class LoginData extends SingletonBaseNotify<LoginData>()
     Data_SmsCodeType : BaseData<SmsCodeType> = new BaseData<SmsCodeType>();
     Data_ShowAreaCodeView : BaseData<boolean> = new BaseData<boolean>(true);
     Data_InSignInProgress : BaseData<boolean> = new BaseData<boolean>();
-
 }
+
 

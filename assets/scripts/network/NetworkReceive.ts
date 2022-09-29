@@ -1,4 +1,4 @@
-import { Enum } from "cc";
+import { Enum, js } from "cc";
 import { Singleton } from "../base/Singleton";
 import { UIMgr } from "../base/UIMgr";
 import { LoginData } from "../ui/login/LoginData";
@@ -6,9 +6,27 @@ import { Network } from "./Network";
 
 export class NetworkReceive extends Singleton<NetworkReceive>()
 {
+    private static GetClassName(_msgId : number) : string
+    {
+        for(let i = 0 ; i < Object.keys(MessageId).length  ; i++)
+        {
+            let currentKey = Object.keys(MessageId)[i];
+            if(MessageId[currentKey] == 1003)
+            {
+                let className = currentKey.replace("_" , "");
+                console.log("className==" + className);
+                return className;
+            }
+        }
+
+        //js.setClassName("S2CLogin",S2CLogin);
+        //js.getClassByName(NetworkReceive.GetClassName(MessageId.S2C_Login))["decode"](_data);
+        return "";
+    }
 
     public RegisterMsg()
     {
+     
         Network.Instance.AddMsgListenner(MessageId.S2C_Login,(_data)=>
         {
             let msg = S2CLogin.decode(_data);

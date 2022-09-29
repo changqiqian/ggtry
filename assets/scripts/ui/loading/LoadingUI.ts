@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, find, Label, Sprite, sys } from 'cc';
+import { _decorator, Component, Node, find, Label, Sprite, sys, js } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { JsbScript } from '../../base/JsbScript';
 import { Localization } from '../../base/Localization';
@@ -30,6 +30,7 @@ export class LoadingUI extends BaseUI
     }
     BindUI() 
     {
+
     }
 
     RegDataNotify() 

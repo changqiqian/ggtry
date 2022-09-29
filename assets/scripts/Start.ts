@@ -1,9 +1,10 @@
-import { _decorator, Component, Node, director, debug, setDisplayStats } from 'cc';
+import { _decorator, Component, Node, director, debug, setDisplayStats, js } from 'cc';
 import { JsbScript } from './base/JsbScript';
 import { Localization } from './base/Localization';
 import { SceneType, UIMgr } from './base/UIMgr';
 import { GameConfig } from './GameConfig';
 import { NetworkReceive } from './network/NetworkReceive';
+
 
 
 const { ccclass, property } = _decorator;
@@ -36,6 +37,7 @@ export class Start extends Component
             //初始化UIMgr成功后   跳转到Loading页面
             UIMgr.Instance.ChangeScene(SceneType.Loading);  
         });
+
     }
 
 

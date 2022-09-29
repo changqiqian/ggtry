@@ -128,7 +128,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
         this.Data_Club_CreateTexasConfig.mData.shortBaseScore = this.Data_ClubCreateShortBaseScore.mData;
         this.Data_Club_CreateTexasConfig.mData.buttonDouble = this.Data_ClubCreateShortButtonDouble.mData;
     }
-
+    //读取已经储存的 房间创建配置
     ReadModule(_index : number)
     {
         let strData = GameConfig.GetCreateRoomModule(_index);
@@ -162,7 +162,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
         this.Data_ClubCreateShortBaseScore.mData = this.Data_Club_CreateTexasConfig.mData.shortBaseScore
         this.Data_ClubCreateShortButtonDouble.mData = this.Data_Club_CreateTexasConfig.mData.buttonDouble
     }
-
+    //把房间配置转换成 proto
     ConvertCreateTexasConfigToProto(_config : Club_CreateTexasConfig) : ClubGameConfig
     {
         let finalData = new ClubGameConfig();
