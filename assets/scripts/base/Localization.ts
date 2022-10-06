@@ -85,6 +85,7 @@ export class Localization {
         { name: 'CountryName41', ch: '越南', en: 'Vietnam' },
         { name: 'CountryName42', ch: '阿联酋', en: 'United Arab Emirates' },
 
+        { name: '00000', ch: '资源加载完成', en: 'load src finished' },
         { name: '00001', ch: '本应用软件在该地区无法使用，造成不便请见谅。', en: 'This application is not available in your region.Sorry for the inconvenience.' },
         { name: '00002', ch: '无效的电话号码！', en: 'Invalid Phone Number!' },
         { name: '00003', ch: '操作无法完成。（错误代码：', en: "The operation couldn't be completed.(Error code:" },
@@ -181,6 +182,7 @@ export class Localization {
         { name: '00094', ch: '保存模版成功', en: 'Save success' },
         { name: '00095', ch: '保存模版失败', en: 'Save failed' },
         { name: '00096', ch: '您确定要删除模版吗？', en: 'Are you sure to delete?' },
+        { name: '00097', ch: '本地资源加载中', en: 'Loading resource...' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

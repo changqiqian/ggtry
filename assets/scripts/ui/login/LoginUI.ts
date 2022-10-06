@@ -17,7 +17,8 @@ export class LoginUI extends BaseUI
 
     public static GetUsingBundleFolder() : Array<string>
     {
-        return ["login","clubPage"];
+        return [];
+        //return ["login","clubPage"];
     }
     
     @property(Label) 

@@ -11,7 +11,8 @@ export class GameUI extends BaseUI
 {
     public static GetUsingBundleFolder() : Array<string>
     {
-        return ["gamePage" , "emoji"];
+        return [];
+        //return ["gamePage" , "emoji"];
     }
 
     InitParam() 

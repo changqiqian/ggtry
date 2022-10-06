@@ -8,6 +8,7 @@ import { LoadingUI } from "../ui/loading/LoadingUI";
 import { LoginUI } from "../ui/login/LoginUI";
 import { BaseUI } from "./BaseUI";
 import { BaseWindow } from "./BaseWindow";
+import { Localization } from "./Localization";
 import { ResMgr } from "./ResMgr";
 import { Singleton } from "./Singleton";
 
@@ -26,17 +27,15 @@ class LayerKeyPair
 
 class SceneConfig
 {
-    constructor(_type :SceneType ,_prefabPath : string, _defaultBundle : string , _bundles : Array<string> , _folders : Array<string>) 
+    constructor(_type :SceneType ,_prefabPath : string, _defaultBundle : string , _bundles : Array<string>) 
     {
         this.type = _type;
         this.bundleNames = _bundles;
-        this.resFolders = _folders;
         this.prefabPath = _prefabPath;
         this.defaultBundle = _defaultBundle;
     }
     type : SceneType;
     bundleNames : Array<string>; //依赖的所有bundle
-    resFolders : Array<string>; //每个bundle下的目录结构
     defaultBundle : string; //作为当前场景的prefab属于哪一个bundle
     prefabPath : string; //作为当前场景的prefab的路径
 }
@@ -58,8 +57,9 @@ export enum SceneType
 
 export class UIMgr extends Singleton<UIMgr>()
 {
-    
-
+    public static ResFolder : Array<string>; //Bundle目录结构
+    public static InitialBundle : Array<string>;//初始bundle
+    public static RestBundle : Array<string>;//剩余bundle
     mLayerRoot : cc.Node = null;
     mWindowRoot : cc.Node = null;
     mTopRoot : cc.Node = null;
@@ -80,19 +80,28 @@ export class UIMgr extends Singleton<UIMgr>()
         this.mSceneConfig = new Array<SceneConfig>();
 
         //场景配置
-        let resFolder:Array<string> = ["anm","font","music","prefab","texture"];
-        let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,"loading" ,LoadingUI.GetUsingBundleFolder(),resFolder);
-        let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,"login",LoginUI.GetUsingBundleFolder(),resFolder);
-        let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI" ,"hall",HallUI.GetUsingBundleFolder(),resFolder);
-        let gameConfig = new SceneConfig(SceneType.Game, "prefab/GameUI" ,"gamePage",GameUI.GetUsingBundleFolder(),resFolder);
+        UIMgr.ResFolder = ["anm","font","music","prefab","texture"];
+        UIMgr.InitialBundle = ["common","loading"];
+        UIMgr.RestBundle = ["activityPage","cashPage","clubPage","emoji","gamePage","hall",
+        "login","mePage","mttPage","cowboy"];
+        let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,"loading" ,LoadingUI.GetUsingBundleFolder());
+        let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,"login",LoginUI.GetUsingBundleFolder());
+        let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI" ,"hall",HallUI.GetUsingBundleFolder());
+        let gameConfig = new SceneConfig(SceneType.Game, "prefab/GameUI" ,"gamePage",GameUI.GetUsingBundleFolder());
 
         this.mSceneConfig.push(loadingConfig);
         this.mSceneConfig.push(loginConfig);
         this.mSceneConfig.push(hallConfig);
         this.mSceneConfig.push(gameConfig);
         
-        //公用资源加载
-        this.PreloadRes(["common"], resFolder , ()=>
+
+        this.LoadInitRes(_loadFinish);
+
+    }
+    //公用资源加载和启动资源
+    public LoadInitRes(_loadFinish : Function)
+    {
+        this.PreloadRes(UIMgr.InitialBundle, ()=>
         {
             //初始化菊花图
             this.CreatePrefab("common","prefab/LoadingMask" , (_tempNode)=>
@@ -112,6 +121,15 @@ export class UIMgr extends Singleton<UIMgr>()
             });
             _loadFinish();
         });
+    }
+
+    //加载 除了启动资源外的剩下所有资源
+    public LoadRestRes(_loadFinish : Function , _loadCallback : Function)
+    {
+        this.PreloadRes(UIMgr.RestBundle , ()=>
+        {
+            _loadFinish();
+        } , _loadCallback);
     }
 
     public ShowLoading(_show:boolean , _tips:string = "Loading...")
@@ -236,32 +254,47 @@ export class UIMgr extends Singleton<UIMgr>()
         {
             let configDeleteScene = this.GetSceneConfig(this.mCurrentScene);
             this.DeleteScene( this.mCurrentScene);
-            for(let i = 0 ; i < configDeleteScene.bundleNames.length ; i++)
-            {
-                ResMgr.ReleaseBundle(configDeleteScene.bundleNames[i]);
-            }
+            //删除bundle
+            // for(let i = 0 ; i < configDeleteScene.bundleNames.length ; i++)
+            // {
+            //     ResMgr.ReleaseBundle(configDeleteScene.bundleNames[i]);
+            // }
         }
 
         this.mCurrentScene = _sceneType;
         let configNewScene = this.GetSceneConfig(_sceneType);
-        this.PreloadRes(configNewScene.bundleNames , configNewScene.resFolders , ()=>
+        this.PreloadRes(configNewScene.bundleNames  , ()=>
         {
             this.ShowLayer(configNewScene.defaultBundle,configNewScene.prefabPath);
         });
     }
 
-    public PreloadRes(_bundleNames : Array<string> , _resFolders : Array<string> , _loadFinish : Function)
+    public PreloadRes(_bundleNames : Array<string>  , _loadFinish : Function 
+        , _loadCallback : Function = null)
     {
-        let loadCount = _bundleNames.length * _resFolders.length;
-        //console.log("total loadCount === " +loadCount);
+        let loadCount = _bundleNames.length * UIMgr.ResFolder.length;
+        if(loadCount == 0)
+        {
+            if(_loadFinish)
+            {
+                _loadFinish();
+            }
+            return;
+        }
+
         for(let i = 0 ; i < _bundleNames.length ; i++)
         {
             ResMgr.PreloadBundle(_bundleNames[i] , (_bundle)=>
             {
-                ResMgr.PreloadAssetsInBundle(_bundle , _resFolders , ()=>
+                ResMgr.PreloadAssetsInBundle(_bundle , UIMgr.ResFolder , ()=>
                 {
                     loadCount--;
-                    //console.log("rest loadCount === " +loadCount);
+                    if(_loadCallback != null)
+                    {
+                        _loadCallback(loadCount);
+                    }
+                    let tips = "加载资源 BundleName:" +_bundleNames[i] + "  count =" + loadCount;
+                    console.log(tips);
                     if(loadCount == 0)
                     {
                         if(_loadFinish)

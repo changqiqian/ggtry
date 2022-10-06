@@ -147,10 +147,6 @@
     "playOnLoad": false,
     "_clips": [
       {
-        "__uuid__": "6f3149d1-97ce-4d80-8e5b-a7b3bd98045e",
-        "__expectedType__": "cc.AnimationClip"
-      },
-      {
         "__uuid__": "e9b2f536-3a38-4902-af2c-944c4a9508bf",
         "__expectedType__": "cc.AnimationClip"
       }

@@ -12,7 +12,8 @@ export class HallUI extends BaseUI
 {
     public static GetUsingBundleFolder() : Array<string>
     {
-        return ["hall","mttPage","cashPage" ,"clubPage","mePage","cowboy" , "activityPage"];
+        return [];
+        //return ["hall","mttPage","cashPage" ,"clubPage","mePage","cowboy" , "activityPage"];
     }
 
     InitParam() 

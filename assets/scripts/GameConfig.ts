@@ -16,8 +16,7 @@ export class GameConfig
     }
     //发布的版本号
     public static Version = "1.1.3"
-    //发布的版本信息
-    public static VersionInfo = "alpha"
+
       
     public static LOGIN_TOKEN;
     public static LOGIN_PHONE;

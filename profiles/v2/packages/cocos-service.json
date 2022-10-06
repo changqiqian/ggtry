@@ -8,6 +8,14 @@
     "android": {
       "configID": "437b18",
       "services": []
+    },
+    "mac": {
+      "configID": "437b18",
+      "services": []
+    },
+    "ios": {
+      "configID": "437b18",
+      "services": []
     }
   },
   "builder-options": {

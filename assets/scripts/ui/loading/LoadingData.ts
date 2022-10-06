@@ -9,7 +9,6 @@ export class LoadingData extends SingletonBaseNotify<LoadingData>()
         LoadingData.ClearInstance();
     }
     
- 
 
     Data_HotUpdateEnd : BaseData<boolean> = new BaseData<boolean>(true);
     Data_HotUpdateProgress : BaseData<number> = new BaseData<number>();

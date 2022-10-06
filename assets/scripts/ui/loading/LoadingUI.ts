@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, find, Label, Sprite, sys, js } from 'cc';
+import { _decorator, Component, Node, find, Label, Sprite, sys, js, UI } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { JsbScript } from '../../base/JsbScript';
 import { Localization } from '../../base/Localization';
@@ -12,7 +12,8 @@ export class LoadingUI extends BaseUI
 {
     public static GetUsingBundleFolder() : Array<string>
     {
-        return ["loading"];
+        return [];
+        //return ["loading"];
     }
     
 
@@ -39,12 +40,28 @@ export class LoadingUI extends BaseUI
         {
             if(_data)
             {
-                this.scheduleOnce(()=>
-                {
-                    UIMgr.Instance.ChangeScene(SceneType.Login);
-                },1);
-            }
+                this.mTips.string = Localization.GetString("00097");
+                let totalSrcCount = UIMgr.ResFolder.length * UIMgr.RestBundle.length;
+                this.mPercent.string =  "0%";
+                this.mProgress.fillRange = 0;
 
+                UIMgr.Instance.LoadRestRes(
+                ()=>
+                {
+                    this.mPercent.string =  "100%";
+                    this.mProgress.fillRange = 1;
+                    UIMgr.Instance.ShowToast(Localization.GetString("00000"),1);
+                    UIMgr.Instance.ShowToast(Localization.GetString("00000"),1);
+                    UIMgr.Instance.ChangeScene(SceneType.Login);
+  
+                },
+                (_restSrcCount)=>
+                {
+                    let currentRatio = (totalSrcCount - _restSrcCount) / totalSrcCount;
+                    this.mPercent.string = (currentRatio * 100).toFixed(2) + "%";
+                    this.mProgress.fillRange = currentRatio;
+                })
+            }
         });
 
         LoadingData.Instance.Data_HotUpdateProgress.AddListenner(this,(_data)=>
