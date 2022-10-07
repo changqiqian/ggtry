@@ -2,7 +2,7 @@
   "__version__": "1.0.0",
   "options": {
     "android": {
-      "remoteServerAddress": "http://13.229.222.39/remote-assets/"
+      "remoteServerAddress": "http://13.229.222.39/remote-assets2/"
     }
   }
 }

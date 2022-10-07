@@ -20,11 +20,10 @@ urlToWriteInMainifest = 'http://13.229.222.39/remote-assets2/'
 #存放游戏配置 版本号文件的地址
 filePathToGameConfig = 'assets/scripts/GameConfig.ts'
 #Creator引擎命令行编译工具文件地址
-filePathToCreatorCompileTools = '/Applications/CocosCreator/Creator/3.5.2/CocosCreator'
+filePathToCreatorCompileTools = '/Applications/CocosCreator/Creator/3.5.2/CocosCreator.app/Contents/MacOS/CocosCreator'
+#filePathToCreatorCompileTools = '/Applications/CocosDashboard.app/Contents/MacOS/CocosDashboard'
 #要进行编译的项目工程地址
-pathProjectToCompile = '../Pokerlife'
-#编译项目所需参数
-configPara = '"platform=android;debug=false;md5Cache=false;"'
+pathProjectToCompile = '../cowboy/'
 #存放生成热更新文件的地址
 pathToSaveHotUpdate = '../Pokerlife/build/zh/hotUpdate'
 #生成热更配置文件Manifest js工具脚本地址
@@ -57,12 +56,6 @@ def createVersion(url):
     cmd = subprocess.Popen('sh createVersion.sh' + ' ' + filePathToCreateManifestTool + ' ' + gameVersion + ' ' + url + ' ' + pathToAfterCompileToMD5 + ' ' + pathToSaveHotUpdate + ' ' + urlToWriteInMainifest, stdin=subprocess.PIPE, stderr=sys.stderr, close_fds=True, stdout=sys.stdout, universal_newlines=True, shell=True, bufsize=1)
     cmd.communicate()
     return cmd.returncode
-
-def compileCreator():
-    cmd = subprocess.Popen('sh compile.sh' + ' ' + filePathToCreatorCompileTools + ' ' + pathProjectToCompile + ' ' + configPara, stdin=subprocess.PIPE, stderr=sys.stderr, close_fds=True, stdout=sys.stdout, universal_newlines=True, shell=True, bufsize=1)
-    cmd.communicate()
-    return cmd.returncode
-
 
 
 def copyFiles(sourceDir,  targetDir):
@@ -125,7 +118,7 @@ def managerVersion():
                 print('将要更新的版本号为：' + finalStr)
                 global gameVersion 
                 gameVersion = finalStr
-                putIn = "gc.version = \"" + finalStr + "\"" + '\n'
+                putIn = "    public static Version = \"" + finalStr + "\"" + '\n'
                 f.write('%s' %putIn)
             else:
                 f.write('%s' %line)
@@ -144,10 +137,9 @@ if __name__ == "__main__":
     # gVersion = str(dictRes["version"])
     # print('目前远端的版本为: ' + gVersion)
     # gameVersionOld = gVersion
-    gVersion = '1.0.0'
-    print('目前远端的版本为: ' + gVersion)
-    gameVersionOld = gVersion
 
+    gVersion = '1.0.3'
+    gameVersionOld = gVersion
     #版本号自动叠加
     print('处理版本号...')
     managerVersion()
@@ -156,9 +148,11 @@ if __name__ == "__main__":
 
 
     #调用creator命令编译构建
-    # print('开始构建cocos工程')
-    # compileCreator()
-    # print('构建完成！')
+    print('开始构建cocos工程')
+    configPathParam = '"configPath=/Users/yamiwang/cowboy/build/cocos.compile.config.json"'
+    buildParam = filePathToCreatorCompileTools + ' --project ' +  pathProjectToCompile + ' --build ' + configPathParam
+    os.system(buildParam)
+    print('构建完成！')
 
     # #清空旧的热更文件
     # print('清空旧的热更文件 build/zh/hotUpdate/')
