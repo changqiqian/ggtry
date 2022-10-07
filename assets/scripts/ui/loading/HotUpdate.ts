@@ -21,11 +21,7 @@ export class HotUpdate extends Component {
     private versionCompareHandle: (versionA: string, versionB: string) => number = null!;
     onLoad() 
     {
-        this.scheduleOnce(()=>
-        {
-            LoadingData.Instance.Data_HotUpdateEnd.mData = true;
-        },0)
-        return;
+
         // Hot update is only available in Native build
         if (!jsb) 
         {
@@ -145,7 +141,7 @@ export class HotUpdate extends Component {
         switch (event.getEventCode()) {
             case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
                 LoadingData.Instance.Data_HotUpdateTips.mData = '本地没有找到manifest文件';
-                console.log("updateCb ERROR_NO_LOCAL_MANIFEST");
+                console.log("本地没有找到manifest文件");
                 failed = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_PROGRESSION:
@@ -174,20 +170,20 @@ export class HotUpdate extends Component {
                 //this.panel.info.string = 'Already up to date with the latest remote version.';
                 LoadingData.Instance.Data_HotUpdateTips.mData = '已是最新版本';
                 LoadingData.Instance.Data_HotUpdateEnd.mData = true;
-                console.log("updateCb ALREADY_UP_TO_DATE");
+                console.log("已是最新版本");
                 failed = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_FINISHED:
                 //this.panel.info.string = 'Update finished. ' + event.getMessage();
                 LoadingData.Instance.Data_HotUpdateTips.mData = '更新完毕';
-                console.log("updateCb UPDATE_FINISHED");
+                console.log("更新完毕");
                 needRestart = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_FAILED:
                 //this.panel.info.string = 'Update failed. ' + event.getMessage();
                 //this.panel.retryBtn.active = true;
                 LoadingData.Instance.Data_HotUpdateTips.mData = '更新失败';
-                console.log("updateCb UPDATE_FAILED");
+                console.log("更新失败");
                 this._updating = false;
                 this._canRetry = true;
                 this.retry();
@@ -195,7 +191,7 @@ export class HotUpdate extends Component {
             case jsb.EventAssetsManager.ERROR_UPDATING:
                 //this.panel.info.string = 'Asset update error: ' + event.getAssetId() + ', ' + event.getMessage();
                 LoadingData.Instance.Data_HotUpdateTips.mData = '更新失败==' +  event.getMessage();
-                console.log("updateCb ERROR_UPDATING");
+                console.log('更新失败==' +  event.getMessage());
                 break;
             case jsb.EventAssetsManager.ERROR_DECOMPRESS:
                 //this.panel.info.string = event.getMessage();
@@ -236,7 +232,7 @@ export class HotUpdate extends Component {
 
             //this.panel.info.string = 'Retry failed Assets...';
             LoadingData.Instance.Data_HotUpdateTips.mData = '下载更新失败的资源';
-            console.log("Retry failed Assets...'");
+            console.log("下载更新失败的资源..'");
             this._am.downloadFailedAssets();
         }
     }

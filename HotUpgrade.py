@@ -142,10 +142,10 @@ if __name__ == "__main__":
     os.system(versionFileParam)
     print('生成热更版本文件完成！')
 
-    print('拷贝最新版本信息到cocos工程')
-    shutil.copy( pathToSaveHotUpdate + 'project.manifest', filePathToProjectManifest)
-    shutil.copy( pathToSaveHotUpdate + 'version.manifest', filePathToProjectManifest)
-    print('拷贝最新版本信息到项目，完成！')
+    # print('拷贝最新版本信息到cocos工程')
+    # shutil.copy( pathToSaveHotUpdate + 'project.manifest', filePathToProjectManifest)
+    # shutil.copy( pathToSaveHotUpdate + 'version.manifest', filePathToProjectManifest)
+    # print('拷贝最新版本信息到项目，完成！')
 
     print('把构建生成的资源拷贝到HotRelease目录')
     copyFiles('build/android/assets/', pathToSaveHotUpdate)
