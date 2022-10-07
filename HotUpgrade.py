@@ -23,21 +23,11 @@ filePathToCreatorCompileTools = '/Applications/CocosCreator/Creator/3.5.2/CocosC
 #要进行编译的项目工程地址
 pathProjectToCompile = '../cowboy/'
 #存放生成热更新文件的地址
-pathToSaveHotUpdate = '../cowboy/HotRelase/'
-#需要对编译后的代码资源进行md5加密的文件地址
-gameResDir = '../Pokerlife/build/zh/jsb-default/res'
-gameSrcDir = '../Pokerlife/build/zh/jsb-default/src'
-#项目中存放porject.manifest热更文件的地址
+pathToSaveHotUpdate = '../cowboy/HotRelase/remote-assets2/'
+#COCOS项目中存放porject.manifest热更文件的地址
 filePathToProjectManifest = 'assets/'
 #构建生成的资源目录
 SrcPath = 'build/android/assets/'
-
-#每一版的热更目录名称
-hotUpdateName = 'SYPoker'
-#存放热更生成的配置文件地址
-pathToSaveHotUpdateMainifestVersion = '../Pokerlife/build/zh/hotUpdate/version.manifest'
-pathToSaveHotUpdateMainifestProject = '../Pokerlife/build/zh/hotUpdate/project.manifest'
-
 
 gVeriosnRemoteUrl = "http://13.229.222.39/remote-assets2/version.manifest"
 gVersion = "1.0.001"
@@ -122,14 +112,12 @@ if __name__ == "__main__":
     global gameVersion
 
     #获取最新版本
-    # response = requests.get(gVeriosnRemoteUrl)
-    # dictRes = json.loads(response.text)
-    # gVersion = str(dictRes["version"])
-    # print('目前远端的版本为: ' + gVersion)
-    # gameVersionOld = gVersion
-
-    gVersion = '1.0.3'
+    response = requests.get(gVeriosnRemoteUrl)
+    dictRes = json.loads(response.text)
+    gVersion = str(dictRes["version"])
+    print('目前远端的版本为: ' + gVersion)
     gameVersionOld = gVersion
+
     #版本号自动叠加
     print('处理版本号...')
     managerVersion()
@@ -139,9 +127,9 @@ if __name__ == "__main__":
 
     #调用creator命令编译构建
     print('开始构建cocos工程')
-    # configPathParam = '"configPath=/Users/yamiwang/cowboy/build/cocos.compile.config.json"'
-    # buildParam = filePathToCreatorCompileTools + ' --project ' +  pathProjectToCompile + ' --build ' + configPathParam
-    # os.system(buildParam)
+    configPathParam = '"configPath=/Users/yamiwang/cowboy/build/cocos.compile.config.json"'
+    buildParam = filePathToCreatorCompileTools + ' --project ' +  pathProjectToCompile + ' --build ' + configPathParam
+    os.system(buildParam)
     print('构建完成！')
 
     # #清空旧的热更文件
@@ -159,27 +147,10 @@ if __name__ == "__main__":
     shutil.copy( pathToSaveHotUpdate + 'version.manifest', filePathToProjectManifest)
     print('拷贝最新版本信息到项目，完成！')
 
-    # print('把res和src文件夹从build/zh/jsb-default/拷贝到/build/zh/hotUpdate/...')
-    # copyFiles(gameResDir, pathToSaveHotUpdate + '/res')
-    # copyFiles(gameSrcDir, pathToSaveHotUpdate + '/src')
-    # print('拷贝资源到相关目录完成！')
+    print('把构建生成的资源拷贝到HotRelease目录')
+    copyFiles('build/android/assets/', pathToSaveHotUpdate)
+    print('拷贝资源到相关目录完成！')
     
-    # print('上传文件中...')
-    
-
-    
-    # finalRootFolder = pathToSaveHotUpdate + "/remote-assets" 
-    # versionFolder = finalRootFolder +"/" +hotUpdateName + gameVersion
-    # os.makedirs(finalRootFolder)
-    # os.makedirs(versionFolder)
-    # copyFiles(pathToSaveHotUpdate + '/res', versionFolder + '/res')
-    # copyFiles(pathToSaveHotUpdate + '/src', versionFolder + '/src')
-    # shutil.copy( pathToSaveHotUpdate + '/project.manifest', finalRootFolder)
-    # shutil.copy( pathToSaveHotUpdate + '/version.manifest', finalRootFolder)
-    # shutil.copy( pathToSaveHotUpdate + '/project.manifest', versionFolder)
-    # shutil.copy( pathToSaveHotUpdate + '/version.manifest', versionFolder)
-
-
     print('更新完毕！！！' + '版本号:' + gameVersion)
 
     
