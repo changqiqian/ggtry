@@ -13,31 +13,27 @@ import subprocess
 import json
 import requests
 from ftplib import FTP
-#保存增量的mainifest文件地址
-pathToSaveDebugMainifest = 'mainifest/alphaMainifest'
+
 #写在热更文件mainifest中的 请求远端存放热更文件的URL地址'http://XXXX.com/pokerlifeAlphaNew/'
 urlToWriteInMainifest = 'http://13.229.222.39/remote-assets2/'
 #存放游戏配置 版本号文件的地址
 filePathToGameConfig = 'assets/scripts/GameConfig.ts'
 #Creator引擎命令行编译工具文件地址
 filePathToCreatorCompileTools = '/Applications/CocosCreator/Creator/3.5.2/CocosCreator.app/Contents/MacOS/CocosCreator'
-#filePathToCreatorCompileTools = '/Applications/CocosDashboard.app/Contents/MacOS/CocosDashboard'
 #要进行编译的项目工程地址
 pathProjectToCompile = '../cowboy/'
 #存放生成热更新文件的地址
-pathToSaveHotUpdate = '../Pokerlife/build/zh/hotUpdate'
-#生成热更配置文件Manifest js工具脚本地址
-filePathToCreateManifestTool = '../Pokerlife/version_generator.js'
+pathToSaveHotUpdate = '../cowboy/HotRelase/'
 #需要对编译后的代码资源进行md5加密的文件地址
-pathToAfterCompileToMD5 = '../Pokerlife/build/zh/jsb-default'
 gameResDir = '../Pokerlife/build/zh/jsb-default/res'
 gameSrcDir = '../Pokerlife/build/zh/jsb-default/src'
 #项目中存放porject.manifest热更文件的地址
-filePathToProjectManifest = '../Pokerlife/assets/resources/'
-
+filePathToProjectManifest = 'assets/'
+#构建生成的资源目录
+SrcPath = 'build/android/assets/'
 
 #每一版的热更目录名称
-hotUpdateName = 'pokerlifeAlphaNew'
+hotUpdateName = 'SYPoker'
 #存放热更生成的配置文件地址
 pathToSaveHotUpdateMainifestVersion = '../Pokerlife/build/zh/hotUpdate/version.manifest'
 pathToSaveHotUpdateMainifestProject = '../Pokerlife/build/zh/hotUpdate/project.manifest'
@@ -50,12 +46,6 @@ gVersion = "1.0.001"
 global gameVersionOld
 #存储最近的版本号
 global gameVersion
-
-def createVersion(url):
-    global gameVersion
-    cmd = subprocess.Popen('sh createVersion.sh' + ' ' + filePathToCreateManifestTool + ' ' + gameVersion + ' ' + url + ' ' + pathToAfterCompileToMD5 + ' ' + pathToSaveHotUpdate + ' ' + urlToWriteInMainifest, stdin=subprocess.PIPE, stderr=sys.stderr, close_fds=True, stdout=sys.stdout, universal_newlines=True, shell=True, bufsize=1)
-    cmd.communicate()
-    return cmd.returncode
 
 
 def copyFiles(sourceDir,  targetDir):
@@ -149,35 +139,25 @@ if __name__ == "__main__":
 
     #调用creator命令编译构建
     print('开始构建cocos工程')
-    configPathParam = '"configPath=/Users/yamiwang/cowboy/build/cocos.compile.config.json"'
-    buildParam = filePathToCreatorCompileTools + ' --project ' +  pathProjectToCompile + ' --build ' + configPathParam
-    os.system(buildParam)
+    # configPathParam = '"configPath=/Users/yamiwang/cowboy/build/cocos.compile.config.json"'
+    # buildParam = filePathToCreatorCompileTools + ' --project ' +  pathProjectToCompile + ' --build ' + configPathParam
+    # os.system(buildParam)
     print('构建完成！')
 
     # #清空旧的热更文件
-    # print('清空旧的热更文件 build/zh/hotUpdate/')
-    # delFiles(pathToSaveHotUpdate)
-    # print('清空完毕！')
+    print('清空旧的热更文件')
+    delFiles(pathToSaveHotUpdate)
+    print('清空完毕！')
 
-    # print('生成热更版本文件...')
-    # urlToWriteInMainifestFinal = urlToWriteInMainifest + hotUpdateName + gameVersion + '/'
-    # print '写入mainifest的热更地址: ' + urlToWriteInMainifestFinal
-    # createVersion(urlToWriteInMainifestFinal)
-    # print('生成热更版本文件完成！')
+    print('生成热更版本文件...')
+    versionFileParam = 'node version_generator.js -v ' + gameVersion + ' -u ' + urlToWriteInMainifest + " -s " + SrcPath + " -d " + pathToSaveHotUpdate
+    os.system(versionFileParam)
+    print('生成热更版本文件完成！')
 
-    # print('更新本地基准版本信息...')
-    # if not os.path.exists(pathToSaveDebugMainifest + '/' + gameVersion):
-    #     os.makedirs(pathToSaveDebugMainifest + '/' + gameVersion)
-    # copyFiles(pathToSaveHotUpdate, pathToSaveDebugMainifest + '/' + gameVersion)
-    # print('更新本地基准版本信息完成！')
-
-    # #提前放好一个mainifest文件，防止报错
-    # #将debug版本的project.mainifest文件拷贝到项目中
-    # #防止打包到时候正式版与测试版来回切换，导致热更地址不对的问题
-    # print('拷贝最新版本信息到cocos工程')
-    # shutil.copy( pathToSaveDebugMainifest + '/' + gameVersion + '/project.manifest', filePathToProjectManifest)
-    # #shutil.copy( pathToSaveDebugMainifest + '/' + gameVersion + '/version.manifest', filePathToProjectManifest)
-    # print('拷贝最新版本信息到项目，完成！')
+    print('拷贝最新版本信息到cocos工程')
+    shutil.copy( pathToSaveHotUpdate + 'project.manifest', filePathToProjectManifest)
+    shutil.copy( pathToSaveHotUpdate + 'version.manifest', filePathToProjectManifest)
+    print('拷贝最新版本信息到项目，完成！')
 
     # print('把res和src文件夹从build/zh/jsb-default/拷贝到/build/zh/hotUpdate/...')
     # copyFiles(gameResDir, pathToSaveHotUpdate + '/res')
