@@ -67,8 +67,8 @@ export function SingletonBaseNotify<T>()
             props.forEach((prop)=>
             {
                 let str = prop.toString();
-                console.log("str==" + str);
-                console.log("this[str]==" + this[str]);
+                // console.log("str==" + str);
+                // console.log("this[str]==" + this[str]);
                 if(this[str] != null)
                 {
                     this[str].RemoveListennerByTarget(_target);

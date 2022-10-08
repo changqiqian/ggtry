@@ -131,9 +131,9 @@ export class HotUpdate extends Component {
             default:
                 return;
         }
+        
 
-
-        this._am.setEventCallback(null!);
+        //this._am.setEventCallback(null);
         this._updating = false;
     }
 
@@ -208,12 +208,12 @@ export class HotUpdate extends Component {
         }
 
         if (failed) {
-            this._am.setEventCallback(null!);
+            this._am.setEventCallback(null);
             this._updating = false;
         }
 
         if (needRestart) {
-            this._am.setEventCallback(null!);
+            this._am.setEventCallback(null);
             // Prepend the manifest's search path
             var searchPaths = jsb.fileUtils.getSearchPaths();
             var newPaths = this._am.getLocalManifest().getSearchPaths();
@@ -294,7 +294,7 @@ export class HotUpdate extends Component {
         }
         if(this._am != null)
         {
-            this._am.setEventCallback(null!);
+            this._am.setEventCallback(null);
         }
     }
 }
