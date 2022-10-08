@@ -153,6 +153,9 @@ export class HotUpdate extends Component {
                 //console.log(this.panel.fileLabel.string, this.panel.byteLabel.string);
                 LoadingData.Instance.Data_HotUpdateProgress = event.getPercent();
                 console.log("updateCb event.getPercent()=="+event.getPercent());
+                console.log("updateCb event.getPercentByFile()=="+event.getPercentByFile());
+                console.log("updateCb event.getDownloadedFiles()=="+event.getDownloadedFiles());
+                console.log("updateCb event.getTotalFiles()=="+event.getTotalFiles());
                 var msg = event.getMessage();
                 if (msg) 
                 {
@@ -228,10 +231,9 @@ export class HotUpdate extends Component {
     }
 
     retry() {
-        if (!this._updating && this._canRetry) {
+        if (!this._updating && this._canRetry) 
+        {
             this._canRetry = false;
-
-            //this.panel.info.string = 'Retry failed Assets...';
             LoadingData.Instance.Data_HotUpdateTips.mData = '下载更新失败的资源';
             console.log("下载更新失败的资源..'");
             this._am.downloadFailedAssets();
@@ -239,15 +241,21 @@ export class HotUpdate extends Component {
     }
 
     checkUpdate() {
-        if (this._updating) {
+        if (this._updating) 
+        {
             //this.panel.info.string = 'Checking or updating ...';
             return;
         }
-        if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
+        if (this._am.getState() === jsb.AssetsManager.State.UNINITED) 
+        {
+            console.log("this.manifestUrl===" + this.manifestUrl)
+            console.log("this.manifestUrl.nativeUrl.length===" + this.manifestUrl.nativeUrl.length)
+            console.log("this.manifestUrl.nativeUrl===" + this.manifestUrl.nativeUrl)
             var url = this.manifestUrl.nativeUrl;
             this._am.loadLocalManifest(url);
         }
-        if (!this._am.getLocalManifest() || !this._am.getLocalManifest().isLoaded()) {
+        if (!this._am.getLocalManifest() || !this._am.getLocalManifest().isLoaded()) 
+        {
             //this.panel.info.string = 'Failed to load local manifest ...';
             return;
         }
@@ -267,6 +275,9 @@ export class HotUpdate extends Component {
 
             if (this._am.getState() === jsb.AssetsManager.State.UNINITED) 
             {
+                console.log("this.manifestUrl===" + this.manifestUrl)
+                console.log("this.manifestUrl.nativeUrl.length===" + this.manifestUrl.nativeUrl.length)
+                console.log("this.manifestUrl.nativeUrl===" + this.manifestUrl.nativeUrl)
                 console.log("2222222")
                 var url = this.manifestUrl.nativeUrl;
                 this._am.loadLocalManifest(url);
