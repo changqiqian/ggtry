@@ -138,6 +138,7 @@ export class HotUpdate extends Component {
     updateCb(event: any) {
         var needRestart = false;
         var failed = false;
+        console.log("updateCb")
         switch (event.getEventCode()) {
             case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
                 LoadingData.Instance.Data_HotUpdateTips.mData = '本地没有找到manifest文件';
@@ -257,17 +258,22 @@ export class HotUpdate extends Component {
     }
 
     hotUpdate() {
-        if (this._am && !this._updating) {
+        console.log("this._am=== " + this._am);
+        console.log("this._updating=== " + this._updating);
+        if (this._am && !this._updating) 
+        {
+            console.log("1111111")
             this._am.setEventCallback(this.updateCb.bind(this));
 
-            if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
+            if (this._am.getState() === jsb.AssetsManager.State.UNINITED) 
+            {
+                console.log("2222222")
                 var url = this.manifestUrl.nativeUrl;
                 this._am.loadLocalManifest(url);
             }
-
+            console.log("3333333")
             this._failCount = 0;
             this._am.update();
-            //this.panel.updateBtn.active = false;
             this._updating = true;
         }
     }
