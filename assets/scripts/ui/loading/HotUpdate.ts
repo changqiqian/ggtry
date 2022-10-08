@@ -124,7 +124,9 @@ export class HotUpdate extends Component {
                 LoadingData.Instance.Data_HotUpdateTips.mData = '发现新版本，准备更新...';
                 LoadingData.Instance.Data_HotUpdateProgress.mData = 0;
                 console.log("checkCb","发现新版本");
-                this.hotUpdate();
+                this.scheduleOnce(()=>{
+                    this.hotUpdate();
+                },1);
                 break;
             default:
                 return;
@@ -138,7 +140,7 @@ export class HotUpdate extends Component {
     updateCb(event: any) {
         var needRestart = false;
         var failed = false;
-        console.log("updateCb")
+        console.log("updateCb + event.getEventCode()");
         switch (event.getEventCode()) {
             case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
                 LoadingData.Instance.Data_HotUpdateTips.mData = '本地没有找到manifest文件';
@@ -151,7 +153,7 @@ export class HotUpdate extends Component {
                 //this.panel.fileLabel.string = event.getDownloadedFiles() + ' / ' + event.getTotalFiles();
                 //this.panel.byteLabel.string = event.getDownloadedBytes() + ' / ' + event.getTotalBytes();
                 //console.log(this.panel.fileLabel.string, this.panel.byteLabel.string);
-                LoadingData.Instance.Data_HotUpdateProgress = event.getPercent();
+                LoadingData.Instance.Data_HotUpdateProgress.mData = event.getPercent();
                 console.log("updateCb event.getPercent()=="+event.getPercent());
                 console.log("updateCb event.getPercentByFile()=="+event.getPercentByFile());
                 console.log("updateCb event.getDownloadedFiles()=="+event.getDownloadedFiles());
@@ -159,7 +161,7 @@ export class HotUpdate extends Component {
                 var msg = event.getMessage();
                 if (msg) 
                 {
-                    LoadingData.Instance.Data_HotUpdateTips.mData = 'Updated file: ' + msg;
+                    LoadingData.Instance.Data_HotUpdateTips.mData = 'Updated file: ' + event.getDownloadedFiles() + ' / ' + event.getTotalFiles();
                     //this.panel.info.string = 'Updated file: ' + msg;
                     // cc.log(event.getPercent()/100 + '% : ' + msg);
                 }
@@ -262,12 +264,10 @@ export class HotUpdate extends Component {
         this._am.setEventCallback(this.checkCb.bind(this));
 
         this._am.checkUpdate();
-        //this._updating = true;
+        this._updating = true;
     }
 
     hotUpdate() {
-        console.log("this._am=== " + this._am);
-        console.log("this._updating=== " + this._updating);
         if (this._am && !this._updating) 
         {
             console.log("1111111")
@@ -275,9 +275,6 @@ export class HotUpdate extends Component {
 
             if (this._am.getState() === jsb.AssetsManager.State.UNINITED) 
             {
-                console.log("this.manifestUrl===" + this.manifestUrl)
-                console.log("this.manifestUrl.nativeUrl.length===" + this.manifestUrl.nativeUrl.length)
-                console.log("this.manifestUrl.nativeUrl===" + this.manifestUrl.nativeUrl)
                 console.log("2222222")
                 var url = this.manifestUrl.nativeUrl;
                 this._am.loadLocalManifest(url);
