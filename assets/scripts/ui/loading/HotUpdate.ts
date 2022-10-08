@@ -254,7 +254,7 @@ export class HotUpdate extends Component {
         this._am.setEventCallback(this.checkCb.bind(this));
 
         this._am.checkUpdate();
-        this._updating = true;
+        //this._updating = true;
     }
 
     hotUpdate() {
