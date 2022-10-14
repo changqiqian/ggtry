@@ -27,7 +27,7 @@ export class HeadChoserView extends BaseUI
             let currentBtn = this.mHeadLayout.children[i].getComponent(BaseButton);
             currentBtn.SetClickCallback((_data)=>
             {
-                LocalPlayerData.Instance.Data_PhotoUrl.mData = _data.toString();
+                LocalPlayerData.Instance.Data_Head.mData = _data.toString();
                 this.Show(false);
             },i);
 

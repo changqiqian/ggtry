@@ -183,6 +183,7 @@ export class Localization {
         { name: '00095', ch: '保存模版失败', en: 'Save failed' },
         { name: '00096', ch: '您确定要删除模版吗？', en: 'Are you sure to delete?' },
         { name: '00097', ch: '本地资源加载中', en: 'Loading resource...' },
+        { name: '00098', ch: '手机号已注册', en: 'This phone number registed already' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

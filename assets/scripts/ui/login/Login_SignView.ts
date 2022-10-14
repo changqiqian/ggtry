@@ -65,7 +65,10 @@ export class Login_SignView extends BaseUI
             }
 
             LocalPlayerData.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
-            this.ShowLayer("login","prefab/Login_SetUserInfo");
+            let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
+            let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
+            let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
+            NetworkSend.Instance.VerifyPhoneNumber(fullPhoneNumber);
         });
     }
     RegDataNotify() 
@@ -74,6 +77,20 @@ export class Login_SignView extends BaseUI
         {
             this.mAreaCodeBtn.SetTitle(GameConfig.AreaCodeList[_data].areaCode);
         })
+
+        LoginData.Instance.Data_VerifyPhoneNumber.AddListenner(this,(_data)=>
+        {
+            if(_data)
+            {
+                this.ShowLayer("login","prefab/Login_SetUserInfo");
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00098"));
+            }
+            
+        })
+   
     }
     LateInit() 
     {

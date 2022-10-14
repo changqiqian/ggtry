@@ -89,7 +89,7 @@ export class SMSCodeView extends BaseUI
                 let inviteCode = LocalPlayerData.Instance.Data_SupervisorInviteCode.mData;
                 let nickName = LocalPlayerData.Instance.Data_NickName.mData;
                 let psw = LocalPlayerData.Instance.Data_LastInputPwd.mData;
-                let head = LocalPlayerData.Instance.Data_PhotoUrl.mData;
+                let head = LocalPlayerData.Instance.Data_Head.mData;
                 let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
                 let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
                 let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;

@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { CommonNotify } from '../../CommonNotify';
 import { Network } from '../../network/Network';
+import { NetworkSend } from '../../network/NetworkSend';
 import { LoginData } from '../login/LoginData';
 import { HallData, Hall_SubPage } from './HallData';
 const { ccclass, property } = _decorator;
@@ -18,6 +19,7 @@ export class HallUI extends BaseUI
 
     InitParam() 
     {
+        NetworkSend.Instance.GetUserInfo();
     }
     BindUI() 
     {

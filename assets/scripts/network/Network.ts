@@ -161,8 +161,11 @@ export class Network  extends Singleton<Network>()
         if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) 
         {
             this.mWebSocket.send(totalBuffer);
+            if(_msgID == MessageId.C2S_HeartbeatPing)
+            {
+                return;
+            }
             console.log('给服务器发送消息：' + _msgID);
-            //console.log('数据长度====' + totalLength);
         } 
         else 
         {
@@ -189,6 +192,13 @@ export class Network  extends Singleton<Network>()
         {
             msgDataArray[i] = dataView.getUint8(i + currentOffset);
         }
+        if(msgId == MessageId.S2C_HeartbeatPong)
+        {
+            this.RecvPing();
+            return;
+        }
+
+
         console.log('收到 消息  msgId====' + msgId);
         for (let i = 0; i < this.mMsgListenner.length; i++) 
         {
@@ -230,15 +240,16 @@ export class Network  extends Singleton<Network>()
     /////                               心跳
     ////////////////////////////////////////////////////////////////////////////////////
     public SendPing() {
-        // this.StopPing();
-        // clearTimeout(this.mPingSendTimer);
-        // this.mPingRevTimer = setTimeout(this.OnPingTimeOut.bind(this), this.mPingSpace);
-        // this.SendMsg(MsgID.Ping, {});
-        // //console.log('发送 心跳');
+        this.StopPing();
+        clearTimeout(this.mPingSendTimer);
+        this.mPingRevTimer = setTimeout(this.OnPingTimeOut.bind(this), this.mPingSpace);
+        let msg = new HeartbeatPing();
+        this.SendMsg(MessageId.C2S_HeartbeatPing , HeartbeatPing.encode(msg).finish());
+        console.log('发送 心跳');
     }
 
     private RecvPing() {
-        //console.log('收到 心跳');
+        console.log('收到 心跳');
         clearTimeout(this.mPingRevTimer);
         this.mPingSendTimer = setTimeout(this.SendPing.bind(this), this.mPingSpace);
     }

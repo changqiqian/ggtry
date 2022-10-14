@@ -58,7 +58,7 @@ export class Login_SetUserInfo extends BaseUI
                 return
             }
 
-            let headPicUrl = LocalPlayerData.Instance.Data_PhotoUrl.mData;
+            let headPicUrl = LocalPlayerData.Instance.Data_Head.mData;
             if(headPicUrl ==null) 
             {
                 UIMgr.Instance.ShowToast(Localization.GetString("00012"));
@@ -71,7 +71,7 @@ export class Login_SetUserInfo extends BaseUI
     }
     RegDataNotify() 
     {
-        LocalPlayerData.Instance.Data_PhotoUrl.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_Head.AddListenner(this,(_data)=>
         {
             if(_data == null)
             {

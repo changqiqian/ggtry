@@ -13,12 +13,17 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     {
         LocalPlayerData.ClearInstance();
     }
-
+    Data_Token : BaseData<string> = new BaseData<string>();
     Data_Uid : BaseData<string> = new BaseData<string>(); //玩家uid
     Data_NickName : BaseData<string> = new BaseData<string>(); //玩家姓名
     Data_AreaCode : BaseData<number> = new BaseData<number>(false , 0); //区号
-    Data_PhotoUrl : BaseData<string> = new BaseData<string>(false , null); //头像地址
+    Data_Head : BaseData<string> = new BaseData<string>(false , null); //头像地址
     Data_SupervisorInviteCode : BaseData<string> = new BaseData<string>(false , ""); //谁邀请的我
+    Data_Coin : BaseData<number> = new BaseData<number>(); //玩家金币
+    Data_Diamond : BaseData<number> = new BaseData<number>(); //玩家g钻石
+    Data_AccountLevel : BaseData<AccountLevel> = new BaseData<AccountLevel>(); //账户等级
+    Data_AccountStatus : BaseData<AccountStatus> = new BaseData<AccountStatus>(); //账户状态
+
 
     Data_LastInputPhoneNum : BaseData<string> = new BaseData<string>(); //最后一次输入的手机号
     Data_LastInputPwd : BaseData<string> = new BaseData<string>();//最后一次输入的密码

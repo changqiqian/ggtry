@@ -10,7 +10,7 @@ export class LoadingData extends SingletonBaseNotify<LoadingData>()
     }
     
 
-    Data_HotUpdateEnd : BaseData<boolean> = new BaseData<boolean>(true);
+    Data_HotUpdateEnd : BaseData<boolean> = new BaseData<boolean>();
     Data_HotUpdateProgress : BaseData<number> = new BaseData<number>();
     Data_HotUpdateTips : BaseData<string> = new BaseData<string>();
 }

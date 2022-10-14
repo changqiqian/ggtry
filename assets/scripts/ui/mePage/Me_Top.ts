@@ -42,7 +42,7 @@ export class Me_Top extends BaseUI
             this.mID.string = _data;
         })
 
-        LocalPlayerData.Instance.Data_PhotoUrl.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_Head.AddListenner(this,(_data)=>
         {
             if(_data == null || _data == "")
             {
