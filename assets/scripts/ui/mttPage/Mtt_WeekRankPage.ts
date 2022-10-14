@@ -38,7 +38,7 @@ export class Mtt_WeekRankPage extends BaseUI
     {
         this.node.active = false;
         this.mNoData.active = false;
-        this.mScrollView.node.on(ScrollView.EventType.SCROLL_TO_BOTTOM, this.OnDragBottom, this);
+        this.mScrollView.node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
     }
     RegDataNotify() 
     {

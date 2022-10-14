@@ -439,8 +439,11 @@ export class C2SChangeUserInfo implements IC2SChangeUserInfo {
      */
     constructor(p?: IC2SChangeUserInfo);
 
-    /** C2SChangeUserInfo baseInfo. */
-    public baseInfo?: (IUserBaseInfo|null);
+    /** C2SChangeUserInfo nickName. */
+    public nickName: string;
+
+    /** C2SChangeUserInfo head. */
+    public head: string;
 
     /**
      * Encodes the specified C2SChangeUserInfo message. Does not implicitly {@link C2SChangeUserInfo.verify|verify} messages.
@@ -474,157 +477,6 @@ export enum AccountStauts {
     AccountStauts_Frozen = 1
 }
 
-/** Represents a UserInfo. */
-export class UserInfo implements IUserInfo {
-
-    /**
-     * Constructs a new UserInfo.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IUserInfo);
-
-    /** UserInfo uid. */
-    public uid: number;
-
-    /** UserInfo phoneNum. */
-    public phoneNum: string;
-
-    /** UserInfo userBaseInfo. */
-    public userBaseInfo?: (IUserBaseInfo|null);
-
-    /** UserInfo userAssets. */
-    public userAssets?: (IUserAssets|null);
-
-    /** UserInfo userAccountInfo. */
-    public userAccountInfo?: (IUserAccountInfo|null);
-
-    /**
-     * Encodes the specified UserInfo message. Does not implicitly {@link UserInfo.verify|verify} messages.
-     * @param m UserInfo message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IUserInfo, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a UserInfo message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns UserInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserInfo;
-}
-
-/** Represents a UserBaseInfo. */
-export class UserBaseInfo implements IUserBaseInfo {
-
-    /**
-     * Constructs a new UserBaseInfo.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IUserBaseInfo);
-
-    /** UserBaseInfo nickName. */
-    public nickName: string;
-
-    /** UserBaseInfo head. */
-    public head: string;
-
-    /**
-     * Encodes the specified UserBaseInfo message. Does not implicitly {@link UserBaseInfo.verify|verify} messages.
-     * @param m UserBaseInfo message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IUserBaseInfo, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a UserBaseInfo message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns UserBaseInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserBaseInfo;
-}
-
-/** Represents a UserAssets. */
-export class UserAssets implements IUserAssets {
-
-    /**
-     * Constructs a new UserAssets.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IUserAssets);
-
-    /** UserAssets coin. */
-    public coin: number;
-
-    /** UserAssets diamond. */
-    public diamond: number;
-
-    /** UserAssets clubPoint. */
-    public clubPoint: number;
-
-    /** UserAssets unionCoin. */
-    public unionCoin: number;
-
-    /**
-     * Encodes the specified UserAssets message. Does not implicitly {@link UserAssets.verify|verify} messages.
-     * @param m UserAssets message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IUserAssets, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a UserAssets message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns UserAssets
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserAssets;
-}
-
-/** Represents a UserAccountInfo. */
-export class UserAccountInfo implements IUserAccountInfo {
-
-    /**
-     * Constructs a new UserAccountInfo.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IUserAccountInfo);
-
-    /** UserAccountInfo accountLevel. */
-    public accountLevel: AccountLevel;
-
-    /** UserAccountInfo accountStatus. */
-    public accountStatus: AccountStauts;
-
-    /**
-     * Encodes the specified UserAccountInfo message. Does not implicitly {@link UserAccountInfo.verify|verify} messages.
-     * @param m UserAccountInfo message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IUserAccountInfo, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a UserAccountInfo message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns UserAccountInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserAccountInfo;
-}
-
 /** Represents a S2CGetUserInfo. */
 export class S2CGetUserInfo implements IS2CGetUserInfo {
 
@@ -634,8 +486,35 @@ export class S2CGetUserInfo implements IS2CGetUserInfo {
      */
     constructor(p?: IS2CGetUserInfo);
 
-    /** S2CGetUserInfo userInfo. */
-    public userInfo?: (IUserInfo|null);
+    /** S2CGetUserInfo uid. */
+    public uid: number;
+
+    /** S2CGetUserInfo phoneNum. */
+    public phoneNum: string;
+
+    /** S2CGetUserInfo nickName. */
+    public nickName: string;
+
+    /** S2CGetUserInfo head. */
+    public head: string;
+
+    /** S2CGetUserInfo coin. */
+    public coin: number;
+
+    /** S2CGetUserInfo diamond. */
+    public diamond: number;
+
+    /** S2CGetUserInfo clubPoint. */
+    public clubPoint: number;
+
+    /** S2CGetUserInfo unionCoin. */
+    public unionCoin: number;
+
+    /** S2CGetUserInfo accountLevel. */
+    public accountLevel: AccountLevel;
+
+    /** S2CGetUserInfo accountStatus. */
+    public accountStatus: AccountStauts;
 
     /**
      * Encodes the specified S2CGetUserInfo message. Does not implicitly {@link S2CGetUserInfo.verify|verify} messages.
@@ -668,8 +547,11 @@ export class S2CChangeUserInfo implements IS2CChangeUserInfo {
     /** S2CChangeUserInfo result. */
     public result?: (ICommonResult|null);
 
-    /** S2CChangeUserInfo baseInfo. */
-    public baseInfo?: (IUserBaseInfo|null);
+    /** S2CChangeUserInfo nickName. */
+    public nickName: string;
+
+    /** S2CChangeUserInfo head. */
+    public head: string;
 
     /**
      * Encodes the specified S2CChangeUserInfo message. Does not implicitly {@link S2CChangeUserInfo.verify|verify} messages.

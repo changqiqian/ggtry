@@ -26,7 +26,7 @@ export class Mtt_PlayersPage extends BaseUI
     BindUI() 
     {
         this.node.active = false;
-        this.mScrollView.node.on(ScrollView.EventType.SCROLL_TO_BOTTOM, this.OnDragBottom, this);
+        this.mScrollView.node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
     }
     RegDataNotify() 
     {

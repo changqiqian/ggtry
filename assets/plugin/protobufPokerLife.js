@@ -989,7 +989,8 @@ $root.C2SChangeUserInfo = (function() {
      * Properties of a C2SChangeUserInfo.
      * @exports IC2SChangeUserInfo
      * @interface IC2SChangeUserInfo
-     * @property {IUserBaseInfo|null} [baseInfo] C2SChangeUserInfo baseInfo
+     * @property {string|null} [nickName] C2SChangeUserInfo nickName
+     * @property {string|null} [head] C2SChangeUserInfo head
      */
 
     /**
@@ -1008,12 +1009,20 @@ $root.C2SChangeUserInfo = (function() {
     }
 
     /**
-     * C2SChangeUserInfo baseInfo.
-     * @member {IUserBaseInfo|null|undefined} baseInfo
+     * C2SChangeUserInfo nickName.
+     * @member {string} nickName
      * @memberof C2SChangeUserInfo
      * @instance
      */
-    C2SChangeUserInfo.prototype.baseInfo = null;
+    C2SChangeUserInfo.prototype.nickName = "";
+
+    /**
+     * C2SChangeUserInfo head.
+     * @member {string} head
+     * @memberof C2SChangeUserInfo
+     * @instance
+     */
+    C2SChangeUserInfo.prototype.head = "";
 
     /**
      * Encodes the specified C2SChangeUserInfo message. Does not implicitly {@link C2SChangeUserInfo.verify|verify} messages.
@@ -1027,8 +1036,10 @@ $root.C2SChangeUserInfo = (function() {
     C2SChangeUserInfo.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
-        if (m.baseInfo != null && Object.hasOwnProperty.call(m, "baseInfo"))
-            $root.UserBaseInfo.encode(m.baseInfo, w.uint32(10).fork()).ldelim();
+        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
+            w.uint32(10).string(m.nickName);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(18).string(m.head);
         return w;
     };
 
@@ -1051,7 +1062,10 @@ $root.C2SChangeUserInfo = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.baseInfo = $root.UserBaseInfo.decode(r, r.uint32());
+                m.nickName = r.string();
+                break;
+            case 2:
+                m.head = r.string();
                 break;
             default:
                 r.skipType(t & 7);
@@ -1094,463 +1108,22 @@ $root.AccountStauts = (function() {
     return values;
 })();
 
-$root.UserInfo = (function() {
-
-    /**
-     * Properties of a UserInfo.
-     * @exports IUserInfo
-     * @interface IUserInfo
-     * @property {number|null} [uid] UserInfo uid
-     * @property {string|null} [phoneNum] UserInfo phoneNum
-     * @property {IUserBaseInfo|null} [userBaseInfo] UserInfo userBaseInfo
-     * @property {IUserAssets|null} [userAssets] UserInfo userAssets
-     * @property {IUserAccountInfo|null} [userAccountInfo] UserInfo userAccountInfo
-     */
-
-    /**
-     * Constructs a new UserInfo.
-     * @exports UserInfo
-     * @classdesc Represents a UserInfo.
-     * @implements IUserInfo
-     * @constructor
-     * @param {IUserInfo=} [p] Properties to set
-     */
-    function UserInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * UserInfo uid.
-     * @member {number} uid
-     * @memberof UserInfo
-     * @instance
-     */
-    UserInfo.prototype.uid = 0;
-
-    /**
-     * UserInfo phoneNum.
-     * @member {string} phoneNum
-     * @memberof UserInfo
-     * @instance
-     */
-    UserInfo.prototype.phoneNum = "";
-
-    /**
-     * UserInfo userBaseInfo.
-     * @member {IUserBaseInfo|null|undefined} userBaseInfo
-     * @memberof UserInfo
-     * @instance
-     */
-    UserInfo.prototype.userBaseInfo = null;
-
-    /**
-     * UserInfo userAssets.
-     * @member {IUserAssets|null|undefined} userAssets
-     * @memberof UserInfo
-     * @instance
-     */
-    UserInfo.prototype.userAssets = null;
-
-    /**
-     * UserInfo userAccountInfo.
-     * @member {IUserAccountInfo|null|undefined} userAccountInfo
-     * @memberof UserInfo
-     * @instance
-     */
-    UserInfo.prototype.userAccountInfo = null;
-
-    /**
-     * Encodes the specified UserInfo message. Does not implicitly {@link UserInfo.verify|verify} messages.
-     * @function encode
-     * @memberof UserInfo
-     * @static
-     * @param {IUserInfo} m UserInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    UserInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(8).int32(m.uid);
-        if (m.phoneNum != null && Object.hasOwnProperty.call(m, "phoneNum"))
-            w.uint32(18).string(m.phoneNum);
-        if (m.userBaseInfo != null && Object.hasOwnProperty.call(m, "userBaseInfo"))
-            $root.UserBaseInfo.encode(m.userBaseInfo, w.uint32(26).fork()).ldelim();
-        if (m.userAssets != null && Object.hasOwnProperty.call(m, "userAssets"))
-            $root.UserAssets.encode(m.userAssets, w.uint32(34).fork()).ldelim();
-        if (m.userAccountInfo != null && Object.hasOwnProperty.call(m, "userAccountInfo"))
-            $root.UserAccountInfo.encode(m.userAccountInfo, w.uint32(42).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a UserInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof UserInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {UserInfo} UserInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    UserInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.UserInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.uid = r.int32();
-                break;
-            case 2:
-                m.phoneNum = r.string();
-                break;
-            case 3:
-                m.userBaseInfo = $root.UserBaseInfo.decode(r, r.uint32());
-                break;
-            case 4:
-                m.userAssets = $root.UserAssets.decode(r, r.uint32());
-                break;
-            case 5:
-                m.userAccountInfo = $root.UserAccountInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return UserInfo;
-})();
-
-$root.UserBaseInfo = (function() {
-
-    /**
-     * Properties of a UserBaseInfo.
-     * @exports IUserBaseInfo
-     * @interface IUserBaseInfo
-     * @property {string|null} [nickName] UserBaseInfo nickName
-     * @property {string|null} [head] UserBaseInfo head
-     */
-
-    /**
-     * Constructs a new UserBaseInfo.
-     * @exports UserBaseInfo
-     * @classdesc Represents a UserBaseInfo.
-     * @implements IUserBaseInfo
-     * @constructor
-     * @param {IUserBaseInfo=} [p] Properties to set
-     */
-    function UserBaseInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * UserBaseInfo nickName.
-     * @member {string} nickName
-     * @memberof UserBaseInfo
-     * @instance
-     */
-    UserBaseInfo.prototype.nickName = "";
-
-    /**
-     * UserBaseInfo head.
-     * @member {string} head
-     * @memberof UserBaseInfo
-     * @instance
-     */
-    UserBaseInfo.prototype.head = "";
-
-    /**
-     * Encodes the specified UserBaseInfo message. Does not implicitly {@link UserBaseInfo.verify|verify} messages.
-     * @function encode
-     * @memberof UserBaseInfo
-     * @static
-     * @param {IUserBaseInfo} m UserBaseInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    UserBaseInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
-            w.uint32(10).string(m.nickName);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(18).string(m.head);
-        return w;
-    };
-
-    /**
-     * Decodes a UserBaseInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof UserBaseInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {UserBaseInfo} UserBaseInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    UserBaseInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.UserBaseInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.nickName = r.string();
-                break;
-            case 2:
-                m.head = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return UserBaseInfo;
-})();
-
-$root.UserAssets = (function() {
-
-    /**
-     * Properties of a UserAssets.
-     * @exports IUserAssets
-     * @interface IUserAssets
-     * @property {number|null} [coin] UserAssets coin
-     * @property {number|null} [diamond] UserAssets diamond
-     * @property {number|null} [clubPoint] UserAssets clubPoint
-     * @property {number|null} [unionCoin] UserAssets unionCoin
-     */
-
-    /**
-     * Constructs a new UserAssets.
-     * @exports UserAssets
-     * @classdesc Represents a UserAssets.
-     * @implements IUserAssets
-     * @constructor
-     * @param {IUserAssets=} [p] Properties to set
-     */
-    function UserAssets(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * UserAssets coin.
-     * @member {number} coin
-     * @memberof UserAssets
-     * @instance
-     */
-    UserAssets.prototype.coin = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * UserAssets diamond.
-     * @member {number} diamond
-     * @memberof UserAssets
-     * @instance
-     */
-    UserAssets.prototype.diamond = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * UserAssets clubPoint.
-     * @member {number} clubPoint
-     * @memberof UserAssets
-     * @instance
-     */
-    UserAssets.prototype.clubPoint = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * UserAssets unionCoin.
-     * @member {number} unionCoin
-     * @memberof UserAssets
-     * @instance
-     */
-    UserAssets.prototype.unionCoin = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified UserAssets message. Does not implicitly {@link UserAssets.verify|verify} messages.
-     * @function encode
-     * @memberof UserAssets
-     * @static
-     * @param {IUserAssets} m UserAssets message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    UserAssets.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.coin != null && Object.hasOwnProperty.call(m, "coin"))
-            w.uint32(8).int64(m.coin);
-        if (m.diamond != null && Object.hasOwnProperty.call(m, "diamond"))
-            w.uint32(16).int64(m.diamond);
-        if (m.clubPoint != null && Object.hasOwnProperty.call(m, "clubPoint"))
-            w.uint32(24).int64(m.clubPoint);
-        if (m.unionCoin != null && Object.hasOwnProperty.call(m, "unionCoin"))
-            w.uint32(32).int64(m.unionCoin);
-        return w;
-    };
-
-    /**
-     * Decodes a UserAssets message from the specified reader or buffer.
-     * @function decode
-     * @memberof UserAssets
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {UserAssets} UserAssets
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    UserAssets.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.UserAssets();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.coin = r.int64();
-                break;
-            case 2:
-                m.diamond = r.int64();
-                break;
-            case 3:
-                m.clubPoint = r.int64();
-                break;
-            case 4:
-                m.unionCoin = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return UserAssets;
-})();
-
-$root.UserAccountInfo = (function() {
-
-    /**
-     * Properties of a UserAccountInfo.
-     * @exports IUserAccountInfo
-     * @interface IUserAccountInfo
-     * @property {AccountLevel|null} [accountLevel] UserAccountInfo accountLevel
-     * @property {AccountStauts|null} [accountStatus] UserAccountInfo accountStatus
-     */
-
-    /**
-     * Constructs a new UserAccountInfo.
-     * @exports UserAccountInfo
-     * @classdesc Represents a UserAccountInfo.
-     * @implements IUserAccountInfo
-     * @constructor
-     * @param {IUserAccountInfo=} [p] Properties to set
-     */
-    function UserAccountInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * UserAccountInfo accountLevel.
-     * @member {AccountLevel} accountLevel
-     * @memberof UserAccountInfo
-     * @instance
-     */
-    UserAccountInfo.prototype.accountLevel = 0;
-
-    /**
-     * UserAccountInfo accountStatus.
-     * @member {AccountStauts} accountStatus
-     * @memberof UserAccountInfo
-     * @instance
-     */
-    UserAccountInfo.prototype.accountStatus = 0;
-
-    /**
-     * Encodes the specified UserAccountInfo message. Does not implicitly {@link UserAccountInfo.verify|verify} messages.
-     * @function encode
-     * @memberof UserAccountInfo
-     * @static
-     * @param {IUserAccountInfo} m UserAccountInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    UserAccountInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.accountLevel != null && Object.hasOwnProperty.call(m, "accountLevel"))
-            w.uint32(8).int32(m.accountLevel);
-        if (m.accountStatus != null && Object.hasOwnProperty.call(m, "accountStatus"))
-            w.uint32(16).int32(m.accountStatus);
-        return w;
-    };
-
-    /**
-     * Decodes a UserAccountInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof UserAccountInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {UserAccountInfo} UserAccountInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    UserAccountInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.UserAccountInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.accountLevel = r.int32();
-                break;
-            case 2:
-                m.accountStatus = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return UserAccountInfo;
-})();
-
 $root.S2CGetUserInfo = (function() {
 
     /**
      * Properties of a S2CGetUserInfo.
      * @exports IS2CGetUserInfo
      * @interface IS2CGetUserInfo
-     * @property {IUserInfo|null} [userInfo] S2CGetUserInfo userInfo
+     * @property {number|null} [uid] S2CGetUserInfo uid
+     * @property {string|null} [phoneNum] S2CGetUserInfo phoneNum
+     * @property {string|null} [nickName] S2CGetUserInfo nickName
+     * @property {string|null} [head] S2CGetUserInfo head
+     * @property {number|null} [coin] S2CGetUserInfo coin
+     * @property {number|null} [diamond] S2CGetUserInfo diamond
+     * @property {number|null} [clubPoint] S2CGetUserInfo clubPoint
+     * @property {number|null} [unionCoin] S2CGetUserInfo unionCoin
+     * @property {AccountLevel|null} [accountLevel] S2CGetUserInfo accountLevel
+     * @property {AccountStauts|null} [accountStatus] S2CGetUserInfo accountStatus
      */
 
     /**
@@ -1569,12 +1142,84 @@ $root.S2CGetUserInfo = (function() {
     }
 
     /**
-     * S2CGetUserInfo userInfo.
-     * @member {IUserInfo|null|undefined} userInfo
+     * S2CGetUserInfo uid.
+     * @member {number} uid
      * @memberof S2CGetUserInfo
      * @instance
      */
-    S2CGetUserInfo.prototype.userInfo = null;
+    S2CGetUserInfo.prototype.uid = 0;
+
+    /**
+     * S2CGetUserInfo phoneNum.
+     * @member {string} phoneNum
+     * @memberof S2CGetUserInfo
+     * @instance
+     */
+    S2CGetUserInfo.prototype.phoneNum = "";
+
+    /**
+     * S2CGetUserInfo nickName.
+     * @member {string} nickName
+     * @memberof S2CGetUserInfo
+     * @instance
+     */
+    S2CGetUserInfo.prototype.nickName = "";
+
+    /**
+     * S2CGetUserInfo head.
+     * @member {string} head
+     * @memberof S2CGetUserInfo
+     * @instance
+     */
+    S2CGetUserInfo.prototype.head = "";
+
+    /**
+     * S2CGetUserInfo coin.
+     * @member {number} coin
+     * @memberof S2CGetUserInfo
+     * @instance
+     */
+    S2CGetUserInfo.prototype.coin = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CGetUserInfo diamond.
+     * @member {number} diamond
+     * @memberof S2CGetUserInfo
+     * @instance
+     */
+    S2CGetUserInfo.prototype.diamond = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CGetUserInfo clubPoint.
+     * @member {number} clubPoint
+     * @memberof S2CGetUserInfo
+     * @instance
+     */
+    S2CGetUserInfo.prototype.clubPoint = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CGetUserInfo unionCoin.
+     * @member {number} unionCoin
+     * @memberof S2CGetUserInfo
+     * @instance
+     */
+    S2CGetUserInfo.prototype.unionCoin = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CGetUserInfo accountLevel.
+     * @member {AccountLevel} accountLevel
+     * @memberof S2CGetUserInfo
+     * @instance
+     */
+    S2CGetUserInfo.prototype.accountLevel = 0;
+
+    /**
+     * S2CGetUserInfo accountStatus.
+     * @member {AccountStauts} accountStatus
+     * @memberof S2CGetUserInfo
+     * @instance
+     */
+    S2CGetUserInfo.prototype.accountStatus = 0;
 
     /**
      * Encodes the specified S2CGetUserInfo message. Does not implicitly {@link S2CGetUserInfo.verify|verify} messages.
@@ -1588,8 +1233,26 @@ $root.S2CGetUserInfo = (function() {
     S2CGetUserInfo.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
-        if (m.userInfo != null && Object.hasOwnProperty.call(m, "userInfo"))
-            $root.UserInfo.encode(m.userInfo, w.uint32(10).fork()).ldelim();
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(8).int32(m.uid);
+        if (m.phoneNum != null && Object.hasOwnProperty.call(m, "phoneNum"))
+            w.uint32(18).string(m.phoneNum);
+        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
+            w.uint32(26).string(m.nickName);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(34).string(m.head);
+        if (m.coin != null && Object.hasOwnProperty.call(m, "coin"))
+            w.uint32(40).int64(m.coin);
+        if (m.diamond != null && Object.hasOwnProperty.call(m, "diamond"))
+            w.uint32(48).int64(m.diamond);
+        if (m.clubPoint != null && Object.hasOwnProperty.call(m, "clubPoint"))
+            w.uint32(56).int64(m.clubPoint);
+        if (m.unionCoin != null && Object.hasOwnProperty.call(m, "unionCoin"))
+            w.uint32(64).int64(m.unionCoin);
+        if (m.accountLevel != null && Object.hasOwnProperty.call(m, "accountLevel"))
+            w.uint32(72).int32(m.accountLevel);
+        if (m.accountStatus != null && Object.hasOwnProperty.call(m, "accountStatus"))
+            w.uint32(80).int32(m.accountStatus);
         return w;
     };
 
@@ -1612,7 +1275,34 @@ $root.S2CGetUserInfo = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.userInfo = $root.UserInfo.decode(r, r.uint32());
+                m.uid = r.int32();
+                break;
+            case 2:
+                m.phoneNum = r.string();
+                break;
+            case 3:
+                m.nickName = r.string();
+                break;
+            case 4:
+                m.head = r.string();
+                break;
+            case 5:
+                m.coin = r.int64();
+                break;
+            case 6:
+                m.diamond = r.int64();
+                break;
+            case 7:
+                m.clubPoint = r.int64();
+                break;
+            case 8:
+                m.unionCoin = r.int64();
+                break;
+            case 9:
+                m.accountLevel = r.int32();
+                break;
+            case 10:
+                m.accountStatus = r.int32();
                 break;
             default:
                 r.skipType(t & 7);
@@ -1632,7 +1322,8 @@ $root.S2CChangeUserInfo = (function() {
      * @exports IS2CChangeUserInfo
      * @interface IS2CChangeUserInfo
      * @property {ICommonResult|null} [result] S2CChangeUserInfo result
-     * @property {IUserBaseInfo|null} [baseInfo] S2CChangeUserInfo baseInfo
+     * @property {string|null} [nickName] S2CChangeUserInfo nickName
+     * @property {string|null} [head] S2CChangeUserInfo head
      */
 
     /**
@@ -1659,12 +1350,20 @@ $root.S2CChangeUserInfo = (function() {
     S2CChangeUserInfo.prototype.result = null;
 
     /**
-     * S2CChangeUserInfo baseInfo.
-     * @member {IUserBaseInfo|null|undefined} baseInfo
+     * S2CChangeUserInfo nickName.
+     * @member {string} nickName
      * @memberof S2CChangeUserInfo
      * @instance
      */
-    S2CChangeUserInfo.prototype.baseInfo = null;
+    S2CChangeUserInfo.prototype.nickName = "";
+
+    /**
+     * S2CChangeUserInfo head.
+     * @member {string} head
+     * @memberof S2CChangeUserInfo
+     * @instance
+     */
+    S2CChangeUserInfo.prototype.head = "";
 
     /**
      * Encodes the specified S2CChangeUserInfo message. Does not implicitly {@link S2CChangeUserInfo.verify|verify} messages.
@@ -1680,8 +1379,10 @@ $root.S2CChangeUserInfo = (function() {
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.baseInfo != null && Object.hasOwnProperty.call(m, "baseInfo"))
-            $root.UserBaseInfo.encode(m.baseInfo, w.uint32(18).fork()).ldelim();
+        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
+            w.uint32(18).string(m.nickName);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(26).string(m.head);
         return w;
     };
 
@@ -1707,7 +1408,10 @@ $root.S2CChangeUserInfo = (function() {
                 m.result = $root.CommonResult.decode(r, r.uint32());
                 break;
             case 2:
-                m.baseInfo = $root.UserBaseInfo.decode(r, r.uint32());
+                m.nickName = r.string();
+                break;
+            case 3:
+                m.head = r.string();
                 break;
             default:
                 r.skipType(t & 7);

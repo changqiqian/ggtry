@@ -37,7 +37,7 @@ export class Me_Message extends BaseUI {
             this.Show(false);
         });
 
-        this.mScrollView.node.on(ScrollView.EventType.SCROLL_TO_BOTTOM, this.OnDragBottom, this);
+        this.mScrollView.node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
 
         for (let i = this.mLayout.children.length - 1; i >= 0; i--) {
             let current = this.mLayout.children[i].getComponent(ToggleBtn);

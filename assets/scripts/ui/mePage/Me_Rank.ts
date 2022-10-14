@@ -20,7 +20,7 @@ export class Me_Rank extends BaseUI {
 
     InitParam() {}
     BindUI() {
-        this.mScrollView.node.on(ScrollView.EventType.SCROLL_TO_BOTTOM, this.OnDragBottom, this);
+        this.mScrollView.node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
 
         this.mBackBtn.SetClickCallback(() => {
             this.Show(false);
