@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Label, Button, sys } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
@@ -101,7 +102,11 @@ export class LoginUI extends BaseUI
         {
             if(_data == true)
             {
-                UIMgr.Instance.ChangeScene(SceneType.Hall);
+                let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
+                let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
+                let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
+                let pwd = LocalPlayerData.Instance.Data_LastInputPwd.mData
+                NetworkSend.Instance.LoginWithPwd(fullPhoneNumber,pwd);
             }
         });
         
