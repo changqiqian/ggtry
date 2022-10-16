@@ -1,3 +1,8 @@
 {
-  "disable-packages": {}
+  "disable-packages": {
+    "/Users/yamiwang/cowboy/extensions/hot-update-local-ip": {
+      "name": "hot-update-local-ip",
+      "time": 1665901997994
+    }
+  }
 }
