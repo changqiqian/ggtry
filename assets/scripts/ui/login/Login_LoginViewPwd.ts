@@ -7,6 +7,7 @@ import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
+import { Tool } from '../../Tool';
 import { BaseButton } from '../common/BaseButton';
 import { ToggleBtn } from '../common/ToggleBtn';
 import { LoginData } from './LoginData';
@@ -74,29 +75,15 @@ export class Login_LoginViewPwd extends BaseUI {
  
         this.mConfirmBtn.SetClickCallback(()=>
         {
-            if(this.mAccountEditBox.string.length < 7) 
+            if(Tool.AccountTest(this.mAccountEditBox.string) == false)
             {
-                UIMgr.Instance.ShowToast(Localization.GetString("00002"));
-                return
-            }
-
-            if(this.mAccountEditBox.string.indexOf(" ") != -1) 
-            {
-                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
-                return
+                return;
             }
 
             let password = this.mPwdEditbox.string;
-            if(password === "")
+            if(Tool.PasswordTest(password) == false)
             {
-                UIMgr.Instance.ShowToast(Localization.GetString("00004"));
-                return
-            }
-
-            if(password.indexOf(" ") != -1) 
-            {
-                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
-                return
+                return;
             }
 
 

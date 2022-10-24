@@ -185,7 +185,7 @@ export class Localization {
         { name: '00097', ch: '本地资源加载中', en: 'Loading resource...' },
         { name: '00098', ch: '手机号已注册', en: 'This phone number registed already' },
         { name: '00099', ch: '您没有修改权限', en: 'you have no rights to modify' },
-        { name: '00100', ch: '请输入俱乐部id', en: 'input club id first' },
+        { name: '00100', ch: '请输入id', en: 'Please input id' },
         { name: '00101', ch: '俱乐部已解散', en: 'Club dismissed' },
         { name: '00102', ch: '确定要解散当前俱乐部吗？', en: 'Are you sure you wanna dismiss current club?' },
         { name: '00103', ch: '确定要退出当前俱乐部吗？', en: 'Are you sure you wanna quit current club?' },
@@ -194,6 +194,12 @@ export class Localization {
         { name: '00106', ch: '您已成功俱乐部xxx', en: 'you already join club xxx' },
         { name: '00107', ch: '已通过', en: 'member added' },
         { name: '00108', ch: '已拒绝', en: 'member reject' },
+        { name: '00109', ch: '密码只能由数字和字母组成', en: '密码只能由数字和字母组成' },
+        { name: '00110', ch: 'ID只能由数字组成', en: 'ID只能由数字组成' },
+        { name: '00111', ch: '请输入账号', en: 'Please input account' },
+        { name: '00112', ch: '邀请码只能由7位数字组成', en: '邀请码只能由7位数字组成' },
+
+        
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

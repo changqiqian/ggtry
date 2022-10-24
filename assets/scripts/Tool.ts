@@ -1,3 +1,5 @@
+import { UIMgr } from "./base/UIMgr";
+import { Localization } from './base/Localization';
 export class Tool
 {
     //获取几分几秒对应的字符串时间显示格式  00:00
@@ -154,6 +156,97 @@ export class Tool
     {
         let serverMoney = _clientMoney * 10000;
         return serverMoney;
+    }
+
+    public static PasswordTest(_target : string) : boolean
+    {
+        if(_target == "")
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00004"));
+            return;
+        }
+
+        if(_target.indexOf(" ") != -1)
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00015"));
+            return;
+        }
+
+        let result = /^[1-9][0-9]*([\.][0-9]{1,2})?$/.test(_target);
+        if(result == false)
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00109"));
+        }
+        return result;
+    }
+
+    public static AccountTest(_target : string) : boolean
+    {
+        if(_target == "")
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00111"));
+            return false;
+        }
+
+        if(_target.indexOf(" ") != -1)
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00015"));
+            return false;
+        }
+
+        let result = /^((d{3,4}-)|d{3.4}-)?d{7,8}$/.test(_target);
+        if(result == false)
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00002"));
+        }
+        return result;
+    }
+
+    public static IdTest(_target : string) : boolean
+    {
+        if(_target == "")
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00100"));
+            return false;
+        }
+
+        if(_target.indexOf(" ") != -1)
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00015"));
+            return false;
+        }
+        let result = /^[0-9]*$/.test(_target);
+        if(result == false)
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00110"));
+        }
+        return result;
+    }
+    
+    public static InviteCodeTest(_target : string) : boolean
+    {
+        let result = /^d{n}$/.test(_target);
+        if(result == false)
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00112"));
+        }
+        return result;
+    }
+
+    public static NickNameTest(_target : string) : boolean
+    {
+        if(_target.length == 0) 
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00011"));
+            return false;
+        }
+
+        if(_target.indexOf(" ") != -1) 
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00015"));
+            return false;
+        }
+        return true;
     }
 
 }

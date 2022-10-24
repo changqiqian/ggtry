@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
 import { NetworkSend } from '../../network/NetworkSend';
+import { Tool } from '../../Tool';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
@@ -35,12 +36,10 @@ export class Club_SearchLayer extends BaseUI
         });
         this.mConfirmBtn.SetClickCallback(()=>
         {
-            if(this.mEditBox.string == "")
+            if(Tool.IdTest(this.mEditBox.string) == false)
             {
-                UIMgr.Instance.ShowToast(Localization.GetString("00100"));
                 return;
             }
-
             NetworkSend.Instance.SearchClub(this.mEditBox.string);
         });
     }

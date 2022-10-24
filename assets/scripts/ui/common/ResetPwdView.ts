@@ -7,6 +7,7 @@ import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
+import { Tool } from '../../Tool';
 import { LoginData } from '../login/LoginData';
 import { BaseButton } from './BaseButton';
 import { ToggleBtn } from './ToggleBtn';
@@ -74,21 +75,13 @@ export class ResetPwdView extends BaseUI
  
         this.mConfirmBtn.SetClickCallback(()=>
         {
-            if(this.mPwdEditbox.string == "")
+            if(Tool.PasswordTest(this.mPwdEditbox.string) == false)
             {
-                UIMgr.Instance.ShowToast(Localization.GetString("00004"));
                 return;
             }
-
-            if(this.mPwdEditbox.string.indexOf(" ") != -1)
+        
+            if(Tool.PasswordTest(this.mRePwdEditbox.string) == false)
             {
-                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
-                return;
-            }
-
-            if(this.mRePwdEditbox.string.indexOf(" ") != -1)
-            {
-                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
                 return;
             }
 

@@ -6,6 +6,7 @@ import { UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
+import { Tool } from '../../Tool';
 import { BaseButton } from '../common/BaseButton';
 
 const { ccclass, property } = _decorator;
@@ -39,16 +40,9 @@ export class ForgetPwd extends BaseUI {
 
         this.mConfirmBtn.SetClickCallback(()=>
         {
-            if(this.mAccountEditBox.string.length < 7) 
+            if(Tool.AccountTest(this.mAccountEditBox.string) == false)
             {
-                UIMgr.Instance.ShowToast(Localization.GetString("00002"));
-                return
-            }
-
-            if(this.mAccountEditBox.string.indexOf(" ") != -1) 
-            {
-                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
-                return
+                return;
             }
 
             LocalPlayerData.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;

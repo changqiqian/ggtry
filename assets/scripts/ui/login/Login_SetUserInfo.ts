@@ -4,6 +4,7 @@ import { Localization } from '../../base/Localization';
 import { Gender, LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { Network } from '../../network/Network';
+import { Tool } from '../../Tool';
 import { BaseButton } from '../common/BaseButton';
 import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
@@ -46,16 +47,9 @@ export class Login_SetUserInfo extends BaseUI
         this.mHeadBG.on(Node.EventType.TOUCH_END,this.OnEditHeadBtn.bind(this),this);
         this.mConfirmBtn.SetClickCallback(()=>
         {
-            if(this.mNickNameEditBox.string.length == 0) 
+            if(Tool.NickNameTest(this.mNickNameEditBox.string)==false)
             {
-                UIMgr.Instance.ShowToast(Localization.GetString("00011"));
-                return
-            }
-
-            if(this.mNickNameEditBox.string.indexOf(" ") != -1) 
-            {
-                UIMgr.Instance.ShowToast(Localization.GetString("00015"));
-                return
+                return;
             }
 
             let headPicUrl = LocalPlayerData.Instance.Data_Head.mData;
@@ -64,6 +58,15 @@ export class Login_SetUserInfo extends BaseUI
                 UIMgr.Instance.ShowToast(Localization.GetString("00012"));
                 return
             }
+
+            if(this.mInviteCodeEditBox.string != "")
+            {
+                if(Tool.InviteCodeTest(this.mInviteCodeEditBox.string) == false)
+                {
+                    return;
+                }
+            }
+
             LocalPlayerData.Instance.Data_SupervisorInviteCode.mData = this.mInviteCodeEditBox.string;
             LocalPlayerData.Instance.Data_NickName.mData = this.mNickNameEditBox.string;
             this.ShowLayer("common","prefab/ResetPwdView");
