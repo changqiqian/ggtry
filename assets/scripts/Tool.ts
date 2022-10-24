@@ -163,13 +163,13 @@ export class Tool
         if(_target == "")
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00004"));
-            return;
+            return false;
         }
 
         if(_target.indexOf(" ") != -1)
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00015"));
-            return;
+            return false;
         }
 
         let result = /^[1-9][0-9]*([\.][0-9]{1,2})?$/.test(_target);
@@ -193,8 +193,8 @@ export class Tool
             UIMgr.Instance.ShowToast(Localization.GetString("00015"));
             return false;
         }
-
-        let result = /^((d{3,4}-)|d{3.4}-)?d{7,8}$/.test(_target);
+        //var reg = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/;
+        let result = /^[0-9]*$/.test(_target);
         if(result == false)
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00002"));
