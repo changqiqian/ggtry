@@ -1,6 +1,10 @@
 import { _decorator, Component, Node, Sprite, Label, UITransform, view } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
+import { HallData } from '../hall/HallData';
+import { Club_MemberNotifyWindow } from './Club_MemberNotifyWindow';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_MainEnter')
@@ -14,8 +18,8 @@ export class Club_MainEnter extends BaseUI
     mId: Label = null;
     @property(Node) 
     mOwnerTag: Node = null;
-    @property(Node) 
-    mBellBG: Node = null;
+    @property(BaseButton) 
+    mNotifyBtn: BaseButton = null;
     @property(Label) 
     mClubName: Label = null;
     @property(Label) 
@@ -28,8 +32,7 @@ export class Club_MainEnter extends BaseUI
     mProtectOffset : number = 50;
     mMaxOffset : number;
     mCenterX : number;
-    mData : any = null;
-    mCallback : Function = null;
+    mData : IClubDetailsInfo = null;
     mLastTimeScale : number = null;
 
     InitParam()
@@ -40,29 +43,47 @@ export class Club_MainEnter extends BaseUI
     }
     BindUI()
     {
+        this.mNotifyBtn.node.active = false;
         this.mEnterBtn.SetClickCallback(()=>
         {
             let currentScale = this.CalculateCurrentScaleRatio();
             if(currentScale == 1)
             {
-                if(this.mCallback != null)
-                {
-                    this.mCallback(this.mData ,  true);
-                }
+                NetworkSend.Instance.EnterClub(this.mData.id);
             }
-            else
+        });
+
+        this.mNotifyBtn.SetClickCallback(()=>
+        {
+            this.ShowWindow("clubPage","prefab/Club_MemberNotifyWindow",true,(_script)=>
             {
-                if(this.mCallback != null)
-                {
-                    this.mCallback(this.mData , false);
-                }
-            }
+                let tempScript = _script as Club_MemberNotifyWindow;
+                tempScript.InitWithData(this.mData.id);
+            });
         });
 
     }
     RegDataNotify()
     {
+        HallData.Instance.Data_ClubDismiss.AddListenner(this,(_data)=>
+        {
+            if(_data == this.mData.id)
+            {
+                this.DeleteSelf();
+            }
+        });
 
+        HallData.Instance.Data_ClubApplyingNotify.AddListenner(this,(_data)=>
+        {
+            if(LocalPlayerData.Instance.Data_Uid.mData != this.mData.ownerId)
+            {
+                return;
+            }
+            if(_data)
+            {
+                this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(this.mData.id)
+            }
+        });
     }
     LateInit()
     {
@@ -73,12 +94,27 @@ export class Club_MainEnter extends BaseUI
         this.unscheduleAllCallbacks();
     }
 
-    public InitWithData(_data : any , _clickCallback :Function= null , )
+    public InitWithData(_data : IClubDetailsInfo)
     {
         this.mData = _data;
-        this.mCallback = _clickCallback;
+        this.UpdateUI();
         this.schedule(this.ScaleLogic.bind(this),0.01);
     }
+
+    UpdateUI()
+    {
+        this.mId.string = this.mData.id;
+        let stamp = "texture/club/Stamp" +  this.mData.stamp;
+        this.LoadSprite("common",stamp,(_spriteFrame)=>
+        {
+            this.mStamp.spriteFrame = _spriteFrame;
+        });
+        this.mOwnerTag.active = LocalPlayerData.Instance.Data_Uid.mData == this.mData.ownerId;
+        this.mClubName.string = this.mData.name;
+        this.mMemberCount.string = this.mData.memberCount + "";
+        this.mCurrentTables.string = this.mData.tableCount + "";
+    }
+
     //update
     ScaleLogic(dt: number)
     {

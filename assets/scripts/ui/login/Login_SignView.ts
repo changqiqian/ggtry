@@ -84,11 +84,6 @@ export class Login_SignView extends BaseUI
             {
                 this.ShowLayer("login","prefab/Login_SetUserInfo");
             }
-            else
-            {
-                UIMgr.Instance.ShowToast(Localization.GetString("00098"));
-            }
-            
         })
    
     }

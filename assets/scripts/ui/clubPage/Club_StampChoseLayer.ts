@@ -15,20 +15,25 @@ export class Club_StampChoseLayer extends BaseUI
     mScrollView: ScrollView = null;
     InitParam()
     {
-        HallData.Instance.Data_ClubStampIndex.mData = 0;
+
     }
     BindUI()
     {
         for(let i = 0 ; i < GameConfig.ClubStampNumber ; i++)
         {
             let currentToggle = this.mScrollView.content.children[i].getComponent(ToggleBtn);
-            let logoName = "Stamp" + i;
-            this.LoadSprite("common" , "texutre/club/" + logoName , (_spriteFrame)=>
+            let name = "Stamp" + i;
+            this.LoadSprite("common" , "texture/club/" + name , (_spriteFrame)=>
             {
                 currentToggle.SetImage(_spriteFrame)
                 currentToggle.SetDataNotify(HallData.Instance.Data_ClubStampIndex,i);
             })
         }
+
+        this.mCloseBtn.SetClickCallback(()=>
+        {
+            this.CloseAsWindow();
+        });
     }
     RegDataNotify()
     {

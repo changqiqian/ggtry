@@ -143,4 +143,17 @@ export class Tool
         return finalName;
     };
 
+    //服务器的钱转成客户端
+    public static ConvertMoney_S2C(_serverMoney : number) : number
+    {
+        let clientMoney = _serverMoney / 10000;
+        return clientMoney;
+    }
+
+    public static ConvertMoney_C2S(_clientMoney : number) : number
+    {
+        let serverMoney = _clientMoney * 10000;
+        return serverMoney;
+    }
+
 }

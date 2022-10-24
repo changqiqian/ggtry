@@ -42,9 +42,69 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubRecordCoinType : BaseData<GameCurrencyType> = new BaseData<GameCurrencyType>();//俱乐部战绩 货币类型
     Data_ClubRecordDateType : BaseData<RecordDateType> = new BaseData<RecordDateType>();//俱乐部战绩 战绩时间段
                     //创建俱乐部
-    Data_ClubLogoIndex : BaseData<number> = new BaseData<number>(); //创建俱乐部时候选择的logo编号
-    Data_ClubStampIndex : BaseData<number> = new BaseData<number>(); //创建俱乐部时候选的封面编号
+    Data_ClubLogoIndex : BaseData<number> = new BaseData<number>(false,0); //创建俱乐部时候选择的logo编号
+    Data_ClubStampIndex : BaseData<number> = new BaseData<number>(false,0); //创建俱乐部时候选的封面编号
+    Data_ClubCreateData : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //创建俱乐部成功后的返回数据
+    Data_ClubEnter : BaseData<boolean> = new BaseData<boolean>(); //进入俱乐部
+    Data_ClubDismiss : BaseData<string> = new BaseData<string>(); //解散俱乐部
+    Data_ClubSearchSuccess : BaseData<boolean> = new BaseData<boolean>(); //搜索俱乐部成功
+    Data_ClubSearchResult : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //解散俱乐部
+    Data_ClubJoinResult : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //俱乐部申请回复结果
+    Data_ClubApplyingInfo :BaseData<Array<IClubJoinRequest>> = new BaseData<Array<IClubJoinRequest>>(false,new Array<IClubJoinRequest>()); //有玩家申请加入我创建的俱乐部
+    Data_ClubApplyingNotify : BaseData<boolean> = new BaseData<boolean>(); //新的俱乐部申请
 
+    public ApplyingNotifyContain(_clubId : string) : boolean
+    {
+        for(let i = 0 ; i < this.Data_ClubApplyingInfo.mData.length ; i++)
+        {
+            let current = this.Data_ClubApplyingInfo.mData[i];
+            let clubInfo = current.clubInfo;
+            if(clubInfo.id == _clubId)
+            {
+                if(current.userInfo.length > 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public GetApplyingUsers(_clubId : string) : Array<UserInfo>
+    {
+        for(let i = 0 ; i < this.Data_ClubApplyingInfo.mData.length ; i++)
+        {
+            let current = this.Data_ClubApplyingInfo.mData[i];
+            let clubInfo = current.clubInfo;
+            if(clubInfo.id == _clubId)
+            {
+                return current.userInfo;
+            }
+        }
+
+        return [];
+    }
+
+    public RemoveApplyingMembers(_clubId : string , _uid : string)
+    {
+        for(let i = 0 ; i < this.Data_ClubApplyingInfo.mData.length ; i++)
+        {
+            let current = this.Data_ClubApplyingInfo.mData[i];
+            let clubInfo = current.clubInfo;
+            if(clubInfo.id == _clubId)
+            {
+                let users = current.userInfo;
+                let index = users.findIndex((_item) => _item.uid === _uid);
+                if(index > 0)
+                {
+                    users.splice(index , 1);
+                }
+                break;
+            }
+        }
+        
+
+    }
                     //创建牌局,追踪每个选项最终值，用于最后生成数据
     Data_ClubRefreshSmallBlind : BaseData<number> = new BaseData<number>(); //小盲选项值发生了变化
     Data_ClubRefreshShortBaseScore : BaseData<number> = new BaseData<number>();//短牌底分选项发生了变化

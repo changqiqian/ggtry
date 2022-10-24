@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Sprite } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { Tool } from '../../../Tool';
 import { BaseButton } from '../../common/BaseButton';
 const { ccclass, property } = _decorator;
 
@@ -54,12 +55,12 @@ export class Hall_PlayerInfoBar extends BaseUI
 
         LocalPlayerData.Instance.Data_Coin.AddListenner(this,(_data)=>
         {
-            this.mCoinBtn.SetTitle(_data.toString());
+            this.mCoinBtn.SetTitle(Tool.ConvertMoney_S2C(_data).toString());
         })
 
         LocalPlayerData.Instance.Data_Diamond.AddListenner(this,(_data)=>
         {
-            this.mDiamondBtn.SetTitle(_data.toString());
+            this.mDiamondBtn.SetTitle(Tool.ConvertMoney_S2C(_data).toString());
         })
         
     }

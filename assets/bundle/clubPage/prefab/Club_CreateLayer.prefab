@@ -3374,7 +3374,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 75.91,
+      "width": 97.6,
       "height": 63
     },
     "_anchorPoint": {
@@ -3410,7 +3410,7 @@
       "b": 187,
       "a": 255
     },
-    "_string": "0/20",
+    "_string": "0/100",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 39,
@@ -3923,7 +3923,7 @@
       "__id__": 187
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 210
@@ -4157,7 +4157,13 @@
     },
     "mCloseBtn": null,
     "mLogoBtn": null,
+    "mLogo": {
+      "__id__": 50
+    },
     "mStampBtn": null,
+    "mStamp": {
+      "__id__": 86
+    },
     "mNameEditBox": {
       "__id__": 136
     },

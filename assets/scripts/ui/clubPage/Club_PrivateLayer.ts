@@ -2,6 +2,10 @@ import { _decorator, Component, Node, Label, ScrollView } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { BaseButton } from '../common/BaseButton';
 import { ToggleBtn } from '../common/ToggleBtn';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { Tool } from '../../Tool';
+import { HallData } from '../hall/HallData';
+import { Club_MemberNotifyWindow } from './Club_MemberNotifyWindow';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_PrivateLayer')
@@ -14,7 +18,7 @@ export class Club_PrivateLayer extends BaseUI
     @property(Label) 
     mClubId: Label = null;
     @property(BaseButton) 
-    mMessageBtn: BaseButton = null;
+    mNotifyBtn: BaseButton = null;
     @property(BaseButton) 
     mMenuBtn: BaseButton = null;
     @property(ToggleBtn) 
@@ -37,9 +41,36 @@ export class Club_PrivateLayer extends BaseUI
     }
     BindUI()
     {
+
+        this.mBackBtn.SetClickCallback(()=>
+        {
+            this.Show(false);
+        });
+
+        this.mNotifyBtn.node.active = false;
+        this.mNotifyBtn.SetClickCallback(()=>
+        {
+            this.ShowWindow("clubPage","prefab/Club_MemberNotifyWindow",true,(_script)=>
+            {
+                let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+                let tempScript = _script as Club_MemberNotifyWindow;
+                tempScript.InitWithData(clubId);
+            });
+        });
+        this.mMenuBtn.SetClickCallback(()=>
+        {
+            this.ShowLayer("clubPage","prefab/Club_Setting");
+        });
+
+        this.mAssetsToggle.SetClickCallback((_data)=>
+        {
+            this.UpdateMoney()
+        });
+        this.mAssetsToggle.SetShowStauts(false);
+    
         this.mAseetsBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_AssetsManage");
+            this.ShowWindow("clubPage","prefab/Club_AssetsManage");
         });
         this.mRecordBtn.SetClickCallback(()=>
         {
@@ -54,9 +85,46 @@ export class Club_PrivateLayer extends BaseUI
             this.ShowLayer("clubPage","prefab/Club_CreateGameOption");
         });
     }
+
     RegDataNotify()
     {
+        LocalPlayerData.Instance.Data_CurrentEnterClub.AddListenner(this,(_data)=>
+        {
+            this.mClubName.string = _data.name;
+            this.mClubId.string = _data.id;
+        });
 
+        LocalPlayerData.Instance.Data_SelfClubInfo.AddListenner(this,(_data)=>
+        {
+            this.UpdateMoney();
+        });
+
+        HallData.Instance.Data_ClubEnter.AddListenner(this,(_data)=>
+        {
+            if(this.node.active == false)
+            {
+                return;
+            }
+            
+            if(_data == false)
+            {
+                this.Show(false);
+            }
+        });
+
+        HallData.Instance.Data_ClubApplyingNotify.AddListenner(this,(_data)=>
+        {
+            let ownerId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.ownerId;
+            if(LocalPlayerData.Instance.Data_Uid.mData != ownerId)
+            {
+                return;
+            }
+            if(_data)
+            {
+                let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+                this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(clubId)
+            }
+        });
     }
     LateInit()
     {
@@ -65,6 +133,27 @@ export class Club_PrivateLayer extends BaseUI
     CustmoerDestory()
     {
 
+    }
+
+    UpdateMoney()
+    {
+        let show = this.mAssetsToggle.IsSelected();
+        if(show)
+        {
+            if(LocalPlayerData.Instance.Data_SelfClubInfo.mData != null)
+            {
+                let clubPoint = LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint;
+                this.mMoney.string = Tool.ConvertMoney_S2C(clubPoint) + "";
+            }
+            else
+            {
+                this.mMoney.string = "***";
+            }
+        }
+        else
+        {
+            this.mMoney.string = "***";
+        }
     }
 }
 

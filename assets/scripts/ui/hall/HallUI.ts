@@ -1,9 +1,11 @@
 import { _decorator, Component, Node, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { CommonNotify } from '../../CommonNotify';
 import { Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
+import { TipsWindow } from '../common/TipsWindow';
 import { LoginData } from '../login/LoginData';
 import { HallData, Hall_SubPage } from './HallData';
 const { ccclass, property } = _decorator;
@@ -19,7 +21,7 @@ export class HallUI extends BaseUI
 
     InitParam() 
     {
-        NetworkSend.Instance.GetUserInfo();
+        
     }
     BindUI() 
     {
@@ -35,7 +37,20 @@ export class HallUI extends BaseUI
         LoginData.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
             
-        })
+        });
+
+        HallData.Instance.Data_ClubJoinResult.AddListenner(this,(_data)=>
+        {
+            let clubId = _data.id;
+            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            {
+                let tempScript = _script as TipsWindow;
+                let tips = Localization.GetString("00106");
+                tips = Localization.ReplaceString(tips,clubId);
+                tempScript.SetTips(tips);
+                tempScript.ShowConfirmBtnOnly();
+            })
+        });
     }
     LateInit() 
     {

@@ -34,12 +34,18 @@ export class PlayerInfo extends BaseUI
 
     public SetRomoteHead(_url : string)
     {
-
+        this.LoadRemoteSprite(_url,(_spriteFrame)=>
+        {
+            this.mHead.spriteFrame = _spriteFrame;
+        });
     }
 
-    public SetLocalHead(_bundleName : string , _assetPath : string)
+    public SetLocalHead(_headIndex : number)
     {
-
+        this.LoadLocalHead(_headIndex , (_spriteFrame)=>
+        {
+            this.mHead.spriteFrame = _spriteFrame;
+        })
     }
 
     public SetName(_name : string)

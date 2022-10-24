@@ -14,11 +14,6 @@ export class Club_LogoChoseLayer extends BaseUI
     @property(ScrollView) 
     mScrollView: ScrollView = null;
     
-    onEnable()
-    {
-        HallData.Instance.Data_ClubLogoIndex.mData = 0;
-    }
-
     InitParam()
     {
 
@@ -29,12 +24,17 @@ export class Club_LogoChoseLayer extends BaseUI
         {
             let currentToggle = this.mScrollView.content.children[i].getComponent(ToggleBtn);
             let logoName = "Logo" + i;
-            this.LoadSprite("common" , "texutre/club/" + logoName , (_spriteFrame)=>
+            this.LoadSprite("common" , "texture/club/" + logoName , (_spriteFrame)=>
             {
                 currentToggle.SetImage(_spriteFrame)
                 currentToggle.SetDataNotify(HallData.Instance.Data_ClubLogoIndex,i);
             })
         }
+
+        this.mCloseBtn.SetClickCallback(()=>
+        {
+            this.CloseAsWindow();
+        });
     }
     RegDataNotify()
     {

@@ -28,6 +28,9 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_LastInputPhoneNum : BaseData<string> = new BaseData<string>(); //最后一次输入的手机号
     Data_LastInputPwd : BaseData<string> = new BaseData<string>();//最后一次输入的密码
 
+    Data_SelfClubInfo : BaseData<IClubMember> = new BaseData<IClubMember>();//进入俱乐部后，我的俱乐部个人信息
+    Data_CurrentEnterClub : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>();//当前进入的俱乐部
+
     //自定义设置
     CustomerInit()
     {

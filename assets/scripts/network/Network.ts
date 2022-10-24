@@ -245,11 +245,11 @@ export class Network  extends Singleton<Network>()
         this.mPingRevTimer = setTimeout(this.OnPingTimeOut.bind(this), this.mPingSpace);
         let msg = new HeartbeatPing();
         this.SendMsg(MessageId.C2S_HeartbeatPing , HeartbeatPing.encode(msg).finish());
-        console.log('发送 心跳');
+        //console.log('发送 心跳');
     }
 
     private RecvPing() {
-        console.log('收到 心跳');
+        //console.log('收到 心跳');
         clearTimeout(this.mPingRevTimer);
         this.mPingSendTimer = setTimeout(this.SendPing.bind(this), this.mPingSpace);
     }

@@ -40,7 +40,7 @@ export class Club_CreateGameOption extends BaseUI
         });
         this.mCloseBtn.SetClickCallback(()=>
         {
-
+            this.Show(false);
         });
     }
     RegDataNotify()
