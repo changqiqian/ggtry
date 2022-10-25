@@ -49,7 +49,7 @@ export class Club_Setting extends BaseUI
     onEnable()
     {
         let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-        NetworkSend.Instance.GetClubMember(clubId,0,4);
+        //NetworkSend.Instance.GetClubMember(clubId,0,4);
     }
 
     onDisable()

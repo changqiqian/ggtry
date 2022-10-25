@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite, Label, UITransform, view } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, UITransform, view, PageView } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { NetworkSend } from '../../network/NetworkSend';
@@ -34,7 +34,7 @@ export class Club_MainEnter extends BaseUI
     mCenterX : number;
     mData : IClubDetailsInfo = null;
     mLastTimeScale : number = null;
-
+    mReviewOnly : boolean = false;
     InitParam()
     {
         let screenSize = view.getVisibleSize();
@@ -46,6 +46,10 @@ export class Club_MainEnter extends BaseUI
         this.mNotifyBtn.node.active = false;
         this.mEnterBtn.SetClickCallback(()=>
         {
+            if(this.mReviewOnly)
+            {
+                return;
+            }
             let currentScale = this.CalculateCurrentScaleRatio();
             if(currentScale == 1)
             {
@@ -89,6 +93,11 @@ export class Club_MainEnter extends BaseUI
         {
             if(_data == this.mData.id)
             {
+                let pageView = this.node.parent.getComponent(PageView);
+                if(pageView)
+                {
+                    pageView.removePage(this.node);
+                }
                 this.DeleteSelf();
             }
         });
@@ -108,6 +117,7 @@ export class Club_MainEnter extends BaseUI
         this.UpdateUI();
         this.schedule(this.ScaleLogic.bind(this),0.01);
     }
+    
 
     UpdateUI()
     {
@@ -164,6 +174,11 @@ export class Club_MainEnter extends BaseUI
             let scaleRatio = 1 - (offset/this.mMaxOffset) * 0.1;
             return scaleRatio;
         }
+    }
+
+    public SetReviewOnly(_value : boolean)
+    {
+        this.mReviewOnly = _value;
     }
 }
 

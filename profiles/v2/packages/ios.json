@@ -3,8 +3,9 @@
   "options": {
     "ios": {
       "orientation": {
-        "landscapeRight": true,
-        "landscapeLeft": true
+        "landscapeRight": false,
+        "landscapeLeft": false,
+        "portrait": true
       },
       "renderBackEnd": {
         "metal": true
@@ -14,7 +15,8 @@
       "osTarget": {
         "iphoneos": false,
         "simulator": true
-      }
+      },
+      "developerTeam": "ZTGH2Z5AW9"
     }
   }
 }

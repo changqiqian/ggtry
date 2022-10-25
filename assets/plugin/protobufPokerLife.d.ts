@@ -512,6 +512,9 @@ export class ClubDetailsInfo implements IClubDetailsInfo {
 /** Properties of a ClubMember. */
 export interface IClubMember {
 
+    /** ClubMember id */
+    id?: (string|null);
+
     /** ClubMember uid */
     uid?: (string|null);
 
@@ -536,6 +539,9 @@ export class ClubMember implements IClubMember {
      * @param [p] Properties to set
      */
     constructor(p?: IClubMember);
+
+    /** ClubMember id. */
+    public id: string;
 
     /** ClubMember uid. */
     public uid: string;

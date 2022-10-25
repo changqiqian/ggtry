@@ -1121,6 +1121,7 @@ $root.ClubMember = (function() {
      * Properties of a ClubMember.
      * @exports IClubMember
      * @interface IClubMember
+     * @property {string|null} [id] ClubMember id
      * @property {string|null} [uid] ClubMember uid
      * @property {string|null} [nickName] ClubMember nickName
      * @property {string|null} [head] ClubMember head
@@ -1142,6 +1143,14 @@ $root.ClubMember = (function() {
                 if (p[ks[i]] != null)
                     this[ks[i]] = p[ks[i]];
     }
+
+    /**
+     * ClubMember id.
+     * @member {string} id
+     * @memberof ClubMember
+     * @instance
+     */
+    ClubMember.prototype.id = "";
 
     /**
      * ClubMember uid.
@@ -1195,16 +1204,18 @@ $root.ClubMember = (function() {
     ClubMember.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
+        if (m.id != null && Object.hasOwnProperty.call(m, "id"))
+            w.uint32(10).string(m.id);
         if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(10).string(m.uid);
+            w.uint32(18).string(m.uid);
         if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
-            w.uint32(18).string(m.nickName);
+            w.uint32(26).string(m.nickName);
         if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(26).string(m.head);
+            w.uint32(34).string(m.head);
         if (m.clubPoint != null && Object.hasOwnProperty.call(m, "clubPoint"))
-            w.uint32(32).int64(m.clubPoint);
+            w.uint32(40).int64(m.clubPoint);
         if (m.memberType != null && Object.hasOwnProperty.call(m, "memberType"))
-            w.uint32(40).int32(m.memberType);
+            w.uint32(48).int32(m.memberType);
         return w;
     };
 
@@ -1227,18 +1238,21 @@ $root.ClubMember = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.uid = r.string();
+                m.id = r.string();
                 break;
             case 2:
-                m.nickName = r.string();
+                m.uid = r.string();
                 break;
             case 3:
-                m.head = r.string();
+                m.nickName = r.string();
                 break;
             case 4:
-                m.clubPoint = r.int64();
+                m.head = r.string();
                 break;
             case 5:
+                m.clubPoint = r.int64();
+                break;
+            case 6:
                 m.memberType = r.int32();
                 break;
             default:
@@ -1258,6 +1272,7 @@ $root.ClubBasicJoinRequest = (function() {
      * Properties of a ClubBasicJoinRequest.
      * @exports IClubBasicJoinRequest
      * @interface IClubBasicJoinRequest
+     * @property {string|null} [id] ClubBasicJoinRequest id
      * @property {string|null} [uid] ClubBasicJoinRequest uid
      * @property {string|null} [nickName] ClubBasicJoinRequest nickName
      * @property {string|null} [head] ClubBasicJoinRequest head
@@ -1277,6 +1292,14 @@ $root.ClubBasicJoinRequest = (function() {
                 if (p[ks[i]] != null)
                     this[ks[i]] = p[ks[i]];
     }
+
+    /**
+     * ClubBasicJoinRequest id.
+     * @member {string} id
+     * @memberof ClubBasicJoinRequest
+     * @instance
+     */
+    ClubBasicJoinRequest.prototype.id = "";
 
     /**
      * ClubBasicJoinRequest uid.
@@ -1314,12 +1337,14 @@ $root.ClubBasicJoinRequest = (function() {
     ClubBasicJoinRequest.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
+        if (m.id != null && Object.hasOwnProperty.call(m, "id"))
+            w.uint32(10).string(m.id);
         if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(10).string(m.uid);
+            w.uint32(18).string(m.uid);
         if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
-            w.uint32(18).string(m.nickName);
+            w.uint32(26).string(m.nickName);
         if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(26).string(m.head);
+            w.uint32(34).string(m.head);
         return w;
     };
 
@@ -1342,12 +1367,15 @@ $root.ClubBasicJoinRequest = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.uid = r.string();
+                m.id = r.string();
                 break;
             case 2:
-                m.nickName = r.string();
+                m.uid = r.string();
                 break;
             case 3:
+                m.nickName = r.string();
+                break;
+            case 4:
                 m.head = r.string();
                 break;
             default:

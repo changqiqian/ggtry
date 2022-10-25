@@ -33,6 +33,8 @@ export class Club_SearchResult extends BaseUI
             NetworkSend.Instance.JoinClub(clubId);
             this.CloseAsWindow();
         });
+
+        this.mClub_MainEnter.SetReviewOnly(true);
     }
     RegDataNotify()
     {
