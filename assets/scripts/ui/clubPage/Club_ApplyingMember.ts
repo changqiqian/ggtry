@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { PlayerInfo } from '../common/PlayerInfo';
 import { HallData } from '../hall/HallData';
@@ -17,7 +18,7 @@ export class Club_ApplyingMember extends BaseUI {
     mRejectBtn: BaseButton = null;
     
     private mClubId : string  = null;
-    private mUserInfo : UserInfo = null;
+    private mUserInfo : IClubBasicJoinRequest = null;
     InitParam()
     {
 
@@ -26,11 +27,11 @@ export class Club_ApplyingMember extends BaseUI {
     {
         this.mAgreeBtn.SetClickCallback(()=>
         {
-
+            this.DealApplying(true);
         });
         this.mRejectBtn.SetClickCallback(()=>
         {
-            
+            this.DealApplying(false);
         });
     }
     RegDataNotify()
@@ -57,13 +58,20 @@ export class Club_ApplyingMember extends BaseUI {
 
     }
 
-    public InitWithData(_userInfo : UserInfo , _clubId : string)
+    public InitWithData(_userInfo : IClubBasicJoinRequest , _clubId : string)
     {
         this.mUserInfo = _userInfo;
         this.mClubId = _clubId;
         this.mPlayerInfo.SetName(this.mUserInfo.nickName);
         this.mPlayerInfo.SetLocalHead(Number(this.mUserInfo.head));
         this.mID.string = this.mUserInfo.uid;
+    }
+
+    public DealApplying(_agree : boolean)
+    {
+        let uids = new Array<string>();
+        uids.push(this.mUserInfo.uid);
+        NetworkSend.Instance.AddClubMember(this.mClubId , _agree ,uids);
     }
 }
 

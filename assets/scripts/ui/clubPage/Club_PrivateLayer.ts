@@ -55,11 +55,11 @@ export class Club_PrivateLayer extends BaseUI
                 let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
                 let tempScript = _script as Club_MemberNotifyWindow;
                 tempScript.InitWithData(clubId);
-            });
+            },HallData.ClubUiTag);
         });
         this.mMenuBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_Setting");
+            this.ShowLayer("clubPage","prefab/Club_Setting",true,null,HallData.ClubUiTag);
         });
 
         this.mAssetsToggle.SetClickCallback((_data)=>
@@ -70,19 +70,19 @@ export class Club_PrivateLayer extends BaseUI
     
         this.mAseetsBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_AssetsManage");
+            this.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
         });
         this.mRecordBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_RecordLayer");
+            this.ShowLayer("clubPage","prefab/Club_RecordLayer",true,null,HallData.ClubUiTag);
         });
         this.mDataBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_DataLayer");
+            this.ShowLayer("clubPage","prefab/Club_DataLayer",true,null,HallData.ClubUiTag);
         });
         this.mCreateBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_CreateGameOption");
+            this.ShowLayer("clubPage","prefab/Club_CreateGameOption",true,null,HallData.ClubUiTag);
         });
     }
 
@@ -99,18 +99,8 @@ export class Club_PrivateLayer extends BaseUI
             this.UpdateMoney();
         });
 
-        HallData.Instance.Data_ClubEnter.AddListenner(this,(_data)=>
-        {
-            if(this.node.active == false)
-            {
-                return;
-            }
-            
-            if(_data == false)
-            {
-                this.Show(false);
-            }
-        });
+
+
 
         HallData.Instance.Data_ClubApplyingNotify.AddListenner(this,(_data)=>
         {

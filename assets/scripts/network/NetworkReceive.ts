@@ -250,6 +250,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         
         Network.Instance.AddMsgListenner(MessageId.S2C_AddClubMember,(_data)=>
         {
+            UIMgr.Instance.ShowLoading(false);
             let msg = S2CAddClubMember.decode(_data);
             console.log("收到的内容 S2C_AddClubMember  处理俱乐部申请===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
@@ -275,6 +276,47 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_GetClubMember,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CGetClubMember.decode(_data);
+            console.log("收到的内容 S2C_GetClubMember  获取俱乐部成员列表===" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                HallData.Instance.Data_S2CGetClubMember.mData = msg;
+
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_RemoveMember,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CRemoveMember.decode(_data);
+            console.log("收到的内容 S2C_RemoveMember  移除俱乐部成员===" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                HallData.Instance.Data_S2CRemoveMember.mData = msg;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_RemoveNotifiy,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CRemoveNotifiy.decode(_data);
+            console.log("收到的内容 S2C_RemoveNotifiy  自己被移除俱乐部通知===" + JSON.stringify(msg));
+            HallData.Instance.Data_ClubRemoveNotify.mData = msg.clubId;
+        },this);
+        
     }
 
     public UnregisterMsg()

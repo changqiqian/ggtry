@@ -31,11 +31,11 @@ export class Club_CreateGameModuleItem extends BaseUI
             HallData.Instance.Data_ClubCurrentModuleIndex.mData = this.mIndex;
             if(HallData.Instance.Data_Club_CreateTexasConfig.mData.gameType == GameType.GameType_TexasCash)
             {
-                this.ShowLayer("clubPage" , "prefab/Club_CreateTexas")
+                this.ShowLayer("clubPage" , "prefab/Club_CreateTexas",true,null,HallData.ClubUiTag);
             }
             else if(HallData.Instance.Data_Club_CreateTexasConfig.mData.gameType == GameType.GameType_ShortCash)
             {
-                this.ShowLayer("clubPage" , "prefab/Club_CreateShort")
+                this.ShowLayer("clubPage" , "prefab/Club_CreateShort",true,null,HallData.ClubUiTag);
             }
         });
         this.mDeleteBtn.SetClickCallback(()=>
@@ -50,7 +50,7 @@ export class Club_CreateGameModuleItem extends BaseUI
                     GameConfig.DeleteCreateRoomModule(this.mIndex);
                     HallData.Instance.Data_ClubRefreshGameModule.mData = true;
                 })
-            })
+            },HallData.ClubUiTag)
         });
     }
     RegDataNotify()

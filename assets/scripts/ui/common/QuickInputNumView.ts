@@ -1,16 +1,23 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { BaseButton } from './BaseButton';
 const { ccclass, property } = _decorator;
 
 @ccclass('QuickInputNumView')
 export class QuickInputNumView extends BaseUI 
 {
+    @property(MovingShow) 
+    mMovingShow: MovingShow = null;
     @property(Node) 
     mContainer: Node = null;
 
     mNumberClickCallback : Function = null;
     mDeleteClickCallback : Function = null;
+    onEnable()
+    {
+        this.mMovingShow.ShowAnimation();
+    }
     InitParam() 
     {
 
@@ -18,7 +25,12 @@ export class QuickInputNumView extends BaseUI
     BindUI() 
     {
         this.node.on(Node.EventType.TOUCH_END,this.OnClickBG.bind(this),this);
-
+        this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
+        this.mMovingShow.SetAnimationCallback(()=>
+        {
+            this.node.active = false;
+        })
+        
         for(let i = 0 ; i < this.mContainer.children.length ; i++)
         {
             let currentBtn = this.mContainer.children[i].getComponent(BaseButton);
@@ -55,6 +67,19 @@ export class QuickInputNumView extends BaseUI
         this.mDeleteClickCallback = null;
     }
 
+
+    public Show(_val : boolean)
+    {
+        if(_val)
+        {
+            this.node.active = true;
+        }
+        else
+        {
+            this.mMovingShow.HideAnimation();
+        }
+    }
+
     public SetCallback(_numberClickCallback : Function , _deleteClickCallback : Function)
     {
         this.mNumberClickCallback = _numberClickCallback;
@@ -63,7 +88,7 @@ export class QuickInputNumView extends BaseUI
 
     OnClickBG()
     {
-        this.Show(false);
+        this.mMovingShow.HideAnimation();
     }
 
     OnClickNumBtn(_num)

@@ -123,7 +123,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
         Network.Instance.SendMsg(MessageId.C2S_QuitClub , C2SQuitClub.encode(msg).finish());
         console.log("退出俱乐部 C2S_QuitClub== " + JSON.stringify(msg))
     }
-
+ 
     public SearchClub(_clubId : string)
     {
         UIMgr.Instance.ShowLoading(true);
@@ -151,6 +151,27 @@ export class NetworkSend extends Singleton<NetworkSend>()
         msg.uids = _uids;
         Network.Instance.SendMsg(MessageId.C2S_AddClubMember , C2SAddClubMember.encode(msg).finish());
         console.log("通过玩家的俱乐部加入申请 C2S_AddClubMember== " + JSON.stringify(msg))
+    }
+
+    public GetClubMember(_clubId : string , _page : number , _pageSize :number)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SGetClubMember();
+        msg.clubId = _clubId;
+        msg.page = _page;
+        msg.pageSize = _pageSize;
+        Network.Instance.SendMsg(MessageId.C2S_GetClubMember , C2SGetClubMember.encode(msg).finish());
+        console.log("获取俱乐部成员 C2S_GetClubMember== " + JSON.stringify(msg))
+    }
+
+    public RemoveClubMember(_clubId : string , _uids : Array<string>)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SRemoveMember();
+        msg.clubId = _clubId;
+        msg.uids = _uids;
+        Network.Instance.SendMsg(MessageId.C2S_RemoveMember , C2SRemoveMember.encode(msg).finish());
+        console.log("移除俱乐部成员 C2S_GetClubMember== " + JSON.stringify(msg))
     }
 }
 

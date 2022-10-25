@@ -32,8 +32,6 @@ export class Mtt_AllRankPage extends BaseUI
     }
     RegDataNotify() 
     {
-
-
         HallData.Instance.Data_MttRankSubPage.AddListenner(this , (_data)=>
         {
             this.Show(_data == Mtt_RankSubPage.All);

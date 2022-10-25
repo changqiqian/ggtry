@@ -15,7 +15,7 @@ class SubViewKeyPair {
         this.value = _value;
     }
     key: string;
-    value: any;
+    value: Node;
 }
 
 const { ccclass, property } = _decorator;
@@ -196,14 +196,14 @@ export abstract class BaseUI extends Component {
         }
     }
 
-    ShowLayer(_bundleName: string, _assetPath: string, _show: boolean = true, _finishFunction: Function = null) 
+    ShowLayer(_bundleName: string, _assetPath: string, _show: boolean = true, _finishFunction: Function = null, _tag : string = "") 
     {
-        UIMgr.Instance.ShowLayer(_bundleName, _assetPath, _show, _finishFunction);
+        UIMgr.Instance.ShowLayer(_bundleName, _assetPath, _show, _finishFunction , _tag);
     }
 
-    ShowWindow(_bundleName: string, _prefabPath: string, _show: boolean = true, _finishFunction: Function = null) 
+    ShowWindow(_bundleName: string, _prefabPath: string, _show: boolean = true, _finishFunction: Function = null, _tag : string = "") 
     {
-        UIMgr.Instance.ShowWindow(_bundleName, _prefabPath, _show, _finishFunction);
+        UIMgr.Instance.ShowWindow(_bundleName, _prefabPath, _show, _finishFunction , _tag);
     }
 
 

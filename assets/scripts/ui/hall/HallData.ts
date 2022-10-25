@@ -36,7 +36,8 @@ export class HallData extends SingletonBaseNotify<HallData>()
     //Club
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    //俱乐部战绩
+    public static ClubUiTag = "ClubTag";            
+        //俱乐部战绩
     Data_ClubRecordSubPage : BaseData<Club_RecordSubPage> = new BaseData<Club_RecordSubPage>();//俱乐部战绩 子页面
     Data_ClubRecordDetailSubPage : BaseData<Club_RecordDetailSubPage> = new BaseData<Club_RecordDetailSubPage>();//俱乐部战绩详情 子页面
     Data_ClubRecordCoinType : BaseData<GameCurrencyType> = new BaseData<GameCurrencyType>();//俱乐部战绩 货币类型
@@ -52,7 +53,9 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubJoinResult : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //俱乐部申请回复结果
     Data_ClubApplyingInfo :BaseData<Array<IClubJoinRequest>> = new BaseData<Array<IClubJoinRequest>>(false,new Array<IClubJoinRequest>()); //有玩家申请加入我创建的俱乐部
     Data_ClubApplyingNotify : BaseData<boolean> = new BaseData<boolean>(); //新的俱乐部申请
-
+    Data_ClubRemoveNotify : BaseData<string> = new BaseData<string>(); //你被移除了某个俱乐部
+    Data_S2CGetClubMember : BaseData<S2CGetClubMember> = new BaseData<S2CGetClubMember>(true); //收到的俱乐部成员列表
+    Data_S2CRemoveMember : BaseData<S2CRemoveMember> = new BaseData<S2CRemoveMember>(); //收到的移除俱乐部成员消息
     public ApplyingNotifyContain(_clubId : string) : boolean
     {
         for(let i = 0 ; i < this.Data_ClubApplyingInfo.mData.length ; i++)
@@ -61,7 +64,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
             let clubInfo = current.clubInfo;
             if(clubInfo.id == _clubId)
             {
-                if(current.userInfo.length > 0)
+                if(current.clubBasicJoinRequest.length > 0)
                 {
                     return true;
                 }
@@ -70,7 +73,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
         return false;
     }
 
-    public GetApplyingUsers(_clubId : string) : Array<UserInfo>
+    public GetApplyingUsers(_clubId : string) : Array<IClubBasicJoinRequest>
     {
         for(let i = 0 ; i < this.Data_ClubApplyingInfo.mData.length ; i++)
         {
@@ -78,7 +81,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
             let clubInfo = current.clubInfo;
             if(clubInfo.id == _clubId)
             {
-                return current.userInfo;
+                return current.clubBasicJoinRequest;
             }
         }
 
@@ -93,9 +96,9 @@ export class HallData extends SingletonBaseNotify<HallData>()
             let clubInfo = current.clubInfo;
             if(clubInfo.id == _clubId)
             {
-                let users = current.userInfo;
+                let users = current.clubBasicJoinRequest;
                 let index = users.findIndex((_item) => _item.uid === _uid);
-                if(index > 0)
+                if(index >= 0)
                 {
                     users.splice(index , 1);
                 }

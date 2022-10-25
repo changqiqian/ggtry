@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, PageView, instantiate, UITransform } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { UIMgr } from '../../base/UIMgr';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
@@ -57,7 +58,11 @@ export class Club_Main extends BaseUI
         {
             if(_data)
             {
-                this.ShowLayer("clubPage","prefab/Club_PrivateLayer");
+                this.ShowLayer("clubPage","prefab/Club_PrivateLayer",true,null,HallData.ClubUiTag);
+            }
+            else
+            {
+                UIMgr.Instance.HideUiByTag(HallData.ClubUiTag);
             }
         });
         HallData.Instance.Data_ClubSearchSuccess.AddListenner(this,(_data)=>
@@ -65,6 +70,20 @@ export class Club_Main extends BaseUI
             if(_data)
             {
                 this.ShowWindow("clubPage","prefab/Club_SearchResult");
+            }
+        });
+
+        HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
+        {
+            if(HallData.Instance.Data_ClubEnter.mData == false)
+            {
+                return;
+            }
+
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(currentClubId == _data)
+            {
+                UIMgr.Instance.HideUiByTag(HallData.ClubUiTag);
             }
         });
     }

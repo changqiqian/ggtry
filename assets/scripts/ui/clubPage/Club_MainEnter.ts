@@ -59,7 +59,7 @@ export class Club_MainEnter extends BaseUI
             {
                 let tempScript = _script as Club_MemberNotifyWindow;
                 tempScript.InitWithData(this.mData.id);
-            });
+            },HallData.ClubUiTag);
         });
 
     }
@@ -82,6 +82,14 @@ export class Club_MainEnter extends BaseUI
             if(_data)
             {
                 this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(this.mData.id)
+            }
+        });
+
+        HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
+        {
+            if(_data == this.mData.id)
+            {
+                this.DeleteSelf();
             }
         });
     }

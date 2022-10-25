@@ -35,5 +35,15 @@ export class Club_HeadAndName extends BaseUI
     {
 
     }
+
+    public InitWithData(_head : number , _name : string)
+    {
+        this.LoadLocalHead(_head,(_spriteFrame)=>
+        {
+            this.mHead.spriteFrame = _spriteFrame;
+        });
+
+        this.mName.string = _name;
+    }
 }
 

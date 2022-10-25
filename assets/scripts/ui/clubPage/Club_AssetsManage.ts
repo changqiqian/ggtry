@@ -24,7 +24,10 @@ export class Club_AssetsManage extends BaseUI
     }
     BindUI()
     {
-
+        this.mCloseBtn.SetClickCallback(()=>
+        {
+            this.CloseAsWindow();
+        })
     }
     RegDataNotify()
     {

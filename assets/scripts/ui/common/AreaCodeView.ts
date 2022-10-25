@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { GameConfig } from '../../GameConfig';
+import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { LoginData } from '../login/LoginData';
 import { AreaCodeItem } from './AreaCodeItem';
 import { BaseButton } from './BaseButton';
@@ -17,11 +18,13 @@ export class AreaCodeView extends BaseUI {
     mSearchBtn: BaseButton = null;
     @property(Node) 
     mContent: Node = null;
-
+    @property(MovingShow) 
+    mMovingShow: MovingShow = null;
     onEnable()
     {
         this.mSearchEditBox.string = "";
         this.ExcutiveSearch();
+        this.mMovingShow.ShowAnimation();
     }
 
     InitParam() 
@@ -30,7 +33,7 @@ export class AreaCodeView extends BaseUI {
     }
     BindUI() 
     {
-        this.node.on(Node.EventType.TOUCH_END,this.HideAnm.bind(this),this);
+        this.node.on(Node.EventType.TOUCH_END,this.TouchEmptyBG.bind(this),this);
         for(let i = 0 ; i < GameConfig.AreaCodeList.length ; i++)
         {
             this.LoadPrefab("common" , "prefab/AreaCodeItem"  ,  (_prefab)=>
@@ -48,6 +51,12 @@ export class AreaCodeView extends BaseUI {
             this.ExcutiveSearch();
         });
 
+        this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
+        this.mMovingShow.SetAnimationCallback(()=>
+        {
+            this.node.active = false;
+        })
+
     }
     RegDataNotify() 
     {
@@ -55,7 +64,7 @@ export class AreaCodeView extends BaseUI {
         {
             if(_data == false)
             {
-                this.HideAnm();
+                this.mMovingShow.HideAnimation();
             }
         })
     }
@@ -73,24 +82,19 @@ export class AreaCodeView extends BaseUI {
     {
         if(_val)
         {
-            this.ShowAnm();
+            this.node.active = true;
         }
         else
         {
-            this.HideAnm();
+            this.mMovingShow.HideAnimation();
         }
     }
 
-    ShowAnm()
-    {
-        this.node.active = true;
-    }
 
-    HideAnm()
+    TouchEmptyBG()
     {
-        this.node.active = false;
+        this.mMovingShow.HideAnimation();
     }
-
 
     ExcutiveSearch()
     {

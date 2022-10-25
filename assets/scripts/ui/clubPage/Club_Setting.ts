@@ -8,6 +8,7 @@ import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { TipsWindow } from '../common/TipsWindow';
 import { HallData } from '../hall/HallData';
+import { Club_HeadAndName } from './Club_HeadAndName';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_Setting')
@@ -44,6 +45,13 @@ export class Club_Setting extends BaseUI
     @property(BaseButton) 
     mDismissBtn: BaseButton = null;
 
+
+    onEnable()
+    {
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        NetworkSend.Instance.GetClubMember(clubId,0,4);
+    }
+
     onDisable()
     {
         let currentClub = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
@@ -69,17 +77,17 @@ export class Club_Setting extends BaseUI
 
         this.mAssetsBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_AssetsManage");
+            this.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
         });
 
         this.mAssetsRecordBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_AssetsRecord");
+            this.ShowLayer("clubPage","prefab/Club_AssetsRecord",true,null,HallData.ClubUiTag);
         });
 
         this.mMoreMemberBtn.SetClickCallback(()=>
         {
-
+            this.ShowWindow("clubPage","prefab/Club_MemberList",true,null,HallData.ClubUiTag);
         });
 
         this.mLogoBtn.SetClickCallback(()=>
@@ -151,7 +159,7 @@ export class Club_Setting extends BaseUI
                 {
                     NetworkSend.Instance.QuitClub(clubId);
                 });
-            })
+            },HallData.ClubUiTag)
         });
         
     }
@@ -201,6 +209,43 @@ export class Club_Setting extends BaseUI
             }
         });
 
+
+        HallData.Instance.Data_S2CGetClubMember.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(clubId != _data.clubId)
+            {
+                return;
+            }
+
+            if(_data.page != 0)
+            {
+                return;
+            }
+
+            this.mMemberCount.string = _data.totalMember + "";
+
+            for(let i = 0 ; i < this.mUserContainer.children.length  ; i++)
+            {
+                let currentNode = this.mUserContainer.children[i];
+                if(i < _data.clubMembers.length)
+                {
+                    currentNode.active = true;
+                    let currentMemberData = _data.clubMembers[i];
+                    let currentScript = currentNode.getComponent(Club_HeadAndName);
+                    currentScript.InitWithData(Number(currentMemberData.head),currentMemberData.nickName);
+                }
+                else
+                {
+                    currentNode.active = false;
+                }
+            }
+        });
         
     }
     LateInit()

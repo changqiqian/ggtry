@@ -14,15 +14,17 @@ import { Singleton } from "./Singleton";
 
 class LayerKeyPair
 {
-    constructor(_key :string  , _value : cc.Node , _belong :SceneType) 
+    constructor(_key :string  , _value : cc.Node , _belong :SceneType , _tag : string) 
     {
         this.key = _key;
         this.value = _value;
         this.belong = _belong;
+        this.tag = _tag;
     }
     key : string ;
     value : any;
     belong : SceneType;
+    tag : string ;
 }
 
 class SceneConfig
@@ -144,7 +146,7 @@ export class UIMgr extends Singleton<UIMgr>()
         this.mToast.ShowToast(_tips , _duration);
     }
 
-    public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null)
+    public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null , _tag : string = "")
     {
         let key = _bundleName + "/"  + _prefabPath;
         let target = this.FindLayer(key,LayerType.Layer);
@@ -157,6 +159,7 @@ export class UIMgr extends Singleton<UIMgr>()
         
         if(target != null && target.value!=null)
         {
+            target.tag = _tag;
             let nodeCount = this.GetRootNode(LayerType.Layer).children.length;
             target.value.setSiblingIndex(nodeCount);
             let tempScript = target.value.getComponent(BaseUI);
@@ -167,7 +170,7 @@ export class UIMgr extends Singleton<UIMgr>()
             }
             return;
         }
-        this.CreateRecordItem(key , LayerType.Layer);
+        this.CreateRecordItem(key , LayerType.Layer , _tag);
         this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
         {
             this.GetRootNode(LayerType.Layer).addChild(_tempNode);
@@ -180,7 +183,7 @@ export class UIMgr extends Singleton<UIMgr>()
         });
     }
 
-    public ShowWindow(_bundleName :string , _prefabPath:string , _show : boolean = true, _finishFunction : Function = null)
+    public ShowWindow(_bundleName :string , _prefabPath:string , _show : boolean = true, _finishFunction : Function = null, _tag : string = "")
     {
         let key = _bundleName + "/"  + _prefabPath;
         let target = this.FindLayer(key,LayerType.Window);
@@ -193,6 +196,7 @@ export class UIMgr extends Singleton<UIMgr>()
 
         if(target != null && target.value!=null)
         {
+            target.tag = _tag;
             let nodeCount = this.GetRootNode(LayerType.Window).children.length;
             target.value.setSiblingIndex(nodeCount);
             let tempScript = target.value.getComponent(BaseWindow);
@@ -204,7 +208,7 @@ export class UIMgr extends Singleton<UIMgr>()
             return;
         }
 
-        this.CreateRecordItem(key , LayerType.Window);
+        this.CreateRecordItem(key , LayerType.Window , _tag);
         this.CreatePrefab("common","prefab/BaseWindow" , (_tempWindow)=>
         {
             this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
@@ -400,10 +404,39 @@ export class UIMgr extends Singleton<UIMgr>()
         target.value = _node;
     }
 
-    private CreateRecordItem(_key : string ,  _type : LayerType)
+    private CreateRecordItem(_key : string ,  _type : LayerType , _tag : string)
     {
-        let keyPair = new LayerKeyPair(_key , null , this.mCurrentScene);
+        let keyPair = new LayerKeyPair(_key , null , this.mCurrentScene , _tag);
         this.GetList(_type).push(keyPair);
+    }
+    
+    public HideUiByTag(_tag : string)
+    {
+        for(let i = 0 ; i < this.mLayerList.length ; i++)
+        {
+            let currentKeyPair = this.mLayerList[i];
+            if(currentKeyPair.tag == _tag)
+            {
+                if(currentKeyPair.value != null)
+                {
+                    let tempScript = currentKeyPair.value.getComponent(BaseUI);
+                    tempScript.Show(false);
+                }
+            }
+        }
+
+        for(let i = 0 ; i < this.mWindowList.length ; i++)
+        {
+            let currentKeyPair = this.mWindowList[i];
+            if(currentKeyPair.tag == _tag)
+            {
+                if(currentKeyPair.value != null)
+                {
+                    let tempScript = currentKeyPair.value.getComponent(BaseUI);
+                    tempScript.Show(false);
+                }
+            }
+        }
     }
 
 }
