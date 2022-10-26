@@ -3510,187 +3510,6 @@ $root.S2CAddClubMember = (function() {
     return S2CAddClubMember;
 })();
 
-$root.S2CClubJoinNotify = (function() {
-
-    /**
-     * Properties of a S2CClubJoinNotify.
-     * @exports IS2CClubJoinNotify
-     * @interface IS2CClubJoinNotify
-     * @property {Array.<IClubJoinRequest>|null} [request] S2CClubJoinNotify request
-     */
-
-    /**
-     * Constructs a new S2CClubJoinNotify.
-     * @exports S2CClubJoinNotify
-     * @classdesc Represents a S2CClubJoinNotify.
-     * @implements IS2CClubJoinNotify
-     * @constructor
-     * @param {IS2CClubJoinNotify=} [p] Properties to set
-     */
-    function S2CClubJoinNotify(p) {
-        this.request = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CClubJoinNotify request.
-     * @member {Array.<IClubJoinRequest>} request
-     * @memberof S2CClubJoinNotify
-     * @instance
-     */
-    S2CClubJoinNotify.prototype.request = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CClubJoinNotify message. Does not implicitly {@link S2CClubJoinNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CClubJoinNotify
-     * @static
-     * @param {IS2CClubJoinNotify} m S2CClubJoinNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CClubJoinNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.request != null && m.request.length) {
-            for (var i = 0; i < m.request.length; ++i)
-                $root.ClubJoinRequest.encode(m.request[i], w.uint32(10).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CClubJoinNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CClubJoinNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CClubJoinNotify} S2CClubJoinNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CClubJoinNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CClubJoinNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                if (!(m.request && m.request.length))
-                    m.request = [];
-                m.request.push($root.ClubJoinRequest.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CClubJoinNotify;
-})();
-
-$root.S2CJoinClubResult = (function() {
-
-    /**
-     * Properties of a S2CJoinClubResult.
-     * @exports IS2CJoinClubResult
-     * @interface IS2CJoinClubResult
-     * @property {ICommonResult|null} [result] S2CJoinClubResult result
-     * @property {IClubDetailsInfo|null} [clubInfo] S2CJoinClubResult clubInfo
-     */
-
-    /**
-     * Constructs a new S2CJoinClubResult.
-     * @exports S2CJoinClubResult
-     * @classdesc Represents a S2CJoinClubResult.
-     * @implements IS2CJoinClubResult
-     * @constructor
-     * @param {IS2CJoinClubResult=} [p] Properties to set
-     */
-    function S2CJoinClubResult(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CJoinClubResult result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CJoinClubResult
-     * @instance
-     */
-    S2CJoinClubResult.prototype.result = null;
-
-    /**
-     * S2CJoinClubResult clubInfo.
-     * @member {IClubDetailsInfo|null|undefined} clubInfo
-     * @memberof S2CJoinClubResult
-     * @instance
-     */
-    S2CJoinClubResult.prototype.clubInfo = null;
-
-    /**
-     * Encodes the specified S2CJoinClubResult message. Does not implicitly {@link S2CJoinClubResult.verify|verify} messages.
-     * @function encode
-     * @memberof S2CJoinClubResult
-     * @static
-     * @param {IS2CJoinClubResult} m S2CJoinClubResult message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CJoinClubResult.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubInfo != null && Object.hasOwnProperty.call(m, "clubInfo"))
-            $root.ClubDetailsInfo.encode(m.clubInfo, w.uint32(18).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CJoinClubResult message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CJoinClubResult
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CJoinClubResult} S2CJoinClubResult
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CJoinClubResult.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CJoinClubResult();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubInfo = $root.ClubDetailsInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CJoinClubResult;
-})();
-
 $root.S2CDismissClub = (function() {
 
     /**
@@ -3993,6 +3812,187 @@ $root.S2CRemoveMember = (function() {
     };
 
     return S2CRemoveMember;
+})();
+
+$root.S2CClubJoinNotify = (function() {
+
+    /**
+     * Properties of a S2CClubJoinNotify.
+     * @exports IS2CClubJoinNotify
+     * @interface IS2CClubJoinNotify
+     * @property {Array.<IClubJoinRequest>|null} [request] S2CClubJoinNotify request
+     */
+
+    /**
+     * Constructs a new S2CClubJoinNotify.
+     * @exports S2CClubJoinNotify
+     * @classdesc Represents a S2CClubJoinNotify.
+     * @implements IS2CClubJoinNotify
+     * @constructor
+     * @param {IS2CClubJoinNotify=} [p] Properties to set
+     */
+    function S2CClubJoinNotify(p) {
+        this.request = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CClubJoinNotify request.
+     * @member {Array.<IClubJoinRequest>} request
+     * @memberof S2CClubJoinNotify
+     * @instance
+     */
+    S2CClubJoinNotify.prototype.request = $util.emptyArray;
+
+    /**
+     * Encodes the specified S2CClubJoinNotify message. Does not implicitly {@link S2CClubJoinNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CClubJoinNotify
+     * @static
+     * @param {IS2CClubJoinNotify} m S2CClubJoinNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CClubJoinNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.request != null && m.request.length) {
+            for (var i = 0; i < m.request.length; ++i)
+                $root.ClubJoinRequest.encode(m.request[i], w.uint32(10).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a S2CClubJoinNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CClubJoinNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CClubJoinNotify} S2CClubJoinNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CClubJoinNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CClubJoinNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                if (!(m.request && m.request.length))
+                    m.request = [];
+                m.request.push($root.ClubJoinRequest.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CClubJoinNotify;
+})();
+
+$root.S2CJoinClubResult = (function() {
+
+    /**
+     * Properties of a S2CJoinClubResult.
+     * @exports IS2CJoinClubResult
+     * @interface IS2CJoinClubResult
+     * @property {ICommonResult|null} [result] S2CJoinClubResult result
+     * @property {IClubDetailsInfo|null} [clubInfo] S2CJoinClubResult clubInfo
+     */
+
+    /**
+     * Constructs a new S2CJoinClubResult.
+     * @exports S2CJoinClubResult
+     * @classdesc Represents a S2CJoinClubResult.
+     * @implements IS2CJoinClubResult
+     * @constructor
+     * @param {IS2CJoinClubResult=} [p] Properties to set
+     */
+    function S2CJoinClubResult(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CJoinClubResult result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CJoinClubResult
+     * @instance
+     */
+    S2CJoinClubResult.prototype.result = null;
+
+    /**
+     * S2CJoinClubResult clubInfo.
+     * @member {IClubDetailsInfo|null|undefined} clubInfo
+     * @memberof S2CJoinClubResult
+     * @instance
+     */
+    S2CJoinClubResult.prototype.clubInfo = null;
+
+    /**
+     * Encodes the specified S2CJoinClubResult message. Does not implicitly {@link S2CJoinClubResult.verify|verify} messages.
+     * @function encode
+     * @memberof S2CJoinClubResult
+     * @static
+     * @param {IS2CJoinClubResult} m S2CJoinClubResult message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CJoinClubResult.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.clubInfo != null && Object.hasOwnProperty.call(m, "clubInfo"))
+            $root.ClubDetailsInfo.encode(m.clubInfo, w.uint32(18).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a S2CJoinClubResult message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CJoinClubResult
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CJoinClubResult} S2CJoinClubResult
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CJoinClubResult.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CJoinClubResult();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.clubInfo = $root.ClubDetailsInfo.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CJoinClubResult;
 })();
 
 $root.S2CRemoveNotify = (function() {

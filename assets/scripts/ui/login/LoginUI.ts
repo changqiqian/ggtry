@@ -133,6 +133,7 @@ export class LoginUI extends BaseUI
     {
         if(GameConfig.DebugMode == false)
         {
+            GameConfig.SetSeverUrl(GameConfig.DevelopIP);
             Network.Instance.CreateWS();
         }
     }

@@ -69,38 +69,14 @@ export class Club_MainEnter extends BaseUI
     }
     RegDataNotify()
     {
-        HallData.Instance.Data_ClubDismiss.AddListenner(this,(_data)=>
-        {
-            if(_data == this.mData.id)
-            {
-                this.DeleteSelf();
-            }
-        });
+
 
         HallData.Instance.Data_ClubApplyingNotify.AddListenner(this,(_data)=>
         {
-            if(LocalPlayerData.Instance.Data_Uid.mData != this.mData.ownerId)
-            {
-                return;
-            }
-            if(_data)
-            {
-                this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(this.mData.id)
-            }
+            this.UpdateNewMemberNotifyUI(_data);
         });
 
-        HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
-        {
-            if(_data == this.mData.id)
-            {
-                let pageView = this.node.parent.getComponent(PageView);
-                if(pageView)
-                {
-                    pageView.removePage(this.node);
-                }
-                this.DeleteSelf();
-            }
-        });
+
     }
     LateInit()
     {
@@ -118,6 +94,28 @@ export class Club_MainEnter extends BaseUI
         this.schedule(this.ScaleLogic.bind(this),0.01);
     }
     
+    UpdateNewMemberNotifyUI(_show : boolean)
+    {
+        if(this.mReviewOnly)
+        {
+            return;
+        }
+
+        if(this.mData == null)
+        {
+            return;
+        }
+
+        if(LocalPlayerData.Instance.Data_Uid.mData != this.mData.ownerId)
+        {
+            return;
+        }
+        if(_show)
+        {
+            this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(this.mData.id)
+        }
+    }
+
 
     UpdateUI()
     {
@@ -131,6 +129,7 @@ export class Club_MainEnter extends BaseUI
         this.mClubName.string = this.mData.name;
         this.mMemberCount.string = this.mData.memberCount + "";
         this.mCurrentTables.string = this.mData.tableCount + "";
+        this.UpdateNewMemberNotifyUI(HallData.Instance.Data_ClubApplyingNotify.mData);
     }
 
     //update

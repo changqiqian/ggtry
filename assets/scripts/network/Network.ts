@@ -124,7 +124,7 @@ export class Network  extends Singleton<Network>()
 
         if (this.mForceClose == false) {
             CommonNotify.Instance.Data_SocketClose.mData = true;
-            console.log(" OnClose setTimeout(this.CreateWS.bind(this), 1000);" );
+            UIMgr.Instance.ShowToast(Localization.GetString("00113"));
             setTimeout(this.CreateWS.bind(this), 1000);
         }
     }

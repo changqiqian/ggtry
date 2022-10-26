@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { UIMgr } from '../../base/UIMgr';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { PlayerInfo } from '../common/PlayerInfo';
@@ -16,6 +17,8 @@ export class Club_Member extends BaseUI {
     mID: Label = null;
     @property(BaseButton) 
     mRemoveBtn: BaseButton = null;
+    @property(BaseButton) 
+    mManagerBtn: BaseButton = null;
     
     mMember : IClubMember = null;
     InitParam()
@@ -30,6 +33,12 @@ export class Club_Member extends BaseUI {
             let uids = new Array<string>();
             uids.push(this.mMember.uid);
             NetworkSend.Instance.RemoveClubMember(clubId,uids);
+        });
+
+
+        this.mManagerBtn.SetClickCallback(()=>
+        {
+            UIMgr.Instance.ShowToast("功能开发中");
         });
         
     }
@@ -70,8 +79,9 @@ export class Club_Member extends BaseUI {
         this.mPlayerInfo.SetName(this.mMember.nickName);
         this.mPlayerInfo.SetLocalHead(Number(this.mMember.head));
         this.mID.string = this.mMember.uid;
-        let isClubOwner = LocalPlayerData.Instance.Data_Uid.mData == LocalPlayerData.Instance.Data_CurrentEnterClub.mData.ownerId;
-        this.mRemoveBtn.node.active = isClubOwner
+        let isClubOwner = _member.uid == LocalPlayerData.Instance.Data_CurrentEnterClub.mData.ownerId;
+        this.mRemoveBtn.node.active = !isClubOwner;
+        this.mManagerBtn.node.active = !isClubOwner;
     }
 }
 

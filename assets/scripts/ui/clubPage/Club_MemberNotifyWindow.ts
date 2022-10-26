@@ -1,5 +1,7 @@
 import { _decorator, Component, Node, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
+import { UIMgr } from '../../base/UIMgr';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
@@ -18,6 +20,7 @@ export class Club_MemberNotifyWindow extends BaseUI {
     mApplyAllBtn: BaseButton = null;
 
     private mClubId : string = null;
+
     InitParam()
     {
 
@@ -52,9 +55,9 @@ export class Club_MemberNotifyWindow extends BaseUI {
 
     public InitWithData(_clubId : string)
     {
+        this.mScrollView.content.destroyAllChildren();
         this.mClubId = _clubId;
         let applyingUsers = HallData.Instance.GetApplyingUsers(this.mClubId);
-        this.mScrollView.content.destroyAllChildren();
         for(let i = 0 ; i < applyingUsers.length ; i++)
         {
             let currentUser = applyingUsers[i];
@@ -71,6 +74,11 @@ export class Club_MemberNotifyWindow extends BaseUI {
     public ApplyingAll(_agree : boolean)
     {
         let applyingUsers = HallData.Instance.GetApplyingUsers(this.mClubId);
+        if(applyingUsers.length == 0)
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00114"));
+            return;
+        }
         let uids = new Array<string>();
         for(let i = 0 ; i < applyingUsers.length ; i++)
         {

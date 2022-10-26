@@ -11,11 +11,165 @@
   },
   "BuildTaskManager": {
     "taskMap": {
-      "1666726911295": {
-        "id": "1666726911295",
+      "1666816310638": {
+        "id": "1666816310638",
         "progress": 1,
         "state": "success",
-        "message": "10-26-2022 03:42 Build success in 39806 ms!",
+        "message": "10-27-2022 04:38 make package /Users/yamiwang/cowboy/build/android-001 success!",
+        "options": {
+          "name": "SY",
+          "platform": "android",
+          "buildPath": "project://build",
+          "debug": true,
+          "md5Cache": false,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "replaceSplashScreen": false,
+          "mainBundleCompressionType": "merge_dep",
+          "mainBundleIsRemote": false,
+          "mergeStartScene": false,
+          "experimentalEraseModules": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
+          "scenes": [
+            {
+              "url": "db://assets/scene/start.scene",
+              "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
+              "inBundle": false
+            }
+          ],
+          "outputName": "android-001",
+          "packages": {
+            "android": {
+              "packageName": "SY.TEXAS.COM",
+              "orientation": {
+                "portrait": true,
+                "upsideDown": false,
+                "landscapeRight": false,
+                "landscapeLeft": false
+              },
+              "apiLevel": "android-33",
+              "appABIs": [
+                "arm64-v8a",
+                "armeabi-v7a"
+              ],
+              "useDebugKeystore": true,
+              "keystorePath": "",
+              "keystorePassword": "",
+              "keystoreAlias": "",
+              "keystoreAliasPassword": "",
+              "appBundle": false,
+              "androidInstant": false,
+              "remoteUrl": "",
+              "sdkPath": "",
+              "ndkPath": "",
+              "renderBackEnd": {
+                "vulkan": false,
+                "gles3": true,
+                "gles2": true
+              },
+              "swappy": false
+            },
+            "cocos-service": {
+              "configID": "437b18",
+              "services": []
+            },
+            "hot-update": null,
+            "native": {
+              "polyfills": {
+                "asyncFunctions": true
+              },
+              "encrypted": false,
+              "xxteaKey": "beTdBAiGxM1Ly+03",
+              "compressZip": false,
+              "makeAfterBuild": false,
+              "JobSystem": "none",
+              "remoteServerAddress": "http://13.229.222.39/remote-assets2/"
+            }
+          }
+        },
+        "time": "10-27-2022 04:31",
+        "dirty": true,
+        "rawOptions": {
+          "name": "SY",
+          "platform": "android",
+          "buildPath": "project://build",
+          "debug": true,
+          "md5Cache": false,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "replaceSplashScreen": false,
+          "mainBundleCompressionType": "merge_dep",
+          "mainBundleIsRemote": false,
+          "mergeStartScene": false,
+          "experimentalEraseModules": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
+          "scenes": [
+            {
+              "url": "db://assets/scene/start.scene",
+              "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
+              "inBundle": false
+            }
+          ],
+          "outputName": "android-001",
+          "packages": {
+            "android": {
+              "packageName": "SY.TEXAS.COM",
+              "orientation": {
+                "portrait": true,
+                "upsideDown": false,
+                "landscapeRight": false,
+                "landscapeLeft": false
+              },
+              "apiLevel": "android-33",
+              "appABIs": [
+                "arm64-v8a",
+                "armeabi-v7a"
+              ],
+              "useDebugKeystore": true,
+              "keystorePath": "",
+              "keystorePassword": "",
+              "keystoreAlias": "",
+              "keystoreAliasPassword": "",
+              "appBundle": false,
+              "androidInstant": false,
+              "remoteUrl": "",
+              "sdkPath": "",
+              "ndkPath": "",
+              "renderBackEnd": {
+                "vulkan": false,
+                "gles3": true,
+                "gles2": true
+              },
+              "swappy": false
+            },
+            "cocos-service": {
+              "configID": "437b18",
+              "services": []
+            },
+            "hot-update": null,
+            "native": {
+              "polyfills": {
+                "asyncFunctions": true
+              },
+              "encrypted": false,
+              "xxteaKey": "beTdBAiGxM1Ly+03",
+              "compressZip": false,
+              "makeAfterBuild": false,
+              "JobSystem": "none",
+              "remoteServerAddress": "http://13.229.222.39/remote-assets2/"
+            }
+          }
+        }
+      },
+      "1666817954244": {
+        "id": "1666817954244",
+        "progress": 1,
+        "state": "success",
+        "message": "10-27-2022 04:59 Build success in 41558 ms!",
         "options": {
           "name": "SY",
           "platform": "ios",
@@ -76,7 +230,7 @@
             }
           }
         },
-        "time": "10-26-2022 03:41",
+        "time": "10-27-2022 04:59",
         "dirty": false
       }
     }

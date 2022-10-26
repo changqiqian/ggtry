@@ -54,8 +54,10 @@ export class LoadingUI extends BaseUI
                         this.mProgress.fillRange = 1;
                         UIMgr.Instance.ShowToast(Localization.GetString("00000"),1);
                         UIMgr.Instance.ShowToast(Localization.GetString("00000"),1);
-                        UIMgr.Instance.ChangeScene(SceneType.Login);
-      
+                        this.scheduleOnce(()=>
+                        {
+                            UIMgr.Instance.ChangeScene(SceneType.Login);
+                        },1)
                     },
                     (_restSrcCount)=>
                     {
@@ -69,7 +71,7 @@ export class LoadingUI extends BaseUI
 
         LoadingData.Instance.Data_HotUpdateProgress.AddListenner(this,(_data)=>
         {
-            this.mPercent.string = _data * 100 + "%";
+            this.mPercent.string = _data.toFixed(2) * 100 + "%";
             this.mProgress.fillRange = _data;
 
         });

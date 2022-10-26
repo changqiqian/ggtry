@@ -175,7 +175,10 @@ export class UIMgr extends Singleton<UIMgr>()
         {
             this.GetRootNode(LayerType.Layer).addChild(_tempNode);
             this.RecordLayer(key , _tempNode , LayerType.Layer);
+            let nodeCount = this.GetRootNode(LayerType.Layer).children.length;
+            _tempNode.setSiblingIndex(nodeCount);
             let tempScript = _tempNode.getComponent(BaseUI);
+            tempScript.Show(_show);
             if(_finishFunction != null)
             {
                 _finishFunction(tempScript);
@@ -218,6 +221,7 @@ export class UIMgr extends Singleton<UIMgr>()
                 let tempScript = _tempWindow.getComponent(BaseWindow);
                 let contentScript = _tempNode.getComponent(BaseUI);
                 tempScript.SetContent(_tempNode , contentScript);
+                tempScript.Show(_show);
                 if(_finishFunction != null)
                 {
                     _finishFunction(contentScript);

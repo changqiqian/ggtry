@@ -33,6 +33,10 @@ export class Club_MemberList extends BaseUI {
     BindUI()
     {
         this.mScrollView.node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
+        this.mCloseBtn.SetClickCallback(()=>
+        {
+            this.CloseAsWindow();
+        });
     }
     RegDataNotify()
     {
@@ -49,10 +53,10 @@ export class Club_MemberList extends BaseUI {
                 return;
             }
 
-            if(this.mCurrentPage != _data.page)
-            {
-                return;
-            }
+            // if(this.mCurrentPage != _data.page)
+            // {
+            //     return;
+            // }
 
             for(let i = 0 ; i < _data.clubMembers.length ; i++)
             {
@@ -68,14 +72,15 @@ export class Club_MemberList extends BaseUI {
             }
             
 
-            if(this.mCurrentData.length >= _data.totalMember)
-            {
-                this.mIsLastPage = true;
-            }
-            else
-            {
-                this.mIsLastPage = false;
-            }
+            // if(this.mCurrentData.length >= _data.totalMember)
+            // {
+            //     this.mIsLastPage = true;
+            // }
+            // else
+            // {
+            //     this.mIsLastPage = false;
+            // }
+            this.mIsLastPage = true;
             
             this.mCurrentPage++;
 

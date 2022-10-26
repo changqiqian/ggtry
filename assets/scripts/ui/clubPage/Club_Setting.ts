@@ -49,7 +49,7 @@ export class Club_Setting extends BaseUI
     onEnable()
     {
         let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-        //NetworkSend.Instance.GetClubMember(clubId,0,4);
+        NetworkSend.Instance.GetClubMember(clubId,0,4);
     }
 
     onDisable()
@@ -94,7 +94,7 @@ export class Club_Setting extends BaseUI
         {
             if(this.HaveRights())
             {
-
+                UIMgr.Instance.ShowToast("功能开发中");
             }
         });
 
@@ -102,34 +102,47 @@ export class Club_Setting extends BaseUI
         {
             if(this.HaveRights())
             {
-
+                UIMgr.Instance.ShowToast("功能开发中");
             }
         });
         this.mClubNameBtn.SetClickCallback(()=>
         {
             if(this.HaveRights())
             {
-
+                UIMgr.Instance.ShowToast("功能开发中");
             }
         });
 
         this.mClubNotifyBtn.SetClickCallback(()=>
         {
-            
+            if(this.HaveRights())
+            {
+                UIMgr.Instance.ShowToast("功能开发中");
+            }
+            else
+            {
+                this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+                {
+                    let tempScript = _script as TipsWindow;
+                    let tips = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.brief;
+                    tempScript.SetTips(tips);
+                    tempScript.ShowConfirmBtnOnly();
+                })
+            }
         });
 
         this.mClubDescribe.SetClickCallback(()=>
         {
             if(this.HaveRights())
             {
-
+                UIMgr.Instance.ShowToast("功能开发中");
             }
         });
         this.mUnionBtn.SetClickCallback(()=>
         {
             if(this.HaveRights())
             {
-
+                UIMgr.Instance.ShowToast("功能开发中");
             }
         });
         this.mDismissBtn.SetClickCallback(()=>
@@ -161,6 +174,7 @@ export class Club_Setting extends BaseUI
                 });
             },HallData.ClubUiTag)
         });
+        this.mExitBtn.node.active = false;
         
     }
     RegDataNotify()
@@ -174,7 +188,7 @@ export class Club_Setting extends BaseUI
 
             this.mUnionBtn.node.active = LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId;
             this.mDismissBtn.node.active = LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId;
-            this.mExitBtn.node.active = !LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId;
+            //this.mExitBtn.node.active = !(LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId);
 
         });
 
@@ -223,10 +237,10 @@ export class Club_Setting extends BaseUI
                 return;
             }
 
-            if(_data.page != 0)
-            {
-                return;
-            }
+            // if(_data.page != 0)
+            // {
+            //     return;
+            // }
 
             this.mMemberCount.string = _data.totalMember + "";
 
@@ -245,6 +259,8 @@ export class Club_Setting extends BaseUI
                     currentNode.active = false;
                 }
             }
+
+            //HallData.Instance.Data_S2CGetClubMember.mData = null;
         });
         
     }

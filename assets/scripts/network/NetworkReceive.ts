@@ -241,9 +241,13 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CClubJoinNotify.decode(_data);
             console.log("收到的内容 S2C_ClubJoinNotify  俱乐部申请推送===" + JSON.stringify(msg));
+            if(msg.request.length <= 0)
+            {
+                return;
+            }
             for(let i = 0 ; i < msg.request.length ; i++)
             {
-                HallData.Instance.Data_ClubApplyingInfo.mData.push(msg.request[i]);
+                HallData.Instance.RecieveNewClubApply(msg.request[i]);
             }
             HallData.Instance.Data_ClubApplyingNotify.mData = true;
         },this);

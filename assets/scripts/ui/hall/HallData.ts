@@ -52,10 +52,38 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubSearchResult : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //解散俱乐部
     Data_ClubJoinResult : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //俱乐部申请回复结果
     Data_ClubApplyingInfo :BaseData<Array<IClubJoinRequest>> = new BaseData<Array<IClubJoinRequest>>(false,new Array<IClubJoinRequest>()); //有玩家申请加入我创建的俱乐部
-    Data_ClubApplyingNotify : BaseData<boolean> = new BaseData<boolean>(); //新的俱乐部申请
+    Data_ClubApplyingNotify : BaseData<boolean> = new BaseData<boolean>(true); //新的俱乐部申请
     Data_ClubRemoveNotify : BaseData<string> = new BaseData<string>(); //你被移除了某个俱乐部
     Data_S2CGetClubMember : BaseData<S2CGetClubMember> = new BaseData<S2CGetClubMember>(true); //收到的俱乐部成员列表
     Data_S2CRemoveMember : BaseData<S2CRemoveMember> = new BaseData<S2CRemoveMember>(); //收到的移除俱乐部成员消息
+    Data_ClubScoreManageUid : BaseData<number> = new BaseData<number>(); //当前想要操作的积分的成员id
+    Data_ClubScoreManageUserInfo : BaseData<IClubMember> = new BaseData<IClubMember>(); //当前发放或者回收的俱乐部积分的成员详细信息
+    public RecieveNewClubApply(_request : IClubJoinRequest)
+    {
+        let clubIndex = this.Data_ClubApplyingInfo.mData.findIndex((_item) => _item.clubInfo.id === _request.clubInfo.id);
+        console.log("clubIndex ==" + clubIndex);
+        if(clubIndex < 0)
+        {
+            this.Data_ClubApplyingInfo.mData.push(_request);
+        }
+        else
+        {
+            console.log("_request.clubBasicJoinRequest.length ==" + _request.clubBasicJoinRequest.length);
+            for(let i = 0 ; i < _request.clubBasicJoinRequest.length ; i++)
+            {
+                let currentNewUser = _request.clubBasicJoinRequest[i];
+                let currentClubApplyInfo = this.Data_ClubApplyingInfo.mData[clubIndex];
+                let userIndex = currentClubApplyInfo.clubBasicJoinRequest.findIndex((_item) => _item.uid === currentNewUser.uid);
+                if(userIndex < 0)
+                {
+                    currentClubApplyInfo.clubBasicJoinRequest.push(currentNewUser);
+                }
+                console.log("userIndex ==" + userIndex);
+            }
+            
+        }
+    }
+
     public ApplyingNotifyContain(_clubId : string) : boolean
     {
         for(let i = 0 ; i < this.Data_ClubApplyingInfo.mData.length ; i++)

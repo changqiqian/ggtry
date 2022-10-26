@@ -1,7 +1,9 @@
 import { _decorator, Component, Node, Sprite, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Tool } from '../../Tool';
 import { PlayerInfo } from '../common/PlayerInfo';
 import { ToggleBtn } from '../common/ToggleBtn';
+import { HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_AssetsManageItem')
@@ -18,17 +20,24 @@ export class Club_AssetsManageItem extends BaseUI
     @property(ToggleBtn) 
     mToggleBtn: ToggleBtn = null;
 
+    mData : IClubMember = null;
     InitParam()
     {
 
     }
     BindUI()
     {
-
+        
     }
     RegDataNotify()
     {
-
+        HallData.Instance.Data_ClubScoreManageUid.AddListenner(this,(_data)=>
+        {
+            if(_data == Number(this.mData.uid))
+            {
+                HallData.Instance.Data_ClubScoreManageUserInfo.mData = this.mData;
+            }
+        });
     }
     LateInit()
     {
@@ -37,6 +46,16 @@ export class Club_AssetsManageItem extends BaseUI
     CustmoerDestory()
     {
 
+    }
+
+    public InitWithData(_member : IClubMember)
+    {
+        this.mData = _member;
+        this.mPlayerInfo.SetName(_member.nickName);
+        this.mPlayerInfo.SetLocalHead(Number(_member.head));
+        this.mID.string = _member.uid;
+        this.mAmount.string = Tool.ConvertMoney_S2C(_member.clubPoint) + "";
+        this.mToggleBtn.SetDataNotify(HallData.Instance.Data_ClubScoreManageUid,Number(this.mData.uid));
     }
 }
 

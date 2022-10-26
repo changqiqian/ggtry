@@ -37,7 +37,7 @@ export class Club_PrivateLayer extends BaseUI
     mScrollView: ScrollView = null;
     InitParam()
     {
-
+        
     }
     BindUI()
     {

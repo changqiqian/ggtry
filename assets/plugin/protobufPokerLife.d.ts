@@ -1459,71 +1459,6 @@ export class S2CAddClubMember implements IS2CAddClubMember {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CAddClubMember;
 }
 
-/** Represents a S2CClubJoinNotify. */
-export class S2CClubJoinNotify implements IS2CClubJoinNotify {
-
-    /**
-     * Constructs a new S2CClubJoinNotify.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IS2CClubJoinNotify);
-
-    /** S2CClubJoinNotify request. */
-    public request: IClubJoinRequest[];
-
-    /**
-     * Encodes the specified S2CClubJoinNotify message. Does not implicitly {@link S2CClubJoinNotify.verify|verify} messages.
-     * @param m S2CClubJoinNotify message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IS2CClubJoinNotify, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a S2CClubJoinNotify message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns S2CClubJoinNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CClubJoinNotify;
-}
-
-/** Represents a S2CJoinClubResult. */
-export class S2CJoinClubResult implements IS2CJoinClubResult {
-
-    /**
-     * Constructs a new S2CJoinClubResult.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IS2CJoinClubResult);
-
-    /** S2CJoinClubResult result. */
-    public result?: (ICommonResult|null);
-
-    /** S2CJoinClubResult clubInfo. */
-    public clubInfo?: (IClubDetailsInfo|null);
-
-    /**
-     * Encodes the specified S2CJoinClubResult message. Does not implicitly {@link S2CJoinClubResult.verify|verify} messages.
-     * @param m S2CJoinClubResult message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IS2CJoinClubResult, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a S2CJoinClubResult message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns S2CJoinClubResult
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CJoinClubResult;
-}
-
 /** Represents a S2CDismissClub. */
 export class S2CDismissClub implements IS2CDismissClub {
 
@@ -1627,6 +1562,71 @@ export class S2CRemoveMember implements IS2CRemoveMember {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CRemoveMember;
+}
+
+/** Represents a S2CClubJoinNotify. */
+export class S2CClubJoinNotify implements IS2CClubJoinNotify {
+
+    /**
+     * Constructs a new S2CClubJoinNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CClubJoinNotify);
+
+    /** S2CClubJoinNotify request. */
+    public request: IClubJoinRequest[];
+
+    /**
+     * Encodes the specified S2CClubJoinNotify message. Does not implicitly {@link S2CClubJoinNotify.verify|verify} messages.
+     * @param m S2CClubJoinNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CClubJoinNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CClubJoinNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CClubJoinNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CClubJoinNotify;
+}
+
+/** Represents a S2CJoinClubResult. */
+export class S2CJoinClubResult implements IS2CJoinClubResult {
+
+    /**
+     * Constructs a new S2CJoinClubResult.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CJoinClubResult);
+
+    /** S2CJoinClubResult result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CJoinClubResult clubInfo. */
+    public clubInfo?: (IClubDetailsInfo|null);
+
+    /**
+     * Encodes the specified S2CJoinClubResult message. Does not implicitly {@link S2CJoinClubResult.verify|verify} messages.
+     * @param m S2CJoinClubResult message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CJoinClubResult, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CJoinClubResult message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CJoinClubResult
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CJoinClubResult;
 }
 
 /** Represents a S2CRemoveNotify. */

@@ -2,6 +2,7 @@ import { _decorator, Component, Node, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { SceneType, UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
@@ -50,6 +51,11 @@ export class HallUI extends BaseUI
                 tempScript.SetTips(tips);
                 tempScript.ShowConfirmBtnOnly();
             })
+        });
+
+        CommonNotify.Instance.Data_SocketClose.AddListenner(this,(_data)=>
+        {
+            UIMgr.Instance.ChangeScene(SceneType.Login);  
         });
     }
     LateInit() 

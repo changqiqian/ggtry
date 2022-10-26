@@ -36,8 +36,40 @@ export class Club_Main extends BaseUI
             this.ShowWindow("clubPage","prefab/Club_SearchLayer");
         })
     }
+
+    RemovePage(_clubId : string)
+    {
+        let padges = this.mPageView.getPages();
+        for(let i = 0 ; i < padges.length ; i++)
+        {
+            let currentPage = padges[i].getComponent(Club_MainEnter);
+            if(currentPage.mData.id == _clubId)
+            {
+                this.mPageView.removePage(padges[i]);
+                break;
+            }
+        }
+    }
     RegDataNotify() 
     {
+        HallData.Instance.Data_ClubDismiss.AddListenner(this,(_data)=>
+        {
+            this.RemovePage(_data);
+        });
+        HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
+        {
+            this.RemovePage(_data);
+            if(HallData.Instance.Data_ClubEnter.mData == false)
+            {
+                return;
+            }
+
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(currentClubId == _data)
+            {
+                HallData.Instance.Data_ClubEnter.mData = false;
+            }
+        });
         LocalPlayerData.Instance.Data_AccountLevel.AddListenner(this,(_data)=>
         {
             this.mCreateBtn.node.active = !(_data == AccountLevel.AccountLevel_Normal);
@@ -73,19 +105,6 @@ export class Club_Main extends BaseUI
             }
         });
 
-        HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
-        {
-            if(HallData.Instance.Data_ClubEnter.mData == false)
-            {
-                return;
-            }
-
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-            if(currentClubId == _data)
-            {
-                UIMgr.Instance.HideUiByTag(HallData.ClubUiTag);
-            }
-        });
     }
     LateInit() 
     {

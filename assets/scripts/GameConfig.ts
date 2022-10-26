@@ -3,7 +3,7 @@ import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
 export class GameConfig
 {
-    public static DebugMode =  true;
+    public static DebugMode =  false;
     public static PrivateIP = "192.168.68.100:9001"; //私人电脑ip 可选
     public static DevelopIP = "52.77.219.158:9501"; //开发环境ip 可选
     public static TestIP = "13.229.222.39:9008"; //测试环境ip 可选
@@ -15,7 +15,7 @@ export class GameConfig
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
     }
     //发布的版本号
-    public static Version = "1.1.0"
+    public static Version = "1.1.6"
 
       
     public static LOGIN_TOKEN;
