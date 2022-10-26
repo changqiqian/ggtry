@@ -309,10 +309,10 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         },this);
 
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_RemoveNotifiy,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_RemoveNotify,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
-            let msg = S2CRemoveNotifiy.decode(_data);
+            let msg = S2CRemoveNotify.decode(_data);
             console.log("收到的内容 S2C_RemoveNotifiy  自己被移除俱乐部通知===" + JSON.stringify(msg));
             HallData.Instance.Data_ClubRemoveNotify.mData = msg.clubId;
         },this);

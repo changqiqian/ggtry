@@ -10,6 +10,75 @@
     "debug": true
   },
   "BuildTaskManager": {
-    "taskMap": {}
+    "taskMap": {
+      "1666726911295": {
+        "id": "1666726911295",
+        "progress": 1,
+        "state": "success",
+        "message": "10-26-2022 03:42 Build success in 39806 ms!",
+        "options": {
+          "name": "SY",
+          "platform": "ios",
+          "buildPath": "project://build",
+          "debug": true,
+          "md5Cache": false,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "replaceSplashScreen": false,
+          "mainBundleCompressionType": "merge_dep",
+          "mainBundleIsRemote": false,
+          "mergeStartScene": false,
+          "experimentalEraseModules": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
+          "scenes": [
+            {
+              "url": "db://assets/scene/start.scene",
+              "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
+              "inBundle": false
+            }
+          ],
+          "outputName": "ios",
+          "packages": {
+            "ios": {
+              "orientation": {
+                "landscapeRight": false,
+                "landscapeLeft": false,
+                "portrait": true
+              },
+              "renderBackEnd": {
+                "metal": true
+              },
+              "skipUpdateXcodeProject": false,
+              "targetVersion": "12.0",
+              "osTarget": {
+                "iphoneos": true,
+                "simulator": false
+              },
+              "developerTeam": "ZTGH2Z5AW9",
+              "packageName": "SY.Texas.Com"
+            },
+            "cocos-service": {
+              "configID": "437b18",
+              "services": []
+            },
+            "hot-update": null,
+            "native": {
+              "polyfills": {
+                "asyncFunctions": true
+              },
+              "encrypted": false,
+              "xxteaKey": "beTdBAiGxM1Ly+03",
+              "compressZip": false,
+              "makeAfterBuild": false,
+              "JobSystem": "none"
+            }
+          }
+        },
+        "time": "10-26-2022 03:41",
+        "dirty": false
+      }
+    }
   }
 }

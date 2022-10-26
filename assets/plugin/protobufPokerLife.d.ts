@@ -580,6 +580,9 @@ export class ClubMember implements IClubMember {
 /** Properties of a ClubBasicJoinRequest. */
 export interface IClubBasicJoinRequest {
 
+    /** ClubBasicJoinRequest id */
+    id?: (string|null);
+
     /** ClubBasicJoinRequest uid */
     uid?: (string|null);
 
@@ -598,6 +601,9 @@ export class ClubBasicJoinRequest implements IClubBasicJoinRequest {
      * @param [p] Properties to set
      */
     constructor(p?: IClubBasicJoinRequest);
+
+    /** ClubBasicJoinRequest id. */
+    public id: string;
 
     /** ClubBasicJoinRequest uid. */
     public uid: string;
@@ -1348,9 +1354,6 @@ export class S2CJoinClub implements IS2CJoinClub {
     /** S2CJoinClub result. */
     public result?: (ICommonResult|null);
 
-    /** S2CJoinClub clubInfo. */
-    public clubInfo?: (IClubDetailsInfo|null);
-
     /**
      * Encodes the specified S2CJoinClub message. Does not implicitly {@link S2CJoinClub.verify|verify} messages.
      * @param m S2CJoinClub message or plain object to encode
@@ -1626,35 +1629,35 @@ export class S2CRemoveMember implements IS2CRemoveMember {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CRemoveMember;
 }
 
-/** Represents a S2CRemoveNotifiy. */
-export class S2CRemoveNotifiy implements IS2CRemoveNotifiy {
+/** Represents a S2CRemoveNotify. */
+export class S2CRemoveNotify implements IS2CRemoveNotify {
 
     /**
-     * Constructs a new S2CRemoveNotifiy.
+     * Constructs a new S2CRemoveNotify.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CRemoveNotifiy);
+    constructor(p?: IS2CRemoveNotify);
 
-    /** S2CRemoveNotifiy clubId. */
+    /** S2CRemoveNotify clubId. */
     public clubId: string;
 
     /**
-     * Encodes the specified S2CRemoveNotifiy message. Does not implicitly {@link S2CRemoveNotifiy.verify|verify} messages.
-     * @param m S2CRemoveNotifiy message or plain object to encode
+     * Encodes the specified S2CRemoveNotify message. Does not implicitly {@link S2CRemoveNotify.verify|verify} messages.
+     * @param m S2CRemoveNotify message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CRemoveNotifiy, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CRemoveNotify, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CRemoveNotifiy message from the specified reader or buffer.
+     * Decodes a S2CRemoveNotify message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CRemoveNotifiy
+     * @returns S2CRemoveNotify
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CRemoveNotifiy;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CRemoveNotify;
 }
 
 /** Represents a C2SLogout. */
@@ -2163,7 +2166,7 @@ export enum MessageId {
     S2C_RemoveMember = 4511,
     S2C_ClubJoinNotify = 4610,
     S2C_JoinClubResult = 4611,
-    S2C_RemoveNotifiy = 46112,
+    S2C_RemoveNotify = 46112,
     MSG_ClubEnd = 5000
 }
  

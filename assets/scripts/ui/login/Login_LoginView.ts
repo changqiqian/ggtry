@@ -66,8 +66,10 @@ export class Login_LoginView extends BaseUI {
 
         this.mPasswordLoginBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("login","prefab/Login_LoginViewPwd");
-            this.Show(false)
+            this.ShowLayer("login","prefab/Login_LoginViewPwd",true,(_script)=>
+            {
+                this.Show(false);
+            });
         });
     }
     RegDataNotify() 

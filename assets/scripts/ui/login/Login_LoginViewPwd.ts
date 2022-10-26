@@ -97,8 +97,11 @@ export class Login_LoginViewPwd extends BaseUI {
  
         this.mSMSLoginBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("login","prefab/Login_LoginView");
-            this.Show(false)
+            this.ShowLayer("login","prefab/Login_LoginView",true,(_script)=>
+            {
+                this.Show(false);
+            });
+          
         });
     }
     RegDataNotify() 
