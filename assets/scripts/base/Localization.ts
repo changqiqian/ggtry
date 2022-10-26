@@ -203,6 +203,7 @@ export class Localization {
         { name: '00115', ch: '请选择玩家', en: 'Select user first' },
         { name: '00116', ch: '回收积分', en: 'Take back' },
         { name: '00117', ch: '发放积分', en: 'Share point' },
+        { name: '00118', ch: '您确定要把玩家xxx踢出俱乐部吗？', en: 'Are you sure you wanna remove user xxx?' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },
