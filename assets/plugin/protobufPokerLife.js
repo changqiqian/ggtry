@@ -3900,25 +3900,25 @@ $root.S2CClubJoinNotify = (function() {
     return S2CClubJoinNotify;
 })();
 
-$root.S2CJoinClubResult = (function() {
+$root.S2CJoinClubNotify = (function() {
 
     /**
-     * Properties of a S2CJoinClubResult.
-     * @exports IS2CJoinClubResult
-     * @interface IS2CJoinClubResult
-     * @property {ICommonResult|null} [result] S2CJoinClubResult result
-     * @property {IClubDetailsInfo|null} [clubInfo] S2CJoinClubResult clubInfo
+     * Properties of a S2CJoinClubNotify.
+     * @exports IS2CJoinClubNotify
+     * @interface IS2CJoinClubNotify
+     * @property {ICommonResult|null} [result] S2CJoinClubNotify result
+     * @property {IClubDetailsInfo|null} [clubInfo] S2CJoinClubNotify clubInfo
      */
 
     /**
-     * Constructs a new S2CJoinClubResult.
-     * @exports S2CJoinClubResult
-     * @classdesc Represents a S2CJoinClubResult.
-     * @implements IS2CJoinClubResult
+     * Constructs a new S2CJoinClubNotify.
+     * @exports S2CJoinClubNotify
+     * @classdesc Represents a S2CJoinClubNotify.
+     * @implements IS2CJoinClubNotify
      * @constructor
-     * @param {IS2CJoinClubResult=} [p] Properties to set
+     * @param {IS2CJoinClubNotify=} [p] Properties to set
      */
-    function S2CJoinClubResult(p) {
+    function S2CJoinClubNotify(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -3926,31 +3926,31 @@ $root.S2CJoinClubResult = (function() {
     }
 
     /**
-     * S2CJoinClubResult result.
+     * S2CJoinClubNotify result.
      * @member {ICommonResult|null|undefined} result
-     * @memberof S2CJoinClubResult
+     * @memberof S2CJoinClubNotify
      * @instance
      */
-    S2CJoinClubResult.prototype.result = null;
+    S2CJoinClubNotify.prototype.result = null;
 
     /**
-     * S2CJoinClubResult clubInfo.
+     * S2CJoinClubNotify clubInfo.
      * @member {IClubDetailsInfo|null|undefined} clubInfo
-     * @memberof S2CJoinClubResult
+     * @memberof S2CJoinClubNotify
      * @instance
      */
-    S2CJoinClubResult.prototype.clubInfo = null;
+    S2CJoinClubNotify.prototype.clubInfo = null;
 
     /**
-     * Encodes the specified S2CJoinClubResult message. Does not implicitly {@link S2CJoinClubResult.verify|verify} messages.
+     * Encodes the specified S2CJoinClubNotify message. Does not implicitly {@link S2CJoinClubNotify.verify|verify} messages.
      * @function encode
-     * @memberof S2CJoinClubResult
+     * @memberof S2CJoinClubNotify
      * @static
-     * @param {IS2CJoinClubResult} m S2CJoinClubResult message or plain object to encode
+     * @param {IS2CJoinClubNotify} m S2CJoinClubNotify message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    S2CJoinClubResult.encode = function encode(m, w) {
+    S2CJoinClubNotify.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
@@ -3961,20 +3961,20 @@ $root.S2CJoinClubResult = (function() {
     };
 
     /**
-     * Decodes a S2CJoinClubResult message from the specified reader or buffer.
+     * Decodes a S2CJoinClubNotify message from the specified reader or buffer.
      * @function decode
-     * @memberof S2CJoinClubResult
+     * @memberof S2CJoinClubNotify
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {S2CJoinClubResult} S2CJoinClubResult
+     * @returns {S2CJoinClubNotify} S2CJoinClubNotify
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    S2CJoinClubResult.decode = function decode(r, l) {
+    S2CJoinClubNotify.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CJoinClubResult();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CJoinClubNotify();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -3992,7 +3992,7 @@ $root.S2CJoinClubResult = (function() {
         return m;
     };
 
-    return S2CJoinClubResult;
+    return S2CJoinClubNotify;
 })();
 
 $root.S2CRemoveNotify = (function() {
@@ -4074,6 +4074,87 @@ $root.S2CRemoveNotify = (function() {
     };
 
     return S2CRemoveNotify;
+})();
+
+$root.S2CDismissClubNotify = (function() {
+
+    /**
+     * Properties of a S2CDismissClubNotify.
+     * @exports IS2CDismissClubNotify
+     * @interface IS2CDismissClubNotify
+     * @property {string|null} [clubId] S2CDismissClubNotify clubId
+     */
+
+    /**
+     * Constructs a new S2CDismissClubNotify.
+     * @exports S2CDismissClubNotify
+     * @classdesc Represents a S2CDismissClubNotify.
+     * @implements IS2CDismissClubNotify
+     * @constructor
+     * @param {IS2CDismissClubNotify=} [p] Properties to set
+     */
+    function S2CDismissClubNotify(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CDismissClubNotify clubId.
+     * @member {string} clubId
+     * @memberof S2CDismissClubNotify
+     * @instance
+     */
+    S2CDismissClubNotify.prototype.clubId = "";
+
+    /**
+     * Encodes the specified S2CDismissClubNotify message. Does not implicitly {@link S2CDismissClubNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CDismissClubNotify
+     * @static
+     * @param {IS2CDismissClubNotify} m S2CDismissClubNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CDismissClubNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
+            w.uint32(10).string(m.clubId);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CDismissClubNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CDismissClubNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CDismissClubNotify} S2CDismissClubNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CDismissClubNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CDismissClubNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.clubId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CDismissClubNotify;
 })();
 
 $root.C2SLogout = (function() {
@@ -5417,8 +5498,9 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_QuitClub=4510 S2C_QuitClub value
  * @property {number} S2C_RemoveMember=4511 S2C_RemoveMember value
  * @property {number} S2C_ClubJoinNotify=4610 S2C_ClubJoinNotify value
- * @property {number} S2C_JoinClubResult=4611 S2C_JoinClubResult value
- * @property {number} S2C_RemoveNotify=46112 S2C_RemoveNotify value
+ * @property {number} S2C_JoinClubNotify=4611 S2C_JoinClubNotify value
+ * @property {number} S2C_RemoveNotify=4612 S2C_RemoveNotify value
+ * @property {number} S2C_DismissClubNotify=4613 S2C_DismissClubNotify value
  * @property {number} MSG_ClubEnd=5000 MSG_ClubEnd value
  */
 $root.MessageId = (function() {
@@ -5463,8 +5545,9 @@ $root.MessageId = (function() {
     values[valuesById[4510] = "S2C_QuitClub"] = 4510;
     values[valuesById[4511] = "S2C_RemoveMember"] = 4511;
     values[valuesById[4610] = "S2C_ClubJoinNotify"] = 4610;
-    values[valuesById[4611] = "S2C_JoinClubResult"] = 4611;
-    values[valuesById[46112] = "S2C_RemoveNotify"] = 46112;
+    values[valuesById[4611] = "S2C_JoinClubNotify"] = 4611;
+    values[valuesById[4612] = "S2C_RemoveNotify"] = 4612;
+    values[valuesById[4613] = "S2C_DismissClubNotify"] = 4613;
     values[valuesById[5000] = "MSG_ClubEnd"] = 5000;
     return values;
 })();

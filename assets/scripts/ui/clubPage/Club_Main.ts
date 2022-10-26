@@ -80,7 +80,7 @@ export class Club_Main extends BaseUI
             this.InsertClub(_data);
         });
 
-        HallData.Instance.Data_ClubJoinResult.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ClubJoinNotify.AddListenner(this,(_data)=>
         {
             this.InsertClub(_data);
         });

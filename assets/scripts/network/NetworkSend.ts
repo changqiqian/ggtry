@@ -171,7 +171,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
         msg.clubId = _clubId;
         msg.uids = _uids;
         Network.Instance.SendMsg(MessageId.C2S_RemoveMember , C2SRemoveMember.encode(msg).finish());
-        console.log("移除俱乐部成员 C2S_GetClubMember== " + JSON.stringify(msg))
+        console.log("移除俱乐部成员 C2S_RemoveMember== " + JSON.stringify(msg))
     }
 }
 

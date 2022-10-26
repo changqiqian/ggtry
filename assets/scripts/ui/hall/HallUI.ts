@@ -40,7 +40,7 @@ export class HallUI extends BaseUI
             
         });
 
-        HallData.Instance.Data_ClubJoinResult.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ClubJoinNotify.AddListenner(this,(_data)=>
         {
             let clubId = _data.id;
             this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>

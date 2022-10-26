@@ -54,6 +54,11 @@ export class ToggleBtn extends BaseUI {
         this.mDataNotify.AddListenner(this , this.NotifyCallback.bind(this));
         this.mSelected.node.on(Node.EventType.TOUCH_END,this.OnSelected.bind(this),this);
         this.mDisabled.node.on(Node.EventType.TOUCH_END,this.OnDisabled.bind(this),this);
+
+        if(this.mDataNotify.mData == null)
+        {
+            this.ShowUnselected();
+        }
     }
 
     public SetClickCallback(_callback : Function)

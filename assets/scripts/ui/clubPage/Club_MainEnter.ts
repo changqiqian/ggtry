@@ -69,14 +69,11 @@ export class Club_MainEnter extends BaseUI
     }
     RegDataNotify()
     {
-
-
         HallData.Instance.Data_ClubApplyingNotify.AddListenner(this,(_data)=>
         {
+            console.log("Club_MainEnter  Data_ClubApplyingNotify");
             this.UpdateNewMemberNotifyUI(_data);
         });
-
-
     }
     LateInit()
     {
@@ -96,22 +93,25 @@ export class Club_MainEnter extends BaseUI
     
     UpdateNewMemberNotifyUI(_show : boolean)
     {
+        console.log("1111");
         if(this.mReviewOnly)
         {
             return;
         }
-
+        console.log("22222");
         if(this.mData == null)
         {
             return;
         }
-
+        console.log("33333");
         if(LocalPlayerData.Instance.Data_Uid.mData != this.mData.ownerId)
         {
             return;
         }
+        console.log("44444");
         if(_show)
         {
+            console.log("5555555");
             this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(this.mData.id)
         }
     }
@@ -129,6 +129,8 @@ export class Club_MainEnter extends BaseUI
         this.mClubName.string = this.mData.name;
         this.mMemberCount.string = this.mData.memberCount + "";
         this.mCurrentTables.string = this.mData.tableCount + "";
+
+        console.log("UpdateUI");
         this.UpdateNewMemberNotifyUI(HallData.Instance.Data_ClubApplyingNotify.mData);
     }
 

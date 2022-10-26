@@ -198,7 +198,7 @@ export class Localization {
         { name: '00110', ch: 'ID只能由数字组成', en: 'ID只能由数字组成' },
         { name: '00111', ch: '请输入账号', en: 'Please input account' },
         { name: '00112', ch: '邀请码只能由7位数字组成', en: '邀请码只能由7位数字组成' },
-        { name: '00113', ch: '网络已断开', en: 'Network disconnected' },
+        { name: '00113', ch: '与服务器失去连接', en: 'Disconnected with server' },
         { name: '00114', ch: '已经没有申请了', en: 'No applying now' },
         { name: '00115', ch: '请选择玩家', en: 'Select user first' },
         { name: '00116', ch: '回收积分', en: 'Take back' },

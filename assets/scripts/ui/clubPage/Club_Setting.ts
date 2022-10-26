@@ -174,7 +174,6 @@ export class Club_Setting extends BaseUI
                 });
             },HallData.ClubUiTag)
         });
-        this.mExitBtn.node.active = false;
         
     }
     RegDataNotify()
@@ -188,7 +187,7 @@ export class Club_Setting extends BaseUI
 
             this.mUnionBtn.node.active = LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId;
             this.mDismissBtn.node.active = LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId;
-            //this.mExitBtn.node.active = !(LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId);
+            this.mExitBtn.node.active = !(LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId);
 
         });
 
