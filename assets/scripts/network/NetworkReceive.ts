@@ -283,8 +283,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 {
                     HallData.Instance.RemoveApplyingMembers(msg.clubId,msg.uids[i]);
                 }
-
                 HallData.Instance.Data_ClubApplyingNotify.mData = true;
+                HallData.Instance.Data_ClubApplyingSuccess.mData = true;
             }
             else
             {

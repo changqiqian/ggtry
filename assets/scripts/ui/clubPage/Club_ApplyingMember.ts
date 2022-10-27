@@ -36,7 +36,7 @@ export class Club_ApplyingMember extends BaseUI {
     }
     RegDataNotify()
     {
-        HallData.Instance.Data_ClubApplyingNotify.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ClubApplyingSuccess.AddListenner(this,(_data)=>
         {
             if(_data)
             {

@@ -92,8 +92,26 @@ export class Club_Member extends BaseUI {
         this.mPlayerInfo.SetLocalHead(Number(this.mMember.head));
         this.mID.string = this.mMember.uid;
         let isClubOwner = _member.uid == LocalPlayerData.Instance.Data_CurrentEnterClub.mData.ownerId;
-        this.mRemoveBtn.node.active = !isClubOwner;
-        this.mManagerBtn.node.active = !isClubOwner;
+        let isSelf = _member.uid == LocalPlayerData.Instance.Data_Uid.mData;
+
+        if(isClubOwner)
+        {
+            if(isSelf)
+            {
+                this.mRemoveBtn.node.active = false;
+                this.mManagerBtn.node.active = false;
+            }
+            else
+            {
+                this.mRemoveBtn.node.active = true;
+                this.mManagerBtn.node.active = true;
+            }
+        }
+        else
+        {
+            this.mRemoveBtn.node.active = false;
+            this.mManagerBtn.node.active = false;
+        }
     }
 }
 

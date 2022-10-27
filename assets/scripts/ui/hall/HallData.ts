@@ -52,7 +52,8 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubSearchResult : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //解散俱乐部
     Data_ClubJoinNotify : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //俱乐部申请回复结果
     Data_ClubApplyingInfo :BaseData<Array<IClubJoinRequest>> = new BaseData<Array<IClubJoinRequest>>(false,new Array<IClubJoinRequest>()); //有玩家申请加入我创建的俱乐部
-    Data_ClubApplyingNotify : BaseData<boolean> = new BaseData<boolean>(true); //新的俱乐部申请
+    Data_ClubApplyingNotify : BaseData<boolean> = new BaseData<boolean>(); //新的俱乐部申请
+    Data_ClubApplyingSuccess : BaseData<boolean> = new BaseData<boolean>(true); //新的俱乐部申请通过了
     Data_ClubRemoveNotify : BaseData<string> = new BaseData<string>(); //你被移除了某个俱乐部
     Data_S2CGetClubMember : BaseData<S2CGetClubMember> = new BaseData<S2CGetClubMember>(true); //收到的俱乐部成员列表
     Data_S2CRemoveMember : BaseData<S2CRemoveMember> = new BaseData<S2CRemoveMember>(); //收到的移除俱乐部成员消息
