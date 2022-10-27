@@ -73,6 +73,12 @@ export class Club_MainEnter extends BaseUI
         {
             this.UpdateNewMemberNotifyUI(_data);
         });
+
+        LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
+        {
+            this.mData = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
+            this.UpdateUI();
+        });
     }
     LateInit()
     {
@@ -87,6 +93,7 @@ export class Club_MainEnter extends BaseUI
     {
         this.mData = _data;
         this.UpdateUI();
+        this.UpdateNewMemberNotifyUI(true);
         this.schedule(this.ScaleLogic.bind(this),0.01);
     }
     
@@ -100,6 +107,7 @@ export class Club_MainEnter extends BaseUI
         {
             return;
         }
+
         if(LocalPlayerData.Instance.Data_Uid.mData != this.mData.ownerId)
         {
             return;
@@ -123,8 +131,6 @@ export class Club_MainEnter extends BaseUI
         this.mClubName.string = this.mData.name;
         this.mMemberCount.string = this.mData.memberCount + "";
         this.mCurrentTables.string = this.mData.tableCount + "";
-
-        this.UpdateNewMemberNotifyUI(HallData.Instance.Data_ClubApplyingNotify.mData);
     }
 
     //update

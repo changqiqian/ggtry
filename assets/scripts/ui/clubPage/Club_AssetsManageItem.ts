@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Sprite, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { Tool } from '../../Tool';
 import { PlayerInfo } from '../common/PlayerInfo';
 import { ToggleBtn } from '../common/ToggleBtn';
@@ -37,6 +38,21 @@ export class Club_AssetsManageItem extends BaseUI
             {
                 HallData.Instance.Data_ClubScoreManageUserInfo.mData = this.mData;
             }
+        });
+
+        HallData.Instance.Data_ShareClubScore.AddListenner(this,(_data)=>
+        {
+            if(_data.clubId != LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
+            {
+                return;
+            }
+
+            if(_data.uid != this.mData.uid)
+            {
+                return;
+            }
+            this.mAmount.string = Tool.ConvertMoney_S2C(_data.playerRestPoint) + "";
+
         });
     }
     LateInit()

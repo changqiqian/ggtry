@@ -6,6 +6,8 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { Tool } from '../../Tool';
 import { HallData } from '../hall/HallData';
 import { Club_MemberNotifyWindow } from './Club_MemberNotifyWindow';
+import { UIMgr } from '../../base/UIMgr';
+import { Localization } from '../../base/Localization';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_PrivateLayer')
@@ -70,7 +72,10 @@ export class Club_PrivateLayer extends BaseUI
     
         this.mAseetsBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
+            if(this.HaveRights())
+            {
+                this.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
+            }
         });
         this.mRecordBtn.SetClickCallback(()=>
         {
@@ -82,16 +87,28 @@ export class Club_PrivateLayer extends BaseUI
         });
         this.mCreateBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_CreateGameOption",true,null,HallData.ClubUiTag);
+            if(this.HaveRights())
+            {
+                this.ShowLayer("clubPage","prefab/Club_CreateGameOption",true,null,HallData.ClubUiTag);
+            }
         });
+    }
+    UpdateClubInfoUI()
+    {
+        this.mClubName.string = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.name;
+        this.mClubId.string = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
     }
 
     RegDataNotify()
     {
         LocalPlayerData.Instance.Data_CurrentEnterClub.AddListenner(this,(_data)=>
         {
-            this.mClubName.string = _data.name;
-            this.mClubId.string = _data.id;
+            this.UpdateClubInfoUI();
+        });
+
+        LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
+        {
+            this.UpdateClubInfoUI();
         });
 
         LocalPlayerData.Instance.Data_SelfClubInfo.AddListenner(this,(_data)=>
@@ -99,13 +116,21 @@ export class Club_PrivateLayer extends BaseUI
             this.UpdateMoney();
         });
 
+        LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
+        {
+            let currentClubData = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
+            this.mClubName.string = currentClubData.name;
+        });
 
-
+        HallData.Instance.Data_ClubPlayerPointNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateMoney();
+        });
 
         HallData.Instance.Data_ClubApplyingNotify.AddListenner(this,(_data)=>
         {
-            let ownerId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.ownerId;
-            if(LocalPlayerData.Instance.Data_Uid.mData != ownerId)
+            if(LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType != 
+                ClubMemberType.ClubAccountType_Owner)
             {
                 return;
             }
@@ -144,6 +169,20 @@ export class Club_PrivateLayer extends BaseUI
         {
             this.mMoney.string = "***";
         }
+    }
+
+    HaveRights() :boolean
+    {
+        let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == 
+            ClubMemberType.ClubAccountType_Owner
+        if(selfIsOwner)
+        {
+        }
+        else
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00099"));
+        }
+        return selfIsOwner;
     }
 }
 

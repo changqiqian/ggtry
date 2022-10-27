@@ -91,7 +91,9 @@ export class Club_Member extends BaseUI {
         this.mPlayerInfo.SetName(this.mMember.nickName);
         this.mPlayerInfo.SetLocalHead(Number(this.mMember.head));
         this.mID.string = this.mMember.uid;
-        let selfIsClubOwner = LocalPlayerData.Instance.Data_Uid.mData == LocalPlayerData.Instance.Data_CurrentEnterClub.mData.ownerId;
+        let selfIsClubOwner = 
+            LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == ClubMemberType.ClubAccountType_Owner;
+
         let isSelf = _member.uid == LocalPlayerData.Instance.Data_Uid.mData;
 
         if(selfIsClubOwner)

@@ -6,6 +6,8 @@ import { UIMgr } from '../../base/UIMgr';
 import { Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
+import { InputTipsWindow } from '../common/InputTipsWindow';
+import { InputTipsWindowBig } from '../common/InputTipsWindowBig';
 import { TipsWindow } from '../common/TipsWindow';
 import { HallData } from '../hall/HallData';
 import { Club_HeadAndName } from './Club_HeadAndName';
@@ -35,8 +37,6 @@ export class Club_Setting extends BaseUI
     @property(BaseButton) 
     mClubId: BaseButton = null;
     @property(BaseButton) 
-    mClubNotifyBtn: BaseButton = null;
-    @property(BaseButton) 
     mClubDescribe: BaseButton = null;
     @property(BaseButton) 
     mUnionBtn: BaseButton = null;
@@ -45,22 +45,34 @@ export class Club_Setting extends BaseUI
     @property(BaseButton) 
     mDismissBtn: BaseButton = null;
 
-
+    mLastTimeBrief : string = null;
+    mPageSize : number = 4;
     onEnable()
     {
+        this.mLastTimeBrief = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.brief;
         let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-        NetworkSend.Instance.GetClubMember(clubId,0,4);
+        NetworkSend.Instance.GetClubMember(clubId,1,this.mPageSize);
     }
 
     onDisable()
     {
+        if(this.HaveRights() == false)
+        {
+            return;
+        }
+
         let currentClub = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
         let logoChanged = currentClub.logo != HallData.Instance.Data_ClubLogoIndex.mData;
         let stampChanged = currentClub.stamp != HallData.Instance.Data_ClubStampIndex.mData;
         let nameChanged = currentClub.name != this.mClubNameBtn.GetTitle();
-        if(logoChanged || stampChanged || nameChanged)
+        let briefChanged = currentClub.brief != this.mLastTimeBrief;
+        if(logoChanged || stampChanged || nameChanged || briefChanged)
         {
-            //发送修改消息
+            let newLogo = logoChanged ?  HallData.Instance.Data_ClubLogoIndex.mData : null;
+            let newStamp = stampChanged ? HallData.Instance.Data_ClubStampIndex.mData :null;
+            let newName =  nameChanged? this.mClubNameBtn.GetTitle() : null;
+            let newBrief = briefChanged? this.mLastTimeBrief : null;
+            NetworkSend.Instance.ModifyClubInfo(currentClub.id,newName,newBrief,newLogo,newStamp);
         }
     }
 
@@ -77,7 +89,10 @@ export class Club_Setting extends BaseUI
 
         this.mAssetsBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
+            if(this.HaveRights())
+            {
+                this.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
+            }
         });
 
         this.mAssetsRecordBtn.SetClickCallback(()=>
@@ -94,7 +109,7 @@ export class Club_Setting extends BaseUI
         {
             if(this.HaveRights())
             {
-                UIMgr.Instance.ShowToast("功能开发中");
+                this.ShowWindow("clubPage","prefab/Club_LogoChoseLayer",true,null,HallData.ClubUiTag);
             }
         });
 
@@ -102,22 +117,48 @@ export class Club_Setting extends BaseUI
         {
             if(this.HaveRights())
             {
-                UIMgr.Instance.ShowToast("功能开发中");
+                this.ShowWindow("clubPage","prefab/Club_StampChoseLayer",true,null,HallData.ClubUiTag);
             }
         });
         this.mClubNameBtn.SetClickCallback(()=>
         {
             if(this.HaveRights())
             {
-                UIMgr.Instance.ShowToast("功能开发中");
+                this.ShowWindow("common" , "prefab/InputTipsWindow",true,(_script)=>
+                {
+                    let tempScript = _script as InputTipsWindow;
+                    let title = Localization.GetString("00121");
+                    tempScript.SetTitle(title);
+                    tempScript.SetCallback((_data)=>
+                    {
+                        if(_data != null && _data !="")
+                        {
+                            this.mClubNameBtn.SetTitle(_data);
+                        }
+                    })
+                },HallData.ClubUiTag)
             }
         });
 
-        this.mClubNotifyBtn.SetClickCallback(()=>
+        this.mClubDescribe.SetClickCallback(()=>
         {
             if(this.HaveRights())
             {
-                UIMgr.Instance.ShowToast("功能开发中");
+                this.ShowWindow("common" , "prefab/InputTipsWindowBig",true,(_script)=>
+                {
+                    let tempScript = _script as InputTipsWindowBig;
+                    let title = Localization.GetString("00122");
+                    tempScript.SetTitle(title);
+                    tempScript.SetMaxInput(100);
+                    tempScript.SetPlaceHolder(Localization.GetString("00123"));
+                    tempScript.SetCallback((_data)=>
+                    {
+                        if(_data != null && _data !="")
+                        {
+                            this.mLastTimeBrief = _data;
+                        }
+                    })
+                },HallData.ClubUiTag)
             }
             else
             {
@@ -127,15 +168,7 @@ export class Club_Setting extends BaseUI
                     let tips = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.brief;
                     tempScript.SetTips(tips);
                     tempScript.ShowConfirmBtnOnly();
-                })
-            }
-        });
-
-        this.mClubDescribe.SetClickCallback(()=>
-        {
-            if(this.HaveRights())
-            {
-                UIMgr.Instance.ShowToast("功能开发中");
+                },HallData.ClubUiTag)
             }
         });
         this.mUnionBtn.SetClickCallback(()=>
@@ -176,19 +209,32 @@ export class Club_Setting extends BaseUI
         });
         
     }
+
+    UpdateClubInfoUI()
+    {
+        let clubInfo =LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
+        HallData.Instance.Data_ClubLogoIndex.mData = clubInfo.logo;
+        HallData.Instance.Data_ClubStampIndex.mData = clubInfo.stamp;
+        this.mClubNameBtn.SetTitle(clubInfo.name);
+        this.mClubId.SetTitle(clubInfo.id);
+
+    }
+
     RegDataNotify()
     {
         LocalPlayerData.Instance.Data_CurrentEnterClub.AddListenner(this,(_data)=>
         {
-            HallData.Instance.Data_ClubLogoIndex.mData = _data.logo;
-            HallData.Instance.Data_ClubStampIndex.mData = _data.stamp;
-            this.mClubNameBtn.SetTitle(_data.name);
-            this.mClubId.SetTitle(_data.id);
+            this.UpdateClubInfoUI();
+            let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == 
+                ClubMemberType.ClubAccountType_Owner
+            this.mUnionBtn.node.active = selfIsOwner;
+            this.mDismissBtn.node.active = selfIsOwner;
+            this.mExitBtn.node.active = !(selfIsOwner);
+        });
 
-            this.mUnionBtn.node.active = LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId;
-            this.mDismissBtn.node.active = LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId;
-            this.mExitBtn.node.active = !(LocalPlayerData.Instance.Data_Uid.mData == _data.ownerId);
-
+        LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
+        {
+            this.UpdateClubInfoUI();
         });
 
         HallData.Instance.Data_ClubLogoIndex.AddListenner(this,(_data)=>
@@ -236,10 +282,15 @@ export class Club_Setting extends BaseUI
                 return;
             }
 
-            // if(_data.page != 0)
-            // {
-            //     return;
-            // }
+            if(_data.page != 1)
+            {
+                return;
+            }
+
+            if(this.mPageSize != _data.pageSize)
+            {
+                return;
+            }
 
             this.mMemberCount.string = _data.totalMember + "";
 
@@ -259,7 +310,7 @@ export class Club_Setting extends BaseUI
                 }
             }
 
-            //HallData.Instance.Data_S2CGetClubMember.mData = null;
+            HallData.Instance.Data_S2CGetClubMember.mData = null;
         });
         
     }
@@ -274,17 +325,16 @@ export class Club_Setting extends BaseUI
 
     HaveRights() :boolean
     {
-        let ownerId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.ownerId;
-
-        if(LocalPlayerData.Instance.Data_Uid.mData == ownerId)
+        let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == 
+            ClubMemberType.ClubAccountType_Owner
+        if(selfIsOwner)
         {
-            return true;
         }
         else
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00099"));
-            return false;
         }
+        return selfIsOwner;
     }
 }
 

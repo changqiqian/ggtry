@@ -64,6 +64,11 @@ export class Club_Main extends BaseUI
                 return;
             }
 
+            if(LocalPlayerData.Instance.Data_CurrentEnterClub.mData == null)
+            {
+                return;
+            }
+
             let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
             if(currentClubId == _data)
             {

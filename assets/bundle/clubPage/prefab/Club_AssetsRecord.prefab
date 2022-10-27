@@ -353,7 +353,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "资产管理",
+    "_string": "资产记录",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 42,
@@ -1073,7 +1073,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1125,
-      "height": 950
+      "height": 760
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

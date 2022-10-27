@@ -26,7 +26,7 @@ export class Club_AssetsManage extends BaseUI
     @property(BaseButton) 
     mGiveBtn: BaseButton = null;
 
-    mCurrentPage :number = 0;
+    mCurrentPage :number = 1;
     mPageSize : number = 20;
     mIsLastPage : boolean = false;
     mCurrentData : Array<IClubMember>;
@@ -73,10 +73,15 @@ export class Club_AssetsManage extends BaseUI
                 return;
             }
 
-            // if(this.mCurrentPage != _data.page)
-            // {
-            //     return;
-            // }
+            if(this.mCurrentPage != _data.page)
+            {
+                return;
+            }
+
+            if(this.mPageSize != _data.pageSize)
+            {
+                return;
+            }
 
             for(let i = 0 ; i < _data.clubMembers.length ; i++)
             {
@@ -92,15 +97,15 @@ export class Club_AssetsManage extends BaseUI
             }
             
 
-            // if(this.mCurrentData.length >= _data.totalMember)
-            // {
-            //     this.mIsLastPage = true;
-            // }
-            // else
-            // {
-            //     this.mIsLastPage = false;
-            // }
-            this.mIsLastPage = true;
+            if(this.mCurrentData.length >= _data.totalMember)
+            {
+                this.mIsLastPage = true;
+            }
+            else
+            {
+                this.mIsLastPage = false;
+            }
+
             
             this.mCurrentPage++;
 
@@ -133,7 +138,7 @@ export class Club_AssetsManage extends BaseUI
     {
         this.mIsLastPage = false;
         this.mCurrentData = new Array<IClubMember>();
-        this.mCurrentPage = 0;
+        this.mCurrentPage = 1;
         this.mScrollView.content.destroyAllChildren();
     }
     

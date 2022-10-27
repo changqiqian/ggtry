@@ -90,7 +90,7 @@
           }
         },
         "time": "10-27-2022 04:31",
-        "dirty": true,
+        "dirty": false,
         "rawOptions": {
           "name": "SY",
           "platform": "android",
@@ -165,11 +165,11 @@
           }
         }
       },
-      "1666817954244": {
-        "id": "1666817954244",
+      "1666855786517": {
+        "id": "1666855786517",
         "progress": 1,
         "state": "success",
-        "message": "10-27-2022 04:59 Build success in 41558 ms!",
+        "message": "10-27-2022 15:31 Build success in 76584 ms!",
         "options": {
           "name": "SY",
           "platform": "ios",
@@ -223,14 +223,14 @@
                 "asyncFunctions": true
               },
               "encrypted": false,
-              "xxteaKey": "beTdBAiGxM1Ly+03",
+              "xxteaKey": "99CkKIFgFBa71q8h",
               "compressZip": false,
               "makeAfterBuild": false,
               "JobSystem": "none"
             }
           }
         },
-        "time": "10-27-2022 04:59",
+        "time": "10-27-2022 15:29",
         "dirty": false
       }
     }

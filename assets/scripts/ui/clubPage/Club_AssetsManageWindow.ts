@@ -65,8 +65,31 @@ export class Club_AssetsManageWindow extends BaseUI
             this.mPlayerInfo.SetLocalHead(Number(_data.head));
             this.mID.string = _data.uid;
             this.mPlayerAmount.string = Tool.ConvertMoney_S2C(_data.clubPoint) + "";
-            let clubTotalPoint = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.totalClubPoint;
-            this.mClubAmount.string = Tool.ConvertMoney_S2C(clubTotalPoint) + "";
+            this.UpdateClubTotalScore();
+        });
+
+
+        LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
+        {
+            this.UpdateClubTotalScore();
+        });
+
+        HallData.Instance.Data_ShareClubScore.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+            if(_data.clubId != LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
+            {
+                return;
+            }
+
+            if(_data.uid != HallData.Instance.Data_ClubScoreManageUserInfo.mData.uid)
+            {
+                return;
+            }
+            this.mPlayerAmount.string = Tool.ConvertMoney_S2C(_data.playerRestPoint) + "";
         });
     }
     LateInit()
@@ -94,6 +117,16 @@ export class Club_AssetsManageWindow extends BaseUI
         {
             this.mTitle.string = Localization.GetString("00116");
         }
+    }
+
+    UpdateClubTotalScore()
+    {
+        if(this.node.activeInHierarchy == false)
+        {
+            return;
+        }
+        let clubTotalPoint = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.totalClubPoint;
+        this.mClubAmount.string = Tool.ConvertMoney_S2C(clubTotalPoint) + "";
     }
 }
 

@@ -14,7 +14,7 @@ export class Club_MemberList extends BaseUI {
     @property(ScrollView) 
     mScrollView: ScrollView = null;
 
-    mCurrentPage :number = 0;
+    mCurrentPage :number = 1;
     mPageSize : number = 20;
     mIsLastPage : boolean = false;
     mCurrentData : Array<IClubMember>;
@@ -53,10 +53,16 @@ export class Club_MemberList extends BaseUI {
                 return;
             }
 
-            // if(this.mCurrentPage != _data.page)
-            // {
-            //     return;
-            // }
+            if(this.mCurrentPage != _data.page)
+            {
+                return;
+            }
+
+            if(this.mPageSize != _data.pageSize)
+            {
+                return;
+            }
+
 
             for(let i = 0 ; i < _data.clubMembers.length ; i++)
             {
@@ -72,15 +78,14 @@ export class Club_MemberList extends BaseUI {
             }
             
 
-            // if(this.mCurrentData.length >= _data.totalMember)
-            // {
-            //     this.mIsLastPage = true;
-            // }
-            // else
-            // {
-            //     this.mIsLastPage = false;
-            // }
-            this.mIsLastPage = true;
+            if(this.mCurrentData.length >= _data.totalMember)
+            {
+                this.mIsLastPage = true;
+            }
+            else
+            {
+                this.mIsLastPage = false;
+            }
             
             this.mCurrentPage++;
 
@@ -103,10 +108,12 @@ export class Club_MemberList extends BaseUI {
 
     OnDragBottom() 
     {
+        console.log("OnDragBottom")
         if(this.mIsLastPage)
         {
             return;
         }
+        console.log("OnDragBottom  pass")
         this.Refresh();
     }
 
@@ -114,7 +121,7 @@ export class Club_MemberList extends BaseUI {
     {
         this.mIsLastPage = false;
         this.mCurrentData = new Array<IClubMember>();
-        this.mCurrentPage = 0;
+        this.mCurrentPage = 1;
         this.mScrollView.content.destroyAllChildren();
     }
 }

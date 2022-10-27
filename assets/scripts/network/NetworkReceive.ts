@@ -10,24 +10,6 @@ import { NetworkSend } from "./NetworkSend";
 
 export class NetworkReceive extends Singleton<NetworkReceive>()
 {
-    private static GetClassName(_msgId : number) : string
-    {
-        for(let i = 0 ; i < Object.keys(MessageId).length  ; i++)
-        {
-            let currentKey = Object.keys(MessageId)[i];
-            if(MessageId[currentKey] == 1003)
-            {
-                let className = currentKey.replace("_" , "");
-                console.log("className==" + className);
-                return className;
-            }
-        }
-
-        //js.setClassName("S2CLogin",S2CLogin);
-        //js.getClassByName(NetworkReceive.GetClassName(MessageId.S2C_Login))["decode"](_data);
-        return "";
-    }
-
     public RegisterMsg()
     {
         
@@ -177,16 +159,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_DismissClubNotify,(_data)=>
-        {
-            UIMgr.Instance.ShowLoading(false);
-            let msg = S2CDismissClubNotify.decode(_data);
-            console.log("收到的内容 S2C_DismissClubNotify 创建者解散俱乐部推送===" + JSON.stringify(msg));
-            HallData.Instance.Data_ClubEnter.mData = false;
-            HallData.Instance.Data_ClubDismiss.mData = msg.clubId;
-        },this);
-
-
         Network.Instance.AddMsgListenner(MessageId.S2C_QuitClub,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
@@ -231,36 +203,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             {
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
-        },this);
-
-        Network.Instance.AddMsgListenner(MessageId.S2C_JoinClubNotify,(_data)=>
-        {
-            UIMgr.Instance.ShowLoading(false);
-            let msg = S2CJoinClubNotify.decode(_data);
-            console.log("收到的内容S2C_JoinClubResult 加入俱乐部的申请结果===" + JSON.stringify(msg));
-            if(msg.result.resId == MsgResult.Success)
-            {
-                HallData.Instance.Data_ClubJoinNotify.mData = msg.clubInfo;
-            }
-            else
-            {
-                UIMgr.Instance.ShowToast(msg.result.resMessage);
-            }
-        },this);
-
-        Network.Instance.AddMsgListenner(MessageId.S2C_ClubJoinNotify,(_data)=>
-        {
-            let msg = S2CClubJoinNotify.decode(_data);
-            console.log("收到的内容 S2C_ClubJoinNotify  俱乐部申请推送===" + JSON.stringify(msg));
-            if(msg.request.length <= 0)
-            {
-                return;
-            }
-            for(let i = 0 ; i < msg.request.length ; i++)
-            {
-                HallData.Instance.RecieveNewClubApply(msg.request[i]);
-            }
-            HallData.Instance.Data_ClubApplyingNotify.mData = true;
         },this);
         
         Network.Instance.AddMsgListenner(MessageId.S2C_AddClubMember,(_data)=>
@@ -323,14 +265,108 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_ModifyClubInfo,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CModifyClubInfo.decode(_data);
+            console.log("收到的内容 S2C_ModifyClubInfo  修改俱乐部信息===" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00119"));
+                LocalPlayerData.Instance.Data_CurrentEnterClub.mData = msg.clubInfo;
+                LocalPlayerData.Instance.Data_UpdateCurrentClub.mData = true;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_ShareClubScore,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CShareClubScore.decode(_data);
+            console.log("收到的内容 S2C_ShareClubScore  修改玩家俱乐部积分===" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                LocalPlayerData.Instance.Data_CurrentEnterClub.mData.totalClubPoint = msg.clubRestPoint;
+                LocalPlayerData.Instance.Data_UpdateCurrentClub.mData = true;
+                HallData.Instance.Data_ShareClubScore.mData = msg;
+                UIMgr.Instance.ShowToast(Localization.GetString("00120"));
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //
+        //                              服务器推送
+        //
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        Network.Instance.AddMsgListenner(MessageId.S2C_DismissClubNotify,(_data)=>
+        {
+            let msg = S2CDismissClubNotify.decode(_data);
+            console.log("收到的内容 S2C_DismissClubNotify 创建者解散俱乐部推送===" + JSON.stringify(msg));
+            HallData.Instance.Data_ClubEnter.mData = false;
+            HallData.Instance.Data_ClubDismiss.mData = msg.clubId;
+        },this);
 
         Network.Instance.AddMsgListenner(MessageId.S2C_RemoveNotify,(_data)=>
         {
-            UIMgr.Instance.ShowLoading(false);
             let msg = S2CRemoveNotify.decode(_data);
             console.log("收到的内容 S2C_RemoveNotifiy  自己被移除俱乐部通知===" + JSON.stringify(msg));
             HallData.Instance.Data_ClubRemoveNotify.mData = msg.clubId;
         },this);
+        Network.Instance.AddMsgListenner(MessageId.S2C_JoinClubNotify,(_data)=>
+        {
+            let msg = S2CJoinClubNotify.decode(_data);
+            console.log("收到的内容S2C_JoinClubResult 加入俱乐部的申请结果===" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                HallData.Instance.Data_ClubJoinNotify.mData = msg.clubInfo;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_ClubJoinNotify,(_data)=>
+        {
+            let msg = S2CClubJoinNotify.decode(_data);
+            console.log("收到的内容 S2C_ClubJoinNotify  俱乐部申请推送===" + JSON.stringify(msg));
+            if(msg.request.length <= 0)
+            {
+                return;
+            }
+            for(let i = 0 ; i < msg.request.length ; i++)
+            {
+                HallData.Instance.RecieveNewClubApply(msg.request[i]);
+            }
+            HallData.Instance.Data_ClubApplyingNotify.mData = true;
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_ClubPlayerPointNotify,(_data)=>
+        {
+            let msg = S2CClubPlayerPointNotify.decode(_data);
+            console.log("收到的内容 S2C_ClubPlayerPointNotify  玩家俱乐部积分修改通知===" + JSON.stringify(msg));
+            if(LocalPlayerData.Instance.Data_CurrentEnterClub.mData != null)
+            {
+                if(_data.clubId == LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
+                {
+                    LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint = _data.playerRestAmount;
+                    HallData.Instance.Data_ClubPlayerPointNotify.mData = _data;
+                }
+            }
+        },this);
+
         
     }
 

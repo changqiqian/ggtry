@@ -173,6 +173,46 @@ export class NetworkSend extends Singleton<NetworkSend>()
         Network.Instance.SendMsg(MessageId.C2S_RemoveMember , C2SRemoveMember.encode(msg).finish());
         console.log("移除俱乐部成员 C2S_RemoveMember== " + JSON.stringify(msg))
     }
+
+    public ModifyClubInfo(_clubId : string , _newName:string , _newBrief : string,
+        _newLogo : number , _newStamp : number)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SModifyClubInfo();
+        msg.clubId = _clubId;
+        if(_newName != null)
+        {
+            msg.newName = _newName;
+        }
+        if(_newBrief != null)
+        {
+            msg.newBrief = _newBrief;
+        }
+        if(_newLogo != null)
+        {
+            msg.newLogo = _newLogo;
+        }
+        if(_newStamp != null)
+        {
+            msg.newStamp = _newStamp;
+        }
+
+        Network.Instance.SendMsg(MessageId.C2S_ModifyClubInfo , C2SModifyClubInfo.encode(msg).finish());
+        console.log("修改俱乐部信息 C2S_ModifyClubInfo== " + JSON.stringify(msg))
+    }
+
+
+    public ShareClubScore(_clubId : string , _uid : string , _amount : number )
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SShareClubScore();
+        msg.clubId = _clubId;
+        msg.uid = _uid;
+        msg.amount = _amount;
+        Network.Instance.SendMsg(MessageId.C2S_ShareClubScore , C2SShareClubScore.encode(msg).finish());
+        console.log("修改俱乐部成员积分 C2S_ShareClubScore== " + JSON.stringify(msg))
+    }
+    
 }
 
 
