@@ -3,19 +3,19 @@ import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
 export class GameConfig
 {
-    public static DebugMode =  false;
+    public static DebugMode =  true;
     public static PrivateIP = "192.168.68.100:9001"; //私人电脑ip 可选
     public static DevelopIP = "52.77.219.158:9501"; //开发环境ip 可选
-    public static TestIP = "13.229.222.39:9008"; //测试环境ip 可选
+    public static TestIP = "52.77.219.158:9601"; //测试环境ip 可选
     public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip 上面三个选项选择后，会赋值给UsingIp
-    public static SeverUrl = "ws://13.229.222.39:9008/pokerlife";
+    public static SeverUrl = "ws://13.229.222.39:9008/pokerlife"; //完整的地址长这样
     public static SetSeverUrl(_ip : string)
     {
         GameConfig.UsingIp = _ip;
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
     }
     //发布的版本号
-    public static Version = "1.2.4"
+    public static Version = "1.2.5"
 
       
     public static LOGIN_TOKEN;

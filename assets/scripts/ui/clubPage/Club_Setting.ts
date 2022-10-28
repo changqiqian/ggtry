@@ -50,8 +50,7 @@ export class Club_Setting extends BaseUI
     onEnable()
     {
         this.mLastTimeBrief = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.brief;
-        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-        NetworkSend.Instance.GetClubMember(clubId,1,this.mPageSize);
+        this.RefreshMember();
     }
 
     onDisable()
@@ -147,9 +146,11 @@ export class Club_Setting extends BaseUI
                 this.ShowWindow("common" , "prefab/InputTipsWindowBig",true,(_script)=>
                 {
                     let tempScript = _script as InputTipsWindowBig;
+                    let currentClub = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
                     let title = Localization.GetString("00122");
                     tempScript.SetTitle(title);
                     tempScript.SetMaxInput(100);
+                    tempScript.SetContent(currentClub.brief);
                     tempScript.SetPlaceHolder(Localization.GetString("00123"));
                     tempScript.SetCallback((_data)=>
                     {
@@ -255,19 +256,6 @@ export class Club_Setting extends BaseUI
             })
         });
 
-        HallData.Instance.Data_ClubEnter.AddListenner(this,(_data)=>
-        {
-            if(this.node.active == false)
-            {
-                return;
-            }
-
-            if(_data == false)
-            {
-                this.Show(false);
-            }
-        });
-
 
         HallData.Instance.Data_S2CGetClubMember.AddListenner(this,(_data)=>
         {
@@ -302,7 +290,8 @@ export class Club_Setting extends BaseUI
                     currentNode.active = true;
                     let currentMemberData = _data.clubMembers[i];
                     let currentScript = currentNode.getComponent(Club_HeadAndName);
-                    currentScript.InitWithData(Number(currentMemberData.head),currentMemberData.nickName);
+                    currentScript.InitWithData(Number(currentMemberData.head),currentMemberData.nickName,
+                    currentMemberData.uid);
                 }
                 else
                 {
@@ -311,6 +300,23 @@ export class Club_Setting extends BaseUI
             }
 
             HallData.Instance.Data_S2CGetClubMember.mData = null;
+        });
+
+
+        HallData.Instance.Data_S2CRemoveMember.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(clubId != _data.clubId)
+            {
+                return;
+            }
+
+            this.RefreshMember();
         });
         
     }
@@ -321,6 +327,12 @@ export class Club_Setting extends BaseUI
     CustmoerDestory()
     {
 
+    }
+
+    RefreshMember()
+    {
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        NetworkSend.Instance.GetClubMember(clubId,1,this.mPageSize);
     }
 
     HaveRights() :boolean

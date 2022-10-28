@@ -202,6 +202,27 @@ export class Tool
         return result;
     }
 
+    public static NumberTest(_target : string) : boolean
+    {
+        if(_target == "")
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00124"));
+            return false;
+        }
+
+        if(_target.indexOf(" ") != -1)
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00015"));
+            return false;
+        }
+        let result = /^[0-9]*$/.test(_target);
+        if(result == false)
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00125"));
+        }
+        return result;
+    }
+
     public static IdTest(_target : string) : boolean
     {
         if(_target == "")

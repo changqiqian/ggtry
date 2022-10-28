@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
+import { NetworkSend } from '../../network/NetworkSend';
 import { Tool } from '../../Tool';
 import { BaseButton } from '../common/BaseButton';
 import { PlayerInfo } from '../common/PlayerInfo';
@@ -26,13 +27,15 @@ export class Club_AssetsManageWindow extends BaseUI
     mPlayerAmount: Label = null;
     @property(Label) 
     mClubAmount: Label = null;
-
-    
     @property(BaseButton) 
     mConfirmBtn: BaseButton = null;   
-
-
     mGive : boolean = null;
+
+    onEnable()
+    {
+        this.mEditBox.string = "";
+        this.UpdateClubTotalScore();
+    }
     InitParam()
     {
 
@@ -47,13 +50,22 @@ export class Club_AssetsManageWindow extends BaseUI
 
         this.mConfirmBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowToast("功能开发中");
-            if(this.mGive)
-            {
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
 
+            if(Tool.NumberTest(this.mEditBox.string) == false)
+            {
+                return;
+            }   
+
+            let amount = Number(this.mEditBox.string);
+            let currentUser = HallData.Instance.Data_ClubScoreManageUserInfo.mData;
+            if(this.mGive)
+            {   
+                NetworkSend.Instance.ShareClubScore(clubId,currentUser.uid,amount);
             }
             else
             {
+                NetworkSend.Instance.ShareClubScore(clubId,currentUser.uid, -amount);
             }
         });
     }

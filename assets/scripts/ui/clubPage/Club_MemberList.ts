@@ -108,12 +108,10 @@ export class Club_MemberList extends BaseUI {
 
     OnDragBottom() 
     {
-        console.log("OnDragBottom")
         if(this.mIsLastPage)
         {
             return;
         }
-        console.log("OnDragBottom  pass")
         this.Refresh();
     }
 

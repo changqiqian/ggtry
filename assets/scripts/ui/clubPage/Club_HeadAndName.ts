@@ -12,6 +12,8 @@ export class Club_HeadAndName extends BaseUI
     mName: Label = null;
     @property(BaseButton) 
     mBtn: BaseButton = null;
+
+    mUid : string = null;
     InitParam()
     {
 
@@ -36,13 +38,13 @@ export class Club_HeadAndName extends BaseUI
 
     }
 
-    public InitWithData(_head : number , _name : string)
+    public InitWithData(_head : number , _name : string , _uid : string)
     {
         this.LoadLocalHead(_head,(_spriteFrame)=>
         {
             this.mHead.spriteFrame = _spriteFrame;
         });
-
+        this.mUid = _uid;
         this.mName.string = _name;
     }
 }

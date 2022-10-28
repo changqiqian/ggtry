@@ -2047,35 +2047,35 @@ export class S2CClubPlayerPointNotify implements IS2CClubPlayerPointNotify {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CClubPlayerPointNotify;
 }
 
-/** Represents a S2CModifyMemberRoleNotifiy. */
-export class S2CModifyMemberRoleNotifiy implements IS2CModifyMemberRoleNotifiy {
+/** Represents a S2CModifyMemberRoleNotify. */
+export class S2CModifyMemberRoleNotify implements IS2CModifyMemberRoleNotify {
 
     /**
-     * Constructs a new S2CModifyMemberRoleNotifiy.
+     * Constructs a new S2CModifyMemberRoleNotify.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CModifyMemberRoleNotifiy);
+    constructor(p?: IS2CModifyMemberRoleNotify);
 
-    /** S2CModifyMemberRoleNotifiy memberType. */
+    /** S2CModifyMemberRoleNotify memberType. */
     public memberType: ClubMemberType;
 
     /**
-     * Encodes the specified S2CModifyMemberRoleNotifiy message. Does not implicitly {@link S2CModifyMemberRoleNotifiy.verify|verify} messages.
-     * @param m S2CModifyMemberRoleNotifiy message or plain object to encode
+     * Encodes the specified S2CModifyMemberRoleNotify message. Does not implicitly {@link S2CModifyMemberRoleNotify.verify|verify} messages.
+     * @param m S2CModifyMemberRoleNotify message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CModifyMemberRoleNotifiy, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CModifyMemberRoleNotify, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CModifyMemberRoleNotifiy message from the specified reader or buffer.
+     * Decodes a S2CModifyMemberRoleNotify message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CModifyMemberRoleNotifiy
+     * @returns S2CModifyMemberRoleNotify
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CModifyMemberRoleNotifiy;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CModifyMemberRoleNotify;
 }
 
 /** Represents a C2SLogout. */

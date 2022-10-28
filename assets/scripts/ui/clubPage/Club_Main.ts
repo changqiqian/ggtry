@@ -59,21 +59,6 @@ export class Club_Main extends BaseUI
         HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
         {
             this.RemovePage(_data);
-            if(HallData.Instance.Data_ClubEnter.mData == false)
-            {
-                return;
-            }
-
-            if(LocalPlayerData.Instance.Data_CurrentEnterClub.mData == null)
-            {
-                return;
-            }
-
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-            if(currentClubId == _data)
-            {
-                HallData.Instance.Data_ClubEnter.mData = false;
-            }
         });
         LocalPlayerData.Instance.Data_AccountLevel.AddListenner(this,(_data)=>
         {

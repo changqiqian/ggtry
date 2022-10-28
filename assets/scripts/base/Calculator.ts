@@ -90,7 +90,7 @@ export class Calculator extends Singleton<Calculator>()
         return result;
     }
 
-    public CalculateCombination(_targetCards : Array<CardStruct>)
+    public CalculateCombination(_targetCards : Array<CardStruct>) :Array<CardStruct>
     {
         if (_targetCards.length < 5)
         {
@@ -500,7 +500,7 @@ export class Calculator extends Singleton<Calculator>()
                     if (currentStepCard.mNum - lastStepCard.mNum == 1)
                     {
                         tempResult.push(currentStepCard);
-                        if (tempResult.length == 5)
+                        if (tempResult.length == condition)
                         {
                             break;
                         }
@@ -511,7 +511,7 @@ export class Calculator extends Singleton<Calculator>()
                     }
                 }
             }
-            if (tempResult.length == 5)
+            if (tempResult.length == condition)
             {
                 result.push(tempResult);
             }

@@ -5099,24 +5099,24 @@ $root.S2CClubPlayerPointNotify = (function() {
     return S2CClubPlayerPointNotify;
 })();
 
-$root.S2CModifyMemberRoleNotifiy = (function() {
+$root.S2CModifyMemberRoleNotify = (function() {
 
     /**
-     * Properties of a S2CModifyMemberRoleNotifiy.
-     * @exports IS2CModifyMemberRoleNotifiy
-     * @interface IS2CModifyMemberRoleNotifiy
-     * @property {ClubMemberType|null} [memberType] S2CModifyMemberRoleNotifiy memberType
+     * Properties of a S2CModifyMemberRoleNotify.
+     * @exports IS2CModifyMemberRoleNotify
+     * @interface IS2CModifyMemberRoleNotify
+     * @property {ClubMemberType|null} [memberType] S2CModifyMemberRoleNotify memberType
      */
 
     /**
-     * Constructs a new S2CModifyMemberRoleNotifiy.
-     * @exports S2CModifyMemberRoleNotifiy
-     * @classdesc Represents a S2CModifyMemberRoleNotifiy.
-     * @implements IS2CModifyMemberRoleNotifiy
+     * Constructs a new S2CModifyMemberRoleNotify.
+     * @exports S2CModifyMemberRoleNotify
+     * @classdesc Represents a S2CModifyMemberRoleNotify.
+     * @implements IS2CModifyMemberRoleNotify
      * @constructor
-     * @param {IS2CModifyMemberRoleNotifiy=} [p] Properties to set
+     * @param {IS2CModifyMemberRoleNotify=} [p] Properties to set
      */
-    function S2CModifyMemberRoleNotifiy(p) {
+    function S2CModifyMemberRoleNotify(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -5124,23 +5124,23 @@ $root.S2CModifyMemberRoleNotifiy = (function() {
     }
 
     /**
-     * S2CModifyMemberRoleNotifiy memberType.
+     * S2CModifyMemberRoleNotify memberType.
      * @member {ClubMemberType} memberType
-     * @memberof S2CModifyMemberRoleNotifiy
+     * @memberof S2CModifyMemberRoleNotify
      * @instance
      */
-    S2CModifyMemberRoleNotifiy.prototype.memberType = 0;
+    S2CModifyMemberRoleNotify.prototype.memberType = 0;
 
     /**
-     * Encodes the specified S2CModifyMemberRoleNotifiy message. Does not implicitly {@link S2CModifyMemberRoleNotifiy.verify|verify} messages.
+     * Encodes the specified S2CModifyMemberRoleNotify message. Does not implicitly {@link S2CModifyMemberRoleNotify.verify|verify} messages.
      * @function encode
-     * @memberof S2CModifyMemberRoleNotifiy
+     * @memberof S2CModifyMemberRoleNotify
      * @static
-     * @param {IS2CModifyMemberRoleNotifiy} m S2CModifyMemberRoleNotifiy message or plain object to encode
+     * @param {IS2CModifyMemberRoleNotify} m S2CModifyMemberRoleNotify message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    S2CModifyMemberRoleNotifiy.encode = function encode(m, w) {
+    S2CModifyMemberRoleNotify.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.memberType != null && Object.hasOwnProperty.call(m, "memberType"))
@@ -5149,20 +5149,20 @@ $root.S2CModifyMemberRoleNotifiy = (function() {
     };
 
     /**
-     * Decodes a S2CModifyMemberRoleNotifiy message from the specified reader or buffer.
+     * Decodes a S2CModifyMemberRoleNotify message from the specified reader or buffer.
      * @function decode
-     * @memberof S2CModifyMemberRoleNotifiy
+     * @memberof S2CModifyMemberRoleNotify
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {S2CModifyMemberRoleNotifiy} S2CModifyMemberRoleNotifiy
+     * @returns {S2CModifyMemberRoleNotify} S2CModifyMemberRoleNotify
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    S2CModifyMemberRoleNotifiy.decode = function decode(r, l) {
+    S2CModifyMemberRoleNotify.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CModifyMemberRoleNotifiy();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CModifyMemberRoleNotify();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -5177,7 +5177,7 @@ $root.S2CModifyMemberRoleNotifiy = (function() {
         return m;
     };
 
-    return S2CModifyMemberRoleNotifiy;
+    return S2CModifyMemberRoleNotify;
 })();
 
 $root.C2SLogout = (function() {

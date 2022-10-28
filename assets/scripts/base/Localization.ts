@@ -209,6 +209,8 @@ export class Localization {
         { name: '00121', ch: '修改俱乐部名称', en: 'Edit club name' },
         { name: '00122', ch: '修改俱乐部简介', en: 'Edit club brief' },
         { name: '00123', ch: '俱乐部简介', en: 'Club brief' },
+        { name: '00124', ch: '请输入金额', en: 'Please input amount' },
+        { name: '00125', ch: '输入不合法！', en: 'Invalid input!' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

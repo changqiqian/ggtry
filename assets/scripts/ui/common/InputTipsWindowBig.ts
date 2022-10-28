@@ -75,6 +75,11 @@ export class InputTipsWindowBig extends BaseUI {
         this.mEditBox.placeholder = _placeholder;
     }
 
+    public SetContent(_content :string)
+    {
+        this.mEditBox.string = _content;
+    }
+
     public SetMaxInput(_maxInput : number)
     {
         this.mEditBox.maxLength = _maxInput;

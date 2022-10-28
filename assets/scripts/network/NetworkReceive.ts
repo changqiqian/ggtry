@@ -357,12 +357,12 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CClubPlayerPointNotify.decode(_data);
             console.log("收到的内容 S2C_ClubPlayerPointNotify  玩家俱乐部积分修改通知===" + JSON.stringify(msg));
-            if(LocalPlayerData.Instance.Data_CurrentEnterClub.mData != null)
+            if(HallData.Instance.Data_ClubEnter.mData)
             {
-                if(_data.clubId == LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
+                if(msg.clubId == LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
                 {
-                    LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint = _data.playerRestAmount;
-                    HallData.Instance.Data_ClubPlayerPointNotify.mData = _data;
+                    LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint = msg.playerRestAmount;
+                    HallData.Instance.Data_ClubPlayerPointNotify.mData = msg;
                 }
             }
         },this);

@@ -59,7 +59,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_S2CRemoveMember : BaseData<S2CRemoveMember> = new BaseData<S2CRemoveMember>(); //收到的移除俱乐部成员消息
     Data_ClubScoreManageUid : BaseData<number> = new BaseData<number>(); //当前想要操作的积分的成员id
     Data_ClubScoreManageUserInfo : BaseData<IClubMember> = new BaseData<IClubMember>(); //当前发放或者回收的俱乐部积分的成员详细信息
-    Data_ShareClubScore :  BaseData<S2CShareClubScore> = new BaseData<S2CShareClubScore>(); //修改玩家俱乐部积分
+    Data_ShareClubScore :  BaseData<S2CShareClubScore> = new BaseData<S2CShareClubScore>(true); //修改玩家俱乐部积分
     Data_ClubPlayerPointNotify:  BaseData<S2CClubPlayerPointNotify> = new BaseData<S2CClubPlayerPointNotify>(true); //俱乐部玩家积分修改通知
     public RecieveNewClubApply(_request : IClubJoinRequest)
     {

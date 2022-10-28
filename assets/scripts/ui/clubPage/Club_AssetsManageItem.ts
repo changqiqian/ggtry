@@ -52,7 +52,16 @@ export class Club_AssetsManageItem extends BaseUI
                 return;
             }
             this.mAmount.string = Tool.ConvertMoney_S2C(_data.playerRestPoint) + "";
+        });
 
+        HallData.Instance.Data_ClubPlayerPointNotify.AddListenner(this,(_data)=>
+        {
+            let clubPoint = LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint;
+            if(this.mData.uid != LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
+            this.mAmount.string = Tool.ConvertMoney_S2C(clubPoint) + "";
         });
     }
     LateInit()

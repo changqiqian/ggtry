@@ -43,9 +43,11 @@ export class Club_PrivateLayer extends BaseUI
     }
     BindUI()
     {
-
         this.mBackBtn.SetClickCallback(()=>
         {
+            LocalPlayerData.Instance.Data_SelfClubInfo.ResetData();
+            LocalPlayerData.Instance.Data_CurrentEnterClub.ResetData();
+            HallData.Instance.Data_ClubEnter.mData = false;
             this.Show(false);
         });
 
@@ -138,6 +140,19 @@ export class Club_PrivateLayer extends BaseUI
             {
                 let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
                 this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(clubId)
+            }
+        });
+
+        HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(currentClubId == _data)
+            {
+                HallData.Instance.Data_ClubEnter.mData = false;
             }
         });
     }

@@ -1,6 +1,7 @@
 import { LocalPlayerData } from "../base/LocalPlayerData";
 import { Singleton } from "../base/Singleton";
 import { UIMgr } from "../base/UIMgr";
+import { Tool } from "../Tool";
 import { Network } from "./Network";
 
 export class NetworkSend extends Singleton<NetworkSend>()
@@ -208,7 +209,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
         let msg = new C2SShareClubScore();
         msg.clubId = _clubId;
         msg.uid = _uid;
-        msg.amount = _amount;
+        msg.amount = Tool.ConvertMoney_C2S(_amount);
         Network.Instance.SendMsg(MessageId.C2S_ShareClubScore , C2SShareClubScore.encode(msg).finish());
         console.log("修改俱乐部成员积分 C2S_ShareClubScore== " + JSON.stringify(msg))
     }
