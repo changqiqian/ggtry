@@ -2,7 +2,8 @@ import { Enum, js } from "cc";
 import { Localization } from "../base/Localization";
 import { LocalPlayerData } from "../base/LocalPlayerData";
 import { Singleton } from "../base/Singleton";
-import { UIMgr } from "../base/UIMgr";
+import { SceneType, UIMgr } from "../base/UIMgr";
+import { GameConfig } from "../GameConfig";
 import { HallData } from "../ui/hall/HallData";
 import { LoginData } from "../ui/login/LoginData";
 import { Network } from "./Network";
@@ -36,13 +37,18 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_Login 登录===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                LocalPlayerData.Instance.Data_Token.mData = msg.token;
+                let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
+                let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
+                let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
+                GameConfig.SaveToken(msg.token,fullPhoneNumber);
                 LoginData.Instance.Data_LoginSuccessData.mData = true;
                 NetworkSend.Instance.GetUserInfo();
             }
             else
             {
+                GameConfig.ClearToken();
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
+                UIMgr.Instance.ChangeScene(SceneType.Login);
             }
         },this);
 

@@ -269,12 +269,12 @@ export class GameConfig
         GameConfig.WriteSimpleData("LOGIN_PHONE", null);
     }
 
-    public static SaveToken(_token:string , _user:string =null)
+    public static SaveToken(_token:string , _phoneNum:string =null)
     {
         GameConfig.LOGIN_TOKEN = _token;
-        GameConfig.LOGIN_PHONE = _user;
+        GameConfig.LOGIN_PHONE = _phoneNum;
         GameConfig.WriteSimpleData("LOGIN_TOKEN", _token);
-        GameConfig.WriteSimpleData("LOGIN_PHONE", _user);
+        GameConfig.WriteSimpleData("LOGIN_PHONE", _phoneNum);
     }
     
     public static SaveBBToggle(_value: boolean) 

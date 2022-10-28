@@ -4,6 +4,7 @@ import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
+import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
 import { TipsWindow } from '../common/TipsWindow';
@@ -37,7 +38,10 @@ export class HallUI extends BaseUI
     {
         LoginData.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
         {
-            
+            if(_data)
+            {
+                
+            }
         });
 
         HallData.Instance.Data_ClubJoinNotify.AddListenner(this,(_data)=>
@@ -53,9 +57,18 @@ export class HallUI extends BaseUI
             })
         });
 
-        CommonNotify.Instance.Data_SocketClose.AddListenner(this,(_data)=>
+
+        CommonNotify.Instance.Data_SocketOpen.AddListenner(this,(_data)=>
         {
-            UIMgr.Instance.ChangeScene(SceneType.Login);  
+            if(GameConfig.LOGIN_TOKEN != null)
+            {
+                console.log("Token 自动登录")
+                NetworkSend.Instance.LoginWithToken(GameConfig.LOGIN_PHONE,GameConfig.LOGIN_TOKEN);
+            }
+            else
+            {
+                UIMgr.Instance.ChangeScene(SceneType.Login);
+            }
         });
     }
     LateInit() 

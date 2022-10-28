@@ -13,7 +13,6 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     {
         LocalPlayerData.ClearInstance();
     }
-    Data_Token : BaseData<string> = new BaseData<string>();
     Data_Uid : BaseData<string> = new BaseData<string>(); //玩家uid
     Data_NickName : BaseData<string> = new BaseData<string>(); //玩家姓名
     Data_AreaCode : BaseData<number> = new BaseData<number>(false , 0); //区号

@@ -1,6 +1,7 @@
 import { LocalPlayerData } from "../base/LocalPlayerData";
 import { Singleton } from "../base/Singleton";
 import { UIMgr } from "../base/UIMgr";
+import { GameConfig } from "../GameConfig";
 import { Tool } from "../Tool";
 import { Network } from "./Network";
 
@@ -74,7 +75,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
     {
         UIMgr.Instance.ShowLoading(true);
         let msg = new C2SGetUserInfo();
-        msg.token = LocalPlayerData.Instance.Data_Token.mData;
+        msg.token = GameConfig.LOGIN_TOKEN;
         Network.Instance.SendMsg(MessageId.C2S_GetUserInfo , C2SGetUserInfo.encode(msg).finish());
         console.log("获取用户数据 C2S_GetUserInfo== " + JSON.stringify(msg))
     }

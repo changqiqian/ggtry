@@ -122,7 +122,9 @@ export class Network  extends Singleton<Network>()
             this.mWebSocket = null;
         }
 
-        if (this.mForceClose == false) {
+        if (this.mForceClose == false) 
+        {
+            UIMgr.Instance.ShowLoading(true, '已断线...');
             CommonNotify.Instance.Data_SocketClose.mData = true;
             UIMgr.Instance.ShowToast(Localization.GetString("00113"));
             setTimeout(this.CreateWS.bind(this), 1000);
