@@ -21,6 +21,8 @@ export class Login_SetUserInfo extends BaseUI
     @property(EditBox) 
     mNickNameEditBox: EditBox = null;
     @property(EditBox) 
+    mSignEditBox: EditBox = null;
+    @property(EditBox) 
     mInviteCodeEditBox: EditBox = null;
     @property(BaseButton) 
     mConfirmBtn: BaseButton = null;
@@ -32,6 +34,7 @@ export class Login_SetUserInfo extends BaseUI
     {
         this.mNickNameEditBox.string = "";
         this.mInviteCodeEditBox.string = "";
+        this.mSignEditBox.string = "";
     }
 
     InitParam() 
@@ -42,6 +45,7 @@ export class Login_SetUserInfo extends BaseUI
     {
         this.mNickNameEditBox.placeholder = Localization.GetString("00138");
         this.mInviteCodeEditBox.placeholder = Localization.GetString("00141");
+        this.mSignEditBox.placeholder = Localization.GetString("00235");
         this.mBackBtn.SetClickCallback(()=>
         {
             this.Show(false);
@@ -62,13 +66,13 @@ export class Login_SetUserInfo extends BaseUI
                 return
             }
 
-            // if(this.mInviteCodeEditBox.string != "")
-            // {
-            //     if(Tool.InviteCodeTest(this.mInviteCodeEditBox.string) == false)
-            //     {
-            //         return;
-            //     }
-            // }
+            if(this.mInviteCodeEditBox.string != "")
+            {
+                if(Tool.InviteCodeTest(this.mInviteCodeEditBox.string) == false)
+                {
+                    return;
+                }
+            }
 
             LocalPlayerData.Instance.Data_SupervisorInviteCode.mData = this.mInviteCodeEditBox.string;
             LocalPlayerData.Instance.Data_NickName.mData = this.mNickNameEditBox.string;

@@ -246,7 +246,7 @@ export class Tool
     
     public static InviteCodeTest(_target : string) : boolean
     {
-        let result = /^d{n}$/.test(_target);
+        let result = /^d{7}$/.test(_target);
         if(result == false)
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00112"));
