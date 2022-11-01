@@ -308,8 +308,18 @@ export class Localization {
         { name: '00220', ch: '搜索俱乐部', en: 'Search club' },
         { name: '00221', ch: '请输入俱乐部ID', en: 'Input club id' },
         { name: '00222', ch: '加入俱乐部', en: 'Join club' },
-
-        
+        { name: '00223', ch: '加入', en: 'Join' },
+        { name: '00224', ch: '俱乐部详情', en: 'Club details' },
+        { name: '00225', ch: '发币记录', en: 'Point records' },
+        { name: '00226', ch: '成员', en: 'Member' },
+        { name: '00227', ch: '查看更多', en: 'More' },
+        { name: '00228', ch: '俱乐部ID', en: 'Club id' },
+        { name: '00229', ch: '联盟', en: 'Union' },
+        { name: '00230', ch: '退出俱乐部', en: 'Exit club' },
+        { name: '00231', ch: '解散俱乐部', en: 'Dismiss club' },
+        { name: '00232', ch: '玩法选择', en: 'Game play' },
+        { name: '00233', ch: '前注玩法', en: 'Ante mode' },
+        { name: '00234', ch: '盲注玩法', en: 'Bliind mode' },
         
         
         { name: '01000', ch: '公告', en: 'Notification' },
