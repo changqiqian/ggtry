@@ -1,5 +1,6 @@
 const jsb = (<any>window).jsb;
 import { _decorator, Component, Node, Label, ProgressBar, Asset, game, sys, debug } from 'cc';
+import { Localization } from '../../base/Localization';
 import { GameConfig } from '../../GameConfig';
 import { LoadingData } from './LoadingData';
 
@@ -31,10 +32,6 @@ export class HotUpdate extends Component {
         this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'SY-remote-asset');
         console.log('Storage path for remote asset : ' + this._storagePath);
 
-        // Setup your own version compare handler, versionA and B is versions in string
-        // if the return value greater than 0, versionA is greater than B,
-        // if the return value equals 0, versionA equals to B,
-        // if the return value smaller than 0, versionA is smaller than B.
         this.versionCompareHandle = function (versionA: string, versionB: string) {
             console.log("JS Custom Version Compare: version A is " + versionA + ', version B is ' + versionB);
             GameConfig.Version = versionB;
@@ -93,7 +90,7 @@ export class HotUpdate extends Component {
             this._am.setMaxConcurrentTask(2);
         }
         /***********************************************检测是否有更新版本***********************************/
-        LoadingData.Instance.Data_HotUpdateTips.mData = '检测是否有更新版本';
+        LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10001");
         LoadingData.Instance.Data_HotUpdateProgress.mData = 0;
         this.scheduleOnce(()=>{
             this.checkUpdate();
@@ -105,23 +102,23 @@ export class HotUpdate extends Component {
         console.log('Code: ' + event.getEventCode());
         switch (event.getEventCode()) {
             case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
-                LoadingData.Instance.Data_HotUpdateTips.mData = '本地没有找到manifest文件，跳过热更新';
+                LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10002");
                 LoadingData.Instance.Data_HotUpdateEnd.mData = true;
                 console.log("checkCb","本地没有找到manifest文件，跳过热更新");
                 break;
             case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
             case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
-                LoadingData.Instance.Data_HotUpdateTips.mData = '下载远端manifest文件失败，跳过热更新';
+                LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10003");
                 LoadingData.Instance.Data_HotUpdateEnd.mData = true;
                 console.log("checkCb","下载远端manifest文件失败，跳过热更新");
                 break;
             case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
-                LoadingData.Instance.Data_HotUpdateTips.mData = '已是最新版本';
+                LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10004");
                 LoadingData.Instance.Data_HotUpdateEnd.mData = true;
                 console.log("checkCb","已是最新版本");
                 break;
             case jsb.EventAssetsManager.NEW_VERSION_FOUND:
-                LoadingData.Instance.Data_HotUpdateTips.mData = '发现新版本，准备更新...';
+                LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10005");
                 LoadingData.Instance.Data_HotUpdateProgress.mData = 0;
                 console.log("checkCb","发现新版本");
                 this.scheduleOnce(()=>{
@@ -143,7 +140,7 @@ export class HotUpdate extends Component {
         console.log("updateCb + event.getEventCode()");
         switch (event.getEventCode()) {
             case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
-                LoadingData.Instance.Data_HotUpdateTips.mData = '本地没有找到manifest文件';
+                LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10006");
                 console.log("本地没有找到manifest文件");
                 failed = true;
                 break;
@@ -161,7 +158,7 @@ export class HotUpdate extends Component {
                 var msg = event.getMessage();
                 if (msg) 
                 {
-                    LoadingData.Instance.Data_HotUpdateTips.mData = 'Updated file: ' + event.getDownloadedFiles() + ' / ' + event.getTotalFiles();
+                    LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10007");
                     //this.panel.info.string = 'Updated file: ' + msg;
                     // cc.log(event.getPercent()/100 + '% : ' + msg);
                 }
@@ -174,21 +171,21 @@ export class HotUpdate extends Component {
                 break;
             case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
                 //this.panel.info.string = 'Already up to date with the latest remote version.';
-                LoadingData.Instance.Data_HotUpdateTips.mData = '已是最新版本';
+                LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10004");
                 LoadingData.Instance.Data_HotUpdateEnd.mData = true;
                 console.log("已是最新版本");
                 failed = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_FINISHED:
                 //this.panel.info.string = 'Update finished. ' + event.getMessage();
-                LoadingData.Instance.Data_HotUpdateTips.mData = '更新完毕';
+                LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10008");
                 console.log("更新完毕");
                 needRestart = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_FAILED:
                 //this.panel.info.string = 'Update failed. ' + event.getMessage();
                 //this.panel.retryBtn.active = true;
-                LoadingData.Instance.Data_HotUpdateTips.mData = '更新失败';
+                LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10009");
                 console.log("更新失败");
                 this._updating = false;
                 this._canRetry = true;
@@ -196,7 +193,7 @@ export class HotUpdate extends Component {
                 break;
             case jsb.EventAssetsManager.ERROR_UPDATING:
                 //this.panel.info.string = 'Asset update error: ' + event.getAssetId() + ', ' + event.getMessage();
-                LoadingData.Instance.Data_HotUpdateTips.mData = '更新失败==' +  event.getMessage();
+                LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10009");
                 console.log('更新失败==' +  event.getMessage());
                 break;
             case jsb.EventAssetsManager.ERROR_DECOMPRESS:
@@ -236,7 +233,7 @@ export class HotUpdate extends Component {
         if (!this._updating && this._canRetry) 
         {
             this._canRetry = false;
-            LoadingData.Instance.Data_HotUpdateTips.mData = '下载更新失败的资源';
+            LoadingData.Instance.Data_HotUpdateTips.mData = Localization.GetString("10010");
             console.log("下载更新失败的资源..'");
             this._am.downloadFailedAssets();
         }
@@ -250,9 +247,6 @@ export class HotUpdate extends Component {
         }
         if (this._am.getState() === jsb.AssetsManager.State.UNINITED) 
         {
-            console.log("this.manifestUrl===" + this.manifestUrl)
-            console.log("this.manifestUrl.nativeUrl.length===" + this.manifestUrl.nativeUrl.length)
-            console.log("this.manifestUrl.nativeUrl===" + this.manifestUrl.nativeUrl)
             var url = this.manifestUrl.nativeUrl;
             this._am.loadLocalManifest(url);
         }
@@ -270,16 +264,13 @@ export class HotUpdate extends Component {
     hotUpdate() {
         if (this._am && !this._updating) 
         {
-            console.log("1111111")
             this._am.setEventCallback(this.updateCb.bind(this));
 
             if (this._am.getState() === jsb.AssetsManager.State.UNINITED) 
             {
-                console.log("2222222")
                 var url = this.manifestUrl.nativeUrl;
                 this._am.loadLocalManifest(url);
             }
-            console.log("3333333")
             this._failCount = 0;
             this._am.update();
             this._updating = true;

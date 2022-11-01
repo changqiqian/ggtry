@@ -42,6 +42,7 @@ export class Club_AssetsManage extends BaseUI
     }
     BindUI()
     {
+        this.mEditBox.placeholder = Localization.GetString("00163");
         this.mCloseBtn.SetClickCallback(()=>
         {
             this.CloseAsWindow();

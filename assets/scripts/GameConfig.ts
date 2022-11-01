@@ -4,10 +4,9 @@ import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 export class GameConfig
 {
     public static DebugMode =  true;
-    public static PrivateIP = "192.168.68.100:9001"; //私人电脑ip 可选
     public static DevelopIP = "52.77.219.158:9501"; //开发环境ip 可选
     public static TestIP = "52.77.219.158:9601"; //测试环境ip 可选
-    public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip 上面三个选项选择后，会赋值给UsingIp
+    public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip 上面选项选择后，会赋值给UsingIp
     public static SeverUrl = "ws://13.229.222.39:9008/pokerlife"; //完整的地址长这样
     public static SetSeverUrl(_ip : string)
     {
@@ -15,7 +14,7 @@ export class GameConfig
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
     }
     //发布的版本号
-    public static Version = "1.2.5"
+    public static Version = "1.3.3"
 
       
     public static LOGIN_TOKEN;
@@ -24,8 +23,8 @@ export class GameConfig
     public static WebberAddr= "http://18.142.237.115:9487"; //打开收银台web
 
 
-    public static ClubLogoNumber = 8;
-    public static ClubStampNumber = 4;
+    public static ClubLogoNumber = 8; //俱乐部logo数量
+    public static ClubStampNumber = 4; //俱乐部封面数量
 
     public static AreaCodeList=[
         {"name":"CountryName0", "areaCode": "+852"},

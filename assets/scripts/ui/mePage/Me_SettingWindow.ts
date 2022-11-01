@@ -30,8 +30,9 @@ export class SettingWindow extends BaseUI {
             this.CloseAsWindow();
         });
         this.mDeleteAccountBtn.SetClickCallback(() => {
-            UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect');
-            this.CloseAsWindow();
+            UIMgr.Instance.ShowToast("功能开发中");
+            // UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect');
+            // this.CloseAsWindow();
         });
         this.mSwitchAccountBtn.SetClickCallback(() => {
             GameConfig.ClearToken();
@@ -39,8 +40,9 @@ export class SettingWindow extends BaseUI {
             UIMgr.Instance.ChangeScene(SceneType.Login);
         });
         this.mEditPasswordBtn.SetClickCallback(() => {
-            UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_SettingWindow', false);
-            this.ShowLayer('common', 'prefab/ForgetPwd');
+            UIMgr.Instance.ShowToast("功能开发中");
+            // UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_SettingWindow', false);
+            // this.ShowLayer('common', 'prefab/ForgetPwd');
         });
 
         this.mBBModeToggle.SetClickCallback((_value)=>

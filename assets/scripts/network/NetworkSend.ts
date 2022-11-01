@@ -43,7 +43,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
         UIMgr.Instance.ShowLoading(true);
         let msg = new C2SLogin();
         msg.loginType = LoginType.LoginType_Token;
-        msg.phoneNumber = _phone;
+        //msg.phoneNumber = _phone;
         msg.token = _token;
         Network.Instance.SendMsg(MessageId.C2S_Login , C2SLogin.encode(msg).finish());
         console.log("Token登录 C2S_Login== " + JSON.stringify(msg))
@@ -214,6 +214,35 @@ export class NetworkSend extends Singleton<NetworkSend>()
         Network.Instance.SendMsg(MessageId.C2S_ShareClubScore , C2SShareClubScore.encode(msg).finish());
         console.log("修改俱乐部成员积分 C2S_ShareClubScore== " + JSON.stringify(msg))
     }
+    
+    public ModifyMemberRole(_clubId : string , _uid : string , _memberType : ClubMemberType )
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SModifyMemberRole();
+        msg.clubId = _clubId;
+        msg.uid = _uid;
+        msg.memberType = _memberType;
+        Network.Instance.SendMsg(MessageId.C2S_ModifyMemberRole , C2SModifyMemberRole.encode(msg).finish());
+        console.log("修改俱乐部成员权限 C2S_ModifyMemberRole== " + JSON.stringify(msg))
+    }
+
+    public ChangeUserInfo(_nickName : string , _head : string )
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SChangeUserInfo();
+        if(_nickName != null)
+        {
+            msg.nickName = _nickName;
+        }
+        if(_head != null)
+        {
+            msg.head = _head;
+        }
+
+        Network.Instance.SendMsg(MessageId.C2S_ChangeUserInfo , C2SChangeUserInfo.encode(msg).finish());
+        console.log("修改头像或昵称 C2S_ChangeUserInfo== " + JSON.stringify(msg))
+    }
+
     
 }
 

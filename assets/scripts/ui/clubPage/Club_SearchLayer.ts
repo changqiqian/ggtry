@@ -30,6 +30,7 @@ export class Club_SearchLayer extends BaseUI
     }
     BindUI()
     {
+        this.mEditBox.placeholder = Localization.GetString("00221");
         this.mCloseBtn.SetClickCallback(()=>
         {
             this.CloseAsWindow();

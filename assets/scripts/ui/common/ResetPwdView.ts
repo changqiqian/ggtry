@@ -43,6 +43,9 @@ export class ResetPwdView extends BaseUI
     }
     BindUI() 
     {
+        this.mPwdEditbox.placeholder = Localization.GetString("00004");
+        this.mRePwdEditbox.placeholder = Localization.GetString("00157");
+        
         this.mBackBtn.SetClickCallback(()=>
         {
             this.Show(false)

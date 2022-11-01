@@ -36,12 +36,32 @@ export class Club_CreateBasicOption extends BaseUI
         {
             let currentToggle = this.mCurrencyModeToggle.children[i].getComponent(ToggleBtn);
             currentToggle.SetDataNotify(HallData.Instance.Data_ClubCreateGameCurrencyType,i);  
+
+
+            if(i == GameCurrencyType.GameCurrencyType_Coin)
+            {
+                currentToggle.SetTitle(Localization.GetString("00173"));
+            }
+            else if(i == GameCurrencyType.GameCurrencyType_Point)
+            {
+                currentToggle.SetTitle(Localization.GetString("00172"));
+            }
         }
 
         for(let i = 0 ; i < this.mTaxToggle.children.length ; i++)
         {
             let currentToggle = this.mTaxToggle.children[i].getComponent(ToggleBtn);
             currentToggle.SetDataNotify(HallData.Instance.Data_ClubCreateGameTaxType,i);  
+
+            if(i == GameTaxType.GameTaxType_EveryRound)
+            {
+                currentToggle.SetTitle(Localization.GetString("00174"));
+            }
+            else if(i == GameTaxType.GameTaxType_WholeGameEnd)
+            {
+                currentToggle.SetTitle(Localization.GetString("00175"));
+            }
+            
         }
     }
     RegDataNotify()

@@ -60,7 +60,10 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubScoreManageUid : BaseData<number> = new BaseData<number>(); //当前想要操作的积分的成员id
     Data_ClubScoreManageUserInfo : BaseData<IClubMember> = new BaseData<IClubMember>(); //当前发放或者回收的俱乐部积分的成员详细信息
     Data_ShareClubScore :  BaseData<S2CShareClubScore> = new BaseData<S2CShareClubScore>(true); //修改玩家俱乐部积分
-    Data_ClubPlayerPointNotify:  BaseData<S2CClubPlayerPointNotify> = new BaseData<S2CClubPlayerPointNotify>(true); //俱乐部玩家积分修改通知
+    Data_ClubUpdateSelfData:  BaseData<boolean> = new BaseData<boolean>(true); //更新自己的俱乐部数据
+    Data_S2CModifyMemberRole:  BaseData<S2CModifyMemberRole> = new BaseData<S2CModifyMemberRole>(true); //修改俱乐部成员权限返回
+
+    //
     public RecieveNewClubApply(_request : IClubJoinRequest)
     {
         let clubIndex = this.Data_ClubApplyingInfo.mData.findIndex((_item) => _item.clubInfo.id === _request.clubInfo.id);

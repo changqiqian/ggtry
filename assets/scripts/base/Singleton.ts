@@ -67,8 +67,6 @@ export function SingletonBaseNotify<T>()
             props.forEach((prop)=>
             {
                 let str = prop.toString();
-                // console.log("str==" + str);
-                // console.log("this[str]==" + this[str]);
                 if(this[str] != null)
                 {
                     this[str].RemoveListennerByTarget(_target);
@@ -97,3 +95,43 @@ export function SingletonBaseNotify<T>()
 }
 
 
+export class MultipleNotify 
+{
+    public constructor() 
+    {
+
+    }
+
+
+    public RemoveAllDataListenner()
+    {
+        var props = Object.keys(this);
+        props.forEach((prop)=>
+        {
+            let str = prop.toString();
+            this[str].RemoveAllListenner();
+        });
+    }
+    public RemoveAllDataListennerByTarget(_target : any)
+    {
+        var props = Object.keys(this);
+        props.forEach((prop)=>
+        {
+            let str = prop.toString();
+            if(this[str] != null)
+            {
+                this[str].RemoveListennerByTarget(_target);
+            }
+        });
+    }
+
+    public Clear()
+    {
+        var props = Object.keys(this);
+        props.forEach((prop)=>
+        {
+            let str = prop.toString();
+            this[str].Clear();
+        });
+    }
+}

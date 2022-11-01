@@ -33,6 +33,7 @@ export class AreaCodeView extends BaseUI {
     }
     BindUI() 
     {
+        this.mSearchEditBox.placeholder = Localization.GetString("00152");
         this.node.on(Node.EventType.TOUCH_END,this.TouchEmptyBG.bind(this),this);
         for(let i = 0 ; i < GameConfig.AreaCodeList.length ; i++)
         {

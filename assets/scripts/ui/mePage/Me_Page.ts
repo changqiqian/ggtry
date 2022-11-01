@@ -20,7 +20,6 @@ export class Me_Page extends BaseUI
     RegDataNotify() 
     {
 
-
         HallData.Instance.Data_SubPage.AddListenner(this , (_data)=>
         {
             this.Show(_data == Hall_SubPage.Me);

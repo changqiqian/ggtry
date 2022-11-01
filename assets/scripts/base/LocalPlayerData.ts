@@ -30,6 +30,19 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_SelfClubInfo : BaseData<IClubMember> = new BaseData<IClubMember>();//进入俱乐部后，我的俱乐部个人信息
     Data_CurrentEnterClub : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>();//当前进入的俱乐部
     Data_UpdateCurrentClub : BaseData<boolean> = new BaseData<boolean>(true); //刷新当前俱乐部数据
+
+
+    UpdateUserInfo(_userInfo : UserInfo)
+    {
+        LocalPlayerData.Instance.Data_Uid.mData = _userInfo.uid;
+        LocalPlayerData.Instance.Data_NickName.mData = _userInfo.nickName;
+        LocalPlayerData.Instance.Data_Head.mData = _userInfo.head;
+        LocalPlayerData.Instance.Data_Coin.mData = _userInfo.coin;
+        LocalPlayerData.Instance.Data_Diamond.mData = _userInfo.diamond;
+        LocalPlayerData.Instance.Data_AccountLevel.mData = _userInfo.accountLevel;
+        LocalPlayerData.Instance.Data_AccountStatus.mData = _userInfo.accountStatus;
+    }
+
     //自定义设置
     CustomerInit()
     {

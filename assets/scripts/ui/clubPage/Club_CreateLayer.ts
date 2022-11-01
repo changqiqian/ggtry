@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, EditBox, Label, Sprite } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
@@ -38,6 +39,9 @@ export class Club_CreateLayer extends BaseUI
     {
         HallData.Instance.Data_ClubLogoIndex.mData = 0;
         HallData.Instance.Data_ClubStampIndex.mData = 0;
+
+        this.mNameEditBox.string = "";
+        this.mProfileEditBox.string = "";
     }
 
     InitParam()
@@ -46,6 +50,8 @@ export class Club_CreateLayer extends BaseUI
     }
     BindUI()
     {
+        this.mNameEditBox.placeholder = Localization.GetString("00192");
+        this.mProfileEditBox.placeholder = Localization.GetString("00193");
         this.mCloseBtn.SetClickCallback(()=>
         {
             this.CloseAsWindow();

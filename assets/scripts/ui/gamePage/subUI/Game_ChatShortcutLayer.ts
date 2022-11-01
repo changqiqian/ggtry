@@ -39,10 +39,10 @@ export class Game_ChatShortcutLayer extends BaseUI
     RegDataNotify()
     {
 
-        GameData.Instance.Data_ChatingSubLayer.AddListenner(this , (_data)=>
-        {
-            this.node.active = _data == Game_ChattingSubLayer.ChatHistory
-        });
+        // GameData.Instance.Data_ChatingSubLayer.AddListenner(this , (_data)=>
+        // {
+        //     this.node.active = _data == Game_ChattingSubLayer.ChatHistory
+        // });
     }
     LateInit()
     {

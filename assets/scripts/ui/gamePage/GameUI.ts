@@ -17,7 +17,8 @@ export class GameUI extends BaseUI
 
     InitParam() 
     {
-      
+
+        
     }
     BindUI() 
     {

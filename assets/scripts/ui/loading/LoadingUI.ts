@@ -71,7 +71,7 @@ export class LoadingUI extends BaseUI
 
         LoadingData.Instance.Data_HotUpdateProgress.AddListenner(this,(_data)=>
         {
-            this.mPercent.string = _data.toFixed(2) * 100 + "%";
+            this.mPercent.string = (_data * 100).toFixed(2) + "%";
             this.mProgress.fillRange = _data;
 
         });

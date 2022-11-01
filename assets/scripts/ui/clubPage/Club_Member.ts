@@ -21,7 +21,8 @@ export class Club_Member extends BaseUI {
     mRemoveBtn: BaseButton = null;
     @property(BaseButton) 
     mManagerBtn: BaseButton = null;
-    
+    @property(Label) 
+    mRole: Label = null;
     mMember : IClubMember = null;
     InitParam()
     {
@@ -34,8 +35,7 @@ export class Club_Member extends BaseUI {
             this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
-                let tips = Localization.GetString("00118");
-                tips = Localization.ReplaceString(tips,this.mMember.uid)
+                let tips = Localization.ReplaceString("00118",this.mMember.uid)
                 tempScript.SetTips(tips);
                 tempScript.SetCallback(()=>
                 {
@@ -50,7 +50,15 @@ export class Club_Member extends BaseUI {
 
         this.mManagerBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowToast("功能开发中");
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(this.mMember.memberType == ClubMemberType.ClubAccountType_Normal)
+            {
+                NetworkSend.Instance.ModifyMemberRole(clubId,this.mMember.uid,ClubMemberType.ClubAccountType_Manager);
+            }
+            else if(this.mMember.memberType == ClubMemberType.ClubAccountType_Manager)
+            {  
+                NetworkSend.Instance.ModifyMemberRole(clubId,this.mMember.uid,ClubMemberType.ClubAccountType_Normal);
+            }
         });
         
     }
@@ -75,6 +83,44 @@ export class Club_Member extends BaseUI {
                 this.DeleteSelf();
             }
         });
+
+        HallData.Instance.Data_S2CModifyMemberRole.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(clubId != _data.clubId)
+            {
+                return;
+            }
+
+            if(this.mMember.uid != _data.uid)
+            {
+                return;
+            }
+
+            this.mMember.memberType = _data.memberType;
+            this.UpdateManagerBtn();
+        });
+
+        HallData.Instance.Data_ClubUpdateSelfData.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            if(this.mMember.uid != LocalPlayerData.Instance.Data_SelfClubInfo.mData.uid)
+            {
+                return;
+            }
+
+            this.mMember = LocalPlayerData.Instance.Data_SelfClubInfo.mData;
+            this.UpdateManagerBtn();
+        });
+        
     }
     LateInit()
     {
@@ -91,28 +137,46 @@ export class Club_Member extends BaseUI {
         this.mPlayerInfo.SetName(this.mMember.nickName);
         this.mPlayerInfo.SetLocalHead(Number(this.mMember.head));
         this.mID.string = this.mMember.uid;
+        this.UpdateManagerBtn();
+    }
+
+    UpdateManagerBtn()
+    {
         let selfIsClubOwner = 
-            LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == ClubMemberType.ClubAccountType_Owner;
+        LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == ClubMemberType.ClubAccountType_Owner;
+        let isSelf = this.mMember.uid == LocalPlayerData.Instance.Data_Uid.mData;
 
-        let isSelf = _member.uid == LocalPlayerData.Instance.Data_Uid.mData;
-
-        if(selfIsClubOwner)
+        if(selfIsClubOwner && isSelf == false)
         {
-            if(isSelf)
+            this.mRemoveBtn.node.active = true;
+            this.mManagerBtn.node.active = true;
+            this.mRole.node.active = false;
+            if(this.mMember.memberType == ClubMemberType.ClubAccountType_Normal)
             {
-                this.mRemoveBtn.node.active = false;
-                this.mManagerBtn.node.active = false;
+                this.mManagerBtn.SetTitle(Localization.GetString("00126"));
             }
-            else
-            {
-                this.mRemoveBtn.node.active = true;
-                this.mManagerBtn.node.active = true;
+            else if(this.mMember.memberType == ClubMemberType.ClubAccountType_Manager)
+            {  
+                this.mManagerBtn.SetTitle(Localization.GetString("00127"));
             }
         }
         else
         {
             this.mRemoveBtn.node.active = false;
             this.mManagerBtn.node.active = false;
+            this.mRole.node.active = true;
+            if(this.mMember.memberType == ClubMemberType.ClubAccountType_Normal)
+            {
+                this.mRole.string = "";
+            }
+            else if(this.mMember.memberType == ClubMemberType.ClubAccountType_Manager)
+            {  
+                this.mRole.string = Localization.GetString("00128");
+            }
+            else if(this.mMember.memberType == ClubMemberType.ClubAccountType_Owner)
+            {  
+                this.mRole.string = Localization.GetString("00129");
+            }
         }
     }
 }

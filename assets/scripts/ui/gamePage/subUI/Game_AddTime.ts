@@ -51,23 +51,6 @@ export class Game_AddTime extends BaseUI
     SetButtonTitle(_title : string)
     {
         this.mDiamond.active = false;
-        if(_title == "延时已上限")
-        {
-            this.node.active = false;
-            return;
-        }
-        if(_title == "key10141")
-        {
-            this.mAddBtn.SetTitle(Localization.GetString("key10141"));
-            return;
-        }
-
-        if(_title == "Insufficient diamonds")
-        {
-            this.mAddBtn.SetTitle(Localization.GetString("00082"));   
-            return;
-        }
-
         this.mDiamond.active = true;
         this.mAddBtn.SetTitle(_title);
     }

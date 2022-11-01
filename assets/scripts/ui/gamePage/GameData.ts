@@ -1,15 +1,11 @@
 import { _decorator} from 'cc';
 import { BaseData } from '../../base/BaseData';
 import { DataNotify } from '../../base/DataNotify';
-import { SingletonBaseNotify } from '../../base/Singleton';
+import { MultipleNotify, SingletonBaseNotify } from '../../base/Singleton';
 import { Network } from '../../network/Network';
 
-export class GameData extends SingletonBaseNotify<GameData>()
+export class GameData extends MultipleNotify
 {
-    protected ResetInstance() 
-    {
-        GameData.ClearInstance();
-    }
 
     //UI控制
     Data_ChatingSubLayer :  BaseData<Game_ChattingSubLayer> = new BaseData<Game_ChattingSubLayer>();  //聊天页面子页面

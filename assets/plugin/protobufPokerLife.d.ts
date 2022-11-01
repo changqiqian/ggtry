@@ -585,6 +585,132 @@ export class C2SModifyMemberRole implements IC2SModifyMemberRole {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SModifyMemberRole;
 }
 
+/** Properties of a C2SCreateClubGame. */
+export interface IC2SCreateClubGame {
+
+    /** C2SCreateClubGame clubId */
+    clubId?: (string|null);
+
+    /** C2SCreateClubGame gameConfig */
+    gameConfig?: (IClubGameConfig|null);
+}
+
+/** Represents a C2SCreateClubGame. */
+export class C2SCreateClubGame implements IC2SCreateClubGame {
+
+    /**
+     * Constructs a new C2SCreateClubGame.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SCreateClubGame);
+
+    /** C2SCreateClubGame clubId. */
+    public clubId: string;
+
+    /** C2SCreateClubGame gameConfig. */
+    public gameConfig?: (IClubGameConfig|null);
+
+    /**
+     * Encodes the specified C2SCreateClubGame message. Does not implicitly {@link C2SCreateClubGame.verify|verify} messages.
+     * @param m C2SCreateClubGame message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SCreateClubGame, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SCreateClubGame message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SCreateClubGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SCreateClubGame;
+}
+
+/** Properties of a C2SGetClubGameList. */
+export interface IC2SGetClubGameList {
+
+    /** C2SGetClubGameList clubId */
+    clubId?: (string|null);
+}
+
+/** Represents a C2SGetClubGameList. */
+export class C2SGetClubGameList implements IC2SGetClubGameList {
+
+    /**
+     * Constructs a new C2SGetClubGameList.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SGetClubGameList);
+
+    /** C2SGetClubGameList clubId. */
+    public clubId: string;
+
+    /**
+     * Encodes the specified C2SGetClubGameList message. Does not implicitly {@link C2SGetClubGameList.verify|verify} messages.
+     * @param m C2SGetClubGameList message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SGetClubGameList, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SGetClubGameList message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SGetClubGameList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetClubGameList;
+}
+
+/** Properties of a C2SDismissClubGame. */
+export interface IC2SDismissClubGame {
+
+    /** C2SDismissClubGame clubId */
+    clubId?: (string|null);
+
+    /** C2SDismissClubGame gameId */
+    gameId?: (string|null);
+}
+
+/** Represents a C2SDismissClubGame. */
+export class C2SDismissClubGame implements IC2SDismissClubGame {
+
+    /**
+     * Constructs a new C2SDismissClubGame.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SDismissClubGame);
+
+    /** C2SDismissClubGame clubId. */
+    public clubId: string;
+
+    /** C2SDismissClubGame gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2SDismissClubGame message. Does not implicitly {@link C2SDismissClubGame.verify|verify} messages.
+     * @param m C2SDismissClubGame message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SDismissClubGame, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SDismissClubGame message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SDismissClubGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SDismissClubGame;
+}
+
 /** Properties of a ClubDetailsInfo. */
 export interface IClubDetailsInfo {
 
@@ -837,6 +963,56 @@ export class ClubJoinRequest implements IClubJoinRequest {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubJoinRequest;
+}
+
+/** Properties of a ClubGameInfo. */
+export interface IClubGameInfo {
+
+    /** ClubGameInfo clubId */
+    clubId?: (string|null);
+
+    /** ClubGameInfo gameId */
+    gameId?: (string|null);
+
+    /** ClubGameInfo gameConfig */
+    gameConfig?: (IClubGameConfig|null);
+}
+
+/** Represents a ClubGameInfo. */
+export class ClubGameInfo implements IClubGameInfo {
+
+    /**
+     * Constructs a new ClubGameInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IClubGameInfo);
+
+    /** ClubGameInfo clubId. */
+    public clubId: string;
+
+    /** ClubGameInfo gameId. */
+    public gameId: string;
+
+    /** ClubGameInfo gameConfig. */
+    public gameConfig?: (IClubGameConfig|null);
+
+    /**
+     * Encodes the specified ClubGameInfo message. Does not implicitly {@link ClubGameInfo.verify|verify} messages.
+     * @param m ClubGameInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IClubGameInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a ClubGameInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns ClubGameInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubGameInfo;
 }
 
 /** Properties of a ClubGameConfig. */
@@ -1846,6 +2022,111 @@ export class S2CModifyMemberRole implements IS2CModifyMemberRole {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CModifyMemberRole;
 }
 
+/** Represents a S2CCreateClubGame. */
+export class S2CCreateClubGame implements IS2CCreateClubGame {
+
+    /**
+     * Constructs a new S2CCreateClubGame.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCreateClubGame);
+
+    /** S2CCreateClubGame result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CCreateClubGame gameInfo. */
+    public gameInfo?: (IClubGameInfo|null);
+
+    /**
+     * Encodes the specified S2CCreateClubGame message. Does not implicitly {@link S2CCreateClubGame.verify|verify} messages.
+     * @param m S2CCreateClubGame message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCreateClubGame, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCreateClubGame message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCreateClubGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCreateClubGame;
+}
+
+/** Represents a S2CGetClubGameList. */
+export class S2CGetClubGameList implements IS2CGetClubGameList {
+
+    /**
+     * Constructs a new S2CGetClubGameList.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CGetClubGameList);
+
+    /** S2CGetClubGameList result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CGetClubGameList gameInfos. */
+    public gameInfos: IClubGameInfo[];
+
+    /**
+     * Encodes the specified S2CGetClubGameList message. Does not implicitly {@link S2CGetClubGameList.verify|verify} messages.
+     * @param m S2CGetClubGameList message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CGetClubGameList, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CGetClubGameList message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CGetClubGameList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetClubGameList;
+}
+
+/** Represents a S2CDismissClubGame. */
+export class S2CDismissClubGame implements IS2CDismissClubGame {
+
+    /**
+     * Constructs a new S2CDismissClubGame.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CDismissClubGame);
+
+    /** S2CDismissClubGame result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CDismissClubGame clubId. */
+    public clubId: string;
+
+    /** S2CDismissClubGame gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CDismissClubGame message. Does not implicitly {@link S2CDismissClubGame.verify|verify} messages.
+     * @param m S2CDismissClubGame message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CDismissClubGame, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CDismissClubGame message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CDismissClubGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CDismissClubGame;
+}
+
 /** Represents a S2CClubJoinNotify. */
 export class S2CClubJoinNotify implements IS2CClubJoinNotify {
 
@@ -2056,6 +2337,9 @@ export class S2CModifyMemberRoleNotify implements IS2CModifyMemberRoleNotify {
      */
     constructor(p?: IS2CModifyMemberRoleNotify);
 
+    /** S2CModifyMemberRoleNotify clubId. */
+    public clubId: string;
+
     /** S2CModifyMemberRoleNotify memberType. */
     public memberType: ClubMemberType;
 
@@ -2076,6 +2360,71 @@ export class S2CModifyMemberRoleNotify implements IS2CModifyMemberRoleNotify {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CModifyMemberRoleNotify;
+}
+
+/** Represents a S2CCreateClubGameNotify. */
+export class S2CCreateClubGameNotify implements IS2CCreateClubGameNotify {
+
+    /**
+     * Constructs a new S2CCreateClubGameNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCreateClubGameNotify);
+
+    /** S2CCreateClubGameNotify gameInfo. */
+    public gameInfo?: (IClubGameInfo|null);
+
+    /**
+     * Encodes the specified S2CCreateClubGameNotify message. Does not implicitly {@link S2CCreateClubGameNotify.verify|verify} messages.
+     * @param m S2CCreateClubGameNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCreateClubGameNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCreateClubGameNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCreateClubGameNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCreateClubGameNotify;
+}
+
+/** Represents a S2CDismissClubGameNotify. */
+export class S2CDismissClubGameNotify implements IS2CDismissClubGameNotify {
+
+    /**
+     * Constructs a new S2CDismissClubGameNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CDismissClubGameNotify);
+
+    /** S2CDismissClubGameNotify clubId. */
+    public clubId: string;
+
+    /** S2CDismissClubGameNotify gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CDismissClubGameNotify message. Does not implicitly {@link S2CDismissClubGameNotify.verify|verify} messages.
+     * @param m S2CDismissClubGameNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CDismissClubGameNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CDismissClubGameNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CDismissClubGameNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CDismissClubGameNotify;
 }
 
 /** Represents a C2SLogout. */
@@ -2217,11 +2566,8 @@ export class S2CChangeUserInfo implements IS2CChangeUserInfo {
     /** S2CChangeUserInfo result. */
     public result?: (ICommonResult|null);
 
-    /** S2CChangeUserInfo nickName. */
-    public nickName: string;
-
-    /** S2CChangeUserInfo head. */
-    public head: string;
+    /** S2CChangeUserInfo userInfo. */
+    public userInfo?: (IUserInfo|null);
 
     /**
      * Encodes the specified S2CChangeUserInfo message. Does not implicitly {@link S2CChangeUserInfo.verify|verify} messages.
@@ -2559,7 +2905,9 @@ export enum MessageId {
     MSG_HallBegin = 2001,
     C2S_Logout = 2002,
     C2S_GetUserInfo = 2003,
+    C2S_ChangeUserInfo = 2004,
     S2C_GetUserInfo = 3000,
+    S2C_ChangeUserInfo = 3001,
     MSG_HallEnd = 3500,
     MSG_ClubBegin = 4001,
     C2S_CreateClub = 4002,
@@ -2575,6 +2923,9 @@ export enum MessageId {
     C2S_ModifyClubInfo = 4012,
     C2S_ShareClubScore = 4013,
     C2S_ModifyMemberRole = 4014,
+    C2S_CreateClubGame = 4015,
+    C2S_GetClubGameList = 4016,
+    C2S_DismissClubGame = 4017,
     S2C_CreateClub = 4502,
     S2C_GetClubInfos = 4503,
     S2C_EnterClub = 4504,
@@ -2588,6 +2939,9 @@ export enum MessageId {
     S2C_ModifyClubInfo = 4512,
     S2C_ShareClubScore = 4513,
     S2C_ModifyMemberRole = 4514,
+    S2C_CreateClubGame = 4515,
+    S2C_GetClubGameList = 4516,
+    S2C_DismissClubGame = 4517,
     S2C_ClubJoinNotify = 4610,
     S2C_JoinClubNotify = 4611,
     S2C_RemoveNotify = 4612,
@@ -2595,6 +2949,8 @@ export enum MessageId {
     S2C_ClubTotalPointNotify = 4614,
     S2C_ClubPlayerPointNotify = 4615,
     S2C_ModifyMemberRoleNotify = 4616,
+    S2C_CreateClubGameNotify = 4617,
+    S2C_DismissClubGameNotify = 4618,
     MSG_ClubEnd = 5000
 }
  

@@ -67,7 +67,7 @@ export abstract class BaseUI extends Component {
         LoadingData.Instance.RemoveAllDataListennerByTarget(this);
         LoginData.Instance.RemoveAllDataListennerByTarget(this);
         HallData.Instance.RemoveAllDataListennerByTarget(this);
-        GameData.Instance.RemoveAllDataListennerByTarget(this);
+        //GameData.Instance.RemoveAllDataListennerByTarget(this);
         LocalPlayerData.Instance.RemoveAllDataListennerByTarget(this);
         CommonNotify.Instance.RemoveAllDataListennerByTarget(this);
         this.StopSecondsTimer();

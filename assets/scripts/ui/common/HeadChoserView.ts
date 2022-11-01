@@ -14,10 +14,6 @@ export class HeadChoserView extends BaseUI
     @property(Node) 
     mHeadLayout: Node = null;
     @property(BaseButton) 
-    mCameraBtn: BaseButton = null;
-    @property(BaseButton) 
-    mPhotoLibrayBtn: BaseButton = null;
-    @property(BaseButton) 
     mCancelBtn: BaseButton = null;
 
     onEnable()
@@ -51,16 +47,6 @@ export class HeadChoserView extends BaseUI
             });
 
         }
-
-        this.mCameraBtn.SetClickCallback(()=>
-        {
-            UIMgr.Instance.ShowToast("打开相机，需要在原生工程里面添加平台代码");
-        });
-
-        this.mPhotoLibrayBtn.SetClickCallback(()=>
-        {
-            UIMgr.Instance.ShowToast("打开相册，需要在原生工程里面添加平台代码");
-        });
 
         this.mCancelBtn.SetClickCallback(()=>
         {

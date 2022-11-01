@@ -46,6 +46,8 @@ export class Login_LoginViewPwd extends BaseUI {
     }
     BindUI() 
     {
+        this.mPwdEditbox.placeholder = Localization.GetString("00143");
+        this.mAccountEditBox.placeholder = Localization.GetString("00134");
         this.mBackBtn.SetClickCallback(()=>
         {
             this.Show(false)

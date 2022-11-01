@@ -19,10 +19,10 @@ export class Game_ChatHistoryLayer extends BaseUI
     RegDataNotify()
     {
 
-        GameData.Instance.Data_ChatingSubLayer.AddListenner(this , (_data)=>
-        {
-            this.node.active = _data == Game_ChattingSubLayer.ChatHistory
-        });
+        // GameData.Instance.Data_ChatingSubLayer.AddListenner(this , (_data)=>
+        // {
+        //     this.node.active = _data == Game_ChattingSubLayer.ChatHistory
+        // });
     }
     LateInit()
     {

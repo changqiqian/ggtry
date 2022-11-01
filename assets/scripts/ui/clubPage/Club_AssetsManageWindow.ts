@@ -42,6 +42,7 @@ export class Club_AssetsManageWindow extends BaseUI
     }
     BindUI()
     {
+        this.mEditBox.placeholder = Localization.GetString("00124");
         this.mCloseBtn.SetClickCallback(()=>
         {
             this.CloseAsWindow();
@@ -77,12 +78,20 @@ export class Club_AssetsManageWindow extends BaseUI
             this.mPlayerInfo.SetLocalHead(Number(_data.head));
             this.mID.string = _data.uid;
             this.mPlayerAmount.string = Tool.ConvertMoney_S2C(_data.clubPoint) + "";
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             this.UpdateClubTotalScore();
         });
 
 
         LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             this.UpdateClubTotalScore();
         });
 
@@ -133,10 +142,6 @@ export class Club_AssetsManageWindow extends BaseUI
 
     UpdateClubTotalScore()
     {
-        if(this.node.activeInHierarchy == false)
-        {
-            return;
-        }
         let clubTotalPoint = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.totalClubPoint;
         this.mClubAmount.string = Tool.ConvertMoney_S2C(clubTotalPoint) + "";
     }

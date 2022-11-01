@@ -34,8 +34,6 @@ export class LoginUI extends BaseUI
     @property(Node) 
     DebugFunction: Node = null;
     @property(BaseButton) 
-    PrivateIP: BaseButton = null;
-    @property(BaseButton) 
     DevIpBtn: BaseButton = null;
     @property(BaseButton) 
     TestIpBtn: BaseButton = null;
@@ -64,14 +62,6 @@ export class LoginUI extends BaseUI
 
         //debug mode
         this.DebugFunction.active = GameConfig.DebugMode;
-        this.PrivateIP.SetTitle("私人电脑" + GameConfig.PrivateIP);
-        this.PrivateIP.SetClickCallback(()=>
-        {
-            GameConfig.SetSeverUrl(GameConfig.PrivateIP);
-            Network.Instance.CreateWS();
-            this.DebugFunction.active = false;
-        });
-
         this.DevIpBtn.SetTitle("开发环境：" + GameConfig.DevelopIP);
         this.DevIpBtn.SetClickCallback(()=>
         {

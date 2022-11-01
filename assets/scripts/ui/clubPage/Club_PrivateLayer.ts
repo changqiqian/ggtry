@@ -37,6 +37,12 @@ export class Club_PrivateLayer extends BaseUI
     mCreateBtn: BaseButton = null;
     @property(ScrollView) 
     mScrollView: ScrollView = null;
+
+
+    onEnable()
+    {
+        this.UpdateNotifyBtn();
+    }
     InitParam()
     {
         
@@ -105,41 +111,59 @@ export class Club_PrivateLayer extends BaseUI
     {
         LocalPlayerData.Instance.Data_CurrentEnterClub.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             this.UpdateClubInfoUI();
         });
 
         LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             this.UpdateClubInfoUI();
         });
 
         LocalPlayerData.Instance.Data_SelfClubInfo.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             this.UpdateMoney();
         });
 
         LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             let currentClubData = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
             this.mClubName.string = currentClubData.name;
         });
 
-        HallData.Instance.Data_ClubPlayerPointNotify.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ClubUpdateSelfData.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             this.UpdateMoney();
         });
 
         HallData.Instance.Data_ClubApplyingNotify.AddListenner(this,(_data)=>
         {
-            if(LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType != 
-                ClubMemberType.ClubAccountType_Owner)
+            if(this.node.activeInHierarchy == false)
             {
                 return;
             }
             if(_data)
             {
-                let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-                this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(clubId)
+                this.UpdateNotifyBtn();
             }
         });
 
@@ -156,6 +180,20 @@ export class Club_PrivateLayer extends BaseUI
             }
         });
     }
+
+    UpdateNotifyBtn()
+    {
+        if(LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType != 
+            ClubMemberType.ClubAccountType_Owner)
+        {
+            return;
+        }
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(clubId)
+    }
+
+
+
     LateInit()
     {
 

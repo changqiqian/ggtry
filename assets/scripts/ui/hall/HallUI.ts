@@ -50,8 +50,7 @@ export class HallUI extends BaseUI
             this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
-                let tips = Localization.GetString("00106");
-                tips = Localization.ReplaceString(tips,clubId);
+                let tips = Localization.ReplaceString("00106",clubId);
                 tempScript.SetTips(tips);
                 tempScript.ShowConfirmBtnOnly();
             })

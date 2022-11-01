@@ -31,6 +31,8 @@ export class Club_CreateShort extends BaseUI
             this.Show(false);
         })
 
+
+        this.mNameEditBox.placeholder = Localization.GetString("00195");
         this.mNameEditBox.node.on('text-changed', (_param)=>
         {
             HallData.Instance.Data_Club_CreateTexasConfig.mData.gameName = this.mNameEditBox.string;

@@ -41,6 +41,7 @@ export class Login_SignView extends BaseUI
     }
     BindUI() 
     {
+        this.mAccountEditBox.placeholder = Localization.GetString("00134");
         this.mBackBtn.SetClickCallback(()=>
         {
             this.Show(false)

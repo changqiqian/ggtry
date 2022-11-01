@@ -55,11 +55,6 @@ export class Club_Setting extends BaseUI
 
     onDisable()
     {
-        if(this.HaveRights() == false)
-        {
-            return;
-        }
-
         let currentClub = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
         let logoChanged = currentClub.logo != HallData.Instance.Data_ClubLogoIndex.mData;
         let stampChanged = currentClub.stamp != HallData.Instance.Data_ClubStampIndex.mData;
@@ -225,6 +220,10 @@ export class Club_Setting extends BaseUI
     {
         LocalPlayerData.Instance.Data_CurrentEnterClub.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             this.UpdateClubInfoUI();
             let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == 
                 ClubMemberType.ClubAccountType_Owner
@@ -235,11 +234,19 @@ export class Club_Setting extends BaseUI
 
         LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             this.UpdateClubInfoUI();
         });
 
         HallData.Instance.Data_ClubLogoIndex.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             let logoName = "Logo" + _data;
             this.LoadSprite("common" , "texture/club/" + logoName , (_spriteFrame)=>
             {
@@ -249,6 +256,10 @@ export class Club_Setting extends BaseUI
 
         HallData.Instance.Data_ClubStampIndex.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             let stampName = "Stamp" + _data;
             this.LoadSprite("common" , "texture/club/" + stampName , (_spriteFrame)=>
             {

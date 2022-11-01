@@ -34,6 +34,10 @@ export class Club_AssetsManageItem extends BaseUI
     {
         HallData.Instance.Data_ClubScoreManageUid.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             if(_data == Number(this.mData.uid))
             {
                 HallData.Instance.Data_ClubScoreManageUserInfo.mData = this.mData;
@@ -42,6 +46,10 @@ export class Club_AssetsManageItem extends BaseUI
 
         HallData.Instance.Data_ShareClubScore.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             if(_data.clubId != LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
             {
                 return;
@@ -54,8 +62,13 @@ export class Club_AssetsManageItem extends BaseUI
             this.mAmount.string = Tool.ConvertMoney_S2C(_data.playerRestPoint) + "";
         });
 
-        HallData.Instance.Data_ClubPlayerPointNotify.AddListenner(this,(_data)=>
+
+        HallData.Instance.Data_ClubUpdateSelfData.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             let clubPoint = LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint;
             if(this.mData.uid != LocalPlayerData.Instance.Data_Uid.mData)
             {

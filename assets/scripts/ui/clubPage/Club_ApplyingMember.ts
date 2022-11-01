@@ -38,6 +38,10 @@ export class Club_ApplyingMember extends BaseUI {
     {
         HallData.Instance.Data_ClubApplyingSuccess.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
             if(_data)
             {
                 let users = HallData.Instance.GetApplyingUsers(this.mClubId);
