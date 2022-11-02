@@ -24,10 +24,10 @@ export class LoginUI extends BaseUI
     
     @property(Label) 
     mVersion: Label = null;
-    @property(Button) 
-    mLoginBtn: Button = null;
-    @property(Button) 
-    mSignBtn: Button = null;
+    @property(BaseButton) 
+    mLoginBtn: BaseButton = null;
+    @property(BaseButton) 
+    mSignBtn: BaseButton = null;
     @property(BaseButton) 
     mCyberBtn: BaseButton = null;
 
@@ -44,8 +44,18 @@ export class LoginUI extends BaseUI
     BindUI() 
     {
         this.mVersion.string = GameConfig.Version;
-        this.mLoginBtn.node.on(Node.EventType.TOUCH_END,this.OnLoginBtn.bind(this),this);
-        this.mSignBtn.node.on(Node.EventType.TOUCH_END,this.OnSignBtn.bind(this),this);
+
+        this.mLoginBtn.SetClickCallback(()=>
+        {
+            //this.ShowLayer("login","prefab/Login_LoginView");
+            this.ShowLayer("common","prefab/CuoPai");
+        });
+
+        this.mSignBtn.SetClickCallback(()=>
+        {
+            this.ShowLayer("login","prefab/Login_SignView");
+        });
+   
         this.mCyberBtn.SetClickCallback(()=>
         {
             this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
@@ -133,14 +143,5 @@ export class LoginUI extends BaseUI
         LoginData.Instance.Clear();
     }
 
-    private OnLoginBtn()
-    {
-        this.ShowLayer("login","prefab/Login_LoginView");
-    }
-
-    private OnSignBtn()
-    {
-        this.ShowLayer("login","prefab/Login_SignView");
-    }
 }
 
