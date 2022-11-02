@@ -91,7 +91,7 @@ export class Club_Main extends BaseUI
         {
             if(_data)
             {
-                this.ShowWindow("clubPage","prefab/Club_SearchResult");
+                this.ShowWindow("clubPage","prefab/Club_SearchResultFix");
             }
         });
 

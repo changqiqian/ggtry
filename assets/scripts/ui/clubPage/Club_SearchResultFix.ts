@@ -6,8 +6,8 @@ import { HallData } from '../hall/HallData';
 import { Club_MainEnter } from './Club_MainEnter';
 const { ccclass, property } = _decorator;
 
-@ccclass('Club_SearchResult')
-export class Club_SearchResult extends BaseUI 
+@ccclass('Club_SearchResultFix')
+export class Club_SearchResultFix extends BaseUI 
 {
     @property(BaseButton) 
     mCloseBtn: BaseButton = null;
