@@ -59,10 +59,8 @@ export class Login_SignView extends BaseUI
                 return;
             }
 
-            LocalPlayerData.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
-            let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
-            let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
+            let fullPhoneNumber = LocalPlayerData.Instance.GetFullPhoneNumber(this.mAccountEditBox.string);
+
             NetworkSend.Instance.VerifyPhoneNumber(fullPhoneNumber);
         });
     }

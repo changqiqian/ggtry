@@ -19,7 +19,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             UIMgr.Instance.ShowLoading(false);
             let msg = S2CVerifyPhoneNumber.decode(_data);
             console.log("收到的内容 S2C_VerifyPhoneNumber 验证手机号是否注册===" + JSON.stringify(msg));
-            console.log("msg.result.resId===" + msg.result.resId);
             if(msg.result.resId == MsgResult.Success)
             {
                 LoginData.Instance.Data_VerifyPhoneNumber.mData = true;
@@ -30,6 +29,17 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_Kick,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CKick.decode(_data);
+            console.log("收到的内容 S2C_Kick 服务器踢人===" + JSON.stringify(msg));
+            UIMgr.Instance.ShowToast(msg.result.resMessage);
+            GameConfig.ClearToken();
+            Network.Instance.ClearWS();
+            UIMgr.Instance.ChangeScene(SceneType.Login);
+        },this);
+
         Network.Instance.AddMsgListenner(MessageId.S2C_Login,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
@@ -37,10 +47,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_Login 登录===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
-                let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-                let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
-                GameConfig.SaveToken(msg.token,fullPhoneNumber);
+                GameConfig.SaveToken(msg.token);
                 NetworkSend.Instance.GetUserInfo();
             }
             else
@@ -88,6 +95,9 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             else
             {
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
+                GameConfig.ClearToken();
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+                UIMgr.Instance.ChangeScene(SceneType.Login);
             }
         },this);
 

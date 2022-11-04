@@ -90,9 +90,8 @@ export class SMSCodeView extends BaseUI
                 let nickName = LocalPlayerData.Instance.Data_NickName.mData;
                 let psw = LocalPlayerData.Instance.Data_LastInputPwd.mData;
                 let head = LocalPlayerData.Instance.Data_Head.mData;
-                let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
-                let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-                let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
+                let fullPhoneNumber = LocalPlayerData.Instance.GetFullPhoneNumber();
+
                 NetworkSend.Instance.Register(fullPhoneNumber , currentInput,nickName,psw,head,inviteCode);
             }
             else if(smsCodeType == SmsCodeType.ResetPassword)
@@ -105,9 +104,7 @@ export class SMSCodeView extends BaseUI
     {
         LocalPlayerData.Instance.Data_LastInputPhoneNum.AddListenner(this,(_data)=>
         {
-            let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
-            let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
+            let fullPhoneNumber = LocalPlayerData.Instance.GetFullPhoneNumber();
             this.mPhoneNum.string = fullPhoneNumber;
         });
     }

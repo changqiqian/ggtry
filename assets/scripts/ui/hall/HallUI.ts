@@ -62,7 +62,7 @@ export class HallUI extends BaseUI
             if(GameConfig.LOGIN_TOKEN != null)
             {
                 console.log("Token 自动登录")
-                NetworkSend.Instance.LoginWithToken(GameConfig.LOGIN_PHONE,GameConfig.LOGIN_TOKEN);
+                NetworkSend.Instance.GetUserInfo();
             }
             else
             {

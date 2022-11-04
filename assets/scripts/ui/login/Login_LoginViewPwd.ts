@@ -88,12 +88,10 @@ export class Login_LoginViewPwd extends BaseUI {
                 return;
             }
 
-
-            LocalPlayerData.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
             LocalPlayerData.Instance.Data_LastInputPwd.mData = password;
-            let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
-            let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
+            let fullPhoneNumber = LocalPlayerData.Instance.GetFullPhoneNumber(this.mAccountEditBox.string);
+
+
             NetworkSend.Instance.LoginWithPwd(fullPhoneNumber,password);
         });
  

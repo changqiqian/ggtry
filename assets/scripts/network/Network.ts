@@ -245,8 +245,8 @@ export class Network  extends Singleton<Network>()
         this.StopPing();
         clearTimeout(this.mPingSendTimer);
         this.mPingRevTimer = setTimeout(this.OnPingTimeOut.bind(this), this.mPingSpace);
-        let msg = new HeartbeatPing();
-        this.SendMsg(MessageId.C2S_HeartbeatPing , HeartbeatPing.encode(msg).finish());
+        let msg = new C2SHeartbeatPing();
+        this.SendMsg(MessageId.C2S_HeartbeatPing , C2SHeartbeatPing.encode(msg).finish());
         //console.log('发送 心跳');
     }
 

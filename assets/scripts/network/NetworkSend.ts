@@ -38,16 +38,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
         Network.Instance.SendMsg(MessageId.C2S_Login , C2SLogin.encode(msg).finish());
         console.log("验证码登录 C2S_Login== " + JSON.stringify(msg))
     }
-    public LoginWithToken(_phone : string, _token : string)
-    {
-        UIMgr.Instance.ShowLoading(true);
-        let msg = new C2SLogin();
-        msg.loginType = LoginType.LoginType_Token;
-        //msg.phoneNumber = _phone;
-        msg.token = _token;
-        Network.Instance.SendMsg(MessageId.C2S_Login , C2SLogin.encode(msg).finish());
-        console.log("Token登录 C2S_Login== " + JSON.stringify(msg))
-    }
+
     public GetSmsCode(_phone : string , _codeType : SmsCodeType)
     {
         UIMgr.Instance.ShowLoading(true);

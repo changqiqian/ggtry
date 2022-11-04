@@ -47,8 +47,7 @@ export class LoginUI extends BaseUI
 
         this.mLoginBtn.SetClickCallback(()=>
         {
-            //this.ShowLayer("login","prefab/Login_LoginView");
-            this.ShowLayer("common","prefab/CuoPai");
+            this.ShowLayer("login","prefab/Login_LoginView");
         });
 
         this.mSignBtn.SetClickCallback(()=>
@@ -65,7 +64,7 @@ export class LoginUI extends BaseUI
                 tempScript.SetTips(tips);
                 tempScript.SetCallback(()=>
                 {
-                    UIMgr.Instance.ShowToast("摄像头功能还没做");
+                    UIMgr.Instance.ShowToast("功能开发中");
                 })
             })
         });
@@ -102,10 +101,8 @@ export class LoginUI extends BaseUI
         {
             if(_data == true)
             {
-                let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
-                let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-                let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
                 let pwd = LocalPlayerData.Instance.Data_LastInputPwd.mData
+                let fullPhoneNumber = LocalPlayerData.Instance.GetFullPhoneNumber();
                 NetworkSend.Instance.LoginWithPwd(fullPhoneNumber,pwd);
             }
         });
@@ -120,7 +117,7 @@ export class LoginUI extends BaseUI
             if(GameConfig.LOGIN_TOKEN != null)
             {
                 console.log("Token 自动登录")
-                NetworkSend.Instance.LoginWithToken(GameConfig.LOGIN_PHONE,GameConfig.LOGIN_TOKEN);
+                NetworkSend.Instance.GetUserInfo();       
             }
         });
 

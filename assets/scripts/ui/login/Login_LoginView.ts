@@ -58,10 +58,8 @@ export class Login_LoginView extends BaseUI {
 
 
             LoginData.Instance.Data_SmsCodeType
-            LocalPlayerData.Instance.Data_LastInputPhoneNum.mData = this.mAccountEditBox.string;
-            let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
-            let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + this.mAccountEditBox.string;
+            let fullPhoneNumber = LocalPlayerData.Instance.GetFullPhoneNumber(this.mAccountEditBox.string);
+
             NetworkSend.Instance.GetSmsCode(fullPhoneNumber , SmsCodeType.Login);
         });
 

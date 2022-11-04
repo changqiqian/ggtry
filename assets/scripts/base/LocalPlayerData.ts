@@ -31,6 +31,20 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_CurrentEnterClub : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>();//当前进入的俱乐部
     Data_UpdateCurrentClub : BaseData<boolean> = new BaseData<boolean>(true); //刷新当前俱乐部数据
 
+    GetFullPhoneNumber(_phoneNum : string = null)
+    {
+        console.log("this.Data_LastInputPhoneNum.mData 11111= ====" + this.Data_LastInputPhoneNum.mData)
+        if(_phoneNum != null )
+        {
+            this.Data_LastInputPhoneNum.mData = _phoneNum;
+        }
+        console.log("this.Data_LastInputPhoneNum.mData 2222= ====" + this.Data_LastInputPhoneNum.mData)
+
+        let currentAreaCodeIndex = this.Data_AreaCode.mData;
+        let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
+        let fullPhoneNumber = currentAreaCode + ' ' + this.Data_LastInputPhoneNum.mData;
+        return fullPhoneNumber;
+    }
 
     UpdateUserInfo(_userInfo : UserInfo)
     {

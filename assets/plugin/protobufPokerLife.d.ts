@@ -1436,60 +1436,91 @@ export enum AccountStatus {
     AccountStatus_Frozen = 1
 }
 
-/** Represents a HeartbeatPing. */
-export class HeartbeatPing implements IHeartbeatPing {
+/** Represents a C2SHeartbeatPing. */
+export class C2SHeartbeatPing implements IC2SHeartbeatPing {
 
     /**
-     * Constructs a new HeartbeatPing.
+     * Constructs a new C2SHeartbeatPing.
      * @param [p] Properties to set
      */
-    constructor(p?: IHeartbeatPing);
+    constructor(p?: IC2SHeartbeatPing);
 
     /**
-     * Encodes the specified HeartbeatPing message. Does not implicitly {@link HeartbeatPing.verify|verify} messages.
-     * @param m HeartbeatPing message or plain object to encode
+     * Encodes the specified C2SHeartbeatPing message. Does not implicitly {@link C2SHeartbeatPing.verify|verify} messages.
+     * @param m C2SHeartbeatPing message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IHeartbeatPing, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SHeartbeatPing, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a HeartbeatPing message from the specified reader or buffer.
+     * Decodes a C2SHeartbeatPing message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns HeartbeatPing
+     * @returns C2SHeartbeatPing
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): HeartbeatPing;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SHeartbeatPing;
 }
 
-/** Represents a HeartbeatPong. */
-export class HeartbeatPong implements IHeartbeatPong {
+/** Represents a S2CHeartbeatPong. */
+export class S2CHeartbeatPong implements IS2CHeartbeatPong {
 
     /**
-     * Constructs a new HeartbeatPong.
+     * Constructs a new S2CHeartbeatPong.
      * @param [p] Properties to set
      */
-    constructor(p?: IHeartbeatPong);
+    constructor(p?: IS2CHeartbeatPong);
 
     /**
-     * Encodes the specified HeartbeatPong message. Does not implicitly {@link HeartbeatPong.verify|verify} messages.
-     * @param m HeartbeatPong message or plain object to encode
+     * Encodes the specified S2CHeartbeatPong message. Does not implicitly {@link S2CHeartbeatPong.verify|verify} messages.
+     * @param m S2CHeartbeatPong message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IHeartbeatPong, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CHeartbeatPong, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a HeartbeatPong message from the specified reader or buffer.
+     * Decodes a S2CHeartbeatPong message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns HeartbeatPong
+     * @returns S2CHeartbeatPong
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): HeartbeatPong;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CHeartbeatPong;
+}
+
+/** Represents a S2CKick. */
+export class S2CKick implements IS2CKick {
+
+    /**
+     * Constructs a new S2CKick.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CKick);
+
+    /** S2CKick result. */
+    public result?: (ICommonResult|null);
+
+    /**
+     * Encodes the specified S2CKick message. Does not implicitly {@link S2CKick.verify|verify} messages.
+     * @param m S2CKick message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CKick, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CKick message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CKick
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CKick;
 }
 
 /** Represents a UserInfo. */
@@ -2609,9 +2640,6 @@ export class C2SLogin implements IC2SLogin {
     /** C2SLogin psw. */
     public psw: string;
 
-    /** C2SLogin token. */
-    public token: string;
-
     /**
      * Encodes the specified C2SLogin message. Does not implicitly {@link C2SLogin.verify|verify} messages.
      * @param m C2SLogin message or plain object to encode
@@ -2753,8 +2781,7 @@ export enum SmsCodeType {
 export enum LoginType {
     LoginType_UnKnow = 0,
     LoginType_PhoneCode = 1,
-    LoginType_PhonePsw = 2,
-    LoginType_Token = 3
+    LoginType_PhonePsw = 2
 }
 
 /** Represents a S2CLogin. */
@@ -2892,6 +2919,7 @@ export enum MessageId {
     MSG_UnKnow = 0,
     C2S_HeartbeatPing = 10,
     S2C_HeartbeatPong = 11,
+    S2C_Kick = 20,
     MSG_LoginBegin = 1001,
     C2S_Login = 1002,
     C2S_Register = 1004,

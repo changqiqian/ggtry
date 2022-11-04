@@ -3,7 +3,7 @@ import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
 export class GameConfig
 {
-    public static DebugMode =  true;
+    public static DebugMode =  false;
     public static DevelopIP = "52.77.219.158:9501"; //开发环境ip 可选
     public static TestIP = "52.77.219.158:9601"; //测试环境ip 可选
     public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip 上面选项选择后，会赋值给UsingIp
@@ -14,11 +14,10 @@ export class GameConfig
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
     }
     //发布的版本号
-    public static Version = "1.3.3"
+    public static Version = "1.3.6"
 
       
     public static LOGIN_TOKEN;
-    public static LOGIN_PHONE;
 
     public static WebberAddr= "http://18.142.237.115:9487"; //打开收银台web
 
@@ -257,23 +256,19 @@ export class GameConfig
     public static LoadToken()
     {
         GameConfig.LOGIN_TOKEN = GameConfig.ReadSimpleData("LOGIN_TOKEN", null);
-        GameConfig.LOGIN_PHONE = GameConfig.ReadSimpleData("LOGIN_PHONE", null);
     }
 
     public static ClearToken()
     {
         GameConfig.LOGIN_TOKEN = null;
-        GameConfig.LOGIN_PHONE = null;
         GameConfig.WriteSimpleData("LOGIN_TOKEN", null);
-        GameConfig.WriteSimpleData("LOGIN_PHONE", null);
     }
 
-    public static SaveToken(_token:string , _phoneNum:string =null)
+    public static SaveToken(_token:string)
     {
         GameConfig.LOGIN_TOKEN = _token;
-        GameConfig.LOGIN_PHONE = _phoneNum;
         GameConfig.WriteSimpleData("LOGIN_TOKEN", _token);
-        GameConfig.WriteSimpleData("LOGIN_PHONE", _phoneNum);
+
     }
     
     public static SaveBBToggle(_value: boolean) 

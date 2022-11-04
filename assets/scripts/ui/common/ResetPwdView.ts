@@ -95,9 +95,8 @@ export class ResetPwdView extends BaseUI
             }
             
             LocalPlayerData.Instance.Data_LastInputPwd.mData = this.mPwdEditbox.string;
-            let currentAreaCodeIndex = LocalPlayerData.Instance.Data_AreaCode.mData;
-            let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;
-            let fullPhoneNumber = currentAreaCode + ' ' + LocalPlayerData.Instance.Data_LastInputPhoneNum.mData;
+            let fullPhoneNumber = LocalPlayerData.Instance.GetFullPhoneNumber();
+
 
             if(LoginData.Instance.Data_InSignInProgress.mData)
             {

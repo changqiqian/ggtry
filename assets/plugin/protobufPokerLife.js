@@ -3182,23 +3182,23 @@ $root.AccountStatus = (function() {
     return values;
 })();
 
-$root.HeartbeatPing = (function() {
+$root.C2SHeartbeatPing = (function() {
 
     /**
-     * Properties of a HeartbeatPing.
-     * @exports IHeartbeatPing
-     * @interface IHeartbeatPing
+     * Properties of a C2SHeartbeatPing.
+     * @exports IC2SHeartbeatPing
+     * @interface IC2SHeartbeatPing
      */
 
     /**
-     * Constructs a new HeartbeatPing.
-     * @exports HeartbeatPing
-     * @classdesc Represents a HeartbeatPing.
-     * @implements IHeartbeatPing
+     * Constructs a new C2SHeartbeatPing.
+     * @exports C2SHeartbeatPing
+     * @classdesc Represents a C2SHeartbeatPing.
+     * @implements IC2SHeartbeatPing
      * @constructor
-     * @param {IHeartbeatPing=} [p] Properties to set
+     * @param {IC2SHeartbeatPing=} [p] Properties to set
      */
-    function HeartbeatPing(p) {
+    function C2SHeartbeatPing(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -3206,35 +3206,35 @@ $root.HeartbeatPing = (function() {
     }
 
     /**
-     * Encodes the specified HeartbeatPing message. Does not implicitly {@link HeartbeatPing.verify|verify} messages.
+     * Encodes the specified C2SHeartbeatPing message. Does not implicitly {@link C2SHeartbeatPing.verify|verify} messages.
      * @function encode
-     * @memberof HeartbeatPing
+     * @memberof C2SHeartbeatPing
      * @static
-     * @param {IHeartbeatPing} m HeartbeatPing message or plain object to encode
+     * @param {IC2SHeartbeatPing} m C2SHeartbeatPing message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    HeartbeatPing.encode = function encode(m, w) {
+    C2SHeartbeatPing.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         return w;
     };
 
     /**
-     * Decodes a HeartbeatPing message from the specified reader or buffer.
+     * Decodes a C2SHeartbeatPing message from the specified reader or buffer.
      * @function decode
-     * @memberof HeartbeatPing
+     * @memberof C2SHeartbeatPing
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {HeartbeatPing} HeartbeatPing
+     * @returns {C2SHeartbeatPing} C2SHeartbeatPing
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    HeartbeatPing.decode = function decode(r, l) {
+    C2SHeartbeatPing.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.HeartbeatPing();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SHeartbeatPing();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -3246,26 +3246,26 @@ $root.HeartbeatPing = (function() {
         return m;
     };
 
-    return HeartbeatPing;
+    return C2SHeartbeatPing;
 })();
 
-$root.HeartbeatPong = (function() {
+$root.S2CHeartbeatPong = (function() {
 
     /**
-     * Properties of a HeartbeatPong.
-     * @exports IHeartbeatPong
-     * @interface IHeartbeatPong
+     * Properties of a S2CHeartbeatPong.
+     * @exports IS2CHeartbeatPong
+     * @interface IS2CHeartbeatPong
      */
 
     /**
-     * Constructs a new HeartbeatPong.
-     * @exports HeartbeatPong
-     * @classdesc Represents a HeartbeatPong.
-     * @implements IHeartbeatPong
+     * Constructs a new S2CHeartbeatPong.
+     * @exports S2CHeartbeatPong
+     * @classdesc Represents a S2CHeartbeatPong.
+     * @implements IS2CHeartbeatPong
      * @constructor
-     * @param {IHeartbeatPong=} [p] Properties to set
+     * @param {IS2CHeartbeatPong=} [p] Properties to set
      */
-    function HeartbeatPong(p) {
+    function S2CHeartbeatPong(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -3273,35 +3273,35 @@ $root.HeartbeatPong = (function() {
     }
 
     /**
-     * Encodes the specified HeartbeatPong message. Does not implicitly {@link HeartbeatPong.verify|verify} messages.
+     * Encodes the specified S2CHeartbeatPong message. Does not implicitly {@link S2CHeartbeatPong.verify|verify} messages.
      * @function encode
-     * @memberof HeartbeatPong
+     * @memberof S2CHeartbeatPong
      * @static
-     * @param {IHeartbeatPong} m HeartbeatPong message or plain object to encode
+     * @param {IS2CHeartbeatPong} m S2CHeartbeatPong message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    HeartbeatPong.encode = function encode(m, w) {
+    S2CHeartbeatPong.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         return w;
     };
 
     /**
-     * Decodes a HeartbeatPong message from the specified reader or buffer.
+     * Decodes a S2CHeartbeatPong message from the specified reader or buffer.
      * @function decode
-     * @memberof HeartbeatPong
+     * @memberof S2CHeartbeatPong
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {HeartbeatPong} HeartbeatPong
+     * @returns {S2CHeartbeatPong} S2CHeartbeatPong
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    HeartbeatPong.decode = function decode(r, l) {
+    S2CHeartbeatPong.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.HeartbeatPong();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CHeartbeatPong();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -3313,7 +3313,88 @@ $root.HeartbeatPong = (function() {
         return m;
     };
 
-    return HeartbeatPong;
+    return S2CHeartbeatPong;
+})();
+
+$root.S2CKick = (function() {
+
+    /**
+     * Properties of a S2CKick.
+     * @exports IS2CKick
+     * @interface IS2CKick
+     * @property {ICommonResult|null} [result] S2CKick result
+     */
+
+    /**
+     * Constructs a new S2CKick.
+     * @exports S2CKick
+     * @classdesc Represents a S2CKick.
+     * @implements IS2CKick
+     * @constructor
+     * @param {IS2CKick=} [p] Properties to set
+     */
+    function S2CKick(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CKick result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CKick
+     * @instance
+     */
+    S2CKick.prototype.result = null;
+
+    /**
+     * Encodes the specified S2CKick message. Does not implicitly {@link S2CKick.verify|verify} messages.
+     * @function encode
+     * @memberof S2CKick
+     * @static
+     * @param {IS2CKick} m S2CKick message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CKick.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a S2CKick message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CKick
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CKick} S2CKick
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CKick.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CKick();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CKick;
 })();
 
 $root.UserInfo = (function() {
@@ -6497,7 +6578,6 @@ $root.C2SLogin = (function() {
      * @property {string|null} [phoneNumber] C2SLogin phoneNumber
      * @property {string|null} [code] C2SLogin code
      * @property {string|null} [psw] C2SLogin psw
-     * @property {string|null} [token] C2SLogin token
      */
 
     /**
@@ -6548,14 +6628,6 @@ $root.C2SLogin = (function() {
     C2SLogin.prototype.psw = "";
 
     /**
-     * C2SLogin token.
-     * @member {string} token
-     * @memberof C2SLogin
-     * @instance
-     */
-    C2SLogin.prototype.token = "";
-
-    /**
      * Encodes the specified C2SLogin message. Does not implicitly {@link C2SLogin.verify|verify} messages.
      * @function encode
      * @memberof C2SLogin
@@ -6575,8 +6647,6 @@ $root.C2SLogin = (function() {
             w.uint32(26).string(m.code);
         if (m.psw != null && Object.hasOwnProperty.call(m, "psw"))
             w.uint32(34).string(m.psw);
-        if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-            w.uint32(42).string(m.token);
         return w;
     };
 
@@ -6609,9 +6679,6 @@ $root.C2SLogin = (function() {
                 break;
             case 4:
                 m.psw = r.string();
-                break;
-            case 5:
-                m.token = r.string();
                 break;
             default:
                 r.skipType(t & 7);
@@ -6974,14 +7041,12 @@ $root.SmsCodeType = (function() {
  * @property {number} LoginType_UnKnow=0 LoginType_UnKnow value
  * @property {number} LoginType_PhoneCode=1 LoginType_PhoneCode value
  * @property {number} LoginType_PhonePsw=2 LoginType_PhonePsw value
- * @property {number} LoginType_Token=3 LoginType_Token value
  */
 $root.LoginType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "LoginType_UnKnow"] = 0;
     values[valuesById[1] = "LoginType_PhoneCode"] = 1;
     values[valuesById[2] = "LoginType_PhonePsw"] = 2;
-    values[valuesById[3] = "LoginType_Token"] = 3;
     return values;
 })();
 
@@ -7344,6 +7409,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} MSG_UnKnow=0 MSG_UnKnow value
  * @property {number} C2S_HeartbeatPing=10 C2S_HeartbeatPing value
  * @property {number} S2C_HeartbeatPong=11 S2C_HeartbeatPong value
+ * @property {number} S2C_Kick=20 S2C_Kick value
  * @property {number} MSG_LoginBegin=1001 MSG_LoginBegin value
  * @property {number} C2S_Login=1002 C2S_Login value
  * @property {number} C2S_Register=1004 C2S_Register value
@@ -7410,6 +7476,7 @@ $root.MessageId = (function() {
     values[valuesById[0] = "MSG_UnKnow"] = 0;
     values[valuesById[10] = "C2S_HeartbeatPing"] = 10;
     values[valuesById[11] = "S2C_HeartbeatPong"] = 11;
+    values[valuesById[20] = "S2C_Kick"] = 20;
     values[valuesById[1001] = "MSG_LoginBegin"] = 1001;
     values[valuesById[1002] = "C2S_Login"] = 1002;
     values[valuesById[1004] = "C2S_Register"] = 1004;
