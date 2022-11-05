@@ -1024,9 +1024,6 @@ export interface IClubGameConfig {
     /** ClubGameConfig texasConfig */
     texasConfig?: (ITexasConfig|null);
 
-    /** ClubGameConfig shortConfig */
-    shortConfig?: (IShortConfig|null);
-
     /** ClubGameConfig matchingConfig */
     matchingConfig?: (IMatchingConfig|null);
 }
@@ -1045,9 +1042,6 @@ export class ClubGameConfig implements IClubGameConfig {
 
     /** ClubGameConfig texasConfig. */
     public texasConfig?: (ITexasConfig|null);
-
-    /** ClubGameConfig shortConfig. */
-    public shortConfig?: (IShortConfig|null);
 
     /** ClubGameConfig matchingConfig. */
     public matchingConfig?: (IMatchingConfig|null);
@@ -1132,6 +1126,9 @@ export interface IGameBasicConfig {
 
     /** GameBasicConfig taxRatio */
     taxRatio?: (number|null);
+
+    /** GameBasicConfig shortConfig */
+    shortConfig?: (IShortConfig|null);
 }
 
 /** Represents a GameBasicConfig. */
@@ -1157,6 +1154,9 @@ export class GameBasicConfig implements IGameBasicConfig {
 
     /** GameBasicConfig taxRatio. */
     public taxRatio: number;
+
+    /** GameBasicConfig shortConfig. */
+    public shortConfig?: (IShortConfig|null);
 
     /**
      * Encodes the specified GameBasicConfig message. Does not implicitly {@link GameBasicConfig.verify|verify} messages.

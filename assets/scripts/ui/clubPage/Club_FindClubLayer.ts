@@ -18,9 +18,9 @@ export class Club_FindClubLayer extends BaseUI {
     InitParam()
     {
         //这几个变量 只要在编辑器里面拖动绑定，编辑器就回报错，没办法了 只有代码绑定
-        this.mCloseBtn = this.node.getChildByName("Top/CloseBtn").getComponent(BaseButton);
-        this.mClub_MainEnter = this.node.getChildByName("Bottom/Club_MainEnter").getComponent(Club_MainEnter);
-        this.mConfirmBtn = this.node.getChildByName("Bottom/ConfirmBtn").getComponent(BaseButton);
+        this.mCloseBtn = this.node.getChildByPath("Top/CloseBtn").getComponent(BaseButton);
+        this.mClub_MainEnter = this.node.getChildByPath("Bottom/Club_MainEnter").getComponent(Club_MainEnter);
+        this.mConfirmBtn = this.node.getChildByPath("Bottom/ConfirmBtn").getComponent(BaseButton);
     }
     BindUI()
     {

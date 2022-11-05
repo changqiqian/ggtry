@@ -84,7 +84,7 @@ export class Club_GameItem extends BaseUI
             case GameType.GameType_ShortCash:
                 tempColor = new Color(98,174,175);
                 gameTypeName = "Short";
-                if(_data.shortConfig.scoreMode == ShortGameScoreMode.ShortGameScoreMode_BlindMode)
+                if(_data.basicConfig.shortConfig.scoreMode == ShortGameScoreMode.ShortGameScoreMode_BlindMode)
                 {
                     this.mBlindInfo.string = _data.texasConfig.smallBlind + "/" + _data.texasConfig.smallBlind * 2;
                     if(_data.texasConfig.straddle)
@@ -98,21 +98,21 @@ export class Club_GameItem extends BaseUI
                     this.mMinBringIn.string = _data.texasConfig.minBringIn + "";
                     this.mMaxBringIn.string = _data.texasConfig.maxBringIn + "";
                 }
-                else if(_data.shortConfig.scoreMode == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
+                else if(_data.basicConfig.shortConfig.scoreMode == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
                 {
-                    this.mBlindInfo.string = _data.shortConfig.baseScore + " ante";
-                    this.mMinBringIn.string = _data.shortConfig.baseScore * 50 + "";
-                    this.mMaxBringIn.string = _data.shortConfig.baseScore * 100 + "";
+                    this.mBlindInfo.string = _data.basicConfig.shortConfig.baseScore + " ante";
+                    this.mMinBringIn.string = _data.basicConfig.shortConfig.baseScore * 50 + "";
+                    this.mMaxBringIn.string = _data.basicConfig.shortConfig.baseScore * 100 + "";
                 }
             break
-            case GameType.GameType_Mtt:
-                gameTypeName = "Mtt"
-                tempColor = new Color(59,52,122);
-            break
-            case GameType.GameType_Omh:
-                gameTypeName = "Omh"
-                tempColor = Color.WHITE;
-            break
+            // case GameType.GameType_Mtt:
+            //     gameTypeName = "Mtt"
+            //     tempColor = new Color(59,52,122);
+            // break
+            // case GameType.GameType_Omh:
+            //     gameTypeName = "Omh"
+            //     tempColor = Color.WHITE;
+            // break
         }
         this.mCircleTimer.SetColor(tempColor);
         this.mGameType.string = gameTypeName;

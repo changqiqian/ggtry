@@ -282,8 +282,15 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(msg.result.resId == MsgResult.Success)
             {
                 UIMgr.Instance.ShowToast(Localization.GetString("00119"));
-                LocalPlayerData.Instance.Data_CurrentEnterClub.mData = msg.clubInfo;
-                LocalPlayerData.Instance.Data_UpdateCurrentClub.mData = true;
+                if(HallData.Instance.Data_ClubEnter.mData)
+                {
+                    LocalPlayerData.Instance.Data_CurrentEnterClub.mData = msg.clubInfo;
+                    LocalPlayerData.Instance.Data_UpdateCurrentClub.mData = true;
+                }
+                else
+                {
+                    LocalPlayerData.Instance.Data_ModifyClubInfo.mData = msg.clubInfo;
+                }
             }
             else
             {

@@ -7,6 +7,7 @@ import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
+import { DragLayerDown } from '../../UiTool/DragLayerDown';
 import { BaseButton } from '../common/BaseButton';
 import { TipsWindow } from '../common/TipsWindow';
 import { LoginData } from './LoginData';
@@ -43,6 +44,7 @@ export class LoginUI extends BaseUI
     }
     BindUI() 
     {
+        this.node.addComponent(DragLayerDown);
         this.mVersion.string = GameConfig.Version;
 
         this.mLoginBtn.SetClickCallback(()=>

@@ -76,8 +76,22 @@ export class Club_MainEnter extends BaseUI
 
         LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
         {
-            this.mData = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
-            this.UpdateUI();
+            let clubInfo = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
+            if(this.mData.id == clubInfo.id)
+            {
+                this.mData = clubInfo;
+                this.UpdateUI();
+            }
+        });
+
+        LocalPlayerData.Instance.Data_ModifyClubInfo.AddListenner(this,(_data)=>
+        {
+            let clubInfo = _data;
+            if(this.mData.id == clubInfo.id)
+            {
+                this.mData = clubInfo;
+                this.UpdateUI();
+            }
         });
     }
     LateInit()

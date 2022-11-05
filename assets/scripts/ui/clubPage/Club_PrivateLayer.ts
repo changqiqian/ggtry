@@ -42,6 +42,7 @@ export class Club_PrivateLayer extends BaseUI
     onEnable()
     {
         this.UpdateNotifyBtn();
+        this.UpdateClubInfoUI();
     }
     InitParam()
     {
@@ -109,14 +110,6 @@ export class Club_PrivateLayer extends BaseUI
 
     RegDataNotify()
     {
-        LocalPlayerData.Instance.Data_CurrentEnterClub.AddListenner(this,(_data)=>
-        {
-            if(this.node.activeInHierarchy == false)
-            {
-                return;
-            }
-            this.UpdateClubInfoUI();
-        });
 
         LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
         {

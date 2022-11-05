@@ -61,14 +61,14 @@ export class Club_RecardItem extends BaseUI
             case GameType.GameType_ShortCash:
                 tempColor = new Color(98,174,175);
             break
-            case GameType.GameType_Mtt:
-                gameTypeName = "Mtt"
-                tempColor = new Color(59,52,122);
-            break
-            case GameType.GameType_Omh:
-                gameTypeName = "Omh"
-                tempColor = Color.WHITE;
-            break
+            // case GameType.GameType_Mtt:
+            //     gameTypeName = "Mtt"
+            //     tempColor = new Color(59,52,122);
+            // break
+            // case GameType.GameType_Omh:
+            //     gameTypeName = "Omh"
+            //     tempColor = Color.WHITE;
+            // break
         }
         this.mCircleTimer.SetColor(tempColor);
         this.mGameType.string = gameTypeName;

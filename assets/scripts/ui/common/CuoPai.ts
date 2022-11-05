@@ -50,7 +50,7 @@ export class CuoPai extends BaseUI {
         this.node!.on(Node.EventType.TOUCH_START,this.TouchStart.bind(this));
         this.node!.on(Node.EventType.TOUCH_MOVE,this.TouchMove.bind(this));
         this.node!.on(Node.EventType.TOUCH_END,this.TouchEnd.bind(this));
-        // this.node!.on(Node.EventType.TOUCH_CANCEL,this.touch_end.bind(this));
+        this.node!.on(Node.EventType.TOUCH_CANCEL,this.TouchEnd.bind(this));
     }
     RegDataNotify()
     {
@@ -104,25 +104,25 @@ export class CuoPai extends BaseUI {
         this.mCardFace!.active = false;
     }
 
-    private TouchStart(event:EventTouch)
+    private TouchStart(_event:EventTouch)
     {
         this.mTouchPos = [];
         //不在纸牌区域内的话就不执行
-        if(!Intersection2D.pointInPolygon(event.getUIStartLocation(),this.mCardWorldPoints))
+        if(!Intersection2D.pointInPolygon(_event.getUIStartLocation(),this.mCardWorldPoints))
         return;
 
-        this.mTouchPos.push(event.getUIStartLocation());
+        this.mTouchPos.push(_event.getUIStartLocation());
     }
 
-    private TouchMove(event:EventTouch)
+    private TouchMove(_event:EventTouch)
     {
         if(this.mPeekCardEnd || this.mTouchPos.length == 0)
         {
             return;
         }
         
-        let startPos = event.getUIStartLocation();
-        let endPos   = event.getUILocation();
+        let startPos = _event.getUIStartLocation();
+        let endPos = _event.getUILocation();
         this.mTouchPos.push(endPos);
 
         if(!this.mMoveStart)
@@ -139,9 +139,9 @@ export class CuoPai extends BaseUI {
                 let angle = this.getSignAngle(endPos,startPos);
          
                 this.mMaskMove!.node.angle = angle;
-                this.mLayoutCard!.angle    = -angle;  
-                this.mShadow!.angle  = angle;
-                this.mCardFace!.angle      = 0;
+                this.mLayoutCard!.angle = -angle;  
+                this.mShadow!.angle = angle;
+                this.mCardFace!.angle = 0;
                 let index = 0;
 
                 //纸牌正面初始位置锚点调整
@@ -339,23 +339,23 @@ export class CuoPai extends BaseUI {
 
     }
 
-    private TouchEnd(event?:EventTouch)
+    private TouchEnd(_event?:EventTouch)
     {
         this.mMaskMove!.node.angle = 0;
-        this.mLayoutCard!.angle    = 0;
+        this.mLayoutCard!.angle = 0;
         this.mMaskMove!.node.setPosition(0,0);
         this.mLayoutCard!.setPosition(0,0);
-        this.mMoveStart            = false;
-        this.mShadow!.active   = false;
-        this.mCardFace!.active       = false;
+        this.mMoveStart = false;
+        this.mShadow!.active  = false;
+        this.mCardFace!.active = false;
         this.mCardFace!.setPosition(1000,1000);
     
     }
 
-    private getSignDistance(endPos:Vec2, startPos:Vec2) 
+    private getSignDistance(_endPos:Vec2, _startPos:Vec2) 
     {
-        let a = endPos.x-startPos.x;
-        let b = endPos.y-startPos.y;
+        let a = _endPos.x-_startPos.x;
+        let b = _endPos.y-_startPos.y;
         let c = this.getSignHypotenuse(Math.abs(a),Math.abs(b));
         let obj = 
         {
@@ -369,17 +369,17 @@ export class CuoPai extends BaseUI {
         return obj;
     }
 
-    private getSignHypotenuse(width:number, height:number) 
+    private getSignHypotenuse(_width:number, _height:number) 
     {
-        let a = Math.pow(width,2);
-        let b = Math.pow(height,2);
+        let a = Math.pow(_width,2);
+        let b = Math.pow(_height,2);
         let c = Math.sqrt(a+b);
         return c;
     }
 
-    private getSignAngle(endPos:Vec2, startPos:Vec2) 
+    private getSignAngle(_endPos:Vec2, _startPos:Vec2) 
     {
-        var radian = Math.atan2(endPos.y - startPos.y, endPos.x - startPos.x);  // 返回来的是弧度
+        var radian = Math.atan2(_endPos.y - _startPos.y, _endPos.x - _startPos.x);  // 返回来的是弧度
         var angle = 180 / Math.PI * radian;                                     // 根据弧度计算角度
         return angle;
     }

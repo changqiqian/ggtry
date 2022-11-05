@@ -265,7 +265,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
         let finalData = new ClubGameConfig();
         finalData.basicConfig = new GameBasicConfig();
         finalData.texasConfig = new TexasConfig();
-        finalData.shortConfig = new ShortConfig();
+        finalData.basicConfig.shortConfig = new ShortConfig();
 
         finalData.basicConfig.gameType = _config.gameType;
         finalData.basicConfig.gameName = _config.gameName;
@@ -273,13 +273,13 @@ export class HallData extends SingletonBaseNotify<HallData>()
         finalData.basicConfig.taxType = _config.taxType;
         finalData.basicConfig.taxRatio = GameConfig.GetTexasCreateRoomTaxValue(_config.taxType)[_config.taxRatio];
         finalData.texasConfig.smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[_config.smallBlind];
-        finalData.shortConfig.baseScore = GameConfig.GetShortCreateRoomBaseScoreValue()[_config.shortBaseScore];
-        finalData.shortConfig.scoreMode = _config.shortScoreMode;
-        finalData.shortConfig.buttonDouble = _config.buttonDouble;
+        finalData.basicConfig.shortConfig.baseScore = GameConfig.GetShortCreateRoomBaseScoreValue()[_config.shortBaseScore];
+        finalData.basicConfig.shortConfig.scoreMode = _config.shortScoreMode;
+        finalData.basicConfig.shortConfig.buttonDouble = _config.buttonDouble;
         
         let bigBlind = finalData.texasConfig.smallBlind * 2;
         let bigBliind100 = bigBlind* 100;
-        let baseScore100 = finalData.shortConfig.baseScore * 100;
+        let baseScore100 = finalData.basicConfig.shortConfig.baseScore * 100;
         finalData.texasConfig.straddle = _config.straddle;
         finalData.texasConfig.ante = GameConfig.GetTexasCreateRoomAnteValue(finalData.texasConfig.smallBlind)[_config.ante];
         

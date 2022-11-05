@@ -29,6 +29,7 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
 
     Data_SelfClubInfo : BaseData<IClubMember> = new BaseData<IClubMember>();//进入俱乐部后，我的俱乐部个人信息
     Data_CurrentEnterClub : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>();//当前进入的俱乐部
+    Data_ModifyClubInfo : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(true);//修改俱乐部信息
     Data_UpdateCurrentClub : BaseData<boolean> = new BaseData<boolean>(true); //刷新当前俱乐部数据
 
     GetFullPhoneNumber(_phoneNum : string = null)

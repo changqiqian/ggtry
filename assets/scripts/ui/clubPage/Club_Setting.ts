@@ -46,20 +46,42 @@ export class Club_Setting extends BaseUI
     mDismissBtn: BaseButton = null;
 
     mLastTimeBrief : string = null;
+    mLastTimeLogo : number = null;
+    mLastTimeStamp :  number = null;
+    mLastTimeName : string = null;
     mPageSize : number = 4;
     onEnable()
     {
-        this.mLastTimeBrief = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.brief;
+        let currentClub = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
         this.RefreshMember();
+        this.UpdateClubInfoUI();
+        let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == 
+            ClubMemberType.ClubAccountType_Owner
+        this.mUnionBtn.node.active = selfIsOwner;
+        this.mDismissBtn.node.active = selfIsOwner;
+        this.mExitBtn.node.active = !(selfIsOwner);
+
+        this.mLastTimeBrief = currentClub.brief;
+        this.mLastTimeLogo = currentClub.logo;
+        this.mLastTimeStamp = currentClub.stamp;
+        this.mLastTimeName = currentClub.name;
     }
 
     onDisable()
     {
+        if(LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType != ClubMemberType.ClubAccountType_Owner)
+        {
+            return;
+        }
+
+
         let currentClub = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
         let logoChanged = currentClub.logo != HallData.Instance.Data_ClubLogoIndex.mData;
-        let stampChanged = currentClub.stamp != HallData.Instance.Data_ClubStampIndex.mData;
-        let nameChanged = currentClub.name != this.mClubNameBtn.GetTitle();
+        let stampChanged = this.mLastTimeStamp != HallData.Instance.Data_ClubStampIndex.mData;
+        let nameChanged = this.mLastTimeName != this.mClubNameBtn.GetTitle();
         let briefChanged = currentClub.brief != this.mLastTimeBrief;
+
+
         if(logoChanged || stampChanged || nameChanged || briefChanged)
         {
             let newLogo = logoChanged ?  HallData.Instance.Data_ClubLogoIndex.mData : null;
@@ -213,25 +235,10 @@ export class Club_Setting extends BaseUI
         HallData.Instance.Data_ClubStampIndex.mData = clubInfo.stamp;
         this.mClubNameBtn.SetTitle(clubInfo.name);
         this.mClubId.SetTitle(clubInfo.id);
-
     }
 
     RegDataNotify()
     {
-        LocalPlayerData.Instance.Data_CurrentEnterClub.AddListenner(this,(_data)=>
-        {
-            if(this.node.activeInHierarchy == false)
-            {
-                return;
-            }
-            this.UpdateClubInfoUI();
-            let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == 
-                ClubMemberType.ClubAccountType_Owner
-            this.mUnionBtn.node.active = selfIsOwner;
-            this.mDismissBtn.node.active = selfIsOwner;
-            this.mExitBtn.node.active = !(selfIsOwner);
-        });
-
         LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
         {
             if(this.node.activeInHierarchy == false)

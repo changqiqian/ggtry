@@ -2232,7 +2232,6 @@ $root.ClubGameConfig = (function() {
      * @interface IClubGameConfig
      * @property {IGameBasicConfig|null} [basicConfig] ClubGameConfig basicConfig
      * @property {ITexasConfig|null} [texasConfig] ClubGameConfig texasConfig
-     * @property {IShortConfig|null} [shortConfig] ClubGameConfig shortConfig
      * @property {IMatchingConfig|null} [matchingConfig] ClubGameConfig matchingConfig
      */
 
@@ -2268,14 +2267,6 @@ $root.ClubGameConfig = (function() {
     ClubGameConfig.prototype.texasConfig = null;
 
     /**
-     * ClubGameConfig shortConfig.
-     * @member {IShortConfig|null|undefined} shortConfig
-     * @memberof ClubGameConfig
-     * @instance
-     */
-    ClubGameConfig.prototype.shortConfig = null;
-
-    /**
      * ClubGameConfig matchingConfig.
      * @member {IMatchingConfig|null|undefined} matchingConfig
      * @memberof ClubGameConfig
@@ -2299,10 +2290,8 @@ $root.ClubGameConfig = (function() {
             $root.GameBasicConfig.encode(m.basicConfig, w.uint32(10).fork()).ldelim();
         if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
             $root.TexasConfig.encode(m.texasConfig, w.uint32(18).fork()).ldelim();
-        if (m.shortConfig != null && Object.hasOwnProperty.call(m, "shortConfig"))
-            $root.ShortConfig.encode(m.shortConfig, w.uint32(26).fork()).ldelim();
         if (m.matchingConfig != null && Object.hasOwnProperty.call(m, "matchingConfig"))
-            $root.MatchingConfig.encode(m.matchingConfig, w.uint32(34).fork()).ldelim();
+            $root.MatchingConfig.encode(m.matchingConfig, w.uint32(26).fork()).ldelim();
         return w;
     };
 
@@ -2331,9 +2320,6 @@ $root.ClubGameConfig = (function() {
                 m.texasConfig = $root.TexasConfig.decode(r, r.uint32());
                 break;
             case 3:
-                m.shortConfig = $root.ShortConfig.decode(r, r.uint32());
-                break;
-            case 4:
                 m.matchingConfig = $root.MatchingConfig.decode(r, r.uint32());
                 break;
             default:
@@ -2453,6 +2439,8 @@ $root.GameBasicConfig = (function() {
      * @property {GameCurrencyType|null} [currencyType] GameBasicConfig currencyType
      * @property {GameTaxType|null} [taxType] GameBasicConfig taxType
      * @property {number|null} [taxRatio] GameBasicConfig taxRatio
+     * @property {IShortConfig|null} [shortConfig] GameBasicConfig shortConfig
+     * @property {IOmhConfig|null} [omhConfig] GameBasicConfig omhConfig
      */
 
     /**
@@ -2511,6 +2499,22 @@ $root.GameBasicConfig = (function() {
     GameBasicConfig.prototype.taxRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * GameBasicConfig shortConfig.
+     * @member {IShortConfig|null|undefined} shortConfig
+     * @memberof GameBasicConfig
+     * @instance
+     */
+    GameBasicConfig.prototype.shortConfig = null;
+
+    /**
+     * GameBasicConfig omhConfig.
+     * @member {IOmhConfig|null|undefined} omhConfig
+     * @memberof GameBasicConfig
+     * @instance
+     */
+    GameBasicConfig.prototype.omhConfig = null;
+
+    /**
      * Encodes the specified GameBasicConfig message. Does not implicitly {@link GameBasicConfig.verify|verify} messages.
      * @function encode
      * @memberof GameBasicConfig
@@ -2532,6 +2536,10 @@ $root.GameBasicConfig = (function() {
             w.uint32(32).int32(m.taxType);
         if (m.taxRatio != null && Object.hasOwnProperty.call(m, "taxRatio"))
             w.uint32(40).int64(m.taxRatio);
+        if (m.shortConfig != null && Object.hasOwnProperty.call(m, "shortConfig"))
+            $root.ShortConfig.encode(m.shortConfig, w.uint32(50).fork()).ldelim();
+        if (m.omhConfig != null && Object.hasOwnProperty.call(m, "omhConfig"))
+            $root.OmhConfig.encode(m.omhConfig, w.uint32(58).fork()).ldelim();
         return w;
     };
 
@@ -2567,6 +2575,12 @@ $root.GameBasicConfig = (function() {
                 break;
             case 5:
                 m.taxRatio = r.int64();
+                break;
+            case 6:
+                m.shortConfig = $root.ShortConfig.decode(r, r.uint32());
+                break;
+            case 7:
+                m.omhConfig = $root.OmhConfig.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);
@@ -2965,6 +2979,87 @@ $root.ShortConfig = (function() {
     return ShortConfig;
 })();
 
+$root.OmhConfig = (function() {
+
+    /**
+     * Properties of an OmhConfig.
+     * @exports IOmhConfig
+     * @interface IOmhConfig
+     * @property {number|null} [baseScore] OmhConfig baseScore
+     */
+
+    /**
+     * Constructs a new OmhConfig.
+     * @exports OmhConfig
+     * @classdesc Represents an OmhConfig.
+     * @implements IOmhConfig
+     * @constructor
+     * @param {IOmhConfig=} [p] Properties to set
+     */
+    function OmhConfig(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * OmhConfig baseScore.
+     * @member {number} baseScore
+     * @memberof OmhConfig
+     * @instance
+     */
+    OmhConfig.prototype.baseScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified OmhConfig message. Does not implicitly {@link OmhConfig.verify|verify} messages.
+     * @function encode
+     * @memberof OmhConfig
+     * @static
+     * @param {IOmhConfig} m OmhConfig message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    OmhConfig.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.baseScore != null && Object.hasOwnProperty.call(m, "baseScore"))
+            w.uint32(8).int64(m.baseScore);
+        return w;
+    };
+
+    /**
+     * Decodes an OmhConfig message from the specified reader or buffer.
+     * @function decode
+     * @memberof OmhConfig
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {OmhConfig} OmhConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    OmhConfig.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.OmhConfig();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.baseScore = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return OmhConfig;
+})();
+
 /**
  * ClubMemberType enum.
  * @exports ClubMemberType
@@ -2987,15 +3082,19 @@ $root.ClubMemberType = (function() {
  * @enum {number}
  * @property {number} GameType_TexasCash=0 GameType_TexasCash value
  * @property {number} GameType_ShortCash=1 GameType_ShortCash value
- * @property {number} GameType_Mtt=2 GameType_Mtt value
- * @property {number} GameType_Omh=3 GameType_Omh value
+ * @property {number} GameType_OmhCash=2 GameType_OmhCash value
+ * @property {number} GameType_TexasMtt=3 GameType_TexasMtt value
+ * @property {number} GameType_ShortMtt=4 GameType_ShortMtt value
+ * @property {number} GameType_OmhMtt=5 GameType_OmhMtt value
  */
 $root.GameType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "GameType_TexasCash"] = 0;
     values[valuesById[1] = "GameType_ShortCash"] = 1;
-    values[valuesById[2] = "GameType_Mtt"] = 2;
-    values[valuesById[3] = "GameType_Omh"] = 3;
+    values[valuesById[2] = "GameType_OmhCash"] = 2;
+    values[valuesById[3] = "GameType_TexasMtt"] = 3;
+    values[valuesById[4] = "GameType_ShortMtt"] = 4;
+    values[valuesById[5] = "GameType_OmhMtt"] = 5;
     return values;
 })();
 
