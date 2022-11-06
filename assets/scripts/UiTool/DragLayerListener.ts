@@ -1,12 +1,13 @@
 import { _decorator, Component, Node, Vec2 } from 'cc';
 import { BaseUI } from '../base/BaseUI';
 import { CommonNotify } from '../CommonNotify';
+import { MultipleTableCtr } from '../ui/common/MultipleTableCtr';
 const { ccclass, property } = _decorator;
 
 @ccclass('DragLayerListener')
 export class DragLayerListener extends BaseUI 
 {
-    mMaxOffset : number = -300;
+    mMaxOffset : number = - MultipleTableCtr.ContentHeight;
     mStartPosY : number = null;
     InitParam()
     {

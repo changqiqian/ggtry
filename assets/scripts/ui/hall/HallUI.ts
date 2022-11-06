@@ -32,6 +32,7 @@ export class HallUI extends BaseUI
         this.AddSubView("clubPage","prefab/Club_Page");
         this.AddSubView("mePage","prefab/Me_Page");
         this.AddSubView("hall","prefab/Hall_Bottom");
+        this.AddSubView("common","prefab/MultipleTableCtr");
     }
 
     RegDataNotify() 

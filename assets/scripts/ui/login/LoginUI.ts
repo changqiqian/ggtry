@@ -7,7 +7,7 @@ import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
-import { DragLayerDown } from '../../UiTool/DragLayerDown';
+import { DragDownEvent } from '../../UiTool/DragDownEvent';
 import { BaseButton } from '../common/BaseButton';
 import { TipsWindow } from '../common/TipsWindow';
 import { LoginData } from './LoginData';
@@ -40,11 +40,11 @@ export class LoginUI extends BaseUI
     TestIpBtn: BaseButton = null;
     InitParam() 
     {
-        
+        this.node.addComponent(DragDownEvent);
     }
     BindUI() 
     {
-        this.node.addComponent(DragLayerDown);
+        this.AddSubView("common","prefab/MultipleTableCtr");
         this.mVersion.string = GameConfig.Version;
 
         this.mLoginBtn.SetClickCallback(()=>

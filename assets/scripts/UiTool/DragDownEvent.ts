@@ -2,8 +2,8 @@ import { _decorator, Component, Node, EventTouch, Vec2, Vec4, math } from 'cc';
 import { CommonNotify } from '../CommonNotify';
 const { ccclass, property } = _decorator;
 
-@ccclass('DragLayerDown')
-export class DragLayerDown extends Component 
+@ccclass('DragDownEvent')
+export class DragDownEvent extends Component 
 {
     mStartPos : Vec2 = null;
     mEndPos : Vec2 = null;
@@ -23,6 +23,8 @@ export class DragLayerDown extends Component
     {
         this.Reset();
         this.mStartPos = _event.getUIStartLocation();
+
+        //_event.preventSwallow = true
     }
 
     private TouchMove(_event:EventTouch)
