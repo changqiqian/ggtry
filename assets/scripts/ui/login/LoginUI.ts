@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, Button, sys } from 'cc';
+import { _decorator, Component, Node, Label, Button, sys, SafeArea } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
