@@ -44,7 +44,7 @@ export class LoginUI extends BaseUI
     }
     BindUI() 
     {
-        this.ShowLayer("common","prefab/MultipleTableCtr");
+        UIMgr.Instance.AddLayerInTopRoot("common","prefab/MultipleTableCtr");
         this.mVersion.string = GameConfig.Version;
 
         this.mLoginBtn.SetClickCallback(()=>

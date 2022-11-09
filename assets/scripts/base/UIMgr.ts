@@ -146,6 +146,15 @@ export class UIMgr extends Singleton<UIMgr>()
         this.mToast.ShowToast(_tips , _duration);
     }
 
+    public AddLayerInTopRoot(_bundleName :string , _prefabPath:string)
+    {
+        this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
+        {
+            this.mTopRoot.addChild(_tempNode);
+            _tempNode.setSiblingIndex(0);
+        });
+    }
+
     public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null , _tag : string = "", _aka : string  = "")
     {
         let key = _bundleName + "/"  + _prefabPath + _aka;

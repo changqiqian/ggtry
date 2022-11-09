@@ -11,7 +11,7 @@ export class AdaptTop extends Component {
         let fullHeight = view.getVisibleSize().height;
         if(fullHeight > safeHeight)
         {
-            let offsetHeight = (fullHeight - safeHeight)/2.5;
+            let offsetHeight = (fullHeight - safeHeight)/3;
             let widget = this.node.getComponent(Widget);
             if(widget != null)
             {
