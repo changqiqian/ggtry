@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager, sys, view, Widget } from 'cc';
+import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager, sys, view, Widget, UITransform, Vec3, Size } from 'cc';
 import { CommonNotify } from '../CommonNotify';
 import { GameConfig } from '../GameConfig';
 import { MultipleTableCtr } from '../ui/common/MultipleTableCtr';
@@ -319,14 +319,21 @@ export abstract class BaseUI extends Component {
         if(widget != null)
         {
             widget.top = GameConfig.MultipleUIHeight;
-
+            widget.updateAlignment();
             //如果你prefab根节点下有叫bg的一张背景图，我就会帮你自动铺满全屏，不然为了适配刘海屏幕的时候，整个prefab
             //的顶部会被我缩一个小刘海尺寸，那么你的背景图就无法撑满全屏了
             let bg = this.node.getChildByName("BG");
             if(bg != null)
-            {
-                bg.addComponent(AdaptFullScreen);
-
+            {   
+                let bgWidget = bg.getComponent(Widget);
+                if(bgWidget != null)
+                {
+                    bgWidget.enabled = false;
+                }
+                let getVisibleSize = view.getVisibleSize();
+                let bgTransform = bg.getComponent(UITransform);
+                bgTransform.setContentSize(getVisibleSize);
+                bg.setWorldPosition(new Vec3(getVisibleSize.width/2 ,getVisibleSize.height/2));
             }
         }
     }
