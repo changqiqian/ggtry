@@ -2,6 +2,7 @@ import { _decorator, Component, Node, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { CommonNotify } from '../../CommonNotify';
 import { Network } from '../../network/Network';
+import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { HallData } from '../hall/HallData';
 import { LoginData } from '../login/LoginData';
 import { GameData } from './GameData';
@@ -12,22 +13,24 @@ const { ccclass, property } = _decorator;
 @ccclass('GameBase')
 export class GameBase extends BaseUI 
 {
+    private mIndex : number = null;
+    mMovingShow: MovingShow = null;
+    // onEnable()
+    // {
+    //     this.mMovingShow.ShowAnimation();
+    // }
     InitParam() 
     {
 
     }
     BindUI() 
     {
-        this.InitBottom();
-        this.InitGameStartInfo();
-        this.InitPot();
-        this.InitPublicCards();
-        this.InitSelfAction();
-        this.InitSelfPreAction();
-        this.InitSelfUI();
-        this.InitTopUI();
-        this.InitControlBtns();
-        this.InitOtherUI();
+        this.mMovingShow = this.node.getComponent(MovingShow);
+        this.mMovingShow.SetAnimationType(AnimationShowType.FromRight);
+        this.mMovingShow.SetAnimationCallback(()=>
+        {
+            this.node.active = false;
+        })
     }
     RegDataNotify() 
     {
@@ -50,6 +53,11 @@ export class GameBase extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    public ShowMoveInAnimation()
+    {
+        this.mMovingShow.ShowAnimation();
     }
 
     InitBottom()
@@ -100,18 +108,36 @@ export class GameBase extends BaseUI
     InitSeatUI(_seatCount : number)
     {
         let prefabName = "prefab/Game_SeatUI" + _seatCount;
-        if(this.HaveSubView("gamePage" , prefabName ) == false)
+        this.AddSubView("gamePage",  prefabName  , (_script) =>
         {
-            this.AddSubView("gamePage",  prefabName  , (_script) =>
-            {
-                this.GetGameInfoMsg();
-            });
-        }
+
+        });
     }
 
     InitOtherUI()
     {
 
+    }
+
+    public InitWithData(_index : number,_seatNum : number)
+    {
+        this.mIndex = _index;
+        this.InitBottom();
+        this.InitGameStartInfo();
+        this.InitPot();
+        this.InitPublicCards();
+        this.InitSelfAction();
+        this.InitSelfPreAction();
+        this.InitSelfUI();
+        this.InitTopUI();
+        this.InitControlBtns();
+        this.InitOtherUI();
+        this.InitSeatUI(_seatNum);
+    }
+
+    public GetIndex() : number
+    {
+        return this.mIndex;
     }
 
     GetGameInfoMsg()

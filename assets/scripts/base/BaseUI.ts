@@ -196,14 +196,14 @@ export abstract class BaseUI extends Component {
         }
     }
 
-    ShowLayer(_bundleName: string, _assetPath: string, _show: boolean = true, _finishFunction: Function = null, _tag : string = "") 
+    ShowLayer(_bundleName: string, _assetPath: string, _show: boolean = true, _finishFunction: Function = null, _tag : string = "",_aka : string  = "") 
     {
-        UIMgr.Instance.ShowLayer(_bundleName, _assetPath, _show, _finishFunction , _tag);
+        UIMgr.Instance.ShowLayer(_bundleName, _assetPath, _show, _finishFunction , _tag,_aka);
     }
 
-    ShowWindow(_bundleName: string, _prefabPath: string, _show: boolean = true, _finishFunction: Function = null, _tag : string = "") 
+    ShowWindow(_bundleName: string, _prefabPath: string, _show: boolean = true, _finishFunction: Function = null, _tag : string = "",_aka : string  = "") 
     {
-        UIMgr.Instance.ShowWindow(_bundleName, _prefabPath, _show, _finishFunction , _tag);
+        UIMgr.Instance.ShowWindow(_bundleName, _prefabPath, _show, _finishFunction , _tag,_aka);
     }
 
 

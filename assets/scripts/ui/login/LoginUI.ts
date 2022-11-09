@@ -40,11 +40,11 @@ export class LoginUI extends BaseUI
     TestIpBtn: BaseButton = null;
     InitParam() 
     {
-        this.node.addComponent(DragDownEvent);
+        //this.node.addComponent(DragDownEvent);
     }
     BindUI() 
     {
-        this.AddSubView("common","prefab/MultipleTableCtr");
+        this.ShowLayer("common","prefab/MultipleTableCtr");
         this.mVersion.string = GameConfig.Version;
 
         this.mLoginBtn.SetClickCallback(()=>

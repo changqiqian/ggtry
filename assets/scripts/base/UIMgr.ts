@@ -146,9 +146,9 @@ export class UIMgr extends Singleton<UIMgr>()
         this.mToast.ShowToast(_tips , _duration);
     }
 
-    public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null , _tag : string = "")
+    public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null , _tag : string = "", _aka : string  = "")
     {
-        let key = _bundleName + "/"  + _prefabPath;
+        let key = _bundleName + "/"  + _prefabPath + _aka;
         let target = this.FindLayer(key,LayerType.Layer);
 
         if(target != null && target.value == null)
@@ -170,7 +170,7 @@ export class UIMgr extends Singleton<UIMgr>()
             }
             return;
         }
-        this.CreateRecordItem(key , LayerType.Layer , _tag);
+        this.CreateRecordItem(key, LayerType.Layer , _tag);
         this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
         {
             this.GetRootNode(LayerType.Layer).addChild(_tempNode);
@@ -186,9 +186,9 @@ export class UIMgr extends Singleton<UIMgr>()
         });
     }
 
-    public ShowWindow(_bundleName :string , _prefabPath:string , _show : boolean = true, _finishFunction : Function = null, _tag : string = "")
+    public ShowWindow(_bundleName :string , _prefabPath:string , _show : boolean = true, _finishFunction : Function = null, _tag : string = "",_aka : string  = "")
     {
-        let key = _bundleName + "/"  + _prefabPath;
+        let key = _bundleName + "/"  + _prefabPath + _aka;
         let target = this.FindLayer(key,LayerType.Window);
 
         if(target != null && target.value == null)

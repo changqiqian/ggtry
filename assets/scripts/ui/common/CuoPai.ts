@@ -134,7 +134,7 @@ export class CuoPai extends BaseUI {
                 this.mMoveStart = true;
                 this.mSinCos = obj.sincos;
 
-                this.mShadow!.active = true;
+                // this.mShadow!.active = true;
                 
                 let angle = this.getSignAngle(endPos,startPos);
          
@@ -224,8 +224,8 @@ export class CuoPai extends BaseUI {
                 //遮罩层移动前位置修正
                 let tpp  = this.mMaskMove!.node.getComponent(PolygonCollider2D)!;
                 let twpa = this.mCardWorldPoints;
-                while(1){
-
+                while(1)
+                {
                     this.mMaskMove!.node.setPosition(this.mMaskMove!.node.getPosition().x + this.mSinCos.cos,this.mMaskMove!.node.getPosition().y + this.mSinCos.sin);
                     if(!Intersection2D.pointInPolygon(new Vec2(twpa[index].x,twpa[index].y),tpp.worldPoints))
                     break;
@@ -262,6 +262,8 @@ export class CuoPai extends BaseUI {
         }
         else
         {
+            let dragDistance = this.getSignDistance(endPos,startPos).distance;
+            this.mShadow.active = dragDistance >= 30;
             //获取触碰点移动角度
             let angle = this.getSignAngle(endPos,this.mTouchPos[0]);
             let addx = this.mSinCos.cos;
@@ -271,16 +273,26 @@ export class CuoPai extends BaseUI {
             //反方向修正
             if( this.mMaskMove!.node.angle + 90 >= angle && this.mMaskMove!.node.angle - 90 <= angle )
             {//正
-            }else{
+            }
+            else
+            {
              //负
                 addx = -this.mSinCos.cos;
                 addy = -this.mSinCos.sin;    
                 switch(cardfacetype)
                 {
-                    case 0:cardfacetype=1;break;
-                    case 1:cardfacetype=0;break;
-                    case 2:cardfacetype=3;break;
-                    case 3:cardfacetype=2;break;
+                    case Direciton.ToRight:
+                        cardfacetype = Direciton.ToLeft;
+                        break;
+                    case Direciton.ToLeft:
+                        cardfacetype = Direciton.ToRight;
+                        break;
+                    case Direciton.ToUp:
+                        cardfacetype = Direciton.ToBottom;
+                        break;
+                    case Direciton.ToBottom:
+                        cardfacetype = Direciton.ToUp;
+                        break;
                 }
             }
 
@@ -292,18 +304,30 @@ export class CuoPai extends BaseUI {
             {
                 switch(cardfacetype)
                 {
-                    case 0:
+                    case Direciton.ToRight:
                         if(endPos.x <= maskShadow_rect.worldPoints[0].x)
-                        {isBack = true;}break;
-                    case 1:
+                        {
+                            isBack = true;
+                        }
+                        break;
+                    case Direciton.ToLeft:
                         if(endPos.x >= maskShadow_rect.worldPoints[0].x)
-                        {isBack = true;}break;
-                    case 2://
+                        {
+                            isBack = true;
+                        }
+                        break;
+                    case Direciton.ToUp://
                         if(endPos.y <= maskShadow_rect.worldPoints[0].y)
-                        {isBack = true;}break;
-                    case 3://
+                        {
+                            isBack = true;
+                        }
+                        break;
+                    case Direciton.ToBottom://
                         if(endPos.y >= maskShadow_rect.worldPoints[0].y)
-                        {isBack = true;}break;
+                        {
+                            isBack = true;
+                        }
+                        break;
                 }
                 if(isBack)break;
                 //最外遮罩层的移动
