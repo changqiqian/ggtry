@@ -57,7 +57,7 @@ export class GameBase extends BaseUI
 
     public ShowMoveInAnimation()
     {
-        this.mMovingShow.ShowAnimation();
+        this.mMovingShow.ShowAnimation(0.5);
     }
 
     InitBottom()
