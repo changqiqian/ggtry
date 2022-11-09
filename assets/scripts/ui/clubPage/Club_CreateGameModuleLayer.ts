@@ -18,6 +18,7 @@ export class Club_CreateGameModuleLayer extends BaseUI
     InitParam()
     {
         HallData.Instance.Data_ClubRefreshGameModule.mData = true;
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

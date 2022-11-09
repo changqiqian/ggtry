@@ -1,10 +1,12 @@
-import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager } from 'cc';
+import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager, sys, view, Widget } from 'cc';
 import { CommonNotify } from '../CommonNotify';
+import { GameConfig } from '../GameConfig';
+import { MultipleTableCtr } from '../ui/common/MultipleTableCtr';
 import { CowboyData } from '../ui/cowboy/CowboyData';
-import { GameData } from '../ui/gamePage/GameData';
 import { HallData } from '../ui/hall/HallData';
 import { LoadingData } from '../ui/loading/LoadingData';
 import { LoginData } from '../ui/login/LoginData';
+import { AdaptFullScreen } from '../UiTool/AdaptFullScreen';
 import { LocalPlayerData } from './LocalPlayerData';
 import { ResMgr } from './ResMgr';
 import { UIMgr } from './UIMgr';
@@ -40,6 +42,8 @@ const { ccclass, property } = _decorator;
 
 // }
 @ccclass('BaseUI')
+
+//如果你这个prefab有撑满全屏的背景图，那么将他放在prefab的根节点下，并且命名成BG
 export abstract class BaseUI extends Component {
     mIsWindow: boolean = false;
     mLayerList: Array<SubViewKeyPair>;
@@ -297,6 +301,7 @@ export abstract class BaseUI extends Component {
     OnSecondTimer()
     {
 
+
     }
 
 
@@ -304,5 +309,26 @@ export abstract class BaseUI extends Component {
     {
         this.node.removeFromParent();
         this.node.destroy();
+
     }
+
+
+    AutoAdaptMultipleTableUI()
+    {
+        let widget = this.node.getComponent(Widget);
+        if(widget != null)
+        {
+            widget.top = GameConfig.MultipleUIHeight;
+
+            //如果你prefab根节点下有叫bg的一张背景图，我就会帮你自动铺满全屏，不然为了适配刘海屏幕的时候，整个prefab
+            //的顶部会被我缩一个小刘海尺寸，那么你的背景图就无法撑满全屏了
+            let bg = this.node.getChildByName("BG");
+            if(bg != null)
+            {
+                bg.addComponent(AdaptFullScreen);
+
+            }
+        }
+    }
+
 }

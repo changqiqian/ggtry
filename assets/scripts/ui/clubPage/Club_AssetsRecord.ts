@@ -13,7 +13,7 @@ export class Club_AssetsRecord extends BaseUI
     
     InitParam()
     {
-
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

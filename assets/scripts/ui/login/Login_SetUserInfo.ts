@@ -39,7 +39,7 @@ export class Login_SetUserInfo extends BaseUI
 
     InitParam() 
     {
-
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

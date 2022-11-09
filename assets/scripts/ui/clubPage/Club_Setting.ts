@@ -94,7 +94,7 @@ export class Club_Setting extends BaseUI
 
     InitParam()
     {
-        
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

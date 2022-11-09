@@ -26,7 +26,7 @@ export class Club_RecordLayer extends BaseUI
     mScrollView: ScrollView = null;
     InitParam()
     {
-
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

@@ -17,7 +17,7 @@ export class GameUI extends BaseUI
 
     InitParam() 
     {
-
+        this.AutoAdaptMultipleTableUI();
         
     }
     BindUI() 

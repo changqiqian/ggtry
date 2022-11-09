@@ -34,7 +34,7 @@ export class Login_LoginView extends BaseUI {
 
     InitParam() 
     {
-
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

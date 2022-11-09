@@ -17,7 +17,10 @@ export class Me_Record extends BaseUI {
         HallData.Instance.Data_MeRecodeSubPage.mData = Me_ReocordSubPage.CyberRecord;
     }
 
-    InitParam() {}
+    InitParam() 
+    {
+        this.AutoAdaptMultipleTableUI();
+    }
     BindUI() {
         this.mBackBtn.SetClickCallback(() => {
             this.Show(false);

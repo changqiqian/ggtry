@@ -16,7 +16,7 @@ export class Club_DataLayer extends BaseUI
     mSubLayer: Node = null;
     InitParam()
     {
-
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

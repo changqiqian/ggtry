@@ -34,9 +34,14 @@ export class Me_RankDetail extends BaseUI {
     @property(Sprite)
     mHeadNo3: Sprite = null;
 
-    InitParam() {}
-    BindUI() {
-        this.mCloseBtn.SetClickCallback(() => {
+    InitParam() 
+    {
+        this.AutoAdaptMultipleTableUI();
+    }
+    BindUI() 
+    {
+        this.mCloseBtn.SetClickCallback(() => 
+        {
             this.Show(false);
         });
     }

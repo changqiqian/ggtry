@@ -28,6 +28,7 @@ export class LoadingUI extends BaseUI
         this.mTips.string = "";
         this.mPercent.string = "";
         this.mProgress.fillRange = 0;
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

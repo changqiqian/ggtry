@@ -529,7 +529,7 @@
     "_id": "9fXNi9yNVJtZlS7A00juJR"
   },
   {
-    "__type__": "cc.SafeArea",
+    "__type__": "661a1Orv3RLzochI7rWQazD",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -537,7 +537,7 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "_id": "5aut49wTpGL5X33JFynGfM"
+    "_id": "dapffgFu1GhZtgougwqL0A"
   },
   {
     "__type__": "cc.Node",

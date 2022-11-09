@@ -29,7 +29,6 @@ export class MultipleTableCtr extends BaseUI {
     @property(ToggleBtn) 
     mHomeToggle: ToggleBtn = null;
 
-    public static ContentHeight :number = 160;
     public static MaxGame : number = 4;
     private mHomeIndex : number = -1;
 

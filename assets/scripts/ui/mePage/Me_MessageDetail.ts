@@ -11,16 +11,28 @@ export class Me_MessageDetail extends BaseUI {
     @property(Label)
     mDetail: Label = null;
 
-    InitParam() {}
-    BindUI() {
+    InitParam() 
+    {
+        this.AutoAdaptMultipleTableUI();
+    }
+    BindUI() 
+    {
 
-        this.mBackBtn.SetClickCallback(() => {
+        this.mBackBtn.SetClickCallback(() => 
+        {
             this.Show(false);
         });
     }
-    RegDataNotify() {
+    RegDataNotify() 
+    {
 
     }
-    LateInit() {}
-    CustmoerDestory() {}
+    LateInit() 
+    {
+
+    }
+    CustmoerDestory() 
+    {
+        
+    }
 }

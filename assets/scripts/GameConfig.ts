@@ -14,14 +14,14 @@ export class GameConfig
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
     }
     //发布的版本号
-    public static Version = "1.4.2"
+    public static Version = "1.4.3"
 
       
     public static LOGIN_TOKEN;
 
     public static WebberAddr= "http://18.142.237.115:9487"; //打开收银台web
 
-
+    public static MultipleUIHeight = 160;
     public static ClubLogoNumber = 8; //俱乐部logo数量
     public static ClubStampNumber = 4; //俱乐部封面数量
 

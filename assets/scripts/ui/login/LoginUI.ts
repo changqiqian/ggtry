@@ -40,7 +40,7 @@ export class LoginUI extends BaseUI
     TestIpBtn: BaseButton = null;
     InitParam() 
     {
-        //this.node.addComponent(DragDownEvent);
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

@@ -23,6 +23,7 @@ export class Club_CreateShort extends BaseUI
     mCreateBtn: BaseButton = null;
     InitParam()
     {
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

@@ -23,7 +23,7 @@ export class HallUI extends BaseUI
 
     InitParam() 
     {
-        
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

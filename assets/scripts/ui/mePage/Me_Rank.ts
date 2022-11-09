@@ -18,7 +18,10 @@ export class Me_Rank extends BaseUI {
     mIsLastPage: boolean = false;
     mCurrentData: Array<any> = [];
 
-    InitParam() {}
+    InitParam() 
+    {
+        this.AutoAdaptMultipleTableUI();
+    }
     BindUI() {
         this.mScrollView.node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
 

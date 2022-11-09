@@ -22,7 +22,7 @@ export class Club_CreateTexas extends BaseUI
     mCreateBtn: BaseButton = null;
     InitParam()
     {
-        
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

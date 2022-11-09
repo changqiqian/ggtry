@@ -42,7 +42,7 @@ export class Login_LoginViewPwd extends BaseUI {
 
     InitParam() 
     {
-
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

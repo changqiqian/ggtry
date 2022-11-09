@@ -46,7 +46,7 @@ export class Club_PrivateLayer extends BaseUI
     }
     InitParam()
     {
-        
+        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

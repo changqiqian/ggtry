@@ -31,7 +31,10 @@ export class Me_Message extends BaseUI {
         HallData.Instance.Data_MeMessageSubPage.mData = Me_MessageSubPage.Announcement;
     }
 
-    InitParam() {}
+    InitParam() 
+    {
+        this.AutoAdaptMultipleTableUI();
+    }
     BindUI() {
         this.mBackBtn.SetClickCallback(() => {
             this.Show(false);
