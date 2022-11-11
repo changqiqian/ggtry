@@ -36,22 +36,7 @@ export class Club_ApplyingMember extends BaseUI {
     }
     RegDataNotify()
     {
-        HallData.Instance.Data_ClubApplyingSuccess.AddListenner(this,(_data)=>
-        {
-            if(this.node.activeInHierarchy == false)
-            {
-                return;
-            }
-            if(_data)
-            {
-                let users = HallData.Instance.GetApplyingUsers(this.mClubId);
-                let index = users.findIndex((_item) => _item.uid === this.mUserInfo.uid);
-                if(index < 0)
-                {
-                    this.DeleteSelf();
-                }
-            }
-        });
+        
     }
     LateInit()
     {

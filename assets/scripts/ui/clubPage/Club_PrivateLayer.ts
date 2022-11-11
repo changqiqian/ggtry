@@ -8,6 +8,7 @@ import { HallData } from '../hall/HallData';
 import { Club_MemberNotifyWindow } from './Club_MemberNotifyWindow';
 import { UIMgr } from '../../base/UIMgr';
 import { Localization } from '../../base/Localization';
+import ListView from '../../UiTool/ListView';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_PrivateLayer')
@@ -35,8 +36,8 @@ export class Club_PrivateLayer extends BaseUI
     mDataBtn: BaseButton = null;
     @property(BaseButton) 
     mCreateBtn: BaseButton = null;
-    @property(ScrollView) 
-    mScrollView: ScrollView = null;
+    @property(ListView) 
+    mListView: ListView = null;
 
 
     onEnable()
@@ -50,6 +51,8 @@ export class Club_PrivateLayer extends BaseUI
     }
     BindUI()
     {
+        this.mListView.SetRenderCallback(this.RenderEvent.bind(this));
+
         this.mBackBtn.SetClickCallback(()=>
         {
             LocalPlayerData.Instance.Data_SelfClubInfo.ResetData();
@@ -229,6 +232,11 @@ export class Club_PrivateLayer extends BaseUI
             UIMgr.Instance.ShowToast(Localization.GetString("00099"));
         }
         return selfIsOwner;
+    }
+
+    RenderEvent(_item: Node , _index: number)
+    {
+
     }
 }
 

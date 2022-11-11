@@ -49,8 +49,8 @@ export class LoginUI extends BaseUI
 
         this.mLoginBtn.SetClickCallback(()=>
         {
-            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");
-            UIMgr.Instance.ShowLayer("login","prefab/TestList");
+            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");
+            //UIMgr.Instance.ShowLayer("login","prefab/TestList");
         });
 
         this.mSignBtn.SetClickCallback(()=>

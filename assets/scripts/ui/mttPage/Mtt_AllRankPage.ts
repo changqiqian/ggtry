@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, ScrollView, instantiate, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Network } from '../../network/Network';
+import ListView from '../../UiTool/ListView';
 import { HallData, Mtt_RankSubPage } from '../hall/HallData';
 import { Mtt_RankItem } from './Mtt_RankItem';
 const { ccclass, property } = _decorator;
@@ -10,16 +11,19 @@ export class Mtt_AllRankPage extends BaseUI
 {
     @property(Label) 
     mTime: Label = null;
-    @property(ScrollView) 
-    mScrollView: ScrollView = null;
+    @property(ListView) 
+    mListView: ListView = null;
     @property(Node) 
     mNoData: Node = null;
 
-    mCurrentPage :number = 0;
-    mPageCount : number = 20;
+    mCurrentPage :number = 1;
+    mPageSize : number = 20;
     mIsLastPage : boolean = false;
-    mCurrentData : Array<any>;
-
+    mCurrentData : Array<ClubMember>;
+    onEnable()
+    {
+        this.OnDragTop();
+    }
     InitParam() 
     {
 
@@ -28,18 +32,15 @@ export class Mtt_AllRankPage extends BaseUI
     {
         this.node.active = false;
         this.mNoData.active = false;
-        this.mScrollView.node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
+        this.mListView.SetRenderCallback(this.RenderEvent.bind(this));
+        this.mListView.SetDragBottom(this.OnDragBottom.bind(this));
+        this.mListView.SetDragTop(this.OnDragTop.bind(this));    
     }
     RegDataNotify() 
     {
         HallData.Instance.Data_MttRankSubPage.AddListenner(this , (_data)=>
         {
             this.Show(_data == Mtt_RankSubPage.All);
-            if(_data == Mtt_RankSubPage.All)
-            {
-                this.ResetPage();
-                this.Refresh();
-            }
         })
     }
     LateInit() 
@@ -47,13 +48,14 @@ export class Mtt_AllRankPage extends BaseUI
 
     }
 
-    CustmoerDestory() 
+    CustmoerDestory()
     {
-
+        this.mCurrentData = null;
     }
+
     Refresh()
     {
-        this.mCurrentPage++;
+
     }
 
     OnDragBottom() 
@@ -65,12 +67,23 @@ export class Mtt_AllRankPage extends BaseUI
         this.Refresh();
     }
 
+    OnDragTop() 
+    {
+        this.ResetPage();
+        this.Refresh();
+    }
+
     ResetPage()
     {
         this.mIsLastPage = false;
-        this.mCurrentData = new Array<any>();
-        this.mCurrentPage = 0;
-        this.mScrollView.content.destroyAllChildren();
+        this.mCurrentData = new Array<ClubMember>();
+        this.mCurrentPage = 1;
+        this.mListView.numItems = 0;
+    }
+
+    RenderEvent(_item: Node , _index: number)
+    {
+
     }
 }
 

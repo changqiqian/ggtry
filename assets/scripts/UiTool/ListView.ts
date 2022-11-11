@@ -78,6 +78,7 @@
     public frameByFrameRenderNum: number = 0;
     private renderEvent: Function = null;
     private dragBottomCallback :  Function = null;
+    private dragTopCallback :  Function = null;
 
     private _forceUpdate: boolean = false;
     private _align: number;
@@ -243,6 +244,7 @@
          this.node.on('scrolling', this._onScrolling, this);
          this.node.on(Node.EventType.SIZE_CHANGED, this._onSizeChanged, this);
          this.node.getComponent(ScrollView).node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
+         this.node.getComponent(ScrollView).node.on(ScrollView.EventType.BOUNCE_TOP, this.OnDragTop, this);
      }
      //卸载事件
      _unregisterEvent() {
@@ -254,7 +256,7 @@
          this.node.off('scrolling', this._onScrolling, this);
          this.node.off(Node.EventType.SIZE_CHANGED, this._onSizeChanged, this);
          this.node.getComponent(ScrollView).node.off(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
-
+         this.node.getComponent(ScrollView).node.off(ScrollView.EventType.BOUNCE_TOP, this.OnDragTop, this);
      }
      //初始化各种..
      _init() {
@@ -1448,12 +1450,25 @@
      {
         this.dragBottomCallback = _dragBottomCallback;
      }
+
+     public SetDragTop(_dragTopCallback : Function)
+     {
+        this.dragTopCallback = _dragTopCallback;
+     }
      
      private OnDragBottom()
      {
         if(this.dragBottomCallback)
         {
             this.dragBottomCallback();
+        }
+     }
+
+     private OnDragTop()
+     {
+        if(this.dragTopCallback)
+        {
+            this.dragTopCallback();
         }
      }
  }

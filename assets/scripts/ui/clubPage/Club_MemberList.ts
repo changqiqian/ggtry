@@ -2,6 +2,7 @@ import { _decorator, Component, Node, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { NetworkSend } from '../../network/NetworkSend';
+import ListView from '../../UiTool/ListView';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
 import { Club_Member } from './Club_Member';
@@ -11,8 +12,8 @@ const { ccclass, property } = _decorator;
 export class Club_MemberList extends BaseUI {
     @property(BaseButton) 
     mCloseBtn: BaseButton = null;
-    @property(ScrollView) 
-    mScrollView: ScrollView = null;
+    @property(ListView) 
+    mListView: ListView = null;
 
     mCurrentPage :number = 1;
     mPageSize : number = 20;
@@ -21,22 +22,22 @@ export class Club_MemberList extends BaseUI {
 
     onEnable()
     {
-        this.ResetPage();
-        this.Refresh();
+        this.OnDragTop();
     }
-
-
     InitParam()
     {
 
     }
     BindUI()
     {
-        this.mScrollView.node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
         this.mCloseBtn.SetClickCallback(()=>
         {
             this.CloseAsWindow();
         });
+
+        this.mListView.SetRenderCallback(this.RenderEvent.bind(this));
+        this.mListView.SetDragBottom(this.OnDragBottom.bind(this));
+        this.mListView.SetDragTop(this.OnDragBottom.bind(this));
     }
     RegDataNotify()
     {
@@ -63,20 +64,18 @@ export class Club_MemberList extends BaseUI {
                 return;
             }
 
-
             for(let i = 0 ; i < _data.clubMembers.length ; i++)
             {
                 let current = _data.clubMembers[i];
-                this.LoadPrefab("clubPage" , "prefab/Club_Member" , (_prefab)=>
+                let index = this.mCurrentData.findIndex((_item) => _item.uid === current.uid);
+                if(index < 0)
                 {
-                    let tempNode = instantiate(_prefab);
-                    this.mScrollView.content.addChild(tempNode);
-                    let tempScript = tempNode.getComponent(Club_Member);
-                    tempScript.InitWithData(current);
-                });
-                this.mCurrentData.push(current);
+                    this.mCurrentData.push(current);
+                }
             }
             
+
+            this.mListView.numItems = this.mCurrentData.length;
 
             if(this.mCurrentData.length >= _data.totalMember)
             {
@@ -115,12 +114,25 @@ export class Club_MemberList extends BaseUI {
         this.Refresh();
     }
 
+    OnDragTop() 
+    {
+        this.ResetPage();
+        this.Refresh();
+    }
+
     ResetPage()
     {
         this.mIsLastPage = false;
         this.mCurrentData = new Array<ClubMember>();
         this.mCurrentPage = 1;
-        this.mScrollView.content.destroyAllChildren();
+        this.mListView.numItems = 0;
+    }
+
+    RenderEvent(_item: Node , _index: number)
+    {
+        let srcData = this.mCurrentData[_index];
+        let script = _item.getComponent(Club_Member);
+        script.InitWithData(srcData);
     }
 }
 

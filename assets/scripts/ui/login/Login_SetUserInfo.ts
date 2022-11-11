@@ -27,9 +27,6 @@ export class Login_SetUserInfo extends BaseUI
     @property(BaseButton) 
     mConfirmBtn: BaseButton = null;
 
-
-
-    
     onEnable()
     {
         this.mNickNameEditBox.string = "";

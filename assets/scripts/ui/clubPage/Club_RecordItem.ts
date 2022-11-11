@@ -4,8 +4,8 @@ import { BaseButton } from '../common/BaseButton';
 import { CircleTimer } from '../common/CircleTimer';
 const { ccclass, property } = _decorator;
 
-@ccclass('Club_RecardItem')
-export class Club_RecardItem extends BaseUI 
+@ccclass('Club_RecordItem')
+export class Club_RecordItem extends BaseUI 
 {
     @property(CircleTimer) 
     mCircleTimer: CircleTimer = null;

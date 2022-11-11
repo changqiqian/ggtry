@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Label, ScrollView } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import ListView from '../../UiTool/ListView';
 import { Club_RecordDetailSubPage, HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
 
@@ -28,8 +29,8 @@ export class Club_RecordGeneralLayer extends BaseUI
     mTotalHands: Label = null;
     @property(Label)
     mTotalBringIn: Label = null;
-    @property(ScrollView)
-    mScrollView: ScrollView = null;
+    @property(ListView)
+    mListView: ListView = null;
 
     
     InitParam()
@@ -38,7 +39,7 @@ export class Club_RecordGeneralLayer extends BaseUI
     }
     BindUI()
     {
-
+        this.mListView.SetRenderCallback(this.RenderEvent.bind(this));
     }
     RegDataNotify()
     {
@@ -54,6 +55,11 @@ export class Club_RecordGeneralLayer extends BaseUI
 
     }
     CustmoerDestory()
+    {
+
+    }
+
+    RenderEvent(_item: Node , _index: number)
     {
 
     }

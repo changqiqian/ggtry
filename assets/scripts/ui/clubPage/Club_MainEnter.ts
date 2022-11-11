@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Sprite, Label, UITransform, view, PageView } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { UIMgr } from '../../base/UIMgr';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';

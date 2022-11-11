@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Label, ScrollView } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import ListView from '../../UiTool/ListView';
 import { BaseButton } from '../common/BaseButton';
 import { ToggleBtn } from '../common/ToggleBtn';
 import { HallData } from '../hall/HallData';
@@ -22,8 +23,8 @@ export class Club_RecordLayer extends BaseUI
     mGameNum: Label = null;
     @property(Label) 
     mVPIP: Label = null;
-    @property(ScrollView) 
-    mScrollView: ScrollView = null;
+    @property(ListView) 
+    mListView: ListView = null;
     InitParam()
     {
         this.AutoAdaptMultipleTableUI();
@@ -51,6 +52,10 @@ export class Club_RecordLayer extends BaseUI
             currentToggle.SetDataNotify(HallData.Instance.Data_ClubRecordDateType, i);
         }
 
+
+        this.mListView.SetRenderCallback(this.RenderEvent.bind(this));
+        this.mListView.SetDragTop(this.OnDragTop.bind(this));
+
     }
     RegDataNotify()
     {
@@ -61,6 +66,16 @@ export class Club_RecordLayer extends BaseUI
 
     }
     CustmoerDestory()
+    {
+
+    }
+
+    RenderEvent(_item: Node , _index: number)
+    {
+
+    }
+
+    OnDragTop() 
     {
 
     }

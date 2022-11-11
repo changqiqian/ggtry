@@ -14,11 +14,11 @@ export class Start extends Component
 {
     onLoad()
     {
-        setDisplayStats(false);
+        setDisplayStats(true);
         if (cc.sys.isNative) 
         {
             console.log('设置屏幕常亮')
-            jsb.Device.setKeepScreenOn(true)
+            jsb.Device.setKeepScreenOn(true);
         }
     }
     start() 
