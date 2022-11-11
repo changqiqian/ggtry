@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, EditBox, Label, Sprite } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
+import { UIMgr } from '../../base/UIMgr';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
@@ -59,12 +60,12 @@ export class Club_CreateLayer extends BaseUI
 
         this.mLogoBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_LogoChoseLayer");
+            UIMgr.Instance.ShowWindow("clubPage","prefab/Club_LogoChoseLayer");
         });
 
         this.mStampBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_StampChoseLayer");
+            UIMgr.Instance.ShowWindow("clubPage","prefab/Club_StampChoseLayer");
         });
 
         this.mNameEditBox.node.on('text-changed', (_param)=>

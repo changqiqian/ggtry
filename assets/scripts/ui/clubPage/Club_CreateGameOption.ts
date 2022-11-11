@@ -27,12 +27,12 @@ export class Club_CreateGameOption extends BaseUI
         this.mNLHBtn.SetClickCallback(()=>
         {
             HallData.Instance.ResetCreateRoomParam(GameType.GameType_TexasCash);
-            this.ShowLayer("clubPage","prefab/Club_CreateTexas");
+            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_CreateTexas");
         });
         this.mShortBtn.SetClickCallback(()=>
         {
             HallData.Instance.ResetCreateRoomParam(GameType.GameType_TexasCash);
-            this.ShowLayer("clubPage","prefab/Club_CreateShort");
+            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_CreateShort");
         });
         this.mMttBtn.SetClickCallback(()=>
         {
@@ -40,7 +40,7 @@ export class Club_CreateGameOption extends BaseUI
         });
         this.mModuleBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_CreateGameModuleLayer");
+            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_CreateGameModuleLayer");
         });
         this.mCloseBtn.SetClickCallback(()=>
         {

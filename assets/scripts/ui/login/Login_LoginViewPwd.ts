@@ -55,12 +55,12 @@ export class Login_LoginViewPwd extends BaseUI {
  
         this.mAreaCodeBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("common","prefab/AreaCodeView");
+            UIMgr.Instance.ShowLayer("common","prefab/AreaCodeView");
         });
 
         this.mForgetBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("common","prefab/ForgetPwd");
+            UIMgr.Instance.ShowLayer("common","prefab/ForgetPwd");
         });
 
         this.mSeePwdToggle.SetClickCallback((_result)=>
@@ -97,7 +97,7 @@ export class Login_LoginViewPwd extends BaseUI {
  
         this.mSMSLoginBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("login","prefab/Login_LoginView",true,(_script)=>
+            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView",true,(_script)=>
             {
                 this.Show(false);
             });

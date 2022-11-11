@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Sprite, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { GameData } from '../gamePage/GameData';
 import { HallData } from '../hall/HallData';
 import { ToggleBtn } from './ToggleBtn';
 const { ccclass, property } = _decorator;
@@ -27,11 +28,11 @@ export class MultipleTableBtn extends BaseUI
 
     InitParam()
     {
-
+        this.ResetUI();
     }
     BindUI()
     {
-
+        
     }
     RegDataNotify()
     {
@@ -50,7 +51,6 @@ export class MultipleTableBtn extends BaseUI
     {
         this.mIndex = _index;
         this.mToggleBtn.SetDataNotify(HallData.Instance.Data_MultipeIndex,_index);
-        // this.ResetUI();
     }
 
     ResetUI()
@@ -61,5 +61,11 @@ export class MultipleTableBtn extends BaseUI
         this.mOmhContainer.active = false;
         this.mPot.active = false;
     }
+
+    BindGameData(_gameData : GameData)
+    {
+        
+    }
+
 }
 

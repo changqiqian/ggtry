@@ -2,7 +2,6 @@ import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { BaseButton } from '../../common/BaseButton';
-import { GameData } from '../GameData';
 import { Game_Player } from './Game_Player';
 const { ccclass, property } = _decorator;
 
@@ -16,6 +15,8 @@ export class Game_SeatItem extends BaseUI
     @property(Game_Player) 
     mGame_Player: Game_Player = null;
     mSeatID : number = null; //座位编号
+
+    private mIndex : number = null;
     InitParam() 
     {
 
@@ -51,6 +52,11 @@ export class Game_SeatItem extends BaseUI
     {
         this.mSeatID = _id;
         this.mGame_Player.SetSeatID(_id);
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 }
 

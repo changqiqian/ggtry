@@ -10,6 +10,8 @@ export class Game_SelfPreAction extends BaseUI
     mPreFoldCheck: ToggleBtn = null;
     @property(ToggleBtn) 
     mPreCall: ToggleBtn = null;
+
+    private mIndex : number = null;
     InitParam() 
     {
 
@@ -30,6 +32,11 @@ export class Game_SelfPreAction extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 }
 

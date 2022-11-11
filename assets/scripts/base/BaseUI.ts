@@ -1,12 +1,10 @@
 import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager, sys, view, Widget, UITransform, Vec3, Size } from 'cc';
 import { CommonNotify } from '../CommonNotify';
 import { GameConfig } from '../GameConfig';
-import { MultipleTableCtr } from '../ui/common/MultipleTableCtr';
 import { CowboyData } from '../ui/cowboy/CowboyData';
 import { HallData } from '../ui/hall/HallData';
 import { LoadingData } from '../ui/loading/LoadingData';
 import { LoginData } from '../ui/login/LoginData';
-import { AdaptFullScreen } from '../UiTool/AdaptFullScreen';
 import { LocalPlayerData } from './LocalPlayerData';
 import { ResMgr } from './ResMgr';
 import { UIMgr } from './UIMgr';
@@ -71,7 +69,6 @@ export abstract class BaseUI extends Component {
         LoadingData.Instance.RemoveAllDataListennerByTarget(this);
         LoginData.Instance.RemoveAllDataListennerByTarget(this);
         HallData.Instance.RemoveAllDataListennerByTarget(this);
-        //GameData.Instance.RemoveAllDataListennerByTarget(this);
         LocalPlayerData.Instance.RemoveAllDataListennerByTarget(this);
         CommonNotify.Instance.RemoveAllDataListennerByTarget(this);
         this.StopSecondsTimer();
@@ -200,16 +197,6 @@ export abstract class BaseUI extends Component {
         }
     }
 
-    ShowLayer(_bundleName: string, _assetPath: string, _show: boolean = true, _finishFunction: Function = null, _tag : string = "",_aka : string  = "") 
-    {
-        UIMgr.Instance.ShowLayer(_bundleName, _assetPath, _show, _finishFunction , _tag,_aka);
-    }
-
-    ShowWindow(_bundleName: string, _prefabPath: string, _show: boolean = true, _finishFunction: Function = null, _tag : string = "",_aka : string  = "") 
-    {
-        UIMgr.Instance.ShowWindow(_bundleName, _prefabPath, _show, _finishFunction , _tag,_aka);
-    }
-
 
     CloseAsWindow() 
     {
@@ -321,7 +308,7 @@ export abstract class BaseUI extends Component {
             widget.top = GameConfig.MultipleUIHeight;
             widget.updateAlignment();
             //如果你prefab根节点下有叫bg的一张背景图，我就会帮你自动铺满全屏，不然为了适配刘海屏幕的时候，整个prefab
-            //的顶部会被我缩一个小刘海尺寸，那么你的背景图就无法撑满全屏了
+            //的顶部会被我裁剪一个刘海尺寸，那么你的背景图就无法撑满全屏了
             let bg = this.node.getChildByName("BG");
             if(bg != null)
             {   

@@ -61,7 +61,7 @@ export class Club_PrivateLayer extends BaseUI
         this.mNotifyBtn.node.active = false;
         this.mNotifyBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_MemberNotifyWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("clubPage","prefab/Club_MemberNotifyWindow",true,(_script)=>
             {
                 let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
                 let tempScript = _script as Club_MemberNotifyWindow;
@@ -70,7 +70,7 @@ export class Club_PrivateLayer extends BaseUI
         });
         this.mMenuBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_Setting",true,null,HallData.ClubUiTag);
+            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_Setting",true,null,HallData.ClubUiTag);
         });
 
         this.mAssetsToggle.SetClickCallback((_data)=>
@@ -83,22 +83,22 @@ export class Club_PrivateLayer extends BaseUI
         {
             if(this.HaveRights())
             {
-                this.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
+                UIMgr.Instance.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
             }
         });
         this.mRecordBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_RecordLayer",true,null,HallData.ClubUiTag);
+            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_RecordLayer",true,null,HallData.ClubUiTag);
         });
         this.mDataBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_DataLayer",true,null,HallData.ClubUiTag);
+            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_DataLayer",true,null,HallData.ClubUiTag);
         });
         this.mCreateBtn.SetClickCallback(()=>
         {
             if(this.HaveRights())
             {
-                this.ShowLayer("clubPage","prefab/Club_CreateGameOption",true,null,HallData.ClubUiTag);
+                UIMgr.Instance.ShowLayer("clubPage","prefab/Club_CreateGameOption",true,null,HallData.ClubUiTag);
             }
         });
     }

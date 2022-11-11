@@ -1,9 +1,7 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
-import { GameConfig } from '../../../GameConfig';
 import { Tool } from '../../../Tool';
-import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_TableInfo')
@@ -23,7 +21,7 @@ export class Game_TableInfo extends BaseUI
     mOtherInfo: Label = null;
     @property(Label) 
     mLeftTime: Label = null;
-
+    private mIndex : number = null;
     InitParam() 
     {
 
@@ -44,6 +42,11 @@ export class Game_TableInfo extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 
     StartCountDown(_time : number)

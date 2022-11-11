@@ -100,7 +100,7 @@ export class Mtt_InfoPage extends BaseUI
 
         this.mDismissBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
                 let tips = Localization.GetString("00046");
@@ -118,7 +118,7 @@ export class Mtt_InfoPage extends BaseUI
 
         this.mManualStartBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
                 let tips = Localization.GetString("00047");

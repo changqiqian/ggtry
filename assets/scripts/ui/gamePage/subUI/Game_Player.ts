@@ -4,7 +4,6 @@ import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { BaseButton } from '../../common/BaseButton';
 import { CircleTimer } from '../../common/CircleTimer';
 import { Poker } from '../../common/Poker';
-import { GameData } from '../GameData';
 import { Game_ActionTag } from './Game_ActionTag';
 import { Game_AddMoneyLabel } from './Game_AddMoneyLabel';
 import { Game_BetAmount } from './Game_BetAmount';

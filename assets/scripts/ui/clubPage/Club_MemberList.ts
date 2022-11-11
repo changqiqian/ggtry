@@ -17,7 +17,7 @@ export class Club_MemberList extends BaseUI {
     mCurrentPage :number = 1;
     mPageSize : number = 20;
     mIsLastPage : boolean = false;
-    mCurrentData : Array<IClubMember>;
+    mCurrentData : Array<ClubMember>;
 
     onEnable()
     {
@@ -118,7 +118,7 @@ export class Club_MemberList extends BaseUI {
     ResetPage()
     {
         this.mIsLastPage = false;
-        this.mCurrentData = new Array<IClubMember>();
+        this.mCurrentData = new Array<ClubMember>();
         this.mCurrentPage = 1;
         this.mScrollView.content.destroyAllChildren();
     }

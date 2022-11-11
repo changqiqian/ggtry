@@ -1,9 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
-import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { BaseButton } from '../../common/BaseButton';
 import { CircleTimer } from '../../common/CircleTimer';
-import { GameData } from '../GameData';
 import { Game_CustomerRaise } from './Game_CustomerRaise';
 import { Game_Slider } from './Game_Slider';
 const { ccclass, property } = _decorator;
@@ -28,6 +26,8 @@ export class Game_SelfAction extends BaseUI
 
     mCallAmount : number = null;
     mMinRaiseAmount : number = null;
+
+    private mIndex : number = null;
     onEnable()
     {
 
@@ -73,6 +73,11 @@ export class Game_SelfAction extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 
     HideAll()

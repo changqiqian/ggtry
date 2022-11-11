@@ -4,6 +4,7 @@ import { Me_PrizeItem } from './Me_PrizeItem';
 import { Mtt_RegisterFee } from '../mttPage/Mtt_RegisterFee';
 import { Localization } from '../../base/Localization';
 import { BaseButton } from '../common/BaseButton';
+import { UIMgr } from '../../base/UIMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('Me_RankItem')
@@ -32,7 +33,7 @@ export class Me_RankItem extends BaseUI {
     InitParam() {}
     BindUI() {
         this.mRankItemBtn.SetClickCallback(() => {
-            this.ShowLayer('mePage', 'prefab/Me_RankDetail');
+            UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_RankDetail');
         });
     }
     RegDataNotify() {}
@@ -100,7 +101,7 @@ export class Me_RankItem extends BaseUI {
             tempScript.ShowNothing(Localization.GetString('00036'));
         } else {
             let regFee = this._data.enterFee.toString() + '+' + this._data.serviceFee.toString();
-            tempScript.InitWithData(this._data.enterFeeType, regFee, this._data.enterFeeTicket.nums, this._data.enterFeeTicket.name);
+            tempScript.InitWithData();
         }
     }
 }

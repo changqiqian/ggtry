@@ -107,25 +107,25 @@ export class Club_Setting extends BaseUI
         {
             if(this.HaveRights())
             {
-                this.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
+                UIMgr.Instance.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
             }
         });
 
         this.mAssetsRecordBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("clubPage","prefab/Club_AssetsRecord",true,null,HallData.ClubUiTag);
+            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_AssetsRecord",true,null,HallData.ClubUiTag);
         });
 
         this.mMoreMemberBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_MemberList",true,null,HallData.ClubUiTag);
+            UIMgr.Instance.ShowWindow("clubPage","prefab/Club_MemberList",true,null,HallData.ClubUiTag);
         });
 
         this.mLogoBtn.SetClickCallback(()=>
         {
             if(this.HaveRights())
             {
-                this.ShowWindow("clubPage","prefab/Club_LogoChoseLayer",true,null,HallData.ClubUiTag);
+                UIMgr.Instance.ShowWindow("clubPage","prefab/Club_LogoChoseLayer",true,null,HallData.ClubUiTag);
             }
         });
 
@@ -133,14 +133,14 @@ export class Club_Setting extends BaseUI
         {
             if(this.HaveRights())
             {
-                this.ShowWindow("clubPage","prefab/Club_StampChoseLayer",true,null,HallData.ClubUiTag);
+                UIMgr.Instance.ShowWindow("clubPage","prefab/Club_StampChoseLayer",true,null,HallData.ClubUiTag);
             }
         });
         this.mClubNameBtn.SetClickCallback(()=>
         {
             if(this.HaveRights())
             {
-                this.ShowWindow("common" , "prefab/InputTipsWindow",true,(_script)=>
+                UIMgr.Instance.ShowWindow("common" , "prefab/InputTipsWindow",true,(_script)=>
                 {
                     let tempScript = _script as InputTipsWindow;
                     let title = Localization.GetString("00121");
@@ -160,7 +160,7 @@ export class Club_Setting extends BaseUI
         {
             if(this.HaveRights())
             {
-                this.ShowWindow("common" , "prefab/InputTipsWindowBig",true,(_script)=>
+                UIMgr.Instance.ShowWindow("common" , "prefab/InputTipsWindowBig",true,(_script)=>
                 {
                     let tempScript = _script as InputTipsWindowBig;
                     let currentClub = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
@@ -180,7 +180,7 @@ export class Club_Setting extends BaseUI
             }
             else
             {
-                this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+                UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
                 {
                     let tempScript = _script as TipsWindow;
                     let tips = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.brief;
@@ -199,7 +199,7 @@ export class Club_Setting extends BaseUI
         this.mDismissBtn.SetClickCallback(()=>
         {
             let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
                 let tips = Localization.GetString("00102");
@@ -214,7 +214,7 @@ export class Club_Setting extends BaseUI
         this.mExitBtn.SetClickCallback(()=>
         {
             let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
                 let tips = Localization.GetString("00103");

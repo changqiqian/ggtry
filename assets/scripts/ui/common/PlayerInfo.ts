@@ -1,6 +1,5 @@
 import { _decorator, Component, Node, Sprite, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
-import { GameData } from '../gamePage/GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('PlayerInfo')

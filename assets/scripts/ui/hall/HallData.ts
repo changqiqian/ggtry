@@ -44,30 +44,30 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubRecordSubPage : BaseData<Club_RecordSubPage> = new BaseData<Club_RecordSubPage>();//俱乐部战绩 子页面
     Data_ClubRecordDetailSubPage : BaseData<Club_RecordDetailSubPage> = new BaseData<Club_RecordDetailSubPage>();//俱乐部战绩详情 子页面
     Data_ClubRecordCoinType : BaseData<GameCurrencyType> = new BaseData<GameCurrencyType>();//俱乐部战绩 货币类型
-    Data_ClubRecordDateType : BaseData<RecordDateType> = new BaseData<RecordDateType>();//俱乐部战绩 战绩时间段
+    Data_ClubRecordDateType : BaseData<Club_RecordDateType> = new BaseData<Club_RecordDateType>();//俱乐部战绩 战绩时间段
                     //创建俱乐部
     Data_ClubLogoIndex : BaseData<number> = new BaseData<number>(false,0); //创建俱乐部时候选择的logo编号
     Data_ClubStampIndex : BaseData<number> = new BaseData<number>(false,0); //创建俱乐部时候选的封面编号
-    Data_ClubCreateData : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //创建俱乐部成功后的返回数据
+    Data_ClubCreateData : BaseData<ClubDetailsInfo> = new BaseData<ClubDetailsInfo>(); //创建俱乐部成功后的返回数据
     Data_ClubEnter : BaseData<boolean> = new BaseData<boolean>(); //进入俱乐部
     Data_ClubDismiss : BaseData<string> = new BaseData<string>(); //解散俱乐部
     Data_ClubSearchSuccess : BaseData<boolean> = new BaseData<boolean>(); //搜索俱乐部成功
-    Data_ClubSearchResult : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //解散俱乐部
-    Data_ClubJoinNotify : BaseData<IClubDetailsInfo> = new BaseData<IClubDetailsInfo>(); //俱乐部申请回复结果
-    Data_ClubApplyingInfo :BaseData<Array<IClubJoinRequest>> = new BaseData<Array<IClubJoinRequest>>(false,new Array<IClubJoinRequest>()); //有玩家申请加入我创建的俱乐部
+    Data_ClubSearchResult : BaseData<ClubDetailsInfo> = new BaseData<ClubDetailsInfo>(); //解散俱乐部
+    Data_ClubJoinNotify : BaseData<ClubDetailsInfo> = new BaseData<ClubDetailsInfo>(); //俱乐部申请回复结果
+    Data_ClubApplyingInfo :BaseData<Array<ClubJoinRequest>> = new BaseData<Array<ClubJoinRequest>>(false,new Array<ClubJoinRequest>()); //有玩家申请加入我创建的俱乐部
     Data_ClubApplyingNotify : BaseData<boolean> = new BaseData<boolean>(); //新的俱乐部申请
     Data_ClubApplyingSuccess : BaseData<boolean> = new BaseData<boolean>(true); //新的俱乐部申请通过了
     Data_ClubRemoveNotify : BaseData<string> = new BaseData<string>(); //你被移除了某个俱乐部
     Data_S2CGetClubMember : BaseData<S2CGetClubMember> = new BaseData<S2CGetClubMember>(true); //收到的俱乐部成员列表
     Data_S2CRemoveMember : BaseData<S2CRemoveMember> = new BaseData<S2CRemoveMember>(); //收到的移除俱乐部成员消息
     Data_ClubScoreManageUid : BaseData<number> = new BaseData<number>(); //当前想要操作的积分的成员id
-    Data_ClubScoreManageUserInfo : BaseData<IClubMember> = new BaseData<IClubMember>(); //当前发放或者回收的俱乐部积分的成员详细信息
+    Data_ClubScoreManageUserInfo : BaseData<ClubMember> = new BaseData<ClubMember>(); //当前发放或者回收的俱乐部积分的成员详细信息
     Data_ShareClubScore :  BaseData<S2CShareClubScore> = new BaseData<S2CShareClubScore>(true); //修改玩家俱乐部积分
     Data_ClubUpdateSelfData:  BaseData<boolean> = new BaseData<boolean>(true); //更新自己的俱乐部数据
     Data_S2CModifyMemberRole:  BaseData<S2CModifyMemberRole> = new BaseData<S2CModifyMemberRole>(true); //修改俱乐部成员权限返回
 
     //
-    public RecieveNewClubApply(_request : IClubJoinRequest)
+    public RecieveNewClubApply(_request : ClubJoinRequest)
     {
         let clubIndex = this.Data_ClubApplyingInfo.mData.findIndex((_item) => _item.clubInfo.id === _request.clubInfo.id);
         console.log("clubIndex ==" + clubIndex);
@@ -110,7 +110,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
         return false;
     }
 
-    public GetApplyingUsers(_clubId : string) : Array<IClubBasicJoinRequest>
+    public GetApplyingUsers(_clubId : string) : Array<ClubBasicJoinRequest>
     {
         for(let i = 0 ; i < this.Data_ClubApplyingInfo.mData.length ; i++)
         {
@@ -370,6 +370,13 @@ export enum Club_RecordSubPage { //俱乐部战绩页面 子页面
 export enum Club_RecordDetailSubPage { //俱乐部战绩详情 子页面
     General = 0, //牌局概述页面
     Recipe = 1, //牌铺页面
+}
+
+
+export enum Club_RecordDateType{ //俱乐部战记
+    Today = 0,
+    Week,
+    Month
 }
 
 

@@ -31,16 +31,16 @@ export class Club_CreateGameModuleItem extends BaseUI
             HallData.Instance.Data_ClubCurrentModuleIndex.mData = this.mIndex;
             if(HallData.Instance.Data_Club_CreateTexasConfig.mData.gameType == GameType.GameType_TexasCash)
             {
-                this.ShowLayer("clubPage" , "prefab/Club_CreateTexas",true,null,HallData.ClubUiTag);
+                UIMgr.Instance.ShowLayer("clubPage" , "prefab/Club_CreateTexas",true,null,HallData.ClubUiTag);
             }
             else if(HallData.Instance.Data_Club_CreateTexasConfig.mData.gameType == GameType.GameType_ShortCash)
             {
-                this.ShowLayer("clubPage" , "prefab/Club_CreateShort",true,null,HallData.ClubUiTag);
+                UIMgr.Instance.ShowLayer("clubPage" , "prefab/Club_CreateShort",true,null,HallData.ClubUiTag);
             }
         });
         this.mDeleteBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
                 let tips = Localization.GetString("00096");

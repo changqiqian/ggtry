@@ -2,7 +2,6 @@ import { _decorator, Component, Node, EditBox } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { BaseButton } from '../../common/BaseButton';
 import { ToggleBtn } from '../../common/ToggleBtn';
-import { GameData, Game_ChattingSubLayer } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_ChattingLayer')

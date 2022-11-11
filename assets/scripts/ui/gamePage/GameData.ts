@@ -6,7 +6,7 @@ import { Network } from '../../network/Network';
 
 export class GameData extends MultipleNotify
 {
-
+    public static GameUiTag = "GameUiTag";
     //UI控制
     Data_ChatingSubLayer :  BaseData<Game_ChattingSubLayer> = new BaseData<Game_ChattingSubLayer>();  //聊天页面子页面
 

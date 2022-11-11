@@ -14,6 +14,8 @@ export class Game_ControlBtns extends BaseUI
     mRebuyBtn: BaseButton = null;
     @property(BaseButton) 
     mBackToGameBtn: BaseButton = null;
+
+    private mIndex : number = null;
     InitParam() 
     {
 
@@ -49,6 +51,11 @@ export class Game_ControlBtns extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 }
 

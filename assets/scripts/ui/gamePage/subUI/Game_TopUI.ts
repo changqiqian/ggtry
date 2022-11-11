@@ -19,7 +19,7 @@ export class Game_TopUI extends BaseUI
     mMicOn: Node = null;
     @property(Node) 
     mMicDisable: Node = null;
-    
+    private mIndex : number = null;
     InitParam() 
     {
 
@@ -40,6 +40,11 @@ export class Game_TopUI extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 }
 

@@ -38,13 +38,13 @@ export class Me_Main extends BaseUI {
     BindUI() {
         this.mBankBtn.SetClickCallback(() => {
             if (sys.isBrowser) {
-                this.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => {
+                UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => {
                     let tempScript = _script as InsertWebView;
                     let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
                     tempScript.SetUrl(GameConfig.WebberAddr, param);
                 });
             } else {
-                this.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => {
+                UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => {
                     let tempScript = _script as FullScreenWebView;
                     let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
                     tempScript.SetUrl(GameConfig.WebberAddr, param);
@@ -54,18 +54,18 @@ export class Me_Main extends BaseUI {
         this.mBankBtn.SetProtectDoubleClick(true, 1);
 
         this.mMsgBtn.SetClickCallback(() => {
-            this.ShowLayer('mePage', 'prefab/Me_Message');
+            UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Message');
         });
 
         this.mTableBtn.SetClickCallback(() => {
             if (sys.isBrowser) {
-                this.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => {
+                UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => {
                     let tempScript = _script as InsertWebView;
                     let param = '/manage-table';
                     tempScript.SetUrl(GameConfig.WebberAddr, param);
                 });
             } else {
-                this.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => {
+                UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => {
                     let tempScript = _script as FullScreenWebView;
                     let param = '/manage-table';
                     tempScript.SetUrl(GameConfig.WebberAddr, param);
@@ -76,11 +76,11 @@ export class Me_Main extends BaseUI {
         this.mQuestBtn.SetClickCallback(() => {});
 
         this.mProfitBtn.SetClickCallback(() => {
-            this.ShowLayer('mePage', 'prefab/Me_Record');
+            UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Record');
         });
 
         this.mGameRecordBtn.SetClickCallback(() => {
-            this.ShowLayer('mePage', 'prefab/Me_Rank');
+            UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Rank');
         });
 
         this.mSettingBtn.SetClickCallback(() => {
@@ -88,7 +88,7 @@ export class Me_Main extends BaseUI {
         });
 
         this.mAgentBtn.SetClickCallback(() => {
-            this.ShowLayer('mePage', 'prefab/Me_Proxy');
+            UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Proxy');
         });
 
         this.mServiceBtn.SetClickCallback(() => {});

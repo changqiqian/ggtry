@@ -3,7 +3,6 @@ import { _decorator, Component, Node } from 'cc';
 import { TipsWindow } from '../common/TipsWindow';
 import { HallData } from '../hall/HallData';
 import { GameBase } from './GameBase';
-import { GameData } from './GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Mtt')

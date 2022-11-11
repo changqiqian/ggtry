@@ -44,22 +44,22 @@ export class LoginUI extends BaseUI
     }
     BindUI() 
     {
-        UIMgr.Instance.AddLayerInTopRoot("common","prefab/MultipleTableCtr");
+        UIMgr.Instance.AddLayerInWindowRoot("common","prefab/MultipleTableCtr");
         this.mVersion.string = GameConfig.Version;
 
         this.mLoginBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("login","prefab/Login_LoginView");
+            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");
         });
 
         this.mSignBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("login","prefab/Login_SignView");
+            UIMgr.Instance.ShowLayer("login","prefab/Login_SignView");
         });
    
         this.mCyberBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
                 let tips = Localization.GetString("00016");
@@ -125,7 +125,7 @@ export class LoginUI extends BaseUI
 
         LoginData.Instance.Data_SmsCodeType.AddListenner(this,(_data)=>
         {
-            this.ShowLayer("common","prefab/SMSCodeView");
+            UIMgr.Instance.ShowLayer("common","prefab/SMSCodeView");
         });
     }
     LateInit() 

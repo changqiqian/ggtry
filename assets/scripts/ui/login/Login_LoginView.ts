@@ -46,7 +46,7 @@ export class Login_LoginView extends BaseUI {
 
         this.mAreaCodeBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("common","prefab/AreaCodeView");
+            UIMgr.Instance.ShowLayer("common","prefab/AreaCodeView");
         });
 
         this.mConfirmBtn.SetClickCallback(()=>
@@ -65,7 +65,7 @@ export class Login_LoginView extends BaseUI {
 
         this.mPasswordLoginBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("login","prefab/Login_LoginViewPwd",true,(_script)=>
+            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginViewPwd",true,(_script)=>
             {
                 this.Show(false);
             });

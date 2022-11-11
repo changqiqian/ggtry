@@ -76,7 +76,7 @@ export class Login_SetUserInfo extends BaseUI
 
             LocalPlayerData.Instance.Data_SupervisorInviteCode.mData = this.mInviteCodeEditBox.string;
             LocalPlayerData.Instance.Data_NickName.mData = this.mNickNameEditBox.string;
-            this.ShowLayer("common","prefab/ResetPwdView");
+            UIMgr.Instance.ShowLayer("common","prefab/ResetPwdView");
         });
     }
     RegDataNotify() 
@@ -106,7 +106,7 @@ export class Login_SetUserInfo extends BaseUI
 
     OnEditHeadBtn()
     {
-        this.ShowLayer("common" , "prefab/HeadChoserView");
+        UIMgr.Instance.ShowLayer("common" , "prefab/HeadChoserView");
     }
 
 }

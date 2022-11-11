@@ -29,7 +29,7 @@ export class Club_AssetsManage extends BaseUI
     mCurrentPage :number = 1;
     mPageSize : number = 20;
     mIsLastPage : boolean = false;
-    mCurrentData : Array<IClubMember>;
+    mCurrentData : Array<ClubMember>;
     onEnable()
     {
         HallData.Instance.Data_ClubScoreManageUid.ResetData();
@@ -138,7 +138,7 @@ export class Club_AssetsManage extends BaseUI
     ResetPage()
     {
         this.mIsLastPage = false;
-        this.mCurrentData = new Array<IClubMember>();
+        this.mCurrentData = new Array<ClubMember>();
         this.mCurrentPage = 1;
         this.mScrollView.content.destroyAllChildren();
     }
@@ -151,7 +151,7 @@ export class Club_AssetsManage extends BaseUI
             return;
         }
 
-        this.ShowWindow("clubPage", "prefab/Club_AssetsManageWindow",true,(_script)=>
+        UIMgr.Instance.ShowWindow("clubPage", "prefab/Club_AssetsManageWindow",true,(_script)=>
         {
             let tempScript = _script as Club_AssetsManageWindow;
             tempScript.InitWithData(_give);

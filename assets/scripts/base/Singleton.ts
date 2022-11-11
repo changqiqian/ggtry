@@ -1,3 +1,4 @@
+import { BaseData } from "./BaseData";
 
 export function Singleton<T>() 
 {
@@ -58,7 +59,10 @@ export function SingletonBaseNotify<T>()
             props.forEach((prop)=>
             {
                 let str = prop.toString();
-                this[str].RemoveAllListenner();
+                if(this[str] instanceof BaseData)
+                {
+                    this[str].RemoveAllListenner();
+                }
             });
         }
         public RemoveAllDataListennerByTarget(_target : any)
@@ -67,7 +71,7 @@ export function SingletonBaseNotify<T>()
             props.forEach((prop)=>
             {
                 let str = prop.toString();
-                if(this[str] != null)
+                if(this[str] instanceof BaseData)
                 {
                     this[str].RemoveListennerByTarget(_target);
                 }
@@ -80,7 +84,10 @@ export function SingletonBaseNotify<T>()
             props.forEach((prop)=>
             {
                 let str = prop.toString();
-                this[str].Clear();
+                if(this[str] instanceof BaseData)
+                {
+                    this[str].Clear();
+                }
             });
             this.ResetInstance();
         }
@@ -109,7 +116,10 @@ export class MultipleNotify
         props.forEach((prop)=>
         {
             let str = prop.toString();
-            this[str].RemoveAllListenner();
+            if(this[str] instanceof BaseData)
+            {
+                this[str].RemoveAllListenner();
+            }
         });
     }
     public RemoveAllDataListennerByTarget(_target : any)
@@ -118,7 +128,7 @@ export class MultipleNotify
         props.forEach((prop)=>
         {
             let str = prop.toString();
-            if(this[str] != null)
+            if(this[str] instanceof BaseData)
             {
                 this[str].RemoveListennerByTarget(_target);
             }
@@ -131,7 +141,11 @@ export class MultipleNotify
         props.forEach((prop)=>
         {
             let str = prop.toString();
-            this[str].Clear();
+            if(this[str] instanceof BaseData)
+            {
+                this[str].Clear();
+            }
+
         });
     }
 }

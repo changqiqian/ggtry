@@ -2,7 +2,6 @@ import { _decorator, Component, Node, Label, UI } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { GameConfig } from '../../../GameConfig';
-import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_MttInfo')

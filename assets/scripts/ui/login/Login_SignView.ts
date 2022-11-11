@@ -49,7 +49,7 @@ export class Login_SignView extends BaseUI
 
         this.mAreaCodeBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("common","prefab/AreaCodeView");
+            UIMgr.Instance.ShowLayer("common","prefab/AreaCodeView");
         });
 
         this.mConfirmBtn.SetClickCallback(()=>
@@ -75,7 +75,7 @@ export class Login_SignView extends BaseUI
         {
             if(_data)
             {
-                this.ShowLayer("login","prefab/Login_SetUserInfo");
+                UIMgr.Instance.ShowLayer("login","prefab/Login_SetUserInfo");
             }
         })
    

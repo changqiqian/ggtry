@@ -29,11 +29,11 @@ export class Club_Main extends BaseUI
     {
         this.mCreateBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_CreateLayer");
+            UIMgr.Instance.ShowWindow("clubPage","prefab/Club_CreateLayer");
         })
         this.mSearchBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_SearchLayer");
+            UIMgr.Instance.ShowWindow("clubPage","prefab/Club_SearchLayer");
         })
     }
 
@@ -80,7 +80,7 @@ export class Club_Main extends BaseUI
         {
             if(_data)
             {
-                this.ShowLayer("clubPage","prefab/Club_PrivateLayer",true,null,HallData.ClubUiTag);
+                UIMgr.Instance.ShowLayer("clubPage","prefab/Club_PrivateLayer",true,null,HallData.ClubUiTag);
             }
             else
             {
@@ -91,7 +91,7 @@ export class Club_Main extends BaseUI
         {
             if(_data)
             {
-                this.ShowWindow("clubPage","prefab/Club_FindClubLayer");
+                UIMgr.Instance.ShowWindow("clubPage","prefab/Club_FindClubLayer");
             }
         });
 
@@ -106,7 +106,7 @@ export class Club_Main extends BaseUI
 
     }
 
-    InsertClub(_clubData : IClubDetailsInfo)
+    InsertClub(_clubData : ClubDetailsInfo)
     {
         this.LoadPrefab("clubPage" , "prefab/Club_MainEnter" , (_prefab)=>
         {

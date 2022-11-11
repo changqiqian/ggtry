@@ -1,6 +1,5 @@
 import { _decorator, Component, Node, ScrollView } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
-import { GameData, Game_ChattingSubLayer } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_ChatHistoryLayer')

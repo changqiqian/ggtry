@@ -23,7 +23,7 @@ export class Club_Member extends BaseUI {
     mManagerBtn: BaseButton = null;
     @property(Label) 
     mRole: Label = null;
-    mMember : IClubMember = null;
+    mMember : ClubMember = null;
     InitParam()
     {
 
@@ -32,7 +32,7 @@ export class Club_Member extends BaseUI {
     {
         this.mRemoveBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
                 let tips = Localization.ReplaceString("00118",this.mMember.uid)
@@ -131,7 +131,7 @@ export class Club_Member extends BaseUI {
 
     }
 
-    public InitWithData(_member : IClubMember)
+    public InitWithData(_member : ClubMember)
     {
         this.mMember = _member;
         this.mPlayerInfo.SetName(this.mMember.nickName);

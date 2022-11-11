@@ -21,7 +21,7 @@ export class GameConfig
 
     public static WebberAddr= "http://18.142.237.115:9487"; //打开收银台web
 
-    public static MultipleUIHeight = 160;
+    public static MultipleUIHeight = 150;
     public static ClubLogoNumber = 8; //俱乐部logo数量
     public static ClubStampNumber = 4; //俱乐部封面数量
 

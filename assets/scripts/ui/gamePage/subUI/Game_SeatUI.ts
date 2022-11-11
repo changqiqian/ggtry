@@ -1,19 +1,19 @@
 import { _decorator, Component, Node, Vec3 } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
-import { LocalPlayerData } from '../../../base/LocalPlayerData';
-import { GameData } from '../GameData';
 import { Game_SeatItem } from './Game_SeatItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_SeatUI')
 export class Game_SeatUI extends BaseUI 
 {
+    private mIndex : number = null;
     InitParam() 
     {
         let childCount = this.node.children.length; 
         for(let i = 0 ; i < childCount ; i++)
         {
             let current = this.node.children[i].getComponent(Game_SeatItem);
+            current.InitWithData(this.mIndex);
             current.SetSeatID(i);
         }
     }
@@ -33,6 +33,11 @@ export class Game_SeatUI extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 
     GetSeatNodeBySeatId(_seatId : number) : Game_SeatItem

@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Sprite } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { UIMgr } from '../../../base/UIMgr';
 import { BaseButton } from '../../common/BaseButton';
 import { InsertWebView } from '../../common/InsertWebView';
 const { ccclass, property } = _decorator;
@@ -21,7 +22,7 @@ export class Hall_LunBoItem extends BaseUI
     {
         this.mBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("common","prefab/InsertWebView",true , (_script)=>
+            UIMgr.Instance.ShowLayer("common","prefab/InsertWebView",true , (_script)=>
             {
                 let tempScript = _script as InsertWebView;
                 tempScript.SetTile("Detail");

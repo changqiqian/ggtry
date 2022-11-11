@@ -21,7 +21,7 @@ export class Club_AssetsManageItem extends BaseUI
     @property(ToggleBtn) 
     mToggleBtn: ToggleBtn = null;
 
-    mData : IClubMember = null;
+    mData : ClubMember = null;
     InitParam()
     {
 
@@ -86,7 +86,7 @@ export class Club_AssetsManageItem extends BaseUI
 
     }
 
-    public InitWithData(_member : IClubMember)
+    public InitWithData(_member : ClubMember)
     {
         this.mData = _member;
         this.mPlayerInfo.SetName(_member.nickName);

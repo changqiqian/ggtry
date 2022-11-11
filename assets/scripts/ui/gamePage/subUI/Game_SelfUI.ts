@@ -27,6 +27,8 @@ export class Game_SelfUI extends BaseUI
     mDealer: Node = null;
     @property(Label) 
     mMoney: Label = null;
+
+    private mIndex : number = null;
     InitParam() 
     {
 
@@ -62,7 +64,10 @@ export class Game_SelfUI extends BaseUI
     {
 
     }
-
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
+    }
     HideAllUI()
     {
         this.mCards.active = false;

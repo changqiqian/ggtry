@@ -59,7 +59,7 @@ export class Me_Top extends BaseUI
     {
         this.mHeadBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("common" , "prefab/HeadChoserView");
+            UIMgr.Instance.ShowLayer("common" , "prefab/HeadChoserView");
         });
 
         this.mCyberBtn.SetClickCallback(()=>
@@ -69,7 +69,7 @@ export class Me_Top extends BaseUI
 
         this.mModifyNameBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("common" , "prefab/InputTipsWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("common" , "prefab/InputTipsWindow",true,(_script)=>
             {
                 let tempScript = _script as InputTipsWindow;
                 let title = Localization.GetString("00130");

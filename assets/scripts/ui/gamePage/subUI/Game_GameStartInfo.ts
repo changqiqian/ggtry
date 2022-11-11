@@ -12,6 +12,8 @@ export class Game_GameStartInfo extends BaseUI
     mCountDown: Label = null;
     @property(Label) 
     mTips: Label = null;
+
+    private mIndex : number = null;
     InitParam() 
     {
 
@@ -32,6 +34,11 @@ export class Game_GameStartInfo extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 }
 

@@ -4,7 +4,6 @@ import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { GameConfig } from '../../../GameConfig';
 import { Network } from '../../../network/Network';
 import { BaseButton } from '../../common/BaseButton';
-import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_CustomerRaise')

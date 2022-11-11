@@ -3,7 +3,6 @@ import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { BaseButton } from '../../common/BaseButton';
 import { ToggleBtn } from '../../common/ToggleBtn';
-import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_BottomUI')
@@ -19,6 +18,8 @@ export class Game_BottomUI extends BaseUI
     mMicToggle: ToggleBtn = null;
     @property(BaseButton) 
     mMttTableBtn: BaseButton = null;
+
+    private mIndex : number = null;
     InitParam() 
     {
         
@@ -61,6 +62,11 @@ export class Game_BottomUI extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 }
 

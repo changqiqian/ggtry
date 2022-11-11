@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { HallData } from '../hall/HallData';
 import { BaseButton } from '../common/BaseButton';
 import { Network } from '../../network/Network';
+import { UIMgr } from '../../base/UIMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('Me_MessageItem')
@@ -23,7 +24,7 @@ export class Me_MessageItem extends BaseUI {
     InitParam() {}
     BindUI() {
         this.mMessageItemBtn.SetClickCallback(() => {
-            this.ShowLayer('mePage', 'prefab/Me_MessageDetail');
+            UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_MessageDetail');
         });
     }
     RegDataNotify() {}

@@ -1,14 +1,12 @@
 
-import { AssetManager, assetManager, Component, find, instantiate } from "cc";
+import { instantiate } from "cc";
 import { LoadingMask } from "../ui/common/LoadingMask";
 import { Toast } from "../ui/common/Toast";
-import { GameUI } from "../ui/gamePage/GameUI";
 import { HallUI } from "../ui/hall/HallUI";
 import { LoadingUI } from "../ui/loading/LoadingUI";
 import { LoginUI } from "../ui/login/LoginUI";
 import { BaseUI } from "./BaseUI";
 import { BaseWindow } from "./BaseWindow";
-import { Localization } from "./Localization";
 import { ResMgr } from "./ResMgr";
 import { Singleton } from "./Singleton";
 
@@ -89,12 +87,11 @@ export class UIMgr extends Singleton<UIMgr>()
         let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,"loading" ,LoadingUI.GetUsingBundleFolder());
         let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,"login",LoginUI.GetUsingBundleFolder());
         let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI" ,"hall",HallUI.GetUsingBundleFolder());
-        let gameConfig = new SceneConfig(SceneType.Game, "prefab/GameUI" ,"gamePage",GameUI.GetUsingBundleFolder());
 
         this.mSceneConfig.push(loadingConfig);
         this.mSceneConfig.push(loginConfig);
         this.mSceneConfig.push(hallConfig);
-        this.mSceneConfig.push(gameConfig);
+
         
 
         this.LoadInitRes(_loadFinish);
@@ -155,9 +152,18 @@ export class UIMgr extends Singleton<UIMgr>()
         });
     }
 
+    public AddLayerInWindowRoot(_bundleName :string , _prefabPath:string)
+    {
+        this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
+        {
+            this.mWindowRoot.addChild(_tempNode);
+            _tempNode.setSiblingIndex(0);
+        });
+    }
+
     public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null , _tag : string = "", _aka : string  = "")
     {
-        let key = _bundleName + "/"  + _prefabPath + _aka;
+        let key = this.CreateKey(_bundleName,_prefabPath,_aka);
         let target = this.FindLayer(key,LayerType.Layer);
 
         if(target != null && target.value == null)
@@ -197,7 +203,7 @@ export class UIMgr extends Singleton<UIMgr>()
 
     public ShowWindow(_bundleName :string , _prefabPath:string , _show : boolean = true, _finishFunction : Function = null, _tag : string = "",_aka : string  = "")
     {
-        let key = _bundleName + "/"  + _prefabPath + _aka;
+        let key = this.CreateKey(_bundleName,_prefabPath,_aka);
         let target = this.FindLayer(key,LayerType.Window);
 
         if(target != null && target.value == null)
@@ -338,12 +344,12 @@ export class UIMgr extends Singleton<UIMgr>()
 
     private DeleteScene(_SceneType : SceneType)
     {
-        this.DeleteLayer(LayerType.Layer,_SceneType);
-        this.DeleteLayer(LayerType.Window,_SceneType);
+        this.DeleteLayerBySecene(LayerType.Layer,_SceneType);
+        this.DeleteLayerBySecene(LayerType.Window,_SceneType);
     }
 
 
-    private DeleteLayer(_type :LayerType , _belong : SceneType)
+    private DeleteLayerBySecene(_type :LayerType , _belong : SceneType)
     {
         let targetList = this.GetList(_type);
         let step = 0;
@@ -372,6 +378,27 @@ export class UIMgr extends Singleton<UIMgr>()
         targetList.splice(0 , targetList.length - 1);
     }
 
+    public DeleteLayer(_bundleName :string , _prefabPath:string , _aka:string )
+    {
+        let key = this.CreateKey(_bundleName,_prefabPath,_aka);
+        let target = this.FindLayer(key,LayerType.Layer);
+        if(target == null || target.value == null)
+        {
+            console.log("没有找到该layer ，无法删除 ===key===" + key);
+            return;
+        }
+
+        target.value.getComponent(BaseUI).DeleteSelf();
+        let targetList = this.GetList(LayerType.Layer);
+        let index = targetList.findIndex((_item) => _item.key === key);
+        targetList.splice(index , 1);
+    }
+
+    private CreateKey(_bundleName :string , _prefabPath:string , _aka:string) : string 
+    {
+        let key = _bundleName + "/"  + _prefabPath + ":aka==" + _aka;
+        return key;
+    }
 
     private GetList(_type :LayerType) : Array<LayerKeyPair>
     {
@@ -425,32 +452,24 @@ export class UIMgr extends Singleton<UIMgr>()
     
     public HideUiByTag(_tag : string)
     {
-        for(let i = 0 ; i < this.mLayerList.length ; i++)
+        for(let i = LayerType.Layer ; i <= LayerType.Window ; i++)
         {
-            let currentKeyPair = this.mLayerList[i];
-            if(currentKeyPair.tag == _tag)
+            let currentList = this.GetList(i);
+            for(let i = 0 ; i < currentList.length ; i++)
             {
-                if(currentKeyPair.value != null)
+                let currentKeyPair = currentList[i];
+                if(currentKeyPair.tag == _tag)
                 {
-                    let tempScript = currentKeyPair.value.getComponent(BaseUI);
-                    tempScript.Show(false);
-                }
-            }
-        }
-
-        for(let i = 0 ; i < this.mWindowList.length ; i++)
-        {
-            let currentKeyPair = this.mWindowList[i];
-            if(currentKeyPair.tag == _tag)
-            {
-                if(currentKeyPair.value != null)
-                {
-                    let tempScript = currentKeyPair.value.getComponent(BaseUI);
-                    tempScript.Show(false);
+                    if(currentKeyPair.value != null)
+                    {
+                        let tempScript = currentKeyPair.value.getComponent(BaseUI);
+                        tempScript.Show(false);
+                    }
                 }
             }
         }
     }
+
 
 }
 

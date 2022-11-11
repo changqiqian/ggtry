@@ -3,7 +3,6 @@ import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { SceneType, UIMgr } from '../../../base/UIMgr';
 import { BaseButton } from '../../common/BaseButton';
-import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_MttResultLayer')

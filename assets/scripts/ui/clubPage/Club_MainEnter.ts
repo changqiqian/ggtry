@@ -32,7 +32,7 @@ export class Club_MainEnter extends BaseUI
     mProtectOffset : number = 50;
     mMaxOffset : number;
     mCenterX : number;
-    mData : IClubDetailsInfo = null;
+    mData : ClubDetailsInfo = null;
     mLastTimeScale : number = null;
     mReviewOnly : boolean = false;
     InitParam()
@@ -59,7 +59,7 @@ export class Club_MainEnter extends BaseUI
 
         this.mNotifyBtn.SetClickCallback(()=>
         {
-            this.ShowWindow("clubPage","prefab/Club_MemberNotifyWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("clubPage","prefab/Club_MemberNotifyWindow",true,(_script)=>
             {
                 let tempScript = _script as Club_MemberNotifyWindow;
                 tempScript.InitWithData(this.mData.id);
@@ -103,7 +103,7 @@ export class Club_MainEnter extends BaseUI
         this.unscheduleAllCallbacks();
     }
 
-    public InitWithData(_data : IClubDetailsInfo)
+    public InitWithData(_data : ClubDetailsInfo)
     {
         this.mData = _data;
         this.UpdateUI();

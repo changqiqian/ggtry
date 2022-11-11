@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, PageView, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { UIMgr } from '../../base/UIMgr';
 import { Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 
@@ -33,7 +34,7 @@ export class Mtt_Main extends BaseUI
     {
         this.mRankBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("mttPage","prefab/Mtt_RankPage");
+            UIMgr.Instance.ShowLayer("mttPage","prefab/Mtt_RankPage");
         });
         this.mTicketBtn.SetClickCallback(()=>
         {
@@ -41,7 +42,7 @@ export class Mtt_Main extends BaseUI
         });
         this.mSearchBtn.SetClickCallback(()=>
         {
-            this.ShowLayer("gamePage","prefab/Game_Menu");
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_Menu");
         });
         this.AddSubView("hall","prefab/Hall_LunBo",null,this.mTop);
     }

@@ -18,7 +18,7 @@ export class Club_ApplyingMember extends BaseUI {
     mRejectBtn: BaseButton = null;
     
     private mClubId : string  = null;
-    private mUserInfo : IClubBasicJoinRequest = null;
+    private mUserInfo : ClubBasicJoinRequest = null;
     InitParam()
     {
 
@@ -62,7 +62,7 @@ export class Club_ApplyingMember extends BaseUI {
 
     }
 
-    public InitWithData(_userInfo : IClubBasicJoinRequest , _clubId : string)
+    public InitWithData(_userInfo : ClubBasicJoinRequest , _clubId : string)
     {
         this.mUserInfo = _userInfo;
         this.mClubId = _clubId;

@@ -4,7 +4,6 @@ import { Localization } from '../../../base/Localization';
 import { GameConfig } from '../../../GameConfig';
 import { Network } from '../../../network/Network';
 import { Tool } from '../../../Tool';
-import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_MttRestTimeTips')

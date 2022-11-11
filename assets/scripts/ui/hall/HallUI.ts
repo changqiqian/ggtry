@@ -48,7 +48,7 @@ export class HallUI extends BaseUI
         HallData.Instance.Data_ClubJoinNotify.AddListenner(this,(_data)=>
         {
             let clubId = _data.id;
-            this.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
                 let tips = Localization.ReplaceString("00106",clubId);

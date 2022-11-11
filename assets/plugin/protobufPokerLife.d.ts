@@ -711,35 +711,11 @@ export class C2SDismissClubGame implements IC2SDismissClubGame {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SDismissClubGame;
 }
 
-/** Properties of a ClubDetailsInfo. */
-export interface IClubDetailsInfo {
-
-    /** ClubDetailsInfo logo */
-    logo?: (number|null);
-
-    /** ClubDetailsInfo stamp */
-    stamp?: (number|null);
-
-    /** ClubDetailsInfo name */
-    name?: (string|null);
-
-    /** ClubDetailsInfo brief */
-    brief?: (string|null);
-
-    /** ClubDetailsInfo id */
-    id?: (string|null);
-
-    /** ClubDetailsInfo ownerId */
-    ownerId?: (string|null);
-
-    /** ClubDetailsInfo memberCount */
-    memberCount?: (number|null);
-
-    /** ClubDetailsInfo tableCount */
-    tableCount?: (number|null);
-
-    /** ClubDetailsInfo totalClubPoint */
-    totalClubPoint?: (number|null);
+/** ClubMemberType enum. */
+export enum ClubMemberType {
+    ClubAccountType_Normal = 0,
+    ClubAccountType_Manager = 1,
+    ClubAccountType_Owner = 2
 }
 
 /** Represents a ClubDetailsInfo. */
@@ -797,28 +773,6 @@ export class ClubDetailsInfo implements IClubDetailsInfo {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubDetailsInfo;
 }
 
-/** Properties of a ClubMember. */
-export interface IClubMember {
-
-    /** ClubMember id */
-    id?: (string|null);
-
-    /** ClubMember uid */
-    uid?: (string|null);
-
-    /** ClubMember nickName */
-    nickName?: (string|null);
-
-    /** ClubMember head */
-    head?: (string|null);
-
-    /** ClubMember clubPoint */
-    clubPoint?: (number|null);
-
-    /** ClubMember memberType */
-    memberType?: (ClubMemberType|null);
-}
-
 /** Represents a ClubMember. */
 export class ClubMember implements IClubMember {
 
@@ -865,22 +819,6 @@ export class ClubMember implements IClubMember {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubMember;
 }
 
-/** Properties of a ClubBasicJoinRequest. */
-export interface IClubBasicJoinRequest {
-
-    /** ClubBasicJoinRequest id */
-    id?: (string|null);
-
-    /** ClubBasicJoinRequest uid */
-    uid?: (string|null);
-
-    /** ClubBasicJoinRequest nickName */
-    nickName?: (string|null);
-
-    /** ClubBasicJoinRequest head */
-    head?: (string|null);
-}
-
 /** Represents a ClubBasicJoinRequest. */
 export class ClubBasicJoinRequest implements IClubBasicJoinRequest {
 
@@ -921,16 +859,6 @@ export class ClubBasicJoinRequest implements IClubBasicJoinRequest {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubBasicJoinRequest;
 }
 
-/** Properties of a ClubJoinRequest. */
-export interface IClubJoinRequest {
-
-    /** ClubJoinRequest clubBasicJoinRequest */
-    clubBasicJoinRequest?: (IClubBasicJoinRequest[]|null);
-
-    /** ClubJoinRequest clubInfo */
-    clubInfo?: (IClubDetailsInfo|null);
-}
-
 /** Represents a ClubJoinRequest. */
 export class ClubJoinRequest implements IClubJoinRequest {
 
@@ -963,19 +891,6 @@ export class ClubJoinRequest implements IClubJoinRequest {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubJoinRequest;
-}
-
-/** Properties of a ClubGameInfo. */
-export interface IClubGameInfo {
-
-    /** ClubGameInfo clubId */
-    clubId?: (string|null);
-
-    /** ClubGameInfo gameId */
-    gameId?: (string|null);
-
-    /** ClubGameInfo gameConfig */
-    gameConfig?: (IClubGameConfig|null);
 }
 
 /** Represents a ClubGameInfo. */
@@ -1013,380 +928,6 @@ export class ClubGameInfo implements IClubGameInfo {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubGameInfo;
-}
-
-/** Properties of a ClubGameConfig. */
-export interface IClubGameConfig {
-
-    /** ClubGameConfig basicConfig */
-    basicConfig?: (IGameBasicConfig|null);
-
-    /** ClubGameConfig texasConfig */
-    texasConfig?: (ITexasConfig|null);
-
-    /** ClubGameConfig matchingConfig */
-    matchingConfig?: (IMatchingConfig|null);
-}
-
-/** Represents a ClubGameConfig. */
-export class ClubGameConfig implements IClubGameConfig {
-
-    /**
-     * Constructs a new ClubGameConfig.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IClubGameConfig);
-
-    /** ClubGameConfig basicConfig. */
-    public basicConfig?: (IGameBasicConfig|null);
-
-    /** ClubGameConfig texasConfig. */
-    public texasConfig?: (ITexasConfig|null);
-
-    /** ClubGameConfig matchingConfig. */
-    public matchingConfig?: (IMatchingConfig|null);
-
-    /**
-     * Encodes the specified ClubGameConfig message. Does not implicitly {@link ClubGameConfig.verify|verify} messages.
-     * @param m ClubGameConfig message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IClubGameConfig, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a ClubGameConfig message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns ClubGameConfig
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubGameConfig;
-}
-
-/** Properties of a MatchingConfig. */
-export interface IMatchingConfig {
-
-    /** MatchingConfig currentPlayerNum */
-    currentPlayerNum?: (number|null);
-
-    /** MatchingConfig startTime */
-    startTime?: (number|null);
-}
-
-/** Represents a MatchingConfig. */
-export class MatchingConfig implements IMatchingConfig {
-
-    /**
-     * Constructs a new MatchingConfig.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IMatchingConfig);
-
-    /** MatchingConfig currentPlayerNum. */
-    public currentPlayerNum: number;
-
-    /** MatchingConfig startTime. */
-    public startTime: number;
-
-    /**
-     * Encodes the specified MatchingConfig message. Does not implicitly {@link MatchingConfig.verify|verify} messages.
-     * @param m MatchingConfig message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IMatchingConfig, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a MatchingConfig message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns MatchingConfig
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): MatchingConfig;
-}
-
-/** Properties of a GameBasicConfig. */
-export interface IGameBasicConfig {
-
-    /** GameBasicConfig gameType */
-    gameType?: (GameType|null);
-
-    /** GameBasicConfig gameName */
-    gameName?: (string|null);
-
-    /** GameBasicConfig currencyType */
-    currencyType?: (GameCurrencyType|null);
-
-    /** GameBasicConfig taxType */
-    taxType?: (GameTaxType|null);
-
-    /** GameBasicConfig taxRatio */
-    taxRatio?: (number|null);
-
-    /** GameBasicConfig shortConfig */
-    shortConfig?: (IShortConfig|null);
-}
-
-/** Represents a GameBasicConfig. */
-export class GameBasicConfig implements IGameBasicConfig {
-
-    /**
-     * Constructs a new GameBasicConfig.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGameBasicConfig);
-
-    /** GameBasicConfig gameType. */
-    public gameType: GameType;
-
-    /** GameBasicConfig gameName. */
-    public gameName: string;
-
-    /** GameBasicConfig currencyType. */
-    public currencyType: GameCurrencyType;
-
-    /** GameBasicConfig taxType. */
-    public taxType: GameTaxType;
-
-    /** GameBasicConfig taxRatio. */
-    public taxRatio: number;
-
-    /** GameBasicConfig shortConfig. */
-    public shortConfig?: (IShortConfig|null);
-
-    /**
-     * Encodes the specified GameBasicConfig message. Does not implicitly {@link GameBasicConfig.verify|verify} messages.
-     * @param m GameBasicConfig message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGameBasicConfig, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a GameBasicConfig message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns GameBasicConfig
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): GameBasicConfig;
-}
-
-/** Properties of a TexasConfig. */
-export interface ITexasConfig {
-
-    /** TexasConfig smallBlind */
-    smallBlind?: (number|null);
-
-    /** TexasConfig straddle */
-    straddle?: (boolean|null);
-
-    /** TexasConfig ante */
-    ante?: (number|null);
-
-    /** TexasConfig maxTotalBuyIn */
-    maxTotalBuyIn?: (number|null);
-
-    /** TexasConfig minBringIn */
-    minBringIn?: (number|null);
-
-    /** TexasConfig maxBringIn */
-    maxBringIn?: (number|null);
-
-    /** TexasConfig allowBringOut */
-    allowBringOut?: (boolean|null);
-
-    /** TexasConfig minScoreAfterBringOut */
-    minScoreAfterBringOut?: (number|null);
-
-    /** TexasConfig insurance */
-    insurance?: (boolean|null);
-
-    /** TexasConfig gameDuration */
-    gameDuration?: (number|null);
-
-    /** TexasConfig thinkingTime */
-    thinkingTime?: (number|null);
-
-    /** TexasConfig seatNum */
-    seatNum?: (number|null);
-
-    /** TexasConfig autoStartNum */
-    autoStartNum?: (number|null);
-
-    /** TexasConfig gpsLimit */
-    gpsLimit?: (boolean|null);
-
-    /** TexasConfig ipLimit */
-    ipLimit?: (boolean|null);
-}
-
-/** Represents a TexasConfig. */
-export class TexasConfig implements ITexasConfig {
-
-    /**
-     * Constructs a new TexasConfig.
-     * @param [p] Properties to set
-     */
-    constructor(p?: ITexasConfig);
-
-    /** TexasConfig smallBlind. */
-    public smallBlind: number;
-
-    /** TexasConfig straddle. */
-    public straddle: boolean;
-
-    /** TexasConfig ante. */
-    public ante: number;
-
-    /** TexasConfig maxTotalBuyIn. */
-    public maxTotalBuyIn: number;
-
-    /** TexasConfig minBringIn. */
-    public minBringIn: number;
-
-    /** TexasConfig maxBringIn. */
-    public maxBringIn: number;
-
-    /** TexasConfig allowBringOut. */
-    public allowBringOut: boolean;
-
-    /** TexasConfig minScoreAfterBringOut. */
-    public minScoreAfterBringOut: number;
-
-    /** TexasConfig insurance. */
-    public insurance: boolean;
-
-    /** TexasConfig gameDuration. */
-    public gameDuration: number;
-
-    /** TexasConfig thinkingTime. */
-    public thinkingTime: number;
-
-    /** TexasConfig seatNum. */
-    public seatNum: number;
-
-    /** TexasConfig autoStartNum. */
-    public autoStartNum: number;
-
-    /** TexasConfig gpsLimit. */
-    public gpsLimit: boolean;
-
-    /** TexasConfig ipLimit. */
-    public ipLimit: boolean;
-
-    /**
-     * Encodes the specified TexasConfig message. Does not implicitly {@link TexasConfig.verify|verify} messages.
-     * @param m TexasConfig message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: ITexasConfig, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a TexasConfig message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns TexasConfig
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): TexasConfig;
-}
-
-/** Properties of a ShortConfig. */
-export interface IShortConfig {
-
-    /** ShortConfig scoreMode */
-    scoreMode?: (ShortGameScoreMode|null);
-
-    /** ShortConfig baseScore */
-    baseScore?: (number|null);
-
-    /** ShortConfig buttonDouble */
-    buttonDouble?: (boolean|null);
-}
-
-/** Represents a ShortConfig. */
-export class ShortConfig implements IShortConfig {
-
-    /**
-     * Constructs a new ShortConfig.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IShortConfig);
-
-    /** ShortConfig scoreMode. */
-    public scoreMode: ShortGameScoreMode;
-
-    /** ShortConfig baseScore. */
-    public baseScore: number;
-
-    /** ShortConfig buttonDouble. */
-    public buttonDouble: boolean;
-
-    /**
-     * Encodes the specified ShortConfig message. Does not implicitly {@link ShortConfig.verify|verify} messages.
-     * @param m ShortConfig message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IShortConfig, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a ShortConfig message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns ShortConfig
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ShortConfig;
-}
-
-/** ClubMemberType enum. */
-export enum ClubMemberType {
-    ClubAccountType_Normal = 0,
-    ClubAccountType_Manager = 1,
-    ClubAccountType_Owner = 2
-}
-
-/** GameType enum. */
-export enum GameType {
-    GameType_TexasCash = 0,
-    GameType_ShortCash = 1,
-    GameType_Mtt = 2,
-    GameType_Omh = 3
-}
-
-/** GameTaxType enum. */
-export enum GameTaxType {
-    GameTaxType_EveryRound = 0,
-    GameTaxType_WholeGameEnd = 1
-}
-
-/** GameCurrencyType enum. */
-export enum GameCurrencyType {
-    GameCurrencyType_Point = 0,
-    GameCurrencyType_Coin = 1
-}
-
-/** ShortGameScoreMode enum. */
-export enum ShortGameScoreMode {
-    ShortGameScoreMode_AnteMode = 0,
-    ShortGameScoreMode_BlindMode = 1
-}
-
-/** RecordDateType enum. */
-export enum RecordDateType {
-    RecordDateType_Today = 0,
-    RecordDateType_Week = 1,
-    RecordDateType_Month = 2
 }
 
 /** Represents a CommonResult. */
@@ -1570,6 +1111,295 @@ export class UserInfo implements IUserInfo {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserInfo;
+}
+
+/** GameType enum. */
+export enum GameType {
+    GameType_TexasCash = 0,
+    GameType_ShortCash = 1,
+    GameType_OmhCash = 2,
+    GameType_TexasMtt = 3,
+    GameType_ShortMtt = 4,
+    GameType_OmhMtt = 5
+}
+
+/** GameTaxType enum. */
+export enum GameTaxType {
+    GameTaxType_EveryRound = 0,
+    GameTaxType_WholeGameEnd = 1
+}
+
+/** GameCurrencyType enum. */
+export enum GameCurrencyType {
+    GameCurrencyType_Point = 0,
+    GameCurrencyType_Coin = 1
+}
+
+/** ShortGameScoreMode enum. */
+export enum ShortGameScoreMode {
+    ShortGameScoreMode_AnteMode = 0,
+    ShortGameScoreMode_BlindMode = 1
+}
+
+/** Represents a ClubGameConfig. */
+export class ClubGameConfig implements IClubGameConfig {
+
+    /**
+     * Constructs a new ClubGameConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IClubGameConfig);
+
+    /** ClubGameConfig basicConfig. */
+    public basicConfig?: (IGameBasicConfig|null);
+
+    /** ClubGameConfig texasConfig. */
+    public texasConfig?: (ITexasConfig|null);
+
+    /** ClubGameConfig matchingConfig. */
+    public matchingConfig?: (IMatchingConfig|null);
+
+    /**
+     * Encodes the specified ClubGameConfig message. Does not implicitly {@link ClubGameConfig.verify|verify} messages.
+     * @param m ClubGameConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IClubGameConfig, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a ClubGameConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns ClubGameConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubGameConfig;
+}
+
+/** Represents a MatchingConfig. */
+export class MatchingConfig implements IMatchingConfig {
+
+    /**
+     * Constructs a new MatchingConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IMatchingConfig);
+
+    /** MatchingConfig currentPlayerNum. */
+    public currentPlayerNum: number;
+
+    /** MatchingConfig startTime. */
+    public startTime: number;
+
+    /**
+     * Encodes the specified MatchingConfig message. Does not implicitly {@link MatchingConfig.verify|verify} messages.
+     * @param m MatchingConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IMatchingConfig, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a MatchingConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns MatchingConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): MatchingConfig;
+}
+
+/** Represents a GameBasicConfig. */
+export class GameBasicConfig implements IGameBasicConfig {
+
+    /**
+     * Constructs a new GameBasicConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IGameBasicConfig);
+
+    /** GameBasicConfig gameType. */
+    public gameType: GameType;
+
+    /** GameBasicConfig gameName. */
+    public gameName: string;
+
+    /** GameBasicConfig currencyType. */
+    public currencyType: GameCurrencyType;
+
+    /** GameBasicConfig taxType. */
+    public taxType: GameTaxType;
+
+    /** GameBasicConfig taxRatio. */
+    public taxRatio: number;
+
+    /** GameBasicConfig shortConfig. */
+    public shortConfig?: (IShortConfig|null);
+
+    /** GameBasicConfig omhConfig. */
+    public omhConfig?: (IOmhConfig|null);
+
+    /**
+     * Encodes the specified GameBasicConfig message. Does not implicitly {@link GameBasicConfig.verify|verify} messages.
+     * @param m GameBasicConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IGameBasicConfig, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a GameBasicConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns GameBasicConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): GameBasicConfig;
+}
+
+/** Represents a TexasConfig. */
+export class TexasConfig implements ITexasConfig {
+
+    /**
+     * Constructs a new TexasConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ITexasConfig);
+
+    /** TexasConfig smallBlind. */
+    public smallBlind: number;
+
+    /** TexasConfig straddle. */
+    public straddle: boolean;
+
+    /** TexasConfig ante. */
+    public ante: number;
+
+    /** TexasConfig maxTotalBuyIn. */
+    public maxTotalBuyIn: number;
+
+    /** TexasConfig minBringIn. */
+    public minBringIn: number;
+
+    /** TexasConfig maxBringIn. */
+    public maxBringIn: number;
+
+    /** TexasConfig allowBringOut. */
+    public allowBringOut: boolean;
+
+    /** TexasConfig minScoreAfterBringOut. */
+    public minScoreAfterBringOut: number;
+
+    /** TexasConfig insurance. */
+    public insurance: boolean;
+
+    /** TexasConfig gameDuration. */
+    public gameDuration: number;
+
+    /** TexasConfig thinkingTime. */
+    public thinkingTime: number;
+
+    /** TexasConfig seatNum. */
+    public seatNum: number;
+
+    /** TexasConfig autoStartNum. */
+    public autoStartNum: number;
+
+    /** TexasConfig gpsLimit. */
+    public gpsLimit: boolean;
+
+    /** TexasConfig ipLimit. */
+    public ipLimit: boolean;
+
+    /**
+     * Encodes the specified TexasConfig message. Does not implicitly {@link TexasConfig.verify|verify} messages.
+     * @param m TexasConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ITexasConfig, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a TexasConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns TexasConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): TexasConfig;
+}
+
+/** Represents a ShortConfig. */
+export class ShortConfig implements IShortConfig {
+
+    /**
+     * Constructs a new ShortConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IShortConfig);
+
+    /** ShortConfig scoreMode. */
+    public scoreMode: ShortGameScoreMode;
+
+    /** ShortConfig baseScore. */
+    public baseScore: number;
+
+    /** ShortConfig buttonDouble. */
+    public buttonDouble: boolean;
+
+    /**
+     * Encodes the specified ShortConfig message. Does not implicitly {@link ShortConfig.verify|verify} messages.
+     * @param m ShortConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IShortConfig, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a ShortConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns ShortConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ShortConfig;
+}
+
+/** Represents an OmhConfig. */
+export class OmhConfig implements IOmhConfig {
+
+    /**
+     * Constructs a new OmhConfig.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IOmhConfig);
+
+    /** OmhConfig baseScore. */
+    public baseScore: number;
+
+    /**
+     * Encodes the specified OmhConfig message. Does not implicitly {@link OmhConfig.verify|verify} messages.
+     * @param m OmhConfig message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IOmhConfig, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes an OmhConfig message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns OmhConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): OmhConfig;
 }
 
 /** Represents a S2CCreateClub. */

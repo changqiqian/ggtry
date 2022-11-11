@@ -1,7 +1,6 @@
 import { _decorator, Component, Node, AudioSource } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Poker } from '../../common/Poker';
-import { GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_PublicCards')
@@ -9,6 +8,8 @@ export class Game_PublicCards extends BaseUI
 {
     @property(AudioSource) 
     mAudio: AudioSource = null;
+
+    private mIndex : number = null;
     InitParam() 
     {
 
@@ -30,6 +31,11 @@ export class Game_PublicCards extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 
     DealOnCard(_cardData : number)
@@ -78,5 +84,6 @@ export class Game_PublicCards extends BaseUI
         }
         return result;
     }
+    
 }
 
