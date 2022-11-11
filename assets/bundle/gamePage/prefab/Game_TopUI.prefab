@@ -894,10 +894,6 @@
     "root": {
       "__id__": 13
     },
-    "asset": {
-      "__uuid__": "3d0fca7e-24e5-4009-baee-d1af3e1e63db",
-      "__expectedType__": "cc.Prefab"
-    },
     "fileId": "02Etsad5lBMrzzfPGPiY/z"
   },
   {
@@ -1173,10 +1169,6 @@
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 13
-    },
-    "asset": {
-      "__uuid__": "3d0fca7e-24e5-4009-baee-d1af3e1e63db",
-      "__expectedType__": "cc.Prefab"
     },
     "fileId": "6btsgli0VBerHs6E7RFkMF"
   },
@@ -1716,10 +1708,6 @@
     "root": {
       "__id__": 13
     },
-    "asset": {
-      "__uuid__": "3d0fca7e-24e5-4009-baee-d1af3e1e63db",
-      "__expectedType__": "cc.Prefab"
-    },
     "fileId": "1cFaXx3zFMQJLtGwXeslWT"
   },
   {
@@ -1798,10 +1786,6 @@
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 13
-    },
-    "asset": {
-      "__uuid__": "3d0fca7e-24e5-4009-baee-d1af3e1e63db",
-      "__expectedType__": "cc.Prefab"
     },
     "fileId": "78Zw9Q5a9Na5OE8aR0OopB"
   },
@@ -1930,10 +1914,6 @@
     "root": {
       "__id__": 13
     },
-    "asset": {
-      "__uuid__": "3d0fca7e-24e5-4009-baee-d1af3e1e63db",
-      "__expectedType__": "cc.Prefab"
-    },
     "fileId": "040HLx8yNJ0b5wrZYOrHXo"
   },
   {
@@ -2060,10 +2040,6 @@
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 13
-    },
-    "asset": {
-      "__uuid__": "3d0fca7e-24e5-4009-baee-d1af3e1e63db",
-      "__expectedType__": "cc.Prefab"
     },
     "fileId": "8ajskWl7hHQbo8jTxtaXCl"
   },
@@ -2192,10 +2168,6 @@
     "root": {
       "__id__": 13
     },
-    "asset": {
-      "__uuid__": "3d0fca7e-24e5-4009-baee-d1af3e1e63db",
-      "__expectedType__": "cc.Prefab"
-    },
     "fileId": "73hQXLbRBCc7Db5Yy/qrzU"
   },
   {
@@ -2229,10 +2201,6 @@
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 13
-    },
-    "asset": {
-      "__uuid__": "3d0fca7e-24e5-4009-baee-d1af3e1e63db",
-      "__expectedType__": "cc.Prefab"
     },
     "fileId": "02mjzmCYFNxJDThXHp1vFa"
   },
@@ -2592,10 +2560,6 @@
     "root": {
       "__id__": 13
     },
-    "asset": {
-      "__uuid__": "3d0fca7e-24e5-4009-baee-d1af3e1e63db",
-      "__expectedType__": "cc.Prefab"
-    },
     "fileId": "b6wgaTYnZDxpQzvhwzDMj2"
   },
   {
@@ -2681,10 +2645,6 @@
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 13
-    },
-    "asset": {
-      "__uuid__": "3d0fca7e-24e5-4009-baee-d1af3e1e63db",
-      "__expectedType__": "cc.Prefab"
     },
     "fileId": "acheO/n9RMR77sYF/XeNvN",
     "targetOverrides": [
