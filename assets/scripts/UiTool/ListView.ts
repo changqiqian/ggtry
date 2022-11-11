@@ -1,6 +1,6 @@
 
  const { ccclass, property, disallowMultiple, menu, executionOrder, requireComponent } = _decorator;
- import { Node, Component, Enum, tween, _decorator, EventHandler, ScrollView, Prefab, Layout, Vec2, Size, NodePool, isValid, instantiate, Vec3, Widget, UITransform, CCFloat, CCBoolean, CCInteger } from 'cc';
+ import { Node, Component, Enum, tween, _decorator, EventHandler, ScrollView, Prefab, Layout, Vec2, Size, NodePool, isValid, instantiate, Vec3, Widget, UITransform, CCFloat, CCBoolean, CCInteger, Tween } from 'cc';
  import { DEV } from 'cc/env';
 
  
@@ -8,15 +8,7 @@
      NODE = 1,
      PREFAB = 2,
  }
- 
- enum SlideType {
-     NORMAL = 1,//普通
-     ADHERING = 2,//粘附模式，将强制关闭滚动惯性
-     PAGE = 3,//页面模式，将强制关闭滚动惯性
- }
- 
 
- 
  @ccclass
  @disallowMultiple()
  @menu('ListView')
@@ -41,35 +33,6 @@
          visible() { return this.templateType == TemplateType.PREFAB; }
      })
      tmpPrefab: Prefab = null;
-     //滑动模式
-     @property({})
-     private _slideMode: SlideType = SlideType.NORMAL;
-     @property({
-         type: Enum(SlideType),
-         tooltip: DEV && '滑动模式'
-     })
-     set slideMode(val: SlideType) {
-         this._slideMode = val;
-     }
-     get slideMode() {
-         return this._slideMode;
-     }
-     //翻页作用距离
-     @property({
-         type: CCFloat,
-         range: [0, 1, .1],
-         tooltip: DEV && '翻页作用距离',
-         slide: true,
-         visible() { return this._slideMode == SlideType.PAGE; }
-     })
-     public pageDistance: number = .3;
-     //页面改变事件
-     @property({
-         type: EventHandler,
-         tooltip: DEV && '页面改变事件',
-         visible() { return this._slideMode == SlideType.PAGE; }
-     })
-     private pageChangeEvent: EventHandler = new EventHandler();
      //是否为虚拟列表（动态列表）
      @property({})
      private _virtual: boolean = true;
@@ -87,34 +50,7 @@
      get virtual() {
          return this._virtual;
      }
-     //是否为循环列表
-     @property({
-         tooltip: DEV && '是否为循环列表',
-         visible() {
-             let val: boolean = /*this.virtual &&*/ this.slideMode == SlideType.NORMAL;
-             if (!val)
-                 this.cyclic = false;
-             return val;
-         }
-     })
-     public cyclic: boolean = false;
-     //缺省居中
-     @property({
-         tooltip: DEV && 'Item数量不足以填满Content时，是否居中显示Item（不支持Grid布局）',
-         visible() { return this.virtual; }
-     })
-     public lackCenter: boolean = false;
-     //缺省可滑动
-     @property({
-         tooltip: DEV && 'Item数量不足以填满Content时，是否可滑动',
-         visible() {
-             let val: boolean = this.virtual && !this.lackCenter;
-             if (!val)
-                 this.lackSlide = false;
-             return val;
-         }
-     })
-     public lackSlide: boolean = false;
+
      //刷新频率
      @property({ type: CCInteger })
      private _updateRate: number = 0;
@@ -139,82 +75,69 @@
          tooltip: DEV && '逐帧渲染时，每帧渲染的Item数量（<=0时关闭分帧渲染）',
          slide: true,
      })
-     public frameByFrameRenderNum: number = 0;
-     //渲染事件（渲染器）
-    //  @property({
-    //      type: EventHandler,
-    //      tooltip: DEV && '渲染事件（渲染器）',
-    //  })
+    public frameByFrameRenderNum: number = 0;
     private renderEvent: Function = null;
     private dragBottomCallback :  Function = null;
 
-     private _forceUpdate: boolean = false;
-     private _align: number;
-     private _horizontalDir: number;
-     private _verticalDir: number;
-     private _startAxis: number;
-     private _alignCalcType: number;
-     public content: Node;
-     private _contentUt: UITransform;
-     private firstListId: number;
-     public displayItemNum: number;
-     private _updateDone: boolean = true;
-     private _updateCounter: number;
-     public _actualNumItems: number;
-     private _cyclicNum: number;
-     private _cyclicPos1: number;
-     private _cyclicPos2: number;
+    private _forceUpdate: boolean = false;
+    private _align: number;
+    private _horizontalDir: number;
+    private _verticalDir: number;
+    private _startAxis: number;
+    private _alignCalcType: number;
+    public content: Node;
+    private _contentUt: UITransform;
+    private firstListId: number;
+    public displayItemNum: number;
+    private _updateDone: boolean = true;
+    private _updateCounter: number;
+    public _actualNumItems: number;
      //列表数量
      @property({
          serializable: false
      })
      private _numItems: number = 0;
      set numItems(val: number) {
-         let t = this;
-         if (!t.checkInited(false))
+         if (!this.checkInited(false))
              return;
          if (val == null || val < 0) {
              console.error('numItems set the wrong::', val);
              return;
          }
-         t._actualNumItems = t._numItems = val;
-         t._forceUpdate = true;
+         this._actualNumItems = this._numItems = val;
+         this._forceUpdate = true;
  
-         if (t._virtual) {
-             t._resizeContent();
-             if (t.cyclic) {
-                 t._numItems = t._cyclicNum * t._numItems;
-             }
-             t._onScrolling();
-             if (!t.frameByFrameRenderNum && t.slideMode == SlideType.PAGE)
-                 t.curPageNum = t.nearestListId;
-         } else {
-             if (t.cyclic) {
-                 t._resizeContent();
-                 t._numItems = t._cyclicNum * t._numItems;
-             }
-             let layout: Layout = t.content.getComponent(Layout);
+         if (this._virtual) {
+             this._resizeContent();
+
+             this._onScrolling();
+
+         } 
+         else 
+         {
+
+             let layout: Layout = this.content.getComponent(Layout);
              if (layout) {
                  layout.enabled = true;
              }
-             t._delRedundantItem();
+             this._delRedundantItem();
  
-             t.firstListId = 0;
-             if (t.frameByFrameRenderNum > 0) {
+             this.firstListId = 0;
+             if (this.frameByFrameRenderNum > 0) {
                  //先渲染几个出来
-                 let len: number = t.frameByFrameRenderNum > t._numItems ? t._numItems : t.frameByFrameRenderNum;
+                 let len: number = this.frameByFrameRenderNum > this._numItems ? this._numItems : this.frameByFrameRenderNum;
                  for (let n: number = 0; n < len; n++) {
-                     t._createOrUpdateItem2(n);
+                     this._createOrUpdateItem2(n);
                  }
-                 if (t.frameByFrameRenderNum < t._numItems) {
-                     t._updateCounter = t.frameByFrameRenderNum;
-                     t._updateDone = false;
+                 if (this.frameByFrameRenderNum < this._numItems) {
+                     this._updateCounter = this.frameByFrameRenderNum;
+                     this._updateDone = false;
                  }
              } else {
-                 for (let n: number = 0; n < t._numItems; n++) {
-                     t._createOrUpdateItem2(n);
+                 for (let n: number = 0; n < this._numItems; n++) {
+                     this._createOrUpdateItem2(n);
                  }
-                 t.displayItemNum = t._numItems;
+                 this.displayItemNum = this._numItems;
              }
          }
      }
@@ -251,11 +174,6 @@
      public _customSize: any;
  
      private frameCount: number;
-     private _aniDelRuning: boolean = false;
-     private _aniDelCB: Function;
-     private _aniDelItem: any;
-     private _aniDelBeforePos: Vec2;
-     private _aniDelBeforeScale: number;
      private viewTop: number;
      private viewRight: number;
      private viewBottom: number;
@@ -275,7 +193,6 @@
      private _adheringBarrier: boolean = false;
      private nearestListId: number;
  
-     public curPageNum: number = 0;
      private _beganPos: number;
      private _scrollPos: number;
      private _curScrollIsTouch: boolean;//当前滑动是否为手动
@@ -284,7 +201,6 @@
      private _scrollToEndTime: number;
      private _scrollToSo: any;
  
-     private _lack: boolean;
      private _allItemSize: number;
      private _allItemSizeNoEdge: number;
  
@@ -299,37 +215,18 @@
      }
  
      onDestroy() {
-         let t: any = this;
-         if (isValid(t._itemTmp))
-             t._itemTmp.destroy();
-         if (isValid(t.tmpNode))
-             t.tmpNode.destroy();
-         t._pool && t._pool.clear();
+
+         if (isValid(this._itemTmp))
+             this._itemTmp.destroy();
+         if (isValid(this.tmpNode))
+             this.tmpNode.destroy();
+         this._pool && this._pool.clear();
      }
  
      onEnable() {
          // if (!EDITOR) 
          this._registerEvent();
          this._init();
-         // 处理重新显示后，有可能上一次的动画移除还未播放完毕，导致动画卡住的问题
-         if (this._aniDelRuning) {
-             this._aniDelRuning = false;
-             if (this._aniDelItem) {
-                 if (this._aniDelBeforePos) {
-                     this._aniDelItem.position = this._aniDelBeforePos;
-                     delete this._aniDelBeforePos;
-                 }
-                 if (this._aniDelBeforeScale) {
-                     this._aniDelItem.scale = this._aniDelBeforeScale;
-                     delete this._aniDelBeforeScale;
-                 }
-                 delete this._aniDelItem;
-             }
-             if (this._aniDelCB) {
-                 this._aniDelCB();
-                 delete this._aniDelCB;
-             }
-         }
      }
  
      onDisable() {
@@ -338,134 +235,113 @@
      }
      //注册事件
      _registerEvent() {
-         let t: any = this;
-         t.node.on(Node.EventType.TOUCH_START, t._onTouchStart, t);
-         t.node.on('touch-up', t._onTouchUp, t);
-         t.node.on(Node.EventType.TOUCH_CANCEL, t._onTouchCancelled, t);
-         t.node.on('scroll-began', t._onScrollBegan, t);
-         t.node.on('scroll-ended', t._onScrollEnded, t);
-         t.node.on('scrolling', t._onScrolling, t);
-         t.node.on(Node.EventType.SIZE_CHANGED, t._onSizeChanged, t);
-         t.node.getComponent(ScrollView).node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
+         this.node.on(Node.EventType.TOUCH_START, this._onTouchStart, this);
+         this.node.on('touch-up', this._onTouchUp, this);
+         this.node.on(Node.EventType.TOUCH_CANCEL, this._onTouchCancelled, this);
+         this.node.on('scroll-began', this._onScrollBegan, this);
+         this.node.on('scroll-ended', this._onScrollEnded, this);
+         this.node.on('scrolling', this._onScrolling, this);
+         this.node.on(Node.EventType.SIZE_CHANGED, this._onSizeChanged, this);
+         this.node.getComponent(ScrollView).node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
      }
      //卸载事件
      _unregisterEvent() {
-         let t: any = this;
-         t.node.off(Node.EventType.TOUCH_START, t._onTouchStart, t);
-         t.node.off('touch-up', t._onTouchUp, t);
-         t.node.off(Node.EventType.TOUCH_CANCEL, t._onTouchCancelled, t);
-         t.node.off('scroll-began', t._onScrollBegan, t);
-         t.node.off('scroll-ended', t._onScrollEnded, t);
-         t.node.off('scrolling', t._onScrolling, t);
-         t.node.off(Node.EventType.SIZE_CHANGED, t._onSizeChanged, t);
-         t.node.getComponent(ScrollView).node.off(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
+         this.node.off(Node.EventType.TOUCH_START, this._onTouchStart, this);
+         this.node.off('touch-up', this._onTouchUp, this);
+         this.node.off(Node.EventType.TOUCH_CANCEL, this._onTouchCancelled, this);
+         this.node.off('scroll-began', this._onScrollBegan, this);
+         this.node.off('scroll-ended', this._onScrollEnded, this);
+         this.node.off('scrolling', this._onScrolling, this);
+         this.node.off(Node.EventType.SIZE_CHANGED, this._onSizeChanged, this);
+         this.node.getComponent(ScrollView).node.off(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);
 
      }
      //初始化各种..
      _init() {
-         let t: any = this;
-         if (t._inited)
+         if (this._inited)
              return;
  
-         t._thisNodeUt = t.node.getComponent(UITransform);
-         t._scrollView = t.node.getComponent(ScrollView);
+         this._thisNodeUt = this.node.getComponent(UITransform);
+         this._scrollView = this.node.getComponent(ScrollView);
  
-         t.content = t._scrollView.content;
-         t._contentUt = t.content.getComponent(UITransform);
-         if (!t.content) {
-             console.error(t.node.name + "'s ScrollView unset content!");
+         this.content = this._scrollView.content;
+         this._contentUt = this.content.getComponent(UITransform);
+         if (!this.content) {
+             console.error(this.node.name + "'s ScrollView unset content!");
              return;
          }
  
-         t._layout = t.content.getComponent(Layout);
+         this._layout = this.content.getComponent(Layout);
  
-         t._align = t._layout.type; //排列模式
-         t._resizeMode = t._layout.resizeMode; //自适应模式
-         t._startAxis = t._layout.startAxis;
+         this._align = this._layout.type; //排列模式
+         this._resizeMode = this._layout.resizeMode; //自适应模式
+         this._startAxis = this._layout.startAxis;
  
-         t._topGap = t._layout.paddingTop; //顶边距
-         t._rightGap = t._layout.paddingRight; //右边距
-         t._bottomGap = t._layout.paddingBottom; //底边距
-         t._leftGap = t._layout.paddingLeft; //左边距
+         this._topGap = this._layout.paddingTop; //顶边距
+         this._rightGap = this._layout.paddingRight; //右边距
+         this._bottomGap = this._layout.paddingBottom; //底边距
+         this._leftGap = this._layout.paddingLeft; //左边距
  
-         t._columnGap = t._layout.spacingX; //列距
-         t._lineGap = t._layout.spacingY; //行距
+         this._columnGap = this._layout.spacingX; //列距
+         this._lineGap = this._layout.spacingY; //行距
  
-         t._colLineNum; //列数或行数（非GRID模式则=1，表示单列或单行）;
+         this._colLineNum; //列数或行数（非GRID模式则=1，表示单列或单行）;
  
-         t._verticalDir = t._layout.verticalDirection; //垂直排列子节点的方向
-         t._horizontalDir = t._layout.horizontalDirection; //水平排列子节点的方向
+         this._verticalDir = this._layout.verticalDirection; //垂直排列子节点的方向
+         this._horizontalDir = this._layout.horizontalDirection; //水平排列子节点的方向
  
-         t.setTemplateItem(instantiate(t.templateType == TemplateType.PREFAB ? t.tmpPrefab : t.tmpNode));
+         this.setTemplateItem(instantiate(this.templateType == TemplateType.PREFAB ? this.tmpPrefab : this.tmpNode));
+
  
-         // 特定的滑动模式处理
-         if (t._slideMode == SlideType.ADHERING || t._slideMode == SlideType.PAGE) {
-             t._scrollView.inertia = false;
-             t._scrollView._onMouseWheel = function () {
-                 return;
-             };
-         }
-         if (!t.virtual)         // lackCenter 仅支持 Virtual 模式
-             t.lackCenter = false;
+         this._lastDisplayData = []; //最后一次刷新的数据
+         this.displayData = []; //当前数据
+         this._pool = new NodePool();    //这是个池子..
+         this._forceUpdate = false;         //是否强制更新
+         this._updateCounter = 0;           //当前分帧渲染帧数
+         this._updateDone = true;           //分帧渲染是否完成
  
-         t._lastDisplayData = []; //最后一次刷新的数据
-         t.displayData = []; //当前数据
-         t._pool = new NodePool();    //这是个池子..
-         t._forceUpdate = false;         //是否强制更新
-         t._updateCounter = 0;           //当前分帧渲染帧数
-         t._updateDone = true;           //分帧渲染是否完成
- 
-         t.curPageNum = 0;               //当前页数
- 
-         if (t.cyclic || 0) {
-             t._scrollView._processAutoScrolling = this._processAutoScrolling.bind(t);
-             t._scrollView._startBounceBackIfNeeded = function () {
-                 return false;
-             }
-         }
- 
-         switch (t._align) {
+         switch (this._align) {
              case Layout.Type.HORIZONTAL: {
-                 switch (t._horizontalDir) {
+                 switch (this._horizontalDir) {
                      case Layout.HorizontalDirection.LEFT_TO_RIGHT:
-                         t._alignCalcType = 1;
+                         this._alignCalcType = 1;
                          break;
                      case Layout.HorizontalDirection.RIGHT_TO_LEFT:
-                         t._alignCalcType = 2;
+                         this._alignCalcType = 2;
                          break;
                  }
                  break;
              }
              case Layout.Type.VERTICAL: {
-                 switch (t._verticalDir) {
+                 switch (this._verticalDir) {
                      case Layout.VerticalDirection.TOP_TO_BOTTOM:
-                         t._alignCalcType = 3;
+                         this._alignCalcType = 3;
                          break;
                      case Layout.VerticalDirection.BOTTOM_TO_TOP:
-                         t._alignCalcType = 4;
+                         this._alignCalcType = 4;
                          break;
                  }
                  break;
              }
              case Layout.Type.GRID: {
-                 switch (t._startAxis) {
+                 switch (this._startAxis) {
                      case Layout.AxisDirection.HORIZONTAL:
-                         switch (t._verticalDir) {
+                         switch (this._verticalDir) {
                              case Layout.VerticalDirection.TOP_TO_BOTTOM:
-                                 t._alignCalcType = 3;
+                                 this._alignCalcType = 3;
                                  break;
                              case Layout.VerticalDirection.BOTTOM_TO_TOP:
-                                 t._alignCalcType = 4;
+                                 this._alignCalcType = 4;
                                  break;
                          }
                          break;
                      case Layout.AxisDirection.VERTICAL:
-                         switch (t._horizontalDir) {
+                         switch (this._horizontalDir) {
                              case Layout.HorizontalDirection.LEFT_TO_RIGHT:
-                                 t._alignCalcType = 1;
+                                 this._alignCalcType = 1;
                                  break;
                              case Layout.HorizontalDirection.RIGHT_TO_LEFT:
-                                 t._alignCalcType = 2;
+                                 this._alignCalcType = 2;
                                  break;
                          }
                          break;
@@ -474,13 +350,13 @@
              }
          }
          // 清空 content
-         // t.content.children.forEach((child: Node) => {
+         // this.content.children.forEach((child: Node) => {
          //     child.removeFromParent();
-         //     if (child != t.tmpNode && child.isValid)
+         //     if (child != this.tmpNode && child.isValid)
          //         child.destroy();
          // });
-         t.content.removeAllChildren();
-         t._inited = true;
+         this.content.removeAllChildren();
+         this._inited = true;
      }
      /**
       * 为了实现循环列表，必须覆写cc.ScrollView的某些函数
@@ -559,45 +435,44 @@
      setTemplateItem(item: any) {
          if (!item)
              return;
-         let t: any = this;
-         t._itemTmp = item;
-         t._itemTmpUt = item.getComponent(UITransform);
+         this._itemTmp = item;
+         this._itemTmpUt = item.getComponent(UITransform);
  
-         if (t._resizeMode == Layout.ResizeMode.CHILDREN)
-             t._itemSize = t._layout.cellSize;
+         if (this._resizeMode == Layout.ResizeMode.CHILDREN)
+             this._itemSize = this._layout.cellSize;
          else {
              let itemUt: UITransform = item.getComponent(UITransform);
-             t._itemSize = new Size(itemUt.width, itemUt.height);
+             this._itemSize = new Size(itemUt.width, itemUt.height);
          }
  
 
          let com: any = item.getComponent(Widget);
          if (com && com.enabled) {
-             t._needUpdateWidget = true;
+             this._needUpdateWidget = true;
          }
  
-         switch (t._align) {
+         switch (this._align) {
              case Layout.Type.HORIZONTAL:
-                 t._colLineNum = 1;
-                 t._sizeType = false;
+                 this._colLineNum = 1;
+                 this._sizeType = false;
                  break;
              case Layout.Type.VERTICAL:
-                 t._colLineNum = 1;
-                 t._sizeType = true;
+                 this._colLineNum = 1;
+                 this._sizeType = true;
                  break;
              case Layout.Type.GRID:
-                 switch (t._startAxis) {
+                 switch (this._startAxis) {
                      case Layout.AxisDirection.HORIZONTAL:
                          //计算列数
-                         let trimW: number = t._contentUt.width - t._leftGap - t._rightGap;
-                         t._colLineNum = Math.floor((trimW + t._columnGap) / (t._itemSize.width + t._columnGap));
-                         t._sizeType = true;
+                         let trimW: number = this._contentUt.width - this._leftGap - this._rightGap;
+                         this._colLineNum = Math.floor((trimW + this._columnGap) / (this._itemSize.width + this._columnGap));
+                         this._sizeType = true;
                          break;
                      case Layout.AxisDirection.VERTICAL:
                          //计算行数
-                         let trimH: number = t._contentUt.height - t._topGap - t._bottomGap;
-                         t._colLineNum = Math.floor((trimH + t._lineGap) / (t._itemSize.height + t._lineGap));
-                         t._sizeType = false;
+                         let trimH: number = this._contentUt.height - this._topGap - this._bottomGap;
+                         this._colLineNum = Math.floor((trimH + this._lineGap) / (this._itemSize.height + this._lineGap));
+                         this._sizeType = false;
                          break;
                  }
                  break;
@@ -618,81 +493,60 @@
      }
      //禁用 Layout 组件，自行计算 Content Size
      _resizeContent() {
-         let t: any = this;
          let result: number;
  
-         switch (t._align) {
+         switch (this._align) {
              case Layout.Type.HORIZONTAL: {
-                 if (t._customSize) {
-                     let fixed: any = t._getFixedSize(null);
-                     result = t._leftGap + fixed.val + (t._itemSize.width * (t._numItems - fixed.count)) + (t._columnGap * (t._numItems - 1)) + t._rightGap;
+                 if (this._customSize) {
+                     let fixed: any = this._getFixedSize(null);
+                     result = this._leftGap + fixed.val + (this._itemSize.width * (this._numItems - fixed.count)) + (this._columnGap * (this._numItems - 1)) + this._rightGap;
                  } else {
-                     result = t._leftGap + (t._itemSize.width * t._numItems) + (t._columnGap * (t._numItems - 1)) + t._rightGap;
+                     result = this._leftGap + (this._itemSize.width * this._numItems) + (this._columnGap * (this._numItems - 1)) + this._rightGap;
                  }
                  break;
              }
              case Layout.Type.VERTICAL: {
-                 if (t._customSize) {
-                     let fixed: any = t._getFixedSize(null);
-                     result = t._topGap + fixed.val + (t._itemSize.height * (t._numItems - fixed.count)) + (t._lineGap * (t._numItems - 1)) + t._bottomGap;
+                 if (this._customSize) {
+                     let fixed: any = this._getFixedSize(null);
+                     result = this._topGap + fixed.val + (this._itemSize.height * (this._numItems - fixed.count)) + (this._lineGap * (this._numItems - 1)) + this._bottomGap;
                  } else {
-                     result = t._topGap + (t._itemSize.height * t._numItems) + (t._lineGap * (t._numItems - 1)) + t._bottomGap;
+                     result = this._topGap + (this._itemSize.height * this._numItems) + (this._lineGap * (this._numItems - 1)) + this._bottomGap;
                  }
                  break;
              }
              case Layout.Type.GRID: {
-                 //网格模式不支持居中
-                 if (t.lackCenter)
-                     t.lackCenter = false;
-                 switch (t._startAxis) {
+                 switch (this._startAxis) {
                      case Layout.AxisDirection.HORIZONTAL:
-                         let lineNum: number = Math.ceil(t._numItems / t._colLineNum);
-                         result = t._topGap + (t._itemSize.height * lineNum) + (t._lineGap * (lineNum - 1)) + t._bottomGap;
+                         let lineNum: number = Math.ceil(this._numItems / this._colLineNum);
+                         result = this._topGap + (this._itemSize.height * lineNum) + (this._lineGap * (lineNum - 1)) + this._bottomGap;
                          break;
                      case Layout.AxisDirection.VERTICAL:
-                         let colNum: number = Math.ceil(t._numItems / t._colLineNum);
-                         result = t._leftGap + (t._itemSize.width * colNum) + (t._columnGap * (colNum - 1)) + t._rightGap;
+                         let colNum: number = Math.ceil(this._numItems / this._colLineNum);
+                         result = this._leftGap + (this._itemSize.width * colNum) + (this._columnGap * (colNum - 1)) + this._rightGap;
                          break;
                  }
                  break;
              }
          }
  
-         let layout: Layout = t.content.getComponent(Layout);
+         let layout: Layout = this.content.getComponent(Layout);
          if (layout)
              layout.enabled = false;
  
-         t._allItemSize = result;
-         t._allItemSizeNoEdge = t._allItemSize - (t._sizeType ? (t._topGap + t._bottomGap) : (t._leftGap + t._rightGap));
+         this._allItemSize = result;
+         this._allItemSizeNoEdge = this._allItemSize - (this._sizeType ? (this._topGap + this._bottomGap) : (this._leftGap + this._rightGap));
+         let slideOffset: number = 0.1
  
-         if (t.cyclic) {
-             let totalSize: number = (t._sizeType ? t._thisNodeUt.height : t._thisNodeUt.width);
- 
-             t._cyclicPos1 = 0;
-             totalSize -= t._cyclicPos1;
-             t._cyclicNum = Math.ceil(totalSize / t._allItemSizeNoEdge) + 1;
-             let spacing: number = t._sizeType ? t._lineGap : t._columnGap;
-             t._cyclicPos2 = t._cyclicPos1 + t._allItemSizeNoEdge + spacing;
-             t._cyclicAllItemSize = t._allItemSize + (t._allItemSizeNoEdge * (t._cyclicNum - 1)) + (spacing * (t._cyclicNum - 1));
-             t._cycilcAllItemSizeNoEdge = t._allItemSizeNoEdge * t._cyclicNum;
-             t._cycilcAllItemSizeNoEdge += spacing * (t._cyclicNum - 1);
-             // cc.log('_cyclicNum ->', t._cyclicNum, t._allItemSizeNoEdge, t._allItemSize, t._cyclicPos1, t._cyclicPos2);
-         }
- 
-         t._lack = !t.cyclic && t._allItemSize < (t._sizeType ? t._thisNodeUt.height : t._thisNodeUt.width);
-         let slideOffset: number = ((!t._lack || !t.lackCenter) && t.lackSlide) ? 0 : .1;
- 
-         let targetWH: number = t._lack ? ((t._sizeType ? t._thisNodeUt.height : t._thisNodeUt.width) - slideOffset) : (t.cyclic ? t._cyclicAllItemSize : t._allItemSize);
+         let targetWH: number = false ? ((this._sizeType ? this._thisNodeUt.height : this._thisNodeUt.width) - slideOffset) : (this._allItemSize);
          if (targetWH < 0)
              targetWH = 0;
  
-         if (t._sizeType) {
-             t._contentUt.height = targetWH;
+         if (this._sizeType) {
+             this._contentUt.height = targetWH;
          } else {
-             t._contentUt.width = targetWH;
+             this._contentUt.width = targetWH;
          }
- 
-         // cc.log('_resizeContent()  numItems =', t._numItems, '，content =', t.content);
+
      }
  
      //滚动进行时...
@@ -705,101 +559,23 @@
          } else
              this.frameCount = this._updateRate;
  
-         if (this._aniDelRuning)
-             return;
- 
-         //循环列表处理
-         if (this.cyclic) {
-             let scrollPos: any = this.content.getPosition();
-             scrollPos = this._sizeType ? scrollPos.y : scrollPos.x;
- 
-             let addVal = this._allItemSizeNoEdge + (this._sizeType ? this._lineGap : this._columnGap);
-             let add: any = this._sizeType ? new Vec3(0, addVal, 0) : new Vec3(addVal, 0, 0);
- 
-             let contentPos = this.content.getPosition();
- 
-             switch (this._alignCalcType) {
-                 case 1://单行HORIZONTAL（LEFT_TO_RIGHT）、网格VERTICAL（LEFT_TO_RIGHT）
-                     if (scrollPos > -this._cyclicPos1) {
-                         contentPos.set(-this._cyclicPos2, contentPos.y, contentPos.z);
-                         this.content.setPosition(contentPos);
-                         if (this._scrollView.isAutoScrolling()) {
-                             this._scrollView['_autoScrollStartPosition'] = this._scrollView['_autoScrollStartPosition'].subtract(add);
-                         }
-                         // if (this._beganPos) {
-                         //     this._beganPos += add;
-                         // }
-                     } else if (scrollPos < -this._cyclicPos2) {
-                         contentPos.set(-this._cyclicPos1, contentPos.y, contentPos.z);
-                         this.content.setPosition(contentPos);
-                         if (this._scrollView.isAutoScrolling()) {
-                             this._scrollView['_autoScrollStartPosition'] = this._scrollView['_autoScrollStartPosition'].add(add);
-                         }
-                         // if (this._beganPos) {
-                         //     this._beganPos -= add;
-                         // }
-                     }
-                     break;
-                 case 2://单行HORIZONTAL（RIGHT_TO_LEFT）、网格VERTICAL（RIGHT_TO_LEFT）
-                     if (scrollPos < this._cyclicPos1) {
-                         contentPos.set(this._cyclicPos2, contentPos.y, contentPos.z);
-                         this.content.setPosition(contentPos);
-                         if (this._scrollView.isAutoScrolling()) {
-                             this._scrollView['_autoScrollStartPosition'] = this._scrollView['_autoScrollStartPosition'].add(add);
-                         }
-                     } else if (scrollPos > this._cyclicPos2) {
-                         contentPos.set(this._cyclicPos1, contentPos.y, contentPos.z);
-                         this.content.setPosition(contentPos);
-                         if (this._scrollView.isAutoScrolling()) {
-                             this._scrollView['_autoScrollStartPosition'] = this._scrollView['_autoScrollStartPosition'].subtract(add);
-                         }
-                     }
-                     break;
-                 case 3://单列VERTICAL（TOP_TO_BOTTOM）、网格HORIZONTAL（TOP_TO_BOTTOM）
-                     if (scrollPos < this._cyclicPos1) {
-                         contentPos.set(contentPos.x, this._cyclicPos2, contentPos.z);
-                         this.content.setPosition(contentPos);
-                         if (this._scrollView.isAutoScrolling()) {
-                             this._scrollView['_autoScrollStartPosition'] = this._scrollView['_autoScrollStartPosition'].add(add);
-                         }
-                     } else if (scrollPos > this._cyclicPos2) {
-                         contentPos.set(contentPos.x, this._cyclicPos1, contentPos.z);
-                         this.content.setPosition(contentPos);
-                         if (this._scrollView.isAutoScrolling()) {
-                             this._scrollView['_autoScrollStartPosition'] = this._scrollView['_autoScrollStartPosition'].subtract(add);
-                         }
-                     }
-                     break;
-                 case 4://单列VERTICAL（BOTTOM_TO_TOP）、网格HORIZONTAL（BOTTOM_TO_TOP）
-                     if (scrollPos > -this._cyclicPos1) {
-                         contentPos.set(contentPos.x, -this._cyclicPos2, contentPos.z);
-                         this.content.setPosition(contentPos);
-                         if (this._scrollView.isAutoScrolling()) {
-                             this._scrollView['_autoScrollStartPosition'] = this._scrollView['_autoScrollStartPosition'].subtract(add);
-                         }
-                     } else if (scrollPos < -this._cyclicPos2) {
-                         contentPos.set(contentPos.x, -this._cyclicPos1, contentPos.z);
-                         this.content.setPosition(contentPos);
-                         if (this._scrollView.isAutoScrolling()) {
-                             this._scrollView['_autoScrollStartPosition'] = this._scrollView['_autoScrollStartPosition'].add(add);
-                         }
-                     }
-                     break;
-             }
-         }
- 
+        
          this._calcViewPos();
  
          let vTop: number, vRight: number, vBottom: number, vLeft: number;
-         if (this._sizeType) {
+         if (this._sizeType) 
+         {
              vTop = this.viewTop;
              vBottom = this.viewBottom;
-         } else {
+         } 
+         else 
+         {
              vRight = this.viewRight;
              vLeft = this.viewLeft;
          }
  
-         if (this._virtual) {
+         if (this._virtual) 
+         {
              this.displayData = [];
              let itemPos: any;
  
@@ -983,11 +759,7 @@
                              left = this._leftGap + ((this._itemSize.width + this._columnGap) * id);
                              width = this._itemSize.width;
                          }
-                         if (this.lackCenter) {
-                             left -= this._leftGap;
-                             let offset: number = (this._contentUt.width / 2) - (this._allItemSizeNoEdge / 2);
-                             left += offset;
-                         }
+
                          right = left + width;
                          return {
                              id: id,
@@ -1007,11 +779,7 @@
                              right = -this._rightGap - ((this._itemSize.width + this._columnGap) * id);
                              width = this._itemSize.width;
                          }
-                         if (this.lackCenter) {
-                             right += this._rightGap;
-                             let offset: number = (this._contentUt.width / 2) - (this._allItemSizeNoEdge / 2);
-                             right -= offset;
-                         }
+
                          left = right - width;
                          return {
                              id: id,
@@ -1035,11 +803,7 @@
                              top = -this._topGap - ((this._itemSize.height + this._lineGap) * id);
                              height = this._itemSize.height;
                          }
-                         if (this.lackCenter) {
-                             top += this._topGap;
-                             let offset: number = (this._contentUt.height / 2) - (this._allItemSizeNoEdge / 2);
-                             top -= offset;
-                         }
+
                          bottom = top - height;
                          return {
                              id: id,
@@ -1059,11 +823,7 @@
                              bottom = this._bottomGap + ((this._itemSize.height + this._lineGap) * id);
                              height = this._itemSize.height;
                          }
-                         if (this.lackCenter) {
-                             bottom -= this._bottomGap;
-                             let offset: number = (this._contentUt.height / 2) - (this._allItemSizeNoEdge / 2);
-                             bottom += offset;
-                         }
+
                          top = bottom + height;
                          return {
                              id: id,
@@ -1217,11 +977,10 @@
      }
      //滚动结束时..
      _onScrollEnded() {
-         let t: any = this;
-         t._curScrollIsTouch = false;
-         if (t.scrollToListId != null) {
-             let item: any = t.getItemByListId(t.scrollToListId);
-             t.scrollToListId = null;
+         this._curScrollIsTouch = false;
+         if (this.scrollToListId != null) {
+             let item: any = this.getItemByListId(this.scrollToListId);
+             this.scrollToListId = null;
              if (item) {
                  tween(item)
                      .to(.1, { scale: 1.06 })
@@ -1229,20 +988,8 @@
                      .start();
              }
          }
-         t._onScrolling();
- 
-         if (t._slideMode == SlideType.ADHERING &&
-             !t.adhering
-         ) {
-             //cc.log(t.adhering, t._scrollView.isAutoScrolling(), t._scrollView.isScrolling());
-             t.adhere();
-         } else if (t._slideMode == SlideType.PAGE) {
-             if (t._beganPos != null && t._curScrollIsTouch) {
-                 this._pageAdhere();
-             } else {
-                 t.adhere();
-             }
-         }
+         this._onScrolling();
+
      }
      // 触摸时
      _onTouchStart(ev, captureListeners) {
@@ -1259,39 +1006,15 @@
      }
      //触摸抬起时..
      _onTouchUp() {
-         let t: any = this;
-         t._scrollPos = null;
-         if (t._slideMode == SlideType.ADHERING) {
-             if (this.adhering)
-                 this._adheringBarrier = true;
-             t.adhere();
-         } else if (t._slideMode == SlideType.PAGE) {
-             if (t._beganPos != null) {
-                 this._pageAdhere();
-             } else {
-                 t.adhere();
-             }
-         }
+         this._scrollPos = null;
          this._scrollItem = null;
      }
  
      _onTouchCancelled(ev, captureListeners) {
-         let t = this;
-         if (t._scrollView['_hasNestedViewGroup'](ev, captureListeners) || ev.simulate)
+         if (this._scrollView['_hasNestedViewGroup'](ev, captureListeners) || ev.simulate)
              return;
  
-         t._scrollPos = null;
-         if (t._slideMode == SlideType.ADHERING) {
-             if (t.adhering)
-                 t._adheringBarrier = true;
-             t.adhere();
-         } else if (t._slideMode == SlideType.PAGE) {
-             if (t._beganPos != null) {
-                 t._pageAdhere();
-             } else {
-                 t.adhere();
-             }
-         }
+         this._scrollPos = null;
          this._scrollItem = null;
      }
      //当尺寸改变
@@ -1299,83 +1022,8 @@
          if (this.checkInited(false))
              this._onScrolling();
      }
-     //当Item自适应
-     _onItemAdaptive(item: any) {
-         let ut: UITransform = item.getComponent(UITransform);
-         // if (this.checkInited(false)) {
-         if (
-             (!this._sizeType && ut.width != this._itemSize.width)
-             || (this._sizeType && ut.height != this._itemSize.height)
-         ) {
-             if (!this._customSize)
-                 this._customSize = {};
-             let val = this._sizeType ? ut.height : ut.width;
-             if (this._customSize[item._listId] != val) {
-                 this._customSize[item._listId] = val;
-                 this._resizeContent();
-                 // this.content.children.forEach((child: Node) => {
-                 //     this._updateItemPos(child);
-                 // });
-                 this.updateAll();
-                 // 如果当前正在运行 scrollTo，肯定会不准确，在这里做修正
-                 if (this._scrollToListId != null) {
-                     this._scrollPos = null;
-                     this.unschedule(this._scrollToSo);
-                     this.scrollTo(this._scrollToListId, Math.max(0, this._scrollToEndTime - ((new Date()).getTime() / 1000)));
-                 }
-             }
-         }
-         // }
-     }
-     //PAGE粘附
-     _pageAdhere() {
-         let t = this;
-         if (!t.cyclic && (t.elasticTop > 0 || t.elasticRight > 0 || t.elasticBottom > 0 || t.elasticLeft > 0))
-             return;
-         let curPos = t._sizeType ? t.viewTop : t.viewLeft;
-         let dis = (t._sizeType ? t._thisNodeUt.height : t._thisNodeUt.width) * t.pageDistance;
-         let canSkip = Math.abs(t._beganPos - curPos) > dis;
-         if (canSkip) {
-             let timeInSecond = .5;
-             switch (t._alignCalcType) {
-                 case 1://单行HORIZONTAL（LEFT_TO_RIGHT）、网格VERTICAL（LEFT_TO_RIGHT）
-                 case 4://单列VERTICAL（BOTTOM_TO_TOP）、网格HORIZONTAL（BOTTOM_TO_TOP）
-                     if (t._beganPos > curPos) {
-                         t.prePage(timeInSecond);
-                         // cc.log('_pageAdhere   PPPPPPPPPPPPPPP');
-                     } else {
-                         t.nextPage(timeInSecond);
-                         // cc.log('_pageAdhere   NNNNNNNNNNNNNNN');
-                     }
-                     break;
-                 case 2://单行HORIZONTAL（RIGHT_TO_LEFT）、网格VERTICAL（RIGHT_TO_LEFT）
-                 case 3://单列VERTICAL（TOP_TO_BOTTOM）、网格HORIZONTAL（TOP_TO_BOTTOM）
-                     if (t._beganPos < curPos) {
-                         t.prePage(timeInSecond);
-                     } else {
-                         t.nextPage(timeInSecond);
-                     }
-                     break;
-             }
-         } else if (t.elasticTop <= 0 && t.elasticRight <= 0 && t.elasticBottom <= 0 && t.elasticLeft <= 0) {
-             t.adhere();
-         }
-         t._beganPos = null;
-     }
-     //粘附
-     adhere() {
-         let t: any = this;
-         if (!t.checkInited())
-             return;
-         if (t.elasticTop > 0 || t.elasticRight > 0 || t.elasticBottom > 0 || t.elasticLeft > 0)
-             return;
-         t.adhering = true;
-         t._calcNearestItem();
-         let offset: number = (t._sizeType ? t._topGap : t._leftGap) / (t._sizeType ? t._thisNodeUt.height : t._thisNodeUt.width);
-         let timeInSecond: number = .7;
-         t.scrollTo(t.nearestListId, timeInSecond, offset);
-     }
-     //Update..
+
+
      update() {
          if (this.frameByFrameRenderNum <= 0 || this._updateDone)
              return;
@@ -1400,8 +1048,6 @@
                      this._delRedundantItem();
                      this._forceUpdate = false;
                      this._calcNearestItem();
-                     if (this.slideMode == SlideType.PAGE)
-                         this.curPageNum = this.nearestListId;
                  }
              } else {
                  this._updateCounter += this.frameByFrameRenderNum;
@@ -1416,8 +1062,6 @@
              } else {
                  this._updateDone = true;
                  this._calcNearestItem();
-                 if (this.slideMode == SlideType.PAGE)
-                     this.curPageNum = this.nearestListId;
              }
          }
      }
@@ -1454,7 +1098,6 @@
                      widget.updateAlignment();
              }
              item.setSiblingIndex(this.content.children.length - 1);
- 
              if (this.renderEvent) 
              {
                 this.renderEvent(item, data.id % this._actualNumItems)
@@ -1481,13 +1124,11 @@
              item = instantiate(this._itemTmp);
              item._listId = listId;
              this.content.addChild(item);
-
              if (this.renderEvent) 
              {
                 this.renderEvent(item, listId % this._actualNumItems)
              }
          } else if (this._forceUpdate && this.renderEvent) { //强制更新
-             item._listId = listId;
              if (this.renderEvent) 
              {
                 this.renderEvent(item, listId % this._actualNumItems)
@@ -1517,15 +1158,6 @@
              else
                  ut.width = size;
          }
-     }
-     /**
-      * 更新Item位置
-      * @param {Number||Node} listIdOrItem
-      */
-     _updateItemPos(listIdOrItem: any) {
-         let item: any = isNaN(listIdOrItem) ? listIdOrItem : this.getItemByListId(listIdOrItem);
-         let pos: any = this.getItemPos(item._listId);
-         item.setPosition(pos.x, pos.y);
      }
     
      /**
@@ -1608,12 +1240,12 @@
              // cc.log('存入::', str, '    pool.length =', this._pool.length);
          } else {
              while (this.content.children.length > this._numItems) {
-                 this._delSingleItem(this.content.children[this.content.children.length - 1]);
+                 this.DelSingleItem(this.content.children[this.content.children.length - 1]);
              }
          }
      }
      //删除单个Item
-     _delSingleItem(item: any) {
+     DelSingleItem(item: any) {
          // cc.log('DEL::', item['_listId'], item);
          item.removeFromParent();
          if (item.destroy)
@@ -1629,8 +1261,7 @@
       * @param {Boolean} overStress 滚动后是否强调该Item（这只是个实验功能）
       */
      scrollTo(listId: number, timeInSecond: number = .5, offset: number = null, overStress: boolean = false) {
-         let t = this;
-         if (!t.checkInited(false))
+         if (!this.checkInited(false))
              return;
          // t._scrollView.stopAutoScroll();
          if (timeInSecond == null)   //默认0.5
@@ -1639,78 +1270,78 @@
              timeInSecond = 0;
          if (listId < 0)
              listId = 0;
-         else if (listId >= t._numItems)
-             listId = t._numItems - 1;
+         else if (listId >= this._numItems)
+             listId = this._numItems - 1;
          // 以防设置了numItems之后layout的尺寸还未更新
-         if (!t._virtual && t._layout && t._layout.enabled)
-             t._layout.updateLayout();
+         if (!this._virtual && this._layout && this._layout.enabled)
+             this._layout.updateLayout();
  
-         let pos = t.getItemPos(listId);
+         let pos = this.getItemPos(listId);
          if (!pos) {
              return DEV && console.error('pos is null', listId);
          }
          let targetX: number, targetY: number;
  
-         switch (t._alignCalcType) {
+         switch (this._alignCalcType) {
              case 1://单行HORIZONTAL（LEFT_TO_RIGHT）、网格VERTICAL（LEFT_TO_RIGHT）
                  targetX = pos.left;
                  if (offset != null)
-                     targetX -= t._thisNodeUt.width * offset;
+                     targetX -= this._thisNodeUt.width * offset;
                  else
-                     targetX -= t._leftGap;
+                     targetX -= this._leftGap;
                  pos = new Vec3(targetX, 0, 0);
                  break;
              case 2://单行HORIZONTAL（RIGHT_TO_LEFT）、网格VERTICAL（RIGHT_TO_LEFT）
-                 targetX = pos.right - t._thisNodeUt.width;
+                 targetX = pos.right - this._thisNodeUt.width;
                  if (offset != null)
-                     targetX += t._thisNodeUt.width * offset;
+                     targetX += this._thisNodeUt.width * offset;
                  else
-                     targetX += t._rightGap;
-                 pos = new Vec3(targetX + t._contentUt.width, 0, 0);
+                     targetX += this._rightGap;
+                 pos = new Vec3(targetX + this._contentUt.width, 0, 0);
                  break;
              case 3://单列VERTICAL（TOP_TO_BOTTOM）、网格HORIZONTAL（TOP_TO_BOTTOM）
                  targetY = pos.top;
                  if (offset != null)
-                     targetY += t._thisNodeUt.height * offset;
+                     targetY += this._thisNodeUt.height * offset;
                  else
-                     targetY += t._topGap;
+                     targetY += this._topGap;
                  pos = new Vec3(0, -targetY, 0);
                  break;
              case 4://单列VERTICAL（BOTTOM_TO_TOP）、网格HORIZONTAL（BOTTOM_TO_TOP）
-                 targetY = pos.bottom + t._thisNodeUt.height;
+                 targetY = pos.bottom + this._thisNodeUt.height;
                  if (offset != null)
-                     targetY -= t._thisNodeUt.height * offset;
+                     targetY -= this._thisNodeUt.height * offset;
                  else
-                     targetY -= t._bottomGap;
-                 pos = new Vec3(0, -targetY + t._contentUt.height, 0);
+                     targetY -= this._bottomGap;
+                 pos = new Vec3(0, -targetY + this._contentUt.height, 0);
                  break;
          }
-         let viewPos: any = t.content.getPosition();
-         viewPos = Math.abs(t._sizeType ? viewPos.y : viewPos.x);
+         let viewPos: any = this.content.getPosition();
+         viewPos = Math.abs(this._sizeType ? viewPos.y : viewPos.x);
  
-         let comparePos = t._sizeType ? pos.y : pos.x;
-         let runScroll = Math.abs((t._scrollPos != null ? t._scrollPos : viewPos) - comparePos) > .5;
-         // cc.log(runScroll, t._scrollPos, viewPos, comparePos)
+         let comparePos = this._sizeType ? pos.y : pos.x;
+         let runScroll = Math.abs((this._scrollPos != null ? this._scrollPos : viewPos) - comparePos) > .5;
+         // cc.log(runScroll, this._scrollPos, viewPos, comparePos)
  
-         // t._scrollView.stopAutoScroll();
+         // this._scrollView.stopAutoScroll();
          if (runScroll) {
-             t._scrollView.scrollToOffset(pos, timeInSecond);
-             t._scrollToListId = listId;
-             t._scrollToEndTime = ((new Date()).getTime() / 1000) + timeInSecond;
-             // cc.log(listId, t.content.width, t.content.getPosition(), pos);
-             t._scrollToSo = t.scheduleOnce(() => {
-                 if (!t._adheringBarrier) {
-                     t.adhering = t._adheringBarrier = false;
+             this._scrollView.scrollToOffset(pos, timeInSecond);
+             this._scrollToListId = listId;
+             this._scrollToEndTime = ((new Date()).getTime() / 1000) + timeInSecond;
+             // cc.log(listId, this.content.width, this.content.getPosition(), pos);
+             this._scrollToSo = this.scheduleOnce(() => {
+                 if (!this._adheringBarrier) {
+                     this.adhering = this._adheringBarrier = false;
                  }
-                 t._scrollPos =
-                     t._scrollToListId =
-                     t._scrollToEndTime =
-                     t._scrollToSo =
+                 this._scrollPos =
+                     this._scrollToListId =
+                     this._scrollToEndTime =
+                     this._scrollToSo =
                      null;
-                 //cc.log('2222222222', t._adheringBarrier)
+                 //cc.log('2222222222', this._adheringBarrier)
                  if (overStress) {
-                     // t.scrollToListId = listId;
-                     let item = t.getItemByListId(listId);
+                     // this.scrollToListId = listId;
+                     let item = this.getItemByListId(listId);
                      if (item) {
                          tween(item)
                              .to(.1, { scale: 1.05 })
@@ -1721,7 +1352,7 @@
              }, timeInSecond + .1);
  
              if (timeInSecond <= 0) {
-                 t._onScrolling();
+                 this._onScrolling();
              }
          }
      }
@@ -1729,54 +1360,53 @@
       * 计算当前滚动窗最近的Item
       */
      _calcNearestItem() {
-         let t: any = this;
-         t.nearestListId = null;
+         this.nearestListId = null;
          let data: any, center: number;
  
-         if (t._virtual)
-             t._calcViewPos();
+         if (this._virtual)
+             this._calcViewPos();
  
          let vTop: number, vRight: number, vBottom: number, vLeft: number;
-         vTop = t.viewTop;
-         vRight = t.viewRight;
-         vBottom = t.viewBottom;
-         vLeft = t.viewLeft;
+         vTop = this.viewTop;
+         vRight = this.viewRight;
+         vBottom = this.viewBottom;
+         vLeft = this.viewLeft;
  
          let breakFor: boolean = false;
-         for (let n = 0; n < t.content.children.length && !breakFor; n += t._colLineNum) {
-             data = t._virtual ? t.displayData[n] : t._calcExistItemPos(n);
+         for (let n = 0; n < this.content.children.length && !breakFor; n += this._colLineNum) {
+             data = this._virtual ? this.displayData[n] : this._calcExistItemPos(n);
              if (data) {
-                 center = t._sizeType ? ((data.top + data.bottom) / 2) : (center = (data.left + data.right) / 2);
-                 switch (t._alignCalcType) {
+                 center = this._sizeType ? ((data.top + data.bottom) / 2) : (center = (data.left + data.right) / 2);
+                 switch (this._alignCalcType) {
                      case 1://单行HORIZONTAL（LEFT_TO_RIGHT）、网格VERTICAL（LEFT_TO_RIGHT）
                          if (data.right >= vLeft) {
-                             t.nearestListId = data.id;
+                             this.nearestListId = data.id;
                              if (vLeft > center)
-                                 t.nearestListId += t._colLineNum;
+                                 this.nearestListId += this._colLineNum;
                              breakFor = true;
                          }
                          break;
                      case 2://单行HORIZONTAL（RIGHT_TO_LEFT）、网格VERTICAL（RIGHT_TO_LEFT）
                          if (data.left <= vRight) {
-                             t.nearestListId = data.id;
+                             this.nearestListId = data.id;
                              if (vRight < center)
-                                 t.nearestListId += t._colLineNum;
+                                 this.nearestListId += this._colLineNum;
                              breakFor = true;
                          }
                          break;
                      case 3://单列VERTICAL（TOP_TO_BOTTOM）、网格HORIZONTAL（TOP_TO_BOTTOM）
                          if (data.bottom <= vTop) {
-                             t.nearestListId = data.id;
+                             this.nearestListId = data.id;
                              if (vTop < center)
-                                 t.nearestListId += t._colLineNum;
+                                 this.nearestListId += this._colLineNum;
                              breakFor = true;
                          }
                          break;
                      case 4://单列VERTICAL（BOTTOM_TO_TOP）、网格HORIZONTAL（BOTTOM_TO_TOP）
                          if (data.top >= vBottom) {
-                             t.nearestListId = data.id;
+                             this.nearestListId = data.id;
                              if (vBottom > center)
-                                 t.nearestListId += t._colLineNum;
+                                 this.nearestListId += this._colLineNum;
                              breakFor = true;
                          }
                          break;
@@ -1784,90 +1414,29 @@
              }
          }
          //判断最后一个Item。。。（哎，这些判断真心恶心，判断了前面的还要判断最后一个。。。一开始呢，就只有一个布局（单列布局），那时候代码才三百行，后来就想着完善啊，艹..这坑真深，现在这行数都一千五了= =||）
-         data = t._virtual ? t.displayData[t.displayItemNum - 1] : t._calcExistItemPos(t._numItems - 1);
-         if (data && data.id == t._numItems - 1) {
-             center = t._sizeType ? ((data.top + data.bottom) / 2) : (center = (data.left + data.right) / 2);
-             switch (t._alignCalcType) {
+         data = this._virtual ? this.displayData[this.displayItemNum - 1] : this._calcExistItemPos(this._numItems - 1);
+         if (data && data.id == this._numItems - 1) {
+             center = this._sizeType ? ((data.top + data.bottom) / 2) : (center = (data.left + data.right) / 2);
+             switch (this._alignCalcType) {
                  case 1://单行HORIZONTAL（LEFT_TO_RIGHT）、网格VERTICAL（LEFT_TO_RIGHT）
                      if (vRight > center)
-                         t.nearestListId = data.id;
+                         this.nearestListId = data.id;
                      break;
                  case 2://单行HORIZONTAL（RIGHT_TO_LEFT）、网格VERTICAL（RIGHT_TO_LEFT）
                      if (vLeft < center)
-                         t.nearestListId = data.id;
+                         this.nearestListId = data.id;
                      break;
                  case 3://单列VERTICAL（TOP_TO_BOTTOM）、网格HORIZONTAL（TOP_TO_BOTTOM）
                      if (vBottom < center)
-                         t.nearestListId = data.id;
+                         this.nearestListId = data.id;
                      break;
                  case 4://单列VERTICAL（BOTTOM_TO_TOP）、网格HORIZONTAL（BOTTOM_TO_TOP）
                      if (vTop > center)
-                         t.nearestListId = data.id;
+                         this.nearestListId = data.id;
                      break;
              }
          }
-         // cc.log('t.nearestListId =', t.nearestListId);
-     }
-     //上一页
-     prePage(timeInSecond: number = .5) {
-         // cc.log('👈');
-         if (!this.checkInited())
-             return;
-         this.skipPage(this.curPageNum - 1, timeInSecond);
-     }
-     //下一页
-     nextPage(timeInSecond: number = .5) {
-         // cc.log('👉');
-         if (!this.checkInited())
-             return;
-         this.skipPage(this.curPageNum + 1, timeInSecond);
-     }
-     //跳转到第几页
-     skipPage(pageNum: number, timeInSecond: number) {
-         let t: any = this;
-         if (!t.checkInited())
-             return;
-         if (t._slideMode != SlideType.PAGE)
-             return console.error('This function is not allowed to be called, Must SlideMode = PAGE!');
-         if (pageNum < 0 || pageNum >= t._numItems)
-             return;
-         if (t.curPageNum == pageNum)
-             return;
-         // cc.log(pageNum);
-         t.curPageNum = pageNum;
-         if (t.pageChangeEvent) {
-             EventHandler.emitEvents([t.pageChangeEvent], pageNum);
-         }
-         t.scrollTo(pageNum, timeInSecond);
-     }
-     //计算 CustomSize（这个函数还是保留吧，某些罕见的情况的确还是需要手动计算customSize的）
-     calcCustomSize(numItems: number) {
-         let t: any = this;
-         if (!t.checkInited())
-             return;
-         if (!t._itemTmp)
-             return console.error('Unset template item!');
-         if (!t.renderEvent)
-             return console.error('Unset Render-Event!');
-         t._customSize = {};
-         let temp: any = instantiate(t._itemTmp);
-         let ut: UITransform = temp.getComponent(UITransform);
-         t.content.addChild(temp);
-         for (let n: number = 0; n < numItems; n++) {
-            if (this.renderEvent) 
-            {
-               this.renderEvent(temp, n)
-            }
-             if (ut.height != t._itemSize.height || ut.width != t._itemSize.width) {
-                 t._customSize[n] = t._sizeType ? ut.height : ut.width;
-             }
-         }
-         if (!Object.keys(t._customSize).length)
-             t._customSize = null;
-         temp.removeFromParent();
-         if (temp.destroy)
-             temp.destroy();
-         return t._customSize;
+         // cc.log('this.nearestListId =', this.nearestListId);
      }
 
      public SetRenderCallback(_renderCallback : Function)

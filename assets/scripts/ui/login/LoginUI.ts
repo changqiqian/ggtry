@@ -7,7 +7,6 @@ import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
-import { DragDownEvent } from '../../UiTool/DragDownEvent';
 import { BaseButton } from '../common/BaseButton';
 import { TipsWindow } from '../common/TipsWindow';
 import { LoginData } from './LoginData';
@@ -47,9 +46,11 @@ export class LoginUI extends BaseUI
         UIMgr.Instance.AddLayerInWindowRoot("common","prefab/MultipleTableCtr");
         this.mVersion.string = GameConfig.Version;
 
+
         this.mLoginBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");
+            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");
+            UIMgr.Instance.ShowLayer("login","prefab/TestList");
         });
 
         this.mSignBtn.SetClickCallback(()=>
