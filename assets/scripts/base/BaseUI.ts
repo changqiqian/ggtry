@@ -46,13 +46,16 @@ export abstract class BaseUI extends Component {
     mIsWindow: boolean = false;
     mLayerList: Array<SubViewKeyPair>;
 
+
     //计时器，可以自动补偿切到后台的时间，定时器停止造成的时间对不上
     mTotalCountTime : number;
     mTimerStartingTime : number;
     mTimerForward : boolean = null;
 
     //
-    onLoad() {
+    onLoad() 
+    {
+        this.PreInit();
         this.mIsWindow = false;
         this.mLayerList = new Array<SubViewKeyPair>();
         this.InitParam();
@@ -60,7 +63,8 @@ export abstract class BaseUI extends Component {
         this.RegDataNotify();
     }
 
-    start() {
+    start() 
+    {
         this.LateInit();
     }
 
@@ -89,6 +93,11 @@ export abstract class BaseUI extends Component {
 
     public Show(_val: boolean) {
         this.node.active = _val;
+    }
+
+    PreInit()
+    {
+        
     }
 
     LoadSprite(_bundleName: string, _assetPath: string, _loadFinish: Function) {
@@ -299,30 +308,19 @@ export abstract class BaseUI extends Component {
 
     }
 
-
-    AutoAdaptMultipleTableUI()
+    //因为为了适配刘海屏幕，所有的ui都往下移动了一格，那么这些ui内部的背景图就无法撑满全屏，导致屏幕顶部刘海屏位置是黑的，
+    //用这个方法就可以强制让prefab的背景图忽略刘海适配，撑满全屏
+    public MaxScreen(_target : Node)
     {
-        let widget = this.node.getComponent(Widget);
+        let widget = _target.getComponent(Widget);
         if(widget != null)
         {
-            widget.top = GameConfig.MultipleUIHeight;
             widget.updateAlignment();
-            //如果你prefab根节点下有叫bg的一张背景图，我就会帮你自动铺满全屏，不然为了适配刘海屏幕的时候，整个prefab
-            //的顶部会被我裁剪一个刘海尺寸，那么你的背景图就无法撑满全屏了
-            let bg = this.node.getChildByName("BG");
-            if(bg != null)
-            {   
-                let bgWidget = bg.getComponent(Widget);
-                if(bgWidget != null)
-                {
-                    bgWidget.enabled = false;
-                }
-                let getVisibleSize = view.getVisibleSize();
-                let bgTransform = bg.getComponent(UITransform);
-                bgTransform.setContentSize(getVisibleSize);
-                bg.setWorldPosition(new Vec3(getVisibleSize.width/2 ,getVisibleSize.height/2));
-            }
         }
+        let getVisibleSize = view.getVisibleSize();
+        let tempTransform = _target.getComponent(UITransform);
+        tempTransform.setContentSize(getVisibleSize);
+        _target.setWorldPosition(new Vec3(getVisibleSize.width/2 ,getVisibleSize.height/2));
     }
 
 }

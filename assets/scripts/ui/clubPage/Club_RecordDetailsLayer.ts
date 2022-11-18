@@ -17,7 +17,6 @@ export class Club_RecordDetailsLayer extends BaseUI
     
     InitParam()
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

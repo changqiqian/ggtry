@@ -14,7 +14,10 @@ import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Login_LoginViewPwd')
-export class Login_LoginViewPwd extends BaseUI {
+export class Login_LoginViewPwd extends BaseUI 
+{
+    @property(Node) 
+    mBG: Node = null;
     @property(BaseButton) 
     mBackBtn: BaseButton = null;
     @property(BaseButton) 
@@ -42,10 +45,10 @@ export class Login_LoginViewPwd extends BaseUI {
 
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {
+        this.MaxScreen(this.mBG);
         this.mPwdEditbox.placeholder = Localization.GetString("00143");
         this.mAccountEditBox.placeholder = Localization.GetString("00134");
         this.mBackBtn.SetClickCallback(()=>

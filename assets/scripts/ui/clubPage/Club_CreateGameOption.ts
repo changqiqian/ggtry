@@ -20,7 +20,6 @@ export class Club_CreateGameOption extends BaseUI
     mCloseBtn: BaseButton = null;
     InitParam()
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

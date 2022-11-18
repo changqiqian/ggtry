@@ -34,17 +34,17 @@
     "_active": true,
     "_components": [
       {
+        "__id__": 201
+      },
+      {
         "__id__": 203
       },
       {
         "__id__": 205
-      },
-      {
-        "__id__": 207
       }
     ],
     "_prefab": {
-      "__id__": 209
+      "__id__": 207
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2759,13 +2759,10 @@
       },
       {
         "__id__": 198
-      },
-      {
-        "__id__": 200
       }
     ],
     "_prefab": {
-      "__id__": 202
+      "__id__": 200
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -3143,51 +3140,6 @@
     "fileId": "dbX5swREZE0YM57RuA2/Nr"
   },
   {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 177
-    },
-    "_enabled": false,
-    "__prefab": {
-      "__id__": 197
-    },
-    "_visFlags": 0,
-    "_customMaterial": null,
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_spriteFrame": {
-      "__uuid__": "b730527c-3233-41c2-aaf7-7cdab58f9749@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
-    "_type": 1,
-    "_fillType": 0,
-    "_sizeMode": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_useGrayscale": false,
-    "_atlas": null,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "21d8Ra1c9AhanYivMTaoSN"
-  },
-  {
     "__type__": "cc.ScrollView",
     "_name": "",
     "_objFlags": 0,
@@ -3196,7 +3148,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 199
+      "__id__": 197
     },
     "bounceDuration": 0.23,
     "brake": 0.75,
@@ -3226,7 +3178,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 201
+      "__id__": 199
     },
     "_alignFlags": 45,
     "_target": null,
@@ -3271,7 +3223,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 204
+      "__id__": 202
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -3298,7 +3250,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 206
+      "__id__": 204
     },
     "_alignFlags": 45,
     "_target": null,
@@ -3333,7 +3285,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 208
+      "__id__": 206
     },
     "mBackBtn": {
       "__id__": 16
@@ -3348,7 +3300,7 @@
       "__id__": 100
     },
     "mScrollView": {
-      "__id__": 198
+      "__id__": 196
     },
     "_id": ""
   },

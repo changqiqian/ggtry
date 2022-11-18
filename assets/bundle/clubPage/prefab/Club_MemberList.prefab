@@ -1214,7 +1214,7 @@
     "__type__": "cc.PrefabInstance",
     "fileId": "8aeccO+YRPmaiDBqAPFlYc",
     "prefabRootNode": {
-      "__id__": 1
+      "__id__": 45
     },
     "mountedChildren": [],
     "mountedComponents": [],
@@ -1518,7 +1518,7 @@
     "__type__": "cc.PrefabInstance",
     "fileId": "733zVmIkZMiKY5MrnDYYWr",
     "prefabRootNode": {
-      "__id__": 1
+      "__id__": 45
     },
     "mountedChildren": [],
     "mountedComponents": [],
@@ -1788,7 +1788,7 @@
     "__type__": "cc.PrefabInstance",
     "fileId": "2cW7x9x2NAEI7r52SL3S5M",
     "prefabRootNode": {
-      "__id__": 1
+      "__id__": 45
     },
     "mountedChildren": [],
     "mountedComponents": [],
@@ -2466,10 +2466,10 @@
     "__prefab": {
       "__id__": 163
     },
-    "mCloseBtn": null,
     "mListView": {
       "__id__": 152
     },
+    "mCloseBtn": null,
     "_id": ""
   },
   {

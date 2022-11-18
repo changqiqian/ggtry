@@ -33,7 +33,6 @@ export class Me_Message extends BaseUI {
 
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() {
         this.mBackBtn.SetClickCallback(() => {

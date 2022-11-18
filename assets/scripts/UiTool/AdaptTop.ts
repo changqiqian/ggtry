@@ -4,12 +4,21 @@ const { ccclass, property } = _decorator;
 
 //用于适配顶部刘海
 @ccclass('AdaptTop')
-export class AdaptTop extends Component {
+export class AdaptTop extends Component 
+{
+
+    public static TopOffset : boolean = false;
+
     onLoad()
     {
         let safeHeight = sys.getSafeAreaRect().size.height;
         let fullHeight = view.getVisibleSize().height;
-        if(fullHeight > safeHeight)
+
+        let num = fullHeight - safeHeight;
+        console.log("fullHeight===" + fullHeight);
+        console.log("safeHeight===" + safeHeight);
+        console.log("Top num===" + num);
+        if(num >= 50)
         {
             let offsetHeight = (fullHeight - safeHeight)/3;
             let widget = this.node.getComponent(Widget);
@@ -18,6 +27,8 @@ export class AdaptTop extends Component {
                 widget.top = offsetHeight;
                 widget.updateAlignment();
             }
+
+            AdaptTop.TopOffset = true;
         }
     }
 

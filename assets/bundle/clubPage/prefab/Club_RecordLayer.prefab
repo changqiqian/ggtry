@@ -8267,6 +8267,9 @@
     "__prefab": {
       "__id__": 554
     },
+    "mListView": {
+      "__id__": 543
+    },
     "mBackBtn": null,
     "mGameTypeLayout": {
       "__id__": 52
@@ -8286,7 +8289,6 @@
     "mVPIP": {
       "__id__": 433
     },
-    "mListView": null,
     "_id": ""
   },
   {

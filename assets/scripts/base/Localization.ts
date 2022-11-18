@@ -321,7 +321,7 @@ export class Localization {
         { name: '00233', ch: '前注玩法', en: 'Ante mode' },
         { name: '00234', ch: '盲注玩法', en: 'Bliind mode' },
         { name: '00235', ch: '输入个性签名', en: 'Input signature' },
-
+        { name: '00236', ch: '连接成功', en: 'Server connected' },
         
         
         { name: '01000', ch: '公告', en: 'Notification' },

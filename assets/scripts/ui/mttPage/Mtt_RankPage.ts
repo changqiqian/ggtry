@@ -41,7 +41,6 @@ export class Mtt_RankPage extends BaseUI
 
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

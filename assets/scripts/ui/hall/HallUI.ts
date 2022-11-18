@@ -21,18 +21,22 @@ export class HallUI extends BaseUI
         //return ["hall","mttPage","cashPage" ,"clubPage","mePage","cowboy" , "activityPage"];
     }
 
+    
+    @property(Node) 
+    mBG: Node = null;
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
+      
     }
     BindUI() 
     {
+        this.MaxScreen(this.mBG);
+        UIMgr.Instance.ShowMultipleTable(true);
         this.AddSubView("mttPage","prefab/Mtt_Page");
         this.AddSubView("cashPage","prefab/Cash_Page");
         this.AddSubView("clubPage","prefab/Club_Page");
         this.AddSubView("mePage","prefab/Me_Page");
         this.AddSubView("hall","prefab/Hall_Bottom");
-        this.AddSubView("common","prefab/MultipleTableCtr");
     }
 
     RegDataNotify() 
@@ -79,6 +83,7 @@ export class HallUI extends BaseUI
     CustmoerDestory() 
     {
         HallData.Instance.Clear();
+        UIMgr.Instance.ShowMultipleTable(false);
     }
 
 }

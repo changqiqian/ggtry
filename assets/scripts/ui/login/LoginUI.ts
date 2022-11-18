@@ -21,7 +21,8 @@ export class LoginUI extends BaseUI
         return [];
         //return ["login","clubPage"];
     }
-    
+    @property(Node) 
+    mBG: Node = null;
     @property(Label) 
     mVersion: Label = null;
     @property(BaseButton) 
@@ -39,18 +40,14 @@ export class LoginUI extends BaseUI
     TestIpBtn: BaseButton = null;
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {
-        UIMgr.Instance.AddLayerInWindowRoot("common","prefab/MultipleTableCtr");
+        this.MaxScreen(this.mBG);
         this.mVersion.string = GameConfig.Version;
-
-
         this.mLoginBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");
-            //UIMgr.Instance.ShowLayer("login","prefab/TestList");
         });
 
         this.mSignBtn.SetClickCallback(()=>

@@ -99,6 +99,7 @@ export class Network  extends Singleton<Network>()
     private OnOpen(event) {
         UIMgr.Instance.ShowLoading(false);
         console.log('Socket OnOpen = ');
+        UIMgr.Instance.ShowToast(Localization.GetString("00236"));
         clearTimeout(this.mConnectTimer);
         CommonNotify.Instance.Data_SocketOpen.mData = true;
         this.SendPing();

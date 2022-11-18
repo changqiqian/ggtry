@@ -16,7 +16,8 @@ export class LoadingUI extends BaseUI
         //return ["loading"];
     }
     
-
+    @property(Node) 
+    mBG: Node = null;
     @property(Label) 
     mTips: Label = null;
     @property(Label) 
@@ -28,11 +29,10 @@ export class LoadingUI extends BaseUI
         this.mTips.string = "";
         this.mPercent.string = "";
         this.mProgress.fillRange = 0;
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {
-
+        this.MaxScreen(this.mBG);
     }
 
     RegDataNotify() 

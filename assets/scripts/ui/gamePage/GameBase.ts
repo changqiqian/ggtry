@@ -26,7 +26,6 @@ export class GameBase extends BaseUI
 
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

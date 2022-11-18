@@ -18,7 +18,6 @@ export class Game_MttResultLayer extends BaseUI
     mRecrodBtn: BaseButton = null;
     InitParam()
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI()
     {

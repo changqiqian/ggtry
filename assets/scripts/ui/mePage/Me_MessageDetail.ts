@@ -13,7 +13,6 @@ export class Me_MessageDetail extends BaseUI {
 
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

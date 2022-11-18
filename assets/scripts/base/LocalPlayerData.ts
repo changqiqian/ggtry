@@ -34,12 +34,10 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
 
     GetFullPhoneNumber(_phoneNum : string = null)
     {
-        console.log("this.Data_LastInputPhoneNum.mData 11111= ====" + this.Data_LastInputPhoneNum.mData)
         if(_phoneNum != null )
         {
             this.Data_LastInputPhoneNum.mData = _phoneNum;
         }
-        console.log("this.Data_LastInputPhoneNum.mData 2222= ====" + this.Data_LastInputPhoneNum.mData)
 
         let currentAreaCodeIndex = this.Data_AreaCode.mData;
         let currentAreaCode = GameConfig.AreaCodeList[currentAreaCodeIndex].areaCode;

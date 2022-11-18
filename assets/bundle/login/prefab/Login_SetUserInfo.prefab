@@ -4498,6 +4498,9 @@
     "__prefab": {
       "__id__": 235
     },
+    "mBG": {
+      "__id__": 2
+    },
     "mBackBtn": null,
     "mHeadBG": {
       "__id__": 47

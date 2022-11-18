@@ -2495,14 +2495,14 @@
     "__prefab": {
       "__id__": 123
     },
+    "mListView": {
+      "__id__": 117
+    },
     "mPlayerAmount": {
       "__id__": 13
     },
     "mPrizeLevel": {
       "__id__": 25
-    },
-    "mListView": {
-      "__id__": 117
     },
     "_id": ""
   },

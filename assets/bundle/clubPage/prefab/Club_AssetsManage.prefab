@@ -4633,14 +4633,14 @@
     "__prefab": {
       "__id__": 294
     },
+    "mListView": {
+      "__id__": 226
+    },
     "mCloseBtn": null,
     "mEditBox": {
       "__id__": 61
     },
     "mSearchBtn": null,
-    "mListView": {
-      "__id__": 226
-    },
     "mTakeBackBtn": null,
     "mGiveBtn": null,
     "_id": ""

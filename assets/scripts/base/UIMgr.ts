@@ -1,6 +1,7 @@
 
 import { instantiate } from "cc";
 import { LoadingMask } from "../ui/common/LoadingMask";
+import { MultipleTableCtr } from "../ui/common/MultipleTableCtr";
 import { Toast } from "../ui/common/Toast";
 import { HallUI } from "../ui/hall/HallUI";
 import { LoadingUI } from "../ui/loading/LoadingUI";
@@ -63,6 +64,7 @@ export class UIMgr extends Singleton<UIMgr>()
     mLayerRoot : cc.Node = null;
     mWindowRoot : cc.Node = null;
     mTopRoot : cc.Node = null;
+    mMultipleTableCtr : MultipleTableCtr = null;
     mLayerList : Array<LayerKeyPair>;
     mWindowList  : Array<LayerKeyPair>;
     mCurrentScene : SceneType;
@@ -152,6 +154,30 @@ export class UIMgr extends Singleton<UIMgr>()
         });
     }
 
+    public ShowMultipleTable(_value : boolean)
+    {
+        if(this.mMultipleTableCtr == null)
+        {
+            if(_value == false)
+            {
+                return;
+            }
+
+            this.CreatePrefab("common","prefab/MultipleTableCtr" , (_tempNode)=>
+            {
+                this.mMultipleTableCtr = _tempNode.getComponent(MultipleTableCtr);
+                this.mWindowRoot.addChild(_tempNode);
+                _tempNode.setSiblingIndex(0);
+            });
+        }
+        else
+        {
+            this.mMultipleTableCtr.Show(true);
+        }
+    }
+
+
+
     public AddLayerInWindowRoot(_bundleName :string , _prefabPath:string)
     {
         this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
@@ -160,6 +186,7 @@ export class UIMgr extends Singleton<UIMgr>()
             _tempNode.setSiblingIndex(0);
         });
     }
+    
 
     public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null , _tag : string = "", _aka : string  = "")
     {
@@ -237,6 +264,8 @@ export class UIMgr extends Singleton<UIMgr>()
                 let contentScript = _tempNode.getComponent(BaseUI);
                 tempScript.SetContent(_tempNode , contentScript);
                 tempScript.Show(_show);
+                let nodeCount = this.GetRootNode(LayerType.Window).children.length;
+                tempScript.node.setSiblingIndex(nodeCount);
                 if(_finishFunction != null)
                 {
                     _finishFunction(contentScript);

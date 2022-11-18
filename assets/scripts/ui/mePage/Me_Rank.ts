@@ -20,7 +20,6 @@ export class Me_Rank extends BaseUI {
 
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() {
         this.mScrollView.node.on(ScrollView.EventType.BOUNCE_BOTTOM, this.OnDragBottom, this);

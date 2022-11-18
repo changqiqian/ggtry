@@ -38,7 +38,6 @@ export class SMSCodeView extends BaseUI
     InitParam() 
     {
         this.mPhoneNum.string = "";
-        this.AutoAdaptMultipleTableUI();
     }
 
     BindUI() 

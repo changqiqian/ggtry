@@ -12,6 +12,8 @@ const { ccclass, property } = _decorator;
 @ccclass('Login_SetUserInfo')
 export class Login_SetUserInfo extends BaseUI 
 {
+    @property(Node) 
+    mBG: Node = null;
     @property(BaseButton) 
     mBackBtn: BaseButton = null;
     @property(Node) 
@@ -36,10 +38,10 @@ export class Login_SetUserInfo extends BaseUI
 
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {
+        this.MaxScreen(this.mBG);
         this.mNickNameEditBox.placeholder = Localization.GetString("00138");
         this.mInviteCodeEditBox.placeholder = Localization.GetString("00141");
         this.mSignEditBox.placeholder = Localization.GetString("00235");

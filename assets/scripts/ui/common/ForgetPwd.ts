@@ -24,7 +24,6 @@ export class ForgetPwd extends BaseUI {
     InitParam() 
     {
         this.mAccountEditBox.string = "";
-        this.AutoAdaptMultipleTableUI();
     }
 
     BindUI() 

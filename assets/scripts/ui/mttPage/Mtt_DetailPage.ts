@@ -33,7 +33,6 @@ export class Mtt_DetailPage extends BaseUI
 
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

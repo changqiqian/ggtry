@@ -2335,7 +2335,7 @@
     "__type__": "cc.PrefabInstance",
     "fileId": "ccceoilCVO9LJ/nogCcc55",
     "prefabRootNode": {
-      "__id__": 1
+      "__id__": 93
     },
     "mountedChildren": [],
     "mountedComponents": [
@@ -3050,6 +3050,9 @@
     "__prefab": {
       "__id__": 156
     },
+    "mListView": {
+      "__id__": 150
+    },
     "mTime": {
       "__id__": 80
     },
@@ -3067,9 +3070,6 @@
     },
     "mPower": {
       "__id__": 66
-    },
-    "mListView": {
-      "__id__": 150
     },
     "mNoData": {
       "__id__": 136

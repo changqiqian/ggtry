@@ -4,7 +4,7 @@ import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { NetworkSend } from '../../network/NetworkSend';
-import ListView from '../../UiTool/ListView';
+import { ListViewCtr } from '../../UiTool/ListViewCtr';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
 import { Club_AssetsManageItem } from './Club_AssetsManageItem';
@@ -12,7 +12,7 @@ import { Club_AssetsManageWindow } from './Club_AssetsManageWindow';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_AssetsManage')
-export class Club_AssetsManage extends BaseUI 
+export class Club_AssetsManage extends ListViewCtr<ClubMember>
 {
     @property(BaseButton) 
     mCloseBtn: BaseButton = null;
@@ -20,25 +20,16 @@ export class Club_AssetsManage extends BaseUI
     mEditBox: EditBox = null;
     @property(BaseButton) 
     mSearchBtn: BaseButton = null;
-    @property(ListView) 
-    mListView: ListView = null;
     @property(BaseButton) 
     mTakeBackBtn: BaseButton = null;
     @property(BaseButton) 
     mGiveBtn: BaseButton = null;
 
-    mCurrentPage :number = 1;
-    mPageSize : number = 20;
-    mIsLastPage : boolean = false;
-    mCurrentData : Array<ClubMember>;
+
     onEnable()
     {
+        super.onEnable();
         HallData.Instance.Data_ClubScoreManageUid.ResetData();
-        this.OnDragTop();
-    }
-    InitParam()
-    {
-
     }
     BindUI()
     {
@@ -63,9 +54,6 @@ export class Club_AssetsManage extends BaseUI
         });
         
 
-        this.mListView.SetRenderCallback(this.RenderEvent.bind(this));
-        this.mListView.SetDragBottom(this.OnDragBottom.bind(this));
-        this.mListView.SetDragTop(this.OnDragTop.bind(this));
     }
     RegDataNotify()
     {
@@ -98,60 +86,16 @@ export class Club_AssetsManage extends BaseUI
                 let index = this.mCurrentData.findIndex((_item) => _item.uid === current.uid);
                 if(index < 0)
                 {
-                    this.mCurrentData.push(current);
+                    this.InsertOneData(current);
                 }
             }
 
-            this.mListView.numItems = this.mCurrentData.length;
-            if(this.mCurrentData.length >= _data.totalMember)
-            {
-                this.mIsLastPage = true;
-            }
-            else
-            {
-                this.mIsLastPage = false;
-            }
-            this.mCurrentPage++;
+            this.UpdateData(_data.totalMember);
 
         });
     }
-    LateInit()
-    {
 
-    }
-    CustmoerDestory()
-    {
-        this.mCurrentData = null;
-    }
-    Refresh()
-    {
-        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-        NetworkSend.Instance.GetClubMember(clubId,this.mCurrentPage,this.mPageSize)
-    }
 
-    OnDragBottom() 
-    {
-        if(this.mIsLastPage)
-        {
-            return;
-        }
-        this.Refresh();
-    }
-
-    OnDragTop()
-    {
-        this.ResetPage();
-        this.Refresh();
-    }
-
-    ResetPage()
-    {
-        this.mIsLastPage = false;
-        this.mCurrentData = new Array<ClubMember>();
-        this.mCurrentPage = 1;
-        this.mListView.numItems = 0;
-    }
-    
     ShowAssetsManagerWindow(_give : boolean)
     {
         if(HallData.Instance.Data_ClubScoreManageUid.mData == null)
@@ -172,6 +116,12 @@ export class Club_AssetsManage extends BaseUI
         let srcData = this.mCurrentData[_index];
         let script = _item.getComponent(Club_AssetsManageItem);
         script.InitWithData(srcData);
+    }
+
+    Refresh()
+    {
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        NetworkSend.Instance.GetClubMember(clubId,this.mCurrentPage,this.mPageSize)
     }
 }
 

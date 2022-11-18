@@ -2280,6 +2280,9 @@
     "__prefab": {
       "__id__": 117
     },
+    "mListView": {
+      "__id__": 111
+    },
     "mTotalReward": {
       "__id__": 13
     },
@@ -2288,9 +2291,6 @@
     },
     "mRewardCircle": {
       "__id__": 19
-    },
-    "mListView": {
-      "__id__": 111
     },
     "_id": ""
   },

@@ -13,8 +13,10 @@ import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Login_LoginView')
-export class Login_LoginView extends BaseUI {
-
+export class Login_LoginView extends BaseUI 
+{
+    @property(Node) 
+    mBG: Node = null;
     @property(BaseButton) 
     mBackBtn: BaseButton = null;
     @property(BaseButton) 
@@ -34,10 +36,12 @@ export class Login_LoginView extends BaseUI {
 
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
+
     }
     BindUI() 
     {
+        this.MaxScreen(this.mBG);
+
         this.mAccountEditBox.placeholder = Localization.GetString("00134");
         this.mBackBtn.SetClickCallback(()=>
         {

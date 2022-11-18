@@ -19,7 +19,6 @@ export class Me_Record extends BaseUI {
 
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() {
         this.mBackBtn.SetClickCallback(() => {

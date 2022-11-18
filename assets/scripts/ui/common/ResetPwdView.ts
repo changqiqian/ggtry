@@ -39,7 +39,6 @@ export class ResetPwdView extends BaseUI
     }
     InitParam() 
     {
-        this.AutoAdaptMultipleTableUI();
     }
     BindUI() 
     {

@@ -10,7 +10,8 @@ import { Club_ApplyingMember } from './Club_ApplyingMember';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_MemberNotifyWindow')
-export class Club_MemberNotifyWindow extends BaseUI {
+export class Club_MemberNotifyWindow extends BaseUI 
+{
     @property(BaseButton) 
     mCloseBtn: BaseButton = null;
     @property(ListView) 
@@ -42,11 +43,6 @@ export class Club_MemberNotifyWindow extends BaseUI {
         });
 
         this.mListView.SetRenderCallback(this.RenderEvent.bind(this));
-
-        this.mListView.SetDragBottom(()=>
-        {
-
-        });
     }
     RegDataNotify()
     {
