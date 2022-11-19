@@ -90,13 +90,13 @@ export class MultipleTableCtr extends BaseUI
     }
 
 
-     RemoveGameUI(_index : number)
+    DeleteGameUI(_index : number)
     {
         let current = MultipleTableCtr.FindGameStruct(_index);
         current.mGameData.Clear();
         current.mGameData = null;
         this.GetControlButton(_index).ResetUI();
-        UIMgr.Instance.DeleteLayer("gamePage","prefab/" + current.mPrefabName,_index.toString());
+        UIMgr.Instance.DeleteUiByTag(MultipleTableCtr.GetUiTag(_index));
         let uiIndex = MultipleTableCtr.mGameStruct.findIndex((_item) => _item.mIndex === _index);
         MultipleTableCtr.mGameStruct.splice(uiIndex , 1);
         HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.mHomeIndex;
@@ -115,7 +115,7 @@ export class MultipleTableCtr extends BaseUI
             gameScript.ShowMoveInAnimation();
             this.GetControlButton(index).BindGameData(gameStruct.mGameData);
             HallData.Instance.Data_MultipeIndex.mData = index;
-        },GameData.GameUiTag,index.toString());
+        },MultipleTableCtr.GetUiTag(index),index.toString());
     }
 
     public static FindGameStruct(_index : number) : GameStruct
@@ -141,7 +141,7 @@ export class MultipleTableCtr extends BaseUI
             HallData.Instance.Data_MultipeIndex.mData = this.mHomeIndex;
             return;
         }
-        UIMgr.Instance.ShowLayer("gamePage","prefab/" + current.mPrefabName,true,null,GameData.GameUiTag,_index.toString());
+        UIMgr.Instance.ShowLayer("gamePage","prefab/" + current.mPrefabName,true,null,MultipleTableCtr.GetUiTag(_index),_index.toString());
     }
 
     public static HideAllGameUI()
@@ -225,6 +225,11 @@ export class MultipleTableCtr extends BaseUI
             break;
         }
         return gameData;
+    }
+
+    public static GetUiTag(_index : number)
+    {
+        return GameData.GameUiTag + _index;
     }
 }
 

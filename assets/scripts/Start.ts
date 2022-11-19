@@ -14,7 +14,7 @@ export class Start extends Component
 {
     onLoad()
     {
-        setDisplayStats(true);
+        setDisplayStats(false);
         if (cc.sys.isNative) 
         {
             console.log('设置屏幕常亮')

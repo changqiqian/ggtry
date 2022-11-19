@@ -397,20 +397,10 @@ export class UIMgr extends Singleton<UIMgr>()
         }
     }
 
-    private DeleteAllLayer(_type :LayerType)
+    public DeleteUi(_bundleName :string , _prefabPath:string , _aka:string , _layerType : LayerType)
     {
-        let targetList = this.GetList(_type);
-        for(let i = 0 ; i < targetList.length ; i++)
-        {
-            targetList[i].value.destroy();
-        }
-        targetList.splice(0 , targetList.length - 1);
-    }
-
-    public DeleteLayer(_bundleName :string , _prefabPath:string , _aka:string )
-    {
-        let key = this.CreateKey(_bundleName,_prefabPath,_aka);
-        let target = this.FindLayer(key,LayerType.Layer);
+        let key = this.CreateKey(_bundleName , _prefabPath,_aka);
+        let target = this.FindLayer(key , _layerType);
         if(target == null || target.value == null)
         {
             console.log("没有找到该layer ，无法删除 ===key===" + key);
@@ -418,9 +408,52 @@ export class UIMgr extends Singleton<UIMgr>()
         }
 
         target.value.getComponent(BaseUI).DeleteSelf();
-        let targetList = this.GetList(LayerType.Layer);
+        let targetList = this.GetList(_layerType);
         let index = targetList.findIndex((_item) => _item.key === key);
         targetList.splice(index , 1);
+    }
+
+    public DeleteUiByTag(_tag:string)
+    {
+        for(let i = LayerType.Layer ; i <= LayerType.Window ; i++)
+        {
+            let currentList = this.GetList(i);
+            let step = 0;
+            while(step < currentList.length)
+            {
+                let currentKeyPair = currentList[i];
+                if(currentKeyPair.tag == _tag)
+                {
+                    let tempScript = currentKeyPair.value.getComponent(BaseUI);
+                    tempScript.DeleteSelf();
+                    currentList.splice(step , 1);
+                }
+                else
+                {
+                    step++;
+                }
+            }
+        }
+    }
+
+    public HideUiByTag(_tag : string)
+    {
+        for(let i = LayerType.Layer ; i <= LayerType.Window ; i++)
+        {
+            let currentList = this.GetList(i);
+            for(let i = 0 ; i < currentList.length ; i++)
+            {
+                let currentKeyPair = currentList[i];
+                if(currentKeyPair.tag == _tag)
+                {
+                    if(currentKeyPair.value != null)
+                    {
+                        let tempScript = currentKeyPair.value.getComponent(BaseUI);
+                        tempScript.Show(false);
+                    }
+                }
+            }
+        }
     }
 
     private CreateKey(_bundleName :string , _prefabPath:string , _aka:string) : string 
@@ -478,26 +511,7 @@ export class UIMgr extends Singleton<UIMgr>()
         let keyPair = new LayerKeyPair(_key , null , this.mCurrentScene , _tag);
         this.GetList(_type).push(keyPair);
     }
-    
-    public HideUiByTag(_tag : string)
-    {
-        for(let i = LayerType.Layer ; i <= LayerType.Window ; i++)
-        {
-            let currentList = this.GetList(i);
-            for(let i = 0 ; i < currentList.length ; i++)
-            {
-                let currentKeyPair = currentList[i];
-                if(currentKeyPair.tag == _tag)
-                {
-                    if(currentKeyPair.value != null)
-                    {
-                        let tempScript = currentKeyPair.value.getComponent(BaseUI);
-                        tempScript.Show(false);
-                    }
-                }
-            }
-        }
-    }
+
 
 
 }

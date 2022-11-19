@@ -6250,7 +6250,7 @@
     "__type__": "cc.PrefabInstance",
     "fileId": "a99/388+xH57FiwHr8JFBl",
     "prefabRootNode": {
-      "__id__": 1
+      "__id__": 335
     },
     "mountedChildren": [],
     "mountedComponents": [],
@@ -6839,7 +6839,9 @@
       "__id__": 423
     },
     "templateType": 1,
-    "tmpNode": null,
+    "tmpNode": {
+      "__id__": 335
+    },
     "tmpPrefab": null,
     "_virtual": true,
     "_updateRate": 0,
