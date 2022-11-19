@@ -41,7 +41,9 @@ export class Mtt_RankPage extends BaseUI
 
     InitParam() 
     {
+        this.OffsetTop();
     }
+
     BindUI() 
     {
         this.mBackBtn.SetClickCallback(()=>

@@ -186,6 +186,16 @@ export class UIMgr extends Singleton<UIMgr>()
             _tempNode.setSiblingIndex(0);
         });
     }
+
+    public IsMultipleTableShow()
+    {
+        if(this.mMultipleTableCtr == null)
+        {
+            return false;
+        }
+
+        return this.mMultipleTableCtr.node.active;
+    }
     
 
     public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null , _tag : string = "", _aka : string  = "")

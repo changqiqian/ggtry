@@ -28,6 +28,7 @@ export class Club_RecordLayer extends ListViewCtr<any>
 
     BindUI()
     {
+        this.OffsetHallTop();
         this.mBackBtn.SetClickCallback(()=>
         {
             this.Show(false);

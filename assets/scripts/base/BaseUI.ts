@@ -323,4 +323,44 @@ export abstract class BaseUI extends Component {
         _target.setWorldPosition(new Vec3(getVisibleSize.width/2 ,getVisibleSize.height/2));
     }
 
+    //让ui换面往下移动，因为顶部增加了一个'多桌ui'
+    public OffsetTop()
+    {
+        if(UIMgr.Instance.IsMultipleTableShow() == false)
+        {
+            return;
+        }
+
+
+        let widget = this.node.getComponent(Widget);
+        if(widget != null)
+        {
+            widget.top = GameConfig.MultipleUIHeight;
+            widget.updateAlignment();
+        }
+        else
+        {
+            console.log("OffsetTop wrong !! 当前prefab的根节点没有挂载widget")
+        }
+    }
+
+    //让ui换面往下移动，因为顶部增加了半个'多桌ui'
+    public OffsetHallTop()
+    {
+        if(UIMgr.Instance.IsMultipleTableShow() == false)
+        {
+            return;
+        }
+        let widget = this.node.getComponent(Widget);
+        if(widget != null)
+        {
+            widget.top = GameConfig.MultipleUIHeight/2;
+            widget.updateAlignment();
+        }
+        else
+        {
+            console.log("OffsetTop wrong !! 当前prefab的根节点没有挂载widget")
+        }
+    }
+
 }

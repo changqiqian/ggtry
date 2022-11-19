@@ -17,6 +17,7 @@ export class Club_CreateGameModuleLayer extends BaseUI
 
     InitParam()
     {
+        this.OffsetHallTop();
         HallData.Instance.Data_ClubRefreshGameModule.mData = true;
     }
     BindUI()

@@ -34,7 +34,7 @@ class GameStruct
 @ccclass('MultipleTableCtr')
 export class MultipleTableCtr extends BaseUI 
 {
-
+    public static MultipleUIHeight : number = 150;
     @property(Node) 
     mLayout: Node = null;
 

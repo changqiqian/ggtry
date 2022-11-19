@@ -42,7 +42,6 @@ export class Mtt_Main extends BaseUI
         });
         this.mSearchBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_Menu");
         });
         this.AddSubView("hall","prefab/Hall_LunBo",null,this.mTop);
     }

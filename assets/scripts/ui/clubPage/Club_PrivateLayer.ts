@@ -47,6 +47,7 @@ export class Club_PrivateLayer extends BaseUI
     }
     InitParam()
     {
+        this.OffsetHallTop();
     }
     BindUI()
     {
