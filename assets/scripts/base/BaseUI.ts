@@ -316,6 +316,7 @@ export abstract class BaseUI extends Component {
         if(widget != null)
         {
             widget.updateAlignment();
+            widget.enabled = false;
         }
         let getVisibleSize = view.getVisibleSize();
         let tempTransform = _target.getComponent(UITransform);

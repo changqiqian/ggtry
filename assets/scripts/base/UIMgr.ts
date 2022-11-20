@@ -138,7 +138,7 @@ export class UIMgr extends Singleton<UIMgr>()
         this.mLoadingMask.ShowLoading(_show , _tips);
     }
 
-    public ShowToast(_tips:string ,  _duration:number = 3)
+    public ShowToast(_tips:string ,  _duration:number = 2)
     {
         let childCount = this.mTopRoot.children.length;
         this.mToast.node.setSiblingIndex(childCount);

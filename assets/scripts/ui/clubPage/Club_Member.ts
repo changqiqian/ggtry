@@ -21,6 +21,8 @@ export class Club_Member extends BaseUI {
     mRemoveBtn: BaseButton = null;
     @property(BaseButton) 
     mManagerBtn: BaseButton = null;
+    @property(BaseButton) 
+    mCancelManagerBtn: BaseButton = null;
     @property(Label) 
     mRole: Label = null;
     mMember : ClubMember = null;
@@ -55,7 +57,12 @@ export class Club_Member extends BaseUI {
             {
                 NetworkSend.Instance.ModifyMemberRole(clubId,this.mMember.uid,ClubMemberType.ClubAccountType_Manager);
             }
-            else if(this.mMember.memberType == ClubMemberType.ClubAccountType_Manager)
+        });
+
+        this.mCancelManagerBtn.SetClickCallback(()=>
+        {
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(this.mMember.memberType == ClubMemberType.ClubAccountType_Manager)
             {  
                 NetworkSend.Instance.ModifyMemberRole(clubId,this.mMember.uid,ClubMemberType.ClubAccountType_Normal);
             }
@@ -142,28 +149,29 @@ export class Club_Member extends BaseUI {
 
     UpdateManagerBtn()
     {
-        let selfIsClubOwner = 
-        LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == ClubMemberType.ClubAccountType_Owner;
+        let selfIsClubOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == ClubMemberType.ClubAccountType_Owner;
         let isSelf = this.mMember.uid == LocalPlayerData.Instance.Data_Uid.mData;
 
         if(selfIsClubOwner && isSelf == false)
         {
             this.mRemoveBtn.node.active = true;
-            this.mManagerBtn.node.active = true;
+            this.mManagerBtn.node.active = false;
+            this.mCancelManagerBtn.node.active = false;
             this.mRole.node.active = false;
             if(this.mMember.memberType == ClubMemberType.ClubAccountType_Normal)
             {
-                this.mManagerBtn.SetTitle(Localization.GetString("00126"));
+                this.mManagerBtn.node.active = true;
             }
             else if(this.mMember.memberType == ClubMemberType.ClubAccountType_Manager)
             {  
-                this.mManagerBtn.SetTitle(Localization.GetString("00127"));
+                this.mCancelManagerBtn.node.active = true;
             }
         }
         else
         {
             this.mRemoveBtn.node.active = false;
             this.mManagerBtn.node.active = false;
+            this.mCancelManagerBtn.node.active = false;
             this.mRole.node.active = true;
             if(this.mMember.memberType == ClubMemberType.ClubAccountType_Normal)
             {

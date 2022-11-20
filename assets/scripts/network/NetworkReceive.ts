@@ -143,6 +143,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             {
                 LocalPlayerData.Instance.Data_SelfClubInfo.mData = msg.clubMember;
                 LocalPlayerData.Instance.Data_CurrentEnterClub.mData = msg.clubInfo;
+                LocalPlayerData.Instance.Data_UpdateCurrentClub.mData = true;
                 HallData.Instance.Data_ClubEnter.mData = true;
             }
             else

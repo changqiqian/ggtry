@@ -35,16 +35,23 @@ export class Me_Main extends BaseUI {
     @property(BaseButton)
     mServiceBtn: BaseButton = null;
     InitParam() {}
-    BindUI() {
-        this.mBankBtn.SetClickCallback(() => {
-            if (sys.isBrowser) {
-                UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => {
+    BindUI() 
+    {
+        this.mBankBtn.SetClickCallback(() => 
+        {
+            if (sys.isBrowser) 
+            {
+                UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => 
+                {
                     let tempScript = _script as InsertWebView;
                     let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
                     tempScript.SetUrl(GameConfig.WebberAddr, param);
                 });
-            } else {
-                UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => {
+            } 
+            else 
+            {
+                UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => 
+                {
                     let tempScript = _script as FullScreenWebView;
                     let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
                     tempScript.SetUrl(GameConfig.WebberAddr, param);
@@ -53,19 +60,26 @@ export class Me_Main extends BaseUI {
         });
         this.mBankBtn.SetProtectDoubleClick(true, 1);
 
-        this.mMsgBtn.SetClickCallback(() => {
+        this.mMsgBtn.SetClickCallback(() => 
+        {
             UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Message');
         });
 
-        this.mTableBtn.SetClickCallback(() => {
-            if (sys.isBrowser) {
-                UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => {
+        this.mTableBtn.SetClickCallback(() => 
+        {
+            if (sys.isBrowser) 
+            {
+                UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => 
+                {
                     let tempScript = _script as InsertWebView;
                     let param = '/manage-table';
                     tempScript.SetUrl(GameConfig.WebberAddr, param);
                 });
-            } else {
-                UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => {
+            } 
+            else 
+            {
+                UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => 
+                {
                     let tempScript = _script as FullScreenWebView;
                     let param = '/manage-table';
                     tempScript.SetUrl(GameConfig.WebberAddr, param);
@@ -73,62 +87,83 @@ export class Me_Main extends BaseUI {
             }
         });
 
-        this.mQuestBtn.SetClickCallback(() => {});
+        this.mQuestBtn.SetClickCallback(() => 
+        {
 
-        this.mProfitBtn.SetClickCallback(() => {
+        });
+
+        this.mProfitBtn.SetClickCallback(() => 
+        {
             UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Record');
         });
 
-        this.mGameRecordBtn.SetClickCallback(() => {
+        this.mGameRecordBtn.SetClickCallback(() => 
+        {
             UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Rank');
         });
 
-        this.mSettingBtn.SetClickCallback(() => {
+        this.mSettingBtn.SetClickCallback(() =>
+        {
             UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_SettingWindow');
         });
 
-        this.mAgentBtn.SetClickCallback(() => {
+        this.mAgentBtn.SetClickCallback(() => 
+        {
             UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Proxy');
         });
 
         this.mServiceBtn.SetClickCallback(() => {});
     }
-    RegDataNotify() {}
-    LateInit() {
-        this.EnableScroll();
+    RegDataNotify() 
+    {
+
+    }
+    LateInit() 
+    {
+        //this.EnableScroll();
     }
 
-    CustmoerDestory() {}
+    CustmoerDestory() 
+    {
 
-    EnableScroll() {
-        let scrollViewContentTransform = this.mScrollView.content.getComponent(UITransform);
-        let scrollViewHeight = scrollViewContentTransform.height;
-        let bottomNode = this.FindScrollViewBottomChild();
-        let bottomNodeY = bottomNode.position.y;
-        let bottomNodeHeight = bottomNode.getComponent(UITransform).height;
-        bottomNodeY = Math.abs(bottomNodeY);
-
-        let requireScrollHeight = bottomNodeY + bottomNodeHeight;
-        if (requireScrollHeight > scrollViewHeight) {
-            let finalSize = new Size(scrollViewContentTransform.width, requireScrollHeight);
-            scrollViewContentTransform.setContentSize(finalSize);
-            this.mScrollView.vertical = true;
-        } else {
-            this.mScrollView.vertical = false;
-        }
     }
 
-    FindScrollViewBottomChild(): Node {
-        let finalPosY = 0;
-        let finalNode = null;
-        for (let i = 0; i < this.mScrollView.content.children.length; i++) {
-            let current = this.mScrollView.content.children[i];
-            let posY = current.position.y;
-            if (finalPosY > posY) {
-                finalPosY = posY;
-                finalNode = current;
-            }
-        }
-        return finalNode;
-    }
+    // EnableScroll() 
+    // {
+    //     let scrollViewContentTransform = this.mScrollView.content.getComponent(UITransform);
+    //     let scrollViewHeight = scrollViewContentTransform.height;
+    //     let bottomNode = this.FindScrollViewBottomChild();
+    //     let bottomNodeY = bottomNode.position.y;
+    //     let bottomNodeHeight = bottomNode.getComponent(UITransform).height;
+    //     bottomNodeY = Math.abs(bottomNodeY);
+
+    //     let requireScrollHeight = bottomNodeY + bottomNodeHeight;
+    //     if (requireScrollHeight > scrollViewHeight) 
+    //     {
+    //         let finalSize = new Size(scrollViewContentTransform.width, requireScrollHeight);
+    //         scrollViewContentTransform.setContentSize(finalSize);
+    //         this.mScrollView.vertical = true;
+    //     } 
+    //     else 
+    //     {
+    //         this.mScrollView.vertical = false;
+    //     }
+    // }
+
+    // FindScrollViewBottomChild(): Node 
+    // {
+    //     let finalPosY = 0;
+    //     let finalNode = null;
+    //     for (let i = 0; i < this.mScrollView.content.children.length; i++) 
+    //     {
+    //         let current = this.mScrollView.content.children[i];
+    //         let posY = current.position.y;
+    //         if (finalPosY > posY) 
+    //         {
+    //             finalPosY = posY;
+    //             finalNode = current;
+    //         }
+    //     }
+    //     return finalNode;
+    // }
 }

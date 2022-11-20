@@ -44,6 +44,7 @@ export class Club_PrivateLayer extends BaseUI
     {
         this.UpdateNotifyBtn();
         this.UpdateClubInfoUI();
+        this.UpdateMoney();
     }
     InitParam()
     {
