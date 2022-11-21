@@ -538,7 +538,6 @@
          this._allItemSize = result;
          this._allItemSizeNoEdge = this._allItemSize - (this._sizeType ? (this._topGap + this._bottomGap) : (this._leftGap + this._rightGap));
          let slideOffset: number = 0.1
- 
          let targetWH: number = false ? ((this._sizeType ? this._thisNodeUt.height : this._thisNodeUt.width) - slideOffset) : (this._allItemSize);
          if (targetWH < 0)
              targetWH = 0;

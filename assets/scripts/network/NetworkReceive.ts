@@ -346,6 +346,42 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CreateClubGame,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCreateClubGame.decode(_data);
+            console.log("收到的内容 S2C_CreateClubGame  创建俱乐部德州游戏==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00237"));
+                HallData.Instance.UpdateOneGame(msg.gameInfo);
+                HallData.Instance.Data_UpdateClubGameList.mData = true;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_GetClubGameList,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CGetClubGameList.decode(_data);
+            console.log("收到的内容 S2C_GetClubGameList  获取俱乐部游戏列表==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                if(msg.gameInfos != null && msg.gameInfos.length > 0)
+                {
+                    HallData.Instance.UpdateGameList(msg.gameInfos);
+                }
+
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////

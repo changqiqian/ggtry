@@ -322,6 +322,9 @@ export class Localization {
         { name: '00234', ch: '盲注玩法', en: 'Bliind mode' },
         { name: '00235', ch: '输入个性签名', en: 'Input signature' },
         { name: '00236', ch: '连接成功', en: 'Server connected' },
+        { name: '00237', ch: '创建成功', en: 'Create success' },
+        { name: '00238', ch: '奥马哈', en: 'Omh' },
+        
         
         
         { name: '01000', ch: '公告', en: 'Notification' },

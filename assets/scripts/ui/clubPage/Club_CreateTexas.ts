@@ -1,8 +1,10 @@
 import { _decorator, Component, Node, EditBox, ScrollView } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
+import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
@@ -45,6 +47,7 @@ export class Club_CreateTexas extends BaseUI
         this.mSaveBtn.SetClickCallback(()=>
         {
             let currentModuleIndex = HallData.Instance.Data_ClubCurrentModuleIndex.mData;
+            console.log("currentModuleIndex===" + currentModuleIndex);
             let saveResult = GameConfig.TryToSaveCreateRoomModule(HallData.Instance.Data_Club_CreateTexasConfig.mData , currentModuleIndex);
             if(saveResult)
             {
@@ -59,7 +62,15 @@ export class Club_CreateTexas extends BaseUI
 
         this.mCreateBtn.SetClickCallback(()=>
         {
-
+            let createConfig = HallData.Instance.Data_Club_CreateTexasConfig.mData;
+            if(createConfig.gameName == "")
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00195"));
+                return;
+            }
+            let clubGameInfo = HallData.Instance.ConvertCreateTexasConfigToProto(createConfig);
+            clubGameInfo.clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            NetworkSend.Instance.CreateClubTexas(clubGameInfo);
         });
     }
     RegDataNotify()

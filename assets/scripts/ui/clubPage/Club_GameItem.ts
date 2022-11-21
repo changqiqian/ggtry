@@ -59,7 +59,7 @@ export class Club_GameItem extends BaseUI
         this.InitWithServerData(tempData);
     }
 
-    public InitWithServerData(_data : ClubGameConfig)
+    public InitWithServerData(_data : ClubGameInfo)
     {
         let tempColor;
         let gameTypeName;
@@ -119,11 +119,11 @@ export class Club_GameItem extends BaseUI
         this.mGameType.color = tempColor;
 
 
-        if(_data.matchingConfig != null)
+        if(_data.aboutGameInfo != null)
         {
-            this.mCircleTimer.SetProgress(_data.matchingConfig.currentPlayerNum / _data.texasConfig.seatNum);
-            this.mCircleTimer.SetTimerTitle(_data.matchingConfig.currentPlayerNum + "/"+_data.texasConfig.seatNum);
-            this.mLeftTime.string = "00:00" + "/" + _data.texasConfig.gameDuration + "h";
+            this.mCircleTimer.SetProgress(_data.aboutGameInfo.currentPlayerNum / _data.texasConfig.seatNum);
+            this.mCircleTimer.SetTimerTitle(_data.aboutGameInfo.currentPlayerNum + "/"+_data.texasConfig.seatNum);
+            this.mLeftTime.string = _data.aboutGameInfo.leftTime+ "/" + _data.texasConfig.gameDuration + "h";
         }
         else
         {

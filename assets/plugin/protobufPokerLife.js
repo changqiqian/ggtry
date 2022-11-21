@@ -1284,7 +1284,8 @@ $root.C2SCreateClubGame = (function() {
      * @exports IC2SCreateClubGame
      * @interface IC2SCreateClubGame
      * @property {string|null} [clubId] C2SCreateClubGame clubId
-     * @property {IClubGameConfig|null} [gameConfig] C2SCreateClubGame gameConfig
+     * @property {IBasicGameConfig|null} [basicConfig] C2SCreateClubGame basicConfig
+     * @property {IBasicTexasConfig|null} [texasConfig] C2SCreateClubGame texasConfig
      */
 
     /**
@@ -1311,12 +1312,20 @@ $root.C2SCreateClubGame = (function() {
     C2SCreateClubGame.prototype.clubId = "";
 
     /**
-     * C2SCreateClubGame gameConfig.
-     * @member {IClubGameConfig|null|undefined} gameConfig
+     * C2SCreateClubGame basicConfig.
+     * @member {IBasicGameConfig|null|undefined} basicConfig
      * @memberof C2SCreateClubGame
      * @instance
      */
-    C2SCreateClubGame.prototype.gameConfig = null;
+    C2SCreateClubGame.prototype.basicConfig = null;
+
+    /**
+     * C2SCreateClubGame texasConfig.
+     * @member {IBasicTexasConfig|null|undefined} texasConfig
+     * @memberof C2SCreateClubGame
+     * @instance
+     */
+    C2SCreateClubGame.prototype.texasConfig = null;
 
     /**
      * Encodes the specified C2SCreateClubGame message. Does not implicitly {@link C2SCreateClubGame.verify|verify} messages.
@@ -1332,8 +1341,10 @@ $root.C2SCreateClubGame = (function() {
             w = $Writer.create();
         if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
             w.uint32(10).string(m.clubId);
-        if (m.gameConfig != null && Object.hasOwnProperty.call(m, "gameConfig"))
-            $root.ClubGameConfig.encode(m.gameConfig, w.uint32(18).fork()).ldelim();
+        if (m.basicConfig != null && Object.hasOwnProperty.call(m, "basicConfig"))
+            $root.BasicGameConfig.encode(m.basicConfig, w.uint32(18).fork()).ldelim();
+        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
+            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(26).fork()).ldelim();
         return w;
     };
 
@@ -1359,7 +1370,10 @@ $root.C2SCreateClubGame = (function() {
                 m.clubId = r.string();
                 break;
             case 2:
-                m.gameConfig = $root.ClubGameConfig.decode(r, r.uint32());
+                m.basicConfig = $root.BasicGameConfig.decode(r, r.uint32());
+                break;
+            case 3:
+                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);
@@ -2139,7 +2153,9 @@ $root.ClubGameInfo = (function() {
      * @interface IClubGameInfo
      * @property {string|null} [clubId] ClubGameInfo clubId
      * @property {string|null} [gameId] ClubGameInfo gameId
-     * @property {IClubGameConfig|null} [gameConfig] ClubGameInfo gameConfig
+     * @property {IBasicGameConfig|null} [basicConfig] ClubGameInfo basicConfig
+     * @property {IBasicTexasConfig|null} [texasConfig] ClubGameInfo texasConfig
+     * @property {IAboutGameInfo|null} [aboutGameInfo] ClubGameInfo aboutGameInfo
      */
 
     /**
@@ -2174,12 +2190,28 @@ $root.ClubGameInfo = (function() {
     ClubGameInfo.prototype.gameId = "";
 
     /**
-     * ClubGameInfo gameConfig.
-     * @member {IClubGameConfig|null|undefined} gameConfig
+     * ClubGameInfo basicConfig.
+     * @member {IBasicGameConfig|null|undefined} basicConfig
      * @memberof ClubGameInfo
      * @instance
      */
-    ClubGameInfo.prototype.gameConfig = null;
+    ClubGameInfo.prototype.basicConfig = null;
+
+    /**
+     * ClubGameInfo texasConfig.
+     * @member {IBasicTexasConfig|null|undefined} texasConfig
+     * @memberof ClubGameInfo
+     * @instance
+     */
+    ClubGameInfo.prototype.texasConfig = null;
+
+    /**
+     * ClubGameInfo aboutGameInfo.
+     * @member {IAboutGameInfo|null|undefined} aboutGameInfo
+     * @memberof ClubGameInfo
+     * @instance
+     */
+    ClubGameInfo.prototype.aboutGameInfo = null;
 
     /**
      * Encodes the specified ClubGameInfo message. Does not implicitly {@link ClubGameInfo.verify|verify} messages.
@@ -2197,8 +2229,12 @@ $root.ClubGameInfo = (function() {
             w.uint32(10).string(m.clubId);
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(18).string(m.gameId);
-        if (m.gameConfig != null && Object.hasOwnProperty.call(m, "gameConfig"))
-            $root.ClubGameConfig.encode(m.gameConfig, w.uint32(26).fork()).ldelim();
+        if (m.basicConfig != null && Object.hasOwnProperty.call(m, "basicConfig"))
+            $root.BasicGameConfig.encode(m.basicConfig, w.uint32(26).fork()).ldelim();
+        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
+            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(34).fork()).ldelim();
+        if (m.aboutGameInfo != null && Object.hasOwnProperty.call(m, "aboutGameInfo"))
+            $root.AboutGameInfo.encode(m.aboutGameInfo, w.uint32(42).fork()).ldelim();
         return w;
     };
 
@@ -2227,7 +2263,13 @@ $root.ClubGameInfo = (function() {
                 m.gameId = r.string();
                 break;
             case 3:
-                m.gameConfig = $root.ClubGameConfig.decode(r, r.uint32());
+                m.basicConfig = $root.BasicGameConfig.decode(r, r.uint32());
+                break;
+            case 4:
+                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
+                break;
+            case 5:
+                m.aboutGameInfo = $root.AboutGameInfo.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);
@@ -2809,26 +2851,25 @@ $root.ShortGameScoreMode = (function() {
     return values;
 })();
 
-$root.ClubGameConfig = (function() {
+$root.AboutGameInfo = (function() {
 
     /**
-     * Properties of a ClubGameConfig.
-     * @exports IClubGameConfig
-     * @interface IClubGameConfig
-     * @property {IGameBasicConfig|null} [basicConfig] ClubGameConfig basicConfig
-     * @property {ITexasConfig|null} [texasConfig] ClubGameConfig texasConfig
-     * @property {IMatchingConfig|null} [matchingConfig] ClubGameConfig matchingConfig
+     * Properties of an AboutGameInfo.
+     * @exports IAboutGameInfo
+     * @interface IAboutGameInfo
+     * @property {number|null} [currentPlayerNum] AboutGameInfo currentPlayerNum
+     * @property {number|null} [leftTime] AboutGameInfo leftTime
      */
 
     /**
-     * Constructs a new ClubGameConfig.
-     * @exports ClubGameConfig
-     * @classdesc Represents a ClubGameConfig.
-     * @implements IClubGameConfig
+     * Constructs a new AboutGameInfo.
+     * @exports AboutGameInfo
+     * @classdesc Represents an AboutGameInfo.
+     * @implements IAboutGameInfo
      * @constructor
-     * @param {IClubGameConfig=} [p] Properties to set
+     * @param {IAboutGameInfo=} [p] Properties to set
      */
-    function ClubGameConfig(p) {
+    function AboutGameInfo(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -2836,163 +2877,55 @@ $root.ClubGameConfig = (function() {
     }
 
     /**
-     * ClubGameConfig basicConfig.
-     * @member {IGameBasicConfig|null|undefined} basicConfig
-     * @memberof ClubGameConfig
-     * @instance
-     */
-    ClubGameConfig.prototype.basicConfig = null;
-
-    /**
-     * ClubGameConfig texasConfig.
-     * @member {ITexasConfig|null|undefined} texasConfig
-     * @memberof ClubGameConfig
-     * @instance
-     */
-    ClubGameConfig.prototype.texasConfig = null;
-
-    /**
-     * ClubGameConfig matchingConfig.
-     * @member {IMatchingConfig|null|undefined} matchingConfig
-     * @memberof ClubGameConfig
-     * @instance
-     */
-    ClubGameConfig.prototype.matchingConfig = null;
-
-    /**
-     * Encodes the specified ClubGameConfig message. Does not implicitly {@link ClubGameConfig.verify|verify} messages.
-     * @function encode
-     * @memberof ClubGameConfig
-     * @static
-     * @param {IClubGameConfig} m ClubGameConfig message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ClubGameConfig.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.basicConfig != null && Object.hasOwnProperty.call(m, "basicConfig"))
-            $root.GameBasicConfig.encode(m.basicConfig, w.uint32(10).fork()).ldelim();
-        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
-            $root.TexasConfig.encode(m.texasConfig, w.uint32(18).fork()).ldelim();
-        if (m.matchingConfig != null && Object.hasOwnProperty.call(m, "matchingConfig"))
-            $root.MatchingConfig.encode(m.matchingConfig, w.uint32(26).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a ClubGameConfig message from the specified reader or buffer.
-     * @function decode
-     * @memberof ClubGameConfig
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ClubGameConfig} ClubGameConfig
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ClubGameConfig.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ClubGameConfig();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.basicConfig = $root.GameBasicConfig.decode(r, r.uint32());
-                break;
-            case 2:
-                m.texasConfig = $root.TexasConfig.decode(r, r.uint32());
-                break;
-            case 3:
-                m.matchingConfig = $root.MatchingConfig.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ClubGameConfig;
-})();
-
-$root.MatchingConfig = (function() {
-
-    /**
-     * Properties of a MatchingConfig.
-     * @exports IMatchingConfig
-     * @interface IMatchingConfig
-     * @property {number|null} [currentPlayerNum] MatchingConfig currentPlayerNum
-     * @property {number|null} [startTime] MatchingConfig startTime
-     */
-
-    /**
-     * Constructs a new MatchingConfig.
-     * @exports MatchingConfig
-     * @classdesc Represents a MatchingConfig.
-     * @implements IMatchingConfig
-     * @constructor
-     * @param {IMatchingConfig=} [p] Properties to set
-     */
-    function MatchingConfig(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * MatchingConfig currentPlayerNum.
+     * AboutGameInfo currentPlayerNum.
      * @member {number} currentPlayerNum
-     * @memberof MatchingConfig
+     * @memberof AboutGameInfo
      * @instance
      */
-    MatchingConfig.prototype.currentPlayerNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    AboutGameInfo.prototype.currentPlayerNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * MatchingConfig startTime.
-     * @member {number} startTime
-     * @memberof MatchingConfig
+     * AboutGameInfo leftTime.
+     * @member {number} leftTime
+     * @memberof AboutGameInfo
      * @instance
      */
-    MatchingConfig.prototype.startTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    AboutGameInfo.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * Encodes the specified MatchingConfig message. Does not implicitly {@link MatchingConfig.verify|verify} messages.
+     * Encodes the specified AboutGameInfo message. Does not implicitly {@link AboutGameInfo.verify|verify} messages.
      * @function encode
-     * @memberof MatchingConfig
+     * @memberof AboutGameInfo
      * @static
-     * @param {IMatchingConfig} m MatchingConfig message or plain object to encode
+     * @param {IAboutGameInfo} m AboutGameInfo message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    MatchingConfig.encode = function encode(m, w) {
+    AboutGameInfo.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.currentPlayerNum != null && Object.hasOwnProperty.call(m, "currentPlayerNum"))
             w.uint32(8).int64(m.currentPlayerNum);
-        if (m.startTime != null && Object.hasOwnProperty.call(m, "startTime"))
-            w.uint32(16).int64(m.startTime);
+        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
+            w.uint32(16).int64(m.leftTime);
         return w;
     };
 
     /**
-     * Decodes a MatchingConfig message from the specified reader or buffer.
+     * Decodes an AboutGameInfo message from the specified reader or buffer.
      * @function decode
-     * @memberof MatchingConfig
+     * @memberof AboutGameInfo
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {MatchingConfig} MatchingConfig
+     * @returns {AboutGameInfo} AboutGameInfo
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    MatchingConfig.decode = function decode(r, l) {
+    AboutGameInfo.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.MatchingConfig();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.AboutGameInfo();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -3000,7 +2933,7 @@ $root.MatchingConfig = (function() {
                 m.currentPlayerNum = r.int64();
                 break;
             case 2:
-                m.startTime = r.int64();
+                m.leftTime = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -3010,33 +2943,31 @@ $root.MatchingConfig = (function() {
         return m;
     };
 
-    return MatchingConfig;
+    return AboutGameInfo;
 })();
 
-$root.GameBasicConfig = (function() {
+$root.BasicGameConfig = (function() {
 
     /**
-     * Properties of a GameBasicConfig.
-     * @exports IGameBasicConfig
-     * @interface IGameBasicConfig
-     * @property {GameType|null} [gameType] GameBasicConfig gameType
-     * @property {string|null} [gameName] GameBasicConfig gameName
-     * @property {GameCurrencyType|null} [currencyType] GameBasicConfig currencyType
-     * @property {GameTaxType|null} [taxType] GameBasicConfig taxType
-     * @property {number|null} [taxRatio] GameBasicConfig taxRatio
-     * @property {IShortConfig|null} [shortConfig] GameBasicConfig shortConfig
-     * @property {IOmhConfig|null} [omhConfig] GameBasicConfig omhConfig
+     * Properties of a BasicGameConfig.
+     * @exports IBasicGameConfig
+     * @interface IBasicGameConfig
+     * @property {GameType|null} [gameType] BasicGameConfig gameType
+     * @property {string|null} [gameName] BasicGameConfig gameName
+     * @property {GameCurrencyType|null} [currencyType] BasicGameConfig currencyType
+     * @property {GameTaxType|null} [taxType] BasicGameConfig taxType
+     * @property {number|null} [taxRatio] BasicGameConfig taxRatio
      */
 
     /**
-     * Constructs a new GameBasicConfig.
-     * @exports GameBasicConfig
-     * @classdesc Represents a GameBasicConfig.
-     * @implements IGameBasicConfig
+     * Constructs a new BasicGameConfig.
+     * @exports BasicGameConfig
+     * @classdesc Represents a BasicGameConfig.
+     * @implements IBasicGameConfig
      * @constructor
-     * @param {IGameBasicConfig=} [p] Properties to set
+     * @param {IBasicGameConfig=} [p] Properties to set
      */
-    function GameBasicConfig(p) {
+    function BasicGameConfig(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -3044,71 +2975,55 @@ $root.GameBasicConfig = (function() {
     }
 
     /**
-     * GameBasicConfig gameType.
+     * BasicGameConfig gameType.
      * @member {GameType} gameType
-     * @memberof GameBasicConfig
+     * @memberof BasicGameConfig
      * @instance
      */
-    GameBasicConfig.prototype.gameType = 0;
+    BasicGameConfig.prototype.gameType = 0;
 
     /**
-     * GameBasicConfig gameName.
+     * BasicGameConfig gameName.
      * @member {string} gameName
-     * @memberof GameBasicConfig
+     * @memberof BasicGameConfig
      * @instance
      */
-    GameBasicConfig.prototype.gameName = "";
+    BasicGameConfig.prototype.gameName = "";
 
     /**
-     * GameBasicConfig currencyType.
+     * BasicGameConfig currencyType.
      * @member {GameCurrencyType} currencyType
-     * @memberof GameBasicConfig
+     * @memberof BasicGameConfig
      * @instance
      */
-    GameBasicConfig.prototype.currencyType = 0;
+    BasicGameConfig.prototype.currencyType = 0;
 
     /**
-     * GameBasicConfig taxType.
+     * BasicGameConfig taxType.
      * @member {GameTaxType} taxType
-     * @memberof GameBasicConfig
+     * @memberof BasicGameConfig
      * @instance
      */
-    GameBasicConfig.prototype.taxType = 0;
+    BasicGameConfig.prototype.taxType = 0;
 
     /**
-     * GameBasicConfig taxRatio.
+     * BasicGameConfig taxRatio.
      * @member {number} taxRatio
-     * @memberof GameBasicConfig
+     * @memberof BasicGameConfig
      * @instance
      */
-    GameBasicConfig.prototype.taxRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicGameConfig.prototype.taxRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * GameBasicConfig shortConfig.
-     * @member {IShortConfig|null|undefined} shortConfig
-     * @memberof GameBasicConfig
-     * @instance
-     */
-    GameBasicConfig.prototype.shortConfig = null;
-
-    /**
-     * GameBasicConfig omhConfig.
-     * @member {IOmhConfig|null|undefined} omhConfig
-     * @memberof GameBasicConfig
-     * @instance
-     */
-    GameBasicConfig.prototype.omhConfig = null;
-
-    /**
-     * Encodes the specified GameBasicConfig message. Does not implicitly {@link GameBasicConfig.verify|verify} messages.
+     * Encodes the specified BasicGameConfig message. Does not implicitly {@link BasicGameConfig.verify|verify} messages.
      * @function encode
-     * @memberof GameBasicConfig
+     * @memberof BasicGameConfig
      * @static
-     * @param {IGameBasicConfig} m GameBasicConfig message or plain object to encode
+     * @param {IBasicGameConfig} m BasicGameConfig message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    GameBasicConfig.encode = function encode(m, w) {
+    BasicGameConfig.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
@@ -3121,28 +3036,24 @@ $root.GameBasicConfig = (function() {
             w.uint32(32).int32(m.taxType);
         if (m.taxRatio != null && Object.hasOwnProperty.call(m, "taxRatio"))
             w.uint32(40).int64(m.taxRatio);
-        if (m.shortConfig != null && Object.hasOwnProperty.call(m, "shortConfig"))
-            $root.ShortConfig.encode(m.shortConfig, w.uint32(50).fork()).ldelim();
-        if (m.omhConfig != null && Object.hasOwnProperty.call(m, "omhConfig"))
-            $root.OmhConfig.encode(m.omhConfig, w.uint32(58).fork()).ldelim();
         return w;
     };
 
     /**
-     * Decodes a GameBasicConfig message from the specified reader or buffer.
+     * Decodes a BasicGameConfig message from the specified reader or buffer.
      * @function decode
-     * @memberof GameBasicConfig
+     * @memberof BasicGameConfig
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {GameBasicConfig} GameBasicConfig
+     * @returns {BasicGameConfig} BasicGameConfig
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    GameBasicConfig.decode = function decode(r, l) {
+    BasicGameConfig.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.GameBasicConfig();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.BasicGameConfig();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -3161,12 +3072,6 @@ $root.GameBasicConfig = (function() {
             case 5:
                 m.taxRatio = r.int64();
                 break;
-            case 6:
-                m.shortConfig = $root.ShortConfig.decode(r, r.uint32());
-                break;
-            case 7:
-                m.omhConfig = $root.OmhConfig.decode(r, r.uint32());
-                break;
             default:
                 r.skipType(t & 7);
                 break;
@@ -3175,41 +3080,41 @@ $root.GameBasicConfig = (function() {
         return m;
     };
 
-    return GameBasicConfig;
+    return BasicGameConfig;
 })();
 
-$root.TexasConfig = (function() {
+$root.BasicTexasConfig = (function() {
 
     /**
-     * Properties of a TexasConfig.
-     * @exports ITexasConfig
-     * @interface ITexasConfig
-     * @property {number|null} [smallBlind] TexasConfig smallBlind
-     * @property {boolean|null} [straddle] TexasConfig straddle
-     * @property {number|null} [ante] TexasConfig ante
-     * @property {number|null} [maxTotalBuyIn] TexasConfig maxTotalBuyIn
-     * @property {number|null} [minBringIn] TexasConfig minBringIn
-     * @property {number|null} [maxBringIn] TexasConfig maxBringIn
-     * @property {boolean|null} [allowBringOut] TexasConfig allowBringOut
-     * @property {number|null} [minScoreAfterBringOut] TexasConfig minScoreAfterBringOut
-     * @property {boolean|null} [insurance] TexasConfig insurance
-     * @property {number|null} [gameDuration] TexasConfig gameDuration
-     * @property {number|null} [thinkingTime] TexasConfig thinkingTime
-     * @property {number|null} [seatNum] TexasConfig seatNum
-     * @property {number|null} [autoStartNum] TexasConfig autoStartNum
-     * @property {boolean|null} [gpsLimit] TexasConfig gpsLimit
-     * @property {boolean|null} [ipLimit] TexasConfig ipLimit
+     * Properties of a BasicTexasConfig.
+     * @exports IBasicTexasConfig
+     * @interface IBasicTexasConfig
+     * @property {number|null} [smallBlind] BasicTexasConfig smallBlind
+     * @property {boolean|null} [straddle] BasicTexasConfig straddle
+     * @property {number|null} [ante] BasicTexasConfig ante
+     * @property {number|null} [maxTotalBuyIn] BasicTexasConfig maxTotalBuyIn
+     * @property {number|null} [minBringIn] BasicTexasConfig minBringIn
+     * @property {number|null} [maxBringIn] BasicTexasConfig maxBringIn
+     * @property {boolean|null} [allowBringOut] BasicTexasConfig allowBringOut
+     * @property {number|null} [minScoreAfterBringOut] BasicTexasConfig minScoreAfterBringOut
+     * @property {boolean|null} [insurance] BasicTexasConfig insurance
+     * @property {number|null} [gameDuration] BasicTexasConfig gameDuration
+     * @property {number|null} [thinkingTime] BasicTexasConfig thinkingTime
+     * @property {number|null} [seatNum] BasicTexasConfig seatNum
+     * @property {number|null} [autoStartNum] BasicTexasConfig autoStartNum
+     * @property {boolean|null} [gpsLimit] BasicTexasConfig gpsLimit
+     * @property {boolean|null} [ipLimit] BasicTexasConfig ipLimit
      */
 
     /**
-     * Constructs a new TexasConfig.
-     * @exports TexasConfig
-     * @classdesc Represents a TexasConfig.
-     * @implements ITexasConfig
+     * Constructs a new BasicTexasConfig.
+     * @exports BasicTexasConfig
+     * @classdesc Represents a BasicTexasConfig.
+     * @implements IBasicTexasConfig
      * @constructor
-     * @param {ITexasConfig=} [p] Properties to set
+     * @param {IBasicTexasConfig=} [p] Properties to set
      */
-    function TexasConfig(p) {
+    function BasicTexasConfig(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -3217,135 +3122,135 @@ $root.TexasConfig = (function() {
     }
 
     /**
-     * TexasConfig smallBlind.
+     * BasicTexasConfig smallBlind.
      * @member {number} smallBlind
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.smallBlind = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicTexasConfig.prototype.smallBlind = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * TexasConfig straddle.
+     * BasicTexasConfig straddle.
      * @member {boolean} straddle
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.straddle = false;
+    BasicTexasConfig.prototype.straddle = false;
 
     /**
-     * TexasConfig ante.
+     * BasicTexasConfig ante.
      * @member {number} ante
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.ante = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicTexasConfig.prototype.ante = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * TexasConfig maxTotalBuyIn.
+     * BasicTexasConfig maxTotalBuyIn.
      * @member {number} maxTotalBuyIn
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.maxTotalBuyIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicTexasConfig.prototype.maxTotalBuyIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * TexasConfig minBringIn.
+     * BasicTexasConfig minBringIn.
      * @member {number} minBringIn
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.minBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicTexasConfig.prototype.minBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * TexasConfig maxBringIn.
+     * BasicTexasConfig maxBringIn.
      * @member {number} maxBringIn
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.maxBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicTexasConfig.prototype.maxBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * TexasConfig allowBringOut.
+     * BasicTexasConfig allowBringOut.
      * @member {boolean} allowBringOut
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.allowBringOut = false;
+    BasicTexasConfig.prototype.allowBringOut = false;
 
     /**
-     * TexasConfig minScoreAfterBringOut.
+     * BasicTexasConfig minScoreAfterBringOut.
      * @member {number} minScoreAfterBringOut
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.minScoreAfterBringOut = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicTexasConfig.prototype.minScoreAfterBringOut = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * TexasConfig insurance.
+     * BasicTexasConfig insurance.
      * @member {boolean} insurance
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.insurance = false;
+    BasicTexasConfig.prototype.insurance = false;
 
     /**
-     * TexasConfig gameDuration.
+     * BasicTexasConfig gameDuration.
      * @member {number} gameDuration
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.gameDuration = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicTexasConfig.prototype.gameDuration = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * TexasConfig thinkingTime.
+     * BasicTexasConfig thinkingTime.
      * @member {number} thinkingTime
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.thinkingTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicTexasConfig.prototype.thinkingTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * TexasConfig seatNum.
+     * BasicTexasConfig seatNum.
      * @member {number} seatNum
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.seatNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicTexasConfig.prototype.seatNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * TexasConfig autoStartNum.
+     * BasicTexasConfig autoStartNum.
      * @member {number} autoStartNum
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.autoStartNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    BasicTexasConfig.prototype.autoStartNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * TexasConfig gpsLimit.
+     * BasicTexasConfig gpsLimit.
      * @member {boolean} gpsLimit
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.gpsLimit = false;
+    BasicTexasConfig.prototype.gpsLimit = false;
 
     /**
-     * TexasConfig ipLimit.
+     * BasicTexasConfig ipLimit.
      * @member {boolean} ipLimit
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @instance
      */
-    TexasConfig.prototype.ipLimit = false;
+    BasicTexasConfig.prototype.ipLimit = false;
 
     /**
-     * Encodes the specified TexasConfig message. Does not implicitly {@link TexasConfig.verify|verify} messages.
+     * Encodes the specified BasicTexasConfig message. Does not implicitly {@link BasicTexasConfig.verify|verify} messages.
      * @function encode
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @static
-     * @param {ITexasConfig} m TexasConfig message or plain object to encode
+     * @param {IBasicTexasConfig} m BasicTexasConfig message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    TexasConfig.encode = function encode(m, w) {
+    BasicTexasConfig.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.smallBlind != null && Object.hasOwnProperty.call(m, "smallBlind"))
@@ -3382,20 +3287,20 @@ $root.TexasConfig = (function() {
     };
 
     /**
-     * Decodes a TexasConfig message from the specified reader or buffer.
+     * Decodes a BasicTexasConfig message from the specified reader or buffer.
      * @function decode
-     * @memberof TexasConfig
+     * @memberof BasicTexasConfig
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {TexasConfig} TexasConfig
+     * @returns {BasicTexasConfig} BasicTexasConfig
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    TexasConfig.decode = function decode(r, l) {
+    BasicTexasConfig.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.TexasConfig();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.BasicTexasConfig();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -3452,7 +3357,7 @@ $root.TexasConfig = (function() {
         return m;
     };
 
-    return TexasConfig;
+    return BasicTexasConfig;
 })();
 
 $root.ShortConfig = (function() {
@@ -7553,6 +7458,18 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CreateClubGameNotify=4617 S2C_CreateClubGameNotify value
  * @property {number} S2C_DismissClubGameNotify=4618 S2C_DismissClubGameNotify value
  * @property {number} MSG_ClubEnd=5000 MSG_ClubEnd value
+ * @property {number} MSG_TexasCashBegin=5001 MSG_TexasCashBegin value
+ * @property {number} MSG_TexasCashEnd=5500 MSG_TexasCashEnd value
+ * @property {number} MSG_TexasMttBegin=5501 MSG_TexasMttBegin value
+ * @property {number} MSG_TexasMttEnd=6000 MSG_TexasMttEnd value
+ * @property {number} MSG_ShortCashBegin=6001 MSG_ShortCashBegin value
+ * @property {number} MSG_ShortCashEnd=6500 MSG_ShortCashEnd value
+ * @property {number} MSG_ShortMttBegin=6501 MSG_ShortMttBegin value
+ * @property {number} MSG_ShortMttEnd=7000 MSG_ShortMttEnd value
+ * @property {number} MSG_OmhCashBegin=7001 MSG_OmhCashBegin value
+ * @property {number} MSG_OmhCashEnd=7500 MSG_OmhCashEnd value
+ * @property {number} MSG_OmhMttBegin=7501 MSG_OmhMttBegin value
+ * @property {number} MSG_OmhMttEnd=8000 MSG_OmhMttEnd value
  */
 $root.MessageId = (function() {
     var valuesById = {}, values = Object.create(valuesById);
@@ -7620,5 +7537,17 @@ $root.MessageId = (function() {
     values[valuesById[4617] = "S2C_CreateClubGameNotify"] = 4617;
     values[valuesById[4618] = "S2C_DismissClubGameNotify"] = 4618;
     values[valuesById[5000] = "MSG_ClubEnd"] = 5000;
+    values[valuesById[5001] = "MSG_TexasCashBegin"] = 5001;
+    values[valuesById[5500] = "MSG_TexasCashEnd"] = 5500;
+    values[valuesById[5501] = "MSG_TexasMttBegin"] = 5501;
+    values[valuesById[6000] = "MSG_TexasMttEnd"] = 6000;
+    values[valuesById[6001] = "MSG_ShortCashBegin"] = 6001;
+    values[valuesById[6500] = "MSG_ShortCashEnd"] = 6500;
+    values[valuesById[6501] = "MSG_ShortMttBegin"] = 6501;
+    values[valuesById[7000] = "MSG_ShortMttEnd"] = 7000;
+    values[valuesById[7001] = "MSG_OmhCashBegin"] = 7001;
+    values[valuesById[7500] = "MSG_OmhCashEnd"] = 7500;
+    values[valuesById[7501] = "MSG_OmhMttBegin"] = 7501;
+    values[valuesById[8000] = "MSG_OmhMttEnd"] = 8000;
     return values;
 })();

@@ -9,6 +9,8 @@ import { Club_MemberNotifyWindow } from './Club_MemberNotifyWindow';
 import { UIMgr } from '../../base/UIMgr';
 import { Localization } from '../../base/Localization';
 import ListView from '../../UiTool/ListView';
+import { Club_GameItem } from './Club_GameItem';
+import { NetworkSend } from '../../network/NetworkSend';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_PrivateLayer')
@@ -39,13 +41,16 @@ export class Club_PrivateLayer extends BaseUI
     @property(ListView) 
     mListView: ListView = null;
 
-
+    mGameList : Array<ClubGameInfo>;
     onEnable()
     {
+        this.mListView.numItems = 0;
         this.UpdateNotifyBtn();
         this.UpdateClubInfoUI();
         this.UpdateMoney();
+        this.DragTop();
     }
+
     InitParam()
     {
         this.OffsetHallTop();
@@ -53,7 +58,7 @@ export class Club_PrivateLayer extends BaseUI
     BindUI()
     {
         this.mListView.SetRenderCallback(this.RenderEvent.bind(this));
-
+        this.mListView.SetDragTop(this.DragTop.bind(this));
         this.mBackBtn.SetClickCallback(()=>
         {
             LocalPlayerData.Instance.Data_SelfClubInfo.ResetData();
@@ -176,6 +181,19 @@ export class Club_PrivateLayer extends BaseUI
                 HallData.Instance.Data_ClubEnter.mData = false;
             }
         });
+
+
+        HallData.Instance.Data_UpdateClubGameList.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+
+            this.mGameList = HallData.Instance.FindGameListByClubId(currentClubId);
+            this.mListView.numItems = this.mGameList.length;
+        });
     }
 
     UpdateNotifyBtn()
@@ -189,15 +207,13 @@ export class Club_PrivateLayer extends BaseUI
         this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(clubId)
     }
 
-
-
     LateInit()
     {
 
     }
     CustmoerDestory()
     {
-
+        this.mGameList = null;
     }
 
     UpdateMoney()
@@ -237,7 +253,15 @@ export class Club_PrivateLayer extends BaseUI
 
     RenderEvent(_item: Node , _index: number)
     {
+        let currentData = this.mGameList[_index];
+        let gameItem = _item.getComponent(Club_GameItem);
+        gameItem.InitWithServerData(currentData);
+    }
 
+    DragTop()
+    {
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        NetworkSend.Instance.GetClubGameList(clubId);
     }
 }
 

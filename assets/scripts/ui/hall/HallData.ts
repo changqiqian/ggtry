@@ -65,7 +65,48 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubUpdateSelfData:  BaseData<boolean> = new BaseData<boolean>(true); //更新自己的俱乐部数据
     Data_S2CModifyMemberRole:  BaseData<S2CModifyMemberRole> = new BaseData<S2CModifyMemberRole>(true); //修改俱乐部成员权限返回
 
+    Data_ClubGameInfos : BaseData<Array<ClubGameInfo>> = new BaseData<Array<ClubGameInfo>>(false, new Array<ClubGameInfo>()); //俱乐部游戏列表
+    Data_UpdateClubGameList :  BaseData<boolean> = new BaseData<boolean>(true); //更新俱乐部游戏列表
     //
+    public UpdateOneGame(_clubGameInfo : ClubGameInfo)
+    {
+        let index = this.Data_ClubGameInfos.mData.findIndex((_item) => _item.gameId === _clubGameInfo.gameId);
+        if(index >= 0)
+        {
+            this.Data_ClubGameInfos.mData[index] = _clubGameInfo;
+        }
+        else
+        {
+            this.Data_ClubGameInfos.mData.push(_clubGameInfo);
+        }
+    }
+
+    public UpdateGameList(_clubGameInfos : Array<ClubGameInfo>)
+    {
+        for(let i = 0 ; i < _clubGameInfos.length ; i++)
+        {
+            let current = _clubGameInfos[i];
+            this.UpdateOneGame(current);
+        }
+        this.Data_UpdateClubGameList.mData = true;
+    }
+
+    public FindGameListByClubId(_clubId : string)
+    {
+        let result = new Array<ClubGameInfo>();
+        for(let i = 0 ; i < this.Data_ClubGameInfos.mData.length ; i++)
+        {
+            let current = this.Data_ClubGameInfos.mData[i];
+            if(current.clubId == _clubId)
+            {
+                result.push(current);
+            }
+        }
+
+        return result;
+    }
+
+
     public RecieveNewClubApply(_request : ClubJoinRequest)
     {
         let clubIndex = this.Data_ClubApplyingInfo.mData.findIndex((_item) => _item.clubInfo.id === _request.clubInfo.id);
@@ -141,8 +182,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
                 break;
             }
         }
-        
-
     }
                     //创建牌局,追踪每个选项最终值，用于最后生成数据
     Data_ClubRefreshSmallBlind : BaseData<number> = new BaseData<number>(); //小盲选项值发生了变化
@@ -179,6 +218,9 @@ export class HallData extends SingletonBaseNotify<HallData>()
     //创建俱乐部房间时候的 生成基础配置
     ResetCreateRoomParam(_type : GameType)
     {
+        this.Data_ClubCurrentModuleIndex.mData = -1;
+
+
         this.Data_ClubCreateGameType.mData = _type;
         this.Data_ClubCreateGameName.mData = "";
         this.Data_ClubCreateGameCurrencyType.mData = GameCurrencyType.GameCurrencyType_Point;
@@ -262,52 +304,55 @@ export class HallData extends SingletonBaseNotify<HallData>()
         this.Data_ClubCreateShortButtonDouble.mData = this.Data_Club_CreateTexasConfig.mData.buttonDouble
     }
     //把房间配置转换成 proto
-    ConvertCreateTexasConfigToProto(_config : Club_CreateTexasConfig) : ClubGameConfig
+    ConvertCreateTexasConfigToProto(_config : Club_CreateTexasConfig) : ClubGameInfo
     {
-        let finalData = new ClubGameConfig();
-        finalData.basicConfig = new GameBasicConfig();
-        finalData.texasConfig = new TexasConfig();
-        finalData.basicConfig.shortConfig = new ShortConfig();
+        let basicData = new BasicGameConfig();
+        let texasData = new BasicTexasConfig();
+        let shortData = new ShortConfig();
 
-        finalData.basicConfig.gameType = _config.gameType;
-        finalData.basicConfig.gameName = _config.gameName;
-        finalData.basicConfig.currencyType = _config.currencyType;
-        finalData.basicConfig.taxType = _config.taxType;
-        finalData.basicConfig.taxRatio = GameConfig.GetTexasCreateRoomTaxValue(_config.taxType)[_config.taxRatio];
-        finalData.texasConfig.smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[_config.smallBlind];
-        finalData.basicConfig.shortConfig.baseScore = GameConfig.GetShortCreateRoomBaseScoreValue()[_config.shortBaseScore];
-        finalData.basicConfig.shortConfig.scoreMode = _config.shortScoreMode;
-        finalData.basicConfig.shortConfig.buttonDouble = _config.buttonDouble;
+        basicData.gameType = _config.gameType;
+        basicData.gameName = _config.gameName;
+        basicData.currencyType = _config.currencyType;
+        basicData.taxType = _config.taxType;
+        basicData.taxRatio = GameConfig.GetTexasCreateRoomTaxValue(_config.taxType)[_config.taxRatio];
+        texasData.smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[_config.smallBlind];
+        shortData.baseScore = GameConfig.GetShortCreateRoomBaseScoreValue()[_config.shortBaseScore];
+        shortData.scoreMode = _config.shortScoreMode;
+        shortData.buttonDouble = _config.buttonDouble;
         
-        let bigBlind = finalData.texasConfig.smallBlind * 2;
+        let bigBlind = texasData.smallBlind * 2;
         let bigBliind100 = bigBlind* 100;
-        let baseScore100 = finalData.basicConfig.shortConfig.baseScore * 100;
-        finalData.texasConfig.straddle = _config.straddle;
-        finalData.texasConfig.ante = GameConfig.GetTexasCreateRoomAnteValue(finalData.texasConfig.smallBlind)[_config.ante];
+        let baseScore100 = shortData.baseScore * 100;
+        texasData.straddle = _config.straddle;
+        texasData.ante = GameConfig.GetTexasCreateRoomAnteValue(texasData.smallBlind)[_config.ante];
         
         if( _config.gameType == GameType.GameType_TexasCash)
         {
-            finalData.texasConfig.maxTotalBuyIn = GameConfig.GetTexasCreateRoomMaxBuyInValue()[_config.maxTotalBuyIn] * bigBliind100;
-            finalData.texasConfig.minBringIn = bigBliind100 / 2;
-            finalData.texasConfig.maxBringIn = bigBliind100 * GameConfig.GetTexasCreateRoomBringInValue()[_config.maxBringIn];
+            texasData.maxTotalBuyIn = GameConfig.GetTexasCreateRoomMaxBuyInValue()[_config.maxTotalBuyIn] * bigBliind100;
+            texasData.minBringIn = bigBliind100 / 2;
+            texasData.maxBringIn = bigBliind100 * GameConfig.GetTexasCreateRoomBringInValue()[_config.maxBringIn];
         }
         else if( _config.gameType == GameType.GameType_ShortCash)
         {
-            finalData.texasConfig.maxTotalBuyIn = GameConfig.GetTexasCreateRoomMaxBuyInValue()[_config.maxTotalBuyIn] * baseScore100;
-            finalData.texasConfig.minBringIn = baseScore100 / 2;
-            finalData.texasConfig.maxBringIn = baseScore100 * GameConfig.GetTexasCreateRoomBringInValue()[_config.maxBringIn];
+            texasData.maxTotalBuyIn = GameConfig.GetTexasCreateRoomMaxBuyInValue()[_config.maxTotalBuyIn] * baseScore100;
+            texasData.minBringIn = baseScore100 / 2;
+            texasData.maxBringIn = baseScore100 * GameConfig.GetTexasCreateRoomBringInValue()[_config.maxBringIn];
         }
 
-        finalData.texasConfig.allowBringOut = _config.allowBringOut;
-        finalData.texasConfig.minScoreAfterBringOut = _config.minScoreAfterBringOut;
-        finalData.texasConfig.insurance = _config.insurance;
-        finalData.texasConfig.gameDuration = GameConfig.GetTexasCreateRoomGameDurationValue()[_config.gameDuration];
-        finalData.texasConfig.thinkingTime = GameConfig.GetTexasCreateRoomThinkingTimeValue()[_config.thinkingTime];
-        finalData.texasConfig.seatNum = GameConfig.GetTexasCreateRoomSeatNumValue()[_config.seatNum];
-        finalData.texasConfig.autoStartNum = GameConfig.GetTexasCreateRoomAutoStartValue()[_config.autoStartNum];
-        finalData.texasConfig.gpsLimit = _config.gpsLimit;
-        finalData.texasConfig.ipLimit = _config.ipLimit;
-        return finalData;
+        texasData.allowBringOut = _config.allowBringOut;
+        texasData.minScoreAfterBringOut = _config.minScoreAfterBringOut;
+        texasData.insurance = _config.insurance;
+        texasData.gameDuration = GameConfig.GetTexasCreateRoomGameDurationValue()[_config.gameDuration];
+        texasData.thinkingTime = GameConfig.GetTexasCreateRoomThinkingTimeValue()[_config.thinkingTime];
+        texasData.seatNum = GameConfig.GetTexasCreateRoomSeatNumValue()[_config.seatNum];
+        texasData.autoStartNum = GameConfig.GetTexasCreateRoomAutoStartValue()[_config.autoStartNum];
+        texasData.gpsLimit = _config.gpsLimit;
+        texasData.ipLimit = _config.ipLimit;
+
+        let protoData = new ClubGameInfo();
+        protoData.basicConfig = basicData;
+        protoData.texasConfig = texasData;
+        return protoData;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

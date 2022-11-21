@@ -591,8 +591,11 @@ export interface IC2SCreateClubGame {
     /** C2SCreateClubGame clubId */
     clubId?: (string|null);
 
-    /** C2SCreateClubGame gameConfig */
-    gameConfig?: (IClubGameConfig|null);
+    /** C2SCreateClubGame basicConfig */
+    basicConfig?: (IBasicGameConfig|null);
+
+    /** C2SCreateClubGame texasConfig */
+    texasConfig?: (IBasicTexasConfig|null);
 }
 
 /** Represents a C2SCreateClubGame. */
@@ -607,8 +610,11 @@ export class C2SCreateClubGame implements IC2SCreateClubGame {
     /** C2SCreateClubGame clubId. */
     public clubId: string;
 
-    /** C2SCreateClubGame gameConfig. */
-    public gameConfig?: (IClubGameConfig|null);
+    /** C2SCreateClubGame basicConfig. */
+    public basicConfig?: (IBasicGameConfig|null);
+
+    /** C2SCreateClubGame texasConfig. */
+    public texasConfig?: (IBasicTexasConfig|null);
 
     /**
      * Encodes the specified C2SCreateClubGame message. Does not implicitly {@link C2SCreateClubGame.verify|verify} messages.
@@ -908,8 +914,14 @@ export class ClubGameInfo implements IClubGameInfo {
     /** ClubGameInfo gameId. */
     public gameId: string;
 
-    /** ClubGameInfo gameConfig. */
-    public gameConfig?: (IClubGameConfig|null);
+    /** ClubGameInfo basicConfig. */
+    public basicConfig?: (IBasicGameConfig|null);
+
+    /** ClubGameInfo texasConfig. */
+    public texasConfig?: (IBasicTexasConfig|null);
+
+    /** ClubGameInfo aboutGameInfo. */
+    public aboutGameInfo?: (IAboutGameInfo|null);
 
     /**
      * Encodes the specified ClubGameInfo message. Does not implicitly {@link ClubGameInfo.verify|verify} messages.
@@ -1141,197 +1153,154 @@ export enum ShortGameScoreMode {
     ShortGameScoreMode_BlindMode = 1
 }
 
-/** Represents a ClubGameConfig. */
-export class ClubGameConfig implements IClubGameConfig {
+/** Represents an AboutGameInfo. */
+export class AboutGameInfo implements IAboutGameInfo {
 
     /**
-     * Constructs a new ClubGameConfig.
+     * Constructs a new AboutGameInfo.
      * @param [p] Properties to set
      */
-    constructor(p?: IClubGameConfig);
+    constructor(p?: IAboutGameInfo);
 
-    /** ClubGameConfig basicConfig. */
-    public basicConfig?: (IGameBasicConfig|null);
-
-    /** ClubGameConfig texasConfig. */
-    public texasConfig?: (ITexasConfig|null);
-
-    /** ClubGameConfig matchingConfig. */
-    public matchingConfig?: (IMatchingConfig|null);
-
-    /**
-     * Encodes the specified ClubGameConfig message. Does not implicitly {@link ClubGameConfig.verify|verify} messages.
-     * @param m ClubGameConfig message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IClubGameConfig, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a ClubGameConfig message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns ClubGameConfig
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubGameConfig;
-}
-
-/** Represents a MatchingConfig. */
-export class MatchingConfig implements IMatchingConfig {
-
-    /**
-     * Constructs a new MatchingConfig.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IMatchingConfig);
-
-    /** MatchingConfig currentPlayerNum. */
+    /** AboutGameInfo currentPlayerNum. */
     public currentPlayerNum: number;
 
-    /** MatchingConfig startTime. */
-    public startTime: number;
+    /** AboutGameInfo leftTime. */
+    public leftTime: number;
 
     /**
-     * Encodes the specified MatchingConfig message. Does not implicitly {@link MatchingConfig.verify|verify} messages.
-     * @param m MatchingConfig message or plain object to encode
+     * Encodes the specified AboutGameInfo message. Does not implicitly {@link AboutGameInfo.verify|verify} messages.
+     * @param m AboutGameInfo message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IMatchingConfig, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IAboutGameInfo, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a MatchingConfig message from the specified reader or buffer.
+     * Decodes an AboutGameInfo message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns MatchingConfig
+     * @returns AboutGameInfo
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): MatchingConfig;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): AboutGameInfo;
 }
 
-/** Represents a GameBasicConfig. */
-export class GameBasicConfig implements IGameBasicConfig {
+/** Represents a BasicGameConfig. */
+export class BasicGameConfig implements IBasicGameConfig {
 
     /**
-     * Constructs a new GameBasicConfig.
+     * Constructs a new BasicGameConfig.
      * @param [p] Properties to set
      */
-    constructor(p?: IGameBasicConfig);
+    constructor(p?: IBasicGameConfig);
 
-    /** GameBasicConfig gameType. */
+    /** BasicGameConfig gameType. */
     public gameType: GameType;
 
-    /** GameBasicConfig gameName. */
+    /** BasicGameConfig gameName. */
     public gameName: string;
 
-    /** GameBasicConfig currencyType. */
+    /** BasicGameConfig currencyType. */
     public currencyType: GameCurrencyType;
 
-    /** GameBasicConfig taxType. */
+    /** BasicGameConfig taxType. */
     public taxType: GameTaxType;
 
-    /** GameBasicConfig taxRatio. */
+    /** BasicGameConfig taxRatio. */
     public taxRatio: number;
 
-    /** GameBasicConfig shortConfig. */
-    public shortConfig?: (IShortConfig|null);
-
-    /** GameBasicConfig omhConfig. */
-    public omhConfig?: (IOmhConfig|null);
-
     /**
-     * Encodes the specified GameBasicConfig message. Does not implicitly {@link GameBasicConfig.verify|verify} messages.
-     * @param m GameBasicConfig message or plain object to encode
+     * Encodes the specified BasicGameConfig message. Does not implicitly {@link BasicGameConfig.verify|verify} messages.
+     * @param m BasicGameConfig message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IGameBasicConfig, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IBasicGameConfig, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a GameBasicConfig message from the specified reader or buffer.
+     * Decodes a BasicGameConfig message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns GameBasicConfig
+     * @returns BasicGameConfig
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): GameBasicConfig;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): BasicGameConfig;
 }
 
-/** Represents a TexasConfig. */
-export class TexasConfig implements ITexasConfig {
+/** Represents a BasicTexasConfig. */
+export class BasicTexasConfig implements IBasicTexasConfig {
 
     /**
-     * Constructs a new TexasConfig.
+     * Constructs a new BasicTexasConfig.
      * @param [p] Properties to set
      */
-    constructor(p?: ITexasConfig);
+    constructor(p?: IBasicTexasConfig);
 
-    /** TexasConfig smallBlind. */
+    /** BasicTexasConfig smallBlind. */
     public smallBlind: number;
 
-    /** TexasConfig straddle. */
+    /** BasicTexasConfig straddle. */
     public straddle: boolean;
 
-    /** TexasConfig ante. */
+    /** BasicTexasConfig ante. */
     public ante: number;
 
-    /** TexasConfig maxTotalBuyIn. */
+    /** BasicTexasConfig maxTotalBuyIn. */
     public maxTotalBuyIn: number;
 
-    /** TexasConfig minBringIn. */
+    /** BasicTexasConfig minBringIn. */
     public minBringIn: number;
 
-    /** TexasConfig maxBringIn. */
+    /** BasicTexasConfig maxBringIn. */
     public maxBringIn: number;
 
-    /** TexasConfig allowBringOut. */
+    /** BasicTexasConfig allowBringOut. */
     public allowBringOut: boolean;
 
-    /** TexasConfig minScoreAfterBringOut. */
+    /** BasicTexasConfig minScoreAfterBringOut. */
     public minScoreAfterBringOut: number;
 
-    /** TexasConfig insurance. */
+    /** BasicTexasConfig insurance. */
     public insurance: boolean;
 
-    /** TexasConfig gameDuration. */
+    /** BasicTexasConfig gameDuration. */
     public gameDuration: number;
 
-    /** TexasConfig thinkingTime. */
+    /** BasicTexasConfig thinkingTime. */
     public thinkingTime: number;
 
-    /** TexasConfig seatNum. */
+    /** BasicTexasConfig seatNum. */
     public seatNum: number;
 
-    /** TexasConfig autoStartNum. */
+    /** BasicTexasConfig autoStartNum. */
     public autoStartNum: number;
 
-    /** TexasConfig gpsLimit. */
+    /** BasicTexasConfig gpsLimit. */
     public gpsLimit: boolean;
 
-    /** TexasConfig ipLimit. */
+    /** BasicTexasConfig ipLimit. */
     public ipLimit: boolean;
 
     /**
-     * Encodes the specified TexasConfig message. Does not implicitly {@link TexasConfig.verify|verify} messages.
-     * @param m TexasConfig message or plain object to encode
+     * Encodes the specified BasicTexasConfig message. Does not implicitly {@link BasicTexasConfig.verify|verify} messages.
+     * @param m BasicTexasConfig message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: ITexasConfig, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IBasicTexasConfig, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a TexasConfig message from the specified reader or buffer.
+     * Decodes a BasicTexasConfig message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns TexasConfig
+     * @returns BasicTexasConfig
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): TexasConfig;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): BasicTexasConfig;
 }
 
 /** Represents a ShortConfig. */
@@ -2809,7 +2778,19 @@ export enum MessageId {
     S2C_ModifyMemberRoleNotify = 4616,
     S2C_CreateClubGameNotify = 4617,
     S2C_DismissClubGameNotify = 4618,
-    MSG_ClubEnd = 5000
+    MSG_ClubEnd = 5000,
+    MSG_TexasCashBegin = 5001,
+    MSG_TexasCashEnd = 5500,
+    MSG_TexasMttBegin = 5501,
+    MSG_TexasMttEnd = 6000,
+    MSG_ShortCashBegin = 6001,
+    MSG_ShortCashEnd = 6500,
+    MSG_ShortMttBegin = 6501,
+    MSG_ShortMttEnd = 7000,
+    MSG_OmhCashBegin = 7001,
+    MSG_OmhCashEnd = 7500,
+    MSG_OmhMttBegin = 7501,
+    MSG_OmhMttEnd = 8000
 }
  
 }

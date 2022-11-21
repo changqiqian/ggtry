@@ -13,7 +13,7 @@ export class Club_CreateGameOption extends BaseUI
     @property(BaseButton) 
     mShortBtn: BaseButton = null;
     @property(BaseButton) 
-    mMttBtn: BaseButton = null;
+    mOmhBtn: BaseButton = null;
     @property(BaseButton) 
     mModuleBtn: BaseButton = null;
     @property(BaseButton) 
@@ -30,10 +30,11 @@ export class Club_CreateGameOption extends BaseUI
         });
         this.mShortBtn.SetClickCallback(()=>
         {
-            HallData.Instance.ResetCreateRoomParam(GameType.GameType_TexasCash);
-            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_CreateShort");
+            // HallData.Instance.ResetCreateRoomParam(GameType.GameType_TexasCash);
+            // UIMgr.Instance.ShowLayer("clubPage","prefab/Club_CreateShort");
+            UIMgr.Instance.ShowToast("功能开发中");
         });
-        this.mMttBtn.SetClickCallback(()=>
+        this.mOmhBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowToast("功能开发中");
         });
