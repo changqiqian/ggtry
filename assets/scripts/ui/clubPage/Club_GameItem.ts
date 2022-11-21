@@ -2,6 +2,8 @@ import { _decorator, Component, Node, Label, Color } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { GameConfig } from '../../GameConfig';
+import { NetworkSend } from '../../network/NetworkSend';
+import { BaseButton } from '../common/BaseButton';
 import { CircleTimer } from '../common/CircleTimer';
 import { Club_CreateTexasConfig, HallData } from '../hall/HallData';
 
@@ -30,15 +32,20 @@ export class Club_GameItem extends BaseUI
     mMinBringIn: Label = null;
     @property(Label) 
     mMaxBringIn: Label = null;
-    
+    @property(BaseButton) 
+    mEnterBtn: BaseButton = null;
 
+    mData : ClubGameInfo = null;
     InitParam()
     {
 
     }
     BindUI()
     {
-
+        this.mEnterBtn.SetClickCallback(()=>
+        {
+            NetworkSend.Instance.EnterClubGame(this.mData.clubId,this.mData.gameId);
+        })
     }
     RegDataNotify()
     {
@@ -61,6 +68,7 @@ export class Club_GameItem extends BaseUI
 
     public InitWithServerData(_data : ClubGameInfo)
     {
+        this.mData = _data;
         let tempColor;
         let gameTypeName;
 

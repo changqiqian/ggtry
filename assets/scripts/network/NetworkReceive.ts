@@ -382,6 +382,36 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_ClubEnterGame,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CClubEnterGame.decode(_data);
+            console.log("收到的内容 S2C_ClubEnterGame  进入俱乐部游戏==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                HallData.Instance.Data_S2CClubEnterGame.mData = msg;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_ClubExitGame,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CClubExitGame.decode(_data);
+            console.log("收到的内容 S2C_ClubExitGame  退出俱乐部游戏==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////

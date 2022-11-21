@@ -1562,6 +1562,196 @@ $root.C2SDismissClubGame = (function() {
     return C2SDismissClubGame;
 })();
 
+$root.CS2ClubEnterGame = (function() {
+
+    /**
+     * Properties of a CS2ClubEnterGame.
+     * @exports ICS2ClubEnterGame
+     * @interface ICS2ClubEnterGame
+     * @property {string|null} [clubId] CS2ClubEnterGame clubId
+     * @property {string|null} [gameId] CS2ClubEnterGame gameId
+     */
+
+    /**
+     * Constructs a new CS2ClubEnterGame.
+     * @exports CS2ClubEnterGame
+     * @classdesc Represents a CS2ClubEnterGame.
+     * @implements ICS2ClubEnterGame
+     * @constructor
+     * @param {ICS2ClubEnterGame=} [p] Properties to set
+     */
+    function CS2ClubEnterGame(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * CS2ClubEnterGame clubId.
+     * @member {string} clubId
+     * @memberof CS2ClubEnterGame
+     * @instance
+     */
+    CS2ClubEnterGame.prototype.clubId = "";
+
+    /**
+     * CS2ClubEnterGame gameId.
+     * @member {string} gameId
+     * @memberof CS2ClubEnterGame
+     * @instance
+     */
+    CS2ClubEnterGame.prototype.gameId = "";
+
+    /**
+     * Encodes the specified CS2ClubEnterGame message. Does not implicitly {@link CS2ClubEnterGame.verify|verify} messages.
+     * @function encode
+     * @memberof CS2ClubEnterGame
+     * @static
+     * @param {ICS2ClubEnterGame} m CS2ClubEnterGame message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    CS2ClubEnterGame.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
+            w.uint32(10).string(m.clubId);
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a CS2ClubEnterGame message from the specified reader or buffer.
+     * @function decode
+     * @memberof CS2ClubEnterGame
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {CS2ClubEnterGame} CS2ClubEnterGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    CS2ClubEnterGame.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CS2ClubEnterGame();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.clubId = r.string();
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return CS2ClubEnterGame;
+})();
+
+$root.CS2ClubExitGame = (function() {
+
+    /**
+     * Properties of a CS2ClubExitGame.
+     * @exports ICS2ClubExitGame
+     * @interface ICS2ClubExitGame
+     * @property {string|null} [clubId] CS2ClubExitGame clubId
+     * @property {string|null} [gameId] CS2ClubExitGame gameId
+     */
+
+    /**
+     * Constructs a new CS2ClubExitGame.
+     * @exports CS2ClubExitGame
+     * @classdesc Represents a CS2ClubExitGame.
+     * @implements ICS2ClubExitGame
+     * @constructor
+     * @param {ICS2ClubExitGame=} [p] Properties to set
+     */
+    function CS2ClubExitGame(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * CS2ClubExitGame clubId.
+     * @member {string} clubId
+     * @memberof CS2ClubExitGame
+     * @instance
+     */
+    CS2ClubExitGame.prototype.clubId = "";
+
+    /**
+     * CS2ClubExitGame gameId.
+     * @member {string} gameId
+     * @memberof CS2ClubExitGame
+     * @instance
+     */
+    CS2ClubExitGame.prototype.gameId = "";
+
+    /**
+     * Encodes the specified CS2ClubExitGame message. Does not implicitly {@link CS2ClubExitGame.verify|verify} messages.
+     * @function encode
+     * @memberof CS2ClubExitGame
+     * @static
+     * @param {ICS2ClubExitGame} m CS2ClubExitGame message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    CS2ClubExitGame.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
+            w.uint32(10).string(m.clubId);
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a CS2ClubExitGame message from the specified reader or buffer.
+     * @function decode
+     * @memberof CS2ClubExitGame
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {CS2ClubExitGame} CS2ClubExitGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    CS2ClubExitGame.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CS2ClubExitGame();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.clubId = r.string();
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return CS2ClubExitGame;
+})();
+
 /**
  * ClubMemberType enum.
  * @exports ClubMemberType
@@ -5291,6 +5481,238 @@ $root.S2CDismissClubGame = (function() {
     return S2CDismissClubGame;
 })();
 
+$root.S2CClubEnterGame = (function() {
+
+    /**
+     * Properties of a S2CClubEnterGame.
+     * @exports IS2CClubEnterGame
+     * @interface IS2CClubEnterGame
+     * @property {ICommonResult|null} [result] S2CClubEnterGame result
+     * @property {string|null} [clubId] S2CClubEnterGame clubId
+     * @property {string|null} [gameId] S2CClubEnterGame gameId
+     * @property {IClubGameInfo|null} [gameInfo] S2CClubEnterGame gameInfo
+     */
+
+    /**
+     * Constructs a new S2CClubEnterGame.
+     * @exports S2CClubEnterGame
+     * @classdesc Represents a S2CClubEnterGame.
+     * @implements IS2CClubEnterGame
+     * @constructor
+     * @param {IS2CClubEnterGame=} [p] Properties to set
+     */
+    function S2CClubEnterGame(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CClubEnterGame result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CClubEnterGame
+     * @instance
+     */
+    S2CClubEnterGame.prototype.result = null;
+
+    /**
+     * S2CClubEnterGame clubId.
+     * @member {string} clubId
+     * @memberof S2CClubEnterGame
+     * @instance
+     */
+    S2CClubEnterGame.prototype.clubId = "";
+
+    /**
+     * S2CClubEnterGame gameId.
+     * @member {string} gameId
+     * @memberof S2CClubEnterGame
+     * @instance
+     */
+    S2CClubEnterGame.prototype.gameId = "";
+
+    /**
+     * S2CClubEnterGame gameInfo.
+     * @member {IClubGameInfo|null|undefined} gameInfo
+     * @memberof S2CClubEnterGame
+     * @instance
+     */
+    S2CClubEnterGame.prototype.gameInfo = null;
+
+    /**
+     * Encodes the specified S2CClubEnterGame message. Does not implicitly {@link S2CClubEnterGame.verify|verify} messages.
+     * @function encode
+     * @memberof S2CClubEnterGame
+     * @static
+     * @param {IS2CClubEnterGame} m S2CClubEnterGame message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CClubEnterGame.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
+            w.uint32(18).string(m.clubId);
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(26).string(m.gameId);
+        if (m.gameInfo != null && Object.hasOwnProperty.call(m, "gameInfo"))
+            $root.ClubGameInfo.encode(m.gameInfo, w.uint32(34).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a S2CClubEnterGame message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CClubEnterGame
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CClubEnterGame} S2CClubEnterGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CClubEnterGame.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CClubEnterGame();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.clubId = r.string();
+                break;
+            case 3:
+                m.gameId = r.string();
+                break;
+            case 4:
+                m.gameInfo = $root.ClubGameInfo.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CClubEnterGame;
+})();
+
+$root.S2CClubExitGame = (function() {
+
+    /**
+     * Properties of a S2CClubExitGame.
+     * @exports IS2CClubExitGame
+     * @interface IS2CClubExitGame
+     * @property {ICommonResult|null} [result] S2CClubExitGame result
+     * @property {string|null} [clubId] S2CClubExitGame clubId
+     * @property {string|null} [gameId] S2CClubExitGame gameId
+     */
+
+    /**
+     * Constructs a new S2CClubExitGame.
+     * @exports S2CClubExitGame
+     * @classdesc Represents a S2CClubExitGame.
+     * @implements IS2CClubExitGame
+     * @constructor
+     * @param {IS2CClubExitGame=} [p] Properties to set
+     */
+    function S2CClubExitGame(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CClubExitGame result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CClubExitGame
+     * @instance
+     */
+    S2CClubExitGame.prototype.result = null;
+
+    /**
+     * S2CClubExitGame clubId.
+     * @member {string} clubId
+     * @memberof S2CClubExitGame
+     * @instance
+     */
+    S2CClubExitGame.prototype.clubId = "";
+
+    /**
+     * S2CClubExitGame gameId.
+     * @member {string} gameId
+     * @memberof S2CClubExitGame
+     * @instance
+     */
+    S2CClubExitGame.prototype.gameId = "";
+
+    /**
+     * Encodes the specified S2CClubExitGame message. Does not implicitly {@link S2CClubExitGame.verify|verify} messages.
+     * @function encode
+     * @memberof S2CClubExitGame
+     * @static
+     * @param {IS2CClubExitGame} m S2CClubExitGame message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CClubExitGame.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
+            w.uint32(18).string(m.clubId);
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(26).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CClubExitGame message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CClubExitGame
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CClubExitGame} S2CClubExitGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CClubExitGame.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CClubExitGame();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.clubId = r.string();
+                break;
+            case 3:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CClubExitGame;
+})();
+
 $root.S2CClubJoinNotify = (function() {
 
     /**
@@ -5945,182 +6367,6 @@ $root.S2CModifyMemberRoleNotify = (function() {
     };
 
     return S2CModifyMemberRoleNotify;
-})();
-
-$root.S2CCreateClubGameNotify = (function() {
-
-    /**
-     * Properties of a S2CCreateClubGameNotify.
-     * @exports IS2CCreateClubGameNotify
-     * @interface IS2CCreateClubGameNotify
-     * @property {IClubGameInfo|null} [gameInfo] S2CCreateClubGameNotify gameInfo
-     */
-
-    /**
-     * Constructs a new S2CCreateClubGameNotify.
-     * @exports S2CCreateClubGameNotify
-     * @classdesc Represents a S2CCreateClubGameNotify.
-     * @implements IS2CCreateClubGameNotify
-     * @constructor
-     * @param {IS2CCreateClubGameNotify=} [p] Properties to set
-     */
-    function S2CCreateClubGameNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CCreateClubGameNotify gameInfo.
-     * @member {IClubGameInfo|null|undefined} gameInfo
-     * @memberof S2CCreateClubGameNotify
-     * @instance
-     */
-    S2CCreateClubGameNotify.prototype.gameInfo = null;
-
-    /**
-     * Encodes the specified S2CCreateClubGameNotify message. Does not implicitly {@link S2CCreateClubGameNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CCreateClubGameNotify
-     * @static
-     * @param {IS2CCreateClubGameNotify} m S2CCreateClubGameNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CCreateClubGameNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameInfo != null && Object.hasOwnProperty.call(m, "gameInfo"))
-            $root.ClubGameInfo.encode(m.gameInfo, w.uint32(10).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CCreateClubGameNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CCreateClubGameNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CCreateClubGameNotify} S2CCreateClubGameNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CCreateClubGameNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCreateClubGameNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameInfo = $root.ClubGameInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CCreateClubGameNotify;
-})();
-
-$root.S2CDismissClubGameNotify = (function() {
-
-    /**
-     * Properties of a S2CDismissClubGameNotify.
-     * @exports IS2CDismissClubGameNotify
-     * @interface IS2CDismissClubGameNotify
-     * @property {string|null} [clubId] S2CDismissClubGameNotify clubId
-     * @property {string|null} [gameId] S2CDismissClubGameNotify gameId
-     */
-
-    /**
-     * Constructs a new S2CDismissClubGameNotify.
-     * @exports S2CDismissClubGameNotify
-     * @classdesc Represents a S2CDismissClubGameNotify.
-     * @implements IS2CDismissClubGameNotify
-     * @constructor
-     * @param {IS2CDismissClubGameNotify=} [p] Properties to set
-     */
-    function S2CDismissClubGameNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CDismissClubGameNotify clubId.
-     * @member {string} clubId
-     * @memberof S2CDismissClubGameNotify
-     * @instance
-     */
-    S2CDismissClubGameNotify.prototype.clubId = "";
-
-    /**
-     * S2CDismissClubGameNotify gameId.
-     * @member {string} gameId
-     * @memberof S2CDismissClubGameNotify
-     * @instance
-     */
-    S2CDismissClubGameNotify.prototype.gameId = "";
-
-    /**
-     * Encodes the specified S2CDismissClubGameNotify message. Does not implicitly {@link S2CDismissClubGameNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CDismissClubGameNotify
-     * @static
-     * @param {IS2CDismissClubGameNotify} m S2CDismissClubGameNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CDismissClubGameNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CDismissClubGameNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CDismissClubGameNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CDismissClubGameNotify} S2CDismissClubGameNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CDismissClubGameNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CDismissClubGameNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CDismissClubGameNotify;
 })();
 
 $root.C2SLogout = (function() {
@@ -7432,6 +7678,8 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} C2S_CreateClubGame=4015 C2S_CreateClubGame value
  * @property {number} C2S_GetClubGameList=4016 C2S_GetClubGameList value
  * @property {number} C2S_DismissClubGame=4017 C2S_DismissClubGame value
+ * @property {number} CS2_ClubEnterGame=4018 CS2_ClubEnterGame value
+ * @property {number} CS2_ClubExitGame=4019 CS2_ClubExitGame value
  * @property {number} S2C_CreateClub=4502 S2C_CreateClub value
  * @property {number} S2C_GetClubInfos=4503 S2C_GetClubInfos value
  * @property {number} S2C_EnterClub=4504 S2C_EnterClub value
@@ -7448,6 +7696,8 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CreateClubGame=4515 S2C_CreateClubGame value
  * @property {number} S2C_GetClubGameList=4516 S2C_GetClubGameList value
  * @property {number} S2C_DismissClubGame=4517 S2C_DismissClubGame value
+ * @property {number} S2C_ClubEnterGame=4518 S2C_ClubEnterGame value
+ * @property {number} S2C_ClubExitGame=4519 S2C_ClubExitGame value
  * @property {number} S2C_ClubJoinNotify=4610 S2C_ClubJoinNotify value
  * @property {number} S2C_JoinClubNotify=4611 S2C_JoinClubNotify value
  * @property {number} S2C_RemoveNotify=4612 S2C_RemoveNotify value
@@ -7455,8 +7705,6 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_ClubTotalPointNotify=4614 S2C_ClubTotalPointNotify value
  * @property {number} S2C_ClubPlayerPointNotify=4615 S2C_ClubPlayerPointNotify value
  * @property {number} S2C_ModifyMemberRoleNotify=4616 S2C_ModifyMemberRoleNotify value
- * @property {number} S2C_CreateClubGameNotify=4617 S2C_CreateClubGameNotify value
- * @property {number} S2C_DismissClubGameNotify=4618 S2C_DismissClubGameNotify value
  * @property {number} MSG_ClubEnd=5000 MSG_ClubEnd value
  * @property {number} MSG_TexasCashBegin=5001 MSG_TexasCashBegin value
  * @property {number} MSG_TexasCashEnd=5500 MSG_TexasCashEnd value
@@ -7511,6 +7759,8 @@ $root.MessageId = (function() {
     values[valuesById[4015] = "C2S_CreateClubGame"] = 4015;
     values[valuesById[4016] = "C2S_GetClubGameList"] = 4016;
     values[valuesById[4017] = "C2S_DismissClubGame"] = 4017;
+    values[valuesById[4018] = "CS2_ClubEnterGame"] = 4018;
+    values[valuesById[4019] = "CS2_ClubExitGame"] = 4019;
     values[valuesById[4502] = "S2C_CreateClub"] = 4502;
     values[valuesById[4503] = "S2C_GetClubInfos"] = 4503;
     values[valuesById[4504] = "S2C_EnterClub"] = 4504;
@@ -7527,6 +7777,8 @@ $root.MessageId = (function() {
     values[valuesById[4515] = "S2C_CreateClubGame"] = 4515;
     values[valuesById[4516] = "S2C_GetClubGameList"] = 4516;
     values[valuesById[4517] = "S2C_DismissClubGame"] = 4517;
+    values[valuesById[4518] = "S2C_ClubEnterGame"] = 4518;
+    values[valuesById[4519] = "S2C_ClubExitGame"] = 4519;
     values[valuesById[4610] = "S2C_ClubJoinNotify"] = 4610;
     values[valuesById[4611] = "S2C_JoinClubNotify"] = 4611;
     values[valuesById[4612] = "S2C_RemoveNotify"] = 4612;
@@ -7534,8 +7786,6 @@ $root.MessageId = (function() {
     values[valuesById[4614] = "S2C_ClubTotalPointNotify"] = 4614;
     values[valuesById[4615] = "S2C_ClubPlayerPointNotify"] = 4615;
     values[valuesById[4616] = "S2C_ModifyMemberRoleNotify"] = 4616;
-    values[valuesById[4617] = "S2C_CreateClubGameNotify"] = 4617;
-    values[valuesById[4618] = "S2C_DismissClubGameNotify"] = 4618;
     values[valuesById[5000] = "MSG_ClubEnd"] = 5000;
     values[valuesById[5001] = "MSG_TexasCashBegin"] = 5001;
     values[valuesById[5500] = "MSG_TexasCashEnd"] = 5500;

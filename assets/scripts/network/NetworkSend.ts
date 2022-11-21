@@ -1,8 +1,10 @@
+import { Localization } from "../base/Localization";
 import { LocalPlayerData } from "../base/LocalPlayerData";
 import { Singleton } from "../base/Singleton";
 import { UIMgr } from "../base/UIMgr";
 import { GameConfig } from "../GameConfig";
 import { Tool } from "../Tool";
+import { MultipleTableCtr } from "../ui/common/MultipleTableCtr";
 import { Network } from "./Network";
 
 export class NetworkSend extends Singleton<NetworkSend>()
@@ -254,7 +256,32 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("获取俱乐部游戏列表 C2S_GetClubGameList== " + JSON.stringify(msg))
     }
 
+    public EnterClubGame(_clubId : string , _gameId : string)
+    {
+        if(MultipleTableCtr.CheckGameMax())
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00239"));
+            return;
+        }
+
+
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new CS2ClubEnterGame();
+        msg.clubId = _clubId;
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(MessageId.CS2_ClubEnterGame , CS2ClubEnterGame.encode(msg).finish());
+        console.log("进入俱乐部游戏 CS2_ClubEnterGame== " + JSON.stringify(msg))
+    }
     
+    public ExitClubGame(_clubId : string , _gameId : string)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new CS2ClubExitGame();
+        msg.clubId = _clubId;
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(MessageId.CS2_ClubExitGame , CS2ClubExitGame.encode(msg).finish());
+        console.log("退出俱乐部游戏 CS2_ClubExitGame== " + JSON.stringify(msg))
+    }
 }
 
 

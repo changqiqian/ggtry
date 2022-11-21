@@ -74,6 +74,11 @@ export class MultipleTableCtr extends BaseUI
                 MultipleTableCtr.ShowGameUI(_data);
             }
         });
+
+        HallData.Instance.Data_S2CClubEnterGame.AddListenner(this,(_data)=>
+        {
+            this.InsertGameUI(_data.gameData.gameType,_data.gameId,_data.gameInfo.texasConfig.seatNum);
+        });
     }
     LateInit()
     {
@@ -151,6 +156,17 @@ export class MultipleTableCtr extends BaseUI
             let current = MultipleTableCtr.mGameStruct[i];
             current.mScript.Show(false);
         }
+    }
+
+    public static CheckGameMax() : boolean
+    {
+        let aviliableIndex = MultipleTableCtr.GetAviliableIndex();
+        if(aviliableIndex >= MultipleTableCtr.MaxGame)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public static GetAviliableIndex() : number

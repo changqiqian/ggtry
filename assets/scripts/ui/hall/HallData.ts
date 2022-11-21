@@ -67,6 +67,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
 
     Data_ClubGameInfos : BaseData<Array<ClubGameInfo>> = new BaseData<Array<ClubGameInfo>>(false, new Array<ClubGameInfo>()); //俱乐部游戏列表
     Data_UpdateClubGameList :  BaseData<boolean> = new BaseData<boolean>(true); //更新俱乐部游戏列表
+    Data_S2CClubEnterGame :  BaseData<S2CClubEnterGame> = new BaseData<S2CClubEnterGame>(true); //进入俱乐部游戏
     //
     public UpdateOneGame(_clubGameInfo : ClubGameInfo)
     {
