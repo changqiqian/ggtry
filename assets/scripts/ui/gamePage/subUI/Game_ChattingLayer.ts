@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, EditBox } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
 import { ToggleBtn } from '../../common/ToggleBtn';
 const { ccclass, property } = _decorator;
@@ -19,7 +20,13 @@ export class Game_ChattingLayer extends BaseUI
     mSendBtn: BaseButton = null;
     @property(BaseButton) 
     mVipSendBtn: BaseButton = null;
+    @property(MovingShow) 
+    mMovingShow: MovingShow = null;
 
+    onEnable()
+    {
+        this.mMovingShow.ShowAnimation();
+    }
 
     InitParam()
     {
@@ -27,6 +34,10 @@ export class Game_ChattingLayer extends BaseUI
     }
     BindUI()
     {
+        this.node.on(Node.EventType.TOUCH_END,this.TouchEmptyBG.bind(this),this);
+
+
+
         for(let i = 0 ; i < this.mLayout.children.length ; i++)
         {
             let current = this.mLayout.children[i].getComponent(ToggleBtn);
@@ -52,6 +63,12 @@ export class Game_ChattingLayer extends BaseUI
 
         })
 
+        this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
+        this.mMovingShow.SetAnimationCallback(()=>
+        {
+            this.node.active = false;
+        })
+
         this.AddSubView("gamePage" , "prefab/Game_ChatHistoryLayer",null ,this.mSubLayer);
         this.AddSubView("gamePage" , "prefab/Game_ChatShortcutLayer",null ,this.mSubLayer);
     }
@@ -66,6 +83,21 @@ export class Game_ChattingLayer extends BaseUI
     CustmoerDestory()
     {
 
+    }
+    public Show(_val : boolean)
+    {
+        if(_val)
+        {
+            this.node.active = true;
+        }
+        else
+        {
+            this.mMovingShow.HideAnimation();
+        }
+    }
+    TouchEmptyBG()
+    {
+        this.mMovingShow.HideAnimation();
     }
 }
 

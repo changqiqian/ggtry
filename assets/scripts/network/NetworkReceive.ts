@@ -405,7 +405,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_ClubExitGame  退出俱乐部游戏==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                
+                HallData.Instance.Data_S2CClubExitGame.mData = msg;
             }
             else
             {

@@ -1,7 +1,6 @@
 import { _decorator, Component, Node, instantiate, Sprite } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
-import { LoginData } from '../login/LoginData';
 import { Game_BottomUI } from './subUI/Game_BottomUI';
 import { Game_ControlBtns } from './subUI/Game_ControlBtns';
 import { Game_GameStartInfo } from './subUI/Game_GameStartInfo';
@@ -46,8 +45,6 @@ export class GameBase extends BaseUI
         //     }
         //     this.GetGameInfoMsg();
         // });
-
-
     }
     LateInit() 
     {

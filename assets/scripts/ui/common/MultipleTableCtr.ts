@@ -79,6 +79,11 @@ export class MultipleTableCtr extends BaseUI
         {
             this.InsertGameUI(_data.gameData.gameType,_data.gameId,_data.gameInfo.texasConfig.seatNum);
         });
+
+        HallData.Instance.Data_S2CClubExitGame.AddListenner(this,(_data)=>
+        {
+            this.DeleteGameUI(_data.gameId);
+        });
     }
     LateInit()
     {
@@ -94,15 +99,15 @@ export class MultipleTableCtr extends BaseUI
         return this.mLayout.children[_index].getComponent(MultipleTableBtn);
     }
 
-
-    DeleteGameUI(_index : number)
+    DeleteGameUI(_gameId : string)
     {
-        let current = MultipleTableCtr.FindGameStruct(_index);
+        let current = MultipleTableCtr.FindGameStructByGameId(_gameId);
         current.mGameData.Clear();
         current.mGameData = null;
-        this.GetControlButton(_index).ResetUI();
-        UIMgr.Instance.DeleteUiByTag(MultipleTableCtr.GetUiTag(_index));
-        let uiIndex = MultipleTableCtr.mGameStruct.findIndex((_item) => _item.mIndex === _index);
+        let index = current.mIndex;
+        this.GetControlButton(index).ResetUI();
+        UIMgr.Instance.DeleteUiByTag(MultipleTableCtr.GetUiTag(index));
+        let uiIndex = MultipleTableCtr.mGameStruct.findIndex((_item) => _item.mIndex === index);
         MultipleTableCtr.mGameStruct.splice(uiIndex , 1);
         HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.mHomeIndex;
     }
@@ -137,6 +142,41 @@ export class MultipleTableCtr extends BaseUI
         return null;
     }
 
+    public static FindGameStructByGameId(_gameId : string) : GameStruct
+    {
+        for(let i = 0 ; i < MultipleTableCtr.mGameStruct.length ; i++)
+        {
+            let current = MultipleTableCtr.mGameStruct[i];
+            if(_gameId == current.mGameId)
+            {
+                return current;
+            }
+        }
+        return null;
+    }
+    public static GetGameDataByIndex(_index : number):GameData
+    {
+        let current = MultipleTableCtr.FindGameStruct(_index);
+        if(current == null)
+        {
+            console.log("GetGameDataByIndex! 没有找到这个游戏id对应的数据驱动 ==== _index==" + _index);
+            return null;
+        }
+
+        return current.mGameData;
+    }
+    
+    public static GetGameDataByGameId(_gameId : string):GameData
+    {
+        let current = MultipleTableCtr.FindGameStructByGameId(_gameId);
+        if(current == null)
+        {
+            console.log("GetGameDataByGameId! 没有找到这个游戏id对应的数据驱动 ==== _gameId==" + _gameId);
+            return null;
+        }
+
+        return current.mGameData;
+    }
     public static ShowGameUI(_index : number)
     {
         let current = MultipleTableCtr.FindGameStruct(_index);
@@ -186,17 +226,6 @@ export class MultipleTableCtr extends BaseUI
         }
         console.log("Wrong! 不可能到这里来");
         return 0;
-    }
-
-    public static GetGameStructByGameId(_gameId : string):GameStruct
-    {
-        let index = MultipleTableCtr.mGameStruct.findIndex((_item) => _item.mGameId === _gameId);
-        if(index >= 0)
-        {
-            return MultipleTableCtr.mGameStruct[index];
-        }
-        console.log("Wrong! 没有找到这个游戏id ==== _gameId==" + _gameId);
-        return null;
     }
 
     public static GetPrefabName(_gameType : GameType)
