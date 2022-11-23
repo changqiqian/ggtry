@@ -2,6 +2,7 @@ import { _decorator, Component, Node, instantiate, Sprite } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { Game_BottomUI } from './subUI/Game_BottomUI';
+import { Game_ChatingCtr } from './subUI/Game_ChatingCtr';
 import { Game_ControlBtns } from './subUI/Game_ControlBtns';
 import { Game_GameStartInfo } from './subUI/Game_GameStartInfo';
 import { Game_Pot } from './subUI/Game_Pot';
@@ -156,6 +157,16 @@ export class GameBase extends BaseUI
     {
 
     }
+
+    InitChatCtr()
+    {
+        this.AddSubView("gamePage","prefab/Game_ChatingCtr" , (_script)=>
+        {
+            let tempScript = _script as Game_ChatingCtr;
+            tempScript.InitWithData(this.mIndex);
+        });
+    }
+    
 
     public InitWithData(_index : number,_seatNum : number)
     {
