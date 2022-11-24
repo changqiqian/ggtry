@@ -254,8 +254,8 @@ export class Club_PrivateLayer extends BaseUI
     {
         let currentData = this.mGameList[_index];
         let gameItem = _item.getComponent(Club_GameItem);
-        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-        gameItem.InitWithServerData(clubId,currentData);
+        let gameId = currentData.gameId;
+        gameItem.InitWithServerData(gameId , currentData);
     }
 
     DragTop()

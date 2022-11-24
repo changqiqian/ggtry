@@ -31,6 +31,7 @@ export class BaseButton extends BaseUI {
 
     CustmoerDestory() 
     {
+        this.node.off(Node.EventType.TOUCH_END,this.OnClick.bind(this),this);
         this.mCustomerData = null;
         this.mCallback = null;
     }
@@ -113,6 +114,12 @@ export class BaseButton extends BaseUI {
 
     private OnClick()
     {
+        if(this.node.getComponent(Button).interactable == false)
+        {
+            return;
+        }
+
+
         if(this.mProtectDoubleClick == true)
         {
             if(this.mClickProtected == true)

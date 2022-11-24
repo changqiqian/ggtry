@@ -26,6 +26,7 @@ export class GameBase extends BaseUI
 
     InitParam() 
     {
+        this.OffsetTop();
     }
     BindUI() 
     {

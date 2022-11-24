@@ -99,7 +99,7 @@ export class MultipleTableCtr extends BaseUI
 
         HallData.Instance.Data_S2CEnterGame.AddListenner(this,(_data)=>
         {
-            this.InsertGameUI(_data.gameInfo.gameType,_data.gameId,_data.gameInfo.texasConfig.seatNum,_data.gameInfo);
+            this.InsertGameUI(_data.gameStatic.basicConfig.gameType,_data.gameId,_data.gameStatic.texasConfig.seatNum,_data.gameStatic);
         });
 
         HallData.Instance.Data_S2CExitGame.AddListenner(this,(_data)=>
