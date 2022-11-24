@@ -236,11 +236,11 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("修改头像或昵称 C2S_ChangeUserInfo== " + JSON.stringify(msg))
     }
 
-    public CreateClubTexas(_protoData : ClubGameInfo)
+    public CreateClubTexas(_clubId : string , _protoData : GameStaticData)
     {
         UIMgr.Instance.ShowLoading(true);
         let msg = new C2SCreateClubGame();
-        msg.clubId = _protoData.clubId;
+        msg.clubId = _clubId;
         msg.basicConfig = _protoData.basicConfig;
         msg.texasConfig = _protoData.texasConfig;
         Network.Instance.SendMsg(MessageId.C2S_CreateClubGame , C2SCreateClubGame.encode(msg).finish());
@@ -256,31 +256,93 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("获取俱乐部游戏列表 C2S_GetClubGameList== " + JSON.stringify(msg))
     }
 
-    public EnterClubGame(_clubId : string , _gameId : string)
+    public EnterClubGame(_gameId : string , _gameType : GameType)
     {
         if(MultipleTableCtr.CheckGameMax())
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00239"));
             return;
-        }
-
+        } 
 
         UIMgr.Instance.ShowLoading(true);
-        let msg = new CS2ClubEnterGame();
-        msg.clubId = _clubId;
-        msg.gameId = _gameId;
-        Network.Instance.SendMsg(MessageId.CS2_ClubEnterGame , CS2ClubEnterGame.encode(msg).finish());
-        console.log("进入俱乐部游戏 CS2_ClubEnterGame== " + JSON.stringify(msg))
+
+        switch(_gameType)
+        {
+            case GameType.GameType_TexasCash:
+            {
+                let msg = new C2SEnterGame();
+                msg.gameId = _gameId;
+                Network.Instance.SendMsg(MessageId.C2S_TexasCashEnterGame , C2SEnterGame.encode(msg).finish());
+                console.log("进入游戏 德州现金桌 C2S_TexasCashEnterGame== " + JSON.stringify(msg))
+            }
+            break;
+            case GameType.GameType_ShortCash:
+            {
+                
+            }
+            break;
+            case GameType.GameType_OmhCash:
+            {
+                
+            }
+            break;
+            case GameType.GameType_TexasMtt:
+            {
+                
+            }
+            break;
+            case GameType.GameType_ShortMtt:
+            {
+                
+            }
+            break;
+            case GameType.GameType_OmhMtt:
+            {
+                
+            }
+            break;
+        }
     }
     
-    public ExitClubGame(_clubId : string , _gameId : string)
+    public ExitClubGame( _gameId : string, _gameType : GameType)
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new CS2ClubExitGame();
-        msg.clubId = _clubId;
-        msg.gameId = _gameId;
-        Network.Instance.SendMsg(MessageId.CS2_ClubExitGame , CS2ClubExitGame.encode(msg).finish());
-        console.log("退出俱乐部游戏 CS2_ClubExitGame== " + JSON.stringify(msg))
+        switch(_gameType)
+        {
+            case GameType.GameType_TexasCash:
+            {
+                let msg = new C2SExitGame();
+                msg.gameId = _gameId;
+                Network.Instance.SendMsg(MessageId.C2S_TexasCashExitGame , C2SExitGame.encode(msg).finish());
+                console.log("退出德州现金桌 C2S_TexasCashExitGame== " + JSON.stringify(msg))
+            }
+            break;
+            case GameType.GameType_ShortCash:
+            {
+                
+            }
+            break;
+            case GameType.GameType_OmhCash:
+            {
+                
+            }
+            break;
+            case GameType.GameType_TexasMtt:
+            {
+                
+            }
+            break;
+            case GameType.GameType_ShortMtt:
+            {
+                
+            }
+            break;
+            case GameType.GameType_OmhMtt:
+            {
+                
+            }
+            break;
+        }
     }
 }
 

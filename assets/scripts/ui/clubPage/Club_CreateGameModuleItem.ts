@@ -69,7 +69,8 @@ export class Club_CreateGameModuleItem extends BaseUI
     public InitWithData(_data : Club_CreateTexasConfig , _index : number)
     {
         this.mIndex = _index;
-        this.mClub_GameItem.InitWithData(_data);
+        this.mClub_GameItem.InitWithData("",_data);
+        this.mClub_GameItem.ForbbidenEnter();
     }
 }
 

@@ -1,7 +1,9 @@
 import { _decorator, Component, Node, UITransform, Tween, Vec3, easing, Widget } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { NetworkSend } from '../../../network/NetworkSend';
 import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
+import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Menu')
@@ -29,6 +31,7 @@ export class Game_Menu extends BaseUI
     @property(BaseButton) 
     mExitBtn: BaseButton = null;
 
+    mIndex : number;
 
     onEnable()
     {
@@ -80,7 +83,9 @@ export class Game_Menu extends BaseUI
         });
         this.mExitBtn.SetClickCallback(()=>
         {
-
+            let gameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+            let gameId = gameData.Data_GameStaticData.mData.gameId;
+            NetworkSend.Instance.ExitClubGame(gameId,gameData.Data_GameStaticData.mData.basicConfig.gameType);
         });
     }
     RegDataNotify()
@@ -94,6 +99,11 @@ export class Game_Menu extends BaseUI
     CustmoerDestory()
     {
 
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
     }
 
     public Show(_val : boolean)

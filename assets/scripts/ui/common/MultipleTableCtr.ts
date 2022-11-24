@@ -19,7 +19,7 @@ class GameStruct
         this.mScript = _script;
         this.mGameId = _gameId;
         this.mPrefabName = MultipleTableCtr.GetPrefabName(_gameType);
-        this.mGameData = MultipleTableCtr.CreateGameData(_gameType);
+        this.mGameData = this.CreateGameData(_gameType);
     }
     mIndex : number;
     mGameId : string;
@@ -27,6 +27,28 @@ class GameStruct
     mGameData : GameData;
     mPrefabName : string ;
     mGameType : GameType;
+
+    public CreateGameData(_gameType : GameType) : GameData
+    {
+        let gameData = null;
+        switch(_gameType)
+        {
+            case GameType.GameType_TexasCash:
+                gameData = new GameDataCash();
+            break;
+            case GameType.GameType_TexasMtt:
+            break;
+            case GameType.GameType_ShortCash:
+            break;
+            case GameType.GameType_ShortMtt:
+            break;
+            case GameType.GameType_OmhCash:
+            break;
+            case GameType.GameType_OmhMtt:
+            break;
+        }
+        return gameData;
+    }
 }
 
 
@@ -75,12 +97,12 @@ export class MultipleTableCtr extends BaseUI
             }
         });
 
-        HallData.Instance.Data_S2CClubEnterGame.AddListenner(this,(_data)=>
+        HallData.Instance.Data_S2CEnterGame.AddListenner(this,(_data)=>
         {
-            this.InsertGameUI(_data.gameData.gameType,_data.gameId,_data.gameInfo.texasConfig.seatNum);
+            this.InsertGameUI(_data.gameInfo.gameType,_data.gameId,_data.gameInfo.texasConfig.seatNum,_data.gameInfo);
         });
 
-        HallData.Instance.Data_S2CClubExitGame.AddListenner(this,(_data)=>
+        HallData.Instance.Data_S2CExitGame.AddListenner(this,(_data)=>
         {
             this.DeleteGameUI(_data.gameId);
         });
@@ -112,16 +134,17 @@ export class MultipleTableCtr extends BaseUI
         HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.mHomeIndex;
     }
 
-    InsertGameUI(_gameType : GameType ,_gameId : string , _seatNum : number)
+    InsertGameUI(_gameType : GameType ,_gameId : string , _seatNum : number , _gameStaticData : GameStaticData)
     {
         let index = MultipleTableCtr.GetAviliableIndex();
         let prefabName = MultipleTableCtr.GetPrefabName(_gameType);
         UIMgr.Instance.ShowLayer("gamePage","prefab/" + prefabName,true,(_script)=>
         {
+            let gameStruct = (new GameStruct(index , _script , _gameId , _gameType));
+            gameStruct.mGameData.SetGameInfo(_gameStaticData);
+            MultipleTableCtr.mGameStruct.push(gameStruct);
             let gameScript = _script as GameBase;
             gameScript.InitWithData(index,_seatNum);
-            let gameStruct = (new GameStruct(index , _script , _gameId , _gameType));
-            MultipleTableCtr.mGameStruct.push(gameStruct);
             gameScript.ShowMoveInAnimation();
             this.GetControlButton(index).BindGameData(gameStruct.mGameData);
             HallData.Instance.Data_MultipeIndex.mData = index;
@@ -250,27 +273,6 @@ export class MultipleTableCtr extends BaseUI
         return name;
     }
 
-    public static CreateGameData(_gameType : GameType) : GameData
-    {
-        let gameData = null;
-        switch(_gameType)
-        {
-            case GameType.GameType_TexasCash:
-                gameData = new GameDataCash();
-            break;
-            case GameType.GameType_TexasMtt:
-            break;
-            case GameType.GameType_ShortCash:
-            break;
-            case GameType.GameType_ShortMtt:
-            break;
-            case GameType.GameType_OmhCash:
-            break;
-            case GameType.GameType_OmhMtt:
-            break;
-        }
-        return gameData;
-    }
 
     public static GetUiTag(_index : number)
     {

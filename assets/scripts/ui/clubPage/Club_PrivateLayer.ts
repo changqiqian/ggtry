@@ -41,7 +41,7 @@ export class Club_PrivateLayer extends BaseUI
     @property(ListView) 
     mListView: ListView = null;
 
-    mGameList : Array<ClubGameInfo>;
+    mGameList : Array<GameStaticData>;
     onEnable()
     {
         this.mListView.numItems = 0;
@@ -189,9 +189,8 @@ export class Club_PrivateLayer extends BaseUI
             {
                 return;
             }
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
 
-            this.mGameList = HallData.Instance.FindGameListByClubId(currentClubId);
+            this.mGameList = HallData.Instance.Data_GameStaticData.mData;
             this.mListView.numItems = this.mGameList.length;
         });
     }
@@ -255,7 +254,8 @@ export class Club_PrivateLayer extends BaseUI
     {
         let currentData = this.mGameList[_index];
         let gameItem = _item.getComponent(Club_GameItem);
-        gameItem.InitWithServerData(currentData);
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        gameItem.InitWithServerData(clubId,currentData);
     }
 
     DragTop()

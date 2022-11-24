@@ -65,61 +65,45 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubUpdateSelfData:  BaseData<boolean> = new BaseData<boolean>(true); //更新自己的俱乐部数据
     Data_S2CModifyMemberRole:  BaseData<S2CModifyMemberRole> = new BaseData<S2CModifyMemberRole>(true); //修改俱乐部成员权限返回
 
-    Data_ClubGameInfos : BaseData<Array<ClubGameInfo>> = new BaseData<Array<ClubGameInfo>>(false, new Array<ClubGameInfo>()); //俱乐部游戏列表
+    Data_GameStaticData : BaseData<Array<GameStaticData>> = new BaseData<Array<GameStaticData>>(false, new Array<GameStaticData>()); //俱乐部游戏列表
     Data_UpdateClubGameList :  BaseData<boolean> = new BaseData<boolean>(true); //更新俱乐部游戏列表
-    Data_S2CClubEnterGame :  BaseData<S2CClubEnterGame> = new BaseData<S2CClubEnterGame>(true); //进入俱乐部游戏
-    Data_S2CClubExitGame : BaseData<S2CClubExitGame> = new BaseData<S2CClubExitGame>(true); //退出俱乐部游戏
+    Data_S2CEnterGame :  BaseData<S2CCommonEnterGameResp> = new BaseData<S2CCommonEnterGameResp>(true); //进入游戏
+    Data_S2CExitGame : BaseData<S2CCommonSitDownResp> = new BaseData<S2CCommonSitDownResp>(true); //退出游戏
     //
-    public UpdateOneGame(_clubGameInfo : ClubGameInfo)
+    public UpdateOneGame(_gameStaticData : GameStaticData)
     {
-        let index = this.Data_ClubGameInfos.mData.findIndex((_item) => _item.gameId === _clubGameInfo.gameId);
+        let index = this.Data_GameStaticData.mData.findIndex((_item) => _item.gameId === _gameStaticData.gameId);
         if(index >= 0)
         {
-            this.Data_ClubGameInfos.mData[index] = _clubGameInfo;
+            this.Data_GameStaticData.mData[index] = _gameStaticData;
         }
         else
         {
-            this.Data_ClubGameInfos.mData.push(_clubGameInfo);
+            this.Data_GameStaticData.mData.push(_gameStaticData);
         }
     }
 
-    public UpdateGameList(_clubGameInfos : Array<ClubGameInfo>)
+    public UpdateGameList(_gameStaticDatas : Array<GameStaticData>)
     {
-        for(let i = 0 ; i < _clubGameInfos.length ; i++)
+        for(let i = 0 ; i < _gameStaticDatas.length ; i++)
         {
-            let current = _clubGameInfos[i];
+            let current = _gameStaticDatas[i];
             this.UpdateOneGame(current);
         }
         this.Data_UpdateClubGameList.mData = true;
     }
 
-    public FindGameListByClubId(_clubId : string)
-    {
-        let result = new Array<ClubGameInfo>();
-        for(let i = 0 ; i < this.Data_ClubGameInfos.mData.length ; i++)
-        {
-            let current = this.Data_ClubGameInfos.mData[i];
-            if(current.clubId == _clubId)
-            {
-                result.push(current);
-            }
-        }
-
-        return result;
-    }
 
 
     public RecieveNewClubApply(_request : ClubJoinRequest)
     {
         let clubIndex = this.Data_ClubApplyingInfo.mData.findIndex((_item) => _item.clubInfo.id === _request.clubInfo.id);
-        console.log("clubIndex ==" + clubIndex);
         if(clubIndex < 0)
         {
             this.Data_ClubApplyingInfo.mData.push(_request);
         }
         else
         {
-            console.log("_request.clubBasicJoinRequest.length ==" + _request.clubBasicJoinRequest.length);
             for(let i = 0 ; i < _request.clubBasicJoinRequest.length ; i++)
             {
                 let currentNewUser = _request.clubBasicJoinRequest[i];
@@ -129,9 +113,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
                 {
                     currentClubApplyInfo.clubBasicJoinRequest.push(currentNewUser);
                 }
-                console.log("userIndex ==" + userIndex);
-            }
-            
+            }            
         }
     }
 
@@ -306,7 +288,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
         this.Data_ClubCreateShortButtonDouble.mData = this.Data_Club_CreateTexasConfig.mData.buttonDouble
     }
     //把房间配置转换成 proto
-    ConvertCreateTexasConfigToProto(_config : Club_CreateTexasConfig) : ClubGameInfo
+    ConvertCreateTexasConfigToProto(_config : Club_CreateTexasConfig) : GameStaticData
     {
         let basicData = new BasicGameConfig();
         let texasData = new BasicTexasConfig();
@@ -351,7 +333,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
         texasData.gpsLimit = _config.gpsLimit;
         texasData.ipLimit = _config.ipLimit;
 
-        let protoData = new ClubGameInfo();
+        let protoData = new GameStaticData();
         protoData.basicConfig = basicData;
         protoData.texasConfig = texasData;
         return protoData;

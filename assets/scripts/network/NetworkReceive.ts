@@ -383,14 +383,14 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_ClubEnterGame,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonEnterGameResp,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
-            let msg = S2CClubEnterGame.decode(_data);
-            console.log("收到的内容 S2C_ClubEnterGame  进入俱乐部游戏==" + JSON.stringify(msg));
+            let msg = S2CCommonEnterGameResp.decode(_data);
+            console.log("收到的内容 S2C_CommonEnterGameResp  进入游戏==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                HallData.Instance.Data_S2CClubEnterGame.mData = msg;
+                HallData.Instance.Data_S2CEnterGame.mData = msg;
             }
             else
             {
@@ -398,14 +398,14 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_ClubExitGame,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonExitGameResp,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
-            let msg = S2CClubExitGame.decode(_data);
-            console.log("收到的内容 S2C_ClubExitGame  退出俱乐部游戏==" + JSON.stringify(msg));
+            let msg = S2CCommonSitDownResp.decode(_data);
+            console.log("收到的内容 S2C_CommonExitGameResp  退出游戏==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                HallData.Instance.Data_S2CClubExitGame.mData = msg;
+                HallData.Instance.Data_S2CExitGame.mData = msg;
             }
             else
             {

@@ -35,7 +35,8 @@ export class Club_GameItem extends BaseUI
     @property(BaseButton) 
     mEnterBtn: BaseButton = null;
 
-    mData : ClubGameInfo = null;
+    mData : GameStaticData = null;
+    mGameId : string ;
     InitParam()
     {
 
@@ -44,7 +45,7 @@ export class Club_GameItem extends BaseUI
     {
         this.mEnterBtn.SetClickCallback(()=>
         {
-            NetworkSend.Instance.EnterClubGame(this.mData.clubId,this.mData.gameId);
+            NetworkSend.Instance.EnterClubGame(this.mGameId , this.mData.basicConfig.gameType);
         })
     }
     RegDataNotify()
@@ -60,14 +61,20 @@ export class Club_GameItem extends BaseUI
 
     }
 
-    public InitWithData(_data : Club_CreateTexasConfig)
+    public InitWithData(_gameId : string ,_data : Club_CreateTexasConfig)
     {
         let tempData = HallData.Instance.ConvertCreateTexasConfigToProto(_data);
-        this.InitWithServerData(tempData);
+        this.InitWithServerData(_gameId,tempData);
     }
 
-    public InitWithServerData(_data : ClubGameInfo)
+    public ForbbidenEnter()
     {
+        this.mEnterBtn.SetInteractable(false);
+    }
+
+    public InitWithServerData(_gameId : string , _data : GameStaticData)
+    {
+        this.mGameId = _gameId;
         this.mData = _data;
         let tempColor;
         let gameTypeName;

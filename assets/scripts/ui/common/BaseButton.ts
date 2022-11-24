@@ -91,7 +91,7 @@ export class BaseButton extends BaseUI {
         }
     }
 
-    public SetInteractable(_value : boolean)
+    public SetInteractableWithGray(_value : boolean)
     {
         if(this.node.getComponent(Button))
         {
@@ -100,6 +100,16 @@ export class BaseButton extends BaseUI {
 
         this.SetGray(!_value);
     }
+
+    public SetInteractable(_value : boolean)
+    {
+        if(this.node.getComponent(Button))
+        {
+            this.node.getComponent(Button).interactable = _value;
+        }
+    }
+
+    
 
     private OnClick()
     {
