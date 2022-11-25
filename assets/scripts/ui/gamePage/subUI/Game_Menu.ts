@@ -30,7 +30,8 @@ export class Game_Menu extends BaseUI
     mStandBtn: BaseButton = null;
     @property(BaseButton) 
     mExitBtn: BaseButton = null;
-
+    @property(BaseButton) 
+    mDismiss: BaseButton = null;
     mIndex : number;
 
     onEnable()
@@ -40,6 +41,7 @@ export class Game_Menu extends BaseUI
 
     InitParam()
     {
+        this.OffsetHallTop();
     }
     BindUI()
     {
@@ -85,7 +87,12 @@ export class Game_Menu extends BaseUI
         {
             let gameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
             let gameId = gameData.Data_GameStaticData.mData.gameId;
-            NetworkSend.Instance.ExitClubGame(gameId,gameData.Data_GameStaticData.mData.basicConfig.gameType);
+            NetworkSend.Instance.ExitGame(gameId,gameData.Data_GameStaticData.mData.basicConfig.gameType);
+        });
+        this.mDismiss.SetClickCallback(()=>
+        {
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            NetworkSend.Instance.DismissClubGame(gameStruct.mGameId , gameStruct.mClubId);
         });
     }
     RegDataNotify()
@@ -103,7 +110,7 @@ export class Game_Menu extends BaseUI
 
     public InitWithData(_index : number)
     {
-        this.mIndex = _index;
+        this.mIndex = _index;        
     }
 
     public Show(_val : boolean)

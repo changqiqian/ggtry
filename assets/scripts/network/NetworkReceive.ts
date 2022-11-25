@@ -4,6 +4,7 @@ import { LocalPlayerData } from "../base/LocalPlayerData";
 import { Singleton } from "../base/Singleton";
 import { SceneType, UIMgr } from "../base/UIMgr";
 import { GameConfig } from "../GameConfig";
+import { MultipleTableCtr } from "../ui/common/MultipleTableCtr";
 import { HallData } from "../ui/hall/HallData";
 import { LoginData } from "../ui/login/LoginData";
 import { Network } from "./Network";
@@ -412,16 +413,45 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_DismissClubGame,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CDismissClubGame.decode(_data);
+            console.log("收到的内容 S2C_DismissClubGame  解散游戏==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                HallData.Instance.Data_S2CDismissClubGame.mData = msg;
+            }
+            else
+            {
+                MultipleTableCtr.RemoveGameStructByGameId(msg.gameId);
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //
+        //
         //
         //                              服务器推送
         //
+        //
+        //
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+
+
         Network.Instance.AddMsgListenner(MessageId.S2C_DismissClubNotify,(_data)=>
         {
             let msg = S2CDismissClubNotify.decode(_data);

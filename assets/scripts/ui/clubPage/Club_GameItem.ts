@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Label, Color } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { GameConfig } from '../../GameConfig';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
@@ -45,7 +46,8 @@ export class Club_GameItem extends BaseUI
     {
         this.mEnterBtn.SetClickCallback(()=>
         {
-            NetworkSend.Instance.EnterClubGame(this.mGameId , this.mData.basicConfig.gameType);
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            NetworkSend.Instance.EnterGame(this.mGameId , this.mData.basicConfig.gameType , clubId);
         })
     }
     RegDataNotify()

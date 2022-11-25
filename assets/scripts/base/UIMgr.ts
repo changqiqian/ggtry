@@ -222,6 +222,7 @@ export class UIMgr extends Singleton<UIMgr>()
             }
             return;
         }
+        console.log("CreateRecordItem ===_tag===" + _tag);
         this.CreateRecordItem(key, LayerType.Layer , _tag);
         this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
         {
@@ -284,19 +285,17 @@ export class UIMgr extends Singleton<UIMgr>()
         });
     }
 
-
     public CreatePrefab(_bundleName :string , _prefabPath:string, _loadFinish:Function)
     {
         ResMgr.GetAssetInBundle(_bundleName , _prefabPath , cc.Prefab , (_prefab)=>
         {
             if(_loadFinish)
             {
-                let tempNode =  instantiate(_prefab);
+                let tempNode = instantiate(_prefab);
                 _loadFinish(tempNode);
             }
         });
     }
-
 
     public ChangeScene(_sceneType :SceneType)
     {
@@ -431,7 +430,7 @@ export class UIMgr extends Singleton<UIMgr>()
             let step = 0;
             while(step < currentList.length)
             {
-                let currentKeyPair = currentList[i];
+                let currentKeyPair = currentList[step];
                 if(currentKeyPair.tag == _tag)
                 {
                     let tempScript = currentKeyPair.value.getComponent(BaseUI);

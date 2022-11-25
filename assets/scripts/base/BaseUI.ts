@@ -324,7 +324,7 @@ export abstract class BaseUI extends Component {
         _target.setWorldPosition(new Vec3(getVisibleSize.width/2 ,getVisibleSize.height/2));
     }
 
-    //让ui换面往下移动，因为顶部增加了一个'多桌ui'
+    //让ui换面往下移动一个'多桌ui'
     public OffsetTop()
     {
         if(UIMgr.Instance.IsMultipleTableShow() == false)
@@ -345,7 +345,7 @@ export abstract class BaseUI extends Component {
         }
     }
 
-    //让ui换面往下移动，因为顶部增加了半个'多桌ui'
+    //让ui换面往下移动半个'多桌ui'
     public OffsetHallTop()
     {
         if(UIMgr.Instance.IsMultipleTableShow() == false)

@@ -5,6 +5,7 @@ import { UIMgr } from "../base/UIMgr";
 import { GameConfig } from "../GameConfig";
 import { Tool } from "../Tool";
 import { MultipleTableCtr } from "../ui/common/MultipleTableCtr";
+import { HallData } from "../ui/hall/HallData";
 import { Network } from "./Network";
 
 export class NetworkSend extends Singleton<NetworkSend>()
@@ -256,16 +257,24 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("获取俱乐部游戏列表 C2S_GetClubGameList== " + JSON.stringify(msg))
     }
 
-    public EnterClubGame(_gameId : string , _gameType : GameType)
+    public DismissClubGame(_gameId : string , _clubId : string)
     {
-        if(MultipleTableCtr.CheckGameMax())
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SDismissClubGame();
+        msg.gameId = _gameId;
+        msg.clubId = _clubId;
+        Network.Instance.SendMsg(MessageId.C2S_DismissClubGame , C2SDismissClubGame.encode(msg).finish());
+        console.log("解散俱乐部游戏 C2S_DismissClubGame== " + JSON.stringify(msg))
+    }
+
+    public EnterGame(_gameId : string , _gameType : GameType , _clubId : string = "")
+    {
+        if(MultipleTableCtr.CanEnterGame(_gameId, _clubId) == false)
         {
-            UIMgr.Instance.ShowToast(Localization.GetString("00239"));
             return;
-        } 
+        }
 
         UIMgr.Instance.ShowLoading(true);
-
         switch(_gameType)
         {
             case GameType.GameType_TexasCash:
@@ -304,7 +313,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
         }
     }
     
-    public ExitClubGame( _gameId : string, _gameType : GameType)
+    public ExitGame( _gameId : string, _gameType : GameType)
     {
         UIMgr.Instance.ShowLoading(true);
         switch(_gameType)

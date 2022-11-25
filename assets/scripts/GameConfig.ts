@@ -24,6 +24,7 @@ export class GameConfig
     public static MultipleUIHeight = 150;//多桌ui 占用屏幕顶部的高度
     public static ClubLogoNumber = 8; //俱乐部logo数量
     public static ClubStampNumber = 4; //俱乐部封面数量
+    public static WrongIndex = -99;//错误编号
 
     public static AreaCodeList=[
         {"name":"CountryName0", "areaCode": "+852"},

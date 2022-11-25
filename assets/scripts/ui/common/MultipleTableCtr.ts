@@ -1,6 +1,8 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
+import { GameConfig } from '../../GameConfig';
 import { GameBase } from '../gamePage/GameBase';
 import { GameData } from '../gamePage/GameData';
 import { GameDataCash } from '../gamePage/GameDataCash';
@@ -12,7 +14,23 @@ const { ccclass, property } = _decorator;
 
 class GameStruct
 {
-    constructor(_index :number  , _script : GameBase , _gameId : string , _gameType : GameType) 
+    constructor(_gameId : string = "") 
+    {
+        this.mGameId = _gameId;
+        this.mIndex = -1;
+        this.mGameType = null;
+        this.mScript = null;
+        this.mPrefabName = "";
+        this.mGameData = null;
+        this.mClubId = "";
+    }
+
+    public SetClubId(_clubId : string = "")
+    {
+        this.mClubId = _clubId;
+    }
+
+    public InitWithData(_index :number  , _script : GameBase , _gameId : string , _gameType : GameType )
     {
         this.mIndex = _index;
         this.mGameType = _gameType;
@@ -21,12 +39,15 @@ class GameStruct
         this.mPrefabName = MultipleTableCtr.GetPrefabName(_gameType);
         this.mGameData = this.CreateGameData(_gameType);
     }
+
+
     mIndex : number;
     mGameId : string;
     mScript : GameBase;
     mGameData : GameData;
     mPrefabName : string ;
     mGameType : GameType;
+    mClubId : string;
 
     public CreateGameData(_gameType : GameType) : GameData
     {
@@ -52,7 +73,6 @@ class GameStruct
 }
 
 
-
 @ccclass('MultipleTableCtr')
 export class MultipleTableCtr extends BaseUI 
 {
@@ -63,21 +83,20 @@ export class MultipleTableCtr extends BaseUI
     @property(ToggleBtn) 
     mHomeToggle: ToggleBtn = null;
 
-    public static mGameStruct:Array<GameStruct> = new Array<GameStruct>();
+    public static GameStruct:Array<GameStruct> = new Array<GameStruct>();
     public static MaxGame : number = 4;
-    private static mHomeIndex : number = -1;
+    private static HomeIndex : number = -1;
 
-  
     InitParam()
     {
-        HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.mHomeIndex;
+        HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.HomeIndex;
         for(let i = 0 ; i < MultipleTableCtr.MaxGame ; i++)
         {
             let current = this.mLayout.children[i].getComponent(MultipleTableBtn);
             current.InitWithIndex(i);
         }
 
-        this.mHomeToggle.SetDataNotify(HallData.Instance.Data_MultipeIndex,MultipleTableCtr.mHomeIndex);
+        this.mHomeToggle.SetDataNotify(HallData.Instance.Data_MultipeIndex,MultipleTableCtr.HomeIndex);
     }
     BindUI()
     {
@@ -87,7 +106,7 @@ export class MultipleTableCtr extends BaseUI
     {
         HallData.Instance.Data_MultipeIndex.AddListenner(this,(_data)=>
         {
-            if(_data == MultipleTableCtr.mHomeIndex)
+            if(_data == MultipleTableCtr.HomeIndex)
             {
                 MultipleTableCtr.HideAllGameUI();
             }
@@ -103,6 +122,10 @@ export class MultipleTableCtr extends BaseUI
         });
 
         HallData.Instance.Data_S2CExitGame.AddListenner(this,(_data)=>
+        {
+            this.DeleteGameUI(_data.gameId);
+        });
+        HallData.Instance.Data_S2CDismissClubGame.AddListenner(this,(_data)=>
         {
             this.DeleteGameUI(_data.gameId);
         });
@@ -129,9 +152,8 @@ export class MultipleTableCtr extends BaseUI
         let index = current.mIndex;
         this.GetControlButton(index).ResetUI();
         UIMgr.Instance.DeleteUiByTag(MultipleTableCtr.GetUiTag(index));
-        let uiIndex = MultipleTableCtr.mGameStruct.findIndex((_item) => _item.mIndex === index);
-        MultipleTableCtr.mGameStruct.splice(uiIndex , 1);
-        HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.mHomeIndex;
+        MultipleTableCtr.RemoveGameStructByGameId(_gameId);
+        HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.HomeIndex;
     }
 
     InsertGameUI(_gameType : GameType ,_gameId : string , _seatNum : number , _gameStaticData : GameStaticData)
@@ -140,9 +162,9 @@ export class MultipleTableCtr extends BaseUI
         let prefabName = MultipleTableCtr.GetPrefabName(_gameType);
         UIMgr.Instance.ShowLayer("gamePage","prefab/" + prefabName,true,(_script)=>
         {
-            let gameStruct = (new GameStruct(index , _script , _gameId , _gameType));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
+            gameStruct.InitWithData(index , _script , _gameId , _gameType);
             gameStruct.mGameData.SetGameInfo(_gameStaticData);
-            MultipleTableCtr.mGameStruct.push(gameStruct);
             let gameScript = _script as GameBase;
             gameScript.InitWithData(index,_seatNum);
             gameScript.ShowMoveInAnimation();
@@ -153,9 +175,9 @@ export class MultipleTableCtr extends BaseUI
 
     public static FindGameStruct(_index : number) : GameStruct
     {
-        for(let i = 0 ; i < MultipleTableCtr.mGameStruct.length ; i++)
+        for(let i = 0 ; i < MultipleTableCtr.GameStruct.length ; i++)
         {
-            let current = MultipleTableCtr.mGameStruct[i];
+            let current = MultipleTableCtr.GameStruct[i];
             if(_index == current.mIndex)
             {
                 return current;
@@ -167,9 +189,9 @@ export class MultipleTableCtr extends BaseUI
 
     public static FindGameStructByGameId(_gameId : string) : GameStruct
     {
-        for(let i = 0 ; i < MultipleTableCtr.mGameStruct.length ; i++)
+        for(let i = 0 ; i < MultipleTableCtr.GameStruct.length ; i++)
         {
-            let current = MultipleTableCtr.mGameStruct[i];
+            let current = MultipleTableCtr.GameStruct[i];
             if(_gameId == current.mGameId)
             {
                 return current;
@@ -206,7 +228,7 @@ export class MultipleTableCtr extends BaseUI
         if(current == null)
         {
             console.log("MultipleTableCtr 当前UI还没有创建====_index===" + _index);
-            HallData.Instance.Data_MultipeIndex.mData = this.mHomeIndex;
+            HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.HomeIndex;
             return;
         }
         UIMgr.Instance.ShowLayer("gamePage","prefab/" + current.mPrefabName,true,null,MultipleTableCtr.GetUiTag(_index),_index.toString());
@@ -214,17 +236,16 @@ export class MultipleTableCtr extends BaseUI
 
     public static HideAllGameUI()
     {
-        for(let i = 0 ; i < MultipleTableCtr.mGameStruct.length ; i++)
+        for(let i = 0 ; i < MultipleTableCtr.GameStruct.length ; i++)
         {
-            let current = MultipleTableCtr.mGameStruct[i];
-            current.mScript.Show(false);
+            let current = MultipleTableCtr.GameStruct[i];
+            UIMgr.Instance.HideUiByTag(MultipleTableCtr.GetUiTag(current.mIndex));
         }
     }
 
     public static CheckGameMax() : boolean
     {
-        let aviliableIndex = MultipleTableCtr.GetAviliableIndex();
-        if(aviliableIndex >= MultipleTableCtr.MaxGame)
+        if(MultipleTableCtr.GameStruct.length >= MultipleTableCtr.MaxGame)
         {
             return true;
         }
@@ -234,21 +255,16 @@ export class MultipleTableCtr extends BaseUI
 
     public static GetAviliableIndex() : number
     {
-        if(MultipleTableCtr.mGameStruct.length == 0)
+        for(let i = 0 ; i < MultipleTableCtr.MaxGame ; i++)
         {
-            return 0;
-        }
-
-        for(let i = 0 ; i < MultipleTableCtr.mGameStruct.length ; i++)
-        {
-            let index = MultipleTableCtr.mGameStruct.findIndex((_item) => _item.mIndex === i);
+            let index = MultipleTableCtr.GameStruct.findIndex((_item) => _item.mIndex === i);
             if(index < 0)
             {
                 return i;
             }
         }
-        console.log("Wrong! 不可能到这里来");
-        return 0;
+        console.log("GetAviliableIndex Wrong! 不可能到这里来");
+        return GameConfig.WrongIndex;
     }
 
     public static GetPrefabName(_gameType : GameType)
@@ -277,6 +293,47 @@ export class MultipleTableCtr extends BaseUI
     public static GetUiTag(_index : number)
     {
         return GameData.GameUiTag + _index;
+    }
+
+    public static CreateNewGameStruct(_gameId : string , _clubId : string = "")
+    {
+        let gameStruct = new GameStruct(_gameId);
+        gameStruct.SetClubId(_clubId);
+        MultipleTableCtr.GameStruct.push(gameStruct);
+    }
+
+    public static RemoveGameStructByGameId(_gameId : string )
+    {
+        let uiIndex = MultipleTableCtr.GameStruct.findIndex((_item) => _item.mGameId === _gameId);
+        if(uiIndex >= 0)
+        {
+            MultipleTableCtr.GameStruct.splice(uiIndex , 1);
+            return;
+        }
+
+        console.log("RemoveGameStructByGameId wrong _gameId===" + _gameId);
+    }
+
+    //检查是否能进入房间
+    public static CanEnterGame(_gameId : string , _clubId : string = "") : boolean
+    {
+        if(MultipleTableCtr.CheckGameMax())
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00239"));
+            return false;
+        } 
+
+        let tryToGetGameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
+        if(tryToGetGameStruct!=null)
+        {
+            //如果已经进过当前房间了，直接切换到当前房间页面，就不用重新发送进入房间消息了
+            HallData.Instance.Data_MultipeIndex.mData = tryToGetGameStruct.mIndex;
+            return false;
+        }
+
+        MultipleTableCtr.CreateNewGameStruct(_gameId , _clubId);
+
+        return true;
     }
 }
 
