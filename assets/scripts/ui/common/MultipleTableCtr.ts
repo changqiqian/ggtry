@@ -22,12 +22,16 @@ class GameStruct
         this.mScript = null;
         this.mPrefabName = "";
         this.mGameData = null;
-        this.mClubId = "";
+        this.mSelfClubInfo = null;
+        this.mClubDetailsInfo = null;
+        this.mIsClubGame = false;
     }
 
-    public SetClubId(_clubId : string = "")
+    public SetClubInfo(_selfClubInfo : ClubMember , _currentClubInfo : ClubDetailsInfo)
     {
-        this.mClubId = _clubId;
+        this.mSelfClubInfo = _selfClubInfo;
+        this.mClubDetailsInfo = _currentClubInfo;
+        this.mIsClubGame = true;
     }
 
     public InitWithData(_index :number  , _script : GameBase , _gameId : string , _gameType : GameType )
@@ -47,7 +51,9 @@ class GameStruct
     mGameData : GameData;
     mPrefabName : string ;
     mGameType : GameType;
-    mClubId : string;
+    mSelfClubInfo : ClubMember;
+    mClubDetailsInfo : ClubDetailsInfo;
+    mIsClubGame : boolean;
 
     public CreateGameData(_gameType : GameType) : GameData
     {
@@ -117,7 +123,7 @@ export class MultipleTableCtr extends BaseUI
 
         HallData.Instance.Data_S2CEnterGame.AddListenner(this,(_data)=>
         {
-            this.InsertGameUI(_data.gameStatic.basicConfig.gameType,_data.gameId,_data.gameStatic.texasConfig.seatNum,_data.gameStatic);
+            this.InsertGameUI(_data);
         });
 
         HallData.Instance.Data_S2CExitGame.AddListenner(this,(_data)=>
@@ -125,6 +131,11 @@ export class MultipleTableCtr extends BaseUI
             this.DeleteGameUI(_data.gameId);
         });
         HallData.Instance.Data_S2CDismissClubGame.AddListenner(this,(_data)=>
+        {
+            this.DeleteGameUI(_data.gameId);
+        });
+
+        HallData.Instance.Data_S2CDismissClubGameNotify.AddListenner(this,(_data)=>
         {
             this.DeleteGameUI(_data.gameId);
         });
@@ -155,17 +166,20 @@ export class MultipleTableCtr extends BaseUI
         HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.HomeIndex;
     }
 
-    InsertGameUI(_gameType : GameType ,_gameId : string , _seatNum : number , _gameStaticData : GameStaticData)
+    InsertGameUI(_data : S2CCommonEnterGameResp)
     {
+        let gameType = _data.gameStatic.basicConfig.gameType;
+        let gameId = _data.gameId;
+        let seatNum = _data.gameStatic.texasConfig.seatNum;
         let index = MultipleTableCtr.GetAviliableIndex();
-        let prefabName = MultipleTableCtr.GetPrefabName(_gameType);
+        let prefabName = MultipleTableCtr.GetPrefabName(gameType);
         UIMgr.Instance.ShowLayer("gamePage","prefab/" + prefabName,true,(_script)=>
         {
-            let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
-            gameStruct.InitWithData(index , _script , _gameId , _gameType);
-            gameStruct.mGameData.SetGameInfo(_gameStaticData);
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(gameId);
+            gameStruct.InitWithData(index , _script , gameId , gameType);
+            gameStruct.mGameData.SetGameInfo(_data);
             let gameScript = _script as GameBase;
-            gameScript.InitWithData(index,_seatNum);
+            gameScript.InitWithData(index,seatNum);
             gameScript.ShowMoveInAnimation();
             this.GetControlButton(index).BindGameData(gameStruct.mGameData);
             HallData.Instance.Data_MultipeIndex.mData = index;
@@ -294,10 +308,10 @@ export class MultipleTableCtr extends BaseUI
         return GameData.GameUiTag + _index;
     }
 
-    public static CreateNewGameStruct(_gameId : string , _clubId : string = "")
+    public static CreateNewGameStruct(_gameId : string , _selfClubInfo : ClubMember = null , _currentClubInfo : ClubDetailsInfo = null)
     {
         let gameStruct = new GameStruct(_gameId);
-        gameStruct.SetClubId(_clubId);
+        gameStruct.SetClubInfo(_selfClubInfo , _currentClubInfo);
         MultipleTableCtr.GameStruct.push(gameStruct);
     }
 
@@ -314,7 +328,7 @@ export class MultipleTableCtr extends BaseUI
     }
 
     //检查是否能进入房间
-    public static CanEnterGame(_gameId : string , _clubId : string = "") : boolean
+    public static CanEnterGame(_gameId : string , _selfClubInfo : ClubMember = null , _currentClubInfo : ClubDetailsInfo = null) : boolean
     {
         if(MultipleTableCtr.CheckGameMax())
         {
@@ -330,7 +344,7 @@ export class MultipleTableCtr extends BaseUI
             return false;
         }
 
-        MultipleTableCtr.CreateNewGameStruct(_gameId , _clubId);
+        MultipleTableCtr.CreateNewGameStruct(_gameId , _selfClubInfo , _currentClubInfo);
 
         return true;
     }

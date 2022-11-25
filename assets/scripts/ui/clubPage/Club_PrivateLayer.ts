@@ -41,7 +41,7 @@ export class Club_PrivateLayer extends BaseUI
     @property(ListView) 
     mListView: ListView = null;
 
-    mGameList : Array<GameStaticData>;
+    mGameList : Array<ClubGameInfo>;
     onEnable()
     {
         this.mListView.numItems = 0;
@@ -190,7 +190,7 @@ export class Club_PrivateLayer extends BaseUI
                 return;
             }
 
-            this.mGameList = HallData.Instance.Data_GameStaticData.mData;
+            this.mGameList = HallData.Instance.Data_ClubGameInfos.mData;
             this.mListView.numItems = this.mGameList.length;
         });
     }

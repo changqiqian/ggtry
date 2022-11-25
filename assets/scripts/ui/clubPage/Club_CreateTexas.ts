@@ -67,9 +67,9 @@ export class Club_CreateTexas extends BaseUI
                 UIMgr.Instance.ShowToast(Localization.GetString("00195"));
                 return;
             }
-            let gameStaticData = HallData.Instance.ConvertCreateTexasConfigToProto(createConfig);
+            let gameInfo = HallData.Instance.ConvertCreateTexasConfigToProto(createConfig);
             let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-            NetworkSend.Instance.CreateClubTexas(clubId , gameStaticData);
+            NetworkSend.Instance.CreateClubTexas(clubId , gameInfo);
         });
     }
     RegDataNotify()

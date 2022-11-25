@@ -86,13 +86,13 @@ export class Game_Menu extends BaseUI
         this.mExitBtn.SetClickCallback(()=>
         {
             let gameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
-            let gameId = gameData.Data_GameStaticData.mData.gameId;
-            NetworkSend.Instance.ExitGame(gameId,gameData.Data_GameStaticData.mData.basicConfig.gameType);
+            let gameId = gameData.Data_S2CCommonEnterGameResp.mData.gameId;
+            NetworkSend.Instance.ExitGame(gameId,gameData.Data_S2CCommonEnterGameResp.mData.gameStatic.basicConfig.gameType);
         });
         this.mDismiss.SetClickCallback(()=>
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            NetworkSend.Instance.DismissClubGame(gameStruct.mGameId , gameStruct.mClubId);
+            NetworkSend.Instance.DismissClubGame(gameStruct.mGameId , gameStruct.mClubDetailsInfo.id);
         });
     }
     RegDataNotify()
@@ -112,15 +112,14 @@ export class Game_Menu extends BaseUI
     {
         this.mIndex = _index;    
         let gameStruct = MultipleTableCtr.FindGameStruct(_index);
-        let gameType = gameStruct.mGameData.Data_GameStaticData.mData.basicConfig.gameType;
-        let clubId =  gameStruct.mClubId;
-        if(clubId == "")
+        if(gameStruct.mIsClubGame)
         {
-            this.mDismiss.Show(false);
+            let selfClubInfo = gameStruct.mSelfClubInfo;
+            this.mDismiss.Show(selfClubInfo.memberType != ClubMemberType.ClubAccountType_Normal);
         }
         else
         {
-            
+            this.mDismiss.Show(false);
         }
 
 

@@ -372,11 +372,28 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_GetClubGameList  获取俱乐部游戏列表==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                if(msg.gameInfos != null && msg.gameInfos.length > 0)
+                if(msg.gameInfo != null && msg.gameInfo.length > 0)
                 {
-                    HallData.Instance.UpdateGameList(msg.gameInfos);
+                    HallData.Instance.UpdateGameList(msg.gameInfo);
                 }
 
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_DismissClubGame,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CDismissClubGame.decode(_data);
+            console.log("收到的内容 S2C_DismissClubGame  解散俱乐部游戏==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                HallData.Instance.Data_S2CDismissClubGame.mData = msg;
+                let tips = Localization.ReplaceString("00240",msg.gameId);
+                UIMgr.Instance.ShowToast(tips);
             }
             else
             {
@@ -395,6 +412,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
             else
             {
+                MultipleTableCtr.RemoveGameStructByGameId(msg.gameId);
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
@@ -410,22 +428,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
             else
             {
-                UIMgr.Instance.ShowToast(msg.result.resMessage);
-            }
-        },this);
-
-        Network.Instance.AddMsgListenner(MessageId.S2C_DismissClubGame,(_data)=>
-        {
-            UIMgr.Instance.ShowLoading(false);
-            let msg = S2CDismissClubGame.decode(_data);
-            console.log("收到的内容 S2C_DismissClubGame  解散游戏==" + JSON.stringify(msg));
-            if(msg.result.resId == MsgResult.Success)
-            {
-                HallData.Instance.Data_S2CDismissClubGame.mData = msg;
-            }
-            else
-            {
-                MultipleTableCtr.RemoveGameStructByGameId(msg.gameId);
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
@@ -523,6 +525,15 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     HallData.Instance.Data_ClubUpdateSelfData.mData = true;
                 }
             }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_DismissClubGameNotify,(_data)=>
+        {
+            let msg = S2CDismissClubGameNotify.decode(_data);
+            console.log("收到的内容 S2C_DismissClubGameNotify  俱乐部游戏被解散===" + JSON.stringify(msg));
+            HallData.Instance.Data_S2CDismissClubGameNotify.mData = msg;
+            let tips = Localization.ReplaceString("00240",msg.gameId);
+            UIMgr.Instance.ShowToast(tips);
         },this);
         
     }

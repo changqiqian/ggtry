@@ -11,11 +11,11 @@ export abstract class GameData extends MultipleNotify
     public static readonly GameUiTag = "GameUiTag";
     //UI控制
     Data_ChatingSubLayer :  BaseData<Game_ChattingSubLayer> = new BaseData<Game_ChattingSubLayer>();  //聊天页面子页面
-    Data_GameStaticData : BaseData<GameStaticData> = new BaseData<GameStaticData>();  //游戏基础配置信息
+    Data_S2CCommonEnterGameResp : BaseData<S2CCommonEnterGameResp> = new BaseData<S2CCommonEnterGameResp>();  //游戏基础配置信息
 
-    public SetGameInfo(_gameStaticData : GameStaticData)
+    public SetGameInfo(_S2CCommonEnterGameResp : S2CCommonEnterGameResp)
     {
-        this.Data_GameStaticData.mData = _gameStaticData;
+        this.Data_S2CCommonEnterGameResp.mData = _S2CCommonEnterGameResp;
     }
 
     

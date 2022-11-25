@@ -2145,6 +2145,143 @@ $root.ClubJoinRequest = (function() {
     return ClubJoinRequest;
 })();
 
+$root.ClubGameInfo = (function() {
+
+    /**
+     * Properties of a ClubGameInfo.
+     * @exports IClubGameInfo
+     * @interface IClubGameInfo
+     * @property {string|null} [clubId] ClubGameInfo clubId
+     * @property {string|null} [gameId] ClubGameInfo gameId
+     * @property {IClubMember|null} [creatorInfo] ClubGameInfo creatorInfo
+     * @property {IAboutGameInfo|null} [aboutGameInfo] ClubGameInfo aboutGameInfo
+     * @property {IGameStaticData|null} [gameStaticData] ClubGameInfo gameStaticData
+     */
+
+    /**
+     * Constructs a new ClubGameInfo.
+     * @exports ClubGameInfo
+     * @classdesc Represents a ClubGameInfo.
+     * @implements IClubGameInfo
+     * @constructor
+     * @param {IClubGameInfo=} [p] Properties to set
+     */
+    function ClubGameInfo(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * ClubGameInfo clubId.
+     * @member {string} clubId
+     * @memberof ClubGameInfo
+     * @instance
+     */
+    ClubGameInfo.prototype.clubId = "";
+
+    /**
+     * ClubGameInfo gameId.
+     * @member {string} gameId
+     * @memberof ClubGameInfo
+     * @instance
+     */
+    ClubGameInfo.prototype.gameId = "";
+
+    /**
+     * ClubGameInfo creatorInfo.
+     * @member {IClubMember|null|undefined} creatorInfo
+     * @memberof ClubGameInfo
+     * @instance
+     */
+    ClubGameInfo.prototype.creatorInfo = null;
+
+    /**
+     * ClubGameInfo aboutGameInfo.
+     * @member {IAboutGameInfo|null|undefined} aboutGameInfo
+     * @memberof ClubGameInfo
+     * @instance
+     */
+    ClubGameInfo.prototype.aboutGameInfo = null;
+
+    /**
+     * ClubGameInfo gameStaticData.
+     * @member {IGameStaticData|null|undefined} gameStaticData
+     * @memberof ClubGameInfo
+     * @instance
+     */
+    ClubGameInfo.prototype.gameStaticData = null;
+
+    /**
+     * Encodes the specified ClubGameInfo message. Does not implicitly {@link ClubGameInfo.verify|verify} messages.
+     * @function encode
+     * @memberof ClubGameInfo
+     * @static
+     * @param {IClubGameInfo} m ClubGameInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    ClubGameInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
+            w.uint32(10).string(m.clubId);
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.creatorInfo != null && Object.hasOwnProperty.call(m, "creatorInfo"))
+            $root.ClubMember.encode(m.creatorInfo, w.uint32(26).fork()).ldelim();
+        if (m.aboutGameInfo != null && Object.hasOwnProperty.call(m, "aboutGameInfo"))
+            $root.AboutGameInfo.encode(m.aboutGameInfo, w.uint32(34).fork()).ldelim();
+        if (m.gameStaticData != null && Object.hasOwnProperty.call(m, "gameStaticData"))
+            $root.GameStaticData.encode(m.gameStaticData, w.uint32(42).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a ClubGameInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof ClubGameInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {ClubGameInfo} ClubGameInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    ClubGameInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.ClubGameInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.clubId = r.string();
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.creatorInfo = $root.ClubMember.decode(r, r.uint32());
+                break;
+            case 4:
+                m.aboutGameInfo = $root.AboutGameInfo.decode(r, r.uint32());
+                break;
+            case 5:
+                m.gameStaticData = $root.GameStaticData.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return ClubGameInfo;
+})();
+
 $root.CommonResult = (function() {
 
     /**
@@ -2728,101 +2865,6 @@ $root.ShortGameScoreMode = (function() {
     values[valuesById[0] = "ShortGameScoreMode_AnteMode"] = 0;
     values[valuesById[1] = "ShortGameScoreMode_BlindMode"] = 1;
     return values;
-})();
-
-$root.AboutGameInfo = (function() {
-
-    /**
-     * Properties of an AboutGameInfo.
-     * @exports IAboutGameInfo
-     * @interface IAboutGameInfo
-     * @property {number|null} [currentPlayerNum] AboutGameInfo currentPlayerNum
-     * @property {number|null} [leftTime] AboutGameInfo leftTime
-     */
-
-    /**
-     * Constructs a new AboutGameInfo.
-     * @exports AboutGameInfo
-     * @classdesc Represents an AboutGameInfo.
-     * @implements IAboutGameInfo
-     * @constructor
-     * @param {IAboutGameInfo=} [p] Properties to set
-     */
-    function AboutGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * AboutGameInfo currentPlayerNum.
-     * @member {number} currentPlayerNum
-     * @memberof AboutGameInfo
-     * @instance
-     */
-    AboutGameInfo.prototype.currentPlayerNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AboutGameInfo leftTime.
-     * @member {number} leftTime
-     * @memberof AboutGameInfo
-     * @instance
-     */
-    AboutGameInfo.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified AboutGameInfo message. Does not implicitly {@link AboutGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof AboutGameInfo
-     * @static
-     * @param {IAboutGameInfo} m AboutGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    AboutGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.currentPlayerNum != null && Object.hasOwnProperty.call(m, "currentPlayerNum"))
-            w.uint32(8).int64(m.currentPlayerNum);
-        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
-            w.uint32(16).int64(m.leftTime);
-        return w;
-    };
-
-    /**
-     * Decodes an AboutGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof AboutGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {AboutGameInfo} AboutGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    AboutGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.AboutGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.currentPlayerNum = r.int64();
-                break;
-            case 2:
-                m.leftTime = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return AboutGameInfo;
 })();
 
 $root.BasicGameConfig = (function() {
@@ -3963,16 +4005,109 @@ $root.PotInfo = (function() {
     return PotInfo;
 })();
 
+$root.AboutGameInfo = (function() {
+
+    /**
+     * Properties of an AboutGameInfo.
+     * @exports IAboutGameInfo
+     * @interface IAboutGameInfo
+     * @property {number|null} [currentPlayerNum] AboutGameInfo currentPlayerNum
+     * @property {number|null} [leftTime] AboutGameInfo leftTime
+     */
+
+    /**
+     * Constructs a new AboutGameInfo.
+     * @exports AboutGameInfo
+     * @classdesc Represents an AboutGameInfo.
+     * @implements IAboutGameInfo
+     * @constructor
+     * @param {IAboutGameInfo=} [p] Properties to set
+     */
+    function AboutGameInfo(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * AboutGameInfo currentPlayerNum.
+     * @member {number} currentPlayerNum
+     * @memberof AboutGameInfo
+     * @instance
+     */
+    AboutGameInfo.prototype.currentPlayerNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AboutGameInfo leftTime.
+     * @member {number} leftTime
+     * @memberof AboutGameInfo
+     * @instance
+     */
+    AboutGameInfo.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified AboutGameInfo message. Does not implicitly {@link AboutGameInfo.verify|verify} messages.
+     * @function encode
+     * @memberof AboutGameInfo
+     * @static
+     * @param {IAboutGameInfo} m AboutGameInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    AboutGameInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.currentPlayerNum != null && Object.hasOwnProperty.call(m, "currentPlayerNum"))
+            w.uint32(8).int64(m.currentPlayerNum);
+        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
+            w.uint32(16).int64(m.leftTime);
+        return w;
+    };
+
+    /**
+     * Decodes an AboutGameInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof AboutGameInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {AboutGameInfo} AboutGameInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    AboutGameInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.AboutGameInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.currentPlayerNum = r.int64();
+                break;
+            case 2:
+                m.leftTime = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return AboutGameInfo;
+})();
+
 $root.GameStaticData = (function() {
 
     /**
      * Properties of a GameStaticData.
      * @exports IGameStaticData
      * @interface IGameStaticData
-     * @property {string|null} [gameId] GameStaticData gameId
      * @property {IBasicGameConfig|null} [basicConfig] GameStaticData basicConfig
      * @property {IBasicTexasConfig|null} [texasConfig] GameStaticData texasConfig
-     * @property {IAboutGameInfo|null} [aboutGameInfo] GameStaticData aboutGameInfo
      */
 
     /**
@@ -3991,14 +4126,6 @@ $root.GameStaticData = (function() {
     }
 
     /**
-     * GameStaticData gameId.
-     * @member {string} gameId
-     * @memberof GameStaticData
-     * @instance
-     */
-    GameStaticData.prototype.gameId = "";
-
-    /**
      * GameStaticData basicConfig.
      * @member {IBasicGameConfig|null|undefined} basicConfig
      * @memberof GameStaticData
@@ -4015,14 +4142,6 @@ $root.GameStaticData = (function() {
     GameStaticData.prototype.texasConfig = null;
 
     /**
-     * GameStaticData aboutGameInfo.
-     * @member {IAboutGameInfo|null|undefined} aboutGameInfo
-     * @memberof GameStaticData
-     * @instance
-     */
-    GameStaticData.prototype.aboutGameInfo = null;
-
-    /**
      * Encodes the specified GameStaticData message. Does not implicitly {@link GameStaticData.verify|verify} messages.
      * @function encode
      * @memberof GameStaticData
@@ -4034,14 +4153,10 @@ $root.GameStaticData = (function() {
     GameStaticData.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
         if (m.basicConfig != null && Object.hasOwnProperty.call(m, "basicConfig"))
-            $root.BasicGameConfig.encode(m.basicConfig, w.uint32(18).fork()).ldelim();
+            $root.BasicGameConfig.encode(m.basicConfig, w.uint32(10).fork()).ldelim();
         if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
-            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(26).fork()).ldelim();
-        if (m.aboutGameInfo != null && Object.hasOwnProperty.call(m, "aboutGameInfo"))
-            $root.AboutGameInfo.encode(m.aboutGameInfo, w.uint32(34).fork()).ldelim();
+            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(18).fork()).ldelim();
         return w;
     };
 
@@ -4064,16 +4179,10 @@ $root.GameStaticData = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
                 m.basicConfig = $root.BasicGameConfig.decode(r, r.uint32());
                 break;
-            case 3:
+            case 2:
                 m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
-                break;
-            case 4:
-                m.aboutGameInfo = $root.AboutGameInfo.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);
@@ -5697,7 +5806,7 @@ $root.S2CCreateClubGame = (function() {
      * @interface IS2CCreateClubGame
      * @property {ICommonResult|null} [result] S2CCreateClubGame result
      * @property {string|null} [clubId] S2CCreateClubGame clubId
-     * @property {IGameStaticData|null} [gameInfo] S2CCreateClubGame gameInfo
+     * @property {IClubGameInfo|null} [gameInfo] S2CCreateClubGame gameInfo
      */
 
     /**
@@ -5733,7 +5842,7 @@ $root.S2CCreateClubGame = (function() {
 
     /**
      * S2CCreateClubGame gameInfo.
-     * @member {IGameStaticData|null|undefined} gameInfo
+     * @member {IClubGameInfo|null|undefined} gameInfo
      * @memberof S2CCreateClubGame
      * @instance
      */
@@ -5756,7 +5865,7 @@ $root.S2CCreateClubGame = (function() {
         if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
             w.uint32(18).string(m.clubId);
         if (m.gameInfo != null && Object.hasOwnProperty.call(m, "gameInfo"))
-            $root.GameStaticData.encode(m.gameInfo, w.uint32(26).fork()).ldelim();
+            $root.ClubGameInfo.encode(m.gameInfo, w.uint32(26).fork()).ldelim();
         return w;
     };
 
@@ -5785,7 +5894,7 @@ $root.S2CCreateClubGame = (function() {
                 m.clubId = r.string();
                 break;
             case 3:
-                m.gameInfo = $root.GameStaticData.decode(r, r.uint32());
+                m.gameInfo = $root.ClubGameInfo.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);
@@ -5806,7 +5915,7 @@ $root.S2CGetClubGameList = (function() {
      * @interface IS2CGetClubGameList
      * @property {ICommonResult|null} [result] S2CGetClubGameList result
      * @property {string|null} [clubId] S2CGetClubGameList clubId
-     * @property {Array.<IGameStaticData>|null} [gameInfos] S2CGetClubGameList gameInfos
+     * @property {Array.<IClubGameInfo>|null} [gameInfo] S2CGetClubGameList gameInfo
      */
 
     /**
@@ -5818,7 +5927,7 @@ $root.S2CGetClubGameList = (function() {
      * @param {IS2CGetClubGameList=} [p] Properties to set
      */
     function S2CGetClubGameList(p) {
-        this.gameInfos = [];
+        this.gameInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -5842,12 +5951,12 @@ $root.S2CGetClubGameList = (function() {
     S2CGetClubGameList.prototype.clubId = "";
 
     /**
-     * S2CGetClubGameList gameInfos.
-     * @member {Array.<IGameStaticData>} gameInfos
+     * S2CGetClubGameList gameInfo.
+     * @member {Array.<IClubGameInfo>} gameInfo
      * @memberof S2CGetClubGameList
      * @instance
      */
-    S2CGetClubGameList.prototype.gameInfos = $util.emptyArray;
+    S2CGetClubGameList.prototype.gameInfo = $util.emptyArray;
 
     /**
      * Encodes the specified S2CGetClubGameList message. Does not implicitly {@link S2CGetClubGameList.verify|verify} messages.
@@ -5865,9 +5974,9 @@ $root.S2CGetClubGameList = (function() {
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
             w.uint32(18).string(m.clubId);
-        if (m.gameInfos != null && m.gameInfos.length) {
-            for (var i = 0; i < m.gameInfos.length; ++i)
-                $root.GameStaticData.encode(m.gameInfos[i], w.uint32(26).fork()).ldelim();
+        if (m.gameInfo != null && m.gameInfo.length) {
+            for (var i = 0; i < m.gameInfo.length; ++i)
+                $root.ClubGameInfo.encode(m.gameInfo[i], w.uint32(26).fork()).ldelim();
         }
         return w;
     };
@@ -5897,9 +6006,9 @@ $root.S2CGetClubGameList = (function() {
                 m.clubId = r.string();
                 break;
             case 3:
-                if (!(m.gameInfos && m.gameInfos.length))
-                    m.gameInfos = [];
-                m.gameInfos.push($root.GameStaticData.decode(r, r.uint32()));
+                if (!(m.gameInfo && m.gameInfo.length))
+                    m.gameInfo = [];
+                m.gameInfo.push($root.ClubGameInfo.decode(r, r.uint32()));
                 break;
             default:
                 r.skipType(t & 7);
@@ -6675,6 +6784,101 @@ $root.S2CModifyMemberRoleNotify = (function() {
     };
 
     return S2CModifyMemberRoleNotify;
+})();
+
+$root.S2CDismissClubGameNotify = (function() {
+
+    /**
+     * Properties of a S2CDismissClubGameNotify.
+     * @exports IS2CDismissClubGameNotify
+     * @interface IS2CDismissClubGameNotify
+     * @property {string|null} [clubId] S2CDismissClubGameNotify clubId
+     * @property {string|null} [gameId] S2CDismissClubGameNotify gameId
+     */
+
+    /**
+     * Constructs a new S2CDismissClubGameNotify.
+     * @exports S2CDismissClubGameNotify
+     * @classdesc Represents a S2CDismissClubGameNotify.
+     * @implements IS2CDismissClubGameNotify
+     * @constructor
+     * @param {IS2CDismissClubGameNotify=} [p] Properties to set
+     */
+    function S2CDismissClubGameNotify(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CDismissClubGameNotify clubId.
+     * @member {string} clubId
+     * @memberof S2CDismissClubGameNotify
+     * @instance
+     */
+    S2CDismissClubGameNotify.prototype.clubId = "";
+
+    /**
+     * S2CDismissClubGameNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CDismissClubGameNotify
+     * @instance
+     */
+    S2CDismissClubGameNotify.prototype.gameId = "";
+
+    /**
+     * Encodes the specified S2CDismissClubGameNotify message. Does not implicitly {@link S2CDismissClubGameNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CDismissClubGameNotify
+     * @static
+     * @param {IS2CDismissClubGameNotify} m S2CDismissClubGameNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CDismissClubGameNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
+            w.uint32(10).string(m.clubId);
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CDismissClubGameNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CDismissClubGameNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CDismissClubGameNotify} S2CDismissClubGameNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CDismissClubGameNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CDismissClubGameNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.clubId = r.string();
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CDismissClubGameNotify;
 })();
 
 $root.C2SEnterGame = (function() {
@@ -11508,6 +11712,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_ClubTotalPointNotify=4615 S2C_ClubTotalPointNotify value
  * @property {number} S2C_ClubPlayerPointNotify=4616 S2C_ClubPlayerPointNotify value
  * @property {number} S2C_ModifyMemberRoleNotify=4617 S2C_ModifyMemberRoleNotify value
+ * @property {number} S2C_DismissClubGameNotify=4618 S2C_DismissClubGameNotify value
  * @property {number} MSG_ClubEnd=5000 MSG_ClubEnd value
  * @property {number} MSG_TexasCashBegin=5001 MSG_TexasCashBegin value
  * @property {number} C2S_TexasCashEnterGame=5002 C2S_TexasCashEnterGame value
@@ -11548,14 +11753,14 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonActionNotify=8015 S2C_CommonActionNotify value
  * @property {number} S2C_CommonBuyInsuranceNotify=8016 S2C_CommonBuyInsuranceNotify value
  * @property {number} S2C_CommonChatNotify=8017 S2C_CommonChatNotify value
- * @property {number} S2C_CommonRoundStartNotify=8018 S2C_CommonRoundStartNotify value
- * @property {number} S2C_CommonPreFlopRoundNotify=8019 S2C_CommonPreFlopRoundNotify value
- * @property {number} S2C_CommonFlopRoundNotify=8020 S2C_CommonFlopRoundNotify value
- * @property {number} S2C_CommonTurnRoundNotify=8021 S2C_CommonTurnRoundNotify value
- * @property {number} S2C_CommonRiverRoundNotify=8022 S2C_CommonRiverRoundNotify value
- * @property {number} S2C_CommonCurrentActionNotify=8023 S2C_CommonCurrentActionNotify value
- * @property {number} S2C_CommonSettlementNotify=8024 S2C_CommonSettlementNotify value
- * @property {number} S2C_CommonStartNotify=8025 S2C_CommonStartNotify value
+ * @property {number} S2C_CommonStartNotify=8018 S2C_CommonStartNotify value
+ * @property {number} S2C_CommonRoundStartNotify=8019 S2C_CommonRoundStartNotify value
+ * @property {number} S2C_CommonPreFlopRoundNotify=8020 S2C_CommonPreFlopRoundNotify value
+ * @property {number} S2C_CommonFlopRoundNotify=8021 S2C_CommonFlopRoundNotify value
+ * @property {number} S2C_CommonTurnRoundNotify=8022 S2C_CommonTurnRoundNotify value
+ * @property {number} S2C_CommonRiverRoundNotify=8023 S2C_CommonRiverRoundNotify value
+ * @property {number} S2C_CommonCurrentActionNotify=8024 S2C_CommonCurrentActionNotify value
+ * @property {number} S2C_CommonSettlementNotify=8025 S2C_CommonSettlementNotify value
  */
 $root.MessageId = (function() {
     var valuesById = {}, values = Object.create(valuesById);
@@ -11620,6 +11825,7 @@ $root.MessageId = (function() {
     values[valuesById[4615] = "S2C_ClubTotalPointNotify"] = 4615;
     values[valuesById[4616] = "S2C_ClubPlayerPointNotify"] = 4616;
     values[valuesById[4617] = "S2C_ModifyMemberRoleNotify"] = 4617;
+    values[valuesById[4618] = "S2C_DismissClubGameNotify"] = 4618;
     values[valuesById[5000] = "MSG_ClubEnd"] = 5000;
     values[valuesById[5001] = "MSG_TexasCashBegin"] = 5001;
     values[valuesById[5002] = "C2S_TexasCashEnterGame"] = 5002;
@@ -11660,13 +11866,13 @@ $root.MessageId = (function() {
     values[valuesById[8015] = "S2C_CommonActionNotify"] = 8015;
     values[valuesById[8016] = "S2C_CommonBuyInsuranceNotify"] = 8016;
     values[valuesById[8017] = "S2C_CommonChatNotify"] = 8017;
-    values[valuesById[8018] = "S2C_CommonRoundStartNotify"] = 8018;
-    values[valuesById[8019] = "S2C_CommonPreFlopRoundNotify"] = 8019;
-    values[valuesById[8020] = "S2C_CommonFlopRoundNotify"] = 8020;
-    values[valuesById[8021] = "S2C_CommonTurnRoundNotify"] = 8021;
-    values[valuesById[8022] = "S2C_CommonRiverRoundNotify"] = 8022;
-    values[valuesById[8023] = "S2C_CommonCurrentActionNotify"] = 8023;
-    values[valuesById[8024] = "S2C_CommonSettlementNotify"] = 8024;
-    values[valuesById[8025] = "S2C_CommonStartNotify"] = 8025;
+    values[valuesById[8018] = "S2C_CommonStartNotify"] = 8018;
+    values[valuesById[8019] = "S2C_CommonRoundStartNotify"] = 8019;
+    values[valuesById[8020] = "S2C_CommonPreFlopRoundNotify"] = 8020;
+    values[valuesById[8021] = "S2C_CommonFlopRoundNotify"] = 8021;
+    values[valuesById[8022] = "S2C_CommonTurnRoundNotify"] = 8022;
+    values[valuesById[8023] = "S2C_CommonRiverRoundNotify"] = 8023;
+    values[valuesById[8024] = "S2C_CommonCurrentActionNotify"] = 8024;
+    values[valuesById[8025] = "S2C_CommonSettlementNotify"] = 8025;
     return values;
 })();

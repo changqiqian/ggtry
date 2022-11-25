@@ -899,6 +899,49 @@ export class ClubJoinRequest implements IClubJoinRequest {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubJoinRequest;
 }
 
+/** Represents a ClubGameInfo. */
+export class ClubGameInfo implements IClubGameInfo {
+
+    /**
+     * Constructs a new ClubGameInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IClubGameInfo);
+
+    /** ClubGameInfo clubId. */
+    public clubId: string;
+
+    /** ClubGameInfo gameId. */
+    public gameId: string;
+
+    /** ClubGameInfo creatorInfo. */
+    public creatorInfo?: (IClubMember|null);
+
+    /** ClubGameInfo aboutGameInfo. */
+    public aboutGameInfo?: (IAboutGameInfo|null);
+
+    /** ClubGameInfo gameStaticData. */
+    public gameStaticData?: (IGameStaticData|null);
+
+    /**
+     * Encodes the specified ClubGameInfo message. Does not implicitly {@link ClubGameInfo.verify|verify} messages.
+     * @param m ClubGameInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IClubGameInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a ClubGameInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns ClubGameInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubGameInfo;
+}
+
 /** Represents a CommonResult. */
 export class CommonResult implements ICommonResult {
 
@@ -1115,40 +1158,6 @@ export enum GameCurrencyType {
 export enum ShortGameScoreMode {
     ShortGameScoreMode_AnteMode = 0,
     ShortGameScoreMode_BlindMode = 1
-}
-
-/** Represents an AboutGameInfo. */
-export class AboutGameInfo implements IAboutGameInfo {
-
-    /**
-     * Constructs a new AboutGameInfo.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IAboutGameInfo);
-
-    /** AboutGameInfo currentPlayerNum. */
-    public currentPlayerNum: number;
-
-    /** AboutGameInfo leftTime. */
-    public leftTime: number;
-
-    /**
-     * Encodes the specified AboutGameInfo message. Does not implicitly {@link AboutGameInfo.verify|verify} messages.
-     * @param m AboutGameInfo message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IAboutGameInfo, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes an AboutGameInfo message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns AboutGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): AboutGameInfo;
 }
 
 /** Represents a BasicGameConfig. */
@@ -1514,6 +1523,40 @@ export class PotInfo implements IPotInfo {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PotInfo;
 }
 
+/** Represents an AboutGameInfo. */
+export class AboutGameInfo implements IAboutGameInfo {
+
+    /**
+     * Constructs a new AboutGameInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IAboutGameInfo);
+
+    /** AboutGameInfo currentPlayerNum. */
+    public currentPlayerNum: number;
+
+    /** AboutGameInfo leftTime. */
+    public leftTime: number;
+
+    /**
+     * Encodes the specified AboutGameInfo message. Does not implicitly {@link AboutGameInfo.verify|verify} messages.
+     * @param m AboutGameInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IAboutGameInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes an AboutGameInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns AboutGameInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): AboutGameInfo;
+}
+
 /** Represents a GameStaticData. */
 export class GameStaticData implements IGameStaticData {
 
@@ -1523,17 +1566,11 @@ export class GameStaticData implements IGameStaticData {
      */
     constructor(p?: IGameStaticData);
 
-    /** GameStaticData gameId. */
-    public gameId: string;
-
     /** GameStaticData basicConfig. */
     public basicConfig?: (IBasicGameConfig|null);
 
     /** GameStaticData texasConfig. */
     public texasConfig?: (IBasicTexasConfig|null);
-
-    /** GameStaticData aboutGameInfo. */
-    public aboutGameInfo?: (IAboutGameInfo|null);
 
     /**
      * Encodes the specified GameStaticData message. Does not implicitly {@link GameStaticData.verify|verify} messages.
@@ -2097,7 +2134,7 @@ export class S2CCreateClubGame implements IS2CCreateClubGame {
     public clubId: string;
 
     /** S2CCreateClubGame gameInfo. */
-    public gameInfo?: (IGameStaticData|null);
+    public gameInfo?: (IClubGameInfo|null);
 
     /**
      * Encodes the specified S2CCreateClubGame message. Does not implicitly {@link S2CCreateClubGame.verify|verify} messages.
@@ -2133,8 +2170,8 @@ export class S2CGetClubGameList implements IS2CGetClubGameList {
     /** S2CGetClubGameList clubId. */
     public clubId: string;
 
-    /** S2CGetClubGameList gameInfos. */
-    public gameInfos: IGameStaticData[];
+    /** S2CGetClubGameList gameInfo. */
+    public gameInfo: IClubGameInfo[];
 
     /**
      * Encodes the specified S2CGetClubGameList message. Does not implicitly {@link S2CGetClubGameList.verify|verify} messages.
@@ -2425,6 +2462,40 @@ export class S2CModifyMemberRoleNotify implements IS2CModifyMemberRoleNotify {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CModifyMemberRoleNotify;
+}
+
+/** Represents a S2CDismissClubGameNotify. */
+export class S2CDismissClubGameNotify implements IS2CDismissClubGameNotify {
+
+    /**
+     * Constructs a new S2CDismissClubGameNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CDismissClubGameNotify);
+
+    /** S2CDismissClubGameNotify clubId. */
+    public clubId: string;
+
+    /** S2CDismissClubGameNotify gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CDismissClubGameNotify message. Does not implicitly {@link S2CDismissClubGameNotify.verify|verify} messages.
+     * @param m S2CDismissClubGameNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CDismissClubGameNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CDismissClubGameNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CDismissClubGameNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CDismissClubGameNotify;
 }
 
 /** Represents a C2SEnterGame. */
@@ -4169,6 +4240,7 @@ export enum MessageId {
     S2C_ClubTotalPointNotify = 4615,
     S2C_ClubPlayerPointNotify = 4616,
     S2C_ModifyMemberRoleNotify = 4617,
+    S2C_DismissClubGameNotify = 4618,
     MSG_ClubEnd = 5000,
     MSG_TexasCashBegin = 5001,
     C2S_TexasCashEnterGame = 5002,
@@ -4209,14 +4281,14 @@ export enum MessageId {
     S2C_CommonActionNotify = 8015,
     S2C_CommonBuyInsuranceNotify = 8016,
     S2C_CommonChatNotify = 8017,
-    S2C_CommonRoundStartNotify = 8018,
-    S2C_CommonPreFlopRoundNotify = 8019,
-    S2C_CommonFlopRoundNotify = 8020,
-    S2C_CommonTurnRoundNotify = 8021,
-    S2C_CommonRiverRoundNotify = 8022,
-    S2C_CommonCurrentActionNotify = 8023,
-    S2C_CommonSettlementNotify = 8024,
-    S2C_CommonStartNotify = 8025
+    S2C_CommonStartNotify = 8018,
+    S2C_CommonRoundStartNotify = 8019,
+    S2C_CommonPreFlopRoundNotify = 8020,
+    S2C_CommonFlopRoundNotify = 8021,
+    S2C_CommonTurnRoundNotify = 8022,
+    S2C_CommonRiverRoundNotify = 8023,
+    S2C_CommonCurrentActionNotify = 8024,
+    S2C_CommonSettlementNotify = 8025
 }
  
 }

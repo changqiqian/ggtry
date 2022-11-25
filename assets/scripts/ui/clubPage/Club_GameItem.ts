@@ -36,7 +36,7 @@ export class Club_GameItem extends BaseUI
     @property(BaseButton) 
     mEnterBtn: BaseButton = null;
 
-    mData : GameStaticData = null;
+    mData : ClubGameInfo = null;
     mGameId : string ;
     InitParam()
     {
@@ -46,8 +46,9 @@ export class Club_GameItem extends BaseUI
     {
         this.mEnterBtn.SetClickCallback(()=>
         {
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-            NetworkSend.Instance.EnterGame(this.mGameId , this.mData.basicConfig.gameType , clubId);
+            let selfClubInfo = LocalPlayerData.Instance.Data_SelfClubInfo.mData;
+            let clubInfo = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
+            NetworkSend.Instance.EnterGame(this.mGameId , this.mData.gameStaticData.basicConfig.gameType , selfClubInfo , clubInfo);
         })
     }
     RegDataNotify()
@@ -74,52 +75,52 @@ export class Club_GameItem extends BaseUI
         this.mEnterBtn.SetInteractable(false);
     }
 
-    public InitWithServerData(_gameId : string , _data : GameStaticData)
+    public InitWithServerData(_gameId : string , _data : ClubGameInfo)
     {
         this.mGameId = _gameId;
         this.mData = _data;
         let tempColor;
         let gameTypeName;
 
-        switch(_data.basicConfig.gameType)
+        switch(_data.gameStaticData.basicConfig.gameType)
         {
             case GameType.GameType_TexasCash:
                 tempColor = new Color(109,176,99);
                 gameTypeName = "NLH";
-                this.mBlindInfo.string = _data.texasConfig.smallBlind + "/" + _data.texasConfig.smallBlind * 2;
-                if(_data.texasConfig.straddle)
+                this.mBlindInfo.string = _data.gameStaticData.texasConfig.smallBlind + "/" + _data.gameStaticData.texasConfig.smallBlind * 2;
+                if(_data.gameStaticData.texasConfig.straddle)
                 {
-                    this.mBlindInfo.string += "/" + _data.texasConfig.smallBlind * 4;
+                    this.mBlindInfo.string += "/" + _data.gameStaticData.texasConfig.smallBlind * 4;
                 }
-                if(_data.texasConfig.ante > 0)
+                if(_data.gameStaticData.texasConfig.ante > 0)
                 {
-                    this.mBlindInfo.string += "(" + _data.texasConfig.ante+ ")";
+                    this.mBlindInfo.string += "(" + _data.gameStaticData.texasConfig.ante+ ")";
                 }
-                this.mMinBringIn.string = _data.texasConfig.minBringIn + "";
-                this.mMaxBringIn.string = _data.texasConfig.maxBringIn + "";
+                this.mMinBringIn.string = _data.gameStaticData.texasConfig.minBringIn + "";
+                this.mMaxBringIn.string = _data.gameStaticData.texasConfig.maxBringIn + "";
             break
             case GameType.GameType_ShortCash:
                 tempColor = new Color(98,174,175);
                 gameTypeName = "Short";
-                if(_data.basicConfig.shortConfig.scoreMode == ShortGameScoreMode.ShortGameScoreMode_BlindMode)
+                if(_data.gameStaticData.basicConfig.shortConfig.scoreMode == ShortGameScoreMode.ShortGameScoreMode_BlindMode)
                 {
-                    this.mBlindInfo.string = _data.texasConfig.smallBlind + "/" + _data.texasConfig.smallBlind * 2;
-                    if(_data.texasConfig.straddle)
+                    this.mBlindInfo.string = _data.gameStaticData.texasConfig.smallBlind + "/" + _data.gameStaticData.texasConfig.smallBlind * 2;
+                    if(_data.gameStaticData.texasConfig.straddle)
                     {
-                        this.mBlindInfo.string += "/" + _data.texasConfig.smallBlind * 4;
+                        this.mBlindInfo.string += "/" + _data.gameStaticData.texasConfig.smallBlind * 4;
                     }
-                    if(_data.texasConfig.ante > 0)
+                    if(_data.gameStaticData.texasConfig.ante > 0)
                     {
-                        this.mBlindInfo.string += "(" + _data.texasConfig.ante+ ")";
+                        this.mBlindInfo.string += "(" + _data.gameStaticData.texasConfig.ante+ ")";
                     }
-                    this.mMinBringIn.string = _data.texasConfig.minBringIn + "";
-                    this.mMaxBringIn.string = _data.texasConfig.maxBringIn + "";
+                    this.mMinBringIn.string = _data.gameStaticData.texasConfig.minBringIn + "";
+                    this.mMaxBringIn.string = _data.gameStaticData.texasConfig.maxBringIn + "";
                 }
-                else if(_data.basicConfig.shortConfig.scoreMode == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
+                else if(_data.gameStaticData.basicConfig.shortConfig.scoreMode == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
                 {
-                    this.mBlindInfo.string = _data.basicConfig.shortConfig.baseScore + " ante";
-                    this.mMinBringIn.string = _data.basicConfig.shortConfig.baseScore * 50 + "";
-                    this.mMaxBringIn.string = _data.basicConfig.shortConfig.baseScore * 100 + "";
+                    this.mBlindInfo.string = _data.gameStaticData.basicConfig.shortConfig.baseScore + " ante";
+                    this.mMinBringIn.string = _data.gameStaticData.basicConfig.shortConfig.baseScore * 50 + "";
+                    this.mMaxBringIn.string = _data.gameStaticData.basicConfig.shortConfig.baseScore * 100 + "";
                 }
             break
             // case GameType.GameType_Mtt:
@@ -138,40 +139,40 @@ export class Club_GameItem extends BaseUI
 
         if(_data.aboutGameInfo != null)
         {
-            this.mCircleTimer.SetProgress(_data.aboutGameInfo.currentPlayerNum / _data.texasConfig.seatNum);
-            this.mCircleTimer.SetTimerTitle(_data.aboutGameInfo.currentPlayerNum + "/"+_data.texasConfig.seatNum);
-            this.mLeftTime.string = _data.aboutGameInfo.leftTime+ "/" + _data.texasConfig.gameDuration + "h";
+            this.mCircleTimer.SetProgress(_data.aboutGameInfo.currentPlayerNum / _data.gameStaticData.texasConfig.seatNum);
+            this.mCircleTimer.SetTimerTitle(_data.aboutGameInfo.currentPlayerNum + "/"+_data.gameStaticData.texasConfig.seatNum);
+            this.mLeftTime.string = _data.aboutGameInfo.leftTime+ "/" + _data.gameStaticData.texasConfig.gameDuration + "h";
         }
         else
         {
             this.mCircleTimer.SetProgress(1);
-            this.mCircleTimer.SetTimerTitle(_data.texasConfig.seatNum + "");
-            this.mLeftTime.string = _data.texasConfig.gameDuration + "h";
+            this.mCircleTimer.SetTimerTitle(_data.gameStaticData.texasConfig.seatNum + "");
+            this.mLeftTime.string = _data.gameStaticData.texasConfig.gameDuration + "h";
         }
 
-        this.mGameName.string = _data.basicConfig.gameName;
-        if(_data.basicConfig.currencyType == GameCurrencyType.GameCurrencyType_Coin)
+        this.mGameName.string = _data.gameStaticData.basicConfig.gameName;
+        if(_data.gameStaticData.basicConfig.currencyType == GameCurrencyType.GameCurrencyType_Coin)
         {
             this.mScoreTag.getChildByName("Label").getComponent(Label).string = Localization.GetString("00092");
         }
-        else if(_data.basicConfig.currencyType == GameCurrencyType.GameCurrencyType_Point)
+        else if(_data.gameStaticData.basicConfig.currencyType == GameCurrencyType.GameCurrencyType_Point)
         {
             this.mScoreTag.getChildByName("Label").getComponent(Label).string = Localization.GetString("00093");
         }
 
-        this.mInsuranceTag.active = _data.texasConfig.insurance;
+        this.mInsuranceTag.active = _data.gameStaticData.texasConfig.insurance;
 
-        this.mIpTag.active = _data.texasConfig.gpsLimit || _data.texasConfig.ipLimit;
+        this.mIpTag.active = _data.gameStaticData.texasConfig.gpsLimit || _data.gameStaticData.texasConfig.ipLimit;
         let gpsAndIp = "";
-        if(_data.texasConfig.gpsLimit)
+        if(_data.gameStaticData.texasConfig.gpsLimit)
         {
             gpsAndIp = "GPS";
-            if(_data.texasConfig.ipLimit)
+            if(_data.gameStaticData.texasConfig.ipLimit)
             {
                 gpsAndIp += "/IP";
             }
         }
-        else if(_data.texasConfig.ipLimit)
+        else if(_data.gameStaticData.texasConfig.ipLimit)
         {
             gpsAndIp = "IP";
         }

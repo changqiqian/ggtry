@@ -8,6 +8,15 @@ import { HallData } from '../hall/HallData';
 import { Club_MainEnter } from './Club_MainEnter';
 const { ccclass, property } = _decorator;
 
+class ClubStrct
+{
+    constructor()
+    {
+
+    }
+}
+
+
 @ccclass('Club_Main')
 export class Club_Main extends BaseUI 
 {
@@ -74,7 +83,6 @@ export class Club_Main extends BaseUI
         {
             this.InsertClub(_data);
         });
-
 
         HallData.Instance.Data_ClubEnter.AddListenner(this,(_data)=>
         {
