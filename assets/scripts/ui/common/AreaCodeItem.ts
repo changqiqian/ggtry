@@ -11,7 +11,7 @@ export class AreaCodeItem extends BaseUI {
     mSelectedBG: Node = null;
     @property(BaseButton) 
     mBtn: BaseButton = null;
-    mIndex : number = -1;
+    mIndex : number;
     InitParam() 
     {
 
@@ -65,7 +65,7 @@ export class AreaCodeItem extends BaseUI {
 
     ContainTargetContent(_targetContent : string) : boolean
     {
-        let result =  this.mBtn.GetTitle().indexOf(_targetContent) != -1;
+        let result =  this.mBtn.GetTitle().indexOf(_targetContent) >= 0;
         return result;
     }
 

@@ -32,13 +32,16 @@ export class Me_DeleteAccount extends BaseUI {
         this.mReSendSmsBtn.SetClickCallback(() => {
             this.mReSendSmsBtn.node.active = false;
         });
-        this.mDeleteBtn.SetClickCallback(() => {
-            if (this.mSmsEditBox.string.length !== 6) {
+        this.mDeleteBtn.SetClickCallback(() => 
+        {
+            if (this.mSmsEditBox.string.length !== 6) 
+            {
                 UIMgr.Instance.ShowToast(Localization.GetString('00006'));
                 return;
             }
 
-            if (this.mSmsEditBox.string.indexOf(' ') != -1) {
+            if (this.mSmsEditBox.string.indexOf(' ') >= 0) 
+            {
                 UIMgr.Instance.ShowToast(Localization.GetString('00005'));
                 return;
             }

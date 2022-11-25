@@ -47,7 +47,6 @@ export class Club_CreateTexas extends BaseUI
         this.mSaveBtn.SetClickCallback(()=>
         {
             let currentModuleIndex = HallData.Instance.Data_ClubCurrentModuleIndex.mData;
-            console.log("currentModuleIndex===" + currentModuleIndex);
             let saveResult = GameConfig.TryToSaveCreateRoomModule(HallData.Instance.Data_Club_CreateTexasConfig.mData , currentModuleIndex);
             if(saveResult)
             {

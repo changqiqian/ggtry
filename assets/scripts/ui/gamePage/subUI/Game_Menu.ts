@@ -110,7 +110,53 @@ export class Game_Menu extends BaseUI
 
     public InitWithData(_index : number)
     {
-        this.mIndex = _index;        
+        this.mIndex = _index;    
+        let gameStruct = MultipleTableCtr.FindGameStruct(_index);
+        let gameType = gameStruct.mGameData.Data_GameStaticData.mData.basicConfig.gameType;
+        let clubId =  gameStruct.mClubId;
+        if(clubId == "")
+        {
+            this.mDismiss.Show(false);
+        }
+        else
+        {
+            
+        }
+
+
+        // switch(gameType)
+        // {
+        //     case GameType.GameType_TexasCash:
+        //     {
+
+        //     }
+        //     break;
+        //     case GameType.GameType_ShortCash:
+        //     {
+                
+        //     }
+        //     break;
+        //     case GameType.GameType_OmhCash:
+        //     {
+                
+        //     }
+        //     break;
+        //     case GameType.GameType_TexasMtt:
+        //     {
+                
+        //     }
+        //     break;
+        //     case GameType.GameType_ShortMtt:
+        //     {
+                
+        //     }
+        //     break;
+        //     case GameType.GameType_OmhMtt:
+        //     {
+                
+        //     }
+        //     break;
+        // }
     }
 
     public Show(_val : boolean)

@@ -3,7 +3,7 @@ import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
 export class GameConfig
 {
-    public static DebugMode =  true;
+    public static readonly DebugMode =  true;
     public static DevelopIP = "52.77.219.158:9501"; //开发环境ip 可选
     public static TestIP = "52.77.219.158:9601"; //测试环境ip 可选
     public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip 上面选项选择后，会赋值给UsingIp
@@ -14,19 +14,19 @@ export class GameConfig
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
     }
     //发布的版本号
-    public static Version = "1.5.2"
+    public static readonly Version = "1.5.2"
 
       
     public static LOGIN_TOKEN;
 
     public static WebberAddr= "http://18.142.237.115:9487"; //打开收银台web
 
-    public static MultipleUIHeight = 150;//多桌ui 占用屏幕顶部的高度
-    public static ClubLogoNumber = 8; //俱乐部logo数量
-    public static ClubStampNumber = 4; //俱乐部封面数量
-    public static WrongIndex = -99;//错误编号
+    public static readonly MultipleUIHeight = 150;//多桌ui 占用屏幕顶部的高度
+    public static readonly ClubLogoNumber = 8; //俱乐部logo数量
+    public static readonly ClubStampNumber = 4; //俱乐部封面数量
+    public static readonly WrongIndex = -99;//错误编号
 
-    public static AreaCodeList=[
+    public static readonly AreaCodeList=[
         {"name":"CountryName0", "areaCode": "+852"},
         {"name":"CountryName1", "areaCode": "+63"},
         {"name":"CountryName2", "areaCode": "+886"},
@@ -425,7 +425,7 @@ export class GameConfig
     {
         let newIndex;
 
-        if(_index != -1)
+        if(_index !=  GameConfig.WrongIndex)
         {
             newIndex = _index;
         }
@@ -434,7 +434,7 @@ export class GameConfig
             newIndex =GameConfig.GetCreateRoomModuleNewIndex();
         }
 
-        if(newIndex == -1)
+        if(newIndex ==  GameConfig.WrongIndex)
         {
             return false;
         }
@@ -454,7 +454,7 @@ export class GameConfig
         }
 
         console.log("模版空间已满")
-        return -1;
+        return  GameConfig.WrongIndex;
     }
 
     public static DeleteCreateRoomModule(_index : number)
@@ -488,7 +488,7 @@ export class GameConfig
             let currentModule = GameConfig.GetCreateRoomModule(step);
             if(currentModule == null)
             {
-                let nextModuleIndex= -1;
+                let nextModuleIndex =  GameConfig.WrongIndex;
                 for(let i = step + 1 ; i < GameConfig.MaxModule ; i++)
                 {
                     let tempModuleData = GameConfig.GetCreateRoomModule(i);
@@ -499,7 +499,7 @@ export class GameConfig
                     nextModuleIndex = i;
                     break;
                 }
-                if(nextModuleIndex != -1)
+                if(nextModuleIndex !=  GameConfig.WrongIndex)
                 {
                     let nextModuleData = GameConfig.GetCreateRoomModule(nextModuleIndex); 
                     GameConfig.DeleteCreateRoomModule(nextModuleIndex);

@@ -166,7 +166,7 @@ export class Tool
             return false;
         }
 
-        if(_target.indexOf(" ") != -1)
+        if(_target.indexOf(" ") >= 0)
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00015"));
             return false;
@@ -188,7 +188,7 @@ export class Tool
             return false;
         }
 
-        if(_target.indexOf(" ") != -1)
+        if(_target.indexOf(" ") >= 0)
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00015"));
             return false;
@@ -210,7 +210,7 @@ export class Tool
             return false;
         }
 
-        if(_target.indexOf(" ") != -1)
+        if(_target.indexOf(" ") >= 0)
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00015"));
             return false;
@@ -231,7 +231,7 @@ export class Tool
             return false;
         }
 
-        if(_target.indexOf(" ") != -1)
+        if(_target.indexOf(" ")  >= 0)
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00015"));
             return false;
@@ -262,7 +262,7 @@ export class Tool
             return false;
         }
 
-        if(_target.indexOf(" ") != -1) 
+        if(_target.indexOf(" ")  >= 0) 
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00015"));
             return false;

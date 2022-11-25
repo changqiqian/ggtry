@@ -46,6 +46,6 @@ export class CowboyData extends SingletonBaseNotify<CowboyData>()
 
 
     //常量
-    public static TotalCards : number = 5; 
+    public static readonly TotalCards : number = 5; 
 }
 

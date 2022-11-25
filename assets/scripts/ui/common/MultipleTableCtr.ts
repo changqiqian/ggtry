@@ -17,7 +17,7 @@ class GameStruct
     constructor(_gameId : string = "") 
     {
         this.mGameId = _gameId;
-        this.mIndex = -1;
+        this.mIndex = GameConfig.WrongIndex;
         this.mGameType = null;
         this.mScript = null;
         this.mPrefabName = "";
@@ -76,7 +76,6 @@ class GameStruct
 @ccclass('MultipleTableCtr')
 export class MultipleTableCtr extends BaseUI 
 {
-    public static MultipleUIHeight : number = 150;
     @property(Node) 
     mLayout: Node = null;
 
@@ -84,8 +83,8 @@ export class MultipleTableCtr extends BaseUI
     mHomeToggle: ToggleBtn = null;
 
     public static GameStruct:Array<GameStruct> = new Array<GameStruct>();
-    public static MaxGame : number = 4;
-    private static HomeIndex : number = -1;
+    public static readonly MaxGame : number = 4;
+    private static readonly HomeIndex : number = -1;
 
     InitParam()
     {

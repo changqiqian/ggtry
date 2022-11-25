@@ -8,7 +8,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_Cash')
 export class Game_Cash extends GameBase 
 {
-    public static PrefabName :string = "Game_Cash";
+    public static readonly PrefabName :string = "Game_Cash";
     InitOtherUI()
     {
         this.AddSubView("gamePage","prefab/Game_TableInfo", (_script)=>

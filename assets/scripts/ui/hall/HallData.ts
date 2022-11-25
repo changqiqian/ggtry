@@ -39,7 +39,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
     //Club
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public static ClubUiTag = "ClubTag";            
+    public static readonly ClubUiTag = "ClubTag";            
         //俱乐部战绩
     Data_ClubRecordSubPage : BaseData<Club_RecordSubPage> = new BaseData<Club_RecordSubPage>();//俱乐部战绩 子页面
     Data_ClubRecordDetailSubPage : BaseData<Club_RecordDetailSubPage> = new BaseData<Club_RecordDetailSubPage>();//俱乐部战绩详情 子页面
@@ -203,7 +203,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
     //创建俱乐部房间时候的 生成基础配置
     ResetCreateRoomParam(_type : GameType)
     {
-        this.Data_ClubCurrentModuleIndex.mData = -1;
+        this.Data_ClubCurrentModuleIndex.mData = GameConfig.WrongIndex;
 
 
         this.Data_ClubCreateGameType.mData = _type;
