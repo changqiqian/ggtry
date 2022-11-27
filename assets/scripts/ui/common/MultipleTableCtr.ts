@@ -157,6 +157,10 @@ export class MultipleTableCtr extends BaseUI
     DeleteGameUI(_gameId : string)
     {
         let current = MultipleTableCtr.FindGameStructByGameId(_gameId);
+        if(current == null)
+        {
+            return;
+        }
         current.mGameData.Clear();
         current.mGameData = null;
         let index = current.mIndex;

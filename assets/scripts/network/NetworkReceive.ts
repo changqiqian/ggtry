@@ -144,7 +144,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             {
                 LocalPlayerData.Instance.Data_SelfClubInfo.mData = msg.clubMember;
                 LocalPlayerData.Instance.Data_CurrentEnterClub.mData = msg.clubInfo;
-                LocalPlayerData.Instance.Data_UpdateCurrentClub.mData = true;
                 HallData.Instance.Data_ClubEnter.mData = true;
             }
             else
@@ -286,12 +285,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 if(HallData.Instance.Data_ClubEnter.mData)
                 {
                     LocalPlayerData.Instance.Data_CurrentEnterClub.mData = msg.clubInfo;
-                    LocalPlayerData.Instance.Data_UpdateCurrentClub.mData = true;
                 }
-                else
-                {
-                    LocalPlayerData.Instance.Data_ModifyClubInfo.mData = msg.clubInfo;
-                }
+                HallData.Instance.Data_ModifyClubInfo.mData = msg.clubInfo;
             }
             else
             {
@@ -307,7 +302,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(msg.result.resId == MsgResult.Success)
             {
                 LocalPlayerData.Instance.Data_CurrentEnterClub.mData.totalClubPoint = msg.clubRestPoint;
-                LocalPlayerData.Instance.Data_UpdateCurrentClub.mData = true;
                 HallData.Instance.Data_ShareClubScore.mData = msg;
                 UIMgr.Instance.ShowToast(Localization.GetString("00120"));
             }
@@ -356,8 +350,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(msg.result.resId == MsgResult.Success)
             {
                 UIMgr.Instance.ShowToast(Localization.GetString("00237"));
-                HallData.Instance.UpdateOneGame(msg.gameInfo);
-                HallData.Instance.Data_UpdateClubGameList.mData = true;
+                HallData.Instance.AddOneGame(msg.gameInfo);
+                HallData.Instance.Data_S2CCreateClubGame.mData = msg;
             }
             else
             {
@@ -372,11 +366,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_GetClubGameList  获取俱乐部游戏列表==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                if(msg.gameInfo != null && msg.gameInfo.length > 0)
-                {
-                    HallData.Instance.UpdateGameList(msg.gameInfo);
-                }
-
+                HallData.Instance.UpdateGameList(msg.gameInfo);
+                HallData.Instance.Data_S2CGetClubGameList.mData = msg;
             }
             else
             {
@@ -432,6 +423,44 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonSitDownResp,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonSitDownResp.decode(_data);
+            console.log("收到的内容 S2C_CommonSitDownResp  坐下==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameData = MultipleTableCtr.GetGameDataByGameId(msg.gameId);
+                if(gameData != null)
+                {
+                    gameData.Data_S2CCommonSitDownResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonStandUpResp,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonStandUpResp.decode(_data);
+            console.log("收到的内容 S2C_CommonStandUpResp  站起==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameData = MultipleTableCtr.GetGameDataByGameId(msg.gameId);
+                if(gameData != null)
+                {
+                    gameData.Data_S2CCommonStandUpResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
@@ -452,7 +481,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
-
 
         Network.Instance.AddMsgListenner(MessageId.S2C_DismissClubNotify,(_data)=>
         {
@@ -503,14 +531,15 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_ClubPlayerPointNotify  我的俱乐部积分修改===" + JSON.stringify(msg));
             if(HallData.Instance.Data_ClubEnter.mData)
             {
-                if(msg.clubId == LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
+                let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+                if(msg.clubId == currentClubId)
                 {
                     LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint = msg.playerRestAmount;
-                    HallData.Instance.Data_ClubUpdateSelfData.mData = true;
                 }
             }
-        },this);
+            HallData.Instance.Data_S2CClubPlayerPointNotify.mData = msg;
 
+        },this);
 
         Network.Instance.AddMsgListenner(MessageId.S2C_ModifyMemberRoleNotify,(_data)=>
         {
@@ -522,9 +551,9 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 if(currentClubId == msg.clubId)
                 {
                     LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType = msg.memberType;
-                    HallData.Instance.Data_ClubUpdateSelfData.mData = true;
                 }
             }
+            HallData.Instance.Data_S2CModifyMemberRoleNotify.mData = msg;
         },this);
 
         Network.Instance.AddMsgListenner(MessageId.S2C_DismissClubGameNotify,(_data)=>
@@ -536,6 +565,29 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             UIMgr.Instance.ShowToast(tips);
         },this);
         
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonSitDownNotify,(_data)=>
+        {
+            let msg = S2CCommonSitDownNotify.decode(_data);
+            console.log("收到的内容 S2CCommonSitDownNotify  坐下推送===" + JSON.stringify(msg));
+            let gameData = MultipleTableCtr.GetGameDataByGameId(msg.gameId);
+            if(gameData != null)
+            {
+                gameData.PlayerSit(msg.seatInfo);
+                gameData.Data_S2CCommonSitDownNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonStandUpNotify,(_data)=>
+        {
+            let msg = S2CCommonStandUpNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonStandUpNotify  站起推送===" + JSON.stringify(msg));
+            let gameData = MultipleTableCtr.GetGameDataByGameId(msg.gameId);
+            if(gameData != null)
+            {
+                gameData.PlayerStand(msg.actionUid);
+                gameData.Data_S2CCommonStandUpNotify.mData = msg;
+            }
+        },this);
     }
 
     public UnregisterMsg()

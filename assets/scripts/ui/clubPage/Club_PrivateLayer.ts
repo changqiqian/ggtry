@@ -120,37 +120,30 @@ export class Club_PrivateLayer extends BaseUI
     RegDataNotify()
     {
 
-        LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
-        {
-            if(this.node.activeInHierarchy == false)
-            {
-                return;
-            }
-            this.UpdateClubInfoUI();
-        });
-
-        LocalPlayerData.Instance.Data_SelfClubInfo.AddListenner(this,(_data)=>
-        {
-            if(this.node.activeInHierarchy == false)
-            {
-                return;
-            }
-            this.UpdateMoney();
-        });
-
-        LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ModifyClubInfo.AddListenner(this,(_data)=>
         {
             if(this.node.activeInHierarchy == false)
             {
                 return;
             }
             let currentClubData = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
+            if(currentClubData.id != _data.clubInfo.id)
+            {
+                return;
+            }
+            
             this.mClubName.string = currentClubData.name;
         });
 
-        HallData.Instance.Data_ClubUpdateSelfData.AddListenner(this,(_data)=>
+        HallData.Instance.Data_S2CClubPlayerPointNotify.AddListenner(this,(_data)=>
         {
             if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(currentClubId != _data.clubId)
             {
                 return;
             }
@@ -183,15 +176,67 @@ export class Club_PrivateLayer extends BaseUI
         });
 
 
-        HallData.Instance.Data_UpdateClubGameList.AddListenner(this,(_data)=>
+        HallData.Instance.Data_S2CCreateClubGame.AddListenner(this,(_data)=>
         {
             if(this.node.activeInHierarchy == false)
             {
                 return;
             }
 
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(currentClubId != _data.clubId)
+            {
+                return;
+            }
             this.mGameList = HallData.Instance.Data_ClubGameInfos.mData;
             this.mListView.numItems = this.mGameList.length;
+        });
+
+        HallData.Instance.Data_S2CGetClubGameList.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(currentClubId != _data.clubId)
+            {
+                return;
+            }
+
+            this.mGameList = HallData.Instance.Data_ClubGameInfos.mData;
+            this.mListView.numItems = this.mGameList.length;
+        });
+
+        HallData.Instance.Data_S2CDismissClubGame.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(currentClubId != _data.clubId)
+            {
+                return;
+            }
+            this.DragTop();
+        });
+
+        HallData.Instance.Data_S2CDismissClubGameNotify.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(currentClubId != _data.clubId)
+            {
+                return;
+            }
+            this.DragTop();
         });
     }
 
@@ -238,8 +283,7 @@ export class Club_PrivateLayer extends BaseUI
 
     HaveRights() :boolean
     {
-        let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == 
-            ClubMemberType.ClubAccountType_Owner
+        let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == ClubMemberType.ClubAccountType_Owner
         if(selfIsOwner)
         {
         }

@@ -326,6 +326,8 @@ export class Localization {
         { name: '00238', ch: '奥马哈', en: 'Omh' },
         { name: '00239', ch: '最多只能同时加入4个游戏', en: 'Max Game' },
         { name: '00240', ch: '游戏xxx已经被解散', en: 'room xxx dismiss' },
+        { name: '00241', ch: '暂离', en: 'Leave' },
+        
         
         
         { name: '01000', ch: '公告', en: 'Notification' },

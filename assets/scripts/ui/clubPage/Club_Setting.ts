@@ -239,9 +239,15 @@ export class Club_Setting extends BaseUI
 
     RegDataNotify()
     {
-        LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ModifyClubInfo.AddListenner(this,(_data)=>
         {
             if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let clubInfo =LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
+            if(clubInfo.id != _data.clubInfo.id)
             {
                 return;
             }

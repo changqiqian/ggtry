@@ -1,9 +1,14 @@
 import { _decorator, Component, Node, UITransform, Tween, Vec3, easing, Widget } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { UIMgr } from '../../../base/UIMgr';
+import { GameConfig } from '../../../GameConfig';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { GameData } from '../GameData';
+import { Game_BuyInWindow } from './Game_BuyInWindow';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Menu')
@@ -69,7 +74,11 @@ export class Game_Menu extends BaseUI
         });
         this.mBringInBtn.SetClickCallback(()=>
         {
-
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyInWindow",true,(_script)=>
+            {
+                let temp = _script as Game_BuyInWindow;
+                temp.InitWithData(this.mIndex);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
         this.mBringOutBtn.SetClickCallback(()=>
         {
@@ -81,6 +90,15 @@ export class Game_Menu extends BaseUI
         });
         this.mStandBtn.SetClickCallback(()=>
         {
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            let msgId = gameData.StandUpSendMsgId();
+            let gameId = gameStruct.mGameId;
+            let seatId = gameData.GetSeatByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            if(seatId != null)
+            {
+                NetworkSend.Instance.StandUp(msgId,gameId,seatId);
+            }
 
         });
         this.mExitBtn.SetClickCallback(()=>
@@ -122,6 +140,7 @@ export class Game_Menu extends BaseUI
             this.mDismiss.Show(false);
         }
 
+        this.BindData();
 
         // switch(gameType)
         // {
@@ -156,6 +175,31 @@ export class Game_Menu extends BaseUI
         //     }
         //     break;
         // }
+    }
+
+    BindData()
+    {
+        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
+        {
+            this.UpdateStandBtn();
+        });
+        gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateStandBtn();
+        });
+
+        gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateStandBtn();
+        });
+    }
+
+    UpdateStandBtn()
+    {
+        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        let seatId = gameData.GetSeatByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        this.mStandBtn.Show(seatId != null);
     }
 
     public Show(_val : boolean)

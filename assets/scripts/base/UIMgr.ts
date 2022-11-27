@@ -222,7 +222,6 @@ export class UIMgr extends Singleton<UIMgr>()
             }
             return;
         }
-        console.log("CreateRecordItem ===_tag===" + _tag);
         this.CreateRecordItem(key, LayerType.Layer , _tag);
         this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
         {

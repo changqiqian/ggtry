@@ -1139,7 +1139,11 @@ export enum GameType {
 export enum ActionType {
     ActionType_Fold = 0,
     ActionType_Check = 1,
-    ActionType_Bet = 2
+    ActionType_Bet = 2,
+    ActionType_Ante = 3,
+    ActionType_SB = 4,
+    ActionType_BB = 5,
+    ActionType_Straddle = 6
 }
 
 /** GameTaxType enum. */
@@ -1158,6 +1162,18 @@ export enum GameCurrencyType {
 export enum ShortGameScoreMode {
     ShortGameScoreMode_AnteMode = 0,
     ShortGameScoreMode_BlindMode = 1
+}
+
+/** TexasCashState enum. */
+export enum TexasCashState {
+    TexasCashState_Create = 0,
+    TexasCashState_Start = 1,
+    TexasCashState_RoundStart = 2,
+    TexasCashState_PreFlopRound = 3,
+    TexasCashState_FlopRound = 4,
+    TexasCashState_TurnRound = 5,
+    TexasCashState_RiverRound = 6,
+    TexasCashState_Settlement = 7
 }
 
 /** Represents a BasicGameConfig. */
@@ -1402,6 +1418,24 @@ export class PlayerInfo implements IPlayerInfo {
     /** PlayerInfo cards. */
     public cards: ICardInfo[];
 
+    /** PlayerInfo buyIn. */
+    public buyIn: boolean;
+
+    /** PlayerInfo buyInLeftTime. */
+    public buyInLeftTime: number;
+
+    /** PlayerInfo playThisTurn. */
+    public playThisTurn: boolean;
+
+    /** PlayerInfo fold. */
+    public fold: boolean;
+
+    /** PlayerInfo auto. */
+    public auto: boolean;
+
+    /** PlayerInfo autoLeftTime. */
+    public autoLeftTime: number;
+
     /**
      * Encodes the specified PlayerInfo message. Does not implicitly {@link PlayerInfo.verify|verify} messages.
      * @param m PlayerInfo message or plain object to encode
@@ -1609,6 +1643,9 @@ export class GameDynamicData implements IGameDynamicData {
     /** GameDynamicData actionUid. */
     public actionUid: string;
 
+    /** GameDynamicData actionLeftTime. */
+    public actionLeftTime: number;
+
     /** GameDynamicData potInfo. */
     public potInfo?: (IPotInfo|null);
 
@@ -1617,6 +1654,9 @@ export class GameDynamicData implements IGameDynamicData {
 
     /** GameDynamicData publicCards. */
     public publicCards: ICardInfo[];
+
+    /** GameDynamicData dealerUid. */
+    public dealerUid: string;
 
     /**
      * Encodes the specified GameDynamicData message. Does not implicitly {@link GameDynamicData.verify|verify} messages.
@@ -3199,11 +3239,8 @@ export class S2CCommonSitDownNotify implements IS2CCommonSitDownNotify {
     /** S2CCommonSitDownNotify gameId. */
     public gameId: string;
 
-    /** S2CCommonSitDownNotify playerInfo. */
-    public playerInfo?: (IPlayerInfo|null);
-
-    /** S2CCommonSitDownNotify letTime. */
-    public letTime: number;
+    /** S2CCommonSitDownNotify seatInfo. */
+    public seatInfo?: (ISeatInfo|null);
 
     /**
      * Encodes the specified S2CCommonSitDownNotify message. Does not implicitly {@link S2CCommonSitDownNotify.verify|verify} messages.

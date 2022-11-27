@@ -2816,12 +2816,20 @@ $root.GameType = (function() {
  * @property {number} ActionType_Fold=0 ActionType_Fold value
  * @property {number} ActionType_Check=1 ActionType_Check value
  * @property {number} ActionType_Bet=2 ActionType_Bet value
+ * @property {number} ActionType_Ante=3 ActionType_Ante value
+ * @property {number} ActionType_SB=4 ActionType_SB value
+ * @property {number} ActionType_BB=5 ActionType_BB value
+ * @property {number} ActionType_Straddle=6 ActionType_Straddle value
  */
 $root.ActionType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "ActionType_Fold"] = 0;
     values[valuesById[1] = "ActionType_Check"] = 1;
     values[valuesById[2] = "ActionType_Bet"] = 2;
+    values[valuesById[3] = "ActionType_Ante"] = 3;
+    values[valuesById[4] = "ActionType_SB"] = 4;
+    values[valuesById[5] = "ActionType_BB"] = 5;
+    values[valuesById[6] = "ActionType_Straddle"] = 6;
     return values;
 })();
 
@@ -2864,6 +2872,32 @@ $root.ShortGameScoreMode = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "ShortGameScoreMode_AnteMode"] = 0;
     values[valuesById[1] = "ShortGameScoreMode_BlindMode"] = 1;
+    return values;
+})();
+
+/**
+ * TexasCashState enum.
+ * @exports TexasCashState
+ * @enum {number}
+ * @property {number} TexasCashState_Create=0 TexasCashState_Create value
+ * @property {number} TexasCashState_Start=1 TexasCashState_Start value
+ * @property {number} TexasCashState_RoundStart=2 TexasCashState_RoundStart value
+ * @property {number} TexasCashState_PreFlopRound=3 TexasCashState_PreFlopRound value
+ * @property {number} TexasCashState_FlopRound=4 TexasCashState_FlopRound value
+ * @property {number} TexasCashState_TurnRound=5 TexasCashState_TurnRound value
+ * @property {number} TexasCashState_RiverRound=6 TexasCashState_RiverRound value
+ * @property {number} TexasCashState_Settlement=7 TexasCashState_Settlement value
+ */
+$root.TexasCashState = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "TexasCashState_Create"] = 0;
+    values[valuesById[1] = "TexasCashState_Start"] = 1;
+    values[valuesById[2] = "TexasCashState_RoundStart"] = 2;
+    values[valuesById[3] = "TexasCashState_PreFlopRound"] = 3;
+    values[valuesById[4] = "TexasCashState_FlopRound"] = 4;
+    values[valuesById[5] = "TexasCashState_TurnRound"] = 5;
+    values[valuesById[6] = "TexasCashState_RiverRound"] = 6;
+    values[valuesById[7] = "TexasCashState_Settlement"] = 7;
     return values;
 })();
 
@@ -3577,6 +3611,12 @@ $root.PlayerInfo = (function() {
      * @property {string|null} [head] PlayerInfo head
      * @property {number|null} [currency] PlayerInfo currency
      * @property {Array.<ICardInfo>|null} [cards] PlayerInfo cards
+     * @property {boolean|null} [buyIn] PlayerInfo buyIn
+     * @property {number|null} [buyInLeftTime] PlayerInfo buyInLeftTime
+     * @property {boolean|null} [playThisTurn] PlayerInfo playThisTurn
+     * @property {boolean|null} [fold] PlayerInfo fold
+     * @property {boolean|null} [auto] PlayerInfo auto
+     * @property {number|null} [autoLeftTime] PlayerInfo autoLeftTime
      */
 
     /**
@@ -3636,6 +3676,54 @@ $root.PlayerInfo = (function() {
     PlayerInfo.prototype.cards = $util.emptyArray;
 
     /**
+     * PlayerInfo buyIn.
+     * @member {boolean} buyIn
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.buyIn = false;
+
+    /**
+     * PlayerInfo buyInLeftTime.
+     * @member {number} buyInLeftTime
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.buyInLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerInfo playThisTurn.
+     * @member {boolean} playThisTurn
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.playThisTurn = false;
+
+    /**
+     * PlayerInfo fold.
+     * @member {boolean} fold
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.fold = false;
+
+    /**
+     * PlayerInfo auto.
+     * @member {boolean} auto
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.auto = false;
+
+    /**
+     * PlayerInfo autoLeftTime.
+     * @member {number} autoLeftTime
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.autoLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified PlayerInfo message. Does not implicitly {@link PlayerInfo.verify|verify} messages.
      * @function encode
      * @memberof PlayerInfo
@@ -3659,6 +3747,18 @@ $root.PlayerInfo = (function() {
             for (var i = 0; i < m.cards.length; ++i)
                 $root.CardInfo.encode(m.cards[i], w.uint32(50).fork()).ldelim();
         }
+        if (m.buyIn != null && Object.hasOwnProperty.call(m, "buyIn"))
+            w.uint32(56).bool(m.buyIn);
+        if (m.buyInLeftTime != null && Object.hasOwnProperty.call(m, "buyInLeftTime"))
+            w.uint32(64).int64(m.buyInLeftTime);
+        if (m.playThisTurn != null && Object.hasOwnProperty.call(m, "playThisTurn"))
+            w.uint32(72).bool(m.playThisTurn);
+        if (m.fold != null && Object.hasOwnProperty.call(m, "fold"))
+            w.uint32(80).bool(m.fold);
+        if (m.auto != null && Object.hasOwnProperty.call(m, "auto"))
+            w.uint32(88).bool(m.auto);
+        if (m.autoLeftTime != null && Object.hasOwnProperty.call(m, "autoLeftTime"))
+            w.uint32(96).int64(m.autoLeftTime);
         return w;
     };
 
@@ -3696,6 +3796,24 @@ $root.PlayerInfo = (function() {
                 if (!(m.cards && m.cards.length))
                     m.cards = [];
                 m.cards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 7:
+                m.buyIn = r.bool();
+                break;
+            case 8:
+                m.buyInLeftTime = r.int64();
+                break;
+            case 9:
+                m.playThisTurn = r.bool();
+                break;
+            case 10:
+                m.fold = r.bool();
+                break;
+            case 11:
+                m.auto = r.bool();
+                break;
+            case 12:
+                m.autoLeftTime = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -4204,9 +4322,11 @@ $root.GameDynamicData = (function() {
      * @property {boolean|null} [gameStart] GameDynamicData gameStart
      * @property {Array.<ISeatInfo>|null} [seatInfos] GameDynamicData seatInfos
      * @property {string|null} [actionUid] GameDynamicData actionUid
+     * @property {number|null} [actionLeftTime] GameDynamicData actionLeftTime
      * @property {IPotInfo|null} [potInfo] GameDynamicData potInfo
      * @property {Array.<IActionInfo>|null} [actions] GameDynamicData actions
      * @property {Array.<ICardInfo>|null} [publicCards] GameDynamicData publicCards
+     * @property {string|null} [dealerUid] GameDynamicData dealerUid
      */
 
     /**
@@ -4252,6 +4372,14 @@ $root.GameDynamicData = (function() {
     GameDynamicData.prototype.actionUid = "";
 
     /**
+     * GameDynamicData actionLeftTime.
+     * @member {number} actionLeftTime
+     * @memberof GameDynamicData
+     * @instance
+     */
+    GameDynamicData.prototype.actionLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * GameDynamicData potInfo.
      * @member {IPotInfo|null|undefined} potInfo
      * @memberof GameDynamicData
@@ -4276,6 +4404,14 @@ $root.GameDynamicData = (function() {
     GameDynamicData.prototype.publicCards = $util.emptyArray;
 
     /**
+     * GameDynamicData dealerUid.
+     * @member {string} dealerUid
+     * @memberof GameDynamicData
+     * @instance
+     */
+    GameDynamicData.prototype.dealerUid = "";
+
+    /**
      * Encodes the specified GameDynamicData message. Does not implicitly {@link GameDynamicData.verify|verify} messages.
      * @function encode
      * @memberof GameDynamicData
@@ -4295,16 +4431,20 @@ $root.GameDynamicData = (function() {
         }
         if (m.actionUid != null && Object.hasOwnProperty.call(m, "actionUid"))
             w.uint32(26).string(m.actionUid);
+        if (m.actionLeftTime != null && Object.hasOwnProperty.call(m, "actionLeftTime"))
+            w.uint32(32).int64(m.actionLeftTime);
         if (m.potInfo != null && Object.hasOwnProperty.call(m, "potInfo"))
-            $root.PotInfo.encode(m.potInfo, w.uint32(34).fork()).ldelim();
+            $root.PotInfo.encode(m.potInfo, w.uint32(42).fork()).ldelim();
         if (m.actions != null && m.actions.length) {
             for (var i = 0; i < m.actions.length; ++i)
-                $root.ActionInfo.encode(m.actions[i], w.uint32(42).fork()).ldelim();
+                $root.ActionInfo.encode(m.actions[i], w.uint32(50).fork()).ldelim();
         }
         if (m.publicCards != null && m.publicCards.length) {
             for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(50).fork()).ldelim();
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
         }
+        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
+            w.uint32(66).string(m.dealerUid);
         return w;
     };
 
@@ -4338,17 +4478,23 @@ $root.GameDynamicData = (function() {
                 m.actionUid = r.string();
                 break;
             case 4:
-                m.potInfo = $root.PotInfo.decode(r, r.uint32());
+                m.actionLeftTime = r.int64();
                 break;
             case 5:
+                m.potInfo = $root.PotInfo.decode(r, r.uint32());
+                break;
+            case 6:
                 if (!(m.actions && m.actions.length))
                     m.actions = [];
                 m.actions.push($root.ActionInfo.decode(r, r.uint32()));
                 break;
-            case 6:
+            case 7:
                 if (!(m.publicCards && m.publicCards.length))
                     m.publicCards = [];
                 m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 8:
+                m.dealerUid = r.string();
                 break;
             default:
                 r.skipType(t & 7);
@@ -8830,8 +8976,7 @@ $root.S2CCommonSitDownNotify = (function() {
      * @exports IS2CCommonSitDownNotify
      * @interface IS2CCommonSitDownNotify
      * @property {string|null} [gameId] S2CCommonSitDownNotify gameId
-     * @property {IPlayerInfo|null} [playerInfo] S2CCommonSitDownNotify playerInfo
-     * @property {number|null} [letTime] S2CCommonSitDownNotify letTime
+     * @property {ISeatInfo|null} [seatInfo] S2CCommonSitDownNotify seatInfo
      */
 
     /**
@@ -8858,20 +9003,12 @@ $root.S2CCommonSitDownNotify = (function() {
     S2CCommonSitDownNotify.prototype.gameId = "";
 
     /**
-     * S2CCommonSitDownNotify playerInfo.
-     * @member {IPlayerInfo|null|undefined} playerInfo
+     * S2CCommonSitDownNotify seatInfo.
+     * @member {ISeatInfo|null|undefined} seatInfo
      * @memberof S2CCommonSitDownNotify
      * @instance
      */
-    S2CCommonSitDownNotify.prototype.playerInfo = null;
-
-    /**
-     * S2CCommonSitDownNotify letTime.
-     * @member {number} letTime
-     * @memberof S2CCommonSitDownNotify
-     * @instance
-     */
-    S2CCommonSitDownNotify.prototype.letTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    S2CCommonSitDownNotify.prototype.seatInfo = null;
 
     /**
      * Encodes the specified S2CCommonSitDownNotify message. Does not implicitly {@link S2CCommonSitDownNotify.verify|verify} messages.
@@ -8887,10 +9024,8 @@ $root.S2CCommonSitDownNotify = (function() {
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(10).string(m.gameId);
-        if (m.playerInfo != null && Object.hasOwnProperty.call(m, "playerInfo"))
-            $root.PlayerInfo.encode(m.playerInfo, w.uint32(18).fork()).ldelim();
-        if (m.letTime != null && Object.hasOwnProperty.call(m, "letTime"))
-            w.uint32(24).int64(m.letTime);
+        if (m.seatInfo != null && Object.hasOwnProperty.call(m, "seatInfo"))
+            $root.SeatInfo.encode(m.seatInfo, w.uint32(18).fork()).ldelim();
         return w;
     };
 
@@ -8916,10 +9051,7 @@ $root.S2CCommonSitDownNotify = (function() {
                 m.gameId = r.string();
                 break;
             case 2:
-                m.playerInfo = $root.PlayerInfo.decode(r, r.uint32());
-                break;
-            case 3:
-                m.letTime = r.int64();
+                m.seatInfo = $root.SeatInfo.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);

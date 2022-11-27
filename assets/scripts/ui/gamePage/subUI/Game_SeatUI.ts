@@ -1,5 +1,8 @@
-import { _decorator, Component, Node, Vec3 } from 'cc';
+import { _decorator, Component, Node, Vec3, Tween } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { GameData } from '../GameData';
 import { Game_SeatItem } from './Game_SeatItem';
 const { ccclass, property } = _decorator;
 
@@ -9,13 +12,7 @@ export class Game_SeatUI extends BaseUI
     private mIndex : number = null;
     InitParam() 
     {
-        let childCount = this.node.children.length; 
-        for(let i = 0 ; i < childCount ; i++)
-        {
-            let current = this.node.children[i].getComponent(Game_SeatItem);
-            current.InitWithData(this.mIndex);
-            current.SetSeatID(i);
-        }
+
     }
     BindUI() 
     {
@@ -38,6 +35,48 @@ export class Game_SeatUI extends BaseUI
     public InitWithData(_index : number)
     {
         this.mIndex = _index;
+        this.InitSeat();
+        this.BindData();
+    }
+
+    InitSeat()
+    {
+        let childCount = this.node.children.length; 
+        for(let i = 0 ; i < childCount ; i++)
+        {
+            let current = this.node.children[i].getComponent(Game_SeatItem);
+            current.InitWithData(this.mIndex , i);
+        }
+    }
+
+    BindData()
+    {
+        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+
+
+        gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
+        {
+            let seatInfos = _data.gameDynamic.seatInfos;
+            for(let i = 0 ; i < seatInfos.length ; i++)
+            {
+                let current = seatInfos[i];
+                if(current.playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+                {
+                    this.TryRotateSeats(current.seat);
+                    break;
+                }
+            }
+        })
+
+        gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
+        {
+            let seatInfo = _data.seatInfo;
+            if(seatInfo.playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
+            this.TryRotateSeats(seatInfo.seat);
+        })
     }
 
     GetSeatNodeBySeatId(_seatId : number) : Game_SeatItem
@@ -93,11 +132,31 @@ export class Game_SeatUI extends BaseUI
                 let current = this.node.children[i].getComponent(Game_SeatItem);
                 MovePathConfigArray.push(this.GetPath(current.mSeatID , step));
             }
+            this.RotateWithAnm(this.node.activeInHierarchy,MovePathConfigArray);
+        }
+    }
 
-            for(let i = 0 ; i < MovePathConfigArray.length ; i++)
+    RotateWithAnm(_anmation : boolean ,_movePathConfigArray : Array<MovePathConfig>)
+    {
+        for(let i = 0 ; i < _movePathConfigArray.length ; i++)
+        {
+            let current = _movePathConfigArray[i];
+            let movingSeat = this.GetSeatNodeBySeatId(current.mTargetId);
+            if(_anmation)
             {
-                let current = MovePathConfigArray[i];
-                let movingSeat = this.GetSeatNodeBySeatId(current.mTargetId);
+                let totalDuration = 0.3;
+                let currentDuration = current.mPath.length / totalDuration;
+                let tempTween = new Tween(movingSeat.node);
+                for(let k = 1 ; k < current.mPath.length ; k++)
+                {
+                    let destination = current.mPath[k];
+                    tempTween.to(currentDuration , {position : new Vec3(destination)});
+                }
+
+                tempTween.start();
+            }
+            else
+            {
                 movingSeat.node.position =  current.mPath[current.mPath.length - 1];
             }
         }

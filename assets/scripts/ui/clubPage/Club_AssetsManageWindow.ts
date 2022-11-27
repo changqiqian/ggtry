@@ -86,12 +86,18 @@ export class Club_AssetsManageWindow extends BaseUI
         });
 
 
-        LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ModifyClubInfo.AddListenner(this,(_data)=>
         {
             if(this.node.activeInHierarchy == false)
             {
                 return;
             }
+
+            if(_data.clubInfo.id != LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
+            {
+                return;
+            }
+            
             this.UpdateClubTotalScore();
         });
 

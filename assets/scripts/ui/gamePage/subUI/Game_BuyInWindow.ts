@@ -36,6 +36,8 @@ export class Game_BuyInWindow extends BaseUI
     mTipsTitle: Label = null;
     @property(Label) 
     mTips: Label = null;
+
+    mIndex : number = null;
     
     InitParam()
     {
@@ -70,6 +72,17 @@ export class Game_BuyInWindow extends BaseUI
     CustmoerDestory()
     {
 
+    }
+
+    InitWithData(_index : number)
+    {
+        this.mIndex = _index;
+        this.BindData();
+    }
+
+    BindData()
+    {
+        
     }
 
     StartCountDown(_totalTime : number)

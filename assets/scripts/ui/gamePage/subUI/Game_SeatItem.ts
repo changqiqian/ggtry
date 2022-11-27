@@ -1,7 +1,10 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { NetworkSend } from '../../../network/NetworkSend';
 import { BaseButton } from '../../common/BaseButton';
+import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { GameData } from '../GameData';
 import { Game_Player } from './Game_Player';
 const { ccclass, property } = _decorator;
 
@@ -25,13 +28,21 @@ export class Game_SeatItem extends BaseUI
     {
         this.mSitBtn.SetClickCallback(()=>
         {
-
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            let msgId = gameData.SitDownSendMsgId();
+            let gameId = gameStruct.mGameId;
+            NetworkSend.Instance.SitDown(msgId , gameId , this.mSeatID);
         });
 
         this.mEmptyBtn.SetClickCallback(()=>
         {
 
         });
+
+
+        this.mSitBtn.Show(true);
+        this.mEmptyBtn.Show(false);
 
     }
     RegDataNotify() 
@@ -48,15 +59,48 @@ export class Game_SeatItem extends BaseUI
 
     }
 
-    SetSeatID(_id : number)
-    {
-        this.mSeatID = _id;
-        this.mGame_Player.SetSeatID(_id);
-    }
 
-    public InitWithData(_index : number)
+
+    public InitWithData(_index : number , _id : number)
     {
         this.mIndex = _index;
+        this.mSeatID = _id;
+        this.mGame_Player.InitWithData(this.mIndex , _id);
+    }
+
+    BindData()
+    {
+        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+
+        gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
+        {
+            this.UpdateSeats();
+        });
+
+        gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateSeats();
+        });
+
+
+        gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateSeats();
+        });
+        
+    }
+
+    UpdateSeats()
+    {
+        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        let seatInfos = gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        for(let i = 0 ; i < seatInfos.length ; i++)
+        {
+            let current = seatInfos[i];
+            let occupaid = current.seat == this.mSeatID;
+            this.mSitBtn.Show(!occupaid);
+            this.mEmptyBtn.Show(!occupaid);
+        }
     }
 }
 

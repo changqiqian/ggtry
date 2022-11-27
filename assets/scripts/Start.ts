@@ -26,6 +26,8 @@ export class Start extends Component
         // GameConfig.DeleteCreateRoomModule(0);
         // GameConfig.DeleteCreateRoomModule(1);
         // GameConfig.DeleteCreateRoomModule(2);
+        // GameConfig.DeleteCreateRoomModule(3);
+        // GameConfig.DeleteCreateRoomModule(4);
         //注册所有网络消息
         NetworkReceive.Instance.RegisterMsg();
         GameConfig.LoadToken();

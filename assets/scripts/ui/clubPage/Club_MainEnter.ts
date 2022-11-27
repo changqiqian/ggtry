@@ -75,19 +75,9 @@ export class Club_MainEnter extends BaseUI
             this.UpdateNewMemberNotifyUI(_data);
         });
 
-        LocalPlayerData.Instance.Data_UpdateCurrentClub.AddListenner(this,(_data)=>
+        HallData.Instance.Data_ModifyClubInfo.AddListenner(this,(_data)=>
         {
-            let clubInfo = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
-            if(this.mData.id == clubInfo.id)
-            {
-                this.mData = clubInfo;
-                this.UpdateUI();
-            }
-        });
-
-        LocalPlayerData.Instance.Data_ModifyClubInfo.AddListenner(this,(_data)=>
-        {
-            let clubInfo = _data;
+            let clubInfo = _data.clubInfo;
             if(this.mData.id == clubInfo.id)
             {
                 this.mData = clubInfo;

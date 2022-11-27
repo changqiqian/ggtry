@@ -166,7 +166,7 @@ export class Poker extends BaseUI
         });
     }
 
-    public FlipToFront(_duration : number = 1)
+    public FlipToFront(_duration : number = 0.6)
     {
         let halfDuration = _duration / 3;
         

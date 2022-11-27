@@ -112,9 +112,15 @@ export class Club_Member extends BaseUI {
             this.UpdateManagerBtn();
         });
 
-        HallData.Instance.Data_ClubUpdateSelfData.AddListenner(this,(_data)=>
+        HallData.Instance.Data_S2CModifyMemberRoleNotify.AddListenner(this,(_data)=>
         {
             if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(currentClubId != _data.clubId)
             {
                 return;
             }

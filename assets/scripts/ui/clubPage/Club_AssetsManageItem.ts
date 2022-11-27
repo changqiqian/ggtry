@@ -63,18 +63,22 @@ export class Club_AssetsManageItem extends BaseUI
         });
 
 
-        HallData.Instance.Data_ClubUpdateSelfData.AddListenner(this,(_data)=>
+        HallData.Instance.Data_S2CClubPlayerPointNotify.AddListenner(this,(_data)=>
         {
             if(this.node.activeInHierarchy == false)
             {
                 return;
             }
-            let clubPoint = LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint;
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            if(currentClubId != _data.clubId)
+            {
+                return;
+            }
             if(this.mData.uid != LocalPlayerData.Instance.Data_Uid.mData)
             {
                 return;
             }
-            this.mAmount.string = Tool.ConvertMoney_S2C(clubPoint) + "";
+            this.mAmount.string = Tool.ConvertMoney_S2C(_data.playerRestAmount) + "";
         });
     }
     LateInit()

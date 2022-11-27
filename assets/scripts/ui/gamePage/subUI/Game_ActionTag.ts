@@ -32,7 +32,7 @@ export class Game_ActionTag extends BaseUI
 
     }
 
-    SetType()
+    SetType(_actionType : ActionType)
     {
 
     }

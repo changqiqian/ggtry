@@ -50,8 +50,8 @@ export abstract class BaseUI extends Component {
     //计时器，可以自动补偿切到后台的时间，定时器停止造成的时间对不上
     mTotalCountTime : number;
     mTimerStartingTime : number;
-    mTimerForward : boolean = null;
-
+    mTimerForward : boolean = false;
+    mTimerCallback : Function = null;
     //
     onLoad() 
     {
@@ -218,8 +218,9 @@ export abstract class BaseUI extends Component {
         }
     }
     //启动秒表  
-    StartSecondsTimer(_totalTime : number , _timeSpace :number = 1 , _forward : boolean = false)
+    StartSecondsTimer(_totalTime : number , _timeSpace :number = 1 , _forward : boolean = false , _callback : Function = null)
     {
+        this.mTimerCallback = _callback;
         this.mTimerForward = _forward;
         if(_totalTime <= 0)
         {
@@ -296,8 +297,10 @@ export abstract class BaseUI extends Component {
 
     OnSecondTimer()
     {
-
-
+        if(this.mTimerCallback != null)
+        {
+            this.mTimerCallback();
+        }
     }
 
 

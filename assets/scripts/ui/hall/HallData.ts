@@ -60,38 +60,42 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubScoreManageUid : BaseData<number> = new BaseData<number>(); //当前想要操作的积分的成员id
     Data_ClubScoreManageUserInfo : BaseData<ClubMember> = new BaseData<ClubMember>(); //当前发放或者回收的俱乐部积分的成员详细信息
     Data_ShareClubScore :  BaseData<S2CShareClubScore> = new BaseData<S2CShareClubScore>(true); //修改玩家俱乐部积分
-    Data_ClubUpdateSelfData:  BaseData<boolean> = new BaseData<boolean>(true); //更新自己的俱乐部数据
     Data_S2CModifyMemberRole:  BaseData<S2CModifyMemberRole> = new BaseData<S2CModifyMemberRole>(true); //修改俱乐部成员权限返回
+    Data_ModifyClubInfo : BaseData<ClubDetailsInfo> = new BaseData<ClubDetailsInfo>(true);//修改俱乐部信息
+
     Data_ClubGameInfos : BaseData<Array<ClubGameInfo>> = new BaseData<Array<ClubGameInfo>>(false, new Array<ClubGameInfo>()); //俱乐部游戏列表
-    Data_UpdateClubGameList :  BaseData<boolean> = new BaseData<boolean>(true); //更新俱乐部游戏列表
+    Data_S2CCreateClubGame :  BaseData<S2CCreateClubGame> = new BaseData<S2CCreateClubGame>(true); //创建一个剧了不游戏返回结果
+    Data_S2CGetClubGameList :  BaseData<S2CGetClubGameList> = new BaseData<S2CGetClubGameList>(true); //更新俱乐部游戏列表
     Data_S2CEnterGame :  BaseData<S2CCommonEnterGameResp> = new BaseData<S2CCommonEnterGameResp>(true); //进入游戏
     Data_S2CExitGame : BaseData<S2CCommonSitDownResp> = new BaseData<S2CCommonSitDownResp>(true); //退出游戏
     Data_S2CDismissClubGame : BaseData<S2CDismissClubGame> = new BaseData<S2CDismissClubGame>(true); //解散游戏
     Data_S2CDismissClubGameNotify : BaseData<S2CDismissClubGameNotify> = new BaseData<S2CDismissClubGameNotify>(true); //解散游戏推送
+
+    Data_S2CClubPlayerPointNotify : BaseData<S2CClubPlayerPointNotify> = new BaseData<S2CClubPlayerPointNotify>(); //我的俱乐部积分变动推送
+    Data_S2CModifyMemberRoleNotify : BaseData<S2CModifyMemberRoleNotify> = new BaseData<S2CModifyMemberRoleNotify>(); //我的俱乐部角色变动推送
+
+    
+
     //
-    public UpdateOneGame(_clubGameInfo : ClubGameInfo)
+    public AddOneGame(_clubGameInfo : ClubGameInfo)
     {
-        let index = this.Data_ClubGameInfos.mData.findIndex((_item) => _item.gameId === _clubGameInfo.gameId);
+        this.Data_ClubGameInfos.mData.push(_clubGameInfo);
+    }
+
+    public DeleteOneGame(_gameId : string)
+    {
+        let index = this.Data_ClubGameInfos.mData.findIndex((_item) => _item.gameId === _gameId);
         if(index >= 0)
         {
-            this.Data_ClubGameInfos.mData[index] = _clubGameInfo;
-        }
-        else
-        {
-            this.Data_ClubGameInfos.mData.push(_clubGameInfo);
+            this.Data_ClubGameInfos.mData.splice(index , 1);
         }
     }
 
     public UpdateGameList(_clubGameInfo : Array<ClubGameInfo>)
     {
-        for(let i = 0 ; i < _clubGameInfo.length ; i++)
-        {
-            let current = _clubGameInfo[i];
-            this.UpdateOneGame(current);
-        }
-        this.Data_UpdateClubGameList.mData = true;
+        this.Data_ClubGameInfos.mData = new Array<ClubGameInfo>();
+        this.Data_ClubGameInfos.mData = _clubGameInfo;
     }
-
 
 
     public RecieveNewClubApply(_request : ClubJoinRequest)
@@ -333,6 +337,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
         texasData.ipLimit = _config.ipLimit;
 
         let protoData = new ClubGameInfo();
+        protoData.gameStaticData = new GameStaticData();
         protoData.gameStaticData.basicConfig = basicData;
         protoData.gameStaticData.texasConfig = texasData;
         return protoData;

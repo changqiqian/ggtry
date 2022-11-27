@@ -353,6 +353,34 @@ export class NetworkSend extends Singleton<NetworkSend>()
             break;
         }
     }
+
+    public SitDown(_msgId : number ,_gameId : string , _seat : number , _tableId : string = null)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SGameSitDown();
+        msg.gameId = _gameId;
+        msg.seat = _seat;
+        if(_tableId != null)
+        {
+            msg.table = _tableId;
+        }
+        Network.Instance.SendMsg(_msgId , C2SGameSitDown.encode(msg).finish());
+        console.log("坐下  === " + JSON.stringify(msg))
+    }
+
+    public StandUp(_msgId : number ,_gameId : string , _seat : number, _tableId : string = null)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SGameStandUp();
+        msg.gameId = _gameId;
+        msg.seat = _seat;
+        if(_tableId != null)
+        {
+            msg.table = _tableId;
+        }
+        Network.Instance.SendMsg(_msgId , C2SGameStandUp.encode(msg).finish());
+        console.log("坐下  === " + JSON.stringify(msg))
+    }
 }
 
 
