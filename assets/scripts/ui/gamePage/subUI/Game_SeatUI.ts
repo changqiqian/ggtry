@@ -51,9 +51,8 @@ export class Game_SeatUI extends BaseUI
 
     BindData()
     {
-        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
-
-
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
             let seatInfos = _data.gameDynamic.seatInfos;

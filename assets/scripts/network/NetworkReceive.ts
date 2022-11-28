@@ -430,10 +430,10 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_CommonSitDownResp  坐下==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                let gameData = MultipleTableCtr.GetGameDataByGameId(msg.gameId);
-                if(gameData != null)
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
                 {
-                    gameData.Data_S2CCommonSitDownResp.mData = msg;
+                    gameStruct.mGameData.Data_S2CCommonSitDownResp.mData = msg;
                 }
             }
             else
@@ -449,10 +449,10 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_CommonStandUpResp  站起==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                let gameData = MultipleTableCtr.GetGameDataByGameId(msg.gameId);
-                if(gameData != null)
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
                 {
-                    gameData.Data_S2CCommonStandUpResp.mData = msg;
+                    gameStruct.mGameData.Data_S2CCommonStandUpResp.mData = msg;
                 }
             }
             else
@@ -460,6 +460,39 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBringInResp,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonBringInResp.decode(_data);
+            console.log("收到的内容 S2C_CommonBringInResp  带入==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let selfPlayer = gameStruct.mGameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+                    let currencyType = gameStruct.mGameData.Data_S2CCommonEnterGameResp.mData.gameStatic.basicConfig.currencyType;
+                    selfPlayer.buyIn = true;
+                    if(currencyType == GameCurrencyType.GameCurrencyType_Coin)
+                    {
+                        LocalPlayerData.Instance.Data_Coin.mData = msg.leftAmount;
+                    }
+                    else if(currencyType == GameCurrencyType.GameCurrencyType_Point)
+                    {
+                        gameStruct.mSelfClubInfo.clubPoint = msg.leftAmount;
+                    }
+                    selfPlayer.currency = msg.amount;
+                    gameStruct.mGameData.Data_S2CCommonBringInResp.mData = msg;
+                    UIMgr.Instance.ShowToast(Localization.GetString("00245"));
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+        
 
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
@@ -537,6 +570,14 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint = msg.playerRestAmount;
                 }
             }
+
+            let gameStructs = MultipleTableCtr.FindGameStructByClubId(_data.clubId);
+            for(let i = 0 ; i < gameStructs.length ; i++)
+            {
+                let currentGameStruct = gameStructs[i];
+                currentGameStruct.mSelfClubInfo.clubPoint = msg.playerRestAmount;
+            }
+
             HallData.Instance.Data_S2CClubPlayerPointNotify.mData = msg;
 
         },this);
@@ -569,11 +610,11 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CCommonSitDownNotify.decode(_data);
             console.log("收到的内容 S2CCommonSitDownNotify  坐下推送===" + JSON.stringify(msg));
-            let gameData = MultipleTableCtr.GetGameDataByGameId(msg.gameId);
-            if(gameData != null)
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
             {
-                gameData.PlayerSit(msg.seatInfo);
-                gameData.Data_S2CCommonSitDownNotify.mData = msg;
+                gameStruct.mGameData.PlayerSit(msg.seatInfo);
+                gameStruct.mGameData.Data_S2CCommonSitDownNotify.mData = msg;
             }
         },this);
 
@@ -581,11 +622,27 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CCommonStandUpNotify.decode(_data);
             console.log("收到的内容 S2C_CommonStandUpNotify  站起推送===" + JSON.stringify(msg));
-            let gameData = MultipleTableCtr.GetGameDataByGameId(msg.gameId);
-            if(gameData != null)
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
             {
-                gameData.PlayerStand(msg.actionUid);
-                gameData.Data_S2CCommonStandUpNotify.mData = msg;
+                gameStruct.mGameData.PlayerStand(msg.actionUid);
+                gameStruct.mGameData.Data_S2CCommonStandUpNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBringInNotify,(_data)=>
+        {
+            let msg = S2CCommonBringInNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonBringInNotify  带入推送==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let player = gameStruct.mGameData.GetPlayerInfoByUid(msg.actionUid);
+                player.buyIn = true;
+                player.currency = msg.amount;
+                gameStruct.mGameData.Data_S2CCommonBringInNotify.mData = msg;
             }
         },this);
     }

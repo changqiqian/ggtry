@@ -103,8 +103,9 @@ export class Game_Menu extends BaseUI
         });
         this.mExitBtn.SetClickCallback(()=>
         {
-            let gameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
-            let gameId = gameData.Data_S2CCommonEnterGameResp.mData.gameId;
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            let gameId = gameStruct.mGameId;
             NetworkSend.Instance.ExitGame(gameId,gameData.Data_S2CCommonEnterGameResp.mData.gameStatic.basicConfig.gameType);
         });
         this.mDismiss.SetClickCallback(()=>
@@ -142,44 +143,12 @@ export class Game_Menu extends BaseUI
 
         this.BindData();
 
-        // switch(gameType)
-        // {
-        //     case GameType.GameType_TexasCash:
-        //     {
-
-        //     }
-        //     break;
-        //     case GameType.GameType_ShortCash:
-        //     {
-                
-        //     }
-        //     break;
-        //     case GameType.GameType_OmhCash:
-        //     {
-                
-        //     }
-        //     break;
-        //     case GameType.GameType_TexasMtt:
-        //     {
-                
-        //     }
-        //     break;
-        //     case GameType.GameType_ShortMtt:
-        //     {
-                
-        //     }
-        //     break;
-        //     case GameType.GameType_OmhMtt:
-        //     {
-                
-        //     }
-        //     break;
-        // }
     }
 
     BindData()
     {
-        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
             this.UpdateStandBtn();
@@ -193,11 +162,13 @@ export class Game_Menu extends BaseUI
         {
             this.UpdateStandBtn();
         });
+        
     }
 
     UpdateStandBtn()
     {
-        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
         let seatId = gameData.GetSeatByUid(LocalPlayerData.Instance.Data_Uid.mData);
         this.mStandBtn.Show(seatId != null);
     }

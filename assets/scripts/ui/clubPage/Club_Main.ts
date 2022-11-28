@@ -92,6 +92,8 @@ export class Club_Main extends BaseUI
             }
             else
             {
+                LocalPlayerData.Instance.Data_SelfClubInfo.ResetData();
+                LocalPlayerData.Instance.Data_CurrentEnterClub.ResetData();
                 UIMgr.Instance.HideUiByTag(HallData.ClubUiTag);
             }
         });

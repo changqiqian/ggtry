@@ -2,6 +2,7 @@ import { _decorator, Component, Node, Sprite, Label, instantiate, AudioSource, V
 import { BaseUI } from '../../../base/BaseUI';
 import { CardStruct } from '../../../base/Calculator';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { UIMgr } from '../../../base/UIMgr';
 import { Tool } from '../../../Tool';
 import { BaseButton } from '../../common/BaseButton';
 import { CircleTimer } from '../../common/CircleTimer';
@@ -11,6 +12,7 @@ import { GameData } from '../GameData';
 import { Game_ActionTag } from './Game_ActionTag';
 import { Game_AddMoneyLabel } from './Game_AddMoneyLabel';
 import { Game_BetAmount } from './Game_BetAmount';
+import { Game_BuyInWindow } from './Game_BuyInWindow';
 import { Game_MovingCards } from './Game_MovingCards';
 import { Game_MovingChip } from './Game_MovingChip';
 const { ccclass, property } = _decorator;
@@ -103,7 +105,8 @@ export class Game_Player extends BaseUI
 
     BindData()
     {
-        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
             let seatInfos = _data.gameDynamic.seatInfos;
@@ -133,16 +136,45 @@ export class Game_Player extends BaseUI
             if(tempSeatId == this.mSeatID)
             {
                 this.HideAllUI();
+                if(_data.actionUid == LocalPlayerData.Instance.Data_Uid.mData)
+                {
+                    UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyInWindow",false,(_script)=>
+                    {
+                        let temp = _script as Game_BuyInWindow;
+                        temp.InitWithData(this.mIndex);
+                        temp.StopCountDown();
+                    },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+                }
+
             }
         });
+
+        gameData.Data_S2CCommonBringInResp.AddListenner(this,(_data)=>
+        {
+            let selfSeat = gameData.GetSeatByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            if(selfSeat == this.mSeatID)
+            {
+                this.UpdateMoney(_data.amount);
+            }
+        })
+
+        gameData.Data_S2CCommonBringInNotify.AddListenner(this,(_data)=>
+        {
+            let selfSeat = gameData.GetSeatByUid(_data.actionUid);
+            if(selfSeat == this.mSeatID)
+            {
+                this.UpdateMoney(_data.amount);
+            }
+        })
     }
 
     PlayerSit(_playerInfo : PlayerInfo)
     {
-        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
         this.UpdateName(_playerInfo.nickName);
         this.UpdateHead(_playerInfo.head);
-        this.UpdateMoney(Tool.ConvertMoney_S2C(_playerInfo.currency));
+        this.UpdateMoney(_playerInfo.currency);
         this.UpdateDealer(gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.dealerUid);
 
         if(_playerInfo.buyIn)
@@ -171,12 +203,23 @@ export class Game_Player extends BaseUI
         {
             this.mDarkCover.active = true;
             this.StartSecondsTimer(_playerInfo.buyInLeftTime);
+            
+            if(_playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyInWindow",true,(_script)=>
+                {
+                    let temp = _script as Game_BuyInWindow;
+                    temp.InitWithData(this.mIndex);
+                    temp.StartCountDown(_playerInfo.buyInLeftTime);
+                },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+            }
         }
     }
 
     RestoreAction()
     {
-        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
         let currentUid = gameData.GetUidBySeat(this.mSeatID);
         if(currentUid == null)
         {
@@ -251,7 +294,7 @@ export class Game_Player extends BaseUI
     UpdateMoney(_money : number)
     {
         this.mAmount.node.active = true;
-        this.mAmount.string = _money + "";
+        this.mAmount.string =  Tool.ConvertMoney_S2C(_money) + "";
     }
 
     ShowCircleTimer(_show : boolean , _leftTime : number)
@@ -290,7 +333,8 @@ export class Game_Player extends BaseUI
 
     UpdateDealer(_dealerId : string)
     {
-        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
         let currentUid = gameData.GetUidBySeat(this.mSeatID);
         this.mDealer.active = currentUid == _dealerId;
     }

@@ -8366,6 +8366,7 @@ $root.S2CCommonBringInResp = (function() {
      * @property {ICommonResult|null} [result] S2CCommonBringInResp result
      * @property {string|null} [gameId] S2CCommonBringInResp gameId
      * @property {number|null} [amount] S2CCommonBringInResp amount
+     * @property {number|null} [leftAmount] S2CCommonBringInResp leftAmount
      */
 
     /**
@@ -8408,6 +8409,14 @@ $root.S2CCommonBringInResp = (function() {
     S2CCommonBringInResp.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * S2CCommonBringInResp leftAmount.
+     * @member {number} leftAmount
+     * @memberof S2CCommonBringInResp
+     * @instance
+     */
+    S2CCommonBringInResp.prototype.leftAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified S2CCommonBringInResp message. Does not implicitly {@link S2CCommonBringInResp.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonBringInResp
@@ -8425,6 +8434,8 @@ $root.S2CCommonBringInResp = (function() {
             w.uint32(18).string(m.gameId);
         if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
             w.uint32(24).int64(m.amount);
+        if (m.leftAmount != null && Object.hasOwnProperty.call(m, "leftAmount"))
+            w.uint32(32).int64(m.leftAmount);
         return w;
     };
 
@@ -8454,6 +8465,9 @@ $root.S2CCommonBringInResp = (function() {
                 break;
             case 3:
                 m.amount = r.int64();
+                break;
+            case 4:
+                m.leftAmount = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -11873,14 +11887,14 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonStartResp=8003 S2C_CommonStartResp value
  * @property {number} S2C_CommonSitDownResp=8004 S2C_CommonSitDownResp value
  * @property {number} S2C_CommonStandUpResp=8005 S2C_CommonStandUpResp value
- * @property {number} S2c_CommonBringInResp=8006 S2c_CommonBringInResp value
+ * @property {number} S2C_CommonBringInResp=8006 S2C_CommonBringInResp value
  * @property {number} S2C_CommonBringOutResp=8007 S2C_CommonBringOutResp value
  * @property {number} S2C_CommonActionResp=8008 S2C_CommonActionResp value
  * @property {number} S2C_CommonBuyInsuranceResp=8009 S2C_CommonBuyInsuranceResp value
  * @property {number} S2C_CommonChatResp=8010 S2C_CommonChatResp value
  * @property {number} S2C_CommonSitDownNotify=8011 S2C_CommonSitDownNotify value
  * @property {number} S2C_CommonStandUpNotify=8012 S2C_CommonStandUpNotify value
- * @property {number} S2c_CommonBringInNotify=8013 S2c_CommonBringInNotify value
+ * @property {number} S2C_CommonBringInNotify=8013 S2C_CommonBringInNotify value
  * @property {number} S2C_CommonBringOutNotify=8014 S2C_CommonBringOutNotify value
  * @property {number} S2C_CommonActionNotify=8015 S2C_CommonActionNotify value
  * @property {number} S2C_CommonBuyInsuranceNotify=8016 S2C_CommonBuyInsuranceNotify value
@@ -11986,14 +12000,14 @@ $root.MessageId = (function() {
     values[valuesById[8003] = "S2C_CommonStartResp"] = 8003;
     values[valuesById[8004] = "S2C_CommonSitDownResp"] = 8004;
     values[valuesById[8005] = "S2C_CommonStandUpResp"] = 8005;
-    values[valuesById[8006] = "S2c_CommonBringInResp"] = 8006;
+    values[valuesById[8006] = "S2C_CommonBringInResp"] = 8006;
     values[valuesById[8007] = "S2C_CommonBringOutResp"] = 8007;
     values[valuesById[8008] = "S2C_CommonActionResp"] = 8008;
     values[valuesById[8009] = "S2C_CommonBuyInsuranceResp"] = 8009;
     values[valuesById[8010] = "S2C_CommonChatResp"] = 8010;
     values[valuesById[8011] = "S2C_CommonSitDownNotify"] = 8011;
     values[valuesById[8012] = "S2C_CommonStandUpNotify"] = 8012;
-    values[valuesById[8013] = "S2c_CommonBringInNotify"] = 8013;
+    values[valuesById[8013] = "S2C_CommonBringInNotify"] = 8013;
     values[valuesById[8014] = "S2C_CommonBringOutNotify"] = 8014;
     values[valuesById[8015] = "S2C_CommonActionNotify"] = 8015;
     values[valuesById[8016] = "S2C_CommonBuyInsuranceNotify"] = 8016;

@@ -84,6 +84,10 @@ export class ProgressSlider extends BaseUI
     {
         this.mSlider.progress = _value;
         this.mProgress.fillRange = this.mSlider.progress;
+        if(this.mEndCallback)
+        {
+            this.mEndCallback(this.mSlider.progress);
+        }
     }
 }
 

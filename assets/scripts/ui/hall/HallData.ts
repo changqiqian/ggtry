@@ -71,8 +71,8 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_S2CDismissClubGame : BaseData<S2CDismissClubGame> = new BaseData<S2CDismissClubGame>(true); //解散游戏
     Data_S2CDismissClubGameNotify : BaseData<S2CDismissClubGameNotify> = new BaseData<S2CDismissClubGameNotify>(true); //解散游戏推送
 
-    Data_S2CClubPlayerPointNotify : BaseData<S2CClubPlayerPointNotify> = new BaseData<S2CClubPlayerPointNotify>(); //我的俱乐部积分变动推送
-    Data_S2CModifyMemberRoleNotify : BaseData<S2CModifyMemberRoleNotify> = new BaseData<S2CModifyMemberRoleNotify>(); //我的俱乐部角色变动推送
+    Data_S2CClubPlayerPointNotify : BaseData<S2CClubPlayerPointNotify> = new BaseData<S2CClubPlayerPointNotify>(true); //我的俱乐部积分变动推送
+    Data_S2CModifyMemberRoleNotify : BaseData<S2CModifyMemberRoleNotify> = new BaseData<S2CModifyMemberRoleNotify>(true); //我的俱乐部角色变动推送
 
     
 

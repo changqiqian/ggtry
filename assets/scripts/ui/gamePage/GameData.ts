@@ -20,6 +20,8 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonSitDownNotify: BaseData<S2CCommonSitDownResp> = new BaseData<S2CCommonSitDownResp>(true);  //坐下推送
     Data_S2CCommonStandUpResp : BaseData<S2CCommonStandUpResp> = new BaseData<S2CCommonStandUpResp>(true);  //站起
     Data_S2CCommonStandUpNotify : BaseData<S2CCommonStandUpNotify> = new BaseData<S2CCommonStandUpNotify>(true);  //站起推送
+    Data_S2CCommonBringInResp : BaseData<S2CCommonBringInResp> = new BaseData<S2CCommonBringInResp>(true);  //带入
+    Data_S2CCommonBringInNotify : BaseData<S2CCommonBringInNotify> = new BaseData<S2CCommonBringInNotify>(true);  //带入推送
 
     public SetGameInfo(_S2CCommonEnterGameResp : S2CCommonEnterGameResp)
     {
@@ -78,6 +80,36 @@ export abstract class GameData extends MultipleNotify
         }
 
         return false;
+    }
+
+    public GetPlayerInfoByUid(_uid : string) : PlayerInfo
+    {
+        let seatInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        for(let i = 0 ; i < seatInfos.length ; i++)
+        {
+            let current = seatInfos[i];
+            if(current.playerInfo.uid == _uid)
+            {
+                return current.seat.playerInfo;
+            }
+        }
+        console.log("GetPlayerInfoByUid 没有找到这个_uid===" + _uid);
+        return null;
+    }
+
+    public GetPlayerInfoBySeatId(_seatId : number) : PlayerInfo
+    {
+        let seatInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        for(let i = 0 ; i < seatInfos.length ; i++)
+        {
+            let current = seatInfos[i];
+            if(current.seat == _seatId)
+            {
+                return current.playerInfo;
+            }
+        }
+        console.log("GetPlayerInfoBySeatId 没有找到这个seatid ===" + _seatId);
+        return null;
     }
 
     public GetSeatByUid(_uid : string) : number

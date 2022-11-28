@@ -8,6 +8,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_ChatHistoryLayer')
 export class Game_ChatHistoryLayer extends ListViewCtr<any> 
 {
+    mIndex : number ;
     InitParam()
     {
 
@@ -32,7 +33,15 @@ export class Game_ChatHistoryLayer extends ListViewCtr<any>
 
     public InitWithData(_index : number)
     {
-        MultipleTableCtr.GetGameDataByIndex(_index).Data_ChatingSubLayer.AddListenner(this , (_data)=>
+        this.mIndex = _index;
+        this.BindData();
+    }
+
+    BindData()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        gameData.Data_ChatingSubLayer.AddListenner(this , (_data)=>
         {
             this.node.active = _data == Game_ChattingSubLayer.ChatHistory
         });

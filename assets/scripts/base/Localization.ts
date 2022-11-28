@@ -327,8 +327,10 @@ export class Localization {
         { name: '00239', ch: '最多只能同时加入4个游戏', en: 'Max Game' },
         { name: '00240', ch: '游戏xxx已经被解散', en: 'room xxx dismiss' },
         { name: '00241', ch: '暂离', en: 'Leave' },
-        
-        
+        { name: '00242', ch: '倒计时:', en: 'Left time:' },
+        { name: '00243', ch: '最小', en: 'Min' },
+        { name: '00244', ch: '最大', en: 'Max' },
+        { name: '00245', ch: '带入成功', en: 'Buy-in success' },
         
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

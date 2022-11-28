@@ -70,7 +70,8 @@ export class Game_SeatItem extends BaseUI
 
     BindData()
     {
-        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
 
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
@@ -92,7 +93,8 @@ export class Game_SeatItem extends BaseUI
 
     UpdateSeats()
     {
-        let gameData:GameData = MultipleTableCtr.GetGameDataByIndex(this.mIndex);
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
         let seatInfos = gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
         for(let i = 0 ; i < seatInfos.length ; i++)
         {

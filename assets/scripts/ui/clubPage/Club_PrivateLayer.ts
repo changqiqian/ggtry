@@ -61,8 +61,6 @@ export class Club_PrivateLayer extends BaseUI
         this.mListView.SetDragTop(this.DragTop.bind(this));
         this.mBackBtn.SetClickCallback(()=>
         {
-            LocalPlayerData.Instance.Data_SelfClubInfo.ResetData();
-            LocalPlayerData.Instance.Data_CurrentEnterClub.ResetData();
             HallData.Instance.Data_ClubEnter.mData = false;
             this.Show(false);
         });

@@ -216,29 +216,21 @@ export class MultipleTableCtr extends BaseUI
         }
         return null;
     }
-    public static GetGameDataByIndex(_index : number):GameData
-    {
-        let current = MultipleTableCtr.FindGameStruct(_index);
-        if(current == null)
-        {
-            console.log("GetGameDataByIndex! 没有找到这个游戏id对应的数据驱动 ==== _index==" + _index);
-            return null;
-        }
 
-        return current.mGameData;
+    public static FindGameStructByClubId(_clubId : string) : Array<GameStruct>
+    {
+        let gamestructs = new Array<GameStruct>();
+        for(let i = 0 ; i < MultipleTableCtr.GameStruct.length ; i++)
+        {
+            let current = MultipleTableCtr.GameStruct[i];
+            if(_clubId == current.mClubDetailsInfo.id)
+            {
+                gamestructs.push(current);
+            }
+        }
+        return gamestructs;
     }
     
-    public static GetGameDataByGameId(_gameId : string):GameData
-    {
-        let current = MultipleTableCtr.FindGameStructByGameId(_gameId);
-        if(current == null)
-        {
-            console.log("GetGameDataByGameId! 没有找到这个游戏id对应的数据驱动 ==== _gameId==" + _gameId);
-            return null;
-        }
-
-        return current.mGameData;
-    }
     public static ShowGameUI(_index : number)
     {
         let current = MultipleTableCtr.FindGameStruct(_index);

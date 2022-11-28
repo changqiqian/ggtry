@@ -3032,6 +3032,9 @@ export class S2CCommonBringInResp implements IS2CCommonBringInResp {
     /** S2CCommonBringInResp amount. */
     public amount: number;
 
+    /** S2CCommonBringInResp leftAmount. */
+    public leftAmount: number;
+
     /**
      * Encodes the specified S2CCommonBringInResp message. Does not implicitly {@link S2CCommonBringInResp.verify|verify} messages.
      * @param m S2CCommonBringInResp message or plain object to encode
@@ -4306,14 +4309,14 @@ export enum MessageId {
     S2C_CommonStartResp = 8003,
     S2C_CommonSitDownResp = 8004,
     S2C_CommonStandUpResp = 8005,
-    S2c_CommonBringInResp = 8006,
+    S2C_CommonBringInResp = 8006,
     S2C_CommonBringOutResp = 8007,
     S2C_CommonActionResp = 8008,
     S2C_CommonBuyInsuranceResp = 8009,
     S2C_CommonChatResp = 8010,
     S2C_CommonSitDownNotify = 8011,
     S2C_CommonStandUpNotify = 8012,
-    S2c_CommonBringInNotify = 8013,
+    S2C_CommonBringInNotify = 8013,
     S2C_CommonBringOutNotify = 8014,
     S2C_CommonActionNotify = 8015,
     S2C_CommonBuyInsuranceNotify = 8016,
