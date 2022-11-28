@@ -267,9 +267,9 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("解散俱乐部游戏 C2S_DismissClubGame== " + JSON.stringify(msg))
     }
 
-    public EnterGame(_gameId : string , _gameType : GameType , _selfClubInfo : ClubMember = null , _currentClubInfo : ClubDetailsInfo = null)
+    public EnterGame(_gameId : string , _gameType : GameType , _clubId : string = "")
     {
-        if(MultipleTableCtr.CanEnterGame(_gameId, _selfClubInfo , _currentClubInfo) == false)
+        if(MultipleTableCtr.CanEnterGame(_gameId, _clubId) == false)
         {
             return;
         }

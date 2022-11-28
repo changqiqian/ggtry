@@ -7,6 +7,7 @@ import { NetworkSend } from '../../../network/NetworkSend';
 import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { HallData } from '../../hall/HallData';
 import { GameData } from '../GameData';
 import { Game_BuyInWindow } from './Game_BuyInWindow';
 const { ccclass, property } = _decorator;
@@ -111,7 +112,7 @@ export class Game_Menu extends BaseUI
         this.mDismiss.SetClickCallback(()=>
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            NetworkSend.Instance.DismissClubGame(gameStruct.mGameId , gameStruct.mClubDetailsInfo.id);
+            NetworkSend.Instance.DismissClubGame(gameStruct.mGameId , gameStruct.mClubId);
         });
     }
     RegDataNotify()
@@ -130,17 +131,7 @@ export class Game_Menu extends BaseUI
     public InitWithData(_index : number)
     {
         this.mIndex = _index;    
-        let gameStruct = MultipleTableCtr.FindGameStruct(_index);
-        if(gameStruct.mIsClubGame)
-        {
-            let selfClubInfo = gameStruct.mSelfClubInfo;
-            this.mDismiss.Show(selfClubInfo.memberType != ClubMemberType.ClubAccountType_Normal);
-        }
-        else
-        {
-            this.mDismiss.Show(false);
-        }
-
+        this.UpdateDismissBtn();
         this.BindData();
 
     }
@@ -162,7 +153,31 @@ export class Game_Menu extends BaseUI
         {
             this.UpdateStandBtn();
         });
-        
+
+
+        HallData.Instance.Data_S2CModifyMemberRoleNotify.AddListenner(this,(_data)=>
+        {
+            if(gameStruct.mClubId != _data.clubId)
+            {
+                return;
+            }
+            this.UpdateDismissBtn();
+        });
+    }
+
+    UpdateDismissBtn()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
+
+        if(gameStruct.mClubId != "")
+        {
+            this.mDismiss.Show(enterClub.clubMember.memberType != ClubMemberType.ClubAccountType_Normal);
+        }
+        else
+        {
+            this.mDismiss.Show(false);
+        }
     }
 
     UpdateStandBtn()

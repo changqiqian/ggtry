@@ -152,9 +152,11 @@ export class Game_BuyInWindow extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let currentMoney;
         let currencyType = gameStruct.mGameData.Data_S2CCommonEnterGameResp.mData.gameStatic.basicConfig.currencyType;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
+
         if(currencyType == GameCurrencyType.GameCurrencyType_Point)
         {
-            currentMoney = gameStruct.mSelfClubInfo.clubPoint;
+            currentMoney = enterClub.clubMember.clubPoint;
         }
         else if(currencyType == GameCurrencyType.GameCurrencyType_Coin)
         {
@@ -169,11 +171,9 @@ export class Game_BuyInWindow extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let texasConfig = gameStruct.mGameData.Data_S2CCommonEnterGameResp.mData.gameStatic.texasConfig;
         let currentAmount = texasConfig.minBringIn + (texasConfig.maxBringIn - texasConfig.minBringIn) * _ratio;
-        let convertMoneyToS2C= Tool.ConvertMoney_S2C(currentAmount);
+        let convertMoneyToS2C = Tool.ConvertMoney_S2C(currentAmount);
         return convertMoneyToS2C;
     }
-
-
 
     StartCountDown(_totalTime : number)
     {

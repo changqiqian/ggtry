@@ -50,7 +50,7 @@ export class Club_AssetsManageItem extends BaseUI
             {
                 return;
             }
-            if(_data.clubId != LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
+            if(_data.clubId != LocalPlayerData.Instance.Data_CurrentEnterClubId.mData)
             {
                 return;
             }
@@ -69,7 +69,7 @@ export class Club_AssetsManageItem extends BaseUI
             {
                 return;
             }
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(currentClubId != _data.clubId)
             {
                 return;

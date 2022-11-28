@@ -41,7 +41,7 @@ export class Club_Member extends BaseUI {
                 tempScript.SetTips(tips);
                 tempScript.SetCallback(()=>
                 {
-                    let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+                    let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
                     let uids = new Array<string>();
                     uids.push(this.mMember.uid);
                     NetworkSend.Instance.RemoveClubMember(clubId,uids);
@@ -52,7 +52,7 @@ export class Club_Member extends BaseUI {
 
         this.mManagerBtn.SetClickCallback(()=>
         {
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(this.mMember.memberType == ClubMemberType.ClubAccountType_Normal)
             {
                 NetworkSend.Instance.ModifyMemberRole(clubId,this.mMember.uid,ClubMemberType.ClubAccountType_Manager);
@@ -61,7 +61,7 @@ export class Club_Member extends BaseUI {
 
         this.mCancelManagerBtn.SetClickCallback(()=>
         {
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(this.mMember.memberType == ClubMemberType.ClubAccountType_Manager)
             {  
                 NetworkSend.Instance.ModifyMemberRole(clubId,this.mMember.uid,ClubMemberType.ClubAccountType_Normal);
@@ -78,7 +78,7 @@ export class Club_Member extends BaseUI {
                 return;
             }
 
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(clubId != _data.clubId)
             {
                 return;
@@ -97,7 +97,7 @@ export class Club_Member extends BaseUI {
             {
                 return;
             }
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(clubId != _data.clubId)
             {
                 return;
@@ -119,18 +119,20 @@ export class Club_Member extends BaseUI {
                 return;
             }
 
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(currentClubId != _data.clubId)
             {
                 return;
             }
 
-            if(this.mMember.uid != LocalPlayerData.Instance.Data_SelfClubInfo.mData.uid)
+            if(this.mMember.uid != LocalPlayerData.Instance.Data_Uid.mData)
             {
                 return;
             }
 
-            this.mMember = LocalPlayerData.Instance.Data_SelfClubInfo.mData;
+
+            let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentClubId);
+            this.mMember = enterClub.clubMember;
             this.UpdateManagerBtn();
         });
         
@@ -155,7 +157,9 @@ export class Club_Member extends BaseUI {
 
     UpdateManagerBtn()
     {
-        let selfIsClubOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == ClubMemberType.ClubAccountType_Owner;
+        let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentClubId);
+        let selfIsClubOwner = enterClub.clubMember.memberType == ClubMemberType.ClubAccountType_Owner;
         let isSelf = this.mMember.uid == LocalPlayerData.Instance.Data_Uid.mData;
 
         if(selfIsClubOwner && isSelf == false)

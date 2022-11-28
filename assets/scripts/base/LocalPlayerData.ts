@@ -6,6 +6,7 @@ import { DataNotify } from './DataNotify';
 import { SingletonBaseNotify } from './Singleton';
 const { ccclass, property } = _decorator;
 
+
 @ccclass('LocalPlayerData')
 export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
 {
@@ -27,8 +28,36 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_LastInputPhoneNum : BaseData<string> = new BaseData<string>(); //最后一次输入的手机号
     Data_LastInputPwd : BaseData<string> = new BaseData<string>();//最后一次输入的密码
 
-    Data_SelfClubInfo : BaseData<ClubMember> = new BaseData<ClubMember>();//进入俱乐部后，我的俱乐部个人信息
-    Data_CurrentEnterClub : BaseData<ClubDetailsInfo> = new BaseData<ClubDetailsInfo>();//当前进入的俱乐部
+    Data_EnterClubs : BaseData<Array<S2CEnterClub>> = new BaseData<Array<S2CEnterClub>>(false,new Array<S2CEnterClub>()); //玩家的俱乐部数据
+    Data_CurrentEnterClubId : BaseData<string> = new BaseData<string>();//当前进入的俱乐部
+
+
+    public GetClubInfoByClubId(_clubId : string):S2CEnterClub
+    {
+        for(let i = 0 ; i < this.Data_EnterClubs.mData.length ; i++)
+        {
+            let current = this.Data_EnterClubs.mData[i];
+            if(current.clubInfo.id == _clubId)
+            {
+                return current;
+            }
+        }
+        console.log("GetClubInfoByClubId 没有找到这个俱乐部信息 _clubId===" + _clubId);
+        return null;
+    }
+
+    public UpdateClubInfo(_enterClub : S2CEnterClub)
+    {
+        let index = this.Data_EnterClubs.mData.findIndex((_item) => _item.clubInfo.id === _enterClub.clubInfo.id);
+        if(index < 0)
+        {
+            this.Data_EnterClubs.mData.push(_enterClub);
+        }
+        else
+        {
+            this.Data_EnterClubs.mData[index] = _enterClub;
+        }
+    }
 
     GetFullPhoneNumber(_phoneNum : string = null)
     {

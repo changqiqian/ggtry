@@ -68,7 +68,7 @@ export class Club_CreateTexas extends BaseUI
                 return;
             }
             let gameInfo = HallData.Instance.ConvertCreateTexasConfigToProto(createConfig);
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             NetworkSend.Instance.CreateClubTexas(clubId , gameInfo);
         });
     }

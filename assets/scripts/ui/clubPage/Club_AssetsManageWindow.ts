@@ -51,7 +51,7 @@ export class Club_AssetsManageWindow extends BaseUI
 
         this.mConfirmBtn.SetClickCallback(()=>
         {
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
 
             if(Tool.NumberTest(this.mEditBox.string) == false)
             {
@@ -93,7 +93,7 @@ export class Club_AssetsManageWindow extends BaseUI
                 return;
             }
 
-            if(_data.clubInfo.id != LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
+            if(_data.clubInfo.id != LocalPlayerData.Instance.Data_CurrentEnterClubId.mData)
             {
                 return;
             }
@@ -107,7 +107,7 @@ export class Club_AssetsManageWindow extends BaseUI
             {
                 return;
             }
-            if(_data.clubId != LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id)
+            if(_data.clubId != LocalPlayerData.Instance.Data_CurrentEnterClubId.mData)
             {
                 return;
             }
@@ -148,7 +148,9 @@ export class Club_AssetsManageWindow extends BaseUI
 
     UpdateClubTotalScore()
     {
-        let clubTotalPoint = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.totalClubPoint;
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
+        let clubTotalPoint = enterClub.clubInfo.totalClubPoint;
         this.mClubAmount.string = Tool.ConvertMoney_S2C(clubTotalPoint) + "";
     }
 }

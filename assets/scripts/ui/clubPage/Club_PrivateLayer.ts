@@ -70,7 +70,7 @@ export class Club_PrivateLayer extends BaseUI
         {
             UIMgr.Instance.ShowWindow("clubPage","prefab/Club_MemberNotifyWindow",true,(_script)=>
             {
-                let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+                let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
                 let tempScript = _script as Club_MemberNotifyWindow;
                 tempScript.InitWithData(clubId);
             },HallData.ClubUiTag);
@@ -111,8 +111,10 @@ export class Club_PrivateLayer extends BaseUI
     }
     UpdateClubInfoUI()
     {
-        this.mClubName.string = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.name;
-        this.mClubId.string = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
+        this.mClubName.string = enterClub.clubInfo.name;
+        this.mClubId.string = clubId;
     }
 
     RegDataNotify()
@@ -124,13 +126,16 @@ export class Club_PrivateLayer extends BaseUI
             {
                 return;
             }
-            let currentClubData = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
-            if(currentClubData.id != _data.clubInfo.id)
+
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
+
+            if(enterClub.clubInfo.id != _data.clubInfo.id)
             {
                 return;
             }
             
-            this.mClubName.string = currentClubData.name;
+            this.mClubName.string = enterClub.clubInfo.name;
         });
 
         HallData.Instance.Data_S2CClubPlayerPointNotify.AddListenner(this,(_data)=>
@@ -140,7 +145,7 @@ export class Club_PrivateLayer extends BaseUI
                 return;
             }
 
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(currentClubId != _data.clubId)
             {
                 return;
@@ -166,7 +171,7 @@ export class Club_PrivateLayer extends BaseUI
             {
                 return;
             }
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(currentClubId == _data)
             {
                 HallData.Instance.Data_ClubEnter.mData = false;
@@ -181,7 +186,7 @@ export class Club_PrivateLayer extends BaseUI
                 return;
             }
 
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(currentClubId != _data.clubId)
             {
                 return;
@@ -197,7 +202,7 @@ export class Club_PrivateLayer extends BaseUI
                 return;
             }
 
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(currentClubId != _data.clubId)
             {
                 return;
@@ -214,7 +219,7 @@ export class Club_PrivateLayer extends BaseUI
                 return;
             }
 
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(currentClubId != _data.clubId)
             {
                 return;
@@ -229,7 +234,7 @@ export class Club_PrivateLayer extends BaseUI
                 return;
             }
 
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(currentClubId != _data.clubId)
             {
                 return;
@@ -240,12 +245,13 @@ export class Club_PrivateLayer extends BaseUI
 
     UpdateNotifyBtn()
     {
-        if(LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType != 
-            ClubMemberType.ClubAccountType_Owner)
+        let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentClubId);
+        if(enterClub.clubMember.memberType != ClubMemberType.ClubAccountType_Owner)
         {
             return;
         }
-        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
         this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(clubId)
     }
 
@@ -263,9 +269,12 @@ export class Club_PrivateLayer extends BaseUI
         let show = this.mAssetsToggle.IsSelected();
         if(show)
         {
-            if(LocalPlayerData.Instance.Data_SelfClubInfo.mData != null)
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentClubId);
+
+            if(enterClub != null)
             {
-                let clubPoint = LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint;
+                let clubPoint = enterClub.clubMember.clubPoint;
                 this.mMoney.string = Tool.ConvertMoney_S2C(clubPoint) + "";
             }
             else
@@ -281,7 +290,9 @@ export class Club_PrivateLayer extends BaseUI
 
     HaveRights() :boolean
     {
-        let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == ClubMemberType.ClubAccountType_Owner
+        let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentClubId);
+        let selfIsOwner = enterClub.clubMember.memberType == ClubMemberType.ClubAccountType_Owner;
         if(selfIsOwner)
         {
         }
@@ -302,7 +313,7 @@ export class Club_PrivateLayer extends BaseUI
 
     DragTop()
     {
-        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
         NetworkSend.Instance.GetClubGameList(clubId);
     }
 }

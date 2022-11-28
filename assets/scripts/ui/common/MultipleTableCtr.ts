@@ -22,16 +22,17 @@ class GameStruct
         this.mScript = null;
         this.mPrefabName = "";
         this.mGameData = null;
-        this.mSelfClubInfo = null;
-        this.mClubDetailsInfo = null;
         this.mIsClubGame = false;
+        this.mClubId = "";
     }
 
-    public SetClubInfo(_selfClubInfo : ClubMember , _currentClubInfo : ClubDetailsInfo)
+    public SetClubInfo(_clubId : string)
     {
-        this.mSelfClubInfo = _selfClubInfo;
-        this.mClubDetailsInfo = _currentClubInfo;
-        this.mIsClubGame = true;
+        if(_clubId != "")
+        {
+            this.mClubId = _clubId;
+            this.mIsClubGame = true;
+        }
     }
 
     public InitWithData(_index :number  , _script : GameBase , _gameId : string , _gameType : GameType )
@@ -51,8 +52,7 @@ class GameStruct
     mGameData : GameData;
     mPrefabName : string ;
     mGameType : GameType;
-    mSelfClubInfo : ClubMember;
-    mClubDetailsInfo : ClubDetailsInfo;
+    mClubId : string;
     mIsClubGame : boolean;
 
     public CreateGameData(_gameType : GameType) : GameData
@@ -217,20 +217,6 @@ export class MultipleTableCtr extends BaseUI
         return null;
     }
 
-    public static FindGameStructByClubId(_clubId : string) : Array<GameStruct>
-    {
-        let gamestructs = new Array<GameStruct>();
-        for(let i = 0 ; i < MultipleTableCtr.GameStruct.length ; i++)
-        {
-            let current = MultipleTableCtr.GameStruct[i];
-            if(_clubId == current.mClubDetailsInfo.id)
-            {
-                gamestructs.push(current);
-            }
-        }
-        return gamestructs;
-    }
-    
     public static ShowGameUI(_index : number)
     {
         let current = MultipleTableCtr.FindGameStruct(_index);
@@ -304,10 +290,10 @@ export class MultipleTableCtr extends BaseUI
         return GameData.GameUiTag + _index;
     }
 
-    public static CreateNewGameStruct(_gameId : string , _selfClubInfo : ClubMember = null , _currentClubInfo : ClubDetailsInfo = null)
+    public static CreateNewGameStruct(_gameId : string , _clubId : string = "")
     {
         let gameStruct = new GameStruct(_gameId);
-        gameStruct.SetClubInfo(_selfClubInfo , _currentClubInfo);
+        gameStruct.SetClubInfo(_clubId);
         MultipleTableCtr.GameStruct.push(gameStruct);
     }
 
@@ -324,7 +310,7 @@ export class MultipleTableCtr extends BaseUI
     }
 
     //检查是否能进入房间
-    public static CanEnterGame(_gameId : string , _selfClubInfo : ClubMember = null , _currentClubInfo : ClubDetailsInfo = null) : boolean
+    public static CanEnterGame(_gameId : string , _clubId : string = "") : boolean
     {
         if(MultipleTableCtr.CheckGameMax())
         {
@@ -340,7 +326,7 @@ export class MultipleTableCtr extends BaseUI
             return false;
         }
 
-        MultipleTableCtr.CreateNewGameStruct(_gameId , _selfClubInfo , _currentClubInfo);
+        MultipleTableCtr.CreateNewGameStruct(_gameId , _clubId);
 
         return true;
     }

@@ -46,9 +46,7 @@ export class Club_GameItem extends BaseUI
     {
         this.mEnterBtn.SetClickCallback(()=>
         {
-            let selfClubInfo = LocalPlayerData.Instance.Data_SelfClubInfo.mData;
-            let clubInfo = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
-            NetworkSend.Instance.EnterGame(this.mGameId , this.mData.gameStaticData.basicConfig.gameType , selfClubInfo , clubInfo);
+            NetworkSend.Instance.EnterGame(this.mGameId , this.mData.gameStaticData.basicConfig.gameType , this.mData.clubId);
         })
     }
     RegDataNotify()

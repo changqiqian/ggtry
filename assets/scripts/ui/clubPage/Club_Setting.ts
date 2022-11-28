@@ -52,34 +52,37 @@ export class Club_Setting extends BaseUI
     mPageSize : number = 4;
     onEnable()
     {
-        let currentClub = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
         this.RefreshMember();
         this.UpdateClubInfoUI();
-        let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == 
-            ClubMemberType.ClubAccountType_Owner
+
+
+        let selfIsOwner = enterClub.clubMember.memberType == ClubMemberType.ClubAccountType_Owner
         this.mUnionBtn.node.active = selfIsOwner;
         this.mDismissBtn.node.active = selfIsOwner;
         this.mExitBtn.node.active = !(selfIsOwner);
 
-        this.mLastTimeBrief = currentClub.brief;
-        this.mLastTimeLogo = currentClub.logo;
-        this.mLastTimeStamp = currentClub.stamp;
-        this.mLastTimeName = currentClub.name;
+        this.mLastTimeBrief = enterClub.clubInfo.brief;
+        this.mLastTimeLogo = enterClub.clubInfo.logo;
+        this.mLastTimeStamp = enterClub.clubInfo.stamp;
+        this.mLastTimeName = enterClub.clubInfo.name;
     }
 
     onDisable()
     {
-        if(LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType != ClubMemberType.ClubAccountType_Owner)
+        let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentClubId);
+        if(enterClub.clubMember.memberType != ClubMemberType.ClubAccountType_Owner)
         {
             return;
         }
 
 
-        let currentClub = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
-        let logoChanged = currentClub.logo != HallData.Instance.Data_ClubLogoIndex.mData;
+        let logoChanged = enterClub.clubInfo.logo != HallData.Instance.Data_ClubLogoIndex.mData;
         let stampChanged = this.mLastTimeStamp != HallData.Instance.Data_ClubStampIndex.mData;
         let nameChanged = this.mLastTimeName != this.mClubNameBtn.GetTitle();
-        let briefChanged = currentClub.brief != this.mLastTimeBrief;
+        let briefChanged = enterClub.clubInfo.brief != this.mLastTimeBrief;
 
 
         if(logoChanged || stampChanged || nameChanged || briefChanged)
@@ -88,7 +91,7 @@ export class Club_Setting extends BaseUI
             let newStamp = stampChanged ? HallData.Instance.Data_ClubStampIndex.mData :null;
             let newName =  nameChanged? this.mClubNameBtn.GetTitle() : null;
             let newBrief = briefChanged? this.mLastTimeBrief : null;
-            NetworkSend.Instance.ModifyClubInfo(currentClub.id,newName,newBrief,newLogo,newStamp);
+            NetworkSend.Instance.ModifyClubInfo(enterClub.clubInfo.id,newName,newBrief,newLogo,newStamp);
         }
     }
 
@@ -163,11 +166,12 @@ export class Club_Setting extends BaseUI
                 UIMgr.Instance.ShowWindow("common" , "prefab/InputTipsWindowBig",true,(_script)=>
                 {
                     let tempScript = _script as InputTipsWindowBig;
-                    let currentClub = LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
+                    let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+                    let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
                     let title = Localization.GetString("00122");
                     tempScript.SetTitle(title);
                     tempScript.SetMaxInput(100);
-                    tempScript.SetContent(currentClub.brief);
+                    tempScript.SetContent(enterClub.clubInfo.brief);
                     tempScript.SetPlaceHolder(Localization.GetString("00123"));
                     tempScript.SetCallback((_data)=>
                     {
@@ -183,7 +187,9 @@ export class Club_Setting extends BaseUI
                 UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
                 {
                     let tempScript = _script as TipsWindow;
-                    let tips = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.brief;
+                    let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+                    let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
+                    let tips = enterClub.clubInfo.brief;
                     tempScript.SetTips(tips);
                     tempScript.ShowConfirmBtnOnly();
                 },HallData.ClubUiTag)
@@ -198,7 +204,7 @@ export class Club_Setting extends BaseUI
         });
         this.mDismissBtn.SetClickCallback(()=>
         {
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
@@ -213,7 +219,7 @@ export class Club_Setting extends BaseUI
         });
         this.mExitBtn.SetClickCallback(()=>
         {
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
             {
                 let tempScript = _script as TipsWindow;
@@ -230,11 +236,12 @@ export class Club_Setting extends BaseUI
 
     UpdateClubInfoUI()
     {
-        let clubInfo =LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
-        HallData.Instance.Data_ClubLogoIndex.mData = clubInfo.logo;
-        HallData.Instance.Data_ClubStampIndex.mData = clubInfo.stamp;
-        this.mClubNameBtn.SetTitle(clubInfo.name);
-        this.mClubId.SetTitle(clubInfo.id);
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
+        HallData.Instance.Data_ClubLogoIndex.mData = enterClub.clubInfo.logo;
+        HallData.Instance.Data_ClubStampIndex.mData = enterClub.clubInfo.stamp;
+        this.mClubNameBtn.SetTitle(enterClub.clubInfo.name);
+        this.mClubId.SetTitle(enterClub.clubInfo.id);
     }
 
     RegDataNotify()
@@ -246,8 +253,8 @@ export class Club_Setting extends BaseUI
                 return;
             }
 
-            let clubInfo =LocalPlayerData.Instance.Data_CurrentEnterClub.mData;
-            if(clubInfo.id != _data.clubInfo.id)
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            if(clubId != _data.clubInfo.id)
             {
                 return;
             }
@@ -288,7 +295,7 @@ export class Club_Setting extends BaseUI
                 return;
             }
 
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(clubId != _data.clubId)
             {
                 return;
@@ -334,7 +341,7 @@ export class Club_Setting extends BaseUI
                 return;
             }
 
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(clubId != _data.clubId)
             {
                 return;
@@ -355,14 +362,15 @@ export class Club_Setting extends BaseUI
 
     RefreshMember()
     {
-        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
         NetworkSend.Instance.GetClubMember(clubId,1,this.mPageSize);
     }
 
     HaveRights() :boolean
     {
-        let selfIsOwner = LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType == 
-            ClubMemberType.ClubAccountType_Owner
+        let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentClubId);
+        let selfIsOwner = enterClub.clubMember.memberType == ClubMemberType.ClubAccountType_Owner
         if(selfIsOwner)
         {
         }

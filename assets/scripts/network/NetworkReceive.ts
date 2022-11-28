@@ -142,8 +142,9 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_EnterClub 进入俱乐部===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                LocalPlayerData.Instance.Data_SelfClubInfo.mData = msg.clubMember;
-                LocalPlayerData.Instance.Data_CurrentEnterClub.mData = msg.clubInfo;
+                LocalPlayerData.Instance.Data_CurrentEnterClubId.mData = msg.clubInfo.id;
+                LocalPlayerData.Instance.UpdateClubInfo(msg);
+                
                 HallData.Instance.Data_ClubEnter.mData = true;
             }
             else
@@ -282,9 +283,11 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(msg.result.resId == MsgResult.Success)
             {
                 UIMgr.Instance.ShowToast(Localization.GetString("00119"));
-                if(HallData.Instance.Data_ClubEnter.mData)
+
+                let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(msg.clubInfo.id);
+                if(enterClub != null)
                 {
-                    LocalPlayerData.Instance.Data_CurrentEnterClub.mData = msg.clubInfo;
+                    enterClub.clubInfo = msg.clubInfo;
                 }
                 HallData.Instance.Data_ModifyClubInfo.mData = msg.clubInfo;
             }
@@ -301,7 +304,11 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_ShareClubScore  修改玩家俱乐部积分===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                LocalPlayerData.Instance.Data_CurrentEnterClub.mData.totalClubPoint = msg.clubRestPoint;
+                let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(msg.clubId);
+                if(enterClub != null)
+                {
+                    enterClub.clubInfo.totalClubPoint = msg.clubRestPoint;
+                }
                 HallData.Instance.Data_ShareClubScore.mData = msg;
                 UIMgr.Instance.ShowToast(Localization.GetString("00120"));
             }
@@ -480,7 +487,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     }
                     else if(currencyType == GameCurrencyType.GameCurrencyType_Point)
                     {
-                        gameStruct.mSelfClubInfo.clubPoint = msg.leftAmount;
+                        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
+                        enterClub.clubMember.clubPoint = msg.leftAmount;
                     }
                     selfPlayer.currency = msg.amount;
                     gameStruct.mGameData.Data_S2CCommonBringInResp.mData = msg;
@@ -562,20 +570,10 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CClubPlayerPointNotify.decode(_data);
             console.log("收到的内容 S2C_ClubPlayerPointNotify  我的俱乐部积分修改===" + JSON.stringify(msg));
-            if(HallData.Instance.Data_ClubEnter.mData)
+            let clubInfo = LocalPlayerData.Instance.GetClubInfoByClubId(msg.clubId);
+            if(clubInfo != null)
             {
-                let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-                if(msg.clubId == currentClubId)
-                {
-                    LocalPlayerData.Instance.Data_SelfClubInfo.mData.clubPoint = msg.playerRestAmount;
-                }
-            }
-
-            let gameStructs = MultipleTableCtr.FindGameStructByClubId(_data.clubId);
-            for(let i = 0 ; i < gameStructs.length ; i++)
-            {
-                let currentGameStruct = gameStructs[i];
-                currentGameStruct.mSelfClubInfo.clubPoint = msg.playerRestAmount;
+                clubInfo.clubMember.clubPoint = msg.playerRestAmount;
             }
 
             HallData.Instance.Data_S2CClubPlayerPointNotify.mData = msg;
@@ -586,14 +584,12 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CModifyMemberRoleNotify.decode(_data);
             console.log("收到的内容 S2C_ModifyMemberRoleNotify  我的俱乐部权限被修改===" + JSON.stringify(msg));
-            if(HallData.Instance.Data_ClubEnter.mData)
+            let clubInfo = LocalPlayerData.Instance.GetClubInfoByClubId(msg.clubId);
+            if(clubInfo != null)
             {
-                let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
-                if(currentClubId == msg.clubId)
-                {
-                    LocalPlayerData.Instance.Data_SelfClubInfo.mData.memberType = msg.memberType;
-                }
+                clubInfo.clubMember.memberType = msg.memberType;
             }
+
             HallData.Instance.Data_S2CModifyMemberRoleNotify.mData = msg;
         },this);
 

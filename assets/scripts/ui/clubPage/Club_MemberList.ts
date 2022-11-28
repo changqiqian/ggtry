@@ -32,7 +32,7 @@ export class Club_MemberList extends ListViewCtr<ClubMember>
                 return;
             }
 
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             if(clubId != _data.clubId)
             {
                 return;
@@ -65,7 +65,7 @@ export class Club_MemberList extends ListViewCtr<ClubMember>
 
     Refresh()
     {
-        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClub.mData.id;
+        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
         NetworkSend.Instance.GetClubMember(clubId,this.mCurrentPage,this.mPageSize)
     }
 
