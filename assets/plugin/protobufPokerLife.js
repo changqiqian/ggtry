@@ -2820,6 +2820,9 @@ $root.GameType = (function() {
  * @property {number} ActionType_SB=4 ActionType_SB value
  * @property {number} ActionType_BB=5 ActionType_BB value
  * @property {number} ActionType_Straddle=6 ActionType_Straddle value
+ * @property {number} ActionType_Raise=7 ActionType_Raise value
+ * @property {number} ActionType_AllIn=8 ActionType_AllIn value
+ * @property {number} ActionType_Call=9 ActionType_Call value
  */
 $root.ActionType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
@@ -2830,6 +2833,9 @@ $root.ActionType = (function() {
     values[valuesById[4] = "ActionType_SB"] = 4;
     values[valuesById[5] = "ActionType_BB"] = 5;
     values[valuesById[6] = "ActionType_Straddle"] = 6;
+    values[valuesById[7] = "ActionType_Raise"] = 7;
+    values[valuesById[8] = "ActionType_AllIn"] = 8;
+    values[valuesById[9] = "ActionType_Call"] = 9;
     return values;
 })();
 
@@ -9885,6 +9891,7 @@ $root.S2CCommonRoundStartNotify = (function() {
      * @property {IActionInfo|null} [sb] S2CCommonRoundStartNotify sb
      * @property {IActionInfo|null} [bb] S2CCommonRoundStartNotify bb
      * @property {IActionInfo|null} [straddle] S2CCommonRoundStartNotify straddle
+     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonRoundStartNotify potInfo
      */
 
     /**
@@ -9898,6 +9905,7 @@ $root.S2CCommonRoundStartNotify = (function() {
     function S2CCommonRoundStartNotify(p) {
         this.players = [];
         this.antes = [];
+        this.potInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -9961,6 +9969,14 @@ $root.S2CCommonRoundStartNotify = (function() {
     S2CCommonRoundStartNotify.prototype.straddle = null;
 
     /**
+     * S2CCommonRoundStartNotify potInfo.
+     * @member {Array.<IPotInfo>} potInfo
+     * @memberof S2CCommonRoundStartNotify
+     * @instance
+     */
+    S2CCommonRoundStartNotify.prototype.potInfo = $util.emptyArray;
+
+    /**
      * Encodes the specified S2CCommonRoundStartNotify message. Does not implicitly {@link S2CCommonRoundStartNotify.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonRoundStartNotify
@@ -9990,6 +10006,10 @@ $root.S2CCommonRoundStartNotify = (function() {
             $root.ActionInfo.encode(m.bb, w.uint32(50).fork()).ldelim();
         if (m.straddle != null && Object.hasOwnProperty.call(m, "straddle"))
             $root.ActionInfo.encode(m.straddle, w.uint32(58).fork()).ldelim();
+        if (m.potInfo != null && m.potInfo.length) {
+            for (var i = 0; i < m.potInfo.length; ++i)
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(66).fork()).ldelim();
+        }
         return w;
     };
 
@@ -10035,6 +10055,11 @@ $root.S2CCommonRoundStartNotify = (function() {
                 break;
             case 7:
                 m.straddle = $root.ActionInfo.decode(r, r.uint32());
+                break;
+            case 8:
+                if (!(m.potInfo && m.potInfo.length))
+                    m.potInfo = [];
+                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
                 break;
             default:
                 r.skipType(t & 7);

@@ -687,6 +687,63 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameStruct.mGameData.Data_S2CCommonBringOutNotify.mData = msg;
             }
         },this);
+
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonRoundStartNotify,(_data)=>
+        {
+            let msg = S2CCommonRoundStartNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonRoundStartNotify  新一轮游戏开始推送==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.ResetGameInfo();
+                gameData.SetGameState(TexasCashState.TexasCashState_RoundStart);
+                gameData.UpdatePlayer(msg.players);
+                gameData.SetDealer(msg.dealer.uid);
+                for(let i = 0 ; i < msg.antes.length ; i++)
+                {
+                    gameData.InsertAction(msg.antes[i]);
+                }
+                gameData.UpdatePots(msg.potInfo);
+                gameData.InsertAction(msg.sb);
+                gameData.InsertAction(msg.bb);
+                gameData.InsertAction(msg.straddle);
+
+                gameData.Data_S2CCommonRoundStartNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonPreFlopRoundNotify,(_data)=>
+        {
+            let msg = S2CCommonPreFlopRoundNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonPreFlopRoundNotify  翻前发牌推送==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.UpdatePlayerCards(LocalPlayerData.Instance.Data_Uid.mData , msg.cards);
+                gameData.Data_S2CCommonPreFlopRoundNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonCurrentActionNotify,(_data)=>
+        {
+            let msg = S2CCommonCurrentActionNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonCurrentActionNotify  轮到谁行动推送==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.UpdateWhosTurn(msg.actionUid , msg.letTime);
+                gameData.Data_S2CCommonCurrentActionNotify.mData = msg;
+            }
+        },this);
+        
+        
     }
 
     public UnregisterMsg()

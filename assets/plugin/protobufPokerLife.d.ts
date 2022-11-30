@@ -1143,7 +1143,10 @@ export enum ActionType {
     ActionType_Ante = 3,
     ActionType_SB = 4,
     ActionType_BB = 5,
-    ActionType_Straddle = 6
+    ActionType_Straddle = 6,
+    ActionType_Raise = 7,
+    ActionType_AllIn = 8,
+    ActionType_Call = 9
 }
 
 /** GameTaxType enum. */
@@ -3558,6 +3561,9 @@ export class S2CCommonRoundStartNotify implements IS2CCommonRoundStartNotify {
 
     /** S2CCommonRoundStartNotify straddle. */
     public straddle?: (IActionInfo|null);
+
+    /** S2CCommonRoundStartNotify potInfo. */
+    public potInfo: IPotInfo[];
 
     /**
      * Encodes the specified S2CCommonRoundStartNotify message. Does not implicitly {@link S2CCommonRoundStartNotify.verify|verify} messages.

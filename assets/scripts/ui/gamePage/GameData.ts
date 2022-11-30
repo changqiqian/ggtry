@@ -14,6 +14,7 @@ export abstract class GameData extends MultipleNotify
     //UI控制
     Data_ChatingSubLayer :  BaseData<Game_ChattingSubLayer> = new BaseData<Game_ChattingSubLayer>();  //聊天页面子页面
 
+
     //服务器数据返回
     Data_S2CCommonEnterGameResp : BaseData<S2CCommonEnterGameResp> = new BaseData<S2CCommonEnterGameResp>();  //游戏基础配置信息
     Data_S2CCommonSitDownResp : BaseData<S2CCommonSitDownResp> = new BaseData<S2CCommonSitDownResp>(true);  //坐下
@@ -26,10 +27,31 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonBringOutNotify : BaseData<S2CCommonBringOutNotify> = new BaseData<S2CCommonBringOutNotify>(true);  //带出推送
 
 
+    Data_S2CCommonRoundStartNotify : BaseData<S2CCommonRoundStartNotify> = new BaseData<S2CCommonRoundStartNotify>();  //本轮开始推送
+    Data_S2CCommonPreFlopRoundNotify: BaseData<S2CCommonPreFlopRoundNotify> = new BaseData<S2CCommonPreFlopRoundNotify>();  //翻前发牌推送
+    Data_S2CCommonCurrentActionNotify : BaseData<S2CCommonCurrentActionNotify> = new BaseData<S2CCommonCurrentActionNotify>();  //轮到谁行动推送
+
     
     public SetGameInfo(_S2CCommonEnterGameResp : S2CCommonEnterGameResp)
     {
         this.Data_S2CCommonEnterGameResp.mData = _S2CCommonEnterGameResp;
+    }
+
+    public ResetGameInfo()
+    {
+        let seatInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        for(let i = 0 ; i < seatInfos.length ; i++)
+        {
+            seatInfos[i].playerInfo.cards = [];
+            seatInfos[i].playerInfo.fold = false;
+        }
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionUid = "";
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionLeftTime = 0;
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.potInfo = [];
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actions = [];
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.publicCards = [];
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.dealerUid = "";
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.state = TexasCashState.TexasCashState_RoundStart;
     }
 
     public PlayerSit(_seatInfo : SeatInfo)
@@ -49,6 +71,51 @@ export abstract class GameData extends MultipleNotify
         }
     }
 
+    public SetGameState(_state : TexasCashState)
+    {
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.state = _state;
+    }
+
+    public UpdatePlayer(_players : Array<PlayerInfo>)
+    {
+        for(let i = 0 ; i < _players.length ; i++)
+        {
+            let currentPlayer = _players[i];
+            let targetPlayerInfo = this.GetPlayerInfoByUid(currentPlayer.uid);
+            if(targetPlayerInfo != null)
+            {
+                targetPlayerInfo = currentPlayer;
+            }
+        }
+    }
+
+    public UpdateWhosTurn(_uid : string , _leftTime : number)
+    {
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionUid = _uid;
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionLeftTime = _leftTime;
+    }
+
+    public UpdatePlayerCards(_uid : string , _cards : Array<CardInfo>)
+    {
+        let playerInfo = this.GetPlayerInfoByUid(_uid);
+        playerInfo.cards = _cards;
+    }
+
+    public UpdatePots(_pots : Array<PotInfo>)
+    {
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.potInfo = _pots;
+    }
+
+    public SetDealer(_uid : string)
+    {
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.dealerUid = _uid;
+    }
+
+    public InsertAction(_action : ActionInfo)
+    {
+        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actions.push(_action);
+    }
+
     public FindAction(_uid : string , _actionType : ActionType) : ActionInfo
     {
         let actions = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actions;
@@ -64,9 +131,29 @@ export abstract class GameData extends MultipleNotify
                 }
             }
         }
-
         return null;
     }
+
+    public FindActionByUid(_uid : string ) : Array<ActionInfo>
+    {
+        let result = new Array<ActionInfo>();
+        let actions = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actions;
+        if(actions != null)
+        {
+            for(let i = 0 ; i < actions.length ; i++)
+            {
+                let current = actions[i];
+                let playerInfo = current.playerInfo;
+                if(playerInfo.uid == _uid)
+                {
+                    result.push(current);
+                }
+            }
+        }
+        return result;
+    }
+    
+
 
     public IsSelfBySeat(_seatId : number) : boolean
     {

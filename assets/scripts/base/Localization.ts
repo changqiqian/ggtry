@@ -153,7 +153,7 @@ export class Localization {
         { name: '00064', ch: '底池', en: 'Pot' },
         { name: '00065', ch: '弃牌', en: 'Fold' },
         { name: '00066', ch: '过牌', en: 'Check' },
-        { name: '00067', ch: '更注', en: 'Call' },
+        { name: '00067', ch: '跟注', en: 'Call' },
         { name: '00068', ch: '加注', en: 'Raise' },
         { name: '00069', ch: '全下', en: 'All in' },
         { name: '00070', ch: '抓头', en: 'Straddle' },
@@ -337,7 +337,9 @@ export class Localization {
         { name: '00249', ch: '带出记分牌', en: 'Cash-Out' },
         { name: '00250', ch: '带出将在下一手开始前生效', en: 'Will cash out next round' },
         { name: '00251', ch: '带出成功', en: 'Cash out success' },
-        
+        { name: '00252', ch: '小盲', en: 'SB' },
+        { name: '00253', ch: '大盲', en: 'BB' },
+        { name: '00254', ch: '下注', en: 'Bet' },
         
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

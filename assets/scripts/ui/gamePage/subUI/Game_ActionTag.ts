@@ -34,7 +34,54 @@ export class Game_ActionTag extends BaseUI
 
     SetType(_actionType : ActionType)
     {
+        this.node.active = true;
 
+        let title = "";
+        switch(_actionType)
+        {
+            case ActionType.ActionType_Ante:
+            {
+                title = Localization.GetString("00211");
+            }
+            case ActionType.ActionType_SB:
+            {
+                title = Localization.GetString("00252");
+            }
+            case ActionType.ActionType_BB:
+            {
+                title = Localization.GetString("00253");
+            }
+            case ActionType.ActionType_Straddle:
+            {
+                title = Localization.GetString("00210");
+            }
+            case ActionType.ActionType_Bet:
+            {
+                title = Localization.GetString("00254");
+            }
+            case ActionType.ActionType_Raise:
+            {
+                title = Localization.GetString("00068");
+            }
+            case ActionType.ActionType_AllIn:
+            {
+                title = Localization.GetString("00069");
+            }
+            case ActionType.ActionType_Check:
+            {
+                title = Localization.GetString("00066");
+            }
+            case ActionType.ActionType_Fold:
+            {
+                title = Localization.GetString("00065");
+            }
+            case ActionType.ActionType_Call:
+            {
+                title = Localization.GetString("00067");
+            }
+        }
+
+        this.mAction.string = title;
     }
 }
 
