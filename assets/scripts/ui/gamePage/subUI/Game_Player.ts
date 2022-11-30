@@ -166,6 +166,15 @@ export class Game_Player extends BaseUI
                 this.UpdateMoney(_data.amount);
             }
         })
+
+        gameData.Data_S2CCommonBringOutNotify.AddListenner(this,(_data)=>
+        {
+            let selfSeat = gameData.GetSeatByUid(_data.actionUid);
+            if(selfSeat == this.mSeatID)
+            {
+                this.UpdateMoney(_data.amount);
+            }
+        })
     }
 
     PlayerSit(_playerInfo : PlayerInfo)

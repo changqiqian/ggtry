@@ -51,7 +51,6 @@ export class Game_BuyInWindow extends BaseUI
     onEnable()
     {
         this.UpdateTotalMoney();
-        this.mProgressSlider.SetPercent(0);
     }
 
     onDisable()
@@ -81,23 +80,23 @@ export class Game_BuyInWindow extends BaseUI
         this.mConfirmBtn.SetClickCallback(()=>
         {
             let bringInMoney = this.CalculateControlMoney(this.mProgressSlider.GetPercent());
-            let moneyC2S = Tool.ConvertMoney_C2S(bringInMoney);
-         
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
-
-            NetworkSend.Instance.BringIn(gameData.BringInSendMsgId() , gameStruct.mGameId,moneyC2S);
+            NetworkSend.Instance.BringIn(gameData.BringInSendMsgId() , gameStruct.mGameId,bringInMoney);
+            this.CloseAsWindow();
         });
 
 
         this.mProgressSlider.SetEndCallback((_ratio)=>
         {
-            this.mCurrentAmount.string = this.CalculateControlMoney(_ratio) + "";
+            let amount = this.CalculateControlMoney(_ratio);
+            this.mCurrentAmount.string = Tool.ConvertMoney_S2C(amount) + "";
         });
 
         this.mProgressSlider.SetDragCallback((_ratio)=>
         {
-            this.mCurrentAmount.string = this.CalculateControlMoney(_ratio) + "";
+            let amount = this.CalculateControlMoney(_ratio);
+            this.mCurrentAmount.string = Tool.ConvertMoney_S2C(amount) + "";
         });
     }
     RegDataNotify()
@@ -141,14 +140,24 @@ export class Game_BuyInWindow extends BaseUI
         })
 
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        gameStruct.mGameData.Data_S2CCommonBringInResp.AddListenner(this,(_data)=>
+        let gameData = gameStruct.mGameData;
+        gameData.Data_S2CCommonBringInResp.AddListenner(this,(_data)=>
         {
-            this.CloseAsWindow();
+            this.UpdateTotalMoney();
         })
+
+        gameData.Data_S2CCommonBringOutResp.AddListenner(this,(_data)=>
+        {
+            this.UpdateTotalMoney();
+        })
+
+
+        
     }
 
     UpdateTotalMoney()
     {
+        this.mProgressSlider.SetPercent(0);
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let currentMoney;
         let currencyType = gameStruct.mGameData.Data_S2CCommonEnterGameResp.mData.gameStatic.basicConfig.currencyType;
@@ -171,8 +180,7 @@ export class Game_BuyInWindow extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let texasConfig = gameStruct.mGameData.Data_S2CCommonEnterGameResp.mData.gameStatic.texasConfig;
         let currentAmount = texasConfig.minBringIn + (texasConfig.maxBringIn - texasConfig.minBringIn) * _ratio;
-        let convertMoneyToS2C = Tool.ConvertMoney_S2C(currentAmount);
-        return convertMoneyToS2C;
+        return currentAmount;
     }
 
     StartCountDown(_totalTime : number)

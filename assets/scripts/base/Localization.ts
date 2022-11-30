@@ -331,6 +331,13 @@ export class Localization {
         { name: '00243', ch: '最小', en: 'Min' },
         { name: '00244', ch: '最大', en: 'Max' },
         { name: '00245', ch: '带入成功', en: 'Buy-in success' },
+        { name: '00246', ch: '等待开局', en: 'Wating' },
+        { name: '00247', ch: '结算中', en: 'Settlement' },
+        { name: '00248', ch: '买入中', en: 'Buy-In' },
+        { name: '00249', ch: '带出记分牌', en: 'Cash-Out' },
+        { name: '00250', ch: '带出将在下一手开始前生效', en: 'Will cash out next round' },
+        { name: '00251', ch: '带出成功', en: 'Cash out success' },
+        
         
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

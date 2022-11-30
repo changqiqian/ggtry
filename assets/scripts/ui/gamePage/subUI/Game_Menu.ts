@@ -9,6 +9,7 @@ import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { HallData } from '../../hall/HallData';
 import { GameData } from '../GameData';
+import { Game_BringOut } from './Game_BringOut';
 import { Game_BuyInWindow } from './Game_BuyInWindow';
 const { ccclass, property } = _decorator;
 
@@ -83,7 +84,11 @@ export class Game_Menu extends BaseUI
         });
         this.mBringOutBtn.SetClickCallback(()=>
         {
-
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BringOut",true,(_script)=>
+            {
+                let temp = _script as Game_BringOut;
+                temp.InitWithData(this.mIndex);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
         this.mSettingBtn.SetClickCallback(()=>
         {
@@ -131,7 +136,6 @@ export class Game_Menu extends BaseUI
     public InitWithData(_index : number)
     {
         this.mIndex = _index;    
-        this.UpdateDismissBtn();
         this.BindData();
 
     }
@@ -143,16 +147,36 @@ export class Game_Menu extends BaseUI
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
             this.UpdateStandBtn();
+            this.UpdateBringOutBtn();
+            this.UpdateDismissBtn();
         });
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
         {
+            if(_data.seatInfo.playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
             this.UpdateStandBtn();
         });
 
         gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
         {
+            if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
             this.UpdateStandBtn();
         });
+
+        gameData.Data_S2CCommonBringInNotify.AddListenner(this,(_data)=>
+        {
+            if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
+            this.UpdateBringOutBtn();
+        });
+        
 
 
         HallData.Instance.Data_S2CModifyMemberRoleNotify.AddListenner(this,(_data)=>
@@ -184,9 +208,24 @@ export class Game_Menu extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let seatId = gameData.GetSeatByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        this.mStandBtn.Show(seatId != null);
+        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        this.mStandBtn.Show(selfPlayer != null);
     }
+
+    UpdateBringOutBtn()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let allowBringOut = gameData.Data_S2CCommonEnterGameResp.mData.gameStatic.texasConfig.allowBringOut;
+        if(allowBringOut == false)
+        {
+            this.mBringOutBtn.Show(false);
+            return;
+        }
+
+
+    }
+
 
     public Show(_val : boolean)
     {

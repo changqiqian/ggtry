@@ -95,8 +95,7 @@ export class Game_SelfUI extends BaseUI
     }
     SetActionTag()
     {
-        this.mGame_ActionTag.SetType();
-
+        //this.mGame_ActionTag.SetType();
     }
 
 
@@ -130,7 +129,7 @@ export class Game_SelfUI extends BaseUI
         for(let i = 0 ; i < this.mCards.children.length ; i++)
         {
             let currentCard = this.mCards.children[i].getComponent(Poker);
-            currentCard.SetGary();
+            currentCard.SetGary(true);
         }
     }
 

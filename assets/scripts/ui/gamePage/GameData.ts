@@ -22,7 +22,11 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonStandUpNotify : BaseData<S2CCommonStandUpNotify> = new BaseData<S2CCommonStandUpNotify>(true);  //站起推送
     Data_S2CCommonBringInResp : BaseData<S2CCommonBringInResp> = new BaseData<S2CCommonBringInResp>(true);  //带入
     Data_S2CCommonBringInNotify : BaseData<S2CCommonBringInNotify> = new BaseData<S2CCommonBringInNotify>(true);  //带入推送
+    Data_S2CCommonBringOutResp : BaseData<S2CCommonBringOutResp> = new BaseData<S2CCommonBringOutResp>(true);  //带出
+    Data_S2CCommonBringOutNotify : BaseData<S2CCommonBringOutNotify> = new BaseData<S2CCommonBringOutNotify>(true);  //带出推送
 
+
+    
     public SetGameInfo(_S2CCommonEnterGameResp : S2CCommonEnterGameResp)
     {
         this.Data_S2CCommonEnterGameResp.mData = _S2CCommonEnterGameResp;
@@ -142,6 +146,18 @@ export abstract class GameData extends MultipleNotify
         return null;
     }
 
+    public GetTotalPots() : number
+    {
+        let potInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.potInfo;
+        let totalPot = 0;
+        for(let i = 0 ; i < potInfos.length ; i++)
+        {
+            totalPot += potInfos[i].pot;
+        }
+
+        return totalPot;
+    }
+
     
     public abstract GameStartSendMsgId() : number
     public abstract SitDownSendMsgId() : number
@@ -151,9 +167,8 @@ export abstract class GameData extends MultipleNotify
     public abstract ActionSendMsgId() : number
     public abstract BuyInsuranceSendMsgId() : number
     public abstract ChatSendMsgId() : number
-
-
-
+    public abstract ObListSendMsgId() : number
+    public abstract BuyInListSendMsgId() : number
     
 }
 

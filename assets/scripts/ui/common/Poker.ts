@@ -166,6 +166,12 @@ export class Poker extends BaseUI
         });
     }
 
+    public SetFrontByCardInfo(_cardInfo : CardInfo)
+    {
+        let cardStruct = new CardStruct(_cardInfo.number,_cardInfo.type);
+        this.SetFront(cardStruct);
+    }
+
     public FlipToFront(_duration : number = 0.6)
     {
         let halfDuration = _duration / 3;
@@ -215,7 +221,7 @@ export class Poker extends BaseUI
         this.mIcon.active = false;
         this.mBack.active = true;
         this.mFront.active = false;
-        this.mFront.getComponent(Sprite).color = Color.WHITE;
+        this.SetGary(false);
     }
 
     public SetClickAble(_callback : Function , _index : number)
@@ -225,9 +231,16 @@ export class Poker extends BaseUI
         this.mClickCallback = _callback;
     }
 
-    public SetGary()
+    public SetGary(_value : boolean)
     {
-        this.mFront.getComponent(Sprite).color = Color.GRAY;
+        if(_value)
+        {
+            this.mFront.getComponent(Sprite).color = Color.GRAY;
+        }
+        else
+        {
+            this.mFront.getComponent(Sprite).color = Color.WHITE;
+        }
     }
 }
 

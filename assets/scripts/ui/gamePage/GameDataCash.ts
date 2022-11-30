@@ -39,7 +39,14 @@ export class GameDataCash extends GameData
         return MessageId.C2S_TexasCashChat
     }
     
-
+    public ObListSendMsgId() : number
+    {
+        return MessageId.C2S_TexasCashGetObList;
+    }
+    public BuyInListSendMsgId() : number
+    {
+        return MessageId.CS2_TexasCashGetBuyInList;
+    }
     
     
     

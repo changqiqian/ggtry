@@ -4,6 +4,7 @@ import { LocalPlayerData } from "../base/LocalPlayerData";
 import { Singleton } from "../base/Singleton";
 import { SceneType, UIMgr } from "../base/UIMgr";
 import { GameConfig } from "../GameConfig";
+import { Tool } from "../Tool";
 import { MultipleTableCtr } from "../ui/common/MultipleTableCtr";
 import { HallData } from "../ui/hall/HallData";
 import { LoginData } from "../ui/login/LoginData";
@@ -501,6 +502,37 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
         
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBringOutResp,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonBringOutResp.decode(_data);
+            console.log("收到的内容 S2C_CommonBringOutResp  带出==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let selfPlayer = gameStruct.mGameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+                    let currencyType = gameStruct.mGameData.Data_S2CCommonEnterGameResp.mData.gameStatic.basicConfig.currencyType;
+                    if(currencyType == GameCurrencyType.GameCurrencyType_Coin)
+                    {
+                        LocalPlayerData.Instance.Data_Coin.mData = msg.leftAmount;
+                    }
+                    else if(currencyType == GameCurrencyType.GameCurrencyType_Point)
+                    {
+                        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
+                        enterClub.clubMember.clubPoint = msg.leftAmount;
+                    }
+                    selfPlayer.currency = msg.amount;
+                    gameStruct.mGameData.Data_S2CCommonBringOutResp.mData = msg;
+                    UIMgr.Instance.ShowToast(Localization.GetString("00251"));
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
 
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
@@ -639,6 +671,20 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 player.buyIn = true;
                 player.currency = msg.amount;
                 gameStruct.mGameData.Data_S2CCommonBringInNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBringOutNotify,(_data)=>
+        {
+            let msg = S2CCommonBringOutNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonBringOutNotify  带出推送==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let player = gameStruct.mGameData.GetPlayerInfoByUid(msg.actionUid);
+                player.currency = msg.amount;
+                gameStruct.mGameData.Data_S2CCommonBringOutNotify.mData = msg;
             }
         },this);
     }

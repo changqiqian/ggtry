@@ -391,6 +391,16 @@ export class NetworkSend extends Singleton<NetworkSend>()
         Network.Instance.SendMsg(_msgId , C2SGameBringIn.encode(msg).finish());
         console.log("带入  === " + JSON.stringify(msg))
     }
+
+    public BringOut(_msgId : number ,_gameId : string , _amount : number)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SGameBringOut();
+        msg.gameId = _gameId;
+        msg.amount = _amount;
+        Network.Instance.SendMsg(_msgId , C2SGameBringOut.encode(msg).finish());
+        console.log("带出  === " + JSON.stringify(msg))
+    }
 }
 
 

@@ -185,7 +185,7 @@ export class MultipleTableCtr extends BaseUI
             let gameScript = _script as GameBase;
             gameScript.InitWithData(index,seatNum);
             gameScript.ShowMoveInAnimation();
-            this.GetControlButton(index).BindGameData(gameStruct.mGameData);
+            this.GetControlButton(index).BindData();
             HallData.Instance.Data_MultipeIndex.mData = index;
         },MultipleTableCtr.GetUiTag(index),index.toString());
     }
