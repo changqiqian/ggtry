@@ -354,30 +354,21 @@ export class NetworkSend extends Singleton<NetworkSend>()
         }
     }
 
-    public SitDown(_msgId : number ,_gameId : string , _seat : number , _tableId : string = null)
+    public SitDown(_msgId : number ,_gameId : string , _seat : number )
     {
         UIMgr.Instance.ShowLoading(true);
         let msg = new C2SGameSitDown();
         msg.gameId = _gameId;
         msg.seat = _seat;
-        if(_tableId != null)
-        {
-            msg.table = _tableId;
-        }
         Network.Instance.SendMsg(_msgId , C2SGameSitDown.encode(msg).finish());
         console.log("坐下  === " + JSON.stringify(msg))
     }
 
-    public StandUp(_msgId : number ,_gameId : string , _seat : number, _tableId : string = null)
+    public StandUp(_msgId : number ,_gameId : string)
     {
         UIMgr.Instance.ShowLoading(true);
         let msg = new C2SGameStandUp();
         msg.gameId = _gameId;
-        msg.seat = _seat;
-        if(_tableId != null)
-        {
-            msg.table = _tableId;
-        }
         Network.Instance.SendMsg(_msgId , C2SGameStandUp.encode(msg).finish());
         console.log("坐下  === " + JSON.stringify(msg))
     }
@@ -401,6 +392,16 @@ export class NetworkSend extends Singleton<NetworkSend>()
         Network.Instance.SendMsg(_msgId , C2SGameBringOut.encode(msg).finish());
         console.log("带出  === " + JSON.stringify(msg))
     }
+
+    public StartGame(_msgId : number ,_gameId : string )
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SGameStart();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(_msgId , C2SGameStart.encode(msg).finish());
+        console.log("申请开始游戏  === " + JSON.stringify(msg))
+    }
+    
 }
 
 

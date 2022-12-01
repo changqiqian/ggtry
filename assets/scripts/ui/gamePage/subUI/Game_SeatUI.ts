@@ -59,7 +59,7 @@ export class Game_SeatUI extends BaseUI
             for(let i = 0 ; i < seatInfos.length ; i++)
             {
                 let current = seatInfos[i];
-                if(current.playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+                if(current.uid == LocalPlayerData.Instance.Data_Uid.mData)
                 {
                     this.TryRotateSeats(current.seat);
                     break;
@@ -69,12 +69,12 @@ export class Game_SeatUI extends BaseUI
 
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
         {
-            let seatInfo = _data.seatInfo;
-            if(seatInfo.playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+            let playerInfo = _data.seatPlayerInfo;
+            if(playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
             {
                 return;
             }
-            this.TryRotateSeats(seatInfo.seat);
+            this.TryRotateSeats(playerInfo.seat);
         })
     }
 
@@ -131,7 +131,7 @@ export class Game_SeatUI extends BaseUI
                 let current = this.node.children[i].getComponent(Game_SeatItem);
                 MovePathConfigArray.push(this.GetPath(current.mSeatID , step));
             }
-            this.RotateWithAnm(this.node.activeInHierarchy,MovePathConfigArray);
+            this.RotateWithAnm(false,MovePathConfigArray);
         }
     }
 

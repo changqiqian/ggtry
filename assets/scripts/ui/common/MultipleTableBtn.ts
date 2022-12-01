@@ -81,7 +81,7 @@ export class MultipleTableBtn extends BaseUI
 
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
         {
-            if(_data.seatInfo.playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+            if(_data.seatPlayerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
             {
                 return;
             }
@@ -124,7 +124,7 @@ export class MultipleTableBtn extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let coreData = gameData.Data_S2CCommonEnterGameResp.mData;
-        if(coreData.gameDynamic.gameStart == false)
+        if(coreData.gameDynamic.state < TexasCashState.TexasCashState_Start)
         {
             this.WaitGameStart();
             return;
@@ -145,13 +145,13 @@ export class MultipleTableBtn extends BaseUI
             return;
         }
 
-        if(selfPlayer.buyIn == false)
+        if(selfPlayer.currencyNum)
         {
             this.ShowBuyIn(selfPlayer.buyInLeftTime);
             return;
         }
 
-        if(selfPlayer.playThisTurn == false)
+        if(!selfPlayer.cards || selfPlayer.cards.length == 0)
         {
             this.ShowPot();
             return;

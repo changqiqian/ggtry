@@ -103,7 +103,7 @@ export class Game_Menu extends BaseUI
             let seatId = gameData.GetSeatByUid(LocalPlayerData.Instance.Data_Uid.mData);
             if(seatId != null)
             {
-                NetworkSend.Instance.StandUp(msgId,gameId,seatId);
+                NetworkSend.Instance.StandUp(msgId,gameId);
             }
 
         });
@@ -152,7 +152,7 @@ export class Game_Menu extends BaseUI
         });
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
         {
-            if(_data.seatInfo.playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+            if(_data.seatPlayerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
             {
                 return;
             }

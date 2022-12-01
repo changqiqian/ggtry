@@ -50,18 +50,30 @@ export class Game_BuyInWindow extends BaseUI
 
     onEnable()
     {
+        if(this.mIndex == null)
+        {
+            return;
+        }
         this.UpdateTotalMoney();
     }
 
     onDisable()
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let selfPlayer =  gameStruct.mGameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        if(selfPlayer != null)
+        if(gameStruct != null)
         {
-            if(selfPlayer.buyIn == false)
+            let selfPlayer = gameStruct.mGameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            if(selfPlayer != null)
             {
-                this.CloseAsWindow();
+                if(selfPlayer.currencyNum)
+                {
+
+                }
+                else
+                {
+                    let gameData = gameStruct.mGameData;
+                    NetworkSend.Instance.StandUp(gameData.StandUpSendMsgId() , gameStruct.mGameId);
+                }
             }
         }
     }
@@ -116,6 +128,7 @@ export class Game_BuyInWindow extends BaseUI
     {
         this.mIndex = _index;
         this.mCountNode.active = false;
+        this.StopCountDown();
         this.BindData();
     }
 
@@ -191,6 +204,7 @@ export class Game_BuyInWindow extends BaseUI
 
     StopCountDown()
     {
+        this.mCountNode.active = false;
         this.StopSecondsTimer();
     }
     

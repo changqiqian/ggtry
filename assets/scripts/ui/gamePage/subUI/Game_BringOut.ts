@@ -129,7 +129,7 @@ export class Game_BringOut extends BaseUI
         {
             return;
         }
-        let amount = Tool.ConvertMoney_S2C(selfPlayer.currency);
+        let amount = Tool.ConvertMoney_S2C(selfPlayer.currencyNum);
         this.mRestAmount.string = Localization.GetString("00167") + amount;
     }
 
@@ -142,7 +142,7 @@ export class Game_BringOut extends BaseUI
         let selfPlayer =  gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
 
         let minBringOut = 0;
-        let maxBringOut = selfPlayer.currency - minScoreAfterBringOut;
+        let maxBringOut = selfPlayer.currencyNum - minScoreAfterBringOut;
 
         let currentAmount = minBringOut + (maxBringOut - minBringOut) * _ratio;
         return currentAmount;

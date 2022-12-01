@@ -128,7 +128,7 @@ export class LoginUI extends BaseUI
     }
     LateInit() 
     {
-        if(GameConfig.DebugMode == false)
+        if(!GameConfig.DebugMode)
         {
             GameConfig.SetSeverUrl(GameConfig.DevelopIP);
             Network.Instance.CreateWS();

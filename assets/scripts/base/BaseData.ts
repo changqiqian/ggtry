@@ -64,6 +64,8 @@ export class BaseData <T>
         }
     }
 
+
+
     public AddListenner(_target : any , _callfunc : Function)
     {
         let index = this.mEventArray.findIndex((_item) => _item.mtarget === _target);
@@ -78,9 +80,10 @@ export class BaseData <T>
 
         if(this.mSetValueAlready)
         {
-            this.UpdateData(this.mSavingData);
+            dataEvent.mCallfunc(this.mSavingData);
         }
     }
+    
 
     public RemoveListennerByTarget(_target : any)
     {

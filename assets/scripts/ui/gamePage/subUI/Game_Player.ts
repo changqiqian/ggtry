@@ -79,6 +79,7 @@ export class Game_Player extends BaseUI
         this.mCards.active = false;
         this.mLeaveTitle.node.active = false;
         this.mSelfBtn.node.active = false;
+        this.mCountDown.string = "";
     }
 
     RegDataNotify() 
@@ -109,42 +110,34 @@ export class Game_Player extends BaseUI
         let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
-            let seatInfos = _data.gameDynamic.seatInfos;
-            for(let i = 0 ; i < seatInfos.length ; i++)
+            let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+            if(playerInfo == null)
             {
-                let currentSeatInfo = seatInfos[i];
-                if(currentSeatInfo.seat == this.mSeatID)
-                {
-                    this.PlayerSit(currentSeatInfo.playerInfo);
-                    break;
-                }
+                return;
             }
-
+            this.PlayerSit(playerInfo);
             this.RestoreAction();
             this.UpdateTurn();
         });
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
         {
-            let seatInfo = _data.seatInfo;
-            if(seatInfo.seat == this.mSeatID)
+            let playerInfo = _data.seatPlayerInfo;
+            if(playerInfo.seat == this.mSeatID)
             {
-                this.PlayerSit(seatInfo.playerInfo);
+                this.PlayerSit(playerInfo);
             }
         });
 
         gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
         {
-            let tempSeatId = gameData.GetSeatByUid( _data.actionUid);
-            if(tempSeatId == this.mSeatID)
+            if(_data.actionSeat == this.mSeatID)
             {
                 this.HideAllUI();
                 if(_data.actionUid == LocalPlayerData.Instance.Data_Uid.mData)
                 {
                     UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyInWindow",false,(_script)=>
                     {
-                        let temp = _script as Game_BuyInWindow;
-                        temp.InitWithData(this.mIndex);
-                        temp.StopCountDown();
+
                     },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
                 }
             }
@@ -227,6 +220,21 @@ export class Game_Player extends BaseUI
         {
             this.UpdateTurn();
         })
+
+        gameData.Data_S2CCommonBuyInCountDownNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.seat != this.mSeatID)
+            {
+                return;
+            }
+            this.UpdateBuyInCountDown(playerInfo);
+        })
     }
 
     PrepareRoundStart()
@@ -245,14 +253,15 @@ export class Game_Player extends BaseUI
         let gameData = gameStruct.mGameData;
         this.UpdateName(_playerInfo.nickName);
         this.UpdateHead(_playerInfo.head);
-        this.UpdateMoney(_playerInfo.currency);
+        this.UpdateMoney(_playerInfo.currencyNum);
         this.UpdateDealer(gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.dealerUid);
 
-        if(_playerInfo.buyIn)
+        if(_playerInfo.currencyNum)
         {
-            this.mMiniCard.active = _playerInfo.playThisTurn;
+            let playerPlaying = _playerInfo.cards.length > 0;
+            this.mMiniCard.active = playerPlaying;
 
-            if(_playerInfo.playThisTurn)
+            if(playerPlaying)
             {
                 this.mDarkCover.active = _playerInfo.fold || _playerInfo.auto;
                 this.mLeaveTitle.node.active = _playerInfo.auto;
@@ -264,18 +273,23 @@ export class Game_Player extends BaseUI
         }
         else
         {
-            this.mDarkCover.active = true;
-            this.StartSecondsTimer(_playerInfo.buyInLeftTime);
-            
-            if(_playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            this.UpdateBuyInCountDown(_playerInfo);
+        }
+    }
+
+    UpdateBuyInCountDown(_playerInfo : PlayerInfo)
+    {
+        this.mDarkCover.active = true;
+        this.StartSecondsTimer(_playerInfo.buyInLeftTime);
+        
+        if(_playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+        {
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyInWindow",true,(_script)=>
             {
-                UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyInWindow",true,(_script)=>
-                {
-                    let temp = _script as Game_BuyInWindow;
-                    temp.InitWithData(this.mIndex);
-                    temp.StartCountDown(_playerInfo.buyInLeftTime);
-                },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
-            }
+                let temp = _script as Game_BuyInWindow;
+                temp.InitWithData(this.mIndex);
+                temp.StartCountDown(_playerInfo.buyInLeftTime);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         }
     }
 
@@ -283,13 +297,13 @@ export class Game_Player extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let currentUid = gameData.GetUidBySeat(this.mSeatID);
-        if(currentUid == null)
+        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        if(playerInfo == null)
         {
             return;
         }
 
-        let currentActions = gameData.FindActionByUid(currentUid);
+        let currentActions = gameData.FindActionByUid(playerInfo.uid);
         if(currentActions.length > 0)
         {
             let lastAct = currentActions[currentActions.length - 1];

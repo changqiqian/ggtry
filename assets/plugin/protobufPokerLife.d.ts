@@ -1179,6 +1179,12 @@ export enum TexasCashState {
     TexasCashState_Settlement = 7
 }
 
+/** GameRole enum. */
+export enum GameRole {
+    GameRole_Observer = 0,
+    GameRole_Player = 1
+}
+
 /** Represents a BasicGameConfig. */
 export class BasicGameConfig implements IBasicGameConfig {
 
@@ -1415,20 +1421,23 @@ export class PlayerInfo implements IPlayerInfo {
     /** PlayerInfo head. */
     public head: string;
 
-    /** PlayerInfo currency. */
-    public currency: number;
+    /** PlayerInfo currencyNum. */
+    public currencyNum: number;
+
+    /** PlayerInfo buyInNum. */
+    public buyInNum: number;
+
+    /** PlayerInfo gameRole. */
+    public gameRole: GameRole;
 
     /** PlayerInfo cards. */
     public cards: ICardInfo[];
 
-    /** PlayerInfo buyIn. */
-    public buyIn: boolean;
+    /** PlayerInfo seat. */
+    public seat: number;
 
     /** PlayerInfo buyInLeftTime. */
     public buyInLeftTime: number;
-
-    /** PlayerInfo playThisTurn. */
-    public playThisTurn: boolean;
 
     /** PlayerInfo fold. */
     public fold: boolean;
@@ -1458,118 +1467,32 @@ export class PlayerInfo implements IPlayerInfo {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PlayerInfo;
 }
 
-/** Represents an ObPlayer. */
-export class ObPlayer implements IObPlayer {
+/** Represents a PlayerHistoryInfo. */
+export class PlayerHistoryInfo implements IPlayerHistoryInfo {
 
     /**
-     * Constructs a new ObPlayer.
+     * Constructs a new PlayerHistoryInfo.
      * @param [p] Properties to set
      */
-    constructor(p?: IObPlayer);
-
-    /** ObPlayer uid. */
-    public uid: string;
-
-    /** ObPlayer nickName. */
-    public nickName: string;
-
-    /** ObPlayer head. */
-    public head: string;
+    constructor(p?: IPlayerHistoryInfo);
 
     /**
-     * Encodes the specified ObPlayer message. Does not implicitly {@link ObPlayer.verify|verify} messages.
-     * @param m ObPlayer message or plain object to encode
+     * Encodes the specified PlayerHistoryInfo message. Does not implicitly {@link PlayerHistoryInfo.verify|verify} messages.
+     * @param m PlayerHistoryInfo message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IObPlayer, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IPlayerHistoryInfo, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes an ObPlayer message from the specified reader or buffer.
+     * Decodes a PlayerHistoryInfo message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns ObPlayer
+     * @returns PlayerHistoryInfo
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ObPlayer;
-}
-
-/** Represents a BuyInPlayer. */
-export class BuyInPlayer implements IBuyInPlayer {
-
-    /**
-     * Constructs a new BuyInPlayer.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IBuyInPlayer);
-
-    /** BuyInPlayer uid. */
-    public uid: string;
-
-    /** BuyInPlayer nickName. */
-    public nickName: string;
-
-    /** BuyInPlayer head. */
-    public head: string;
-
-    /** BuyInPlayer buyIn. */
-    public buyIn: number;
-
-    /** BuyInPlayer amount. */
-    public amount: number;
-
-    /**
-     * Encodes the specified BuyInPlayer message. Does not implicitly {@link BuyInPlayer.verify|verify} messages.
-     * @param m BuyInPlayer message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IBuyInPlayer, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a BuyInPlayer message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns BuyInPlayer
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): BuyInPlayer;
-}
-
-/** Represents a SeatInfo. */
-export class SeatInfo implements ISeatInfo {
-
-    /**
-     * Constructs a new SeatInfo.
-     * @param [p] Properties to set
-     */
-    constructor(p?: ISeatInfo);
-
-    /** SeatInfo seat. */
-    public seat: number;
-
-    /** SeatInfo playerInfo. */
-    public playerInfo?: (IPlayerInfo|null);
-
-    /**
-     * Encodes the specified SeatInfo message. Does not implicitly {@link SeatInfo.verify|verify} messages.
-     * @param m SeatInfo message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: ISeatInfo, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a SeatInfo message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns SeatInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): SeatInfo;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PlayerHistoryInfo;
 }
 
 /** Represents an ActionInfo. */
@@ -1720,11 +1643,11 @@ export class GameDynamicData implements IGameDynamicData {
      */
     constructor(p?: IGameDynamicData);
 
-    /** GameDynamicData gameStart. */
-    public gameStart: boolean;
+    /** GameDynamicData state. */
+    public state: TexasCashState;
 
     /** GameDynamicData seatInfos. */
-    public seatInfos: ISeatInfo[];
+    public seatInfos: IPlayerInfo[];
 
     /** GameDynamicData actionUid. */
     public actionUid: string;
@@ -1743,9 +1666,6 @@ export class GameDynamicData implements IGameDynamicData {
 
     /** GameDynamicData dealerUid. */
     public dealerUid: string;
-
-    /** GameDynamicData state. */
-    public state: TexasCashState;
 
     /**
      * Encodes the specified GameDynamicData message. Does not implicitly {@link GameDynamicData.verify|verify} messages.
@@ -2701,9 +2621,6 @@ export class C2SGameSitDown implements IC2SGameSitDown {
     /** C2SGameSitDown gameId. */
     public gameId: string;
 
-    /** C2SGameSitDown table. */
-    public table: string;
-
     /** C2SGameSitDown seat. */
     public seat: number;
 
@@ -2737,12 +2654,6 @@ export class C2SGameStandUp implements IC2SGameStandUp {
 
     /** C2SGameStandUp gameId. */
     public gameId: string;
-
-    /** C2SGameStandUp table. */
-    public table: string;
-
-    /** C2SGameStandUp seat. */
-    public seat: number;
 
     /**
      * Encodes the specified C2SGameStandUp message. Does not implicitly {@link C2SGameStandUp.verify|verify} messages.
@@ -3334,8 +3245,8 @@ export class S2CCommonGetObListResp implements IS2CCommonGetObListResp {
     /** S2CCommonGetObListResp result. */
     public result?: (ICommonResult|null);
 
-    /** S2CCommonGetObListResp players. */
-    public players: IObPlayer[];
+    /** S2CCommonGetObListResp observer. */
+    public observer: IPlayerInfo[];
 
     /**
      * Encodes the specified S2CCommonGetObListResp message. Does not implicitly {@link S2CCommonGetObListResp.verify|verify} messages.
@@ -3368,8 +3279,8 @@ export class S2CCommonGetBuyInListResp implements IS2CCommonGetBuyInListResp {
     /** S2CCommonGetBuyInListResp result. */
     public result?: (ICommonResult|null);
 
-    /** S2CCommonGetBuyInListResp players. */
-    public players: IBuyInPlayer[];
+    /** S2CCommonGetBuyInListResp playerHistoryInfo. */
+    public playerHistoryInfo: IPlayerHistoryInfo[];
 
     /**
      * Encodes the specified S2CCommonGetBuyInListResp message. Does not implicitly {@link S2CCommonGetBuyInListResp.verify|verify} messages.
@@ -3390,6 +3301,43 @@ export class S2CCommonGetBuyInListResp implements IS2CCommonGetBuyInListResp {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonGetBuyInListResp;
 }
 
+/** Represents a S2CCommonBuyInCountDownNotify. */
+export class S2CCommonBuyInCountDownNotify implements IS2CCommonBuyInCountDownNotify {
+
+    /**
+     * Constructs a new S2CCommonBuyInCountDownNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonBuyInCountDownNotify);
+
+    /** S2CCommonBuyInCountDownNotify gameId. */
+    public gameId: string;
+
+    /** S2CCommonBuyInCountDownNotify actionUid. */
+    public actionUid: string;
+
+    /** S2CCommonBuyInCountDownNotify leftTime. */
+    public leftTime: number;
+
+    /**
+     * Encodes the specified S2CCommonBuyInCountDownNotify message. Does not implicitly {@link S2CCommonBuyInCountDownNotify.verify|verify} messages.
+     * @param m S2CCommonBuyInCountDownNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonBuyInCountDownNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonBuyInCountDownNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonBuyInCountDownNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBuyInCountDownNotify;
+}
+
 /** Represents a S2CCommonSitDownNotify. */
 export class S2CCommonSitDownNotify implements IS2CCommonSitDownNotify {
 
@@ -3402,8 +3350,8 @@ export class S2CCommonSitDownNotify implements IS2CCommonSitDownNotify {
     /** S2CCommonSitDownNotify gameId. */
     public gameId: string;
 
-    /** S2CCommonSitDownNotify seatInfo. */
-    public seatInfo?: (ISeatInfo|null);
+    /** S2CCommonSitDownNotify seatPlayerInfo. */
+    public seatPlayerInfo?: (IPlayerInfo|null);
 
     /**
      * Encodes the specified S2CCommonSitDownNotify message. Does not implicitly {@link S2CCommonSitDownNotify.verify|verify} messages.
@@ -3435,6 +3383,9 @@ export class S2CCommonStandUpNotify implements IS2CCommonStandUpNotify {
 
     /** S2CCommonStandUpNotify gameId. */
     public gameId: string;
+
+    /** S2CCommonStandUpNotify actionSeat. */
+    public actionSeat: number;
 
     /** S2CCommonStandUpNotify actionUid. */
     public actionUid: string;
@@ -4481,6 +4432,7 @@ export enum MessageId {
     S2C_CommonChatResp = 8010,
     S2C_CommonGetObListResp = 8011,
     S2C_CommonGetBuyInListResp = 8012,
+    S2C_CommonBuyInCountDownNotify = 8110,
     S2C_CommonSitDownNotify = 8111,
     S2C_CommonStandUpNotify = 8112,
     S2C_CommonBringInNotify = 8113,

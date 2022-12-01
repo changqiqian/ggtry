@@ -4578,7 +4578,9 @@
     "mPotInfo": {
       "__id__": 304
     },
-    "mStatus": null,
+    "mStatus": {
+      "__id__": 315
+    },
     "_id": ""
   },
   {

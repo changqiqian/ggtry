@@ -81,7 +81,7 @@ export class Game_SelfUI extends BaseUI
 
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
         {
-            if(_data.seatInfo.playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+            if(_data.seatPlayerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
             {
                 return;
             }
@@ -187,7 +187,7 @@ export class Game_SelfUI extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currency) + "";
+        this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum) + "";
     }
 
 
@@ -260,7 +260,7 @@ export class Game_SelfUI extends BaseUI
         let gameData = gameStruct.mGameData;
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
 
-        if(selfPlayer.playThisTurn == false)
+        if(selfPlayer.cards.length == 0)
         {
             return;
         }
