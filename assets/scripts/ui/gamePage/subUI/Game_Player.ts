@@ -363,10 +363,6 @@ export class Game_Player extends BaseUI
         {
             this.mCircleTimer.StartTimer(actionLeftTime);
         }
-        else
-        {
-            this.mCircleTimer.StopTimer();
-        }
     }
 
     OnSecondTimer()

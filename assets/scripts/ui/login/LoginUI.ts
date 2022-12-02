@@ -8,6 +8,7 @@ import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
+import { Poker } from '../common/Poker';
 import { TipsWindow } from '../common/TipsWindow';
 import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
@@ -38,6 +39,8 @@ export class LoginUI extends BaseUI
     DevIpBtn: BaseButton = null;
     @property(BaseButton) 
     TestIpBtn: BaseButton = null;
+
+
     InitParam() 
     {
     }
@@ -133,6 +136,7 @@ export class LoginUI extends BaseUI
             GameConfig.SetSeverUrl(GameConfig.DevelopIP);
             Network.Instance.CreateWS();
         }
+
     }
 
     CustmoerDestory() 

@@ -2809,6 +2809,9 @@
       },
       {
         "__id__": 197
+      },
+      {
+        "__id__": 199
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -2957,6 +2960,26 @@
     "__type__": "cc.TargetInfo",
     "localID": [
       "eaLy0KjgNMzpJZxdZXV5DR"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 180
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "mPoker"
+    ],
+    "target": null,
+    "targetInfo": {
+      "__id__": 200
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "cdphKb2iNCL6OiL2E+YN6V"
     ]
   }
 ]

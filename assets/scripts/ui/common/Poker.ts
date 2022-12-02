@@ -45,6 +45,7 @@ export class Poker extends BaseUI
             }
         })
 
+
         for(let i = 0 ; i < this.mRoot.children.length ; i++)
         {
             let current = this.mRoot.children[i].getComponent(Widget);
@@ -53,6 +54,13 @@ export class Poker extends BaseUI
                 current.updateAlignment();
                 current.enabled = false;
             }
+        }
+
+        let rootWidget = this.mRoot.getComponent(Widget);
+        if(rootWidget != null)
+        {
+            rootWidget.updateAlignment();
+            rootWidget.enabled = false;
         }
     }
     RegDataNotify() 
@@ -198,12 +206,12 @@ export class Poker extends BaseUI
         this.mTweenFlip .start();
     }
 
-    public DealAnimation(_delayTime : number = 0,_duration : number = 0.2 , _offset : Vec3 = new Vec3(0,100))
+    public DealAnimation(_delayTime : number = 0,_duration : number = 0.2 , _offset :Vec3 = new Vec3(0,100,0))
     {
         this.mRoot.setPosition(_offset);
         this.mTweenDeal = new Tween(this.mRoot); 
         this.mTweenDeal.delay(_delayTime);
-        this.mTweenDeal.to(_duration , {position : _offset} , {easing : easing.quadIn});
+        this.mTweenDeal.to(_duration , {position : new Vec3(0,0,0)} , {easing : easing.quadIn});
         this.mTweenDeal.call(()=>
         {
             this.FlipToFront()

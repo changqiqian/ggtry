@@ -575,13 +575,13 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         Network.Instance.AddMsgListenner(MessageId.S2C_RemoveNotify,(_data)=>
         {
             let msg = S2CRemoveNotify.decode(_data);
-            console.log("收到的内容 S2C_RemoveNotifiy  自己被移除俱乐部通知===" + JSON.stringify(msg));
+            console.log("收到的内容 S2C_RemoveNotify  自己被移除俱乐部通知===" + JSON.stringify(msg));
             HallData.Instance.Data_ClubRemoveNotify.mData = msg.clubId;
         },this);
         Network.Instance.AddMsgListenner(MessageId.S2C_JoinClubNotify,(_data)=>
         {
             let msg = S2CJoinClubNotify.decode(_data);
-            console.log("收到的内容S2C_JoinClubResult 我的加入俱乐部的申请结果===" + JSON.stringify(msg));
+            console.log("收到的内容 S2C_JoinClubNotify 我的加入俱乐部的申请结果===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
                 HallData.Instance.Data_ClubJoinNotify.mData = msg.clubInfo;
@@ -656,7 +656,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 {
                     playerInfo.buyInLeftTime = msg.leftTime;
                 }
-                gameStruct.mGameData.Data_S2CCommonBuyInCountDownNotify.mData = msg;
+                gameData.Data_S2CCommonBuyInCountDownNotify.mData = msg;
             }
         },this);
         
@@ -714,6 +714,20 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonStartNotify,(_data)=>
+        {
+            let msg = S2CCommonStartNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonStartNotify  游戏开始推送==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.SetGameState(TexasCashState.TexasCashState_Start);
+                gameData.Data_S2CCommonStartNotify.mData = msg;
+            }
+        },this);
+
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonRoundStartNotify,(_data)=>
         {
@@ -750,8 +764,51 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(gameStruct != null)
             {
                 let gameData = gameStruct.mGameData;
+                gameData.SetGameState(TexasCashState.TexasCashState_PreFlopRound);
                 gameData.UpdatePlayerCards(LocalPlayerData.Instance.Data_Uid.mData , msg.cards);
                 gameData.Data_S2CCommonPreFlopRoundNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonFlopRoundNotify,(_data)=>
+        {
+            let msg = S2CCommonFlopRoundNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonFlopRoundNotify  发flop==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.SetGameState(TexasCashState.TexasCashState_FlopRound);
+                gameData.GetDynamicData().publicCards = msg.cards;
+                gameData.Data_S2CCommonFlopRoundNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonTurnRoundNotify,(_data)=>
+        {
+            let msg = S2CCommonTurnRoundNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonTurnRoundNotify  发turn==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.SetGameState(TexasCashState.TexasCashState_TurnRound);
+                gameData.GetDynamicData().publicCards.push(msg.card);
+                gameData.Data_S2CCommonTurnRoundNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonRiverRoundNotify,(_data)=>
+        {
+            let msg = S2CCommonRiverRoundNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonRiverRoundNotify  发river==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.SetGameState(TexasCashState.TexasCashState_RiverRound);
+                gameData.GetDynamicData().publicCards.push(msg.card);
+                gameData.Data_S2CCommonRiverRoundNotify.mData = msg;
             }
         },this);
 
@@ -767,82 +824,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.UpdateWhosTurn(msg.actionUid , msg.letTime);
                 gameData.Data_S2CCommonCurrentActionNotify.mData = msg;
             }
-        },this);
-        
-
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonStartNotify,(_data)=>
-        {
-            let msg = S2CCommonStartNotify.decode(_data);
-            console.log("收到的内容 S2C_CommonStartNotify  游戏开始推送==" + JSON.stringify(msg));
-
-            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
-            if(gameStruct != null)
-            {
-                let gameData = gameStruct.mGameData;
-                gameData.GetDynamicData().state = TexasCashState.TexasCashState_Start;
-                gameData.Data_S2CCommonStartNotify.mData = msg;
-            }
-        },this);
-        
-
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBuyInCountDownNotify,(_data)=>
-        {
-            let msg = S2CCommonBuyInCountDownNotify.decode(_data);
-            console.log("收到的内容 S2C_CommonBuyInCountDownNotify  买入通知==" + JSON.stringify(msg));
-
-            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
-            if(gameStruct != null)
-            {
-                let gameData = gameStruct.mGameData;
-                let playerInfo = gameData.GetPlayerInfoByUid(msg.actionUid);
-                playerInfo.buyInLeftTime = msg.leftTime;
-                gameData.Data_S2CCommonBuyInCountDownNotify.mData = msg;
-            }
-        },this);
-        
-
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonFlopRoundNotify,(_data)=>
-        {
-            let msg = S2CCommonFlopRoundNotify.decode(_data);
-            console.log("收到的内容 S2C_CommonFlopRoundNotify  发flop==" + JSON.stringify(msg));
-
-            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
-            if(gameStruct != null)
-            {
-                let gameData = gameStruct.mGameData;
-                gameData.GetDynamicData().publicCards = msg.cards;
-                gameData.Data_S2CCommonFlopRoundNotify.mData = msg;
-            }
-        },this);
-
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonTurnRoundNotify,(_data)=>
-        {
-            let msg = S2CCommonTurnRoundNotify.decode(_data);
-            console.log("收到的内容 S2C_CommonTurnRoundNotify  发turn==" + JSON.stringify(msg));
-
-            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
-            if(gameStruct != null)
-            {
-                let gameData = gameStruct.mGameData;
-                gameData.GetDynamicData().publicCards.push(msg.card);
-                gameData.Data_S2CCommonTurnRoundNotify.mData = msg;
-            }
-        },this);
-
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonRiverRoundNotify,(_data)=>
-        {
-            let msg = S2CCommonRiverRoundNotify.decode(_data);
-            console.log("收到的内容 S2C_CommonRiverRoundNotify  发river==" + JSON.stringify(msg));
-
-            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
-            if(gameStruct != null)
-            {
-                let gameData = gameStruct.mGameData;
-                gameData.GetDynamicData().publicCards.push(msg.card);
-                gameData.Data_S2CCommonRiverRoundNotify.mData = msg;
-            }
-        },this);
-        
+        },this);  
     
     }
 
