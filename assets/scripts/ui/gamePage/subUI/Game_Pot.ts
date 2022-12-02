@@ -86,7 +86,7 @@ export class Game_Pot extends BaseUI
         this.mTotalPotBG.active = true;
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let potInfos = gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.potInfo;
+        let potInfos = gameData.GetDynamicData().potInfo;
 
         let total = 0;
         for(let i = 0; i < potInfos.length ; i++)
@@ -103,7 +103,7 @@ export class Game_Pot extends BaseUI
         this.mSubPots.active = true;
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let potInfos = gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.potInfo;
+        let potInfos = gameData.GetDynamicData().potInfo;
         for(let i = 0; i < potInfos.length ; i++)
         {
             let potId = potInfos[i].id;

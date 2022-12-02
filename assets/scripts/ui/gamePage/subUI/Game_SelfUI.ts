@@ -178,7 +178,7 @@ export class Game_SelfUI extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let dealerUid = gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.dealerUid;
+        let dealerUid = gameData.GetDynamicData().dealerUid;
         this.mDealer.active = dealerUid == LocalPlayerData.Instance.Data_Uid.mData;
     }
 
@@ -243,9 +243,10 @@ export class Game_SelfUI extends BaseUI
         for(let i = 0 ; i < cards.length ; i++)
         {
             let currentPoker = cardNodes[i].getComponent(Poker);
+            currentPoker.ResetAndHide();
             currentPoker.ShowBack(); 
             currentPoker.SetFrontByCardInfo(cards[i]);
-            currentPoker.FlipToFront();
+            currentPoker.DealAnimation();
         }
     }
 
@@ -284,7 +285,7 @@ export class Game_SelfUI extends BaseUI
         {
             return;
         }
-        let actionUid =  gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionUid;
+        let actionUid =  gameData.GetDynamicData().actionUid;
         this.mGame_AddTime.Show(actionUid == LocalPlayerData.Instance.Data_Uid.mData);
     }
 

@@ -208,6 +208,7 @@ export class MultipleTableBtn extends BaseUI
         {
             let cardData = _cards[i];
             let currentPoker =  cardsContainer.children[i].getComponent(Poker);
+            currentPoker.ResetAndHide();
             currentPoker.ShowBack();
             currentPoker.SetFrontByCardInfo(cardData);
             currentPoker.FlipToFront(0.2);
@@ -235,7 +236,7 @@ export class MultipleTableBtn extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let gameType = gameData.Data_S2CCommonEnterGameResp.mData.gameStatic.basicConfig.gameType;
+        let gameType = gameData.GetStaticData().basicConfig.gameType;
         if(gameType == GameType.GameType_OmhCash || gameType == GameType.GameType_OmhMtt)
         {
             return this.mOmhContainer;

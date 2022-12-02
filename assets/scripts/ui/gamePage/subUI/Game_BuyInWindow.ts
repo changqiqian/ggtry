@@ -50,11 +50,11 @@ export class Game_BuyInWindow extends BaseUI
 
     onEnable()
     {
-        if(this.mIndex == null)
-        {
-            return;
-        }
-        this.UpdateTotalMoney();
+        // if(this.mIndex == null)
+        // {
+        //     return;
+        // }
+        // this.UpdateTotalMoney();
     }
 
     onDisable()
@@ -101,14 +101,12 @@ export class Game_BuyInWindow extends BaseUI
 
         this.mProgressSlider.SetEndCallback((_ratio)=>
         {
-            let amount = this.CalculateControlMoney(_ratio);
-            this.mCurrentAmount.string = Tool.ConvertMoney_S2C(amount) + "";
+            this.UpdateBringInAmount(_ratio);
         });
 
         this.mProgressSlider.SetDragCallback((_ratio)=>
         {
-            let amount = this.CalculateControlMoney(_ratio);
-            this.mCurrentAmount.string = Tool.ConvertMoney_S2C(amount) + "";
+            this.UpdateBringInAmount(_ratio);
         });
     }
     RegDataNotify()
@@ -171,9 +169,11 @@ export class Game_BuyInWindow extends BaseUI
     UpdateTotalMoney()
     {
         this.mProgressSlider.SetPercent(0);
+        this.UpdateBringInAmount(0);
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
         let currentMoney;
-        let currencyType = gameStruct.mGameData.Data_S2CCommonEnterGameResp.mData.gameStatic.basicConfig.currencyType;
+        let currencyType = gameData.GetStaticData().basicConfig.currencyType;
         let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
 
         if(currencyType == GameCurrencyType.GameCurrencyType_Point)
@@ -191,9 +191,22 @@ export class Game_BuyInWindow extends BaseUI
     CalculateControlMoney(_ratio : number) : number
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let texasConfig = gameStruct.mGameData.Data_S2CCommonEnterGameResp.mData.gameStatic.texasConfig;
-        let currentAmount = texasConfig.minBringIn + (texasConfig.maxBringIn - texasConfig.minBringIn) * _ratio;
+        let gameData = gameStruct.mGameData;
+        let texasConfig = gameData.GetStaticData().texasConfig;
+
+        let min = texasConfig.minBringIn;
+        let max = (texasConfig.maxBringIn - texasConfig.minBringIn) * _ratio;
+        let sb100 = texasConfig.smallBlind * 100;
+        let roundMax = Math.floor( max/sb100);
+        max = roundMax * sb100;
+        let currentAmount = min + max;
         return currentAmount;
+    }
+
+    UpdateBringInAmount(_ratio : number)
+    {
+        let amount = this.CalculateControlMoney(_ratio);
+        this.mCurrentAmount.string = Tool.ConvertMoney_S2C(amount) + "";
     }
 
     StartCountDown(_totalTime : number)

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite, Tween, Vec2, v2, math, Vec3, Color } from 'cc';
+import { _decorator, Component, Node, Sprite, Tween, Vec2, v2, math, Vec3, Color, Widget, easing } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { CardStruct, CardType, Combiantion } from '../../base/Calculator';
 import { Localization } from '../../base/Localization';
@@ -8,6 +8,8 @@ const { ccclass, property } = _decorator;
 @ccclass('Poker')
 export class Poker extends BaseUI 
 {
+    @property(Node) 
+    mRoot: Node = null;
     @property(Node) 
     mFront: Node = null;
     @property(Node) 
@@ -22,8 +24,8 @@ export class Poker extends BaseUI
     mClickCallback : Function = null;
     mIndex : number = null;
 
-    mTweenBack :Tween = null;
-    mTweenFront :Tween = null;
+    mTweenFlip :Tween = null;
+    mTweenDeal : Tween = null;
     mCardStruct : CardStruct = null;
     mServerData : number = null;
     InitParam() 
@@ -42,6 +44,16 @@ export class Poker extends BaseUI
                 this.mClickCallback(this.mIndex);
             }
         })
+
+        for(let i = 0 ; i < this.mRoot.children.length ; i++)
+        {
+            let current = this.mRoot.children[i].getComponent(Widget);
+            if(current != null)
+            {
+                current.updateAlignment();
+                current.enabled = false;
+            }
+        }
     }
     RegDataNotify() 
     {
@@ -128,32 +140,32 @@ export class Poker extends BaseUI
         }
     }
 
-    public SetFrontByServerData(_serverData : number)
-    {
-        this.mServerData = _serverData;
-        var type = Math.floor(_serverData / 16)
-        switch (type) 
-        {
-            case 0:
-                type = CardType.Diamond;
-                break;
-            case 1:
-                type = CardType.Club;
-                break;
-            case 2:
-                type = CardType.Heart;
-                break;
-            case 3:
-                type = CardType.Speades;
-                break;
-            default:
-                break;
-        }
+    // public SetFrontByServerData(_serverData : number)
+    // {
+    //     this.mServerData = _serverData;
+    //     var type = Math.floor(_serverData / 16)
+    //     switch (type) 
+    //     {
+    //         case 0:
+    //             type = CardType.Diamond;
+    //             break;
+    //         case 1:
+    //             type = CardType.Club;
+    //             break;
+    //         case 2:
+    //             type = CardType.Heart;
+    //             break;
+    //         case 3:
+    //             type = CardType.Speades;
+    //             break;
+    //         default:
+    //             break;
+    //     }
 
-        var num = _serverData % 16;
-        let cardStruct = new CardStruct(num , type);
-        this.SetFront(cardStruct);
-    }
+    //     var num = _serverData % 16;
+    //     let cardStruct = new CardStruct(num , type);
+    //     this.SetFront(cardStruct);
+    // }
 
     public SetFront(_card : CardStruct)
     {
@@ -172,57 +184,77 @@ export class Poker extends BaseUI
         this.SetFront(cardStruct);
     }
 
-    public FlipToFront(_duration : number = 0.6)
+    public FlipToFront(_duration : number = 0.4)
     {
-        let halfDuration = _duration / 3;
-        
-        if(this.mTweenBack !=null)
-        {
-            this.mTweenBack.stop();
-        }
-
-        this.mTweenBack = new Tween(this.mBack); 
-        this.mTweenBack .to(halfDuration , {scale: new Vec3(0,1,1)});
-        this.mTweenBack .call(()=>
+        let halfDuration = _duration / 2;
+        this.mTweenFlip = new Tween(this.mRoot); 
+        this.mTweenFlip.to(halfDuration , {scale: new Vec3(0,1,1)});
+        this.mTweenFlip.call(()=>
         {
             this.mBack.active = false;
-        });
-        this.mTweenBack .start();
-
-
-        if(this.mTweenFront !=null)
-        {
-            this.mTweenFront.stop();
-        }
-    
-        this.mTweenFront = new Tween(this.mFront); 
-        this.mTweenFront.to(halfDuration , {scale: new Vec3(0,1,1)});
-        this.mTweenFront.call(()=>
-        {
             this.mFront.active = true;
         });
-        this.mTweenFront.to(halfDuration , {scale: Vec3.ONE});
-        this.mTweenFront.start();
+        this.mTweenFlip.to(halfDuration , {scale: Vec3.ONE});
+        this.mTweenFlip .start();
+    }
+
+    public DealAnimation(_delayTime : number = 0,_duration : number = 0.2 , _offset : Vec3 = new Vec3(0,100))
+    {
+        this.mRoot.setPosition(_offset);
+        this.mTweenDeal = new Tween(this.mRoot); 
+        this.mTweenDeal.delay(_delayTime);
+        this.mTweenDeal.to(_duration , {position : _offset} , {easing : easing.quadIn});
+        this.mTweenDeal.call(()=>
+        {
+            this.FlipToFront()
+        });
+        this.mTweenDeal.start();
     }
 
     public ShowFront()
     {
-        this.mBack.scale =Vec3.ONE;
-        this.mFront.scale =Vec3.ONE;
+        this.node.active = true;
+        this.mRoot.scale =Vec3.ONE;
         this.mBack.active = false;
         this.mFront.active = true;
     }
 
     public ShowBack() 
     {
-        this.mBack.scale =Vec3.ONE;
-        this.mFront.scale =Vec3.ONE;
+        this.node.active = true;
+        this.mRoot.scale =Vec3.ONE;
         this.mGlow.active = false;
         this.mIcon.active = false;
         this.mBack.active = true;
         this.mFront.active = false;
         this.SetGary(false);
     }
+
+    public ResetAndHide()
+    {
+        this.StopAllAnimation();
+        this.node.active = false;
+        this.mBack.scale =Vec3.ONE;
+        this.mFront.scale =Vec3.ONE;
+        this.mGlow.active = false;
+        this.mIcon.active = false;
+        this.mBack.active = false;
+        this.mFront.active = false;
+        this.SetGary(false);
+    }
+
+    public StopAllAnimation()
+    {
+        if(this.mTweenFlip !=null)
+        {
+            this.mTweenFlip.stop();
+        }
+        if(this.mTweenDeal !=null)
+        {
+            this.mTweenDeal.stop();
+        }
+    }
+
 
     public SetClickAble(_callback : Function , _index : number)
     {

@@ -112,7 +112,7 @@ export class Game_Menu extends BaseUI
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let gameId = gameStruct.mGameId;
-            NetworkSend.Instance.ExitGame(gameId,gameData.Data_S2CCommonEnterGameResp.mData.gameStatic.basicConfig.gameType);
+            NetworkSend.Instance.ExitGame(gameId,gameData.GetStaticData().basicConfig.gameType);
         });
         this.mDismiss.SetClickCallback(()=>
         {
@@ -191,17 +191,18 @@ export class Game_Menu extends BaseUI
 
     UpdateDismissBtn()
     {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
+        this.mDismiss.Show(false);
+        // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        // let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
 
-        if(gameStruct.mClubId != "")
-        {
-            this.mDismiss.Show(enterClub.clubMember.memberType != ClubMemberType.ClubAccountType_Normal);
-        }
-        else
-        {
-            this.mDismiss.Show(false);
-        }
+        // if(gameStruct.mClubId != "")
+        // {
+        //     this.mDismiss.Show(enterClub.clubMember.memberType != ClubMemberType.ClubAccountType_Normal);
+        // }
+        // else
+        // {
+        //     this.mDismiss.Show(false);
+        // }
     }
 
     UpdateStandBtn()
@@ -216,7 +217,7 @@ export class Game_Menu extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let allowBringOut = gameData.Data_S2CCommonEnterGameResp.mData.gameStatic.texasConfig.allowBringOut;
+        let allowBringOut = gameData.GetStaticData().texasConfig.allowBringOut;
         if(allowBringOut == false)
         {
             this.mBringOutBtn.Show(false);

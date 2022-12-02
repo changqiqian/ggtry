@@ -32,6 +32,10 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonRoundStartNotify : BaseData<S2CCommonRoundStartNotify> = new BaseData<S2CCommonRoundStartNotify>();  //本轮开始推送
     Data_S2CCommonPreFlopRoundNotify: BaseData<S2CCommonPreFlopRoundNotify> = new BaseData<S2CCommonPreFlopRoundNotify>();  //翻前发牌推送
     Data_S2CCommonCurrentActionNotify : BaseData<S2CCommonCurrentActionNotify> = new BaseData<S2CCommonCurrentActionNotify>();  //轮到谁行动推送
+    Data_S2CCommonFlopRoundNotify : BaseData<S2CCommonFlopRoundNotify> = new BaseData<S2CCommonFlopRoundNotify>(true);  //发flop
+    Data_S2CCommonTurnRoundNotify : BaseData<S2CCommonTurnRoundNotify> = new BaseData<S2CCommonTurnRoundNotify>(true);  //发转牌
+    Data_S2CCommonRiverRoundNotify : BaseData<S2CCommonRiverRoundNotify> = new BaseData<S2CCommonRiverRoundNotify>(true);  //发河牌
+
 
     
     public SetGameInfo(_S2CCommonEnterGameResp : S2CCommonEnterGameResp)
@@ -39,31 +43,41 @@ export abstract class GameData extends MultipleNotify
         this.Data_S2CCommonEnterGameResp.mData = _S2CCommonEnterGameResp;
     }
 
+    public GetStaticData() : GameStaticData
+    {
+        return this.Data_S2CCommonEnterGameResp.mData.gameStatic;
+    }
+
+    public GetDynamicData() : GameDynamicData
+    {
+        return this.Data_S2CCommonEnterGameResp.mData.gameDynamic;
+    }
+
     public ResetGameInfo()
     {
-        let seatInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        let seatInfos = this.GetDynamicData().seatInfos;
         for(let i = 0 ; i < seatInfos.length ; i++)
         {
             seatInfos[i].cards = [];
             seatInfos[i].fold = false;
         }
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionUid = "";
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionLeftTime = 0;
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.potInfo = [];
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actions = [];
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.publicCards = [];
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.dealerUid = "";
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.state = TexasCashState.TexasCashState_RoundStart;
+        this.GetDynamicData().actionUid = "";
+        this.GetDynamicData().actionLeftTime = 0;
+        this.GetDynamicData().potInfo = [];
+        this.GetDynamicData().actions = [];
+        this.GetDynamicData().publicCards = [];
+        this.GetDynamicData().dealerUid = "";
+        this.GetDynamicData().state = TexasCashState.TexasCashState_RoundStart;
     }
 
     public PlayerSit(_playerInfo : PlayerInfo)
     {
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos.push(_playerInfo);
+        this.GetDynamicData().seatInfos.push(_playerInfo);
     }
 
     public PlayerStand(_userId : string)
     {
-        let seats = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        let seats = this.GetDynamicData().seatInfos;
         for(let i = 0 ; i < seats.length ; i++)
         {
             if(seats[i].uid == _userId)
@@ -78,7 +92,7 @@ export abstract class GameData extends MultipleNotify
 
     public SetGameState(_state : TexasCashState)
     {
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.state = _state;
+        this.GetDynamicData().state = _state;
     }
 
     public UpdatePlayer(_players : Array<PlayerInfo>)
@@ -96,8 +110,8 @@ export abstract class GameData extends MultipleNotify
 
     public UpdateWhosTurn(_uid : string , _leftTime : number)
     {
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionUid = _uid;
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionLeftTime = _leftTime;
+        this.GetDynamicData().actionUid = _uid;
+        this.GetDynamicData().actionLeftTime = _leftTime;
     }
 
     public UpdatePlayerCards(_uid : string , _cards : Array<CardInfo>)
@@ -108,22 +122,22 @@ export abstract class GameData extends MultipleNotify
 
     public UpdatePots(_pots : Array<PotInfo>)
     {
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.potInfo = _pots;
+        this.GetDynamicData().potInfo = _pots;
     }
 
     public SetDealer(_uid : string)
     {
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.dealerUid = _uid;
+        this.GetDynamicData().dealerUid = _uid;
     }
 
     public InsertAction(_action : ActionInfo)
     {
-        this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actions.push(_action);
+        this.GetDynamicData().actions.push(_action);
     }
 
     public FindAction(_uid : string , _actionType : ActionType) : ActionInfo
     {
-        let actions = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actions;
+        let actions = this.GetDynamicData().actions;
         for(let i = 0 ; i < actions.length ; i++)
         {
             let current = actions[i];
@@ -142,7 +156,7 @@ export abstract class GameData extends MultipleNotify
     public FindActionByUid(_uid : string ) : Array<ActionInfo>
     {
         let result = new Array<ActionInfo>();
-        let actions = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.actions;
+        let actions = this.GetDynamicData().actions;
         if(actions != null)
         {
             for(let i = 0 ; i < actions.length ; i++)
@@ -162,7 +176,7 @@ export abstract class GameData extends MultipleNotify
 
     public IsSelfBySeat(_seatId : number) : boolean
     {
-        let seatInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        let seatInfos = this.GetDynamicData().seatInfos;
         for(let i = 0 ; i < seatInfos.length ; i++)
         {
             let current = seatInfos[i];
@@ -180,7 +194,7 @@ export abstract class GameData extends MultipleNotify
 
     public GetPlayerInfoByUid(_uid : string) : PlayerInfo
     {
-        let seatInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        let seatInfos = this.GetDynamicData().seatInfos;
         for(let i = 0 ; i < seatInfos.length ; i++)
         {
             let current = seatInfos[i];
@@ -194,7 +208,7 @@ export abstract class GameData extends MultipleNotify
 
     public GetPlayerInfoBySeatId(_seatId : number) : PlayerInfo
     {
-        let seatInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        let seatInfos = this.GetDynamicData().seatInfos;
         for(let i = 0 ; i < seatInfos.length ; i++)
         {
             let current = seatInfos[i];
@@ -208,7 +222,7 @@ export abstract class GameData extends MultipleNotify
 
     public GetSeatByUid(_uid : string) : number
     {
-        let seatInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        let seatInfos = this.GetDynamicData().seatInfos;
         for(let i = 0 ; i < seatInfos.length ; i++)
         {
             let current = seatInfos[i];
@@ -222,7 +236,7 @@ export abstract class GameData extends MultipleNotify
 
     public GetUidBySeat(_seatId : number) : string
     {
-        let seatInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        let seatInfos = this.GetDynamicData().seatInfos;
         for(let i = 0 ; i < seatInfos.length ; i++)
         {
             let current = seatInfos[i];
@@ -236,7 +250,7 @@ export abstract class GameData extends MultipleNotify
 
     public GetTotalPots() : number
     {
-        let potInfos = this.Data_S2CCommonEnterGameResp.mData.gameDynamic.potInfo;
+        let potInfos = this.GetDynamicData().potInfo;
         let totalPot = 0;
         for(let i = 0 ; i < potInfos.length ; i++)
         {

@@ -30,7 +30,7 @@ export class Game_BringOut extends BaseUI
 
     onEnable()
     {
-        this.UpdateRestMoney();
+        // this.UpdateRestMoney();
     }
 
     InitParam()
@@ -55,14 +55,12 @@ export class Game_BringOut extends BaseUI
 
         this.mProgressSlider.SetEndCallback((_ratio)=>
         {
-            let amount = this.CalculateControlMoney(_ratio);
-            this.mCurrentAmount.string = Tool.ConvertMoney_S2C(amount) + "";
+            this.UpdateCurrentAmount(_ratio);
         });
 
         this.mProgressSlider.SetDragCallback((_ratio)=>
         {
-            let amount = this.CalculateControlMoney(_ratio);
-            this.mCurrentAmount.string = Tool.ConvertMoney_S2C(amount) + "";
+            this.UpdateCurrentAmount(_ratio);
         });
     }
     RegDataNotify()
@@ -118,10 +116,17 @@ export class Game_BringOut extends BaseUI
         })
     }
 
+    UpdateCurrentAmount(_ratio : number)
+    {
+        let amount = this.CalculateControlMoney(_ratio);
+        this.mCurrentAmount.string = Tool.ConvertMoney_S2C(amount) + "";
+    }
 
     UpdateRestMoney()
     {
+        this.mRestAmount.string = "";
         this.mProgressSlider.SetPercent(0);
+        this.UpdateCurrentAmount(0);
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let selfPlayer =  gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
@@ -138,13 +143,15 @@ export class Game_BringOut extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let minScoreAfterBringOut = gameData.Data_S2CCommonEnterGameResp.mData.gameStatic.texasConfig.minScoreAfterBringOut;
+        let minScoreAfterBringOut = gameData.GetStaticData().texasConfig.minScoreAfterBringOut;
         let selfPlayer =  gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
 
         let minBringOut = 0;
         let maxBringOut = selfPlayer.currencyNum - minScoreAfterBringOut;
 
         let currentAmount = minBringOut + (maxBringOut - minBringOut) * _ratio;
+        let sb_100 = gameData.GetStaticData().texasConfig.smallBlind * 100;
+        currentAmount = Math.floor(currentAmount / sb_100) * sb_100;
         return currentAmount;
     }
 

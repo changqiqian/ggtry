@@ -77,7 +77,7 @@ export class Game_GameStartInfo extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
 
-        let autoStartNum = gameData.Data_S2CCommonEnterGameResp.mData.gameStatic.texasConfig.autoStartNum;
+        let autoStartNum = gameData.GetStaticData().texasConfig.autoStartNum;
         if(autoStartNum > 0)
         {
             return;
@@ -89,7 +89,7 @@ export class Game_GameStartInfo extends BaseUI
             return;
         }
 
-        let state = gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.state;
+        let state = gameData.GetDynamicData().state;
         let gameStarted = state >= TexasCashState.TexasCashState_Start;
         if(gameStarted == true)
         {

@@ -95,7 +95,7 @@ export class Game_SeatItem extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let seatInfos = gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.seatInfos;
+        let seatInfos = gameData.GetDynamicData().seatInfos;
         for(let i = 0 ; i < seatInfos.length ; i++)
         {
             let current = seatInfos[i];

@@ -115,7 +115,7 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            this.PlayerSit(playerInfo);
+            this.PlayerSit();
             this.RestoreAction();
             this.UpdateTurn();
         });
@@ -124,7 +124,7 @@ export class Game_Player extends BaseUI
             let playerInfo = _data.seatPlayerInfo;
             if(playerInfo.seat == this.mSeatID)
             {
-                this.PlayerSit(playerInfo);
+                this.PlayerSit();
             }
         });
 
@@ -201,7 +201,7 @@ export class Game_Player extends BaseUI
                 this.Bet(actionStraddle.amount)
             }
 
-            let dealerId = gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.dealerUid;
+            let dealerId = gameData.GetDynamicData().dealerUid;
             this.UpdateDealer(dealerId);
         })
 
@@ -233,7 +233,24 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            this.UpdateBuyInCountDown(playerInfo);
+            this.UpdateBuyInCountDown();
+        })
+
+
+
+        gameData.Data_S2CCommonBuyInCountDownNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.seat != this.mSeatID)
+            {
+                return;
+            }
+            this.UpdateBuyInCountDown();
         })
     }
 
@@ -247,48 +264,62 @@ export class Game_Player extends BaseUI
         this.mCards.active = false;
     }
 
-    PlayerSit(_playerInfo : PlayerInfo)
+    PlayerSit()
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        this.UpdateName(_playerInfo.nickName);
-        this.UpdateHead(_playerInfo.head);
-        this.UpdateMoney(_playerInfo.currencyNum);
-        this.UpdateDealer(gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.dealerUid);
 
-        if(_playerInfo.currencyNum)
+        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        if(playerInfo == null)
         {
-            let playerPlaying = _playerInfo.cards.length > 0;
+            return;
+        }
+        this.UpdateName(playerInfo.nickName);
+        this.UpdateHead(playerInfo.head);
+        this.UpdateMoney(playerInfo.currencyNum);
+        this.UpdateDealer(gameData.GetDynamicData().dealerUid);
+
+        if(playerInfo.currencyNum)
+        {
+            let playerPlaying = playerInfo.cards.length > 0;
             this.mMiniCard.active = playerPlaying;
 
             if(playerPlaying)
             {
-                this.mDarkCover.active = _playerInfo.fold || _playerInfo.auto;
-                this.mLeaveTitle.node.active = _playerInfo.auto;
-                if(_playerInfo.auto)
+                this.mDarkCover.active = playerInfo.fold || playerInfo.auto;
+                this.mLeaveTitle.node.active = playerInfo.auto;
+                if(playerInfo.auto)
                 {
-                    this.StartSecondsTimer(_playerInfo.autoLeftTime)
+                    this.StartSecondsTimer(playerInfo.autoLeftTime)
                 }
             }
         }
         else
         {
-            this.UpdateBuyInCountDown(_playerInfo);
+            this.UpdateBuyInCountDown();
         }
     }
 
-    UpdateBuyInCountDown(_playerInfo : PlayerInfo)
+    UpdateBuyInCountDown()
     {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+
+        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        if(playerInfo == null)
+        {
+            return;
+        }
+
         this.mDarkCover.active = true;
-        this.StartSecondsTimer(_playerInfo.buyInLeftTime);
-        
-        if(_playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+        this.StartSecondsTimer(playerInfo.buyInLeftTime);
+        if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
         {
             UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyInWindow",true,(_script)=>
             {
                 let temp = _script as Game_BuyInWindow;
                 temp.InitWithData(this.mIndex);
-                temp.StartCountDown(_playerInfo.buyInLeftTime);
+                temp.StartCountDown(playerInfo.buyInLeftTime);
             },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         }
     }
@@ -325,8 +356,8 @@ export class Game_Player extends BaseUI
         {
             return;
         }
-        let actionLeftTime = gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionLeftTime;
-        let currentActionUid =  gameData.Data_S2CCommonEnterGameResp.mData.gameDynamic.actionUid;
+        let actionLeftTime = gameData.GetDynamicData().actionLeftTime;
+        let currentActionUid =  gameData.GetDynamicData().actionUid;
         this.mCircleTimer.StopTimer();
         if(currentActionUid == playerInfo.uid)
         {
@@ -385,6 +416,7 @@ export class Game_Player extends BaseUI
         for(let i = 0 ; i < _cards.length ; i++)
         {
             let currentPoker = cardNodes[i].getComponent(Poker);
+            currentPoker.ResetAndHide();
             currentPoker.ShowBack(); 
             currentPoker.SetFrontByCardInfo(_cards[i]);
             currentPoker.FlipToFront();

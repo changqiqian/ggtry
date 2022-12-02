@@ -340,6 +340,10 @@ export class Localization {
         { name: '00252', ch: '小盲', en: 'SB' },
         { name: '00253', ch: '大盲', en: 'BB' },
         { name: '00254', ch: '下注', en: 'Bet' },
+        { name: '00255', ch: '买入', en: 'Buy in' },
+        { name: '00256', ch: '提示', en: 'Tips' },
+        { name: '00257', ch: '买入将在下一手开始前生效', en: 'Will buy in next round' },
+        { name: '00258', ch: '余额:', en: 'Amount:' },
         
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },
