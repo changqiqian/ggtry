@@ -24,9 +24,6 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonStandUpResp : BaseData<S2CCommonStandUpResp> = new BaseData<S2CCommonStandUpResp>(true);  //站起
     Data_S2CCommonStandUpNotify : BaseData<S2CCommonStandUpNotify> = new BaseData<S2CCommonStandUpNotify>(true);  //站起推送
     Data_S2CCommonBringInResp : BaseData<S2CCommonBringInResp> = new BaseData<S2CCommonBringInResp>(true);  //带入
-    Data_S2CCommonBringInNotify : BaseData<S2CCommonBringInNotify> = new BaseData<S2CCommonBringInNotify>(true);  //带入推送
-    Data_S2CCommonBringOutResp : BaseData<S2CCommonBringOutResp> = new BaseData<S2CCommonBringOutResp>(true);  //带出
-    Data_S2CCommonBringOutNotify : BaseData<S2CCommonBringOutNotify> = new BaseData<S2CCommonBringOutNotify>(true);  //带出推送
 
 
     Data_S2CCommonRoundStartNotify : BaseData<S2CCommonRoundStartNotify> = new BaseData<S2CCommonRoundStartNotify>();  //本轮开始推送
@@ -35,8 +32,19 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonFlopRoundNotify : BaseData<S2CCommonFlopRoundNotify> = new BaseData<S2CCommonFlopRoundNotify>(true);  //发flop
     Data_S2CCommonTurnRoundNotify : BaseData<S2CCommonTurnRoundNotify> = new BaseData<S2CCommonTurnRoundNotify>(true);  //发转牌
     Data_S2CCommonRiverRoundNotify : BaseData<S2CCommonRiverRoundNotify> = new BaseData<S2CCommonRiverRoundNotify>(true);  //发河牌
+    Data_S2CCommonActionNotify : BaseData<S2CCommonActionNotify> = new BaseData<S2CCommonActionNotify>(true);  //行动推送
 
+    
 
+    
+    public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
+    {
+        let act = new ActionInfo();
+        act.actionType = _actionType;
+        act.amount = _amount;
+        act.uid = _uid;
+        return act;
+    }
     
     public SetGameInfo(_S2CCommonEnterGameResp : S2CCommonEnterGameResp)
     {
@@ -70,6 +78,11 @@ export abstract class GameData extends MultipleNotify
         this.GetDynamicData().state = TexasCashState.TexasCashState_RoundStart;
     }
 
+    public ClearActions()
+    {
+        this.GetDynamicData().actions = [];
+    }
+
     public PlayerSit(_playerInfo : PlayerInfo)
     {
         this.GetDynamicData().seatInfos.push(_playerInfo);
@@ -86,6 +99,29 @@ export abstract class GameData extends MultipleNotify
                 break;
             }
         }
+    }
+
+
+    public CanPlayerBuyIn(_userId : string) : boolean
+    {
+        let state = this.GetDynamicData().state;
+        let playerInfo = this.GetPlayerInfoByUid(_userId);
+        if(state <= TexasCashState.TexasCashState_Waiting)
+        {
+            return true;
+        }
+
+        if(playerInfo.cards.length == 0)
+        {
+            return true;
+        }
+
+        if(playerInfo.fold == true)
+        {
+            return true;
+        }
+
+        return false;
     }
 
 
@@ -130,6 +166,12 @@ export abstract class GameData extends MultipleNotify
         this.GetDynamicData().dealerUid = _uid;
     }
 
+    public PlayerBet(_uid : string , _amount : number)
+    {
+        let playerInfo = this.GetPlayerInfoByUid(_uid);
+        playerInfo.currencyNum -= _amount;
+    }
+
     public InsertAction(_action : ActionInfo)
     {
         this.GetDynamicData().actions.push(_action);
@@ -140,20 +182,19 @@ export abstract class GameData extends MultipleNotify
         let actions = this.GetDynamicData().actions;
         for(let i = 0 ; i < actions.length ; i++)
         {
-            let current = actions[i];
-            let playerInfo = current.playerInfo;
-            if(playerInfo.uid == _uid)
+            let currentAct = actions[i];
+            if(currentAct.uid == _uid)
             {
-                if(current.actionType == _actionType)
+                if(currentAct.actionType == _actionType)
                 {
-                    return current;
+                    return currentAct;
                 }
             }
         }
         return null;
     }
 
-    public FindActionByUid(_uid : string ) : Array<ActionInfo>
+    public FindLastActionByUid(_uid : string ) : ActionInfo
     {
         let result = new Array<ActionInfo>();
         let actions = this.GetDynamicData().actions;
@@ -161,17 +202,31 @@ export abstract class GameData extends MultipleNotify
         {
             for(let i = 0 ; i < actions.length ; i++)
             {
-                let current = actions[i];
-                let playerInfo = current.playerInfo;
-                if(playerInfo.uid == _uid)
+                let currentAct = actions[i];
+                if(currentAct.uid == _uid)
                 {
-                    result.push(current);
+                    result.push(currentAct);
                 }
             }
         }
-        return result;
+        if(result.length == 0)
+        {
+            return null;
+        }
+        return result[result.length  - 1];
     }
     
+
+    public FindLastAction() : ActionInfo
+    {
+        let actions = this.GetDynamicData().actions;
+        if(actions != null && actions.length >0)
+        {
+            return actions[actions.length - 1];
+        }
+
+        return null;
+    }
 
 
     public IsSelfBySeat(_seatId : number) : boolean
@@ -265,7 +320,6 @@ export abstract class GameData extends MultipleNotify
     public abstract SitDownSendMsgId() : number
     public abstract StandUpSendMsgId() : number
     public abstract BringInSendMsgId() : number
-    public abstract BringOutSendMsgId() : number
     public abstract ActionSendMsgId() : number
     public abstract BuyInsuranceSendMsgId() : number
     public abstract ChatSendMsgId() : number

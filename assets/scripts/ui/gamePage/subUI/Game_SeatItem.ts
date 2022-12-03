@@ -1,6 +1,8 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { UIMgr } from '../../../base/UIMgr';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
@@ -13,12 +15,10 @@ export class Game_SeatItem extends BaseUI
 {
     @property(BaseButton) 
     mSitBtn: BaseButton = null;
-    @property(BaseButton) 
-    mEmptyBtn: BaseButton = null;
     @property(Game_Player) 
     mGame_Player: Game_Player = null;
-    mSeatID : number = null; //座位编号
 
+    mSeatID : number = null; //座位编号
     private mIndex : number = null;
     InitParam() 
     {
@@ -30,19 +30,22 @@ export class Game_SeatItem extends BaseUI
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
-            let msgId = gameData.SitDownSendMsgId();
-            let gameId = gameStruct.mGameId;
-            NetworkSend.Instance.SitDown(msgId , gameId , this.mSeatID);
-        });
-
-        this.mEmptyBtn.SetClickCallback(()=>
-        {
-
+            let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+            if(playerInfo == null)
+            {
+                let msgId = gameData.SitDownSendMsgId();
+                let gameId = gameStruct.mGameId;
+                NetworkSend.Instance.SitDown(msgId , gameId , this.mSeatID);
+            }
+            else
+            {
+                //UIMgr.Instance.ShowToast(Localization.GetString(""));
+            }
         });
 
 
         this.mSitBtn.Show(true);
-        this.mEmptyBtn.Show(false);
+
 
     }
     RegDataNotify() 
@@ -66,6 +69,7 @@ export class Game_SeatItem extends BaseUI
         this.mIndex = _index;
         this.mSeatID = _id;
         this.mGame_Player.InitWithData(this.mIndex , _id);
+        this.BindData();
     }
 
     BindData()
@@ -96,13 +100,19 @@ export class Game_SeatItem extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let seatInfos = gameData.GetDynamicData().seatInfos;
+
+        let occupaid = false;
         for(let i = 0 ; i < seatInfos.length ; i++)
         {
             let current = seatInfos[i];
-            let occupaid = current.seat == this.mSeatID;
-            this.mSitBtn.Show(!occupaid);
-            this.mEmptyBtn.Show(!occupaid);
+            if(current.seat == this.mSeatID)
+            {
+                occupaid = true;
+                break;
+            }
         }
+
+        this.mSitBtn.Show(!occupaid);
     }
 }
 

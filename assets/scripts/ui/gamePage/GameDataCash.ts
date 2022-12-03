@@ -22,10 +22,7 @@ export class GameDataCash extends GameData
     {
         return MessageId.C2S_TexasCashBringIn
     }
-    public BringOutSendMsgId() : number
-    {
-        return MessageId.C2S_TexasCashBringOut
-    }
+
     public ActionSendMsgId() : number
     {
         return MessageId.C2S_TexasCashAction

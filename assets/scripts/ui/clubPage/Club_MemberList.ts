@@ -60,6 +60,72 @@ export class Club_MemberList extends ListViewCtr<ClubMember>
             
             this.UpdateData(_data.totalMember);
         });
+
+        HallData.Instance.Data_S2CRemoveMember.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            if(clubId != _data.clubId)
+            {
+                return;
+            }
+
+            for(let i = 0 ; i < _data.uids.length ; i++)
+            {
+                let index = this.mCurrentData.findIndex((_item) => _item.uid === _data.uids[i]);
+                if(index >= 0)
+                {
+                    this.mCurrentData.splice(index,1);
+                }
+            }
+            this.RefreshData();
+        });
+
+        HallData.Instance.Data_S2CModifyMemberRole.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            if(clubId != _data.clubId)
+            {
+                return;
+            }
+
+            let index = this.mCurrentData.findIndex((_item) => _item.uid === _data.uid);
+            if(index >= 0)
+            {
+                this.mCurrentData[index].memberType = _data.memberType;
+            }
+
+            this.RefreshData();
+        });
+
+        HallData.Instance.Data_S2CModifyMemberRoleNotify.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            if(currentClubId != _data.clubId)
+            {
+                return;
+            }
+
+            let index = this.mCurrentData.findIndex((_item) => _item.uid === LocalPlayerData.Instance.Data_Uid.mData);
+            if(index >= 0)
+            {
+                this.mCurrentData[index].memberType = _data.memberType;
+            }
+            this.RefreshData();
+        });
     }
 
 

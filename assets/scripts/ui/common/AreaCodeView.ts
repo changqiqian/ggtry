@@ -53,7 +53,7 @@ export class AreaCodeView extends BaseUI {
         });
 
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
-        this.mMovingShow.SetAnimationCallback(()=>
+        this.mMovingShow.SetHideAnimationCallback(()=>
         {
             this.node.active = false;
         })

@@ -32,7 +32,7 @@ export class Toast extends BaseUI
         this.StopAnm();
     }
 
-    ShowToast(_tips : string , _duration:number = 3)
+    ShowToast(_tips : string , _duration:number)
     {
         this.mTips.string = _tips;
         this.Show(true);

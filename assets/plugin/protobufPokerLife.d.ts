@@ -1170,7 +1170,7 @@ export enum ShortGameScoreMode {
 /** TexasCashState enum. */
 export enum TexasCashState {
     TexasCashState_Create = 0,
-    TexasCashState_Start = 1,
+    TexasCashState_Waiting = 1,
     TexasCashState_RoundStart = 2,
     TexasCashState_PreFlopRound = 3,
     TexasCashState_FlopRound = 4,
@@ -1424,8 +1424,8 @@ export class PlayerInfo implements IPlayerInfo {
     /** PlayerInfo currencyNum. */
     public currencyNum: number;
 
-    /** PlayerInfo buyInNum. */
-    public buyInNum: number;
+    /** PlayerInfo bringInNum. */
+    public bringInNum: number;
 
     /** PlayerInfo gameRole. */
     public gameRole: GameRole;
@@ -1504,8 +1504,8 @@ export class ActionInfo implements IActionInfo {
      */
     constructor(p?: IActionInfo);
 
-    /** ActionInfo playerInfo. */
-    public playerInfo?: (IPlayerInfo|null);
+    /** ActionInfo uid. */
+    public uid: string;
 
     /** ActionInfo actionType. */
     public actionType: ActionType;
@@ -1564,6 +1564,80 @@ export class PotInfo implements IPotInfo {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PotInfo;
+}
+
+/** Represents a CombinationResult. */
+export class CombinationResult implements ICombinationResult {
+
+    /**
+     * Constructs a new CombinationResult.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ICombinationResult);
+
+    /** CombinationResult winCards. */
+    public winCards: ICardInfo[];
+
+    /** CombinationResult Combination. */
+    public Combination: number;
+
+    /**
+     * Encodes the specified CombinationResult message. Does not implicitly {@link CombinationResult.verify|verify} messages.
+     * @param m CombinationResult message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ICombinationResult, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a CombinationResult message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns CombinationResult
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CombinationResult;
+}
+
+/** Represents a PlayerWinLose. */
+export class PlayerWinLose implements IPlayerWinLose {
+
+    /**
+     * Constructs a new PlayerWinLose.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IPlayerWinLose);
+
+    /** PlayerWinLose uid. */
+    public uid: string;
+
+    /** PlayerWinLose winLose. */
+    public winLose: number;
+
+    /** PlayerWinLose cardInfo. */
+    public cardInfo: ICardInfo[];
+
+    /** PlayerWinLose combinationResult. */
+    public combinationResult?: (ICombinationResult|null);
+
+    /**
+     * Encodes the specified PlayerWinLose message. Does not implicitly {@link PlayerWinLose.verify|verify} messages.
+     * @param m PlayerWinLose message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IPlayerWinLose, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a PlayerWinLose message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns PlayerWinLose
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PlayerWinLose;
 }
 
 /** Represents an AboutGameInfo. */
@@ -2708,40 +2782,6 @@ export class C2SGameBringIn implements IC2SGameBringIn {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGameBringIn;
 }
 
-/** Represents a C2SGameBringOut. */
-export class C2SGameBringOut implements IC2SGameBringOut {
-
-    /**
-     * Constructs a new C2SGameBringOut.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IC2SGameBringOut);
-
-    /** C2SGameBringOut gameId. */
-    public gameId: string;
-
-    /** C2SGameBringOut amount. */
-    public amount: number;
-
-    /**
-     * Encodes the specified C2SGameBringOut message. Does not implicitly {@link C2SGameBringOut.verify|verify} messages.
-     * @param m C2SGameBringOut message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IC2SGameBringOut, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a C2SGameBringOut message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns C2SGameBringOut
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGameBringOut;
-}
-
 /** Represents a C2SGameAction. */
 export class C2SGameAction implements IC2SGameAction {
 
@@ -3029,11 +3069,14 @@ export class S2CCommonBringInResp implements IS2CCommonBringInResp {
     /** S2CCommonBringInResp gameId. */
     public gameId: string;
 
-    /** S2CCommonBringInResp amount. */
-    public amount: number;
+    /** S2CCommonBringInResp bringInNum. */
+    public bringInNum: number;
 
-    /** S2CCommonBringInResp leftAmount. */
-    public leftAmount: number;
+    /** S2CCommonBringInResp totalBringInNum. */
+    public totalBringInNum: number;
+
+    /** S2CCommonBringInResp currencyNum. */
+    public currencyNum: number;
 
     /**
      * Encodes the specified S2CCommonBringInResp message. Does not implicitly {@link S2CCommonBringInResp.verify|verify} messages.
@@ -3052,46 +3095,6 @@ export class S2CCommonBringInResp implements IS2CCommonBringInResp {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBringInResp;
-}
-
-/** Represents a S2CCommonBringOutResp. */
-export class S2CCommonBringOutResp implements IS2CCommonBringOutResp {
-
-    /**
-     * Constructs a new S2CCommonBringOutResp.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IS2CCommonBringOutResp);
-
-    /** S2CCommonBringOutResp result. */
-    public result?: (ICommonResult|null);
-
-    /** S2CCommonBringOutResp gameId. */
-    public gameId: string;
-
-    /** S2CCommonBringOutResp amount. */
-    public amount: number;
-
-    /** S2CCommonBringOutResp leftAmount. */
-    public leftAmount: number;
-
-    /**
-     * Encodes the specified S2CCommonBringOutResp message. Does not implicitly {@link S2CCommonBringOutResp.verify|verify} messages.
-     * @param m S2CCommonBringOutResp message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IS2CCommonBringOutResp, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a S2CCommonBringOutResp message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns S2CCommonBringOutResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBringOutResp;
 }
 
 /** Represents a S2CCommonActionResp. */
@@ -3409,80 +3412,6 @@ export class S2CCommonStandUpNotify implements IS2CCommonStandUpNotify {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonStandUpNotify;
 }
 
-/** Represents a S2CCommonBringInNotify. */
-export class S2CCommonBringInNotify implements IS2CCommonBringInNotify {
-
-    /**
-     * Constructs a new S2CCommonBringInNotify.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IS2CCommonBringInNotify);
-
-    /** S2CCommonBringInNotify gameId. */
-    public gameId: string;
-
-    /** S2CCommonBringInNotify actionUid. */
-    public actionUid: string;
-
-    /** S2CCommonBringInNotify amount. */
-    public amount: number;
-
-    /**
-     * Encodes the specified S2CCommonBringInNotify message. Does not implicitly {@link S2CCommonBringInNotify.verify|verify} messages.
-     * @param m S2CCommonBringInNotify message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IS2CCommonBringInNotify, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a S2CCommonBringInNotify message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns S2CCommonBringInNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBringInNotify;
-}
-
-/** Represents a S2CCommonBringOutNotify. */
-export class S2CCommonBringOutNotify implements IS2CCommonBringOutNotify {
-
-    /**
-     * Constructs a new S2CCommonBringOutNotify.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IS2CCommonBringOutNotify);
-
-    /** S2CCommonBringOutNotify gameId. */
-    public gameId: string;
-
-    /** S2CCommonBringOutNotify actionUid. */
-    public actionUid: string;
-
-    /** S2CCommonBringOutNotify amount. */
-    public amount: number;
-
-    /**
-     * Encodes the specified S2CCommonBringOutNotify message. Does not implicitly {@link S2CCommonBringOutNotify.verify|verify} messages.
-     * @param m S2CCommonBringOutNotify message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IS2CCommonBringOutNotify, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a S2CCommonBringOutNotify message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns S2CCommonBringOutNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBringOutNotify;
-}
-
 /** Represents a S2CCommonRoundStartNotify. */
 export class S2CCommonRoundStartNotify implements IS2CCommonRoundStartNotify {
 
@@ -3498,20 +3427,20 @@ export class S2CCommonRoundStartNotify implements IS2CCommonRoundStartNotify {
     /** S2CCommonRoundStartNotify players. */
     public players: IPlayerInfo[];
 
-    /** S2CCommonRoundStartNotify dealer. */
-    public dealer?: (IPlayerInfo|null);
+    /** S2CCommonRoundStartNotify dealerUid. */
+    public dealerUid: string;
 
     /** S2CCommonRoundStartNotify antes. */
-    public antes: IActionInfo[];
+    public antes: number;
 
-    /** S2CCommonRoundStartNotify sb. */
-    public sb?: (IActionInfo|null);
+    /** S2CCommonRoundStartNotify sbUid. */
+    public sbUid: string;
 
-    /** S2CCommonRoundStartNotify bb. */
-    public bb?: (IActionInfo|null);
+    /** S2CCommonRoundStartNotify bbUid. */
+    public bbUid: string;
 
     /** S2CCommonRoundStartNotify straddle. */
-    public straddle?: (IActionInfo|null);
+    public straddle: string;
 
     /** S2CCommonRoundStartNotify potInfo. */
     public potInfo: IPotInfo[];
@@ -3824,6 +3753,9 @@ export class S2CCommonSettlementNotify implements IS2CCommonSettlementNotify {
      * @param [p] Properties to set
      */
     constructor(p?: IS2CCommonSettlementNotify);
+
+    /** S2CCommonSettlementNotify result. */
+    public result: IPlayerWinLose[];
 
     /**
      * Encodes the specified S2CCommonSettlementNotify message. Does not implicitly {@link S2CCommonSettlementNotify.verify|verify} messages.
@@ -4403,12 +4335,11 @@ export enum MessageId {
     C2S_TexasCashSitDown = 5005,
     C2S_TexasCashStandUp = 5007,
     C2S_TexasCashBringIn = 5008,
-    C2S_TexasCashBringOut = 5009,
-    C2S_TexasCashAction = 5010,
-    C2S_TexasCashBuyInsurance = 5011,
-    C2S_TexasCashChat = 5012,
-    C2S_TexasCashGetObList = 5013,
-    CS2_TexasCashGetBuyInList = 5014,
+    C2S_TexasCashAction = 5009,
+    C2S_TexasCashBuyInsurance = 5010,
+    C2S_TexasCashChat = 5011,
+    C2S_TexasCashGetObList = 5012,
+    CS2_TexasCashGetBuyInList = 5013,
     MSG_TexasCashEnd = 5500,
     MSG_TexasMttBegin = 5501,
     MSG_TexasMttEnd = 6000,
@@ -4426,20 +4357,17 @@ export enum MessageId {
     S2C_CommonSitDownResp = 8004,
     S2C_CommonStandUpResp = 8005,
     S2C_CommonBringInResp = 8006,
-    S2C_CommonBringOutResp = 8007,
-    S2C_CommonActionResp = 8008,
-    S2C_CommonBuyInsuranceResp = 8009,
-    S2C_CommonChatResp = 8010,
-    S2C_CommonGetObListResp = 8011,
-    S2C_CommonGetBuyInListResp = 8012,
+    S2C_CommonActionResp = 8007,
+    S2C_CommonBuyInsuranceResp = 8008,
+    S2C_CommonChatResp = 8009,
+    S2C_CommonGetObListResp = 8010,
+    S2C_CommonGetBuyInListResp = 8011,
     S2C_CommonBuyInCountDownNotify = 8110,
     S2C_CommonSitDownNotify = 8111,
     S2C_CommonStandUpNotify = 8112,
-    S2C_CommonBringInNotify = 8113,
-    S2C_CommonBringOutNotify = 8114,
-    S2C_CommonActionNotify = 8115,
-    S2C_CommonBuyInsuranceNotify = 8116,
-    S2C_CommonChatNotify = 8117,
+    S2C_CommonActionNotify = 8113,
+    S2C_CommonBuyInsuranceNotify = 8114,
+    S2C_CommonChatNotify = 8115,
     S2C_CommonStartNotify = 8118,
     S2C_CommonRoundStartNotify = 8119,
     S2C_CommonPreFlopRoundNotify = 8120,

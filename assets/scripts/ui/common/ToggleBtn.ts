@@ -49,6 +49,7 @@ export class ToggleBtn extends BaseUI {
 
     public SetDataNotify(_baseData : BaseData<number> , _custmoerData : number)
     {
+        _baseData.RemoveListennerByTarget(this);
         this.mDataNotify = _baseData;
         this.mCustmoerData = _custmoerData;
         this.mDataNotify.AddListenner(this , this.NotifyCallback.bind(this));

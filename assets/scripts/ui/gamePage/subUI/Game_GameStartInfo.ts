@@ -76,10 +76,13 @@ export class Game_GameStartInfo extends BaseUI
         this.node.active = false;
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-
+        let dynamicData = gameData.GetDynamicData();
+        let state = dynamicData.state;
         let autoStartNum = gameData.GetStaticData().texasConfig.autoStartNum;
         if(autoStartNum > 0)
         {
+            dynamicData.seatInfos
+            this.mTips.string = Localization.GetString("00246");
             return;
         }
 
@@ -89,8 +92,8 @@ export class Game_GameStartInfo extends BaseUI
             return;
         }
 
-        let state = gameData.GetDynamicData().state;
-        let gameStarted = state >= TexasCashState.TexasCashState_Start;
+
+        let gameStarted = state >= TexasCashState.TexasCashState_Waiting;
         if(gameStarted == true)
         {
             return;

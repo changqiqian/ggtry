@@ -74,6 +74,7 @@ export class Club_AssetsManageWindow extends BaseUI
     {
         HallData.Instance.Data_ClubScoreManageUserInfo.AddListenner(this,(_data)=>
         {
+            console.log("Club_AssetsManageWindow===_data.clubPoint==" +_data.clubPoint)
             this.mPlayerInfo.SetName(_data.nickName);
             this.mPlayerInfo.SetLocalHead(Number(_data.head));
             this.mID.string = _data.uid;

@@ -192,7 +192,7 @@ export class Poker extends BaseUI
         this.SetFront(cardStruct);
     }
 
-    public FlipToFront(_duration : number = 0.4)
+    public FlipToFront(_duration : number = 0.2)
     {
         let halfDuration = _duration / 2;
         this.mTweenFlip = new Tween(this.mRoot); 

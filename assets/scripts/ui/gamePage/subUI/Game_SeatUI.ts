@@ -156,7 +156,12 @@ export class Game_SeatUI extends BaseUI
             }
             else
             {
-                movingSeat.node.position =  current.mPath[current.mPath.length - 1];
+                let totalDuration = 0.2;
+                let tempTween = new Tween(movingSeat.node);
+                let destination = current.mPath[current.mPath.length - 1];
+                tempTween.to(totalDuration , {position : new Vec3(destination)});
+                tempTween.start();
+                //movingSeat.node.position =  current.mPath[current.mPath.length - 1];
             }
         }
     }

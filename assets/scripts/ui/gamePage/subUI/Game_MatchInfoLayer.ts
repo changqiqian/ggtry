@@ -1,6 +1,10 @@
 import { _decorator, Component, Node, ScrollView, Label, Tween, Widget, Vec3, UITransform, easing } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
+import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_MatchInfoLayer')
@@ -8,8 +12,8 @@ export class Game_MatchInfoLayer extends BaseUI
 {
     @property(BaseButton) 
     mBGBtn: BaseButton = null;
-    @property(Node) 
-    mAnmationNode: Node = null;
+    @property(MovingShow) 
+    mMovingShow: MovingShow = null;
     @property(Label) 
     mMatchName: Label = null;
     @property(Label) 
@@ -18,24 +22,43 @@ export class Game_MatchInfoLayer extends BaseUI
     mCountDown: Label = null;
     @property(ScrollView) 
     mScrollView: ScrollView = null;
+    private mIndex : number = null;
+    onEnable()
+    {
+        this.mMovingShow.ShowAnimation();
+    }
 
-    mTween : Tween = null;
-    mMoving : boolean = false;
-    mAnimationNodeOriginX : number = null;
+    public Show(_val : boolean)
+    {
+        if(_val)
+        {
+            this.node.active = true;
+            this.mBGBtn.node.active = true;
+        }
+        else
+        {
+            this.mBGBtn.node.active = false;
+            this.mMovingShow.HideAnimation();
+        }
+    }
     InitParam()
     {
-        this.mAnimationNodeOriginX = this.mAnmationNode.position.x;
-        this.mAnmationNode.getComponent(Widget).updateAlignment();
-        this.mAnmationNode.getComponent(Widget).enabled = false;
-        this.mBGBtn.SetClickCallback(()=>
-        {
-            this.HideAnimation();
-        });
+        this.OffsetTop();
+
 
     }
     BindUI()
     {
+        this.mBGBtn.SetClickCallback(()=>
+        {
+            this.mMovingShow.HideAnimation();
+        });
 
+        this.mMovingShow.SetAnimationType(AnimationShowType.FromLeft);
+        this.mMovingShow.SetHideAnimationCallback(()=>
+        {
+            this.node.active = false;
+        })
     }
     RegDataNotify()
     {
@@ -50,56 +73,29 @@ export class Game_MatchInfoLayer extends BaseUI
 
     }
 
-    ShowAnimation()
+    public InitWithData(_index : number)
     {
-        if(this.mMoving)
-        {
-            return;
-        }
-        this.StopAnimation();
-        this.mMoving = true;
-        this.mBGBtn.node.active = true;
-        let width = this.mAnmationNode.getComponent(UITransform).width;
-        let startPos = new Vec3(this.mAnimationNodeOriginX - width, 0 , 0);
-        this.mAnmationNode.setPosition(startPos);
-        let toPos = new Vec3(this.mAnimationNodeOriginX , 0 , 0);
-        this.mTween = new Tween(this.mAnmationNode);
-        this.mTween.to(0.3,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
-        {
-            this.mMoving = false;
-        });
-        this.mTween.start();
+        this.mIndex = _index;
+        this.BindData();
     }
 
-    HideAnimation()
+    BindData()
     {
-        if(this.mMoving)
-        {
-            return;
-        }
-        this.StopAnimation();
-        this.mMoving = true;
-        this.mBGBtn.node.active = false;
-        let width = this.mAnmationNode.getComponent(UITransform).width;
-        let startPos = new Vec3(this.mAnimationNodeOriginX  , 0 , 0);
-        this.mAnmationNode.setPosition(startPos);
-        let toPos = new Vec3(this.mAnimationNodeOriginX - width , 0 , 0);
-        this.mTween = new Tween(this.mAnmationNode);
-        this.mTween.to(0.3,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
-        {
-            this.mMoving = false;
-            this.node.active = false;
-        });
-        this.mTween.start();
-    }
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
 
-    StopAnimation()
-    {
-        if(this.mTween != null)
+        this.mMatchName.string = gameData.GetStaticData().basicConfig.gameName;
+        if(gameStruct.mIsClubGame)
         {
-            this.mTween.stop();
+            let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId);
+            if(enterClub != null)
+            {
+                this.mClubName.string = enterClub.clubInfo.name;
+            }
+        }
+        else
+        {
+            this.mClubName.string = Localization.GetString("00267");
         }
     }
 }

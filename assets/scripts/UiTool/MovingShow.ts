@@ -39,7 +39,7 @@ export class MovingShow extends BaseUI {
         this.mHideCallback = null;
     }
 
-    public SetAnimationCallback(_hideCallBack : Function)
+    public SetHideAnimationCallback(_hideCallBack : Function)
     {
         this.mHideCallback = _hideCallBack;
     }

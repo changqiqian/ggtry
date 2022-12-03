@@ -1,8 +1,13 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
+import { UIMgr } from '../../../base/UIMgr';
 import { BaseButton } from '../../common/BaseButton';
+import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { ToggleBtn } from '../../common/ToggleBtn';
+import { Game_ChattingLayer } from './Game_ChattingLayer';
+import { Game_MatchInfoLayer } from './Game_MatchInfoLayer';
+import { Game_RecipeLayer } from './Game_RecipeLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_BottomUI')
@@ -14,10 +19,8 @@ export class Game_BottomUI extends BaseUI
     mHistoryBtn: BaseButton = null;
     @property(BaseButton) 
     mChatBtn: BaseButton = null;
-    @property(ToggleBtn) 
-    mMicToggle: ToggleBtn = null;
-    @property(BaseButton) 
-    mMttTableBtn: BaseButton = null;
+
+
 
     private mIndex : number = null;
     InitParam() 
@@ -26,26 +29,32 @@ export class Game_BottomUI extends BaseUI
     }
     BindUI() 
     {
-        this.mMttTableBtn.node.active = false;
-        this.mMttTableBtn.SetClickCallback(()=>
-        {
-
-        });
-
-
         this.mInfoBtn.SetClickCallback(()=>
         {
-
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_MatchInfoLayer",true,(_script)=>
+            {
+                let tempScript = _script as Game_MatchInfoLayer;
+                tempScript.InitWithData(this.mIndex);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+            
         });
 
         this.mHistoryBtn.SetClickCallback(()=>
         {
-
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_RecipeLayer",true,(_script)=>
+            {
+                let tempScript = _script as Game_RecipeLayer;
+                tempScript.InitWithData(this.mIndex);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
 
         this.mChatBtn.SetClickCallback(()=>
         {
-
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_ChattingLayer",true,(_script)=>
+            {
+                let tempScript = _script as Game_ChattingLayer;
+                tempScript.InitWithData(this.mIndex);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
 
     }

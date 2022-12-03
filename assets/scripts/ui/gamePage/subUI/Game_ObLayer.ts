@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Tween, Vec3, UITransform, easing, Widget, Label, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
 import { ToggleBtn } from '../../common/ToggleBtn';
 import { Game_ObItem } from './Game_ObItem';
@@ -10,8 +11,9 @@ export class Game_ObLayer extends BaseUI
 {
     @property(BaseButton) 
     mBGBtn: BaseButton = null;
-    @property(Node) 
-    mAnmationNode: Node = null;
+    @property(MovingShow) 
+    mMovingShow: MovingShow = null;
+
     @property(Label) 
     mObNum: Label = null;
     @property(ScrollView) 
@@ -21,31 +23,43 @@ export class Game_ObLayer extends BaseUI
     @property(ToggleBtn) 
     mChatToggle: ToggleBtn = null;
 
-    mTween : Tween = null;
-    mMoving : boolean = false;
-    mAnimationNodeOriginX : number = null;
+
+    private mIndex : number = null;
+
+    onEnable()
+    {
+        this.mMovingShow.ShowAnimation();
+    }
+
+    public Show(_val : boolean)
+    {
+        if(_val)
+        {
+            this.node.active = true;
+            this.mBGBtn.node.active = true;
+        }
+        else
+        {
+            this.mBGBtn.node.active = false;
+            this.mMovingShow.HideAnimation();
+        }
+    }
     InitParam()
     {
-        this.mAnimationNodeOriginX = this.mAnmationNode.position.x;
+        this.OffsetTop();
     }
     BindUI()
     {
-        this.mAnmationNode.getComponent(Widget).updateAlignment();
-        this.mAnmationNode.getComponent(Widget).enabled = false;
         this.mBGBtn.SetClickCallback(()=>
         {
-            this.HideAnimation();
+            this.mMovingShow.HideAnimation();
         });
 
-        // for(let i = 0 ; i < 5 ; i++)
-        // {
-        //     this.LoadPrefab("gamePage" , "prefab/Game_ObItem" , (_prefab)=>
-        //     {
-        //         let tempNode = instantiate(_prefab);
-        //         this.mScrollView.content.addChild(tempNode);
-        //         let tempScript = tempNode.getComponent(Game_ObItem);
-        //     });
-        // }
+        this.mMovingShow.SetAnimationType(AnimationShowType.FromRight);
+        this.mMovingShow.SetHideAnimationCallback(()=>
+        {
+            this.node.active = false;
+        })
     }
     RegDataNotify()
     {
@@ -60,57 +74,16 @@ export class Game_ObLayer extends BaseUI
 
     }
 
-    ShowAnimation()
+   
+    public InitWithData(_index : number)
     {
-        if(this.mMoving)
-        {
-            return;
-        }
-        this.StopAnimation();
-        this.mMoving = true;
-        this.mBGBtn.node.active = true;
-        let width = this.mAnmationNode.getComponent(UITransform).width;
-        let startPos = new Vec3(this.mAnimationNodeOriginX + width, 0 , 0);
-        this.mAnmationNode.setPosition(startPos);
-        let toPos = new Vec3(this.mAnimationNodeOriginX , 0 , 0);
-        this.mTween = new Tween(this.mAnmationNode);
-        this.mTween.to(0.3,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
-        {
-            this.mMoving = false;
-        });
-        this.mTween.start();
+        this.mIndex = _index;
+        this.BindData();
     }
 
-    HideAnimation()
+    BindData()
     {
-        if(this.mMoving)
-        {
-            return;
-        }
-        this.StopAnimation();
-        this.mMoving = true;
-        this.mBGBtn.node.active = false;
-        let width = this.mAnmationNode.getComponent(UITransform).width;
-        let startPos = new Vec3(this.mAnimationNodeOriginX  , 0 , 0);
-        this.mAnmationNode.setPosition(startPos);
-        let toPos = new Vec3(this.mAnimationNodeOriginX + width , 0 , 0);
-        this.mTween = new Tween(this.mAnmationNode);
-        this.mTween.to(0.3,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
-        {
-            this.mMoving = false;
-            this.node.active = false;
-        });
-        this.mTween.start();
-    }
 
-    StopAnimation()
-    {
-        if(this.mTween != null)
-        {
-            this.mTween.stop();
-        }
     }
 }
 

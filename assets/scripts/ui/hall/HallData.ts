@@ -3,6 +3,7 @@ import { DataNotify } from '../../base/DataNotify';
 import { SingletonBaseNotify } from '../../base/Singleton';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
+import { Tool } from '../../Tool';
 
 export class HallData extends SingletonBaseNotify<HallData>()
 {
@@ -335,6 +336,14 @@ export class HallData extends SingletonBaseNotify<HallData>()
         texasData.autoStartNum = GameConfig.GetTexasCreateRoomAutoStartValue()[_config.autoStartNum];
         texasData.gpsLimit = _config.gpsLimit;
         texasData.ipLimit = _config.ipLimit;
+
+
+
+        texasData.ante = Tool.ConvertMoney_C2S(texasData.ante);
+        texasData.smallBlind = Tool.ConvertMoney_C2S(texasData.smallBlind);
+        texasData.maxTotalBuyIn = Tool.ConvertMoney_C2S(texasData.maxTotalBuyIn);
+        texasData.minBringIn = Tool.ConvertMoney_C2S(texasData.minBringIn);
+        texasData.maxBringIn = Tool.ConvertMoney_C2S(texasData.maxBringIn);
 
         let protoData = new ClubGameInfo();
         protoData.gameStaticData = new GameStaticData();

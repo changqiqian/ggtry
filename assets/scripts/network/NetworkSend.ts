@@ -370,7 +370,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
         let msg = new C2SGameStandUp();
         msg.gameId = _gameId;
         Network.Instance.SendMsg(_msgId , C2SGameStandUp.encode(msg).finish());
-        console.log("坐下  === " + JSON.stringify(msg))
+        console.log("站起  === " + JSON.stringify(msg))
     }
 
     public BringIn(_msgId : number ,_gameId : string , _amount : number)
@@ -383,15 +383,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("带入  === " + JSON.stringify(msg))
     }
 
-    public BringOut(_msgId : number ,_gameId : string , _amount : number)
-    {
-        UIMgr.Instance.ShowLoading(true);
-        let msg = new C2SGameBringOut();
-        msg.gameId = _gameId;
-        msg.amount = _amount;
-        Network.Instance.SendMsg(_msgId , C2SGameBringOut.encode(msg).finish());
-        console.log("带出  === " + JSON.stringify(msg))
-    }
+
 
     public StartGame(_msgId : number ,_gameId : string )
     {

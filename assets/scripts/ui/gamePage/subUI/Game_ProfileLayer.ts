@@ -1,6 +1,8 @@
 import { _decorator, Component, Node, Sprite, Label, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { BaseButton } from '../../common/BaseButton';
+import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Emoji, Emoji_Const, SelfEmoji } from '../../emoji/Emoji_Const';
 import { Emoji_Item } from '../../emoji/Emoji_Item';
 import { Emoji_SelfItem } from '../../emoji/Emoji_SelfItem';
@@ -28,6 +30,9 @@ export class Game_ProfileLayer extends BaseUI
     @property(ScrollView) 
     mScrollViewForSelf: ScrollView = null;
     
+    private mIndex : number = null;
+    mTargetUid: string = null;
+
     InitParam()
     {
 
@@ -54,6 +59,11 @@ export class Game_ProfileLayer extends BaseUI
             })
         }
 
+        this.mCloseBtn.SetClickCallback(()=>
+        {
+            this.CloseAsWindow();
+        })
+
         this.mScrollView.node.active = false;
         this.mScrollViewForSelf.node.active = false;
     }
@@ -69,5 +79,36 @@ export class Game_ProfileLayer extends BaseUI
     {
 
     }
+
+    public InitWithData(_index : number , _targetUid : string)
+    {
+        this.mIndex = _index;
+        this.mTargetUid = _targetUid;
+
+        this.mScrollView.node.active = false;
+        this.mScrollViewForSelf.node.active = false;
+
+        if(_targetUid == LocalPlayerData.Instance.Data_Uid.mData)
+        {
+            this.mScrollViewForSelf.node.active = true;
+        }
+        else
+        {
+            this.mScrollView.node.active = true;
+        }
+
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let playerInfo = gameData.GetPlayerInfoByUid(_targetUid);
+
+        this.LoadLocalHead(parseInt(playerInfo.head),(_spriteFrame)=>
+        {
+            this.mHead.spriteFrame = _spriteFrame;
+        });
+
+        this.mName.string = playerInfo.nickName;
+    }
+
+
 }
 

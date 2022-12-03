@@ -32,54 +32,8 @@ export class Club_AssetsManageItem extends BaseUI
     }
     RegDataNotify()
     {
-        HallData.Instance.Data_ClubScoreManageUid.AddListenner(this,(_data)=>
-        {
-            if(this.node.activeInHierarchy == false)
-            {
-                return;
-            }
-            if(_data == Number(this.mData.uid))
-            {
-                HallData.Instance.Data_ClubScoreManageUserInfo.mData = this.mData;
-            }
-        });
-
-        HallData.Instance.Data_ShareClubScore.AddListenner(this,(_data)=>
-        {
-            if(this.node.activeInHierarchy == false)
-            {
-                return;
-            }
-            if(_data.clubId != LocalPlayerData.Instance.Data_CurrentEnterClubId.mData)
-            {
-                return;
-            }
-
-            if(_data.uid != this.mData.uid)
-            {
-                return;
-            }
-            this.mAmount.string = Tool.ConvertMoney_S2C(_data.playerRestPoint) + "";
-        });
 
 
-        HallData.Instance.Data_S2CClubPlayerPointNotify.AddListenner(this,(_data)=>
-        {
-            if(this.node.activeInHierarchy == false)
-            {
-                return;
-            }
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
-            if(currentClubId != _data.clubId)
-            {
-                return;
-            }
-            if(this.mData.uid != LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
-            this.mAmount.string = Tool.ConvertMoney_S2C(_data.playerRestAmount) + "";
-        });
     }
     LateInit()
     {

@@ -7,8 +7,6 @@ const { ccclass, property } = _decorator;
 @ccclass('Emoji_Item')
 export class Emoji_Item extends BaseUI 
 {
-    @property(Sprite) 
-    mEmojiIcon: Sprite = null;
     @property(Label) 
     mCost: Label = null;
     @property(BaseButton) 
@@ -46,7 +44,7 @@ export class Emoji_Item extends BaseUI
         this.mCostAmount = _costAmount;
         this.LoadSprite("emoji","texture/" + _type , (_spriteFrame)=>
         {
-            this.mEmojiIcon.spriteFrame = _spriteFrame;
+            this.mSelfBtn.SetSprite(_spriteFrame);
         });
 
         this.mCost.string = _costAmount + "";

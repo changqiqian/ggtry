@@ -27,7 +27,7 @@ export class HeadChoserView extends BaseUI
     BindUI() 
     {
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
-        this.mMovingShow.SetAnimationCallback(()=>
+        this.mMovingShow.SetHideAnimationCallback(()=>
         {
             this.node.active = false;
         })

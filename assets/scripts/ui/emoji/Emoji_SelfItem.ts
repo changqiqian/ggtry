@@ -7,8 +7,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Emoji_SelfItem')
 export class Emoji_SelfItem extends BaseUI 
 {
-    @property(Sprite) 
-    mIcon: Sprite = null;
+
     @property(BaseButton) 
     mSelfBtn: BaseButton = null;
 
@@ -43,7 +42,7 @@ export class Emoji_SelfItem extends BaseUI
         let name = "Self" + _type;
         this.LoadSprite("emoji","texture/" + name , (_spriteFrame)=>
         {
-            this.mIcon.spriteFrame = _spriteFrame;
+            this.mSelfBtn.SetSprite(_spriteFrame);
         });
     }
 }

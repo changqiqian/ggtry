@@ -50,7 +50,27 @@ export class Club_AssetsManage extends ListViewCtr<ClubMember>
 
         this.mSearchBtn.SetClickCallback(()=>
         {
+            if(this.mEditBox.string == "")
+            {
+                this.OnDragTop();
+            }
+            else
+            {
+                var filterResult = this.mCurrentData.filter((_item , _index , _array)=>
+                {
+                    return _item.uid == this.mEditBox.string;
+                }); 
 
+                if(filterResult.length <= 0)
+                {
+                    UIMgr.Instance.ShowToast(Localization.GetString("00266"));
+                }
+                else
+                {
+                    this.mCurrentData = filterResult;
+                    this.RefreshData();
+                }
+            }
         });
         
 
@@ -91,6 +111,61 @@ export class Club_AssetsManage extends ListViewCtr<ClubMember>
             }
 
             this.UpdateData(_data.totalMember);
+
+        });
+
+        HallData.Instance.Data_ClubScoreManageUid.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+
+            let index = this.mCurrentData.findIndex((_item) => _item.uid === _data.toString());
+            if(index >= 0)
+            {
+                HallData.Instance.Data_ClubScoreManageUserInfo.mData = this.mCurrentData[index];
+            }
+        });
+
+        HallData.Instance.Data_ShareClubScore.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+            if(_data.clubId != LocalPlayerData.Instance.Data_CurrentEnterClubId.mData)
+            {
+                return;
+            }
+            let index = this.mCurrentData.findIndex((_item) => _item.uid === _data.uid);
+            if(index >= 0)
+            {
+                this.mCurrentData[index].clubPoint = _data.playerRestPoint;
+            }
+
+            this.RefreshData();
+        });
+
+        HallData.Instance.Data_S2CClubPlayerPointNotify.AddListenner(this,(_data)=>
+        {
+            if(this.node.activeInHierarchy == false)
+            {
+                return;
+            }
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            if(currentClubId != _data.clubId)
+            {
+                return;
+            }
+
+
+            let index = this.mCurrentData.findIndex((_item) => _item.uid === LocalPlayerData.Instance.Data_Uid.mData);
+            if(index >= 0)
+            {
+                this.mCurrentData[index].clubPoint = _data.playerRestPoint;
+            }
+            this.RefreshData();
 
         });
     }

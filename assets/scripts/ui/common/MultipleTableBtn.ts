@@ -97,23 +97,7 @@ export class MultipleTableBtn extends BaseUI
             this.UpdateUI();
         })
 
-        gameData.Data_S2CCommonBringInNotify.AddListenner(this,(_data)=>
-        {
-            if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
-            this.UpdateUI();
-        })
 
-        gameData.Data_S2CCommonBringOutNotify.AddListenner(this,(_data)=>
-        {
-            if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
-            this.UpdateUI();
-        })
         
         
         
@@ -124,7 +108,7 @@ export class MultipleTableBtn extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let coreData = gameData.Data_S2CCommonEnterGameResp.mData;
-        if(coreData.gameDynamic.state < TexasCashState.TexasCashState_Start)
+        if(coreData.gameDynamic.state < TexasCashState.TexasCashState_Waiting)
         {
             this.WaitGameStart();
             return;
@@ -211,7 +195,7 @@ export class MultipleTableBtn extends BaseUI
             currentPoker.ResetAndHide();
             currentPoker.ShowBack();
             currentPoker.SetFrontByCardInfo(cardData);
-            currentPoker.FlipToFront(0.2);
+            currentPoker.FlipToFront();
             currentPoker.SetGary(_fold);
         }
     }

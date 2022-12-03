@@ -49,7 +49,6 @@ export class Game_BringOut extends BaseUI
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let amount = this.CalculateControlMoney(this.mProgressSlider.GetPercent());
-            NetworkSend.Instance.BringOut(gameData.BringOutSendMsgId(),gameStruct.mGameId,amount);
             this.CloseAsWindow();
         });
 
@@ -110,10 +109,7 @@ export class Game_BringOut extends BaseUI
             this.UpdateRestMoney();
         })
 
-        gameData.Data_S2CCommonBringOutResp.AddListenner(this,(_data)=>
-        {
-            this.UpdateRestMoney();
-        })
+
     }
 
     UpdateCurrentAmount(_ratio : number)
@@ -150,7 +146,7 @@ export class Game_BringOut extends BaseUI
         let maxBringOut = selfPlayer.currencyNum - minScoreAfterBringOut;
 
         let currentAmount = minBringOut + (maxBringOut - minBringOut) * _ratio;
-        let sb_100 = gameData.GetStaticData().texasConfig.smallBlind * 100;
+        let sb_100 = gameData.GetStaticData().texasConfig.smallBlind * 20;
         currentAmount = Math.floor(currentAmount / sb_100) * sb_100;
         return currentAmount;
     }

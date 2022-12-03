@@ -26,7 +26,7 @@ export class QuickInputNumView extends BaseUI
     {
         this.node.on(Node.EventType.TOUCH_END,this.OnClickBG.bind(this),this);
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
-        this.mMovingShow.SetAnimationCallback(()=>
+        this.mMovingShow.SetHideAnimationCallback(()=>
         {
             this.node.active = false;
         })

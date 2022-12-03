@@ -84,6 +84,11 @@ export abstract class ListViewCtr<T> extends BaseUI
         this.mCurrentPage++;
     }
 
+    public RefreshData()
+    {
+        this.mListView.numItems = this.mCurrentData.length;
+    }
+
     public InsertOneData(_data :T)
     {
         if(this.mCurrentData == null)

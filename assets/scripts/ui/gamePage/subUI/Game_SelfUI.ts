@@ -38,7 +38,6 @@ export class Game_SelfUI extends BaseUI
     }
     BindUI() 
     {
-        this.node.active = false;
         this.HideAllUI();
         this.mGame_AddTime.SetCallback(()=>
         {
@@ -103,30 +102,6 @@ export class Game_SelfUI extends BaseUI
             this.UpdateMoney();
         })
 
-
-        gameData.Data_S2CCommonBringInNotify.AddListenner(this,(_data)=>
-        {
-            if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
-            this.UpdateMoney();
-        })
-
-        gameData.Data_S2CCommonBringOutResp.AddListenner(this,(_data)=>
-        {
-            this.UpdateMoney();
-        })
-
-        gameData.Data_S2CCommonBringOutNotify.AddListenner(this,(_data)=>
-        {
-            if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
-            this.UpdateMoney();
-        })
-
         gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
         {
             this.UpdateUI();
@@ -141,7 +116,9 @@ export class Game_SelfUI extends BaseUI
         {
             this.UpdateAddTime();
         })
-        
+        gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
+        {
+        })
     }
 
 
@@ -153,7 +130,7 @@ export class Game_SelfUI extends BaseUI
         this.mGame_ActionTag.node.active = false;
         this.mDealer.active = false;
         this.mConbinationBG.active = false;
-        this.mMoney.node.active = false;
+        this.mMoney.string = "";
     }
 
     UpdateUI()
@@ -187,7 +164,14 @@ export class Game_SelfUI extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum) + "";
+        if(gameData.CanPlayerBuyIn(selfPlayer.uid))
+        {
+            this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum + selfPlayer.bringInNum) + "";
+        }
+        else
+        {
+            this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum) + "";
+        }
     }
 
 
@@ -203,16 +187,11 @@ export class Game_SelfUI extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-
-        let currentActions = gameData.FindActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        if(currentActions.length > 0)
+        let lastAct = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(lastAct != null)
         {
-            let lastAct = currentActions[currentActions.length - 1];
-            if(lastAct.actionType != ActionType.ActionType_Ante)
-            {
-                this.mGame_ActionTag.SetType(lastAct.actionType);
-                this.Bet(lastAct.amount);
-            }
+            this.mGame_ActionTag.SetType(lastAct.actionType);
+            this.Bet(lastAct.amount);
         }
     }
 

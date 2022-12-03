@@ -23,6 +23,8 @@ export class Game_ChattingLayer extends BaseUI
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
 
+
+    private mIndex : number = null;
     onEnable()
     {
         this.mMovingShow.ShowAnimation();
@@ -64,7 +66,7 @@ export class Game_ChattingLayer extends BaseUI
         })
 
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
-        this.mMovingShow.SetAnimationCallback(()=>
+        this.mMovingShow.SetHideAnimationCallback(()=>
         {
             this.node.active = false;
         })
@@ -81,6 +83,17 @@ export class Game_ChattingLayer extends BaseUI
 
     }
     CustmoerDestory()
+    {
+
+    }
+
+    public InitWithData(_index : number)
+    {
+        this.mIndex = _index;
+        this.BindData();
+    }
+
+    BindData()
     {
 
     }

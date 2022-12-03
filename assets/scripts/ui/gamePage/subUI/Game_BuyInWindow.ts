@@ -45,6 +45,7 @@ export class Game_BuyInWindow extends BaseUI
     @property(Label) 
     mTips: Label = null;
 
+
     mIndex : number = null;
     mInit : boolean = false;
 
@@ -59,20 +60,22 @@ export class Game_BuyInWindow extends BaseUI
 
     onDisable()
     {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        if(gameStruct != null)
+        if(this.mCountNode.active)
         {
-            let selfPlayer = gameStruct.mGameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-            if(selfPlayer != null)
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            if(gameStruct != null)
             {
-                if(selfPlayer.currencyNum)
+                let selfPlayer = gameStruct.mGameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+                if(selfPlayer != null)
                 {
-
-                }
-                else
-                {
-                    let gameData = gameStruct.mGameData;
-                    NetworkSend.Instance.StandUp(gameData.StandUpSendMsgId() , gameStruct.mGameId);
+                    if(selfPlayer.currencyNum)
+                    {
+                    }
+                    else
+                    {
+                        let gameData = gameStruct.mGameData;
+                        NetworkSend.Instance.StandUp(gameData.StandUpSendMsgId() , gameStruct.mGameId);
+                    }
                 }
             }
         }
@@ -95,7 +98,6 @@ export class Game_BuyInWindow extends BaseUI
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             NetworkSend.Instance.BringIn(gameData.BringInSendMsgId() , gameStruct.mGameId,bringInMoney);
-            this.CloseAsWindow();
         });
 
 
@@ -154,28 +156,20 @@ export class Game_BuyInWindow extends BaseUI
         let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonBringInResp.AddListenner(this,(_data)=>
         {
-            this.UpdateTotalMoney();
+            this.StopCountDown();
+            this.CloseAsWindow();
         })
-
-        gameData.Data_S2CCommonBringOutResp.AddListenner(this,(_data)=>
-        {
-            this.UpdateTotalMoney();
-        })
-
-
-        
     }
 
     UpdateTotalMoney()
     {
-        this.mProgressSlider.SetPercent(0);
-        this.UpdateBringInAmount(0);
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
+        this.mProgressSlider.SetPercent(0);
+        this.UpdateBringInAmount(0);
         let currentMoney;
         let currencyType = gameData.GetStaticData().basicConfig.currencyType;
         let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
-
         if(currencyType == GameCurrencyType.GameCurrencyType_Point)
         {
             currentMoney = enterClub.clubMember.clubPoint;
@@ -196,7 +190,7 @@ export class Game_BuyInWindow extends BaseUI
 
         let min = texasConfig.minBringIn;
         let max = (texasConfig.maxBringIn - texasConfig.minBringIn) * _ratio;
-        let sb100 = texasConfig.smallBlind * 100;
+        let sb100 = texasConfig.smallBlind * 20;
         let roundMax = Math.floor( max/sb100);
         max = roundMax * sb100;
         let currentAmount = min + max;
@@ -227,7 +221,7 @@ export class Game_BuyInWindow extends BaseUI
         this.mCountDown.string = seconds + "";
         if(seconds == 0)
         {
-            this.CloseAsWindow();
+            //this.CloseAsWindow();
         }
     }
 }
