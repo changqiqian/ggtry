@@ -21,7 +21,7 @@ export class Me_DeleteAccount extends BaseUI {
     @property
     count: number = 10;
     @property(BaseButton)
-    mDeleteBtn: BaseButton = null;
+    mConfirmBtn: BaseButton = null;
 
     InitParam() {}
     BindUI() {
@@ -33,7 +33,7 @@ export class Me_DeleteAccount extends BaseUI {
         this.mReSendSmsBtn.SetClickCallback(() => {
             this.mReSendSmsBtn.node.active = false;
         });
-        this.mDeleteBtn.SetClickCallback(() => 
+        this.mConfirmBtn.SetClickCallback(() => 
         {
             if (this.mSmsEditBox.string.length !== 6) 
             {
