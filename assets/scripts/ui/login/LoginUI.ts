@@ -7,6 +7,7 @@ import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
+import { DragDownEvent } from '../../UiTool/DragDownEvent';
 import { BaseButton } from '../common/BaseButton';
 import { Poker } from '../common/Poker';
 import { TipsWindow } from '../common/TipsWindow';
@@ -44,6 +45,7 @@ export class LoginUI extends BaseUI
 
     InitParam() 
     {
+        //this.node.addComponent(DragDownEvent);
     }
     BindUI() 
     {
@@ -51,10 +53,7 @@ export class LoginUI extends BaseUI
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");
-            //UIMgr.Instance.ShowLayer("common","prefab/CuoPai");
-
-            
+            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");            
         });
 
         this.mSignBtn.SetClickCallback(()=>

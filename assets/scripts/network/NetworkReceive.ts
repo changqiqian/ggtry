@@ -97,7 +97,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
             else
             {
-                UIMgr.Instance.ShowToast(msg.result.resMessage);
                 GameConfig.ClearToken();
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
                 UIMgr.Instance.ChangeScene(SceneType.Login);

@@ -40,6 +40,7 @@ export class Club_GameItem extends BaseUI
     @property(BaseButton) 
     mEnterBtn: BaseButton = null;
 
+    mViewOnly : boolean = false;
     mData : ClubGameInfo = null;
     mGameId : string ;
     InitParam()
@@ -50,6 +51,10 @@ export class Club_GameItem extends BaseUI
     {
         this.mEnterBtn.SetClickCallback(()=>
         {
+            if(this.mViewOnly )
+            {
+                return;
+            }
             NetworkSend.Instance.EnterGame(this.mGameId , this.mData.gameStaticData.basicConfig.gameType , this.mData.clubId);
         })
     }
@@ -74,6 +79,7 @@ export class Club_GameItem extends BaseUI
 
     public ForbbidenEnter()
     {
+        this.mViewOnly = true;
         this.mEnterBtn.SetInteractable(false);
     }
 
@@ -195,7 +201,10 @@ export class Club_GameItem extends BaseUI
         }
         this.mIpTag.getChildByName("Label").getComponent(Label).string = gpsAndIp;
 
-
+        if(this.mViewOnly )
+        {
+            return;
+        }
         this.UpdateEnterAlready();
     }
 }

@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, instantiate, Sprite } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { DragDownEvent } from '../../UiTool/DragDownEvent';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { Game_BottomUI } from './subUI/Game_BottomUI';
 import { Game_ChatingCtr } from './subUI/Game_ChatingCtr';

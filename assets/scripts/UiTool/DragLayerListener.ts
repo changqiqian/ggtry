@@ -1,14 +1,13 @@
 import { _decorator, Component, Node, Vec2 } from 'cc';
 import { BaseUI } from '../base/BaseUI';
 import { CommonNotify } from '../CommonNotify';
-import { GameConfig } from '../GameConfig';
-import { MultipleTableCtr } from '../ui/common/MultipleTableCtr';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('DragLayerListener')
 export class DragLayerListener extends BaseUI 
 {
-    mMaxOffset : number = - GameConfig.MultipleUIHeight;
+    mMaxOffset : number =  500;
     mStartPosY : number = null;
     InitParam()
     {
@@ -25,13 +24,13 @@ export class DragLayerListener extends BaseUI
 
             let finalPosY = this.mStartPosY  + _data;
 
-            if(finalPosY > 0)
-            {
-                finalPosY = 0;
-            }
-            if(finalPosY < this.mMaxOffset)
+            if(finalPosY >= this.mMaxOffset)
             {
                 finalPosY = this.mMaxOffset;
+            }
+            if(finalPosY <= 0)
+            {
+                finalPosY = 0;
             }
 
             this.node.setPosition(0,finalPosY,0);
@@ -46,12 +45,12 @@ export class DragLayerListener extends BaseUI
             }
             if(this.node.position.y >= this.mMaxOffset/2)
             {
-                this.node.setPosition(0,0,0);
+                this.node.setPosition(0,this.mMaxOffset,0);
                 CommonNotify.Instance.Data_LayerDragDown.mData = false;
             }
             else
             {
-                this.node.setPosition(0,this.mMaxOffset,0);
+                this.node.setPosition(0,0,0);
                 CommonNotify.Instance.Data_LayerDragDown.mData = true;
             }
         });

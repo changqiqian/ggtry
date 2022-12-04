@@ -83,6 +83,7 @@ export class HallUI extends BaseUI
     CustmoerDestory() 
     {
         HallData.Instance.Clear();
+        console.log("CustmoerDestory1111")
         UIMgr.Instance.ShowMultipleTable(false);
     }
 
