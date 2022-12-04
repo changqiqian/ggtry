@@ -355,6 +355,8 @@ export class Localization {
         { name: '00267', ch: '公厅游戏', en: 'Public Game' },
         { name: '00268', ch: '实时战绩', en: 'Details' },
         { name: '00269', ch: '昵称', en: 'Name' },
+        { name: '00270', ch: '退出结算', en: 'Settlement' },
+        { name: '00271', ch: '编号:', en: 'No.' },
         
         
         

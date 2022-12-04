@@ -10,6 +10,7 @@ import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { Poker } from '../common/Poker';
 import { TipsWindow } from '../common/TipsWindow';
+import { Game_RecipeLayer } from '../gamePage/subUI/Game_RecipeLayer';
 import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
 
@@ -51,6 +52,9 @@ export class LoginUI extends BaseUI
         this.mLoginBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");
+            //UIMgr.Instance.ShowLayer("common","prefab/CuoPai");
+
+            
         });
 
         this.mSignBtn.SetClickCallback(()=>

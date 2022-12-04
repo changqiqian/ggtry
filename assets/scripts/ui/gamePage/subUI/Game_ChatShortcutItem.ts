@@ -8,6 +8,8 @@ export class Game_ChatShortcutItem extends BaseUI
 {
     @property(BaseButton) 
     mBtn: BaseButton = null;
+
+    mIndex : number ;
     InitParam()
     {
 
@@ -33,9 +35,10 @@ export class Game_ChatShortcutItem extends BaseUI
 
     }
 
-    public InitWithData(_content :string)
+    public InitWithData(_index : number ,  _content :string)
     {
         this.mBtn.SetTitle(_content);
+        this.mIndex = _index;
     }
 }
 

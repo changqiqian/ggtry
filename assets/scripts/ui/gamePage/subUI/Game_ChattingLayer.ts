@@ -1,13 +1,21 @@
 import { _decorator, Component, Node, EditBox } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { UIMgr } from '../../../base/UIMgr';
 import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
+import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { ToggleBtn } from '../../common/ToggleBtn';
+import { HallData } from '../../hall/HallData';
+import { Game_ChattingSubLayer } from '../GameData';
+import { Game_ChatHistoryLayer } from './Game_ChatHistoryLayer';
+import { Game_ChatShortcutLayer } from './Game_ChatShortcutLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_ChattingLayer')
 export class Game_ChattingLayer extends BaseUI 
 {
+    @property(BaseButton) 
+    mBGBtn: BaseButton = null;
     @property(Node) 
     mLayout: Node = null;
     @property(Node) 
@@ -25,27 +33,19 @@ export class Game_ChattingLayer extends BaseUI
 
 
     private mIndex : number = null;
-    onEnable()
-    {
-        this.mMovingShow.ShowAnimation();
-    }
+    private mInited : boolean = false;
+
+
 
     InitParam()
     {
-        //GameData.Instance.Data_ChatingSubLayer.mData = Game_ChattingSubLayer.ChatHistory;
     }
     BindUI()
     {
-        this.node.on(Node.EventType.TOUCH_END,this.TouchEmptyBG.bind(this),this);
-
-
-
-        for(let i = 0 ; i < this.mLayout.children.length ; i++)
+        this.mBGBtn.SetClickCallback(()=>
         {
-            let current = this.mLayout.children[i].getComponent(ToggleBtn);
-            //current.SetDataNotify(GameData.Instance.Data_ChatingSubLayer, i);
-        }
-
+            this.mMovingShow.HideAnimation();
+        })
 
         this.mSendBtn.node.active = true;
         this.mVipSendBtn.node.active = false;
@@ -57,7 +57,6 @@ export class Game_ChattingLayer extends BaseUI
 
         this.mSendBtn.SetClickCallback(()=>
         {
-
         })
 
         this.mVipSendBtn.SetClickCallback(()=>
@@ -66,13 +65,18 @@ export class Game_ChattingLayer extends BaseUI
         })
 
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
-        this.mMovingShow.SetHideAnimationCallback(()=>
-        {
-            this.node.active = false;
-        })
+        this.mMovingShow.SetRoot(this.node);
 
-        this.AddSubView("gamePage" , "prefab/Game_ChatHistoryLayer",null ,this.mSubLayer);
-        this.AddSubView("gamePage" , "prefab/Game_ChatShortcutLayer",null ,this.mSubLayer);
+        this.AddSubView("gamePage" , "prefab/Game_ChatHistoryLayer",(_script)=>
+        {
+            let tempScript = _script as Game_ChatHistoryLayer;
+            tempScript.InitWithData(this.mIndex);
+        } ,this.mSubLayer);
+        this.AddSubView("gamePage" , "prefab/Game_ChatShortcutLayer",(_script)=>
+        {
+            let tempScript = _script as Game_ChatShortcutLayer;
+            tempScript.InitWithData(this.mIndex);
+        } ,this.mSubLayer);
     }
     RegDataNotify()
     {
@@ -89,29 +93,43 @@ export class Game_ChattingLayer extends BaseUI
 
     public InitWithData(_index : number)
     {
+        if(this.mInited == true)
+        {
+            return;
+        }
+
+        this.mInited = true;
         this.mIndex = _index;
         this.BindData();
     }
 
     BindData()
     {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        gameData.Data_ChatingSubLayer.mData = Game_ChattingSubLayer.ChatHistory;
 
+
+
+        for(let i = 0 ; i < this.mLayout.children.length ; i++)
+        {
+            let current = this.mLayout.children[i].getComponent(ToggleBtn);
+            current.SetDataNotify(gameData.Data_ChatingSubLayer, i);
+        }
     }
     public Show(_val : boolean)
     {
         if(_val)
         {
             this.node.active = true;
+            this.mMovingShow.ShowAnimation();
         }
         else
         {
             this.mMovingShow.HideAnimation();
         }
     }
-    TouchEmptyBG()
-    {
-        this.mMovingShow.HideAnimation();
-    }
+
 }
 
 

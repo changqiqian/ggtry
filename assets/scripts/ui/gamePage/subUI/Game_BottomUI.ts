@@ -20,7 +20,8 @@ export class Game_BottomUI extends BaseUI
     @property(BaseButton) 
     mChatBtn: BaseButton = null;
 
-
+    @property(BaseButton) 
+    mTestBtn: BaseButton = null;
 
     private mIndex : number = null;
     InitParam() 
@@ -29,6 +30,11 @@ export class Game_BottomUI extends BaseUI
     }
     BindUI() 
     {
+        this.mTestBtn.SetClickCallback(()=>
+        {
+            UIMgr.Instance.ShowLayer("common","prefab/CuoPai",true,null,MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+        })
+
         this.mInfoBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowLayer("gamePage","prefab/Game_MatchInfoLayer",true,(_script)=>
@@ -43,9 +49,10 @@ export class Game_BottomUI extends BaseUI
         {
             UIMgr.Instance.ShowLayer("gamePage","prefab/Game_RecipeLayer",true,(_script)=>
             {
+                let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
                 let tempScript = _script as Game_RecipeLayer;
-                tempScript.InitWithData(this.mIndex);
-            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+                tempScript.InitWithData(gameStruct.mGameId);
+            });
         });
 
         this.mChatBtn.SetClickCallback(()=>

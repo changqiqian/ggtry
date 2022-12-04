@@ -476,7 +476,6 @@ export class Game_Player extends BaseUI
         {
             this.mAmount.string =  Tool.ConvertMoney_S2C(playerInfo.currencyNum) + "";
         }
-    
     }
 
     ShowCards(_cards : Array<CardInfo>)

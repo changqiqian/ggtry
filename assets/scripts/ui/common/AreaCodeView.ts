@@ -24,7 +24,6 @@ export class AreaCodeView extends BaseUI {
     {
         this.mSearchEditBox.string = "";
         this.ExcutiveSearch();
-        this.mMovingShow.ShowAnimation();
     }
 
     InitParam() 
@@ -53,10 +52,7 @@ export class AreaCodeView extends BaseUI {
         });
 
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
-        this.mMovingShow.SetHideAnimationCallback(()=>
-        {
-            this.node.active = false;
-        })
+        this.mMovingShow.SetRoot(this.node);
 
     }
     RegDataNotify() 
@@ -84,6 +80,7 @@ export class AreaCodeView extends BaseUI {
         if(_val)
         {
             this.node.active = true;
+            this.mMovingShow.ShowAnimation();
         }
         else
         {

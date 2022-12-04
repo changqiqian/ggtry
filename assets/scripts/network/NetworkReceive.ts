@@ -490,17 +490,27 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 {
                     let gameData = gameStruct.mGameData;
                     let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-                    // let currencyType = gameData.GetStaticData().basicConfig.currencyType;
-                    // if(currencyType == GameCurrencyType.GameCurrencyType_Coin)
-                    // {
-                    //     LocalPlayerData.Instance.Data_Coin.mData = msg.leftAmount;
-                    // }
-                    // else if(currencyType == GameCurrencyType.GameCurrencyType_Point)
-                    // {
-                    //     let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
-                    //     enterClub.clubMember.clubPoint = msg.leftAmount;
-                    // }
-                    // selfPlayer.currencyNum = msg.amount;
+                    
+                    if(gameStruct.mIsClubGame)
+                    {
+                        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId);
+                        if(enterClub != null)
+                        {
+                            enterClub.clubMember.clubPoint -= msg.bringInNum;
+                            let pointNotify = new S2CClubPlayerPointNotify();
+                            pointNotify.amount = msg.bringInNum;
+                            pointNotify.clubId = enterClub.clubInfo.id;
+                            pointNotify.playerRestAmount = enterClub.clubMember.clubPoint;
+                            HallData.Instance.Data_S2CClubPlayerPointNotify.mData = pointNotify;
+                        }
+                    }
+                    else
+                    {
+                        LocalPlayerData.Instance.Data_Coin.mData -= msg.bringInNum;
+                    }
+                    
+
+
                     selfPlayer.bringInNum = msg.totalBringInNum;
                     gameData.Data_S2CCommonBringInResp.mData = msg;
                     UIMgr.Instance.ShowToast(Localization.GetString("00245"));

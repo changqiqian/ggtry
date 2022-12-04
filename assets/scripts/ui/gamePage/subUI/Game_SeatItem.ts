@@ -30,8 +30,8 @@ export class Game_SeatItem extends BaseUI
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
-            let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
-            if(playerInfo == null)
+            let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            if(selfPlayer == null)
             {
                 let msgId = gameData.SitDownSendMsgId();
                 let gameId = gameStruct.mGameId;

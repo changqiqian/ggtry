@@ -9,6 +9,7 @@ const { ccclass, property } = _decorator;
 export class Game_ChatHistoryLayer extends ListViewCtr<any> 
 {
     mIndex : number ;
+    mInited : boolean = false;
     InitParam()
     {
 
@@ -33,6 +34,12 @@ export class Game_ChatHistoryLayer extends ListViewCtr<any>
 
     public InitWithData(_index : number)
     {
+        if(this.mInited == true)
+        {
+            return;
+        }
+
+        this.mInited = true;
         this.mIndex = _index;
         this.BindData();
     }

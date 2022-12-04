@@ -118,6 +118,7 @@ export class Game_SelfUI extends BaseUI
         })
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
+            
         })
     }
 

@@ -16,10 +16,6 @@ export class HeadChoserView extends BaseUI
     @property(BaseButton) 
     mCancelBtn: BaseButton = null;
 
-    onEnable()
-    {
-        this.mMovingShow.ShowAnimation();
-    }
     InitParam() 
     {
 
@@ -27,10 +23,7 @@ export class HeadChoserView extends BaseUI
     BindUI() 
     {
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
-        this.mMovingShow.SetHideAnimationCallback(()=>
-        {
-            this.node.active = false;
-        })
+        this.mMovingShow.SetRoot(this.node);
 
         for(let i = 0 ; i < this.mHeadLayout.children.length ; i++)
         {
@@ -72,6 +65,7 @@ export class HeadChoserView extends BaseUI
         if(_val)
         {
             this.node.active = true;
+            this.mMovingShow.ShowAnimation();
         }
         else
         {

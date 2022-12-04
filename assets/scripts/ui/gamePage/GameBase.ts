@@ -32,10 +32,7 @@ export class GameBase extends BaseUI
     {
         this.mMovingShow = this.node.getComponent(MovingShow);
         this.mMovingShow.SetAnimationType(AnimationShowType.FromRight);
-        this.mMovingShow.SetHideAnimationCallback(()=>
-        {
-            this.node.active = false;
-        })
+        this.mMovingShow.SetRoot(this.node);
     }
     RegDataNotify() 
     {

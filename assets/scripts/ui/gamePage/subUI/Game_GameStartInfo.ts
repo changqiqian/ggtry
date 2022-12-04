@@ -2,6 +2,7 @@ import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { UIMgr } from '../../../base/UIMgr';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
@@ -32,9 +33,10 @@ export class Game_GameStartInfo extends BaseUI
 
         this.mStartBtn.SetClickCallback(()=>
         {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
-            NetworkSend.Instance.StartGame(gameData.GameStartSendMsgId(),gameStruct.mGameId);
+            UIMgr.Instance.ShowToast("有bug 还在查 不能开始")
+            // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            // let gameData = gameStruct.mGameData;
+            // NetworkSend.Instance.StartGame(gameData.GameStartSendMsgId(),gameStruct.mGameId);
         });
     }
     RegDataNotify() 
@@ -54,6 +56,7 @@ export class Game_GameStartInfo extends BaseUI
     public InitWithData(_index : number)
     {
         this.mIndex = _index;
+        this.BindData();
     }
 
     BindData()

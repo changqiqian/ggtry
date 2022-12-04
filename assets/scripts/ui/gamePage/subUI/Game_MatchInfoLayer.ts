@@ -23,10 +23,7 @@ export class Game_MatchInfoLayer extends BaseUI
     @property(ScrollView) 
     mScrollView: ScrollView = null;
     private mIndex : number = null;
-    onEnable()
-    {
-        this.mMovingShow.ShowAnimation();
-    }
+
 
     public Show(_val : boolean)
     {
@@ -34,6 +31,7 @@ export class Game_MatchInfoLayer extends BaseUI
         {
             this.node.active = true;
             this.mBGBtn.node.active = true;
+            this.mMovingShow.ShowAnimation();
         }
         else
         {
@@ -55,10 +53,7 @@ export class Game_MatchInfoLayer extends BaseUI
         });
 
         this.mMovingShow.SetAnimationType(AnimationShowType.FromLeft);
-        this.mMovingShow.SetHideAnimationCallback(()=>
-        {
-            this.node.active = false;
-        })
+        this.mMovingShow.SetRoot(this.node);
     }
     RegDataNotify()
     {

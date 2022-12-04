@@ -214,6 +214,7 @@ export class UIMgr extends Singleton<UIMgr>()
             target.tag = _tag;
             let nodeCount = this.GetRootNode(LayerType.Layer).children.length;
             target.value.setSiblingIndex(nodeCount);
+            target.value.active = false;
             let tempScript = target.value.getComponent(BaseUI);
             tempScript.Show(_show);
             if(_finishFunction != null)
@@ -415,7 +416,7 @@ export class UIMgr extends Singleton<UIMgr>()
         }
     }
 
-    public DeleteUi(_bundleName :string , _prefabPath:string , _aka:string , _layerType : LayerType)
+    public DeleteUI(_bundleName :string , _prefabPath:string , _layerType : LayerType ,  _aka : string = "")
     {
         let key = this.CreateKey(_bundleName , _prefabPath,_aka);
         let target = this.FindLayer(key , _layerType);
@@ -429,6 +430,22 @@ export class UIMgr extends Singleton<UIMgr>()
         let targetList = this.GetList(_layerType);
         let index = targetList.findIndex((_item) => _item.key === key);
         targetList.splice(index , 1);
+    }
+
+    public DeleteUIByTarget(_target : BaseUI)
+    {
+        for(let i = LayerType.Layer ; i <= LayerType.Window ; i++)
+        {
+            let currentList = this.GetList(i);
+
+            let index = currentList.findIndex((_item) => _item.value === _target.node);
+            if(index >=0)
+            {
+                _target.DeleteSelf();
+                currentList.splice(index , 1);
+                break;
+            }
+        }
     }
 
     public DeleteUiByTag(_tag:string)

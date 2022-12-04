@@ -241,6 +241,8 @@ export class Club_PrivateLayer extends BaseUI
             }
             this.DragTop();
         });
+
+        
     }
 
     UpdateNotifyBtn()

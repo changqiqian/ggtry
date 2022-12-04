@@ -14,10 +14,7 @@ export class QuickInputNumView extends BaseUI
 
     mNumberClickCallback : Function = null;
     mDeleteClickCallback : Function = null;
-    onEnable()
-    {
-        this.mMovingShow.ShowAnimation();
-    }
+
     InitParam() 
     {
 
@@ -26,10 +23,7 @@ export class QuickInputNumView extends BaseUI
     {
         this.node.on(Node.EventType.TOUCH_END,this.OnClickBG.bind(this),this);
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
-        this.mMovingShow.SetHideAnimationCallback(()=>
-        {
-            this.node.active = false;
-        })
+        this.mMovingShow.SetRoot(this.node);
         
         for(let i = 0 ; i < this.mContainer.children.length ; i++)
         {
@@ -73,6 +67,7 @@ export class QuickInputNumView extends BaseUI
         if(_val)
         {
             this.node.active = true;
+            this.mMovingShow.ShowAnimation();
         }
         else
         {

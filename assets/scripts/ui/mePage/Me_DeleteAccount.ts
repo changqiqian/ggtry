@@ -26,8 +26,9 @@ export class Me_DeleteAccount extends BaseUI {
     InitParam() {}
     BindUI() {
 
-        this.mCloseBtn.SetClickCallback(() => {
-            UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccount', false);
+        this.mCloseBtn.SetClickCallback(() => 
+        {
+            this.CloseAsWindow();
         });
         this.mReSendSmsBtn.SetClickCallback(() => {
             this.mReSendSmsBtn.node.active = false;

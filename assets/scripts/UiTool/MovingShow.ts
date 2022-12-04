@@ -9,8 +9,11 @@ export class MovingShow extends BaseUI {
 
     private mAnimationShowType : AnimationShowType = null;
     private mOriginPos : Vec3 = null;
-    private mHideCallback : Function = null;
+    private mShowCallback : Function = null;
     private static mDuration : number = 0.3;
+
+    private mRootNode : Node = null;
+
 
     InitParam()
     {
@@ -36,12 +39,19 @@ export class MovingShow extends BaseUI {
     }
     CustmoerDestory()
     {
-        this.mHideCallback = null;
+        this.mShowCallback = null;
+        this.mRootNode = null;
     }
 
-    public SetHideAnimationCallback(_hideCallBack : Function)
+    public SetRoot(_RootNode : Node)
     {
-        this.mHideCallback = _hideCallBack;
+        this.mRootNode = _RootNode;
+    }
+
+
+    public SetShowAnimationCallback(_showCallback : Function)
+    {
+        this.mShowCallback = _showCallback;
     }
 
     public SetAnimationType(_type : AnimationShowType)
@@ -104,6 +114,10 @@ export class MovingShow extends BaseUI {
         this.mTween.call(()=>
         {
             this.mMoving = false;
+            if(this.mShowCallback !=null)
+            {
+                this.mShowCallback();
+            }
         });
         this.mTween.start();
     }
@@ -119,10 +133,7 @@ export class MovingShow extends BaseUI {
         this.mTween.call(()=>
         {
             this.mMoving = false;
-            if(this.mHideCallback != null)
-            {
-                this.mHideCallback();
-            }
+            this.HideRoot();
         });
         this.mTween.start();
     }
@@ -138,13 +149,16 @@ export class MovingShow extends BaseUI {
         this.mTween.call(()=>
         {
             this.mMoving = false;
+            if(this.mShowCallback !=null)
+            {
+                this.mShowCallback ();
+            }
         });
         this.mTween.start();
     }
 
     private HideAnimationFromBottom(_druation : number = MovingShow.mDuration)
     {
-        console.log("HideAnimationFromBottom");
         let height = this.node.getComponent(UITransform).height;
         let startPos = new Vec3(this.mOriginPos.x  , this.mOriginPos.y , this.mOriginPos.z);
         this.node.setPosition(startPos);
@@ -154,10 +168,7 @@ export class MovingShow extends BaseUI {
         this.mTween.call(()=>
         {
             this.mMoving = false;
-            if(this.mHideCallback != null)
-            {
-                this.mHideCallback();
-            }
+            this.HideRoot();
         });
         this.mTween.start();
     }
@@ -173,6 +184,10 @@ export class MovingShow extends BaseUI {
         this.mTween.call(()=>
         {
             this.mMoving = false;
+            if(this.mShowCallback !=null)
+            {
+                this.mShowCallback ();
+            }
         });
         this.mTween.start();
     }
@@ -188,10 +203,7 @@ export class MovingShow extends BaseUI {
         this.mTween.call(()=>
         {
             this.mMoving = false;
-            if(this.mHideCallback != null)
-            {
-                this.mHideCallback();
-            }
+            this.HideRoot();
         });
         this.mTween.start();
     }
@@ -201,6 +213,14 @@ export class MovingShow extends BaseUI {
         if(this.mTween != null)
         {
             this.mTween.stop();
+        }
+    }
+
+    private HideRoot()
+    {
+        if(this.mRootNode != null)
+        {
+            this.mRootNode.active = false;
         }
     }
 }

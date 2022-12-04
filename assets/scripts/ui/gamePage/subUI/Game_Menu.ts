@@ -37,11 +37,7 @@ export class Game_Menu extends BaseUI
     mDismiss: BaseButton = null;
     mIndex : number;
 
-    onEnable()
-    {
-        this.mMovingShow.ShowAnimation();
-    }
-
+    mInited : boolean = false;
     InitParam()
     {
         this.OffsetHallTop();
@@ -49,10 +45,7 @@ export class Game_Menu extends BaseUI
     BindUI()
     {
         this.mMovingShow.SetAnimationType(AnimationShowType.FromLeft);
-        this.mMovingShow.SetHideAnimationCallback(()=>
-        {
-            this.node.active = false;
-        })
+        this.mMovingShow.SetRoot(this.node);
 
         this.mBGBtn.SetClickCallback(()=>
         {
@@ -123,6 +116,11 @@ export class Game_Menu extends BaseUI
 
     public InitWithData(_index : number)
     {
+        if(this.mInited)
+        {
+            return;
+        }
+        this.mInited = false;
         this.mIndex = _index;    
         this.BindData();
 
@@ -200,6 +198,7 @@ export class Game_Menu extends BaseUI
         {
             this.node.active = true;
             this.mBGBtn.node.active = true;
+            this.mMovingShow.ShowAnimation();
         }
         else
         {

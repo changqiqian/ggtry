@@ -1760,6 +1760,146 @@ export class GameDynamicData implements IGameDynamicData {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): GameDynamicData;
 }
 
+/** Represents a SimpleReplayData. */
+export class SimpleReplayData implements ISimpleReplayData {
+
+    /**
+     * Constructs a new SimpleReplayData.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ISimpleReplayData);
+
+    /** SimpleReplayData gameId. */
+    public gameId: string;
+
+    /** SimpleReplayData index. */
+    public index: number;
+
+    /** SimpleReplayData publicCards. */
+    public publicCards: ICardInfo[];
+
+    /** SimpleReplayData myCards. */
+    public myCards: ICardInfo[];
+
+    /** SimpleReplayData myResult. */
+    public myResult: number;
+
+    /** SimpleReplayData winnerCards. */
+    public winnerCards: ICardInfo[];
+
+    /** SimpleReplayData winnerName. */
+    public winnerName: string;
+
+    /** SimpleReplayData winnerHead. */
+    public winnerHead: string;
+
+    /** SimpleReplayData winnerResult. */
+    public winnerResult: number;
+
+    /**
+     * Encodes the specified SimpleReplayData message. Does not implicitly {@link SimpleReplayData.verify|verify} messages.
+     * @param m SimpleReplayData message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ISimpleReplayData, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a SimpleReplayData message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns SimpleReplayData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): SimpleReplayData;
+}
+
+/** Represents a ReplayData. */
+export class ReplayData implements IReplayData {
+
+    /**
+     * Constructs a new ReplayData.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IReplayData);
+
+    /** ReplayData gameId. */
+    public gameId: string;
+
+    /** ReplayData index. */
+    public index: number;
+
+    /** ReplayData gameStatic. */
+    public gameStatic?: (IGameStaticData|null);
+
+    /** ReplayData players. */
+    public players: IPlayerInfo[];
+
+    /** ReplayData dealerUid. */
+    public dealerUid: string;
+
+    /** ReplayData antes. */
+    public antes: number;
+
+    /** ReplayData sbUid. */
+    public sbUid: string;
+
+    /** ReplayData bbUid. */
+    public bbUid: string;
+
+    /** ReplayData straddle. */
+    public straddle: string;
+
+    /** ReplayData potInfo. */
+    public potInfo: IPotInfo[];
+
+    /** ReplayData myCards. */
+    public myCards: ICardInfo[];
+
+    /** ReplayData flop. */
+    public flop: ICardInfo[];
+
+    /** ReplayData turn. */
+    public turn: ICardInfo[];
+
+    /** ReplayData river. */
+    public river: ICardInfo[];
+
+    /** ReplayData preFlopActions. */
+    public preFlopActions: IActionInfo[];
+
+    /** ReplayData flopActions. */
+    public flopActions: IActionInfo[];
+
+    /** ReplayData turnActions. */
+    public turnActions: IActionInfo[];
+
+    /** ReplayData riverActions. */
+    public riverActions: IActionInfo[];
+
+    /** ReplayData result. */
+    public result: IPlayerWinLose[];
+
+    /**
+     * Encodes the specified ReplayData message. Does not implicitly {@link ReplayData.verify|verify} messages.
+     * @param m ReplayData message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IReplayData, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a ReplayData message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns ReplayData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ReplayData;
+}
+
 /** Represents a S2CCreateClub. */
 export class S2CCreateClub implements IS2CCreateClub {
 

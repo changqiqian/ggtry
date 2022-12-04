@@ -1,5 +1,7 @@
 import { _decorator, Component, Node, Size, UITransform, Vec3, Vec2, PolygonCollider2D, EventTouch, Intersection2D, Sprite } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { UIMgr } from '../../base/UIMgr';
+import { BaseButton } from './BaseButton';
 const { ccclass, property } = _decorator;
 
 @ccclass('CuoPai')
@@ -24,6 +26,9 @@ export class CuoPai extends BaseUI {
     /**渐变层 为了提高真实度*/
     @property(Node)
     mShadow:Node | undefined;
+
+    @property(BaseButton)
+    mFinishBtn:BaseButton;
 
     /**卡牌层的固定位置  为了防止 搓牌效果遮罩移动时 卡牌层同时位移*/
     private mLayoutCardWorldPosition:Vec3 = new Vec3();
@@ -51,6 +56,15 @@ export class CuoPai extends BaseUI {
         this.node!.on(Node.EventType.TOUCH_MOVE,this.TouchMove.bind(this));
         this.node!.on(Node.EventType.TOUCH_END,this.TouchEnd.bind(this));
         this.node!.on(Node.EventType.TOUCH_CANCEL,this.TouchEnd.bind(this));
+
+        this.mFinishBtn.SetClickCallback(()=>
+        {
+            if(this.mPeekCardEnd)
+            {
+                return;
+            }
+            this.Finish();
+        })
     }
     RegDataNotify()
     {
@@ -67,7 +81,7 @@ export class CuoPai extends BaseUI {
 
     public Reset()
     {
-
+        this.mPeekCardEnd = false;
         //这是为了遮罩层旋转了也不会让纸牌缺边
         let hypotenuse = this.getSignHypotenuse(this.mCardSize.width,this.mCardSize.height);
         this.mCardDiameter = hypotenuse;
@@ -344,12 +358,13 @@ export class CuoPai extends BaseUI {
             this.mShadow!.setWorldPosition(new Vec3(tpp.worldPoints[0].x,tpp.worldPoints[0].y));
 
             //是否执行结束搓牌
+            let minMove = this.mCardDiameter * 0.6;
+            let biasMove = minMove * Math.abs(addy);
+            let finishCondition = minMove + biasMove;
             let obj = this.getSignDistance(endPos,startPos);
-            if( obj.distance >= this.mCardDiameter*2)
+            if( obj.distance >= finishCondition)
             {
-                this.mPeekCardEnd = true;
-                this.TouchEnd();
-                this.mCardBack!.getComponent(Sprite)!.spriteFrame = this.mCardFace!.getComponent(Sprite)!.spriteFrame;
+                this.Finish();
             }
 
         }
@@ -373,7 +388,22 @@ export class CuoPai extends BaseUI {
         this.mShadow!.active  = false;
         this.mCardFace!.active = false;
         this.mCardFace!.setPosition(1000,1000);
-    
+    }
+
+    private Finish()
+    {
+        this.mPeekCardEnd = true;
+        this.TouchEnd();
+        this.mFinishBtn.Show(false);
+        this.mCardBack!.getComponent(Sprite)!.spriteFrame = this.mCardFace!.getComponent(Sprite)!.spriteFrame;
+        this.StartSecondsTimer(2,1,false,()=>
+        {
+            let restTime = this.GetRestSeconds();
+            if(restTime <= 0)
+            {
+                UIMgr.Instance.DeleteUIByTarget(this);
+            }
+        });
     }
 
     private getSignDistance(_endPos:Vec2, _startPos:Vec2) 
