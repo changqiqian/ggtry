@@ -45,6 +45,15 @@ class GameStruct
         this.mGameData = this.CreateGameData(_gameType);
     }
 
+    public ClearData()
+    {
+        if(this.mGameData!=null)
+        {
+            this.mGameData.Clear();
+            this.mGameData = null;
+        }
+    }
+
 
     mIndex : number;
     mGameId : string;
@@ -88,12 +97,13 @@ export class MultipleTableCtr extends BaseUI
     @property(ToggleBtn) 
     mHomeToggle: ToggleBtn = null;
 
-    public static GameStruct:Array<GameStruct> = new Array<GameStruct>();
+    public static GameStruct:Array<GameStruct> ;
     public static readonly MaxGame : number = 4;
     private static readonly HomeIndex : number = -1;
 
     InitParam()
     {
+        MultipleTableCtr.GameStruct = new Array<GameStruct>();
         HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.HomeIndex;
         for(let i = 0 ; i < MultipleTableCtr.MaxGame ; i++)
         {
@@ -146,7 +156,12 @@ export class MultipleTableCtr extends BaseUI
     }
     CustmoerDestory()
     {
+        for(let i = 0 ; i <MultipleTableCtr.GameStruct.length ; i++)
+        {
+            MultipleTableCtr.GameStruct[i].ClearData();
+        }
 
+        MultipleTableCtr.GameStruct = null;
     }
 
     GetControlButton(_index : number) : MultipleTableBtn

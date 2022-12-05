@@ -18,7 +18,9 @@ export abstract class GameData extends MultipleNotify
     //服务器数据返回
     Data_S2CCommonEnterGameResp : BaseData<S2CCommonEnterGameResp> = new BaseData<S2CCommonEnterGameResp>();  //游戏基础配置信息
     Data_S2CCommonStartNotify : BaseData<S2CCommonStartNotify> = new BaseData<S2CCommonStartNotify>(true);  //游戏开始推送
-    Data_S2CCommonBuyInCountDownNotify : BaseData<S2CCommonBuyInCountDownNotify> = new BaseData<S2CCommonBuyInCountDownNotify>(true);  //买入倒计时推送
+    Data_S2CCommonStartResp : BaseData<S2CCommonStartResp> = new BaseData<S2CCommonStartResp>(true);  //游戏开始回复
+    Data_S2CCommonBringInTimerNotify : BaseData<S2CCommonBringInTimerNotify> = new BaseData<S2CCommonBringInTimerNotify>(true);  //买入倒计时推送
+    Data_S2CCommonBringInNotify : BaseData<S2CCommonBringInNotify> = new BaseData<S2CCommonBringInNotify>(true);  //买入推送
     Data_S2CCommonSitDownResp : BaseData<S2CCommonSitDownResp> = new BaseData<S2CCommonSitDownResp>(true);  //坐下
     Data_S2CCommonSitDownNotify: BaseData<S2CCommonSitDownNotify> = new BaseData<S2CCommonSitDownNotify>(true);  //坐下推送
     Data_S2CCommonStandUpResp : BaseData<S2CCommonStandUpResp> = new BaseData<S2CCommonStandUpResp>(true);  //站起
@@ -136,10 +138,10 @@ export abstract class GameData extends MultipleNotify
         for(let i = 0 ; i < _players.length ; i++)
         {
             let currentPlayer = _players[i];
-            let targetPlayerInfo = this.GetPlayerInfoByUid(currentPlayer.uid);
-            if(targetPlayerInfo != null)
+            let index = this.GetDynamicData().seatInfos.findIndex((_item) => _item.uid === currentPlayer.uid);
+            if(index >= 0)
             {
-                targetPlayerInfo = currentPlayer;
+                this.GetDynamicData().seatInfos[index] = currentPlayer;
             }
         }
     }
@@ -159,6 +161,18 @@ export abstract class GameData extends MultipleNotify
     public UpdatePots(_pots : Array<PotInfo>)
     {
         this.GetDynamicData().potInfo = _pots;
+    }
+
+    public GetTotalPotAmount()
+    {
+        let pots = this.GetDynamicData().potInfo;
+        let result = 0;
+        for(let i = 0 ; i < pots.length ; i++)
+        {
+            let currentPot = pots[i];
+            result += currentPot.pot;
+        }
+        return result;
     }
 
     public SetDealer(_uid : string)
@@ -192,6 +206,22 @@ export abstract class GameData extends MultipleNotify
             }
         }
         return null;
+    }
+
+    public FindLastBetAction() : ActionInfo
+    {
+        let actions = this.GetDynamicData().actions;
+        let lastBetAction = null;
+        for(let i = 0 ; i < actions.length ; i++)
+        {
+            let currentAct = actions[i];
+            if(currentAct.amount)
+            {
+                lastBetAction = currentAct;
+                break;
+            }
+        }
+        return lastBetAction;
     }
 
     public FindLastActionByUid(_uid : string ) : ActionInfo

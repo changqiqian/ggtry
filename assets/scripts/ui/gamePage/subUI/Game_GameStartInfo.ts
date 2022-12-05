@@ -33,10 +33,9 @@ export class Game_GameStartInfo extends BaseUI
 
         this.mStartBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowToast("有bug 还在查 不能开始")
-            // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            // let gameData = gameStruct.mGameData;
-            // NetworkSend.Instance.StartGame(gameData.GameStartSendMsgId(),gameStruct.mGameId);
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            NetworkSend.Instance.StartGame(gameData.GameStartSendMsgId(),gameStruct.mGameId);
         });
     }
     RegDataNotify() 

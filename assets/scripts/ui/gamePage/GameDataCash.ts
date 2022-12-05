@@ -8,7 +8,7 @@ export class GameDataCash extends GameData
 {
     public GameStartSendMsgId() : number
     {
-        return MessageId.C2S_TexasCashEnterGame
+        return MessageId.C2S_TexasCashStart
     }
     public SitDownSendMsgId() : number
     {

@@ -199,7 +199,7 @@ export class Game_SelfUI extends BaseUI
 
     Bet(_amount : number)
     {
-        this.mGame_BetAmount.Bet(_amount);
+        this.mGame_BetAmount.Bet(Tool.ConvertMoney_S2C(_amount));
     }
 
     UpdateCards()

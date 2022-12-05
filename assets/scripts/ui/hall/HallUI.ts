@@ -82,8 +82,8 @@ export class HallUI extends BaseUI
 
     CustmoerDestory() 
     {
+        LocalPlayerData.Instance.Clear();
         HallData.Instance.Clear();
-        console.log("CustmoerDestory1111")
         UIMgr.Instance.ShowMultipleTable(false);
     }
 

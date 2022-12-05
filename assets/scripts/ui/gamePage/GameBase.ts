@@ -37,14 +37,7 @@ export class GameBase extends BaseUI
     }
     RegDataNotify() 
     {
-        // LoginData.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
-        // {
-        //     if(_data)
-        //     {
-        //         return;
-        //     }
-        //     this.GetGameInfoMsg();
-        // });
+
     }
     LateInit() 
     {

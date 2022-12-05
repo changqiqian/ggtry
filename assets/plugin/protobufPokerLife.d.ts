@@ -1760,146 +1760,6 @@ export class GameDynamicData implements IGameDynamicData {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): GameDynamicData;
 }
 
-/** Represents a SimpleReplayData. */
-export class SimpleReplayData implements ISimpleReplayData {
-
-    /**
-     * Constructs a new SimpleReplayData.
-     * @param [p] Properties to set
-     */
-    constructor(p?: ISimpleReplayData);
-
-    /** SimpleReplayData gameId. */
-    public gameId: string;
-
-    /** SimpleReplayData index. */
-    public index: number;
-
-    /** SimpleReplayData publicCards. */
-    public publicCards: ICardInfo[];
-
-    /** SimpleReplayData myCards. */
-    public myCards: ICardInfo[];
-
-    /** SimpleReplayData myResult. */
-    public myResult: number;
-
-    /** SimpleReplayData winnerCards. */
-    public winnerCards: ICardInfo[];
-
-    /** SimpleReplayData winnerName. */
-    public winnerName: string;
-
-    /** SimpleReplayData winnerHead. */
-    public winnerHead: string;
-
-    /** SimpleReplayData winnerResult. */
-    public winnerResult: number;
-
-    /**
-     * Encodes the specified SimpleReplayData message. Does not implicitly {@link SimpleReplayData.verify|verify} messages.
-     * @param m SimpleReplayData message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: ISimpleReplayData, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a SimpleReplayData message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns SimpleReplayData
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): SimpleReplayData;
-}
-
-/** Represents a ReplayData. */
-export class ReplayData implements IReplayData {
-
-    /**
-     * Constructs a new ReplayData.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IReplayData);
-
-    /** ReplayData gameId. */
-    public gameId: string;
-
-    /** ReplayData index. */
-    public index: number;
-
-    /** ReplayData gameStatic. */
-    public gameStatic?: (IGameStaticData|null);
-
-    /** ReplayData players. */
-    public players: IPlayerInfo[];
-
-    /** ReplayData dealerUid. */
-    public dealerUid: string;
-
-    /** ReplayData antes. */
-    public antes: number;
-
-    /** ReplayData sbUid. */
-    public sbUid: string;
-
-    /** ReplayData bbUid. */
-    public bbUid: string;
-
-    /** ReplayData straddle. */
-    public straddle: string;
-
-    /** ReplayData potInfo. */
-    public potInfo: IPotInfo[];
-
-    /** ReplayData myCards. */
-    public myCards: ICardInfo[];
-
-    /** ReplayData flop. */
-    public flop: ICardInfo[];
-
-    /** ReplayData turn. */
-    public turn: ICardInfo[];
-
-    /** ReplayData river. */
-    public river: ICardInfo[];
-
-    /** ReplayData preFlopActions. */
-    public preFlopActions: IActionInfo[];
-
-    /** ReplayData flopActions. */
-    public flopActions: IActionInfo[];
-
-    /** ReplayData turnActions. */
-    public turnActions: IActionInfo[];
-
-    /** ReplayData riverActions. */
-    public riverActions: IActionInfo[];
-
-    /** ReplayData result. */
-    public result: IPlayerWinLose[];
-
-    /**
-     * Encodes the specified ReplayData message. Does not implicitly {@link ReplayData.verify|verify} messages.
-     * @param m ReplayData message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IReplayData, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a ReplayData message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns ReplayData
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ReplayData;
-}
-
 /** Represents a S2CCreateClub. */
 export class S2CCreateClub implements IS2CCreateClub {
 
@@ -3246,6 +3106,9 @@ export class S2CCommonActionResp implements IS2CCommonActionResp {
      */
     constructor(p?: IS2CCommonActionResp);
 
+    /** S2CCommonActionResp result. */
+    public result?: (ICommonResult|null);
+
     /** S2CCommonActionResp gameId. */
     public gameId: string;
 
@@ -3444,41 +3307,84 @@ export class S2CCommonGetBuyInListResp implements IS2CCommonGetBuyInListResp {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonGetBuyInListResp;
 }
 
-/** Represents a S2CCommonBuyInCountDownNotify. */
-export class S2CCommonBuyInCountDownNotify implements IS2CCommonBuyInCountDownNotify {
+/** Represents a S2CCommonBringInTimerNotify. */
+export class S2CCommonBringInTimerNotify implements IS2CCommonBringInTimerNotify {
 
     /**
-     * Constructs a new S2CCommonBuyInCountDownNotify.
+     * Constructs a new S2CCommonBringInTimerNotify.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CCommonBuyInCountDownNotify);
+    constructor(p?: IS2CCommonBringInTimerNotify);
 
-    /** S2CCommonBuyInCountDownNotify gameId. */
+    /** S2CCommonBringInTimerNotify gameId. */
     public gameId: string;
 
-    /** S2CCommonBuyInCountDownNotify actionUid. */
+    /** S2CCommonBringInTimerNotify actionUid. */
     public actionUid: string;
 
-    /** S2CCommonBuyInCountDownNotify leftTime. */
+    /** S2CCommonBringInTimerNotify leftTime. */
     public leftTime: number;
 
     /**
-     * Encodes the specified S2CCommonBuyInCountDownNotify message. Does not implicitly {@link S2CCommonBuyInCountDownNotify.verify|verify} messages.
-     * @param m S2CCommonBuyInCountDownNotify message or plain object to encode
+     * Encodes the specified S2CCommonBringInTimerNotify message. Does not implicitly {@link S2CCommonBringInTimerNotify.verify|verify} messages.
+     * @param m S2CCommonBringInTimerNotify message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CCommonBuyInCountDownNotify, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CCommonBringInTimerNotify, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CCommonBuyInCountDownNotify message from the specified reader or buffer.
+     * Decodes a S2CCommonBringInTimerNotify message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CCommonBuyInCountDownNotify
+     * @returns S2CCommonBringInTimerNotify
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBuyInCountDownNotify;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBringInTimerNotify;
+}
+
+/** Represents a S2CCommonBringInNotify. */
+export class S2CCommonBringInNotify implements IS2CCommonBringInNotify {
+
+    /**
+     * Constructs a new S2CCommonBringInNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonBringInNotify);
+
+    /** S2CCommonBringInNotify gameId. */
+    public gameId: string;
+
+    /** S2CCommonBringInNotify uid. */
+    public uid: string;
+
+    /** S2CCommonBringInNotify bringInNum. */
+    public bringInNum: number;
+
+    /** S2CCommonBringInNotify totalBringInNum. */
+    public totalBringInNum: number;
+
+    /** S2CCommonBringInNotify currencyNum. */
+    public currencyNum: number;
+
+    /**
+     * Encodes the specified S2CCommonBringInNotify message. Does not implicitly {@link S2CCommonBringInNotify.verify|verify} messages.
+     * @param m S2CCommonBringInNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonBringInNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonBringInNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonBringInNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBringInNotify;
 }
 
 /** Represents a S2CCommonSitDownNotify. */
@@ -4502,20 +4408,21 @@ export enum MessageId {
     S2C_CommonChatResp = 8009,
     S2C_CommonGetObListResp = 8010,
     S2C_CommonGetBuyInListResp = 8011,
-    S2C_CommonBuyInCountDownNotify = 8110,
-    S2C_CommonSitDownNotify = 8111,
-    S2C_CommonStandUpNotify = 8112,
-    S2C_CommonActionNotify = 8113,
-    S2C_CommonBuyInsuranceNotify = 8114,
-    S2C_CommonChatNotify = 8115,
-    S2C_CommonStartNotify = 8118,
-    S2C_CommonRoundStartNotify = 8119,
-    S2C_CommonPreFlopRoundNotify = 8120,
-    S2C_CommonFlopRoundNotify = 8121,
-    S2C_CommonTurnRoundNotify = 8122,
-    S2C_CommonRiverRoundNotify = 8123,
-    S2C_CommonCurrentActionNotify = 8124,
-    S2C_CommonSettlementNotify = 8125
+    S2C_CommonBringInTimerNotify = 8110,
+    S2C_CommonBringInNotify = 8111,
+    S2C_CommonSitDownNotify = 8112,
+    S2C_CommonStandUpNotify = 8113,
+    S2C_CommonActionNotify = 8114,
+    S2C_CommonBuyInsuranceNotify = 8115,
+    S2C_CommonChatNotify = 8116,
+    S2C_CommonStartNotify = 8250,
+    S2C_CommonRoundStartNotify = 8251,
+    S2C_CommonPreFlopRoundNotify = 8252,
+    S2C_CommonFlopRoundNotify = 8253,
+    S2C_CommonTurnRoundNotify = 8254,
+    S2C_CommonRiverRoundNotify = 8255,
+    S2C_CommonCurrentActionNotify = 8256,
+    S2C_CommonSettlementNotify = 8257
 }
  
 }

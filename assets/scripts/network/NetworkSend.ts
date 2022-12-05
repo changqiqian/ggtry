@@ -383,8 +383,6 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("带入  === " + JSON.stringify(msg))
     }
 
-
-
     public StartGame(_msgId : number ,_gameId : string )
     {
         UIMgr.Instance.ShowLoading(true);
@@ -393,6 +391,17 @@ export class NetworkSend extends Singleton<NetworkSend>()
         Network.Instance.SendMsg(_msgId , C2SGameStart.encode(msg).finish());
         console.log("申请开始游戏  === " + JSON.stringify(msg))
     }
+    
+    public SendGameAction(_msgId : number ,_gameId : string , _actionInfo : ActionInfo)
+    {
+        //UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SGameAction();
+        msg.gameId = _gameId;
+        msg.actionInfo = _actionInfo;
+        Network.Instance.SendMsg(_msgId , C2SGameAction.encode(msg).finish());
+        console.log("玩家动作  === " + JSON.stringify(msg))
+    }
+
     
 }
 

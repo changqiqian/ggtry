@@ -172,7 +172,8 @@ export class UIMgr extends Singleton<UIMgr>()
         }
         else
         {
-            this.mMultipleTableCtr.Show(true);
+            this.mMultipleTableCtr.DeleteSelf();
+            this.mMultipleTableCtr = null;
         }
     }
 

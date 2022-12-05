@@ -477,6 +477,54 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonStartResp,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonStartResp.decode(_data);
+            console.log("收到的内容 S2C_CommonStartResp  游戏正式开始回复==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    // UIMgr.Instance.ShowToast();
+                    // gameData.SetGameState(TexasCashState.TexasCashState_Waiting);
+                    gameData.Data_S2CCommonStartResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonActionResp,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonActionResp.decode(_data);
+            console.log("收到的内容 S2C_CommonActionResp  自己行动回复==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                // let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                // if(gameStruct != null)
+                // {
+                //     let gameData = gameStruct.mGameData;
+                //     // UIMgr.Instance.ShowToast();
+                //     // gameData.SetGameState(TexasCashState.TexasCashState_Waiting);
+                //     gameData.Data_S2CCommonStartResp.mData = msg;
+                // }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        
+        
+
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonBringInResp,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
@@ -623,10 +671,10 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             UIMgr.Instance.ShowToast(tips);
         },this);
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBuyInCountDownNotify,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBringInTimerNotify,(_data)=>
         {
-            let msg = S2CCommonBuyInCountDownNotify.decode(_data);
-            console.log("收到的内容 S2C_CommonBuyInCountDownNotify  买入倒计时推送===" + JSON.stringify(msg));
+            let msg = S2CCommonBringInTimerNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonBringInTimerNotify  买入倒计时推送===" + JSON.stringify(msg));
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
             if(gameStruct != null)
             {
@@ -636,9 +684,29 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 {
                     playerInfo.buyInLeftTime = msg.leftTime;
                 }
-                gameData.Data_S2CCommonBuyInCountDownNotify.mData = msg;
+                gameData.Data_S2CCommonBringInTimerNotify.mData = msg;
             }
         },this);
+
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBringInNotify,(_data)=>
+        {
+            let msg = S2CCommonBringInNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonBringInNotify  买入推送===" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                let playerInfo = gameData.GetPlayerInfoByUid(msg.uid);
+                if(playerInfo!=null)
+                {
+                    playerInfo.bringInNum = msg.totalBringInNum;
+                    playerInfo.currencyNum = msg.currencyNum;
+                }
+                gameData.Data_S2CCommonBringInNotify.mData = msg;
+            }
+        },this);
+        
         
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonSitDownNotify,(_data)=>
         {
@@ -665,6 +733,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.Data_S2CCommonStandUpNotify.mData = msg;
             }
         },this);
+
 
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonStartNotify,(_data)=>
@@ -717,7 +786,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(gameStruct != null)
             {
                 let gameData = gameStruct.mGameData;
-                gameData.ClearActions();
                 gameData.SetGameState(TexasCashState.TexasCashState_PreFlopRound);
                 gameData.UpdatePlayerCards(LocalPlayerData.Instance.Data_Uid.mData , msg.cards);
                 gameData.Data_S2CCommonPreFlopRoundNotify.mData = msg;

@@ -165,11 +165,8 @@ export class Game_Player extends BaseUI
             }
             if(selfPlayer.seat == this.mSeatID)
             {
-                if(gameData.CanPlayerBuyIn(LocalPlayerData.Instance.Data_Uid.mData))
-                {
-                    this.UpdateMoney();
-                    this.ShowBuying(false)
-                }
+                this.ShowBuying(false)
+                this.UpdateMoney();
             }
         })
 
@@ -206,6 +203,8 @@ export class Game_Player extends BaseUI
 
             let dealerId = gameData.GetDynamicData().dealerUid;
             this.UpdateDealer(dealerId);
+
+            this.UpdateMoney();
         })
 
 
@@ -230,7 +229,7 @@ export class Game_Player extends BaseUI
             this.ExcutiveAction();
         })
 
-        gameData.Data_S2CCommonBuyInCountDownNotify.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonBringInTimerNotify.AddListenner(this,(_data)=>
         {
             let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
             if(playerInfo == null)
@@ -244,6 +243,25 @@ export class Game_Player extends BaseUI
             }
             this.UpdateBuyInCountDown();
         })
+
+        gameData.Data_S2CCommonBringInNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.uid);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.seat != this.mSeatID)
+            {
+                return;
+            }
+
+            this.ShowBuying(false);
+            this.UpdateMoney();
+        })
+
+        
     }
 
     PrepareRoundStart()
@@ -412,9 +430,17 @@ export class Game_Player extends BaseUI
         let actionLeftTime = gameData.GetDynamicData().actionLeftTime;
         let currentActionUid =  gameData.GetDynamicData().actionUid;
         this.mCircleTimer.StopTimer();
-        if(currentActionUid == playerInfo.uid)
+
+        if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
         {
-            this.mCircleTimer.StartTimer(actionLeftTime);
+            this.node.active = currentActionUid != playerInfo.uid
+        }
+        else
+        {
+            if(currentActionUid == playerInfo.uid)
+            {
+                this.mCircleTimer.StartTimer(actionLeftTime);
+            }
         }
     }
 
@@ -434,10 +460,10 @@ export class Game_Player extends BaseUI
             return;
         }
 
-        if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-        {
-            return;
-        }
+        // if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+        // {
+        //     return;
+        // }
         this.mName.node.active = true;
         this.mName.string = playerInfo.nickName;
     }
@@ -461,10 +487,10 @@ export class Game_Player extends BaseUI
             return;
         }
 
-        if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-        {
-            return;
-        }
+        // if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+        // {
+        //     return;
+        // }
 
         this.mAmount.node.active = true;
         if(gameData.CanPlayerBuyIn(playerInfo.uid))

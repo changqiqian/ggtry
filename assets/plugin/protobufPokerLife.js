@@ -4748,602 +4748,6 @@ $root.GameDynamicData = (function() {
     return GameDynamicData;
 })();
 
-$root.SimpleReplayData = (function() {
-
-    /**
-     * Properties of a SimpleReplayData.
-     * @exports ISimpleReplayData
-     * @interface ISimpleReplayData
-     * @property {string|null} [gameId] SimpleReplayData gameId
-     * @property {number|null} [index] SimpleReplayData index
-     * @property {Array.<ICardInfo>|null} [publicCards] SimpleReplayData publicCards
-     * @property {Array.<ICardInfo>|null} [myCards] SimpleReplayData myCards
-     * @property {number|null} [myResult] SimpleReplayData myResult
-     * @property {Array.<ICardInfo>|null} [winnerCards] SimpleReplayData winnerCards
-     * @property {string|null} [winnerName] SimpleReplayData winnerName
-     * @property {string|null} [winnerHead] SimpleReplayData winnerHead
-     * @property {number|null} [winnerResult] SimpleReplayData winnerResult
-     */
-
-    /**
-     * Constructs a new SimpleReplayData.
-     * @exports SimpleReplayData
-     * @classdesc Represents a SimpleReplayData.
-     * @implements ISimpleReplayData
-     * @constructor
-     * @param {ISimpleReplayData=} [p] Properties to set
-     */
-    function SimpleReplayData(p) {
-        this.publicCards = [];
-        this.myCards = [];
-        this.winnerCards = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * SimpleReplayData gameId.
-     * @member {string} gameId
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.gameId = "";
-
-    /**
-     * SimpleReplayData index.
-     * @member {number} index
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * SimpleReplayData publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * SimpleReplayData myCards.
-     * @member {Array.<ICardInfo>} myCards
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.myCards = $util.emptyArray;
-
-    /**
-     * SimpleReplayData myResult.
-     * @member {number} myResult
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.myResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * SimpleReplayData winnerCards.
-     * @member {Array.<ICardInfo>} winnerCards
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.winnerCards = $util.emptyArray;
-
-    /**
-     * SimpleReplayData winnerName.
-     * @member {string} winnerName
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.winnerName = "";
-
-    /**
-     * SimpleReplayData winnerHead.
-     * @member {string} winnerHead
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.winnerHead = "";
-
-    /**
-     * SimpleReplayData winnerResult.
-     * @member {number} winnerResult
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.winnerResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified SimpleReplayData message. Does not implicitly {@link SimpleReplayData.verify|verify} messages.
-     * @function encode
-     * @memberof SimpleReplayData
-     * @static
-     * @param {ISimpleReplayData} m SimpleReplayData message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    SimpleReplayData.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
-            w.uint32(16).int64(m.index);
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(26).fork()).ldelim();
-        }
-        if (m.myCards != null && m.myCards.length) {
-            for (var i = 0; i < m.myCards.length; ++i)
-                $root.CardInfo.encode(m.myCards[i], w.uint32(34).fork()).ldelim();
-        }
-        if (m.myResult != null && Object.hasOwnProperty.call(m, "myResult"))
-            w.uint32(40).int64(m.myResult);
-        if (m.winnerCards != null && m.winnerCards.length) {
-            for (var i = 0; i < m.winnerCards.length; ++i)
-                $root.CardInfo.encode(m.winnerCards[i], w.uint32(50).fork()).ldelim();
-        }
-        if (m.winnerName != null && Object.hasOwnProperty.call(m, "winnerName"))
-            w.uint32(58).string(m.winnerName);
-        if (m.winnerHead != null && Object.hasOwnProperty.call(m, "winnerHead"))
-            w.uint32(66).string(m.winnerHead);
-        if (m.winnerResult != null && Object.hasOwnProperty.call(m, "winnerResult"))
-            w.uint32(72).int64(m.winnerResult);
-        return w;
-    };
-
-    /**
-     * Decodes a SimpleReplayData message from the specified reader or buffer.
-     * @function decode
-     * @memberof SimpleReplayData
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {SimpleReplayData} SimpleReplayData
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    SimpleReplayData.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.SimpleReplayData();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.index = r.int64();
-                break;
-            case 3:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 4:
-                if (!(m.myCards && m.myCards.length))
-                    m.myCards = [];
-                m.myCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 5:
-                m.myResult = r.int64();
-                break;
-            case 6:
-                if (!(m.winnerCards && m.winnerCards.length))
-                    m.winnerCards = [];
-                m.winnerCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 7:
-                m.winnerName = r.string();
-                break;
-            case 8:
-                m.winnerHead = r.string();
-                break;
-            case 9:
-                m.winnerResult = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return SimpleReplayData;
-})();
-
-$root.ReplayData = (function() {
-
-    /**
-     * Properties of a ReplayData.
-     * @exports IReplayData
-     * @interface IReplayData
-     * @property {string|null} [gameId] ReplayData gameId
-     * @property {number|null} [index] ReplayData index
-     * @property {IGameStaticData|null} [gameStatic] ReplayData gameStatic
-     * @property {Array.<IPlayerInfo>|null} [players] ReplayData players
-     * @property {string|null} [dealerUid] ReplayData dealerUid
-     * @property {number|null} [antes] ReplayData antes
-     * @property {string|null} [sbUid] ReplayData sbUid
-     * @property {string|null} [bbUid] ReplayData bbUid
-     * @property {string|null} [straddle] ReplayData straddle
-     * @property {Array.<IPotInfo>|null} [potInfo] ReplayData potInfo
-     * @property {Array.<ICardInfo>|null} [myCards] ReplayData myCards
-     * @property {Array.<ICardInfo>|null} [flop] ReplayData flop
-     * @property {Array.<ICardInfo>|null} [turn] ReplayData turn
-     * @property {Array.<ICardInfo>|null} [river] ReplayData river
-     * @property {Array.<IActionInfo>|null} [preFlopActions] ReplayData preFlopActions
-     * @property {Array.<IActionInfo>|null} [flopActions] ReplayData flopActions
-     * @property {Array.<IActionInfo>|null} [turnActions] ReplayData turnActions
-     * @property {Array.<IActionInfo>|null} [riverActions] ReplayData riverActions
-     * @property {Array.<IPlayerWinLose>|null} [result] ReplayData result
-     */
-
-    /**
-     * Constructs a new ReplayData.
-     * @exports ReplayData
-     * @classdesc Represents a ReplayData.
-     * @implements IReplayData
-     * @constructor
-     * @param {IReplayData=} [p] Properties to set
-     */
-    function ReplayData(p) {
-        this.players = [];
-        this.potInfo = [];
-        this.myCards = [];
-        this.flop = [];
-        this.turn = [];
-        this.river = [];
-        this.preFlopActions = [];
-        this.flopActions = [];
-        this.turnActions = [];
-        this.riverActions = [];
-        this.result = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ReplayData gameId.
-     * @member {string} gameId
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.gameId = "";
-
-    /**
-     * ReplayData index.
-     * @member {number} index
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReplayData gameStatic.
-     * @member {IGameStaticData|null|undefined} gameStatic
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.gameStatic = null;
-
-    /**
-     * ReplayData players.
-     * @member {Array.<IPlayerInfo>} players
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.players = $util.emptyArray;
-
-    /**
-     * ReplayData dealerUid.
-     * @member {string} dealerUid
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.dealerUid = "";
-
-    /**
-     * ReplayData antes.
-     * @member {number} antes
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.antes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReplayData sbUid.
-     * @member {string} sbUid
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.sbUid = "";
-
-    /**
-     * ReplayData bbUid.
-     * @member {string} bbUid
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.bbUid = "";
-
-    /**
-     * ReplayData straddle.
-     * @member {string} straddle
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.straddle = "";
-
-    /**
-     * ReplayData potInfo.
-     * @member {Array.<IPotInfo>} potInfo
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.potInfo = $util.emptyArray;
-
-    /**
-     * ReplayData myCards.
-     * @member {Array.<ICardInfo>} myCards
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.myCards = $util.emptyArray;
-
-    /**
-     * ReplayData flop.
-     * @member {Array.<ICardInfo>} flop
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.flop = $util.emptyArray;
-
-    /**
-     * ReplayData turn.
-     * @member {Array.<ICardInfo>} turn
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.turn = $util.emptyArray;
-
-    /**
-     * ReplayData river.
-     * @member {Array.<ICardInfo>} river
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.river = $util.emptyArray;
-
-    /**
-     * ReplayData preFlopActions.
-     * @member {Array.<IActionInfo>} preFlopActions
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.preFlopActions = $util.emptyArray;
-
-    /**
-     * ReplayData flopActions.
-     * @member {Array.<IActionInfo>} flopActions
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.flopActions = $util.emptyArray;
-
-    /**
-     * ReplayData turnActions.
-     * @member {Array.<IActionInfo>} turnActions
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.turnActions = $util.emptyArray;
-
-    /**
-     * ReplayData riverActions.
-     * @member {Array.<IActionInfo>} riverActions
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.riverActions = $util.emptyArray;
-
-    /**
-     * ReplayData result.
-     * @member {Array.<IPlayerWinLose>} result
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.result = $util.emptyArray;
-
-    /**
-     * Encodes the specified ReplayData message. Does not implicitly {@link ReplayData.verify|verify} messages.
-     * @function encode
-     * @memberof ReplayData
-     * @static
-     * @param {IReplayData} m ReplayData message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ReplayData.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
-            w.uint32(16).int64(m.index);
-        if (m.gameStatic != null && Object.hasOwnProperty.call(m, "gameStatic"))
-            $root.GameStaticData.encode(m.gameStatic, w.uint32(26).fork()).ldelim();
-        if (m.players != null && m.players.length) {
-            for (var i = 0; i < m.players.length; ++i)
-                $root.PlayerInfo.encode(m.players[i], w.uint32(34).fork()).ldelim();
-        }
-        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
-            w.uint32(42).string(m.dealerUid);
-        if (m.antes != null && Object.hasOwnProperty.call(m, "antes"))
-            w.uint32(48).int64(m.antes);
-        if (m.sbUid != null && Object.hasOwnProperty.call(m, "sbUid"))
-            w.uint32(58).string(m.sbUid);
-        if (m.bbUid != null && Object.hasOwnProperty.call(m, "bbUid"))
-            w.uint32(66).string(m.bbUid);
-        if (m.straddle != null && Object.hasOwnProperty.call(m, "straddle"))
-            w.uint32(74).string(m.straddle);
-        if (m.potInfo != null && m.potInfo.length) {
-            for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(82).fork()).ldelim();
-        }
-        if (m.myCards != null && m.myCards.length) {
-            for (var i = 0; i < m.myCards.length; ++i)
-                $root.CardInfo.encode(m.myCards[i], w.uint32(90).fork()).ldelim();
-        }
-        if (m.flop != null && m.flop.length) {
-            for (var i = 0; i < m.flop.length; ++i)
-                $root.CardInfo.encode(m.flop[i], w.uint32(98).fork()).ldelim();
-        }
-        if (m.turn != null && m.turn.length) {
-            for (var i = 0; i < m.turn.length; ++i)
-                $root.CardInfo.encode(m.turn[i], w.uint32(106).fork()).ldelim();
-        }
-        if (m.river != null && m.river.length) {
-            for (var i = 0; i < m.river.length; ++i)
-                $root.CardInfo.encode(m.river[i], w.uint32(114).fork()).ldelim();
-        }
-        if (m.preFlopActions != null && m.preFlopActions.length) {
-            for (var i = 0; i < m.preFlopActions.length; ++i)
-                $root.ActionInfo.encode(m.preFlopActions[i], w.uint32(122).fork()).ldelim();
-        }
-        if (m.flopActions != null && m.flopActions.length) {
-            for (var i = 0; i < m.flopActions.length; ++i)
-                $root.ActionInfo.encode(m.flopActions[i], w.uint32(130).fork()).ldelim();
-        }
-        if (m.turnActions != null && m.turnActions.length) {
-            for (var i = 0; i < m.turnActions.length; ++i)
-                $root.ActionInfo.encode(m.turnActions[i], w.uint32(138).fork()).ldelim();
-        }
-        if (m.riverActions != null && m.riverActions.length) {
-            for (var i = 0; i < m.riverActions.length; ++i)
-                $root.ActionInfo.encode(m.riverActions[i], w.uint32(146).fork()).ldelim();
-        }
-        if (m.result != null && m.result.length) {
-            for (var i = 0; i < m.result.length; ++i)
-                $root.PlayerWinLose.encode(m.result[i], w.uint32(154).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a ReplayData message from the specified reader or buffer.
-     * @function decode
-     * @memberof ReplayData
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ReplayData} ReplayData
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ReplayData.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ReplayData();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.index = r.int64();
-                break;
-            case 3:
-                m.gameStatic = $root.GameStaticData.decode(r, r.uint32());
-                break;
-            case 4:
-                if (!(m.players && m.players.length))
-                    m.players = [];
-                m.players.push($root.PlayerInfo.decode(r, r.uint32()));
-                break;
-            case 5:
-                m.dealerUid = r.string();
-                break;
-            case 6:
-                m.antes = r.int64();
-                break;
-            case 7:
-                m.sbUid = r.string();
-                break;
-            case 8:
-                m.bbUid = r.string();
-                break;
-            case 9:
-                m.straddle = r.string();
-                break;
-            case 10:
-                if (!(m.potInfo && m.potInfo.length))
-                    m.potInfo = [];
-                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 11:
-                if (!(m.myCards && m.myCards.length))
-                    m.myCards = [];
-                m.myCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 12:
-                if (!(m.flop && m.flop.length))
-                    m.flop = [];
-                m.flop.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 13:
-                if (!(m.turn && m.turn.length))
-                    m.turn = [];
-                m.turn.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 14:
-                if (!(m.river && m.river.length))
-                    m.river = [];
-                m.river.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 15:
-                if (!(m.preFlopActions && m.preFlopActions.length))
-                    m.preFlopActions = [];
-                m.preFlopActions.push($root.ActionInfo.decode(r, r.uint32()));
-                break;
-            case 16:
-                if (!(m.flopActions && m.flopActions.length))
-                    m.flopActions = [];
-                m.flopActions.push($root.ActionInfo.decode(r, r.uint32()));
-                break;
-            case 17:
-                if (!(m.turnActions && m.turnActions.length))
-                    m.turnActions = [];
-                m.turnActions.push($root.ActionInfo.decode(r, r.uint32()));
-                break;
-            case 18:
-                if (!(m.riverActions && m.riverActions.length))
-                    m.riverActions = [];
-                m.riverActions.push($root.ActionInfo.decode(r, r.uint32()));
-                break;
-            case 19:
-                if (!(m.result && m.result.length))
-                    m.result = [];
-                m.result.push($root.PlayerWinLose.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ReplayData;
-})();
-
 $root.S2CCreateClub = (function() {
 
     /**
@@ -9200,6 +8604,7 @@ $root.S2CCommonActionResp = (function() {
      * Properties of a S2CCommonActionResp.
      * @exports IS2CCommonActionResp
      * @interface IS2CCommonActionResp
+     * @property {ICommonResult|null} [result] S2CCommonActionResp result
      * @property {string|null} [gameId] S2CCommonActionResp gameId
      * @property {IActionInfo|null} [actionInfo] S2CCommonActionResp actionInfo
      */
@@ -9218,6 +8623,14 @@ $root.S2CCommonActionResp = (function() {
                 if (p[ks[i]] != null)
                     this[ks[i]] = p[ks[i]];
     }
+
+    /**
+     * S2CCommonActionResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonActionResp
+     * @instance
+     */
+    S2CCommonActionResp.prototype.result = null;
 
     /**
      * S2CCommonActionResp gameId.
@@ -9247,10 +8660,12 @@ $root.S2CCommonActionResp = (function() {
     S2CCommonActionResp.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
+            w.uint32(18).string(m.gameId);
         if (m.actionInfo != null && Object.hasOwnProperty.call(m, "actionInfo"))
-            $root.ActionInfo.encode(m.actionInfo, w.uint32(18).fork()).ldelim();
+            $root.ActionInfo.encode(m.actionInfo, w.uint32(26).fork()).ldelim();
         return w;
     };
 
@@ -9273,9 +8688,12 @@ $root.S2CCommonActionResp = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.gameId = r.string();
+                m.result = $root.CommonResult.decode(r, r.uint32());
                 break;
             case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
                 m.actionInfo = $root.ActionInfo.decode(r, r.uint32());
                 break;
             default:
@@ -9788,26 +9206,26 @@ $root.S2CCommonGetBuyInListResp = (function() {
     return S2CCommonGetBuyInListResp;
 })();
 
-$root.S2CCommonBuyInCountDownNotify = (function() {
+$root.S2CCommonBringInTimerNotify = (function() {
 
     /**
-     * Properties of a S2CCommonBuyInCountDownNotify.
-     * @exports IS2CCommonBuyInCountDownNotify
-     * @interface IS2CCommonBuyInCountDownNotify
-     * @property {string|null} [gameId] S2CCommonBuyInCountDownNotify gameId
-     * @property {string|null} [actionUid] S2CCommonBuyInCountDownNotify actionUid
-     * @property {number|null} [leftTime] S2CCommonBuyInCountDownNotify leftTime
+     * Properties of a S2CCommonBringInTimerNotify.
+     * @exports IS2CCommonBringInTimerNotify
+     * @interface IS2CCommonBringInTimerNotify
+     * @property {string|null} [gameId] S2CCommonBringInTimerNotify gameId
+     * @property {string|null} [actionUid] S2CCommonBringInTimerNotify actionUid
+     * @property {number|null} [leftTime] S2CCommonBringInTimerNotify leftTime
      */
 
     /**
-     * Constructs a new S2CCommonBuyInCountDownNotify.
-     * @exports S2CCommonBuyInCountDownNotify
-     * @classdesc Represents a S2CCommonBuyInCountDownNotify.
-     * @implements IS2CCommonBuyInCountDownNotify
+     * Constructs a new S2CCommonBringInTimerNotify.
+     * @exports S2CCommonBringInTimerNotify
+     * @classdesc Represents a S2CCommonBringInTimerNotify.
+     * @implements IS2CCommonBringInTimerNotify
      * @constructor
-     * @param {IS2CCommonBuyInCountDownNotify=} [p] Properties to set
+     * @param {IS2CCommonBringInTimerNotify=} [p] Properties to set
      */
-    function S2CCommonBuyInCountDownNotify(p) {
+    function S2CCommonBringInTimerNotify(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -9815,39 +9233,39 @@ $root.S2CCommonBuyInCountDownNotify = (function() {
     }
 
     /**
-     * S2CCommonBuyInCountDownNotify gameId.
+     * S2CCommonBringInTimerNotify gameId.
      * @member {string} gameId
-     * @memberof S2CCommonBuyInCountDownNotify
+     * @memberof S2CCommonBringInTimerNotify
      * @instance
      */
-    S2CCommonBuyInCountDownNotify.prototype.gameId = "";
+    S2CCommonBringInTimerNotify.prototype.gameId = "";
 
     /**
-     * S2CCommonBuyInCountDownNotify actionUid.
+     * S2CCommonBringInTimerNotify actionUid.
      * @member {string} actionUid
-     * @memberof S2CCommonBuyInCountDownNotify
+     * @memberof S2CCommonBringInTimerNotify
      * @instance
      */
-    S2CCommonBuyInCountDownNotify.prototype.actionUid = "";
+    S2CCommonBringInTimerNotify.prototype.actionUid = "";
 
     /**
-     * S2CCommonBuyInCountDownNotify leftTime.
+     * S2CCommonBringInTimerNotify leftTime.
      * @member {number} leftTime
-     * @memberof S2CCommonBuyInCountDownNotify
+     * @memberof S2CCommonBringInTimerNotify
      * @instance
      */
-    S2CCommonBuyInCountDownNotify.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    S2CCommonBringInTimerNotify.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * Encodes the specified S2CCommonBuyInCountDownNotify message. Does not implicitly {@link S2CCommonBuyInCountDownNotify.verify|verify} messages.
+     * Encodes the specified S2CCommonBringInTimerNotify message. Does not implicitly {@link S2CCommonBringInTimerNotify.verify|verify} messages.
      * @function encode
-     * @memberof S2CCommonBuyInCountDownNotify
+     * @memberof S2CCommonBringInTimerNotify
      * @static
-     * @param {IS2CCommonBuyInCountDownNotify} m S2CCommonBuyInCountDownNotify message or plain object to encode
+     * @param {IS2CCommonBringInTimerNotify} m S2CCommonBringInTimerNotify message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    S2CCommonBuyInCountDownNotify.encode = function encode(m, w) {
+    S2CCommonBringInTimerNotify.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -9860,20 +9278,20 @@ $root.S2CCommonBuyInCountDownNotify = (function() {
     };
 
     /**
-     * Decodes a S2CCommonBuyInCountDownNotify message from the specified reader or buffer.
+     * Decodes a S2CCommonBringInTimerNotify message from the specified reader or buffer.
      * @function decode
-     * @memberof S2CCommonBuyInCountDownNotify
+     * @memberof S2CCommonBringInTimerNotify
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {S2CCommonBuyInCountDownNotify} S2CCommonBuyInCountDownNotify
+     * @returns {S2CCommonBringInTimerNotify} S2CCommonBringInTimerNotify
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    S2CCommonBuyInCountDownNotify.decode = function decode(r, l) {
+    S2CCommonBringInTimerNotify.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonBuyInCountDownNotify();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonBringInTimerNotify();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -9894,7 +9312,144 @@ $root.S2CCommonBuyInCountDownNotify = (function() {
         return m;
     };
 
-    return S2CCommonBuyInCountDownNotify;
+    return S2CCommonBringInTimerNotify;
+})();
+
+$root.S2CCommonBringInNotify = (function() {
+
+    /**
+     * Properties of a S2CCommonBringInNotify.
+     * @exports IS2CCommonBringInNotify
+     * @interface IS2CCommonBringInNotify
+     * @property {string|null} [gameId] S2CCommonBringInNotify gameId
+     * @property {string|null} [uid] S2CCommonBringInNotify uid
+     * @property {number|null} [bringInNum] S2CCommonBringInNotify bringInNum
+     * @property {number|null} [totalBringInNum] S2CCommonBringInNotify totalBringInNum
+     * @property {number|null} [currencyNum] S2CCommonBringInNotify currencyNum
+     */
+
+    /**
+     * Constructs a new S2CCommonBringInNotify.
+     * @exports S2CCommonBringInNotify
+     * @classdesc Represents a S2CCommonBringInNotify.
+     * @implements IS2CCommonBringInNotify
+     * @constructor
+     * @param {IS2CCommonBringInNotify=} [p] Properties to set
+     */
+    function S2CCommonBringInNotify(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonBringInNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonBringInNotify
+     * @instance
+     */
+    S2CCommonBringInNotify.prototype.gameId = "";
+
+    /**
+     * S2CCommonBringInNotify uid.
+     * @member {string} uid
+     * @memberof S2CCommonBringInNotify
+     * @instance
+     */
+    S2CCommonBringInNotify.prototype.uid = "";
+
+    /**
+     * S2CCommonBringInNotify bringInNum.
+     * @member {number} bringInNum
+     * @memberof S2CCommonBringInNotify
+     * @instance
+     */
+    S2CCommonBringInNotify.prototype.bringInNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CCommonBringInNotify totalBringInNum.
+     * @member {number} totalBringInNum
+     * @memberof S2CCommonBringInNotify
+     * @instance
+     */
+    S2CCommonBringInNotify.prototype.totalBringInNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CCommonBringInNotify currencyNum.
+     * @member {number} currencyNum
+     * @memberof S2CCommonBringInNotify
+     * @instance
+     */
+    S2CCommonBringInNotify.prototype.currencyNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified S2CCommonBringInNotify message. Does not implicitly {@link S2CCommonBringInNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonBringInNotify
+     * @static
+     * @param {IS2CCommonBringInNotify} m S2CCommonBringInNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonBringInNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(26).string(m.uid);
+        if (m.bringInNum != null && Object.hasOwnProperty.call(m, "bringInNum"))
+            w.uint32(32).int64(m.bringInNum);
+        if (m.totalBringInNum != null && Object.hasOwnProperty.call(m, "totalBringInNum"))
+            w.uint32(40).int64(m.totalBringInNum);
+        if (m.currencyNum != null && Object.hasOwnProperty.call(m, "currencyNum"))
+            w.uint32(48).int64(m.currencyNum);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonBringInNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonBringInNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonBringInNotify} S2CCommonBringInNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonBringInNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonBringInNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.uid = r.string();
+                break;
+            case 4:
+                m.bringInNum = r.int64();
+                break;
+            case 5:
+                m.totalBringInNum = r.int64();
+                break;
+            case 6:
+                m.currencyNum = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonBringInNotify;
 })();
 
 $root.S2CCommonSitDownNotify = (function() {
@@ -12642,20 +12197,21 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonChatResp=8009 S2C_CommonChatResp value
  * @property {number} S2C_CommonGetObListResp=8010 S2C_CommonGetObListResp value
  * @property {number} S2C_CommonGetBuyInListResp=8011 S2C_CommonGetBuyInListResp value
- * @property {number} S2C_CommonBuyInCountDownNotify=8110 S2C_CommonBuyInCountDownNotify value
- * @property {number} S2C_CommonSitDownNotify=8111 S2C_CommonSitDownNotify value
- * @property {number} S2C_CommonStandUpNotify=8112 S2C_CommonStandUpNotify value
- * @property {number} S2C_CommonActionNotify=8113 S2C_CommonActionNotify value
- * @property {number} S2C_CommonBuyInsuranceNotify=8114 S2C_CommonBuyInsuranceNotify value
- * @property {number} S2C_CommonChatNotify=8115 S2C_CommonChatNotify value
- * @property {number} S2C_CommonStartNotify=8118 S2C_CommonStartNotify value
- * @property {number} S2C_CommonRoundStartNotify=8119 S2C_CommonRoundStartNotify value
- * @property {number} S2C_CommonPreFlopRoundNotify=8120 S2C_CommonPreFlopRoundNotify value
- * @property {number} S2C_CommonFlopRoundNotify=8121 S2C_CommonFlopRoundNotify value
- * @property {number} S2C_CommonTurnRoundNotify=8122 S2C_CommonTurnRoundNotify value
- * @property {number} S2C_CommonRiverRoundNotify=8123 S2C_CommonRiverRoundNotify value
- * @property {number} S2C_CommonCurrentActionNotify=8124 S2C_CommonCurrentActionNotify value
- * @property {number} S2C_CommonSettlementNotify=8125 S2C_CommonSettlementNotify value
+ * @property {number} S2C_CommonBringInTimerNotify=8110 S2C_CommonBringInTimerNotify value
+ * @property {number} S2C_CommonBringInNotify=8111 S2C_CommonBringInNotify value
+ * @property {number} S2C_CommonSitDownNotify=8112 S2C_CommonSitDownNotify value
+ * @property {number} S2C_CommonStandUpNotify=8113 S2C_CommonStandUpNotify value
+ * @property {number} S2C_CommonActionNotify=8114 S2C_CommonActionNotify value
+ * @property {number} S2C_CommonBuyInsuranceNotify=8115 S2C_CommonBuyInsuranceNotify value
+ * @property {number} S2C_CommonChatNotify=8116 S2C_CommonChatNotify value
+ * @property {number} S2C_CommonStartNotify=8250 S2C_CommonStartNotify value
+ * @property {number} S2C_CommonRoundStartNotify=8251 S2C_CommonRoundStartNotify value
+ * @property {number} S2C_CommonPreFlopRoundNotify=8252 S2C_CommonPreFlopRoundNotify value
+ * @property {number} S2C_CommonFlopRoundNotify=8253 S2C_CommonFlopRoundNotify value
+ * @property {number} S2C_CommonTurnRoundNotify=8254 S2C_CommonTurnRoundNotify value
+ * @property {number} S2C_CommonRiverRoundNotify=8255 S2C_CommonRiverRoundNotify value
+ * @property {number} S2C_CommonCurrentActionNotify=8256 S2C_CommonCurrentActionNotify value
+ * @property {number} S2C_CommonSettlementNotify=8257 S2C_CommonSettlementNotify value
  */
 $root.MessageId = (function() {
     var valuesById = {}, values = Object.create(valuesById);
@@ -12756,19 +12312,20 @@ $root.MessageId = (function() {
     values[valuesById[8009] = "S2C_CommonChatResp"] = 8009;
     values[valuesById[8010] = "S2C_CommonGetObListResp"] = 8010;
     values[valuesById[8011] = "S2C_CommonGetBuyInListResp"] = 8011;
-    values[valuesById[8110] = "S2C_CommonBuyInCountDownNotify"] = 8110;
-    values[valuesById[8111] = "S2C_CommonSitDownNotify"] = 8111;
-    values[valuesById[8112] = "S2C_CommonStandUpNotify"] = 8112;
-    values[valuesById[8113] = "S2C_CommonActionNotify"] = 8113;
-    values[valuesById[8114] = "S2C_CommonBuyInsuranceNotify"] = 8114;
-    values[valuesById[8115] = "S2C_CommonChatNotify"] = 8115;
-    values[valuesById[8118] = "S2C_CommonStartNotify"] = 8118;
-    values[valuesById[8119] = "S2C_CommonRoundStartNotify"] = 8119;
-    values[valuesById[8120] = "S2C_CommonPreFlopRoundNotify"] = 8120;
-    values[valuesById[8121] = "S2C_CommonFlopRoundNotify"] = 8121;
-    values[valuesById[8122] = "S2C_CommonTurnRoundNotify"] = 8122;
-    values[valuesById[8123] = "S2C_CommonRiverRoundNotify"] = 8123;
-    values[valuesById[8124] = "S2C_CommonCurrentActionNotify"] = 8124;
-    values[valuesById[8125] = "S2C_CommonSettlementNotify"] = 8125;
+    values[valuesById[8110] = "S2C_CommonBringInTimerNotify"] = 8110;
+    values[valuesById[8111] = "S2C_CommonBringInNotify"] = 8111;
+    values[valuesById[8112] = "S2C_CommonSitDownNotify"] = 8112;
+    values[valuesById[8113] = "S2C_CommonStandUpNotify"] = 8113;
+    values[valuesById[8114] = "S2C_CommonActionNotify"] = 8114;
+    values[valuesById[8115] = "S2C_CommonBuyInsuranceNotify"] = 8115;
+    values[valuesById[8116] = "S2C_CommonChatNotify"] = 8116;
+    values[valuesById[8250] = "S2C_CommonStartNotify"] = 8250;
+    values[valuesById[8251] = "S2C_CommonRoundStartNotify"] = 8251;
+    values[valuesById[8252] = "S2C_CommonPreFlopRoundNotify"] = 8252;
+    values[valuesById[8253] = "S2C_CommonFlopRoundNotify"] = 8253;
+    values[valuesById[8254] = "S2C_CommonTurnRoundNotify"] = 8254;
+    values[valuesById[8255] = "S2C_CommonRiverRoundNotify"] = 8255;
+    values[valuesById[8256] = "S2C_CommonCurrentActionNotify"] = 8256;
+    values[valuesById[8257] = "S2C_CommonSettlementNotify"] = 8257;
     return values;
 })();

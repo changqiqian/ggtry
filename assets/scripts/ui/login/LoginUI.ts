@@ -45,7 +45,6 @@ export class LoginUI extends BaseUI
 
     InitParam() 
     {
-        //this.node.addComponent(DragDownEvent);
     }
     BindUI() 
     {

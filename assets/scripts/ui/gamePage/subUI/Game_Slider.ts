@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Slider, Sprite, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Tool } from '../../../Tool';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Slider')
@@ -80,12 +81,7 @@ export class Game_Slider extends BaseUI
     {
         this.mTotalNum = _totalAmount;
         this.mMinRaiseNum = _minRaise;
-        this.mTotalAmount.string = _totalAmount + "";
-    }
-
-    SetCurrentAmount(_CurrentAmount : number)
-    {
-        this.mAmount.string = _CurrentAmount + "";
+        this.mTotalAmount.string = Tool.ConvertMoney_S2C(_totalAmount) + "";
     }
 
     ResetSlider()
@@ -101,7 +97,7 @@ export class Game_Slider extends BaseUI
         this.mProgress.fillRange = this.mSlider.progress;
         this.mTotalBG.active = this.mProgress.fillRange < 1;
         let currentAmount = this.CalculateCurrentAmount(this.mProgress.fillRange);
-        this.mAmount.string = currentAmount + "";
+        this.mAmount.string = Tool.ConvertMoney_S2C(currentAmount) + "";
         return currentAmount;
     }
 
@@ -119,8 +115,7 @@ export class Game_Slider extends BaseUI
         {
             let tempAmount = this.mTotalNum - this.mMinRaiseNum;
             let finalAmount = _ratio * tempAmount + this.mMinRaiseNum;
-            let fixed = finalAmount.toFixed(0);
-            return Number(fixed);
+            return finalAmount;
         }
 
         
