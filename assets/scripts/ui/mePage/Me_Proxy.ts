@@ -8,7 +8,10 @@ export class Me_Proxy extends BaseUI {
     @property(BaseButton)
     mBackBtn: BaseButton = null;
 
-    InitParam() {}
+    InitParam() 
+    {
+        this.OffsetHallTop();
+    }
     BindUI() {
         this.mBackBtn.SetClickCallback(() => {
             this.Show(false);

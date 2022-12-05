@@ -35,7 +35,7 @@ export class BriefRecordItem extends BaseUI
     {
         this.mVideoBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowToast(this.mData.index + "");
+            //UIMgr.Instance.ShowToast(this.mData.index + "");
         })
     }
     RegDataNotify()

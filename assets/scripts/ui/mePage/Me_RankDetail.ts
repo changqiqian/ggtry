@@ -36,6 +36,7 @@ export class Me_RankDetail extends BaseUI {
 
     InitParam() 
     {
+        this.OffsetHallTop();
     }
     BindUI() 
     {

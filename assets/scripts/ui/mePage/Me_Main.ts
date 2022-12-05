@@ -39,24 +39,25 @@ export class Me_Main extends BaseUI {
     {
         this.mBankBtn.SetClickCallback(() => 
         {
-            if (sys.isBrowser) 
-            {
-                UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => 
-                {
-                    let tempScript = _script as InsertWebView;
-                    let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
-                    tempScript.SetUrl(GameConfig.WebberAddr, param);
-                });
-            } 
-            else 
-            {
-                UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => 
-                {
-                    let tempScript = _script as FullScreenWebView;
-                    let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
-                    tempScript.SetUrl(GameConfig.WebberAddr, param);
-                });
-            }
+            UIMgr.Instance.ShowToast("功能开发中");
+            // if (sys.isBrowser) 
+            // {
+            //     UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => 
+            //     {
+            //         let tempScript = _script as InsertWebView;
+            //         let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
+            //         tempScript.SetUrl(GameConfig.WebberAddr, param);
+            //     });
+            // } 
+            // else 
+            // {
+            //     UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => 
+            //     {
+            //         let tempScript = _script as FullScreenWebView;
+            //         let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
+            //         tempScript.SetUrl(GameConfig.WebberAddr, param);
+            //     });
+            // }
         });
         this.mBankBtn.SetProtectDoubleClick(true, 1);
 
@@ -67,24 +68,25 @@ export class Me_Main extends BaseUI {
 
         this.mTableBtn.SetClickCallback(() => 
         {
-            if (sys.isBrowser) 
-            {
-                UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => 
-                {
-                    let tempScript = _script as InsertWebView;
-                    let param = '/manage-table';
-                    tempScript.SetUrl(GameConfig.WebberAddr, param);
-                });
-            } 
-            else 
-            {
-                UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => 
-                {
-                    let tempScript = _script as FullScreenWebView;
-                    let param = '/manage-table';
-                    tempScript.SetUrl(GameConfig.WebberAddr, param);
-                });
-            }
+            UIMgr.Instance.ShowToast("功能开发中");
+            // if (sys.isBrowser) 
+            // {
+            //     UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => 
+            //     {
+            //         let tempScript = _script as InsertWebView;
+            //         let param = '/manage-table';
+            //         tempScript.SetUrl(GameConfig.WebberAddr, param);
+            //     });
+            // } 
+            // else 
+            // {
+            //     UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => 
+            //     {
+            //         let tempScript = _script as FullScreenWebView;
+            //         let param = '/manage-table';
+            //         tempScript.SetUrl(GameConfig.WebberAddr, param);
+            //     });
+            // }
         });
 
         this.mQuestBtn.SetClickCallback(() => 

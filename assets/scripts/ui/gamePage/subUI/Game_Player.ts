@@ -513,10 +513,10 @@ export class Game_Player extends BaseUI
             return;
         }
 
-        // if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-        // {
-        //     return;
-        // }
+        if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+        {
+            return;
+        }
         this.mName.node.active = true;
         this.mName.string = playerInfo.nickName;
     }
@@ -540,10 +540,10 @@ export class Game_Player extends BaseUI
             return;
         }
 
-        // if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-        // {
-        //     return;
-        // }
+        if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+        {
+            return;
+        }
 
         this.mAmount.node.active = true;
         if(gameData.CanPlayerBuyIn(playerInfo.uid))

@@ -113,6 +113,8 @@ export class Club_AssetsManageWindow extends BaseUI
                 return;
             }
 
+            this.UpdateClubTotalScore();
+
             if(_data.uid != HallData.Instance.Data_ClubScoreManageUserInfo.mData.uid)
             {
                 return;

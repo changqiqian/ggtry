@@ -19,6 +19,7 @@ export class Me_Record extends BaseUI {
 
     InitParam() 
     {
+        this.OffsetHallTop();
     }
     BindUI() {
         this.mBackBtn.SetClickCallback(() => {

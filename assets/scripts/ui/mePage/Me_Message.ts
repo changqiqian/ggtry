@@ -33,6 +33,7 @@ export class Me_Message extends BaseUI {
 
     InitParam() 
     {
+        this.OffsetHallTop();
     }
     BindUI() {
         this.mBackBtn.SetClickCallback(() => {
