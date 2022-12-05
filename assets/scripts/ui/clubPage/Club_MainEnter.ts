@@ -77,7 +77,7 @@ export class Club_MainEnter extends BaseUI
 
         HallData.Instance.Data_ModifyClubInfo.AddListenner(this,(_data)=>
         {
-            let clubInfo = _data.clubInfo;
+            let clubInfo = _data;
             if(this.mData.id == clubInfo.id)
             {
                 this.mData = clubInfo;

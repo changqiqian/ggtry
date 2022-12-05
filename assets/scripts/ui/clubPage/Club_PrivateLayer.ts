@@ -130,7 +130,7 @@ export class Club_PrivateLayer extends BaseUI
             let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
             let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
 
-            if(enterClub.clubInfo.id != _data.clubInfo.id)
+            if(enterClub.clubInfo.id != _data.id)
             {
                 return;
             }

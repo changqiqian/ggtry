@@ -254,7 +254,7 @@ export class Club_Setting extends BaseUI
             }
 
             let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
-            if(clubId != _data.clubInfo.id)
+            if(clubId != _data.id)
             {
                 return;
             }

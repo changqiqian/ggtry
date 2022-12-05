@@ -163,7 +163,7 @@ export class Club_AssetsManage extends ListViewCtr<ClubMember>
             let index = this.mCurrentData.findIndex((_item) => _item.uid === LocalPlayerData.Instance.Data_Uid.mData);
             if(index >= 0)
             {
-                this.mCurrentData[index].clubPoint = _data.playerRestPoint;
+                this.mCurrentData[index].clubPoint = _data.playerRestAmount;
             }
             this.RefreshData();
 
