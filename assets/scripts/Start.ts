@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, director, debug, setDisplayStats, js } from 'cc';
 import { JsbScript } from './base/JsbScript';
 import { Localization } from './base/Localization';
+import { LocalPlayerData } from './base/LocalPlayerData';
 import { SceneType, UIMgr } from './base/UIMgr';
 import { GameConfig } from './GameConfig';
 import { NetworkReceive } from './network/NetworkReceive';
@@ -32,6 +33,8 @@ export class Start extends Component
         let systemLanguage = JsbScript.getSysLanguage();
         //设置当前语言
         Localization.SetLanguage(systemLanguage);
+
+        LocalPlayerData.Instance.LoadLocalConfig();
         //初始化UIMgr
         UIMgr.Instance.Init(()=>
         {

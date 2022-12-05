@@ -323,6 +323,25 @@ export class GameConfig
         GameConfig.WriteSimpleData(titleName, _optionNum);
     }
 
+    public static GetCustomerRaise(_index : number) :number
+    {
+        if(_index >= 3)//我们只有3个自定义加注按钮
+        {
+            console.log("我们只有3个自定义加注按钮 你当前想获取_index===" + _index);
+            return;
+        }
+        let titleName = "CUSTOMER_RAISE_RATIO" + _index;
+        let optionNum = GameConfig.ReadSimpleData(titleName, null);
+        if(optionNum == null)
+        {
+            return _index;
+        }
+        else
+        {
+            return parseInt(optionNum);
+        }
+    }
+
     public static GetCustomerRaiseRatio(_index : number) : number
     {
         if(_index >= 3)//我们只有3个自定义加注按钮
@@ -331,17 +350,8 @@ export class GameConfig
             return 0;
         }
 
-        let titleName = "CUSTOMER_RAISE_RATIO" + _index; 
-        let optionNum = GameConfig.ReadSimpleData(titleName, null);
-        let result;
-        if(optionNum == null)
-        {
-            result = GameConfig.GetDefaultCustomerRaiseRatio(_index);
-        }
-        else
-        {
-            result = GameConfig.GetDefaultCustomerRaiseRatio(Number(optionNum));
-        }
+        let optionNum = GameConfig.GetCustomerRaise(_index);
+        let result = GameConfig.GetDefaultCustomerRaiseRatio(Number(optionNum));
         return result;
     }
 
@@ -353,18 +363,8 @@ export class GameConfig
             return "None";
         }
 
-        let titleName = "CUSTOMER_RAISE_TITLE" + _index; 
-        let optionNum = GameConfig.ReadSimpleData(titleName, null);
-        let result;
-        if(optionNum == null)
-        {
-            result = GameConfig.GetDefaultCustomerRaiseTitle(_index);
-        }
-        else
-        {
-            result = GameConfig.GetDefaultCustomerRaiseTitle(Number(optionNum));
-        }
-
+        let optionNum = GameConfig.GetCustomerRaise(_index);
+        let result = GameConfig.GetDefaultCustomerRaiseTitle(Number(optionNum));
         return result;
     }
 

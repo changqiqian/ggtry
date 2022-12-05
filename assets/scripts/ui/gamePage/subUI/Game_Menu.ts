@@ -73,7 +73,7 @@ export class Game_Menu extends BaseUI
         });
         this.mSettingBtn.SetClickCallback(()=>
         {
-
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_Setting");
         });
         this.mStandBtn.SetClickCallback(()=>
         {

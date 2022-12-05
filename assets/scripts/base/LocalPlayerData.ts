@@ -83,17 +83,26 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
         LocalPlayerData.Instance.Data_AccountStatus.mData = _userInfo.accountStatus;
     }
 
-    //自定义设置
-    CustomerInit()
+    //自定义设置 本地存储变量读取
+    LoadLocalConfig()
     {
-        this.Data_CustomerRaise0.mData = GameConfig.GetCustomerRaiseRatio(0);
-        this.Data_CustomerRaise1.mData = GameConfig.GetCustomerRaiseRatio(1);
-        this.Data_CustomerRaise2.mData = GameConfig.GetCustomerRaiseRatio(2);
+        this.Data_CustomerRaise0.mData = GameConfig.GetCustomerRaise(0);
+        this.Data_CustomerRaise1.mData = GameConfig.GetCustomerRaise(1);
+        this.Data_CustomerRaise2.mData = GameConfig.GetCustomerRaise(2);
         this.Data_BGSetting.mData = GameConfig.GetBGSetting();
         this.Data_PokerSetting.mData = GameConfig.GetPokerSetting();
         this.Data_CustomerSliderSetting.mData = GameConfig.GetCustomerSliderSetting();
         this.Data_BBModeSetting.mData = GameConfig.GetBBToggleSetting();
         this.Data_BGMSetting.mData = GameConfig.GetBGMSetting();
+
+        console.log("this.Data_CustomerRaise0.mData == " + this.Data_CustomerRaise0.mData )
+        console.log("this.Data_CustomerRaise1.mData == " + this.Data_CustomerRaise1.mData )
+        console.log("this.Data_CustomerRaise2.mData == " + this.Data_CustomerRaise2.mData )
+        console.log("this.Data_BGSetting.mData == " + this.Data_BGSetting.mData )
+        console.log("this.Data_PokerSetting.mData == " + this.Data_PokerSetting.mData )
+        console.log("this.Data_CustomerSliderSetting.mData == " + this.Data_CustomerSliderSetting.mData )
+        console.log("this.Data_BBModeSetting.mData == " + this.Data_BBModeSetting.mData )
+        console.log("this.Data_BGMSetting.mData == " + this.Data_BGMSetting.mData )
     }
     Data_CustomerRaise0 :BaseData<number> = new BaseData<number>();
     Data_CustomerRaise1 : BaseData<number> = new BaseData<number>();
