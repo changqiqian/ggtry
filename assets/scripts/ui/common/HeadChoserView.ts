@@ -22,6 +22,12 @@ export class HeadChoserView extends BaseUI
     }
     BindUI() 
     {
+        this.node.on(Node.EventType.TOUCH_END,()=>
+        {
+            this.Show(false);
+        });
+
+
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
 
