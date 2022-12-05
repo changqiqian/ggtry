@@ -206,7 +206,7 @@ export class Poker extends BaseUI
         this.mTweenFlip .start();
     }
 
-    public DealAnimation(_delayTime : number = 0,_duration : number = 0.2 , _offset :Vec3 = new Vec3(0,100,0))
+    public DealAnimation(_delayTime : number = 0,_duration : number = 0.2 , _offset :Vec3 = new Vec3(0,300,0))
     {
         this.mRoot.setPosition(_offset);
         this.mTweenDeal = new Tween(this.mRoot); 

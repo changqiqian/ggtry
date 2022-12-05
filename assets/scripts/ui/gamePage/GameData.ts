@@ -1,4 +1,4 @@
-import { _decorator} from 'cc';
+import { Vec3, _decorator} from 'cc';
 import { BaseData } from '../../base/BaseData';
 import { DataNotify } from '../../base/DataNotify';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
@@ -28,16 +28,17 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonBringInResp : BaseData<S2CCommonBringInResp> = new BaseData<S2CCommonBringInResp>(true);  //带入
 
 
-    Data_S2CCommonRoundStartNotify : BaseData<S2CCommonRoundStartNotify> = new BaseData<S2CCommonRoundStartNotify>();  //本轮开始推送
-    Data_S2CCommonPreFlopRoundNotify: BaseData<S2CCommonPreFlopRoundNotify> = new BaseData<S2CCommonPreFlopRoundNotify>();  //翻前发牌推送
-    Data_S2CCommonCurrentActionNotify : BaseData<S2CCommonCurrentActionNotify> = new BaseData<S2CCommonCurrentActionNotify>();  //轮到谁行动推送
+    Data_S2CCommonRoundStartNotify : BaseData<S2CCommonRoundStartNotify> = new BaseData<S2CCommonRoundStartNotify>(true);  //本轮开始推送
+    Data_S2CCommonPreFlopRoundNotify: BaseData<S2CCommonPreFlopRoundNotify> = new BaseData<S2CCommonPreFlopRoundNotify>(true);  //翻前发牌推送
+    Data_S2CCommonCurrentActionNotify : BaseData<S2CCommonCurrentActionNotify> = new BaseData<S2CCommonCurrentActionNotify>(true);  //轮到谁行动推送
     Data_S2CCommonFlopRoundNotify : BaseData<S2CCommonFlopRoundNotify> = new BaseData<S2CCommonFlopRoundNotify>(true);  //发flop
     Data_S2CCommonTurnRoundNotify : BaseData<S2CCommonTurnRoundNotify> = new BaseData<S2CCommonTurnRoundNotify>(true);  //发转牌
     Data_S2CCommonRiverRoundNotify : BaseData<S2CCommonRiverRoundNotify> = new BaseData<S2CCommonRiverRoundNotify>(true);  //发河牌
     Data_S2CCommonActionNotify : BaseData<S2CCommonActionNotify> = new BaseData<S2CCommonActionNotify>(true);  //行动推送
 
-    
+    Data_RotateSeatEnd : BaseData<boolean> = new BaseData<boolean>(true);  //座位旋转结束
 
+    Data_ChipFlyToPlayerFromPot  : BaseData<Vec3> = new BaseData<Vec3>(true);  //执行筹码飞向赢家
     
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
     {

@@ -59,6 +59,11 @@ export class Game_PublicCards extends BaseUI
             }
         });
 
+        gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
+        {
+            this.ClearPublicCards();
+        });
+
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
         {
             this.ClearPublicCards();

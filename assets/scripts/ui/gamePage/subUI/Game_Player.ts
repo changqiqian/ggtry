@@ -218,6 +218,22 @@ export class Game_Player extends BaseUI
             this.mMiniCard.active = true;
         })
 
+        gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.CleanTable();
+        })
+
+        gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.CleanTable();
+        })
+
+        gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.CleanTable();
+        })
+        
+
         gameData.Data_S2CCommonCurrentActionNotify.AddListenner(this,(_data)=>
         {
             this.RestoreTurn();
@@ -261,7 +277,44 @@ export class Game_Player extends BaseUI
             this.UpdateMoney();
         })
 
-        
+        gameData.Data_RotateSeatEnd.AddListenner(this,(_data)=>
+        {
+            if(_data)
+            {
+                this.UpdateUIDirection();
+            }
+        })        
+    }
+
+    CleanTable()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        if(playerInfo == null)
+        {
+            return;
+        }
+
+        this.mGame_ActionTag.node.active = false;
+        this.mGame_BetAmount.node.active = false;
+    }
+
+    UpdateUIDirection()
+    {
+        let posX = this.node.parent.position.x;
+        let betPos = this.mGame_BetAmount.node.position;
+        let dealerPos = this.mDealer.position;
+        if(posX > 0)
+        {
+            this.mGame_BetAmount.node.setPosition(-Math.abs(betPos.x) , betPos.y , betPos.z);
+            this.mDealer.setPosition(-Math.abs(dealerPos.x) , dealerPos.y , dealerPos.z);
+        }
+        else  if(posX == 0)
+        {
+            this.mGame_BetAmount.node.setPosition(Math.abs(betPos.x) , betPos.y , betPos.z);
+            this.mDealer.setPosition(Math.abs(dealerPos.x) , dealerPos.y , dealerPos.z);
+        }
     }
 
     PrepareRoundStart()

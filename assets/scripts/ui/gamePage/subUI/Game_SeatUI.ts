@@ -160,6 +160,12 @@ export class Game_SeatUI extends BaseUI
                 let tempTween = new Tween(movingSeat.node);
                 let destination = current.mPath[current.mPath.length - 1];
                 tempTween.to(totalDuration , {position : new Vec3(destination)});
+                tempTween.call(()=>
+                {
+                    let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_RotateSeatEnd.mData = true;
+                });
                 tempTween.start();
                 //movingSeat.node.position =  current.mPath[current.mPath.length - 1];
             }

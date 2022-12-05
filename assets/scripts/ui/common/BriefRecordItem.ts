@@ -26,7 +26,7 @@ export class BriefRecordItem extends BaseUI
     @property(BaseButton) 
     mVideoBtn: BaseButton = null;
     
-    mData : SimpleReplayData = null;
+    mData : any = null;
     InitParam()
     {
 
@@ -50,37 +50,37 @@ export class BriefRecordItem extends BaseUI
     {
 
     }
-    public InitWithData(_data : SimpleReplayData)
+    public InitWithData(_data : any)
     {
         this.mData = _data;
-        this.mVideoBtn.SetTitle(Localization.GetString("00271") + _data.index)
-        this.ResetCards();
-        this.mWinnerPlayerInfo.SetLocalHead(parseInt(_data.winnerHead));
-        this.mWinnerPlayerInfo.SetName(_data.winnerName);
-        this.mMyProfit.string = Tool.ConvertMoney_S2C(_data.myResult) + "";
-        this.mWinnerProfit.string = Tool.ConvertMoney_S2C(_data.winnerResult) + "";
+        // this.mVideoBtn.SetTitle(Localization.GetString("00271") + _data.index)
+        // this.ResetCards();
+        // this.mWinnerPlayerInfo.SetLocalHead(parseInt(_data.winnerHead));
+        // this.mWinnerPlayerInfo.SetName(_data.winnerName);
+        // this.mMyProfit.string = Tool.ConvertMoney_S2C(_data.myResult) + "";
+        // this.mWinnerProfit.string = Tool.ConvertMoney_S2C(_data.winnerResult) + "";
 
 
-        for(let i = 0 ; i < _data.myCards.length ; i++)
-        {
-            let currentCard = this.mMineCards.children[i].getComponent(Poker);
-            currentCard.SetFrontByCardInfo(_data.myCards[i]);
-            currentCard.ShowFront();
-        }
+        // for(let i = 0 ; i < _data.myCards.length ; i++)
+        // {
+        //     let currentCard = this.mMineCards.children[i].getComponent(Poker);
+        //     currentCard.SetFrontByCardInfo(_data.myCards[i]);
+        //     currentCard.ShowFront();
+        // }
 
-        for(let i = 0 ; i < _data.winnerCards.length ; i++)
-        {
-            let currentCard = this.mWinnerCards.children[i].getComponent(Poker);
-            currentCard.SetFrontByCardInfo(_data.winnerCards[i]);
-            currentCard.ShowFront();
-        }
+        // for(let i = 0 ; i < _data.winnerCards.length ; i++)
+        // {
+        //     let currentCard = this.mWinnerCards.children[i].getComponent(Poker);
+        //     currentCard.SetFrontByCardInfo(_data.winnerCards[i]);
+        //     currentCard.ShowFront();
+        // }
 
-        for(let i = 0 ; i < _data.publicCards.length ; i++)
-        {
-            let currentCard = this.mPublicCards.children[i].getComponent(Poker);
-            currentCard.SetFrontByCardInfo(_data.publicCards[i]);
-            currentCard.ShowFront();
-        }
+        // for(let i = 0 ; i < _data.publicCards.length ; i++)
+        // {
+        //     let currentCard = this.mPublicCards.children[i].getComponent(Poker);
+        //     currentCard.SetFrontByCardInfo(_data.publicCards[i]);
+        //     currentCard.ShowFront();
+        // }
     }
     
 
