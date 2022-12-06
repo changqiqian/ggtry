@@ -102,7 +102,6 @@ export class GameConfig
     public static GetTexasCreateRoomBlindTitle(): Array<string>
     {
         return ["","","","","","","","","",""];
-        //return ["1/2" , "2/4" ,"3/6" , "4/8" , "5/10" , "10/20" , "20/40" , "25/50" , "50/100", "100/200"];
     }
     public static GetTexasCreateRoomBlindValue(): Array<number>
     {

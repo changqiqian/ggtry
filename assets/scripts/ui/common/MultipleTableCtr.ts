@@ -176,8 +176,6 @@ export class MultipleTableCtr extends BaseUI
         {
             return;
         }
-        current.mGameData.Clear();
-        current.mGameData = null;
         let index = current.mIndex;
         this.GetControlButton(index).ResetUI();
         UIMgr.Instance.DeleteUiByTag(MultipleTableCtr.GetUiTag(index));
@@ -317,6 +315,7 @@ export class MultipleTableCtr extends BaseUI
         let uiIndex = MultipleTableCtr.GameStruct.findIndex((_item) => _item.mGameId === _gameId);
         if(uiIndex >= 0)
         {
+            MultipleTableCtr.GameStruct[uiIndex].ClearData();
             MultipleTableCtr.GameStruct.splice(uiIndex , 1);
             return;
         }
@@ -336,13 +335,12 @@ export class MultipleTableCtr extends BaseUI
         let tryToGetGameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
         if(tryToGetGameStruct!=null)
         {
-            //如果已经进过当前房间了，直接切换到当前房间页面，就不用重新发送进入房间消息了
+            //如果已经过当前房间了，直接切换到当前房间页面，就不用重新发送进入房间消息了
             HallData.Instance.Data_MultipeIndex.mData = tryToGetGameStruct.mIndex;
             return false;
         }
 
         MultipleTableCtr.CreateNewGameStruct(_gameId , _clubId);
-
         return true;
     }
 }
