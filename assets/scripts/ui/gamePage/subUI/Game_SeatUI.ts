@@ -3,6 +3,7 @@ import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { GameData } from '../GameData';
+import { GameReplayData } from '../GameReplayData';
 import { Game_SeatItem } from './Game_SeatItem';
 const { ccclass, property } = _decorator;
 
@@ -39,6 +40,24 @@ export class Game_SeatUI extends BaseUI
         this.BindData();
     }
 
+    public InitWithReplayData()
+    {
+        this.InitSeatWithReplay();
+    }
+
+    InitSeatWithReplay()
+    {
+        let childCount = this.node.children.length; 
+        for(let i = 0 ; i < childCount ; i++)
+        {
+            let current = this.node.children[i].getComponent(Game_SeatItem);
+            current.InitWithReplayData(i);
+        }
+
+        let selfPlayer = GameReplayData.Instance.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        this.TryRotateSeats(selfPlayer.seat , false);
+    }
+
     InitSeat()
     {
         let childCount = this.node.children.length; 
@@ -61,7 +80,7 @@ export class Game_SeatUI extends BaseUI
                 let current = seatInfos[i];
                 if(current.uid == LocalPlayerData.Instance.Data_Uid.mData)
                 {
-                    this.TryRotateSeats(current.seat);
+                    this.TryRotateSeats(current.seat , true);
                     break;
                 }
             }
@@ -74,7 +93,7 @@ export class Game_SeatUI extends BaseUI
             {
                 return;
             }
-            this.TryRotateSeats(playerInfo.seat);
+            this.TryRotateSeats(playerInfo.seat,true);
         })
     }
 
@@ -111,7 +130,7 @@ export class Game_SeatUI extends BaseUI
         return this.node.children[index].getComponent(Game_SeatItem);
     }
 
-    TryRotateSeats(_LocalPlayerSeatId : number)
+    TryRotateSeats(_LocalPlayerSeatId : number , _animation : boolean )
     {
         let localSeat = this.GetSeatNodeBySeatId(_LocalPlayerSeatId);
         let bottomSeat = this.FindBottomSeat();
@@ -131,7 +150,7 @@ export class Game_SeatUI extends BaseUI
                 let current = this.node.children[i].getComponent(Game_SeatItem);
                 MovePathConfigArray.push(this.GetPath(current.mSeatID , step));
             }
-            this.RotateWithAnm(false,MovePathConfigArray);
+            this.RotateWithAnm(_animation , MovePathConfigArray);
         }
     }
 
@@ -144,19 +163,6 @@ export class Game_SeatUI extends BaseUI
             if(_anmation)
             {
                 let totalDuration = 0.3;
-                let currentDuration = current.mPath.length / totalDuration;
-                let tempTween = new Tween(movingSeat.node);
-                for(let k = 1 ; k < current.mPath.length ; k++)
-                {
-                    let destination = current.mPath[k];
-                    tempTween.to(currentDuration , {position : new Vec3(destination)});
-                }
-
-                tempTween.start();
-            }
-            else
-            {
-                let totalDuration = 0.3;
                 let tempTween = new Tween(movingSeat.node);
                 let destination = current.mPath[current.mPath.length - 1];
                 tempTween.to(totalDuration , {position : new Vec3(destination)});
@@ -167,7 +173,12 @@ export class Game_SeatUI extends BaseUI
                     gameData.Data_RotateSeatEnd.mData = true;
                 });
                 tempTween.start();
-                //movingSeat.node.position =  current.mPath[current.mPath.length - 1];
+            }
+            else
+            {
+
+                movingSeat.node.position =  current.mPath[current.mPath.length - 1];
+                GameReplayData.Instance.Data_RotateSeatEnd.mData = true;
             }
         }
     }

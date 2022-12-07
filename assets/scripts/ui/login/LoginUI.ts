@@ -11,6 +11,7 @@ import { DragDownEvent } from '../../UiTool/DragDownEvent';
 import { BaseButton } from '../common/BaseButton';
 import { Poker } from '../common/Poker';
 import { TipsWindow } from '../common/TipsWindow';
+import { Game_CashReplay } from '../gamePage/subUI/Game_CashReplay';
 import { Game_RecipeLayer } from '../gamePage/subUI/Game_RecipeLayer';
 import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
@@ -52,7 +53,12 @@ export class LoginUI extends BaseUI
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");            
+            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");          
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
+            {
+                let tempScript = _script as Game_CashReplay;
+                tempScript.InitWithData();
+            });        
         });
 
         this.mSignBtn.SetClickCallback(()=>

@@ -2,6 +2,7 @@ import { _decorator, Component, Node, AudioSource } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Poker } from '../../common/Poker';
+import { GameReplayData } from '../GameReplayData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_PublicCards')
@@ -11,6 +12,7 @@ export class Game_PublicCards extends BaseUI
     mAudio: AudioSource = null;
 
     private mIndex : number = null;
+    private mLastState : TexasCashState;
     InitParam() 
     {
 
@@ -112,6 +114,88 @@ export class Game_PublicCards extends BaseUI
     GetCardNode(_index : number) : Poker
     {
         return this.node.children[_index].getComponent(Poker);
+    }
+
+
+    InitWithReplayData()
+    {
+        this.mLastState = GameReplayData.Instance.Data_State.mData;
+
+
+        GameReplayData.Instance.Data_Update.AddListenner(this,(_data)=>
+        {
+            this.UpdateReplayUI();
+        })
+
+        GameReplayData.Instance.Data_ReStart.AddListenner(this,(_data)=>
+        {
+            if(_data == false)
+            {
+                return;
+            }
+            this.ClearPublicCards();
+        })
+
+    }
+
+    UpdateReplayUI()
+    {
+        let state = GameReplayData.Instance.Data_State.mData;
+        let publicCards = GameReplayData.Instance.Data_ReplayData.mData.publicCards;
+
+        if(this.mLastState == state)
+        {
+            return;
+        }
+        this.mLastState = state;
+
+
+        switch(state)
+        {
+            case TexasCashState.TexasCashState_RoundStart:
+            {
+               
+            }
+            break;
+            case TexasCashState.TexasCashState_PreFlopRound:
+            {
+    
+            }
+            break;
+            case TexasCashState.TexasCashState_FlopRound:
+            {
+                for(let i = 0 ; i < 3 ; i++)
+                {
+                    let poker = this.GetCardNode(i);
+                    poker.ResetAndHide();
+                    poker.ShowBack();
+                    poker.SetFrontByCardInfo(publicCards[i]);
+                    poker.DealAnimation();
+                }
+            }
+            break;
+            case TexasCashState.TexasCashState_TurnRound:
+                {
+                    let cardIndex = 3;
+                    let poker = this.GetCardNode(cardIndex);
+                    poker.ResetAndHide();
+                    poker.ShowBack();
+                    poker.SetFrontByCardInfo(publicCards[cardIndex]);
+                    poker.DealAnimation();
+                }
+                break;
+            case TexasCashState.TexasCashState_RiverRound:
+            {
+                let cardIndex = 4;
+                let poker = this.GetCardNode(cardIndex);
+                poker.ResetAndHide();
+                poker.ShowBack();
+                poker.SetFrontByCardInfo(publicCards[cardIndex]);
+                poker.DealAnimation();
+            }
+            break;
+        }
+   
     }
 
     

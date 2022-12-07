@@ -27,10 +27,6 @@ export class Game_Mtt extends GameBase
         this.AddSubView("gamePage","prefab/Game_MttRestTimeTips");
     }
 
-    GetGameInfoMsg()
-    {
-        
-    }
 
 
 }

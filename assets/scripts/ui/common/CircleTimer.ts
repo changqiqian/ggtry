@@ -11,7 +11,7 @@ export class CircleTimer extends BaseUI {
     @property(Label) 
     mCount: Label = null;
     mSecondCallback : Function = null;
-    OnDisabled()
+    onDisable()
     {
         this.StopTimer();
     }

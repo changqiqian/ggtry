@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, Widget } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
@@ -26,27 +26,12 @@ export class Game_SeatItem extends BaseUI
     }
     BindUI() 
     {
-        this.mSitBtn.SetClickCallback(()=>
+        let widget = this.node.getComponent(Widget);
+        if(widget != null)
         {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
-            let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-            if(selfPlayer == null)
-            {
-                let msgId = gameData.SitDownSendMsgId();
-                let gameId = gameStruct.mGameId;
-                NetworkSend.Instance.SitDown(msgId , gameId , this.mSeatID);
-            }
-            else
-            {
-                //UIMgr.Instance.ShowToast(Localization.GetString(""));
-            }
-        });
-
-
-        this.mSitBtn.Show(true);
-
-
+            widget.updateAlignment();
+            widget.enabled = false;
+        }
     }
     RegDataNotify() 
     {
@@ -69,7 +54,34 @@ export class Game_SeatItem extends BaseUI
         this.mIndex = _index;
         this.mSeatID = _id;
         this.mGame_Player.InitWithData(this.mIndex , _id);
+
+        this.mSitBtn.SetClickCallback(()=>
+        {
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            if(selfPlayer == null)
+            {
+                let msgId = gameData.SitDownSendMsgId();
+                let gameId = gameStruct.mGameId;
+                NetworkSend.Instance.SitDown(msgId , gameId , this.mSeatID);
+            }
+        });
+        this.mSitBtn.Show(true);
+
         this.BindData();
+    }
+
+    public InitWithReplayData(_id : number)
+    {
+        this.mSeatID = _id;
+        this.mGame_Player.InitWithReplayData(_id);
+
+        this.mSitBtn.SetClickCallback(()=>
+        {
+
+        });
+        this.mSitBtn.Show(true);
     }
 
     BindData()

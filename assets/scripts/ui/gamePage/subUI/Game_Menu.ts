@@ -168,18 +168,17 @@ export class Game_Menu extends BaseUI
 
     UpdateDismissBtn()
     {
-        this.mDismiss.Show(false);
-        // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        // let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
 
-        // if(gameStruct.mClubId != "")
-        // {
-        //     this.mDismiss.Show(enterClub.clubMember.memberType != ClubMemberType.ClubAccountType_Normal);
-        // }
-        // else
-        // {
-        //     this.mDismiss.Show(false);
-        // }
+        if(gameStruct.mClubId != "")
+        {
+            this.mDismiss.Show(enterClub.clubMember.memberType != ClubMemberType.ClubAccountType_Normal);
+        }
+        else
+        {
+            this.mDismiss.Show(false);
+        }
     }
 
     UpdateStandBtn()

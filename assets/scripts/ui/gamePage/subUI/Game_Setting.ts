@@ -71,12 +71,12 @@ export class Game_Setting extends BaseUI
 
         this.mSliderToggle.SetClickCallback((_value)=>
         {
-            LocalPlayerData.Instance.Data_CustomerSliderSetting = _value;
+            LocalPlayerData.Instance.Data_CustomerSliderSetting.mData = _value;
         })
 
         this.mBBModeToggle.SetClickCallback((_value)=>
         {
-            LocalPlayerData.Instance.Data_BBModeSetting = _value;
+            LocalPlayerData.Instance.Data_BBModeSetting.mData = _value;
         })
 
     }

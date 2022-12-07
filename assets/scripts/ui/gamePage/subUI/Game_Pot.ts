@@ -59,7 +59,6 @@ export class Game_Pot extends BaseUI
         this.mSubPots.active = false;
     }
 
-
     public InitWithData(_index : number)
     {
         this.mIndex = _index;
@@ -80,6 +79,12 @@ export class Game_Pot extends BaseUI
             
         })
     }
+
+    public InitWithReplay()
+    {
+        
+    }
+
 
     UpdateTotalPot()
     {

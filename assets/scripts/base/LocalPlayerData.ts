@@ -14,7 +14,7 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     {
         LocalPlayerData.ClearInstance();
     }
-    Data_Uid : BaseData<string> = new BaseData<string>(); //玩家uid
+    Data_Uid : BaseData<string> = new BaseData<string>(false,"uuid1"); //玩家uid
     Data_NickName : BaseData<string> = new BaseData<string>(); //玩家姓名
     Data_AreaCode : BaseData<number> = new BaseData<number>(false , 0); //区号
     Data_Head : BaseData<string> = new BaseData<string>(false , null); //头像地址
@@ -95,14 +95,6 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
         this.Data_BBModeSetting.mData = GameConfig.GetBBToggleSetting();
         this.Data_BGMSetting.mData = GameConfig.GetBGMSetting();
 
-        console.log("this.Data_CustomerRaise0.mData == " + this.Data_CustomerRaise0.mData )
-        console.log("this.Data_CustomerRaise1.mData == " + this.Data_CustomerRaise1.mData )
-        console.log("this.Data_CustomerRaise2.mData == " + this.Data_CustomerRaise2.mData )
-        console.log("this.Data_BGSetting.mData == " + this.Data_BGSetting.mData )
-        console.log("this.Data_PokerSetting.mData == " + this.Data_PokerSetting.mData )
-        console.log("this.Data_CustomerSliderSetting.mData == " + this.Data_CustomerSliderSetting.mData )
-        console.log("this.Data_BBModeSetting.mData == " + this.Data_BBModeSetting.mData )
-        console.log("this.Data_BGMSetting.mData == " + this.Data_BGMSetting.mData )
     }
     Data_CustomerRaise0 :BaseData<number> = new BaseData<number>();
     Data_CustomerRaise1 : BaseData<number> = new BaseData<number>();

@@ -1,6 +1,8 @@
 import { _decorator, Component, Node, Slider, Sprite, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Tool } from '../../../Tool';
+import { BaseButton } from '../../common/BaseButton';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Slider')
@@ -18,6 +20,8 @@ export class Game_Slider extends BaseUI
     mTotalAmount: Label = null;
     @property(Node) 
     mTotalBG: Node = null;
+    @property(BaseButton) 
+    mConfirmBtn: BaseButton = null;
     
     mCallback :Function = null;
 
@@ -34,24 +38,29 @@ export class Game_Slider extends BaseUI
     }
     BindUI() 
     {
-        this.mHadnle.on(Node.EventType.TOUCH_END,()=>
+
+        this.mConfirmBtn.SetClickCallback(()=>
         {
+            if(LocalPlayerData.Instance.Data_CustomerSliderSetting.mData == false)
+            {
+                return;
+            }
             let amount = this.DragLogic();
             if(this.mCallback)
             {
                 this.mCallback(amount);
             }
+        })
+
+        this.mHadnle.on(Node.EventType.TOUCH_END,()=>
+        {
+            this.DragEnd();
         });
 
         this.mHadnle.on(Node.EventType.TOUCH_CANCEL,()=>
         {
-            let amount = this.DragLogic();
-            if(this.mCallback)
-            {
-                this.mCallback(amount);
-            }
+            this.DragEnd();
         });
-
 
         this.mSlider.node.on("slide",()=>
         {
@@ -60,7 +69,10 @@ export class Game_Slider extends BaseUI
     }
     RegDataNotify() 
     {
-
+        LocalPlayerData.Instance.Data_CustomerSliderSetting.AddListenner(this,(_data)=>
+        {
+            this.mConfirmBtn.Show(_data);
+        })
     }
     LateInit() 
     {
@@ -101,6 +113,23 @@ export class Game_Slider extends BaseUI
         return currentAmount;
     }
 
+    DragEnd()
+    {
+        let amount = this.DragLogic();
+        if(LocalPlayerData.Instance.Data_CustomerSliderSetting.mData)
+        {
+            if(amount == 0)
+            {
+                this.node.active = false;
+            }
+            return;
+        }
+        if(this.mCallback)
+        {
+            this.mCallback(amount);
+        }
+    }
+
     CalculateCurrentAmount(_ratio : number) : number
     {
         if(_ratio <= 0)
@@ -117,8 +146,6 @@ export class Game_Slider extends BaseUI
             let finalAmount = _ratio * tempAmount + this.mMinRaiseNum;
             return finalAmount;
         }
-
-        
     }
 }
 

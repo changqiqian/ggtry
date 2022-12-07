@@ -4748,6 +4748,626 @@ $root.GameDynamicData = (function() {
     return GameDynamicData;
 })();
 
+$root.SimpleReplayData = (function() {
+
+    /**
+     * Properties of a SimpleReplayData.
+     * @exports ISimpleReplayData
+     * @interface ISimpleReplayData
+     * @property {string|null} [gameId] SimpleReplayData gameId
+     * @property {number|null} [index] SimpleReplayData index
+     * @property {Array.<ICardInfo>|null} [publicCards] SimpleReplayData publicCards
+     * @property {Array.<ICardInfo>|null} [myCards] SimpleReplayData myCards
+     * @property {number|null} [myResult] SimpleReplayData myResult
+     * @property {Array.<ICardInfo>|null} [winnerCards] SimpleReplayData winnerCards
+     * @property {string|null} [winnerName] SimpleReplayData winnerName
+     * @property {string|null} [winnerHead] SimpleReplayData winnerHead
+     * @property {number|null} [winnerResult] SimpleReplayData winnerResult
+     */
+
+    /**
+     * Constructs a new SimpleReplayData.
+     * @exports SimpleReplayData
+     * @classdesc Represents a SimpleReplayData.
+     * @implements ISimpleReplayData
+     * @constructor
+     * @param {ISimpleReplayData=} [p] Properties to set
+     */
+    function SimpleReplayData(p) {
+        this.publicCards = [];
+        this.myCards = [];
+        this.winnerCards = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * SimpleReplayData gameId.
+     * @member {string} gameId
+     * @memberof SimpleReplayData
+     * @instance
+     */
+    SimpleReplayData.prototype.gameId = "";
+
+    /**
+     * SimpleReplayData index.
+     * @member {number} index
+     * @memberof SimpleReplayData
+     * @instance
+     */
+    SimpleReplayData.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * SimpleReplayData publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof SimpleReplayData
+     * @instance
+     */
+    SimpleReplayData.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * SimpleReplayData myCards.
+     * @member {Array.<ICardInfo>} myCards
+     * @memberof SimpleReplayData
+     * @instance
+     */
+    SimpleReplayData.prototype.myCards = $util.emptyArray;
+
+    /**
+     * SimpleReplayData myResult.
+     * @member {number} myResult
+     * @memberof SimpleReplayData
+     * @instance
+     */
+    SimpleReplayData.prototype.myResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * SimpleReplayData winnerCards.
+     * @member {Array.<ICardInfo>} winnerCards
+     * @memberof SimpleReplayData
+     * @instance
+     */
+    SimpleReplayData.prototype.winnerCards = $util.emptyArray;
+
+    /**
+     * SimpleReplayData winnerName.
+     * @member {string} winnerName
+     * @memberof SimpleReplayData
+     * @instance
+     */
+    SimpleReplayData.prototype.winnerName = "";
+
+    /**
+     * SimpleReplayData winnerHead.
+     * @member {string} winnerHead
+     * @memberof SimpleReplayData
+     * @instance
+     */
+    SimpleReplayData.prototype.winnerHead = "";
+
+    /**
+     * SimpleReplayData winnerResult.
+     * @member {number} winnerResult
+     * @memberof SimpleReplayData
+     * @instance
+     */
+    SimpleReplayData.prototype.winnerResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified SimpleReplayData message. Does not implicitly {@link SimpleReplayData.verify|verify} messages.
+     * @function encode
+     * @memberof SimpleReplayData
+     * @static
+     * @param {ISimpleReplayData} m SimpleReplayData message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    SimpleReplayData.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
+            w.uint32(16).int64(m.index);
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(26).fork()).ldelim();
+        }
+        if (m.myCards != null && m.myCards.length) {
+            for (var i = 0; i < m.myCards.length; ++i)
+                $root.CardInfo.encode(m.myCards[i], w.uint32(34).fork()).ldelim();
+        }
+        if (m.myResult != null && Object.hasOwnProperty.call(m, "myResult"))
+            w.uint32(40).int64(m.myResult);
+        if (m.winnerCards != null && m.winnerCards.length) {
+            for (var i = 0; i < m.winnerCards.length; ++i)
+                $root.CardInfo.encode(m.winnerCards[i], w.uint32(50).fork()).ldelim();
+        }
+        if (m.winnerName != null && Object.hasOwnProperty.call(m, "winnerName"))
+            w.uint32(58).string(m.winnerName);
+        if (m.winnerHead != null && Object.hasOwnProperty.call(m, "winnerHead"))
+            w.uint32(66).string(m.winnerHead);
+        if (m.winnerResult != null && Object.hasOwnProperty.call(m, "winnerResult"))
+            w.uint32(72).int64(m.winnerResult);
+        return w;
+    };
+
+    /**
+     * Decodes a SimpleReplayData message from the specified reader or buffer.
+     * @function decode
+     * @memberof SimpleReplayData
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {SimpleReplayData} SimpleReplayData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    SimpleReplayData.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.SimpleReplayData();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.index = r.int64();
+                break;
+            case 3:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 4:
+                if (!(m.myCards && m.myCards.length))
+                    m.myCards = [];
+                m.myCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 5:
+                m.myResult = r.int64();
+                break;
+            case 6:
+                if (!(m.winnerCards && m.winnerCards.length))
+                    m.winnerCards = [];
+                m.winnerCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 7:
+                m.winnerName = r.string();
+                break;
+            case 8:
+                m.winnerHead = r.string();
+                break;
+            case 9:
+                m.winnerResult = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return SimpleReplayData;
+})();
+
+$root.ReplayData = (function() {
+
+    /**
+     * Properties of a ReplayData.
+     * @exports IReplayData
+     * @interface IReplayData
+     * @property {string|null} [gameId] ReplayData gameId
+     * @property {number|null} [index] ReplayData index
+     * @property {IGameStaticData|null} [gameStatic] ReplayData gameStatic
+     * @property {Array.<IPlayerInfo>|null} [players] ReplayData players
+     * @property {string|null} [dealerUid] ReplayData dealerUid
+     * @property {number|null} [antes] ReplayData antes
+     * @property {string|null} [sbUid] ReplayData sbUid
+     * @property {string|null} [bbUid] ReplayData bbUid
+     * @property {string|null} [straddle] ReplayData straddle
+     * @property {Array.<ICardInfo>|null} [publicCards] ReplayData publicCards
+     * @property {Array.<IActionResult>|null} [preFlopActions] ReplayData preFlopActions
+     * @property {Array.<IActionResult>|null} [flopActions] ReplayData flopActions
+     * @property {Array.<IActionResult>|null} [turnActions] ReplayData turnActions
+     * @property {Array.<IActionResult>|null} [riverActions] ReplayData riverActions
+     * @property {Array.<IPlayerWinLose>|null} [result] ReplayData result
+     */
+
+    /**
+     * Constructs a new ReplayData.
+     * @exports ReplayData
+     * @classdesc Represents a ReplayData.
+     * @implements IReplayData
+     * @constructor
+     * @param {IReplayData=} [p] Properties to set
+     */
+    function ReplayData(p) {
+        this.players = [];
+        this.publicCards = [];
+        this.preFlopActions = [];
+        this.flopActions = [];
+        this.turnActions = [];
+        this.riverActions = [];
+        this.result = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * ReplayData gameId.
+     * @member {string} gameId
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.gameId = "";
+
+    /**
+     * ReplayData index.
+     * @member {number} index
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * ReplayData gameStatic.
+     * @member {IGameStaticData|null|undefined} gameStatic
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.gameStatic = null;
+
+    /**
+     * ReplayData players.
+     * @member {Array.<IPlayerInfo>} players
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.players = $util.emptyArray;
+
+    /**
+     * ReplayData dealerUid.
+     * @member {string} dealerUid
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.dealerUid = "";
+
+    /**
+     * ReplayData antes.
+     * @member {number} antes
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.antes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * ReplayData sbUid.
+     * @member {string} sbUid
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.sbUid = "";
+
+    /**
+     * ReplayData bbUid.
+     * @member {string} bbUid
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.bbUid = "";
+
+    /**
+     * ReplayData straddle.
+     * @member {string} straddle
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.straddle = "";
+
+    /**
+     * ReplayData publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * ReplayData preFlopActions.
+     * @member {Array.<IActionResult>} preFlopActions
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.preFlopActions = $util.emptyArray;
+
+    /**
+     * ReplayData flopActions.
+     * @member {Array.<IActionResult>} flopActions
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.flopActions = $util.emptyArray;
+
+    /**
+     * ReplayData turnActions.
+     * @member {Array.<IActionResult>} turnActions
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.turnActions = $util.emptyArray;
+
+    /**
+     * ReplayData riverActions.
+     * @member {Array.<IActionResult>} riverActions
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.riverActions = $util.emptyArray;
+
+    /**
+     * ReplayData result.
+     * @member {Array.<IPlayerWinLose>} result
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.result = $util.emptyArray;
+
+    /**
+     * Encodes the specified ReplayData message. Does not implicitly {@link ReplayData.verify|verify} messages.
+     * @function encode
+     * @memberof ReplayData
+     * @static
+     * @param {IReplayData} m ReplayData message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    ReplayData.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
+            w.uint32(16).int64(m.index);
+        if (m.gameStatic != null && Object.hasOwnProperty.call(m, "gameStatic"))
+            $root.GameStaticData.encode(m.gameStatic, w.uint32(26).fork()).ldelim();
+        if (m.players != null && m.players.length) {
+            for (var i = 0; i < m.players.length; ++i)
+                $root.PlayerInfo.encode(m.players[i], w.uint32(34).fork()).ldelim();
+        }
+        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
+            w.uint32(42).string(m.dealerUid);
+        if (m.antes != null && Object.hasOwnProperty.call(m, "antes"))
+            w.uint32(48).int64(m.antes);
+        if (m.sbUid != null && Object.hasOwnProperty.call(m, "sbUid"))
+            w.uint32(58).string(m.sbUid);
+        if (m.bbUid != null && Object.hasOwnProperty.call(m, "bbUid"))
+            w.uint32(66).string(m.bbUid);
+        if (m.straddle != null && Object.hasOwnProperty.call(m, "straddle"))
+            w.uint32(74).string(m.straddle);
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(82).fork()).ldelim();
+        }
+        if (m.preFlopActions != null && m.preFlopActions.length) {
+            for (var i = 0; i < m.preFlopActions.length; ++i)
+                $root.ActionResult.encode(m.preFlopActions[i], w.uint32(90).fork()).ldelim();
+        }
+        if (m.flopActions != null && m.flopActions.length) {
+            for (var i = 0; i < m.flopActions.length; ++i)
+                $root.ActionResult.encode(m.flopActions[i], w.uint32(98).fork()).ldelim();
+        }
+        if (m.turnActions != null && m.turnActions.length) {
+            for (var i = 0; i < m.turnActions.length; ++i)
+                $root.ActionResult.encode(m.turnActions[i], w.uint32(106).fork()).ldelim();
+        }
+        if (m.riverActions != null && m.riverActions.length) {
+            for (var i = 0; i < m.riverActions.length; ++i)
+                $root.ActionResult.encode(m.riverActions[i], w.uint32(114).fork()).ldelim();
+        }
+        if (m.result != null && m.result.length) {
+            for (var i = 0; i < m.result.length; ++i)
+                $root.PlayerWinLose.encode(m.result[i], w.uint32(122).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a ReplayData message from the specified reader or buffer.
+     * @function decode
+     * @memberof ReplayData
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {ReplayData} ReplayData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    ReplayData.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.ReplayData();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.index = r.int64();
+                break;
+            case 3:
+                m.gameStatic = $root.GameStaticData.decode(r, r.uint32());
+                break;
+            case 4:
+                if (!(m.players && m.players.length))
+                    m.players = [];
+                m.players.push($root.PlayerInfo.decode(r, r.uint32()));
+                break;
+            case 5:
+                m.dealerUid = r.string();
+                break;
+            case 6:
+                m.antes = r.int64();
+                break;
+            case 7:
+                m.sbUid = r.string();
+                break;
+            case 8:
+                m.bbUid = r.string();
+                break;
+            case 9:
+                m.straddle = r.string();
+                break;
+            case 10:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 11:
+                if (!(m.preFlopActions && m.preFlopActions.length))
+                    m.preFlopActions = [];
+                m.preFlopActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 12:
+                if (!(m.flopActions && m.flopActions.length))
+                    m.flopActions = [];
+                m.flopActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 13:
+                if (!(m.turnActions && m.turnActions.length))
+                    m.turnActions = [];
+                m.turnActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 14:
+                if (!(m.riverActions && m.riverActions.length))
+                    m.riverActions = [];
+                m.riverActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 15:
+                if (!(m.result && m.result.length))
+                    m.result = [];
+                m.result.push($root.PlayerWinLose.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return ReplayData;
+})();
+
+$root.ActionResult = (function() {
+
+    /**
+     * Properties of an ActionResult.
+     * @exports IActionResult
+     * @interface IActionResult
+     * @property {IActionInfo|null} [actionInfo] ActionResult actionInfo
+     * @property {Array.<IPotInfo>|null} [potInfo] ActionResult potInfo
+     */
+
+    /**
+     * Constructs a new ActionResult.
+     * @exports ActionResult
+     * @classdesc Represents an ActionResult.
+     * @implements IActionResult
+     * @constructor
+     * @param {IActionResult=} [p] Properties to set
+     */
+    function ActionResult(p) {
+        this.potInfo = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * ActionResult actionInfo.
+     * @member {IActionInfo|null|undefined} actionInfo
+     * @memberof ActionResult
+     * @instance
+     */
+    ActionResult.prototype.actionInfo = null;
+
+    /**
+     * ActionResult potInfo.
+     * @member {Array.<IPotInfo>} potInfo
+     * @memberof ActionResult
+     * @instance
+     */
+    ActionResult.prototype.potInfo = $util.emptyArray;
+
+    /**
+     * Encodes the specified ActionResult message. Does not implicitly {@link ActionResult.verify|verify} messages.
+     * @function encode
+     * @memberof ActionResult
+     * @static
+     * @param {IActionResult} m ActionResult message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    ActionResult.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.actionInfo != null && Object.hasOwnProperty.call(m, "actionInfo"))
+            $root.ActionInfo.encode(m.actionInfo, w.uint32(10).fork()).ldelim();
+        if (m.potInfo != null && m.potInfo.length) {
+            for (var i = 0; i < m.potInfo.length; ++i)
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(18).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes an ActionResult message from the specified reader or buffer.
+     * @function decode
+     * @memberof ActionResult
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {ActionResult} ActionResult
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    ActionResult.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.ActionResult();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.actionInfo = $root.ActionInfo.decode(r, r.uint32());
+                break;
+            case 2:
+                if (!(m.potInfo && m.potInfo.length))
+                    m.potInfo = [];
+                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return ActionResult;
+})();
+
 $root.S2CCreateClub = (function() {
 
     /**

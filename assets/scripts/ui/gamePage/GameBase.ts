@@ -54,80 +54,58 @@ export class GameBase extends BaseUI
         this.mMovingShow.ShowAnimation();
     }
 
-    InitBottom()
+
+    public InitWithData(_index : number,_seatNum : number)
+    {
+        this.mIndex = _index;
+        this.InitSubView();
+        this.InitSeatUI(_seatNum);
+        this.InitChatCtr();
+        this.InitBG();
+    }
+
+    InitSubView()
     {
         this.AddSubView("gamePage","prefab/Game_BottomUI" , (_script)=>
         {
             let tempScript = _script as Game_BottomUI;
             tempScript.InitWithData(this.mIndex);
         });
-    }
-
-    InitGameStartInfo()
-    {
         this.AddSubView("gamePage","prefab/Game_GameStartInfo", (_script)=>
         {
             let tempScript = _script as Game_GameStartInfo;
             tempScript.InitWithData(this.mIndex);
         });
-    }
-
-    InitPot()
-    {
         this.AddSubView("gamePage","prefab/Game_Pot", (_script)=>
         {
             let tempScript = _script as Game_Pot;
             tempScript.InitWithData(this.mIndex);
         });
-    }
-
-    InitPublicCards()
-    {
         this.AddSubView("gamePage","prefab/Game_PublicCards", (_script)=>
         {
             let tempScript = _script as Game_PublicCards;
             tempScript.InitWithData(this.mIndex);
         });
-    }
-
-    InitSelfAction()
-    {
         this.AddSubView("gamePage","prefab/Game_SelfAction", (_script)=>
         {
             let tempScript = _script as Game_SelfAction;
             tempScript.InitWithData(this.mIndex);
         });
-    }
-
-    InitSelfPreAction()
-    {
         this.AddSubView("gamePage","prefab/Game_SelfPreAction", (_script)=>
         {
             let tempScript = _script as Game_SelfPreAction;
             tempScript.InitWithData(this.mIndex);
         });
-    }
-
-    InitSelfUI()
-    {
         this.AddSubView("gamePage","prefab/Game_SelfUI", (_script)=>
         {
             let tempScript = _script as Game_SelfUI;
             tempScript.InitWithData(this.mIndex);
         });
-    }
-
-    InitTopUI()
-    {
         this.AddSubView("gamePage","prefab/Game_TopUI", (_script)=>
         {
             let tempScript = _script as Game_TopUI;
             tempScript.InitWithData(this.mIndex);
         });
-    }
-
-    InitControlBtns()
-    {
         this.AddSubView("gamePage","prefab/Game_ControlBtns", (_script)=>
         {
             let tempScript = _script as Game_ControlBtns;
@@ -145,10 +123,6 @@ export class GameBase extends BaseUI
         });
     }
 
-    InitOtherUI()
-    {
-
-    }
 
     InitChatCtr()
     {
@@ -158,38 +132,15 @@ export class GameBase extends BaseUI
             tempScript.InitWithData(this.mIndex);
         });
     }
-    
 
-    public InitWithData(_index : number,_seatNum : number)
+    InitBG()
     {
-        this.mIndex = _index;
-        this.InitBottom();
-        this.InitGameStartInfo();
-        this.InitPot();
-        this.InitPublicCards();
-        this.InitSelfAction();
-        this.InitSelfPreAction();
-        this.InitSelfUI();
-        this.InitTopUI();
-        this.InitControlBtns();
-        this.InitOtherUI();
-        this.InitSeatUI(_seatNum);
-
         this.LoadSprite("gamePage" , "texture/bg/BG" + this.mIndex,(_spriteFrame)=>
         {
             this.mBG.spriteFrame = _spriteFrame;
         });
     }
-
-    public GetIndex() : number
-    {
-        return this.mIndex;
-    }
-
-    GetGameInfoMsg()
-    {
-
-    }
+    
 
 }
 
