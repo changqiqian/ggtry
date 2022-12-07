@@ -12,7 +12,7 @@ export class Game_PublicCards extends BaseUI
     mAudio: AudioSource = null;
 
     private mIndex : number = null;
-    private mLastState : TexasCashState;
+
     InitParam() 
     {
 
@@ -119,10 +119,9 @@ export class Game_PublicCards extends BaseUI
 
     InitWithReplayData()
     {
-        this.mLastState = GameReplayData.Instance.Data_State.mData;
 
 
-        GameReplayData.Instance.Data_Update.AddListenner(this,(_data)=>
+        GameReplayData.Instance.Data_State.AddListenner(this,(_data)=>
         {
             this.UpdateReplayUI();
         })
@@ -142,12 +141,6 @@ export class Game_PublicCards extends BaseUI
     {
         let state = GameReplayData.Instance.Data_State.mData;
         let publicCards = GameReplayData.Instance.Data_ReplayData.mData.publicCards;
-
-        if(this.mLastState == state)
-        {
-            return;
-        }
-        this.mLastState = state;
 
 
         switch(state)

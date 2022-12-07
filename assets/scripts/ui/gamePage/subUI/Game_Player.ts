@@ -290,13 +290,13 @@ export class Game_Player extends BaseUI
 
     CleanTable()
     {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
-        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
-        if(playerInfo == null)
-        {
-            return;
-        }
+        // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        // let gameData = gameStruct.mGameData;
+        // let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        // if(playerInfo == null)
+        // {
+        //     return;
+        // }
 
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
@@ -387,7 +387,58 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            this.ExcutiveAction(true);
+
+            let state = GameReplayData.Instance.Data_State.mData;
+            if(state == TexasCashState.TexasCashState_Settlement)
+            {
+                let step = GameReplayData.Instance.Data_State.mData;
+                if(step < 0)
+                {
+                    //亮牌
+                }
+                else
+                {
+                    //结算输赢
+                }
+
+            }
+            else
+            {
+                this.ExcutiveAction(true);
+            }
+        })
+
+
+        GameReplayData.Instance.Data_State.AddListenner(this,(_data)=>
+        {
+            switch(_data)
+            {
+                case TexasCashState.TexasCashState_RoundStart:
+                {
+                    
+                }
+                break;
+                case TexasCashState.TexasCashState_PreFlopRound:
+                {
+        
+                }
+                break;
+                case TexasCashState.TexasCashState_FlopRound:
+                {
+                    this.CleanTable();
+                }
+                break;
+                case TexasCashState.TexasCashState_TurnRound:
+                {
+                    this.CleanTable();
+                }
+                break;
+                case TexasCashState.TexasCashState_RiverRound:
+                {
+                    this.CleanTable();
+                }
+                break;
+            }
         })
     }
 
@@ -557,7 +608,6 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-
             this.ShowActionType(currentAction.actionInfo.actionType , true);
             this.Bet(currentAction.actionInfo.amount , true);
         }
@@ -654,6 +704,17 @@ export class Game_Player extends BaseUI
         }
     }
 
+    ShowFoldCard()
+    {
+        let cardNodes = this.mCards.children;
+        this.mCards.active = true;
+        for(let i = 0 ; i < cardNodes.length ; i++)
+        {
+            let currentPoker = cardNodes[i].getComponent(Poker);
+            currentPoker.SetGary(true);
+        }
+    }
+
     UpdateDealer(_dealerId : string , _playerInfo : PlayerInfo , _replay : boolean)
     {
         if(_replay == false)
@@ -689,15 +750,26 @@ export class Game_Player extends BaseUI
 
     ShowActionType(_actionType : ActionType , _replay : boolean)
     {
-        this.mDarkCover.active = _actionType == ActionType.ActionType_Fold;
         if(_replay == false)
         {
+            this.mDarkCover.active = _actionType == ActionType.ActionType_Fold;
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let isSelf = gameData.IsSelfBySeat(this.mSeatID);
             if(isSelf)
             {
                 return;
+            }
+        }
+        else
+        {
+            if(_actionType == ActionType.ActionType_Fold)
+            {
+                let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID);
+                if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+                {
+                    this.ShowFoldCard();
+                }
             }
         }
         this.mGame_ActionTag.SetType(_actionType);

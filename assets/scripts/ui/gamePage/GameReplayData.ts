@@ -43,6 +43,12 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
     {
         let state = this.Data_State.mData;
         let step = this.Data_Step.mData;
+
+        if(step < 0)
+        {
+            return null;
+        }
+
         switch(state)
         {
             case TexasCashState.TexasCashState_RoundStart:

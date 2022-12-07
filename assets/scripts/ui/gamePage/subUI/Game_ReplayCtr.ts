@@ -76,23 +76,20 @@ export class Game_ReplayCtr extends BaseUI
         {
             case TexasCashState.TexasCashState_RoundStart:
             {
-                GameReplayData.Instance.Data_Step.mData = -1;
+                GameReplayData.Instance.Data_Step.mData = 0;
                 GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_PreFlopRound;
-                UIMgr.Instance.ShowToast("TexasCashState_PreFlopRound");
             }
             break;
             case TexasCashState.TexasCashState_PreFlopRound:
             {
                 let preFlopActions = GameReplayData.Instance.GetPreflopActions(); 
                 GameReplayData.Instance.Data_Step.mData++;
-                UIMgr.Instance.ShowToast("TexasCashState_PreFlopRound Data_Step==" +GameReplayData.Instance.Data_Step.mData);
                 if(GameReplayData.Instance.Data_Step.mData >= preFlopActions.length)
                 {
                     if(this.HaveNextPhase())
                     {
                         GameReplayData.Instance.Data_Step.mData =-1;
                         GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_FlopRound;
-                        UIMgr.Instance.ShowToast("TexasCashState_FlopRound");
                     }
                 }
             }
@@ -101,7 +98,6 @@ export class Game_ReplayCtr extends BaseUI
             {
                 let flopActions = GameReplayData.Instance.GetFlopActions(); 
                 GameReplayData.Instance.Data_Step.mData++;
-                UIMgr.Instance.ShowToast("TexasCashState_FlopRound Data_Step==" +GameReplayData.Instance.Data_Step.mData);
 
                 if(GameReplayData.Instance.Data_Step.mData >= flopActions.length)
                 {
@@ -109,7 +105,6 @@ export class Game_ReplayCtr extends BaseUI
                     {
                         GameReplayData.Instance.Data_Step.mData = -1;
                         GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_TurnRound;
-                        UIMgr.Instance.ShowToast("TexasCashState_TurnRound");
                     }
                 }
             }
@@ -118,7 +113,6 @@ export class Game_ReplayCtr extends BaseUI
             {
                 let turnActions = GameReplayData.Instance.GetTurnActions(); 
                 GameReplayData.Instance.Data_Step.mData++;
-                UIMgr.Instance.ShowToast("TexasCashState_TurnRound Data_Step==" +GameReplayData.Instance.Data_Step.mData);
 
                 if(GameReplayData.Instance.Data_Step.mData >= turnActions.length)
                 {
@@ -126,7 +120,6 @@ export class Game_ReplayCtr extends BaseUI
                     {
                         GameReplayData.Instance.Data_Step.mData = -1;
                         GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_RiverRound;
-                        UIMgr.Instance.ShowToast("TexasCashState_RiverRound");
                     }
                 }
             }
@@ -135,21 +128,19 @@ export class Game_ReplayCtr extends BaseUI
             {
                 let riverActions = GameReplayData.Instance.GetRiverActions(); 
                 GameReplayData.Instance.Data_Step.mData++;
-                UIMgr.Instance.ShowToast("TexasCashState_RiverRound Data_Step==" +GameReplayData.Instance.Data_Step.mData);
                 if(GameReplayData.Instance.Data_Step.mData >= riverActions.length)
                 {
                     if(this.HaveNextPhase())
                     {
                         GameReplayData.Instance.Data_Step.mData = -1;
                         GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_Settlement;
-                        UIMgr.Instance.ShowToast("TexasCashState_Settlement");
                     }
                 }
             }
             break;
             case TexasCashState.TexasCashState_Settlement:
             {
-
+                GameReplayData.Instance.Data_Step.mData = 1;
             }
             break;
         }
@@ -209,7 +200,7 @@ export class Game_ReplayCtr extends BaseUI
         }
 
         GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_Settlement;
-        UIMgr.Instance.ShowToast("牌局已结束");
+        UIMgr.Instance.ShowToast("完毕");
         return false;
     }
 }
