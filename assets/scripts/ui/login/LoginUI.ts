@@ -53,12 +53,12 @@ export class LoginUI extends BaseUI
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
         {
-            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");          
-            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
+            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");   
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_RecipeLayer",true,(_script)=>
             {
-                let tempScript = _script as Game_CashReplay;
-                tempScript.InitWithData();
-            });        
+                let tempScript = _script as Game_RecipeLayer;
+                tempScript.InitWithData("111");
+            });       
         });
 
         this.mSignBtn.SetClickCallback(()=>

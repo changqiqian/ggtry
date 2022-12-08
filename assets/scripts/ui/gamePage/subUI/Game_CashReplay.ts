@@ -29,7 +29,6 @@ export class Game_CashReplay extends BaseUI {
 
     onDisable()
     {
-    
         UIMgr.Instance.DeleteUIByTarget(this);
     }
 
@@ -115,7 +114,7 @@ export class Game_CashReplay extends BaseUI {
         player1Cards2.type = 3;
         player1.cards.push(player1Cards1);
         player1.cards.push(player1Cards2);
-        player1.seat = 3;
+        player1.seat = 2;
         player1.fold = false;
 
         let player2 = new PlayerInfo();
@@ -216,9 +215,9 @@ export class Game_CashReplay extends BaseUI {
         winlose2.uid = "uuid1";
         winlose2.combinationResult = 3;
         winlose2.winLose = -50000;
-        winlose2.cardInfo = new Array<CardInfo>(); 
-        winlose2.cardInfo.push(player1Cards1);
-        winlose2.cardInfo.push(player1Cards1);
+        // winlose2.cardInfo = new Array<CardInfo>(); 
+        // winlose2.cardInfo.push(player1Cards1);
+        // winlose2.cardInfo.push(player1Cards1);
 
         testData.result.push(winlose1);
         testData.result.push(winlose2);

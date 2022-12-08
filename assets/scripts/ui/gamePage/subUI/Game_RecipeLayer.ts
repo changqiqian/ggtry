@@ -19,8 +19,7 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayData>
     private mGameId : string = null;
     onEnable()
     {
-        super.onEnable();
-
+    
     }
 
     onDisable()
@@ -44,12 +43,8 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayData>
     BindUI()
     {
         this.node.on(Node.EventType.TOUCH_END,this.OnClickEmptyBG.bind(this),this);
-
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
-
         this.mMovingShow.SetRoot(this.node);
-
-
         this.mMovingShow.SetShowAnimationCallback(()=>
         {
             this.OnDragTop();

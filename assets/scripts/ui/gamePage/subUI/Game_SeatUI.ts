@@ -150,11 +150,11 @@ export class Game_SeatUI extends BaseUI
                 let current = this.node.children[i].getComponent(Game_SeatItem);
                 MovePathConfigArray.push(this.GetPath(current.mSeatID , step));
             }
-            this.RotateWithAnm(_animation , MovePathConfigArray);
+            this.RotateWithAnm(MovePathConfigArray , _animation);
         }
     }
 
-    RotateWithAnm(_anmation : boolean ,_movePathConfigArray : Array<MovePathConfig>)
+    RotateWithAnm(_movePathConfigArray : Array<MovePathConfig> , _anmation : boolean)
     {
         for(let i = 0 ; i < _movePathConfigArray.length ; i++)
         {

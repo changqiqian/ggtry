@@ -18,6 +18,7 @@ import { Game_BuyInWindow } from './Game_BuyInWindow';
 import { Game_MovingCards } from './Game_MovingCards';
 import { Game_MovingChip } from './Game_MovingChip';
 import { Game_ProfileLayer } from './Game_ProfileLayer';
+import { Game_WinEffect } from './Game_WinEffect';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Player')
@@ -118,6 +119,141 @@ export class Game_Player extends BaseUI
         this.BindData();
     }
 
+    public InitWithReplayData(_id : number)
+    {
+        this.mSeatID = _id;
+        GameReplayData.Instance.Data_ReStart.AddListenner(this,(_data)=>
+        {
+            if(_data == false)
+            {
+                return;
+            }
+
+            this.HideAllUI();
+            let replayData = GameReplayData.Instance.Data_ReplayData.mData;
+            let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID );
+            if(playerInfo == null)
+            {
+                return;
+            }
+            this.mCards.active = false;
+            this.mSelfBtn.node.active = false;
+            this.mBG.active = true;
+
+            this.UpdateName(playerInfo.nickName);
+            this.UpdateHead(playerInfo.head);
+            this.UpdateMoney(true ,playerInfo);
+            this.UpdateDealer(replayData.dealerUid , playerInfo , true);
+
+            if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                this.ShowCards(playerInfo.cards);
+            }
+            else
+            {
+                this.mMiniCard.active = true;
+            }
+
+            if(replayData.sbUid == playerInfo.uid)
+            {
+                this.ShowActionType(ActionType.ActionType_SB , true);
+                this.Bet(replayData.gameStatic.texasConfig.smallBlind , true);
+            }
+            else if(replayData.bbUid == playerInfo.uid)
+            {
+                this.ShowActionType(ActionType.ActionType_BB , true);
+                this.Bet(replayData.gameStatic.texasConfig.smallBlind * 2, true);
+            }
+            else if(replayData.straddle == playerInfo.uid)
+            {
+                this.ShowActionType(ActionType.ActionType_Straddle , true);
+                this.Bet(replayData.gameStatic.texasConfig.smallBlind * 4, true);
+            }
+        })
+
+        GameReplayData.Instance.Data_Update.AddListenner(this,(_data)=>
+        {
+            if(_data == false)
+            {
+                return;
+            }
+
+            let state = GameReplayData.Instance.Data_State.mData;
+            if(state == TexasCashState.TexasCashState_Settlement)
+            {
+                let winResult = GameReplayData.Instance.GetWinResult(this.mSeatID);
+                if(winResult == null)
+                {
+                    return;
+                }
+                if(winResult.cardInfo!=null && winResult.cardInfo.length > 0)
+                {
+                    this.ShowCards(winResult.cardInfo);
+                }
+
+                if(winResult.winLose > 0)
+                {
+                    this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
+                    {
+                        let tempNode = instantiate(_prefab);
+                        this.node.addChild(tempNode);
+                        let script = tempNode.getComponent(Game_WinEffect);
+                        script.InitWithData(winResult.winLose);
+                    })
+                }
+
+            }
+            else
+            {
+                this.ExcutiveAction(true);
+            }
+        })
+
+        GameReplayData.Instance.Data_RotateSeatEnd.AddListenner(this,(_data)=>
+        {
+            if(_data)
+            {
+                this.UpdateUIDirection();
+            }
+        })    
+
+        GameReplayData.Instance.Data_State.AddListenner(this,(_data)=>
+        {
+            switch(_data)
+            {
+                case TexasCashState.TexasCashState_RoundStart:
+                {
+                    
+                }
+                break;
+                case TexasCashState.TexasCashState_PreFlopRound:
+                {
+        
+                }
+                break;
+                case TexasCashState.TexasCashState_FlopRound:
+                {
+                    this.CleanTable();
+                }
+                break;
+                case TexasCashState.TexasCashState_TurnRound:
+                {
+                    this.CleanTable();
+                }
+                break;
+                case TexasCashState.TexasCashState_RiverRound:
+                {
+                    this.CleanTable();
+                }
+                break;
+                case TexasCashState.TexasCashState_Settlement:
+                {
+                    this.CleanTable();
+                }
+                break;
+            }
+        })
+    }
 
     BindData()
     {
@@ -285,19 +421,11 @@ export class Game_Player extends BaseUI
             {
                 this.UpdateUIDirection();
             }
-        })        
+        })            
     }
 
     CleanTable()
     {
-        // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        // let gameData = gameStruct.mGameData;
-        // let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
-        // if(playerInfo == null)
-        // {
-        //     return;
-        // }
-
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
     }
@@ -327,119 +455,6 @@ export class Game_Player extends BaseUI
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
         this.mCards.active = false;
-    }
-
-    public InitWithReplayData(_id : number)
-    {
-        this.mSeatID = _id;
-        GameReplayData.Instance.Data_ReStart.AddListenner(this,(_data)=>
-        {
-            if(_data == false)
-            {
-                return;
-            }
-
-            this.HideAllUI();
-            let replayData = GameReplayData.Instance.Data_ReplayData.mData;
-            let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID );
-            if(playerInfo == null)
-            {
-                return;
-            }
-
-            this.mSelfBtn.node.active = false;
-            this.mBG.active = true;
-
-            this.UpdateName(playerInfo.nickName);
-            this.UpdateHead(playerInfo.head);
-            this.UpdateMoney(true ,playerInfo);
-            this.UpdateDealer(replayData.dealerUid , playerInfo , true);
-
-            if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                this.ShowCards(playerInfo.cards);
-            }
-            else
-            {
-                this.mMiniCard.active = true;
-            }
-
-            if(replayData.sbUid == playerInfo.uid)
-            {
-                this.ShowActionType(ActionType.ActionType_SB , true);
-                this.Bet(replayData.gameStatic.texasConfig.smallBlind , true);
-            }
-            else if(replayData.bbUid == playerInfo.uid)
-            {
-                this.ShowActionType(ActionType.ActionType_BB , true);
-                this.Bet(replayData.gameStatic.texasConfig.smallBlind * 2, true);
-            }
-            else if(replayData.straddle == playerInfo.uid)
-            {
-                this.ShowActionType(ActionType.ActionType_Straddle , true);
-                this.Bet(replayData.gameStatic.texasConfig.smallBlind * 4, true);
-            }
-        })
-
-        GameReplayData.Instance.Data_Update.AddListenner(this,(_data)=>
-        {
-            if(_data == false)
-            {
-                return;
-            }
-
-            let state = GameReplayData.Instance.Data_State.mData;
-            if(state == TexasCashState.TexasCashState_Settlement)
-            {
-                let step = GameReplayData.Instance.Data_State.mData;
-                if(step < 0)
-                {
-                    //亮牌
-                }
-                else
-                {
-                    //结算输赢
-                }
-
-            }
-            else
-            {
-                this.ExcutiveAction(true);
-            }
-        })
-
-
-        GameReplayData.Instance.Data_State.AddListenner(this,(_data)=>
-        {
-            switch(_data)
-            {
-                case TexasCashState.TexasCashState_RoundStart:
-                {
-                    
-                }
-                break;
-                case TexasCashState.TexasCashState_PreFlopRound:
-                {
-        
-                }
-                break;
-                case TexasCashState.TexasCashState_FlopRound:
-                {
-                    this.CleanTable();
-                }
-                break;
-                case TexasCashState.TexasCashState_TurnRound:
-                {
-                    this.CleanTable();
-                }
-                break;
-                case TexasCashState.TexasCashState_RiverRound:
-                {
-                    this.CleanTable();
-                }
-                break;
-            }
-        })
     }
 
     PlayerSit()

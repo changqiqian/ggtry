@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, Sprite } from 'cc';
+import { _decorator, Component, Node, Label, Sprite, Tween, Vec3 } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 
@@ -11,6 +11,8 @@ export class Game_ActionTag extends BaseUI
     mBG: Sprite = null;
     @property(Label) 
     mAction: Label = null;
+
+    mTween : Tween = null;
     InitParam() 
     {
 
@@ -92,6 +94,22 @@ export class Game_ActionTag extends BaseUI
         }
 
         this.mAction.string = title;
+
+        this.ShowAnimation();
+    }
+
+    ShowAnimation()
+    {
+        if(this.mTween != null)
+        {
+            this.mTween.stop();
+        }
+        let bigScale = 1.5;
+        this.node.scale = Vec3.ONE;
+        this.mTween = new Tween(this.node); 
+        this.mTween.to(0.15,{scale : new Vec3(bigScale,bigScale,bigScale)});
+        this.mTween.to(0.15,{scale : Vec3.ONE});
+        this.mTween.start();
     }
 }
 

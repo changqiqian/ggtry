@@ -133,5 +133,28 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
         return this.Data_ReplayData.mData.riverActions;
     }
 
+    GetWinResult(_seat : number) : PlayerWinLose
+    {
+        let index = this.Data_ReplayData.mData.players.findIndex((_item) => _item.seat === _seat);
+        let playerInfo = null;
+        if(index >=0)
+        {
+            playerInfo = this.Data_ReplayData.mData.players[index];
+        }
+
+        if(playerInfo == null)
+        {
+            return null;
+        }
+
+        index = this.Data_ReplayData.mData.result.findIndex((_item) => _item.uid === playerInfo.uid);
+        if(index >=0)
+        {
+            return this.Data_ReplayData.mData.result[index];
+        }
+
+        return null;
+   
+    }
 
 }

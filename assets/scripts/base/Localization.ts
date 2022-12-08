@@ -357,6 +357,12 @@ export class Localization {
         { name: '00269', ch: '昵称', en: 'Name' },
         { name: '00270', ch: '退出结算', en: 'Settlement' },
         { name: '00271', ch: '编号:', en: 'No.' },
+        { name: '00272', ch: '开始播放', en: 'Auto play' },
+        { name: '00273', ch: '停止播放', en: 'Stop play' },
+        { name: '00274', ch: '重置', en: 'Reset' },
+        { name: '00275', ch: '退出', en: 'Exit' },
+        { name: '00276', ch: '暂停播放', en: 'Stop' },
+        { name: '00277', ch: '自动播放', en: 'Auto Play' },
         
         
         

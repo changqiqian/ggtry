@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
 import { Tool } from '../../Tool';
+import { Game_CashReplay } from '../gamePage/subUI/Game_CashReplay';
 import { BaseButton } from './BaseButton';
 import { PlayerInfo } from './PlayerInfo';
 import { Poker } from './Poker';
@@ -35,7 +36,11 @@ export class BriefRecordItem extends BaseUI
     {
         this.mVideoBtn.SetClickCallback(()=>
         {
-            //UIMgr.Instance.ShowToast(this.mData.index + "");
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
+            {
+                let tempScript = _script as Game_CashReplay;
+                tempScript.InitWithData();
+            });      
         })
     }
     RegDataNotify()

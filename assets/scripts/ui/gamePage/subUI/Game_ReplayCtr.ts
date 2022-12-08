@@ -1,5 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { UIMgr } from '../../../base/UIMgr';
 import { GameConfig } from '../../../GameConfig';
 import { BaseButton } from '../../common/BaseButton';
@@ -28,16 +29,29 @@ export class Game_ReplayCtr extends BaseUI
     {
         this.mReStartBtn.SetClickCallback(()=>
         {
+            this.StopAutoPlay();
             GameReplayData.Instance.ReStart();
         })
 
         this.mAuotToggle.SetClickCallback((_data)=>
         {
-
+            if(_data)
+            {
+                this.StartAutoPlay();
+            }
+            else
+            {
+                this.StopAutoPlay();
+            }
         })
+        this.mAuotToggle.ShowUnselected();
 
         this.mNextBtn.SetClickCallback(()=>
         {
+            if(GameReplayData.Instance.Data_Auto.mData)
+            {
+                return;
+            }
             this.NextLogic();
         })
 
@@ -69,6 +83,34 @@ export class Game_ReplayCtr extends BaseUI
         this.mExitCallback = _exitCallback;
     }
 
+    StartAutoPlay()
+    {
+        GameReplayData.Instance.Data_Auto.mData = true;
+        UIMgr.Instance.ShowToast(Localization.GetString("00272"),1);
+        this.schedule(this.AutoPlayLogic,1.5);
+
+        this.mNextBtn.Show(false);
+    }
+
+    StopAutoPlay()
+    {
+        GameReplayData.Instance.Data_Auto.mData = false;
+        //UIMgr.Instance.ShowToast(Localization.GetString("00273"),1);
+        this.unschedule(this.AutoPlayLogic);
+        this.mAuotToggle.ShowUnselected();
+        this.mNextBtn.Show(true);
+    }
+
+    AutoPlayLogic()
+    {
+        this.NextLogic();
+        let state = GameReplayData.Instance.Data_State.mData;
+        if(state == TexasCashState.TexasCashState_Settlement)
+        {
+            this.StopAutoPlay();
+        }
+    }
+
     NextLogic()
     {
         let state = GameReplayData.Instance.Data_State.mData;
@@ -86,7 +128,7 @@ export class Game_ReplayCtr extends BaseUI
                 GameReplayData.Instance.Data_Step.mData++;
                 if(GameReplayData.Instance.Data_Step.mData >= preFlopActions.length)
                 {
-                    if(this.HaveNextPhase())
+                    if(this.TrySettlment() == false)
                     {
                         GameReplayData.Instance.Data_Step.mData =-1;
                         GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_FlopRound;
@@ -101,7 +143,7 @@ export class Game_ReplayCtr extends BaseUI
 
                 if(GameReplayData.Instance.Data_Step.mData >= flopActions.length)
                 {
-                    if(this.HaveNextPhase())
+                    if(this.TrySettlment()  == false)
                     {
                         GameReplayData.Instance.Data_Step.mData = -1;
                         GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_TurnRound;
@@ -116,7 +158,7 @@ export class Game_ReplayCtr extends BaseUI
 
                 if(GameReplayData.Instance.Data_Step.mData >= turnActions.length)
                 {
-                    if(this.HaveNextPhase())
+                    if(this.TrySettlment()  == false)
                     {
                         GameReplayData.Instance.Data_Step.mData = -1;
                         GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_RiverRound;
@@ -130,17 +172,16 @@ export class Game_ReplayCtr extends BaseUI
                 GameReplayData.Instance.Data_Step.mData++;
                 if(GameReplayData.Instance.Data_Step.mData >= riverActions.length)
                 {
-                    if(this.HaveNextPhase())
+                    if(this.TrySettlment()  == false)
                     {
-                        GameReplayData.Instance.Data_Step.mData = -1;
-                        GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_Settlement;
+                        
                     }
                 }
             }
             break;
             case TexasCashState.TexasCashState_Settlement:
             {
-                GameReplayData.Instance.Data_Step.mData = 1;
+
             }
             break;
         }
@@ -150,7 +191,7 @@ export class Game_ReplayCtr extends BaseUI
     }
 
     //是否有下一轮的数据
-    HaveNextPhase()
+    TrySettlment()
     {
         let state = GameReplayData.Instance.Data_State.mData;
 
@@ -158,14 +199,14 @@ export class Game_ReplayCtr extends BaseUI
         {
             case TexasCashState.TexasCashState_RoundStart:
             {
-                return true;
+                return false;
             }
             case TexasCashState.TexasCashState_PreFlopRound:
             {
                 let flopActions = GameReplayData.Instance.GetFlopActions(); 
                 if(flopActions && flopActions.length > 0)
                 {
-                    return true;
+                    return false;
                 }
             }
             break;
@@ -174,7 +215,7 @@ export class Game_ReplayCtr extends BaseUI
                 let turnActions = GameReplayData.Instance.GetTurnActions(); 
                 if(turnActions && turnActions.length > 0)
                 {
-                    return true;
+                    return false;
                 }
             }
             break;
@@ -183,15 +224,14 @@ export class Game_ReplayCtr extends BaseUI
                 let riverActions = GameReplayData.Instance.GetRiverActions(); 
                 if(riverActions && riverActions.length > 0)
                 {
-                    return true;
+                    return false;
                 }
             }
             break;
             case TexasCashState.TexasCashState_RiverRound:
             {
-                return true;
+                return false;
             }
-            break;
             case TexasCashState.TexasCashState_Settlement:
             {
 
@@ -199,9 +239,9 @@ export class Game_ReplayCtr extends BaseUI
             break;
         }
 
+
         GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_Settlement;
-        UIMgr.Instance.ShowToast("完毕");
-        return false;
+        return true;
     }
 }
 

@@ -99,7 +99,7 @@ export class Club_MainEnter extends BaseUI
         this.mData = _data;
         this.UpdateUI();
         this.UpdateNewMemberNotifyUI(true);
-        this.schedule(this.ScaleLogic.bind(this),0.01);
+        this.schedule(this.ScaleLogic,0.01);
     }
     
     UpdateNewMemberNotifyUI(_show : boolean)
