@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Button, Label, Sprite, SpriteFrame } from 'cc';
+import { AudioManager } from '../../base/AudioManager';
 import { BaseData } from '../../base/BaseData';
 import { BaseUI } from '../../base/BaseUI';
 import { DataNotify } from '../../base/DataNotify';
@@ -47,6 +48,7 @@ export class ToggleBtn extends BaseUI {
         }
     }
 
+    //需要数据驱动的toggle用这个初始化
     public SetDataNotify(_baseData : BaseData<number> , _custmoerData : number)
     {
         _baseData.RemoveListennerByTarget(this);
@@ -62,6 +64,7 @@ export class ToggleBtn extends BaseUI {
         }
     }
 
+    //不需要数据驱动的toggle用这个初始化
     public SetClickCallback(_callback : Function)
     {
         this.mClickCallback = _callback;
@@ -69,11 +72,13 @@ export class ToggleBtn extends BaseUI {
         {
             this.mSelected.node.on(Node.EventType.TOUCH_END,()=>
             {
+                AudioManager.Instance.PlayMusicOneShot("Btn");
                 this.ShowUnselected();
                 this.mClickCallback(false);
             },this);
             this.mDisabled.node.on(Node.EventType.TOUCH_END,()=>
             {
+                AudioManager.Instance.PlayMusicOneShot("Btn");
                 this.ShowSelected();
                 this.mClickCallback(true);
             },this);
@@ -112,7 +117,7 @@ export class ToggleBtn extends BaseUI {
 
     OnSelected()
     {
-        
+        AudioManager.Instance.PlayMusicOneShot("Btn");
     }
 
     OnDisabled()
@@ -121,7 +126,7 @@ export class ToggleBtn extends BaseUI {
         {
             return;
         }
-
+        AudioManager.Instance.PlayMusicOneShot("Btn");
         if(this.mDataNotify == null)
         {
             return;

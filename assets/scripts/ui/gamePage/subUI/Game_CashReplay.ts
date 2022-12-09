@@ -170,7 +170,7 @@ export class Game_CashReplay extends BaseUI {
         preAct2.actionInfo = new ActionInfo();
         preAct2.actionInfo.uid = "uuid1";
         preAct2.actionInfo.actionType = ActionType.ActionType_Check;
-        preAct2.actionInfo.amount = 2000;
+        preAct2.actionInfo.amount = 0;
         testData.preFlopActions.push(preAct1);
         testData.preFlopActions.push(preAct2);
 
@@ -192,8 +192,8 @@ export class Game_CashReplay extends BaseUI {
         let turnAct1 = new ActionResult();
         turnAct1.actionInfo = new ActionInfo();
         turnAct1.actionInfo.uid = "uuid2";
-        turnAct1.actionInfo.actionType = ActionType.ActionType_Bet;
-        turnAct1.actionInfo.amount = 2000;
+        turnAct1.actionInfo.actionType = ActionType.ActionType_Fold;
+        turnAct1.actionInfo.amount = 0;
         let turnAct2 = new ActionResult();
         turnAct2.actionInfo = new ActionInfo();
         turnAct2.actionInfo.uid = "uuid1";

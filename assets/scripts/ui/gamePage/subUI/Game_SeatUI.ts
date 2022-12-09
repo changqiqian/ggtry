@@ -56,6 +56,40 @@ export class Game_SeatUI extends BaseUI
 
         let selfPlayer = GameReplayData.Instance.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         this.TryRotateSeats(selfPlayer.seat , false);
+
+        GameReplayData.Instance.Data_State.AddListenner(this,(_data)=>
+        {
+            switch(_data)
+            {
+                case TexasCashState.TexasCashState_RoundStart:
+                {
+                    
+                }
+                break;
+                case TexasCashState.TexasCashState_PreFlopRound:
+                {
+        
+                }
+                break;
+                case TexasCashState.TexasCashState_FlopRound:
+                {
+                }
+                break;
+                case TexasCashState.TexasCashState_TurnRound:
+                {
+                }
+                break;
+                case TexasCashState.TexasCashState_RiverRound:
+                {
+                }
+                break;
+                case TexasCashState.TexasCashState_Settlement:
+                {
+          
+                }
+                break;
+            }
+        })
     }
 
     InitSeat()
@@ -95,7 +129,21 @@ export class Game_SeatUI extends BaseUI
             }
             this.TryRotateSeats(playerInfo.seat,true);
         })
+
+        gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
+        {
+        })
+
+        gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
+        {
+        })
+
+        gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
+        {
+        })
     }
+
+
 
     GetSeatNodeBySeatId(_seatId : number) : Game_SeatItem
     {

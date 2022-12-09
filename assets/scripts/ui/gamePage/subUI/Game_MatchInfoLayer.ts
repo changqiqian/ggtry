@@ -2,13 +2,14 @@ import { _decorator, Component, Node, ScrollView, Label, Tween, Widget, Vec3, UI
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { ListViewCtr } from '../../../UiTool/ListViewCtr';
 import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_MatchInfoLayer')
-export class Game_MatchInfoLayer extends BaseUI 
+export class Game_MatchInfoLayer extends ListViewCtr<any> 
 {
     @property(BaseButton) 
     mBGBtn: BaseButton = null;
@@ -20,6 +21,10 @@ export class Game_MatchInfoLayer extends BaseUI
     mClubName: Label = null;
     @property(Label) 
     mCountDown: Label = null;
+
+    @property(Label) 
+    mInsAmount: Label = null;
+
     @property(ScrollView) 
     mScrollView: ScrollView = null;
     private mIndex : number = null;
@@ -92,6 +97,16 @@ export class Game_MatchInfoLayer extends BaseUI
         {
             this.mClubName.string = Localization.GetString("00267");
         }
+    }
+
+    RenderEvent(_item: Node , _index: number)
+    {
+
+    }
+
+    Refresh()
+    {
+
     }
 }
 

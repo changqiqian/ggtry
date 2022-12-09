@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Sprite, Label, instantiate, AudioSource, Vec3, view } from 'cc';
+import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
 import { CardStruct } from '../../../base/Calculator';
 import { Localization } from '../../../base/Localization';
@@ -157,17 +158,17 @@ export class Game_Player extends BaseUI
             if(replayData.sbUid == playerInfo.uid)
             {
                 this.ShowActionType(ActionType.ActionType_SB , true);
-                this.Bet(replayData.gameStatic.texasConfig.smallBlind , true);
+                this.Bet(replayData.gameStatic.texasConfig.smallBlind ,ActionType.ActionType_SB, true);
             }
             else if(replayData.bbUid == playerInfo.uid)
             {
                 this.ShowActionType(ActionType.ActionType_BB , true);
-                this.Bet(replayData.gameStatic.texasConfig.smallBlind * 2, true);
+                this.Bet(replayData.gameStatic.texasConfig.smallBlind * 2,ActionType.ActionType_BB, true);
             }
             else if(replayData.straddle == playerInfo.uid)
             {
                 this.ShowActionType(ActionType.ActionType_Straddle , true);
-                this.Bet(replayData.gameStatic.texasConfig.smallBlind * 4, true);
+                this.Bet(replayData.gameStatic.texasConfig.smallBlind * 4,ActionType.ActionType_Straddle, true);
             }
         })
 
@@ -322,21 +323,21 @@ export class Game_Player extends BaseUI
             if(actionSB != null)
             {
                 this.ShowActionType(ActionType.ActionType_SB , false);
-                this.Bet(actionSB.amount , false)
+                this.Bet(actionSB.amount ,ActionType.ActionType_SB, false)
             }
 
             let actionBB = gameData.FindAction(currentPlayer.uid , ActionType.ActionType_BB);
             if(actionBB != null)
             {
                 this.ShowActionType(ActionType.ActionType_BB, false);
-                this.Bet(actionBB.amount , false)
+                this.Bet(actionBB.amount ,ActionType.ActionType_BB, false)
             }
 
             let actionStraddle = gameData.FindAction(currentPlayer.uid , ActionType.ActionType_Straddle);
             if(actionStraddle != null)
             {
                 this.ShowActionType(ActionType.ActionType_Straddle, false);
-                this.Bet(actionStraddle.amount , false)
+                this.Bet(actionStraddle.amount ,ActionType.ActionType_Straddle, false)
             }
 
             let dealerId = gameData.GetDynamicData().dealerUid;
@@ -426,9 +427,23 @@ export class Game_Player extends BaseUI
 
     CleanTable()
     {
+        if(this.mGame_BetAmount.node.activeInHierarchy == true )
+        {
+            this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_prefab)=>
+            {
+                let tempNode = instantiate(_prefab);
+                this.node.addChild(tempNode);
+                let script = tempNode.getComponent(Game_MovingChip);
+                let startWorldPos = this.mGame_BetAmount.GetChipWorldPos();
+                let screenSize = view.getVisibleSize();
+                script.Fly(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
+                AudioManager.Instance.PlayMusicOneShot("ChipMove");
+            })
+        }
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
     }
+
 
     UpdateUIDirection()
     {
@@ -569,7 +584,7 @@ export class Game_Player extends BaseUI
         if(lastAct != null)
         {
             this.ShowActionType(lastAct.actionType , false);
-            this.Bet(lastAct.amount , false);
+            this.Bet(lastAct.amount ,lastAct.actionType, false);
         }
 
     }
@@ -604,7 +619,7 @@ export class Game_Player extends BaseUI
     
             this.mCircleTimer.StopTimer();
             this.ShowActionType(lastAct.actionType , false);
-            this.Bet(lastAct.amount , false);
+            this.Bet(lastAct.amount ,lastAct.actionType , false);
         }
         else
         {
@@ -624,7 +639,7 @@ export class Game_Player extends BaseUI
                 return;
             }
             this.ShowActionType(currentAction.actionInfo.actionType , true);
-            this.Bet(currentAction.actionInfo.amount , true);
+            this.Bet(currentAction.actionInfo.amount ,currentAction.actionInfo.actionType, true);
         }
     }
 
@@ -744,8 +759,20 @@ export class Game_Player extends BaseUI
         this.mDealer.active = currentUid == _dealerId;
     }
 
-    Bet(_amount : number , _replay : boolean)
+    Bet(_amount : number ,_actionType : ActionType ,  _replay : boolean)
     {
+        if(_actionType == ActionType.ActionType_Check)
+        {
+            AudioManager.Instance.PlayMusicOneShot("Check");
+            return;
+        }
+
+        if(_actionType == ActionType.ActionType_Fold)
+        {
+            AudioManager.Instance.PlayMusicOneShot("Fold");
+            return;
+        }
+
         if(_replay == false)
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
@@ -759,22 +786,37 @@ export class Game_Player extends BaseUI
         }
 
         this.mGame_BetAmount.node.active = true;
+        this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_prefab)=>
+        {
+            let tempNode = instantiate(_prefab);
+            this.node.addChild(tempNode);
+            let script = tempNode.getComponent(Game_MovingChip);
+            let startWorldPos = this.node.worldPosition;
+            let entWorldPos = this.mGame_BetAmount.GetChipWorldPos();
+            script.Fly(startWorldPos ,entWorldPos);
+            AudioManager.Instance.PlayMusicOneShot("Bet");
+        })
+
         let amountS2C = Tool.ConvertMoney_S2C(_amount);
         this.mGame_BetAmount.Bet(amountS2C);
+
     }
 
     ShowActionType(_actionType : ActionType , _replay : boolean)
     {
+
+        this.mDarkCover.active = _actionType == ActionType.ActionType_Fold;
+        this.mMiniCard.active = _actionType != ActionType.ActionType_Fold;
+
         if(_replay == false)
         {
-            this.mDarkCover.active = _actionType == ActionType.ActionType_Fold;
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
-            let isSelf = gameData.IsSelfBySeat(this.mSeatID);
-            if(isSelf)
-            {
-                return;
-            }
+            // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            // let gameData = gameStruct.mGameData;
+            // let isSelf = gameData.IsSelfBySeat(this.mSeatID);
+            // if(isSelf)
+            // {
+            //     return;
+            // }
         }
         else
         {
@@ -787,6 +829,22 @@ export class Game_Player extends BaseUI
                 }
             }
         }
+
+        if(_actionType == ActionType.ActionType_Fold)
+        {
+            this.LoadPrefab("gamePage","prefab/Game_MovingCards",(_prefab)=>
+            {
+                let tempNode = instantiate(_prefab);
+                this.node.addChild(tempNode);
+                let script = tempNode.getComponent(Game_MovingCards);
+                let startWorldPos = this.node.worldPosition;
+                let screenSize = view.getVisibleSize();
+                script.FlyTo(startWorldPos , new Vec3(screenSize.width/2 , screenSize.height/2));
+            })
+        }
+
+
+
         this.mGame_ActionTag.SetType(_actionType);
     }
 

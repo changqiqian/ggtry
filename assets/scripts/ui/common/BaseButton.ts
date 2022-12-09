@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Label, Color, SpriteFrame, Sprite, Button } from 'cc';
 import { Color3 } from '../../../../@types/packages/scene/@types/public';
+import { AudioManager } from '../../base/AudioManager';
 import { BaseUI } from '../../base/BaseUI';
 const { ccclass, property } = _decorator;
 
@@ -134,7 +135,7 @@ export class BaseButton extends BaseUI {
             },this.mClickProtectedDuration);
         }
 
-
+        AudioManager.Instance.PlayMusicOneShot("Btn");
         if(this.mCallback != null)
         {
             this.mCallback(this.mCustomerData);

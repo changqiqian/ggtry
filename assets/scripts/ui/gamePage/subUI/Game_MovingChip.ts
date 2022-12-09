@@ -5,10 +5,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_MovingChip')
 export class Game_MovingChip extends BaseUI 
 {
-    @property(AudioSource) 
-    mAudioBet: AudioSource = null;
-    @property(AudioSource) 
-    mAudioCollect: AudioSource = null;
+
     InitParam()
     {
 
@@ -30,19 +27,6 @@ export class Game_MovingChip extends BaseUI
     {
 
     }
-
-    public FlyToBet(_startWorldPos : Vec3 , _endWorldPos : Vec3 )
-    {
-        this.mAudioBet.play();
-        this.Fly(_startWorldPos , _endWorldPos);
-    }
-
-    public FlyToCollect(_startWorldPos : Vec3 , _endWorldPos : Vec3 )
-    {
-        this.mAudioCollect.play();
-        this.Fly(_startWorldPos , _endWorldPos);
-    }
-
 
     public Fly(_startWorldPos : Vec3 , _endWorldPos : Vec3)
     {

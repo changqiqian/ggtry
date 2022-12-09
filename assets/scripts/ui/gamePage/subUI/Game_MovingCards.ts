@@ -5,8 +5,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_MovingCards')
 export class Game_MovingCards extends BaseUI 
 {
-    @property(AudioSource) 
-    mAudio: AudioSource = null;
+
     InitParam()
     {
 
@@ -31,7 +30,7 @@ export class Game_MovingCards extends BaseUI
 
     public FlyTo(_startWorldPos : Vec3 , _endWorldPos : Vec3)
     {
-        this.mAudio.play();
+
 
         let duration = 0.5;
         let localStartPos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(_startWorldPos);
@@ -52,10 +51,6 @@ export class Game_MovingCards extends BaseUI
             this.node.destroy();
         })
         .start()
-
-
-
-
     }
 }
 
