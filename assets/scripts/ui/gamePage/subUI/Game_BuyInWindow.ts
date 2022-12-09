@@ -164,17 +164,15 @@ export class Game_BuyInWindow extends BaseUI
     UpdateTotalMoney()
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
         this.mProgressSlider.SetPercent(0);
         this.UpdateBringInAmount(0);
         let currentMoney;
-        let currencyType = gameData.GetStaticData().basicConfig.currencyType;
         let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
-        if(currencyType == GameCurrencyType.GameCurrencyType_Point)
+        if(gameStruct.mIsClubGame)
         {
             currentMoney = enterClub.clubMember.clubPoint;
         }
-        else if(currencyType == GameCurrencyType.GameCurrencyType_Coin)
+        else 
         {
             currentMoney = LocalPlayerData.Instance.Data_Coin.mData;
         }

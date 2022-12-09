@@ -5,6 +5,7 @@ import { NetworkSend } from '../../../network/NetworkSend';
 import { BaseButton } from '../../common/BaseButton';
 import { CircleTimer } from '../../common/CircleTimer';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { Game_PreCheckOrFold } from '../GameData';
 import { Game_CustomerRaise } from './Game_CustomerRaise';
 import { Game_Slider } from './Game_Slider';
 const { ccclass, property } = _decorator;
@@ -44,24 +45,12 @@ export class Game_SelfAction extends BaseUI
         this.HideAll();
         this.mFoldBtn.SetClickCallback(()=>
         {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
-            let actionInfo = new ActionInfo();
-            actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
-            actionInfo.amount = 0;
-            actionInfo.actionType = ActionType.ActionType_Fold;
-            NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId(),gameStruct.mGameId,actionInfo);
+            this.ExcutiveFold();
         });
 
         this.mCheckBtn.SetClickCallback(()=>
         {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
-            let actionInfo = new ActionInfo();
-            actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
-            actionInfo.amount = 0;
-            actionInfo.actionType = ActionType.ActionType_Check;
-            NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId(),gameStruct.mGameId,actionInfo);
+            this.ExcutiveCheck();
         });
 
         this.mCallBtn.SetClickCallback(()=>
@@ -83,7 +72,7 @@ export class Game_SelfAction extends BaseUI
                 actionInfo.amount = callAmount;
                 actionInfo.actionType = ActionType.ActionType_Call;
             }
-            NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId(),gameStruct.mGameId,actionInfo);
+            this.SendGameAction(actionInfo);
         });
 
         this.mSliderRaiseBtn.SetClickCallback(this.OnSliderRaiseBtn.bind(this));
@@ -106,8 +95,9 @@ export class Game_SelfAction extends BaseUI
                 actionInfo.amount = _amount;
                 actionInfo.actionType = ActionType.ActionType_Call;
             }
-            NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId(),gameStruct.mGameId,actionInfo);
-            
+
+            this.SendGameAction(actionInfo);
+
         });
     }
     RegDataNotify() 
@@ -175,6 +165,40 @@ export class Game_SelfAction extends BaseUI
         {
             return;
         }
+
+        if(gameData.Data_PreCheckOrFold.mData == Game_PreCheckOrFold.Selected)
+        {
+            let selfLastAct = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            let biggestAct = gameData.FindBiggestBetAction();
+
+            if(biggestAct == null)
+            {
+                this.ExcutiveCheck();
+                return;
+            }
+
+            if(selfLastAct == null)
+            {
+                this.ExcutiveFold();
+                return;
+            }
+
+            if(selfLastAct.amount < biggestAct.amount)
+            {
+                this.ExcutiveFold();
+                return;
+            }
+
+
+            if(selfLastAct.amount >= biggestAct.amount)
+            {
+                this.ExcutiveCheck();
+                return;
+            }
+
+
+        }
+        this.ShowActionUI();
     }
 
     ShowActionUI()
@@ -254,6 +278,32 @@ export class Game_SelfAction extends BaseUI
         {
             this.mCircleTimer.StartTimer(_leftTime);
         }
+    }
+
+    ExcutiveFold()
+    {
+        let actionInfo = new ActionInfo();
+        actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
+        actionInfo.amount = 0;
+        actionInfo.actionType = ActionType.ActionType_Fold;
+        this.SendGameAction(actionInfo);
+    }
+
+    ExcutiveCheck()
+    {
+        let actionInfo = new ActionInfo();
+        actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
+        actionInfo.amount = 0;
+        actionInfo.actionType = ActionType.ActionType_Check;
+        this.SendGameAction(actionInfo);
+    }
+
+    SendGameAction(_action : ActionInfo)
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        gameData.Data_PreCheckOrFold.mData = Game_PreCheckOrFold.UnSelected;
+        NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId(),gameStruct.mGameId,_action);
     }
 }
 

@@ -36,9 +36,8 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonRiverRoundNotify : BaseData<S2CCommonRiverRoundNotify> = new BaseData<S2CCommonRiverRoundNotify>(true);  //发河牌
     Data_S2CCommonActionNotify : BaseData<S2CCommonActionNotify> = new BaseData<S2CCommonActionNotify>(true);  //行动推送
 
+    Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_RotateSeatEnd : BaseData<boolean> = new BaseData<boolean>(true);  //座位旋转结束
-
-    Data_ChipFlyToPlayerFromPot  : BaseData<Vec3> = new BaseData<Vec3>(true);  //执行筹码飞向赢家
     
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
     {
@@ -225,6 +224,27 @@ export abstract class GameData extends MultipleNotify
         return lastBetAction;
     }
 
+    public FindBiggestBetAction() : ActionInfo
+    {
+        let actions = this.GetDynamicData().actions;
+        if(actions == null || actions.length == 0)
+        {
+            return null;
+        }
+
+        let biggestBetAct = actions[0];
+        for(let i = 0 ; i < actions.length ; i++)
+        {
+            let currentAct = actions[i];
+            if(currentAct.amount >= biggestBetAct.amount)
+            {
+                biggestBetAct = currentAct;
+                break;
+            }
+        }
+        return biggestBetAct;
+    }
+
     public FindLastActionByUid(_uid : string ) : ActionInfo
     {
         let result = new Array<ActionInfo>();
@@ -366,3 +386,8 @@ export enum Game_ChattingSubLayer
     Shortcut,
 }
 
+export enum Game_PreCheckOrFold
+{
+    UnSelected, // 没选中
+    Selected, //选中
+}
