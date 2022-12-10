@@ -151,8 +151,8 @@ export class Game_CashReplay extends BaseUI {
         rsAct2.actionInfo.uid = "selfUid";
         rsAct2.actionInfo.actionType = ActionType.ActionType_BB;
         rsAct2.actionInfo.amount = 2000;
-        testData.preFlopActions.push(rsAct1);
-        testData.preFlopActions.push(rsAct2);
+        testData.roundStartActions.push(rsAct1);
+        testData.roundStartActions.push(rsAct2);
 
 
 

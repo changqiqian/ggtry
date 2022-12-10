@@ -63,31 +63,52 @@ export class Game_SelfPreAction extends BaseUI
             this.UpdateUI();
         })
 
+        gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateUI();
+        })
+
+        gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateUI();
+        })
+
+        gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateUI();
+        })
+
     }
 
     UpdateUI()
     {
+        this.node.active = false;
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let dynamicData =  gameData.GetDynamicData();
+        let gameState = gameData.GetGameState();
 
-        if(dynamicData.state == TexasCashState.TexasCashState_Create ||
-        dynamicData.state == TexasCashState.TexasCashState_RoundStart ||
-        dynamicData.state == TexasCashState.TexasCashState_Settlement ||
-        dynamicData.state == TexasCashState.TexasCashState_WaitStart)
+        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer == null)
         {
-            this.node.active = false;
             return;
         }
 
-        let currentActionUid =  dynamicData.actionUid;
-        if(currentActionUid == LocalPlayerData.Instance.Data_Uid.mData)
+        if(gameState == TexasCashState.TexasCashState_Create ||
+            gameState == TexasCashState.TexasCashState_RoundStart ||
+            gameState == TexasCashState.TexasCashState_Settlement ||
+            gameState == TexasCashState.TexasCashState_WaitStart)
         {
-            this.node.active = false;
+
             return;
         }
 
-        let selfLastAct = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        let currentActionUid =  gameData.GetActionUid();
+        if(currentActionUid == selfPlayer.uid)
+        {
+            return;
+        }
+
+        let selfLastAct = gameData.FindLastActionByUid(selfPlayer.uid);
         let biggestAct = gameData.FindBiggestBetAction();
 
         if(biggestAct == null)

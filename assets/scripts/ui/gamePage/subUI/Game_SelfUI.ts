@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Label, instantiate, Vec3, view } from 'cc';
+import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
 import { CardStruct, Combiantion } from '../../../base/Calculator';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
@@ -8,6 +9,8 @@ import { Poker } from '../../common/Poker';
 import { Game_ActionTag } from './Game_ActionTag';
 import { Game_AddTime } from './Game_AddTime';
 import { Game_BetAmount } from './Game_BetAmount';
+import { Game_MovingCards } from './Game_MovingCards';
+import { Game_MovingChip } from './Game_MovingChip';
 
 const { ccclass, property } = _decorator;
 
@@ -96,7 +99,6 @@ export class Game_SelfUI extends BaseUI
             this.HideAllUI();
         });
 
-
         gameData.Data_S2CCommonBringInResp.AddListenner(this,(_data)=>
         {
             this.UpdateMoney();
@@ -104,7 +106,9 @@ export class Game_SelfUI extends BaseUI
 
         gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateUI();
+            this.UpdateDealer();
+            this.UpdateMoney();
+            this.RestoreAction();
         })
 
         gameData.Data_S2CCommonPreFlopRoundNotify.AddListenner(this,(_data)=>
@@ -118,7 +122,22 @@ export class Game_SelfUI extends BaseUI
         })
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
-            
+            this.ExcutiveCurrentAction();
+        })
+
+        gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.CleanTable();
+        })
+
+        gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.CleanTable();
+        })
+
+        gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.CleanTable();
         })
     }
 
@@ -134,6 +153,24 @@ export class Game_SelfUI extends BaseUI
         this.mMoney.string = "";
     }
 
+    CleanTable()
+    {
+        if(this.mGame_BetAmount.node.activeInHierarchy == true )
+        {
+            this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_prefab)=>
+            {
+                let tempNode = instantiate(_prefab);
+                this.node.addChild(tempNode);
+                let script = tempNode.getComponent(Game_MovingChip);
+                let startWorldPos = this.mGame_BetAmount.GetChipWorldPos();
+                let screenSize = view.getVisibleSize();
+                script.Fly(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
+            })
+        }
+        this.mGame_BetAmount.node.active = false;
+        this.mGame_ActionTag.node.active = false;
+    }
+
     UpdateUI()
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
@@ -146,7 +183,7 @@ export class Game_SelfUI extends BaseUI
         }
         this.UpdateDealer();
         this.UpdateMoney();
-        this.UpdateAction();
+        this.RestoreAction();
         this.UpdateCards();
         this.UpdateFold();
         this.UpdateAddTime();
@@ -174,8 +211,6 @@ export class Game_SelfUI extends BaseUI
             this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum) + "";
         }
     }
-
-
     UpdateAddTimeBtn(_show : boolean , _delaySpend : string)
     {
         this.mGame_AddTime.node.active = _show;
@@ -184,23 +219,77 @@ export class Game_SelfUI extends BaseUI
             this.mGame_AddTime.SetButtonTitle(_delaySpend);
         }
     }
-    UpdateAction()
+    RestoreAction()
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let lastAct = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
         if(lastAct != null)
         {
-            this.mGame_ActionTag.SetType(lastAct.actionType);
-            this.Bet(lastAct.amount);
+            this.ShowActionType(lastAct.actionType);
+            this.Bet(lastAct.amount , lastAct.actionType);
         }
     }
 
-
-    Bet(_amount : number)
+    ExcutiveCurrentAction()
     {
-        this.mGame_BetAmount.Bet(Tool.ConvertMoney_S2C(_amount));
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let lastAct = gameData.FindLastAction();
+        if(lastAct != null)
+        {
+            if(lastAct.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                this.ShowActionType(lastAct.actionType);
+                this.Bet(lastAct.amount , lastAct.actionType);
+            }
+        }
     }
+
+    Bet(_amount : number , _actionType : ActionType)
+    {
+        if(_actionType == ActionType.ActionType_Check)
+        {
+            return;
+        }
+
+        if(_actionType == ActionType.ActionType_Fold)
+        {
+            return;
+        }
+
+        this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_prefab)=>
+        {
+            let tempNode = instantiate(_prefab);
+            this.node.addChild(tempNode);
+            let script = tempNode.getComponent(Game_MovingChip);
+            let startWorldPos = this.node.worldPosition;
+            let entWorldPos = this.mGame_BetAmount.GetChipWorldPos();
+            script.Fly(startWorldPos ,entWorldPos);
+        })
+        let amountS2C = Tool.ConvertMoney_S2C(_amount);
+        this.mGame_BetAmount.Bet(amountS2C);
+    }
+
+    ShowActionType(_actionType : ActionType )
+    {
+        if(_actionType == ActionType.ActionType_Fold)
+        {
+            this.LoadPrefab("gamePage","prefab/Game_MovingCards",(_prefab)=>
+            {
+                let tempNode = instantiate(_prefab);
+                this.node.addChild(tempNode);
+                let script = tempNode.getComponent(Game_MovingCards);
+                let startWorldPos = this.mCards.worldPosition;
+                let screenSize = view.getVisibleSize();
+                script.FlyTo(startWorldPos , new Vec3(screenSize.width/2 , screenSize.height/2));
+            })
+            this.FoldCards();
+
+        }
+        this.mGame_ActionTag.SetType(_actionType);
+    }
+
 
     UpdateCards()
     {
@@ -249,6 +338,11 @@ export class Game_SelfUI extends BaseUI
         {
             return;
         }
+        this.FoldCards();
+    }
+
+    FoldCards()
+    {
         for(let i = 0 ; i < this.mCards.children.length ; i++)
         {
             let currentCard = this.mCards.children[i].getComponent(Poker);

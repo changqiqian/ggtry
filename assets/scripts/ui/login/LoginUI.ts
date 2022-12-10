@@ -9,6 +9,7 @@ import {  Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
 import { DragDownEvent } from '../../UiTool/DragDownEvent';
 import { BaseButton } from '../common/BaseButton';
+import { MultipleTableCtr } from '../common/MultipleTableCtr';
 import { Poker } from '../common/Poker';
 import { TipsWindow } from '../common/TipsWindow';
 import { Game_CashReplay } from '../gamePage/subUI/Game_CashReplay';
@@ -49,7 +50,6 @@ export class LoginUI extends BaseUI
         this.mLoginBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");   
-    
         });
 
         this.mSignBtn.SetClickCallback(()=>

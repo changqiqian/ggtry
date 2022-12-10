@@ -27,6 +27,7 @@ export class Game_Slider extends BaseUI
 
     mTotalNum : number;
     mMinRaiseNum : number;
+    mSmallBlind : number;
     onEnable()
     {
         this.ResetSlider();
@@ -89,8 +90,9 @@ export class Game_Slider extends BaseUI
         this.mCallback = _callback;
     }
 
-    SetTotalAmountAndMinRaise(_totalAmount : number , _minRaise : number)
+    SetTotalAmountAndMinRaise(_totalAmount : number , _minRaise : number , _smallBlind : number)
     {
+        this.mSmallBlind = _smallBlind;
         this.mTotalNum = _totalAmount;
         this.mMinRaiseNum = _minRaise;
         this.mTotalAmount.string = Tool.ConvertMoney_S2C(_totalAmount) + "";
@@ -142,8 +144,15 @@ export class Game_Slider extends BaseUI
         }
         else
         {
-            let tempAmount = this.mTotalNum - this.mMinRaiseNum;
-            let finalAmount = _ratio * tempAmount + this.mMinRaiseNum;
+            if(this.mTotalNum <= this.mMinRaiseNum)
+            {
+                return this.mTotalNum;
+            }
+
+            let changeAmount = this.mTotalNum - this.mMinRaiseNum;
+            changeAmount = _ratio * changeAmount;
+            changeAmount = Math.floor(changeAmount/this.mSmallBlind) * this.mSmallBlind;
+            let finalAmount = changeAmount + this.mMinRaiseNum;
             return finalAmount;
         }
     }

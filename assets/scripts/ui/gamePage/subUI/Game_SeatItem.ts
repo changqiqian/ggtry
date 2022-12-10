@@ -111,6 +111,15 @@ export class Game_SeatItem extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
+        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer != null)
+        {
+            this.mSitBtn.Show(false);
+            return;
+        }
+
+
+
         let seatInfos = gameData.GetDynamicData().seatInfos;
 
         let occupaid = false;
@@ -123,7 +132,6 @@ export class Game_SeatItem extends BaseUI
                 break;
             }
         }
-
         this.mSitBtn.Show(!occupaid);
     }
 }

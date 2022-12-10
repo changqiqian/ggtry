@@ -135,6 +135,26 @@ export class Game_SelfAction extends BaseUI
         {
             this.UpdateUI();
         })
+
+        gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateUI();
+        })
+
+        gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateUI();
+        })
+
+        gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateUI();
+        })
+
+        gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateUI();
+        })
     }
 
     HideAll()
@@ -154,15 +174,23 @@ export class Game_SelfAction extends BaseUI
         this.HideAll();
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
+        let gameState = gameData.GetGameState();
         let actUid = gameData.GetDynamicData().actionUid;
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        let myTurn = actUid == LocalPlayerData.Instance.Data_Uid.mData;
         if(selfPlayer == null)
         {
-            myTurn = false;
+            return;
         }
 
-        if(myTurn == false)
+        if(gameState == TexasCashState.TexasCashState_Create ||
+            gameState == TexasCashState.TexasCashState_RoundStart ||
+            gameState == TexasCashState.TexasCashState_Settlement ||
+            gameState == TexasCashState.TexasCashState_WaitStart)
+        {
+            return;
+        }
+        
+        if(actUid != selfPlayer.uid)
         {
             return;
         }
@@ -196,8 +224,6 @@ export class Game_SelfAction extends BaseUI
                 this.ExcutiveCheck();
                 return;
             }
-
-
         }
         this.ShowActionUI();
     }
@@ -268,9 +294,9 @@ export class Game_SelfAction extends BaseUI
             }
             else
             {
-                minBet = lastBetAction.amount;
+                minBet = lastBetAction.amount * 2;
             }
-            this.mGame_Slider.SetTotalAmountAndMinRaise(selfPlayer.currencyNum , minBet);
+            this.mGame_Slider.SetTotalAmountAndMinRaise(selfPlayer.currencyNum , minBet , sb);
         }
     }
 

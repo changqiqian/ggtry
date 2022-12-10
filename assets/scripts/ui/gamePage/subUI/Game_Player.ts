@@ -1,7 +1,5 @@
 import { _decorator, Component, Node, Sprite, Label, instantiate, AudioSource, Vec3, view } from 'cc';
-import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
-import { CardStruct } from '../../../base/Calculator';
 import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { UIMgr } from '../../../base/UIMgr';
@@ -10,10 +8,8 @@ import { BaseButton } from '../../common/BaseButton';
 import { CircleTimer } from '../../common/CircleTimer';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Poker } from '../../common/Poker';
-import { GameData } from '../GameData';
 import { GameReplayData } from '../GameReplayData';
 import { Game_ActionTag } from './Game_ActionTag';
-import { Game_AddMoneyLabel } from './Game_AddMoneyLabel';
 import { Game_BetAmount } from './Game_BetAmount';
 import { Game_BuyInWindow } from './Game_BuyInWindow';
 import { Game_MovingCards } from './Game_MovingCards';
@@ -152,7 +148,7 @@ export class Game_Player extends BaseUI
             }
             else
             {
-                this.mMiniCard.active = true;
+                this.ShowMiniCard(true);
             }
 
             let sbActionResult = GameReplayData.Instance.GetRoundStartActionByActionType(ActionType.ActionType_SB);
@@ -237,22 +233,22 @@ export class Game_Player extends BaseUI
                 break;
                 case TexasCashState.TexasCashState_FlopRound:
                 {
-                    this.CleanTable();
+                    this.CleanTable(true);
                 }
                 break;
                 case TexasCashState.TexasCashState_TurnRound:
                 {
-                    this.CleanTable();
+                    this.CleanTable(true);
                 }
                 break;
                 case TexasCashState.TexasCashState_RiverRound:
                 {
-                    this.CleanTable();
+                    this.CleanTable(true);
                 }
                 break;
                 case TexasCashState.TexasCashState_Settlement:
                 {
-                    this.CleanTable();
+                    this.CleanTable(true);
                 }
                 break;
             }
@@ -357,22 +353,23 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            this.mMiniCard.active = true;
+
+            this.ShowMiniCard(true);
         })
 
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
         {
-            this.CleanTable();
+            this.CleanTable(false);
         })
 
         gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
         {
-            this.CleanTable();
+            this.CleanTable(false);
         })
 
         gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
         {
-            this.CleanTable();
+            this.CleanTable(false);
         })
         
 
@@ -457,7 +454,7 @@ export class Game_Player extends BaseUI
         this.ShowCards(_winLoseInfo.cardInfo);
     }
 
-    CleanTable()
+    CleanTable(_replay : boolean)
     {
         if(this.mGame_BetAmount.node.activeInHierarchy == true )
         {
@@ -469,7 +466,7 @@ export class Game_Player extends BaseUI
                 let startWorldPos = this.mGame_BetAmount.GetChipWorldPos();
                 let screenSize = view.getVisibleSize();
                 script.Fly(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
-                AudioManager.Instance.PlayMusicOneShot("ChipMove");
+
             })
         }
         this.mGame_ActionTag.node.active = false;
@@ -529,7 +526,7 @@ export class Game_Player extends BaseUI
         if(_playerInfo.currencyNum)
         {
             let playerPlaying = _playerInfo.cards.length > 0;
-            this.mMiniCard.active = playerPlaying;
+            this.ShowMiniCard(playerPlaying);
 
             if(playerPlaying)
             {
@@ -795,13 +792,11 @@ export class Game_Player extends BaseUI
     {
         if(_actionType == ActionType.ActionType_Check)
         {
-            AudioManager.Instance.PlayMusicOneShot("Check");
             return;
         }
 
         if(_actionType == ActionType.ActionType_Fold)
         {
-            AudioManager.Instance.PlayMusicOneShot("Fold");
             return;
         }
 
@@ -826,7 +821,6 @@ export class Game_Player extends BaseUI
             let startWorldPos = this.node.worldPosition;
             let entWorldPos = this.mGame_BetAmount.GetChipWorldPos();
             script.Fly(startWorldPos ,entWorldPos);
-            AudioManager.Instance.PlayMusicOneShot("Bet");
         })
 
         let amountS2C = Tool.ConvertMoney_S2C(_amount);
@@ -838,7 +832,7 @@ export class Game_Player extends BaseUI
     {
 
         this.mDarkCover.active = _actionType == ActionType.ActionType_Fold;
-        this.mMiniCard.active = _actionType != ActionType.ActionType_Fold;
+        this.ShowMiniCard(_actionType != ActionType.ActionType_Fold);
 
         if(_replay == false)
         {
@@ -874,10 +868,27 @@ export class Game_Player extends BaseUI
                 script.FlyTo(startWorldPos , new Vec3(screenSize.width/2 , screenSize.height/2));
             })
         }
-
-
-
         this.mGame_ActionTag.SetType(_actionType);
+    }
+
+
+    ShowMiniCard(_value : boolean )
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let isSelf = gameData.IsSelfBySeat(this.mSeatID);
+
+        if(_value)
+        {
+            if(isSelf == false)
+            {
+                this.mMiniCard.active = true;
+            }
+        }
+        else
+        {
+            this.mMiniCard.active = false;
+        }
     }
 }
 

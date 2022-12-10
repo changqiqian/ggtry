@@ -38,7 +38,7 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonSettlementNotify  : BaseData<S2CCommonSettlementNotify> = new BaseData<S2CCommonSettlementNotify>(true);  //游戏结算推送
 
 
-    Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
+    Data_PreCheckOrFold : BaseData<number> = new BaseData<number>(false,false);  //提前check 或者 fold  0代表没选中，1代表选中
     Data_RotateSeatEnd : BaseData<boolean> = new BaseData<boolean>(true);  //座位旋转结束
     
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
