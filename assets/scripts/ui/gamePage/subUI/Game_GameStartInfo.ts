@@ -67,7 +67,7 @@ export class Game_GameStartInfo extends BaseUI
             this.UpdateUI();
         });
 
-        gameData.Data_S2CCommonStartNotify.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonOpenNotify.AddListenner(this,(_data)=>
         {
             this.UpdateUI();
         });
@@ -95,7 +95,7 @@ export class Game_GameStartInfo extends BaseUI
         }
 
 
-        let gameStarted = state >= TexasCashState.TexasCashState_Waiting;
+        let gameStarted = state >= TexasCashState.TexasCashState_WaitStart;
         if(gameStarted == true)
         {
             return;

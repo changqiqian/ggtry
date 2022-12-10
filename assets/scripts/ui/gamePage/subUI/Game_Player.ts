@@ -423,6 +423,35 @@ export class Game_Player extends BaseUI
                 this.UpdateUIDirection();
             }
         })            
+
+        gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+            let winLoseInfos = _data.result;
+            let index = winLoseInfos.findIndex((_item) => _item.uid === playerInfo.uid);
+            if(index < 0)
+            {
+                return;
+            }
+
+            let currentWinLose = winLoseInfos[index];
+            this.UpdateWinLose(currentWinLose);
+        })
+    }
+
+    UpdateWinLose(_winLoseInfo : PlayerWinLose)
+    {
+        if(_winLoseInfo.winLose >=0)
+        {
+            this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
+            {
+                let tempNode = instantiate(_prefab);
+                this.node.addChild(tempNode);
+                let script = tempNode.getComponent(Game_WinEffect);
+                script.InitWithData(_winLoseInfo.winLose);
+            })
+        }
+        this.ShowCards(_winLoseInfo.cardInfo);
     }
 
     CleanTable()
@@ -846,23 +875,6 @@ export class Game_Player extends BaseUI
 
 
         this.mGame_ActionTag.SetType(_actionType);
-    }
-
-    ShowWin(_winScore:number , _totalScore : number)
-    {
-        this.LoadPrefab("gamePage" , "prefab/Game_AddMoneyLabel" , (_prefab)=>
-        {
-            let tempNode = instantiate(_prefab);
-            this.node.addChild(tempNode);
-            let tempScript = tempNode.getComponent(Game_AddMoneyLabel);
-            tempScript.InitWithData(_winScore);
-        });
-
-        this.LoadPrefab("gamePage" , "prefab/Game_WinEffect" , (_prefab)=>
-        {
-            let tempNode = instantiate(_prefab);
-            this.node.addChild(tempNode);
-        });
     }
 }
 

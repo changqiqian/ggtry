@@ -74,7 +74,7 @@ export class Game_SelfPreAction extends BaseUI
         if(dynamicData.state == TexasCashState.TexasCashState_Create ||
         dynamicData.state == TexasCashState.TexasCashState_RoundStart ||
         dynamicData.state == TexasCashState.TexasCashState_Settlement ||
-        dynamicData.state == TexasCashState.TexasCashState_Waiting)
+        dynamicData.state == TexasCashState.TexasCashState_WaitStart)
         {
             this.node.active = false;
             return;

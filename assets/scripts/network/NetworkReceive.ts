@@ -738,17 +738,17 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
 
 
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonStartNotify,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonOpenNotify,(_data)=>
         {
-            let msg = S2CCommonStartNotify.decode(_data);
-            console.log("收到的内容 S2C_CommonStartNotify  游戏开始推送==" + JSON.stringify(msg));
+            let msg = S2CCommonOpenNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonOpenNotify  游戏开始推送==" + JSON.stringify(msg));
 
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
             if(gameStruct != null)
             {
                 let gameData = gameStruct.mGameData;
-                gameData.SetGameState(TexasCashState.TexasCashState_Waiting);
-                gameData.Data_S2CCommonStartNotify.mData = msg;
+                gameData.SetGameState(TexasCashState.TexasCashState_WaitStart);
+                gameData.Data_S2CCommonOpenNotify.mData = msg;
             }
         },this);
 
@@ -869,6 +869,18 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);  
     
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonSettlementNotify,(_data)=>
+        {
+            let msg = S2CCommonSettlementNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonSettlementNotify  游戏结算==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_S2CCommonSettlementNotify.mData = msg;
+            }
+        },this);  
     }
 
     public UnregisterMsg()

@@ -17,7 +17,7 @@ export abstract class GameData extends MultipleNotify
 
     //服务器数据返回
     Data_S2CCommonEnterGameResp : BaseData<S2CCommonEnterGameResp> = new BaseData<S2CCommonEnterGameResp>();  //游戏基础配置信息
-    Data_S2CCommonStartNotify : BaseData<S2CCommonStartNotify> = new BaseData<S2CCommonStartNotify>(true);  //游戏开始推送
+    Data_S2CCommonOpenNotify : BaseData<S2CCommonOpenNotify> = new BaseData<S2CCommonOpenNotify>(true);  //游戏开始推送
     Data_S2CCommonStartResp : BaseData<S2CCommonStartResp> = new BaseData<S2CCommonStartResp>(true);  //游戏开始回复
     Data_S2CCommonBringInTimerNotify : BaseData<S2CCommonBringInTimerNotify> = new BaseData<S2CCommonBringInTimerNotify>(true);  //买入倒计时推送
     Data_S2CCommonBringInNotify : BaseData<S2CCommonBringInNotify> = new BaseData<S2CCommonBringInNotify>(true);  //买入推送
@@ -35,6 +35,8 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonTurnRoundNotify : BaseData<S2CCommonTurnRoundNotify> = new BaseData<S2CCommonTurnRoundNotify>(true);  //发转牌
     Data_S2CCommonRiverRoundNotify : BaseData<S2CCommonRiverRoundNotify> = new BaseData<S2CCommonRiverRoundNotify>(true);  //发河牌
     Data_S2CCommonActionNotify : BaseData<S2CCommonActionNotify> = new BaseData<S2CCommonActionNotify>(true);  //行动推送
+    Data_S2CCommonSettlementNotify  : BaseData<S2CCommonSettlementNotify> = new BaseData<S2CCommonSettlementNotify>(true);  //游戏结算推送
+
 
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_RotateSeatEnd : BaseData<boolean> = new BaseData<boolean>(true);  //座位旋转结束
@@ -108,7 +110,7 @@ export abstract class GameData extends MultipleNotify
     {
         let state = this.GetDynamicData().state;
         let playerInfo = this.GetPlayerInfoByUid(_userId);
-        if(state <= TexasCashState.TexasCashState_Waiting)
+        if(state <= TexasCashState.TexasCashState_WaitStart)
         {
             return true;
         }

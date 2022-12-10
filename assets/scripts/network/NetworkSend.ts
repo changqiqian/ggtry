@@ -386,9 +386,9 @@ export class NetworkSend extends Singleton<NetworkSend>()
     public StartGame(_msgId : number ,_gameId : string )
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new C2SGameStart();
+        let msg = new C2SGameOpen();
         msg.gameId = _gameId;
-        Network.Instance.SendMsg(_msgId , C2SGameStart.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2SGameOpen.encode(msg).finish());
         console.log("申请开始游戏  === " + JSON.stringify(msg))
     }
     

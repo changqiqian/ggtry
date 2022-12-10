@@ -2886,7 +2886,7 @@ $root.ShortGameScoreMode = (function() {
  * @exports TexasCashState
  * @enum {number}
  * @property {number} TexasCashState_Create=0 TexasCashState_Create value
- * @property {number} TexasCashState_Waiting=1 TexasCashState_Waiting value
+ * @property {number} TexasCashState_WaitStart=1 TexasCashState_WaitStart value
  * @property {number} TexasCashState_RoundStart=2 TexasCashState_RoundStart value
  * @property {number} TexasCashState_PreFlopRound=3 TexasCashState_PreFlopRound value
  * @property {number} TexasCashState_FlopRound=4 TexasCashState_FlopRound value
@@ -2897,7 +2897,7 @@ $root.ShortGameScoreMode = (function() {
 $root.TexasCashState = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "TexasCashState_Create"] = 0;
-    values[valuesById[1] = "TexasCashState_Waiting"] = 1;
+    values[valuesById[1] = "TexasCashState_WaitStart"] = 1;
     values[valuesById[2] = "TexasCashState_RoundStart"] = 2;
     values[valuesById[3] = "TexasCashState_PreFlopRound"] = 3;
     values[valuesById[4] = "TexasCashState_FlopRound"] = 4;
@@ -8592,24 +8592,24 @@ $root.C2SGameChat = (function() {
     return C2SGameChat;
 })();
 
-$root.C2SGameStart = (function() {
+$root.C2SGameOpen = (function() {
 
     /**
-     * Properties of a C2SGameStart.
-     * @exports IC2SGameStart
-     * @interface IC2SGameStart
-     * @property {string|null} [gameId] C2SGameStart gameId
+     * Properties of a C2SGameOpen.
+     * @exports IC2SGameOpen
+     * @interface IC2SGameOpen
+     * @property {string|null} [gameId] C2SGameOpen gameId
      */
 
     /**
-     * Constructs a new C2SGameStart.
-     * @exports C2SGameStart
-     * @classdesc Represents a C2SGameStart.
-     * @implements IC2SGameStart
+     * Constructs a new C2SGameOpen.
+     * @exports C2SGameOpen
+     * @classdesc Represents a C2SGameOpen.
+     * @implements IC2SGameOpen
      * @constructor
-     * @param {IC2SGameStart=} [p] Properties to set
+     * @param {IC2SGameOpen=} [p] Properties to set
      */
-    function C2SGameStart(p) {
+    function C2SGameOpen(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -8617,23 +8617,23 @@ $root.C2SGameStart = (function() {
     }
 
     /**
-     * C2SGameStart gameId.
+     * C2SGameOpen gameId.
      * @member {string} gameId
-     * @memberof C2SGameStart
+     * @memberof C2SGameOpen
      * @instance
      */
-    C2SGameStart.prototype.gameId = "";
+    C2SGameOpen.prototype.gameId = "";
 
     /**
-     * Encodes the specified C2SGameStart message. Does not implicitly {@link C2SGameStart.verify|verify} messages.
+     * Encodes the specified C2SGameOpen message. Does not implicitly {@link C2SGameOpen.verify|verify} messages.
      * @function encode
-     * @memberof C2SGameStart
+     * @memberof C2SGameOpen
      * @static
-     * @param {IC2SGameStart} m C2SGameStart message or plain object to encode
+     * @param {IC2SGameOpen} m C2SGameOpen message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    C2SGameStart.encode = function encode(m, w) {
+    C2SGameOpen.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -8642,20 +8642,20 @@ $root.C2SGameStart = (function() {
     };
 
     /**
-     * Decodes a C2SGameStart message from the specified reader or buffer.
+     * Decodes a C2SGameOpen message from the specified reader or buffer.
      * @function decode
-     * @memberof C2SGameStart
+     * @memberof C2SGameOpen
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {C2SGameStart} C2SGameStart
+     * @returns {C2SGameOpen} C2SGameOpen
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    C2SGameStart.decode = function decode(r, l) {
+    C2SGameOpen.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGameStart();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGameOpen();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -8670,7 +8670,7 @@ $root.C2SGameStart = (function() {
         return m;
     };
 
-    return C2SGameStart;
+    return C2SGameOpen;
 })();
 
 $root.S2CCommonEnterGameResp = (function() {
@@ -11288,6 +11288,7 @@ $root.S2CCommonSettlementNotify = (function() {
      * Properties of a S2CCommonSettlementNotify.
      * @exports IS2CCommonSettlementNotify
      * @interface IS2CCommonSettlementNotify
+     * @property {string|null} [gameId] S2CCommonSettlementNotify gameId
      * @property {Array.<IPlayerWinLose>|null} [result] S2CCommonSettlementNotify result
      */
 
@@ -11306,6 +11307,14 @@ $root.S2CCommonSettlementNotify = (function() {
                 if (p[ks[i]] != null)
                     this[ks[i]] = p[ks[i]];
     }
+
+    /**
+     * S2CCommonSettlementNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonSettlementNotify
+     * @instance
+     */
+    S2CCommonSettlementNotify.prototype.gameId = "";
 
     /**
      * S2CCommonSettlementNotify result.
@@ -11327,9 +11336,11 @@ $root.S2CCommonSettlementNotify = (function() {
     S2CCommonSettlementNotify.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
         if (m.result != null && m.result.length) {
             for (var i = 0; i < m.result.length; ++i)
-                $root.PlayerWinLose.encode(m.result[i], w.uint32(10).fork()).ldelim();
+                $root.PlayerWinLose.encode(m.result[i], w.uint32(18).fork()).ldelim();
         }
         return w;
     };
@@ -11353,6 +11364,9 @@ $root.S2CCommonSettlementNotify = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
                 if (!(m.result && m.result.length))
                     m.result = [];
                 m.result.push($root.PlayerWinLose.decode(r, r.uint32()));
@@ -11368,24 +11382,24 @@ $root.S2CCommonSettlementNotify = (function() {
     return S2CCommonSettlementNotify;
 })();
 
-$root.S2CCommonStartNotify = (function() {
+$root.S2CCommonOpenNotify = (function() {
 
     /**
-     * Properties of a S2CCommonStartNotify.
-     * @exports IS2CCommonStartNotify
-     * @interface IS2CCommonStartNotify
-     * @property {string|null} [gameId] S2CCommonStartNotify gameId
+     * Properties of a S2CCommonOpenNotify.
+     * @exports IS2CCommonOpenNotify
+     * @interface IS2CCommonOpenNotify
+     * @property {string|null} [gameId] S2CCommonOpenNotify gameId
      */
 
     /**
-     * Constructs a new S2CCommonStartNotify.
-     * @exports S2CCommonStartNotify
-     * @classdesc Represents a S2CCommonStartNotify.
-     * @implements IS2CCommonStartNotify
+     * Constructs a new S2CCommonOpenNotify.
+     * @exports S2CCommonOpenNotify
+     * @classdesc Represents a S2CCommonOpenNotify.
+     * @implements IS2CCommonOpenNotify
      * @constructor
-     * @param {IS2CCommonStartNotify=} [p] Properties to set
+     * @param {IS2CCommonOpenNotify=} [p] Properties to set
      */
-    function S2CCommonStartNotify(p) {
+    function S2CCommonOpenNotify(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -11393,23 +11407,23 @@ $root.S2CCommonStartNotify = (function() {
     }
 
     /**
-     * S2CCommonStartNotify gameId.
+     * S2CCommonOpenNotify gameId.
      * @member {string} gameId
-     * @memberof S2CCommonStartNotify
+     * @memberof S2CCommonOpenNotify
      * @instance
      */
-    S2CCommonStartNotify.prototype.gameId = "";
+    S2CCommonOpenNotify.prototype.gameId = "";
 
     /**
-     * Encodes the specified S2CCommonStartNotify message. Does not implicitly {@link S2CCommonStartNotify.verify|verify} messages.
+     * Encodes the specified S2CCommonOpenNotify message. Does not implicitly {@link S2CCommonOpenNotify.verify|verify} messages.
      * @function encode
-     * @memberof S2CCommonStartNotify
+     * @memberof S2CCommonOpenNotify
      * @static
-     * @param {IS2CCommonStartNotify} m S2CCommonStartNotify message or plain object to encode
+     * @param {IS2CCommonOpenNotify} m S2CCommonOpenNotify message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    S2CCommonStartNotify.encode = function encode(m, w) {
+    S2CCommonOpenNotify.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -11418,20 +11432,20 @@ $root.S2CCommonStartNotify = (function() {
     };
 
     /**
-     * Decodes a S2CCommonStartNotify message from the specified reader or buffer.
+     * Decodes a S2CCommonOpenNotify message from the specified reader or buffer.
      * @function decode
-     * @memberof S2CCommonStartNotify
+     * @memberof S2CCommonOpenNotify
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {S2CCommonStartNotify} S2CCommonStartNotify
+     * @returns {S2CCommonOpenNotify} S2CCommonOpenNotify
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    S2CCommonStartNotify.decode = function decode(r, l) {
+    S2CCommonOpenNotify.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonStartNotify();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonOpenNotify();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -11446,7 +11460,7 @@ $root.S2CCommonStartNotify = (function() {
         return m;
     };
 
-    return S2CCommonStartNotify;
+    return S2CCommonOpenNotify;
 })();
 
 $root.C2SLogout = (function() {
@@ -12786,7 +12800,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} MSG_TexasCashBegin=5001 MSG_TexasCashBegin value
  * @property {number} C2S_TexasCashEnterGame=5002 C2S_TexasCashEnterGame value
  * @property {number} C2S_TexasCashExitGame=5003 C2S_TexasCashExitGame value
- * @property {number} C2S_TexasCashStart=5004 C2S_TexasCashStart value
+ * @property {number} C2S_TexasCashOpen=5004 C2S_TexasCashOpen value
  * @property {number} C2S_TexasCashSitDown=5005 C2S_TexasCashSitDown value
  * @property {number} C2S_TexasCashStandUp=5007 C2S_TexasCashStandUp value
  * @property {number} C2S_TexasCashBringIn=5008 C2S_TexasCashBringIn value
@@ -12824,7 +12838,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonActionNotify=8114 S2C_CommonActionNotify value
  * @property {number} S2C_CommonBuyInsuranceNotify=8115 S2C_CommonBuyInsuranceNotify value
  * @property {number} S2C_CommonChatNotify=8116 S2C_CommonChatNotify value
- * @property {number} S2C_CommonStartNotify=8250 S2C_CommonStartNotify value
+ * @property {number} S2C_CommonOpenNotify=8250 S2C_CommonOpenNotify value
  * @property {number} S2C_CommonRoundStartNotify=8251 S2C_CommonRoundStartNotify value
  * @property {number} S2C_CommonPreFlopRoundNotify=8252 S2C_CommonPreFlopRoundNotify value
  * @property {number} S2C_CommonFlopRoundNotify=8253 S2C_CommonFlopRoundNotify value
@@ -12901,7 +12915,7 @@ $root.MessageId = (function() {
     values[valuesById[5001] = "MSG_TexasCashBegin"] = 5001;
     values[valuesById[5002] = "C2S_TexasCashEnterGame"] = 5002;
     values[valuesById[5003] = "C2S_TexasCashExitGame"] = 5003;
-    values[valuesById[5004] = "C2S_TexasCashStart"] = 5004;
+    values[valuesById[5004] = "C2S_TexasCashOpen"] = 5004;
     values[valuesById[5005] = "C2S_TexasCashSitDown"] = 5005;
     values[valuesById[5007] = "C2S_TexasCashStandUp"] = 5007;
     values[valuesById[5008] = "C2S_TexasCashBringIn"] = 5008;
@@ -12939,7 +12953,7 @@ $root.MessageId = (function() {
     values[valuesById[8114] = "S2C_CommonActionNotify"] = 8114;
     values[valuesById[8115] = "S2C_CommonBuyInsuranceNotify"] = 8115;
     values[valuesById[8116] = "S2C_CommonChatNotify"] = 8116;
-    values[valuesById[8250] = "S2C_CommonStartNotify"] = 8250;
+    values[valuesById[8250] = "S2C_CommonOpenNotify"] = 8250;
     values[valuesById[8251] = "S2C_CommonRoundStartNotify"] = 8251;
     values[valuesById[8252] = "S2C_CommonPreFlopRoundNotify"] = 8252;
     values[valuesById[8253] = "S2C_CommonFlopRoundNotify"] = 8253;

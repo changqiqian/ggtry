@@ -108,7 +108,7 @@ export class MultipleTableBtn extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let coreData = gameData.Data_S2CCommonEnterGameResp.mData;
-        if(coreData.gameDynamic.state < TexasCashState.TexasCashState_Waiting)
+        if(coreData.gameDynamic.state < TexasCashState.TexasCashState_WaitStart)
         {
             this.WaitGameStart();
             return;

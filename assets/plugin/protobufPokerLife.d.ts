@@ -1170,7 +1170,7 @@ export enum ShortGameScoreMode {
 /** TexasCashState enum. */
 export enum TexasCashState {
     TexasCashState_Create = 0,
-    TexasCashState_Waiting = 1,
+    TexasCashState_WaitStart = 1,
     TexasCashState_RoundStart = 2,
     TexasCashState_PreFlopRound = 3,
     TexasCashState_FlopRound = 4,
@@ -3043,35 +3043,35 @@ export class C2SGameChat implements IC2SGameChat {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGameChat;
 }
 
-/** Represents a C2SGameStart. */
-export class C2SGameStart implements IC2SGameStart {
+/** Represents a C2SGameOpen. */
+export class C2SGameOpen implements IC2SGameOpen {
 
     /**
-     * Constructs a new C2SGameStart.
+     * Constructs a new C2SGameOpen.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2SGameStart);
+    constructor(p?: IC2SGameOpen);
 
-    /** C2SGameStart gameId. */
+    /** C2SGameOpen gameId. */
     public gameId: string;
 
     /**
-     * Encodes the specified C2SGameStart message. Does not implicitly {@link C2SGameStart.verify|verify} messages.
-     * @param m C2SGameStart message or plain object to encode
+     * Encodes the specified C2SGameOpen message. Does not implicitly {@link C2SGameOpen.verify|verify} messages.
+     * @param m C2SGameOpen message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2SGameStart, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SGameOpen, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2SGameStart message from the specified reader or buffer.
+     * Decodes a C2SGameOpen message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2SGameStart
+     * @returns C2SGameOpen
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGameStart;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGameOpen;
 }
 
 /** Represents a S2CCommonEnterGameResp. */
@@ -3962,6 +3962,9 @@ export class S2CCommonSettlementNotify implements IS2CCommonSettlementNotify {
      */
     constructor(p?: IS2CCommonSettlementNotify);
 
+    /** S2CCommonSettlementNotify gameId. */
+    public gameId: string;
+
     /** S2CCommonSettlementNotify result. */
     public result: IPlayerWinLose[];
 
@@ -3984,35 +3987,35 @@ export class S2CCommonSettlementNotify implements IS2CCommonSettlementNotify {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonSettlementNotify;
 }
 
-/** Represents a S2CCommonStartNotify. */
-export class S2CCommonStartNotify implements IS2CCommonStartNotify {
+/** Represents a S2CCommonOpenNotify. */
+export class S2CCommonOpenNotify implements IS2CCommonOpenNotify {
 
     /**
-     * Constructs a new S2CCommonStartNotify.
+     * Constructs a new S2CCommonOpenNotify.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CCommonStartNotify);
+    constructor(p?: IS2CCommonOpenNotify);
 
-    /** S2CCommonStartNotify gameId. */
+    /** S2CCommonOpenNotify gameId. */
     public gameId: string;
 
     /**
-     * Encodes the specified S2CCommonStartNotify message. Does not implicitly {@link S2CCommonStartNotify.verify|verify} messages.
-     * @param m S2CCommonStartNotify message or plain object to encode
+     * Encodes the specified S2CCommonOpenNotify message. Does not implicitly {@link S2CCommonOpenNotify.verify|verify} messages.
+     * @param m S2CCommonOpenNotify message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CCommonStartNotify, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CCommonOpenNotify, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CCommonStartNotify message from the specified reader or buffer.
+     * Decodes a S2CCommonOpenNotify message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CCommonStartNotify
+     * @returns S2CCommonOpenNotify
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonStartNotify;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonOpenNotify;
 }
 
 /** Represents a C2SLogout. */
@@ -4539,7 +4542,7 @@ export enum MessageId {
     MSG_TexasCashBegin = 5001,
     C2S_TexasCashEnterGame = 5002,
     C2S_TexasCashExitGame = 5003,
-    C2S_TexasCashStart = 5004,
+    C2S_TexasCashOpen = 5004,
     C2S_TexasCashSitDown = 5005,
     C2S_TexasCashStandUp = 5007,
     C2S_TexasCashBringIn = 5008,
@@ -4577,7 +4580,7 @@ export enum MessageId {
     S2C_CommonActionNotify = 8114,
     S2C_CommonBuyInsuranceNotify = 8115,
     S2C_CommonChatNotify = 8116,
-    S2C_CommonStartNotify = 8250,
+    S2C_CommonOpenNotify = 8250,
     S2C_CommonRoundStartNotify = 8251,
     S2C_CommonPreFlopRoundNotify = 8252,
     S2C_CommonFlopRoundNotify = 8253,
