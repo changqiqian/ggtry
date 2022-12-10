@@ -64,7 +64,6 @@ export abstract class GameData extends MultipleNotify
     {
         return this.Data_S2CCommonEnterGameResp.mData.gameDynamic;
     }
-
     public ResetGameInfo()
     {
         let seatInfos = this.GetDynamicData().seatInfos;
@@ -135,6 +134,12 @@ export abstract class GameData extends MultipleNotify
         this.GetDynamicData().state = _state;
     }
 
+    public GetGameState() : TexasCashState
+    {
+        return this.GetDynamicData().state;
+    }
+
+
     public UpdatePlayer(_players : Array<PlayerInfo>)
     {
         for(let i = 0 ; i < _players.length ; i++)
@@ -146,6 +151,16 @@ export abstract class GameData extends MultipleNotify
                 this.GetDynamicData().seatInfos[index] = currentPlayer;
             }
         }
+    }
+
+    public GetActionUid() : string
+    {
+        return this.GetDynamicData().actionUid;
+    }
+
+    public GetActionTime() : number
+    {
+        return this.GetDynamicData().actionLeftTime;
     }
 
     public UpdateWhosTurn(_uid : string , _leftTime : number)
@@ -269,6 +284,10 @@ export abstract class GameData extends MultipleNotify
         return result[result.length  - 1];
     }
     
+    public SetActions(_actions : Array<ActionInfo>)
+    {
+        this.GetDynamicData().actions = _actions;
+    }
 
     public FindLastAction() : ActionInfo
     {

@@ -139,8 +139,22 @@ export class Game_CashReplay extends BaseUI {
 
         testData.dealerUid = "selfUid";
         testData.antes = 0;
-        testData.sbUid = "uuid2";
-        testData.bbUid = "selfUid";
+
+        testData.roundStartActions = new Array<ActionResult>();
+        let rsAct1 = new ActionResult();
+        rsAct1.actionInfo = new ActionInfo();
+        rsAct1.actionInfo.uid = "uuid2";
+        rsAct1.actionInfo.actionType = ActionType.ActionType_SB;
+        rsAct1.actionInfo.amount = 1000;
+        let rsAct2 = new ActionResult();
+        rsAct2.actionInfo = new ActionInfo();
+        rsAct2.actionInfo.uid = "selfUid";
+        rsAct2.actionInfo.actionType = ActionType.ActionType_BB;
+        rsAct2.actionInfo.amount = 2000;
+        testData.preFlopActions.push(rsAct1);
+        testData.preFlopActions.push(rsAct2);
+
+
 
         testData.publicCards = new Array<CardInfo>();
         let pubCard1 = new CardInfo();

@@ -1,8 +1,10 @@
 import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
 
+
 export class GameConfig
 {
+
     public static readonly DebugMode =  true;
     public static DevelopIP = "52.77.219.158:9501"; //开发环境ip 可选
     public static TestIP = "52.77.219.158:9601"; //测试环境ip 可选

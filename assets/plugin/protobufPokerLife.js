@@ -4968,10 +4968,8 @@ $root.ReplayData = (function() {
      * @property {Array.<IPlayerInfo>|null} [players] ReplayData players
      * @property {string|null} [dealerUid] ReplayData dealerUid
      * @property {number|null} [antes] ReplayData antes
-     * @property {string|null} [sbUid] ReplayData sbUid
-     * @property {string|null} [bbUid] ReplayData bbUid
-     * @property {string|null} [straddle] ReplayData straddle
      * @property {Array.<ICardInfo>|null} [publicCards] ReplayData publicCards
+     * @property {Array.<IActionResult>|null} [roundStartActions] ReplayData roundStartActions
      * @property {Array.<IActionResult>|null} [preFlopActions] ReplayData preFlopActions
      * @property {Array.<IActionResult>|null} [flopActions] ReplayData flopActions
      * @property {Array.<IActionResult>|null} [turnActions] ReplayData turnActions
@@ -4990,6 +4988,7 @@ $root.ReplayData = (function() {
     function ReplayData(p) {
         this.players = [];
         this.publicCards = [];
+        this.roundStartActions = [];
         this.preFlopActions = [];
         this.flopActions = [];
         this.turnActions = [];
@@ -5050,36 +5049,20 @@ $root.ReplayData = (function() {
     ReplayData.prototype.antes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * ReplayData sbUid.
-     * @member {string} sbUid
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.sbUid = "";
-
-    /**
-     * ReplayData bbUid.
-     * @member {string} bbUid
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.bbUid = "";
-
-    /**
-     * ReplayData straddle.
-     * @member {string} straddle
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.straddle = "";
-
-    /**
      * ReplayData publicCards.
      * @member {Array.<ICardInfo>} publicCards
      * @memberof ReplayData
      * @instance
      */
     ReplayData.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * ReplayData roundStartActions.
+     * @member {Array.<IActionResult>} roundStartActions
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.roundStartActions = $util.emptyArray;
 
     /**
      * ReplayData preFlopActions.
@@ -5147,35 +5130,33 @@ $root.ReplayData = (function() {
             w.uint32(42).string(m.dealerUid);
         if (m.antes != null && Object.hasOwnProperty.call(m, "antes"))
             w.uint32(48).int64(m.antes);
-        if (m.sbUid != null && Object.hasOwnProperty.call(m, "sbUid"))
-            w.uint32(58).string(m.sbUid);
-        if (m.bbUid != null && Object.hasOwnProperty.call(m, "bbUid"))
-            w.uint32(66).string(m.bbUid);
-        if (m.straddle != null && Object.hasOwnProperty.call(m, "straddle"))
-            w.uint32(74).string(m.straddle);
         if (m.publicCards != null && m.publicCards.length) {
             for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(82).fork()).ldelim();
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
+        }
+        if (m.roundStartActions != null && m.roundStartActions.length) {
+            for (var i = 0; i < m.roundStartActions.length; ++i)
+                $root.ActionResult.encode(m.roundStartActions[i], w.uint32(66).fork()).ldelim();
         }
         if (m.preFlopActions != null && m.preFlopActions.length) {
             for (var i = 0; i < m.preFlopActions.length; ++i)
-                $root.ActionResult.encode(m.preFlopActions[i], w.uint32(90).fork()).ldelim();
+                $root.ActionResult.encode(m.preFlopActions[i], w.uint32(74).fork()).ldelim();
         }
         if (m.flopActions != null && m.flopActions.length) {
             for (var i = 0; i < m.flopActions.length; ++i)
-                $root.ActionResult.encode(m.flopActions[i], w.uint32(98).fork()).ldelim();
+                $root.ActionResult.encode(m.flopActions[i], w.uint32(82).fork()).ldelim();
         }
         if (m.turnActions != null && m.turnActions.length) {
             for (var i = 0; i < m.turnActions.length; ++i)
-                $root.ActionResult.encode(m.turnActions[i], w.uint32(106).fork()).ldelim();
+                $root.ActionResult.encode(m.turnActions[i], w.uint32(90).fork()).ldelim();
         }
         if (m.riverActions != null && m.riverActions.length) {
             for (var i = 0; i < m.riverActions.length; ++i)
-                $root.ActionResult.encode(m.riverActions[i], w.uint32(114).fork()).ldelim();
+                $root.ActionResult.encode(m.riverActions[i], w.uint32(98).fork()).ldelim();
         }
         if (m.result != null && m.result.length) {
             for (var i = 0; i < m.result.length; ++i)
-                $root.PlayerWinLose.encode(m.result[i], w.uint32(122).fork()).ldelim();
+                $root.PlayerWinLose.encode(m.result[i], w.uint32(106).fork()).ldelim();
         }
         return w;
     };
@@ -5219,40 +5200,36 @@ $root.ReplayData = (function() {
                 m.antes = r.int64();
                 break;
             case 7:
-                m.sbUid = r.string();
-                break;
-            case 8:
-                m.bbUid = r.string();
-                break;
-            case 9:
-                m.straddle = r.string();
-                break;
-            case 10:
                 if (!(m.publicCards && m.publicCards.length))
                     m.publicCards = [];
                 m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
-            case 11:
+            case 8:
+                if (!(m.roundStartActions && m.roundStartActions.length))
+                    m.roundStartActions = [];
+                m.roundStartActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 9:
                 if (!(m.preFlopActions && m.preFlopActions.length))
                     m.preFlopActions = [];
                 m.preFlopActions.push($root.ActionResult.decode(r, r.uint32()));
                 break;
-            case 12:
+            case 10:
                 if (!(m.flopActions && m.flopActions.length))
                     m.flopActions = [];
                 m.flopActions.push($root.ActionResult.decode(r, r.uint32()));
                 break;
-            case 13:
+            case 11:
                 if (!(m.turnActions && m.turnActions.length))
                     m.turnActions = [];
                 m.turnActions.push($root.ActionResult.decode(r, r.uint32()));
                 break;
-            case 14:
+            case 12:
                 if (!(m.riverActions && m.riverActions.length))
                     m.riverActions = [];
                 m.riverActions.push($root.ActionResult.decode(r, r.uint32()));
                 break;
-            case 15:
+            case 13:
                 if (!(m.result && m.result.length))
                     m.result = [];
                 m.result.push($root.PlayerWinLose.decode(r, r.uint32()));
@@ -10286,9 +10263,7 @@ $root.S2CCommonRoundStartNotify = (function() {
      * @property {Array.<IPlayerInfo>|null} [players] S2CCommonRoundStartNotify players
      * @property {string|null} [dealerUid] S2CCommonRoundStartNotify dealerUid
      * @property {number|null} [antes] S2CCommonRoundStartNotify antes
-     * @property {string|null} [sbUid] S2CCommonRoundStartNotify sbUid
-     * @property {string|null} [bbUid] S2CCommonRoundStartNotify bbUid
-     * @property {string|null} [straddle] S2CCommonRoundStartNotify straddle
+     * @property {Array.<IActionInfo>|null} [actionInfo] S2CCommonRoundStartNotify actionInfo
      * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonRoundStartNotify potInfo
      */
 
@@ -10302,6 +10277,7 @@ $root.S2CCommonRoundStartNotify = (function() {
      */
     function S2CCommonRoundStartNotify(p) {
         this.players = [];
+        this.actionInfo = [];
         this.potInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -10342,28 +10318,12 @@ $root.S2CCommonRoundStartNotify = (function() {
     S2CCommonRoundStartNotify.prototype.antes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * S2CCommonRoundStartNotify sbUid.
-     * @member {string} sbUid
+     * S2CCommonRoundStartNotify actionInfo.
+     * @member {Array.<IActionInfo>} actionInfo
      * @memberof S2CCommonRoundStartNotify
      * @instance
      */
-    S2CCommonRoundStartNotify.prototype.sbUid = "";
-
-    /**
-     * S2CCommonRoundStartNotify bbUid.
-     * @member {string} bbUid
-     * @memberof S2CCommonRoundStartNotify
-     * @instance
-     */
-    S2CCommonRoundStartNotify.prototype.bbUid = "";
-
-    /**
-     * S2CCommonRoundStartNotify straddle.
-     * @member {string} straddle
-     * @memberof S2CCommonRoundStartNotify
-     * @instance
-     */
-    S2CCommonRoundStartNotify.prototype.straddle = "";
+    S2CCommonRoundStartNotify.prototype.actionInfo = $util.emptyArray;
 
     /**
      * S2CCommonRoundStartNotify potInfo.
@@ -10395,15 +10355,13 @@ $root.S2CCommonRoundStartNotify = (function() {
             w.uint32(26).string(m.dealerUid);
         if (m.antes != null && Object.hasOwnProperty.call(m, "antes"))
             w.uint32(32).int64(m.antes);
-        if (m.sbUid != null && Object.hasOwnProperty.call(m, "sbUid"))
-            w.uint32(42).string(m.sbUid);
-        if (m.bbUid != null && Object.hasOwnProperty.call(m, "bbUid"))
-            w.uint32(50).string(m.bbUid);
-        if (m.straddle != null && Object.hasOwnProperty.call(m, "straddle"))
-            w.uint32(58).string(m.straddle);
+        if (m.actionInfo != null && m.actionInfo.length) {
+            for (var i = 0; i < m.actionInfo.length; ++i)
+                $root.ActionInfo.encode(m.actionInfo[i], w.uint32(42).fork()).ldelim();
+        }
         if (m.potInfo != null && m.potInfo.length) {
             for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(66).fork()).ldelim();
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(50).fork()).ldelim();
         }
         return w;
     };
@@ -10441,15 +10399,11 @@ $root.S2CCommonRoundStartNotify = (function() {
                 m.antes = r.int64();
                 break;
             case 5:
-                m.sbUid = r.string();
+                if (!(m.actionInfo && m.actionInfo.length))
+                    m.actionInfo = [];
+                m.actionInfo.push($root.ActionInfo.decode(r, r.uint32()));
                 break;
             case 6:
-                m.bbUid = r.string();
-                break;
-            case 7:
-                m.straddle = r.string();
-                break;
-            case 8:
                 if (!(m.potInfo && m.potInfo.length))
                     m.potInfo = [];
                 m.potInfo.push($root.PotInfo.decode(r, r.uint32()));

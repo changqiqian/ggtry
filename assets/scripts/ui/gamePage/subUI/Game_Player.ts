@@ -155,17 +155,20 @@ export class Game_Player extends BaseUI
                 this.mMiniCard.active = true;
             }
 
-            if(replayData.sbUid == playerInfo.uid)
+            let sbActionResult = GameReplayData.Instance.GetRoundStartActionByActionType(ActionType.ActionType_SB);
+            let bbActionResult = GameReplayData.Instance.GetRoundStartActionByActionType(ActionType.ActionType_BB);
+            let straddleActionResult = GameReplayData.Instance.GetRoundStartActionByActionType(ActionType.ActionType_Straddle);
+            if(sbActionResult.actionInfo.uid == playerInfo.uid)
             {
                 this.ShowActionType(ActionType.ActionType_SB , true);
                 this.Bet(replayData.gameStatic.texasConfig.smallBlind ,ActionType.ActionType_SB, true);
             }
-            else if(replayData.bbUid == playerInfo.uid)
+            else if(bbActionResult.actionInfo.uid == playerInfo.uid)
             {
                 this.ShowActionType(ActionType.ActionType_BB , true);
                 this.Bet(replayData.gameStatic.texasConfig.smallBlind * 2,ActionType.ActionType_BB, true);
             }
-            else if(replayData.straddle == playerInfo.uid)
+            else if(straddleActionResult.actionInfo.uid == playerInfo.uid)
             {
                 this.ShowActionType(ActionType.ActionType_Straddle , true);
                 this.Bet(replayData.gameStatic.texasConfig.smallBlind * 4,ActionType.ActionType_Straddle, true);

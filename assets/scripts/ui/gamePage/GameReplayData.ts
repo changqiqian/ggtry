@@ -113,6 +113,27 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
         return null;
     }
 
+
+    GetRoundStartActionByActionType(_actionType : ActionType) : ActionResult
+    {
+        let roundStartActions = this.GetRoundStartActions();
+        for(let i = 0 ; i < roundStartActions.length ; i++)
+        {
+            let current = roundStartActions[i];
+            if(current.actionInfo.actionType == _actionType)
+            {
+                return current;
+            }
+        }
+
+        return null;
+    }
+
+    GetRoundStartActions() : Array<ActionResult>
+    {
+        return this.Data_ReplayData.mData.roundStartActions;
+    }
+
     GetPreflopActions() : Array<ActionResult>
     {
         return this.Data_ReplayData.mData.preFlopActions;

@@ -98,6 +98,11 @@ export class MultipleTableBtn extends BaseUI
         })
 
 
+        gameData.Data_S2CCommonOpenNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateUI();
+        })
+        
         
         
         
@@ -107,15 +112,15 @@ export class MultipleTableBtn extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let coreData = gameData.Data_S2CCommonEnterGameResp.mData;
-        if(coreData.gameDynamic.state < TexasCashState.TexasCashState_WaitStart)
+        let state = gameData.GetGameState();
+        if(state < TexasCashState.TexasCashState_WaitStart)
         {
             this.WaitGameStart();
             return;
         }
 
-        if(coreData.gameDynamic.state == TexasCashState.TexasCashState_RoundStart ||
-            coreData.gameDynamic.state == TexasCashState.TexasCashState_Settlement )
+        if(state == TexasCashState.TexasCashState_RoundStart ||
+            state == TexasCashState.TexasCashState_Settlement )
         {
             this.WaitNextRound();
             return;
@@ -142,9 +147,12 @@ export class MultipleTableBtn extends BaseUI
         }
 
         this.ShowCards(selfPlayer.cards,selfPlayer.fold);
-        if(coreData.gameDynamic.actionUid == selfPlayer.uid)
+
+        let actionUid = gameData.GetActionUid();
+        let actionTime = gameData.GetActionTime();
+        if(actionUid == selfPlayer.uid)
         {
-            this.ShowCountDown(coreData.gameDynamic.actionLeftTime);
+            this.ShowCountDown(actionTime);
         }
     }
 

@@ -1842,17 +1842,11 @@ export class ReplayData implements IReplayData {
     /** ReplayData antes. */
     public antes: number;
 
-    /** ReplayData sbUid. */
-    public sbUid: string;
-
-    /** ReplayData bbUid. */
-    public bbUid: string;
-
-    /** ReplayData straddle. */
-    public straddle: string;
-
     /** ReplayData publicCards. */
     public publicCards: ICardInfo[];
+
+    /** ReplayData roundStartActions. */
+    public roundStartActions: IActionResult[];
 
     /** ReplayData preFlopActions. */
     public preFlopActions: IActionResult[];
@@ -3641,14 +3635,8 @@ export class S2CCommonRoundStartNotify implements IS2CCommonRoundStartNotify {
     /** S2CCommonRoundStartNotify antes. */
     public antes: number;
 
-    /** S2CCommonRoundStartNotify sbUid. */
-    public sbUid: string;
-
-    /** S2CCommonRoundStartNotify bbUid. */
-    public bbUid: string;
-
-    /** S2CCommonRoundStartNotify straddle. */
-    public straddle: string;
+    /** S2CCommonRoundStartNotify actionInfo. */
+    public actionInfo: IActionInfo[];
 
     /** S2CCommonRoundStartNotify potInfo. */
     public potInfo: IPotInfo[];

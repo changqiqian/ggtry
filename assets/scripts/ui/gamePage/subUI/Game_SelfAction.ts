@@ -2,6 +2,7 @@ import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { NetworkSend } from '../../../network/NetworkSend';
+import { Tool } from '../../../Tool';
 import { BaseButton } from '../../common/BaseButton';
 import { CircleTimer } from '../../common/CircleTimer';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
@@ -224,6 +225,8 @@ export class Game_SelfAction extends BaseUI
     {
         this.mFoldBtn.node.active = true;
         this.mCallBtn.node.active = true;
+        let clientCallAmount = Tool.ConvertMoney_S2C(_lastBetAction.amount);
+        this.mCallBtn.SetTitle(clientCallAmount + "");
         this.mCheckBtn.node.active = false;
         this.mGame_CustomerRaise.InitWithData(this.mIndex);
         this.mSliderRaiseBtn.node.active = true;

@@ -43,6 +43,7 @@ export class LoginUI extends BaseUI
     }
     BindUI() 
     {
+
         this.MaxScreen(this.mBG);
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
@@ -134,7 +135,6 @@ export class LoginUI extends BaseUI
             GameConfig.SetSeverUrl(GameConfig.DevelopIP);
             Network.Instance.CreateWS();
         }
-
     }
 
     CustmoerDestory() 

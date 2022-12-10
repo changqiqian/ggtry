@@ -767,14 +767,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.UpdatePlayer(msg.players);
                 gameData.SetDealer(msg.dealerUid);
                 gameData.UpdatePots(msg.potInfo);
-                let sbAmount = gameData.GetStaticData().texasConfig.smallBlind;
-                gameData.InsertAction(GameData.CreateAction(ActionType.ActionType_SB,msg.sbUid,sbAmount));
-                gameData.InsertAction(GameData.CreateAction(ActionType.ActionType_BB,msg.bbUid,sbAmount*2));
-                if(msg.straddle)
-                {
-                    gameData.InsertAction(GameData.CreateAction(ActionType.ActionType_BB,msg.straddle,sbAmount*4));
-                }
-
+                gameData.SetActions(msg.actionInfo);
                 gameData.Data_S2CCommonRoundStartNotify.mData = msg;
             }
         },this);
