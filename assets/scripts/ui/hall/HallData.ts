@@ -47,7 +47,8 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubRecordDateType : BaseData<Club_RecordDateType> = new BaseData<Club_RecordDateType>();//俱乐部战绩 战绩时间段
     Data_ClubLogoIndex : BaseData<number> = new BaseData<number>(false,0); //创建俱乐部时候选择的logo编号
     Data_ClubStampIndex : BaseData<number> = new BaseData<number>(false,0); //创建俱乐部时候选的封面编号
-    Data_ClubCreateData : BaseData<ClubDetailsInfo> = new BaseData<ClubDetailsInfo>(); //创建俱乐部成功后的返回数据
+    Data_ClubCreateData : BaseData<ClubDetailsInfo> = new BaseData<ClubDetailsInfo>(); //生产一个新俱乐部
+    Data_UpdateAllClub : BaseData<boolean> = new BaseData<boolean>(true); //刷新所有俱乐部
     Data_ClubEnter : BaseData<boolean> = new BaseData<boolean>(); //进入俱乐部
     Data_ClubDismiss : BaseData<string> = new BaseData<string>(); //解散俱乐部
     Data_ClubSearchSuccess : BaseData<boolean> = new BaseData<boolean>(); //搜索俱乐部成功
@@ -75,9 +76,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_S2CClubPlayerPointNotify : BaseData<S2CClubPlayerPointNotify> = new BaseData<S2CClubPlayerPointNotify>(true); //我的俱乐部积分变动推送
     Data_S2CModifyMemberRoleNotify : BaseData<S2CModifyMemberRoleNotify> = new BaseData<S2CModifyMemberRoleNotify>(true); //我的俱乐部角色变动推送
 
-    
-
-    //
     public AddOneGame(_clubGameInfo : ClubGameInfo)
     {
         this.Data_ClubGameInfos.mData.push(_clubGameInfo);

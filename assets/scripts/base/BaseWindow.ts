@@ -17,7 +17,7 @@ export class BaseWindow extends BaseUI {
     }
     BindUI() 
     {
-        this.mDarkBG.on(Node.EventType.TOUCH_END,this.OnClickDarkBG.bind(this),this);
+        this.AddTouchCloseEvent(this.mDarkBG);
     }
     RegDataNotify() 
     {
@@ -64,11 +64,6 @@ export class BaseWindow extends BaseUI {
         {
             this.HideAnm();
         }
-    }
-
-    private OnClickDarkBG()
-    {
-        this.Show(false);
     }
 
     private ShowAnm()

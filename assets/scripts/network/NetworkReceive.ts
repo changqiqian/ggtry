@@ -110,6 +110,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_CreateClub 创建俱乐部===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
+                LocalPlayerData.Instance.CreateEnterClubWithClubInfo( msg.clubInfo);
                 HallData.Instance.Data_ClubCreateData.mData = msg.clubInfo;
             }
             else
@@ -125,10 +126,9 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_GetClubInfos 我的俱乐部列表===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                for(let i = 0 ; i < msg.clubInfos.length ; i++)
-                {
-                    HallData.Instance.Data_ClubCreateData.mData = msg.clubInfos[i];
-                }
+                HallData.Instance.Data_ClubEnter.mData = false;
+                LocalPlayerData.Instance.ReUpdateClubInfo(msg.clubInfos);
+                HallData.Instance.Data_UpdateAllClub.mData = true;
             }
             else
             {
@@ -145,7 +145,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             {
                 LocalPlayerData.Instance.Data_CurrentEnterClubId.mData = msg.clubInfo.id;
                 LocalPlayerData.Instance.UpdateClubInfo(msg);
-                
                 HallData.Instance.Data_ClubEnter.mData = true;
             }
             else
@@ -161,6 +160,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_DismissClub 解散俱乐部===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
+                LocalPlayerData.Instance.RemoveEnterClub( msg.clubId);
                 HallData.Instance.Data_ClubEnter.mData = false;
                 HallData.Instance.Data_ClubDismiss.mData = msg.clubId;
                 UIMgr.Instance.ShowToast(Localization.GetString("00101"));
@@ -178,6 +178,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_QuitClub 退出俱乐部===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
+                LocalPlayerData.Instance.RemoveEnterClub( msg.clubId);
                 HallData.Instance.Data_ClubEnter.mData = false;
                 HallData.Instance.Data_ClubDismiss.mData = msg.clubId;
                 UIMgr.Instance.ShowToast(Localization.GetString("00104"));
@@ -596,14 +597,15 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CDismissClubNotify.decode(_data);
             console.log("收到的内容 S2C_DismissClubNotify 创建者解散俱乐部推送===" + JSON.stringify(msg));
+            LocalPlayerData.Instance.RemoveEnterClub( msg.clubId);
             HallData.Instance.Data_ClubEnter.mData = false;
             HallData.Instance.Data_ClubDismiss.mData = msg.clubId;
         },this);
-
         Network.Instance.AddMsgListenner(MessageId.S2C_RemoveNotify,(_data)=>
         {
             let msg = S2CRemoveNotify.decode(_data);
             console.log("收到的内容 S2C_RemoveNotify  自己被移除俱乐部通知===" + JSON.stringify(msg));
+            LocalPlayerData.Instance.RemoveEnterClub( msg.clubId);
             HallData.Instance.Data_ClubRemoveNotify.mData = msg.clubId;
         },this);
         Network.Instance.AddMsgListenner(MessageId.S2C_JoinClubNotify,(_data)=>
@@ -612,6 +614,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_JoinClubNotify 我的加入俱乐部的申请结果===" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
+                LocalPlayerData.Instance.CreateEnterClubWithClubInfo( msg.clubInfo);
                 HallData.Instance.Data_ClubJoinNotify.mData = msg.clubInfo;
             }
             else
@@ -619,7 +622,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
-
         Network.Instance.AddMsgListenner(MessageId.S2C_ClubJoinNotify,(_data)=>
         {
             let msg = S2CClubJoinNotify.decode(_data);

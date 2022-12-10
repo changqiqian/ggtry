@@ -15,12 +15,6 @@ const { ccclass, property } = _decorator;
 @ccclass('HallUI')
 export class HallUI extends BaseUI 
 {
-    public static GetUsingBundleFolder() : Array<string>
-    {
-        return [];
-        //return ["hall","mttPage","cashPage" ,"clubPage","mePage","cowboy" , "activityPage"];
-    }
-
     
     @property(Node) 
     mBG: Node = null;
@@ -47,18 +41,6 @@ export class HallUI extends BaseUI
             {
                 
             }
-        });
-
-        HallData.Instance.Data_ClubJoinNotify.AddListenner(this,(_data)=>
-        {
-            let clubId = _data.id;
-            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
-            {
-                let tempScript = _script as TipsWindow;
-                let tips = Localization.ReplaceString("00106",clubId);
-                tempScript.SetTips(tips);
-                tempScript.ShowConfirmBtnOnly();
-            })
         });
 
 

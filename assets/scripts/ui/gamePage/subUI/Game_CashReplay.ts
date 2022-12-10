@@ -100,7 +100,7 @@ export class Game_CashReplay extends BaseUI {
 
         testData.players = new Array<PlayerInfo>();
         let player1 = new PlayerInfo();
-        player1.uid = "uuid1";
+        player1.uid = "selfUid";
         player1.nickName = "player1";
         player1.head = "1";
         player1.currencyNum = 100000;
@@ -137,10 +137,10 @@ export class Game_CashReplay extends BaseUI {
         testData.players.push(player1);
         testData.players.push(player2);
 
-        testData.dealerUid = "uuid1";
+        testData.dealerUid = "selfUid";
         testData.antes = 0;
         testData.sbUid = "uuid2";
-        testData.bbUid = "uuid1";
+        testData.bbUid = "selfUid";
 
         testData.publicCards = new Array<CardInfo>();
         let pubCard1 = new CardInfo();
@@ -168,7 +168,7 @@ export class Game_CashReplay extends BaseUI {
         preAct1.actionInfo.amount = 2000;
         let preAct2 = new ActionResult();
         preAct2.actionInfo = new ActionInfo();
-        preAct2.actionInfo.uid = "uuid1";
+        preAct2.actionInfo.uid = "selfUid";
         preAct2.actionInfo.actionType = ActionType.ActionType_Check;
         preAct2.actionInfo.amount = 0;
         testData.preFlopActions.push(preAct1);
@@ -182,7 +182,7 @@ export class Game_CashReplay extends BaseUI {
         flopAct1.actionInfo.amount = 2000;
         let flopAct2 = new ActionResult();
         flopAct2.actionInfo = new ActionInfo();
-        flopAct2.actionInfo.uid = "uuid1";
+        flopAct2.actionInfo.uid = "selfUid";
         flopAct2.actionInfo.actionType = ActionType.ActionType_Call;
         flopAct2.actionInfo.amount = 2000;
         testData.flopActions.push(flopAct1);
@@ -196,7 +196,7 @@ export class Game_CashReplay extends BaseUI {
         turnAct1.actionInfo.amount = 0;
         let turnAct2 = new ActionResult();
         turnAct2.actionInfo = new ActionInfo();
-        turnAct2.actionInfo.uid = "uuid1";
+        turnAct2.actionInfo.uid = "selfUid";
         turnAct2.actionInfo.actionType = ActionType.ActionType_Fold;
         turnAct2.actionInfo.amount = 0;
         testData.turnActions.push(turnAct1);
@@ -212,7 +212,7 @@ export class Game_CashReplay extends BaseUI {
         winlose1.cardInfo.push(player2Cards1);
 
         let winlose2 = new PlayerWinLose();
-        winlose2.uid = "uuid1";
+        winlose2.uid = "selfUid";
         winlose2.combinationResult = 3;
         winlose2.winLose = -50000;
         // winlose2.cardInfo = new Array<CardInfo>(); 

@@ -14,8 +14,8 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_Menu')
 export class Game_Menu extends BaseUI 
 {
-    @property(BaseButton) 
-    mBGBtn: BaseButton = null;
+    @property(Node) 
+    mBG: Node = null;
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
     
@@ -47,10 +47,9 @@ export class Game_Menu extends BaseUI
         this.mMovingShow.SetAnimationType(AnimationShowType.FromLeft);
         this.mMovingShow.SetRoot(this.node);
 
-        this.mBGBtn.SetClickCallback(()=>
-        {
-            this.mMovingShow.HideAnimation();
-        });
+
+        this.AddTouchCloseEvent(this.mBG);
+
         this.mRuleBtn.SetClickCallback(()=>
         {
 
@@ -196,12 +195,10 @@ export class Game_Menu extends BaseUI
         if(_val)
         {
             this.node.active = true;
-            this.mBGBtn.node.active = true;
             this.mMovingShow.ShowAnimation();
         }
         else
         {
-            this.mBGBtn.node.active = false;
             this.mMovingShow.HideAnimation();
         }
     }

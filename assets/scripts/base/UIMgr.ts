@@ -3,9 +3,6 @@ import { instantiate } from "cc";
 import { LoadingMask } from "../ui/common/LoadingMask";
 import { MultipleTableCtr } from "../ui/common/MultipleTableCtr";
 import { Toast } from "../ui/common/Toast";
-import { HallUI } from "../ui/hall/HallUI";
-import { LoadingUI } from "../ui/loading/LoadingUI";
-import { LoginUI } from "../ui/login/LoginUI";
 import { BaseUI } from "./BaseUI";
 import { BaseWindow } from "./BaseWindow";
 import { ResMgr } from "./ResMgr";
@@ -86,9 +83,9 @@ export class UIMgr extends Singleton<UIMgr>()
         UIMgr.InitialBundle = ["common","loading"];
         UIMgr.RestBundle = ["activityPage","cashPage","clubPage","gamePage","hall",
         "login","mePage","mttPage","emoji"];//,"cowboy"];
-        let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,"loading" ,LoadingUI.GetUsingBundleFolder());
-        let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,"login",LoginUI.GetUsingBundleFolder());
-        let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI" ,"hall",HallUI.GetUsingBundleFolder());
+        let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,"loading" ,[]);
+        let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,"login",[]);
+        let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI" ,"hall",[]);
 
         this.mSceneConfig.push(loadingConfig);
         this.mSceneConfig.push(loginConfig);
@@ -324,7 +321,7 @@ export class UIMgr extends Singleton<UIMgr>()
 
         if(this.mCurrentScene != SceneType.None)
         {
-            let configDeleteScene = this.GetSceneConfig(this.mCurrentScene);
+            //let configDeleteScene = this.GetSceneConfig(this.mCurrentScene);
             this.DeleteScene( this.mCurrentScene);
             //删除bundle
             // for(let i = 0 ; i < configDeleteScene.bundleNames.length ; i++)
@@ -335,10 +332,11 @@ export class UIMgr extends Singleton<UIMgr>()
 
         this.mCurrentScene = _sceneType;
         let configNewScene = this.GetSceneConfig(_sceneType);
-        this.PreloadRes(configNewScene.bundleNames  , ()=>
-        {
-            this.ShowLayer(configNewScene.defaultBundle,configNewScene.prefabPath);
-        });
+        this.ShowLayer(configNewScene.defaultBundle,configNewScene.prefabPath);
+        // this.PreloadRes(configNewScene.bundleNames  , ()=>
+        // {
+        //     this.ShowLayer(configNewScene.defaultBundle,configNewScene.prefabPath);
+        // });
     }
 
     public PreloadRes(_bundleNames : Array<string>  , _loadFinish : Function 

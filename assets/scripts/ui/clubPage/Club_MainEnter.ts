@@ -84,6 +84,19 @@ export class Club_MainEnter extends BaseUI
                 this.UpdateUI();
             }
         });
+
+        HallData.Instance.Data_ClubEnter.AddListenner(this,(_data)=>
+        {
+            if(_data)
+            {
+                let currentEnterClubInfo = LocalPlayerData.Instance.GetClubInfoByClubId(this.mData.id);
+                if(currentEnterClubInfo!=null)
+                {
+                    this.mData = currentEnterClubInfo.clubInfo;
+                    this.UpdateUI();
+                }
+            }
+        });
     }
     LateInit()
     {

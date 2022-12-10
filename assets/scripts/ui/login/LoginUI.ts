@@ -19,12 +19,6 @@ const { ccclass, property } = _decorator;
 @ccclass('LoginUI')
 export class LoginUI extends BaseUI 
 {
-
-    public static GetUsingBundleFolder() : Array<string>
-    {
-        return [];
-        //return ["login","clubPage"];
-    }
     @property(Node) 
     mBG: Node = null;
     @property(Label) 
@@ -53,12 +47,8 @@ export class LoginUI extends BaseUI
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
         {
-            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");   
-            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_RecipeLayer",true,(_script)=>
-            {
-                let tempScript = _script as Game_RecipeLayer;
-                tempScript.InitWithData("111");
-            });       
+            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");   
+    
         });
 
         this.mSignBtn.SetClickCallback(()=>

@@ -14,7 +14,7 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     {
         LocalPlayerData.ClearInstance();
     }
-    Data_Uid : BaseData<string> = new BaseData<string>(false,"uuid1"); //玩家uid
+    Data_Uid : BaseData<string> = new BaseData<string>(false,"selfUid"); //玩家uid
     Data_NickName : BaseData<string> = new BaseData<string>(); //玩家姓名
     Data_AreaCode : BaseData<number> = new BaseData<number>(false , 0); //区号
     Data_Head : BaseData<string> = new BaseData<string>(false , null); //头像地址
@@ -31,6 +31,11 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_EnterClubs : BaseData<Array<S2CEnterClub>> = new BaseData<Array<S2CEnterClub>>(false,new Array<S2CEnterClub>()); //玩家的俱乐部数据
     Data_CurrentEnterClubId : BaseData<string> = new BaseData<string>();//当前进入的俱乐部
 
+    public ClearEnterClubInfo()
+    {
+        this.Data_EnterClubs.mData = new Array<S2CEnterClub>();
+        this.Data_CurrentEnterClubId.ResetData();
+    }
 
     public GetClubInfoByClubId(_clubId : string):S2CEnterClub
     {
@@ -55,7 +60,61 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
         }
         else
         {
-            this.Data_EnterClubs.mData[index] = _enterClub;
+            if(_enterClub.clubInfo !=null)
+            {
+                this.Data_EnterClubs.mData[index].clubInfo = _enterClub.clubInfo;
+            }
+            if(_enterClub.clubMember !=null)
+            {
+                this.Data_EnterClubs.mData[index].clubMember = _enterClub.clubMember;
+            }
+        }
+    }
+
+    public ReUpdateClubInfo(_clubInfos : Array<ClubDetailsInfo>)
+    {
+        let needRemoveClubId = new Array<string>();
+        for(let i = 0 ; i < this.Data_EnterClubs.mData.length ; i++)
+        {
+            let currentOldClub = this.Data_EnterClubs.mData[i].clubInfo;
+            let index = _clubInfos.findIndex((_item) => _item.id === currentOldClub.id);
+            if(index < 0)
+            {
+                needRemoveClubId.push(currentOldClub.id);
+            }
+        }
+
+        for(let i = 0 ; i < needRemoveClubId.length ; i++)
+        {
+            let needRemoveId = needRemoveClubId[i];
+            let index = this.Data_EnterClubs.mData.findIndex((_item) => _item.clubInfo.id === needRemoveId);
+            if(index >= 0)
+            {
+                this.Data_EnterClubs.mData.splice(index , 1);
+            }
+        }
+
+        for(let i = 0 ; i < _clubInfos.length ; i++)
+        {
+            this.CreateEnterClubWithClubInfo(_clubInfos[i]);
+        }
+
+    }
+
+    public CreateEnterClubWithClubInfo(_clubInfo : ClubDetailsInfo)
+    {
+        let tempEnterClub = new S2CEnterClub();
+        tempEnterClub.clubInfo = _clubInfo;
+        tempEnterClub.clubMember = null;
+        this.UpdateClubInfo(tempEnterClub);
+    }
+
+    public RemoveEnterClub(_clubId : string)
+    {
+        let index = this.Data_EnterClubs.mData.findIndex((_item) => _item.clubInfo.id === _clubId);
+        if(index >= 0)
+        {
+            this.Data_EnterClubs.mData.splice(index , 1);
         }
     }
 

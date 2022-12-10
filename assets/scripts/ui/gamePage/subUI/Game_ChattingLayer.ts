@@ -14,8 +14,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_ChattingLayer')
 export class Game_ChattingLayer extends BaseUI 
 {
-    @property(BaseButton) 
-    mBGBtn: BaseButton = null;
+
     @property(Node) 
     mLayout: Node = null;
     @property(Node) 
@@ -42,10 +41,8 @@ export class Game_ChattingLayer extends BaseUI
     }
     BindUI()
     {
-        this.mBGBtn.SetClickCallback(()=>
-        {
-            this.mMovingShow.HideAnimation();
-        })
+        this.AddTouchCloseEvent(this.node);
+
 
         this.mSendBtn.node.active = true;
         this.mVipSendBtn.node.active = false;

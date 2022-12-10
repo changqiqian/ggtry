@@ -16,11 +16,6 @@ export class Start extends Component
     onLoad()
     {
         setDisplayStats(false);
-        if (cc.sys.isNative) 
-        {
-            console.log('设置屏幕常亮')
-            jsb.Device.setKeepScreenOn(true);
-        }
     }
     start() 
     {
@@ -29,6 +24,7 @@ export class Start extends Component
         NetworkReceive.Instance.RegisterMsg();
         GameConfig.LoadToken();
 
+        JsbScript.KeepScreenOn(true);
         //获取系统语言设置
         let systemLanguage = JsbScript.getSysLanguage();
         //设置当前语言

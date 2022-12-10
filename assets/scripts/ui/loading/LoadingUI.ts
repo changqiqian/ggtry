@@ -10,11 +10,6 @@ const { ccclass, property } = _decorator;
 @ccclass('LoadingUI')
 export class LoadingUI extends BaseUI 
 {
-    public static GetUsingBundleFolder() : Array<string>
-    {
-        return [];
-        //return ["loading"];
-    }
     
     @property(Node) 
     mBG: Node = null;

@@ -9,8 +9,8 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_ObLayer')
 export class Game_ObLayer extends BaseUI 
 {
-    @property(BaseButton) 
-    mBGBtn: BaseButton = null;
+    @property(Node) 
+    mBG: Node = null;
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
 
@@ -32,12 +32,10 @@ export class Game_ObLayer extends BaseUI
         if(_val)
         {
             this.node.active = true;
-            this.mBGBtn.node.active = true;
             this.mMovingShow.ShowAnimation();
         }
         else
         {
-            this.mBGBtn.node.active = false;
             this.mMovingShow.HideAnimation();
         }
     }
@@ -47,11 +45,7 @@ export class Game_ObLayer extends BaseUI
     }
     BindUI()
     {
-        this.mBGBtn.SetClickCallback(()=>
-        {
-            this.mMovingShow.HideAnimation();
-        });
-
+        this.AddTouchCloseEvent(this.mBG);
         this.mMovingShow.SetAnimationType(AnimationShowType.FromRight);
         this.mMovingShow.SetRoot(this.node);
     }

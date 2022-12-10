@@ -68,7 +68,8 @@ export abstract class BaseUI extends Component {
         this.LateInit();
     }
 
-    onDestroy() {
+    onDestroy() 
+    {
         CowboyData.Instance.RemoveAllDataListennerByTarget(this);
         LoadingData.Instance.RemoveAllDataListennerByTarget(this);
         LoginData.Instance.RemoveAllDataListennerByTarget(this);
@@ -91,7 +92,8 @@ export abstract class BaseUI extends Component {
     //自定义析构
     abstract CustmoerDestory();
 
-    public Show(_val: boolean) {
+    public Show(_val: boolean) 
+    {
         this.node.active = _val;
     }
 
@@ -100,9 +102,12 @@ export abstract class BaseUI extends Component {
         
     }
 
-    LoadSprite(_bundleName: string, _assetPath: string, _loadFinish: Function) {
-        ResMgr.GetAssetInBundle(_bundleName, _assetPath, ImageAsset, (_imageAsset) => {
-            if (cc.isValid(this.node, true) == false) {
+    LoadSprite(_bundleName: string, _assetPath: string, _loadFinish: Function) 
+    {
+        ResMgr.GetAssetInBundle(_bundleName, _assetPath, ImageAsset, (_imageAsset) => 
+        {
+            if (cc.isValid(this.node, true) == false) 
+            {
                 return;
             }
             let tempSpriteFrame = SpriteFrame.createWithImage(_imageAsset);
@@ -110,35 +115,47 @@ export abstract class BaseUI extends Component {
         });
     }
 
-    LoadLocalHead(_headIndex: number, _loadFinish: Function) {
-        this.LoadSprite('common', 'texture/head/' + _headIndex.toString(), (_spriteFrame) => {
-            if (_loadFinish) {
+    LoadLocalHead(_headIndex: number, _loadFinish: Function) 
+    {
+        this.LoadSprite('common', 'texture/head/' + _headIndex.toString(), (_spriteFrame) => 
+        {
+            if (_loadFinish) 
+            {
                 _loadFinish(_spriteFrame);
             }
         });
     }
 
-    LoadRemoteSprite(_url: string, _finish: Function) {
+    LoadRemoteSprite(_url: string, _finish: Function) 
+    {
         if(_url == "")
         {
             return;
         }
-        assetManager.loadRemote(_url, (_err: Error | null, _imageAsset: ImageAsset) => {
-            if (cc.isValid(this.node, true) == false) {
+        assetManager.loadRemote(_url, (_err: Error | null, _imageAsset: ImageAsset) => 
+        {
+            if (cc.isValid(this.node, true) == false) 
+            {
                 return;
             }
-            if (_err) {
+            if (_err) 
+            {
                 console.error(_err.message || _err);
-            } else if (_finish != null) {
+            } 
+            else if (_finish != null) 
+            {
                 let tempSpriteFrame = SpriteFrame.createWithImage(_imageAsset);
                 _finish(tempSpriteFrame);
             }
         });
     }
 
-    LoadPrefab(_bundleName: string, _assetPath: string, _loadFinish: Function) {
-        UIMgr.Instance.CreatePrefab(_bundleName, _assetPath, (_prefab) => {
-            if (cc.isValid(this.node, true) == false) {
+    LoadPrefab(_bundleName: string, _assetPath: string, _loadFinish: Function) 
+    {
+        UIMgr.Instance.CreatePrefab(_bundleName, _assetPath, (_prefab) => 
+        {
+            if (cc.isValid(this.node, true) == false) 
+            {
                 return;
             }
             _loadFinish(_prefab);
@@ -173,7 +190,8 @@ export abstract class BaseUI extends Component {
         {
             let currentScript = this.mLayerList[index].value.getComponent(BaseUI);
             currentScript.Show(true);
-            if (_loadFinish != null) {
+            if (_loadFinish != null) 
+            {
                 _loadFinish(currentScript);
             }
         } 
@@ -211,9 +229,12 @@ export abstract class BaseUI extends Component {
     {
         let parentNode = this.node.parent;
         let parentScript = parentNode.getComponent(BaseUI);
-        if (parentScript.mIsWindow) {
+        if (parentScript.mIsWindow) 
+        {
             parentScript.Show(false);
-        } else {
+        } 
+        else 
+        {
             this.Show(false);
         }
     }
@@ -301,6 +322,16 @@ export abstract class BaseUI extends Component {
         {
             this.mTimerCallback();
         }
+    }
+
+    AddTouchCloseEvent(_node : Node)
+    {
+        _node.on(Node.EventType.TOUCH_END,this.TouchToClose.bind(this),this);
+    }
+
+    TouchToClose()
+    {
+        this.Show(false);
     }
 
 

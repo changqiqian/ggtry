@@ -55,7 +55,10 @@ export class Game_SeatUI extends BaseUI
         }
 
         let selfPlayer = GameReplayData.Instance.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        this.TryRotateSeats(selfPlayer.seat , false);
+        if(selfPlayer != null)
+        {
+            this.TryRotateSeats(selfPlayer.seat , false);
+        }
 
         GameReplayData.Instance.Data_State.AddListenner(this,(_data)=>
         {

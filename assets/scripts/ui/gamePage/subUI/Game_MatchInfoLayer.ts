@@ -11,10 +11,11 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_MatchInfoLayer')
 export class Game_MatchInfoLayer extends ListViewCtr<any> 
 {
-    @property(BaseButton) 
-    mBGBtn: BaseButton = null;
+
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
+    @property(Node) 
+    mBG: Node = null;
     @property(Label) 
     mMatchName: Label = null;
     @property(Label) 
@@ -35,12 +36,10 @@ export class Game_MatchInfoLayer extends ListViewCtr<any>
         if(_val)
         {
             this.node.active = true;
-            this.mBGBtn.node.active = true;
             this.mMovingShow.ShowAnimation();
         }
         else
         {
-            this.mBGBtn.node.active = false;
             this.mMovingShow.HideAnimation();
         }
     }
@@ -52,11 +51,7 @@ export class Game_MatchInfoLayer extends ListViewCtr<any>
     }
     BindUI()
     {
-        this.mBGBtn.SetClickCallback(()=>
-        {
-            this.mMovingShow.HideAnimation();
-        });
-
+        this.AddTouchCloseEvent(this.mBG);
         this.mMovingShow.SetAnimationType(AnimationShowType.FromLeft);
         this.mMovingShow.SetRoot(this.node);
     }

@@ -127,14 +127,13 @@ export class Club_PrivateLayer extends BaseUI
                 return;
             }
 
-            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
-            let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
-
-            if(enterClub.clubInfo.id != _data.id)
+            let currentEnterClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            if(currentEnterClubId != _data.id)
             {
                 return;
             }
             
+            let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentEnterClubId);
             this.mClubName.string = enterClub.clubInfo.name;
         });
 
@@ -162,19 +161,6 @@ export class Club_PrivateLayer extends BaseUI
             if(_data)
             {
                 this.UpdateNotifyBtn();
-            }
-        });
-
-        HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
-        {
-            if(this.node.activeInHierarchy == false)
-            {
-                return;
-            }
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
-            if(currentClubId == _data)
-            {
-                HallData.Instance.Data_ClubEnter.mData = false;
             }
         });
 

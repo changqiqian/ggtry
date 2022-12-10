@@ -1,9 +1,11 @@
 import { _decorator, Component, Node, PageView, instantiate, UITransform } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
+import { TipsWindow } from '../common/TipsWindow';
 import { HallData } from '../hall/HallData';
 import { Club_MainEnter } from './Club_MainEnter';
 const { ccclass, property } = _decorator;
@@ -79,9 +81,31 @@ export class Club_Main extends BaseUI
             this.InsertClub(_data);
         });
 
+        HallData.Instance.Data_UpdateAllClub.AddListenner(this,(_data)=>
+        {
+            if(_data)
+            {
+                this.mPageView.removeAllPages();
+                let enterClubInfos = LocalPlayerData.Instance.Data_EnterClubs.mData;
+                for(let i = 0 ; i < enterClubInfos.length ; i++)
+                {
+                    let currentInfo = enterClubInfos[i].clubInfo;
+                    this.InsertClub(currentInfo);
+                }
+            }
+
+        });
+
         HallData.Instance.Data_ClubJoinNotify.AddListenner(this,(_data)=>
         {
             this.InsertClub(_data);
+            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            {
+                let tempScript = _script as TipsWindow;
+                let tips = Localization.ReplaceString("00106",_data.id);
+                tempScript.SetTips(tips);
+                tempScript.ShowConfirmBtnOnly();
+            })
         });
 
         HallData.Instance.Data_ClubEnter.AddListenner(this,(_data)=>
@@ -94,6 +118,14 @@ export class Club_Main extends BaseUI
             {
                 LocalPlayerData.Instance.Data_CurrentEnterClubId.mData = "";
                 UIMgr.Instance.HideUiByTag(HallData.ClubUiTag);
+            }
+        });
+        HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
+        {
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            if(currentClubId == _data)
+            {
+                HallData.Instance.Data_ClubEnter.mData = false;
             }
         });
         HallData.Instance.Data_ClubSearchSuccess.AddListenner(this,(_data)=>

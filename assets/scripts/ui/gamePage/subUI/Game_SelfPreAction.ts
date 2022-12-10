@@ -69,7 +69,18 @@ export class Game_SelfPreAction extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let currentActionUid =  gameData.GetDynamicData().actionUid;
+        let dynamicData =  gameData.GetDynamicData();
+
+        if(dynamicData.state == TexasCashState.TexasCashState_Create ||
+        dynamicData.state == TexasCashState.TexasCashState_RoundStart ||
+        dynamicData.state == TexasCashState.TexasCashState_Settlement ||
+        dynamicData.state == TexasCashState.TexasCashState_Waiting)
+        {
+            this.node.active = false;
+            return;
+        }
+
+        let currentActionUid =  dynamicData.actionUid;
         if(currentActionUid == LocalPlayerData.Instance.Data_Uid.mData)
         {
             this.node.active = false;
