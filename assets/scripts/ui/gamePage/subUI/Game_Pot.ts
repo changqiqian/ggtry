@@ -76,8 +76,33 @@ export class Game_Pot extends BaseUI
         })
         gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
         {
-            
+            this.UpdateSubPots();
+            this.UpdateTotalPot();
         })
+
+        gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateSubPots();
+            this.UpdateTotalPot();
+        })
+
+        gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateSubPots();
+            this.UpdateTotalPot();
+        })
+        gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateSubPots();
+            this.UpdateTotalPot();
+        })
+        gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateSubPots();
+            this.UpdateTotalPot();
+        })
+        
+        
     }
 
     public InitWithReplay()
@@ -85,21 +110,31 @@ export class Game_Pot extends BaseUI
         
     }
 
+    ClearPot()
+    {
+        this.mTotalAmount.string = "";
+        this.HideSubPot();
+    }
 
     UpdateTotalPot()
     {
-        this.mTotalPotBG.active = true;
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let potInfos = gameData.GetDynamicData().potInfo;
 
-        let total = 0;
-        for(let i = 0; i < potInfos.length ; i++)
+        if(potInfos.length > 1)
         {
-            total += potInfos[i].pot;
+            let total = 0;
+            for(let i = 0; i < potInfos.length ; i++)
+            {
+                total += potInfos[i].pot;
+            }
+            this.SetTotalPot(total);
+            this.mTotalPotBG.active = true;
+            return;
         }
 
-        this.mTotalAmount.string = Tool.ConvertMoney_S2C(total) + "";
+        this.mTotalPotBG.active = false;
     }
 
     UpdateSubPots()
