@@ -513,7 +513,7 @@ export class Game_Player extends BaseUI
         }
 
         this.mSelfBtn.node.active = true;
-        this.mBG.active = true;
+        this.mBG.active = !(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData);
         this.UpdateName(playerInfo.nickName);
         this.UpdateHead(playerInfo.head);
         this.UpdateMoney(false,playerInfo);

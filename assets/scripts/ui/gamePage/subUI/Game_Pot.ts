@@ -23,8 +23,7 @@ export class Game_Pot extends BaseUI
     }
     BindUI() 
     {
-        this.HideMainPot();
-        this.HideSubPot();
+        this.ClearPot();
     }
     RegDataNotify() 
     {
@@ -45,10 +44,6 @@ export class Game_Pot extends BaseUI
         this.mTotalAmount.string = Localization.GetString("00064")+":" + Tool.ConvertMoney_S2C(_amount);
     }
 
-    HideMainPot()
-    {
-        this.mTotalPotBG.active = false;
-    }
 
     HideSubPot()
     {
@@ -112,6 +107,7 @@ export class Game_Pot extends BaseUI
 
     ClearPot()
     {
+        this.mTotalPotBG.active = false;
         this.mTotalAmount.string = "";
         this.HideSubPot();
     }

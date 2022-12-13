@@ -72,31 +72,18 @@ export class Game_PublicCards extends BaseUI
             let cards = gameData.GetDynamicData().publicCards;
             for(let i = 0 ; i < cards.length ; i++)
             {
-                let poker = this.GetCardNode(i);
-                poker.ResetAndHide();
-                poker.ShowBack();
-                poker.SetFrontByCardInfo(cards[i]);
-                poker.DealAnimation();
+                this.ShowCard(i , cards[i]);
             }
         });
 
         gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
         {
-            let poker = this.GetCardNode(3);
-            poker.ResetAndHide();
-            poker.ShowBack();
-            poker.SetFrontByCardInfo(_data.card);
-            poker.DealAnimation();
+            this.ShowCard(3 , _data.card);
         });
 
-        
         gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
         {
-            let poker = this.GetCardNode(4);
-            poker.ResetAndHide();
-            poker.ShowBack();
-            poker.SetFrontByCardInfo(_data.card);
-            poker.FlipToFront();
+            this.ShowCard(4 , _data.card);
         });
         
     }
@@ -109,6 +96,18 @@ export class Game_PublicCards extends BaseUI
             let poker = this.GetCardNode(i);
             poker.ResetAndHide();
         }
+    }
+
+    ShowCard(_index , _cardInfo : CardInfo)
+    {
+        this.scheduleOnce(()=>
+        {
+            let poker = this.GetCardNode(_index);
+            poker.ResetAndHide();
+            poker.ShowBack();
+            poker.SetFrontByCardInfo(_cardInfo);
+            poker.FlipToFront();
+        },1)
     }
 
     GetCardNode(_index : number) : Poker

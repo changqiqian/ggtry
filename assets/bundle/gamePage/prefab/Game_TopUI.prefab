@@ -3217,7 +3217,7 @@
     "propertyPath": [
       "_string"
     ],
-    "value": "355"
+    "value": "ob"
   },
   {
     "__type__": "cc.TargetInfo",
@@ -3235,7 +3235,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 50.05,
+      "width": 33.37,
       "height": 50.4
     }
   },
