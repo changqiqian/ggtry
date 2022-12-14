@@ -1,10 +1,8 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
-import { Localization } from '../../../base/Localization';
 import { UIMgr } from '../../../base/UIMgr';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
-import { ToggleBtn } from '../../common/ToggleBtn';
 import { Game_ChattingLayer } from './Game_ChattingLayer';
 import { Game_MatchInfoLayer } from './Game_MatchInfoLayer';
 import { Game_RecipeLayer } from './Game_RecipeLayer';

@@ -153,7 +153,11 @@ export class Game_SelfAction extends BaseUI
 
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateUI();
+            if(_data.actionInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                gameData.Data_PreCheckOrFold.mData = Game_PreCheckOrFold.UnSelected;
+            }
+            this.HideAll();
         })
     }
 
@@ -218,7 +222,6 @@ export class Game_SelfAction extends BaseUI
                 return;
             }
 
-
             if(selfLastAct.amount >= biggestAct.amount)
             {
                 this.ExcutiveCheck();
@@ -227,6 +230,8 @@ export class Game_SelfAction extends BaseUI
         }
         this.ShowActionUI();
     }
+
+    
 
     ShowActionUI()
     {

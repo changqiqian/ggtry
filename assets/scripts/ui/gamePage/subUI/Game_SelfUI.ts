@@ -307,15 +307,11 @@ export class Game_SelfUI extends BaseUI
             this.mCards.active = false;
             return;
         }
-        let cardNodes = this.mCards.children;
         this.mCards.active = true;
         for(let i = 0 ; i < cards.length ; i++)
         {
-            let currentPoker = cardNodes[i].getComponent(Poker);
-            currentPoker.ResetAndHide();
-            currentPoker.ShowBack(); 
-            currentPoker.SetFrontByCardInfo(cards[i]);
-            currentPoker.DealAnimation();
+            let delayTime = i*0.05;
+            this.ShowCard(i , cards[i] , delayTime);
         }
     }
 
@@ -339,6 +335,19 @@ export class Game_SelfUI extends BaseUI
             return;
         }
         this.FoldCards();
+    }
+
+    ShowCard(_index : number , _cardInfo : CardInfo , _delayTime : number)
+    {
+        this.scheduleOnce(()=>
+        {
+            let cardNodes = this.mCards.children;
+            let currentPoker = cardNodes[_index].getComponent(Poker);
+            currentPoker.ResetAndHide();
+            currentPoker.ShowBack(); 
+            currentPoker.SetFrontByCardInfo(_cardInfo);
+            currentPoker.DealAnimation();
+        },_delayTime)
     }
 
     FoldCards()

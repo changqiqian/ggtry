@@ -1,7 +1,11 @@
 import { _decorator, Component, Node, instantiate, Sprite } from 'cc';
+import { AudioManager } from '../../base/AudioManager';
 import { BaseUI } from '../../base/BaseUI';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { DragDownEvent } from '../../UiTool/DragDownEvent';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
+import { MultipleTableCtr } from '../common/MultipleTableCtr';
+import { HallData } from '../hall/HallData';
 import { Game_BottomUI } from './subUI/Game_BottomUI';
 import { Game_ChatingCtr } from './subUI/Game_ChatingCtr';
 import { Game_ControlBtns } from './subUI/Game_ControlBtns';
@@ -62,6 +66,143 @@ export class GameBase extends BaseUI
         this.InitSeatUI(_seatNum);
         this.InitChatCtr();
         this.InitBG();
+        this.BindData();
+    }
+
+    BindData()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+
+        gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
+        {
+            let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData)
+            if(selfPlayer == null)
+            {
+                return;
+            }
+            if(selfPlayer.uid != gameData.GetDynamicData().actionUid)
+            {
+                return;
+            }
+            this.TryToPlayAudio("YourTurn");
+        });
+
+        gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
+        {
+            this.TryToPlayAudio("Bet");
+        })
+
+        gameData.Data_S2CCommonPreFlopRoundNotify.AddListenner(this,(_data)=>
+        {
+            //发牌音效
+            let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData)
+            if(selfPlayer == null)
+            {
+                return;
+            }
+
+            this.TryToPlayAudio("DealHands");
+        })
+
+        gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.TryToPlayAudio("DealCard");
+        })
+
+        gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.TryToPlayAudio("DealCard");
+        })
+
+        gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
+        {
+            this.TryToPlayAudio("DealCard");
+        })
+
+        gameData.Data_S2CCommonCurrentActionNotify.AddListenner(this,(_data)=>
+        {
+            let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData)
+            if(selfPlayer == null)
+            {
+                return;
+            }
+
+            if(selfPlayer.uid != _data.actionUid)
+            {
+                return;
+            }
+            this.TryToPlayAudio("YourTurn");
+
+        })
+
+        gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
+        {
+            let actType = _data.actionInfo.actionType;
+            switch(actType)
+            {
+                case ActionType.ActionType_AllIn:
+                {
+                    this.TryToPlayAudio("Bet");
+                }
+                break;
+                case ActionType.ActionType_Ante:
+                {
+                    this.TryToPlayAudio("Bet");
+                }
+                break;
+                case ActionType.ActionType_BB:
+                {
+                    this.TryToPlayAudio("Bet");
+                }
+                break;
+                case ActionType.ActionType_Bet:
+                {
+                    this.TryToPlayAudio("Bet");
+                }
+                break;
+                case ActionType.ActionType_Call:
+                {
+                    this.TryToPlayAudio("Bet");
+                }
+                break;
+                case ActionType.ActionType_Check:
+                {
+                    this.TryToPlayAudio("Check");
+                }
+                break;
+                case ActionType.ActionType_Fold:
+                {
+                    this.TryToPlayAudio("Fold");
+                }
+                break;
+                case ActionType.ActionType_Raise:
+                {
+                    this.TryToPlayAudio("Bet");
+                }
+                break;
+                case ActionType.ActionType_SB:
+                {
+                    this.TryToPlayAudio("Bet");
+                }
+                break;
+                case ActionType.ActionType_Straddle:
+                {
+                    this.TryToPlayAudio("Bet");
+                }
+                break;
+            }
+        })
+    }
+
+    TryToPlayAudio(_audioName : string)
+    {
+        if(HallData.Instance.Data_MultipeIndex.mData != this.mIndex)
+        {
+            return;
+        }
+
+        AudioManager.Instance.PlayMusicOneShot(_audioName);
     }
 
     InitSubView()
