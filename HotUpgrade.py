@@ -23,7 +23,7 @@ filePathToCreatorCompileTools = '/Applications/CocosCreator/Creator/3.5.2/CocosC
 #要进行编译的项目工程地址
 pathProjectToCompile = '../cowboy/'
 #存放生成热更新文件的地址
-pathToSaveHotUpdate = '../cowboy/HotRelase/remote-assets2/'
+pathToSaveHotUpdate = '../cowboy/HotRelease/remote-assets2/'
 #COCOS项目中存放porject.manifest热更文件的地址
 filePathToProjectManifest = 'assets/'
 #构建生成的资源目录

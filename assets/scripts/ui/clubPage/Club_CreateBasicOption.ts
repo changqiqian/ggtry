@@ -90,7 +90,6 @@ export class Club_CreateBasicOption extends BaseUI
             this.mMeassureSliderTax.SetIndex(_data);
         })
 
-
         HallData.Instance.Data_ClubCreateGameCurrencyType.AddListenner(this,(_data)=>
         {
             HallData.Instance.Data_Club_CreateTexasConfig.mData.currencyType = _data;

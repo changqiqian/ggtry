@@ -21,9 +21,7 @@ export class Game_SelfPreAction extends BaseUI
     }
     BindUI() 
     {
-
         this.node.active = false;
-
     }
     RegDataNotify() 
     {
@@ -60,7 +58,10 @@ export class Game_SelfPreAction extends BaseUI
 
         gameData.Data_S2CCommonCurrentActionNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateUI();
+            if(_data.actionUid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                this.node.active = false;
+            }
         })
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
@@ -74,6 +75,11 @@ export class Game_SelfPreAction extends BaseUI
         })
 
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateUI();
+        })
+
+        gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
             this.UpdateUI();
         })

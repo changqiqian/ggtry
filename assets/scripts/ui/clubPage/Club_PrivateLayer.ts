@@ -11,10 +11,11 @@ import { Localization } from '../../base/Localization';
 import ListView from '../../UiTool/ListView';
 import { Club_GameItem } from './Club_GameItem';
 import { NetworkSend } from '../../network/NetworkSend';
+import { ListViewCtr } from '../../UiTool/ListViewCtr';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_PrivateLayer')
-export class Club_PrivateLayer extends BaseUI 
+export class Club_PrivateLayer extends ListViewCtr<ClubGameInfo>
 {
     @property(BaseButton) 
     mBackBtn: BaseButton = null;
@@ -38,27 +39,29 @@ export class Club_PrivateLayer extends BaseUI
     mDataBtn: BaseButton = null;
     @property(BaseButton) 
     mCreateBtn: BaseButton = null;
-    @property(ListView) 
-    mListView: ListView = null;
+    @property(BaseButton) 
+    mRefreshBtn: BaseButton = null;
 
-    mGameList : Array<ClubGameInfo>;
     onEnable()
     {
-        this.mListView.numItems = 0;
         this.UpdateNotifyBtn();
         this.UpdateClubInfoUI();
         this.UpdateMoney();
-        this.DragTop();
+        this.OnDragTop();
     }
 
-    InitParam()
-    {
-        this.OffsetHallTop();
-    }
+
     BindUI()
     {
-        this.mListView.SetRenderCallback(this.RenderEvent.bind(this));
-        this.mListView.SetDragTop(this.DragTop.bind(this));
+        this.OffsetHallTop();
+        this.mRefreshBtn.Show(false);
+        this.mRefreshBtn.SetClickCallback(()=>
+        {
+            this.OnDragTop();
+            this.mRefreshBtn.Show(false);
+        })
+
+
         this.mBackBtn.SetClickCallback(()=>
         {
             HallData.Instance.Data_ClubEnter.mData = false;
@@ -177,8 +180,8 @@ export class Club_PrivateLayer extends BaseUI
             {
                 return;
             }
-            this.mGameList = HallData.Instance.Data_ClubGameInfos.mData;
-            this.mListView.numItems = this.mGameList.length;
+            this.mCurrentData = HallData.Instance.Data_ClubGameInfos.mData;
+            this.UpdateData(this.mCurrentData.length);
         });
 
         HallData.Instance.Data_S2CGetClubGameList.AddListenner(this,(_data)=>
@@ -194,8 +197,8 @@ export class Club_PrivateLayer extends BaseUI
                 return;
             }
 
-            this.mGameList = HallData.Instance.Data_ClubGameInfos.mData;
-            this.mListView.numItems = this.mGameList.length;
+            this.mCurrentData = HallData.Instance.Data_ClubGameInfos.mData;
+            this.UpdateData(this.mCurrentData.length);
         });
 
         HallData.Instance.Data_S2CDismissClubGame.AddListenner(this,(_data)=>
@@ -210,7 +213,7 @@ export class Club_PrivateLayer extends BaseUI
             {
                 return;
             }
-            this.DragTop();
+            this.OnDragTop();
         });
 
         HallData.Instance.Data_S2CDismissClubGameNotify.AddListenner(this,(_data)=>
@@ -225,7 +228,7 @@ export class Club_PrivateLayer extends BaseUI
             {
                 return;
             }
-            this.DragTop();
+            this.OnDragTop();
         });
 
         
@@ -241,15 +244,6 @@ export class Club_PrivateLayer extends BaseUI
         }
         let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
         this.mNotifyBtn.node.active = HallData.Instance.ApplyingNotifyContain(clubId)
-    }
-
-    LateInit()
-    {
-
-    }
-    CustmoerDestory()
-    {
-        this.mGameList = null;
     }
 
     UpdateMoney()
@@ -293,16 +287,22 @@ export class Club_PrivateLayer extends BaseUI
 
     RenderEvent(_item: Node , _index: number)
     {
-        let currentData = this.mGameList[_index];
+        let currentData = this.mCurrentData[_index];
         let gameItem = _item.getComponent(Club_GameItem);
         let gameId = currentData.gameId;
         gameItem.InitWithServerData(gameId , currentData);
     }
 
-    DragTop()
+    Refresh()
     {
         let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
         NetworkSend.Instance.GetClubGameList(clubId);
+    }
+
+    RefreshData()
+    {
+        this.mListView.numItems = this.mCurrentData.length;
+        this.mRefreshBtn.Show(this.mCurrentData.length == 0);
     }
 }
 
