@@ -142,9 +142,9 @@ export class Game_Pot extends BaseUI
         let potInfos = gameData.GetDynamicData().potInfo;
         for(let i = 0; i < potInfos.length ; i++)
         {
-            let potId = potInfos[i].id;
+            //let potId = potInfos[i].id;
             let potAmount = potInfos[i].pot;
-            let subPotNode = this.mSubPots.children[potId];
+            let subPotNode = this.mSubPots.children[i];
             subPotNode.active = true;
             subPotNode.children[0].getComponent(Label).string = Tool.ConvertMoney_S2C(potAmount) + "";
         }

@@ -139,6 +139,12 @@ export class Game_SelfUI extends BaseUI
         {
             this.CleanTable();
         })
+
+        gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateMoney();
+        })
+        
     }
 
 
@@ -202,6 +208,10 @@ export class Game_SelfUI extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer == null)
+        {
+            return;
+        }
         if(gameData.CanPlayerBuyIn(selfPlayer.uid))
         {
             this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum + selfPlayer.bringInNum) + "";
@@ -213,6 +223,13 @@ export class Game_SelfUI extends BaseUI
     }
     UpdateAddTimeBtn(_show : boolean , _delaySpend : string)
     {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer == null)
+        {
+            return;
+        }
         this.mGame_AddTime.node.active = _show;
         if(_show)
         {
@@ -223,6 +240,11 @@ export class Game_SelfUI extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
+        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer == null)
+        {
+            return;
+        }
         let lastAct = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
         if(lastAct != null)
         {
@@ -235,6 +257,11 @@ export class Game_SelfUI extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
+        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer == null)
+        {
+            return;
+        }
         let lastAct = gameData.FindLastAction();
         if(lastAct != null)
         {

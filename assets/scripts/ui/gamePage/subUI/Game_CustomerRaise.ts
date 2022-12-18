@@ -76,7 +76,8 @@ export class Game_CustomerRaise extends BaseUI
         for(let i = 0 ; i < this.mRaiseByBB.children.length ; i++)
         {
             let bbRatio = i + 3;
-            let amount = bbRatio * bb
+            let amount = bbRatio * bb;
+            let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
             let clientAmount = Tool.ConvertMoney_S2C(amount);
             let currentBtn = this.mRaiseByBB.children[i].getComponent(BaseButton);
             currentBtn.SetTitle(clientAmount + "");
@@ -84,15 +85,16 @@ export class Game_CustomerRaise extends BaseUI
             {
                 let actionInfo = new ActionInfo();
                 actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
+                let realMoney = amount - selfBetAction.amount;
 
-                if(amount >= selfPlayer.currencyNum)
+                if(realMoney >= selfPlayer.currencyNum)
                 {
                     actionInfo.amount = selfPlayer.currencyNum;
                     actionInfo.actionType = ActionType.ActionType_AllIn;
                 }
                 else
                 {
-                    actionInfo.amount = amount;
+                    actionInfo.amount = realMoney;
                     actionInfo.actionType = ActionType.ActionType_Raise;
                 }
                 NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId() , gameStruct.mGameId ,actionInfo );
@@ -113,6 +115,8 @@ export class Game_CustomerRaise extends BaseUI
             let ratio = GameConfig.GetCustomerRaiseRatio(i);
             let title = GameConfig.GetCustomerRaiseTitle(i);
             let amount = ratio *  totalPot;
+            let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
+
             let clientAmount = Tool.ConvertMoney_S2C(amount);
 
             let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
@@ -122,15 +126,16 @@ export class Game_CustomerRaise extends BaseUI
             {
                 let actionInfo = new ActionInfo();
                 actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
+                let realMoney = amount - selfBetAction.amount;
 
-                if(amount >= selfPlayer.currencyNum)
+                if(realMoney >= selfPlayer.currencyNum)
                 {
                     actionInfo.amount = selfPlayer.currencyNum;
                     actionInfo.actionType = ActionType.ActionType_AllIn;
                 }
                 else
                 {
-                    actionInfo.amount = amount;
+                    actionInfo.amount = realMoney;
                     actionInfo.actionType = ActionType.ActionType_Raise;
                 }
                 NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId() , gameStruct.mGameId ,actionInfo );

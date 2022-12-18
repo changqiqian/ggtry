@@ -102,7 +102,7 @@ export class GameBase extends BaseUI
                 return;
             }
 
-            this.TryToPlayAudio("DealHands");
+            this.TryToPlayAudio("DealCard");
         })
 
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>

@@ -219,7 +219,8 @@ export class Game_CashReplay extends BaseUI {
         testData.result = new Array<PlayerWinLose>();
         let winlose1 = new PlayerWinLose();
         winlose1.uid = "uuid2";
-        winlose1.combinationResult = 2;
+        winlose1.combinationResult = new CombinationResult();
+        winlose1.combinationResult.Combination = 2;
         winlose1.winLose = 50000;
         winlose1.cardInfo = new Array<CardInfo>(); 
         winlose1.cardInfo.push(player2Cards1);
@@ -227,7 +228,8 @@ export class Game_CashReplay extends BaseUI {
 
         let winlose2 = new PlayerWinLose();
         winlose2.uid = "selfUid";
-        winlose2.combinationResult = 3;
+        winlose2.combinationResult = new CombinationResult();
+        winlose2.combinationResult.Combination = 3;
         winlose2.winLose = -50000;
         // winlose2.cardInfo = new Array<CardInfo>(); 
         // winlose2.cardInfo.push(player1Cards1);

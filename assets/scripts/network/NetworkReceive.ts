@@ -871,6 +871,11 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(gameStruct != null)
             {
                 let gameData = gameStruct.mGameData;
+                for(let i = 0 ; i < msg.result.length ; i++)
+                {
+                    let currentResult = msg.result[i];
+                    gameData.UpdatePlayerMoney(currentResult.uid , currentResult.amount);
+                }
                 gameData.Data_S2CCommonSettlementNotify.mData = msg;
             }
         },this);  

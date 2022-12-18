@@ -59,10 +59,13 @@ export class Game_SelfAction extends BaseUI
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-            let lastBetAction = gameData.FindLastBetAction();
+            let biggestBetAction = gameData.FindBiggestBetAction();
+            let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
+
+        
             let actionInfo = new ActionInfo();
             actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
-            let callAmount = lastBetAction.amount;
+            let callAmount = biggestBetAction.amount - selfBetAction.amount;
             if(callAmount >= selfPlayer.currencyNum)
             {
                 actionInfo.amount = selfPlayer.currencyNum;
@@ -73,6 +76,7 @@ export class Game_SelfAction extends BaseUI
                 actionInfo.amount = callAmount;
                 actionInfo.actionType = ActionType.ActionType_Call;
             }
+            
             this.SendGameAction(actionInfo);
         });
 
@@ -83,8 +87,10 @@ export class Game_SelfAction extends BaseUI
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
             let actionInfo = new ActionInfo();
             actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
+            _amount = _amount - selfBetAction.amount;
 
             if(_amount >= selfPlayer.currencyNum)
             {
@@ -94,7 +100,7 @@ export class Game_SelfAction extends BaseUI
             else
             {
                 actionInfo.amount = _amount;
-                actionInfo.actionType = ActionType.ActionType_Call;
+                actionInfo.actionType = ActionType.ActionType_Raise;
             }
 
             this.SendGameAction(actionInfo);
@@ -133,17 +139,27 @@ export class Game_SelfAction extends BaseUI
 
         gameData.Data_S2CCommonCurrentActionNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateUI();
+            if(_data.actionUid  == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                this.UpdateUI();
+            }
+            else
+            {
+                this.HideAll();
+            }
         })
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateUI();
+            this.HideAll();
         })
 
         gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateUI();
+            if(_data.actionUid  == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                this.HideAll();
+            }
         })
 
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
@@ -156,8 +172,9 @@ export class Game_SelfAction extends BaseUI
             if(_data.actionInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
             {
                 gameData.Data_PreCheckOrFold.mData = Game_PreCheckOrFold.UnSelected;
+                this.HideAll();
             }
-            this.HideAll();
+            
         })
     }
 
@@ -237,15 +254,27 @@ export class Game_SelfAction extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let lastBetAction = gameData.FindLastBetAction();
+        let biggestBetAction = gameData.FindBiggestBetAction();
+        let selfLastAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
         this.mCircleTimer.StopTimer();
-        if(lastBetAction ==null)
+        if(biggestBetAction == null)
         {
             this.ShowCheckUI();
         }
+        else if(selfLastAction == null)
+        {
+            this.ShowBetUI(biggestBetAction);
+        }
         else
         {
-            this.ShowBetUI(lastBetAction);
+            if(selfLastAction.amount == biggestBetAction.amount)
+            {
+                this.ShowCheckUI();
+            }
+            else
+            {
+                this.ShowBetUI(biggestBetAction);
+            }
         }
 
         let actionTime = gameData.GetDynamicData().actionLeftTime;
@@ -288,18 +317,18 @@ export class Game_SelfAction extends BaseUI
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
-            let lastBetAction = gameData.FindLastBetAction();
+            let biggestBetAction = gameData.FindBiggestBetAction();
             let sb = gameData.GetStaticData().texasConfig.smallBlind;
             let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
 
             let minBet = 0;
-            if(lastBetAction == null)
+            if(biggestBetAction == null)
             {
                 minBet = sb * 2;
             }
             else
             {
-                minBet = lastBetAction.amount * 2;
+                minBet = biggestBetAction.amount * 2;
             }
             this.mGame_Slider.SetTotalAmountAndMinRaise(selfPlayer.currencyNum , minBet , sb);
         }
@@ -337,6 +366,13 @@ export class Game_SelfAction extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         gameData.Data_PreCheckOrFold.mData = Game_PreCheckOrFold.UnSelected;
+
+        if(_action.amount >=0)
+        {
+
+        }
+        
+        
         NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId(),gameStruct.mGameId,_action);
     }
 }

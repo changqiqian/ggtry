@@ -2813,29 +2813,31 @@ $root.GameType = (function() {
  * ActionType enum.
  * @exports ActionType
  * @enum {number}
- * @property {number} ActionType_Fold=0 ActionType_Fold value
- * @property {number} ActionType_Check=1 ActionType_Check value
- * @property {number} ActionType_Bet=2 ActionType_Bet value
- * @property {number} ActionType_Ante=3 ActionType_Ante value
- * @property {number} ActionType_SB=4 ActionType_SB value
- * @property {number} ActionType_BB=5 ActionType_BB value
- * @property {number} ActionType_Straddle=6 ActionType_Straddle value
- * @property {number} ActionType_Raise=7 ActionType_Raise value
- * @property {number} ActionType_AllIn=8 ActionType_AllIn value
- * @property {number} ActionType_Call=9 ActionType_Call value
+ * @property {number} ActionType_Init=0 ActionType_Init value
+ * @property {number} ActionType_Fold=1 ActionType_Fold value
+ * @property {number} ActionType_Check=2 ActionType_Check value
+ * @property {number} ActionType_Bet=3 ActionType_Bet value
+ * @property {number} ActionType_Ante=4 ActionType_Ante value
+ * @property {number} ActionType_SB=5 ActionType_SB value
+ * @property {number} ActionType_BB=6 ActionType_BB value
+ * @property {number} ActionType_Straddle=7 ActionType_Straddle value
+ * @property {number} ActionType_Raise=8 ActionType_Raise value
+ * @property {number} ActionType_AllIn=9 ActionType_AllIn value
+ * @property {number} ActionType_Call=10 ActionType_Call value
  */
 $root.ActionType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "ActionType_Fold"] = 0;
-    values[valuesById[1] = "ActionType_Check"] = 1;
-    values[valuesById[2] = "ActionType_Bet"] = 2;
-    values[valuesById[3] = "ActionType_Ante"] = 3;
-    values[valuesById[4] = "ActionType_SB"] = 4;
-    values[valuesById[5] = "ActionType_BB"] = 5;
-    values[valuesById[6] = "ActionType_Straddle"] = 6;
-    values[valuesById[7] = "ActionType_Raise"] = 7;
-    values[valuesById[8] = "ActionType_AllIn"] = 8;
-    values[valuesById[9] = "ActionType_Call"] = 9;
+    values[valuesById[0] = "ActionType_Init"] = 0;
+    values[valuesById[1] = "ActionType_Fold"] = 1;
+    values[valuesById[2] = "ActionType_Check"] = 2;
+    values[valuesById[3] = "ActionType_Bet"] = 3;
+    values[valuesById[4] = "ActionType_Ante"] = 4;
+    values[valuesById[5] = "ActionType_SB"] = 5;
+    values[valuesById[6] = "ActionType_BB"] = 6;
+    values[valuesById[7] = "ActionType_Straddle"] = 7;
+    values[valuesById[8] = "ActionType_Raise"] = 8;
+    values[valuesById[9] = "ActionType_AllIn"] = 9;
+    values[valuesById[10] = "ActionType_Call"] = 10;
     return values;
 })();
 
@@ -4137,7 +4139,7 @@ $root.CombinationResult = (function() {
      * Properties of a CombinationResult.
      * @exports ICombinationResult
      * @interface ICombinationResult
-     * @property {Array.<ICardInfo>|null} [winCards] CombinationResult winCards
+     * @property {Array.<ICardInfo>|null} [cards] CombinationResult cards
      * @property {number|null} [Combination] CombinationResult Combination
      */
 
@@ -4150,7 +4152,7 @@ $root.CombinationResult = (function() {
      * @param {ICombinationResult=} [p] Properties to set
      */
     function CombinationResult(p) {
-        this.winCards = [];
+        this.cards = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -4158,12 +4160,12 @@ $root.CombinationResult = (function() {
     }
 
     /**
-     * CombinationResult winCards.
-     * @member {Array.<ICardInfo>} winCards
+     * CombinationResult cards.
+     * @member {Array.<ICardInfo>} cards
      * @memberof CombinationResult
      * @instance
      */
-    CombinationResult.prototype.winCards = $util.emptyArray;
+    CombinationResult.prototype.cards = $util.emptyArray;
 
     /**
      * CombinationResult Combination.
@@ -4185,9 +4187,9 @@ $root.CombinationResult = (function() {
     CombinationResult.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
-        if (m.winCards != null && m.winCards.length) {
-            for (var i = 0; i < m.winCards.length; ++i)
-                $root.CardInfo.encode(m.winCards[i], w.uint32(10).fork()).ldelim();
+        if (m.cards != null && m.cards.length) {
+            for (var i = 0; i < m.cards.length; ++i)
+                $root.CardInfo.encode(m.cards[i], w.uint32(10).fork()).ldelim();
         }
         if (m.Combination != null && Object.hasOwnProperty.call(m, "Combination"))
             w.uint32(16).uint64(m.Combination);
@@ -4213,9 +4215,9 @@ $root.CombinationResult = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                if (!(m.winCards && m.winCards.length))
-                    m.winCards = [];
-                m.winCards.push($root.CardInfo.decode(r, r.uint32()));
+                if (!(m.cards && m.cards.length))
+                    m.cards = [];
+                m.cards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
             case 2:
                 m.Combination = r.uint64();
@@ -4241,6 +4243,7 @@ $root.PlayerWinLose = (function() {
      * @property {number|null} [winLose] PlayerWinLose winLose
      * @property {Array.<ICardInfo>|null} [cardInfo] PlayerWinLose cardInfo
      * @property {ICombinationResult|null} [combinationResult] PlayerWinLose combinationResult
+     * @property {number|null} [amount] PlayerWinLose amount
      */
 
     /**
@@ -4273,7 +4276,7 @@ $root.PlayerWinLose = (function() {
      * @memberof PlayerWinLose
      * @instance
      */
-    PlayerWinLose.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    PlayerWinLose.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
      * PlayerWinLose cardInfo.
@@ -4292,6 +4295,14 @@ $root.PlayerWinLose = (function() {
     PlayerWinLose.prototype.combinationResult = null;
 
     /**
+     * PlayerWinLose amount.
+     * @member {number} amount
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified PlayerWinLose message. Does not implicitly {@link PlayerWinLose.verify|verify} messages.
      * @function encode
      * @memberof PlayerWinLose
@@ -4306,13 +4317,15 @@ $root.PlayerWinLose = (function() {
         if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
             w.uint32(10).string(m.uid);
         if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(16).uint64(m.winLose);
+            w.uint32(16).int64(m.winLose);
         if (m.cardInfo != null && m.cardInfo.length) {
             for (var i = 0; i < m.cardInfo.length; ++i)
                 $root.CardInfo.encode(m.cardInfo[i], w.uint32(26).fork()).ldelim();
         }
         if (m.combinationResult != null && Object.hasOwnProperty.call(m, "combinationResult"))
             $root.CombinationResult.encode(m.combinationResult, w.uint32(34).fork()).ldelim();
+        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
+            w.uint32(40).int64(m.amount);
         return w;
     };
 
@@ -4338,7 +4351,7 @@ $root.PlayerWinLose = (function() {
                 m.uid = r.string();
                 break;
             case 2:
-                m.winLose = r.uint64();
+                m.winLose = r.int64();
                 break;
             case 3:
                 if (!(m.cardInfo && m.cardInfo.length))
@@ -4347,6 +4360,9 @@ $root.PlayerWinLose = (function() {
                 break;
             case 4:
                 m.combinationResult = $root.CombinationResult.decode(r, r.uint32());
+                break;
+            case 5:
+                m.amount = r.int64();
                 break;
             default:
                 r.skipType(t & 7);

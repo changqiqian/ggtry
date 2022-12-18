@@ -104,6 +104,12 @@ export abstract class GameData extends MultipleNotify
         }
     }
 
+    public UpdatePlayerMoney(_userId : string , _money : number)
+    {
+        let playerInfo = this.GetPlayerInfoByUid(_userId);
+        playerInfo.currencyNum = _money;
+    }
+
 
     public CanPlayerBuyIn(_userId : string) : boolean
     {
@@ -225,22 +231,6 @@ export abstract class GameData extends MultipleNotify
         return null;
     }
 
-    public FindLastBetAction() : ActionInfo
-    {
-        let actions = this.GetDynamicData().actions;
-        let lastBetAction = null;
-        for(let i = 0 ; i < actions.length ; i++)
-        {
-            let currentAct = actions[i];
-            if(currentAct.amount)
-            {
-                lastBetAction = currentAct;
-                break;
-            }
-        }
-        return lastBetAction;
-    }
-
     public FindBiggestBetAction() : ActionInfo
     {
         let actions = this.GetDynamicData().actions;
@@ -249,23 +239,56 @@ export abstract class GameData extends MultipleNotify
             return null;
         }
 
-        let biggestBetAct = actions[0];
+        let result = new ActionInfo();
+        result.uid = "";
+        result.amount = 0;
+        result.actionType = ActionType.ActionType_Init;
         for(let i = 0 ; i < actions.length ; i++)
         {
-            let currentAct = actions[i];
-            if(currentAct.amount >= biggestBetAct.amount)
+            let targetUid = actions[i].uid;
+            let targetInfo = new ActionInfo();
+            targetInfo.uid = targetUid;
+            targetInfo.amount = 0;
+            targetInfo.actionType = ActionType.ActionType_Init;
+
+
+            for(let j = 0 ; j < actions.length ; j++)
             {
-                biggestBetAct = currentAct;
-                break;
+                let currentActionInfo = actions[j];
+                let currentUid = currentActionInfo.uid;
+                if(targetUid == currentUid)
+                {
+                    targetInfo.amount += currentActionInfo.amount;
+                    targetInfo.actionType = currentActionInfo.actionType;
+                }
+            }
+
+            if(targetInfo.amount > result.amount)
+            {
+                result = targetInfo;
             }
         }
-        return biggestBetAct;
+
+        return result;
     }
 
     public FindLastActionByUid(_uid : string ) : ActionInfo
     {
-        let result = new Array<ActionInfo>();
         let actions = this.GetDynamicData().actions;
+        if(actions != null)
+        {
+            let index = actions.findIndex((_item) => _item.uid === _uid);
+            if(index < 0)
+            {
+                return null;
+            }
+        }
+
+
+        let result = new ActionInfo();
+        result.uid = _uid;
+        result.amount = 0;
+        result.actionType = ActionType.ActionType_Init;
         if(actions != null)
         {
             for(let i = 0 ; i < actions.length ; i++)
@@ -273,33 +296,32 @@ export abstract class GameData extends MultipleNotify
                 let currentAct = actions[i];
                 if(currentAct.uid == _uid)
                 {
-                    result.push(currentAct);
+                    result.actionType = currentAct.actionType;
+                    result.amount += currentAct.amount;
                 }
             }
         }
-        if(result.length == 0)
-        {
-            return null;
-        }
-        return result[result.length  - 1];
+        return result;
     }
-    
-    public SetActions(_actions : Array<ActionInfo>)
-    {
-        this.GetDynamicData().actions = _actions;
-    }
+
 
     public FindLastAction() : ActionInfo
     {
         let actions = this.GetDynamicData().actions;
-        if(actions != null && actions.length >0)
+        if(actions == null)
         {
-            return actions[actions.length - 1];
+            return null;    
         }
 
-        return null;
+        let lastUid = actions[actions.length - 1].uid;
+
+        return this.FindLastActionByUid(lastUid);
     }
 
+    public SetActions(_actions : Array<ActionInfo>)
+    {
+        this.GetDynamicData().actions = _actions;
+    }
 
     public IsSelfBySeat(_seatId : number) : boolean
     {

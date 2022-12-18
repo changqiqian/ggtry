@@ -1137,16 +1137,17 @@ export enum GameType {
 
 /** ActionType enum. */
 export enum ActionType {
-    ActionType_Fold = 0,
-    ActionType_Check = 1,
-    ActionType_Bet = 2,
-    ActionType_Ante = 3,
-    ActionType_SB = 4,
-    ActionType_BB = 5,
-    ActionType_Straddle = 6,
-    ActionType_Raise = 7,
-    ActionType_AllIn = 8,
-    ActionType_Call = 9
+    ActionType_Init = 0,
+    ActionType_Fold = 1,
+    ActionType_Check = 2,
+    ActionType_Bet = 3,
+    ActionType_Ante = 4,
+    ActionType_SB = 5,
+    ActionType_BB = 6,
+    ActionType_Straddle = 7,
+    ActionType_Raise = 8,
+    ActionType_AllIn = 9,
+    ActionType_Call = 10
 }
 
 /** GameTaxType enum. */
@@ -1575,8 +1576,8 @@ export class CombinationResult implements ICombinationResult {
      */
     constructor(p?: ICombinationResult);
 
-    /** CombinationResult winCards. */
-    public winCards: ICardInfo[];
+    /** CombinationResult cards. */
+    public cards: ICardInfo[];
 
     /** CombinationResult Combination. */
     public Combination: number;
@@ -1620,6 +1621,9 @@ export class PlayerWinLose implements IPlayerWinLose {
 
     /** PlayerWinLose combinationResult. */
     public combinationResult?: (ICombinationResult|null);
+
+    /** PlayerWinLose amount. */
+    public amount: number;
 
     /**
      * Encodes the specified PlayerWinLose message. Does not implicitly {@link PlayerWinLose.verify|verify} messages.

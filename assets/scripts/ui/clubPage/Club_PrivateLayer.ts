@@ -299,9 +299,8 @@ export class Club_PrivateLayer extends ListViewCtr<ClubGameInfo>
         NetworkSend.Instance.GetClubGameList(clubId);
     }
 
-    RefreshData()
+    OnUpdateData()
     {
-        this.mListView.numItems = this.mCurrentData.length;
         this.mRefreshBtn.Show(this.mCurrentData.length == 0);
     }
 }

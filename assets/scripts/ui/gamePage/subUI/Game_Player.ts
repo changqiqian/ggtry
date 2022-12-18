@@ -427,6 +427,10 @@ export class Game_Player extends BaseUI
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
             let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+            if(playerInfo == null)
+            {
+                return;
+            }
             let winLoseInfos = _data.result;
             let index = winLoseInfos.findIndex((_item) => _item.uid === playerInfo.uid);
             if(index < 0)
@@ -435,6 +439,7 @@ export class Game_Player extends BaseUI
             }
 
             let currentWinLose = winLoseInfos[index];
+            this.UpdateMoney(false ,playerInfo);
             this.UpdateWinLose(currentWinLose);
         })
     }
@@ -519,6 +524,7 @@ export class Game_Player extends BaseUI
         this.UpdateMoney(false,playerInfo);
         this.UpdateDealer(gameData.GetDynamicData().dealerUid , playerInfo , false);
         this.UpdatePlayerPlayingState(playerInfo);
+        this.UpdateUIDirection();
     }
 
     UpdatePlayerPlayingState(_playerInfo : PlayerInfo)
