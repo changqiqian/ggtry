@@ -5,7 +5,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_MovingCards')
 export class Game_MovingCards extends BaseUI 
 {
-
+    mTween : Tween = null;
     InitParam()
     {
 
@@ -25,12 +25,12 @@ export class Game_MovingCards extends BaseUI
 
     CustmoerDestory()
     {
-
+        this.StopAnimation();
     }
 
     public FlyTo(_startWorldPos : Vec3 , _endWorldPos : Vec3)
     {
-
+        this.StopAnimation();
 
         let duration = 0.5;
         let localStartPos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(_startWorldPos);
@@ -45,12 +45,28 @@ export class Game_MovingCards extends BaseUI
 
         let tween = new Tween(this.node)
         .parallel(tweenMove, tweenRotate)
-        .call(()=>
-        {
-            this.node.removeFromParent();
-            this.node.destroy();
-        })
         .start()
+
+        this.StartSecondsTimer(duration , 0.05 , false );
+    }
+
+    OnSecondTimer()
+    {
+        let restTime = this.GetRestMillSeconds();
+        if(restTime == 0)
+        {
+            this.StopAnimation();
+            this.DeleteSelf();
+        }
+    }
+
+    StopAnimation()
+    {
+        if(this.mTween!=null)
+        {
+            this.mTween.stop();
+            this.mTween = null;
+        }
     }
 }
 

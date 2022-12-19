@@ -178,6 +178,10 @@ export abstract class GameData extends MultipleNotify
     public UpdatePlayerCards(_uid : string , _cards : Array<CardInfo>)
     {
         let playerInfo = this.GetPlayerInfoByUid(_uid);
+        if(playerInfo == null)
+        {
+            return;
+        }
         playerInfo.cards = _cards;
     }
 
@@ -342,6 +346,27 @@ export abstract class GameData extends MultipleNotify
             }
         }
         return null;
+    }
+
+    public IsPlayerPlaying(_uid : string) : boolean
+    {
+        let playerInfo = this.GetPlayerInfoByUid(_uid);
+        if(playerInfo == null)
+        {
+            return false;
+        }
+
+        if(playerInfo.cards == null)
+        {
+            return false;
+        }
+
+        if(playerInfo.cards.length == 0)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public GetSeatByUid(_uid : string) : number

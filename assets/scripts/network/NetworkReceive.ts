@@ -558,8 +558,10 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     }
                     
 
-
-                    selfPlayer.bringInNum = msg.totalBringInNum;
+                    if(selfPlayer!=null)
+                    {
+                        selfPlayer.bringInNum = msg.totalBringInNum;
+                    }
                     gameData.Data_S2CCommonBringInResp.mData = msg;
                     UIMgr.Instance.ShowToast(Localization.GetString("00245"));
                 }

@@ -11,8 +11,7 @@ export class Game_WinEffect extends BaseUI
     mParticular: ParticleSystem2D = null;
     @property(Label) 
     mWinAmount: Label = null;
-
-    mIndex : number;
+    mTween : Tween = null;
     InitParam()
     {
 
@@ -32,19 +31,11 @@ export class Game_WinEffect extends BaseUI
 
     CustmoerDestory()
     {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        if(gameStruct !=null)
-        {
-            let gameData = gameStruct.mGameData;
-            gameData.RemoveAllDataListennerByTarget(this);
-        }
-        
+        this.StopAnimation();        
     }
 
-    public InitWithData(_amount : number , _index : number)
+    public InitWithData(_amount : number)
     {
-        console.log("InitWithData 成功====" + _amount);
-        this.mIndex = _index;
         let clientAmount = Tool.ConvertMoney_S2C(_amount)
         if(clientAmount >= 0)
         {
@@ -57,25 +48,31 @@ export class Game_WinEffect extends BaseUI
             this.mWinAmount.color = new Color(255,0,0);
         }
 
-        let tween = new Tween(this.mWinAmount.node); 
-        tween.to(0.5 , {position : new Vec3(0,200,0)} , {easing : easing.quadIn});
-        tween.delay(1.5);
-        tween.call(()=>
-        {
-            this.DeleteSelf();
-        });
-        tween.start();
-        this.BindData();
+        this.StopAnimation();
+        this.mTween = new Tween(this.mWinAmount.node); 
+        this.mTween.to(0.5 , {position : new Vec3(0,200,0)} , {easing : easing.quadIn});
+        this.mTween.start();
+        this.StartSecondsTimer(2 , 0.05 , false);
     }
 
-    BindData()
+    OnSecondTimer()
     {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
-        gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
+        let restTime = this.GetRestMillSeconds();
+        if(restTime == 0)
         {
+            this.StopAnimation();
             this.DeleteSelf();
-        })
+        }
+    }
+
+
+    StopAnimation()
+    {
+        if(this.mTween!=null)
+        {
+            this.mTween.stop();
+            this.mTween = null;
+        }
     }
 }
 

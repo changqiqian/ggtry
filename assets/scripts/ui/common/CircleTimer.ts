@@ -55,6 +55,10 @@ export class CircleTimer extends BaseUI {
     public StartTimer(_totalTime : number , _SecondCallback : Function = null)
     {
         this.node.active = true;
+        if(_totalTime == 0)
+        {
+            return;
+        }
         this.StartSecondsTimer(_totalTime , 0.01);
         this.mSecondCallback = _SecondCallback;
         this.OnSecondTimer();

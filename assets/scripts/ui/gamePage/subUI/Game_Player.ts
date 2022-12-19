@@ -315,6 +315,7 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
+            
 
             this.PrepareRoundStart();
             
@@ -353,6 +354,12 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
+
+            if(gameData.IsPlayerPlaying(playerInfo.uid) == false)
+            {
+                return;
+            }
+
 
             this.ShowMiniCard(true , false);
         })
@@ -459,7 +466,7 @@ export class Game_Player extends BaseUI
                 let tempNode = instantiate(_prefab);
                 this.node.addChild(tempNode);
                 let script = tempNode.getComponent(Game_WinEffect);
-                script.InitWithData(_winLoseInfo.winLose , this.mIndex);
+                script.InitWithData(_winLoseInfo.winLose);
                 console.log("尝试生成输赢动画 成功====" + _winLoseInfo.uid);
             })
         }

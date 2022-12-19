@@ -5,7 +5,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_MovingChip')
 export class Game_MovingChip extends BaseUI 
 {
-
+    mTween : Tween = null;
     InitParam()
     {
 
@@ -25,21 +25,40 @@ export class Game_MovingChip extends BaseUI
 
     CustmoerDestory()
     {
-
+        this.StopAnimation();
     }
 
     public Fly(_startWorldPos : Vec3 , _endWorldPos : Vec3)
     {
+        this.StopAnimation();
+        let duration = 0.5;
         let localStartPos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(_startWorldPos);
         let localEndPos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(_endWorldPos);
         this.node.setPosition(localStartPos);
-        let tween = new Tween(this.node);
-        tween.to(0.5,{position:localEndPos},{easing:easing.quadOut});
-        tween.call(()=>
+        this.mTween = new Tween(this.node);
+        this.mTween.to(duration,{position:localEndPos},{easing:easing.quadOut});
+        this.mTween.start();
+        this.StartSecondsTimer(duration , 0.05 , false );
+    }
+
+
+    OnSecondTimer()
+    {
+        let restTime = this.GetRestMillSeconds();
+        if(restTime == 0)
         {
+            this.StopAnimation();
             this.DeleteSelf();
-        });
-        tween.start();
+        }
+    }
+
+    StopAnimation()
+    {
+        if(this.mTween!=null)
+        {
+            this.mTween.stop();
+            this.mTween = null;
+        }
     }
 }
 

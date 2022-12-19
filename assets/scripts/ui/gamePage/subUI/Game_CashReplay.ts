@@ -2,20 +2,12 @@ import { _decorator, Component, Node, Sprite } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { UIMgr } from '../../../base/UIMgr';
 import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
-import { GameBase } from '../GameBase';
 import { GameReplayData } from '../GameReplayData';
-import { Game_BottomUI } from './Game_BottomUI';
-import { Game_ControlBtns } from './Game_ControlBtns';
-import { Game_GameStartInfo } from './Game_GameStartInfo';
 import { Game_Pot } from './Game_Pot';
 import { Game_PublicCards } from './Game_PublicCards';
 import { Game_ReplayCtr } from './Game_ReplayCtr';
 import { Game_SeatUI } from './Game_SeatUI';
-import { Game_SelfAction } from './Game_SelfAction';
-import { Game_SelfPreAction } from './Game_SelfPreAction';
-import { Game_SelfUI } from './Game_SelfUI';
 import { Game_TableInfo } from './Game_TableInfo';
-import { Game_TopUI } from './Game_TopUI';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_CashReplay')

@@ -99,6 +99,11 @@ export class Game_SelfPreAction extends BaseUI
             return;
         }
 
+        if(selfPlayer.cards.length == 0)
+        {
+            return;
+        }
+
         if(gameState == TexasCashState.TexasCashState_Create ||
             gameState == TexasCashState.TexasCashState_RoundStart ||
             gameState == TexasCashState.TexasCashState_Settlement ||

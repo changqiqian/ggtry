@@ -263,10 +263,10 @@ export class Game_SelfAction extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let lastAction = gameData.FindLastAction();
+        let lastBigBetAction = gameData.FindBiggestBetAction();
         let selfLastAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
         this.mCircleTimer.StopTimer();
-        if(lastAction == null)
+        if(lastBigBetAction == null)
         {
             this.ShowCheckUI();
         }
@@ -274,9 +274,9 @@ export class Game_SelfAction extends BaseUI
         {
             if(selfLastAction == null)
             {
-                if(lastAction.roundAmount > 0)
+                if(lastBigBetAction.roundAmount > 0)
                 {
-                    this.ShowBetUI(lastAction);
+                    this.ShowBetUI(lastBigBetAction);
                 }
                 else
                 {
@@ -285,13 +285,13 @@ export class Game_SelfAction extends BaseUI
             }
             else
             {
-                if(selfLastAction.roundAmount == lastAction.roundAmount)
+                if(selfLastAction.roundAmount == lastBigBetAction.roundAmount)
                 {
                     this.ShowCheckUI();
                 }
                 else
                 {
-                    this.ShowBetUI(lastAction);
+                    this.ShowBetUI(lastBigBetAction);
                 }
             }
             

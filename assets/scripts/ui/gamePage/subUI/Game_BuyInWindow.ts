@@ -159,6 +159,19 @@ export class Game_BuyInWindow extends BaseUI
             this.StopCountDown();
             this.CloseAsWindow();
         })
+
+        gameData.Data_S2CCommonStandUpResp.AddListenner(this,(_data)=>
+        {
+            this.CloseAsWindow();
+        })
+
+        gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
+        {
+            if( _data.actionUid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                this.CloseAsWindow();
+            }
+        })
     }
 
     UpdateTotalMoney()
