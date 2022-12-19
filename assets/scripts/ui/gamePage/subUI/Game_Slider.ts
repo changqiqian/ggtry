@@ -41,16 +41,8 @@ export class Game_Slider extends BaseUI
     {
 
         this.mConfirmBtn.SetClickCallback(()=>
-        {
-            if(LocalPlayerData.Instance.Data_CustomerSliderSetting.mData == false)
-            {
-                return;
-            }
-            let amount = this.DragLogic();
-            if(this.mCallback)
-            {
-                this.mCallback(amount);
-            }
+        {            
+            this.TryToBet();
         })
 
         this.mHadnle.on(Node.EventType.TOUCH_END,()=>
@@ -117,15 +109,17 @@ export class Game_Slider extends BaseUI
 
     DragEnd()
     {
-        let amount = this.DragLogic();
         if(LocalPlayerData.Instance.Data_CustomerSliderSetting.mData)
         {
-            if(amount == 0)
-            {
-                this.node.active = false;
-            }
             return;
         }
+        this.TryToBet();
+    }
+
+    TryToBet()
+    {
+        let amount = this.DragLogic();
+
         if(this.mCallback)
         {
             this.mCallback(amount);

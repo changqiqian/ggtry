@@ -50,7 +50,7 @@ export class Game_WinEffect extends BaseUI
 
         this.StopAnimation();
         this.mTween = new Tween(this.mWinAmount.node); 
-        this.mTween.to(0.5 , {position : new Vec3(0,200,0)} , {easing : easing.quadIn});
+        this.mTween.to(0.5 , {position : new Vec3(0,150,0)} , {easing : easing.quadIn});
         this.mTween.start();
         this.StartSecondsTimer(2 , 0.05 , false);
     }

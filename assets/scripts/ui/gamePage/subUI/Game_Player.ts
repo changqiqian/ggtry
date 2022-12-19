@@ -438,17 +438,19 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
+
+            if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                this.node.active = true;
+            }
             let winLoseInfos = _data.result;
             let index = winLoseInfos.findIndex((_item) => _item.uid === playerInfo.uid);
-            console.log("index====" + index);
             if(index < 0)
             {
                 return;
             }
-
+            
             let currentWinLose = winLoseInfos[index];
-            console.log("currentWinLose.uid====" + currentWinLose.uid);
-            console.log("currentWinLose.winLose====" + currentWinLose.winLose);
             this.UpdateMoney(false , playerInfo);
             this.UpdateWinLose(currentWinLose);
         })
@@ -456,18 +458,14 @@ export class Game_Player extends BaseUI
 
     UpdateWinLose(_winLoseInfo : PlayerWinLose)
     {
-        console.log("_winLoseInfo.uid====" + _winLoseInfo.uid);
-        console.log("_winLoseInfo.winLose====" + _winLoseInfo.winLose);
         if(_winLoseInfo.winLose >=0)
         {
-            console.log("尝试生成输赢动画====" + _winLoseInfo.uid);
             this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
             {
                 let tempNode = instantiate(_prefab);
                 this.node.addChild(tempNode);
                 let script = tempNode.getComponent(Game_WinEffect);
                 script.InitWithData(_winLoseInfo.winLose);
-                console.log("尝试生成输赢动画 成功====" + _winLoseInfo.uid);
             })
         }
         this.ShowCards(_winLoseInfo.cardInfo);
@@ -533,7 +531,7 @@ export class Game_Player extends BaseUI
         }
 
         this.mSelfBtn.node.active = true;
-        this.mBG.active = !(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData);
+        //this.mBG.active = !(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData);
         this.UpdateName(playerInfo.nickName);
         this.UpdateHead(playerInfo.head);
         this.UpdateMoney(false,playerInfo);
@@ -662,10 +660,10 @@ export class Game_Player extends BaseUI
                 return;
             }
     
-            if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
+            // if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            // {
+            //     return;
+            // }
     
             this.mCircleTimer.StopTimer();
             this.ShowActionType(lastAct.actionType , false);
@@ -771,7 +769,7 @@ export class Game_Player extends BaseUI
             this.mCards.active = false;
             return;
         }
-
+        this.ShowMiniCard(false , false);
         let cardNodes = this.mCards.children;
         this.mCards.active = true;
         for(let i = 0 ; i < _cards.length ; i++)
@@ -899,8 +897,6 @@ export class Game_Player extends BaseUI
         {
             let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID);
             isSelf = playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData;
-
-            
         }
         else
         {

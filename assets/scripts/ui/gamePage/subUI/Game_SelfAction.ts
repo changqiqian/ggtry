@@ -89,10 +89,17 @@ export class Game_SelfAction extends BaseUI
 
         this.mGame_Slider.SetCallback((_amount)=>
         {
+            if(_amount == 0)
+            {
+                this.OnSliderRaiseBtn();
+                return;
+            }
+
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
             let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            let biggestBetAction = gameData.FindBiggestBetAction();
             let actionInfo = new ActionInfo();
             actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
 
@@ -108,8 +115,16 @@ export class Game_SelfAction extends BaseUI
             }
             else
             {
-                actionInfo.amount = _amount;
-                actionInfo.actionType = ActionType.ActionType_Raise;
+                if(biggestBetAction == null || biggestBetAction.roundAmount == 0)
+                {
+                    actionInfo.amount = _amount;
+                    actionInfo.actionType = ActionType.ActionType_Bet;
+                }
+                else
+                {
+                    actionInfo.amount = _amount;
+                    actionInfo.actionType = ActionType.ActionType_Raise;
+                }
             }
 
             this.SendGameAction(actionInfo);
@@ -160,7 +175,7 @@ export class Game_SelfAction extends BaseUI
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
-            //this.HideAll();
+            this.HideAll();
         })
 
         gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
@@ -332,6 +347,7 @@ export class Game_SelfAction extends BaseUI
     {
         this.mGame_CustomerRaise.node.active = !this.mGame_CustomerRaise.node.active;
         this.mGame_Slider.node.active = !this.mGame_Slider.node.active;
+        this.mSliderRaiseBtn.node.active = !this.mSliderRaiseBtn.node.active;
         if(this.mGame_Slider.node.active)
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
