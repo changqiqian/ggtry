@@ -239,33 +239,13 @@ export abstract class GameData extends MultipleNotify
             return null;
         }
 
-        let result = new ActionInfo();
-        result.uid = "";
-        result.amount = 0;
-        result.actionType = ActionType.ActionType_Init;
+        let result = actions[0];
         for(let i = 0 ; i < actions.length ; i++)
         {
-            let targetUid = actions[i].uid;
-            let targetInfo = new ActionInfo();
-            targetInfo.uid = targetUid;
-            targetInfo.amount = 0;
-            targetInfo.actionType = ActionType.ActionType_Init;
-
-
-            for(let j = 0 ; j < actions.length ; j++)
+            let currentAction = actions[i];
+            if(result.roundAmount < currentAction.roundAmount)
             {
-                let currentActionInfo = actions[j];
-                let currentUid = currentActionInfo.uid;
-                if(targetUid == currentUid)
-                {
-                    targetInfo.amount += currentActionInfo.amount;
-                    targetInfo.actionType = currentActionInfo.actionType;
-                }
-            }
-
-            if(targetInfo.amount > result.amount)
-            {
-                result = targetInfo;
+                result = currentAction;
             }
         }
 
@@ -286,9 +266,6 @@ export abstract class GameData extends MultipleNotify
 
 
         let result = new ActionInfo();
-        result.uid = _uid;
-        result.amount = 0;
-        result.actionType = ActionType.ActionType_Init;
         if(actions != null)
         {
             for(let i = 0 ; i < actions.length ; i++)
@@ -296,8 +273,7 @@ export abstract class GameData extends MultipleNotify
                 let currentAct = actions[i];
                 if(currentAct.uid == _uid)
                 {
-                    result.actionType = currentAct.actionType;
-                    result.amount += currentAct.amount;
+                    result = currentAct;
                 }
             }
         }
@@ -313,9 +289,8 @@ export abstract class GameData extends MultipleNotify
             return null;    
         }
 
-        let lastUid = actions[actions.length - 1].uid;
-
-        return this.FindLastActionByUid(lastUid);
+        return actions[actions.length - 1];
+       
     }
 
     public SetActions(_actions : Array<ActionInfo>)

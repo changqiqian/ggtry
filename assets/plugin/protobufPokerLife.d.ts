@@ -1514,6 +1514,9 @@ export class ActionInfo implements IActionInfo {
     /** ActionInfo amount. */
     public amount: number;
 
+    /** ActionInfo roundAmount. */
+    public roundAmount: number;
+
     /**
      * Encodes the specified ActionInfo message. Does not implicitly {@link ActionInfo.verify|verify} messages.
      * @param m ActionInfo message or plain object to encode

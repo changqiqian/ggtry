@@ -145,12 +145,12 @@ export class Game_CashReplay extends BaseUI {
         rsAct1.actionInfo = new ActionInfo();
         rsAct1.actionInfo.uid = "uuid2";
         rsAct1.actionInfo.actionType = ActionType.ActionType_SB;
-        rsAct1.actionInfo.amount = 1000;
+        rsAct1.actionInfo.roundAmount = 1000;
         let rsAct2 = new ActionResult();
         rsAct2.actionInfo = new ActionInfo();
         rsAct2.actionInfo.uid = "selfUid";
         rsAct2.actionInfo.actionType = ActionType.ActionType_BB;
-        rsAct2.actionInfo.amount = 2000;
+        rsAct2.actionInfo.roundAmount = 2000;
         testData.roundStartActions.push(rsAct1);
         testData.roundStartActions.push(rsAct2);
 
@@ -179,12 +179,12 @@ export class Game_CashReplay extends BaseUI {
         preAct1.actionInfo = new ActionInfo();
         preAct1.actionInfo.uid = "uuid2";
         preAct1.actionInfo.actionType = ActionType.ActionType_Call;
-        preAct1.actionInfo.amount = 2000;
+        preAct1.actionInfo.roundAmount = 2000;
         let preAct2 = new ActionResult();
         preAct2.actionInfo = new ActionInfo();
         preAct2.actionInfo.uid = "selfUid";
         preAct2.actionInfo.actionType = ActionType.ActionType_Check;
-        preAct2.actionInfo.amount = 0;
+        preAct2.actionInfo.roundAmount = 0;
         testData.preFlopActions.push(preAct1);
         testData.preFlopActions.push(preAct2);
 
@@ -193,12 +193,12 @@ export class Game_CashReplay extends BaseUI {
         flopAct1.actionInfo = new ActionInfo();
         flopAct1.actionInfo.uid = "uuid2";
         flopAct1.actionInfo.actionType = ActionType.ActionType_Bet;
-        flopAct1.actionInfo.amount = 2000;
+        flopAct1.actionInfo.roundAmount = 2000;
         let flopAct2 = new ActionResult();
         flopAct2.actionInfo = new ActionInfo();
         flopAct2.actionInfo.uid = "selfUid";
         flopAct2.actionInfo.actionType = ActionType.ActionType_Call;
-        flopAct2.actionInfo.amount = 2000;
+        flopAct2.actionInfo.roundAmount = 2000;
         testData.flopActions.push(flopAct1);
         testData.flopActions.push(flopAct2);
 
@@ -207,12 +207,12 @@ export class Game_CashReplay extends BaseUI {
         turnAct1.actionInfo = new ActionInfo();
         turnAct1.actionInfo.uid = "uuid2";
         turnAct1.actionInfo.actionType = ActionType.ActionType_Fold;
-        turnAct1.actionInfo.amount = 0;
+        turnAct1.actionInfo.roundAmount = 0;
         let turnAct2 = new ActionResult();
         turnAct2.actionInfo = new ActionInfo();
         turnAct2.actionInfo.uid = "selfUid";
         turnAct2.actionInfo.actionType = ActionType.ActionType_Fold;
-        turnAct2.actionInfo.amount = 0;
+        turnAct2.actionInfo.roundAmount = 0;
         testData.turnActions.push(turnAct1);
         testData.turnActions.push(turnAct2);
 

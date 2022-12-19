@@ -65,7 +65,12 @@ export class Game_SelfAction extends BaseUI
         
             let actionInfo = new ActionInfo();
             actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
-            let callAmount = biggestBetAction.amount - selfBetAction.amount;
+
+            let callAmount = biggestBetAction.roundAmount;
+            if(selfBetAction != null)
+            {
+                callAmount -= selfBetAction.roundAmount;
+            }
             if(callAmount >= selfPlayer.currencyNum)
             {
                 actionInfo.amount = selfPlayer.currencyNum;
@@ -90,7 +95,11 @@ export class Game_SelfAction extends BaseUI
             let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
             let actionInfo = new ActionInfo();
             actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
-            _amount = _amount - selfBetAction.amount;
+
+            if(selfBetAction != null)
+            {
+                _amount = _amount - selfBetAction.roundAmount;
+            }
 
             if(_amount >= selfPlayer.currencyNum)
             {
@@ -151,7 +160,7 @@ export class Game_SelfAction extends BaseUI
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
-            this.HideAll();
+            //this.HideAll();
         })
 
         gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
@@ -233,13 +242,13 @@ export class Game_SelfAction extends BaseUI
                 return;
             }
 
-            if(selfLastAct.amount < biggestAct.amount)
+            if(selfLastAct.roundAmount < biggestAct.roundAmount)
             {
                 this.ExcutiveFold();
                 return;
             }
 
-            if(selfLastAct.amount >= biggestAct.amount)
+            if(selfLastAct.roundAmount >= biggestAct.roundAmount)
             {
                 this.ExcutiveCheck();
                 return;
@@ -254,29 +263,39 @@ export class Game_SelfAction extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let biggestBetAction = gameData.FindBiggestBetAction();
+        let lastAction = gameData.FindLastAction();
         let selfLastAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
         this.mCircleTimer.StopTimer();
-        if(biggestBetAction == null)
+        if(lastAction == null)
         {
             this.ShowCheckUI();
         }
-        else if(selfLastAction == null)
+        else 
         {
-            this.ShowBetUI(biggestBetAction);
-        }
-        else
-        {
-            if(selfLastAction.amount == biggestBetAction.amount)
+            if(selfLastAction == null)
             {
-                this.ShowCheckUI();
+                if(lastAction.roundAmount > 0)
+                {
+                    this.ShowBetUI(lastAction);
+                }
+                else
+                {
+                    this.ShowCheckUI();
+                }
             }
             else
             {
-                this.ShowBetUI(biggestBetAction);
+                if(selfLastAction.roundAmount == lastAction.roundAmount)
+                {
+                    this.ShowCheckUI();
+                }
+                else
+                {
+                    this.ShowBetUI(lastAction);
+                }
             }
+            
         }
-
         let actionTime = gameData.GetDynamicData().actionLeftTime;
         this.mCircleTimer.StartTimer(actionTime);
     }
@@ -285,7 +304,7 @@ export class Game_SelfAction extends BaseUI
     {
         this.mFoldBtn.node.active = true;
         this.mCallBtn.node.active = true;
-        let clientCallAmount = Tool.ConvertMoney_S2C(_lastBetAction.amount);
+        let clientCallAmount = Tool.ConvertMoney_S2C(_lastBetAction.roundAmount);
         this.mCallBtn.SetTitle(clientCallAmount + "");
         this.mCheckBtn.node.active = false;
         this.mGame_CustomerRaise.InitWithData(this.mIndex);
@@ -328,7 +347,7 @@ export class Game_SelfAction extends BaseUI
             }
             else
             {
-                minBet = biggestBetAction.amount * 2;
+                minBet = biggestBetAction.roundAmount * 2;
             }
             this.mGame_Slider.SetTotalAmountAndMinRaise(selfPlayer.currencyNum , minBet , sb);
         }

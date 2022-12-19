@@ -381,7 +381,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": -270,
+      "x": -250,
       "y": 0,
       "z": 0
     }
@@ -1219,7 +1219,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": 270,
+      "x": 250,
       "y": 0,
       "z": 0
     }
@@ -1393,7 +1393,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 690,
+      "width": 650,
       "height": 100
     },
     "_anchorPoint": {
@@ -1430,7 +1430,7 @@
     "_paddingRight": 0,
     "_paddingTop": 0,
     "_paddingBottom": 0,
-    "_spacingX": 120,
+    "_spacingX": 100,
     "_spacingY": 0,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,
@@ -1675,7 +1675,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.74,
+      "width": 42.25,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -1711,7 +1711,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "3bb",
+    "_string": "2x",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 40,
@@ -1770,7 +1770,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": -270,
+      "x": -250,
       "y": 0,
       "z": 0
     }
@@ -2094,7 +2094,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.74,
+      "width": 42.25,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -2130,7 +2130,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "4bb",
+    "_string": "3x",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 40,
@@ -2513,7 +2513,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.74,
+      "width": 42.25,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -2549,7 +2549,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "5bb",
+    "_string": "4x",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 40,
@@ -2608,7 +2608,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": 270,
+      "x": 250,
       "y": 0,
       "z": 0
     }
@@ -2782,7 +2782,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 690,
+      "width": 650,
       "height": 100
     },
     "_anchorPoint": {
@@ -2819,7 +2819,7 @@
     "_paddingRight": 0,
     "_paddingTop": 0,
     "_paddingBottom": 0,
-    "_spacingX": 120,
+    "_spacingX": 100,
     "_spacingY": 0,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,

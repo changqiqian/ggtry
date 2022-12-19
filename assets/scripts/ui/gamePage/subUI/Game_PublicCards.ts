@@ -100,14 +100,11 @@ export class Game_PublicCards extends BaseUI
 
     ShowCard(_index , _cardInfo : CardInfo)
     {
-        this.scheduleOnce(()=>
-        {
-            let poker = this.GetCardNode(_index);
-            poker.ResetAndHide();
-            poker.ShowBack();
-            poker.SetFrontByCardInfo(_cardInfo);
-            poker.FlipToFront();
-        },1)
+        let poker = this.GetCardNode(_index);
+        poker.ResetAndHide();
+        poker.ShowBack();
+        poker.SetFrontByCardInfo(_cardInfo);
+        poker.FlipToFront();
     }
 
     GetCardNode(_index : number) : Poker

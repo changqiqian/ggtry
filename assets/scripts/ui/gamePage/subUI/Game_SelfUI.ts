@@ -249,7 +249,7 @@ export class Game_SelfUI extends BaseUI
         if(lastAct != null)
         {
             this.ShowActionType(lastAct.actionType);
-            this.Bet(lastAct.amount , lastAct.actionType);
+            this.Bet(lastAct.roundAmount , lastAct.actionType);
         }
     }
 
@@ -268,7 +268,7 @@ export class Game_SelfUI extends BaseUI
             if(lastAct.uid == LocalPlayerData.Instance.Data_Uid.mData)
             {
                 this.ShowActionType(lastAct.actionType);
-                this.Bet(lastAct.amount , lastAct.actionType);
+                this.Bet(lastAct.roundAmount , lastAct.actionType);
             }
         }
     }

@@ -148,7 +148,7 @@ export class Game_Player extends BaseUI
             }
             else
             {
-                this.ShowMiniCard(true);
+                this.ShowMiniCard(true , true);
             }
 
             let sbActionResult = GameReplayData.Instance.GetRoundStartActionByActionType(ActionType.ActionType_SB);
@@ -322,21 +322,21 @@ export class Game_Player extends BaseUI
             if(actionSB != null)
             {
                 this.ShowActionType(ActionType.ActionType_SB , false);
-                this.Bet(actionSB.amount ,ActionType.ActionType_SB, false)
+                this.Bet(actionSB.roundAmount ,ActionType.ActionType_SB, false)
             }
 
             let actionBB = gameData.FindAction(currentPlayer.uid , ActionType.ActionType_BB);
             if(actionBB != null)
             {
                 this.ShowActionType(ActionType.ActionType_BB, false);
-                this.Bet(actionBB.amount ,ActionType.ActionType_BB, false)
+                this.Bet(actionBB.roundAmount ,ActionType.ActionType_BB, false)
             }
 
             let actionStraddle = gameData.FindAction(currentPlayer.uid , ActionType.ActionType_Straddle);
             if(actionStraddle != null)
             {
                 this.ShowActionType(ActionType.ActionType_Straddle, false);
-                this.Bet(actionStraddle.amount ,ActionType.ActionType_Straddle, false)
+                this.Bet(actionStraddle.roundAmount ,ActionType.ActionType_Straddle, false)
             }
 
             let dealerId = gameData.GetDynamicData().dealerUid;
@@ -354,7 +354,7 @@ export class Game_Player extends BaseUI
                 return;
             }
 
-            this.ShowMiniCard(true);
+            this.ShowMiniCard(true , false);
         })
 
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
@@ -433,27 +433,34 @@ export class Game_Player extends BaseUI
             }
             let winLoseInfos = _data.result;
             let index = winLoseInfos.findIndex((_item) => _item.uid === playerInfo.uid);
+            console.log("index====" + index);
             if(index < 0)
             {
                 return;
             }
 
             let currentWinLose = winLoseInfos[index];
-            this.UpdateMoney(false ,playerInfo);
+            console.log("currentWinLose.uid====" + currentWinLose.uid);
+            console.log("currentWinLose.winLose====" + currentWinLose.winLose);
+            this.UpdateMoney(false , playerInfo);
             this.UpdateWinLose(currentWinLose);
         })
     }
 
     UpdateWinLose(_winLoseInfo : PlayerWinLose)
     {
+        console.log("_winLoseInfo.uid====" + _winLoseInfo.uid);
+        console.log("_winLoseInfo.winLose====" + _winLoseInfo.winLose);
         if(_winLoseInfo.winLose >=0)
         {
+            console.log("尝试生成输赢动画====" + _winLoseInfo.uid);
             this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
             {
                 let tempNode = instantiate(_prefab);
                 this.node.addChild(tempNode);
                 let script = tempNode.getComponent(Game_WinEffect);
-                script.InitWithData(_winLoseInfo.winLose);
+                script.InitWithData(_winLoseInfo.winLose , this.mIndex);
+                console.log("尝试生成输赢动画 成功====" + _winLoseInfo.uid);
             })
         }
         this.ShowCards(_winLoseInfo.cardInfo);
@@ -481,17 +488,18 @@ export class Game_Player extends BaseUI
 
     UpdateUIDirection()
     {
-        let posX = this.node.parent.position.x;
-        let betPos = this.mGame_BetAmount.node.position;
+        let posX = this.node.parent.worldPosition.x;
+        let getVisibleSize = view.getVisibleSize();
+        //let betPos = this.mGame_BetAmount.node.position;
         let dealerPos = this.mDealer.position;
-        if(posX > 0)
+        if(posX >= getVisibleSize.width/2)
         {
-            this.mGame_BetAmount.node.setPosition(-Math.abs(betPos.x) , betPos.y , betPos.z);
+            //this.mGame_BetAmount.node.setPosition(-Math.abs(betPos.x) , betPos.y , betPos.z);
             this.mDealer.setPosition(-Math.abs(dealerPos.x) , dealerPos.y , dealerPos.z);
         }
-        else  if(posX == 0)
+        else 
         {
-            this.mGame_BetAmount.node.setPosition(Math.abs(betPos.x) , betPos.y , betPos.z);
+            //this.mGame_BetAmount.node.setPosition(Math.abs(betPos.x) , betPos.y , betPos.z);
             this.mDealer.setPosition(Math.abs(dealerPos.x) , dealerPos.y , dealerPos.z);
         }
     }
@@ -532,7 +540,7 @@ export class Game_Player extends BaseUI
         if(_playerInfo.currencyNum)
         {
             let playerPlaying = _playerInfo.cards.length > 0;
-            this.ShowMiniCard(playerPlaying);
+            this.ShowMiniCard(playerPlaying ,false);
 
             if(playerPlaying)
             {
@@ -619,7 +627,7 @@ export class Game_Player extends BaseUI
         if(lastAct != null)
         {
             this.ShowActionType(lastAct.actionType , false);
-            this.Bet(lastAct.amount ,lastAct.actionType, false);
+            this.Bet(lastAct.roundAmount ,lastAct.actionType, false);
         }
 
     }
@@ -654,7 +662,7 @@ export class Game_Player extends BaseUI
     
             this.mCircleTimer.StopTimer();
             this.ShowActionType(lastAct.actionType , false);
-            this.Bet(lastAct.amount ,lastAct.actionType , false);
+            this.Bet(lastAct.roundAmount ,lastAct.actionType , false);
         }
         else
         {
@@ -674,7 +682,7 @@ export class Game_Player extends BaseUI
                 return;
             }
             this.ShowActionType(currentAction.actionInfo.actionType , true);
-            this.Bet(currentAction.actionInfo.amount ,currentAction.actionInfo.actionType, true);
+            this.Bet(currentAction.actionInfo.roundAmount ,currentAction.actionInfo.actionType, true);
         }
     }
 
@@ -815,7 +823,6 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-
         }
 
         this.mGame_BetAmount.node.active = true;
@@ -838,7 +845,7 @@ export class Game_Player extends BaseUI
     {
 
         this.mDarkCover.active = _actionType == ActionType.ActionType_Fold;
-        this.ShowMiniCard(_actionType != ActionType.ActionType_Fold);
+        this.ShowMiniCard(_actionType != ActionType.ActionType_Fold , _replay);
 
         if(_replay == false)
         {
@@ -878,23 +885,30 @@ export class Game_Player extends BaseUI
     }
 
 
-    ShowMiniCard(_value : boolean )
+    ShowMiniCard(_value : boolean , _replay : boolean)
     {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
-        let isSelf = gameData.IsSelfBySeat(this.mSeatID);
-
-        if(_value)
+        let isSelf = false;
+        if(_replay)
         {
-            if(isSelf == false)
-            {
-                this.mMiniCard.active = true;
-            }
+            let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID);
+            isSelf = playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData;
+
+            
         }
         else
         {
-            this.mMiniCard.active = false;
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            isSelf = gameData.IsSelfBySeat(this.mSeatID);
         }
+
+        if(isSelf)
+        {
+            this.mMiniCard.active = false;
+            return;
+        }
+
+        this.mMiniCard.active = _value;
     }
 }
 

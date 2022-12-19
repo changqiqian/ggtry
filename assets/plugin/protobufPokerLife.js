@@ -3938,6 +3938,7 @@ $root.ActionInfo = (function() {
      * @property {string|null} [uid] ActionInfo uid
      * @property {ActionType|null} [actionType] ActionInfo actionType
      * @property {number|null} [amount] ActionInfo amount
+     * @property {number|null} [roundAmount] ActionInfo roundAmount
      */
 
     /**
@@ -3980,6 +3981,14 @@ $root.ActionInfo = (function() {
     ActionInfo.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * ActionInfo roundAmount.
+     * @member {number} roundAmount
+     * @memberof ActionInfo
+     * @instance
+     */
+    ActionInfo.prototype.roundAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified ActionInfo message. Does not implicitly {@link ActionInfo.verify|verify} messages.
      * @function encode
      * @memberof ActionInfo
@@ -3997,6 +4006,8 @@ $root.ActionInfo = (function() {
             w.uint32(16).int32(m.actionType);
         if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
             w.uint32(24).int64(m.amount);
+        if (m.roundAmount != null && Object.hasOwnProperty.call(m, "roundAmount"))
+            w.uint32(32).int64(m.roundAmount);
         return w;
     };
 
@@ -4026,6 +4037,9 @@ $root.ActionInfo = (function() {
                 break;
             case 3:
                 m.amount = r.int64();
+                break;
+            case 4:
+                m.roundAmount = r.int64();
                 break;
             default:
                 r.skipType(t & 7);

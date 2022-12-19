@@ -47,22 +47,28 @@ export class Game_CustomerRaise extends BaseUI
         this.mIndex = _index;
         this.Show(true);
         
-
         this.mRaiseByPot.active = false;
         this.mRaiseByBB.active = false;
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let totalPot = gameData.GetTotalPotAmount();
-        let sb = gameData.GetStaticData().texasConfig.smallBlind;
 
-        if(totalPot/4 < sb * 2)
-        {
-            this.ShowRaiseBB();
-        }
-        else
+        let lastBetAct = gameData.FindBiggestBetAction();
+        if(lastBetAct == null)
         {
             this.ShowRaiseByPot();
         }
+        else
+        {
+            if(lastBetAct.roundAmount == 0)
+            {
+                this.ShowRaiseByPot();
+            }
+            else
+            {
+                this.ShowRaiseBB();
+            }
+        }
+
     }
 
     ShowRaiseBB()
@@ -70,14 +76,13 @@ export class Game_CustomerRaise extends BaseUI
         this.mRaiseByBB.active = true;
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let sb = gameData.GetStaticData().texasConfig.smallBlind;
-        let bb = sb * 2;
+        let lastBetAct = gameData.FindBiggestBetAction();
+
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         for(let i = 0 ; i < this.mRaiseByBB.children.length ; i++)
         {
-            let bbRatio = i + 3;
-            let amount = bbRatio * bb;
-            let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            let bbRatio = i + 2;
+            let amount = bbRatio * lastBetAct.roundAmount;
             let clientAmount = Tool.ConvertMoney_S2C(amount);
             let currentBtn = this.mRaiseByBB.children[i].getComponent(BaseButton);
             currentBtn.SetTitle(clientAmount + "");
@@ -85,7 +90,12 @@ export class Game_CustomerRaise extends BaseUI
             {
                 let actionInfo = new ActionInfo();
                 actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
-                let realMoney = amount - selfBetAction.amount;
+                let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
+                let realMoney = amount;
+                if(selfBetAction != null)
+                {
+                    realMoney -= selfBetAction.roundAmount;
+                }
 
                 if(realMoney >= selfPlayer.currencyNum)
                 {
@@ -94,8 +104,16 @@ export class Game_CustomerRaise extends BaseUI
                 }
                 else
                 {
-                    actionInfo.amount = realMoney;
-                    actionInfo.actionType = ActionType.ActionType_Raise;
+                    if(lastBetAct == null || lastBetAct.roundAmount == 0)
+                    {
+                        actionInfo.amount = realMoney;
+                        actionInfo.actionType = ActionType.ActionType_Bet;
+                    }
+                    else
+                    {
+                        actionInfo.amount = realMoney;
+                        actionInfo.actionType = ActionType.ActionType_Raise;
+                    }
                 }
                 NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId() , gameStruct.mGameId ,actionInfo );
             },i);
@@ -109,14 +127,12 @@ export class Game_CustomerRaise extends BaseUI
         let gameData = gameStruct.mGameData;
         let totalPot = gameData.GetTotalPotAmount();
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-
+        let lastBetAct = gameData.FindBiggestBetAction();
         for(let i = 0 ; i < this.mRaiseByPot.children.length ; i++)
         {
             let ratio = GameConfig.GetCustomerRaiseRatio(i);
             let title = GameConfig.GetCustomerRaiseTitle(i);
             let amount = ratio *  totalPot;
-            let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
-
             let clientAmount = Tool.ConvertMoney_S2C(amount);
 
             let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
@@ -126,7 +142,12 @@ export class Game_CustomerRaise extends BaseUI
             {
                 let actionInfo = new ActionInfo();
                 actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
-                let realMoney = amount - selfBetAction.amount;
+                let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
+                let realMoney = amount;
+                if(selfBetAction != null)
+                {
+                    realMoney -= selfBetAction.roundAmount;
+                }
 
                 if(realMoney >= selfPlayer.currencyNum)
                 {
@@ -135,8 +156,16 @@ export class Game_CustomerRaise extends BaseUI
                 }
                 else
                 {
-                    actionInfo.amount = realMoney;
-                    actionInfo.actionType = ActionType.ActionType_Raise;
+                    if(lastBetAct == null || lastBetAct.roundAmount == 0)
+                    {
+                        actionInfo.amount = realMoney;
+                        actionInfo.actionType = ActionType.ActionType_Bet;
+                    }
+                    else
+                    {
+                        actionInfo.amount = realMoney;
+                        actionInfo.actionType = ActionType.ActionType_Raise;
+                    }
                 }
                 NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId() , gameStruct.mGameId ,actionInfo );
             },i)

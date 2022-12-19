@@ -66,7 +66,7 @@ export class Game_SelfPreAction extends BaseUI
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateUI();
+            this.node.active = false;
         })
 
         gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
@@ -130,7 +130,7 @@ export class Game_SelfPreAction extends BaseUI
         }
 
 
-        this.node.active = selfLastAct.amount < biggestAct.amount;
+        this.node.active = selfLastAct.roundAmount < biggestAct.roundAmount;
     }
 }
 
