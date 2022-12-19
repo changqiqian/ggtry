@@ -29,7 +29,6 @@ export class Hall_LunBoItem extends BaseUI
                 tempScript.SetUrl(this.mUrl);
             });
         });
-        this.mBtn.SetProtectDoubleClick(true,1);
     }
     RegDataNotify() 
     {

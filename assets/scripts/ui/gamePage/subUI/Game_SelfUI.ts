@@ -142,7 +142,8 @@ export class Game_SelfUI extends BaseUI
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateMoney();
+            this.mMoney.string = "";
+            //this.UpdateMoney();
         })
         
     }
@@ -170,7 +171,7 @@ export class Game_SelfUI extends BaseUI
                 let script = tempNode.getComponent(Game_MovingChip);
                 let startWorldPos = this.mGame_BetAmount.GetChipWorldPos();
                 let screenSize = view.getVisibleSize();
-                script.Fly(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
+                script.FlyWithDelay(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
             })
         }
         this.mGame_BetAmount.node.active = false;

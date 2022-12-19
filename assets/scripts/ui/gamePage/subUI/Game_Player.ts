@@ -451,8 +451,17 @@ export class Game_Player extends BaseUI
             }
             
             let currentWinLose = winLoseInfos[index];
-            this.UpdateMoney(false , playerInfo);
-            this.UpdateWinLose(currentWinLose);
+            this.ShowCards(currentWinLose.cardInfo);
+            this.StartSecondsTimer(1.5 , 0.01 , false , ()=>
+            {
+                let restTime = this.GetRestMillSeconds();
+                if(restTime == 0)
+                {
+                    this.UpdateMoney(false , playerInfo);
+                    this.UpdateWinLose(currentWinLose);
+                    this.mGame_ActionTag.node.active = false;
+                }
+            });
         })
     }
 
@@ -468,7 +477,6 @@ export class Game_Player extends BaseUI
                 script.InitWithData(_winLoseInfo.winLose);
             })
         }
-        this.ShowCards(_winLoseInfo.cardInfo);
     }
 
     CleanTable(_replay : boolean)
@@ -482,7 +490,7 @@ export class Game_Player extends BaseUI
                 let script = tempNode.getComponent(Game_MovingChip);
                 let startWorldPos = this.mGame_BetAmount.GetChipWorldPos();
                 let screenSize = view.getVisibleSize();
-                script.Fly(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
+                script.FlyWithDelay(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
 
             })
         }
@@ -517,6 +525,10 @@ export class Game_Player extends BaseUI
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
         this.mCards.active = false;
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        this.mDarkCover.active = !gameData.IsPlayerPlaying(playerInfo.uid);
     }
 
     PlayerSit()
@@ -579,7 +591,11 @@ export class Game_Player extends BaseUI
             return;
         }
         this.mStateTitle.string = Localization.GetString("00241");
-        this.StartSecondsTimer(_leftTime)
+        this.StartSecondsTimer(_leftTime , 1 , false , ()=>
+        {
+            let seconds = this.GetRestSeconds();
+            this.mCountDown.string = seconds + "";
+        })
     }
 
     ShowBuying(_show :boolean ,_leftTime : number = 0)
@@ -593,7 +609,11 @@ export class Game_Player extends BaseUI
             return;
         }
         this.mStateTitle.string = Localization.GetString("00248");
-        this.StartSecondsTimer(_leftTime)
+        this.StartSecondsTimer(_leftTime , 1 , false , ()=>
+        {
+            let seconds = this.GetRestSeconds();
+            this.mCountDown.string = seconds + "";
+        })
     }
 
     UpdateBuyInCountDown()
@@ -715,12 +735,6 @@ export class Game_Player extends BaseUI
                 this.mCircleTimer.StartTimer(actionLeftTime);
             }
         }
-    }
-
-    OnSecondTimer()
-    {
-        let seconds = this.GetRestSeconds();
-        this.mCountDown.string = seconds + "";
     }
 
     UpdateName(_name : string)

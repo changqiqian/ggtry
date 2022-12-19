@@ -153,34 +153,43 @@ export class Game_PublicCards extends BaseUI
             break;
             case TexasCashState.TexasCashState_FlopRound:
             {
-                for(let i = 0 ; i < 3 ; i++)
+                this.StartSecondsTimer(2,0.01,false,()=>
                 {
-                    let poker = this.GetCardNode(i);
-                    poker.ResetAndHide();
-                    poker.ShowBack();
-                    poker.SetFrontByCardInfo(publicCards[i]);
-                    poker.DealAnimation();
-                }
+                    for(let i = 0 ; i < 3 ; i++)
+                    {
+                        let poker = this.GetCardNode(i);
+                        poker.ResetAndHide();
+                        poker.ShowBack();
+                        poker.SetFrontByCardInfo(publicCards[i]);
+                        poker.DealAnimation();
+                    }
+                })
             }
             break;
             case TexasCashState.TexasCashState_TurnRound:
                 {
-                    let cardIndex = 3;
+                    this.StartSecondsTimer(2,0.01,false,()=>
+                    {
+                        let cardIndex = 3;
+                        let poker = this.GetCardNode(cardIndex);
+                        poker.ResetAndHide();
+                        poker.ShowBack();
+                        poker.SetFrontByCardInfo(publicCards[cardIndex]);
+                        poker.DealAnimation();
+                    })
+                }
+                break;
+            case TexasCashState.TexasCashState_RiverRound:
+            {
+                this.StartSecondsTimer(2,0.01,false,()=>
+                {
+                    let cardIndex = 4;
                     let poker = this.GetCardNode(cardIndex);
                     poker.ResetAndHide();
                     poker.ShowBack();
                     poker.SetFrontByCardInfo(publicCards[cardIndex]);
                     poker.DealAnimation();
-                }
-                break;
-            case TexasCashState.TexasCashState_RiverRound:
-            {
-                let cardIndex = 4;
-                let poker = this.GetCardNode(cardIndex);
-                poker.ResetAndHide();
-                poker.ShowBack();
-                poker.SetFrontByCardInfo(publicCards[cardIndex]);
-                poker.DealAnimation();
+                })
             }
             break;
         }

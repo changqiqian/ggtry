@@ -145,18 +145,9 @@ export abstract class GameData extends MultipleNotify
         return this.GetDynamicData().state;
     }
 
-
-    public UpdatePlayer(_players : Array<PlayerInfo>)
+    public RefreshPlayer(_players : Array<PlayerInfo>)
     {
-        for(let i = 0 ; i < _players.length ; i++)
-        {
-            let currentPlayer = _players[i];
-            let index = this.GetDynamicData().seatInfos.findIndex((_item) => _item.uid === currentPlayer.uid);
-            if(index >= 0)
-            {
-                this.GetDynamicData().seatInfos[index] = currentPlayer;
-            }
-        }
+        this.GetDynamicData().seatInfos = _players;
     }
 
     public GetActionUid() : string

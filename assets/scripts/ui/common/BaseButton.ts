@@ -10,7 +10,7 @@ export class BaseButton extends BaseUI {
     mTitle: Label = null;
     mProtectDoubleClick : boolean = false;
     mClickProtected : boolean = false;
-    mClickProtectedDuration : number = 0.2;
+    mClickProtectedDuration : number = 0.1;
     private mCustomerData : any = null;
     private mCallback : Function = null;
     InitParam() 
@@ -20,6 +20,7 @@ export class BaseButton extends BaseUI {
     BindUI() 
     {
         this.node.on(Node.EventType.TOUCH_END,this.OnClick.bind(this),this);
+        this.SetProtectDoubleClick(true );
     }
     RegDataNotify() 
     {
@@ -79,7 +80,7 @@ export class BaseButton extends BaseUI {
         return "";
     }
 
-    public SetProtectDoubleClick(_enable:boolean , _duration:number = 0.2)
+    public SetProtectDoubleClick(_enable:boolean , _duration:number = 0.1)
     {
         this.mProtectDoubleClick = _enable;
         this.mClickProtectedDuration = _duration;
@@ -129,16 +130,22 @@ export class BaseButton extends BaseUI {
             }
     
             this.mClickProtected = true;
-            this.scheduleOnce(()=>
-            {
-                this.mClickProtected = false;
-            },this.mClickProtectedDuration);
+            this.StartSecondsTimer(this.mClickProtectedDuration,0.05)
         }
 
         AudioManager.Instance.PlayMusicOneShot("Btn");
         if(this.mCallback != null)
         {
             this.mCallback(this.mCustomerData);
+        }
+    }
+
+    OnSecondTimer()
+    {
+        let restTime = this.GetRestMillSeconds();
+        if(restTime == 0)
+        {
+            this.mClickProtected = false;
         }
     }
 

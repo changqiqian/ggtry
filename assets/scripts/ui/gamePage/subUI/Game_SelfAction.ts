@@ -347,7 +347,6 @@ export class Game_SelfAction extends BaseUI
     {
         this.mGame_CustomerRaise.node.active = !this.mGame_CustomerRaise.node.active;
         this.mGame_Slider.node.active = !this.mGame_Slider.node.active;
-        this.mSliderRaiseBtn.node.active = !this.mSliderRaiseBtn.node.active;
         if(this.mGame_Slider.node.active)
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);

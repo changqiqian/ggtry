@@ -59,7 +59,6 @@ export class Me_Main extends BaseUI {
             //     });
             // }
         });
-        this.mBankBtn.SetProtectDoubleClick(true, 1);
 
         this.mMsgBtn.SetClickCallback(() => 
         {

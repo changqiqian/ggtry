@@ -21,6 +21,16 @@ export class Game_Cash extends GameBase
 
     InitSubView()
     {
+        this.AddSubView("gamePage","prefab/Game_TableInfo", (_script)=>
+        {
+            let tempScript = _script as Game_TableInfo;
+            tempScript.InitWithData(this.mIndex);
+        });
+        this.AddSubView("gamePage","prefab/Game_Pot", (_script)=>
+        {
+            let tempScript = _script as Game_Pot;
+            tempScript.InitWithData(this.mIndex);
+        });
         this.AddSubView("gamePage","prefab/Game_BottomUI" , (_script)=>
         {
             let tempScript = _script as Game_BottomUI;
@@ -29,11 +39,6 @@ export class Game_Cash extends GameBase
         this.AddSubView("gamePage","prefab/Game_GameStartInfo", (_script)=>
         {
             let tempScript = _script as Game_GameStartInfo;
-            tempScript.InitWithData(this.mIndex);
-        });
-        this.AddSubView("gamePage","prefab/Game_Pot", (_script)=>
-        {
-            let tempScript = _script as Game_Pot;
             tempScript.InitWithData(this.mIndex);
         });
         this.AddSubView("gamePage","prefab/Game_PublicCards", (_script)=>
@@ -64,12 +69,6 @@ export class Game_Cash extends GameBase
         this.AddSubView("gamePage","prefab/Game_ControlBtns", (_script)=>
         {
             let tempScript = _script as Game_ControlBtns;
-            tempScript.InitWithData(this.mIndex);
-        });
-
-        this.AddSubView("gamePage","prefab/Game_TableInfo", (_script)=>
-        {
-            let tempScript = _script as Game_TableInfo;
             tempScript.InitWithData(this.mIndex);
         });
     }

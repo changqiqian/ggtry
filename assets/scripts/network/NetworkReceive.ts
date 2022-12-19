@@ -463,13 +463,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 {
                     let gameData = gameStruct.mGameData;
                     gameData.Data_S2CCommonStandUpResp.mData = msg;
-                    let seat = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData).seat;
-                    gameStruct.mGameData.PlayerStand(LocalPlayerData.Instance.Data_Uid.mData);
-                    let tempNotify = new S2CCommonStandUpNotify();
-                    tempNotify.actionSeat = seat;
-                    tempNotify.gameId = msg.gameId;
-                    tempNotify.actionUid = LocalPlayerData.Instance.Data_Uid.mData;
-                    gameStruct.mGameData.Data_S2CCommonStandUpNotify.mData = tempNotify;
+                    // let seat = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData).seat;
+                    // gameStruct.mGameData.PlayerStand(LocalPlayerData.Instance.Data_Uid.mData);
                 }
             }
             else
@@ -766,7 +761,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 let gameData = gameStruct.mGameData;
                 gameData.ResetGameInfo();
                 gameData.SetGameState(TexasCashState.TexasCashState_RoundStart);
-                gameData.UpdatePlayer(msg.players);
+                gameData.RefreshPlayer(msg.players);
                 gameData.SetDealer(msg.dealerUid);
                 gameData.UpdatePots(msg.potInfo);
                 gameData.SetActions(msg.actionInfo);
