@@ -117,11 +117,7 @@ export class Game_SeatItem extends BaseUI
             this.mSitBtn.Show(false);
             return;
         }
-
-
-
         let seatInfos = gameData.GetDynamicData().seatInfos;
-
         let occupaid = false;
         for(let i = 0 ; i < seatInfos.length ; i++)
         {

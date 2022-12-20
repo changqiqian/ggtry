@@ -1,5 +1,6 @@
 import { Vec3, _decorator} from 'cc';
 import { BaseData } from '../../base/BaseData';
+import { CardType } from '../../base/Calculator';
 import { DataNotify } from '../../base/DataNotify';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { MultipleNotify, SingletonBaseNotify } from '../../base/Singleton';
@@ -107,6 +108,10 @@ export abstract class GameData extends MultipleNotify
     public UpdatePlayerMoney(_userId : string , _money : number)
     {
         let playerInfo = this.GetPlayerInfoByUid(_userId);
+        if(playerInfo == null)
+        {
+            return;
+        }
         playerInfo.currencyNum = _money;
     }
 
@@ -115,6 +120,11 @@ export abstract class GameData extends MultipleNotify
     {
         let state = this.GetDynamicData().state;
         let playerInfo = this.GetPlayerInfoByUid(_userId);
+        if(playerInfo == null)
+        {
+            return false;
+        }
+
         if(state <= TexasCashState.TexasCashState_WaitStart)
         {
             return true;
@@ -145,8 +155,40 @@ export abstract class GameData extends MultipleNotify
         return this.GetDynamicData().state;
     }
 
+    public IsGamePlayingNow() : boolean
+    {
+        if(this.GetGameState() == TexasCashState.TexasCashState_Create || 
+        this.GetGameState() == TexasCashState.TexasCashState_Settlement ||
+        this.GetGameState() == TexasCashState.TexasCashState_WaitStart )
+        {
+            return false;
+        }
+        
+        return true;
+    }
+
     public RefreshPlayer(_players : Array<PlayerInfo>)
     {
+        for(let i = 0 ; i < _players.length ; i++)
+        {
+            if(_players[i].cards.length == 0)
+            {
+                let gameType = this.GetStaticData().basicConfig.gameType;
+                let cardNum = 0;
+                if(gameType == GameType.GameType_OmhCash || gameType == GameType.GameType_OmhMtt)
+                {
+                    cardNum = 4;
+                }
+                else
+                {
+                    cardNum = 2;
+                }
+                for(let k = 0 ; k < cardNum ; k++)
+                {
+                    _players[i].cards.push(null)
+                }
+            }
+        }
         this.GetDynamicData().seatInfos = _players;
     }
 
@@ -201,6 +243,10 @@ export abstract class GameData extends MultipleNotify
     public PlayerBet(_uid : string , _amount : number)
     {
         let playerInfo = this.GetPlayerInfoByUid(_uid);
+        if(playerInfo == null)
+        {
+            return;
+        }
         playerInfo.currencyNum -= _amount;
     }
 
@@ -259,16 +305,16 @@ export abstract class GameData extends MultipleNotify
             }
         }
 
-
-        let result = new ActionInfo();
+        let result = null;
         if(actions != null)
         {
-            for(let i = 0 ; i < actions.length ; i++)
+            for(let i = actions.length - 1 ; i >= 0  ; i--)
             {
                 let currentAct = actions[i];
                 if(currentAct.uid == _uid)
                 {
                     result = currentAct;
+                    break;
                 }
             }
         }
@@ -347,6 +393,11 @@ export abstract class GameData extends MultipleNotify
             return false;
         }
 
+        if(playerInfo.fold == true)
+        {
+            return false;   
+        }
+
         if(playerInfo.cards == null)
         {
             return false;
@@ -356,7 +407,6 @@ export abstract class GameData extends MultipleNotify
         {
             return false;
         }
-
         return true;
     }
 

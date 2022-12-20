@@ -463,8 +463,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 {
                     let gameData = gameStruct.mGameData;
                     gameData.Data_S2CCommonStandUpResp.mData = msg;
-                    // let seat = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData).seat;
-                    // gameStruct.mGameData.PlayerStand(LocalPlayerData.Instance.Data_Uid.mData);
                 }
             }
             else
@@ -727,13 +725,30 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
             if(gameStruct != null)
             {
+                console.log("aaaaaa")
                 let gameData = gameStruct.mGameData;
+                let currentStandPlayer = gameData.GetPlayerInfoByUid(msg.actionUid)
+                if(currentStandPlayer == null)
+                {
+                    console.log("bbbbbbb")
+                    return;
+                }
+
+                if(gameData.IsPlayerPlaying(currentStandPlayer.uid) == true)
+                {
+                    console.log("cccc")
+                    if(currentStandPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
+                    {
+                        console.log("ddddd")
+                        UIMgr.Instance.ShowToast(Localization.GetString("00278"));
+                    }
+                    return;
+                }
+                console.log("xxxx")
                 gameData.PlayerStand(msg.actionUid);
                 gameData.Data_S2CCommonStandUpNotify.mData = msg;
             }
         },this);
-
-
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonOpenNotify,(_data)=>
         {
@@ -768,6 +783,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.Data_S2CCommonRoundStartNotify.mData = msg;
             }
         },this);
+
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonPreFlopRoundNotify,(_data)=>
         {
@@ -847,7 +863,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CCommonActionNotify.decode(_data);
             console.log("收到的内容 S2CCommonActionNotify  行动推送==" + JSON.stringify(msg));
-
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
             if(gameStruct != null)
             {
@@ -855,6 +870,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.PlayerBet(msg.actionInfo.uid , msg.actionInfo.amount );
                 gameData.UpdatePots(msg.potInfo);
                 gameData.InsertAction(msg.actionInfo);
+                let playerInfo = gameData.GetPlayerInfoByUid(msg.actionInfo.uid);
+                playerInfo.fold = msg.actionInfo.actionType == ActionType.ActionType_Fold;
                 gameData.Data_S2CCommonActionNotify.mData = msg;
             }
         },this);  

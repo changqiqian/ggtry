@@ -92,9 +92,13 @@ export class Game_CustomerRaise extends BaseUI
                 actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
                 let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
                 let realMoney = amount;
-                if(selfBetAction != null)
+
+                if(realMoney < selfPlayer.currencyNum)
                 {
-                    realMoney -= selfBetAction.roundAmount;
+                    if(selfBetAction != null)
+                    {
+                        realMoney -= selfBetAction.roundAmount;
+                    }
                 }
 
                 if(realMoney >= selfPlayer.currencyNum)
@@ -133,6 +137,7 @@ export class Game_CustomerRaise extends BaseUI
             let ratio = GameConfig.GetCustomerRaiseRatio(i);
             let title = GameConfig.GetCustomerRaiseTitle(i);
             let amount = ratio *  totalPot;
+            amount = Number(amount.toFixed(1));   		
             let clientAmount = Tool.ConvertMoney_S2C(amount);
 
             let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
@@ -144,9 +149,12 @@ export class Game_CustomerRaise extends BaseUI
                 actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
                 let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
                 let realMoney = amount;
-                if(selfBetAction != null)
+                if(realMoney < selfPlayer.currencyNum)
                 {
-                    realMoney -= selfBetAction.roundAmount;
+                    if(selfBetAction != null)
+                    {
+                        realMoney -= selfBetAction.roundAmount;
+                    }
                 }
 
                 if(realMoney >= selfPlayer.currencyNum)

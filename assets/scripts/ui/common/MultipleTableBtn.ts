@@ -97,15 +97,10 @@ export class MultipleTableBtn extends BaseUI
             this.UpdateUI();
         })
 
-
         gameData.Data_S2CCommonOpenNotify.AddListenner(this,(_data)=>
         {
             this.UpdateUI();
         })
-        
-        
-        
-        
     }
 
     UpdateUI()

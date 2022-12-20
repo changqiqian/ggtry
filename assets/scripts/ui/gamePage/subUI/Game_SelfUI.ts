@@ -123,6 +123,7 @@ export class Game_SelfUI extends BaseUI
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
             this.ExcutiveCurrentAction();
+            this.UpdateMoney();
         })
 
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
@@ -142,8 +143,8 @@ export class Game_SelfUI extends BaseUI
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
-            this.mMoney.string = "";
-            //this.UpdateMoney();
+            //this.CleanTable();
+            this.HideAllUI();
         })
         
     }
@@ -162,6 +163,23 @@ export class Game_SelfUI extends BaseUI
 
     CleanTable()
     {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        if(gameStruct == null)
+        {
+            return;
+        }
+        let gameData = gameStruct.mGameData;
+        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer == null)
+        {
+            return;
+        }
+
+        if(gameData.IsPlayerPlaying(selfPlayer.uid) == false)
+        {
+            return;
+        }
+
         if(this.mGame_BetAmount.node.activeInHierarchy == true )
         {
             this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_prefab)=>
@@ -182,12 +200,21 @@ export class Game_SelfUI extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
+
+        if(gameData.IsGamePlayingNow() == false)
+        {
+            this.HideAllUI();
+            return;
+        }
+
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         if(selfPlayer == null)
         {
             this.HideAllUI();
             return;
         }
+
+
         this.UpdateDealer();
         this.UpdateMoney();
         this.RestoreAction();

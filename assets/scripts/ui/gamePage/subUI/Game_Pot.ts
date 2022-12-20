@@ -66,6 +66,10 @@ export class Game_Pot extends BaseUI
         let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
+            if(gameData.IsGamePlayingNow() == false)
+            {
+                return;
+            }
             this.UpdateSubPots();
             this.UpdateTotalPot();
         })

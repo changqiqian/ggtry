@@ -363,7 +363,7 @@ export class Localization {
         { name: '00275', ch: '退出', en: 'Exit' },
         { name: '00276', ch: '暂停播放', en: 'Stop' },
         { name: '00277', ch: '自动播放', en: 'Auto Play' },
-        
+        { name: '00278', ch: '下局游戏开始前自动站起', en: 'Auto stand up next game' },
         
         
         { name: '01000', ch: '公告', en: 'Notification' },

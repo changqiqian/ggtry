@@ -62,14 +62,16 @@ export class Game_SelfAction extends BaseUI
             let biggestBetAction = gameData.FindBiggestBetAction();
             let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
 
-        
             let actionInfo = new ActionInfo();
             actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
 
             let callAmount = biggestBetAction.roundAmount;
-            if(selfBetAction != null)
+            if(callAmount < selfPlayer.currencyNum)
             {
-                callAmount -= selfBetAction.roundAmount;
+                if(selfBetAction != null)
+                {
+                    callAmount -= selfBetAction.roundAmount;
+                }
             }
             if(callAmount >= selfPlayer.currencyNum)
             {
@@ -103,11 +105,13 @@ export class Game_SelfAction extends BaseUI
             let actionInfo = new ActionInfo();
             actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
 
-            if(selfBetAction != null)
+            if(_amount < selfPlayer.currencyNum)
             {
-                _amount = _amount - selfBetAction.roundAmount;
+                if(selfBetAction != null)
+                {
+                    _amount = _amount - selfBetAction.roundAmount;
+                }
             }
-
             if(_amount >= selfPlayer.currencyNum)
             {
                 actionInfo.amount = selfPlayer.currencyNum;
@@ -227,10 +231,12 @@ export class Game_SelfAction extends BaseUI
             return;
         }
 
-        if(gameState == TexasCashState.TexasCashState_Create ||
-            gameState == TexasCashState.TexasCashState_RoundStart ||
-            gameState == TexasCashState.TexasCashState_Settlement ||
-            gameState == TexasCashState.TexasCashState_WaitStart)
+        if(gameData.IsGamePlayingNow() == false)
+        {
+            return;
+        }
+
+        if(gameState == TexasCashState.TexasCashState_RoundStart)
         {
             return;
         }
@@ -400,14 +406,8 @@ export class Game_SelfAction extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         gameData.Data_PreCheckOrFold.mData = Game_PreCheckOrFold.UnSelected;
-
-        if(_action.amount >=0)
-        {
-
-        }
-        
-        
         NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId(),gameStruct.mGameId,_action);
+        this.HideAll();
     }
 }
 

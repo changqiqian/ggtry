@@ -49,6 +49,11 @@ export class Game_PublicCards extends BaseUI
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
             this.ClearPublicCards();
+
+            if(gameData.IsGamePlayingNow() == false)
+            {
+                return;
+            }
             let cards = gameData.GetDynamicData().publicCards;
             for(let i = 0 ; i < cards.length ; i++)
             {

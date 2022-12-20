@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Sprite, Label, instantiate, AudioSource, Vec3, view } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Combiantion } from '../../../base/Calculator';
 import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { UIMgr } from '../../../base/UIMgr';
@@ -49,6 +50,8 @@ export class Game_Player extends BaseUI
     mCountDown: Label = null;
     @property(BaseButton) 
     mSelfBtn: BaseButton = null;
+    @property(Node) 
+    mConbination: Node = null;
 
     mSeatID : number = null; //座位编号
     private mIndex : number = null;
@@ -91,6 +94,7 @@ export class Game_Player extends BaseUI
         this.mStateTitle.node.active = false;
         this.mSelfBtn.node.active = false;
         this.mCountDown.string = "";
+        this.mConbination.active = false;
         this.StopSecondsTimer();
     }
 
@@ -267,8 +271,21 @@ export class Game_Player extends BaseUI
                 return;
             }
             this.PlayerSit();
+
+            if(gameData.IsGamePlayingNow() == false)
+            {
+                return;
+            }
+
+            if(gameData.IsPlayerPlaying(playerInfo.uid) == false)
+            {
+                return;
+            }
+
             this.RestoreAction();
             this.RestoreTurn();
+            this.UpdateDealer(gameData.GetDynamicData().dealerUid , playerInfo , false);
+            this.UpdatePlayerPlayingState(playerInfo);
         });
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
         {
@@ -315,10 +332,14 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            
-
             this.PrepareRoundStart();
-            
+
+            if(gameData.IsPlayerPlaying(currentPlayer.uid) == false)
+            {
+                return;
+            }
+            this.ShowMiniCard(true,false);
+
             let actionSB = gameData.FindAction(currentPlayer.uid , ActionType.ActionType_SB);
             if(actionSB != null)
             {
@@ -342,7 +363,6 @@ export class Game_Player extends BaseUI
 
             let dealerId = gameData.GetDynamicData().dealerUid;
             this.UpdateDealer(dealerId,currentPlayer,false);
-
             this.UpdateMoney(false , currentPlayer);
         })
 
@@ -354,13 +374,10 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-
             if(gameData.IsPlayerPlaying(playerInfo.uid) == false)
             {
                 return;
             }
-
-
             this.ShowMiniCard(true , false);
         })
 
@@ -388,7 +405,14 @@ export class Game_Player extends BaseUI
 
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
+            let currentPlayer = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+            if(currentPlayer == null)
+            {
+                return;
+            }
+
             this.ExcutiveAction(false);
+            this.UpdateMoney(false,currentPlayer);
         })
 
         gameData.Data_S2CCommonBringInTimerNotify.AddListenner(this,(_data)=>
@@ -450,8 +474,17 @@ export class Game_Player extends BaseUI
                 return;
             }
             
+            this.mGame_ActionTag.node.active = false;
+            this.mGame_BetAmount.node.active = false;
             let currentWinLose = winLoseInfos[index];
             this.ShowCards(currentWinLose.cardInfo);
+            if(currentWinLose.combinationResult != null)
+            {
+                if(currentWinLose.combinationResult.Combination != null)
+                {
+                    this.ShowConbination(currentWinLose.combinationResult.Combination);
+                }
+            }
             this.StartSecondsTimer(1.5 , 0.01 , false , ()=>
             {
                 let restTime = this.GetRestMillSeconds();
@@ -529,6 +562,7 @@ export class Game_Player extends BaseUI
         let gameData = gameStruct.mGameData;
         let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
         this.mDarkCover.active = !gameData.IsPlayerPlaying(playerInfo.uid);
+        this.mConbination.active = false;
     }
 
     PlayerSit()
@@ -547,23 +581,22 @@ export class Game_Player extends BaseUI
         this.UpdateName(playerInfo.nickName);
         this.UpdateHead(playerInfo.head);
         this.UpdateMoney(false,playerInfo);
-        this.UpdateDealer(gameData.GetDynamicData().dealerUid , playerInfo , false);
-        this.UpdatePlayerPlayingState(playerInfo);
         this.UpdateUIDirection();
     }
 
     UpdatePlayerPlayingState(_playerInfo : PlayerInfo)
     {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let isPlaying = gameData.IsPlayerPlaying(_playerInfo.uid);
         if(_playerInfo.currencyNum)
         {
-            let playerPlaying = _playerInfo.cards.length > 0;
-            this.ShowMiniCard(playerPlaying ,false);
-
-            if(playerPlaying)
+            this.ShowMiniCard(isPlaying ,false);
+            if(isPlaying)
             {
                 if(_playerInfo.auto)
                 {
-                    this.ShowAuto(true  ,_playerInfo.autoLeftTime);
+                    this.ShowAuto(true , _playerInfo.autoLeftTime);
                 }
                 else
                 {
@@ -844,7 +877,6 @@ export class Game_Player extends BaseUI
             }
         }
 
-        this.mGame_BetAmount.node.active = true;
         this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_prefab)=>
         {
             let tempNode = instantiate(_prefab);
@@ -862,10 +894,11 @@ export class Game_Player extends BaseUI
 
     ShowActionType(_actionType : ActionType , _replay : boolean)
     {
+        let isFold = _actionType == ActionType.ActionType_Fold;
+        this.mDarkCover.active = isFold;
 
-        this.mDarkCover.active = _actionType == ActionType.ActionType_Fold;
-        this.ShowMiniCard(_actionType != ActionType.ActionType_Fold , _replay);
-
+        this.ShowMiniCard(!isFold , _replay);
+        
         if(_replay == false)
         {
             // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
@@ -878,7 +911,7 @@ export class Game_Player extends BaseUI
         }
         else
         {
-            if(_actionType == ActionType.ActionType_Fold)
+            if(isFold)
             {
                 let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID);
                 if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
@@ -888,7 +921,7 @@ export class Game_Player extends BaseUI
             }
         }
 
-        if(_actionType == ActionType.ActionType_Fold)
+        if(isFold)
         {
             this.LoadPrefab("gamePage","prefab/Game_MovingCards",(_prefab)=>
             {
@@ -926,6 +959,20 @@ export class Game_Player extends BaseUI
         }
 
         this.mMiniCard.active = _value;
+    }
+
+    ShowConbination(_conbination : Combiantion)
+    {
+        if(_conbination == null)
+        {
+            return;
+        }
+        if(_conbination == Combiantion.None)
+        {
+            return;
+        }
+        this.mConbination.active = true;
+        this.mConbination.getChildByName("Conbination").getComponent(Label).string = Poker.GetConbinationName(_conbination);
     }
 }
 

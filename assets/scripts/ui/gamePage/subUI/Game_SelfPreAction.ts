@@ -93,6 +93,11 @@ export class Game_SelfPreAction extends BaseUI
         let gameData = gameStruct.mGameData;
         let gameState = gameData.GetGameState();
 
+        if(gameData.IsGamePlayingNow() == false)
+        {
+            return;
+        }
+
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         if(selfPlayer == null)
         {

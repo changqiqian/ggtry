@@ -76,6 +76,11 @@ export class GameBase extends BaseUI
 
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
+            if(gameData.IsGamePlayingNow() == false)
+            {
+                return;
+            }
+
             let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData)
             if(selfPlayer == null)
             {
