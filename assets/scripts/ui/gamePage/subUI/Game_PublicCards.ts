@@ -158,43 +158,34 @@ export class Game_PublicCards extends BaseUI
             break;
             case TexasCashState.TexasCashState_FlopRound:
             {
-                this.StartSecondsTimer(2,0.01,false,()=>
+                for(let i = 0 ; i < 3 ; i++)
                 {
-                    for(let i = 0 ; i < 3 ; i++)
-                    {
-                        let poker = this.GetCardNode(i);
-                        poker.ResetAndHide();
-                        poker.ShowBack();
-                        poker.SetFrontByCardInfo(publicCards[i]);
-                        poker.DealAnimation();
-                    }
-                })
+                    let poker = this.GetCardNode(i);
+                    poker.ResetAndHide();
+                    poker.ShowBack();
+                    poker.SetFrontByCardInfo(publicCards[i]);
+                    poker.DealAnimation();
+                }
             }
             break;
             case TexasCashState.TexasCashState_TurnRound:
-                {
-                    this.StartSecondsTimer(2,0.01,false,()=>
-                    {
-                        let cardIndex = 3;
-                        let poker = this.GetCardNode(cardIndex);
-                        poker.ResetAndHide();
-                        poker.ShowBack();
-                        poker.SetFrontByCardInfo(publicCards[cardIndex]);
-                        poker.DealAnimation();
-                    })
-                }
-                break;
+            {
+                let cardIndex = 3;
+                let poker = this.GetCardNode(cardIndex);
+                poker.ResetAndHide();
+                poker.ShowBack();
+                poker.SetFrontByCardInfo(publicCards[cardIndex]);
+                poker.DealAnimation();
+            }
+            break;
             case TexasCashState.TexasCashState_RiverRound:
             {
-                this.StartSecondsTimer(2,0.01,false,()=>
-                {
-                    let cardIndex = 4;
-                    let poker = this.GetCardNode(cardIndex);
-                    poker.ResetAndHide();
-                    poker.ShowBack();
-                    poker.SetFrontByCardInfo(publicCards[cardIndex]);
-                    poker.DealAnimation();
-                })
+                let cardIndex = 4;
+                let poker = this.GetCardNode(cardIndex);
+                poker.ResetAndHide();
+                poker.ShowBack();
+                poker.SetFrontByCardInfo(publicCards[cardIndex]);
+                poker.DealAnimation();
             }
             break;
         }

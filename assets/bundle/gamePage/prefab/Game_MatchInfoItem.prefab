@@ -343,7 +343,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "57520716-48c8-4a19-8acf-41c9f8777fb0@f9941",
+      "__uuid__": "87c2d6d4-92ef-4fa9-85da-b4a73364d69d@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -507,7 +507,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "VPIP",
+    "_name": "Hands",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -942,7 +942,7 @@
     "mNickName": {
       "__id__": 19
     },
-    "mVPIP": {
+    "mHands": {
       "__id__": 25
     },
     "mBringIn": {

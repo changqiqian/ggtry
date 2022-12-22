@@ -39,8 +39,7 @@ export class Club_PrivateLayer extends ListViewCtr<ClubGameInfo>
     mDataBtn: BaseButton = null;
     @property(BaseButton) 
     mCreateBtn: BaseButton = null;
-    @property(BaseButton) 
-    mRefreshBtn: BaseButton = null;
+
 
     onEnable()
     {
@@ -54,13 +53,6 @@ export class Club_PrivateLayer extends ListViewCtr<ClubGameInfo>
     BindUI()
     {
         this.OffsetHallTop();
-        this.mRefreshBtn.Show(false);
-        this.mRefreshBtn.SetClickCallback(()=>
-        {
-            this.OnDragTop();
-            this.mRefreshBtn.Show(false);
-        })
-
 
         this.mBackBtn.SetClickCallback(()=>
         {
@@ -297,11 +289,6 @@ export class Club_PrivateLayer extends ListViewCtr<ClubGameInfo>
     {
         let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
         NetworkSend.Instance.GetClubGameList(clubId);
-    }
-
-    OnUpdateData()
-    {
-        this.mRefreshBtn.Show(this.mCurrentData.length == 0);
     }
 }
 

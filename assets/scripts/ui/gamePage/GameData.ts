@@ -15,7 +15,12 @@ export abstract class GameData extends MultipleNotify
     //UI控制
     Data_ChatingSubLayer :  BaseData<Game_ChattingSubLayer> = new BaseData<Game_ChattingSubLayer>();  //聊天页面子页面
 
+    //观看者列表
+    Data_S2CCommonGetObListResp : BaseData<S2CCommonGetObListResp> = new BaseData<S2CCommonGetObListResp>();  //观看者列表
+    //买入列表
+    Data_S2CCommonGetBringInListResp : BaseData<S2CCommonGetBringInListResp> = new BaseData<S2CCommonGetBringInListResp>();  //买入列表
 
+    
     //服务器数据返回
     Data_S2CCommonEnterGameResp : BaseData<S2CCommonEnterGameResp> = new BaseData<S2CCommonEnterGameResp>();  //游戏基础配置信息
     Data_S2CCommonOpenNotify : BaseData<S2CCommonOpenNotify> = new BaseData<S2CCommonOpenNotify>(true);  //游戏开始推送
@@ -74,6 +79,7 @@ export abstract class GameData extends MultipleNotify
         for(let i = 0 ; i < this.mDelayStandUpNotifyMsg.length ; i++)
         {
             this.Data_S2CCommonStandUpNotify.mData = this.mDelayStandUpNotifyMsg[i];
+            this.PlayerStand(this.mDelayStandUpNotifyMsg[i].actionUid);
         }
         this.mDelayStandUpNotifyMsg = null;
         this.mDelayStandUpNotifyMsg = new Array<S2CCommonStandUpNotify>();
@@ -405,11 +411,6 @@ export abstract class GameData extends MultipleNotify
         if(playerInfo == null)
         {
             return false;
-        }
-
-        if(playerInfo.fold == true)
-        {
-            return false;   
         }
 
         if(playerInfo.gameRole == GameRole.GameRole_Observer)

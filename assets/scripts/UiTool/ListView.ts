@@ -16,6 +16,8 @@
  //脚本生命周期回调的执行优先级。小于 0 的脚本将优先执行，大于 0 的脚本将最后执行。该优先级只对 onLoad, onEnable, start, update 和 lateUpdate 有效，对 onDisable 和 onDestroy 无效。
  @executionOrder(-5000)
  export default class ListView extends Component {
+    @property(Node) 
+    mDragToRefresh: Node = null; //下拉刷新提示
      //模板类型
      @property({ type: Enum(TemplateType), tooltip: DEV && '模板类型', })
      private templateType: TemplateType = TemplateType.NODE;
@@ -51,6 +53,18 @@
          return this._virtual;
      }
 
+    //缺省可滑动
+    @property({
+        tooltip: DEV && 'Item数量不足以填满Content时，是否可滑动',
+        visible() {
+            let val: boolean = this.virtual;
+            if (!val)
+                this.lackSlide = false;
+            return val;
+        }
+    })
+    public lackSlide : boolean = true;
+
      //刷新频率
      @property({ type: CCInteger })
      private _updateRate: number = 0;
@@ -75,6 +89,8 @@
          tooltip: DEV && '逐帧渲染时，每帧渲染的Item数量（<=0时关闭分帧渲染）',
          slide: true,
      })
+
+     
     public frameByFrameRenderNum: number = 0;
     private renderEvent: Function = null;
     private dragBottomCallback :  Function = null;
@@ -107,7 +123,12 @@
          }
          this._actualNumItems = this._numItems = val;
          this._forceUpdate = true;
- 
+
+         if(this.mDragToRefresh != null)
+         {
+            this.mDragToRefresh.active = val == 0;
+         }
+
          if (this._virtual) {
              this._resizeContent();
 
@@ -537,8 +558,8 @@
  
          this._allItemSize = result;
          this._allItemSizeNoEdge = this._allItemSize - (this._sizeType ? (this._topGap + this._bottomGap) : (this._leftGap + this._rightGap));
-         let slideOffset: number = 0.1
-         let targetWH: number = false ? ((this._sizeType ? this._thisNodeUt.height : this._thisNodeUt.width) - slideOffset) : (this._allItemSize);
+         let slideOffset: number =  this.lackSlide ? 0 : 0.1;
+         let targetWH: number = this.lackSlide ? ((this._sizeType ? this._thisNodeUt.height : this._thisNodeUt.width) - slideOffset) : (this._allItemSize);
          if (targetWH < 0)
              targetWH = 0;
  

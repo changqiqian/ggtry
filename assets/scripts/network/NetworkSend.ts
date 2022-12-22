@@ -394,7 +394,6 @@ export class NetworkSend extends Singleton<NetworkSend>()
     
     public SendGameAction(_msgId : number ,_gameId : string , _actionInfo : ActionInfo)
     {
-        //UIMgr.Instance.ShowLoading(true);
         let msg = new C2SGameAction();
         msg.gameId = _gameId;
         msg.actionInfo = _actionInfo;
@@ -402,6 +401,27 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("玩家动作  === " + JSON.stringify(msg))
     }
 
+    public GetObList(_msgId : number ,_gameId : string , _page : number , _pageSize : number)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SGetObList();
+        msg.gameId = _gameId;
+        msg.page = _page;
+        msg.pageSize = _pageSize;
+        Network.Instance.SendMsg(_msgId , C2SGetObList.encode(msg).finish());
+        console.log("获取观看者列表  === " + JSON.stringify(msg))
+    }
+
+    public GetBringInList(_msgId : number ,_gameId : string , _page : number , _pageSize : number)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new CS2GetBringInList();
+        msg.gameId = _gameId;
+        msg.page = _page;
+        msg.pageSize = _pageSize;
+        Network.Instance.SendMsg(_msgId , CS2GetBringInList.encode(msg).finish());
+        console.log("获取买入列表  === " + JSON.stringify(msg))
+    }
     
 }
 

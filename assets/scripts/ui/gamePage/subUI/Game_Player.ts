@@ -148,7 +148,7 @@ export class Game_Player extends BaseUI
 
             if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
             {
-                this.ShowCards(playerInfo.cards);
+                this.ShowCards(playerInfo.cards , true);
             }
             else
             {
@@ -192,7 +192,7 @@ export class Game_Player extends BaseUI
                 }
                 if(winResult.cardInfo!=null && winResult.cardInfo.length > 0)
                 {
-                    this.ShowCards(winResult.cardInfo);
+                    this.ShowCards(winResult.cardInfo , true);
                 }
 
                 if(winResult.winLose > 0)
@@ -463,7 +463,7 @@ export class Game_Player extends BaseUI
             this.mGame_ActionTag.node.active = false;
             this.mGame_BetAmount.node.active = false;
             let currentWinLose = winLoseInfos[index];
-            this.ShowCards(currentWinLose.cardInfo);
+            this.ShowCards(currentWinLose.cardInfo , false);
             if(currentWinLose.combinationResult != null)
             {
                 if(currentWinLose.combinationResult.Combination != null)
@@ -486,7 +486,7 @@ export class Game_Player extends BaseUI
 
     UpdateWinLose(_winLoseInfo : PlayerWinLose)
     {
-        if(_winLoseInfo.winLose >=0)
+        if(_winLoseInfo.winLose >0)
         {
             this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
             {
@@ -790,14 +790,14 @@ export class Game_Player extends BaseUI
         }
     }
 
-    ShowCards(_cards : Array<CardInfo>)
+    ShowCards(_cards : Array<CardInfo> , _replay : boolean)
     {
         if(_cards == null || _cards.length == 0)
         {
             this.mCards.active = false;
             return;
         }
-        this.ShowMiniCard(false , false);
+        this.ShowMiniCard(false , _replay);
         let cardNodes = this.mCards.children;
         this.mCards.active = true;
         for(let i = 0 ; i < _cards.length ; i++)

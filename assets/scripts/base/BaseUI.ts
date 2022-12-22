@@ -224,7 +224,6 @@ export abstract class BaseUI extends Component {
         }
     }
 
-
     CloseAsWindow() 
     {
         let parentNode = this.node.parent;
@@ -297,7 +296,7 @@ export abstract class BaseUI extends Component {
             restTime = this.mTotalCountTime - timePast;
         }
 
-        if(restTime <= 0)
+        if(restTime < 0)
         {
             return 0;
         }
@@ -308,7 +307,7 @@ export abstract class BaseUI extends Component {
     SecondsTimerLogic()
     {
         let restTime = this.GetRestMillSeconds();
-        if(restTime <= 0)
+        if(restTime < 0)
         {
             restTime = 0;
             this.StopSecondsTimer();

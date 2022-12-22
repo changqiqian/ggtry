@@ -153,7 +153,7 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
         this.Data_CustomerSliderSetting.mData = GameConfig.GetCustomerSliderSetting();
         this.Data_BBModeSetting.mData = GameConfig.GetBBToggleSetting();
         this.Data_BGMSetting.mData = GameConfig.GetBGMSetting();
-
+        this.Data_ChatSetting.mData = GameConfig.GetChatSetting();
     }
     Data_CustomerRaise0 :BaseData<number> = new BaseData<number>();
     Data_CustomerRaise1 : BaseData<number> = new BaseData<number>();
@@ -163,6 +163,7 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_CustomerSliderSetting : BaseData<boolean> = new BaseData<boolean>();
     Data_BBModeSetting : BaseData<boolean> = new BaseData<boolean>();
     Data_BGMSetting :BaseData<boolean> = new BaseData<boolean>();
+    Data_ChatSetting :BaseData<boolean> = new BaseData<boolean>();
 }
 
 

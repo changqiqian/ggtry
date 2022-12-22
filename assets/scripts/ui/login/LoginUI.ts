@@ -8,6 +8,7 @@ import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
 import { DragDownEvent } from '../../UiTool/DragDownEvent';
+import ListView from '../../UiTool/ListView';
 import { BaseButton } from '../common/BaseButton';
 import { MultipleTableCtr } from '../common/MultipleTableCtr';
 import { Poker } from '../common/Poker';
@@ -38,7 +39,6 @@ export class LoginUI extends BaseUI
     @property(BaseButton) 
     TestIpBtn: BaseButton = null;
 
-
     InitParam() 
     {
     }
@@ -49,12 +49,15 @@ export class LoginUI extends BaseUI
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");   
-            // UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
-            // {
-            //     let tempScript = _script as Game_CashReplay;
-            //     tempScript.InitWithData();
-            // }); 
+            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");   
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
+            {
+                let tempScript = _script as Game_CashReplay;
+                tempScript.InitWithData();
+            }); 
+
+
+
         });
 
         this.mSignBtn.SetClickCallback(()=>
@@ -93,6 +96,7 @@ export class LoginUI extends BaseUI
             Network.Instance.CreateWS();
             this.DebugFunction.active = false;
         });
+
     }
     RegDataNotify() 
     {

@@ -364,8 +364,11 @@ export class Localization {
         { name: '00276', ch: '暂停播放', en: 'Stop' },
         { name: '00277', ch: '自动播放', en: 'Auto Play' },
         { name: '00278', ch: '下局游戏开始前自动站起', en: 'Auto stand up next game' },
-        
-        
+        { name: '00279', ch: '音效', en: 'Music' },
+        { name: '00280', ch: '聊天', en: 'Chat' },
+
+
+
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },
         { name: '01002', ch: 'Cyber记录', en: 'Cyber Record' },

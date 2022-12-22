@@ -82,12 +82,6 @@ export abstract class ListViewCtr<T> extends BaseUI
             this.mIsLastPage = false;
         }
         this.mCurrentPage++;
-        this.OnUpdateData();
-    }
-
-    public OnUpdateData()
-    {
-            
     }
 
     public RefreshData()

@@ -1428,6 +1428,9 @@ export class PlayerInfo implements IPlayerInfo {
     /** PlayerInfo bringInNum. */
     public bringInNum: number;
 
+    /** PlayerInfo online. */
+    public online: boolean;
+
     /** PlayerInfo gameRole. */
     public gameRole: GameRole;
 
@@ -1476,6 +1479,24 @@ export class PlayerHistoryInfo implements IPlayerHistoryInfo {
      * @param [p] Properties to set
      */
     constructor(p?: IPlayerHistoryInfo);
+
+    /** PlayerHistoryInfo uid. */
+    public uid: string;
+
+    /** PlayerHistoryInfo nickName. */
+    public nickName: string;
+
+    /** PlayerHistoryInfo head. */
+    public head: string;
+
+    /** PlayerHistoryInfo totalGames. */
+    public totalGames: number;
+
+    /** PlayerHistoryInfo totalBringIn. */
+    public totalBringIn: number;
+
+    /** PlayerHistoryInfo totalWinLose. */
+    public totalWinLose: number;
 
     /**
      * Encodes the specified PlayerHistoryInfo message. Does not implicitly {@link PlayerHistoryInfo.verify|verify} messages.
@@ -3075,6 +3096,80 @@ export class C2SGameOpen implements IC2SGameOpen {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGameOpen;
 }
 
+/** Represents a C2SGetObList. */
+export class C2SGetObList implements IC2SGetObList {
+
+    /**
+     * Constructs a new C2SGetObList.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SGetObList);
+
+    /** C2SGetObList gameId. */
+    public gameId: string;
+
+    /** C2SGetObList page. */
+    public page: number;
+
+    /** C2SGetObList pageSize. */
+    public pageSize: number;
+
+    /**
+     * Encodes the specified C2SGetObList message. Does not implicitly {@link C2SGetObList.verify|verify} messages.
+     * @param m C2SGetObList message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SGetObList, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SGetObList message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SGetObList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetObList;
+}
+
+/** Represents a CS2GetBringInList. */
+export class CS2GetBringInList implements ICS2GetBringInList {
+
+    /**
+     * Constructs a new CS2GetBringInList.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ICS2GetBringInList);
+
+    /** CS2GetBringInList gameId. */
+    public gameId: string;
+
+    /** CS2GetBringInList page. */
+    public page: number;
+
+    /** CS2GetBringInList pageSize. */
+    public pageSize: number;
+
+    /**
+     * Encodes the specified CS2GetBringInList message. Does not implicitly {@link CS2GetBringInList.verify|verify} messages.
+     * @param m CS2GetBringInList message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ICS2GetBringInList, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a CS2GetBringInList message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns CS2GetBringInList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CS2GetBringInList;
+}
+
 /** Represents a S2CCommonEnterGameResp. */
 export class S2CCommonEnterGameResp implements IS2CCommonEnterGameResp {
 
@@ -3414,8 +3509,20 @@ export class S2CCommonGetObListResp implements IS2CCommonGetObListResp {
     /** S2CCommonGetObListResp result. */
     public result?: (ICommonResult|null);
 
+    /** S2CCommonGetObListResp gameId. */
+    public gameId: string;
+
     /** S2CCommonGetObListResp observer. */
     public observer: IPlayerInfo[];
+
+    /** S2CCommonGetObListResp page. */
+    public page: number;
+
+    /** S2CCommonGetObListResp pageSize. */
+    public pageSize: number;
+
+    /** S2CCommonGetObListResp totalMember. */
+    public totalMember: number;
 
     /**
      * Encodes the specified S2CCommonGetObListResp message. Does not implicitly {@link S2CCommonGetObListResp.verify|verify} messages.
@@ -3436,38 +3543,50 @@ export class S2CCommonGetObListResp implements IS2CCommonGetObListResp {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonGetObListResp;
 }
 
-/** Represents a S2CCommonGetBuyInListResp. */
-export class S2CCommonGetBuyInListResp implements IS2CCommonGetBuyInListResp {
+/** Represents a S2CCommonGetBringInListResp. */
+export class S2CCommonGetBringInListResp implements IS2CCommonGetBringInListResp {
 
     /**
-     * Constructs a new S2CCommonGetBuyInListResp.
+     * Constructs a new S2CCommonGetBringInListResp.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CCommonGetBuyInListResp);
+    constructor(p?: IS2CCommonGetBringInListResp);
 
-    /** S2CCommonGetBuyInListResp result. */
+    /** S2CCommonGetBringInListResp result. */
     public result?: (ICommonResult|null);
 
-    /** S2CCommonGetBuyInListResp playerHistoryInfo. */
+    /** S2CCommonGetBringInListResp gameId. */
+    public gameId: string;
+
+    /** S2CCommonGetBringInListResp playerHistoryInfo. */
     public playerHistoryInfo: IPlayerHistoryInfo[];
 
+    /** S2CCommonGetBringInListResp page. */
+    public page: number;
+
+    /** S2CCommonGetBringInListResp pageSize. */
+    public pageSize: number;
+
+    /** S2CCommonGetBringInListResp totalMember. */
+    public totalMember: number;
+
     /**
-     * Encodes the specified S2CCommonGetBuyInListResp message. Does not implicitly {@link S2CCommonGetBuyInListResp.verify|verify} messages.
-     * @param m S2CCommonGetBuyInListResp message or plain object to encode
+     * Encodes the specified S2CCommonGetBringInListResp message. Does not implicitly {@link S2CCommonGetBringInListResp.verify|verify} messages.
+     * @param m S2CCommonGetBringInListResp message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CCommonGetBuyInListResp, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CCommonGetBringInListResp, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CCommonGetBuyInListResp message from the specified reader or buffer.
+     * Decodes a S2CCommonGetBringInListResp message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CCommonGetBuyInListResp
+     * @returns S2CCommonGetBringInListResp
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonGetBuyInListResp;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonGetBringInListResp;
 }
 
 /** Represents a S2CCommonBringInTimerNotify. */
@@ -3619,6 +3738,37 @@ export class S2CCommonStandUpNotify implements IS2CCommonStandUpNotify {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonStandUpNotify;
+}
+
+/** Represents a S2CCommonOpenNotify. */
+export class S2CCommonOpenNotify implements IS2CCommonOpenNotify {
+
+    /**
+     * Constructs a new S2CCommonOpenNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonOpenNotify);
+
+    /** S2CCommonOpenNotify gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CCommonOpenNotify message. Does not implicitly {@link S2CCommonOpenNotify.verify|verify} messages.
+     * @param m S2CCommonOpenNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonOpenNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonOpenNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonOpenNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonOpenNotify;
 }
 
 /** Represents a S2CCommonRoundStartNotify. */
@@ -3980,37 +4130,6 @@ export class S2CCommonSettlementNotify implements IS2CCommonSettlementNotify {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonSettlementNotify;
-}
-
-/** Represents a S2CCommonOpenNotify. */
-export class S2CCommonOpenNotify implements IS2CCommonOpenNotify {
-
-    /**
-     * Constructs a new S2CCommonOpenNotify.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IS2CCommonOpenNotify);
-
-    /** S2CCommonOpenNotify gameId. */
-    public gameId: string;
-
-    /**
-     * Encodes the specified S2CCommonOpenNotify message. Does not implicitly {@link S2CCommonOpenNotify.verify|verify} messages.
-     * @param m S2CCommonOpenNotify message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IS2CCommonOpenNotify, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a S2CCommonOpenNotify message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns S2CCommonOpenNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonOpenNotify;
 }
 
 /** Represents a C2SLogout. */
@@ -4545,7 +4664,7 @@ export enum MessageId {
     C2S_TexasCashBuyInsurance = 5010,
     C2S_TexasCashChat = 5011,
     C2S_TexasCashGetObList = 5012,
-    CS2_TexasCashGetBuyInList = 5013,
+    CS2_TexasCashGetBringInList = 5013,
     MSG_TexasCashEnd = 5500,
     MSG_TexasMttBegin = 5501,
     MSG_TexasMttEnd = 6000,
@@ -4567,7 +4686,7 @@ export enum MessageId {
     S2C_CommonBuyInsuranceResp = 8008,
     S2C_CommonChatResp = 8009,
     S2C_CommonGetObListResp = 8010,
-    S2C_CommonGetBuyInListResp = 8011,
+    S2C_CommonGetBringInListResp = 8011,
     S2C_CommonBringInTimerNotify = 8110,
     S2C_CommonBringInNotify = 8111,
     S2C_CommonSitDownNotify = 8112,

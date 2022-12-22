@@ -564,9 +564,44 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
-        
-
-
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonGetObListResp,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonGetObListResp.decode(_data);
+            console.log("收到的内容 S2C_CommonGetObListResp  观看者列表==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_S2CCommonGetObListResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonGetBringInListResp,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonGetBringInListResp.decode(_data);
+            console.log("收到的内容 S2C_CommonGetBringInListResp  买入列表==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_S2CCommonGetBringInListResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
@@ -574,6 +609,16 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //
+        //
+        //
         //
         //
         //
@@ -581,6 +626,16 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         //
         //
         //
+        //
+        //
+        //
+        //
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
@@ -731,9 +786,9 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 {
                     return;
                 }
-
                 if(gameData.IsPlayerPlaying(currentStandPlayer.uid) == true)
                 {
+                    currentStandPlayer.gameRole = GameRole.GameRole_Observer;
                     gameData.AddDelayStandUpNotify(msg);
                     if(currentStandPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
                     {
@@ -741,6 +796,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     }
                     return;
                 }
+
                 gameData.PlayerStand(msg.actionUid);
                 gameData.Data_S2CCommonStandUpNotify.mData = msg;
             }
