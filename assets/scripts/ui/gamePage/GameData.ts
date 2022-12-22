@@ -158,7 +158,7 @@ export abstract class GameData extends MultipleNotify
             return true;
         }
 
-        if(playerInfo.cards.length == 0)
+        if(playerInfo.gameRole == GameRole.GameRole_Observer)
         {
             return true;
         }
@@ -170,8 +170,6 @@ export abstract class GameData extends MultipleNotify
 
         return false;
     }
-
-
 
     public SetGameState(_state : TexasCashState)
     {
@@ -195,29 +193,17 @@ export abstract class GameData extends MultipleNotify
         return true;
     }
 
-    public RefreshPlayer(_players : Array<PlayerInfo>)
+    public UpdatePlayer(_players : Array<PlayerInfo>)
     {
         for(let i = 0 ; i < _players.length ; i++)
         {
-            if(_players[i].cards.length == 0)
+            let currentPlayer = _players[i];
+            let index = this.GetDynamicData().seatInfos.findIndex((_item) => _item.uid === currentPlayer.uid);
+            if(index >= 0)
             {
-                let gameType = this.GetStaticData().basicConfig.gameType;
-                let cardNum = 0;
-                if(gameType == GameType.GameType_OmhCash || gameType == GameType.GameType_OmhMtt)
-                {
-                    cardNum = 4;
-                }
-                else
-                {
-                    cardNum = 2;
-                }
-                for(let k = 0 ; k < cardNum ; k++)
-                {
-                    _players[i].cards.push(null)
-                }
+                this.GetDynamicData().seatInfos[index] = currentPlayer;
             }
         }
-        this.GetDynamicData().seatInfos = _players;
     }
 
     public GetActionUid() : string
@@ -426,15 +412,11 @@ export abstract class GameData extends MultipleNotify
             return false;   
         }
 
-        if(playerInfo.cards == null)
+        if(playerInfo.gameRole == GameRole.GameRole_Observer)
         {
             return false;
         }
 
-        if(playerInfo.cards.length == 0)
-        {
-            return false;
-        }
         return true;
     }
 

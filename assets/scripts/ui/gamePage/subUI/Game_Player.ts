@@ -340,25 +340,11 @@ export class Game_Player extends BaseUI
             }
             this.ShowMiniCard(true,false);
 
-            let actionSB = gameData.FindAction(currentPlayer.uid , ActionType.ActionType_SB);
-            if(actionSB != null)
+            let lastBet = gameData.FindLastActionByUid(currentPlayer.uid);
+            if(lastBet != null)
             {
-                this.ShowActionType(ActionType.ActionType_SB , false);
-                this.Bet(actionSB.roundAmount ,ActionType.ActionType_SB, false)
-            }
-
-            let actionBB = gameData.FindAction(currentPlayer.uid , ActionType.ActionType_BB);
-            if(actionBB != null)
-            {
-                this.ShowActionType(ActionType.ActionType_BB, false);
-                this.Bet(actionBB.roundAmount ,ActionType.ActionType_BB, false)
-            }
-
-            let actionStraddle = gameData.FindAction(currentPlayer.uid , ActionType.ActionType_Straddle);
-            if(actionStraddle != null)
-            {
-                this.ShowActionType(ActionType.ActionType_Straddle, false);
-                this.Bet(actionStraddle.roundAmount ,ActionType.ActionType_Straddle, false)
+                this.ShowActionType(lastBet.actionType , false);
+                this.Bet(lastBet.roundAmount ,lastBet.actionType , false)
             }
 
             let dealerId = gameData.GetDynamicData().dealerUid;
@@ -712,11 +698,6 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-    
-            // if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-            // {
-            //     return;
-            // }
     
             this.mCircleTimer.StopTimer();
             this.ShowActionType(lastAct.actionType , false);

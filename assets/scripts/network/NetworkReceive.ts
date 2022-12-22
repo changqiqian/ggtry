@@ -772,14 +772,13 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 let gameData = gameStruct.mGameData;
                 gameData.ResetGameInfo();
                 gameData.SetGameState(TexasCashState.TexasCashState_RoundStart);
-                gameData.RefreshPlayer(msg.players);
+                gameData.UpdatePlayer(msg.players);
                 gameData.SetDealer(msg.dealerUid);
                 gameData.UpdatePots(msg.potInfo);
                 gameData.SetActions(msg.actionInfo);
                 gameData.Data_S2CCommonRoundStartNotify.mData = msg;
             }
         },this);
-
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonPreFlopRoundNotify,(_data)=>
         {
