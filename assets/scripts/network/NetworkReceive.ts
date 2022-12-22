@@ -725,26 +725,22 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
             if(gameStruct != null)
             {
-                console.log("aaaaaa")
                 let gameData = gameStruct.mGameData;
                 let currentStandPlayer = gameData.GetPlayerInfoByUid(msg.actionUid)
                 if(currentStandPlayer == null)
                 {
-                    console.log("bbbbbbb")
                     return;
                 }
 
                 if(gameData.IsPlayerPlaying(currentStandPlayer.uid) == true)
                 {
-                    console.log("cccc")
+                    gameData.AddDelayStandUpNotify(msg);
                     if(currentStandPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
                     {
-                        console.log("ddddd")
                         UIMgr.Instance.ShowToast(Localization.GetString("00278"));
                     }
                     return;
                 }
-                console.log("xxxx")
                 gameData.PlayerStand(msg.actionUid);
                 gameData.Data_S2CCommonStandUpNotify.mData = msg;
             }

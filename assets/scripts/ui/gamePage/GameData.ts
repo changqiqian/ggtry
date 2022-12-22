@@ -41,6 +41,9 @@ export abstract class GameData extends MultipleNotify
 
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_RotateSeatEnd : BaseData<boolean> = new BaseData<boolean>(true);  //座位旋转结束
+
+    mDelayStandUpNotifyMsg : Array<S2CCommonStandUpNotify> = new Array<S2CCommonStandUpNotify>();
+
     
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
     {
@@ -49,6 +52,31 @@ export abstract class GameData extends MultipleNotify
         act.amount = _amount;
         act.uid = _uid;
         return act;
+    }
+
+    public AddDelayStandUpNotify(_StandUpNotify : S2CCommonStandUpNotify)
+    {
+        this.mDelayStandUpNotifyMsg.push(_StandUpNotify);
+    }
+
+    public IsPlayerDelayStandUp(_uid : string)
+    {
+        let index = this.mDelayStandUpNotifyMsg.findIndex((_item) => _item.actionUid === _uid);
+        if(index < 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public ExcutiveDelayStandUp()
+    {
+        for(let i = 0 ; i < this.mDelayStandUpNotifyMsg.length ; i++)
+        {
+            this.Data_S2CCommonStandUpNotify.mData = this.mDelayStandUpNotifyMsg[i];
+        }
+        this.mDelayStandUpNotifyMsg = null;
+        this.mDelayStandUpNotifyMsg = new Array<S2CCommonStandUpNotify>();
     }
     
     public SetGameInfo(_S2CCommonEnterGameResp : S2CCommonEnterGameResp)

@@ -38,6 +38,12 @@ export class Game_Menu extends BaseUI
     mIndex : number;
 
     mInited : boolean = false;
+
+    onEnable()
+    {
+        this.UpdateStandBtn();
+    }
+
     InitParam()
     {
         this.OffsetHallTop();
@@ -46,10 +52,7 @@ export class Game_Menu extends BaseUI
     {
         this.mMovingShow.SetAnimationType(AnimationShowType.FromLeft);
         this.mMovingShow.SetRoot(this.node);
-
-
         this.AddTouchCloseEvent(this.mBG);
-
         this.mRuleBtn.SetClickCallback(()=>
         {
 
@@ -122,7 +125,6 @@ export class Game_Menu extends BaseUI
         this.mInited = false;
         this.mIndex = _index;    
         this.BindData();
-
     }
 
     BindData()
@@ -151,8 +153,6 @@ export class Game_Menu extends BaseUI
             }
             this.UpdateStandBtn();
         });
-
-        
 
 
         HallData.Instance.Data_S2CModifyMemberRoleNotify.AddListenner(this,(_data)=>
@@ -183,12 +183,20 @@ export class Game_Menu extends BaseUI
     UpdateStandBtn()
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        if(gameStruct == null)
+        {
+            return;
+        }
         let gameData = gameStruct.mGameData;
+        if(gameData.IsPlayerDelayStandUp(LocalPlayerData.Instance.Data_Uid.mData))
+        {
+            this.mStandBtn.Show(false);
+            return;
+        }
+
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         this.mStandBtn.Show(selfPlayer != null);
     }
-
-
 
     public Show(_val : boolean)
     {

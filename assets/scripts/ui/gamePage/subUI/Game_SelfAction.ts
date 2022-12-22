@@ -224,18 +224,20 @@ export class Game_SelfAction extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let gameState = gameData.GetGameState();
-        let actUid = gameData.GetDynamicData().actionUid;
-        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        if(selfPlayer == null)
-        {
-            return;
-        }
 
         if(gameData.IsGamePlayingNow() == false)
         {
             return;
         }
 
+
+
+        let actUid = gameData.GetDynamicData().actionUid;
+        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer == null)
+        {
+            return;
+        }
         if(gameState == TexasCashState.TexasCashState_RoundStart)
         {
             return;

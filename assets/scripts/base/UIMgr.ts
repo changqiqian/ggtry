@@ -82,7 +82,7 @@ export class UIMgr extends Singleton<UIMgr>()
         UIMgr.ResFolder = ["anm","font","music","prefab","texture"];
         UIMgr.InitialBundle = ["common","loading"];
         UIMgr.RestBundle = ["activityPage","cashPage","clubPage","gamePage","hall",
-        "login","mePage","mttPage","emoji"];//,"cowboy"];
+        "login","mePage","mttPage"];//emoji,cowboy
         let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,"loading" ,[]);
         let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,"login",[]);
         let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI" ,"hall",[]);

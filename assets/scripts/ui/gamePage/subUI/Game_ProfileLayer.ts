@@ -39,25 +39,25 @@ export class Game_ProfileLayer extends BaseUI
     }
     BindUI()
     {
-        for(let i = Emoji.Chick ; i <= Emoji.Foot ; i++)
-        {
-            this.LoadPrefab("emoji" , "prefab/Emoji_Item" , (_prefab)=>
-            {
-                let tempNode = instantiate(_prefab);
-                this.mScrollView.content.addChild(tempNode);
-                tempNode.getComponent(Emoji_Item).InitWithData(i , Emoji_Const.Cost);
-            })
-        }
+        // for(let i = Emoji.Chick ; i <= Emoji.Foot ; i++)
+        // {
+        //     this.LoadPrefab("emoji" , "prefab/Emoji_Item" , (_prefab)=>
+        //     {
+        //         let tempNode = instantiate(_prefab);
+        //         this.mScrollView.content.addChild(tempNode);
+        //         tempNode.getComponent(Emoji_Item).InitWithData(i , Emoji_Const.Cost);
+        //     })
+        // }
 
-        for(let i = SelfEmoji.Alarm ; i <= SelfEmoji.Mute ; i++)
-        {
-            this.LoadPrefab("emoji" , "prefab/Emoji_SelfItem" , (_prefab)=>
-            {
-                let tempNode = instantiate(_prefab);
-                this.mScrollViewForSelf.content.addChild(tempNode);
-                tempNode.getComponent(Emoji_SelfItem).InitWithData(i);
-            })
-        }
+        // for(let i = SelfEmoji.Alarm ; i <= SelfEmoji.Mute ; i++)
+        // {
+        //     this.LoadPrefab("emoji" , "prefab/Emoji_SelfItem" , (_prefab)=>
+        //     {
+        //         let tempNode = instantiate(_prefab);
+        //         this.mScrollViewForSelf.content.addChild(tempNode);
+        //         tempNode.getComponent(Emoji_SelfItem).InitWithData(i);
+        //     })
+        // }
 
         this.mCloseBtn.SetClickCallback(()=>
         {

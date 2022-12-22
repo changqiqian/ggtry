@@ -95,6 +95,7 @@ export class GameBase extends BaseUI
 
         gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
         {
+            gameData.ExcutiveDelayStandUp();
             this.TryToPlayAudio("Bet");
         })
 

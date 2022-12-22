@@ -91,7 +91,6 @@ export class Game_SelfPreAction extends BaseUI
         this.node.active = false;
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let gameState = gameData.GetGameState();
 
         if(gameData.IsGamePlayingNow() == false)
         {
@@ -104,17 +103,17 @@ export class Game_SelfPreAction extends BaseUI
             return;
         }
 
-        if(selfPlayer.cards.length == 0)
+        if(gameData.IsPlayerPlaying(selfPlayer.uid) == false)
         {
             return;
         }
 
+        let gameState = gameData.GetGameState();
         if(gameState == TexasCashState.TexasCashState_Create ||
             gameState == TexasCashState.TexasCashState_RoundStart ||
             gameState == TexasCashState.TexasCashState_Settlement ||
             gameState == TexasCashState.TexasCashState_WaitStart)
         {
-
             return;
         }
 
