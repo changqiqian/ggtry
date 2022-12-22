@@ -21,9 +21,9 @@ filePathToGameConfig = 'assets/scripts/GameConfig.ts'
 #Creator引擎命令行编译工具文件地址
 filePathToCreatorCompileTools = '/Applications/CocosCreator/Creator/3.5.2/CocosCreator.app/Contents/MacOS/CocosCreator'
 #要进行编译的项目工程地址
-pathProjectToCompile = '../cowboy/'
+pathProjectToCompile = '../Cowboy2/'
 #存放生成热更新文件的地址
-pathToSaveHotUpdate = '../cowboy/HotRelease/remote-assets2/'
+pathToSaveHotUpdate = '../Cowboy2/HotRelease/remote-assets2/'
 #COCOS项目中存放porject.manifest热更文件的地址
 filePathToProjectManifest = 'assets/'
 #构建生成的资源目录
@@ -127,7 +127,7 @@ if __name__ == "__main__":
 
     #调用creator命令编译构建
     print('开始构建cocos工程')
-    configPathParam = '"configPath=/Users/yamiwang/cowboy/build/cocos.compile.config.json"'
+    configPathParam = '"configPath=/Users/yamiwang/Cowboy2/build/cocos.compile.config.json"'
     buildParam = filePathToCreatorCompileTools + ' --project ' +  pathProjectToCompile + ' --build ' + configPathParam
     os.system(buildParam)
     print('构建完成！')
