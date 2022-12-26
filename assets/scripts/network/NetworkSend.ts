@@ -423,6 +423,15 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("获取买入列表  === " + JSON.stringify(msg))
     }
     
+    public RefreshGame(_msgId : number ,_gameId : string)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SRefresh();
+        msg.gameId = _gameId;
+
+        Network.Instance.SendMsg(_msgId , C2SRefresh.encode(msg).finish());
+        console.log("获取买入列表  === " + JSON.stringify(msg))
+    }
 }
 
 

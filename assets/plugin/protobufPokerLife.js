@@ -8996,6 +8996,87 @@ $root.CS2GetBringInList = (function() {
     return CS2GetBringInList;
 })();
 
+$root.C2SRefresh = (function() {
+
+    /**
+     * Properties of a C2SRefresh.
+     * @exports IC2SRefresh
+     * @interface IC2SRefresh
+     * @property {string|null} [gameId] C2SRefresh gameId
+     */
+
+    /**
+     * Constructs a new C2SRefresh.
+     * @exports C2SRefresh
+     * @classdesc Represents a C2SRefresh.
+     * @implements IC2SRefresh
+     * @constructor
+     * @param {IC2SRefresh=} [p] Properties to set
+     */
+    function C2SRefresh(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2SRefresh gameId.
+     * @member {string} gameId
+     * @memberof C2SRefresh
+     * @instance
+     */
+    C2SRefresh.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2SRefresh message. Does not implicitly {@link C2SRefresh.verify|verify} messages.
+     * @function encode
+     * @memberof C2SRefresh
+     * @static
+     * @param {IC2SRefresh} m C2SRefresh message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2SRefresh.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a C2SRefresh message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2SRefresh
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2SRefresh} C2SRefresh
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2SRefresh.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SRefresh();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2SRefresh;
+})();
+
 $root.S2CCommonEnterGameResp = (function() {
 
     /**
@@ -10259,6 +10340,101 @@ $root.S2CCommonGetBringInListResp = (function() {
     };
 
     return S2CCommonGetBringInListResp;
+})();
+
+$root.S2CCommonRefreshResp = (function() {
+
+    /**
+     * Properties of a S2CCommonRefreshResp.
+     * @exports IS2CCommonRefreshResp
+     * @interface IS2CCommonRefreshResp
+     * @property {ICommonResult|null} [result] S2CCommonRefreshResp result
+     * @property {IS2CCommonEnterGameResp|null} [refreshData] S2CCommonRefreshResp refreshData
+     */
+
+    /**
+     * Constructs a new S2CCommonRefreshResp.
+     * @exports S2CCommonRefreshResp
+     * @classdesc Represents a S2CCommonRefreshResp.
+     * @implements IS2CCommonRefreshResp
+     * @constructor
+     * @param {IS2CCommonRefreshResp=} [p] Properties to set
+     */
+    function S2CCommonRefreshResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonRefreshResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonRefreshResp
+     * @instance
+     */
+    S2CCommonRefreshResp.prototype.result = null;
+
+    /**
+     * S2CCommonRefreshResp refreshData.
+     * @member {IS2CCommonEnterGameResp|null|undefined} refreshData
+     * @memberof S2CCommonRefreshResp
+     * @instance
+     */
+    S2CCommonRefreshResp.prototype.refreshData = null;
+
+    /**
+     * Encodes the specified S2CCommonRefreshResp message. Does not implicitly {@link S2CCommonRefreshResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonRefreshResp
+     * @static
+     * @param {IS2CCommonRefreshResp} m S2CCommonRefreshResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonRefreshResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.refreshData != null && Object.hasOwnProperty.call(m, "refreshData"))
+            $root.S2CCommonEnterGameResp.encode(m.refreshData, w.uint32(18).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonRefreshResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonRefreshResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonRefreshResp} S2CCommonRefreshResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonRefreshResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonRefreshResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.refreshData = $root.S2CCommonEnterGameResp.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonRefreshResp;
 })();
 
 $root.S2CCommonBringInTimerNotify = (function() {
@@ -13221,6 +13397,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} C2S_TexasCashChat=5011 C2S_TexasCashChat value
  * @property {number} C2S_TexasCashGetObList=5012 C2S_TexasCashGetObList value
  * @property {number} CS2_TexasCashGetBringInList=5013 CS2_TexasCashGetBringInList value
+ * @property {number} C2S_TexasCashRefresh=5014 C2S_TexasCashRefresh value
  * @property {number} MSG_TexasCashEnd=5500 MSG_TexasCashEnd value
  * @property {number} MSG_TexasMttBegin=5501 MSG_TexasMttBegin value
  * @property {number} MSG_TexasMttEnd=6000 MSG_TexasMttEnd value
@@ -13258,6 +13435,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonRiverRoundNotify=8255 S2C_CommonRiverRoundNotify value
  * @property {number} S2C_CommonCurrentActionNotify=8256 S2C_CommonCurrentActionNotify value
  * @property {number} S2C_CommonSettlementNotify=8257 S2C_CommonSettlementNotify value
+ * @property {number} S2C_CommonRefresh=8258 S2C_CommonRefresh value
  */
 $root.MessageId = (function() {
     var valuesById = {}, values = Object.create(valuesById);
@@ -13336,6 +13514,7 @@ $root.MessageId = (function() {
     values[valuesById[5011] = "C2S_TexasCashChat"] = 5011;
     values[valuesById[5012] = "C2S_TexasCashGetObList"] = 5012;
     values[valuesById[5013] = "CS2_TexasCashGetBringInList"] = 5013;
+    values[valuesById[5014] = "C2S_TexasCashRefresh"] = 5014;
     values[valuesById[5500] = "MSG_TexasCashEnd"] = 5500;
     values[valuesById[5501] = "MSG_TexasMttBegin"] = 5501;
     values[valuesById[6000] = "MSG_TexasMttEnd"] = 6000;
@@ -13373,5 +13552,6 @@ $root.MessageId = (function() {
     values[valuesById[8255] = "S2C_CommonRiverRoundNotify"] = 8255;
     values[valuesById[8256] = "S2C_CommonCurrentActionNotify"] = 8256;
     values[valuesById[8257] = "S2C_CommonSettlementNotify"] = 8257;
+    values[valuesById[8258] = "S2C_CommonRefresh"] = 8258;
     return values;
 })();

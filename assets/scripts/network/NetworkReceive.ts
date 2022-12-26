@@ -602,6 +602,29 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonRefresh,(_data)=>
+        {
+            let msg = S2CCommonRefreshResp.decode(_data);
+            console.log("收到的内容 S2C_CommonSettlementNotify  游戏结算==" + JSON.stringify(msg));
+
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.refreshData.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.SetGameInfo(msg.refreshData);
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+
+
+
+        },this);  
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
@@ -944,6 +967,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.Data_S2CCommonSettlementNotify.mData = msg;
             }
         },this);  
+
     }
 
     public UnregisterMsg()

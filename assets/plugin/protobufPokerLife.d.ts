@@ -3170,6 +3170,37 @@ export class CS2GetBringInList implements ICS2GetBringInList {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CS2GetBringInList;
 }
 
+/** Represents a C2SRefresh. */
+export class C2SRefresh implements IC2SRefresh {
+
+    /**
+     * Constructs a new C2SRefresh.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SRefresh);
+
+    /** C2SRefresh gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2SRefresh message. Does not implicitly {@link C2SRefresh.verify|verify} messages.
+     * @param m C2SRefresh message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SRefresh, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SRefresh message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SRefresh
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SRefresh;
+}
+
 /** Represents a S2CCommonEnterGameResp. */
 export class S2CCommonEnterGameResp implements IS2CCommonEnterGameResp {
 
@@ -3587,6 +3618,40 @@ export class S2CCommonGetBringInListResp implements IS2CCommonGetBringInListResp
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonGetBringInListResp;
+}
+
+/** Represents a S2CCommonRefreshResp. */
+export class S2CCommonRefreshResp implements IS2CCommonRefreshResp {
+
+    /**
+     * Constructs a new S2CCommonRefreshResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonRefreshResp);
+
+    /** S2CCommonRefreshResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CCommonRefreshResp refreshData. */
+    public refreshData?: (IS2CCommonEnterGameResp|null);
+
+    /**
+     * Encodes the specified S2CCommonRefreshResp message. Does not implicitly {@link S2CCommonRefreshResp.verify|verify} messages.
+     * @param m S2CCommonRefreshResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonRefreshResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonRefreshResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonRefreshResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonRefreshResp;
 }
 
 /** Represents a S2CCommonBringInTimerNotify. */
@@ -4665,6 +4730,7 @@ export enum MessageId {
     C2S_TexasCashChat = 5011,
     C2S_TexasCashGetObList = 5012,
     CS2_TexasCashGetBringInList = 5013,
+    C2S_TexasCashRefresh = 5014,
     MSG_TexasCashEnd = 5500,
     MSG_TexasMttBegin = 5501,
     MSG_TexasMttEnd = 6000,
@@ -4701,7 +4767,8 @@ export enum MessageId {
     S2C_CommonTurnRoundNotify = 8254,
     S2C_CommonRiverRoundNotify = 8255,
     S2C_CommonCurrentActionNotify = 8256,
-    S2C_CommonSettlementNotify = 8257
+    S2C_CommonSettlementNotify = 8257,
+    S2C_CommonRefresh = 8258
 }
  
 }
