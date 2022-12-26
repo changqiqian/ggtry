@@ -11,7 +11,6 @@ export class Game_WinEffect extends BaseUI
     mParticular: ParticleSystem2D = null;
     @property(Label) 
     mWinAmount: Label = null;
-    mTween : Tween = null;
     InitParam()
     {
 
@@ -31,7 +30,7 @@ export class Game_WinEffect extends BaseUI
 
     CustmoerDestory()
     {
-        this.StopAnimation();        
+             
     }
 
     public InitWithData(_amount : number)
@@ -48,11 +47,11 @@ export class Game_WinEffect extends BaseUI
             this.mWinAmount.color = new Color(255,0,0);
         }
 
-        this.StopAnimation();
-        this.mTween = new Tween(this.mWinAmount.node); 
-        this.mTween.to(0.5 , {position : new Vec3(0,150,0)} , {easing : easing.quadIn});
-        this.mTween.start();
-        this.StartSecondsTimer(2 , 0.05 , false);
+        this.StopAllTween(this.mWinAmount.node);
+        let tempTween = new Tween(this.mWinAmount.node); 
+        tempTween.to(0.5 , {position : new Vec3(0,150,0)} , {easing : easing.quadIn});
+        tempTween.start();
+        this.StartSecondsTimer(2 , 0.05 );
     }
 
     OnSecondTimer()
@@ -60,18 +59,8 @@ export class Game_WinEffect extends BaseUI
         let restTime = this.GetRestMillSeconds();
         if(restTime == 0)
         {
-            this.StopAnimation();
+            this.StopAllTween(this.mWinAmount.node);
             this.DeleteSelf();
-        }
-    }
-
-
-    StopAnimation()
-    {
-        if(this.mTween!=null)
-        {
-            this.mTween.stop();
-            this.mTween = null;
         }
     }
 }

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite, Tween, Vec2, v2, math, Vec3, Color, Widget, easing } from 'cc';
+import { _decorator, Component, Node, Sprite, Tween, Vec2, v2, math, Vec3, Color, Widget, easing, TweenSystem } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { CardStruct, CardType, Combiantion } from '../../base/Calculator';
 import { Localization } from '../../base/Localization';
@@ -23,9 +23,6 @@ export class Poker extends BaseUI
 
     mClickCallback : Function = null;
     mIndex : number = null;
-
-    mTweenFlip :Tween = null;
-    mTweenDeal : Tween = null;
     mCardStruct : CardStruct = null;
     mServerData : number = null;
     InitParam() 
@@ -195,28 +192,28 @@ export class Poker extends BaseUI
     public FlipToFront(_duration : number = 0.2)
     {
         let halfDuration = _duration / 2;
-        this.mTweenFlip = new Tween(this.mRoot); 
-        this.mTweenFlip.to(halfDuration , {scale: new Vec3(0,1,1)});
-        this.mTweenFlip.call(()=>
+        let tweenFlip = new Tween(this.mRoot); 
+        tweenFlip.to(halfDuration , {scale: new Vec3(0,1,1)});
+        tweenFlip.call(()=>
         {
             this.mBack.active = false;
             this.mFront.active = true;
         });
-        this.mTweenFlip.to(halfDuration , {scale: Vec3.ONE});
-        this.mTweenFlip .start();
+        tweenFlip.to(halfDuration , {scale: Vec3.ONE});
+        tweenFlip.start();
     }
 
     public DealAnimation(_delayTime : number = 0,_duration : number = 0.2 , _offset :Vec3 = new Vec3(0,300,0))
     {
         this.mRoot.setPosition(_offset);
-        this.mTweenDeal = new Tween(this.mRoot); 
-        this.mTweenDeal.delay(_delayTime);
-        this.mTweenDeal.to(_duration , {position : new Vec3(0,0,0)} , {easing : easing.quadIn});
-        this.mTweenDeal.call(()=>
+        let tweenDeal = new Tween(this.mRoot); 
+        tweenDeal.delay(_delayTime);
+        tweenDeal.to(_duration , {position : new Vec3(0,0,0)} , {easing : easing.quadIn});
+        tweenDeal.call(()=>
         {
             this.FlipToFront()
         });
-        this.mTweenDeal.start();
+        tweenDeal.start();
     }
 
     public ShowFront()
@@ -240,7 +237,7 @@ export class Poker extends BaseUI
 
     public ResetAndHide()
     {
-        this.StopAllAnimation();
+        this.StopAllTween(this.mRoot);
         this.node.active = false;
         this.mBack.scale =Vec3.ONE;
         this.mFront.scale =Vec3.ONE;
@@ -250,19 +247,6 @@ export class Poker extends BaseUI
         this.mFront.active = false;
         this.SetGary(false);
     }
-
-    public StopAllAnimation()
-    {
-        if(this.mTweenFlip !=null)
-        {
-            this.mTweenFlip.stop();
-        }
-        if(this.mTweenDeal !=null)
-        {
-            this.mTweenDeal.stop();
-        }
-    }
-
 
     public SetClickAble(_callback : Function , _index : number)
     {

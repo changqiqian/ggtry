@@ -7,8 +7,6 @@ export class Toast extends BaseUI
 {
     @property(Label) 
     mTips: Label = null;
-
-    mTween :Tween = null;
     mDuration : number;
     InitParam() 
     {
@@ -29,7 +27,7 @@ export class Toast extends BaseUI
 
     CustmoerDestory() 
     {
-        this.StopAnm();
+        this.StopAllTween();
     }
 
     ShowToast(_tips : string , _duration:number)
@@ -42,23 +40,14 @@ export class Toast extends BaseUI
 
     StartAnm()
     {
-        this.StopAnm();
-        this.mTween = new Tween(this.node); 
-        this.mTween.delay( this.mDuration);
-        this.mTween.call(()=>
+        this.StopAllTween();
+        let tempTween = new Tween(this.node); 
+        tempTween.delay( this.mDuration);
+        tempTween.call(()=>
         {
             this.Show(false);
         });
-        this.mTween.start();   
-    }
-
-
-    StopAnm()
-    {
-        if(this.mTween != null)
-        {
-            this.mTween.stop();
-        }
+        tempTween.start();   
     }
 }
 

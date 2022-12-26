@@ -117,7 +117,6 @@ export class Game_PublicCards extends BaseUI
         return this.node.children[_index].getComponent(Poker);
     }
 
-
     InitWithReplayData()
     {
 

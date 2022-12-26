@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager, sys, view, Widget, UITransform, Vec3, Size } from 'cc';
+import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager, sys, view, Widget, UITransform, Vec3, Size, TweenSystem, game, Game } from 'cc';
 import { CommonNotify } from '../CommonNotify';
 import { GameConfig } from '../GameConfig';
 import { CowboyData } from '../ui/cowboy/CowboyData';
@@ -50,11 +50,13 @@ export abstract class BaseUI extends Component {
     //计时器，可以自动补偿切到后台的时间，定时器停止造成的时间对不上
     mTotalCountTime : number;
     mTimerStartingTime : number;
-    mTimerForward : boolean = false;
     mTimerCallback : Function = null;
+    mTimerRunning : boolean = false;
     //
     onLoad() 
     {
+        game.on(Game.EVENT_SHOW,this.OnGameShow,this);
+        game.on(Game.EVENT_HIDE,this.OnGameHide,this);
         this.PreInit();
         this.mIsWindow = false;
         this.mLayerList = new Array<SubViewKeyPair>();
@@ -70,6 +72,8 @@ export abstract class BaseUI extends Component {
 
     onDestroy() 
     {
+        game.off(Game.EVENT_SHOW,this.OnGameShow,this);
+        game.off(Game.EVENT_HIDE,this.OnGameHide,this);
         CowboyData.Instance.RemoveAllDataListennerByTarget(this);
         LoadingData.Instance.RemoveAllDataListennerByTarget(this);
         LoginData.Instance.RemoveAllDataListennerByTarget(this);
@@ -238,14 +242,14 @@ export abstract class BaseUI extends Component {
         }
     }
     //启动秒表  
-    StartSecondsTimer(_totalTime : number , _timeSpace :number = 1 , _forward : boolean = false , _callback : Function = null)
+    StartSecondsTimer(_totalTime : number , _timeSpace :number = 1 , _callback : Function = null)
     {
         this.mTimerCallback = _callback;
-        this.mTimerForward = _forward;
         if(_totalTime <= 0)
         {
             return;
         }
+        this.mTimerRunning = true;
         this.mTotalCountTime = _totalTime * 1000;
         let tempDate = new Date();
         this.mTimerStartingTime = tempDate.getTime(); 
@@ -255,6 +259,7 @@ export abstract class BaseUI extends Component {
 
     StopSecondsTimer()
     {
+        this.mTimerRunning = false;
         this.unschedule(this.SecondsTimerLogic);
     }
 
@@ -264,16 +269,7 @@ export abstract class BaseUI extends Component {
         let nowTime = tempDate.getTime(); 
         let timePast = nowTime - this.mTimerStartingTime;
 
-        let restTime;
-        if(this.mTimerForward)
-        {
-            restTime = this.mTotalCountTime + timePast;
-        }
-        else
-        {
-            restTime = this.mTotalCountTime - timePast;
-        }
-
+        let restTime = this.mTotalCountTime - timePast;
         if(restTime <= 0)
         {
             return 0;
@@ -286,15 +282,7 @@ export abstract class BaseUI extends Component {
         let tempDate = new Date();
         let nowTime = tempDate.getTime(); 
         let timePast = nowTime - this.mTimerStartingTime;
-        let restTime ;
-        if(this.mTimerForward)
-        {
-            restTime = this.mTotalCountTime + timePast;
-        }
-        else
-        {
-            restTime = this.mTotalCountTime - timePast;
-        }
+        let restTime = this.mTotalCountTime - timePast;
 
         if(restTime < 0)
         {
@@ -333,11 +321,31 @@ export abstract class BaseUI extends Component {
         this.Show(false);
     }
 
+    StopAllTween(_target : Node = null)
+    {
+        let target = _target == null ? this.node : _target;
+        TweenSystem.instance.ActionManager.pauseTarget(target);
+        TweenSystem.instance.ActionManager.removeAllActionsFromTarget(target);
+    }
 
     DeleteSelf()
     {
         this.node.removeFromParent();
         this.node.destroy();
+
+    }
+
+
+    OnGameShow()
+    {
+        if(this.mTimerRunning)
+        {
+            this.SecondsTimerLogic();
+        }
+    }
+
+    OnGameHide()
+    {
 
     }
 

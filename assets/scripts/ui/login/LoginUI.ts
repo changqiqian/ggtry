@@ -7,11 +7,7 @@ import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
-import { DragDownEvent } from '../../UiTool/DragDownEvent';
-import ListView from '../../UiTool/ListView';
 import { BaseButton } from '../common/BaseButton';
-import { MultipleTableCtr } from '../common/MultipleTableCtr';
-import { Poker } from '../common/Poker';
 import { TipsWindow } from '../common/TipsWindow';
 import { Game_CashReplay } from '../gamePage/subUI/Game_CashReplay';
 import { Game_RecipeLayer } from '../gamePage/subUI/Game_RecipeLayer';
@@ -49,12 +45,12 @@ export class LoginUI extends BaseUI
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
         {
-            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");   
-            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
-            {
-                let tempScript = _script as Game_CashReplay;
-                tempScript.InitWithData();
-            }); 
+            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");   
+            // UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
+            // {
+            //     let tempScript = _script as Game_CashReplay;
+            //     tempScript.InitWithData();
+            // }); 
 
 
 

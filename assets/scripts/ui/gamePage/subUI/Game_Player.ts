@@ -471,7 +471,7 @@ export class Game_Player extends BaseUI
                     this.ShowConbination(currentWinLose.combinationResult.Combination);
                 }
             }
-            this.StartSecondsTimer(1.5 , 0.01 , false , ()=>
+            this.StartSecondsTimer(1.5 , 0.01  , ()=>
             {
                 let restTime = this.GetRestMillSeconds();
                 if(restTime == 0)
@@ -610,7 +610,7 @@ export class Game_Player extends BaseUI
             return;
         }
         this.mStateTitle.string = Localization.GetString("00241");
-        this.StartSecondsTimer(_leftTime , 1 , false , ()=>
+        this.StartSecondsTimer(_leftTime , 1  , ()=>
         {
             let seconds = this.GetRestSeconds();
             this.mCountDown.string = seconds + "";
@@ -628,7 +628,7 @@ export class Game_Player extends BaseUI
             return;
         }
         this.mStateTitle.string = Localization.GetString("00248");
-        this.StartSecondsTimer(_leftTime , 1 , false , ()=>
+        this.StartSecondsTimer(_leftTime , 1  , ()=>
         {
             let seconds = this.GetRestSeconds();
             this.mCountDown.string = seconds + "";

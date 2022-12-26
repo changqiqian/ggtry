@@ -7,7 +7,6 @@ export class FullScreenWebView extends BaseUI
 {
     @property(WebView) 
     mWebView: WebView = null;
-    mTween : Tween = null;
     mScheme : string = "backapp";
     InitParam() 
     {
@@ -30,7 +29,7 @@ export class FullScreenWebView extends BaseUI
 
     CustmoerDestory() 
     {
-        this.StopAnimation();
+        this.StopAllTween();
     }
 
     public Show(_val : boolean)
@@ -60,31 +59,23 @@ export class FullScreenWebView extends BaseUI
 
     ShowAnmiation()
     {
-        this.StopAnimation();
-        this.mTween = new Tween(this.node);
-        this.mTween.to(0.3,{position:new Vec3(0 , 0 ,0)},{easing:easing.quadIn});
-        this.mTween.start();
+        this.StopAllTween();
+        let tempTween = new Tween(this.node);
+        tempTween.to(0.3,{position:new Vec3(0 , 0 ,0)},{easing:easing.quadIn});
+        tempTween.start();
     }
 
     HideAnimation()
     {
-        this.StopAnimation();
-        this.mTween = new Tween(this.node);
-        this.mTween.to(0.3,{position:new Vec3(0 ,-view.getVisibleSize().height ,0)},{easing:easing.quadOut});
-        this.mTween.call(()=>
+        this.StopAllTween();
+        let tempTween = new Tween(this.node);
+        tempTween.to(0.3,{position:new Vec3(0 ,-view.getVisibleSize().height ,0)},{easing:easing.quadOut});
+        tempTween.call(()=>
         {
             this.node.active = false;
         });
-        this.mTween.start();
+        tempTween.start();
     }
 
-    StopAnimation()
-    {
-        if(this.mTween != null)
-        {
-            this.mTween.stop();
-            this.mTween = null;
-        }
-    }
 }
 

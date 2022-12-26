@@ -396,7 +396,7 @@ export class CuoPai extends BaseUI {
         this.TouchEnd();
         this.mFinishBtn.Show(false);
         this.mCardBack!.getComponent(Sprite)!.spriteFrame = this.mCardFace!.getComponent(Sprite)!.spriteFrame;
-        this.StartSecondsTimer(2,1,false,()=>
+        this.StartSecondsTimer(2,1,()=>
         {
             let restTime = this.GetRestSeconds();
             if(restTime <= 0)

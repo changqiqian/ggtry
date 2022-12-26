@@ -12,13 +12,9 @@ export class Game_ActionTag extends BaseUI
     @property(Label) 
     mAction: Label = null;
 
-    mTween : Tween = null;
     onDisable()
     {
-        if(this.mTween != null)
-        {
-            this.mTween.stop();
-        }
+        this.StopAllTween();
     }
 
     InitParam() 
@@ -108,22 +104,13 @@ export class Game_ActionTag extends BaseUI
 
     ShowAnimation()
     {
-        this.StopAnimation();
+        this.StopAllTween();
         let bigScale = 1.5;
         this.node.scale = Vec3.ONE;
-        this.mTween = new Tween(this.node); 
-        this.mTween.to(0.15,{scale : new Vec3(bigScale,bigScale,bigScale)});
-        this.mTween.to(0.15,{scale : Vec3.ONE});
-        this.mTween.start();
-    }
-
-    StopAnimation()
-    {
-        if(this.mTween != null)
-        {
-            this.mTween.stop();
-            this.mTween = null;
-        }
+        let tempTween = new Tween(this.node); 
+        tempTween.to(0.15,{scale : new Vec3(bigScale,bigScale,bigScale)});
+        tempTween.to(0.15,{scale : Vec3.ONE});
+        tempTween.start();
     }
 }
 

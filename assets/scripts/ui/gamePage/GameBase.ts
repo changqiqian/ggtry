@@ -2,7 +2,6 @@ import { _decorator, Component, Node, instantiate, Sprite, game, Game, TweenSyst
 import { AudioManager } from '../../base/AudioManager';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
-import { DragDownEvent } from '../../UiTool/DragDownEvent';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { MultipleTableCtr } from '../common/MultipleTableCtr';
 import { HallData } from '../hall/HallData';
@@ -32,9 +31,6 @@ export class GameBase extends BaseUI
     InitParam() 
     {
         this.OffsetTop();
-
-        game.on(Game.EVENT_SHOW,this.OnGameShow,this);
-        game.on(Game.EVENT_HIDE,this.OnGameHide,this);
     }
     BindUI() 
     {
@@ -53,8 +49,7 @@ export class GameBase extends BaseUI
 
     CustmoerDestory() 
     {
-        game.off(Game.EVENT_SHOW,this.OnGameShow,this);
-        game.off(Game.EVENT_HIDE,this.OnGameHide,this);
+
     }
 
     public ShowMoveInAnimation()
@@ -147,7 +142,7 @@ export class GameBase extends BaseUI
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
-            this.StartSecondsTimer(6 , 0.01 , false , ()=>
+            this.StartSecondsTimer(6 , 0.01  , ()=>
             {
                 let restTime = this.GetRestMillSeconds();
                 if(restTime == 0)
@@ -285,7 +280,6 @@ export class GameBase extends BaseUI
         });
     }
 
-
     InitChatCtr()
     {
         this.AddSubView("gamePage","prefab/Game_ChatingCtr" , (_script)=>
@@ -302,24 +296,7 @@ export class GameBase extends BaseUI
             this.mBG.spriteFrame = _spriteFrame;
         });
     }
-    
 
-    OnGameShow()
-    {
-        //TweenSystem.instance.ActionManager.removeAllActions();
-
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        if(gameStruct != null)
-        {
-            let gameData = gameStruct.mGameData;
-            gameData.Data_Refresh.mData = true;
-        }
-    }
-
-    OnGameHide()
-    {
-
-    }
 
 }
 

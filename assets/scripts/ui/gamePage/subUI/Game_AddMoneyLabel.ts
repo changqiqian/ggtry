@@ -32,17 +32,21 @@ export class Game_AddMoneyLabel extends BaseUI
     public InitWithData(_amount : number , _offsetY : number = 150)
     {
         this.mAmount.string = _amount+"";
-
+        let totalDuration = 0.5 + 1;
         let currentPos = this.node.position;
         let toPos = new Vec3(currentPos.x , currentPos.y + _offsetY ,currentPos.z);
         let tween = new Tween(this.node);
         tween.to(0.5,{position:toPos},{easing:easing.quadOut});
-        tween.delay(1);
-        tween.call(()=>
-        {
-            this.DeleteSelf();
-        });
         tween.start();
+        this.StartSecondsTimer(totalDuration,0.01,()=>
+        {
+            let restTime = this.GetRestMillSeconds();
+            if(restTime == 0)
+            {
+                this.DeleteSelf();
+            }
+        })
+
     }
 }
 

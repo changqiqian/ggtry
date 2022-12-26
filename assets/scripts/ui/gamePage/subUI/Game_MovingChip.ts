@@ -5,7 +5,6 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_MovingChip')
 export class Game_MovingChip extends BaseUI 
 {
-    mTween : Tween = null;
     InitParam()
     {
 
@@ -25,40 +24,40 @@ export class Game_MovingChip extends BaseUI
 
     CustmoerDestory()
     {
-        this.StopAnimation();
+        this.StopAllTween();
     }
 
     public Fly(_startWorldPos : Vec3 , _endWorldPos : Vec3)
     {
-        this.StopAnimation();
+        this.StopAllTween();
         let duration = 0.5;
         let localStartPos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(_startWorldPos);
         let localEndPos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(_endWorldPos);
         this.node.setPosition(localStartPos);
-        this.mTween = new Tween(this.node);
-        this.mTween.to(duration,{position:localEndPos},{easing:easing.quadOut});
-        this.mTween.start();
-        this.StartSecondsTimer(duration , 0.05 , false );
+        let tempTween = new Tween(this.node);
+        tempTween.to(duration,{position:localEndPos},{easing:easing.quadOut});
+        tempTween.start();
+        this.StartSecondsTimer(duration , 0.05  );
     }
 
     public FlyWithDelay(_startWorldPos : Vec3 , _endWorldPos : Vec3)
     {
         this.node.active = false;
-        this.StopAnimation();
+        this.StopAllTween();
         let duration = 0.5;
         let delayTime = 0.5;
         let localStartPos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(_startWorldPos);
         let localEndPos = this.node.parent.getComponent(UITransform).convertToNodeSpaceAR(_endWorldPos);
         this.node.setPosition(localStartPos);
-        this.mTween = new Tween(this.node);
-        this.mTween.delay(delayTime);
-        this.mTween.call(()=>
+        let tempTween = new Tween(this.node);
+        tempTween.delay(delayTime);
+        tempTween.call(()=>
         {
             this.node.active = true;
         });
-        this.mTween.to(duration,{position:localEndPos},{easing:easing.quadOut});
-        this.mTween.start();
-        this.StartSecondsTimer(duration + delayTime , 0.05 , false );
+        tempTween.to(duration,{position:localEndPos},{easing:easing.quadOut});
+        tempTween.start();
+        this.StartSecondsTimer(duration + delayTime , 0.05  );
     }
 
     OnSecondTimer()
@@ -66,18 +65,10 @@ export class Game_MovingChip extends BaseUI
         let restTime = this.GetRestMillSeconds();
         if(restTime == 0)
         {
-            this.StopAnimation();
+            this.StopAllTween();
             this.DeleteSelf();
         }
     }
 
-    StopAnimation()
-    {
-        if(this.mTween!=null)
-        {
-            this.mTween.stop();
-            this.mTween = null;
-        }
-    }
 }
 

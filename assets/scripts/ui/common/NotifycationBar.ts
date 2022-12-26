@@ -9,7 +9,6 @@ export class NotifycationBar extends BaseUI
     @property(BaseButton) 
     mBtn: BaseButton = null;
 
-    mTween : Tween = null;
     mMoving : boolean = false;
     mAnimationNodeOriginX : number = null;
 
@@ -60,18 +59,18 @@ export class NotifycationBar extends BaseUI
             return;
         }
         this.mMoving = true;
-        this.StopAnimation();
+        this.StopAllTween();
         let width = this.mBtn.node.getComponent(UITransform).width;
         let startPos = new Vec3(this.mAnimationNodeOriginX - width, 0 , 0);
         this.mBtn.node.setPosition(startPos);
         let toPos = new Vec3(this.mAnimationNodeOriginX , 0 , 0);
-        this.mTween = new Tween(this.mBtn.node);
-        this.mTween.to(0.3,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
+        let tempTween = new Tween(this.mBtn.node);
+        tempTween.to(0.3,{position:toPos},{easing:easing.quadIn});
+        tempTween.call(()=>
         {
             this.mMoving = false;
         });
-        this.mTween.start();
+        tempTween.start();
     }
 
     HideAnimation()
@@ -81,27 +80,20 @@ export class NotifycationBar extends BaseUI
             return;
         }
         this.mMoving = true;
-        this.StopAnimation();
+        this.StopAllTween();
         let width = this.mBtn.node.getComponent(UITransform).width;
         let startPos = new Vec3(this.mAnimationNodeOriginX  , 0 , 0);
         this.mBtn.node.setPosition(startPos);
         let toPos = new Vec3(this.mAnimationNodeOriginX - width , 0 , 0);
-        this.mTween = new Tween(this.mBtn.node);
-        this.mTween.to(0.3,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
+        let tempTween = new Tween(this.mBtn.node);
+        tempTween.to(0.3,{position:toPos},{easing:easing.quadIn});
+        tempTween.call(()=>
         {
             this.mMoving = false;
             this.node.active = false;
         });
-        this.mTween.start();
+        tempTween.start();
     }
 
-    StopAnimation()
-    {
-        if(this.mTween != null)
-        {
-            this.mTween.stop();
-        }
-    }
 }
 

@@ -4,7 +4,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('MovingShow')
 export class MovingShow extends BaseUI {
-    private mTween : Tween = null;
     private mMoving : boolean = false;
 
     private mAnimationShowType : AnimationShowType = null;
@@ -66,7 +65,7 @@ export class MovingShow extends BaseUI {
             return;
         }
         this.mMoving = true;
-        this.StopAnimation();
+        this.StopAllTween();
         switch(this.mAnimationShowType)
         {
             case AnimationShowType.FromLeft:
@@ -88,7 +87,7 @@ export class MovingShow extends BaseUI {
             return;
         }
         this.mMoving = true;
-        this.StopAnimation();
+        this.StopAllTween();
         switch(this.mAnimationShowType)
         {
             case AnimationShowType.FromLeft:
@@ -109,9 +108,9 @@ export class MovingShow extends BaseUI {
         let startPos = new Vec3(this.mOriginPos.x - width, this.mOriginPos.y , this.mOriginPos.z);
         this.node.setPosition(startPos);
         let toPos = new Vec3(this.mOriginPos.x, this.mOriginPos.y , this.mOriginPos.z);
-        this.mTween = new Tween(this.node);
-        this.mTween.to(_druation,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
+        let tempTween = new Tween(this.node);
+        tempTween.to(_druation,{position:toPos},{easing:easing.quadIn});
+        tempTween.call(()=>
         {
             this.mMoving = false;
             if(this.mShowCallback !=null)
@@ -119,7 +118,7 @@ export class MovingShow extends BaseUI {
                 this.mShowCallback();
             }
         });
-        this.mTween.start();
+        tempTween.start();
     }
 
     private HideAnimationFromLeft(_druation : number = MovingShow.mDuration)
@@ -128,14 +127,14 @@ export class MovingShow extends BaseUI {
         let startPos = new Vec3(this.mOriginPos.x  , this.mOriginPos.y , this.mOriginPos.z);
         this.node.setPosition(startPos);
         let toPos = new Vec3(this.mOriginPos.x - width , this.mOriginPos.y , this.mOriginPos.z);
-        this.mTween = new Tween(this.node);
-        this.mTween.to(_druation,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
+        let tempTween = new Tween(this.node);
+        tempTween.to(_druation,{position:toPos},{easing:easing.quadIn});
+        tempTween.call(()=>
         {
             this.mMoving = false;
             this.HideRoot();
         });
-        this.mTween.start();
+        tempTween.start();
     }
 
     private ShowAnimationFromBottom(_druation : number = MovingShow.mDuration)
@@ -144,9 +143,9 @@ export class MovingShow extends BaseUI {
         let startPos = new Vec3(this.mOriginPos.x, this.mOriginPos.y - height , this.mOriginPos.z);
         this.node.setPosition(startPos);
         let toPos = new Vec3(this.mOriginPos.x, this.mOriginPos.y , this.mOriginPos.z);
-        this.mTween = new Tween(this.node);
-        this.mTween.to(_druation,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
+        let tempTween = new Tween(this.node);
+        tempTween.to(_druation,{position:toPos},{easing:easing.quadIn});
+        tempTween.call(()=>
         {
             this.mMoving = false;
             if(this.mShowCallback !=null)
@@ -154,7 +153,7 @@ export class MovingShow extends BaseUI {
                 this.mShowCallback ();
             }
         });
-        this.mTween.start();
+        tempTween.start();
     }
 
     private HideAnimationFromBottom(_druation : number = MovingShow.mDuration)
@@ -163,14 +162,14 @@ export class MovingShow extends BaseUI {
         let startPos = new Vec3(this.mOriginPos.x  , this.mOriginPos.y , this.mOriginPos.z);
         this.node.setPosition(startPos);
         let toPos = new Vec3(this.mOriginPos.x  , this.mOriginPos.y - height, this.mOriginPos.z);
-        this.mTween = new Tween(this.node);
-        this.mTween.to(_druation,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
+        let tempTween = new Tween(this.node);
+        tempTween.to(_druation,{position:toPos},{easing:easing.quadIn});
+        tempTween.call(()=>
         {
             this.mMoving = false;
             this.HideRoot();
         });
-        this.mTween.start();
+        tempTween.start();
     }
     
     private ShowAnimationFromRight(_druation : number = MovingShow.mDuration)
@@ -179,9 +178,9 @@ export class MovingShow extends BaseUI {
         let startPos = new Vec3(this.mOriginPos.x + width,this.mOriginPos.y , this.mOriginPos.z);
         this.node.setPosition(startPos);
         let toPos = new Vec3(this.mOriginPos.x, this.mOriginPos.y , this.mOriginPos.z);
-        this.mTween = new Tween(this.node);
-        this.mTween.to(_druation,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
+        let tempTween = new Tween(this.node);
+        tempTween.to(_druation,{position:toPos},{easing:easing.quadIn});
+        tempTween.call(()=>
         {
             this.mMoving = false;
             if(this.mShowCallback !=null)
@@ -189,7 +188,7 @@ export class MovingShow extends BaseUI {
                 this.mShowCallback ();
             }
         });
-        this.mTween.start();
+        tempTween.start();
     }
 
     private HideAnimationFromRight(_druation : number = MovingShow.mDuration)
@@ -198,22 +197,14 @@ export class MovingShow extends BaseUI {
         let startPos = new Vec3(this.mOriginPos.x  , this.mOriginPos.y , this.mOriginPos.z);
         this.node.setPosition(startPos);
         let toPos = new Vec3(this.mOriginPos.x + width , this.mOriginPos.y , this.mOriginPos.z);
-        this.mTween = new Tween(this.node);
-        this.mTween.to(_druation,{position:toPos},{easing:easing.quadIn});
-        this.mTween.call(()=>
+        let tempTween = new Tween(this.node);
+        tempTween.to(_druation,{position:toPos},{easing:easing.quadIn});
+        tempTween.call(()=>
         {
             this.mMoving = false;
             this.HideRoot();
         });
-        this.mTween.start();
-    }
-
-    private StopAnimation()
-    {
-        if(this.mTween != null)
-        {
-            this.mTween.stop();
-        }
+        tempTween.start();
     }
 
     private HideRoot()
