@@ -603,18 +603,23 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonRefresh,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonRefreshResp,(_data)=>
         {
             let msg = S2CCommonRefreshResp.decode(_data);
-            console.log("收到的内容 S2C_CommonSettlementNotify  游戏结算==" + JSON.stringify(msg));
+            console.log("收到的内容 S2C_CommonRefreshResp  刷新游戏场景==" + JSON.stringify(msg));
 
             if(msg.result.resId == MsgResult.Success)
             {
-                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.refreshData.gameId);
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
                 if(gameStruct != null)
                 {
                     let gameData = gameStruct.mGameData;
-                    gameData.SetGameInfo(msg.refreshData);
+                    let enterGameResp = new S2CCommonEnterGameResp();
+                    enterGameResp.gameDynamic = msg.gameDynamic;
+                    enterGameResp.gameId = msg.gameId;
+                    enterGameResp.gameStatic = gameData.GetStaticData();
+                    enterGameResp.result = msg.result;
+                    gameData.SetGameInfo(enterGameResp);
                 }
             }
             else

@@ -46,6 +46,7 @@ export abstract class GameData extends MultipleNotify
 
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_RotateSeatEnd : BaseData<boolean> = new BaseData<boolean>(true);  //座位旋转结束
+    Data_Refresh : BaseData<boolean> = new BaseData<boolean>(true);  //刷新场景
 
     mDelayStandUpNotifyMsg : Array<S2CCommonStandUpNotify> = new Array<S2CCommonStandUpNotify>();
 
@@ -471,7 +472,7 @@ export abstract class GameData extends MultipleNotify
     public abstract ChatSendMsgId() : number
     public abstract ObListSendMsgId() : number
     public abstract BuyInListSendMsgId() : number
-    
+    public abstract RefreshSendMsgId() : number
 }
 
 

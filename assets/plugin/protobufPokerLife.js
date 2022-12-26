@@ -10349,7 +10349,8 @@ $root.S2CCommonRefreshResp = (function() {
      * @exports IS2CCommonRefreshResp
      * @interface IS2CCommonRefreshResp
      * @property {ICommonResult|null} [result] S2CCommonRefreshResp result
-     * @property {IS2CCommonEnterGameResp|null} [refreshData] S2CCommonRefreshResp refreshData
+     * @property {string|null} [gameId] S2CCommonRefreshResp gameId
+     * @property {IGameDynamicData|null} [gameDynamic] S2CCommonRefreshResp gameDynamic
      */
 
     /**
@@ -10376,12 +10377,20 @@ $root.S2CCommonRefreshResp = (function() {
     S2CCommonRefreshResp.prototype.result = null;
 
     /**
-     * S2CCommonRefreshResp refreshData.
-     * @member {IS2CCommonEnterGameResp|null|undefined} refreshData
+     * S2CCommonRefreshResp gameId.
+     * @member {string} gameId
      * @memberof S2CCommonRefreshResp
      * @instance
      */
-    S2CCommonRefreshResp.prototype.refreshData = null;
+    S2CCommonRefreshResp.prototype.gameId = "";
+
+    /**
+     * S2CCommonRefreshResp gameDynamic.
+     * @member {IGameDynamicData|null|undefined} gameDynamic
+     * @memberof S2CCommonRefreshResp
+     * @instance
+     */
+    S2CCommonRefreshResp.prototype.gameDynamic = null;
 
     /**
      * Encodes the specified S2CCommonRefreshResp message. Does not implicitly {@link S2CCommonRefreshResp.verify|verify} messages.
@@ -10397,8 +10406,10 @@ $root.S2CCommonRefreshResp = (function() {
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.refreshData != null && Object.hasOwnProperty.call(m, "refreshData"))
-            $root.S2CCommonEnterGameResp.encode(m.refreshData, w.uint32(18).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.gameDynamic != null && Object.hasOwnProperty.call(m, "gameDynamic"))
+            $root.GameDynamicData.encode(m.gameDynamic, w.uint32(26).fork()).ldelim();
         return w;
     };
 
@@ -10424,7 +10435,10 @@ $root.S2CCommonRefreshResp = (function() {
                 m.result = $root.CommonResult.decode(r, r.uint32());
                 break;
             case 2:
-                m.refreshData = $root.S2CCommonEnterGameResp.decode(r, r.uint32());
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.gameDynamic = $root.GameDynamicData.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);
@@ -13420,6 +13434,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonChatResp=8009 S2C_CommonChatResp value
  * @property {number} S2C_CommonGetObListResp=8010 S2C_CommonGetObListResp value
  * @property {number} S2C_CommonGetBringInListResp=8011 S2C_CommonGetBringInListResp value
+ * @property {number} S2C_CommonRefreshResp=8012 S2C_CommonRefreshResp value
  * @property {number} S2C_CommonBringInTimerNotify=8110 S2C_CommonBringInTimerNotify value
  * @property {number} S2C_CommonBringInNotify=8111 S2C_CommonBringInNotify value
  * @property {number} S2C_CommonSitDownNotify=8112 S2C_CommonSitDownNotify value
@@ -13435,7 +13450,6 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonRiverRoundNotify=8255 S2C_CommonRiverRoundNotify value
  * @property {number} S2C_CommonCurrentActionNotify=8256 S2C_CommonCurrentActionNotify value
  * @property {number} S2C_CommonSettlementNotify=8257 S2C_CommonSettlementNotify value
- * @property {number} S2C_CommonRefresh=8258 S2C_CommonRefresh value
  */
 $root.MessageId = (function() {
     var valuesById = {}, values = Object.create(valuesById);
@@ -13537,6 +13551,7 @@ $root.MessageId = (function() {
     values[valuesById[8009] = "S2C_CommonChatResp"] = 8009;
     values[valuesById[8010] = "S2C_CommonGetObListResp"] = 8010;
     values[valuesById[8011] = "S2C_CommonGetBringInListResp"] = 8011;
+    values[valuesById[8012] = "S2C_CommonRefreshResp"] = 8012;
     values[valuesById[8110] = "S2C_CommonBringInTimerNotify"] = 8110;
     values[valuesById[8111] = "S2C_CommonBringInNotify"] = 8111;
     values[valuesById[8112] = "S2C_CommonSitDownNotify"] = 8112;
@@ -13552,6 +13567,5 @@ $root.MessageId = (function() {
     values[valuesById[8255] = "S2C_CommonRiverRoundNotify"] = 8255;
     values[valuesById[8256] = "S2C_CommonCurrentActionNotify"] = 8256;
     values[valuesById[8257] = "S2C_CommonSettlementNotify"] = 8257;
-    values[valuesById[8258] = "S2C_CommonRefresh"] = 8258;
     return values;
 })();

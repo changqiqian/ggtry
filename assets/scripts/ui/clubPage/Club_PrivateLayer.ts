@@ -49,7 +49,6 @@ export class Club_PrivateLayer extends ListViewCtr<ClubGameInfo>
         this.OnDragTop();
     }
 
-
     BindUI()
     {
         this.OffsetHallTop();

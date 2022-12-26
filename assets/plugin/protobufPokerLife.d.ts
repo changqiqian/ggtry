@@ -3632,8 +3632,11 @@ export class S2CCommonRefreshResp implements IS2CCommonRefreshResp {
     /** S2CCommonRefreshResp result. */
     public result?: (ICommonResult|null);
 
-    /** S2CCommonRefreshResp refreshData. */
-    public refreshData?: (IS2CCommonEnterGameResp|null);
+    /** S2CCommonRefreshResp gameId. */
+    public gameId: string;
+
+    /** S2CCommonRefreshResp gameDynamic. */
+    public gameDynamic?: (IGameDynamicData|null);
 
     /**
      * Encodes the specified S2CCommonRefreshResp message. Does not implicitly {@link S2CCommonRefreshResp.verify|verify} messages.
@@ -4753,6 +4756,7 @@ export enum MessageId {
     S2C_CommonChatResp = 8009,
     S2C_CommonGetObListResp = 8010,
     S2C_CommonGetBringInListResp = 8011,
+    S2C_CommonRefreshResp = 8012,
     S2C_CommonBringInTimerNotify = 8110,
     S2C_CommonBringInNotify = 8111,
     S2C_CommonSitDownNotify = 8112,
@@ -4767,8 +4771,7 @@ export enum MessageId {
     S2C_CommonTurnRoundNotify = 8254,
     S2C_CommonRiverRoundNotify = 8255,
     S2C_CommonCurrentActionNotify = 8256,
-    S2C_CommonSettlementNotify = 8257,
-    S2C_CommonRefresh = 8258
+    S2C_CommonSettlementNotify = 8257
 }
  
 }

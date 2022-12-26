@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, instantiate, Sprite } from 'cc';
+import { _decorator, Component, Node, instantiate, Sprite, game, Game, TweenSystem } from 'cc';
 import { AudioManager } from '../../base/AudioManager';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
@@ -32,6 +32,9 @@ export class GameBase extends BaseUI
     InitParam() 
     {
         this.OffsetTop();
+
+        game.on(Game.EVENT_SHOW,this.OnGameShow,this);
+        game.on(Game.EVENT_HIDE,this.OnGameHide,this);
     }
     BindUI() 
     {
@@ -50,7 +53,8 @@ export class GameBase extends BaseUI
 
     CustmoerDestory() 
     {
-
+        game.off(Game.EVENT_SHOW,this.OnGameShow,this);
+        game.off(Game.EVENT_HIDE,this.OnGameHide,this);
     }
 
     public ShowMoveInAnimation()
@@ -299,6 +303,23 @@ export class GameBase extends BaseUI
         });
     }
     
+
+    OnGameShow()
+    {
+        //TweenSystem.instance.ActionManager.removeAllActions();
+
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        if(gameStruct != null)
+        {
+            let gameData = gameStruct.mGameData;
+            gameData.Data_Refresh.mData = true;
+        }
+    }
+
+    OnGameHide()
+    {
+
+    }
 
 }
 
