@@ -437,10 +437,19 @@ export class UIMgr extends Singleton<UIMgr>()
         {
             let currentList = this.GetList(i);
 
-            let index = currentList.findIndex((_item) => _item.value === _target.node);
+            let index;
+            if(i == LayerType.Layer)
+            {
+                index = currentList.findIndex((_item) => _item.value === _target.node);
+            }
+            else
+            {
+                index = currentList.findIndex((_item) => _item.value.getComponent(BaseWindow).mContent === _target.node);
+            }
+
             if(index >=0)
             {
-                _target.DeleteSelf();
+                currentList[index].value.getComponent(BaseUI).DeleteSelf().DeleteSelf();
                 currentList.splice(index , 1);
                 break;
             }
@@ -475,9 +484,9 @@ export class UIMgr extends Singleton<UIMgr>()
         for(let i = LayerType.Layer ; i <= LayerType.Window ; i++)
         {
             let currentList = this.GetList(i);
-            for(let i = 0 ; i < currentList.length ; i++)
+            for(let k = 0 ; k < currentList.length ; k++)
             {
-                let currentKeyPair = currentList[i];
+                let currentKeyPair = currentList[k];
                 if(currentKeyPair.tag == _tag)
                 {
                     if(currentKeyPair.value != null)

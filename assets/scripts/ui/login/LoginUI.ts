@@ -146,6 +146,5 @@ export class LoginUI extends BaseUI
     {
         LoginData.Instance.Clear();
     }
-
 }
 
