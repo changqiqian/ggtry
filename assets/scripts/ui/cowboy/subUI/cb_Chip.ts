@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label } from 'cc';
+import { _decorator, Component, Node, Label, Tween, easing, UIOpacity } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 const { ccclass, property } = _decorator;
 
@@ -23,11 +23,25 @@ export class cb_Chip extends BaseUI {
 
     }
 
+    onEnable()
+    {
+        let tween = new Tween(this.node.getComponent(UIOpacity));
+        tween.delay(1);
+        tween.to(1,{opacity : 0},{easing:easing.linear});
+        tween.call(()=>
+        {
+            this.node.active = false;
+        });
+        tween.start();
+    }
+
 
     public SetAmount(_amount : number)
     {
         this.mAmount.string = _amount.toString();
     }
+
+
 
 }
 

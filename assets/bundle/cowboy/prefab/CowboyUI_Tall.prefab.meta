@@ -2,12 +2,12 @@
   "ver": "1.1.38",
   "importer": "prefab",
   "imported": true,
-  "uuid": "2eb7f460-0ee7-42a3-8104-ab399d92127a",
+  "uuid": "1bf2af51-c0a9-4482-ab9d-d7176d195461",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "CowboyUI_X"
+    "syncNodeName": "CowboyUI_Tall"
   }
 }

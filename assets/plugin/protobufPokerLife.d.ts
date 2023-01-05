@@ -2805,6 +2805,610 @@ export class S2CDismissClubGameNotify implements IS2CDismissClubGameNotify {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CDismissClubGameNotify;
 }
 
+/** Represents a C2STexasCowboyEnterGame. */
+export class C2STexasCowboyEnterGame implements IC2STexasCowboyEnterGame {
+
+    /**
+     * Constructs a new C2STexasCowboyEnterGame.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2STexasCowboyEnterGame);
+
+    /** C2STexasCowboyEnterGame gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2STexasCowboyEnterGame message. Does not implicitly {@link C2STexasCowboyEnterGame.verify|verify} messages.
+     * @param m C2STexasCowboyEnterGame message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2STexasCowboyEnterGame, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2STexasCowboyEnterGame message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2STexasCowboyEnterGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCowboyEnterGame;
+}
+
+/** Represents a C2STexasCowboyExitGame. */
+export class C2STexasCowboyExitGame implements IC2STexasCowboyExitGame {
+
+    /**
+     * Constructs a new C2STexasCowboyExitGame.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2STexasCowboyExitGame);
+
+    /** C2STexasCowboyExitGame gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2STexasCowboyExitGame message. Does not implicitly {@link C2STexasCowboyExitGame.verify|verify} messages.
+     * @param m C2STexasCowboyExitGame message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2STexasCowboyExitGame, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2STexasCowboyExitGame message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2STexasCowboyExitGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCowboyExitGame;
+}
+
+/** Represents a C2STexasCowboyBet. */
+export class C2STexasCowboyBet implements IC2STexasCowboyBet {
+
+    /**
+     * Constructs a new C2STexasCowboyBet.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2STexasCowboyBet);
+
+    /** C2STexasCowboyBet gameId. */
+    public gameId: string;
+
+    /** C2STexasCowboyBet betInfo. */
+    public betInfo?: (ICowboySingleBet|null);
+
+    /**
+     * Encodes the specified C2STexasCowboyBet message. Does not implicitly {@link C2STexasCowboyBet.verify|verify} messages.
+     * @param m C2STexasCowboyBet message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2STexasCowboyBet, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2STexasCowboyBet message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2STexasCowboyBet
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCowboyBet;
+}
+
+/** Represents a C2STexasCowboySelfRecord. */
+export class C2STexasCowboySelfRecord implements IC2STexasCowboySelfRecord {
+
+    /**
+     * Constructs a new C2STexasCowboySelfRecord.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2STexasCowboySelfRecord);
+
+    /** C2STexasCowboySelfRecord gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2STexasCowboySelfRecord message. Does not implicitly {@link C2STexasCowboySelfRecord.verify|verify} messages.
+     * @param m C2STexasCowboySelfRecord message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2STexasCowboySelfRecord, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2STexasCowboySelfRecord message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2STexasCowboySelfRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCowboySelfRecord;
+}
+
+/** CowboyAreaType enum. */
+export enum CowboyAreaType {
+    CowboyAreaType_0 = 0,
+    CowboyAreaType_1 = 1,
+    CowboyAreaType_2 = 2,
+    CowboyAreaType_3 = 3,
+    CowboyAreaType_4 = 4,
+    CowboyAreaType_5 = 5,
+    CowboyAreaType_6 = 6,
+    CowboyAreaType_7 = 7,
+    CowboyAreaType_8 = 8,
+    CowboyAreaType_9 = 9,
+    CowboyAreaType_10 = 10
+}
+
+/** CowboyPhase enum. */
+export enum CowboyPhase {
+    CowBoyPhase_Start = 0,
+    CowBoyPhase_Settlement = 1
+}
+
+/** Represents a CowboyAreaInfo. */
+export class CowboyAreaInfo implements ICowboyAreaInfo {
+
+    /**
+     * Constructs a new CowboyAreaInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ICowboyAreaInfo);
+
+    /** CowboyAreaInfo cowboyAreaType. */
+    public cowboyAreaType: CowboyAreaType;
+
+    /** CowboyAreaInfo totalBetNum. */
+    public totalBetNum: number;
+
+    /**
+     * Encodes the specified CowboyAreaInfo message. Does not implicitly {@link CowboyAreaInfo.verify|verify} messages.
+     * @param m CowboyAreaInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ICowboyAreaInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a CowboyAreaInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns CowboyAreaInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CowboyAreaInfo;
+}
+
+/** Represents a CowboySingleBet. */
+export class CowboySingleBet implements ICowboySingleBet {
+
+    /**
+     * Constructs a new CowboySingleBet.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ICowboySingleBet);
+
+    /** CowboySingleBet actionId. */
+    public actionId: string;
+
+    /** CowboySingleBet amount. */
+    public amount: number;
+
+    /** CowboySingleBet betArea. */
+    public betArea: CowboyAreaType;
+
+    /**
+     * Encodes the specified CowboySingleBet message. Does not implicitly {@link CowboySingleBet.verify|verify} messages.
+     * @param m CowboySingleBet message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ICowboySingleBet, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a CowboySingleBet message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns CowboySingleBet
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CowboySingleBet;
+}
+
+/** Represents a CowboyHistory. */
+export class CowboyHistory implements ICowboyHistory {
+
+    /**
+     * Constructs a new CowboyHistory.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ICowboyHistory);
+
+    /** CowboyHistory cowboyAreaType. */
+    public cowboyAreaType: CowboyAreaType;
+
+    /** CowboyHistory result. */
+    public result: boolean[];
+
+    /**
+     * Encodes the specified CowboyHistory message. Does not implicitly {@link CowboyHistory.verify|verify} messages.
+     * @param m CowboyHistory message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ICowboyHistory, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a CowboyHistory message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns CowboyHistory
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CowboyHistory;
+}
+
+/** Represents a CowboyRecord. */
+export class CowboyRecord implements ICowboyRecord {
+
+    /**
+     * Constructs a new CowboyRecord.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ICowboyRecord);
+
+    /** CowboyRecord cowboyAreaType. */
+    public cowboyAreaType: CowboyAreaType;
+
+    /** CowboyRecord winLose. */
+    public winLose: number;
+
+    /** CowboyRecord betInfos. */
+    public betInfos: ICowboySingleBet[];
+
+    /**
+     * Encodes the specified CowboyRecord message. Does not implicitly {@link CowboyRecord.verify|verify} messages.
+     * @param m CowboyRecord message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ICowboyRecord, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a CowboyRecord message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns CowboyRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CowboyRecord;
+}
+
+/** Represents a CowboyWinLose. */
+export class CowboyWinLose implements ICowboyWinLose {
+
+    /**
+     * Constructs a new CowboyWinLose.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ICowboyWinLose);
+
+    /** CowboyWinLose uid. */
+    public uid: string;
+
+    /** CowboyWinLose winLose. */
+    public winLose: number;
+
+    /**
+     * Encodes the specified CowboyWinLose message. Does not implicitly {@link CowboyWinLose.verify|verify} messages.
+     * @param m CowboyWinLose message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ICowboyWinLose, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a CowboyWinLose message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns CowboyWinLose
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CowboyWinLose;
+}
+
+/** Represents a S2CTexasCowboyEnterGameResp. */
+export class S2CTexasCowboyEnterGameResp implements IS2CTexasCowboyEnterGameResp {
+
+    /**
+     * Constructs a new S2CTexasCowboyEnterGameResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CTexasCowboyEnterGameResp);
+
+    /** S2CTexasCowboyEnterGameResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CTexasCowboyEnterGameResp gameId. */
+    public gameId: string;
+
+    /** S2CTexasCowboyEnterGameResp phase. */
+    public phase: CowboyPhase;
+
+    /** S2CTexasCowboyEnterGameResp cowboyAreaInfoList. */
+    public cowboyAreaInfoList: ICowboyAreaInfo[];
+
+    /** S2CTexasCowboyEnterGameResp myBetInfo. */
+    public myBetInfo: ICowboySingleBet[];
+
+    /** S2CTexasCowboyEnterGameResp history. */
+    public history: ICowboyHistory[];
+
+    /** S2CTexasCowboyEnterGameResp settlementTime. */
+    public settlementTime: number;
+
+    /** S2CTexasCowboyEnterGameResp betTime. */
+    public betTime: number;
+
+    /** S2CTexasCowboyEnterGameResp restTime. */
+    public restTime: number;
+
+    /** S2CTexasCowboyEnterGameResp oneCard. */
+    public oneCard?: (ICardInfo|null);
+
+    /**
+     * Encodes the specified S2CTexasCowboyEnterGameResp message. Does not implicitly {@link S2CTexasCowboyEnterGameResp.verify|verify} messages.
+     * @param m S2CTexasCowboyEnterGameResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CTexasCowboyEnterGameResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CTexasCowboyEnterGameResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CTexasCowboyEnterGameResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CTexasCowboyEnterGameResp;
+}
+
+/** Represents a S2CTexasCowboyExitGameResp. */
+export class S2CTexasCowboyExitGameResp implements IS2CTexasCowboyExitGameResp {
+
+    /**
+     * Constructs a new S2CTexasCowboyExitGameResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CTexasCowboyExitGameResp);
+
+    /** S2CTexasCowboyExitGameResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CTexasCowboyExitGameResp gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CTexasCowboyExitGameResp message. Does not implicitly {@link S2CTexasCowboyExitGameResp.verify|verify} messages.
+     * @param m S2CTexasCowboyExitGameResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CTexasCowboyExitGameResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CTexasCowboyExitGameResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CTexasCowboyExitGameResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CTexasCowboyExitGameResp;
+}
+
+/** Represents a S2CTexasCowboyBetResp. */
+export class S2CTexasCowboyBetResp implements IS2CTexasCowboyBetResp {
+
+    /**
+     * Constructs a new S2CTexasCowboyBetResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CTexasCowboyBetResp);
+
+    /** S2CTexasCowboyBetResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CTexasCowboyBetResp gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CTexasCowboyBetResp message. Does not implicitly {@link S2CTexasCowboyBetResp.verify|verify} messages.
+     * @param m S2CTexasCowboyBetResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CTexasCowboyBetResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CTexasCowboyBetResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CTexasCowboyBetResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CTexasCowboyBetResp;
+}
+
+/** Represents a S2CTexasCowboySelfRecordResp. */
+export class S2CTexasCowboySelfRecordResp implements IS2CTexasCowboySelfRecordResp {
+
+    /**
+     * Constructs a new S2CTexasCowboySelfRecordResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CTexasCowboySelfRecordResp);
+
+    /** S2CTexasCowboySelfRecordResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CTexasCowboySelfRecordResp gameId. */
+    public gameId: string;
+
+    /** S2CTexasCowboySelfRecordResp record. */
+    public record: ICowboyRecord[];
+
+    /**
+     * Encodes the specified S2CTexasCowboySelfRecordResp message. Does not implicitly {@link S2CTexasCowboySelfRecordResp.verify|verify} messages.
+     * @param m S2CTexasCowboySelfRecordResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CTexasCowboySelfRecordResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CTexasCowboySelfRecordResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CTexasCowboySelfRecordResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CTexasCowboySelfRecordResp;
+}
+
+/** Represents a S2CTexasCowboyBetNotify. */
+export class S2CTexasCowboyBetNotify implements IS2CTexasCowboyBetNotify {
+
+    /**
+     * Constructs a new S2CTexasCowboyBetNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CTexasCowboyBetNotify);
+
+    /** S2CTexasCowboyBetNotify gameId. */
+    public gameId: string;
+
+    /** S2CTexasCowboyBetNotify betInfo. */
+    public betInfo: ICowboySingleBet[];
+
+    /**
+     * Encodes the specified S2CTexasCowboyBetNotify message. Does not implicitly {@link S2CTexasCowboyBetNotify.verify|verify} messages.
+     * @param m S2CTexasCowboyBetNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CTexasCowboyBetNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CTexasCowboyBetNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CTexasCowboyBetNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CTexasCowboyBetNotify;
+}
+
+/** Represents a S2CTexasCowboyGameStartNotify. */
+export class S2CTexasCowboyGameStartNotify implements IS2CTexasCowboyGameStartNotify {
+
+    /**
+     * Constructs a new S2CTexasCowboyGameStartNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CTexasCowboyGameStartNotify);
+
+    /** S2CTexasCowboyGameStartNotify gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CTexasCowboyGameStartNotify message. Does not implicitly {@link S2CTexasCowboyGameStartNotify.verify|verify} messages.
+     * @param m S2CTexasCowboyGameStartNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CTexasCowboyGameStartNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CTexasCowboyGameStartNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CTexasCowboyGameStartNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CTexasCowboyGameStartNotify;
+}
+
+/** Represents a S2CTexasCowboyGameSettlementNotify. */
+export class S2CTexasCowboyGameSettlementNotify implements IS2CTexasCowboyGameSettlementNotify {
+
+    /**
+     * Constructs a new S2CTexasCowboyGameSettlementNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CTexasCowboyGameSettlementNotify);
+
+    /** S2CTexasCowboyGameSettlementNotify gameId. */
+    public gameId: string;
+
+    /** S2CTexasCowboyGameSettlementNotify reward. */
+    public reward: CowboyAreaType[];
+
+    /** S2CTexasCowboyGameSettlementNotify result. */
+    public result: ICowboyWinLose[];
+
+    /** S2CTexasCowboyGameSettlementNotify boyCards. */
+    public boyCards: ICardInfo[];
+
+    /** S2CTexasCowboyGameSettlementNotify girlCards. */
+    public girlCards: ICardInfo[];
+
+    /** S2CTexasCowboyGameSettlementNotify publicCards. */
+    public publicCards: ICardInfo[];
+
+    /** S2CTexasCowboyGameSettlementNotify winner. */
+    public winner: number;
+
+    /** S2CTexasCowboyGameSettlementNotify winnerCombination. */
+    public winnerCombination: number;
+
+    /**
+     * Encodes the specified S2CTexasCowboyGameSettlementNotify message. Does not implicitly {@link S2CTexasCowboyGameSettlementNotify.verify|verify} messages.
+     * @param m S2CTexasCowboyGameSettlementNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CTexasCowboyGameSettlementNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CTexasCowboyGameSettlementNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CTexasCowboyGameSettlementNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CTexasCowboyGameSettlementNotify;
+}
+
 /** Represents a C2SEnterGame. */
 export class C2SEnterGame implements IC2SEnterGame {
 
@@ -3199,6 +3803,68 @@ export class C2SRefresh implements IC2SRefresh {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SRefresh;
+}
+
+/** Represents a C2SExaminePublicCard. */
+export class C2SExaminePublicCard implements IC2SExaminePublicCard {
+
+    /**
+     * Constructs a new C2SExaminePublicCard.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SExaminePublicCard);
+
+    /** C2SExaminePublicCard gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2SExaminePublicCard message. Does not implicitly {@link C2SExaminePublicCard.verify|verify} messages.
+     * @param m C2SExaminePublicCard message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SExaminePublicCard, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SExaminePublicCard message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SExaminePublicCard
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SExaminePublicCard;
+}
+
+/** Represents a C2SExaminePrivateCard. */
+export class C2SExaminePrivateCard implements IC2SExaminePrivateCard {
+
+    /**
+     * Constructs a new C2SExaminePrivateCard.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SExaminePrivateCard);
+
+    /** C2SExaminePrivateCard gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2SExaminePrivateCard message. Does not implicitly {@link C2SExaminePrivateCard.verify|verify} messages.
+     * @param m C2SExaminePrivateCard message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SExaminePrivateCard, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SExaminePrivateCard message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SExaminePrivateCard
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SExaminePrivateCard;
 }
 
 /** Represents a S2CCommonEnterGameResp. */
@@ -3655,6 +4321,74 @@ export class S2CCommonRefreshResp implements IS2CCommonRefreshResp {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonRefreshResp;
+}
+
+/** Represents a S2CCommonExaminePublicCardResp. */
+export class S2CCommonExaminePublicCardResp implements IS2CCommonExaminePublicCardResp {
+
+    /**
+     * Constructs a new S2CCommonExaminePublicCardResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonExaminePublicCardResp);
+
+    /** S2CCommonExaminePublicCardResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CCommonExaminePublicCardResp publicCardList. */
+    public publicCardList: ICardInfo[];
+
+    /**
+     * Encodes the specified S2CCommonExaminePublicCardResp message. Does not implicitly {@link S2CCommonExaminePublicCardResp.verify|verify} messages.
+     * @param m S2CCommonExaminePublicCardResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonExaminePublicCardResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonExaminePublicCardResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonExaminePublicCardResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonExaminePublicCardResp;
+}
+
+/** Represents a S2CCommonExaminePrivateCardResp. */
+export class S2CCommonExaminePrivateCardResp implements IS2CCommonExaminePrivateCardResp {
+
+    /**
+     * Constructs a new S2CCommonExaminePrivateCardResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonExaminePrivateCardResp);
+
+    /** S2CCommonExaminePrivateCardResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CCommonExaminePrivateCardResp playerList. */
+    public playerList: IPlayerInfo[];
+
+    /**
+     * Encodes the specified S2CCommonExaminePrivateCardResp message. Does not implicitly {@link S2CCommonExaminePrivateCardResp.verify|verify} messages.
+     * @param m S2CCommonExaminePrivateCardResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonExaminePrivateCardResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonExaminePrivateCardResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonExaminePrivateCardResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonExaminePrivateCardResp;
 }
 
 /** Represents a S2CCommonBringInTimerNotify. */
@@ -4734,6 +5468,8 @@ export enum MessageId {
     C2S_TexasCashGetObList = 5012,
     CS2_TexasCashGetBringInList = 5013,
     C2S_TexasCashRefresh = 5014,
+    C2S_TexasCashExaminePublicCard = 5015,
+    C2S_TexasCashExaminePrivateCard = 5016,
     MSG_TexasCashEnd = 5500,
     MSG_TexasMttBegin = 5501,
     MSG_TexasMttEnd = 6000,
@@ -4757,6 +5493,8 @@ export enum MessageId {
     S2C_CommonGetObListResp = 8010,
     S2C_CommonGetBringInListResp = 8011,
     S2C_CommonRefreshResp = 8012,
+    S2C_CommonExaminePublicCardResp = 8013,
+    S2C_CommonExaminePrivateCardResp = 8014,
     S2C_CommonBringInTimerNotify = 8110,
     S2C_CommonBringInNotify = 8111,
     S2C_CommonSitDownNotify = 8112,
@@ -4771,7 +5509,20 @@ export enum MessageId {
     S2C_CommonTurnRoundNotify = 8254,
     S2C_CommonRiverRoundNotify = 8255,
     S2C_CommonCurrentActionNotify = 8256,
-    S2C_CommonSettlementNotify = 8257
+    S2C_CommonSettlementNotify = 8257,
+    MSG_TexasCowboyBegin = 10001,
+    C2S_TexasCowboyEnterGame = 10002,
+    C2S_TexasCowboyExitGame = 10003,
+    C2S_TexasCowboyBet = 10004,
+    C2S_TexasCowboyRecord = 10005,
+    S2C_TexasCowboyEnterGameResp = 10030,
+    S2C_TexasCowboyExitGameResp = 10031,
+    S2C_TexasCowboyBetResp = 10032,
+    S2C_TexasCowboySelfRecordResp = 10033,
+    S2C_TexasCowboyBetNotify = 10050,
+    S2C_TexasCowboyGameStartNotify = 10051,
+    S2C_TexasCowboyGameSettlementNotify = 10052,
+    MSG_TexasCowboyEnd = 10100
 }
  
 }

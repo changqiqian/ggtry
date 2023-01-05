@@ -366,8 +366,20 @@ export class Localization {
         { name: '00278', ch: '下局游戏开始前自动站起', en: 'Auto stand up next game' },
         { name: '00279', ch: '音效', en: 'Music' },
         { name: '00280', ch: '聊天', en: 'Chat' },
-
-
+        { name: '00281', ch: '牛仔胜', en: 'Cowboy win' },
+        { name: '00282', ch: '平局', en: 'Tie' },
+        { name: '00283', ch: '美女赢', en: 'Girl win' },
+        { name: '00284', ch: '任一人手牌', en: 'Hands' },
+        { name: '00285', ch: '同花/连牌/同花连张', en: 'Flush/Straight/FlushAndStraight' },
+        { name: '00286', ch: '对子', en: 'Pocket pair' },
+        { name: '00287', ch: '对A', en: 'Pocket Ace' },
+        { name: '00288', ch: '高牌/对子', en: 'High/Pair' },
+        { name: '00289', ch: '两队', en: 'Two pairs' },
+        { name: '00290', ch: '获胜牌型', en: 'Winner conbination' },
+        { name: '00291', ch: '三条/顺子/同花', en: 'Trible/Straight/Flush' },
+        { name: '00292', ch: '葫芦', en: 'Fullhouse' },
+        { name: '00293', ch: '金刚/同花顺', en: 'Quads/StraightFlush' },
+        { name: '00294', ch: 'xxx手未出', en: 'unhit in xxx' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

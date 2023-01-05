@@ -1,24 +1,17 @@
 import { _decorator, Component, Node, instantiate, Prefab, UITransform, Vec3, Size, Tween, easing } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { Tool } from '../../Tool';
+import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { CircleTimer } from '../common/CircleTimer';
-import { CowboyData } from './CowboyData';
+import { cb_ChipConfig, CowboyData } from './CowboyData';
+import { cb_BetRow0 } from './subUI/cb_BetRow0';
+import { cb_BetRow1 } from './subUI/cb_BetRow1';
+import { cb_BetRow2 } from './subUI/cb_BetRow2';
+import { cb_BetRow3 } from './subUI/cb_BetRow3';
+import { cb_BetRow4 } from './subUI/cb_BetRow4';
+import { cb_Chip } from './subUI/cb_Chip';
 const { ccclass, property } = _decorator;
-
-
-class ChipConfig
-{
-    constructor(_uid : string , _betID : number , _node : Node)
-    {
-        this.mUid = _uid;
-        this.mBetID = _betID;
-        this.mNode = _node;
-    }
-
-    mUid : string;
-    mBetID : number;
-    mNode : Node;
-}
 
 @ccclass('CowboyUI')
 export class CowboyUI extends BaseUI 
@@ -28,15 +21,35 @@ export class CowboyUI extends BaseUI
     @property(CircleTimer) 
     mCircleTimer: CircleTimer = null;
 
-    mChipList : Array<ChipConfig>;
 
-    
+    @property(MovingShow) 
+    mMovingShow: MovingShow = null;
+
+    mChipList : Array<cb_ChipConfig>;
+
+    public Show(_val : boolean)
+    {
+        if(_val)
+        {
+            this.node.active = true;
+            this.mMovingShow.ShowAnimation();
+        }
+        else
+        {
+            this.mMovingShow.HideAnimation();
+        }
+    }
     InitParam() 
     {
-        this.mChipList = new Array<ChipConfig>();
+        this.mChipList = new Array<cb_ChipConfig>();
     }
     BindUI() 
     {
+        this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
+        this.mMovingShow.SetRoot(this.node);
+
+        this.AddSubView("cowboy","prefab/cb_TopMenu")
+
         this.mCircleTimer.StartTimer(7);
     }
     RegDataNotify() 
@@ -55,7 +68,7 @@ export class CowboyUI extends BaseUI
         this.mChipList = null;
     }
     
-    Data_BetConfig(_current , _before)
+    Data_BetConfig(_current)
     {
         let tempChip = instantiate(this.mChip) as Node;
         let flyToPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(_current.mTargetWorldPos);
@@ -64,7 +77,7 @@ export class CowboyUI extends BaseUI
         finlaOffset.width = _current.mOffset.width - chipSize.width/2;
         finlaOffset.height = _current.mOffset.height - chipSize.height/2;
         let finalPos = this.RandomPos(flyToPos , finlaOffset);
-        let config = new ChipConfig(_current.mUid,_current.mBetID,tempChip);
+        let config = new cb_ChipConfig(_current.mUid,_current.mBetArea,tempChip);
         this.mChipList.push(config);
         //自己下注
         if(LocalPlayerData.Instance.Data_Uid.mData == _current.mUid)
@@ -73,6 +86,7 @@ export class CowboyUI extends BaseUI
             let localPlayerWorldPos = CowboyData.Instance.Data_LocalPlayerPos.mData;
             let localPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(localPlayerWorldPos);
             tempChip.setPosition(localPlayerPos);
+            tempChip.getComponent(cb_Chip).SetAmount(_current.mAmount);
             this.ChipFlyToBetArea(config,finalPos);
         }
         else//其他玩家下注
@@ -81,14 +95,14 @@ export class CowboyUI extends BaseUI
         }
     }
 
-    ChipFlyToBetArea(_config : ChipConfig , _pos : Vec3)
+    ChipFlyToBetArea(_config : cb_ChipConfig , _pos : Vec3)
     {
         let tween = new Tween(_config.mNode);
         tween.to(0.5,{position:_pos},{easing:easing.quadOut});
         tween.start();
     }
 
-    ChipFlyToPlayer(_config : ChipConfig)
+    ChipFlyToPlayer(_config : cb_ChipConfig)
     {
         //自己回收筹码
         if(_config.mUid == LocalPlayerData.Instance.Data_Uid.mData)
@@ -109,12 +123,12 @@ export class CowboyUI extends BaseUI
         }
     }
 
-    CollectChip(_winID : number)
+    CollectChip(_winArea : CowboyAreaType)
     {
         for(let i = 0 ; i < this.mChipList.length ; i++)
         {
             let currentConfig = this.mChipList[i];
-            if(currentConfig.mBetID == _winID)//玩家回收筹码
+            if(currentConfig.mBetArea == _winArea)//玩家回收筹码
             {
                 this.ChipFlyToPlayer(currentConfig);
             }
@@ -127,14 +141,14 @@ export class CowboyUI extends BaseUI
 
     RandomPos(_pos : Vec3 , _offset : Size) : Vec3
     {
-        let offsetX = this.Random(0 , _offset.width);
-        if(this.Random(0,10)%2 == 0)
+        let offsetX = Tool.Random(0 , _offset.width);
+        if(Tool.Random(0,10)%2 == 0)
         {
             offsetX = -offsetX;
         }
 
-        let offsetY = this.Random(0 , _offset.height);
-        if(this.Random(0,10)%2 == 0)
+        let offsetY = Tool.Random(0 , _offset.height);
+        if(Tool.Random(0,10)%2 == 0)
         {
             offsetY = -offsetY;
         }
@@ -144,9 +158,5 @@ export class CowboyUI extends BaseUI
         return _pos;
     }
 
-    Random(lower:number, upper : number) : number
-    {
-        return Math.floor(Math.random() * (upper - lower+1)) + lower;
-    }
 }
 

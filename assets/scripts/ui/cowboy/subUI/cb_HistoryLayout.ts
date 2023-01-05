@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Label, Color, Vec3, Size, UI, UITransform, instantiate, Sprite, Prefab, Tween } from 'cc';
 import { DEBUG } from 'cc/env';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 const { ccclass, property } = _decorator;
 
 
@@ -18,39 +19,54 @@ export class cb_HistoryLayout extends BaseUI {
     @property(Prefab) 
     mDotPrefab: Prefab = null;
 
-    mColorConfig : Array<Color>;
     mMaxDot : number;
     mPositionConfig : Array<number>;
     mDotSize : Size;
     mMoveOffset : number = 20;
     mMoveDuration : number = 0.2;
-    InitParam() {
-
-    }
-    BindUI() {
-
-    }
-    RegDataNotify() {
-
-    }
-    LateInit() {
-
-    }
-
-    CustmoerDestory() {
-
-    }
-
-    public SetConfig(_config : Array<Color> , _maxDot : number , _dotSize : Size = new Size(20,20))
+    InitParam() 
     {
-        this.mColorConfig = _config;
+
+    }
+    BindUI() 
+    {
+
+    }
+    RegDataNotify() 
+    {
+
+    }
+    LateInit() 
+    {
+
+    }
+
+    CustmoerDestory() 
+    {
+
+    }
+
+    public ResetUI()
+    {
+        this.mDescribe.string = "";
+        this.Clear();
+    }
+
+    public SetConfig( _maxDot : number , _dotSize : Size = new Size(20,20))
+    {
         this.mMaxDot = _maxDot;
         this.mDotSize = _dotSize;
         this.CalculatePositionConfig();
     }
 
-    public SetData(_datas : Array<number>)
+    public SetData(_datas : Array<boolean>)
     {
+        if(_datas.length == 0)
+        {
+            this.mDescribe.string = Localization.ReplaceString("00294",this.mMaxDot + "");
+            return;
+        }
+
         for(let i = 0 ; i < _datas.length ; i++)
         {
             let currentData = _datas[i];
@@ -58,22 +74,25 @@ export class cb_HistoryLayout extends BaseUI {
         }
     }
 
-    public InsertOneData(_data : number)
+    public InsertOneData(_data : boolean)
     {
+        this.mDescribe.string = "";
         let currentIndex = this.mLayOut.children.length;
+        let color = _data ? Color.YELLOW : Color.GRAY;
+
         if(currentIndex < this.mMaxDot)
         {
             let tempNode =  instantiate(this.mDotPrefab) as Node;
             this.mLayOut.addChild(tempNode);
             tempNode.setPosition(this.mPositionConfig[currentIndex],0);
-            tempNode.getComponent(Sprite).color = this.mColorConfig[_data];
+            tempNode.getComponent(Sprite).color = color;
         }
         else
         {
             let tempNode =  instantiate(this.mDotPrefab) as Node;
             this.mLayOut.addChild(tempNode);
             tempNode.setPosition(this.mPositionConfig[this.mPositionConfig.length - 1], this.mMoveOffset);
-            tempNode.getComponent(Sprite).color = this.mColorConfig[_data];
+            tempNode.getComponent(Sprite).color = color;
 
             let firstDot = this.mLayOut.children[0];
             let firstTween = new Tween(firstDot);

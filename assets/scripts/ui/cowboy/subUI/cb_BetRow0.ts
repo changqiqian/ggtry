@@ -1,5 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { cb_BetArea } from './cb_BetArea';
 const { ccclass, property } = _decorator;
 
@@ -12,22 +13,39 @@ export class cb_BetRow0 extends BaseUI
     mBetArea1: cb_BetArea = null;
     @property(cb_BetArea) 
     mBetArea2: cb_BetArea = null;
-    InitParam() {
+    InitParam() 
+    {
 
     }
-    BindUI() {
+    BindUI() 
+    {
+        this.ResetUI();
+        this.mBetArea0.SetAreaConfig(Localization.GetString("00281"),"2",CowboyAreaType.CowboyAreaType_0); //牛仔赢
+        this.mBetArea1.SetAreaConfig(Localization.GetString("00282"),"2",CowboyAreaType.CowboyAreaType_1); //平
+        this.mBetArea2.SetAreaConfig(Localization.GetString("00283"),"2",CowboyAreaType.CowboyAreaType_2); //美女赢
+    }
+    RegDataNotify() 
+    {
 
     }
-    RegDataNotify() {
+    LateInit() 
+    {
 
     }
-    LateInit() {
+
+    CustmoerDestory() 
+    {
 
     }
 
-    CustmoerDestory() {
-
+    public ResetUI()
+    {
+        this.mBetArea0.ResetUI();
+        this.mBetArea1.ResetUI();
+        this.mBetArea2.ResetUI();
     }
+
+
 
 }
 

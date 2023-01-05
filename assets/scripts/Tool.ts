@@ -270,4 +270,9 @@ export class Tool
         return true;
     }
 
+    public static Random(lower:number, upper : number) : number
+    {
+        return Math.floor(Math.random() * (upper - lower+1)) + lower;
+    }
+
 }
