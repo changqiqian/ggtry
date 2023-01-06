@@ -236,14 +236,12 @@ export class NetworkSend extends Singleton<NetworkSend>()
         Network.Instance.SendMsg(MessageId.C2S_ChangeUserInfo , C2SChangeUserInfo.encode(msg).finish());
         console.log("修改头像或昵称 C2S_ChangeUserInfo== " + JSON.stringify(msg))
     }
-
-    public CreateClubTexas(_clubId : string , _protoData : ClubGameInfo)
+    public CreateClubTexas(_clubId : string , _protoData : ClubTexasGameInfo)
     {
         UIMgr.Instance.ShowLoading(true);
         let msg = new C2SCreateClubGame();
         msg.clubId = _clubId;
-        msg.basicConfig = _protoData.gameStaticData.basicConfig;
-        msg.texasConfig = _protoData.gameStaticData.texasConfig;
+        msg.texasConfig = _protoData.basicTexasConfig;
         Network.Instance.SendMsg(MessageId.C2S_CreateClubGame , C2SCreateClubGame.encode(msg).finish());
         console.log("俱乐部创建游戏 C2S_CreateClubGame== " + JSON.stringify(msg))
     }

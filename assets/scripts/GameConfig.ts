@@ -244,15 +244,6 @@ export class GameConfig
         return [0,2,3,4,5,6];
     }
 
-    public static GetShortCreateRoomBaseScoreTitle()
-    {
-        return ["" , "" , "" , "" , "" , "", "" , "" , "" , ""];
-    }
-
-    public static GetShortCreateRoomBaseScoreValue()
-    {
-        return [1 , 2 , 5 , 10 , 20 , 40 , 50 , 100 , 200 , 500];
-    }
 
     public static LoadToken()
     {

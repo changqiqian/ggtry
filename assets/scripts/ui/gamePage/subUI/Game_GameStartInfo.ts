@@ -80,7 +80,7 @@ export class Game_GameStartInfo extends BaseUI
         let gameData = gameStruct.mGameData;
         let dynamicData = gameData.GetDynamicData();
         let state = dynamicData.state;
-        let autoStartNum = gameData.GetStaticData().texasConfig.autoStartNum;
+        let autoStartNum = gameData.GetStaticData().autoStartNum;
         if(autoStartNum > 0)
         {
             dynamicData.seatInfos

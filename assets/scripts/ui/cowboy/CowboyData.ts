@@ -73,6 +73,18 @@ export class CowboyData extends SingletonBaseNotify<CowboyData>()
         return this.Data_S2CTexasCowboyEnterGameResp.mData.phase;
     }
 
+    public GetDuration(_phase :CowboyPhase) : number
+    {
+        if(_phase == CowboyPhase.CowBoyPhase_Settlement)
+        {
+            return this.Data_S2CTexasCowboyEnterGameResp.mData.settlementTime;
+        }
+        else
+        {
+            return this.Data_S2CTexasCowboyEnterGameResp.mData.betTime;
+        }
+    }
+
     //把目标钱， 拆分成几个筹码的组合
     public SeparateChip(_amount : number) : Array<number>
     {

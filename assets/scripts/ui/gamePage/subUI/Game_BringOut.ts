@@ -139,14 +139,14 @@ export class Game_BringOut extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let minScoreAfterBringOut = gameData.GetStaticData().texasConfig.minScoreAfterBringOut;
+        let minScoreAfterBringOut = gameData.GetStaticData().minScoreAfterBringOut;
         let selfPlayer =  gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
 
         let minBringOut = 0;
         let maxBringOut = selfPlayer.currencyNum - minScoreAfterBringOut;
 
         let currentAmount = minBringOut + (maxBringOut - minBringOut) * _ratio;
-        let sb_100 = gameData.GetStaticData().texasConfig.smallBlind * 20;
+        let sb_100 = gameData.GetStaticData().smallBlind * 20;
         currentAmount = Math.floor(currentAmount / sb_100) * sb_100;
         return currentAmount;
     }

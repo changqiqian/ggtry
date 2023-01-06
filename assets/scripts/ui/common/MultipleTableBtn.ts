@@ -223,7 +223,7 @@ export class MultipleTableBtn extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let gameType = gameData.GetStaticData().basicConfig.gameType;
+        let gameType = gameData.GetStaticData().gameType;
         if(gameType == GameType.GameType_OmhCash || gameType == GameType.GameType_OmhMtt)
         {
             return this.mOmhContainer;

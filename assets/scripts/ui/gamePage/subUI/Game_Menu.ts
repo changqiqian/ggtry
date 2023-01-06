@@ -95,7 +95,7 @@ export class Game_Menu extends BaseUI
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let gameId = gameStruct.mGameId;
-            NetworkSend.Instance.ExitGame(gameId,gameData.GetStaticData().basicConfig.gameType);
+            NetworkSend.Instance.ExitGame(gameId,gameData.GetStaticData().gameType);
         });
         this.mDismiss.SetClickCallback(()=>
         {

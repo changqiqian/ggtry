@@ -360,7 +360,7 @@ export class Game_SelfAction extends BaseUI
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let biggestBetAction = gameData.FindBiggestBetAction();
-            let sb = gameData.GetStaticData().texasConfig.smallBlind;
+            let sb = gameData.GetStaticData().smallBlind;
             let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
 
             let minBet = 0;

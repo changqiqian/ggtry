@@ -42,11 +42,26 @@ export class CowboyUI extends BaseUI
     {
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
-        this.AddSubView("cowboy","prefab/cb_TopMenu")
     }
     RegDataNotify() 
     {
-        CowboyData.Instance.Data_BetConfig.AddListenner(this,this.Data_BetConfig.bind(this))
+        CowboyData.Instance.Data_BetConfig.AddListenner(this,this.Data_BetConfig.bind(this));
+
+
+        CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
+        {
+            this.mCircleTimer.StartTimer(_data.restTime);
+        });
+
+        CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
+        {
+            this.mCircleTimer.StartTimer(CowboyData.Instance.GetDuration(CowboyPhase.CowBoyPhase_Start));
+        });
+
+        CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
+        {
+            this.mCircleTimer.StartTimer(CowboyData.Instance.GetDuration(CowboyPhase.CowBoyPhase_Settlement));
+        });
     }
     LateInit() 
     {

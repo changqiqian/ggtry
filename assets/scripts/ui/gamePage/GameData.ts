@@ -91,12 +91,12 @@ export abstract class GameData extends MultipleNotify
         this.Data_S2CCommonEnterGameResp.mData = _S2CCommonEnterGameResp;
     }
 
-    public GetStaticData() : GameStaticData
+    public GetStaticData() : BasicTexasConfig
     {
-        return this.Data_S2CCommonEnterGameResp.mData.gameStatic;
+        return this.Data_S2CCommonEnterGameResp.mData.texasConfig;
     }
 
-    public GetDynamicData() : GameDynamicData
+    public GetDynamicData() : TexasDynamicData
     {
         return this.Data_S2CCommonEnterGameResp.mData.gameDynamic;
     }

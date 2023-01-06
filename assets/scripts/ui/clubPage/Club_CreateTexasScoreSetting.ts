@@ -67,24 +67,7 @@ export class Club_CreateTexasScoreSetting extends BaseUI
             this.mMeassureSliderAnte.SetIndex(_data);
         })
 
-        HallData.Instance.Data_ClubCreateShortScoreMode.AddListenner(this,(_data)=>
-        {
-            if(HallData.Instance.Data_ClubCreateGameType.mData == GameType.GameType_TexasCash)
-            {
-                this.Show(true);
-            }
-            else if(HallData.Instance.Data_ClubCreateGameType.mData == GameType.GameType_ShortCash)
-            {
-                if(_data == ShortGameScoreMode.ShortGameScoreMode_AnteMode)
-                {
-                    this.Show(false);
-                }
-                else if(_data == ShortGameScoreMode.ShortGameScoreMode_BlindMode)
-                {
-                    this.Show(true);
-                }
-            }
-        })
+
 
 
 

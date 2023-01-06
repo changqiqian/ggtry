@@ -1,8 +1,10 @@
 import { _decorator, Component, Node, EditBox, ScrollView } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
+import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
@@ -40,8 +42,6 @@ export class Club_CreateShort extends BaseUI
         }, this);
 
         this.AddSubView("clubPage","prefab/Club_CreateBasicOption",null,this.mScrollView.content);
-        this.AddSubView("clubPage","prefab/Club_ShortScoreMode",null,this.mScrollView.content);
-        this.AddSubView("clubPage","prefab/Club_CreateShortScoreSetting",null,this.mScrollView.content);
         this.AddSubView("clubPage","prefab/Club_CreateTexasScoreSetting",null,this.mScrollView.content);
         this.AddSubView("clubPage","prefab/Club_CreateBringScoreSetting",null,this.mScrollView.content);
         this.AddSubView("clubPage","prefab/Club_CreateTableSetting",null,this.mScrollView.content);
@@ -64,7 +64,15 @@ export class Club_CreateShort extends BaseUI
 
         this.mCreateBtn.SetClickCallback(()=>
         {
-
+            let createConfig = HallData.Instance.Data_Club_CreateTexasConfig.mData;
+            if(createConfig.gameName == "")
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00195"));
+                return;
+            }
+            let gameInfo = HallData.Instance.ConvertCreateTexasConfigToProto(createConfig);
+            let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            NetworkSend.Instance.CreateClubTexas(clubId , gameInfo);
         });
     }
     RegDataNotify()

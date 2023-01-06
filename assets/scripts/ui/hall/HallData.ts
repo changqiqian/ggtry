@@ -65,7 +65,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_S2CModifyMemberRole:  BaseData<S2CModifyMemberRole> = new BaseData<S2CModifyMemberRole>(true); //修改俱乐部成员权限返回
     Data_ModifyClubInfo : BaseData<ClubDetailsInfo> = new BaseData<ClubDetailsInfo>(true);//修改俱乐部信息
 
-    Data_ClubGameInfos : BaseData<Array<ClubGameInfo>> = new BaseData<Array<ClubGameInfo>>(false, new Array<ClubGameInfo>()); //俱乐部游戏列表
+    Data_ClubGameInfos : BaseData<Array<ClubTexasGameInfo>> = new BaseData<Array<ClubTexasGameInfo>>(false, new Array<ClubTexasGameInfo>()); //俱乐部游戏列表
     Data_S2CCreateClubGame :  BaseData<S2CCreateClubGame> = new BaseData<S2CCreateClubGame>(true); //创建一个剧了不游戏返回结果
     Data_S2CGetClubGameList :  BaseData<S2CGetClubGameList> = new BaseData<S2CGetClubGameList>(true); //更新俱乐部游戏列表
     Data_S2CEnterGame :  BaseData<S2CCommonEnterGameResp> = new BaseData<S2CCommonEnterGameResp>(true); //进入游戏
@@ -76,7 +76,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_S2CClubPlayerPointNotify : BaseData<S2CClubPlayerPointNotify> = new BaseData<S2CClubPlayerPointNotify>(true); //我的俱乐部积分变动推送
     Data_S2CModifyMemberRoleNotify : BaseData<S2CModifyMemberRoleNotify> = new BaseData<S2CModifyMemberRoleNotify>(true); //我的俱乐部角色变动推送
 
-    public AddOneGame(_clubGameInfo : ClubGameInfo)
+    public AddOneGame(_clubGameInfo : ClubTexasGameInfo)
     {
         this.Data_ClubGameInfos.mData.push(_clubGameInfo);
     }
@@ -90,9 +90,9 @@ export class HallData extends SingletonBaseNotify<HallData>()
         }
     }
 
-    public UpdateGameList(_clubGameInfo : Array<ClubGameInfo>)
+    public UpdateGameList(_clubGameInfo : Array<ClubTexasGameInfo>)
     {
-        this.Data_ClubGameInfos.mData = new Array<ClubGameInfo>();
+        this.Data_ClubGameInfos.mData = new Array<ClubTexasGameInfo>();
         this.Data_ClubGameInfos.mData = _clubGameInfo;
     }
 
@@ -171,7 +171,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
     }
                     //创建牌局,追踪每个选项最终值，用于最后生成数据
     Data_ClubRefreshSmallBlind : BaseData<number> = new BaseData<number>(); //小盲选项值发生了变化
-    Data_ClubRefreshShortBaseScore : BaseData<number> = new BaseData<number>();//短牌底分选项发生了变化
 
     Data_Club_CreateTexasConfig :  BaseData<Club_CreateTexasConfig> = new BaseData<Club_CreateTexasConfig>(false,new Club_CreateTexasConfig());   
     Data_ClubRefreshGameModule : BaseData<boolean> = new BaseData<boolean>();//刷新创建房间模版数据
@@ -197,9 +196,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubCreateGameGPS : BaseData<boolean> = new BaseData<boolean>(); //俱乐部创建牌局时候，gps
     Data_ClubCreateGameIP : BaseData<boolean> = new BaseData<boolean>(); //俱乐部创建牌局时候，ip
                     //创建短牌，初始化选项用到的数据驱动
-    Data_ClubCreateShortScoreMode :  BaseData<ShortGameScoreMode> = new BaseData<ShortGameScoreMode>();//俱乐部创建牌局时候，短牌底池类型
-    Data_ClubCreateShortBaseScore : BaseData<number> = new BaseData<number>(); //短牌创建时候的底分选择
-    Data_ClubCreateShortButtonDouble : BaseData<boolean> = new BaseData<boolean>();//短牌创建时候的 庄前双倍底分
 
     //创建俱乐部房间时候的 生成基础配置
     ResetCreateRoomParam(_type : GameType)
@@ -226,9 +222,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
         this.Data_ClubCreateGameAutoStart.mData = 0;
         this.Data_ClubCreateGameGPS.mData = false;
         this.Data_ClubCreateGameIP.mData = false;
-        this.Data_ClubCreateShortScoreMode.mData = ShortGameScoreMode.ShortGameScoreMode_BlindMode;
-        this.Data_ClubCreateShortBaseScore.mData = 0;
-        this.Data_ClubCreateShortButtonDouble.mData = false;
 
 
 
@@ -251,9 +244,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
         this.Data_Club_CreateTexasConfig.mData.autoStartNum = this.Data_ClubCreateGameAutoStart.mData;
         this.Data_Club_CreateTexasConfig.mData.gpsLimit = this.Data_ClubCreateGameGPS.mData;
         this.Data_Club_CreateTexasConfig.mData.ipLimit = this.Data_ClubCreateGameIP.mData;
-        this.Data_Club_CreateTexasConfig.mData.shortScoreMode = this.Data_ClubCreateShortScoreMode.mData;
-        this.Data_Club_CreateTexasConfig.mData.shortBaseScore = this.Data_ClubCreateShortBaseScore.mData;
-        this.Data_Club_CreateTexasConfig.mData.buttonDouble = this.Data_ClubCreateShortButtonDouble.mData;
     }
     //读取已经储存的 房间创建配置
     ReadModule(_index : number)
@@ -285,30 +275,24 @@ export class HallData extends SingletonBaseNotify<HallData>()
         this.Data_ClubCreateGameAutoStart.mData = this.Data_Club_CreateTexasConfig.mData.autoStartNum
         this.Data_ClubCreateGameGPS.mData = this.Data_Club_CreateTexasConfig.mData.gpsLimit
         this.Data_ClubCreateGameIP.mData = this.Data_Club_CreateTexasConfig.mData.ipLimit
-        this.Data_ClubCreateShortScoreMode.mData = this.Data_Club_CreateTexasConfig.mData.shortScoreMode
-        this.Data_ClubCreateShortBaseScore.mData = this.Data_Club_CreateTexasConfig.mData.shortBaseScore
-        this.Data_ClubCreateShortButtonDouble.mData = this.Data_Club_CreateTexasConfig.mData.buttonDouble
     }
     //把房间配置转换成 proto
-    ConvertCreateTexasConfigToProto(_config : Club_CreateTexasConfig) : ClubGameInfo
+    ConvertCreateTexasConfigToProto(_config : Club_CreateTexasConfig) : ClubTexasGameInfo
     {
-        let basicData = new BasicGameConfig();
-        let texasData = new BasicTexasConfig();
-        let shortData = new ShortConfig();
 
-        basicData.gameType = _config.gameType;
-        basicData.gameName = _config.gameName;
-        basicData.currencyType = _config.currencyType;
-        basicData.taxType = _config.taxType;
-        basicData.taxRatio = GameConfig.GetTexasCreateRoomTaxValue(_config.taxType)[_config.taxRatio];
+        let texasData = new BasicTexasConfig();
+
+
+        texasData.gameType = _config.gameType;
+        texasData.gameName = _config.gameName;
+        texasData.currencyType = _config.currencyType;
+        texasData.taxType = _config.taxType;
+        texasData.taxRatio = GameConfig.GetTexasCreateRoomTaxValue(_config.taxType)[_config.taxRatio];
         texasData.smallBlind = GameConfig.GetTexasCreateRoomBlindValue()[_config.smallBlind];
-        shortData.baseScore = GameConfig.GetShortCreateRoomBaseScoreValue()[_config.shortBaseScore];
-        shortData.scoreMode = _config.shortScoreMode;
-        shortData.buttonDouble = _config.buttonDouble;
+
         
         let bigBlind = texasData.smallBlind * 2;
         let bigBliind100 = bigBlind* 100;
-        let baseScore100 = shortData.baseScore * 100;
         texasData.straddle = _config.straddle;
         texasData.ante = GameConfig.GetTexasCreateRoomAnteValue(texasData.smallBlind)[_config.ante];
         
@@ -318,12 +302,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
             texasData.minBringIn = bigBliind100 / 2;
             texasData.maxBringIn = bigBliind100 * GameConfig.GetTexasCreateRoomBringInValue()[_config.maxBringIn];
         }
-        else if( _config.gameType == GameType.GameType_ShortCash)
-        {
-            texasData.maxTotalBuyIn = GameConfig.GetTexasCreateRoomMaxBuyInValue()[_config.maxTotalBuyIn] * baseScore100;
-            texasData.minBringIn = baseScore100 / 2;
-            texasData.maxBringIn = baseScore100 * GameConfig.GetTexasCreateRoomBringInValue()[_config.maxBringIn];
-        }
+
 
         texasData.allowBringOut = _config.allowBringOut;
         texasData.minScoreAfterBringOut = _config.minScoreAfterBringOut;
@@ -343,10 +322,9 @@ export class HallData extends SingletonBaseNotify<HallData>()
         texasData.minBringIn = Tool.ConvertMoney_C2S(texasData.minBringIn);
         texasData.maxBringIn = Tool.ConvertMoney_C2S(texasData.maxBringIn);
 
-        let protoData = new ClubGameInfo();
-        protoData.gameStaticData = new GameStaticData();
-        protoData.gameStaticData.basicConfig = basicData;
-        protoData.gameStaticData.texasConfig = texasData;
+        let protoData = new ClubTexasGameInfo();
+        protoData.basicTexasConfig = new BasicTexasConfig();
+        protoData.basicTexasConfig = texasData;
         return protoData;
     }
 
@@ -445,8 +423,4 @@ export class Club_CreateTexasConfig
     gpsLimit :boolean;
     ipLimit :boolean;
 
-    //short
-    shortScoreMode : ShortGameScoreMode;
-    shortBaseScore : number;
-    buttonDouble : boolean;
 }

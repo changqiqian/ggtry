@@ -617,7 +617,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     let enterGameResp = new S2CCommonEnterGameResp();
                     enterGameResp.gameDynamic = msg.gameDynamic;
                     enterGameResp.gameId = msg.gameId;
-                    enterGameResp.gameStatic = gameData.GetStaticData();
+                    enterGameResp.texasConfig = gameData.GetStaticData();
                     enterGameResp.result = msg.result;
                     gameData.SetGameInfo(enterGameResp);
                 }

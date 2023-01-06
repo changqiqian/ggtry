@@ -82,7 +82,7 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerHistoryInfo>
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
 
-        this.mMatchName.string = gameData.GetStaticData().basicConfig.gameName;
+        this.mMatchName.string = gameData.GetStaticData().gameName;
         if(gameStruct.mIsClubGame)
         {
             let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId);

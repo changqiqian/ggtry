@@ -15,7 +15,7 @@ import { ListViewCtr } from '../../UiTool/ListViewCtr';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_PrivateLayer')
-export class Club_PrivateLayer extends ListViewCtr<ClubGameInfo>
+export class Club_PrivateLayer extends ListViewCtr<ClubTexasGameInfo>
 {
     @property(BaseButton) 
     mBackBtn: BaseButton = null;
