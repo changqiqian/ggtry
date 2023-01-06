@@ -2,6 +2,7 @@ import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { CardStruct, CardType } from '../../../base/Calculator';
 import { Poker } from '../../common/Poker';
+import { CowboyData } from '../CowboyData';
 const { ccclass, property } = _decorator;
 
 @ccclass('cb_Role')
@@ -13,18 +14,48 @@ export class cb_Role extends BaseUI {
     InitParam() {
 
     }
-    BindUI() {
-        this.ShowCard(new CardStruct(14,CardType.Diamond) , 0);
+    BindUI() 
+    {
     }
-    RegDataNotify() {
+    RegDataNotify() 
+    {
+        CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
+        {
+            this.RestAllCards();
+            if(CowboyData.Instance.GetPhase() == CowboyPhase.CowBoyPhase_Settlement)
+            {
+                return;
+            }
+
+            this.ShowCardBack();
+        });
+
+        CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
+        {
+            this.RestAllCards();
+            this.ShowCardBack();
+        });
+
 
     }
-    LateInit() {
+    LateInit() 
+    {
 
     }
 
-    CustmoerDestory() {
+    CustmoerDestory() 
+    {
 
+    }
+
+    public ShowWin()
+    {
+
+    }
+
+    public ShowLose()
+    {
+        
     }
 
     public ShowAllCards(_cards : Array<CardStruct> )
@@ -43,5 +74,26 @@ export class cb_Role extends BaseUI {
         currentPoker.FlipToFront();
     }
 
+    public ShowCardBack()
+    {
+        for(let i = 0 ; i < this.mCards.children.length ; i++)
+        {
+            let currentPokerNode = this.mCards.children[i];
+            let currentPoker = currentPokerNode.getComponent(Poker);
+            currentPoker.ShowBack();
+        }
+    }
+
+
+    RestAllCards()
+    {
+        for(let i = 0 ; i < this.mCards.children.length ; i++)
+        {
+            let currentPokerNode = this.mCards.children[i];
+            let currentPoker = currentPokerNode.getComponent(Poker);
+            currentPoker.StopAllTween();
+            currentPoker.Show(false);
+        }
+    }
 }
 

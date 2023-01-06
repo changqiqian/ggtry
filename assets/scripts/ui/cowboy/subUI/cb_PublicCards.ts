@@ -18,15 +18,42 @@ export class cb_PublicCards extends BaseUI
     }
     BindUI() 
     {
-        this.HideAllCards();
+        this.RestAllCards();
     }
     RegDataNotify() 
     {
+        CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
+        {
+            this.RestAllCards();
 
+            if(CowboyData.Instance.GetPhase() == CowboyPhase.CowBoyPhase_Settlement)
+            {
+                return;
+            }
+
+            this.DealCards();
+            this.ShowCard(_data.oneCard,0);
+        });
+
+        CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
+        {
+            this.RestAllCards();
+            this.DealCards();
+            this.ShowCard(_data.oneCard,0);
+        });
+
+        CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
+        {
+            for(let i = 0 ; i < _data.publicCards.length ; i++)
+            {
+                let index = i + 1;
+                this.ShowCard(_data.publicCards[i],index);
+            }
+        });
     }
     LateInit() 
     {
-        this.DealCards();
+        
     }
 
     CustmoerDestory() 
@@ -34,20 +61,9 @@ export class cb_PublicCards extends BaseUI
 
     }
 
-    HideAllCards()
-    {
-        for(let i = 0 ; i < this.mLayout.children.length ; i++)
-        {
-            let currentPoker = this.mLayout.children[i];
-            let originPos = currentPoker.position;
-            currentPoker.active = false;
-            currentPoker.position = new Vec3(originPos.x , 0 , originPos.z);
-        }
-    }
 
     DealCards()
     {
-        let count = CowboyData.TotalCards;
         for(let i = 0 ; i < this.mLayout.children.length ; i++)
         {
             let baseDelayTime = 0.1;
@@ -61,17 +77,9 @@ export class cb_PublicCards extends BaseUI
             tempTween.delay(baseDelayTime * i);
             tempTween.call(()=>
             {
-                currentPoker.active = true;
+                currentPoker.getComponent(Poker).ShowBack();
             });
             tempTween.to(moveTime , {position : new Vec3(originPos.x , 0 , originPos.z)} , {easing:easing.quadIn} );
-            tempTween.call(()=>
-            {
-                count--;
-                if(count == 0)
-                {
-                    this.ShowCard(new CardStruct(14,CardType.Club) , 0);
-                }
-            });
             tempTween.start();
         }
     }
@@ -81,6 +89,20 @@ export class cb_PublicCards extends BaseUI
         let currentPoker = this.mLayout.children[_index].getComponent(Poker);
         currentPoker.SetFront(_card);
         currentPoker.FlipToFront();
+    }
+
+    RestAllCards()
+    {
+        for(let i = 0 ; i < this.mLayout.children.length ; i++)
+        {
+            let currentPokerNode = this.mLayout.children[i];
+            let originPos = currentPokerNode.position;
+            currentPokerNode.position = new Vec3(originPos.x , 0 , originPos.z);
+
+            let currentPoker = currentPokerNode.getComponent(Poker);
+            currentPoker.StopAllTween();
+            currentPoker.Show(false);
+        }
     }
 
 }
