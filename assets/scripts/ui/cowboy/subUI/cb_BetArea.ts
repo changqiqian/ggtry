@@ -78,11 +78,6 @@ export class cb_BetArea extends BaseUI {
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
-            for(let i = 0 ; i < _data.reward.length ; i++)
-            {
-
-            }
-
             let index = _data.reward.findIndex((item) =>{item === this.mBetArea});
             if(index < 0)
             {
@@ -145,7 +140,17 @@ export class cb_BetArea extends BaseUI {
 
     OnBetBtn()
     {
+        if(CowboyData.Instance.GetPhase() == CowboyPhase.CowBoyPhase_Settlement)
+        {
+            return;
+        }
 
+        if(CowboyData.Instance.Data_SelectedChip.mData == 0)
+        {
+            return;
+        }
+
+        //发送下注消息
     }
 
     

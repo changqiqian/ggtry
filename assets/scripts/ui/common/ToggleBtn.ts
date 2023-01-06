@@ -117,6 +117,10 @@ export class ToggleBtn extends BaseUI {
 
     OnSelected()
     {
+        if(this.mForbidden)
+        {
+            return;
+        }
         AudioManager.Instance.PlayMusicOneShot("Btn");
     }
 

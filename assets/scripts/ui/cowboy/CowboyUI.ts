@@ -5,11 +5,6 @@ import { Tool } from '../../Tool';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { CircleTimer } from '../common/CircleTimer';
 import { cb_ChipConfig, CowboyData } from './CowboyData';
-import { cb_BetRow0 } from './subUI/cb_BetRow0';
-import { cb_BetRow1 } from './subUI/cb_BetRow1';
-import { cb_BetRow2 } from './subUI/cb_BetRow2';
-import { cb_BetRow3 } from './subUI/cb_BetRow3';
-import { cb_BetRow4 } from './subUI/cb_BetRow4';
 import { cb_Chip } from './subUI/cb_Chip';
 const { ccclass, property } = _decorator;
 
@@ -47,10 +42,7 @@ export class CowboyUI extends BaseUI
     {
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
-
         this.AddSubView("cowboy","prefab/cb_TopMenu")
-
-        this.mCircleTimer.StartTimer(7);
     }
     RegDataNotify() 
     {

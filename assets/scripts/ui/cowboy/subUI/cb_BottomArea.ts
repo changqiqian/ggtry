@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { Tool } from '../../../Tool';
 import { PlayerInfo } from '../../common/PlayerInfo';
 import { CowboyData } from '../CowboyData';
 
@@ -27,12 +28,20 @@ export class cb_BottomArea extends BaseUI {
 
     RegDataNotify() 
     {
-
-        CowboyData.Instance.Data_SelectedChip.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_NickName.AddListenner(this,(_data)=>
         {
-            console.log("Current Chip = " + _data);
-        })
+            this.mPlayerInfo.SetName(_data);
+        });
 
+        LocalPlayerData.Instance.Data_Head.AddListenner(this,(_data)=>
+        {
+            this.mPlayerInfo.SetLocalHead(Number(_data));
+        });
+
+        CowboyData.Instance.Data_Money.AddListenner(this,(_data)=>
+        {
+            this.mMoney.string = Tool.ConvertMoney_S2C(_data) + "";
+        });
 
     }
     LateInit() {

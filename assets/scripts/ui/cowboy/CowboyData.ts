@@ -58,6 +58,7 @@ export class CowboyData extends SingletonBaseNotify<CowboyData>()
     Data_S2CTexasCowboyGameStartNotify :  BaseData<S2CTexasCowboyGameStartNotify> = new BaseData<S2CTexasCowboyGameStartNotify>(); //游戏开始
     Data_S2CTexasCowboyGameSettlementNotify:  BaseData<S2CTexasCowboyGameSettlementNotify> = new BaseData<S2CTexasCowboyGameSettlementNotify>(); //游戏结算
 
+    Data_Money  : BaseData<number> = new BaseData<number>(); //本地玩家的钱
     Data_SelectedChip : BaseData<number> = new BaseData<number>(); //本地玩家选中的下注筹码
     Data_BetConfig :  BaseData<cb_BetConfig> = new BaseData<cb_BetConfig>(); //下注数据 
     Data_LocalPlayerPos :  BaseData<Vec3> = new BaseData<Vec3>();//本地玩家位置，记录下来，筹码从这里飞出来
@@ -66,6 +67,11 @@ export class CowboyData extends SingletonBaseNotify<CowboyData>()
     //筹码面额配置
     public ChipAmountConfig : Array<number> = new Array<number>(1,10,50,100,500);
 
+
+    public GetPhase() : CowboyPhase
+    {
+        return this.Data_S2CTexasCowboyEnterGameResp.mData.phase;
+    }
 
     //把目标钱， 拆分成几个筹码的组合
     public SeparateChip(_amount : number) : Array<number>
