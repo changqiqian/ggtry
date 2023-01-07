@@ -380,6 +380,8 @@ export class Localization {
         { name: '00292', ch: '葫芦', en: 'Fullhouse' },
         { name: '00293', ch: '金刚/同花顺', en: 'Quads/StraightFlush' },
         { name: '00294', ch: 'xxx手未出', en: 'unhit in xxx' },
+        { name: '00295', ch: '余额不足', en: 'not enough coin' },
+        { name: '00296', ch: '结算', en: 'Cash out' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

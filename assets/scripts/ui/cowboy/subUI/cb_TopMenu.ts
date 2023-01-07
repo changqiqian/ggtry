@@ -1,52 +1,66 @@
 import { _decorator, Component, Node, Button } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { BaseButton } from '../../common/BaseButton';
 const { ccclass, property } = _decorator;
 
 @ccclass('cb_TopMenu')
 export class cb_TopMenu extends BaseUI {
 
+    @property(BaseButton) 
+    mSettingBtn: BaseButton = null;
     @property(Button) 
-    mSettingBtn: Button = null;
-    @property(Button) 
-    mRuleBtn: Button = null;
-    @property(Button) 
-    mMoreBtn: Button = null;
-    @property(Button) 
-    mPlayerBtn: Button = null;
+    mRuleBtn: BaseButton = null;
+    @property(BaseButton) 
+    mMoreBtn: BaseButton = null;
+    @property(BaseButton) 
+    mPlayerBtn: BaseButton = null;
 
 
-    InitParam() {
+    InitParam() 
+    {
 
     }
     BindUI() 
     {
-        this.mSettingBtn.node.on(Node.EventType.TOUCH_END,this.OnSettingBtn.bind(this),this);
-        this.mRuleBtn.node.on(Node.EventType.TOUCH_END,this.OnRuleBtn.bind(this),this);
-        this.mMoreBtn.node.on(Node.EventType.TOUCH_END,this.OnMoreBtn.bind(this),this);
-        this.mPlayerBtn.node.on(Node.EventType.TOUCH_END,this.OnPlayerBtn.bind(this),this);
+        this.mSettingBtn.SetClickCallback(()=>
+        {
+
+        })
+        this.mRuleBtn.SetClickCallback(()=>
+        {
+            
+        })
+        this.mMoreBtn.SetClickCallback(()=>
+        {
+            
+        })
+        this.mPlayerBtn.SetClickCallback(()=>
+        {
+            
+        })
     }
-    RegDataNotify() {
+    RegDataNotify() 
+    {
 
     }
-    LateInit() {
+    LateInit() 
+    {
 
     }
 
-    CustmoerDestory() {
-        this.mSettingBtn.node.off(Node.EventType.TOUCH_END,this.OnSettingBtn.bind(this),this);
-        this.mRuleBtn.node.off(Node.EventType.TOUCH_END,this.OnRuleBtn.bind(this),this);
-        this.mMoreBtn.node.off(Node.EventType.TOUCH_END,this.OnMoreBtn.bind(this),this);
-        this.mPlayerBtn.node.off(Node.EventType.TOUCH_END,this.OnPlayerBtn.bind(this),this);
+    CustmoerDestory() 
+    {
+
     }
 
     OnSettingBtn()
     {
-        console.log("OnSettingBtn");
+
     }
 
     OnRuleBtn()
     {
-        console.log("OnRuleBtn");
+
     }
 
     OnMoreBtn()
