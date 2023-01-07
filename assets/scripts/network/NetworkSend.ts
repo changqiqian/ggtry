@@ -428,7 +428,63 @@ export class NetworkSend extends Singleton<NetworkSend>()
         msg.gameId = _gameId;
 
         Network.Instance.SendMsg(_msgId , C2SRefresh.encode(msg).finish());
-        console.log("获取买入列表  === " + JSON.stringify(msg))
+        console.log("刷新德州游戏最新信息  === " + JSON.stringify(msg))
+    }
+
+    public EnterCowboy(_gameId : string)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2STexasCowboyEnterGame();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(MessageId.C2S_TexasCowboyEnterGame , C2STexasCowboyEnterGame.encode(msg).finish());
+        console.log("进入 德州牛仔  === " + JSON.stringify(msg))
+    }
+
+    public ExitCowboy(_gameId : string)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2STexasCowboyExitGame();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(MessageId.C2S_TexasCowboyExitGame , C2STexasCowboyExitGame.encode(msg).finish());
+        console.log("退出 德州牛仔  === " + JSON.stringify(msg))
+    }
+    
+    public BetCowboy(_gameId : string , _betArea : CowboyAreaType , _amount : number)
+    {
+        let msg = new C2STexasCowboyBet();
+        msg.gameId = _gameId;
+        msg.betInfo = new CowboySingleBet();
+        msg.betInfo.actionId = LocalPlayerData.Instance.Data_Uid.mData;
+        msg.betInfo.betArea = _betArea;
+        msg.betInfo.amount = _amount;
+        Network.Instance.SendMsg(MessageId.C2S_TexasCowboyBet , C2STexasCowboyBet.encode(msg).finish());
+        console.log("下注 德州牛仔  === " + JSON.stringify(msg))
+    }
+
+    public GetRecordCowboy(_gameId : string)
+    {
+        let msg = new C2STexasCowboyRecord();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(MessageId.C2S_TexasCowboyRecord , C2STexasCowboyRecord.encode(msg).finish());
+        console.log("获取记录 德州牛仔  === " + JSON.stringify(msg))
+    }
+
+    public BringInCowboy(_gameId : string , _amount : number)
+    {
+        let msg = new C2STexasCowboyBringIn();
+        msg.gameId = _gameId;
+        msg.amount = _amount;
+        Network.Instance.SendMsg(MessageId.C2S_TexasCowboyBringIn , C2STexasCowboyBringIn.encode(msg).finish());
+        console.log("买入 德州牛仔  === " + JSON.stringify(msg))
+    }
+
+    public BringOutCowboy(_gameId : string , _amount : number)
+    {
+        let msg = new C2STexasCowboyBringOut();
+        msg.gameId = _gameId;
+        msg.amount = _amount;
+        Network.Instance.SendMsg(MessageId.C2S_TexasCowboyBringOut , C2STexasCowboyBringOut.encode(msg).finish());
+        console.log("带出 德州牛仔  === " + JSON.stringify(msg))
     }
 }
 

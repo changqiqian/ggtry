@@ -6,6 +6,7 @@ import { SceneType, UIMgr } from "../base/UIMgr";
 import { GameConfig } from "../GameConfig";
 import { Tool } from "../Tool";
 import { MultipleTableCtr } from "../ui/common/MultipleTableCtr";
+import { CowboyData } from "../ui/cowboy/CowboyData";
 import { GameData } from "../ui/gamePage/GameData";
 import { HallData } from "../ui/hall/HallData";
 import { LoginData } from "../ui/login/LoginData";
@@ -626,10 +627,98 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             {
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
-
-
-
         },this);  
+
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyEnterGameResp,(_data)=>
+        {
+            let msg = S2CTexasCowboyEnterGameResp.decode(_data);
+            console.log("收到的内容 S2C_TexasCowboyEnterGameResp  进入德州牛仔==" + JSON.stringify(msg));
+            UIMgr.Instance.ShowLoading(false);
+            if(msg.result.resId == MsgResult.Success)
+            {
+                CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.mData = _data;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyExitGameResp,(_data)=>
+        {
+            let msg = S2CTexasCowboyExitGameResp.decode(_data);
+            console.log("收到的内容 S2C_TexasCowboyExitGameResp  退出 德州牛仔==" + JSON.stringify(msg));
+            UIMgr.Instance.ShowLoading(false);
+            if(msg.result.resId == MsgResult.Success)
+            {
+                CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.mData = _data;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyBetResp,(_data)=>
+        {
+            let msg = S2CTexasCowboyBetResp.decode(_data);
+            console.log("收到的内容 S2C_TexasCowboyBetResp  下注 德州牛仔==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                CowboyData.Instance.Data_S2CTexasCowboyBetResp.mData = _data;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyRecordResp,(_data)=>
+        {
+            let msg = S2CTexasCowboyRecordResp.decode(_data);
+            console.log("收到的内容 S2C_TexasCowboyRecordResp  获取记录 德州牛仔==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                CowboyData.Instance.Data_S2CTexasCowboyRecordResp.mData = _data;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+        
+        Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyBringInResp,(_data)=>
+        {
+            let msg = S2CTexasCowboyBringInResp.decode(_data);
+            console.log("收到的内容 S2C_TexasCowboyBringInResp  代入 德州牛仔==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                CowboyData.Instance.Data_Money.mData = _data.totalAmount;
+                LocalPlayerData.Instance.Data_Coin.mData = _data.restAmount;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyBringOutResp,(_data)=>
+        {
+            let msg = S2CTexasCowboyBringOutResp.decode(_data);
+            console.log("收到的内容 S2C_TexasCowboyBringOutResp  代出 德州牛仔==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                CowboyData.Instance.Data_Money.mData = _data.totalAmount;
+                LocalPlayerData.Instance.Data_Coin.mData = _data.restAmount;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+        
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
@@ -973,6 +1062,43 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);  
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyBetNotify,(_data)=>
+        {
+            let msg = S2CTexasCowboyBetNotify.decode(_data);
+            console.log("收到的内容 S2C_TexasCowboyBetNotify  牛仔下注推送==" + JSON.stringify(msg));
+            CowboyData.Instance.Data_S2CTexasCowboyBetNotify.mData = msg;
+
+        },this);  
+        
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyGameStartNotify,(_data)=>
+        {
+            let msg = S2CTexasCowboyGameStartNotify.decode(_data);
+            console.log("收到的内容 S2C_TexasCowboyGameStartNotify  牛仔 游戏开始 推送==" + JSON.stringify(msg));
+            CowboyData.Instance.SetPhase(CowboyPhase.CowBoyPhase_Start);
+            CowboyData.Instance.SetOneCard(msg.oneCard);
+            CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.mData = msg;
+
+        },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyGameSettlementNotify,(_data)=>
+        {
+            let msg = S2CTexasCowboyGameSettlementNotify.decode(_data);
+            console.log("收到的内容 S2C_TexasCowboyGameSettlementNotify  牛仔 结算 推送==" + JSON.stringify(msg));
+            CowboyData.Instance.SetPhase(CowboyPhase.CowBoyPhase_Settlement);
+
+            for(let i = 0 ; i < msg.result.length ; i++)
+            {
+                let current = msg.result[i];
+                if(current.uid == LocalPlayerData.Instance.Data_Uid.mData)
+                {
+                    CowboyData.Instance.Data_Money.mData = current.restAmount;
+                    break;
+                }
+            }
+            CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.mData = msg;
+
+        },this);  
     }
 
     public UnregisterMsg()

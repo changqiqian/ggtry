@@ -7,7 +7,9 @@ import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
+import { AdaptTop } from '../../UiTool/AdaptTop';
 import { TipsWindow } from '../common/TipsWindow';
+import { CowboyData } from '../cowboy/CowboyData';
 import { LoginData } from '../login/LoginData';
 import { HallData, Hall_SubPage } from './HallData';
 const { ccclass, property } = _decorator;
@@ -56,6 +58,19 @@ export class HallUI extends BaseUI
                 UIMgr.Instance.ChangeScene(SceneType.Login);
             }
         });
+
+        CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
+        {
+            if(AdaptTop.IsIphoneX)
+            {
+                UIMgr.Instance.ShowLayer("cowboy","prefab/CowboyUI_Tall");  
+
+            }
+            else
+            {
+                UIMgr.Instance.ShowLayer("cowboy","prefab/CowboyUI");  
+            }
+        })
     }
     LateInit() 
     {

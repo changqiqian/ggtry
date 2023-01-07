@@ -6,9 +6,7 @@ const { ccclass, property } = _decorator;
 @ccclass('AdaptTop')
 export class AdaptTop extends Component 
 {
-
-    public static TopOffset : boolean = false;
-
+    public static IsIphoneX : boolean = false;
     onLoad()
     {
         let safeHeight = sys.getSafeAreaRect().size.height;
@@ -28,9 +26,10 @@ export class AdaptTop extends Component
                 widget.updateAlignment();
             }
 
-            AdaptTop.TopOffset = true;
+            AdaptTop.IsIphoneX = true;
         }
     }
+
 
 
 

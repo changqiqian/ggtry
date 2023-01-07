@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Button } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { BaseButton } from '../../common/BaseButton';
+import { CowboyData } from '../CowboyData';
 const { ccclass, property } = _decorator;
 
 @ccclass('cb_TopMenu')
@@ -18,7 +19,7 @@ export class cb_TopMenu extends BaseUI {
 
     InitParam() 
     {
-
+        CowboyData.Instance.Data_OtherPlayerPos.mData = this.mPlayerBtn.node.worldPosition;
     }
     BindUI() 
     {

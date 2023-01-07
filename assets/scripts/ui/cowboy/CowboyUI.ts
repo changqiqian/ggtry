@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, instantiate, Prefab, UITransform, Vec3, Size, Tween, easing } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { UIMgr } from '../../base/UIMgr';
 import { Tool } from '../../Tool';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { CircleTimer } from '../common/CircleTimer';
@@ -45,9 +46,36 @@ export class CowboyUI extends BaseUI
     }
     RegDataNotify() 
     {
-        CowboyData.Instance.Data_BetConfig.AddListenner(this,this.Data_BetConfig.bind(this));
-
-
+        CowboyData.Instance.Data_BetConfig.AddListenner(this,(_data)=>
+        {
+            let tempChip = instantiate(this.mChip) as Node;
+            let flyToPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(_data.mTargetWorldPos);
+            let chipSize = tempChip.getComponent(UITransform).contentSize;
+            let finlaOffset = new Size();
+            finlaOffset.width = _data.mOffset.width - chipSize.width/2;
+            finlaOffset.height = _data.mOffset.height - chipSize.height/2;
+            let finalPos = this.RandomPos(flyToPos , finlaOffset);
+            let config = new cb_ChipConfig(_data.mUid,_data.mBetArea,tempChip);
+            this.mChipList.push(config);
+            this.node.addChild(tempChip);
+            //自己下注
+            if(LocalPlayerData.Instance.Data_Uid.mData == _data.mUid)
+            {   
+                let localPlayerWorldPos = CowboyData.Instance.Data_LocalPlayerPos.mData;
+                let localPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(localPlayerWorldPos);
+                tempChip.setPosition(localPlayerPos);
+                tempChip.getComponent(cb_Chip).SetAmount(_data.mAmount);
+                this.ChipFlyToBetArea(config,finalPos);
+            }
+            else//其他玩家下注
+            {
+                let otherPlayerWorldPos = CowboyData.Instance.Data_OtherPlayerPos.mData;
+                let otherPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(otherPlayerWorldPos);
+                tempChip.setPosition(otherPlayerPos);
+                tempChip.getComponent(cb_Chip).SetAmount(_data.mAmount);
+                this.ChipFlyToBetArea(config,finalPos);
+            }
+        });
         CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
         {
             this.mCircleTimer.StartTimer(_data.restTime);
@@ -62,6 +90,12 @@ export class CowboyUI extends BaseUI
         {
             this.mCircleTimer.StartTimer(CowboyData.Instance.GetDuration(CowboyPhase.CowBoyPhase_Settlement));
         });
+
+        CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.AddListenner(this,(_data)=>
+        {
+            this.Show(false);
+        });
+
     }
     LateInit() 
     {
@@ -73,34 +107,9 @@ export class CowboyUI extends BaseUI
     {
         this.mChipList.splice(0,this.mChipList.length - 1);
         this.mChipList = null;
+        CowboyData.Instance.Clear();
     }
     
-    Data_BetConfig(_current)
-    {
-        let tempChip = instantiate(this.mChip) as Node;
-        let flyToPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(_current.mTargetWorldPos);
-        let chipSize = tempChip.getComponent(UITransform).contentSize;
-        let finlaOffset = new Size();
-        finlaOffset.width = _current.mOffset.width - chipSize.width/2;
-        finlaOffset.height = _current.mOffset.height - chipSize.height/2;
-        let finalPos = this.RandomPos(flyToPos , finlaOffset);
-        let config = new cb_ChipConfig(_current.mUid,_current.mBetArea,tempChip);
-        this.mChipList.push(config);
-        //自己下注
-        if(LocalPlayerData.Instance.Data_Uid.mData == _current.mUid)
-        {   
-            this.node.addChild(tempChip);
-            let localPlayerWorldPos = CowboyData.Instance.Data_LocalPlayerPos.mData;
-            let localPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(localPlayerWorldPos);
-            tempChip.setPosition(localPlayerPos);
-            tempChip.getComponent(cb_Chip).SetAmount(_current.mAmount);
-            this.ChipFlyToBetArea(config,finalPos);
-        }
-        else//其他玩家下注
-        {
-
-        }
-    }
 
     ChipFlyToBetArea(_config : cb_ChipConfig , _pos : Vec3)
     {

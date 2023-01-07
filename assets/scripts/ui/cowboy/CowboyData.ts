@@ -53,20 +53,33 @@ export class CowboyData extends SingletonBaseNotify<CowboyData>()
     }
 
 
-    Data_S2CTexasCowboyEnterGameResp : BaseData<S2CTexasCowboyEnterGameResp> = new BaseData<S2CTexasCowboyEnterGameResp>(); //游戏总数据
+    Data_S2CTexasCowboyEnterGameResp : BaseData<S2CTexasCowboyEnterGameResp> = new BaseData<S2CTexasCowboyEnterGameResp>(); //进入游戏总数据
+    Data_S2CTexasCowboyExitGameResp: BaseData<S2CTexasCowboyExitGameResp> = new BaseData<S2CTexasCowboyExitGameResp>(); //退出游戏
+    Data_S2CTexasCowboyBetResp : BaseData<S2CTexasCowboyBetResp> = new BaseData<S2CTexasCowboyBetResp>(); //下注回复
     Data_S2CTexasCowboyBetNotify :  BaseData<S2CTexasCowboyBetNotify> = new BaseData<S2CTexasCowboyBetNotify>(); //有人下注消息
     Data_S2CTexasCowboyGameStartNotify :  BaseData<S2CTexasCowboyGameStartNotify> = new BaseData<S2CTexasCowboyGameStartNotify>(); //游戏开始
     Data_S2CTexasCowboyGameSettlementNotify:  BaseData<S2CTexasCowboyGameSettlementNotify> = new BaseData<S2CTexasCowboyGameSettlementNotify>(); //游戏结算
+    Data_S2CTexasCowboyRecordResp : BaseData<S2CTexasCowboyRecordResp> = new BaseData<S2CTexasCowboyRecordResp>(); //游戏记录
+
 
     Data_Money  : BaseData<number> = new BaseData<number>(); //本地玩家的钱
     Data_SelectedChip : BaseData<number> = new BaseData<number>(); //本地玩家选中的下注筹码
     Data_BetConfig :  BaseData<cb_BetConfig> = new BaseData<cb_BetConfig>(); //下注数据 
     Data_LocalPlayerPos :  BaseData<Vec3> = new BaseData<Vec3>();//本地玩家位置，记录下来，筹码从这里飞出来
-
+    Data_OtherPlayerPos : BaseData<Vec3> = new BaseData<Vec3>();//其他玩家位置，记录下来，筹码从这里飞出来
 
     //筹码面额配置
     public ChipAmountConfig : Array<number> = new Array<number>(1,10,50,100,500);
 
+    public SetOneCard(_card : CardInfo)
+    {
+        this.Data_S2CTexasCowboyEnterGameResp.mData.oneCard = _card;
+    }
+
+    public SetPhase(_phase : CowboyPhase)
+    {
+        this.Data_S2CTexasCowboyEnterGameResp.mData.phase = _phase;
+    }
 
     public GetPhase() : CowboyPhase
     {
@@ -139,9 +152,5 @@ export class CowboyData extends SingletonBaseNotify<CowboyData>()
 
         return myBetList[index];
     }
-    
-
-    //常量
-    public static readonly TotalCards : number = 5; 
 }
 
