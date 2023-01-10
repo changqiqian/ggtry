@@ -128,7 +128,8 @@ export class CowboyUI extends BaseUI
             let localPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(localPlayerWorldPos);
             let tween = new Tween(_config.mNode);
             tween.to(duration,{position:localPlayerPos},{easing:easing.quadOut});
-            tween.call(()=>{
+            tween.call(()=>
+            {
                 _config.mNode.active = false;
             });
             tween.start();

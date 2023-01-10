@@ -11,7 +11,7 @@
     "6c48a": {
       "importer": "texture",
       "uuid": "0d797fb2-983b-4390-b4cf-14336a09d860@6c48a",
-      "displayName": "TotalHistoryBG",
+      "displayName": "SubBG",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -34,7 +34,7 @@
     "f9941": {
       "importer": "sprite-frame",
       "uuid": "0d797fb2-983b-4390-b4cf-14336a09d860@f9941",
-      "displayName": "TotalHistoryBG",
+      "displayName": "SubBG",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -51,8 +51,8 @@
         "rawHeight": 61,
         "borderTop": 0,
         "borderBottom": 0,
-        "borderLeft": 0,
-        "borderRight": 0,
+        "borderLeft": 38,
+        "borderRight": 38,
         "packable": true,
         "isUuid": true,
         "imageUuidOrDatabaseUri": "0d797fb2-983b-4390-b4cf-14336a09d860@6c48a",

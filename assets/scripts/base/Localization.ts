@@ -374,14 +374,20 @@ export class Localization {
         { name: '00286', ch: '对子', en: 'Pocket pair' },
         { name: '00287', ch: '对A', en: 'Pocket Ace' },
         { name: '00288', ch: '高牌/对子', en: 'High/Pair' },
-        { name: '00289', ch: '两队', en: 'Two pairs' },
+        { name: '00289', ch: '？？？？？？？？？？？？？？？？？？', en: '？？？？？？？？？？？？？？？？？？' },
         { name: '00290', ch: '获胜牌型', en: 'Winner conbination' },
         { name: '00291', ch: '三条/顺子/同花', en: 'Trible/Straight/Flush' },
-        { name: '00292', ch: '葫芦', en: 'Fullhouse' },
+        { name: '00292', ch: '？？？？？？？？？？？？？？？？？', en: '？？？？？？？？？？？？？？？？？？' },
         { name: '00293', ch: '金刚/同花顺', en: 'Quads/StraightFlush' },
         { name: '00294', ch: 'xxx手未出', en: 'unhit in xxx' },
         { name: '00295', ch: '余额不足', en: 'not enough coin' },
         { name: '00296', ch: '结算', en: 'Cash out' },
+        { name: '00298', ch: '牌局统计', en: 'Statics' },
+        { name: '00299', ch: '总局数', en: 'Game count' },
+        { name: '00300', ch: '牛仔', en: 'Boy' },
+        { name: '00301', ch: '美女', en: 'Girl' },
+        { name: '00302', ch: '胜负平:', en: 'WinLose:' },
+
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },
@@ -389,7 +395,11 @@ export class Localization {
         { name: '01003', ch: '钻石记录', en: 'Diamond Reocrd' },
 
 
-        //热更
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //////////////                      热更     
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////
         { name: '10001', ch: '检测是否有更新版本', en: 'Checking update' },
         { name: '10002', ch: '本地没有找到manifest文件，跳过热更新', en: ' Can not find manifest file,skip update' },
         { name: '10003', ch: '下载远端manifest文件失败，跳过热更新', en: 'Download manifest file failed,skip update' },
