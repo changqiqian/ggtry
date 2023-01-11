@@ -374,10 +374,10 @@ export class Localization {
         { name: '00286', ch: '对子', en: 'Pocket pair' },
         { name: '00287', ch: '对A', en: 'Pocket Ace' },
         { name: '00288', ch: '高牌/对子', en: 'High/Pair' },
-        { name: '00289', ch: '？？？？？？？？？？？？？？？？？？', en: '？？？？？？？？？？？？？？？？？？' },
+        { name: '00289', ch: '总计', en: 'Summary' },
         { name: '00290', ch: '获胜牌型', en: 'Winner conbination' },
         { name: '00291', ch: '三条/顺子/同花', en: 'Trible/Straight/Flush' },
-        { name: '00292', ch: '？？？？？？？？？？？？？？？？？', en: '？？？？？？？？？？？？？？？？？？' },
+        { name: '00292', ch: '公共牌', en: 'Public cards' },
         { name: '00293', ch: '金刚/同花顺', en: 'Quads/StraightFlush' },
         { name: '00294', ch: 'xxx手未出', en: 'unhit in xxx' },
         { name: '00295', ch: '余额不足', en: 'not enough coin' },
@@ -387,6 +387,8 @@ export class Localization {
         { name: '00300', ch: '牛仔', en: 'Boy' },
         { name: '00301', ch: '美女', en: 'Girl' },
         { name: '00302', ch: '胜负平:', en: 'WinLose:' },
+        { name: '00303', ch: '牌局回顾', en: 'Record' },
+        
 
 
         { name: '01000', ch: '公告', en: 'Notification' },
