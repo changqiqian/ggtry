@@ -59,7 +59,8 @@ export class CowboyData extends SingletonBaseNotify<CowboyData>()
     Data_S2CTexasCowboyBetNotify :  BaseData<S2CTexasCowboyBetNotify> = new BaseData<S2CTexasCowboyBetNotify>(); //有人下注消息
     Data_S2CTexasCowboyGameStartNotify :  BaseData<S2CTexasCowboyGameStartNotify> = new BaseData<S2CTexasCowboyGameStartNotify>(); //游戏开始
     Data_S2CTexasCowboyGameSettlementNotify:  BaseData<S2CTexasCowboyGameSettlementNotify> = new BaseData<S2CTexasCowboyGameSettlementNotify>(); //游戏结算
-    Data_S2CTexasCowboyRecordResp : BaseData<S2CTexasCowboyRecordResp> = new BaseData<S2CTexasCowboyRecordResp>(); //游戏记录
+    Data_S2CTexasCowboyRecordResp : BaseData<S2CTexasCowboyRecordResp> = new BaseData<S2CTexasCowboyRecordResp>(); //我的游戏记录
+    Data_S2CTexasCowboyTotalHistoryResp: BaseData<S2CTexasCowboyTotalHistoryResp> = new BaseData<S2CTexasCowboyTotalHistoryResp>(); //游戏总记录
 
 
     Data_Money  : BaseData<number> = new BaseData<number>(); //本地玩家的钱
@@ -70,6 +71,11 @@ export class CowboyData extends SingletonBaseNotify<CowboyData>()
 
     //筹码面额配置
     public ChipAmountConfig : Array<number> = new Array<number>(1,10,50,100,500);
+
+    public GetGameId() : string
+    {
+        return this.Data_S2CTexasCowboyEnterGameResp.mData.gameId;
+    }
 
     public SetOneCard(_card : CardInfo)
     {

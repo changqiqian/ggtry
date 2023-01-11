@@ -2843,6 +2843,9 @@ export class C2STexasCowboyRecord implements IC2STexasCowboyRecord {
     /** C2STexasCowboyRecord gameId. */
     public gameId: string;
 
+    /** C2STexasCowboyRecord whichGame. */
+    public whichGame: number;
+
     /**
      * Encodes the specified C2STexasCowboyRecord message. Does not implicitly {@link C2STexasCowboyRecord.verify|verify} messages.
      * @param m C2STexasCowboyRecord message or plain object to encode
@@ -2928,6 +2931,37 @@ export class C2STexasCowboyBringOut implements IC2STexasCowboyBringOut {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCowboyBringOut;
+}
+
+/** Represents a C2STexasCowboyTotalHistory. */
+export class C2STexasCowboyTotalHistory implements IC2STexasCowboyTotalHistory {
+
+    /**
+     * Constructs a new C2STexasCowboyTotalHistory.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2STexasCowboyTotalHistory);
+
+    /** C2STexasCowboyTotalHistory gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2STexasCowboyTotalHistory message. Does not implicitly {@link C2STexasCowboyTotalHistory.verify|verify} messages.
+     * @param m C2STexasCowboyTotalHistory message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2STexasCowboyTotalHistory, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2STexasCowboyTotalHistory message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2STexasCowboyTotalHistory
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCowboyTotalHistory;
 }
 
 /** CowboyAreaType enum. */
@@ -3056,6 +3090,40 @@ export class CowboyHistory implements ICowboyHistory {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CowboyHistory;
 }
 
+/** Represents a CowboyTotalHistory. */
+export class CowboyTotalHistory implements ICowboyTotalHistory {
+
+    /**
+     * Constructs a new CowboyTotalHistory.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ICowboyTotalHistory);
+
+    /** CowboyTotalHistory cowboyAreaType. */
+    public cowboyAreaType: CowboyAreaType;
+
+    /** CowboyTotalHistory count. */
+    public count: number;
+
+    /**
+     * Encodes the specified CowboyTotalHistory message. Does not implicitly {@link CowboyTotalHistory.verify|verify} messages.
+     * @param m CowboyTotalHistory message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ICowboyTotalHistory, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a CowboyTotalHistory message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns CowboyTotalHistory
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CowboyTotalHistory;
+}
+
 /** Represents a CowboyRecord. */
 export class CowboyRecord implements ICowboyRecord {
 
@@ -3068,11 +3136,20 @@ export class CowboyRecord implements ICowboyRecord {
     /** CowboyRecord cowboyAreaType. */
     public cowboyAreaType: CowboyAreaType;
 
-    /** CowboyRecord winLose. */
-    public winLose: number;
+    /** CowboyRecord areaWinLose. */
+    public areaWinLose: number[];
 
-    /** CowboyRecord betInfos. */
-    public betInfos: ICowboySingleBet[];
+    /** CowboyRecord betAmount. */
+    public betAmount: number[];
+
+    /** CowboyRecord boyCards. */
+    public boyCards: ICardInfo[];
+
+    /** CowboyRecord girlCards. */
+    public girlCards: ICardInfo[];
+
+    /** CowboyRecord publicCards. */
+    public publicCards: ICardInfo[];
 
     /**
      * Encodes the specified CowboyRecord message. Does not implicitly {@link CowboyRecord.verify|verify} messages.
@@ -3272,7 +3349,13 @@ export class S2CTexasCowboyRecordResp implements IS2CTexasCowboyRecordResp {
     public gameId: string;
 
     /** S2CTexasCowboyRecordResp record. */
-    public record: ICowboyRecord[];
+    public record?: (ICowboyRecord|null);
+
+    /** S2CTexasCowboyRecordResp whichGame. */
+    public whichGame: number;
+
+    /** S2CTexasCowboyRecordResp totalGame. */
+    public totalGame: number;
 
     /**
      * Encodes the specified S2CTexasCowboyRecordResp message. Does not implicitly {@link S2CTexasCowboyRecordResp.verify|verify} messages.
@@ -3377,6 +3460,46 @@ export class S2CTexasCowboyBringOutResp implements IS2CTexasCowboyBringOutResp {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CTexasCowboyBringOutResp;
+}
+
+/** Represents a S2CTexasCowboyTotalHistoryResp. */
+export class S2CTexasCowboyTotalHistoryResp implements IS2CTexasCowboyTotalHistoryResp {
+
+    /**
+     * Constructs a new S2CTexasCowboyTotalHistoryResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CTexasCowboyTotalHistoryResp);
+
+    /** S2CTexasCowboyTotalHistoryResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CTexasCowboyTotalHistoryResp gameId. */
+    public gameId: string;
+
+    /** S2CTexasCowboyTotalHistoryResp totalHistory. */
+    public totalHistory: ICowboyTotalHistory[];
+
+    /** S2CTexasCowboyTotalHistoryResp totalGameCount. */
+    public totalGameCount: number;
+
+    /**
+     * Encodes the specified S2CTexasCowboyTotalHistoryResp message. Does not implicitly {@link S2CTexasCowboyTotalHistoryResp.verify|verify} messages.
+     * @param m S2CTexasCowboyTotalHistoryResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CTexasCowboyTotalHistoryResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CTexasCowboyTotalHistoryResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CTexasCowboyTotalHistoryResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CTexasCowboyTotalHistoryResp;
 }
 
 /** Represents a S2CTexasCowboyBetNotify. */
@@ -4220,12 +4343,14 @@ export enum MessageId {
     C2S_TexasCowboyRecord = 10005,
     C2S_TexasCowboyBringIn = 10006,
     C2S_TexasCowboyBringOut = 10007,
+    C2S_TexasCowboyTotalHistory = 10008,
     S2C_TexasCowboyEnterGameResp = 10030,
     S2C_TexasCowboyExitGameResp = 10031,
     S2C_TexasCowboyBetResp = 10032,
     S2C_TexasCowboyRecordResp = 10033,
     S2C_TexasCowboyBringInResp = 10034,
     S2C_TexasCowboyBringOutResp = 10035,
+    S2C_TexasCowboyTotalHistoryResp = 10036,
     S2C_TexasCowboyBetNotify = 10050,
     S2C_TexasCowboyGameStartNotify = 10051,
     S2C_TexasCowboyGameSettlementNotify = 10052,

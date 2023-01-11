@@ -677,7 +677,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyRecordResp,(_data)=>
         {
             let msg = S2CTexasCowboyRecordResp.decode(_data);
-            console.log("收到的内容 S2C_TexasCowboyRecordResp  获取记录 德州牛仔==" + JSON.stringify(msg));
+            console.log("收到的内容 S2C_TexasCowboyRecordResp  获取我的记录 德州牛仔==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
                 CowboyData.Instance.Data_S2CTexasCowboyRecordResp.mData = _data;
@@ -692,7 +692,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyBringInResp,(_data)=>
         {
             let msg = S2CTexasCowboyBringInResp.decode(_data);
-            console.log("收到的内容 S2C_TexasCowboyBringInResp  代入 德州牛仔==" + JSON.stringify(msg));
+            console.log("收到的内容 S2C_TexasCowboyBringInResp  带入 德州牛仔==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
                 CowboyData.Instance.Data_Money.mData = _data.totalAmount;
@@ -707,11 +707,25 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyBringOutResp,(_data)=>
         {
             let msg = S2CTexasCowboyBringOutResp.decode(_data);
-            console.log("收到的内容 S2C_TexasCowboyBringOutResp  代出 德州牛仔==" + JSON.stringify(msg));
+            console.log("收到的内容 S2C_TexasCowboyBringOutResp  带出 德州牛仔==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
                 CowboyData.Instance.Data_Money.mData = _data.totalAmount;
                 LocalPlayerData.Instance.Data_Coin.mData = _data.restAmount;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyTotalHistoryResp,(_data)=>
+        {
+            let msg = S2CTexasCowboyTotalHistoryResp.decode(_data);
+            console.log("收到的内容 S2C_TexasCowboyTotalHistoryResp  游戏总记录 德州牛仔==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                CowboyData.Instance.Data_S2CTexasCowboyTotalHistoryResp.mData = msg;
             }
             else
             {

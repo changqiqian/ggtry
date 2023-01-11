@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { BaseButton } from '../../common/BaseButton';
+import { CowboyData } from '../CowboyData';
 const { ccclass, property } = _decorator;
 
 @ccclass('cb_GameHistory')
@@ -56,8 +57,83 @@ export class cb_GameHistory extends BaseUI
     }
     RegDataNotify()
     {
-
+        CowboyData.Instance.Data_S2CTexasCowboyTotalHistoryResp.AddListenner(this,(_data)=>
+        {
+            this.mGameCount.string = _data.totalGameCount+"";
+            for(let i = 0 ; i < _data.totalHistory.length ; i++)
+            {
+                let current = _data.totalHistory[i];
+                this.SetData(current , _data.totalGameCount);
+            }
+        });
     }
+
+    SetData(_cowboyTotalHistory : CowboyTotalHistory , _totalGameCount : number)
+    {
+        switch(_cowboyTotalHistory.cowboyAreaType)
+        {
+            case CowboyAreaType.CowboyAreaType_0:
+                {
+                    this.mBoyWinRate.string = (_cowboyTotalHistory.count / _totalGameCount).toFixed(2);
+                    this.mBoyCount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_1:
+                {
+                    this.mTieWinRate.string = (_cowboyTotalHistory.count / _totalGameCount).toFixed(2);
+                    this.mTieCount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_2:
+                {
+                    this.mGirlWinRate.string = (_cowboyTotalHistory.count / _totalGameCount).toFixed(2);
+                    this.mGirlCount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_3:
+                {
+                    this.mTongSeLianPaiCount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_4:
+                {
+                    this.mPairCount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_5:
+                {
+                    this.mAACount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_6:
+                {
+                    this.mHighOrPairCount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_7:
+                {
+                    this.mTwoPairCount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_8:
+                {
+                    this.mTribleOrSOrFCount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_9:
+                {
+                    this.mFullHouseCount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_10:
+                {
+                    this.mQuadsOrSFCount.string = _cowboyTotalHistory.count + "";
+                }
+                break;
+        }
+    }
+
+
     LateInit()
     {
 

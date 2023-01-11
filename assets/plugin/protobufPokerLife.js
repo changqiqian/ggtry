@@ -8083,6 +8083,7 @@ $root.C2STexasCowboyRecord = (function() {
      * @exports IC2STexasCowboyRecord
      * @interface IC2STexasCowboyRecord
      * @property {string|null} [gameId] C2STexasCowboyRecord gameId
+     * @property {number|null} [whichGame] C2STexasCowboyRecord whichGame
      */
 
     /**
@@ -8109,6 +8110,14 @@ $root.C2STexasCowboyRecord = (function() {
     C2STexasCowboyRecord.prototype.gameId = "";
 
     /**
+     * C2STexasCowboyRecord whichGame.
+     * @member {number} whichGame
+     * @memberof C2STexasCowboyRecord
+     * @instance
+     */
+    C2STexasCowboyRecord.prototype.whichGame = 0;
+
+    /**
      * Encodes the specified C2STexasCowboyRecord message. Does not implicitly {@link C2STexasCowboyRecord.verify|verify} messages.
      * @function encode
      * @memberof C2STexasCowboyRecord
@@ -8122,6 +8131,8 @@ $root.C2STexasCowboyRecord = (function() {
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(10).string(m.gameId);
+        if (m.whichGame != null && Object.hasOwnProperty.call(m, "whichGame"))
+            w.uint32(16).int32(m.whichGame);
         return w;
     };
 
@@ -8145,6 +8156,9 @@ $root.C2STexasCowboyRecord = (function() {
             switch (t >>> 3) {
             case 1:
                 m.gameId = r.string();
+                break;
+            case 2:
+                m.whichGame = r.int32();
                 break;
             default:
                 r.skipType(t & 7);
@@ -8345,6 +8359,87 @@ $root.C2STexasCowboyBringOut = (function() {
     };
 
     return C2STexasCowboyBringOut;
+})();
+
+$root.C2STexasCowboyTotalHistory = (function() {
+
+    /**
+     * Properties of a C2STexasCowboyTotalHistory.
+     * @exports IC2STexasCowboyTotalHistory
+     * @interface IC2STexasCowboyTotalHistory
+     * @property {string|null} [gameId] C2STexasCowboyTotalHistory gameId
+     */
+
+    /**
+     * Constructs a new C2STexasCowboyTotalHistory.
+     * @exports C2STexasCowboyTotalHistory
+     * @classdesc Represents a C2STexasCowboyTotalHistory.
+     * @implements IC2STexasCowboyTotalHistory
+     * @constructor
+     * @param {IC2STexasCowboyTotalHistory=} [p] Properties to set
+     */
+    function C2STexasCowboyTotalHistory(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCowboyTotalHistory gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCowboyTotalHistory
+     * @instance
+     */
+    C2STexasCowboyTotalHistory.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2STexasCowboyTotalHistory message. Does not implicitly {@link C2STexasCowboyTotalHistory.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCowboyTotalHistory
+     * @static
+     * @param {IC2STexasCowboyTotalHistory} m C2STexasCowboyTotalHistory message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCowboyTotalHistory.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCowboyTotalHistory message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCowboyTotalHistory
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCowboyTotalHistory} C2STexasCowboyTotalHistory
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCowboyTotalHistory.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyTotalHistory();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCowboyTotalHistory;
 })();
 
 /**
@@ -8704,6 +8799,101 @@ $root.CowboyHistory = (function() {
     return CowboyHistory;
 })();
 
+$root.CowboyTotalHistory = (function() {
+
+    /**
+     * Properties of a CowboyTotalHistory.
+     * @exports ICowboyTotalHistory
+     * @interface ICowboyTotalHistory
+     * @property {CowboyAreaType|null} [cowboyAreaType] CowboyTotalHistory cowboyAreaType
+     * @property {number|null} [count] CowboyTotalHistory count
+     */
+
+    /**
+     * Constructs a new CowboyTotalHistory.
+     * @exports CowboyTotalHistory
+     * @classdesc Represents a CowboyTotalHistory.
+     * @implements ICowboyTotalHistory
+     * @constructor
+     * @param {ICowboyTotalHistory=} [p] Properties to set
+     */
+    function CowboyTotalHistory(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * CowboyTotalHistory cowboyAreaType.
+     * @member {CowboyAreaType} cowboyAreaType
+     * @memberof CowboyTotalHistory
+     * @instance
+     */
+    CowboyTotalHistory.prototype.cowboyAreaType = 0;
+
+    /**
+     * CowboyTotalHistory count.
+     * @member {number} count
+     * @memberof CowboyTotalHistory
+     * @instance
+     */
+    CowboyTotalHistory.prototype.count = 0;
+
+    /**
+     * Encodes the specified CowboyTotalHistory message. Does not implicitly {@link CowboyTotalHistory.verify|verify} messages.
+     * @function encode
+     * @memberof CowboyTotalHistory
+     * @static
+     * @param {ICowboyTotalHistory} m CowboyTotalHistory message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    CowboyTotalHistory.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.cowboyAreaType != null && Object.hasOwnProperty.call(m, "cowboyAreaType"))
+            w.uint32(8).int32(m.cowboyAreaType);
+        if (m.count != null && Object.hasOwnProperty.call(m, "count"))
+            w.uint32(16).int32(m.count);
+        return w;
+    };
+
+    /**
+     * Decodes a CowboyTotalHistory message from the specified reader or buffer.
+     * @function decode
+     * @memberof CowboyTotalHistory
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {CowboyTotalHistory} CowboyTotalHistory
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    CowboyTotalHistory.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyTotalHistory();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.cowboyAreaType = r.int32();
+                break;
+            case 2:
+                m.count = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return CowboyTotalHistory;
+})();
+
 $root.CowboyRecord = (function() {
 
     /**
@@ -8711,8 +8901,11 @@ $root.CowboyRecord = (function() {
      * @exports ICowboyRecord
      * @interface ICowboyRecord
      * @property {CowboyAreaType|null} [cowboyAreaType] CowboyRecord cowboyAreaType
-     * @property {number|null} [winLose] CowboyRecord winLose
-     * @property {Array.<ICowboySingleBet>|null} [betInfos] CowboyRecord betInfos
+     * @property {Array.<number>|null} [areaWinLose] CowboyRecord areaWinLose
+     * @property {Array.<number>|null} [betAmount] CowboyRecord betAmount
+     * @property {Array.<ICardInfo>|null} [boyCards] CowboyRecord boyCards
+     * @property {Array.<ICardInfo>|null} [girlCards] CowboyRecord girlCards
+     * @property {Array.<ICardInfo>|null} [publicCards] CowboyRecord publicCards
      */
 
     /**
@@ -8724,7 +8917,11 @@ $root.CowboyRecord = (function() {
      * @param {ICowboyRecord=} [p] Properties to set
      */
     function CowboyRecord(p) {
-        this.betInfos = [];
+        this.areaWinLose = [];
+        this.betAmount = [];
+        this.boyCards = [];
+        this.girlCards = [];
+        this.publicCards = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -8740,20 +8937,44 @@ $root.CowboyRecord = (function() {
     CowboyRecord.prototype.cowboyAreaType = 0;
 
     /**
-     * CowboyRecord winLose.
-     * @member {number} winLose
+     * CowboyRecord areaWinLose.
+     * @member {Array.<number>} areaWinLose
      * @memberof CowboyRecord
      * @instance
      */
-    CowboyRecord.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    CowboyRecord.prototype.areaWinLose = $util.emptyArray;
 
     /**
-     * CowboyRecord betInfos.
-     * @member {Array.<ICowboySingleBet>} betInfos
+     * CowboyRecord betAmount.
+     * @member {Array.<number>} betAmount
      * @memberof CowboyRecord
      * @instance
      */
-    CowboyRecord.prototype.betInfos = $util.emptyArray;
+    CowboyRecord.prototype.betAmount = $util.emptyArray;
+
+    /**
+     * CowboyRecord boyCards.
+     * @member {Array.<ICardInfo>} boyCards
+     * @memberof CowboyRecord
+     * @instance
+     */
+    CowboyRecord.prototype.boyCards = $util.emptyArray;
+
+    /**
+     * CowboyRecord girlCards.
+     * @member {Array.<ICardInfo>} girlCards
+     * @memberof CowboyRecord
+     * @instance
+     */
+    CowboyRecord.prototype.girlCards = $util.emptyArray;
+
+    /**
+     * CowboyRecord publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof CowboyRecord
+     * @instance
+     */
+    CowboyRecord.prototype.publicCards = $util.emptyArray;
 
     /**
      * Encodes the specified CowboyRecord message. Does not implicitly {@link CowboyRecord.verify|verify} messages.
@@ -8769,11 +8990,29 @@ $root.CowboyRecord = (function() {
             w = $Writer.create();
         if (m.cowboyAreaType != null && Object.hasOwnProperty.call(m, "cowboyAreaType"))
             w.uint32(8).int32(m.cowboyAreaType);
-        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(16).int64(m.winLose);
-        if (m.betInfos != null && m.betInfos.length) {
-            for (var i = 0; i < m.betInfos.length; ++i)
-                $root.CowboySingleBet.encode(m.betInfos[i], w.uint32(26).fork()).ldelim();
+        if (m.areaWinLose != null && m.areaWinLose.length) {
+            w.uint32(18).fork();
+            for (var i = 0; i < m.areaWinLose.length; ++i)
+                w.int64(m.areaWinLose[i]);
+            w.ldelim();
+        }
+        if (m.betAmount != null && m.betAmount.length) {
+            w.uint32(34).fork();
+            for (var i = 0; i < m.betAmount.length; ++i)
+                w.int64(m.betAmount[i]);
+            w.ldelim();
+        }
+        if (m.boyCards != null && m.boyCards.length) {
+            for (var i = 0; i < m.boyCards.length; ++i)
+                $root.CardInfo.encode(m.boyCards[i], w.uint32(42).fork()).ldelim();
+        }
+        if (m.girlCards != null && m.girlCards.length) {
+            for (var i = 0; i < m.girlCards.length; ++i)
+                $root.CardInfo.encode(m.girlCards[i], w.uint32(50).fork()).ldelim();
+        }
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
         }
         return w;
     };
@@ -8800,12 +9039,39 @@ $root.CowboyRecord = (function() {
                 m.cowboyAreaType = r.int32();
                 break;
             case 2:
-                m.winLose = r.int64();
+                if (!(m.areaWinLose && m.areaWinLose.length))
+                    m.areaWinLose = [];
+                if ((t & 7) === 2) {
+                    var c2 = r.uint32() + r.pos;
+                    while (r.pos < c2)
+                        m.areaWinLose.push(r.int64());
+                } else
+                    m.areaWinLose.push(r.int64());
                 break;
-            case 3:
-                if (!(m.betInfos && m.betInfos.length))
-                    m.betInfos = [];
-                m.betInfos.push($root.CowboySingleBet.decode(r, r.uint32()));
+            case 4:
+                if (!(m.betAmount && m.betAmount.length))
+                    m.betAmount = [];
+                if ((t & 7) === 2) {
+                    var c2 = r.uint32() + r.pos;
+                    while (r.pos < c2)
+                        m.betAmount.push(r.int64());
+                } else
+                    m.betAmount.push(r.int64());
+                break;
+            case 5:
+                if (!(m.boyCards && m.boyCards.length))
+                    m.boyCards = [];
+                m.boyCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 6:
+                if (!(m.girlCards && m.girlCards.length))
+                    m.girlCards = [];
+                m.girlCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 7:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
             default:
                 r.skipType(t & 7);
@@ -9347,7 +9613,9 @@ $root.S2CTexasCowboyRecordResp = (function() {
      * @interface IS2CTexasCowboyRecordResp
      * @property {ICommonResult|null} [result] S2CTexasCowboyRecordResp result
      * @property {string|null} [gameId] S2CTexasCowboyRecordResp gameId
-     * @property {Array.<ICowboyRecord>|null} [record] S2CTexasCowboyRecordResp record
+     * @property {ICowboyRecord|null} [record] S2CTexasCowboyRecordResp record
+     * @property {number|null} [whichGame] S2CTexasCowboyRecordResp whichGame
+     * @property {number|null} [totalGame] S2CTexasCowboyRecordResp totalGame
      */
 
     /**
@@ -9359,7 +9627,6 @@ $root.S2CTexasCowboyRecordResp = (function() {
      * @param {IS2CTexasCowboyRecordResp=} [p] Properties to set
      */
     function S2CTexasCowboyRecordResp(p) {
-        this.record = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -9384,11 +9651,27 @@ $root.S2CTexasCowboyRecordResp = (function() {
 
     /**
      * S2CTexasCowboyRecordResp record.
-     * @member {Array.<ICowboyRecord>} record
+     * @member {ICowboyRecord|null|undefined} record
      * @memberof S2CTexasCowboyRecordResp
      * @instance
      */
-    S2CTexasCowboyRecordResp.prototype.record = $util.emptyArray;
+    S2CTexasCowboyRecordResp.prototype.record = null;
+
+    /**
+     * S2CTexasCowboyRecordResp whichGame.
+     * @member {number} whichGame
+     * @memberof S2CTexasCowboyRecordResp
+     * @instance
+     */
+    S2CTexasCowboyRecordResp.prototype.whichGame = 0;
+
+    /**
+     * S2CTexasCowboyRecordResp totalGame.
+     * @member {number} totalGame
+     * @memberof S2CTexasCowboyRecordResp
+     * @instance
+     */
+    S2CTexasCowboyRecordResp.prototype.totalGame = 0;
 
     /**
      * Encodes the specified S2CTexasCowboyRecordResp message. Does not implicitly {@link S2CTexasCowboyRecordResp.verify|verify} messages.
@@ -9406,10 +9689,12 @@ $root.S2CTexasCowboyRecordResp = (function() {
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(18).string(m.gameId);
-        if (m.record != null && m.record.length) {
-            for (var i = 0; i < m.record.length; ++i)
-                $root.CowboyRecord.encode(m.record[i], w.uint32(26).fork()).ldelim();
-        }
+        if (m.record != null && Object.hasOwnProperty.call(m, "record"))
+            $root.CowboyRecord.encode(m.record, w.uint32(26).fork()).ldelim();
+        if (m.whichGame != null && Object.hasOwnProperty.call(m, "whichGame"))
+            w.uint32(32).int32(m.whichGame);
+        if (m.totalGame != null && Object.hasOwnProperty.call(m, "totalGame"))
+            w.uint32(40).int32(m.totalGame);
         return w;
     };
 
@@ -9438,9 +9723,13 @@ $root.S2CTexasCowboyRecordResp = (function() {
                 m.gameId = r.string();
                 break;
             case 3:
-                if (!(m.record && m.record.length))
-                    m.record = [];
-                m.record.push($root.CowboyRecord.decode(r, r.uint32()));
+                m.record = $root.CowboyRecord.decode(r, r.uint32());
+                break;
+            case 4:
+                m.whichGame = r.int32();
+                break;
+            case 5:
+                m.totalGame = r.int32();
                 break;
             default:
                 r.skipType(t & 7);
@@ -9725,6 +10014,134 @@ $root.S2CTexasCowboyBringOutResp = (function() {
     };
 
     return S2CTexasCowboyBringOutResp;
+})();
+
+$root.S2CTexasCowboyTotalHistoryResp = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyTotalHistoryResp.
+     * @exports IS2CTexasCowboyTotalHistoryResp
+     * @interface IS2CTexasCowboyTotalHistoryResp
+     * @property {ICommonResult|null} [result] S2CTexasCowboyTotalHistoryResp result
+     * @property {string|null} [gameId] S2CTexasCowboyTotalHistoryResp gameId
+     * @property {Array.<ICowboyTotalHistory>|null} [totalHistory] S2CTexasCowboyTotalHistoryResp totalHistory
+     * @property {number|null} [totalGameCount] S2CTexasCowboyTotalHistoryResp totalGameCount
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyTotalHistoryResp.
+     * @exports S2CTexasCowboyTotalHistoryResp
+     * @classdesc Represents a S2CTexasCowboyTotalHistoryResp.
+     * @implements IS2CTexasCowboyTotalHistoryResp
+     * @constructor
+     * @param {IS2CTexasCowboyTotalHistoryResp=} [p] Properties to set
+     */
+    function S2CTexasCowboyTotalHistoryResp(p) {
+        this.totalHistory = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyTotalHistoryResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @instance
+     */
+    S2CTexasCowboyTotalHistoryResp.prototype.result = null;
+
+    /**
+     * S2CTexasCowboyTotalHistoryResp gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @instance
+     */
+    S2CTexasCowboyTotalHistoryResp.prototype.gameId = "";
+
+    /**
+     * S2CTexasCowboyTotalHistoryResp totalHistory.
+     * @member {Array.<ICowboyTotalHistory>} totalHistory
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @instance
+     */
+    S2CTexasCowboyTotalHistoryResp.prototype.totalHistory = $util.emptyArray;
+
+    /**
+     * S2CTexasCowboyTotalHistoryResp totalGameCount.
+     * @member {number} totalGameCount
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @instance
+     */
+    S2CTexasCowboyTotalHistoryResp.prototype.totalGameCount = 0;
+
+    /**
+     * Encodes the specified S2CTexasCowboyTotalHistoryResp message. Does not implicitly {@link S2CTexasCowboyTotalHistoryResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @static
+     * @param {IS2CTexasCowboyTotalHistoryResp} m S2CTexasCowboyTotalHistoryResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyTotalHistoryResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.totalHistory != null && m.totalHistory.length) {
+            for (var i = 0; i < m.totalHistory.length; ++i)
+                $root.CowboyTotalHistory.encode(m.totalHistory[i], w.uint32(26).fork()).ldelim();
+        }
+        if (m.totalGameCount != null && Object.hasOwnProperty.call(m, "totalGameCount"))
+            w.uint32(32).int32(m.totalGameCount);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyTotalHistoryResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyTotalHistoryResp} S2CTexasCowboyTotalHistoryResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyTotalHistoryResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyTotalHistoryResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                if (!(m.totalHistory && m.totalHistory.length))
+                    m.totalHistory = [];
+                m.totalHistory.push($root.CowboyTotalHistory.decode(r, r.uint32()));
+                break;
+            case 4:
+                m.totalGameCount = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyTotalHistoryResp;
 })();
 
 $root.S2CTexasCowboyBetNotify = (function() {
@@ -11916,12 +12333,14 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} C2S_TexasCowboyRecord=10005 C2S_TexasCowboyRecord value
  * @property {number} C2S_TexasCowboyBringIn=10006 C2S_TexasCowboyBringIn value
  * @property {number} C2S_TexasCowboyBringOut=10007 C2S_TexasCowboyBringOut value
+ * @property {number} C2S_TexasCowboyTotalHistory=10008 C2S_TexasCowboyTotalHistory value
  * @property {number} S2C_TexasCowboyEnterGameResp=10030 S2C_TexasCowboyEnterGameResp value
  * @property {number} S2C_TexasCowboyExitGameResp=10031 S2C_TexasCowboyExitGameResp value
  * @property {number} S2C_TexasCowboyBetResp=10032 S2C_TexasCowboyBetResp value
  * @property {number} S2C_TexasCowboyRecordResp=10033 S2C_TexasCowboyRecordResp value
  * @property {number} S2C_TexasCowboyBringInResp=10034 S2C_TexasCowboyBringInResp value
  * @property {number} S2C_TexasCowboyBringOutResp=10035 S2C_TexasCowboyBringOutResp value
+ * @property {number} S2C_TexasCowboyTotalHistoryResp=10036 S2C_TexasCowboyTotalHistoryResp value
  * @property {number} S2C_TexasCowboyBetNotify=10050 S2C_TexasCowboyBetNotify value
  * @property {number} S2C_TexasCowboyGameStartNotify=10051 S2C_TexasCowboyGameStartNotify value
  * @property {number} S2C_TexasCowboyGameSettlementNotify=10052 S2C_TexasCowboyGameSettlementNotify value
@@ -12056,12 +12475,14 @@ $root.MessageId = (function() {
     values[valuesById[10005] = "C2S_TexasCowboyRecord"] = 10005;
     values[valuesById[10006] = "C2S_TexasCowboyBringIn"] = 10006;
     values[valuesById[10007] = "C2S_TexasCowboyBringOut"] = 10007;
+    values[valuesById[10008] = "C2S_TexasCowboyTotalHistory"] = 10008;
     values[valuesById[10030] = "S2C_TexasCowboyEnterGameResp"] = 10030;
     values[valuesById[10031] = "S2C_TexasCowboyExitGameResp"] = 10031;
     values[valuesById[10032] = "S2C_TexasCowboyBetResp"] = 10032;
     values[valuesById[10033] = "S2C_TexasCowboyRecordResp"] = 10033;
     values[valuesById[10034] = "S2C_TexasCowboyBringInResp"] = 10034;
     values[valuesById[10035] = "S2C_TexasCowboyBringOutResp"] = 10035;
+    values[valuesById[10036] = "S2C_TexasCowboyTotalHistoryResp"] = 10036;
     values[valuesById[10050] = "S2C_TexasCowboyBetNotify"] = 10050;
     values[valuesById[10051] = "S2C_TexasCowboyGameStartNotify"] = 10051;
     values[valuesById[10052] = "S2C_TexasCowboyGameSettlementNotify"] = 10052;

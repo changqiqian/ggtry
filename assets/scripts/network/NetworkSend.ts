@@ -461,12 +461,13 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("下注 德州牛仔  === " + JSON.stringify(msg))
     }
 
-    public GetRecordCowboy(_gameId : string)
+    public GetRecordCowboy(_gameId : string , _whichGame : number)
     {
         let msg = new C2STexasCowboyRecord();
         msg.gameId = _gameId;
+        msg.whichGame = _whichGame;
         Network.Instance.SendMsg(MessageId.C2S_TexasCowboyRecord , C2STexasCowboyRecord.encode(msg).finish());
-        console.log("获取记录 德州牛仔  === " + JSON.stringify(msg))
+        console.log("获取记录我的记录 德州牛仔  === " + JSON.stringify(msg))
     }
 
     public BringInCowboy(_gameId : string , _amount : number)
@@ -485,6 +486,14 @@ export class NetworkSend extends Singleton<NetworkSend>()
         msg.amount = _amount;
         Network.Instance.SendMsg(MessageId.C2S_TexasCowboyBringOut , C2STexasCowboyBringOut.encode(msg).finish());
         console.log("带出 德州牛仔  === " + JSON.stringify(msg))
+    }
+
+    public TotalHistoryCowboy(_gameId : string )
+    {
+        let msg = new C2STexasCowboyTotalHistory();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(MessageId.C2S_TexasCowboyTotalHistory , C2STexasCowboyTotalHistory.encode(msg).finish());
+        console.log("游戏总记录 德州牛仔  === " + JSON.stringify(msg))
     }
 }
 
