@@ -249,10 +249,10 @@ export class NetworkSend extends Singleton<NetworkSend>()
     public GetClubGameList(_clubId : string)
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new C2SGetClubGameList();
+        let msg = new C2SGetClubTexasGameInfo();
         msg.clubId = _clubId;
-        Network.Instance.SendMsg(MessageId.C2S_GetClubGameList , C2SGetClubGameList.encode(msg).finish());
-        console.log("获取俱乐部游戏列表 C2S_GetClubGameList== " + JSON.stringify(msg))
+        Network.Instance.SendMsg(MessageId.C2S_GetClubTexasGameInfo , C2SGetClubTexasGameInfo.encode(msg).finish());
+        console.log("获取俱乐部游戏列表 C2S_GetClubTexasGameInfo== " + JSON.stringify(msg))
     }
 
     public DismissClubGame(_gameId : string , _clubId : string)

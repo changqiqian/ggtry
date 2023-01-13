@@ -67,7 +67,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
 
     Data_ClubGameInfos : BaseData<Array<ClubTexasGameInfo>> = new BaseData<Array<ClubTexasGameInfo>>(false, new Array<ClubTexasGameInfo>()); //俱乐部游戏列表
     Data_S2CCreateClubGame :  BaseData<S2CCreateClubGame> = new BaseData<S2CCreateClubGame>(true); //创建一个剧了不游戏返回结果
-    Data_S2CGetClubGameList :  BaseData<S2CGetClubGameList> = new BaseData<S2CGetClubGameList>(true); //更新俱乐部游戏列表
+    Data_S2CGetClubTexasGameInfoResp :  BaseData<S2CGetClubTexasGameInfoResp> = new BaseData<S2CGetClubTexasGameInfoResp>(true); //更新俱乐部游戏列表
     Data_S2CEnterGame :  BaseData<S2CCommonEnterGameResp> = new BaseData<S2CCommonEnterGameResp>(true); //进入游戏
     Data_S2CExitGame : BaseData<S2CCommonSitDownResp> = new BaseData<S2CCommonSitDownResp>(true); //退出游戏
     Data_S2CDismissClubGame : BaseData<S2CDismissClubGame> = new BaseData<S2CDismissClubGame>(true); //解散游戏

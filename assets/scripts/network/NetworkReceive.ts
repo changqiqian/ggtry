@@ -369,15 +369,15 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_GetClubGameList,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_GetClubTexasGameInfoResp,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
-            let msg = S2CGetClubGameList.decode(_data);
-            console.log("收到的内容 S2C_GetClubGameList  获取俱乐部游戏列表==" + JSON.stringify(msg));
+            let msg = S2CGetClubTexasGameInfoResp.decode(_data);
+            console.log("收到的内容 S2C_GetClubTexasGameInfoResp  获取俱乐部游戏列表==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
                 HallData.Instance.UpdateGameList(msg.gameInfo);
-                HallData.Instance.Data_S2CGetClubGameList.mData = msg;
+                HallData.Instance.Data_S2CGetClubTexasGameInfoResp.mData = msg;
             }
             else
             {

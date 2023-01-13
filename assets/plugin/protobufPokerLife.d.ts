@@ -629,42 +629,80 @@ export class C2SCreateClubGame implements IC2SCreateClubGame {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SCreateClubGame;
 }
 
-/** Properties of a C2SGetClubGameList. */
-export interface IC2SGetClubGameList {
+/** Properties of a C2SGetClubTexasGameInfo. */
+export interface IC2SGetClubTexasGameInfo {
 
-    /** C2SGetClubGameList clubId */
+    /** C2SGetClubTexasGameInfo clubId */
     clubId?: (string|null);
 }
 
-/** Represents a C2SGetClubGameList. */
-export class C2SGetClubGameList implements IC2SGetClubGameList {
+/** Represents a C2SGetClubTexasGameInfo. */
+export class C2SGetClubTexasGameInfo implements IC2SGetClubTexasGameInfo {
 
     /**
-     * Constructs a new C2SGetClubGameList.
+     * Constructs a new C2SGetClubTexasGameInfo.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2SGetClubGameList);
+    constructor(p?: IC2SGetClubTexasGameInfo);
 
-    /** C2SGetClubGameList clubId. */
+    /** C2SGetClubTexasGameInfo clubId. */
     public clubId: string;
 
     /**
-     * Encodes the specified C2SGetClubGameList message. Does not implicitly {@link C2SGetClubGameList.verify|verify} messages.
-     * @param m C2SGetClubGameList message or plain object to encode
+     * Encodes the specified C2SGetClubTexasGameInfo message. Does not implicitly {@link C2SGetClubTexasGameInfo.verify|verify} messages.
+     * @param m C2SGetClubTexasGameInfo message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2SGetClubGameList, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SGetClubTexasGameInfo, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2SGetClubGameList message from the specified reader or buffer.
+     * Decodes a C2SGetClubTexasGameInfo message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2SGetClubGameList
+     * @returns C2SGetClubTexasGameInfo
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetClubGameList;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetClubTexasGameInfo;
+}
+
+/** Properties of a C2SGetClubSubGameInfo. */
+export interface IC2SGetClubSubGameInfo {
+
+    /** C2SGetClubSubGameInfo clubId */
+    clubId?: (string|null);
+}
+
+/** Represents a C2SGetClubSubGameInfo. */
+export class C2SGetClubSubGameInfo implements IC2SGetClubSubGameInfo {
+
+    /**
+     * Constructs a new C2SGetClubSubGameInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SGetClubSubGameInfo);
+
+    /** C2SGetClubSubGameInfo clubId. */
+    public clubId: string;
+
+    /**
+     * Encodes the specified C2SGetClubSubGameInfo message. Does not implicitly {@link C2SGetClubSubGameInfo.verify|verify} messages.
+     * @param m C2SGetClubSubGameInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SGetClubSubGameInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SGetClubSubGameInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SGetClubSubGameInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetClubSubGameInfo;
 }
 
 /** Properties of a C2SDismissClubGame. */
@@ -1028,34 +1066,6 @@ export class CardInfo implements ICardInfo {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CardInfo;
-}
-
-/** Represents a GameInfo. */
-export class GameInfo implements IGameInfo {
-
-    /**
-     * Constructs a new GameInfo.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGameInfo);
-
-    /**
-     * Encodes the specified GameInfo message. Does not implicitly {@link GameInfo.verify|verify} messages.
-     * @param m GameInfo message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGameInfo, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a GameInfo message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns GameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): GameInfo;
 }
 
 /** Represents a CommonResult. */
@@ -2392,41 +2402,78 @@ export class S2CCreateClubGame implements IS2CCreateClubGame {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCreateClubGame;
 }
 
-/** Represents a S2CGetClubGameList. */
-export class S2CGetClubGameList implements IS2CGetClubGameList {
+/** Represents a S2CGetClubTexasGameInfoResp. */
+export class S2CGetClubTexasGameInfoResp implements IS2CGetClubTexasGameInfoResp {
 
     /**
-     * Constructs a new S2CGetClubGameList.
+     * Constructs a new S2CGetClubTexasGameInfoResp.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CGetClubGameList);
+    constructor(p?: IS2CGetClubTexasGameInfoResp);
 
-    /** S2CGetClubGameList result. */
+    /** S2CGetClubTexasGameInfoResp result. */
     public result?: (ICommonResult|null);
 
-    /** S2CGetClubGameList clubId. */
+    /** S2CGetClubTexasGameInfoResp clubId. */
     public clubId: string;
 
-    /** S2CGetClubGameList gameInfo. */
+    /** S2CGetClubTexasGameInfoResp gameInfo. */
     public gameInfo: IClubTexasGameInfo[];
 
     /**
-     * Encodes the specified S2CGetClubGameList message. Does not implicitly {@link S2CGetClubGameList.verify|verify} messages.
-     * @param m S2CGetClubGameList message or plain object to encode
+     * Encodes the specified S2CGetClubTexasGameInfoResp message. Does not implicitly {@link S2CGetClubTexasGameInfoResp.verify|verify} messages.
+     * @param m S2CGetClubTexasGameInfoResp message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CGetClubGameList, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CGetClubTexasGameInfoResp, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CGetClubGameList message from the specified reader or buffer.
+     * Decodes a S2CGetClubTexasGameInfoResp message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CGetClubGameList
+     * @returns S2CGetClubTexasGameInfoResp
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetClubGameList;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetClubTexasGameInfoResp;
+}
+
+/** Represents a S2CGetClubSubGameInfoResp. */
+export class S2CGetClubSubGameInfoResp implements IS2CGetClubSubGameInfoResp {
+
+    /**
+     * Constructs a new S2CGetClubSubGameInfoResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CGetClubSubGameInfoResp);
+
+    /** S2CGetClubSubGameInfoResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CGetClubSubGameInfoResp clubId. */
+    public clubId: string;
+
+    /** S2CGetClubSubGameInfoResp gameInfo. */
+    public gameInfo: IClubSubGameInfo[];
+
+    /**
+     * Encodes the specified S2CGetClubSubGameInfoResp message. Does not implicitly {@link S2CGetClubSubGameInfoResp.verify|verify} messages.
+     * @param m S2CGetClubSubGameInfoResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CGetClubSubGameInfoResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CGetClubSubGameInfoResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CGetClubSubGameInfoResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetClubSubGameInfoResp;
 }
 
 /** Represents a S2CDismissClubGame. */
@@ -3134,7 +3181,7 @@ export class CowboyRecord implements ICowboyRecord {
     constructor(p?: ICowboyRecord);
 
     /** CowboyRecord cowboyAreaType. */
-    public cowboyAreaType: CowboyAreaType;
+    public cowboyAreaType: CowboyAreaType[];
 
     /** CowboyRecord areaWinLose. */
     public areaWinLose: number[];
@@ -3150,6 +3197,9 @@ export class CowboyRecord implements ICowboyRecord {
 
     /** CowboyRecord publicCards. */
     public publicCards: ICardInfo[];
+
+    /** CowboyRecord gameCode. */
+    public gameCode: string;
 
     /**
      * Encodes the specified CowboyRecord message. Does not implicitly {@link CowboyRecord.verify|verify} messages.
@@ -3715,32 +3765,60 @@ export class C2SChangeUserInfo implements IC2SChangeUserInfo {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SChangeUserInfo;
 }
 
-/** Represents a C2SGetHallGameList. */
-export class C2SGetHallGameList implements IC2SGetHallGameList {
+/** Represents a C2SGetHallTexasGameInfo. */
+export class C2SGetHallTexasGameInfo implements IC2SGetHallTexasGameInfo {
 
     /**
-     * Constructs a new C2SGetHallGameList.
+     * Constructs a new C2SGetHallTexasGameInfo.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2SGetHallGameList);
+    constructor(p?: IC2SGetHallTexasGameInfo);
 
     /**
-     * Encodes the specified C2SGetHallGameList message. Does not implicitly {@link C2SGetHallGameList.verify|verify} messages.
-     * @param m C2SGetHallGameList message or plain object to encode
+     * Encodes the specified C2SGetHallTexasGameInfo message. Does not implicitly {@link C2SGetHallTexasGameInfo.verify|verify} messages.
+     * @param m C2SGetHallTexasGameInfo message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2SGetHallGameList, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SGetHallTexasGameInfo, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2SGetHallGameList message from the specified reader or buffer.
+     * Decodes a C2SGetHallTexasGameInfo message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2SGetHallGameList
+     * @returns C2SGetHallTexasGameInfo
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetHallGameList;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetHallTexasGameInfo;
+}
+
+/** Represents a C2SGetHallSubGameInfo. */
+export class C2SGetHallSubGameInfo implements IC2SGetHallSubGameInfo {
+
+    /**
+     * Constructs a new C2SGetHallSubGameInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SGetHallSubGameInfo);
+
+    /**
+     * Encodes the specified C2SGetHallSubGameInfo message. Does not implicitly {@link C2SGetHallSubGameInfo.verify|verify} messages.
+     * @param m C2SGetHallSubGameInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SGetHallSubGameInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SGetHallSubGameInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SGetHallSubGameInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetHallSubGameInfo;
 }
 
 /** Represents a HallTexasGameInfo. */
@@ -3888,35 +3966,72 @@ export class S2CChangeUserInfo implements IS2CChangeUserInfo {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CChangeUserInfo;
 }
 
-/** Represents a S2CGetHallGameListResp. */
-export class S2CGetHallGameListResp implements IS2CGetHallGameListResp {
+/** Represents a S2CHallTexasGameInfoResp. */
+export class S2CHallTexasGameInfoResp implements IS2CHallTexasGameInfoResp {
 
     /**
-     * Constructs a new S2CGetHallGameListResp.
+     * Constructs a new S2CHallTexasGameInfoResp.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CGetHallGameListResp);
+    constructor(p?: IS2CHallTexasGameInfoResp);
 
-    /** S2CGetHallGameListResp gameList. */
-    public gameList: IHallSubGameInfo[];
+    /** S2CHallTexasGameInfoResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CHallTexasGameInfoResp gameList. */
+    public gameList: IHallTexasGameInfo[];
 
     /**
-     * Encodes the specified S2CGetHallGameListResp message. Does not implicitly {@link S2CGetHallGameListResp.verify|verify} messages.
-     * @param m S2CGetHallGameListResp message or plain object to encode
+     * Encodes the specified S2CHallTexasGameInfoResp message. Does not implicitly {@link S2CHallTexasGameInfoResp.verify|verify} messages.
+     * @param m S2CHallTexasGameInfoResp message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CGetHallGameListResp, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CHallTexasGameInfoResp, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CGetHallGameListResp message from the specified reader or buffer.
+     * Decodes a S2CHallTexasGameInfoResp message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CGetHallGameListResp
+     * @returns S2CHallTexasGameInfoResp
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetHallGameListResp;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CHallTexasGameInfoResp;
+}
+
+/** Represents a S2CGetHallSubGameInfo. */
+export class S2CGetHallSubGameInfo implements IS2CGetHallSubGameInfo {
+
+    /**
+     * Constructs a new S2CGetHallSubGameInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CGetHallSubGameInfo);
+
+    /** S2CGetHallSubGameInfo result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CGetHallSubGameInfo gameList. */
+    public gameList: IHallSubGameInfo[];
+
+    /**
+     * Encodes the specified S2CGetHallSubGameInfo message. Does not implicitly {@link S2CGetHallSubGameInfo.verify|verify} messages.
+     * @param m S2CGetHallSubGameInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CGetHallSubGameInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CGetHallSubGameInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CGetHallSubGameInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetHallSubGameInfo;
 }
 
 /** Represents a C2SLogin. */
@@ -4234,10 +4349,12 @@ export enum MessageId {
     C2S_Logout = 2002,
     C2S_GetUserInfo = 2003,
     C2S_ChangeUserInfo = 2004,
-    C2S_GetHallGameList = 2005,
+    C2S_GetHallTexasGameInfo = 2005,
+    C2S_GetHallSubGameInfo = 2006,
     S2C_GetUserInfo = 3001,
     S2C_ChangeUserInfo = 3002,
-    S2C_GetHallGameListResp = 3003,
+    S2C_GetHallTexasGameInfoResp = 3003,
+    S2C_GetHallSubGameInfoResp = 3004,
     MSG_HallEnd = 3500,
     MSG_ClubBegin = 4001,
     C2S_CreateClub = 4002,
@@ -4254,8 +4371,9 @@ export enum MessageId {
     C2S_ShareClubScore = 4013,
     C2S_ModifyMemberRole = 4014,
     C2S_CreateClubGame = 4015,
-    C2S_GetClubGameList = 4016,
-    C2S_DismissClubGame = 4017,
+    C2S_GetClubTexasGameInfo = 4016,
+    C2S_GetClubSubGameInfo = 4017,
+    C2S_DismissClubGame = 4018,
     S2C_CreateClub = 4501,
     S2C_GetClubInfos = 4502,
     S2C_EnterClub = 4503,
@@ -4270,8 +4388,9 @@ export enum MessageId {
     S2C_ShareClubScore = 4512,
     S2C_ModifyMemberRole = 4513,
     S2C_CreateClubGame = 4514,
-    S2C_GetClubGameList = 4515,
-    S2C_DismissClubGame = 4516,
+    S2C_GetClubTexasGameInfoResp = 4515,
+    S2C_GetClubSubGameInfoResp = 4516,
+    S2C_DismissClubGame = 4517,
     S2C_ClubJoinNotify = 4611,
     S2C_JoinClubNotify = 4612,
     S2C_RemoveNotify = 4613,

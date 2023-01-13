@@ -175,7 +175,7 @@ export class Club_PrivateLayer extends ListViewCtr<ClubTexasGameInfo>
             this.UpdateData(this.mCurrentData.length);
         });
 
-        HallData.Instance.Data_S2CGetClubGameList.AddListenner(this,(_data)=>
+        HallData.Instance.Data_S2CGetClubTexasGameInfoResp.AddListenner(this,(_data)=>
         {
             if(this.node.activeInHierarchy == false)
             {
