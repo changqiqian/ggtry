@@ -1,6 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { CardStruct, CardType } from '../../../base/Calculator';
+import { SpineCtr } from '../../../UiTool/SpineCtr';
 import { Poker } from '../../common/Poker';
 import { CowboyData } from '../CowboyData';
 const { ccclass, property } = _decorator;
@@ -10,7 +11,8 @@ export class cb_Role extends BaseUI {
 
     @property(Node) 
     mCards: Node = null;
-
+    @property(SpineCtr) 
+    mSpineCtr: SpineCtr = null;
     InitParam() {
 
     }
@@ -48,14 +50,17 @@ export class cb_Role extends BaseUI {
 
     }
 
-    public ShowWin()
+    public PlayWinSpine()
     {
-
+        this.mSpineCtr.SetAnimation("shengli" , false , (_data)=>
+        {
+            this.PlayIdleSpine();
+        });
     }
 
-    public ShowLose()
+    public PlayIdleSpine()
     {
-        
+        this.mSpineCtr.SetAnimation("daiji");
     }
 
     public ShowAllCards(_cards : Array<CardStruct> )

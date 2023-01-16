@@ -90,9 +90,13 @@ export class Network  extends Singleton<Network>()
         clearTimeout(this.mConnectTimer);
         this.StopPing();
         console.log("ClearWS _forceClose== " + _forceClose );
-        if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) {
-            console.log("ClearWS this.mWebSocket.close();" );
+        if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) 
+        {
             this.mWebSocket.close();
+        }
+        else
+        {
+            this.ResetWS();
         }
     }
 
@@ -113,9 +117,15 @@ export class Network  extends Singleton<Network>()
 
     private OnClose(event) {
         console.log('Socket OnClose  =  ');
+        this.ResetWS();
+    }
+    
+    private ResetWS()
+    {
         this.StopPing();
         clearTimeout(this.mConnectTimer);
-        if (this.mWebSocket != null) {
+        if (this.mWebSocket != null) 
+        {
             this.mWebSocket.onopen = null;
             this.mWebSocket.onmessage = null;
             this.mWebSocket.onerror = null;
@@ -212,9 +222,12 @@ export class Network  extends Singleton<Network>()
     public AddMsgListenner(_msgID: number, _callback: Function, _target: any) {
         let index = this.mMsgListenner.findIndex((_item) => _item.target === _target);
         let currentMsgEvent: MsgEvent;
-        if (index >= 0) {
+        if (index >= 0) 
+        {
             currentMsgEvent = this.mMsgListenner[index];
-        } else {
+        } 
+        else 
+        {
             currentMsgEvent = new MsgEvent(_target);
             this.mMsgListenner.push(currentMsgEvent);
         }
@@ -224,7 +237,8 @@ export class Network  extends Singleton<Network>()
 
     public RemoveListenner(_target: any) {
         let index = this.mMsgListenner.findIndex((_item) => _item.target === _target);
-        if (index < 0) {
+        if (index < 0) 
+        {
             console.log('当前_target还没有添加过网络监听，无法移除');
             return;
         }
@@ -234,8 +248,11 @@ export class Network  extends Singleton<Network>()
 
     private OnConnectTimeOut() {
         console.log("OnConnectTimeOut");
-        if (this.mWebSocket.readyState === WebSocket.OPEN) {
-        } else {
+        if (this.mWebSocket.readyState === WebSocket.OPEN) 
+        {
+        } 
+        else 
+        {
             this.ClearWS(false);
         }
     }

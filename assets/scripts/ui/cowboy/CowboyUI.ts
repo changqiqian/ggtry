@@ -4,6 +4,7 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { Tool } from '../../Tool';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
+import { SpineCtr } from '../../UiTool/SpineCtr';
 import { CircleTimer } from '../common/CircleTimer';
 import { cb_ChipConfig, CowboyData } from './CowboyData';
 import { cb_Chip } from './subUI/cb_Chip';
@@ -16,7 +17,8 @@ export class CowboyUI extends BaseUI
     mChip: Prefab = null;
     @property(CircleTimer) 
     mCircleTimer: CircleTimer = null;
-
+    @property(SpineCtr) 
+    mSpine: SpineCtr = null;
 
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
@@ -79,16 +81,22 @@ export class CowboyUI extends BaseUI
         CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
         {
             this.mCircleTimer.StartTimer(_data.restTime);
+            this.mSpine.Hide();
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
         {
-            this.mCircleTimer.StartTimer(CowboyData.Instance.GetDuration(CowboyPhase.CowBoyPhase_Start));
+            this.mCircleTimer.StartTimer(CowboyData.Instance.GetDuration(CowboyPhase.CowBoyPhase_Start),()=>
+            {
+                
+            });
+            this.mSpine.SetAnimation("ksxz");
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
             this.mCircleTimer.StartTimer(CowboyData.Instance.GetDuration(CowboyPhase.CowBoyPhase_Settlement));
+            this.mSpine.SetAnimation("tzxz");
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.AddListenner(this,(_data)=>

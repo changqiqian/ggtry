@@ -5,6 +5,7 @@ import { Tool } from '../../../Tool';
 import { cb_BetConfig, CowboyData } from '../CowboyData';
 import { cb_HistoryLayout } from './cb_HistoryLayout';
 import { cb_Chip } from './cb_Chip';
+import { SpineCtr } from '../../../UiTool/SpineCtr';
 const { ccclass, property } = _decorator;
 
 @ccclass('cb_BetArea')
@@ -19,8 +20,8 @@ export class cb_BetArea extends BaseUI {
     mAreaRatio: Label = null;
     @property(cb_HistoryLayout) 
     mHistory: cb_HistoryLayout = null;
-    @property(Node) 
-    mWin: Node = null;
+    @property(SpineCtr) 
+    mWinSpine: SpineCtr = null;
 
     @property(Node) 
     mChipContainer: Node = null;
@@ -54,7 +55,7 @@ export class cb_BetArea extends BaseUI {
         CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
         {
             this.mAmount.string = "0(0)";
-            this.mWin.active = false;
+            this.mWinSpine.Hide();
             this.mChipContainer.destroyAllChildren();
         })
         
@@ -81,11 +82,11 @@ export class cb_BetArea extends BaseUI {
             let index = _data.reward.findIndex((item) =>{item === this.mBetArea});
             if(index < 0)
             {
-                this.mWin.active = false;
+                this.mWinSpine.Hide();
                 return;
             }
 
-            this.mWin.active = true;
+            this.mWinSpine.SetAnimation("win");
         });
         
         
@@ -133,7 +134,7 @@ export class cb_BetArea extends BaseUI {
     ResetUI()
     {
         this.mAmount.string = "0(0)";
-        this.mWin.active = false;
+        this.mWinSpine.Hide();
         this.mHistory.ResetUI();
         this.mChipContainer.destroyAllChildren();
     }

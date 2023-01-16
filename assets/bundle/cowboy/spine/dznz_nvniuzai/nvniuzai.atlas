@@ -1,0 +1,90 @@
+
+nvniuzai.png
+size: 718,527
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+huohua
+  rotate: false
+  xy: 404, 2
+  size: 217, 258
+  orig: 220, 260
+  offset: 2, 2
+  index: -1
+maozi
+  rotate: false
+  xy: 2, 17
+  size: 307, 183
+  orig: 309, 183
+  offset: 1, 0
+  index: -1
+qiang
+  rotate: false
+  xy: 623, 139
+  size: 82, 122
+  orig: 82, 123
+  offset: 0, 0
+  index: -1
+shenti
+  rotate: true
+  xy: 310, 262
+  size: 263, 225
+  orig: 263, 225
+  offset: 0, 0
+  index: -1
+tou
+  rotate: true
+  xy: 2, 202
+  size: 323, 306
+  orig: 325, 306
+  offset: 1, 0
+  index: -1
+toufa
+  rotate: false
+  xy: 311, 23
+  size: 77, 177
+  orig: 77, 177
+  offset: 0, 0
+  index: -1
+yanwu
+  rotate: true
+  xy: 310, 202
+  size: 58, 92
+  orig: 62, 93
+  offset: 1, 0
+  index: -1
+youyan
+  rotate: true
+  xy: 623, 3
+  size: 68, 49
+  orig: 68, 49
+  offset: 0, 0
+  index: -1
+zidan
+  rotate: false
+  xy: 623, 73
+  size: 66, 64
+  orig: 67, 64
+  offset: 1, 0
+  index: -1
+zuoshou
+  rotate: true
+  xy: 537, 263
+  size: 126, 179
+  orig: 126, 179
+  offset: 0, 0
+  index: -1
+zuoshou2
+  rotate: true
+  xy: 537, 391
+  size: 134, 178
+  orig: 134, 178
+  offset: 0, 0
+  index: -1
+zuoyan
+  rotate: true
+  xy: 674, 35
+  size: 36, 40
+  orig: 36, 40
+  offset: 0, 0
+  index: -1

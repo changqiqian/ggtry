@@ -30,15 +30,19 @@ export class cb_RoleCtr extends BaseUI
 
             if(_data.winner == 0)
             {
-                this.mcb_RoleMan.ShowWin();
-                this.mcb_RoleGirl.ShowLose();
+                this.mcb_RoleMan.PlayWinSpine();
             }
             else
             {
-                this.mcb_RoleMan.ShowLose();
-                this.mcb_RoleGirl.ShowWin();
+                this.mcb_RoleGirl.PlayWinSpine();
             }
         });
+
+        CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
+        {
+            this.mcb_RoleMan.PlayIdleSpine();
+            this.mcb_RoleGirl.PlayIdleSpine();
+        })
     }
     LateInit() 
     {

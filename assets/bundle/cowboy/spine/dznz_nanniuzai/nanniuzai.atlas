@@ -1,0 +1,104 @@
+
+nanniuzai.png
+size: 658,515
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+huohua
+  rotate: true
+  xy: 2, 296
+  size: 217, 258
+  orig: 220, 260
+  offset: 2, 2
+  index: -1
+lingjie
+  rotate: true
+  xy: 174, 121
+  size: 105, 62
+  orig: 106, 63
+  offset: 1, 0
+  index: -1
+maozi
+  rotate: true
+  xy: 2, 20
+  size: 274, 170
+  orig: 276, 170
+  offset: 1, 0
+  index: -1
+qiang
+  rotate: false
+  xy: 443, 9
+  size: 144, 100
+  orig: 144, 100
+  offset: 0, 0
+  index: -1
+shenti
+  rotate: true
+  xy: 240, 111
+  size: 182, 266
+  orig: 182, 266
+  offset: 0, 0
+  index: -1
+tou
+  rotate: false
+  xy: 262, 295
+  size: 205, 218
+  orig: 206, 219
+  offset: 0, 1
+  index: -1
+yanwu
+  rotate: false
+  xy: 174, 27
+  size: 60, 92
+  orig: 62, 93
+  offset: 0, 0
+  index: -1
+youshou
+  rotate: true
+  xy: 236, 2
+  size: 107, 205
+  orig: 108, 205
+  offset: 0, 0
+  index: -1
+youyan
+  rotate: true
+  xy: 608, 322
+  size: 31, 36
+  orig: 31, 36
+  offset: 0, 0
+  index: -1
+zidan
+  rotate: true
+  xy: 174, 228
+  size: 66, 64
+  orig: 67, 64
+  offset: 0, 0
+  index: -1
+zuiba
+  rotate: true
+  xy: 608, 355
+  size: 99, 42
+  orig: 99, 42
+  offset: 0, 0
+  index: -1
+zuoshou
+  rotate: false
+  xy: 469, 305
+  size: 137, 208
+  orig: 137, 208
+  offset: 0, 0
+  index: -1
+zuoshou2
+  rotate: false
+  xy: 508, 111
+  size: 148, 192
+  orig: 148, 192
+  offset: 0, 0
+  index: -1
+zuoyan
+  rotate: true
+  xy: 608, 456
+  size: 57, 43
+  orig: 57, 43
+  offset: 0, 0
+  index: -1
