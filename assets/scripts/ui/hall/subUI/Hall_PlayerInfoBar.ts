@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite } from 'cc';
+import { _decorator, Component, Node, Sprite, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Tool } from '../../../Tool';
@@ -12,10 +12,9 @@ export class Hall_PlayerInfoBar extends BaseUI
     mHead: Sprite = null;
     @property(BaseButton) 
     mCoinBtn: BaseButton = null;
-    @property(BaseButton) 
-    mDiamondBtn: BaseButton = null;
-    @property(BaseButton) 
-    mShopBtn: BaseButton = null;
+    @property(Label) 
+    mName: Label = null;
+
     
     InitParam() 
     {
@@ -28,15 +27,6 @@ export class Hall_PlayerInfoBar extends BaseUI
 
         });
 
-        this.mDiamondBtn.SetClickCallback(()=>
-        {
-
-        });
-
-        this.mShopBtn.SetClickCallback(()=>
-        {
-
-        });
     }
     RegDataNotify() 
     {
@@ -58,9 +48,9 @@ export class Hall_PlayerInfoBar extends BaseUI
             this.mCoinBtn.SetTitle(Tool.ConvertMoney_S2C(_data).toString());
         })
 
-        LocalPlayerData.Instance.Data_Diamond.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_NickName.AddListenner(this,(_data)=>
         {
-            this.mDiamondBtn.SetTitle(Tool.ConvertMoney_S2C(_data).toString());
+            this.mName.string = _data;
         })
         
     }

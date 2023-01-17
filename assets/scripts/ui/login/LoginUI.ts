@@ -1,6 +1,5 @@
 import { _decorator, Component, Node, Label, Button, sys, SafeArea } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
-import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { SceneType, UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
@@ -25,9 +24,6 @@ export class LoginUI extends BaseUI
     mLoginBtn: BaseButton = null;
     @property(BaseButton) 
     mSignBtn: BaseButton = null;
-    @property(BaseButton) 
-    mCyberBtn: BaseButton = null;
-
     @property(Node) 
     DebugFunction: Node = null;
     @property(BaseButton) 
@@ -64,19 +60,6 @@ export class LoginUI extends BaseUI
             UIMgr.Instance.ShowLayer("login","prefab/Login_SignView");
         });
    
-        this.mCyberBtn.SetClickCallback(()=>
-        {
-            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
-            {
-                let tempScript = _script as TipsWindow;
-                let tips = Localization.GetString("00016");
-                tempScript.SetTips(tips);
-                tempScript.SetCallback(()=>
-                {
-                    UIMgr.Instance.ShowToast("功能开发中");
-                })
-            })
-        });
 
         //debug mode
         this.DebugFunction.active = GameConfig.DebugMode;

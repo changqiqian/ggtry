@@ -345,10 +345,8 @@ export class HallData extends SingletonBaseNotify<HallData>()
 }
 
 export enum Hall_SubPage { //大厅底部分页
-    MTT,
     Cash,
     Club,
-    Activity,
     Me,
 }
 

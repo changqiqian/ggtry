@@ -388,13 +388,15 @@ export class Localization {
         { name: '00301', ch: '美女', en: 'Girl' },
         { name: '00302', ch: '胜负平:', en: 'WinLose:' },
         { name: '00303', ch: '牌局回顾', en: 'Record' },
-        
-
+        { name: '00304', ch: '现金', en: 'Cash' },
+        { name: '00305', ch: '我的金币', en: 'Balance' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },
-        { name: '01002', ch: 'Cyber记录', en: 'Cyber Record' },
-        { name: '01003', ch: '钻石记录', en: 'Diamond Reocrd' },
+        { name: '01002', ch: '收支记录', en: 'Bill' },
+        { name: '01003', ch: '游戏战绩', en: 'Game records' },
+
+        
 
 
         //////////////////////////////////////////////////////////////////////////////////////////

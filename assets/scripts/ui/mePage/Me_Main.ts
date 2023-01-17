@@ -10,54 +10,30 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Me_Main')
 export class Me_Main extends BaseUI {
-    @property(ScrollView)
-    mScrollView: ScrollView = null;
+
     @property(BaseButton)
-    mBankBtn: BaseButton = null;
+    mAddBtn: BaseButton = null;
     @property(Label)
-    mCoin: Label = null;
-    @property(Label)
-    mDiamond: Label = null;
+    mMoney: Label = null;
+
     @property(BaseButton)
     mMsgBtn: BaseButton = null;
     @property(BaseButton)
-    mTableBtn: BaseButton = null;
-    @property(BaseButton)
-    mQuestBtn: BaseButton = null;
-    @property(BaseButton)
     mProfitBtn: BaseButton = null;
-    @property(BaseButton)
-    mGameRecordBtn: BaseButton = null;
     @property(BaseButton)
     mSettingBtn: BaseButton = null;
     @property(BaseButton)
-    mAgentBtn: BaseButton = null;
-    @property(BaseButton)
-    mServiceBtn: BaseButton = null;
-    InitParam() {}
+    mGameRecordBtn: BaseButton = null;
+
+    InitParam() 
+    {
+
+    }
     BindUI() 
     {
-        this.mBankBtn.SetClickCallback(() => 
+        this.mAddBtn.SetClickCallback(() => 
         {
-            UIMgr.Instance.ShowToast("功能开发中");
-            // if (sys.isBrowser) 
-            // {
-            //     UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => 
-            //     {
-            //         let tempScript = _script as InsertWebView;
-            //         let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
-            //         tempScript.SetUrl(GameConfig.WebberAddr, param);
-            //     });
-            // } 
-            // else 
-            // {
-            //     UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => 
-            //     {
-            //         let tempScript = _script as FullScreenWebView;
-            //         let param = '/?userId=' + LocalPlayerData.Instance.Data_Uid.mData + '&token=' + GameConfig.LOGIN_TOKEN + '&apiUrl=http://' + GameConfig.UsingIp;
-            //         tempScript.SetUrl(GameConfig.WebberAddr, param);
-            //     });
-            // }
+
         });
 
         this.mMsgBtn.SetClickCallback(() => 
@@ -65,34 +41,7 @@ export class Me_Main extends BaseUI {
             UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Message');
         });
 
-        this.mTableBtn.SetClickCallback(() => 
-        {
-            UIMgr.Instance.ShowToast("功能开发中");
-            // if (sys.isBrowser) 
-            // {
-            //     UIMgr.Instance.ShowLayer('common', 'prefab/InsertWebView', true, (_script) => 
-            //     {
-            //         let tempScript = _script as InsertWebView;
-            //         let param = '/manage-table';
-            //         tempScript.SetUrl(GameConfig.WebberAddr, param);
-            //     });
-            // } 
-            // else 
-            // {
-            //     UIMgr.Instance.ShowLayer('common', 'prefab/FullScreenWebView', true, (_script) => 
-            //     {
-            //         let tempScript = _script as FullScreenWebView;
-            //         let param = '/manage-table';
-            //         tempScript.SetUrl(GameConfig.WebberAddr, param);
-            //     });
-            // }
-        });
-
-        this.mQuestBtn.SetClickCallback(() => 
-        {
-
-        });
-
+       
         this.mProfitBtn.SetClickCallback(() => 
         {
             UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Record');
@@ -100,7 +49,7 @@ export class Me_Main extends BaseUI {
 
         this.mGameRecordBtn.SetClickCallback(() => 
         {
-            UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Rank');
+            //UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Rank');
         });
 
         this.mSettingBtn.SetClickCallback(() =>
@@ -108,12 +57,6 @@ export class Me_Main extends BaseUI {
             UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_SettingWindow');
         });
 
-        this.mAgentBtn.SetClickCallback(() => 
-        {
-            UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Proxy');
-        });
-
-        this.mServiceBtn.SetClickCallback(() => {});
     }
     RegDataNotify() 
     {

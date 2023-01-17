@@ -28,7 +28,6 @@ export class HallUI extends BaseUI
     {
         this.MaxScreen(this.mBG);
         UIMgr.Instance.ShowMultipleTable(true);
-        this.AddSubView("mttPage","prefab/Mtt_Page");
         this.AddSubView("cashPage","prefab/Cash_Page");
         this.AddSubView("clubPage","prefab/Club_Page");
         this.AddSubView("mePage","prefab/Me_Page");
@@ -74,7 +73,7 @@ export class HallUI extends BaseUI
     }
     LateInit() 
     {
-        HallData.Instance.Data_SubPage.mData = Hall_SubPage.MTT;
+        HallData.Instance.Data_SubPage.mData = Hall_SubPage.Cash;
     }
 
     CustmoerDestory() 

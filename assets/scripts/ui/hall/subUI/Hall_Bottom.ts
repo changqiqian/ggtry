@@ -9,7 +9,7 @@ const { ccclass, property } = _decorator;
 export class Hall_Bottom extends BaseUI 
 {
     @property(Node) 
-    mLayout: Node = null;
+    mToggles: Node = null;
 
     InitParam() 
     {
@@ -17,30 +17,10 @@ export class Hall_Bottom extends BaseUI
     }
     BindUI() 
     {
-        for(let i = 0 ; i < this.mLayout.children.length ; i++)
+        for(let i = 0 ; i < this.mToggles.children.length ; i++)
         {
-            let current = this.mLayout.children[i].getComponent(ToggleBtn);
+            let current = this.mToggles.children[i].getComponent(ToggleBtn);
             current.SetDataNotify(HallData.Instance.Data_SubPage, i);
-            if(i == Hall_SubPage.MTT)
-            {
-                current.SetTitle(Localization.GetString("00146"));
-            }
-            else if(i == Hall_SubPage.Cash)
-            {
-                current.SetTitle(Localization.GetString("00147"));
-            }
-            else if(i == Hall_SubPage.Club)
-            {
-                current.SetTitle(Localization.GetString("00148"));
-            }
-            else if(i == Hall_SubPage.Activity)
-            {
-                current.SetTitle(Localization.GetString("00149"));
-            }
-            else if(i == Hall_SubPage.Me)
-            {
-                current.SetTitle(Localization.GetString("00150"));
-            }
         }
     }
     RegDataNotify() 

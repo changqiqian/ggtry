@@ -190,8 +190,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 766,
-      "height": 734
+      "width": 333,
+      "height": 385
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -264,7 +264,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 360,
+    "_top": 534.5,
     "_bottom": 1347.7730000000001,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -344,7 +344,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "c5742747-9dec-49d0-aa2b-df718d5062bb@f9941",
+      "__uuid__": "728f392a-287c-4e68-8630-f9378fe2c726@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -573,7 +573,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "76b96ff9-188e-429d-bfaf-145fa9428c56@f9941",
+      "__uuid__": "447a713b-b32d-4711-a65e-24587e4679b4@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 3,
@@ -585,7 +585,7 @@
       "y": 0
     },
     "_fillStart": 0,
-    "_fillRange": 0.5,
+    "_fillRange": 0.3,
     "_isTrimmedMode": true,
     "_useGrayscale": false,
     "_atlas": null,
@@ -735,9 +735,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 144,
+      "g": 150,
+      "b": 173,
       "a": 255
     },
     "_string": "加载中",
@@ -903,9 +903,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 144,
+      "g": 150,
+      "b": 173,
       "a": 255
     },
     "_string": "34%",
@@ -1026,7 +1026,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "9535a32a-9336-45dd-b08d-8b4e1d5ddccb@f9941",
+      "__uuid__": "0f0b2690-5277-4bd4-a261-c3acec6cebc3@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,

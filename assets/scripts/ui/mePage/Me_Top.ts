@@ -22,7 +22,7 @@ export class Me_Top extends BaseUI
     @property(Label) 
     mID: Label = null;
     @property(BaseButton) 
-    mCyberBtn: BaseButton = null;
+    mHelpBtn: BaseButton = null;
 
     mLastTimeName : string = null;
     mLastTimeHead : string = null;
@@ -62,7 +62,7 @@ export class Me_Top extends BaseUI
             UIMgr.Instance.ShowLayer("common" , "prefab/HeadChoserView");
         });
 
-        this.mCyberBtn.SetClickCallback(()=>
+        this.mHelpBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowToast("功能开发中");
         });
