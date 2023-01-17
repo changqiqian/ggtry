@@ -28,14 +28,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 71
+        "__id__": 73
       },
       {
-        "__id__": 73
+        "__id__": 75
       }
     ],
     "_prefab": {
-      "__id__": 75
+      "__id__": 77
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1156,6 +1156,12 @@
       },
       {
         "__id__": 70
+      },
+      {
+        "__id__": 71
+      },
+      {
+        "__id__": 72
       }
     ],
     "removedComponents": []
@@ -1270,8 +1276,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 200,
-      "height": 70
+      "width": 180,
+      "height": 81
     }
   },
   {
@@ -1289,7 +1295,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "abacb05a-b7f8-497d-a2df-6ca65f481dea@f9941",
+      "__uuid__": "2318bea3-618b-4665-9458-d582302e876f@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -1366,6 +1372,26 @@
     "value": "确定"
   },
   {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 63
+    },
+    "propertyPath": [
+      "_sizeMode"
+    ],
+    "value": 1
+  },
+  {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 63
+    },
+    "propertyPath": [
+      "_type"
+    ],
+    "value": 0
+  },
+  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -1374,7 +1400,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 72
+      "__id__": 74
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -1401,7 +1427,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 74
+      "__id__": 76
     },
     "mSlider": {
       "__id__": 45
@@ -1439,7 +1465,7 @@
     "fileId": "9b6mf3wH5KkbNwe6AgQ6Nh",
     "targetOverrides": [
       {
-        "__id__": 76
+        "__id__": 78
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -1451,7 +1477,7 @@
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 73
+      "__id__": 75
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -1461,7 +1487,7 @@
       "__id__": 48
     },
     "targetInfo": {
-      "__id__": 77
+      "__id__": 79
     }
   },
   {

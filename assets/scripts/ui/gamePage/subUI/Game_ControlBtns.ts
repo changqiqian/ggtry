@@ -11,8 +11,6 @@ export class Game_ControlBtns extends BaseUI
     @property(BaseButton) 
     mDealCardsBtn: BaseButton = null;
     @property(BaseButton) 
-    mRebuyBtn: BaseButton = null;
-    @property(BaseButton) 
     mBackToGameBtn: BaseButton = null;
 
     private mIndex : number = null;
@@ -26,12 +24,7 @@ export class Game_ControlBtns extends BaseUI
         {
         });
         this.mDealCardsBtn.node.active = false;
-
-        this.mRebuyBtn.SetClickCallback(()=>
-        {
-
-        });
-        this.mRebuyBtn.node.active = false;
+        
 
         this.mBackToGameBtn.SetClickCallback(()=>
         {

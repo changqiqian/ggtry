@@ -24,8 +24,6 @@ export class Game_Menu extends BaseUI
     @property(BaseButton) 
     mServiceBtn: BaseButton = null;
     @property(BaseButton) 
-    mShopBtn: BaseButton = null;
-    @property(BaseButton) 
     mBringInBtn: BaseButton = null;
     @property(BaseButton) 
     mSettingBtn: BaseButton = null;
@@ -33,8 +31,6 @@ export class Game_Menu extends BaseUI
     mStandBtn: BaseButton = null;
     @property(BaseButton) 
     mExitBtn: BaseButton = null;
-    @property(BaseButton) 
-    mDismiss: BaseButton = null;
     mIndex : number;
 
     mInited : boolean = false;
@@ -61,10 +57,7 @@ export class Game_Menu extends BaseUI
         {
 
         });
-        this.mShopBtn.SetClickCallback(()=>
-        {
 
-        });
         this.mBringInBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyInWindow",true,(_script)=>
@@ -97,11 +90,11 @@ export class Game_Menu extends BaseUI
             let gameId = gameStruct.mGameId;
             NetworkSend.Instance.ExitGame(gameId,gameData.GetStaticData().gameType);
         });
-        this.mDismiss.SetClickCallback(()=>
-        {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            NetworkSend.Instance.DismissClubGame(gameStruct.mGameId , gameStruct.mClubId);
-        });
+        // this.mDismiss.SetClickCallback(()=>
+        // {
+        //     let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        //     NetworkSend.Instance.DismissClubGame(gameStruct.mGameId , gameStruct.mClubId);
+        // });
     }
     RegDataNotify()
     {

@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "1815f933-099f-4a85-94c3-a16a6fdf7756",
+  "uuid": "b89291dc-0b47-4523-97ce-41aabb75ee64",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "1815f933-099f-4a85-94c3-a16a6fdf7756@6c48a",
-      "displayName": "BG3",
+      "uuid": "b89291dc-0b47-4523-97ce-41aabb75ee64@6c48a",
+      "displayName": "Icon26",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "1815f933-099f-4a85-94c3-a16a6fdf7756",
+        "imageUuidOrDatabaseUri": "b89291dc-0b47-4523-97ce-41aabb75ee64",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "1815f933-099f-4a85-94c3-a16a6fdf7756@f9941",
-      "displayName": "BG3",
+      "uuid": "b89291dc-0b47-4523-97ce-41aabb75ee64@f9941",
+      "displayName": "Icon26",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 264,
-        "height": 60,
-        "rawWidth": 264,
-        "rawHeight": 60,
+        "width": 36,
+        "height": 36,
+        "rawWidth": 36,
+        "rawHeight": 36,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1815f933-099f-4a85-94c3-a16a6fdf7756@6c48a",
+        "imageUuidOrDatabaseUri": "b89291dc-0b47-4523-97ce-41aabb75ee64@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "1815f933-099f-4a85-94c3-a16a6fdf7756@f9941"
+    "redirect": "b89291dc-0b47-4523-97ce-41aabb75ee64@f9941"
   }
 }

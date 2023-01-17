@@ -6,8 +6,8 @@ import { HallData } from '../hall/HallData';
 import { Club_MainEnter } from './Club_MainEnter';
 const { ccclass, property } = _decorator;
 
-@ccclass('Club_FindClubLayerFix')
-export class Club_FindClubLayerFix extends BaseUI {
+@ccclass('Club_SearchClubWindow')
+export class Club_SearchClubWindow extends BaseUI {
     @property(BaseButton) 
     mCloseBtn: BaseButton = null;
     @property(Club_MainEnter) 
@@ -54,4 +54,5 @@ export class Club_FindClubLayerFix extends BaseUI {
 
     }
 }
+
 

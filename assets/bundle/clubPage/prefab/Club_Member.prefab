@@ -807,7 +807,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "4233640a-fe04-4057-81c8-0b4ec1041659@f9941",
+      "__uuid__": "b5d141d7-1d68-4b11-a885-ea8efdabd926@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -911,7 +911,7 @@
     "propertyPath": [
       "_active"
     ],
-    "value": false
+    "value": true
   },
   {
     "__type__": "cc.Node",
@@ -1099,7 +1099,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "cf01e10e-6d38-4057-8664-95568b6040d3@f9941",
+      "__uuid__": "0fc0cb73-891e-41a6-b664-5c56783ca9bb@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -1391,7 +1391,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "4233640a-fe04-4057-81c8-0b4ec1041659@f9941",
+      "__uuid__": "b5d141d7-1d68-4b11-a885-ea8efdabd926@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },

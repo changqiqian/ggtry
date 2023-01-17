@@ -19,14 +19,10 @@ export class Game_ChattingLayer extends BaseUI
     mLayout: Node = null;
     @property(Node) 
     mSubLayer: Node = null;
-    @property(ToggleBtn) 
-    mVipToggle: ToggleBtn = null;
     @property(EditBox) 
     mEditBox: EditBox = null;
     @property(BaseButton) 
     mSendBtn: BaseButton = null;
-    @property(BaseButton) 
-    mVipSendBtn: BaseButton = null;
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
 
@@ -45,21 +41,10 @@ export class Game_ChattingLayer extends BaseUI
 
 
         this.mSendBtn.node.active = true;
-        this.mVipSendBtn.node.active = false;
-        this.mVipToggle.SetClickCallback((_value)=>
-        {
-            this.mSendBtn.node.active = !_value;
-            this.mVipSendBtn.node.active = _value;
-        });
-
         this.mSendBtn.SetClickCallback(()=>
         {
         })
 
-        this.mVipSendBtn.SetClickCallback(()=>
-        {
-
-        })
 
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);

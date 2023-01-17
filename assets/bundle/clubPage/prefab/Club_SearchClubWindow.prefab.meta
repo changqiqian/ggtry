@@ -2,12 +2,12 @@
   "ver": "1.1.38",
   "importer": "prefab",
   "imported": true,
-  "uuid": "49fc85fb-f202-4cb9-9598-dde751fd0e91",
+  "uuid": "d117b84b-f029-4bb8-b970-16a11fa5ac8d",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Club_FindClubLayerFix"
+    "syncNodeName": "Club_SearchClubWindow"
   }
 }
