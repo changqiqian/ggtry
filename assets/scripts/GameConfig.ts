@@ -193,16 +193,6 @@ export class GameConfig
         return [1 , 2 , 3, 4, 5, 6, 7, 8, 9];
     }
 
-    public static GetTexasCreateRoomBringOutTitle()
-    {
-        return ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" ];
-    }
-
-    public static GetTexasCreateRoomBringOutValue()
-    {
-        return [1 , 2 , 3, 4, 5, 6, 7, 8];
-    }
-
     public static GetTexasCreateRoomGameDurationTitle()
     {
         return ["1" , "1.5" , "2" , "2.5" , "3" , "4" , "5" , "6" ];

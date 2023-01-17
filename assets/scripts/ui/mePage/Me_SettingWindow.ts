@@ -20,8 +20,6 @@ export class SettingWindow extends BaseUI {
     mBGMToggle: ToggleBtn = null;
     @property(BaseButton)
     mEditPasswordBtn: BaseButton = null;
-    @property(BaseButton)
-    mDeleteAccountBtn: BaseButton = null;
 
     InitParam() {}
 
@@ -29,11 +27,7 @@ export class SettingWindow extends BaseUI {
         this.mCloseBtn.SetClickCallback(() => {
             this.CloseAsWindow();
         });
-        this.mDeleteAccountBtn.SetClickCallback(() => {
-            UIMgr.Instance.ShowToast("功能开发中");
-            // UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_DeleteAccountDetect');
-            // this.CloseAsWindow();
-        });
+
         this.mSwitchAccountBtn.SetClickCallback(() => {
             GameConfig.ClearToken();
             Network.Instance.ClearWS();

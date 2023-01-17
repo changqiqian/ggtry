@@ -17,14 +17,6 @@ export class Club_CreateBringScoreSetting extends BaseUI {
     @property(MeassureSlider) 
     mMeassureSliderBringin: MeassureSlider = null;
     @property(ToggleBtn) 
-    mBringOutToggle: ToggleBtn = null;
-    @property(Node) 
-    mBiringOutSettingNode: Node = null;
-    @property(Label) 
-    mBringOutAmount: Label = null;
-    @property(MeassureSlider) 
-    mMeassureSliderBringOut: MeassureSlider = null;
-    @property(ToggleBtn) 
     mInsuranceToggle: ToggleBtn = null;
     InitParam()
     {
@@ -32,14 +24,6 @@ export class Club_CreateBringScoreSetting extends BaseUI {
     }
     BindUI()
     {
-        this.mBiringOutSettingNode.active = false;
-        this.mBringOutToggle.ShowUnselected();
-        this.mBringOutToggle.SetClickCallback((_value)=>
-        {
-            HallData.Instance.Data_Club_CreateTexasConfig.mData.allowBringOut = _value;
-            this.mBiringOutSettingNode.active = _value;
-        });
-
 
         this.mMeassureSliderMaxBuyIn.InitWithData(GameConfig.GetTexasCreateRoomMaxBuyInTitle(),
         GameConfig.GetTexasCreateRoomMaxBuyInValue(),(_value , _index)=>
@@ -57,15 +41,6 @@ export class Club_CreateBringScoreSetting extends BaseUI {
             let bigBlind = smallBlind * 2;
             this.mBringInAmount.string = _value * bigBlind * 100 + "";
             HallData.Instance.Data_Club_CreateTexasConfig.mData.maxBringIn = _index;
-        })
-
-        this.mMeassureSliderBringOut.InitWithData(GameConfig.GetTexasCreateRoomBringOutTitle(),
-        GameConfig.GetTexasCreateRoomBringOutValue(),(_value , _index)=>
-        {
-            let smallBlind = HallData.Instance.Data_ClubRefreshSmallBlind.mData;
-            let bigBlind = smallBlind * 2;
-            this.mBringOutAmount.string = _value * bigBlind * 100 + "";
-            HallData.Instance.Data_Club_CreateTexasConfig.mData.minScoreAfterBringOut = _index;
         })
 
         this.mInsuranceToggle.ShowUnselected();
@@ -86,16 +61,6 @@ export class Club_CreateBringScoreSetting extends BaseUI {
             this.mMeassureSliderBringin.SetIndex(_data);
         })
 
-        HallData.Instance.Data_ClubCreateGameAllowBringOut.AddListenner(this,(_data)=>
-        {
-            this.mBringOutToggle.SetShowStauts(_data,true);
-        })
-
-        HallData.Instance.Data_ClubMinScoreAfterBringOut.AddListenner(this,(_data)=>
-        {
-            this.mMeassureSliderBringOut.SetIndex(_data);
-        })
-
 
         HallData.Instance.Data_ClubCreateGameInsurance.AddListenner(this,(_data)=>
         {
@@ -108,7 +73,6 @@ export class Club_CreateBringScoreSetting extends BaseUI {
             let bigBlind100 = bigBlind * 100;
             this.mMaxBuyInAmount.string = this.mMeassureSliderMaxBuyIn.GetValue() * bigBlind100 + "";
             this.mBringInAmount.string = this.mMeassureSliderBringin.GetValue() * bigBlind100 + "";
-            this.mBringOutAmount.string = this.mMeassureSliderBringOut .GetValue()* bigBlind100 + "";
         })
 
     }

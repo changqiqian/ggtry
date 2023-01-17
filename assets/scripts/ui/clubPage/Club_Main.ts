@@ -132,7 +132,7 @@ export class Club_Main extends BaseUI
         {
             if(_data)
             {
-                UIMgr.Instance.ShowWindow("clubPage","prefab/Club_FindClubLayer");
+                UIMgr.Instance.ShowWindow("clubPage","prefab/Club_FindClubLayerFix");
             }
         });
 

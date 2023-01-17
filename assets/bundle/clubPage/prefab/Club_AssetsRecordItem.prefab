@@ -645,8 +645,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48,
-      "height": 48
+      "width": 60,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -682,7 +682,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "b7dd505b-3bb4-423c-8a19-4d8bdd4a657a@f9941",
+      "__uuid__": "c5b38665-adff-445b-9e56-5d528bd50327@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -718,7 +718,7 @@
     "_alignFlags": 32,
     "_target": null,
     "_left": 0,
-    "_right": 48.09499999999997,
+    "_right": 42.09499999999997,
     "_top": 0,
     "_bottom": 0,
     "_horizontalCenter": 0,

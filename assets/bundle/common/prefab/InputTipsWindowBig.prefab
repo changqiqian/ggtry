@@ -218,9 +218,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 144,
+      "g": 150,
+      "b": 173,
       "a": 255
     },
     "_string": "标题",
@@ -1382,7 +1382,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "82773186-e8a6-42b6-96b6-601528671b63@f9941",
+      "__uuid__": "3d5f92a5-a16a-4054-82d9-176f1436a759@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 1,
@@ -1620,7 +1620,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 120,
+      "width": 100,
       "height": 100.8
     }
   },
@@ -1648,7 +1648,7 @@
     "propertyPath": [
       "_fontSize"
     ],
-    "value": 60
+    "value": 50
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -1658,7 +1658,7 @@
     "propertyPath": [
       "_actualFontSize"
     ],
-    "value": 60
+    "value": 50
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -1669,7 +1669,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "e08a21a3-250f-4203-8b41-8d6bb5a0aed7@f9941",
+      "__uuid__": "0fc0cb73-891e-41a6-b664-5c56783ca9bb@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -1687,7 +1687,7 @@
     "propertyPath": [
       "_type"
     ],
-    "value": 0
+    "value": 1
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -1717,7 +1717,7 @@
     "propertyPath": [
       "_sizeMode"
     ],
-    "value": 1
+    "value": 0
   },
   {
     "__type__": "cc.UITransform",
@@ -1769,7 +1769,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "9c46d941-955f-4dc1-bc8b-4e87c3f661d7@f9941",
+      "__uuid__": "43f79acc-df74-4bff-86a5-c2fb9b4a971d@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 1,
