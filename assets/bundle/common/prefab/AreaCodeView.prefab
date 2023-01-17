@@ -751,10 +751,7 @@
     "_returnType": 0,
     "_string": "",
     "_tabIndex": 0,
-    "_backgroundImage": {
-      "__uuid__": "438f4350-4b8e-4201-9ab4-085e6400920d@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
+    "_backgroundImage": null,
     "_inputFlag": 5,
     "_inputMode": 6,
     "_maxLength": 8,
@@ -784,10 +781,7 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "438f4350-4b8e-4201-9ab4-085e6400920d@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_fillType": 0,
     "_sizeMode": 0,
