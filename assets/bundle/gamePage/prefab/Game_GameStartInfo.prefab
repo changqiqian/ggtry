@@ -235,8 +235,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 270,
-      "height": 102
+      "width": 200,
+      "height": 72
     }
   },
   {
@@ -263,7 +263,7 @@
     "propertyPath": [
       "_type"
     ],
-    "value": 0
+    "value": 1
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -273,7 +273,7 @@
     "propertyPath": [
       "_fontSize"
     ],
-    "value": 40
+    "value": 34
   },
   {
     "__type__": "cc.TargetInfo",
@@ -291,7 +291,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 136,
       "height": 50.4
     }
   },
@@ -309,7 +309,7 @@
     "propertyPath": [
       "_actualFontSize"
     ],
-    "value": 40
+    "value": 34
   },
   {
     "__type__": "CCPropertyOverrideInfo",
