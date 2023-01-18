@@ -8,8 +8,6 @@ const { ccclass, property } = _decorator;
 @ccclass('Hall_LunBoItem')
 export class Hall_LunBoItem extends BaseUI 
 {
-    @property(Sprite) 
-    mHttpImage: Sprite = null;
     @property(BaseButton) 
     mBtn: BaseButton = null;
 
