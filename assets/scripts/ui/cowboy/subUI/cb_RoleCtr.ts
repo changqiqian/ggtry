@@ -54,7 +54,7 @@ export class cb_RoleCtr extends BaseUI
 
     }
 
-    ShowCards(_cards:Array<CardStruct> , _gender:cbEnum_Gender)
+    ShowCards(_cards:Array<CardInfo> , _gender:cbEnum_Gender)
     {
         this.node.children[_gender].getComponent(cb_Role).ShowAllCards(_cards);
     }

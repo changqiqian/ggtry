@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, Label, instantiate, Vec3, view } from 'cc';
 import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
-import { CardStruct, Combiantion } from '../../../base/Calculator';
+import { Combiantion } from '../../../base/Calculator';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Tool } from '../../../Tool';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';

@@ -6,11 +6,13 @@ const { ccclass, property } = _decorator;
 @ccclass('AdaptTop')
 export class AdaptTop extends Component 
 {
+    public static IsLiuHai : boolean = false;
     public static IsIphoneX : boolean = false;
     onLoad()
     {
         let safeHeight = sys.getSafeAreaRect().size.height;
         let fullHeight = view.getVisibleSize().height;
+        let fullWidth = view.getVisibleSize().width;
 
         let num = fullHeight - safeHeight;
         console.log("fullHeight===" + fullHeight);
@@ -26,6 +28,11 @@ export class AdaptTop extends Component
                 widget.updateAlignment();
             }
 
+            AdaptTop.IsLiuHai = true;
+        }
+
+        if(fullHeight/fullWidth > 2)
+        {
             AdaptTop.IsIphoneX = true;
         }
     }

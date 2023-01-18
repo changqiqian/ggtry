@@ -79,8 +79,17 @@ export class cb_BetArea extends BaseUI {
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
-            let index = _data.reward.findIndex((item) =>{item === this.mBetArea});
-            if(index < 0)
+            let have = false;
+            for(let i = 0 ; i < _data.reward.length ; i++)
+            {
+                let current = _data.reward[i];
+                if(current == this.mBetArea)
+                {
+                    have = true;
+                    break;
+                }
+            }
+            if(have == false)
             {
                 this.mWinSpine.Hide();
                 return;

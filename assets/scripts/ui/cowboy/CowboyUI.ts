@@ -43,6 +43,7 @@ export class CowboyUI extends BaseUI
     }
     BindUI() 
     {
+        this.OffsetTop();
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
     }
@@ -90,13 +91,19 @@ export class CowboyUI extends BaseUI
             {
                 
             });
-            this.mSpine.SetAnimation("ksxz");
+            this.mSpine.SetAnimation("ksxz",false,(_data)=>
+            {   
+                this.mSpine.Hide(); 
+            });
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
             this.mCircleTimer.StartTimer(CowboyData.Instance.GetDuration(CowboyPhase.CowBoyPhase_Settlement));
-            this.mSpine.SetAnimation("tzxz");
+            this.mSpine.SetAnimation("tzxz",false,(_data)=>
+            {   
+                this.mSpine.Hide(); 
+            });
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.AddListenner(this,(_data)=>

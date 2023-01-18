@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Button } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { UIMgr } from '../../../base/UIMgr';
 import { BaseButton } from '../../common/BaseButton';
 import { CowboyData } from '../CowboyData';
 const { ccclass, property } = _decorator;
@@ -25,7 +26,7 @@ export class cb_TopMenu extends BaseUI {
     {
         this.mSettingBtn.SetClickCallback((_data)=>
         {
-
+            UIMgr.Instance.ShowLayer("cowboy","prefab/subUI/cb_Menu",true);
         })
         this.mRuleBtn.SetClickCallback((_data)=>
         {

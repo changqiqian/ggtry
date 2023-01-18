@@ -1,6 +1,5 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
-import { CardStruct, CardType } from '../../../base/Calculator';
 import { SpineCtr } from '../../../UiTool/SpineCtr';
 import { Poker } from '../../common/Poker';
 import { CowboyData } from '../CowboyData';
@@ -60,10 +59,10 @@ export class cb_Role extends BaseUI {
 
     public PlayIdleSpine()
     {
-        this.mSpineCtr.SetAnimation("daiji");
+        this.mSpineCtr.SetAnimation("daiji",true);
     }
 
-    public ShowAllCards(_cards : Array<CardStruct> )
+    public ShowAllCards(_cards : Array<CardInfo> )
     {
         for(let i = 0 ; i < this.mCards.children.length ; i++)
         {
@@ -72,10 +71,10 @@ export class cb_Role extends BaseUI {
         }
     }
 
-    public ShowCard(_card : CardStruct , _index : number)
+    public ShowCard(_card : CardInfo , _index : number)
     {
         let currentPoker = this.mCards.children[_index].getComponent(Poker);
-        currentPoker.SetFront(_card);
+        currentPoker.SetFrontByCardInfo(_card);
         currentPoker.FlipToFront();
     }
 

@@ -1,6 +1,5 @@
 import { _decorator, Component, Node, Vec3, Tween, easing } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
-import { CardStruct, CardType } from '../../../base/Calculator';
 import { Poker } from '../../common/Poker';
 import { CowboyData } from '../CowboyData';
 const { ccclass, property } = _decorator;
@@ -44,9 +43,9 @@ export class cb_PublicCards extends BaseUI
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
-            for(let i = 0 ; i < _data.publicCards.length ; i++)
+            for(let i = 1 ; i < _data.publicCards.length ; i++)
             {
-                let index = i + 1;
+                let index = i ;
                 this.ShowCard(_data.publicCards[i],index);
             }
         });
