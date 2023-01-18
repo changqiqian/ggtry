@@ -661,7 +661,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             UIMgr.Instance.ShowLoading(false);
             if(msg.result.resId == MsgResult.Success)
             {
-                CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.mData = _data;
+                CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.mData = msg;
             }
             else
             {
@@ -676,7 +676,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             UIMgr.Instance.ShowLoading(false);
             if(msg.result.resId == MsgResult.Success)
             {
-                CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.mData = _data;
+                CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.mData = msg;
             }
             else
             {
@@ -690,7 +690,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_TexasCowboyBetResp  下注 德州牛仔==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                CowboyData.Instance.Data_S2CTexasCowboyBetResp.mData = _data;
+                CowboyData.Instance.Data_S2CTexasCowboyBetResp.mData = msg;
             }
             else
             {
@@ -704,7 +704,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_TexasCowboyRecordResp  获取我的记录 德州牛仔==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                CowboyData.Instance.Data_S2CTexasCowboyRecordResp.mData = _data;
+                CowboyData.Instance.Data_S2CTexasCowboyRecordResp.mData = msg;
             }
             else
             {
@@ -719,8 +719,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_TexasCowboyBringInResp  带入 德州牛仔==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                CowboyData.Instance.Data_Money.mData = _data.totalAmount;
-                LocalPlayerData.Instance.Data_Coin.mData = _data.restAmount;
+                CowboyData.Instance.Data_Money.mData = msg.totalAmount;
+                LocalPlayerData.Instance.Data_Coin.mData = msg.restAmount;
             }
             else
             {
@@ -734,8 +734,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_TexasCowboyBringOutResp  带出 德州牛仔==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
-                CowboyData.Instance.Data_Money.mData = _data.totalAmount;
-                LocalPlayerData.Instance.Data_Coin.mData = _data.restAmount;
+                CowboyData.Instance.Data_Money.mData = msg.totalAmount;
+                LocalPlayerData.Instance.Data_Coin.mData = msg.restAmount;
             }
             else
             {

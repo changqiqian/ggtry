@@ -5,6 +5,7 @@ const { ccclass, property } = _decorator;
 @ccclass('SpineCtr')
 export class SpineCtr extends BaseUI 
 {
+    @property(sp.Skeleton) 
     mSpine : sp.Skeleton = null;
     InitParam()
     {
@@ -12,7 +13,7 @@ export class SpineCtr extends BaseUI
     }
     BindUI()
     {
-        this.mSpine = this.node.getComponent(sp.Skeleton);
+
     }
     RegDataNotify()
     {

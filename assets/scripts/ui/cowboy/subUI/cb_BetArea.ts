@@ -127,6 +127,11 @@ export class cb_BetArea extends BaseUI {
     {
         this.mHistory.ResetUI();
         let historyInfo =  CowboyData.Instance.GetAreaHistoryByAreaType(this.mBetArea);
+        if(historyInfo == null)
+        {
+            this.mHistory.SetData([]);
+            return;
+        }
         let result = historyInfo.result;
         this.mHistory.SetData(result);
     }

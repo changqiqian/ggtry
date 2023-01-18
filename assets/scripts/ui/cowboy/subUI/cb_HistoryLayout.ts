@@ -63,7 +63,7 @@ export class cb_HistoryLayout extends BaseUI {
     {
         if(_datas.length == 0)
         {
-            this.mDescribe.string = Localization.ReplaceString("00294",this.mMaxDot + "");
+            this.mDescribe.string = Localization.GetString("00294");
             return;
         }
 

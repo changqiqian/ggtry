@@ -84,10 +84,10 @@ export class cb_PublicCards extends BaseUI
         }
     }
 
-    ShowCard(_card : CardStruct , _index : number)
+    ShowCard(_card : CardInfo , _index : number)
     {
         let currentPoker = this.mLayout.children[_index].getComponent(Poker);
-        currentPoker.SetFront(_card);
+        currentPoker.SetFrontByCardInfo(_card);
         currentPoker.FlipToFront();
     }
 

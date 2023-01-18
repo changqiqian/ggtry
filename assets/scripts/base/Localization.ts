@@ -379,7 +379,7 @@ export class Localization {
         { name: '00291', ch: '三条/顺子/同花', en: 'Trible/Straight/Flush' },
         { name: '00292', ch: '公共牌', en: 'Public cards' },
         { name: '00293', ch: '金刚/同花顺', en: 'Quads/StraightFlush' },
-        { name: '00294', ch: 'xxx手未出', en: 'unhit in xxx' },
+        { name: '00294', ch: '未出', en: 'not yet' },
         { name: '00295', ch: '余额不足', en: 'not enough coin' },
         { name: '00296', ch: '结算', en: 'Cash out' },
         { name: '00298', ch: '牌局统计', en: 'Statics' },

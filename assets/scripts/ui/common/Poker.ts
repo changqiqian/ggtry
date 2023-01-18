@@ -74,7 +74,7 @@ export class Poker extends BaseUI
     public static GetPokerTexturePath(_card : CardStruct) : string
     {
         let path = "texture/poker/";
-        let num = _card.mNum.toString();
+        let num = _card.mNum;
         let type = "";
         switch(_card.mType)
         {

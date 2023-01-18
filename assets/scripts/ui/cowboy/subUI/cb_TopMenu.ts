@@ -9,7 +9,7 @@ export class cb_TopMenu extends BaseUI {
 
     @property(BaseButton) 
     mSettingBtn: BaseButton = null;
-    @property(Button) 
+    @property(BaseButton) 
     mRuleBtn: BaseButton = null;
     @property(BaseButton) 
     mMoreBtn: BaseButton = null;
@@ -23,19 +23,19 @@ export class cb_TopMenu extends BaseUI {
     }
     BindUI() 
     {
-        this.mSettingBtn.SetClickCallback(()=>
+        this.mSettingBtn.SetClickCallback((_data)=>
         {
 
         })
-        this.mRuleBtn.SetClickCallback(()=>
+        this.mRuleBtn.SetClickCallback((_data)=>
         {
             
         })
-        this.mMoreBtn.SetClickCallback(()=>
+        this.mMoreBtn.SetClickCallback((_data)=>
         {
             
         })
-        this.mPlayerBtn.SetClickCallback(()=>
+        this.mPlayerBtn.SetClickCallback((_data)=>
         {
             
         })

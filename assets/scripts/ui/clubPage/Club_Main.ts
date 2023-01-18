@@ -23,6 +23,10 @@ export class Club_Main extends BaseUI
     @property(BaseButton) 
     mCowboyBtn: BaseButton = null;
 
+    onEnable()
+    {
+        NetworkSend.Instance.GetMiniGameListInHall();
+    }
 
     InitParam() 
     {
