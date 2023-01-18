@@ -1,0 +1,75 @@
+{
+  "ver": "1.0.23",
+  "importer": "image",
+  "imported": true,
+  "uuid": "003e18e7-be51-4796-a941-7bf1a415e21f",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "003e18e7-be51-4796-a941-7bf1a415e21f@6c48a",
+      "displayName": "BG3",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "003e18e7-be51-4796-a941-7bf1a415e21f",
+        "isUuid": true,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.21",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "003e18e7-be51-4796-a941-7bf1a415e21f@f9941",
+      "displayName": "BG3",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 1.5,
+        "offsetY": -0.5,
+        "trimX": 3,
+        "trimY": 1,
+        "width": 191,
+        "height": 169,
+        "rawWidth": 194,
+        "rawHeight": 170,
+        "borderTop": 37,
+        "borderBottom": 37,
+        "borderLeft": 37,
+        "borderRight": 37,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "003e18e7-be51-4796-a941-7bf1a415e21f@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "redirect": "003e18e7-be51-4796-a941-7bf1a415e21f@f9941"
+  }
+}

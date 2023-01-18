@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "c9c86b43-107d-4437-b281-30c2c84160fb",
+  "uuid": "b3e353be-0a2c-4303-9e91-be6d9a02ee1a",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "c9c86b43-107d-4437-b281-30c2c84160fb@6c48a",
-      "displayName": "俱乐部德州牛仔入口",
+      "uuid": "b3e353be-0a2c-4303-9e91-be6d9a02ee1a@6c48a",
+      "displayName": "Tag",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "c9c86b43-107d-4437-b281-30c2c84160fb",
+        "imageUuidOrDatabaseUri": "b3e353be-0a2c-4303-9e91-be6d9a02ee1a",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,29 +33,29 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "c9c86b43-107d-4437-b281-30c2c84160fb@f9941",
-      "displayName": "俱乐部德州牛仔入口",
+      "uuid": "b3e353be-0a2c-4303-9e91-be6d9a02ee1a@f9941",
+      "displayName": "Tag",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 0,
-        "offsetY": 0,
+        "offsetX": -2,
+        "offsetY": -0.5,
         "trimX": 0,
-        "trimY": 0,
-        "width": 1029,
-        "height": 240,
-        "rawWidth": 1029,
-        "rawHeight": 240,
+        "trimY": 1,
+        "width": 470,
+        "height": 101,
+        "rawWidth": 474,
+        "rawHeight": 102,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "c9c86b43-107d-4437-b281-30c2c84160fb@6c48a",
+        "imageUuidOrDatabaseUri": "b3e353be-0a2c-4303-9e91-be6d9a02ee1a@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "c9c86b43-107d-4437-b281-30c2c84160fb@f9941"
+    "redirect": "b3e353be-0a2c-4303-9e91-be6d9a02ee1a@f9941"
   }
 }

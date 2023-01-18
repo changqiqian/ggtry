@@ -185,9 +185,9 @@ export class MultipleTableCtr extends BaseUI
 
     InsertGameUI(_data : S2CCommonEnterGameResp)
     {
-        let gameType = _data.gameStatic.basicConfig.gameType;
+        let gameType = _data.texasConfig.gameType;
         let gameId = _data.gameId;
-        let seatNum = _data.gameStatic.texasConfig.seatNum;
+        let seatNum = _data.texasConfig.seatNum;
         let index = MultipleTableCtr.GetAviliableIndex();
         let prefabName = MultipleTableCtr.GetPrefabName(gameType);
         UIMgr.Instance.ShowLayer("gamePage","prefab/" + prefabName,true,(_script)=>

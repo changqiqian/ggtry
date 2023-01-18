@@ -4000,38 +4000,38 @@ export class S2CHallTexasGameInfoResp implements IS2CHallTexasGameInfoResp {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CHallTexasGameInfoResp;
 }
 
-/** Represents a S2CGetHallSubGameInfo. */
-export class S2CGetHallSubGameInfo implements IS2CGetHallSubGameInfo {
+/** Represents a S2CGetHallSubGameInfoResp. */
+export class S2CGetHallSubGameInfoResp implements IS2CGetHallSubGameInfoResp {
 
     /**
-     * Constructs a new S2CGetHallSubGameInfo.
+     * Constructs a new S2CGetHallSubGameInfoResp.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CGetHallSubGameInfo);
+    constructor(p?: IS2CGetHallSubGameInfoResp);
 
-    /** S2CGetHallSubGameInfo result. */
+    /** S2CGetHallSubGameInfoResp result. */
     public result?: (ICommonResult|null);
 
-    /** S2CGetHallSubGameInfo gameList. */
+    /** S2CGetHallSubGameInfoResp gameList. */
     public gameList: IHallSubGameInfo[];
 
     /**
-     * Encodes the specified S2CGetHallSubGameInfo message. Does not implicitly {@link S2CGetHallSubGameInfo.verify|verify} messages.
-     * @param m S2CGetHallSubGameInfo message or plain object to encode
+     * Encodes the specified S2CGetHallSubGameInfoResp message. Does not implicitly {@link S2CGetHallSubGameInfoResp.verify|verify} messages.
+     * @param m S2CGetHallSubGameInfoResp message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CGetHallSubGameInfo, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CGetHallSubGameInfoResp, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CGetHallSubGameInfo message from the specified reader or buffer.
+     * Decodes a S2CGetHallSubGameInfoResp message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CGetHallSubGameInfo
+     * @returns S2CGetHallSubGameInfoResp
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetHallSubGameInfo;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetHallSubGameInfoResp;
 }
 
 /** Represents a C2SLogin. */

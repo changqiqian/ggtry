@@ -389,13 +389,10 @@
       "b": 255,
       "a": 255
     },
-    "_type": 3,
+    "_type": 1,
     "_inverted": false,
     "_segments": 64,
-    "_spriteFrame": {
-      "__uuid__": "56d92d49-99e6-48f5-ba67-855601089101@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
+    "_spriteFrame": null,
     "_alphaThreshold": 0.1,
     "_id": ""
   },

@@ -11603,25 +11603,25 @@ $root.S2CHallTexasGameInfoResp = (function() {
     return S2CHallTexasGameInfoResp;
 })();
 
-$root.S2CGetHallSubGameInfo = (function() {
+$root.S2CGetHallSubGameInfoResp = (function() {
 
     /**
-     * Properties of a S2CGetHallSubGameInfo.
-     * @exports IS2CGetHallSubGameInfo
-     * @interface IS2CGetHallSubGameInfo
-     * @property {ICommonResult|null} [result] S2CGetHallSubGameInfo result
-     * @property {Array.<IHallSubGameInfo>|null} [gameList] S2CGetHallSubGameInfo gameList
+     * Properties of a S2CGetHallSubGameInfoResp.
+     * @exports IS2CGetHallSubGameInfoResp
+     * @interface IS2CGetHallSubGameInfoResp
+     * @property {ICommonResult|null} [result] S2CGetHallSubGameInfoResp result
+     * @property {Array.<IHallSubGameInfo>|null} [gameList] S2CGetHallSubGameInfoResp gameList
      */
 
     /**
-     * Constructs a new S2CGetHallSubGameInfo.
-     * @exports S2CGetHallSubGameInfo
-     * @classdesc Represents a S2CGetHallSubGameInfo.
-     * @implements IS2CGetHallSubGameInfo
+     * Constructs a new S2CGetHallSubGameInfoResp.
+     * @exports S2CGetHallSubGameInfoResp
+     * @classdesc Represents a S2CGetHallSubGameInfoResp.
+     * @implements IS2CGetHallSubGameInfoResp
      * @constructor
-     * @param {IS2CGetHallSubGameInfo=} [p] Properties to set
+     * @param {IS2CGetHallSubGameInfoResp=} [p] Properties to set
      */
-    function S2CGetHallSubGameInfo(p) {
+    function S2CGetHallSubGameInfoResp(p) {
         this.gameList = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -11630,31 +11630,31 @@ $root.S2CGetHallSubGameInfo = (function() {
     }
 
     /**
-     * S2CGetHallSubGameInfo result.
+     * S2CGetHallSubGameInfoResp result.
      * @member {ICommonResult|null|undefined} result
-     * @memberof S2CGetHallSubGameInfo
+     * @memberof S2CGetHallSubGameInfoResp
      * @instance
      */
-    S2CGetHallSubGameInfo.prototype.result = null;
+    S2CGetHallSubGameInfoResp.prototype.result = null;
 
     /**
-     * S2CGetHallSubGameInfo gameList.
+     * S2CGetHallSubGameInfoResp gameList.
      * @member {Array.<IHallSubGameInfo>} gameList
-     * @memberof S2CGetHallSubGameInfo
+     * @memberof S2CGetHallSubGameInfoResp
      * @instance
      */
-    S2CGetHallSubGameInfo.prototype.gameList = $util.emptyArray;
+    S2CGetHallSubGameInfoResp.prototype.gameList = $util.emptyArray;
 
     /**
-     * Encodes the specified S2CGetHallSubGameInfo message. Does not implicitly {@link S2CGetHallSubGameInfo.verify|verify} messages.
+     * Encodes the specified S2CGetHallSubGameInfoResp message. Does not implicitly {@link S2CGetHallSubGameInfoResp.verify|verify} messages.
      * @function encode
-     * @memberof S2CGetHallSubGameInfo
+     * @memberof S2CGetHallSubGameInfoResp
      * @static
-     * @param {IS2CGetHallSubGameInfo} m S2CGetHallSubGameInfo message or plain object to encode
+     * @param {IS2CGetHallSubGameInfoResp} m S2CGetHallSubGameInfoResp message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    S2CGetHallSubGameInfo.encode = function encode(m, w) {
+    S2CGetHallSubGameInfoResp.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
@@ -11667,20 +11667,20 @@ $root.S2CGetHallSubGameInfo = (function() {
     };
 
     /**
-     * Decodes a S2CGetHallSubGameInfo message from the specified reader or buffer.
+     * Decodes a S2CGetHallSubGameInfoResp message from the specified reader or buffer.
      * @function decode
-     * @memberof S2CGetHallSubGameInfo
+     * @memberof S2CGetHallSubGameInfoResp
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {S2CGetHallSubGameInfo} S2CGetHallSubGameInfo
+     * @returns {S2CGetHallSubGameInfoResp} S2CGetHallSubGameInfoResp
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    S2CGetHallSubGameInfo.decode = function decode(r, l) {
+    S2CGetHallSubGameInfoResp.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CGetHallSubGameInfo();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CGetHallSubGameInfoResp();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -11700,7 +11700,7 @@ $root.S2CGetHallSubGameInfo = (function() {
         return m;
     };
 
-    return S2CGetHallSubGameInfo;
+    return S2CGetHallSubGameInfoResp;
 })();
 
 $root.C2SLogin = (function() {

@@ -153,13 +153,11 @@ export class Club_GameItem extends BaseUI
         this.mCircleTimer.SetProgress(1);
         if(_data.aboutGameInfo != null)
         {
-            //this.mCircleTimer.SetProgress(_data.aboutGameInfo.currentPlayerNum / _data.gameStaticData.texasConfig.seatNum);
             this.mCircleTimer.SetTimerTitle(_data.aboutGameInfo.currentPlayerNum + "/"+_data.basicTexasConfig.seatNum);
             this.mLeftTime.string = _data.aboutGameInfo.leftTime+ "/" + _data.basicTexasConfig.gameDuration + "h";
         }
         else
         {
-            //this.mCircleTimer.SetProgress(1);
             this.mCircleTimer.SetTimerTitle(_data.basicTexasConfig.seatNum + "");
             this.mLeftTime.string = _data.basicTexasConfig.gameDuration + "h";
         }

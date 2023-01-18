@@ -40,7 +40,8 @@ export class HallUI extends BaseUI
         {
             if(_data)
             {
-                
+                NetworkSend.Instance.GetMiniGameListInHall();
+                NetworkSend.Instance.GetTexasGameListInHall();
             }
         });
 

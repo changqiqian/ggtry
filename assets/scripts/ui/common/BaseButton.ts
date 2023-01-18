@@ -40,7 +40,7 @@ export class BaseButton extends BaseUI {
 
     public SetSprite(_spriteFrame : SpriteFrame)
     {
-        this.node.getComponent(Sprite).spriteFrame = _spriteFrame;
+        this.node.getChildByName("Icon").getComponent(Sprite).spriteFrame = _spriteFrame;
     }
 
     public SetTitle(_title : string) 
@@ -88,9 +88,9 @@ export class BaseButton extends BaseUI {
 
     public SetGray(_value : boolean)
     {
-        if(this.node.getComponent(Sprite))
+        if(this.node.getChildByName("Icon").getComponent(Sprite))
         {
-            this.node.getComponent(Sprite).grayscale = _value;
+            this.node.getChildByName("Icon").getComponent(Sprite).grayscale = _value;
         }
     }
 

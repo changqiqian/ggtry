@@ -9,7 +9,6 @@ export abstract class ListViewCtr<T> extends BaseUI
     @property(ListView) 
     mListView: ListView = null;
 
-
     mCurrentPage :number = 1;
     mPageSize : number = 20;
     mIsLastPage : boolean = false;
@@ -96,6 +95,11 @@ export abstract class ListViewCtr<T> extends BaseUI
             return;
         }
         this.mCurrentData.push(_data);
+    }
+
+    public ForceSetData(_datas : Array<T>)
+    {
+        this.mCurrentData = _datas;
     }
 
 

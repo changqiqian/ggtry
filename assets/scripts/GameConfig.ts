@@ -5,8 +5,9 @@ import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 export class GameConfig
 {
     public static readonly DebugMode =  true;
-    public static DevelopIP = "52.77.219.158:9501"; //开发环境ip 可选
-    public static TestIP = "52.77.219.158:9601"; //测试环境ip 可选
+    public static DevelopIP = "18.142.179.150:9501"; //开发环境ip 可选
+    public static TestIP = "18.142.179.150:9601"; //测试环境ip 可选
+    public static JackIP = "18.142.179.150:9001"; //测试环境ip 可选
     public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip 上面选项选择后，会赋值给UsingIp
     public static SeverUrl = "ws://13.229.222.39:9008/pokerlife"; //完整的地址长这样
     public static SetSeverUrl(_ip : string)
@@ -109,7 +110,7 @@ export class GameConfig
         return [1 , 2, 3 ,4 ,5 ,10 ,20 ,25 , 50 , 100];
     }
 
-    public static GetTexasCreateRoomAnteTitle(_smallBlind : number)
+    public static GetTexasCreateRoomAnteTitle(_smallBlind : number):Array<string>
     {
         if(_smallBlind == 1 || _smallBlind == 2 || _smallBlind == 3 || _smallBlind == 4)
         {
@@ -141,7 +142,7 @@ export class GameConfig
         }
     }
 
-    public static GetTexasCreateRoomAnteValue(_smallBlind : number)
+    public static GetTexasCreateRoomAnteValue(_smallBlind : number): Array<number>
     {
         if(_smallBlind == 1 || _smallBlind == 2 || _smallBlind == 3 || _smallBlind == 4)
         {
@@ -173,65 +174,79 @@ export class GameConfig
         }
     }
 
-    public static GetTexasCreateRoomMaxBuyInTitle()
+    public static GetTexasCreateRoomMaxBuyInTitle():Array<string>
     {
         return ["4" , "6" , "8" , "10" , "15" , "20" , "40" , "50" , "100"];
     }
 
-    public static GetTexasCreateRoomMaxBuyInValue()
+    public static GetTexasCreateRoomMaxBuyInValue(): Array<number>
     {
         return [4 , 6 , 8 , 10 , 15 , 20 , 40 , 50 , 100];
     }
 
-    public static GetTexasCreateRoomBringInTitle()
+    public static GetTexasCreateRoomBringInTitle():Array<string>
     {
         return ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9"];
     }
 
-    public static GetTexasCreateRoomBringInValue()
+    public static GetTexasCreateRoomBringInValue(): Array<number>
     {
         return [1 , 2 , 3, 4, 5, 6, 7, 8, 9];
     }
 
-    public static GetTexasCreateRoomGameDurationTitle()
+    public static GetTexasCreateRoomGameDurationTitle():Array<string>
     {
         return ["1" , "1.5" , "2" , "2.5" , "3" , "4" , "5" , "6" ];
     }
 
-    public static GetTexasCreateRoomGameDurationValue()
+    public static GetTexasCreateRoomGameDurationValue(): Array<number>
     {
         return [1 , 1.5 , 2, 2.5, 3, 4, 5, 6];
     }
 
-    public static GetTexasCreateRoomThinkingTimeTitle()
+    public static GetTexasCreateRoomThinkingTimeTitle():Array<string>
     {
         return ["8s" , "12s" , "15s" , "20s"];
     }
 
-    public static GetTexasCreateRoomThinkingTimeValue()
+    public static GetTexasCreateRoomThinkingTimeValue(): Array<number>
     {
         return [8, 12 , 15, 20];
     }
 
-    public static GetTexasCreateRoomSeatNumTitle()
+    public static GetTexasCreateRoomSeatNumTitle():Array<string>
     {
         return ["2" , "3" , "4" , "5" , "6" , "7" , "8" , "9"];
     }
 
-    public static GetTexasCreateRoomSeatNumValue()
+    public static GetTexasCreateRoomSeatNumValue(): Array<number>
     {
         return [2,3,4,5,6,7,8,9];
     }
 
-
-    public static GetTexasCreateRoomAutoStartTitle()
+    public static GetTexasCreateRoomAutoStartTitle():Array<string>
     {
         return ["0" , "2" , "3" , "4" , "5" , "6"];
     }
 
-    public static GetTexasCreateRoomAutoStartValue()
+    public static GetTexasCreateRoomAutoStartValue():Array<number>
     {
         return [0,2,3,4,5,6];
+    }
+
+    public static GetDropBoxSeatTitle() :Array<string>
+    {
+        return ["全部","有空位"];
+    }
+
+    public static GetDropBoxGameTypeTitle() :Array<string>
+    {
+        return ["全部","德州","短牌","奥马哈"];
+    }
+
+    public static GetDropBoxBBTitle() :Array<string>
+    {
+        return ["全部","1/2","2/4","3/6","4/8","5/10","10/20","20/40","50/100","100/200"];
     }
 
 

@@ -72,23 +72,21 @@ export class Game_CashReplay extends BaseUI {
 
         testData.gameId = "123";
 
-        testData.gameStatic = new GameStaticData();
-        testData.gameStatic.basicConfig = new BasicGameConfig();
-        testData.gameStatic.texasConfig = new BasicTexasConfig();
+        testData.texasConfig = new BasicTexasConfig();
 
-        testData.gameStatic.basicConfig.gameType = GameType.GameType_TexasCash;
-        testData.gameStatic.basicConfig.gameName = "TestReplay";
-        testData.gameStatic.basicConfig.currencyType = GameCurrencyType.GameCurrencyType_Point;
-        testData.gameStatic.basicConfig.taxType = GameTaxType.GameTaxType_WholeGameEnd;
-        testData.gameStatic.basicConfig.taxRatio = 0.1;
+        testData.texasConfig.gameType = GameType.GameType_TexasCash;
+        testData.texasConfig.gameName = "TestReplay";
+        testData.texasConfig.currencyType = GameCurrencyType.GameCurrencyType_Point;
+        testData.texasConfig.taxType = GameTaxType.GameTaxType_WholeGameEnd;
+        testData.texasConfig.taxRatio = 0.1;
 
-        testData.gameStatic.texasConfig.smallBlind = 1000;
-        testData.gameStatic.texasConfig.straddle = false;
-        testData.gameStatic.texasConfig.ante = 0 ;
-        testData.gameStatic.texasConfig.seatNum = 5;
-        testData.gameStatic.texasConfig.insurance = true;
-        testData.gameStatic.texasConfig.gpsLimit = true;
-        testData.gameStatic.texasConfig.ipLimit = true;
+        testData.texasConfig.smallBlind = 1000;
+        testData.texasConfig.straddle = false;
+        testData.texasConfig.ante = 0 ;
+        testData.texasConfig.seatNum = 5;
+        testData.texasConfig.insurance = true;
+        testData.texasConfig.gpsLimit = true;
+        testData.texasConfig.ipLimit = true;
 
         testData.players = new Array<PlayerInfo>();
         let player1 = new PlayerInfo();
@@ -264,7 +262,7 @@ export class Game_CashReplay extends BaseUI {
         },this.mBG.node);
         
         let testData = GameReplayData.Instance.Data_ReplayData.mData;
-        let seatNum = testData.gameStatic.texasConfig.seatNum
+        let seatNum = testData.texasConfig.seatNum
 
         let prefabName = "prefab/Game_SeatUI" + seatNum;
         this.AddSubView("gamePage",  prefabName  , (_script) =>

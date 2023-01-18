@@ -30,6 +30,8 @@ export class LoginUI extends BaseUI
     DevIpBtn: BaseButton = null;
     @property(BaseButton) 
     TestIpBtn: BaseButton = null;
+    @property(BaseButton) 
+    JackIpBtn: BaseButton = null;
 
     InitParam() 
     {
@@ -78,6 +80,17 @@ export class LoginUI extends BaseUI
             Network.Instance.CreateWS();
             this.DebugFunction.active = false;
         });
+
+
+
+        this.JackIpBtn.SetTitle("Jack :" + GameConfig.JackIP);
+        this.JackIpBtn.SetClickCallback(()=>
+        {
+            GameConfig.SetSeverUrl(GameConfig.JackIP);
+            Network.Instance.CreateWS();
+            this.DebugFunction.active = false;
+        });
+
 
     }
     RegDataNotify() 

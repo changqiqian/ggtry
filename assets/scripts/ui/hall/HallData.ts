@@ -13,19 +13,45 @@ export class HallData extends SingletonBaseNotify<HallData>()
         HallData.ClearInstance();
     }
     Data_SubPage:  BaseData<Hall_SubPage> = new BaseData<Hall_SubPage>(); //大厅底部 分页
-    Data_LunBoTu: BaseData<any> = new BaseData<any>();//轮播图数据
 
 
 
     Data_MultipeIndex : BaseData<number> = new BaseData<number>();      //多桌游戏选中
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Mtt
+    //游戏列表
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Data_MttInfoSubPage: BaseData<Mtt_InfoSubPage> = new BaseData<Mtt_InfoSubPage>();  //Mtt详细信息页面 分页
-    Data_MttRankSubPage: BaseData<Mtt_RankSubPage> = new BaseData<Mtt_RankSubPage>();  //Mtt排行榜 分页面
+    Data_S2CGetHallSubGameInfoResp  : BaseData<S2CGetHallSubGameInfoResp> = new BaseData<S2CGetHallSubGameInfoResp>(); //小游戏列表
+    Data_S2CHallTexasGameInfoResp  : BaseData<S2CHallTexasGameInfoResp> = new BaseData<S2CHallTexasGameInfoResp>(); //德州游戏列表
 
+    Data_DropBoxSeatOption : BaseData<number> = new BaseData<number>(); //现金桌选中的座位下拉框
+    Data_DropBoxGameTypeOption : BaseData<number> = new BaseData<number>(); //现金桌选中的游戏类型下拉框
+    Data_DropBoxBBOption : BaseData<number> = new BaseData<number>(); //现金桌选中的盲注下拉框
+    public GetHallGameList(_gameType : GameType) : Array<HallSubGameInfo>
+    {
+        if(this.Data_S2CGetHallSubGameInfoResp.mData == null)
+        {
+            return null;
+        }
+
+        let list = this.Data_S2CGetHallSubGameInfoResp.mData.gameList;
+        if(list.length == 0)
+        {
+            return null;
+        }
+        let gameList = new Array<HallSubGameInfo>();
+        for(let i = 0 ; i < list.length ; i++)
+        {
+            let current = list[i];
+            if(current.gameType == _gameType)
+            {
+                gameList.push(current);
+            }
+        }
+
+        return gameList;
+    }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,7 +118,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
 
     public UpdateGameList(_clubGameInfo : Array<ClubTexasGameInfo>)
     {
-        this.Data_ClubGameInfos.mData = new Array<ClubTexasGameInfo>();
         this.Data_ClubGameInfos.mData = _clubGameInfo;
     }
 

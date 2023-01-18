@@ -34,17 +34,17 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 126
+        "__id__": 129
       },
       {
-        "__id__": 128
+        "__id__": 131
       },
       {
-        "__id__": 130
+        "__id__": 133
       }
     ],
     "_prefab": {
-      "__id__": 132
+      "__id__": 135
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2224,6 +2224,12 @@
       },
       {
         "__id__": 124
+      },
+      {
+        "__id__": 126
+      },
+      {
+        "__id__": 128
       }
     ],
     "removedComponents": []
@@ -2420,6 +2426,32 @@
     ]
   },
   {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 127
+    },
+    "propertyPath": [
+      "_spriteFrame"
+    ],
+    "value": null
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "dfhA+hpB9D86xlp6wJM560"
+    ]
+  },
+  {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 127
+    },
+    "propertyPath": [
+      "_enabled"
+    ],
+    "value": false
+  },
+  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -2428,7 +2460,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 127
+      "__id__": 130
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -2455,7 +2487,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 129
+      "__id__": 132
     },
     "mCircleTimer": null,
     "mGameType": {
@@ -2492,7 +2524,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 131
+      "__id__": 134
     },
     "_visFlags": 0,
     "_customMaterial": null,
@@ -2539,10 +2571,10 @@
     "fileId": "e8bgTRfdtPnISbpD+4nHyn",
     "targetOverrides": [
       {
-        "__id__": 133
+        "__id__": 136
       },
       {
-        "__id__": 135
+        "__id__": 138
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -2557,7 +2589,7 @@
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 128
+      "__id__": 131
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -2567,7 +2599,7 @@
       "__id__": 3
     },
     "targetInfo": {
-      "__id__": 134
+      "__id__": 137
     }
   },
   {
@@ -2579,7 +2611,7 @@
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 128
+      "__id__": 131
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -2589,7 +2621,7 @@
       "__id__": 106
     },
     "targetInfo": {
-      "__id__": 136
+      "__id__": 139
     }
   },
   {

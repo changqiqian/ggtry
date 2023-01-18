@@ -22,12 +22,12 @@ export class Hall_LunBoItem extends BaseUI
     {
         this.mBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("common","prefab/InsertWebView",true , (_script)=>
-            {
-                let tempScript = _script as InsertWebView;
-                tempScript.SetTile("Detail");
-                tempScript.SetUrl(this.mUrl);
-            });
+            // UIMgr.Instance.ShowLayer("common","prefab/InsertWebView",true , (_script)=>
+            // {
+            //     let tempScript = _script as InsertWebView;
+            //     tempScript.SetTile("Detail");
+            //     tempScript.SetUrl(this.mUrl);
+            // });
         });
     }
     RegDataNotify() 
@@ -46,11 +46,11 @@ export class Hall_LunBoItem extends BaseUI
 
     public InitWithData(_url : string , _picUrl : string)
     {
-        this.mUrl = _url;
-        this.LoadRemoteSprite(_picUrl,(_spriteFrame)=>
-        {
-            this.mHttpImage.spriteFrame = _spriteFrame;
-        });
+        // this.mUrl = _url;
+        // this.LoadRemoteSprite(_picUrl,(_spriteFrame)=>
+        // {
+        //     this.mHttpImage.spriteFrame = _spriteFrame;
+        // });
     }
 }
 

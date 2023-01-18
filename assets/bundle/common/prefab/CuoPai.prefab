@@ -31,9 +31,6 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 66
-      },
-      {
         "__id__": 68
       },
       {
@@ -41,10 +38,13 @@
       },
       {
         "__id__": 72
+      },
+      {
+        "__id__": 74
       }
     ],
     "_prefab": {
-      "__id__": 74
+      "__id__": 76
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1140,6 +1140,9 @@
       },
       {
         "__id__": 65
+      },
+      {
+        "__id__": 66
       }
     ],
     "removedComponents": []
@@ -1309,6 +1312,26 @@
     "value": "直接显示"
   },
   {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 67
+    },
+    "propertyPath": [
+      "_contentSize"
+    ],
+    "value": {
+      "__type__": "cc.Size",
+      "width": 350,
+      "height": 100
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "6bl478mYtDHqn5INKDzzGm"
+    ]
+  },
+  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -1317,7 +1340,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 67
+      "__id__": 69
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -1344,7 +1367,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 69
+      "__id__": 71
     },
     "_alignFlags": 45,
     "_target": null,
@@ -1379,7 +1402,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 71
+      "__id__": 73
     },
     "_id": ""
   },
@@ -1396,7 +1419,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 73
+      "__id__": 75
     },
     "mCardSize": {
       "__type__": "cc.Size",
@@ -1439,7 +1462,7 @@
     "fileId": "93Ps+25FlFIKyWSVJ5meoJ",
     "targetOverrides": [
       {
-        "__id__": 75
+        "__id__": 77
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -1451,7 +1474,7 @@
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 72
+      "__id__": 74
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -1461,7 +1484,7 @@
       "__id__": 48
     },
     "targetInfo": {
-      "__id__": 76
+      "__id__": 78
     }
   },
   {

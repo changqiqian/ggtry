@@ -10,14 +10,6 @@ import { HallData } from '../hall/HallData';
 import { Club_MainEnter } from './Club_MainEnter';
 const { ccclass, property } = _decorator;
 
-class ClubStrct
-{
-    constructor()
-    {
-
-    }
-}
-
 
 @ccclass('Club_Main')
 export class Club_Main extends BaseUI 
@@ -29,7 +21,7 @@ export class Club_Main extends BaseUI
     @property(PageView) 
     mPageView: PageView = null;
     @property(BaseButton) 
-    mLuckyDrawBtn: BaseButton = null;
+    mCowboyBtn: BaseButton = null;
 
 
     InitParam() 
@@ -45,6 +37,14 @@ export class Club_Main extends BaseUI
         this.mSearchBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowWindow("clubPage","prefab/Club_SearchLayer");
+        })
+
+        this.mCowboyBtn.Show(false);
+        this.mCowboyBtn.SetClickCallback(()=>
+        {
+            let cowboyList = HallData.Instance.GetHallGameList(GameType.GameType_Cowboy);
+            let gameId = cowboyList[0].gameId;
+            NetworkSend.Instance.EnterCowboy(gameId);
         })
     }
 
@@ -70,6 +70,11 @@ export class Club_Main extends BaseUI
         HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
         {
             this.RemovePage(_data);
+            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+            if(currentClubId == _data)
+            {
+                HallData.Instance.Data_ClubEnter.mData = false;
+            }
         });
         LocalPlayerData.Instance.Data_AccountLevel.AddListenner(this,(_data)=>
         {
@@ -120,20 +125,26 @@ export class Club_Main extends BaseUI
                 UIMgr.Instance.HideUiByTag(HallData.ClubUiTag);
             }
         });
-        HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
-        {
-            let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
-            if(currentClubId == _data)
-            {
-                HallData.Instance.Data_ClubEnter.mData = false;
-            }
-        });
         HallData.Instance.Data_ClubSearchSuccess.AddListenner(this,(_data)=>
         {
             if(_data)
             {
                 UIMgr.Instance.ShowWindow("clubPage","prefab/Club_SearchClubWindow");
             }
+        });
+
+
+        HallData.Instance.Data_S2CGetHallSubGameInfoResp.AddListenner(this,(_data)=>
+        {
+            let cowboyList = HallData.Instance.GetHallGameList(GameType.GameType_Cowboy);
+            if(cowboyList == null || cowboyList.length == 0)
+            {
+                this.mCowboyBtn.Show(false);
+                return;
+            }
+
+            this.mCowboyBtn.Show(true);
+
         });
 
     }

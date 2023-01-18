@@ -37,14 +37,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 184
+        "__id__": 187
       },
       {
-        "__id__": 186
+        "__id__": 189
       }
     ],
     "_prefab": {
-      "__id__": 188
+      "__id__": 191
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -3400,6 +3400,12 @@
       },
       {
         "__id__": 182
+      },
+      {
+        "__id__": 184
+      },
+      {
+        "__id__": 186
       }
     ],
     "removedComponents": []
@@ -3596,6 +3602,32 @@
     ]
   },
   {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 185
+    },
+    "propertyPath": [
+      "_spriteFrame"
+    ],
+    "value": null
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "dfhA+hpB9D86xlp6wJM560"
+    ]
+  },
+  {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 185
+    },
+    "propertyPath": [
+      "_enabled"
+    ],
+    "value": false
+  },
+  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -3604,7 +3636,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 185
+      "__id__": 188
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -3631,7 +3663,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 187
+      "__id__": 190
     },
     "mCircleTimer": null,
     "mGameType": {
@@ -3682,10 +3714,10 @@
     "fileId": "57xIgTTNhHu6DIduP3r2GB",
     "targetOverrides": [
       {
-        "__id__": 189
+        "__id__": 192
       },
       {
-        "__id__": 191
+        "__id__": 194
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -3700,7 +3732,7 @@
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 186
+      "__id__": 189
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -3710,7 +3742,7 @@
       "__id__": 11
     },
     "targetInfo": {
-      "__id__": 190
+      "__id__": 193
     }
   },
   {
@@ -3722,7 +3754,7 @@
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 186
+      "__id__": 189
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -3732,7 +3764,7 @@
       "__id__": 164
     },
     "targetInfo": {
-      "__id__": 192
+      "__id__": 195
     }
   },
   {

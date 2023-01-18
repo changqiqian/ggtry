@@ -2,6 +2,12 @@ import { UIMgr } from "./base/UIMgr";
 import { Localization } from './base/Localization';
 export class Tool
 {
+
+    public static ConvertSecondsToHour(_time :number) : string
+    {
+        let result = _time/3600;
+        return result.toFixed(1);
+    }
     //获取几分几秒对应的字符串时间显示格式  00:00
     public static GetRestTime_M_S(_time :number ) : string
     {
@@ -31,70 +37,41 @@ export class Tool
         return finalTime;
     }
 
-    //获取对应的时间格式  xx天xx小时xx分xx秒
-    public static GetRestTime_D_H_M_S(_time) : string
+    public static getRestTime_H_M_S(_time :number ) : string
     {
-        let days = parseInt((_time / 60 / 60 / 24).toString() , 10); //计算剩余的天数 
-        let hours = parseInt((_time / 60 / 60 % 24).toString() , 10); //计算剩余的小时 
-        let minutes = parseInt((_time / 60 % 60).toString(), 10);//计算剩余的分钟 
-        let seconds = parseInt((_time % 60).toString(), 10);//计算剩余的秒数
-        let time = '';
+        let hourAmount = 3600;
+        let minAmount = 60;
         
-        if (days > 0) 
+        let hour =  Math.floor(_time/hourAmount);
+        _time -= hour * hourAmount;
+        let min =  Math.floor(_time/minAmount);
+        _time -= min * minAmount;
+        let second = _time;
+
+
+        let hourStr = "";
+        let minStr = "";
+        let secondStr = "";
+
+        hourStr = hour + "";
+        if(hour<10)
         {
-            if (days < 10)
-                time = days + "Days ";
-                if(days==1)
-                {
-                    time =days + "Day ";
-                }
-            else
-            {
-                time = days + "Days ";
-            }
+            hourStr = "0" + hour;
         }
-        if (hours > 0) 
+
+        minStr = min + "";
+        if(min<10)
         {
-            if (hours < 10)
-            {
-                time += "0" + hours + ":";
-            }
-            else
-            {
-                time += hours + ":";
-            }
+            minStr = "0" + min;
         }
-        if (minutes > 0) 
+
+        secondStr = second + "";
+        if(second<10)
         {
-            if (minutes < 10)
-            {
-                time += "0" + minutes + ":";
-            }
-            else
-            {
-                time += minutes + ":";
-            }
-        } 
-        else 
-        {
-            time += "00:";
+            secondStr = "0" + second;
         }
-        if (seconds > 0) 
-        {
-            if (seconds < 10)
-            {
-                time += "0" + seconds;
-            }
-            else
-            {
-                time += seconds;
-            }
-        } 
-        else 
-        {
-            time += "00";
-        }
-        return (time == "") ? "0" : time;
+        let finalTime = hourStr + ":" + minStr + ":" + secondStr;
+        return finalTime;
     }
 
     //以...来代替多出来的文字

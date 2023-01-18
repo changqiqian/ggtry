@@ -18,6 +18,34 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
     public RegisterMsg()
     {
         
+        Network.Instance.AddMsgListenner(MessageId.S2C_GetHallSubGameInfoResp,(_data)=>
+        {
+            let msg = S2CGetHallSubGameInfoResp.decode(_data);
+            console.log("收到的内容 S2C_GetHallSubGameInfoResp  大厅小游戏列表==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                HallData.Instance.Data_S2CGetHallSubGameInfoResp.mData = msg;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_GetHallTexasGameInfoResp,(_data)=>
+        {
+            let msg = S2CHallTexasGameInfoResp.decode(_data);
+            console.log("收到的内容 S2C_GetHallTexasGameInfoResp  大厅德州列表==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                HallData.Instance.Data_S2CHallTexasGameInfoResp.mData = msg;
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
         Network.Instance.AddMsgListenner(MessageId.S2C_VerifyPhoneNumber,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
@@ -516,10 +544,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
-
-        
-        
-
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonBringInResp,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);

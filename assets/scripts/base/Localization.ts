@@ -390,6 +390,7 @@ export class Localization {
         { name: '00303', ch: '牌局回顾', en: 'Record' },
         { name: '00304', ch: '现金', en: 'Cash' },
         { name: '00305', ch: '我的金币', en: 'Balance' },
+        { name: '00306', ch: '德州', en: 'Texas' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

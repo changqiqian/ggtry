@@ -14,12 +14,8 @@ export class Club_CreateLayer extends BaseUI
     mCloseBtn: BaseButton = null;
     @property(BaseButton) 
     mLogoBtn: BaseButton = null;
-    @property(Sprite) 
-    mLogo: Sprite = null;
     @property(BaseButton) 
     mStampBtn: BaseButton = null;
-    @property(Sprite) 
-    mStamp: Sprite = null;
     @property(EditBox) 
     mNameEditBox: EditBox = null;
     @property(Label) 
@@ -93,7 +89,7 @@ export class Club_CreateLayer extends BaseUI
             let logoName = "Logo" + _data;
             this.LoadSprite("common" , "texture/club/" + logoName , (_spriteFrame)=>
             {
-                this.mLogo.spriteFrame = _spriteFrame;
+                this.mLogoBtn.SetSprite(_spriteFrame)
             })
         });
 
@@ -102,7 +98,7 @@ export class Club_CreateLayer extends BaseUI
             let stampName = "Stamp" + _data;
             this.LoadSprite("common" , "texture/club/" + stampName , (_spriteFrame)=>
             {
-                this.mStamp.spriteFrame = _spriteFrame;
+                this.mStampBtn.SetSprite(_spriteFrame)
             })
         })
     }

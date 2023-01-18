@@ -495,7 +495,22 @@ export class NetworkSend extends Singleton<NetworkSend>()
         Network.Instance.SendMsg(MessageId.C2S_TexasCowboyTotalHistory , C2STexasCowboyTotalHistory.encode(msg).finish());
         console.log("游戏总记录 德州牛仔  === " + JSON.stringify(msg))
     }
+
+    public GetMiniGameListInHall()
+    {
+        let msg = new C2SGetHallSubGameInfo();
+        Network.Instance.SendMsg(MessageId.C2S_GetHallSubGameInfo , C2SGetHallSubGameInfo.encode(msg).finish());
+        console.log("获取大厅 小游戏列表  === " + JSON.stringify(msg))
+    }
+
+    public GetTexasGameListInHall()
+    {
+        let msg = new C2SGetHallTexasGameInfo();
+        Network.Instance.SendMsg(MessageId.C2S_GetHallTexasGameInfo , C2SGetHallTexasGameInfo.encode(msg).finish());
+        console.log("获取大厅 德州列表  === " + JSON.stringify(msg))
+    }
 }
+
 
 
 
