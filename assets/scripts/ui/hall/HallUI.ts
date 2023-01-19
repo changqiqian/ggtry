@@ -63,13 +63,23 @@ export class HallUI extends BaseUI
         {
             if(AdaptTop.IsIphoneX)
             {
-                UIMgr.Instance.ShowLayer("cowboy","prefab/CowboyUI_Tall");  
+                UIMgr.Instance.ShowLayer("cowboy","prefab/CowboyUI_Tall",true,null,CowboyData.UITag);  
             }
             else
             {
-                UIMgr.Instance.ShowLayer("cowboy","prefab/CowboyUI");  
+                UIMgr.Instance.ShowLayer("cowboy","prefab/CowboyUI",true,null,CowboyData.UITag);  
             }
         })
+
+        CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.AddListenner(this,(_data)=>
+        {
+            UIMgr.Instance.HideUiByTag(CowboyData.UITag);
+        });
+
+        CowboyData.Instance.Data_HideUI.AddListenner(this,(_data)=>
+        {
+            UIMgr.Instance.HideUiByTag(CowboyData.UITag);
+        });
     }
     LateInit() 
     {

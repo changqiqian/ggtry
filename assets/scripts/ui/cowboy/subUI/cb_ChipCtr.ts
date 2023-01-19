@@ -32,7 +32,6 @@ export class cb_ChipCtr extends BaseUI
 
         CowboyData.Instance.Data_SelectedChip.AddListenner(this,(_data)=>
         {
-            this.mLastTimeChosenAmount = _data;
         })
 
         CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
@@ -106,8 +105,10 @@ export class cb_ChipCtr extends BaseUI
             this.DisableChip(i , currentAmount > minAviliableAmount);
         }
 
-
-        if(CowboyData.Instance.Data_SelectedChip.mData > minAviliableAmount)
+        console.log("this.mLastTimeChosenAmount == " + this.mLastTimeChosenAmount);
+        console.log("minAviliableAmount == " + minAviliableAmount);
+        console.log("CowboyData.Instance.Data_SelectedChip.mData == " + CowboyData.Instance.Data_SelectedChip.mData);
+        if(this.mLastTimeChosenAmount > minAviliableAmount)
         {
             CowboyData.Instance.Data_SelectedChip.mData =  minAviliableAmount;
         }
@@ -121,6 +122,7 @@ export class cb_ChipCtr extends BaseUI
     {
         let totalMoney = Tool.ConvertMoney_S2C(CowboyData.Instance.Data_Money.mData);
         let minAviliableAmount = 0;
+
         for(let i = CowboyData.Instance.ChipAmountConfig.length - 1 ; i >= 0 ; i--)
         {
             let currentAmount = CowboyData.Instance.ChipAmountConfig[i];
@@ -137,6 +139,7 @@ export class cb_ChipCtr extends BaseUI
 
     DisableAllChip()
     {
+        this.mLastTimeChosenAmount = CowboyData.Instance.Data_SelectedChip.mData;
         CowboyData.Instance.Data_SelectedChip.mData = 0;
         for(let i = CowboyData.Instance.ChipAmountConfig.length - 1 ; i >= 0 ; i--)
         {

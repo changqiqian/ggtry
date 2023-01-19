@@ -30,6 +30,10 @@ export class cb_Chip extends BaseUI {
         tween.to(1,{opacity : 0},{easing:easing.linear});
         tween.call(()=>
         {
+            if (cc.isValid(this.node, true) == false) 
+            {
+                return;
+            }
             this.node.active = false;
         });
         tween.start();

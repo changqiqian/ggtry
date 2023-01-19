@@ -333,9 +333,13 @@ export abstract class BaseUI extends Component {
 
     DeleteSelf()
     {
+        if (cc.isValid(this.node, true) == false) 
+        {
+            return;
+        }
+        this.StopAllTween();
         this.node.removeFromParent();
         this.node.destroy();
-
     }
 
 
@@ -364,7 +368,7 @@ export abstract class BaseUI extends Component {
         }
         let getVisibleSize = view.getVisibleSize();
         let tempTransform = _target.getComponent(UITransform);
-        tempTransform.setContentSize(getVisibleSize);
+        tempTransform.setContentSize(getVisibleSize.width*1.1 , getVisibleSize.height * 1.1);
         _target.setWorldPosition(new Vec3(getVisibleSize.width/2 ,getVisibleSize.height/2));
     }
 

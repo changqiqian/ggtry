@@ -27766,7 +27766,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 547.9360000000001,
+      "y": 520.627,
       "z": 0
     },
     "_lrot": {
@@ -27874,12 +27874,12 @@
     "__prefab": {
       "__id__": 2254
     },
-    "_alignFlags": 4,
+    "_alignFlags": 1,
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 673.083,
-    "_bottom": 1734.4360000000001,
+    "_top": 665.873,
+    "_bottom": 1707.127,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -27889,7 +27889,7 @@
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
-    "_originalHeight": 0,
+    "_originalHeight": 63,
     "_alignMode": 2,
     "_lockFlags": 0,
     "_id": ""

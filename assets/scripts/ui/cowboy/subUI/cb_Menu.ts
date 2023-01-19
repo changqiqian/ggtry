@@ -1,8 +1,10 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { UIMgr } from '../../../base/UIMgr';
+import { NetworkSend } from '../../../network/NetworkSend';
 import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
+import { CowboyData } from '../CowboyData';
 const { ccclass, property } = _decorator;
 
 @ccclass('cb_Menu')
@@ -39,11 +41,12 @@ export class cb_Menu extends BaseUI
         });
         this.mBringInBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowWindow("cowboy","prefab/subUI/cb_BuyInWindow",true)
+            UIMgr.Instance.ShowWindow("cowboy","prefab/subUI/cb_BuyInWindow",true,null,CowboyData.UITag)
         });
         this.mExitBtn.SetClickCallback(()=>
         {
-
+            let gameId = CowboyData.Instance.GetGameId();
+            NetworkSend.Instance.ExitCowboy(gameId);
         });
     }
     RegDataNotify()

@@ -20,9 +20,9 @@ export class cb_BetRow0 extends BaseUI
     BindUI() 
     {
         this.ResetUI();
-        this.mBetArea0.SetAreaConfig(Localization.GetString("00281"),"2",CowboyAreaType.CowboyAreaType_0); //牛仔赢
-        this.mBetArea1.SetAreaConfig(Localization.GetString("00282"),"2",CowboyAreaType.CowboyAreaType_1); //平
-        this.mBetArea2.SetAreaConfig(Localization.GetString("00283"),"2",CowboyAreaType.CowboyAreaType_2); //美女赢
+        this.mBetArea0.SetAreaConfig(Localization.GetString("00281") , CowboyAreaType.CowboyAreaType_0); //牛仔赢
+        this.mBetArea1.SetAreaConfig(Localization.GetString("00282") , CowboyAreaType.CowboyAreaType_1); //平
+        this.mBetArea2.SetAreaConfig(Localization.GetString("00283") , CowboyAreaType.CowboyAreaType_2); //美女赢
     }
     RegDataNotify() 
     {

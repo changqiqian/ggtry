@@ -6,6 +6,7 @@ import { cb_BetConfig, CowboyData } from '../CowboyData';
 import { cb_HistoryLayout } from './cb_HistoryLayout';
 import { cb_Chip } from './cb_Chip';
 import { SpineCtr } from '../../../UiTool/SpineCtr';
+import { NetworkSend } from '../../../network/NetworkSend';
 const { ccclass, property } = _decorator;
 
 @ccclass('cb_BetArea')
@@ -42,12 +43,13 @@ export class cb_BetArea extends BaseUI {
     {
         CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
         {
+            let ratio = CowboyData.Instance.GetRatio(this.mBetArea);
+            this.mAreaRatio.string = ratio + "X";
             if(_data.phase == CowboyPhase.CowBoyPhase_Settlement)
             {
                 this.ResetUI();
                 return;
             }
-
             this.RevertBetInfo();
             this.RevertHistory();
         })
@@ -62,18 +64,23 @@ export class cb_BetArea extends BaseUI {
 
         CowboyData.Instance.Data_S2CTexasCowboyBetNotify.AddListenner(this,(_data)=>
         {
-            let betInfo = _data.betInfo;
-            if(betInfo.betArea != this.mBetArea)
+            let betInfos = _data.betInfo;
+
+            for(let i = 0 ; i < betInfos.length ; i++)
             {
-                return;
+                let current = betInfos[i];
+                if(current.betArea == this.mBetArea)
+                {
+                    let worldPos = this.mChipContainer.worldPosition; 
+                    let offset = this.mChipContainer.getComponent(UITransform).contentSize;
+                    let haflOffset = new Size(offset.width/2 , offset.height/2);
+                    let actionId = current.actionId;
+                    let betConfig = new cb_BetConfig(worldPos,haflOffset,this.mBetArea ,actionId ,Tool.ConvertMoney_S2C(current.amount));
+                    CowboyData.Instance.Data_BetConfig.mData = betConfig;
+                }
+    
             }
 
-            let worldPos = this.mChipContainer.worldPosition; 
-            let offset = this.mChipContainer.getComponent(UITransform).contentSize;
-            let haflOffset = new Size(offset.width/2 , offset.height/2);
-            let actionId = betInfo.actionId;
-            let betConfig = new cb_BetConfig(worldPos,haflOffset,this.mBetArea ,actionId ,Tool.ConvertMoney_S2C(betInfo.amount));
-            CowboyData.Instance.Data_BetConfig.mData = betConfig;
             this.UpdateBetMoney();
         });
 
@@ -96,6 +103,20 @@ export class cb_BetArea extends BaseUI {
             }
 
             this.mWinSpine.SetAnimation("win");
+
+            let myBetInfo = CowboyData.Instance.GetSelfBetInfoByAreaTpye(this.mBetArea);
+            if(myBetInfo == null)
+            {
+                return;
+            }
+            let ratio = CowboyData.Instance.GetRatio(this.mBetArea);
+            let winAmount = ratio * myBetInfo.amount;
+            let worldPos = this.mChipContainer.worldPosition; 
+            let offset = this.mChipContainer.getComponent(UITransform).contentSize;
+            let haflOffset = new Size(offset.width/2 , offset.height/2);
+            let actionId = LocalPlayerData.Instance.Data_Uid.mData;
+            let betConfig = new cb_BetConfig(worldPos,haflOffset,this.mBetArea ,actionId ,Tool.ConvertMoney_S2C(winAmount));
+            CowboyData.Instance.Data_CollectConfig.mData = betConfig;
         });
         
         
@@ -166,6 +187,9 @@ export class cb_BetArea extends BaseUI {
         }
 
         //发送下注消息
+        let gameId = CowboyData.Instance.GetGameId();
+        let amount = Tool.ConvertMoney_C2S(CowboyData.Instance.Data_SelectedChip.mData);
+        NetworkSend.Instance.BetCowboy(gameId,this.mBetArea,amount);
     }
 
     
@@ -197,10 +221,9 @@ export class cb_BetArea extends BaseUI {
     }
 
 
-    SetAreaConfig(_name : string , _ratio : string , _betArea :CowboyAreaType)
+    SetAreaConfig(_name : string , _betArea :CowboyAreaType)
     {
         this.mAreaName.string = _name;
-        this.mAreaRatio.string = _ratio;
         this.mBetArea = _betArea;
     }
 

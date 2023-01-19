@@ -7,7 +7,7 @@ import { Tool } from '../../Tool';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { SpineCtr } from '../../UiTool/SpineCtr';
 import { CircleTimer } from '../common/CircleTimer';
-import { cb_ChipConfig, CowboyData } from './CowboyData';
+import { CowboyData } from './CowboyData';
 import { cb_Chip } from './subUI/cb_Chip';
 const { ccclass, property } = _decorator;
 
@@ -27,7 +27,7 @@ export class CowboyUI extends BaseUI
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
 
-    mChipList : Array<cb_ChipConfig>;
+    mChips : Array<Node> = new Array<Node>();
 
     public Show(_val : boolean)
     {
@@ -43,7 +43,7 @@ export class CowboyUI extends BaseUI
     }
     InitParam() 
     {
-        this.mChipList = new Array<cb_ChipConfig>();
+
     }
     BindUI() 
     {
@@ -53,6 +53,19 @@ export class CowboyUI extends BaseUI
     }
     RegDataNotify() 
     {
+        CowboyData.Instance.Data_CollectConfig.AddListenner(this,(_data)=>
+        {
+            let tempChip = instantiate(this.mChip) as Node;
+            let startPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(_data.mTargetWorldPos);
+            this.node.addChild(tempChip);
+            this.mChips.push(tempChip);
+            let localPlayerWorldPos = CowboyData.Instance.Data_LocalPlayerPos.mData;
+            let localPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(localPlayerWorldPos);
+            tempChip.setPosition(startPos);
+            tempChip.getComponent(cb_Chip).SetAmount(_data.mAmount);
+            this.ChipFlyTo(tempChip,localPlayerPos);
+        });
+
         CowboyData.Instance.Data_BetConfig.AddListenner(this,(_data)=>
         {
             let tempChip = instantiate(this.mChip) as Node;
@@ -62,9 +75,8 @@ export class CowboyUI extends BaseUI
             finlaOffset.width = _data.mOffset.width - chipSize.width/2;
             finlaOffset.height = _data.mOffset.height - chipSize.height/2;
             let finalPos = this.RandomPos(flyToPos , finlaOffset);
-            let config = new cb_ChipConfig(_data.mUid,_data.mBetArea,tempChip);
-            this.mChipList.push(config);
             this.node.addChild(tempChip);
+            this.mChips.push(tempChip);
             //自己下注
             if(LocalPlayerData.Instance.Data_Uid.mData == _data.mUid)
             {   
@@ -72,7 +84,7 @@ export class CowboyUI extends BaseUI
                 let localPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(localPlayerWorldPos);
                 tempChip.setPosition(localPlayerPos);
                 tempChip.getComponent(cb_Chip).SetAmount(_data.mAmount);
-                this.ChipFlyToBetArea(config,finalPos);
+                this.ChipFlyTo(tempChip,finalPos);
             }
             else//其他玩家下注
             {
@@ -80,7 +92,7 @@ export class CowboyUI extends BaseUI
                 let otherPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(otherPlayerWorldPos);
                 tempChip.setPosition(otherPlayerPos);
                 tempChip.getComponent(cb_Chip).SetAmount(_data.mAmount);
-                this.ChipFlyToBetArea(config,finalPos);
+                this.ChipFlyTo(tempChip,finalPos);
             }
         });
         CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
@@ -111,6 +123,12 @@ export class CowboyUI extends BaseUI
 
             this.mSpineWait.Hide(); 
             this.UpdatePhaseStatus();
+
+            for(let i = 0 ; i < this.mChips.length ; i++)
+            {
+                this.mChips[i].getComponent(cb_Chip).DeleteSelf();
+            }
+            
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
@@ -123,15 +141,6 @@ export class CowboyUI extends BaseUI
             this.UpdatePhaseStatus();
         });
 
-        CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.AddListenner(this,(_data)=>
-        {
-            this.Show(false);
-        });
-
-        CowboyData.Instance.Data_HideUI.AddListenner(this,(_data)=>
-        {
-            this.Show(false);
-        });
 
     }
     LateInit() 
@@ -142,56 +151,18 @@ export class CowboyUI extends BaseUI
 
     CustmoerDestory()
     {
-        this.mChipList.splice(0,this.mChipList.length - 1);
-        this.mChipList = null;
+        this.mChips = null;
         CowboyData.Instance.Clear();
     }
     
 
-    ChipFlyToBetArea(_config : cb_ChipConfig , _pos : Vec3)
+    ChipFlyTo(_chip : Node , _pos : Vec3)
     {
-        let tween = new Tween(_config.mNode);
+        let tween = new Tween(_chip);
         tween.to(0.5,{position:_pos},{easing:easing.quadOut});
         tween.start();
     }
 
-    ChipFlyToPlayer(_config : cb_ChipConfig)
-    {
-        //自己回收筹码
-        if(_config.mUid == LocalPlayerData.Instance.Data_Uid.mData)
-        {
-            let duration = 0.5;
-            let localPlayerWorldPos = CowboyData.Instance.Data_LocalPlayerPos.mData;
-            let localPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(localPlayerWorldPos);
-            let tween = new Tween(_config.mNode);
-            tween.to(duration,{position:localPlayerPos},{easing:easing.quadOut});
-            tween.call(()=>
-            {
-                _config.mNode.active = false;
-            });
-            tween.start();
-        }
-        else //其他玩家回收筹码
-        {
-
-        }
-    }
-
-    CollectChip(_winArea : CowboyAreaType)
-    {
-        for(let i = 0 ; i < this.mChipList.length ; i++)
-        {
-            let currentConfig = this.mChipList[i];
-            if(currentConfig.mBetArea == _winArea)//玩家回收筹码
-            {
-                this.ChipFlyToPlayer(currentConfig);
-            }
-            else //系统回收筹码
-            {
-
-            }
-        }
-    }
 
     RandomPos(_pos : Vec3 , _offset : Size) : Vec3
     {

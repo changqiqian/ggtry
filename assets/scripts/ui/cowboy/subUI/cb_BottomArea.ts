@@ -1,8 +1,9 @@
-import { _decorator, Component, Node, Label } from 'cc';
+import { _decorator, Component, Node, Label, instantiate } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Tool } from '../../../Tool';
 import { PlayerInfo } from '../../common/PlayerInfo';
+import { Game_WinEffect } from '../../gamePage/subUI/Game_WinEffect';
 import { CowboyData } from '../CowboyData';
 
 import { cb_ChipCtr } from './cb_ChipCtr';
@@ -41,6 +42,28 @@ export class cb_BottomArea extends BaseUI {
         CowboyData.Instance.Data_Money.AddListenner(this,(_data)=>
         {
             this.mMoney.string = Tool.ConvertMoney_S2C(_data) + "";
+        });
+
+        CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
+        {
+            for(let i = 0 ; i < _data.result.length ; i++)
+            {
+                let current = _data.result[i];
+                if(current.uid == LocalPlayerData.Instance.Data_Uid.mData)
+                {
+                    if(current.winLose > 0)
+                    {
+                        this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
+                        {
+                            let tempNode = instantiate(_prefab);
+                            this.mPlayerInfo.node.addChild(tempNode);
+                            let script = tempNode.getComponent(Game_WinEffect);
+                            script.InitWithData(current.winLose);
+                        })
+                    }
+                    break;
+                }
+            }
         });
 
     }

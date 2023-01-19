@@ -17,8 +17,8 @@ export class cb_BetRow2 extends BaseUI {
     BindUI() 
     {
         this.ResetUI();
-        this.mBetArea0.SetAreaConfig(Localization.GetString("00286"),"10",CowboyAreaType.CowboyAreaType_4); //对子
-        this.mBetArea1.SetAreaConfig(Localization.GetString("00287"),"10",CowboyAreaType.CowboyAreaType_5); //对A
+        this.mBetArea0.SetAreaConfig(Localization.GetString("00286") , CowboyAreaType.CowboyAreaType_4); //对子
+        this.mBetArea1.SetAreaConfig(Localization.GetString("00287") , CowboyAreaType.CowboyAreaType_5); //对A
     }
     RegDataNotify() 
     {

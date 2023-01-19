@@ -1121,6 +1121,21 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CTexasCowboyBetNotify.decode(_data);
             console.log("收到的内容 S2C_TexasCowboyBetNotify  牛仔下注推送==" + JSON.stringify(msg));
+
+
+            for(let i = 0 ; i < msg.betInfo.length  ; i++)
+            {
+                let current = msg.betInfo[i];
+                let betAreaInfo = CowboyData.Instance.GetAreaBetInfoByAreaType(current.betArea);
+                betAreaInfo.totalBetNum += current.amount;
+
+                if(current.actionId == LocalPlayerData.Instance.Data_Uid.mData)
+                {
+                    let myBetInfo = CowboyData.Instance.GetSelfBetInfoByAreaTpye(current.betArea);
+                    myBetInfo.amount += current.amount;
+                }
+            }
+
             CowboyData.Instance.Data_S2CTexasCowboyBetNotify.mData = msg;
 
         },this);  
@@ -1130,6 +1145,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CTexasCowboyGameStartNotify.decode(_data);
             console.log("收到的内容 S2C_TexasCowboyGameStartNotify  牛仔 游戏开始 推送==" + JSON.stringify(msg));
+            CowboyData.Instance.ClearData();
             CowboyData.Instance.SetPhase(CowboyPhase.CowBoyPhase_Start);
             CowboyData.Instance.SetOneCard(msg.oneCard);
             CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.mData = msg;

@@ -9364,6 +9364,7 @@ $root.S2CTexasCowboyEnterGameResp = (function() {
      * @property {number|null} [restTime] S2CTexasCowboyEnterGameResp restTime
      * @property {ICardInfo|null} [oneCard] S2CTexasCowboyEnterGameResp oneCard
      * @property {number|null} [money] S2CTexasCowboyEnterGameResp money
+     * @property {Array.<number>|null} [ratio] S2CTexasCowboyEnterGameResp ratio
      */
 
     /**
@@ -9378,6 +9379,7 @@ $root.S2CTexasCowboyEnterGameResp = (function() {
         this.cowboyAreaInfoList = [];
         this.myBetInfo = [];
         this.history = [];
+        this.ratio = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -9473,6 +9475,14 @@ $root.S2CTexasCowboyEnterGameResp = (function() {
     S2CTexasCowboyEnterGameResp.prototype.money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * S2CTexasCowboyEnterGameResp ratio.
+     * @member {Array.<number>} ratio
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.ratio = $util.emptyArray;
+
+    /**
      * Encodes the specified S2CTexasCowboyEnterGameResp message. Does not implicitly {@link S2CTexasCowboyEnterGameResp.verify|verify} messages.
      * @function encode
      * @memberof S2CTexasCowboyEnterGameResp
@@ -9512,6 +9522,12 @@ $root.S2CTexasCowboyEnterGameResp = (function() {
             $root.CardInfo.encode(m.oneCard, w.uint32(82).fork()).ldelim();
         if (m.money != null && Object.hasOwnProperty.call(m, "money"))
             w.uint32(88).int64(m.money);
+        if (m.ratio != null && m.ratio.length) {
+            w.uint32(98).fork();
+            for (var i = 0; i < m.ratio.length; ++i)
+                w.int64(m.ratio[i]);
+            w.ldelim();
+        }
         return w;
     };
 
@@ -9571,6 +9587,16 @@ $root.S2CTexasCowboyEnterGameResp = (function() {
                 break;
             case 11:
                 m.money = r.int64();
+                break;
+            case 12:
+                if (!(m.ratio && m.ratio.length))
+                    m.ratio = [];
+                if ((t & 7) === 2) {
+                    var c2 = r.uint32() + r.pos;
+                    while (r.pos < c2)
+                        m.ratio.push(r.int64());
+                } else
+                    m.ratio.push(r.int64());
                 break;
             default:
                 r.skipType(t & 7);
@@ -12771,7 +12797,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} C2S_TexasCashBuyInsurance=5010 C2S_TexasCashBuyInsurance value
  * @property {number} C2S_TexasCashChat=5011 C2S_TexasCashChat value
  * @property {number} C2S_TexasCashGetObList=5012 C2S_TexasCashGetObList value
- * @property {number} CS2_TexasCashGetBringInList=5013 CS2_TexasCashGetBringInList value
+ * @property {number} C2S_TexasCashGetBringInList=5013 C2S_TexasCashGetBringInList value
  * @property {number} C2S_TexasCashRefresh=5014 C2S_TexasCashRefresh value
  * @property {number} C2S_TexasCashExaminePublicCard=5015 C2S_TexasCashExaminePublicCard value
  * @property {number} C2S_TexasCashExaminePrivateCard=5016 C2S_TexasCashExaminePrivateCard value
@@ -12922,7 +12948,7 @@ $root.MessageId = (function() {
     values[valuesById[5010] = "C2S_TexasCashBuyInsurance"] = 5010;
     values[valuesById[5011] = "C2S_TexasCashChat"] = 5011;
     values[valuesById[5012] = "C2S_TexasCashGetObList"] = 5012;
-    values[valuesById[5013] = "CS2_TexasCashGetBringInList"] = 5013;
+    values[valuesById[5013] = "C2S_TexasCashGetBringInList"] = 5013;
     values[valuesById[5014] = "C2S_TexasCashRefresh"] = 5014;
     values[valuesById[5015] = "C2S_TexasCashExaminePublicCard"] = 5015;
     values[valuesById[5016] = "C2S_TexasCashExaminePrivateCard"] = 5016;

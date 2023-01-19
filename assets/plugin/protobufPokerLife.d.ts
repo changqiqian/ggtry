@@ -3299,6 +3299,9 @@ export class S2CTexasCowboyEnterGameResp implements IS2CTexasCowboyEnterGameResp
     /** S2CTexasCowboyEnterGameResp money. */
     public money: number;
 
+    /** S2CTexasCowboyEnterGameResp ratio. */
+    public ratio: number[];
+
     /**
      * Encodes the specified S2CTexasCowboyEnterGameResp message. Does not implicitly {@link S2CTexasCowboyEnterGameResp.verify|verify} messages.
      * @param m S2CTexasCowboyEnterGameResp message or plain object to encode
@@ -4472,7 +4475,7 @@ export enum MessageId {
     C2S_TexasCashBuyInsurance = 5010,
     C2S_TexasCashChat = 5011,
     C2S_TexasCashGetObList = 5012,
-    CS2_TexasCashGetBringInList = 5013,
+    C2S_TexasCashGetBringInList = 5013,
     C2S_TexasCashRefresh = 5014,
     C2S_TexasCashExaminePublicCard = 5015,
     C2S_TexasCashExaminePrivateCard = 5016,

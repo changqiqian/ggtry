@@ -19,9 +19,9 @@ export class cb_BetRow4 extends BaseUI {
     BindUI() 
     {
         this.ResetUI();
-        this.mBetArea0.SetAreaConfig(Localization.GetString("00291"),"10",CowboyAreaType.CowboyAreaType_8); //三条/顺子/同花
-        this.mBetArea1.SetAreaConfig(Localization.GetString("00077"),"10",CowboyAreaType.CowboyAreaType_9); //葫芦
-        this.mBetArea2.SetAreaConfig(Localization.GetString("00293"),"10",CowboyAreaType.CowboyAreaType_10); //四条/同花顺/皇家同花顺
+        this.mBetArea0.SetAreaConfig(Localization.GetString("00291") , CowboyAreaType.CowboyAreaType_8); //三条/顺子/同花
+        this.mBetArea1.SetAreaConfig(Localization.GetString("00077") , CowboyAreaType.CowboyAreaType_9); //葫芦
+        this.mBetArea2.SetAreaConfig(Localization.GetString("00293") , CowboyAreaType.CowboyAreaType_10); //四条/同花顺/皇家同花顺
 
     }
     RegDataNotify() 

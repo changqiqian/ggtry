@@ -21,8 +21,8 @@ export class cb_BetRow3 extends BaseUI {
     {
         this.ResetUI();
         this.mTitle.string = Localization.GetString("00290");
-        this.mBetArea0.SetAreaConfig(Localization.GetString("00288"),"10",CowboyAreaType.CowboyAreaType_6); //高牌/对子
-        this.mBetArea1.SetAreaConfig(Localization.GetString("00073"),"10",CowboyAreaType.CowboyAreaType_7); //两队
+        this.mBetArea0.SetAreaConfig(Localization.GetString("00288") , CowboyAreaType.CowboyAreaType_6); //高牌/对子
+        this.mBetArea1.SetAreaConfig(Localization.GetString("00073") , CowboyAreaType.CowboyAreaType_7); //两队
     }
     RegDataNotify() 
     {

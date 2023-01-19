@@ -28,7 +28,7 @@ export class cb_TopMenu extends BaseUI {
     {
         this.mSettingBtn.SetClickCallback((_data)=>
         {
-            UIMgr.Instance.ShowLayer("cowboy","prefab/subUI/cb_Menu",true);
+            UIMgr.Instance.ShowLayer("cowboy","prefab/subUI/cb_Menu",true,null,CowboyData.UITag);
         })
         this.mMyHistoryBtn.SetClickCallback((_data)=>
         {

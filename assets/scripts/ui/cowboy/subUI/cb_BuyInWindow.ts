@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label } from 'cc';
+import { _decorator, Component, Node, Label, UI } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
@@ -78,6 +78,7 @@ export class cb_BuyInWindow extends BaseUI
         CowboyData.Instance.Data_S2CTexasCowboyBringInResp.AddListenner(this,(_data)=>
         {
             this.CloseAsWindow();
+            UIMgr.Instance.ShowToast(Localization.GetString("00245"));
         });
     }
     LateInit()

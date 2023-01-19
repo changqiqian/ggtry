@@ -20,7 +20,7 @@ export class cb_BetRow1 extends BaseUI {
         this.ResetUI();
         this.mTitle.string = Localization.GetString("00284")
         //同花/连牌/同花连张
-        this.mBetArea.SetAreaConfig(Localization.GetString("00285"),"5",CowboyAreaType.CowboyAreaType_3); 
+        this.mBetArea.SetAreaConfig(Localization.GetString("00285") , CowboyAreaType.CowboyAreaType_3); 
     }
     RegDataNotify() 
     {
