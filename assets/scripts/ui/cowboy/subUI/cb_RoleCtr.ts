@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, Tween } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { CardStruct } from '../../../base/Calculator';
 import { cbEnum_Gender, CowboyData } from '../CowboyData';
@@ -23,19 +23,33 @@ export class cb_RoleCtr extends BaseUI
     }
     RegDataNotify() 
     {
+        CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
+        {
+            this.StopAllTween();
+            this.mcb_RoleMan.PlayIdleSpine();
+            this.mcb_RoleGirl.PlayIdleSpine();
+        });
+
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
-            this.mcb_RoleMan.ShowAllCards(_data.boyCards);
-            this.mcb_RoleGirl.ShowAllCards(_data.girlCards);
-
-            if(_data.winner == 0)
+            this.StopAllTween();
+            let tween = new Tween(this.node);
+            tween.delay(CowboyData.SettlementDelay);
+            tween.call(()=>
             {
-                this.mcb_RoleMan.PlayWinSpine();
-            }
-            else
-            {
-                this.mcb_RoleGirl.PlayWinSpine();
-            }
+                this.mcb_RoleMan.ShowAllCards(_data.boyCards);
+                this.mcb_RoleGirl.ShowAllCards(_data.girlCards);
+    
+                if(_data.winner == 0)
+                {
+                    this.mcb_RoleMan.PlayWinSpine();
+                }
+                else
+                {
+                    this.mcb_RoleGirl.PlayWinSpine();
+                }
+            });
+            tween.start();
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>

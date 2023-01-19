@@ -9139,25 +9139,25 @@ $root.CowboyRecord = (function() {
             w.ldelim();
         }
         if (m.betAmount != null && m.betAmount.length) {
-            w.uint32(34).fork();
+            w.uint32(26).fork();
             for (var i = 0; i < m.betAmount.length; ++i)
                 w.int64(m.betAmount[i]);
             w.ldelim();
         }
         if (m.boyCards != null && m.boyCards.length) {
             for (var i = 0; i < m.boyCards.length; ++i)
-                $root.CardInfo.encode(m.boyCards[i], w.uint32(42).fork()).ldelim();
+                $root.CardInfo.encode(m.boyCards[i], w.uint32(34).fork()).ldelim();
         }
         if (m.girlCards != null && m.girlCards.length) {
             for (var i = 0; i < m.girlCards.length; ++i)
-                $root.CardInfo.encode(m.girlCards[i], w.uint32(50).fork()).ldelim();
+                $root.CardInfo.encode(m.girlCards[i], w.uint32(42).fork()).ldelim();
         }
         if (m.publicCards != null && m.publicCards.length) {
             for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(50).fork()).ldelim();
         }
         if (m.gameCode != null && Object.hasOwnProperty.call(m, "gameCode"))
-            w.uint32(66).string(m.gameCode);
+            w.uint32(58).string(m.gameCode);
         return w;
     };
 
@@ -9199,7 +9199,7 @@ $root.CowboyRecord = (function() {
                 } else
                     m.areaWinLose.push(r.int64());
                 break;
-            case 4:
+            case 3:
                 if (!(m.betAmount && m.betAmount.length))
                     m.betAmount = [];
                 if ((t & 7) === 2) {
@@ -9209,22 +9209,22 @@ $root.CowboyRecord = (function() {
                 } else
                     m.betAmount.push(r.int64());
                 break;
-            case 5:
+            case 4:
                 if (!(m.boyCards && m.boyCards.length))
                     m.boyCards = [];
                 m.boyCards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
-            case 6:
+            case 5:
                 if (!(m.girlCards && m.girlCards.length))
                     m.girlCards = [];
                 m.girlCards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
-            case 7:
+            case 6:
                 if (!(m.publicCards && m.publicCards.length))
                     m.publicCards = [];
                 m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
-            case 8:
+            case 7:
                 m.gameCode = r.string();
                 break;
             default:

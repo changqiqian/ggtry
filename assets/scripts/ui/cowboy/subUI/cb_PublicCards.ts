@@ -36,6 +36,7 @@ export class cb_PublicCards extends BaseUI
 
         CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
         {
+            this.StopAllTween();
             this.RestAllCards();
             this.DealCards();
             this.ShowCard(_data.oneCard,0);
@@ -43,11 +44,18 @@ export class cb_PublicCards extends BaseUI
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
-            for(let i = 1 ; i < _data.publicCards.length ; i++)
+            this.StopAllTween();
+            let tween = new Tween(this.node);
+            tween.delay(CowboyData.SettlementDelay);
+            tween.call(()=>
             {
-                let index = i ;
-                this.ShowCard(_data.publicCards[i],index);
-            }
+                for(let i = 1 ; i < _data.publicCards.length ; i++)
+                {
+                    let index = i ;
+                    this.ShowCard(_data.publicCards[i],index);
+                }
+            });
+            tween.start();
         });
     }
     LateInit() 

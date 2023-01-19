@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, instantiate } from 'cc';
+import { _decorator, Component, Node, Label, instantiate, Tween } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Tool } from '../../../Tool';
@@ -44,26 +44,38 @@ export class cb_BottomArea extends BaseUI {
             this.mMoney.string = Tool.ConvertMoney_S2C(_data) + "";
         });
 
+        CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
+        {
+            this.StopAllTween();
+        })
+
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
-            for(let i = 0 ; i < _data.result.length ; i++)
+            this.StopAllTween();
+            let tween = new Tween(this.node);
+            tween.delay(CowboyData.SettlementDelay);
+            tween.call(()=>
             {
-                let current = _data.result[i];
-                if(current.uid == LocalPlayerData.Instance.Data_Uid.mData)
+                for(let i = 0 ; i < _data.result.length ; i++)
                 {
-                    if(current.winLose > 0)
+                    let current = _data.result[i];
+                    if(current.uid == LocalPlayerData.Instance.Data_Uid.mData)
                     {
-                        this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
+                        if(current.winLose > 0)
                         {
-                            let tempNode = instantiate(_prefab);
-                            this.mPlayerInfo.node.addChild(tempNode);
-                            let script = tempNode.getComponent(Game_WinEffect);
-                            script.InitWithData(current.winLose);
-                        })
+                            this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
+                            {
+                                let tempNode = instantiate(_prefab);
+                                this.mPlayerInfo.node.addChild(tempNode);
+                                let script = tempNode.getComponent(Game_WinEffect);
+                                script.InitWithData(current.winLose);
+                            })
+                        }
+                        break;
                     }
-                    break;
                 }
-            }
+            });
+            tween.start();
         });
 
     }

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, Button, instantiate, UITransform, Size, Vec3, Prefab } from 'cc';
+import { _decorator, Component, Node, Label, Button, instantiate, UITransform, Size, Vec3, Prefab, Tween } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Tool } from '../../../Tool';
@@ -56,6 +56,7 @@ export class cb_BetArea extends BaseUI {
 
         CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
         {
+            this.StopAllTween();
             this.mAmount.string = "0(0)";
             this.mWinSpine.Hide();
             this.RemoveAndDestoryAllChild(this.mChipContainer);
@@ -85,45 +86,54 @@ export class cb_BetArea extends BaseUI {
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
-            let have = false;
-            for(let i = 0 ; i < _data.reward.length ; i++)
+            this.StopAllTween();
+            let tween = new Tween(this.node);
+            tween.delay(CowboyData.SettlementDelay);
+            tween.call(()=>
             {
-                let current = _data.reward[i];
-                if(current == this.mBetArea)
+                let have = false;
+                for(let i = 0 ; i < _data.reward.length ; i++)
                 {
-                    have = true;
-                    break;
+                    let current = _data.reward[i];
+                    if(current == this.mBetArea)
+                    {
+                        have = true;
+                        break;
+                    }
                 }
-            }
-
-            this.mHistory.InsertOneData(have);
-            if(have == false)
-            {
-                this.mWinSpine.Hide();
-                return;
-            }
-
-            this.mWinSpine.SetAnimation("win");
+    
+                this.mHistory.InsertOneData(have);
+                if(have == false)
+                {
+                    this.mWinSpine.Hide();
+                    return;
+                }
+    
+                this.mWinSpine.SetAnimation("win");
+    
+                
+                let myBetInfo = CowboyData.Instance.GetSelfBetInfoByAreaTpye(this.mBetArea);
+                if(myBetInfo == null)
+                {
+                    return;
+                }
+    
+                if(myBetInfo.amount <=0)
+                {
+                    return;
+                }
+                let ratio = CowboyData.Instance.GetRatio(this.mBetArea);
+                let winAmount = ratio * myBetInfo.amount;
+                let worldPos = this.mChipContainer.worldPosition; 
+                let offset = this.mChipContainer.getComponent(UITransform).contentSize;
+                let haflOffset = new Size(offset.width/2 , offset.height/2);
+                let actionId = LocalPlayerData.Instance.Data_Uid.mData;
+                let betConfig = new cb_BetConfig(worldPos,haflOffset,this.mBetArea ,actionId ,Tool.ConvertMoney_S2C(winAmount));
+                CowboyData.Instance.Data_CollectConfig.mData = betConfig;
+            })
+            tween.start();
 
             
-            let myBetInfo = CowboyData.Instance.GetSelfBetInfoByAreaTpye(this.mBetArea);
-            if(myBetInfo == null)
-            {
-                return;
-            }
-
-            if(myBetInfo.amount <=0)
-            {
-                return;
-            }
-            let ratio = CowboyData.Instance.GetRatio(this.mBetArea);
-            let winAmount = ratio * myBetInfo.amount;
-            let worldPos = this.mChipContainer.worldPosition; 
-            let offset = this.mChipContainer.getComponent(UITransform).contentSize;
-            let haflOffset = new Size(offset.width/2 , offset.height/2);
-            let actionId = LocalPlayerData.Instance.Data_Uid.mData;
-            let betConfig = new cb_BetConfig(worldPos,haflOffset,this.mBetArea ,actionId ,Tool.ConvertMoney_S2C(winAmount));
-            CowboyData.Instance.Data_CollectConfig.mData = betConfig;
         });
         
         

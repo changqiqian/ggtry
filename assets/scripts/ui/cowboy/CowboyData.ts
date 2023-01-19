@@ -42,6 +42,7 @@ export class CowboyData extends SingletonBaseNotify<CowboyData>()
     }
 
     public static UITag = "CowBoy";
+    public static SettlementDelay = 2;
 
     Data_S2CTexasCowboyEnterGameResp : BaseData<S2CTexasCowboyEnterGameResp> = new BaseData<S2CTexasCowboyEnterGameResp>(); //进入游戏总数据
     Data_S2CTexasCowboyExitGameResp: BaseData<S2CTexasCowboyExitGameResp> = new BaseData<S2CTexasCowboyExitGameResp>(); //退出游戏

@@ -124,6 +124,7 @@ export class CowboyUI extends BaseUI
             {
                 this.mSpineWait.Hide(); 
             }
+            this.UpdatePhaseStatus();
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
@@ -145,6 +146,7 @@ export class CowboyUI extends BaseUI
                 this.mChips[i].getComponent(cb_Chip).DeleteSelf();
             }
             
+            this.mChips = new Array<Node>();
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
