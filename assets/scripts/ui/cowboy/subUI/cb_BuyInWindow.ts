@@ -3,9 +3,11 @@ import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { UIMgr } from '../../../base/UIMgr';
+import { NetworkSend } from '../../../network/NetworkSend';
 import { Tool } from '../../../Tool';
 import { BaseButton } from '../../common/BaseButton';
 import { ProgressSlider } from '../../common/ProgressSlider';
+import { CowboyData } from '../CowboyData';
 const { ccclass, property } = _decorator;
 
 @ccclass('cb_BuyInWindow')
@@ -61,6 +63,8 @@ export class cb_BuyInWindow extends BaseUI
                 UIMgr.Instance.ShowToast(Localization.GetString("00295"));
                 return;
             }
+            let gameId = CowboyData.Instance.GetGameId();
+            NetworkSend.Instance.BringInCowboy(gameId , bringInMoney);
         });
     }
     RegDataNotify()
@@ -71,7 +75,10 @@ export class cb_BuyInWindow extends BaseUI
         });
 
 
-        
+        CowboyData.Instance.Data_S2CTexasCowboyBringInResp.AddListenner(this,(_data)=>
+        {
+            this.CloseAsWindow();
+        });
     }
     LateInit()
     {
@@ -86,7 +93,7 @@ export class cb_BuyInWindow extends BaseUI
     {
         let min = 0;
         let max = LocalPlayerData.Instance.Data_Coin.mData * _ratio;
-        let step = 1;
+        let step = 10000;
         let roundMax = Math.floor( max/step);
         max = roundMax * step;
         let currentAmount = min + max;

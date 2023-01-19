@@ -12625,6 +12625,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} C2S_TexasCashRefresh=5014 C2S_TexasCashRefresh value
  * @property {number} C2S_TexasCashExaminePublicCard=5015 C2S_TexasCashExaminePublicCard value
  * @property {number} C2S_TexasCashExaminePrivateCard=5016 C2S_TexasCashExaminePrivateCard value
+ * @property {number} C2S_TexasCashExtraThink=5017 C2S_TexasCashExtraThink value
  * @property {number} MSG_TexasCashEnd=5500 MSG_TexasCashEnd value
  * @property {number} MSG_TexasMttBegin=5501 MSG_TexasMttBegin value
  * @property {number} MSG_TexasMttEnd=6000 MSG_TexasMttEnd value
@@ -12650,6 +12651,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonRefreshResp=8012 S2C_CommonRefreshResp value
  * @property {number} S2C_CommonExaminePublicCardResp=8013 S2C_CommonExaminePublicCardResp value
  * @property {number} S2C_CommonExaminePrivateCardResp=8014 S2C_CommonExaminePrivateCardResp value
+ * @property {number} S2C_CommonExtraThinkResp=8015 S2C_CommonExtraThinkResp value
  * @property {number} S2C_CommonBringInTimerNotify=8110 S2C_CommonBringInTimerNotify value
  * @property {number} S2C_CommonBringInNotify=8111 S2C_CommonBringInNotify value
  * @property {number} S2C_CommonSitDownNotify=8112 S2C_CommonSitDownNotify value
@@ -12657,6 +12659,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonActionNotify=8114 S2C_CommonActionNotify value
  * @property {number} S2C_CommonBuyInsuranceNotify=8115 S2C_CommonBuyInsuranceNotify value
  * @property {number} S2C_CommonChatNotify=8116 S2C_CommonChatNotify value
+ * @property {number} S2C_CommonExtraThinkNotify=8117 S2C_CommonExtraThinkNotify value
  * @property {number} S2C_CommonOpenNotify=8250 S2C_CommonOpenNotify value
  * @property {number} S2C_CommonRoundStartNotify=8251 S2C_CommonRoundStartNotify value
  * @property {number} S2C_CommonPreFlopRoundNotify=8252 S2C_CommonPreFlopRoundNotify value
@@ -12771,6 +12774,7 @@ $root.MessageId = (function() {
     values[valuesById[5014] = "C2S_TexasCashRefresh"] = 5014;
     values[valuesById[5015] = "C2S_TexasCashExaminePublicCard"] = 5015;
     values[valuesById[5016] = "C2S_TexasCashExaminePrivateCard"] = 5016;
+    values[valuesById[5017] = "C2S_TexasCashExtraThink"] = 5017;
     values[valuesById[5500] = "MSG_TexasCashEnd"] = 5500;
     values[valuesById[5501] = "MSG_TexasMttBegin"] = 5501;
     values[valuesById[6000] = "MSG_TexasMttEnd"] = 6000;
@@ -12796,6 +12800,7 @@ $root.MessageId = (function() {
     values[valuesById[8012] = "S2C_CommonRefreshResp"] = 8012;
     values[valuesById[8013] = "S2C_CommonExaminePublicCardResp"] = 8013;
     values[valuesById[8014] = "S2C_CommonExaminePrivateCardResp"] = 8014;
+    values[valuesById[8015] = "S2C_CommonExtraThinkResp"] = 8015;
     values[valuesById[8110] = "S2C_CommonBringInTimerNotify"] = 8110;
     values[valuesById[8111] = "S2C_CommonBringInNotify"] = 8111;
     values[valuesById[8112] = "S2C_CommonSitDownNotify"] = 8112;
@@ -12803,6 +12808,7 @@ $root.MessageId = (function() {
     values[valuesById[8114] = "S2C_CommonActionNotify"] = 8114;
     values[valuesById[8115] = "S2C_CommonBuyInsuranceNotify"] = 8115;
     values[valuesById[8116] = "S2C_CommonChatNotify"] = 8116;
+    values[valuesById[8117] = "S2C_CommonExtraThinkNotify"] = 8117;
     values[valuesById[8250] = "S2C_CommonOpenNotify"] = 8250;
     values[valuesById[8251] = "S2C_CommonRoundStartNotify"] = 8251;
     values[valuesById[8252] = "S2C_CommonPreFlopRoundNotify"] = 8252;
@@ -14077,6 +14083,87 @@ $root.C2SExaminePrivateCard = (function() {
     };
 
     return C2SExaminePrivateCard;
+})();
+
+$root.C2STexasCashExtraThink = (function() {
+
+    /**
+     * Properties of a C2STexasCashExtraThink.
+     * @exports IC2STexasCashExtraThink
+     * @interface IC2STexasCashExtraThink
+     * @property {string|null} [gameId] C2STexasCashExtraThink gameId
+     */
+
+    /**
+     * Constructs a new C2STexasCashExtraThink.
+     * @exports C2STexasCashExtraThink
+     * @classdesc Represents a C2STexasCashExtraThink.
+     * @implements IC2STexasCashExtraThink
+     * @constructor
+     * @param {IC2STexasCashExtraThink=} [p] Properties to set
+     */
+    function C2STexasCashExtraThink(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCashExtraThink gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCashExtraThink
+     * @instance
+     */
+    C2STexasCashExtraThink.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2STexasCashExtraThink message. Does not implicitly {@link C2STexasCashExtraThink.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCashExtraThink
+     * @static
+     * @param {IC2STexasCashExtraThink} m C2STexasCashExtraThink message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCashExtraThink.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCashExtraThink message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCashExtraThink
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCashExtraThink} C2STexasCashExtraThink
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCashExtraThink.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashExtraThink();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCashExtraThink;
 })();
 
 $root.S2CCommonEnterGameResp = (function() {
@@ -15653,6 +15740,101 @@ $root.S2CCommonExaminePrivateCardResp = (function() {
     return S2CCommonExaminePrivateCardResp;
 })();
 
+$root.S2CCommonExtraThinkResp = (function() {
+
+    /**
+     * Properties of a S2CCommonExtraThinkResp.
+     * @exports IS2CCommonExtraThinkResp
+     * @interface IS2CCommonExtraThinkResp
+     * @property {ICommonResult|null} [result] S2CCommonExtraThinkResp result
+     * @property {number|null} [extraTime] S2CCommonExtraThinkResp extraTime
+     */
+
+    /**
+     * Constructs a new S2CCommonExtraThinkResp.
+     * @exports S2CCommonExtraThinkResp
+     * @classdesc Represents a S2CCommonExtraThinkResp.
+     * @implements IS2CCommonExtraThinkResp
+     * @constructor
+     * @param {IS2CCommonExtraThinkResp=} [p] Properties to set
+     */
+    function S2CCommonExtraThinkResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonExtraThinkResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonExtraThinkResp
+     * @instance
+     */
+    S2CCommonExtraThinkResp.prototype.result = null;
+
+    /**
+     * S2CCommonExtraThinkResp extraTime.
+     * @member {number} extraTime
+     * @memberof S2CCommonExtraThinkResp
+     * @instance
+     */
+    S2CCommonExtraThinkResp.prototype.extraTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified S2CCommonExtraThinkResp message. Does not implicitly {@link S2CCommonExtraThinkResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonExtraThinkResp
+     * @static
+     * @param {IS2CCommonExtraThinkResp} m S2CCommonExtraThinkResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonExtraThinkResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.extraTime != null && Object.hasOwnProperty.call(m, "extraTime"))
+            w.uint32(16).int64(m.extraTime);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonExtraThinkResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonExtraThinkResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonExtraThinkResp} S2CCommonExtraThinkResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonExtraThinkResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonExtraThinkResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.extraTime = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonExtraThinkResp;
+})();
+
 $root.S2CCommonBringInTimerNotify = (function() {
 
     /**
@@ -16666,6 +16848,115 @@ $root.S2CCommonChatNotify = (function() {
     };
 
     return S2CCommonChatNotify;
+})();
+
+$root.S2CCommonExtraThinkNotify = (function() {
+
+    /**
+     * Properties of a S2CCommonExtraThinkNotify.
+     * @exports IS2CCommonExtraThinkNotify
+     * @interface IS2CCommonExtraThinkNotify
+     * @property {string|null} [gameId] S2CCommonExtraThinkNotify gameId
+     * @property {string|null} [actionUid] S2CCommonExtraThinkNotify actionUid
+     * @property {number|null} [extraTime] S2CCommonExtraThinkNotify extraTime
+     */
+
+    /**
+     * Constructs a new S2CCommonExtraThinkNotify.
+     * @exports S2CCommonExtraThinkNotify
+     * @classdesc Represents a S2CCommonExtraThinkNotify.
+     * @implements IS2CCommonExtraThinkNotify
+     * @constructor
+     * @param {IS2CCommonExtraThinkNotify=} [p] Properties to set
+     */
+    function S2CCommonExtraThinkNotify(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonExtraThinkNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonExtraThinkNotify
+     * @instance
+     */
+    S2CCommonExtraThinkNotify.prototype.gameId = "";
+
+    /**
+     * S2CCommonExtraThinkNotify actionUid.
+     * @member {string} actionUid
+     * @memberof S2CCommonExtraThinkNotify
+     * @instance
+     */
+    S2CCommonExtraThinkNotify.prototype.actionUid = "";
+
+    /**
+     * S2CCommonExtraThinkNotify extraTime.
+     * @member {number} extraTime
+     * @memberof S2CCommonExtraThinkNotify
+     * @instance
+     */
+    S2CCommonExtraThinkNotify.prototype.extraTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified S2CCommonExtraThinkNotify message. Does not implicitly {@link S2CCommonExtraThinkNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonExtraThinkNotify
+     * @static
+     * @param {IS2CCommonExtraThinkNotify} m S2CCommonExtraThinkNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonExtraThinkNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.actionUid != null && Object.hasOwnProperty.call(m, "actionUid"))
+            w.uint32(18).string(m.actionUid);
+        if (m.extraTime != null && Object.hasOwnProperty.call(m, "extraTime"))
+            w.uint32(24).int64(m.extraTime);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonExtraThinkNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonExtraThinkNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonExtraThinkNotify} S2CCommonExtraThinkNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonExtraThinkNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonExtraThinkNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.actionUid = r.string();
+                break;
+            case 3:
+                m.extraTime = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonExtraThinkNotify;
 })();
 
 $root.S2CCommonPreFlopRoundNotify = (function() {

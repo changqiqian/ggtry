@@ -4415,6 +4415,7 @@ export enum MessageId {
     C2S_TexasCashRefresh = 5014,
     C2S_TexasCashExaminePublicCard = 5015,
     C2S_TexasCashExaminePrivateCard = 5016,
+    C2S_TexasCashExtraThink = 5017,
     MSG_TexasCashEnd = 5500,
     MSG_TexasMttBegin = 5501,
     MSG_TexasMttEnd = 6000,
@@ -4440,6 +4441,7 @@ export enum MessageId {
     S2C_CommonRefreshResp = 8012,
     S2C_CommonExaminePublicCardResp = 8013,
     S2C_CommonExaminePrivateCardResp = 8014,
+    S2C_CommonExtraThinkResp = 8015,
     S2C_CommonBringInTimerNotify = 8110,
     S2C_CommonBringInNotify = 8111,
     S2C_CommonSitDownNotify = 8112,
@@ -4447,6 +4449,7 @@ export enum MessageId {
     S2C_CommonActionNotify = 8114,
     S2C_CommonBuyInsuranceNotify = 8115,
     S2C_CommonChatNotify = 8116,
+    S2C_CommonExtraThinkNotify = 8117,
     S2C_CommonOpenNotify = 8250,
     S2C_CommonRoundStartNotify = 8251,
     S2C_CommonPreFlopRoundNotify = 8252,
@@ -4932,6 +4935,37 @@ export class C2SExaminePrivateCard implements IC2SExaminePrivateCard {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SExaminePrivateCard;
+}
+
+/** Represents a C2STexasCashExtraThink. */
+export class C2STexasCashExtraThink implements IC2STexasCashExtraThink {
+
+    /**
+     * Constructs a new C2STexasCashExtraThink.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2STexasCashExtraThink);
+
+    /** C2STexasCashExtraThink gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2STexasCashExtraThink message. Does not implicitly {@link C2STexasCashExtraThink.verify|verify} messages.
+     * @param m C2STexasCashExtraThink message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2STexasCashExtraThink, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2STexasCashExtraThink message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2STexasCashExtraThink
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashExtraThink;
 }
 
 /** Represents a S2CCommonEnterGameResp. */
@@ -5458,6 +5492,40 @@ export class S2CCommonExaminePrivateCardResp implements IS2CCommonExaminePrivate
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonExaminePrivateCardResp;
 }
 
+/** Represents a S2CCommonExtraThinkResp. */
+export class S2CCommonExtraThinkResp implements IS2CCommonExtraThinkResp {
+
+    /**
+     * Constructs a new S2CCommonExtraThinkResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonExtraThinkResp);
+
+    /** S2CCommonExtraThinkResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CCommonExtraThinkResp extraTime. */
+    public extraTime: number;
+
+    /**
+     * Encodes the specified S2CCommonExtraThinkResp message. Does not implicitly {@link S2CCommonExtraThinkResp.verify|verify} messages.
+     * @param m S2CCommonExtraThinkResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonExtraThinkResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonExtraThinkResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonExtraThinkResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonExtraThinkResp;
+}
+
 /** Represents a S2CCommonBringInTimerNotify. */
 export class S2CCommonBringInTimerNotify implements IS2CCommonBringInTimerNotify {
 
@@ -5792,6 +5860,43 @@ export class S2CCommonChatNotify implements IS2CCommonChatNotify {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonChatNotify;
+}
+
+/** Represents a S2CCommonExtraThinkNotify. */
+export class S2CCommonExtraThinkNotify implements IS2CCommonExtraThinkNotify {
+
+    /**
+     * Constructs a new S2CCommonExtraThinkNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonExtraThinkNotify);
+
+    /** S2CCommonExtraThinkNotify gameId. */
+    public gameId: string;
+
+    /** S2CCommonExtraThinkNotify actionUid. */
+    public actionUid: string;
+
+    /** S2CCommonExtraThinkNotify extraTime. */
+    public extraTime: number;
+
+    /**
+     * Encodes the specified S2CCommonExtraThinkNotify message. Does not implicitly {@link S2CCommonExtraThinkNotify.verify|verify} messages.
+     * @param m S2CCommonExtraThinkNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonExtraThinkNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonExtraThinkNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonExtraThinkNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonExtraThinkNotify;
 }
 
 /** Represents a S2CCommonPreFlopRoundNotify. */

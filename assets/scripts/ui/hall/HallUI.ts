@@ -27,7 +27,7 @@ export class HallUI extends BaseUI
     BindUI() 
     {
         this.MaxScreen(this.mBG);
-        //UIMgr.Instance.ShowMultipleTable(true);
+        UIMgr.Instance.ShowMultipleTable(true);
         this.AddSubView("cashPage","prefab/Cash_Page");
         this.AddSubView("clubPage","prefab/Club_Page");
         this.AddSubView("mePage","prefab/Me_Page");

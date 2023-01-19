@@ -721,6 +721,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             {
                 CowboyData.Instance.Data_Money.mData = msg.totalAmount;
                 LocalPlayerData.Instance.Data_Coin.mData = msg.restAmount;
+                CowboyData.Instance.Data_S2CTexasCowboyBringInResp.mData = msg;
             }
             else
             {

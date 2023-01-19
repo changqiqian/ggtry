@@ -449,7 +449,7 @@ export class UIMgr extends Singleton<UIMgr>()
 
             if(index >=0)
             {
-                currentList[index].value.getComponent(BaseUI).DeleteSelf().DeleteSelf();
+                currentList[index].value.getComponent(BaseUI).DeleteSelf();
                 currentList.splice(index , 1);
                 break;
             }

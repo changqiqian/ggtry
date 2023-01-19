@@ -39,7 +39,7 @@ export class cb_Menu extends BaseUI
         });
         this.mBringInBtn.SetClickCallback(()=>
         {
-
+            UIMgr.Instance.ShowWindow("cowboy","prefab/subUI/cb_BuyInWindow",true)
         });
         this.mExitBtn.SetClickCallback(()=>
         {
