@@ -17,6 +17,21 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
 {
     public RegisterMsg()
     {
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_RefreshUserInfoResp,(_data)=>
+        {
+            let msg = S2CRefreshUserInfoResp.decode(_data);
+            console.log("收到的内容 S2C_RefreshUserInfoResp  刷新大厅资产==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                LocalPlayerData.Instance.UpdateUserInfo(msg.userInfo);
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
         
         Network.Instance.AddMsgListenner(MessageId.S2C_GetHallSubGameInfoResp,(_data)=>
         {
@@ -661,6 +676,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             UIMgr.Instance.ShowLoading(false);
             if(msg.result.resId == MsgResult.Success)
             {
+                CowboyData.Instance.Data_Money.mData = msg.money;
                 CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.mData = msg;
             }
             else
@@ -677,6 +693,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(msg.result.resId == MsgResult.Success)
             {
                 CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.mData = msg;
+                NetworkSend.Instance.RefreshHallMoney();
             }
             else
             {
@@ -720,8 +737,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(msg.result.resId == MsgResult.Success)
             {
                 CowboyData.Instance.Data_Money.mData = msg.totalAmount;
-                LocalPlayerData.Instance.Data_Coin.mData = msg.restAmount;
                 CowboyData.Instance.Data_S2CTexasCowboyBringInResp.mData = msg;
+                NetworkSend.Instance.RefreshHallMoney();
             }
             else
             {
@@ -736,7 +753,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(msg.result.resId == MsgResult.Success)
             {
                 CowboyData.Instance.Data_Money.mData = msg.totalAmount;
-                LocalPlayerData.Instance.Data_Coin.mData = msg.restAmount;
             }
             else
             {

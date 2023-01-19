@@ -391,6 +391,9 @@ export class Localization {
         { name: '00304', ch: '现金', en: 'Cash' },
         { name: '00305', ch: '我的金币', en: 'Balance' },
         { name: '00306', ch: '德州', en: 'Texas' },
+        { name: '00307', ch: '下拉刷新', en: 'Drag down' },
+        { name: '00308', ch: '下注中', en: 'Beting time' },
+        { name: '00309', ch: '开奖中', en: 'Breaking time' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

@@ -1,5 +1,6 @@
-import { _decorator, Component, Node, instantiate, Prefab, UITransform, Vec3, Size, Tween, easing } from 'cc';
+import { _decorator, Component, Node, instantiate, Prefab, UITransform, Vec3, Size, Tween, easing, Label, Color } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { Tool } from '../../Tool';
@@ -18,8 +19,11 @@ export class CowboyUI extends BaseUI
     @property(CircleTimer) 
     mCircleTimer: CircleTimer = null;
     @property(SpineCtr) 
-    mSpine: SpineCtr = null;
-
+    mSpineStartOrEnd: SpineCtr = null;
+    @property(SpineCtr) 
+    mSpineWait: SpineCtr = null;
+    @property(Label) 
+    mPhaseStatus: Label = null;
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
 
@@ -82,7 +86,16 @@ export class CowboyUI extends BaseUI
         CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
         {
             this.mCircleTimer.StartTimer(_data.restTime);
-            this.mSpine.Hide();
+            this.mSpineStartOrEnd.Hide();
+            let phase = CowboyData.Instance.GetPhase();
+            if(phase == CowboyPhase.CowBoyPhase_Settlement)
+            {
+                this.mSpineWait.SetAnimation("qingdengdai",true);
+            }
+            else
+            {
+                this.mSpineWait.Hide(); 
+            }
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
@@ -91,22 +104,31 @@ export class CowboyUI extends BaseUI
             {
                 
             });
-            this.mSpine.SetAnimation("ksxz",false,(_data)=>
+            this.mSpineStartOrEnd.SetAnimation("ksxz",false,(_data)=>
             {   
-                this.mSpine.Hide(); 
+                this.mSpineStartOrEnd.Hide(); 
             });
+
+            this.mSpineWait.Hide(); 
+            this.UpdatePhaseStatus();
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
             this.mCircleTimer.StartTimer(CowboyData.Instance.GetDuration(CowboyPhase.CowBoyPhase_Settlement));
-            this.mSpine.SetAnimation("tzxz",false,(_data)=>
+            this.mSpineStartOrEnd.SetAnimation("tzxz",false,(_data)=>
             {   
-                this.mSpine.Hide(); 
+                this.mSpineStartOrEnd.Hide(); 
             });
+            this.UpdatePhaseStatus();
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.AddListenner(this,(_data)=>
+        {
+            this.Show(false);
+        });
+
+        CowboyData.Instance.Data_HideUI.AddListenner(this,(_data)=>
         {
             this.Show(false);
         });
@@ -190,5 +212,20 @@ export class CowboyUI extends BaseUI
         return _pos;
     }
 
+    UpdatePhaseStatus()
+    {
+        let phase = CowboyData.Instance.GetPhase();
+        if(phase == CowboyPhase.CowBoyPhase_Settlement)
+        {
+            this.mPhaseStatus.string = Localization.GetString("00309");
+            this.mPhaseStatus.color = Color.RED;
+        }
+        else
+        {
+            this.mPhaseStatus.string  = Localization.GetString("00308");
+            this.mPhaseStatus.color = Color.GREEN;
+        }
+        
+    }
 }
 

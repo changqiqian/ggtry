@@ -30,6 +30,7 @@ export class SpineCtr extends BaseUI
 
     public Hide()
     {
+        this.mSpine.clearTracks();
         this.mSpine.node.active = false;
     }
 

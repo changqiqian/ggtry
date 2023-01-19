@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "e918a26b-77a5-42b3-8d7f-fec1c7d2b852",
+  "uuid": "73b03273-37d2-4e99-850b-1e6b030aa952",
   "files": [
     ".json",
     ".png"
@@ -10,19 +10,19 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "e918a26b-77a5-42b3-8d7f-fec1c7d2b852@6c48a",
-      "displayName": "RuleBtn",
+      "uuid": "73b03273-37d2-4e99-850b-1e6b030aa952@6c48a",
+      "displayName": "DragDownBtn",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "73b03273-37d2-4e99-850b-1e6b030aa952",
+        "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
         "mipfilter": "none",
-        "anisotropy": 0,
-        "isUuid": true,
-        "imageUuidOrDatabaseUri": "e918a26b-77a5-42b3-8d7f-fec1c7d2b852"
+        "anisotropy": 0
       },
       "ver": "1.0.21",
       "imported": true,
@@ -33,12 +33,12 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "e918a26b-77a5-42b3-8d7f-fec1c7d2b852@f9941",
-      "displayName": "RuleBtn",
+      "uuid": "73b03273-37d2-4e99-850b-1e6b030aa952@f9941",
+      "displayName": "DragDownBtn",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
-        "trimType": "none",
+        "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e918a26b-77a5-42b3-8d7f-fec1c7d2b852@6c48a",
+        "imageUuidOrDatabaseUri": "73b03273-37d2-4e99-850b-1e6b030aa952@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "e918a26b-77a5-42b3-8d7f-fec1c7d2b852@f9941"
+    "redirect": "73b03273-37d2-4e99-850b-1e6b030aa952@f9941"
   }
 }

@@ -3296,6 +3296,9 @@ export class S2CTexasCowboyEnterGameResp implements IS2CTexasCowboyEnterGameResp
     /** S2CTexasCowboyEnterGameResp oneCard. */
     public oneCard?: (ICardInfo|null);
 
+    /** S2CTexasCowboyEnterGameResp money. */
+    public money: number;
+
     /**
      * Encodes the specified S2CTexasCowboyEnterGameResp message. Does not implicitly {@link S2CTexasCowboyEnterGameResp.verify|verify} messages.
      * @param m S2CTexasCowboyEnterGameResp message or plain object to encode
@@ -3447,9 +3450,6 @@ export class S2CTexasCowboyBringInResp implements IS2CTexasCowboyBringInResp {
     /** S2CTexasCowboyBringInResp totalAmount. */
     public totalAmount: number;
 
-    /** S2CTexasCowboyBringInResp restAmount. */
-    public restAmount: number;
-
     /**
      * Encodes the specified S2CTexasCowboyBringInResp message. Does not implicitly {@link S2CTexasCowboyBringInResp.verify|verify} messages.
      * @param m S2CTexasCowboyBringInResp message or plain object to encode
@@ -3489,9 +3489,6 @@ export class S2CTexasCowboyBringOutResp implements IS2CTexasCowboyBringOutResp {
 
     /** S2CTexasCowboyBringOutResp totalAmount. */
     public totalAmount: number;
-
-    /** S2CTexasCowboyBringOutResp restAmount. */
-    public restAmount: number;
 
     /**
      * Encodes the specified S2CTexasCowboyBringOutResp message. Does not implicitly {@link S2CTexasCowboyBringOutResp.verify|verify} messages.
@@ -3698,6 +3695,34 @@ export class C2SLogout implements IC2SLogout {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SLogout;
+}
+
+/** Represents a C2SRefreshUserInfo. */
+export class C2SRefreshUserInfo implements IC2SRefreshUserInfo {
+
+    /**
+     * Constructs a new C2SRefreshUserInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SRefreshUserInfo);
+
+    /**
+     * Encodes the specified C2SRefreshUserInfo message. Does not implicitly {@link C2SRefreshUserInfo.verify|verify} messages.
+     * @param m C2SRefreshUserInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SRefreshUserInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SRefreshUserInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SRefreshUserInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SRefreshUserInfo;
 }
 
 /** Represents a C2SGetUserInfo. */
@@ -3930,6 +3955,40 @@ export class S2CGetUserInfo implements IS2CGetUserInfo {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetUserInfo;
+}
+
+/** Represents a S2CRefreshUserInfoResp. */
+export class S2CRefreshUserInfoResp implements IS2CRefreshUserInfoResp {
+
+    /**
+     * Constructs a new S2CRefreshUserInfoResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CRefreshUserInfoResp);
+
+    /** S2CRefreshUserInfoResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CRefreshUserInfoResp userInfo. */
+    public userInfo?: (IUserInfo|null);
+
+    /**
+     * Encodes the specified S2CRefreshUserInfoResp message. Does not implicitly {@link S2CRefreshUserInfoResp.verify|verify} messages.
+     * @param m S2CRefreshUserInfoResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CRefreshUserInfoResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CRefreshUserInfoResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CRefreshUserInfoResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CRefreshUserInfoResp;
 }
 
 /** Represents a S2CChangeUserInfo. */
@@ -4348,13 +4407,15 @@ export enum MessageId {
     MSG_HallBegin = 2001,
     C2S_Logout = 2002,
     C2S_GetUserInfo = 2003,
-    C2S_ChangeUserInfo = 2004,
-    C2S_GetHallTexasGameInfo = 2005,
-    C2S_GetHallSubGameInfo = 2006,
+    C2S_RefreshUserInfo = 2004,
+    C2S_ChangeUserInfo = 2005,
+    C2S_GetHallTexasGameInfo = 2006,
+    C2S_GetHallSubGameInfo = 2007,
     S2C_GetUserInfo = 3001,
-    S2C_ChangeUserInfo = 3002,
-    S2C_GetHallTexasGameInfoResp = 3003,
-    S2C_GetHallSubGameInfoResp = 3004,
+    S2C_RefreshUserInfoResp = 3002,
+    S2C_ChangeUserInfo = 3003,
+    S2C_GetHallTexasGameInfoResp = 3004,
+    S2C_GetHallSubGameInfoResp = 3005,
     MSG_HallEnd = 3500,
     MSG_ClubBegin = 4001,
     C2S_CreateClub = 4002,

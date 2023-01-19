@@ -9363,6 +9363,7 @@ $root.S2CTexasCowboyEnterGameResp = (function() {
      * @property {number|null} [betTime] S2CTexasCowboyEnterGameResp betTime
      * @property {number|null} [restTime] S2CTexasCowboyEnterGameResp restTime
      * @property {ICardInfo|null} [oneCard] S2CTexasCowboyEnterGameResp oneCard
+     * @property {number|null} [money] S2CTexasCowboyEnterGameResp money
      */
 
     /**
@@ -9464,6 +9465,14 @@ $root.S2CTexasCowboyEnterGameResp = (function() {
     S2CTexasCowboyEnterGameResp.prototype.oneCard = null;
 
     /**
+     * S2CTexasCowboyEnterGameResp money.
+     * @member {number} money
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified S2CTexasCowboyEnterGameResp message. Does not implicitly {@link S2CTexasCowboyEnterGameResp.verify|verify} messages.
      * @function encode
      * @memberof S2CTexasCowboyEnterGameResp
@@ -9501,6 +9510,8 @@ $root.S2CTexasCowboyEnterGameResp = (function() {
             w.uint32(72).int32(m.restTime);
         if (m.oneCard != null && Object.hasOwnProperty.call(m, "oneCard"))
             $root.CardInfo.encode(m.oneCard, w.uint32(82).fork()).ldelim();
+        if (m.money != null && Object.hasOwnProperty.call(m, "money"))
+            w.uint32(88).int64(m.money);
         return w;
     };
 
@@ -9557,6 +9568,9 @@ $root.S2CTexasCowboyEnterGameResp = (function() {
                 break;
             case 10:
                 m.oneCard = $root.CardInfo.decode(r, r.uint32());
+                break;
+            case 11:
+                m.money = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -9906,7 +9920,6 @@ $root.S2CTexasCowboyBringInResp = (function() {
      * @property {string|null} [gameId] S2CTexasCowboyBringInResp gameId
      * @property {number|null} [amount] S2CTexasCowboyBringInResp amount
      * @property {number|null} [totalAmount] S2CTexasCowboyBringInResp totalAmount
-     * @property {number|null} [restAmount] S2CTexasCowboyBringInResp restAmount
      */
 
     /**
@@ -9957,14 +9970,6 @@ $root.S2CTexasCowboyBringInResp = (function() {
     S2CTexasCowboyBringInResp.prototype.totalAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * S2CTexasCowboyBringInResp restAmount.
-     * @member {number} restAmount
-     * @memberof S2CTexasCowboyBringInResp
-     * @instance
-     */
-    S2CTexasCowboyBringInResp.prototype.restAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
      * Encodes the specified S2CTexasCowboyBringInResp message. Does not implicitly {@link S2CTexasCowboyBringInResp.verify|verify} messages.
      * @function encode
      * @memberof S2CTexasCowboyBringInResp
@@ -9984,8 +9989,6 @@ $root.S2CTexasCowboyBringInResp = (function() {
             w.uint32(24).int64(m.amount);
         if (m.totalAmount != null && Object.hasOwnProperty.call(m, "totalAmount"))
             w.uint32(32).int64(m.totalAmount);
-        if (m.restAmount != null && Object.hasOwnProperty.call(m, "restAmount"))
-            w.uint32(40).int64(m.restAmount);
         return w;
     };
 
@@ -10019,9 +10022,6 @@ $root.S2CTexasCowboyBringInResp = (function() {
             case 4:
                 m.totalAmount = r.int64();
                 break;
-            case 5:
-                m.restAmount = r.int64();
-                break;
             default:
                 r.skipType(t & 7);
                 break;
@@ -10043,7 +10043,6 @@ $root.S2CTexasCowboyBringOutResp = (function() {
      * @property {string|null} [gameId] S2CTexasCowboyBringOutResp gameId
      * @property {number|null} [amount] S2CTexasCowboyBringOutResp amount
      * @property {number|null} [totalAmount] S2CTexasCowboyBringOutResp totalAmount
-     * @property {number|null} [restAmount] S2CTexasCowboyBringOutResp restAmount
      */
 
     /**
@@ -10094,14 +10093,6 @@ $root.S2CTexasCowboyBringOutResp = (function() {
     S2CTexasCowboyBringOutResp.prototype.totalAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * S2CTexasCowboyBringOutResp restAmount.
-     * @member {number} restAmount
-     * @memberof S2CTexasCowboyBringOutResp
-     * @instance
-     */
-    S2CTexasCowboyBringOutResp.prototype.restAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
      * Encodes the specified S2CTexasCowboyBringOutResp message. Does not implicitly {@link S2CTexasCowboyBringOutResp.verify|verify} messages.
      * @function encode
      * @memberof S2CTexasCowboyBringOutResp
@@ -10121,8 +10112,6 @@ $root.S2CTexasCowboyBringOutResp = (function() {
             w.uint32(24).int64(m.amount);
         if (m.totalAmount != null && Object.hasOwnProperty.call(m, "totalAmount"))
             w.uint32(32).int64(m.totalAmount);
-        if (m.restAmount != null && Object.hasOwnProperty.call(m, "restAmount"))
-            w.uint32(40).int64(m.restAmount);
         return w;
     };
 
@@ -10155,9 +10144,6 @@ $root.S2CTexasCowboyBringOutResp = (function() {
                 break;
             case 4:
                 m.totalAmount = r.int64();
-                break;
-            case 5:
-                m.restAmount = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -10769,6 +10755,73 @@ $root.C2SLogout = (function() {
     };
 
     return C2SLogout;
+})();
+
+$root.C2SRefreshUserInfo = (function() {
+
+    /**
+     * Properties of a C2SRefreshUserInfo.
+     * @exports IC2SRefreshUserInfo
+     * @interface IC2SRefreshUserInfo
+     */
+
+    /**
+     * Constructs a new C2SRefreshUserInfo.
+     * @exports C2SRefreshUserInfo
+     * @classdesc Represents a C2SRefreshUserInfo.
+     * @implements IC2SRefreshUserInfo
+     * @constructor
+     * @param {IC2SRefreshUserInfo=} [p] Properties to set
+     */
+    function C2SRefreshUserInfo(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * Encodes the specified C2SRefreshUserInfo message. Does not implicitly {@link C2SRefreshUserInfo.verify|verify} messages.
+     * @function encode
+     * @memberof C2SRefreshUserInfo
+     * @static
+     * @param {IC2SRefreshUserInfo} m C2SRefreshUserInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2SRefreshUserInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        return w;
+    };
+
+    /**
+     * Decodes a C2SRefreshUserInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2SRefreshUserInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2SRefreshUserInfo} C2SRefreshUserInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2SRefreshUserInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SRefreshUserInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2SRefreshUserInfo;
 })();
 
 $root.C2SGetUserInfo = (function() {
@@ -11406,6 +11459,101 @@ $root.S2CGetUserInfo = (function() {
     };
 
     return S2CGetUserInfo;
+})();
+
+$root.S2CRefreshUserInfoResp = (function() {
+
+    /**
+     * Properties of a S2CRefreshUserInfoResp.
+     * @exports IS2CRefreshUserInfoResp
+     * @interface IS2CRefreshUserInfoResp
+     * @property {ICommonResult|null} [result] S2CRefreshUserInfoResp result
+     * @property {IUserInfo|null} [userInfo] S2CRefreshUserInfoResp userInfo
+     */
+
+    /**
+     * Constructs a new S2CRefreshUserInfoResp.
+     * @exports S2CRefreshUserInfoResp
+     * @classdesc Represents a S2CRefreshUserInfoResp.
+     * @implements IS2CRefreshUserInfoResp
+     * @constructor
+     * @param {IS2CRefreshUserInfoResp=} [p] Properties to set
+     */
+    function S2CRefreshUserInfoResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CRefreshUserInfoResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CRefreshUserInfoResp
+     * @instance
+     */
+    S2CRefreshUserInfoResp.prototype.result = null;
+
+    /**
+     * S2CRefreshUserInfoResp userInfo.
+     * @member {IUserInfo|null|undefined} userInfo
+     * @memberof S2CRefreshUserInfoResp
+     * @instance
+     */
+    S2CRefreshUserInfoResp.prototype.userInfo = null;
+
+    /**
+     * Encodes the specified S2CRefreshUserInfoResp message. Does not implicitly {@link S2CRefreshUserInfoResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CRefreshUserInfoResp
+     * @static
+     * @param {IS2CRefreshUserInfoResp} m S2CRefreshUserInfoResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CRefreshUserInfoResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.userInfo != null && Object.hasOwnProperty.call(m, "userInfo"))
+            $root.UserInfo.encode(m.userInfo, w.uint32(18).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a S2CRefreshUserInfoResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CRefreshUserInfoResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CRefreshUserInfoResp} S2CRefreshUserInfoResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CRefreshUserInfoResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CRefreshUserInfoResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.userInfo = $root.UserInfo.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CRefreshUserInfoResp;
 })();
 
 $root.S2CChangeUserInfo = (function() {
@@ -12558,13 +12706,15 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} MSG_HallBegin=2001 MSG_HallBegin value
  * @property {number} C2S_Logout=2002 C2S_Logout value
  * @property {number} C2S_GetUserInfo=2003 C2S_GetUserInfo value
- * @property {number} C2S_ChangeUserInfo=2004 C2S_ChangeUserInfo value
- * @property {number} C2S_GetHallTexasGameInfo=2005 C2S_GetHallTexasGameInfo value
- * @property {number} C2S_GetHallSubGameInfo=2006 C2S_GetHallSubGameInfo value
+ * @property {number} C2S_RefreshUserInfo=2004 C2S_RefreshUserInfo value
+ * @property {number} C2S_ChangeUserInfo=2005 C2S_ChangeUserInfo value
+ * @property {number} C2S_GetHallTexasGameInfo=2006 C2S_GetHallTexasGameInfo value
+ * @property {number} C2S_GetHallSubGameInfo=2007 C2S_GetHallSubGameInfo value
  * @property {number} S2C_GetUserInfo=3001 S2C_GetUserInfo value
- * @property {number} S2C_ChangeUserInfo=3002 S2C_ChangeUserInfo value
- * @property {number} S2C_GetHallTexasGameInfoResp=3003 S2C_GetHallTexasGameInfoResp value
- * @property {number} S2C_GetHallSubGameInfoResp=3004 S2C_GetHallSubGameInfoResp value
+ * @property {number} S2C_RefreshUserInfoResp=3002 S2C_RefreshUserInfoResp value
+ * @property {number} S2C_ChangeUserInfo=3003 S2C_ChangeUserInfo value
+ * @property {number} S2C_GetHallTexasGameInfoResp=3004 S2C_GetHallTexasGameInfoResp value
+ * @property {number} S2C_GetHallSubGameInfoResp=3005 S2C_GetHallSubGameInfoResp value
  * @property {number} MSG_HallEnd=3500 MSG_HallEnd value
  * @property {number} MSG_ClubBegin=4001 MSG_ClubBegin value
  * @property {number} C2S_CreateClub=4002 C2S_CreateClub value
@@ -12707,13 +12857,15 @@ $root.MessageId = (function() {
     values[valuesById[2001] = "MSG_HallBegin"] = 2001;
     values[valuesById[2002] = "C2S_Logout"] = 2002;
     values[valuesById[2003] = "C2S_GetUserInfo"] = 2003;
-    values[valuesById[2004] = "C2S_ChangeUserInfo"] = 2004;
-    values[valuesById[2005] = "C2S_GetHallTexasGameInfo"] = 2005;
-    values[valuesById[2006] = "C2S_GetHallSubGameInfo"] = 2006;
+    values[valuesById[2004] = "C2S_RefreshUserInfo"] = 2004;
+    values[valuesById[2005] = "C2S_ChangeUserInfo"] = 2005;
+    values[valuesById[2006] = "C2S_GetHallTexasGameInfo"] = 2006;
+    values[valuesById[2007] = "C2S_GetHallSubGameInfo"] = 2007;
     values[valuesById[3001] = "S2C_GetUserInfo"] = 3001;
-    values[valuesById[3002] = "S2C_ChangeUserInfo"] = 3002;
-    values[valuesById[3003] = "S2C_GetHallTexasGameInfoResp"] = 3003;
-    values[valuesById[3004] = "S2C_GetHallSubGameInfoResp"] = 3004;
+    values[valuesById[3002] = "S2C_RefreshUserInfoResp"] = 3002;
+    values[valuesById[3003] = "S2C_ChangeUserInfo"] = 3003;
+    values[valuesById[3004] = "S2C_GetHallTexasGameInfoResp"] = 3004;
+    values[valuesById[3005] = "S2C_GetHallSubGameInfoResp"] = 3005;
     values[valuesById[3500] = "MSG_HallEnd"] = 3500;
     values[valuesById[4001] = "MSG_ClubBegin"] = 4001;
     values[valuesById[4002] = "C2S_CreateClub"] = 4002;

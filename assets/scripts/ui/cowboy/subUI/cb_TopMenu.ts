@@ -11,9 +11,11 @@ export class cb_TopMenu extends BaseUI {
     @property(BaseButton) 
     mSettingBtn: BaseButton = null;
     @property(BaseButton) 
-    mRuleBtn: BaseButton = null;
+    mMyHistoryBtn: BaseButton = null;
     @property(BaseButton) 
-    mMoreBtn: BaseButton = null;
+    mDragDownBtn: BaseButton = null;
+    @property(BaseButton) 
+    mGameHistoryBtn: BaseButton = null;
     @property(BaseButton) 
     mPlayerBtn: BaseButton = null;
 
@@ -28,11 +30,15 @@ export class cb_TopMenu extends BaseUI {
         {
             UIMgr.Instance.ShowLayer("cowboy","prefab/subUI/cb_Menu",true);
         })
-        this.mRuleBtn.SetClickCallback((_data)=>
+        this.mMyHistoryBtn.SetClickCallback((_data)=>
         {
             
         })
-        this.mMoreBtn.SetClickCallback((_data)=>
+        this.mDragDownBtn.SetClickCallback((_data)=>
+        {
+            CowboyData.Instance.Data_HideUI.mData = true;
+        })
+        this.mGameHistoryBtn.SetClickCallback((_data)=>
         {
             
         })

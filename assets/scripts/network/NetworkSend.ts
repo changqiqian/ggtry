@@ -10,6 +10,12 @@ import { Network } from "./Network";
 
 export class NetworkSend extends Singleton<NetworkSend>()
 {
+    public RefreshHallMoney()
+    {
+        let msg = new C2SRefreshUserInfo();
+        Network.Instance.SendMsg(MessageId.C2S_RefreshUserInfo , C2SRefreshUserInfo.encode(msg).finish());
+        console.log("刷新大厅资产 C2S_RefreshUserInfo == " + JSON.stringify(msg))
+    }
     
     public VerifyPhoneNumber(_phone : string)
     {

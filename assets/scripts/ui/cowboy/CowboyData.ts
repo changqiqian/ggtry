@@ -65,6 +65,7 @@ export class CowboyData extends SingletonBaseNotify<CowboyData>()
 
     Data_S2CTexasCowboyBringInResp: BaseData<S2CTexasCowboyBringInResp> = new BaseData<S2CTexasCowboyBringInResp>(); //代入返回
 
+    Data_HideUI : BaseData<boolean> = new BaseData<boolean>(true); //隐藏ui
     Data_Money  : BaseData<number> = new BaseData<number>(); //本地玩家的钱
     Data_SelectedChip : BaseData<number> = new BaseData<number>(); //本地玩家选中的下注筹码
     Data_BetConfig :  BaseData<cb_BetConfig> = new BaseData<cb_BetConfig>(); //下注数据 
