@@ -70,16 +70,6 @@ export class HallUI extends BaseUI
                 UIMgr.Instance.ShowLayer("cowboy","prefab/CowboyUI",true,null,CowboyData.UITag);  
             }
         })
-
-        CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.AddListenner(this,(_data)=>
-        {
-            UIMgr.Instance.HideUiByTag(CowboyData.UITag);
-        });
-
-        CowboyData.Instance.Data_HideUI.AddListenner(this,(_data)=>
-        {
-            UIMgr.Instance.HideUiByTag(CowboyData.UITag);
-        });
     }
     LateInit() 
     {

@@ -43,13 +43,13 @@ export class cb_HistoryLayout extends BaseUI {
 
     CustmoerDestory() 
     {
-
+        this.mPositionConfig = null;
     }
 
     public ResetUI()
     {
         this.mDescribe.string = "";
-        this.Clear();
+        this.RemoveAndDestoryAllChild(this.mLayOut);
     }
 
     public SetConfig( _maxDot : number , _dotSize : Size = new Size(20,20))
@@ -63,9 +63,16 @@ export class cb_HistoryLayout extends BaseUI {
     {
         if(_datas.length == 0)
         {
+            this.ShowDescribe();
             this.mDescribe.string = Localization.GetString("00294");
             return;
         }
+
+        while(_datas.length > this.mMaxDot)
+        {
+            _datas.shift();
+        }
+
 
         for(let i = 0 ; i < _datas.length ; i++)
         {
@@ -79,18 +86,16 @@ export class cb_HistoryLayout extends BaseUI {
         this.mDescribe.string = "";
         let currentIndex = this.mLayOut.children.length;
         let color = _data ? Color.YELLOW : Color.GRAY;
-
+        this.ShowHistory();
+        let tempNode =  instantiate(this.mDotPrefab) as Node;
+        this.mLayOut.addChild(tempNode);
         if(currentIndex < this.mMaxDot)
         {
-            let tempNode =  instantiate(this.mDotPrefab) as Node;
-            this.mLayOut.addChild(tempNode);
             tempNode.setPosition(this.mPositionConfig[currentIndex],0);
             tempNode.getComponent(Sprite).color = color;
         }
         else
         {
-            let tempNode =  instantiate(this.mDotPrefab) as Node;
-            this.mLayOut.addChild(tempNode);
             tempNode.setPosition(this.mPositionConfig[this.mPositionConfig.length - 1], this.mMoveOffset);
             tempNode.getComponent(Sprite).color = color;
 
@@ -103,7 +108,6 @@ export class cb_HistoryLayout extends BaseUI {
                 firstDot.destroy();
             });
             firstTween.start();
-
             for(let i = 1 ; i <= this.mMaxDot ; i++)
             {
                 let currentDot = this.mLayOut.children[i];
@@ -115,10 +119,6 @@ export class cb_HistoryLayout extends BaseUI {
         }
     }
 
-    public Clear()
-    {
-        this.mLayOut.destroyAllChildren();
-    }
 
     public ShowDescribe()
     {

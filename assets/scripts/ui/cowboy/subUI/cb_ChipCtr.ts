@@ -105,9 +105,6 @@ export class cb_ChipCtr extends BaseUI
             this.DisableChip(i , currentAmount > minAviliableAmount);
         }
 
-        console.log("this.mLastTimeChosenAmount == " + this.mLastTimeChosenAmount);
-        console.log("minAviliableAmount == " + minAviliableAmount);
-        console.log("CowboyData.Instance.Data_SelectedChip.mData == " + CowboyData.Instance.Data_SelectedChip.mData);
         if(this.mLastTimeChosenAmount > minAviliableAmount)
         {
             CowboyData.Instance.Data_SelectedChip.mData =  minAviliableAmount;

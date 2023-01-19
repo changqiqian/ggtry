@@ -9,6 +9,7 @@ export class MovingShow extends BaseUI {
     private mAnimationShowType : AnimationShowType = null;
     private mOriginPos : Vec3 = null;
     private mShowCallback : Function = null;
+    private mHideCallback : Function = null;
     private static mDuration : number = 0.3;
 
     private mRootNode : Node = null;
@@ -52,6 +53,12 @@ export class MovingShow extends BaseUI {
     {
         this.mShowCallback = _showCallback;
     }
+
+    public SetHideAnimationCallback(_hideCallback : Function)
+    {
+        this.mHideCallback = _hideCallback;
+    }
+
 
     public SetAnimationType(_type : AnimationShowType)
     {
@@ -212,6 +219,10 @@ export class MovingShow extends BaseUI {
         if(this.mRootNode != null)
         {
             this.mRootNode.active = false;
+        }
+        if(this.mHideCallback != null)
+        {
+            this.mHideCallback();
         }
     }
 }

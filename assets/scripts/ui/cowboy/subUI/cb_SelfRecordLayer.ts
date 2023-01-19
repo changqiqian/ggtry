@@ -13,6 +13,8 @@ const { ccclass, property } = _decorator;
 export class cb_SelfRecordLayer extends BaseUI {
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
+    @property(Node) 
+    mDarkBG: Node = null;
     @property(Label) 
     mGameCode: Label = null;
     @property(Node) 
@@ -42,6 +44,7 @@ export class cb_SelfRecordLayer extends BaseUI {
     }
     BindUI()
     {
+        this.AddTouchCloseEvent(this.mDarkBG);
         this.mCurrentPage = 0;
         this.mMovingShow.SetAnimationType(AnimationShowType.FromRight);
         this.mMovingShow.SetRoot(this.node);
@@ -68,7 +71,7 @@ export class cb_SelfRecordLayer extends BaseUI {
         this.mNextBtn.SetClickCallback(()=>
         {
             let next = this.mCurrentPage + 1;
-            if(next >= this.mMaxPage)
+            if(next > this.mMaxPage)
             {
                 return;
             }
@@ -81,15 +84,16 @@ export class cb_SelfRecordLayer extends BaseUI {
         CowboyData.Instance.Data_S2CTexasCowboyRecordResp.AddListenner(this,(_data)=>
         {
             this.ResetUI();
-
             this.mCurrentPage = _data.whichGame;
             this.mMaxPage = _data.totalGame;
             this.mPageNum.string = this.mCurrentPage + "/" + this.mMaxPage;
 
             let totalWinLose = 0;
             let totalBet = 0;
+            let rewardResults = _data.record.cowboyAreaType;
             for(let i = 0 ; i < _data.record.areaWinLose.length ; i++)
             {
+                let currentArea = i;
                 let currentWinLose = _data.record.areaWinLose[i];
                 let currentBetAmount = _data.record.betAmount[i];
                 let current = this.GetAreaByType(i);
@@ -97,10 +101,47 @@ export class cb_SelfRecordLayer extends BaseUI {
                 totalBet += currentBetAmount;
                 current.SetWinAmount(currentWinLose);
                 current.SetBetAmount(currentBetAmount);
+
+                let win = false;
+                for(let k = 0 ; k < rewardResults.length ; k++)
+                {
+                    let currentResult = rewardResults[k];
+                    if(currentArea == currentResult)
+                    {
+                        win = true;
+                        break;
+                    }
+                }
+
+                current.SetWin(win);
+
             }
 
             this.mTotalBet.string = Tool.ConvertMoney_S2C(totalBet) + "";
             this.mTotalWin.string = Tool.ConvertMoney_S2C(totalWinLose) + "";
+
+
+            for(let i = 0 ; i < this.mCowboyCards.children.length ; i++)
+            {
+                let poker = this.mCowboyCards.children[i].getComponent(Poker);
+                poker.SetFrontByCardInfo(_data.record.boyCards[i]);
+                poker.ShowBack();
+                poker.FlipToFront();
+            }
+            for(let i = 0 ; i < this.mPublicCards.children.length ; i++)
+            {
+                let poker = this.mPublicCards.children[i].getComponent(Poker);
+                poker.SetFrontByCardInfo(_data.record.publicCards[i]);
+                poker.ShowBack();
+                poker.FlipToFront();
+            }
+            for(let i = 0 ; i < this.mGirlCards.children.length ; i++)
+            {
+                let poker = this.mGirlCards.children[i].getComponent(Poker);
+                poker.SetFrontByCardInfo(_data.record.girlCards[i]);
+                poker.ShowBack();
+                poker.FlipToFront();
+            }
         });
     }
     LateInit()
@@ -120,17 +161,17 @@ export class cb_SelfRecordLayer extends BaseUI {
         for(let i = 0 ; i < this.mCowboyCards.children.length ; i++)
         {
             let poker = this.mCowboyCards.children[i].getComponent(Poker);
-            poker.ShowBack();
+            poker.ResetAndHide();
         }
         for(let i = 0 ; i < this.mPublicCards.children.length ; i++)
         {
             let poker = this.mPublicCards.children[i].getComponent(Poker);
-            poker.ShowBack();
+            poker.ResetAndHide();
         }
         for(let i = 0 ; i < this.mGirlCards.children.length ; i++)
         {
             let poker = this.mGirlCards.children[i].getComponent(Poker);
-            poker.ShowBack();
+            poker.ResetAndHide();
         }
 
         for(let i = 0 ; i < this.mAreaInfos.children.length ; i++)
@@ -138,6 +179,7 @@ export class cb_SelfRecordLayer extends BaseUI {
             let current = this.GetAreaByType(i);
             current.SetWinAmount(0);
             current.SetBetAmount(0);
+            current.SetWin(false);
         }
     }
 
@@ -161,6 +203,9 @@ export class cb_SelfRecordLayer extends BaseUI {
         {
             this.node.active = true;
             this.mMovingShow.ShowAnimation();
+            this.ResetUI();
+            let gameId = CowboyData.Instance.GetGameId();
+            NetworkSend.Instance.GetRecordCowboy(gameId);
         }
         else
         {

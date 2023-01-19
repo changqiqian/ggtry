@@ -671,9 +671,9 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
 
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyEnterGameResp,(_data)=>
         {
+            UIMgr.Instance.ShowLoading(false);
             let msg = S2CTexasCowboyEnterGameResp.decode(_data);
             console.log("收到的内容 S2C_TexasCowboyEnterGameResp  进入德州牛仔==" + JSON.stringify(msg));
-            UIMgr.Instance.ShowLoading(false);
             if(msg.result.resId == MsgResult.Success)
             {
                 CowboyData.Instance.Data_Money.mData = msg.money;
@@ -687,9 +687,10 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
 
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyExitGameResp,(_data)=>
         {
+            UIMgr.Instance.ShowLoading(false);
+
             let msg = S2CTexasCowboyExitGameResp.decode(_data);
             console.log("收到的内容 S2C_TexasCowboyExitGameResp  退出 德州牛仔==" + JSON.stringify(msg));
-            UIMgr.Instance.ShowLoading(false);
             if(msg.result.resId == MsgResult.Success)
             {
                 CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.mData = msg;
@@ -717,6 +718,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
 
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyRecordResp,(_data)=>
         {
+            UIMgr.Instance.ShowLoading(false);
             let msg = S2CTexasCowboyRecordResp.decode(_data);
             console.log("收到的内容 S2C_TexasCowboyRecordResp  获取我的记录 德州牛仔==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
@@ -732,6 +734,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyBringInResp,(_data)=>
         {
+            UIMgr.Instance.ShowLoading(false);
             let msg = S2CTexasCowboyBringInResp.decode(_data);
             console.log("收到的内容 S2C_TexasCowboyBringInResp  带入 德州牛仔==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
@@ -762,6 +765,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
 
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyTotalHistoryResp,(_data)=>
         {
+            UIMgr.Instance.ShowLoading(false);
             let msg = S2CTexasCowboyTotalHistoryResp.decode(_data);
             console.log("收到的内容 S2C_TexasCowboyTotalHistoryResp  游戏总记录 德州牛仔==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)

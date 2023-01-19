@@ -316,7 +316,7 @@ export abstract class BaseUI extends Component {
 
     AddTouchCloseEvent(_node : Node)
     {
-        _node.on(Node.EventType.TOUCH_END,this.TouchToClose.bind(this),this);
+        _node.on(Node.EventType.TOUCH_END,this.TouchToClose,this);
     }
 
     TouchToClose()
@@ -370,6 +370,16 @@ export abstract class BaseUI extends Component {
         let tempTransform = _target.getComponent(UITransform);
         tempTransform.setContentSize(getVisibleSize.width*1.1 , getVisibleSize.height * 1.1);
         _target.setWorldPosition(new Vec3(getVisibleSize.width/2 ,getVisibleSize.height/2));
+    }
+
+    public RemoveAndDestoryAllChild(_target : Node)
+    {
+        while(_target.children.length > 0)
+        {
+            let current =  _target.children[0];
+            current.removeFromParent();
+            current.destroy();
+        }
     }
 
     //让ui换面往下移动一个'多桌ui'

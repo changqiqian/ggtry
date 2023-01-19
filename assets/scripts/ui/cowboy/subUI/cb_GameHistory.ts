@@ -74,19 +74,19 @@ export class cb_GameHistory extends BaseUI
         {
             case CowboyAreaType.CowboyAreaType_0:
                 {
-                    this.mBoyWinRate.string = (_cowboyTotalHistory.count / _totalGameCount).toFixed(2);
+                    this.mBoyWinRate.string = (_cowboyTotalHistory.count / _totalGameCount).toFixed(2) + "%";
                     this.mBoyCount.string = _cowboyTotalHistory.count + "";
                 }
                 break;
             case CowboyAreaType.CowboyAreaType_1:
                 {
-                    this.mTieWinRate.string = (_cowboyTotalHistory.count / _totalGameCount).toFixed(2);
+                    this.mTieWinRate.string = (_cowboyTotalHistory.count / _totalGameCount).toFixed(2) + "%";
                     this.mTieCount.string = _cowboyTotalHistory.count + "";
                 }
                 break;
             case CowboyAreaType.CowboyAreaType_2:
                 {
-                    this.mGirlWinRate.string = (_cowboyTotalHistory.count / _totalGameCount).toFixed(2);
+                    this.mGirlWinRate.string = (_cowboyTotalHistory.count / _totalGameCount).toFixed(2) + "%";
                     this.mGirlCount.string = _cowboyTotalHistory.count + "";
                 }
                 break;

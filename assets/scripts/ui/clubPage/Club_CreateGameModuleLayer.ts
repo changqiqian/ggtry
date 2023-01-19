@@ -48,7 +48,7 @@ export class Club_CreateGameModuleLayer extends BaseUI
     Refresh()
     {
         GameConfig.ReoderCreateRoomModuleData();
-        this.mScrollView.content.destroyAllChildren();
+        this.RemoveAndDestoryAllChild(this.mScrollView.content);
         for(let i = 0 ; i < GameConfig.MaxModule ; i++)
         {
             let currentStrData = GameConfig.GetCreateRoomModule(i);

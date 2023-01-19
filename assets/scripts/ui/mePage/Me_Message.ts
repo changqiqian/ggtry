@@ -85,6 +85,6 @@ export class Me_Message extends BaseUI {
         this.mIsLastPage = false;
         this.mCurrentData = new Array<any>();
         this.mCurrentPage = 0;
-        this.mScrollView.content.destroyAllChildren();
+        this.RemoveAndDestoryAllChild(this.mScrollView.content);
     }
 }

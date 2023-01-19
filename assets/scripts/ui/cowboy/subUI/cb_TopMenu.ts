@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Button } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { UIMgr } from '../../../base/UIMgr';
+import { NetworkSend } from '../../../network/NetworkSend';
 import { BaseButton } from '../../common/BaseButton';
 import { CowboyData } from '../CowboyData';
 const { ccclass, property } = _decorator;
@@ -32,7 +33,7 @@ export class cb_TopMenu extends BaseUI {
         })
         this.mMyHistoryBtn.SetClickCallback((_data)=>
         {
-            
+            UIMgr.Instance.ShowLayer("cowboy","prefab/subUI/cb_SelfRecordLayer",true,null,CowboyData.UITag);
         })
         this.mDragDownBtn.SetClickCallback((_data)=>
         {
@@ -40,7 +41,9 @@ export class cb_TopMenu extends BaseUI {
         })
         this.mGameHistoryBtn.SetClickCallback((_data)=>
         {
-            
+            UIMgr.Instance.ShowWindow("cowboy","prefab/subUI/cb_GameHistory",true,null,CowboyData.UITag);
+            let gameId = CowboyData.Instance.GetGameId();
+            NetworkSend.Instance.TotalHistoryCowboy(gameId);
         })
         this.mPlayerBtn.SetClickCallback((_data)=>
         {

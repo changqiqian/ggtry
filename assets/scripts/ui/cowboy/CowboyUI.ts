@@ -41,6 +41,7 @@ export class CowboyUI extends BaseUI
             this.mMovingShow.HideAnimation();
         }
     }
+    
     InitParam() 
     {
 
@@ -53,6 +54,21 @@ export class CowboyUI extends BaseUI
     }
     RegDataNotify() 
     {
+        CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.AddListenner(this,(_data)=>
+        {
+            this.mMovingShow.SetHideAnimationCallback(()=>
+            {
+                UIMgr.Instance.DeleteUiByTag(CowboyData.UITag);
+            });
+            UIMgr.Instance.HideUiByTag(CowboyData.UITag);
+        });
+
+        CowboyData.Instance.Data_HideUI.AddListenner(this,(_data)=>
+        {
+            this.mMovingShow.SetHideAnimationCallback(null);
+            UIMgr.Instance.HideUiByTag(CowboyData.UITag);
+        });
+
         CowboyData.Instance.Data_CollectConfig.AddListenner(this,(_data)=>
         {
             let tempChip = instantiate(this.mChip) as Node;

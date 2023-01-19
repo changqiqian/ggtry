@@ -43,29 +43,28 @@ export class cb_BetArea extends BaseUI {
     {
         CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
         {
+            this.ResetUI();
             let ratio = CowboyData.Instance.GetRatio(this.mBetArea);
             this.mAreaRatio.string = ratio + "X";
+            this.RevertHistory();
             if(_data.phase == CowboyPhase.CowBoyPhase_Settlement)
             {
-                this.ResetUI();
                 return;
             }
             this.RevertBetInfo();
-            this.RevertHistory();
         })
 
         CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
         {
             this.mAmount.string = "0(0)";
             this.mWinSpine.Hide();
-            this.mChipContainer.destroyAllChildren();
+            this.RemoveAndDestoryAllChild(this.mChipContainer);
         })
         
 
         CowboyData.Instance.Data_S2CTexasCowboyBetNotify.AddListenner(this,(_data)=>
         {
             let betInfos = _data.betInfo;
-
             for(let i = 0 ; i < betInfos.length ; i++)
             {
                 let current = betInfos[i];
@@ -96,6 +95,8 @@ export class cb_BetArea extends BaseUI {
                     break;
                 }
             }
+
+            this.mHistory.InsertOneData(have);
             if(have == false)
             {
                 this.mWinSpine.Hide();
@@ -104,8 +105,14 @@ export class cb_BetArea extends BaseUI {
 
             this.mWinSpine.SetAnimation("win");
 
+            
             let myBetInfo = CowboyData.Instance.GetSelfBetInfoByAreaTpye(this.mBetArea);
             if(myBetInfo == null)
+            {
+                return;
+            }
+
+            if(myBetInfo.amount <=0)
             {
                 return;
             }
@@ -128,13 +135,12 @@ export class cb_BetArea extends BaseUI {
 
     CustmoerDestory() 
     {
-        this.mBetBtn.node.off(Node.EventType.TOUCH_END,this.OnBetBtn.bind(this),this);
     }
 
     //复原下注情况
     RevertBetInfo()
     {
-        this.mChipContainer.destroyAllChildren();
+        this.RemoveAndDestoryAllChild(this.mChipContainer);
         let betAreaInfo = CowboyData.Instance.GetAreaBetInfoByAreaType(this.mBetArea);
         let myBetInfo = CowboyData.Instance.GetSelfBetInfoByAreaTpye(this.mBetArea);
         let totalBetMoney = Tool.ConvertMoney_S2C(betAreaInfo.totalBetNum);
@@ -155,7 +161,6 @@ export class cb_BetArea extends BaseUI {
     //还原历史记录
     RevertHistory()
     {
-        this.mHistory.ResetUI();
         let historyInfo =  CowboyData.Instance.GetAreaHistoryByAreaType(this.mBetArea);
         if(historyInfo == null)
         {
@@ -171,7 +176,7 @@ export class cb_BetArea extends BaseUI {
         this.mAmount.string = "0(0)";
         this.mWinSpine.Hide();
         this.mHistory.ResetUI();
-        this.mChipContainer.destroyAllChildren();
+        this.RemoveAndDestoryAllChild(this.mChipContainer);
     }
 
     OnBetBtn()
@@ -225,6 +230,65 @@ export class cb_BetArea extends BaseUI {
     {
         this.mAreaName.string = _name;
         this.mBetArea = _betArea;
+
+        switch(this.mBetArea)
+        {
+            case CowboyAreaType.CowboyAreaType_0:
+                {
+                    this.mHistory.SetConfig(18);
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_1:
+                {
+                    this.mHistory.SetConfig(15);
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_2:
+                {
+                    this.mHistory.SetConfig(18);
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_3:
+                {
+                    this.mHistory.SetConfig(26);
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_4:
+                {
+                    this.mHistory.SetConfig(28);
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_5:
+                {
+                    this.mHistory.SetConfig(19);
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_6:
+                {
+                    this.mHistory.SetConfig(20);
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_7:
+                {
+                    this.mHistory.SetConfig(18);
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_8:
+                {
+                    this.mHistory.SetConfig(18);
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_9:
+                {
+                    this.mHistory.SetConfig(15);
+                }
+                break;
+            case CowboyAreaType.CowboyAreaType_10:
+                {
+                    this.mHistory.SetConfig(18);
+                }
+                break;
+        }
     }
 
     RandomPos(_pos : Vec3 , _offset : Size) : Vec3

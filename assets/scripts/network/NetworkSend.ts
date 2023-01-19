@@ -467,8 +467,9 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("下注 德州牛仔  === " + JSON.stringify(msg))
     }
 
-    public GetRecordCowboy(_gameId : string , _whichGame : number)
+    public GetRecordCowboy(_gameId : string , _whichGame : number = 0)//0代表获取最新的一条数据
     {
+        UIMgr.Instance.ShowLoading(true);
         let msg = new C2STexasCowboyRecord();
         msg.gameId = _gameId;
         msg.whichGame = _whichGame;
@@ -478,6 +479,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
 
     public BringInCowboy(_gameId : string , _amount : number)
     {
+        UIMgr.Instance.ShowLoading(true);
         let msg = new C2STexasCowboyBringIn();
         msg.gameId = _gameId;
         msg.amount = _amount;
@@ -496,6 +498,7 @@ export class NetworkSend extends Singleton<NetworkSend>()
 
     public TotalHistoryCowboy(_gameId : string )
     {
+        UIMgr.Instance.ShowLoading(true);
         let msg = new C2STexasCowboyTotalHistory();
         msg.gameId = _gameId;
         Network.Instance.SendMsg(MessageId.C2S_TexasCowboyTotalHistory , C2STexasCowboyTotalHistory.encode(msg).finish());

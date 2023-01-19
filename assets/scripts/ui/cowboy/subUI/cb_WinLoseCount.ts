@@ -7,6 +7,8 @@ const { ccclass, property } = _decorator;
 @ccclass('cb_WinLoseCount')
 export class cb_WinLoseCount extends BaseUI 
 {
+    @property(Node) 
+    mWinBG: Node = null;
     @property(Label) 
     mTitle: Label = null;
     @property(Label) 
@@ -34,6 +36,11 @@ export class cb_WinLoseCount extends BaseUI
     CustmoerDestory()
     {
 
+    }
+
+    public SetWin(_value :boolean)
+    {
+        this.mWinBG.active = _value;
     }
 
     public SetAreaType(_cowboyAreaType : CowboyAreaType)
