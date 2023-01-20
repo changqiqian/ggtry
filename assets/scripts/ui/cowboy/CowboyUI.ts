@@ -35,6 +35,7 @@ export class CowboyUI extends BaseUI
         if(_val)
         {
             this.node.active = true;
+            AudioManager.Instance.PlayMusic("CowboyBGM");
         }
         else
         {
@@ -99,7 +100,7 @@ export class CowboyUI extends BaseUI
             //自己下注
             if(LocalPlayerData.Instance.Data_Uid.mData == _data.mUid)
             {   
-                if(this.node.activeInHierarchy == true)
+                if(this.node.activeInHierarchy)
                 {
                     AudioManager.Instance.PlayMusicOneShot("CowboyBet");
                 }
@@ -131,6 +132,10 @@ export class CowboyUI extends BaseUI
             else
             {
                 this.mSpineWait.Hide(); 
+                if(this.node.activeInHierarchy)
+                {
+                    AudioManager.Instance.PlayMusicOneShot("CowboyStart");
+                }
             }
             this.UpdatePhaseStatus();
         });

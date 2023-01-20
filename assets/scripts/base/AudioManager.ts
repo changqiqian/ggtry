@@ -40,10 +40,17 @@ export class AudioManager extends BaseUI
         audio.playOneShot(audio.clip);
     }
 
-    public PlayMusic(_name : string)
+    public PlayMusic(_name : string , _loop : boolean = false)
     {
         let audio = this.GetAudioSource(_name);
+        audio.loop = _loop;
         audio.play();
+    }
+
+    public StopMusic(_name : string)
+    {
+        let audio = this.GetAudioSource(_name);
+        audio.stop();
     }
 }
 

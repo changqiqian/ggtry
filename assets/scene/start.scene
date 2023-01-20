@@ -21,11 +21,11 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 61
+      "__id__": 65
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 62
+      "__id__": 66
     },
     "_id": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94"
   },
@@ -59,16 +59,16 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 57
+        "__id__": 61
       },
       {
-        "__id__": 58
+        "__id__": 62
       },
       {
-        "__id__": 59
+        "__id__": 63
       },
       {
-        "__id__": 60
+        "__id__": 64
       }
     ],
     "_prefab": null,
@@ -789,15 +789,21 @@
       },
       {
         "__id__": 53
+      },
+      {
+        "__id__": 55
+      },
+      {
+        "__id__": 57
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 55
+        "__id__": 59
       },
       {
-        "__id__": 56
+        "__id__": 60
       }
     ],
     "_prefab": null,
@@ -1624,7 +1630,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "CowboyDeal",
+    "_name": "CowboyStart",
     "_objFlags": 0,
     "_parent": {
       "__id__": 22
@@ -1663,7 +1669,7 @@
       "y": 0,
       "z": 0
     },
-    "_id": "ff02etaDtDVbycsAyrPn0G"
+    "_id": "1bOAy8LepBbIiczQDAWseD"
   },
   {
     "__type__": "cc.AudioSource",
@@ -1675,17 +1681,17 @@
     "_enabled": true,
     "__prefab": null,
     "_clip": {
-      "__uuid__": "c2d2a277-65ba-4fc4-9820-0dd6adffe256",
+      "__uuid__": "d669627a-6c12-4e96-afcb-d4fd1c25ad9f",
       "__expectedType__": "cc.AudioClip"
     },
     "_loop": false,
     "_playOnAwake": false,
     "_volume": 1,
-    "_id": "99bYKafPNGc7g72UMOmNoT"
+    "_id": "d0E501+tdGrYlCs7ur6Lt9"
   },
   {
     "__type__": "cc.Node",
-    "_name": "CowboyReward",
+    "_name": "CowboyDeal",
     "_objFlags": 0,
     "_parent": {
       "__id__": 22
@@ -1724,7 +1730,7 @@
       "y": 0,
       "z": 0
     },
-    "_id": "124AkCwGtBEr3UNxylshP6"
+    "_id": "ff02etaDtDVbycsAyrPn0G"
   },
   {
     "__type__": "cc.AudioSource",
@@ -1736,17 +1742,17 @@
     "_enabled": true,
     "__prefab": null,
     "_clip": {
-      "__uuid__": "f593d812-7766-42da-a0ad-6c68475fe2f0",
+      "__uuid__": "c2d2a277-65ba-4fc4-9820-0dd6adffe256",
       "__expectedType__": "cc.AudioClip"
     },
     "_loop": false,
     "_playOnAwake": false,
     "_volume": 1,
-    "_id": "8bpl4IHTtG/LJOn5LJm62n"
+    "_id": "99bYKafPNGc7g72UMOmNoT"
   },
   {
     "__type__": "cc.Node",
-    "_name": "CowboyBet",
+    "_name": "CowboyReward",
     "_objFlags": 0,
     "_parent": {
       "__id__": 22
@@ -1785,7 +1791,7 @@
       "y": 0,
       "z": 0
     },
-    "_id": "46/fjWNY9DVb7Ed1xOdHgp"
+    "_id": "124AkCwGtBEr3UNxylshP6"
   },
   {
     "__type__": "cc.AudioSource",
@@ -1797,6 +1803,67 @@
     "_enabled": true,
     "__prefab": null,
     "_clip": {
+      "__uuid__": "f593d812-7766-42da-a0ad-6c68475fe2f0",
+      "__expectedType__": "cc.AudioClip"
+    },
+    "_loop": false,
+    "_playOnAwake": false,
+    "_volume": 1,
+    "_id": "8bpl4IHTtG/LJOn5LJm62n"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "CowboyBet",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 22
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 56
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_layer": 33554432,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "46/fjWNY9DVb7Ed1xOdHgp"
+  },
+  {
+    "__type__": "cc.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 55
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_clip": {
       "__uuid__": "9c16cf37-f0fe-4f13-9b0d-329c5ebd3fdb",
       "__expectedType__": "cc.AudioClip"
     },
@@ -1804,6 +1871,67 @@
     "_playOnAwake": false,
     "_volume": 1,
     "_id": "c6Me8F+6BAB7+Ybs/CAVn+"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "CowboyBGM",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 22
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 58
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_layer": 33554432,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "f2NNret/1MfLPOFduHMHyU"
+  },
+  {
+    "__type__": "cc.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 57
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_clip": {
+      "__uuid__": "fbe74b4a-5965-42d5-bef8-4ae7ec140da0",
+      "__expectedType__": "cc.AudioClip"
+    },
+    "_loop": false,
+    "_playOnAwake": false,
+    "_volume": 1,
+    "_id": "32+IjrMQZBmJVy1H19bTCK"
   },
   {
     "__type__": "cc.UITransform",
@@ -1921,19 +2049,19 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 63
+      "__id__": 67
     },
     "shadows": {
-      "__id__": 64
+      "__id__": 68
     },
     "_skybox": {
-      "__id__": 65
+      "__id__": 69
     },
     "fog": {
-      "__id__": 66
+      "__id__": 70
     },
     "octree": {
-      "__id__": 67
+      "__id__": 71
     }
   },
   {
