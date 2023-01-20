@@ -6,21 +6,22 @@ import { HallData } from '../hall/HallData';
 import { Club_MainEnter } from './Club_MainEnter';
 const { ccclass, property } = _decorator;
 
-@ccclass('Club_SearchClubWindow')
-export class Club_SearchClubWindow extends BaseUI {
+@ccclass('Club_SearchResultWindow')
+export class Club_SearchResultWindow extends BaseUI 
+{
     @property(BaseButton) 
     mCloseBtn: BaseButton = null;
     @property(Club_MainEnter) 
     mClub_MainEnter: Club_MainEnter = null;
     @property(BaseButton) 
-    mConfirmBtn: BaseButton = null;
+    mJoinBtn: BaseButton = null;
     
     InitParam()
     {
         //这几个变量 只要在编辑器里面拖动绑定，编辑器就回报错，没办法了 只有代码绑定
         this.mCloseBtn = this.node.getChildByPath("Top/CloseBtn").getComponent(BaseButton);
-        this.mClub_MainEnter = this.node.getChildByPath("Bottom/Club_MainEnter").getComponent(Club_MainEnter);
-        this.mConfirmBtn = this.node.getChildByPath("Bottom/ConfirmBtn").getComponent(BaseButton);
+        this.mClub_MainEnter = this.node.getChildByPath("Middle/Club_MainEnter").getComponent(Club_MainEnter);
+        this.mJoinBtn = this.node.getChildByPath("Bottom/JoinBtn").getComponent(BaseButton);
     }
     BindUI()
     {
@@ -29,7 +30,7 @@ export class Club_SearchClubWindow extends BaseUI {
             this.CloseAsWindow();
         });
 
-        this.mConfirmBtn.SetClickCallback(()=>
+        this.mJoinBtn.SetClickCallback(()=>
         {
             let clubId = HallData.Instance.Data_ClubSearchResult.mData.id;
             NetworkSend.Instance.JoinClub(clubId);
@@ -54,5 +55,4 @@ export class Club_SearchClubWindow extends BaseUI {
 
     }
 }
-
 
