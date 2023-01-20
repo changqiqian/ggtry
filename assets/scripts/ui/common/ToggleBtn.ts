@@ -98,8 +98,8 @@ export class ToggleBtn extends BaseUI {
 
     public SetImage(_spriteFrame : SpriteFrame)
     {
-        this.mSelected.getComponent(Sprite).spriteFrame = _spriteFrame;
-        this.mDisabled.getComponent(Sprite).spriteFrame = _spriteFrame;
+        this.mSelected.node.getChildByName("Icon").getComponent(Sprite).spriteFrame = _spriteFrame;
+        this.mDisabled.node.getChildByName("Icon").getComponent(Sprite).spriteFrame = _spriteFrame;
     }
 
     public SetForbidden(_val : boolean)
@@ -111,8 +111,8 @@ export class ToggleBtn extends BaseUI {
 
     public SetGray(_val : boolean)
     {
-        this.mSelected.getComponent(Sprite).grayscale = _val;
-        this.mDisabled.getComponent(Sprite).grayscale = _val;
+        this.mSelected.node.getChildByName("Icon").getComponent(Sprite).grayscale = _val;
+        this.mDisabled.node.getChildByName("Icon").getComponent(Sprite).grayscale = _val;
     }
 
     OnSelected()
