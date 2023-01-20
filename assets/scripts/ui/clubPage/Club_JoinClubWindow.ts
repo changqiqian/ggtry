@@ -6,14 +6,11 @@ import { HallData } from '../hall/HallData';
 import { Club_MainEnter } from './Club_MainEnter';
 const { ccclass, property } = _decorator;
 
-@ccclass('Club_SearchResultWindow')
-export class Club_SearchResultWindow extends BaseUI 
+@ccclass('Club_JoinClubWindow')
+export class Club_JoinClubWindow extends BaseUI 
 {
-    @property(BaseButton) 
     mCloseBtn: BaseButton = null;
-    @property(Club_MainEnter) 
     mClub_MainEnter: Club_MainEnter = null;
-    @property(BaseButton) 
     mJoinBtn: BaseButton = null;
     
     InitParam()
