@@ -62,16 +62,16 @@ export class cb_BottomArea extends BaseUI {
                     let current = _data.result[i];
                     if(current.uid == LocalPlayerData.Instance.Data_Uid.mData)
                     {
-                        if(current.winLose > 0)
+                        if(current.reward > 0)
                         {
                             this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
                             {
                                 let tempNode = instantiate(_prefab);
                                 this.mPlayerInfo.node.addChild(tempNode);
                                 let script = tempNode.getComponent(Game_WinEffect);
-                                script.InitWithData(current.winLose);
+                                script.InitWithData(current.reward);
                             })
-                            
+
                             if(this.node.activeInHierarchy == true)
                             {
                                 AudioManager.Instance.PlayMusicOneShot("CowboyReward");

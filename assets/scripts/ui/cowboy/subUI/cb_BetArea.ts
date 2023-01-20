@@ -47,7 +47,8 @@ export class cb_BetArea extends BaseUI {
             let ratio = CowboyData.Instance.GetRatio(this.mBetArea);
             this.mAreaRatio.string = ratio + "X";
             this.RevertHistory();
-            if(_data.phase == CowboyPhase.CowBoyPhase_Settlement)
+            let phase = CowboyData.Instance.GetPhase();
+            if(phase == CowboyPhase.CowBoyPhase_Settlement)
             {
                 return;
             }

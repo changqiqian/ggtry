@@ -35,10 +35,11 @@ export class CowboyUI extends BaseUI
         if(_val)
         {
             this.node.active = true;
-            AudioManager.Instance.PlayMusic("CowboyBGM");
+            AudioManager.Instance.PlayMusic("CowboyBGM",true);
         }
         else
         {
+            AudioManager.Instance.StopMusic("CowboyBGM");
             this.mMovingShow.HideAnimation();
         }
     }
@@ -142,6 +143,11 @@ export class CowboyUI extends BaseUI
 
         CowboyData.Instance.Data_S2CTexasCowboyGameStartNotify.AddListenner(this,(_data)=>
         {
+            if(this.node.activeInHierarchy)
+            {
+                AudioManager.Instance.PlayMusicOneShot("CowboyStart");
+            }
+
             this.mCircleTimer.StartTimer(CowboyData.Instance.GetDuration(CowboyPhase.CowBoyPhase_Start),()=>
             {
                 
@@ -165,6 +171,10 @@ export class CowboyUI extends BaseUI
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
             this.mCircleTimer.StartTimer(CowboyData.Instance.GetDuration(CowboyPhase.CowBoyPhase_Settlement));
+            if(this.node.activeInHierarchy)
+            {
+                AudioManager.Instance.PlayMusicOneShot("CountDownEnd");
+            }
             this.mSpineStartOrEnd.SetAnimation("tzxz",false,(_data)=>
             {   
                 this.mSpineStartOrEnd.Hide(); 

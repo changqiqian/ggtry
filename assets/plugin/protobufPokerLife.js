@@ -9247,6 +9247,7 @@ $root.CowboyWinLose = (function() {
      * @property {string|null} [uid] CowboyWinLose uid
      * @property {number|null} [winLose] CowboyWinLose winLose
      * @property {number|null} [restAmount] CowboyWinLose restAmount
+     * @property {number|null} [reward] CowboyWinLose reward
      */
 
     /**
@@ -9289,6 +9290,14 @@ $root.CowboyWinLose = (function() {
     CowboyWinLose.prototype.restAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * CowboyWinLose reward.
+     * @member {number} reward
+     * @memberof CowboyWinLose
+     * @instance
+     */
+    CowboyWinLose.prototype.reward = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified CowboyWinLose message. Does not implicitly {@link CowboyWinLose.verify|verify} messages.
      * @function encode
      * @memberof CowboyWinLose
@@ -9306,6 +9315,8 @@ $root.CowboyWinLose = (function() {
             w.uint32(16).int64(m.winLose);
         if (m.restAmount != null && Object.hasOwnProperty.call(m, "restAmount"))
             w.uint32(24).int64(m.restAmount);
+        if (m.reward != null && Object.hasOwnProperty.call(m, "reward"))
+            w.uint32(32).int64(m.reward);
         return w;
     };
 
@@ -9335,6 +9346,9 @@ $root.CowboyWinLose = (function() {
                 break;
             case 3:
                 m.restAmount = r.int64();
+                break;
+            case 4:
+                m.reward = r.int64();
                 break;
             default:
                 r.skipType(t & 7);

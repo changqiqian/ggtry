@@ -3238,6 +3238,9 @@ export class CowboyWinLose implements ICowboyWinLose {
     /** CowboyWinLose restAmount. */
     public restAmount: number;
 
+    /** CowboyWinLose reward. */
+    public reward: number;
+
     /**
      * Encodes the specified CowboyWinLose message. Does not implicitly {@link CowboyWinLose.verify|verify} messages.
      * @param m CowboyWinLose message or plain object to encode

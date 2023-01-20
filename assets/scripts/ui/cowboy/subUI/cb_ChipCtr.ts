@@ -60,7 +60,7 @@ export class cb_ChipCtr extends BaseUI
 
     public InitWithData()
     {
-        this.mLastTimeChosenAmount = CowboyData.Instance.ChipAmountConfig[0];
+        this.mLastTimeChosenAmount = 0;
         CowboyData.Instance.Data_SelectedChip.mData = this.mLastTimeChosenAmount;
         for(let i = 0 ; i < CowboyData.Instance.ChipAmountConfig.length ; i++)
         {
