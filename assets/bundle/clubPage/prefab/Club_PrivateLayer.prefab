@@ -6324,7 +6324,7 @@
     "propertyPath": [
       "_active"
     ],
-    "value": false
+    "value": true
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -6337,7 +6337,7 @@
     "value": {
       "__type__": "cc.Size",
       "width": 240,
-      "height": 164
+      "height": 200
     }
   },
   {
@@ -6985,7 +6985,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1125,
-      "height": 80
+      "height": 440
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

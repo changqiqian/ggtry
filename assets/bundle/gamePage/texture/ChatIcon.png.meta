@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "9cd2cf17-056f-4ca4-8d73-3eb7635673e8",
+  "uuid": "b6e3d394-b9de-4a80-9477-219df95f9859",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "9cd2cf17-056f-4ca4-8d73-3eb7635673e8@6c48a",
-      "displayName": "ChatIcon",
+      "uuid": "b6e3d394-b9de-4a80-9477-219df95f9859@6c48a",
+      "displayName": "chatIcon",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "9cd2cf17-056f-4ca4-8d73-3eb7635673e8",
+        "imageUuidOrDatabaseUri": "b6e3d394-b9de-4a80-9477-219df95f9859",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "9cd2cf17-056f-4ca4-8d73-3eb7635673e8@f9941",
-      "displayName": "ChatIcon",
+      "uuid": "b6e3d394-b9de-4a80-9477-219df95f9859@f9941",
+      "displayName": "chatIcon",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -43,19 +43,19 @@
         "rotated": false,
         "offsetX": 0,
         "offsetY": 0,
-        "trimX": 0,
-        "trimY": 0,
-        "width": 66,
-        "height": 60,
-        "rawWidth": 66,
-        "rawHeight": 60,
+        "trimX": 4,
+        "trimY": 8,
+        "width": 40,
+        "height": 32,
+        "rawWidth": 48,
+        "rawHeight": 48,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9cd2cf17-056f-4ca4-8d73-3eb7635673e8@6c48a",
+        "imageUuidOrDatabaseUri": "b6e3d394-b9de-4a80-9477-219df95f9859@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "9cd2cf17-056f-4ca4-8d73-3eb7635673e8@f9941"
+    "redirect": "b6e3d394-b9de-4a80-9477-219df95f9859@f9941"
   }
 }
