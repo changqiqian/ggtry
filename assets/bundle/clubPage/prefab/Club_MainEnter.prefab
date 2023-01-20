@@ -1535,8 +1535,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 96,
-      "height": 96
+      "width": 50,
+      "height": 66
     }
   },
   {
@@ -2112,7 +2112,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "78f497b5-7d19-4a91-be81-8c40d5ae5eb4@f9941",
+      "__uuid__": "4447f262-c3c1-4446-b37b-38ba9525326d@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,

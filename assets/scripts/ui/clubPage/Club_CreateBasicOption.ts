@@ -14,8 +14,6 @@ export class Club_CreateBasicOption extends BaseUI
     @property(BaseButton) 
     mBaseSettingBtn: BaseButton = null;
     @property(Node) 
-    mCurrencyModeToggle: Node = null;
-    @property(Node) 
     mTaxToggle: Node = null;
     @property(MeassureSlider) 
     mMeassureSliderTax: MeassureSlider = null;
@@ -32,21 +30,7 @@ export class Club_CreateBasicOption extends BaseUI
 
         });
 
-        for(let i = 0 ; i < this.mCurrencyModeToggle.children.length ; i++)
-        {
-            let currentToggle = this.mCurrencyModeToggle.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(HallData.Instance.Data_ClubCreateGameCurrencyType,i);  
 
-
-            if(i == GameCurrencyType.GameCurrencyType_Coin)
-            {
-                currentToggle.SetTitle(Localization.GetString("00173"));
-            }
-            else if(i == GameCurrencyType.GameCurrencyType_Point)
-            {
-                currentToggle.SetTitle(Localization.GetString("00172"));
-            }
-        }
 
         for(let i = 0 ; i < this.mTaxToggle.children.length ; i++)
         {
@@ -88,11 +72,6 @@ export class Club_CreateBasicOption extends BaseUI
         HallData.Instance.Data_ClubCreateGameTaxRate.AddListenner(this,(_data)=>
         {
             this.mMeassureSliderTax.SetIndex(_data);
-        })
-
-        HallData.Instance.Data_ClubCreateGameCurrencyType.AddListenner(this,(_data)=>
-        {
-            HallData.Instance.Data_Club_CreateTexasConfig.mData.currencyType = _data;
         })
 
     }

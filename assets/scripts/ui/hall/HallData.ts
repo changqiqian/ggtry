@@ -203,7 +203,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
                     //创建牌局，初始化选项会用到的驱动
     Data_ClubCreateGameType :   BaseData<GameType> = new BaseData<GameType>(false ,GameType.GameType_TexasCash);//俱乐部创建牌局时候，游戏类型
     Data_ClubCreateGameName : BaseData<string> = new BaseData<string>(); //俱乐部创建牌局时候，牌局名称
-    Data_ClubCreateGameCurrencyType : BaseData<GameCurrencyType> = new BaseData<GameCurrencyType>();//俱乐部创建游戏的时候，货币类型设定
     Data_ClubCreateGameTaxType : BaseData<GameTaxType> = new BaseData<GameTaxType>(); //俱乐部创建游戏的时候，抽水设定
     Data_ClubCreateGameTaxRate : BaseData<number> = new BaseData<number>(); //俱乐部创建牌局时候，抽水数值
     Data_ClubCreateGameCurrentSB : BaseData<number> = new BaseData<number>(); //俱乐部创建房间时，选中的小盲
@@ -230,7 +229,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
 
         this.Data_ClubCreateGameType.mData = _type;
         this.Data_ClubCreateGameName.mData = "";
-        this.Data_ClubCreateGameCurrencyType.mData = GameCurrencyType.GameCurrencyType_Point;
         this.Data_ClubCreateGameTaxType.mData = GameTaxType.GameTaxType_WholeGameEnd;
         this.Data_ClubCreateGameTaxRate.mData = 0;
         this.Data_ClubCreateGameCurrentSB.mData = 0;
@@ -252,7 +250,7 @@ export class HallData extends SingletonBaseNotify<HallData>()
 
         this.Data_Club_CreateTexasConfig.mData.gameType = this.Data_ClubCreateGameType.mData;
         this.Data_Club_CreateTexasConfig.mData.gameName = this.Data_ClubCreateGameName.mData;
-        this.Data_Club_CreateTexasConfig.mData.currencyType = this.Data_ClubCreateGameCurrencyType.mData;
+        this.Data_Club_CreateTexasConfig.mData.currencyType = GameCurrencyType.GameCurrencyType_Point;
         this.Data_Club_CreateTexasConfig.mData.taxType = this.Data_ClubCreateGameTaxType.mData;
         this.Data_Club_CreateTexasConfig.mData.taxRatio = this.Data_ClubCreateGameTaxRate.mData;
         this.Data_Club_CreateTexasConfig.mData.smallBlind = this.Data_ClubCreateGameCurrentSB.mData;
@@ -283,7 +281,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
         this.Data_Club_CreateTexasConfig.mData = JSON.parse(strData) as Club_CreateTexasConfig;
         this.Data_ClubCreateGameType.mData = this.Data_Club_CreateTexasConfig.mData.gameType
         this.Data_ClubCreateGameName.mData = this.Data_Club_CreateTexasConfig.mData.gameName
-        this.Data_ClubCreateGameCurrencyType.mData = this.Data_Club_CreateTexasConfig.mData.currencyType
         this.Data_ClubCreateGameTaxType.mData = this.Data_Club_CreateTexasConfig.mData.taxType
         this.Data_ClubCreateGameTaxRate.mData = this.Data_Club_CreateTexasConfig.mData.taxRatio
         this.Data_ClubCreateGameCurrentSB.mData = this.Data_Club_CreateTexasConfig.mData.smallBlind
