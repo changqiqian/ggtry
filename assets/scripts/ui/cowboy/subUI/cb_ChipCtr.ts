@@ -30,10 +30,6 @@ export class cb_ChipCtr extends BaseUI
             this.CalculateAviliableChip();
         });
 
-        CowboyData.Instance.Data_SelectedChip.AddListenner(this,(_data)=>
-        {
-        })
-
         CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
         {
             this.CalculateAviliableChip(); 
@@ -46,6 +42,8 @@ export class cb_ChipCtr extends BaseUI
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
+            this.mLastTimeChosenAmount = CowboyData.Instance.Data_SelectedChip.mData;
+            CowboyData.Instance.Data_SelectedChip.mData = 0;
             this.CalculateAviliableChip(); 
         });
     }
@@ -136,8 +134,6 @@ export class cb_ChipCtr extends BaseUI
 
     DisableAllChip()
     {
-        this.mLastTimeChosenAmount = CowboyData.Instance.Data_SelectedChip.mData;
-        CowboyData.Instance.Data_SelectedChip.mData = 0;
         for(let i = CowboyData.Instance.ChipAmountConfig.length - 1 ; i >= 0 ; i--)
         {
             this.DisableChip(i , true);

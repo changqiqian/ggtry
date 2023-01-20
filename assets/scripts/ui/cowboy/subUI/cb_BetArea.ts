@@ -62,7 +62,6 @@ export class cb_BetArea extends BaseUI {
             this.RemoveAndDestoryAllChild(this.mChipContainer);
         })
         
-
         CowboyData.Instance.Data_S2CTexasCowboyBetNotify.AddListenner(this,(_data)=>
         {
             let betInfos = _data.betInfo;
@@ -78,7 +77,6 @@ export class cb_BetArea extends BaseUI {
                     let betConfig = new cb_BetConfig(worldPos,haflOffset,this.mBetArea ,actionId ,Tool.ConvertMoney_S2C(current.amount));
                     CowboyData.Instance.Data_BetConfig.mData = betConfig;
                 }
-    
             }
 
             this.UpdateBetMoney();
@@ -88,7 +86,7 @@ export class cb_BetArea extends BaseUI {
         {
             this.StopAllTween();
             let tween = new Tween(this.node);
-            tween.delay(CowboyData.SettlementDelay);
+            tween.delay(CowboyData.ShowWinDelay);
             tween.call(()=>
             {
                 let have = false;
@@ -110,8 +108,6 @@ export class cb_BetArea extends BaseUI {
                 }
     
                 this.mWinSpine.SetAnimation("win");
-    
-                
                 let myBetInfo = CowboyData.Instance.GetSelfBetInfoByAreaTpye(this.mBetArea);
                 if(myBetInfo == null)
                 {

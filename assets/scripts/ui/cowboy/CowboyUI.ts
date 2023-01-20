@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, instantiate, Prefab, UITransform, Vec3, Size, Tween, easing, Label, Color } from 'cc';
+import { AudioManager } from '../../base/AudioManager';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
@@ -66,7 +67,7 @@ export class CowboyUI extends BaseUI
         {
             this.mMovingShow.SetHideAnimationCallback(()=>
             {
-                UIMgr.Instance.DeleteUiByTag(CowboyData.UITag);
+  
             });
             UIMgr.Instance.HideUiByTag(CowboyData.UITag);
         });
@@ -98,6 +99,11 @@ export class CowboyUI extends BaseUI
             //自己下注
             if(LocalPlayerData.Instance.Data_Uid.mData == _data.mUid)
             {   
+                if(this.node.activeInHierarchy == true)
+                {
+                    AudioManager.Instance.PlayMusicOneShot("CowboyBet");
+                }
+
                 let localPlayerWorldPos = CowboyData.Instance.Data_LocalPlayerPos.mData;
                 let localPlayerPos = this.node.getComponent(UITransform).convertToNodeSpaceAR(localPlayerWorldPos);
                 tempChip.setPosition(localPlayerPos);

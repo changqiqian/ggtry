@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Tween } from 'cc';
+import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
 import { CardStruct } from '../../../base/Calculator';
 import { cbEnum_Gender, CowboyData } from '../CowboyData';
@@ -34,18 +35,31 @@ export class cb_RoleCtr extends BaseUI
         {
             this.StopAllTween();
             let tween = new Tween(this.node);
-            tween.delay(CowboyData.SettlementDelay);
+            tween.delay(CowboyData.ShowCardsDelay);
             tween.call(()=>
             {
                 this.mcb_RoleMan.ShowAllCards(_data.boyCards);
                 this.mcb_RoleGirl.ShowAllCards(_data.girlCards);
-    
+            });
+            tween.delay(CowboyData.PlaySpineAnmDelay);
+            tween.call(()=>
+            {
                 if(_data.winner == 0)
                 {
+                    if(this.node.activeInHierarchy == true)
+                    {
+                        AudioManager.Instance.PlayMusicOneShot("BoyWin");
+                    }
                     this.mcb_RoleMan.PlayWinSpine();
+                    this.mcb_RoleGirl.PlayLoseSpine();
                 }
                 else
                 {
+                    if(this.node.activeInHierarchy == true)
+                    {
+                        AudioManager.Instance.PlayMusicOneShot("GirlWin");
+                    }
+                    this.mcb_RoleMan.PlayLoseSpine();
                     this.mcb_RoleGirl.PlayWinSpine();
                 }
             });

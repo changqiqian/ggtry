@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "673ec7f3-db33-4bd1-b3e6-df7ba48060d4",
+  "uuid": "a30ff964-84ab-4174-9131-3821c3df97f0",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "673ec7f3-db33-4bd1-b3e6-df7ba48060d4@6c48a",
+      "uuid": "a30ff964-84ab-4174-9131-3821c3df97f0@6c48a",
       "displayName": "nanniuzai",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "673ec7f3-db33-4bd1-b3e6-df7ba48060d4",
+        "imageUuidOrDatabaseUri": "a30ff964-84ab-4174-9131-3821c3df97f0",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "673ec7f3-db33-4bd1-b3e6-df7ba48060d4@f9941",
+      "uuid": "a30ff964-84ab-4174-9131-3821c3df97f0@f9941",
       "displayName": "nanniuzai",
       "id": "f9941",
       "name": "spriteFrame",
@@ -45,17 +45,17 @@
         "offsetY": -0.5,
         "trimX": 2,
         "trimY": 3,
-        "width": 654,
-        "height": 510,
-        "rawWidth": 658,
-        "rawHeight": 515,
+        "width": 1183,
+        "height": 533,
+        "rawWidth": 1187,
+        "rawHeight": 538,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "673ec7f3-db33-4bd1-b3e6-df7ba48060d4@6c48a",
+        "imageUuidOrDatabaseUri": "a30ff964-84ab-4174-9131-3821c3df97f0@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "673ec7f3-db33-4bd1-b3e6-df7ba48060d4@f9941"
+    "redirect": "a30ff964-84ab-4174-9131-3821c3df97f0@f9941"
   }
 }

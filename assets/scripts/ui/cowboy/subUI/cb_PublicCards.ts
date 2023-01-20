@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Vec3, Tween, easing } from 'cc';
+import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
 import { Poker } from '../../common/Poker';
 import { CowboyData } from '../CowboyData';
@@ -38,15 +39,23 @@ export class cb_PublicCards extends BaseUI
             this.RestAllCards();
             this.DealCards();
             this.ShowCard(_data.oneCard,0);
+            if(this.node.activeInHierarchy == true)
+            {
+                AudioManager.Instance.PlayMusicOneShot("CowboyDeal");
+            }
         });
 
         CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.AddListenner(this,(_data)=>
         {
             this.StopAllTween();
             let tween = new Tween(this.node);
-            tween.delay(CowboyData.SettlementDelay);
+            tween.delay(CowboyData.ShowCardsDelay);
             tween.call(()=>
             {
+                if(this.node.activeInHierarchy == true)
+                {
+                    AudioManager.Instance.PlayMusicOneShot("DealCard");
+                }
                 for(let i = 1 ; i < _data.publicCards.length ; i++)
                 {
                     let index = i ;

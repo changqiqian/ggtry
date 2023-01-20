@@ -2,12 +2,12 @@
   "ver": "1.1.38",
   "importer": "prefab",
   "imported": true,
-  "uuid": "5bcc8471-173a-4a8b-b67c-c401204f4693",
+  "uuid": "50a36d16-5315-4509-ae53-35cc05829b56",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "cb_SpineGirl"
+    "syncNodeName": "cb_RoleGirl"
   }
 }

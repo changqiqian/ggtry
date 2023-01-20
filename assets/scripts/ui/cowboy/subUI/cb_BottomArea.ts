@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Label, instantiate, Tween } from 'cc';
+import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Tool } from '../../../Tool';
@@ -53,7 +54,7 @@ export class cb_BottomArea extends BaseUI {
         {
             this.StopAllTween();
             let tween = new Tween(this.node);
-            tween.delay(CowboyData.SettlementDelay);
+            tween.delay(CowboyData.ShowWinAmountDelay);
             tween.call(()=>
             {
                 for(let i = 0 ; i < _data.result.length ; i++)
@@ -70,6 +71,11 @@ export class cb_BottomArea extends BaseUI {
                                 let script = tempNode.getComponent(Game_WinEffect);
                                 script.InitWithData(current.winLose);
                             })
+                            
+                            if(this.node.activeInHierarchy == true)
+                            {
+                                AudioManager.Instance.PlayMusicOneShot("CowboyReward");
+                            }
                         }
                         break;
                     }

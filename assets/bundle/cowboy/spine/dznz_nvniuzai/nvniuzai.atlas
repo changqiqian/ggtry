@@ -1,89 +1,117 @@
 
 nvniuzai.png
-size: 718,527
+size: 1271,541
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+han
+  rotate: true
+  xy: 555, 7
+  size: 22, 42
+  orig: 22, 42
+  offset: 0, 0
+  index: -1
 huohua
   rotate: false
-  xy: 404, 2
+  xy: 957, 16
   size: 217, 258
   orig: 220, 260
   offset: 2, 2
   index: -1
 maozi
   rotate: false
-  xy: 2, 17
+  xy: 555, 31
   size: 307, 183
   orig: 309, 183
   offset: 1, 0
   index: -1
 qiang
   rotate: false
-  xy: 623, 139
+  xy: 864, 92
   size: 82, 122
   orig: 82, 123
   offset: 0, 0
   index: -1
 shenti
   rotate: true
-  xy: 310, 262
+  xy: 863, 276
   size: 263, 225
   orig: 263, 225
   offset: 0, 0
   index: -1
 tou
   rotate: true
-  xy: 2, 202
+  xy: 555, 216
   size: 323, 306
   orig: 325, 306
   offset: 1, 0
   index: -1
 toufa
   rotate: false
-  xy: 311, 23
+  xy: 1176, 98
   size: 77, 177
   orig: 77, 177
   offset: 0, 0
   index: -1
 yanwu
   rotate: true
-  xy: 310, 202
+  xy: 863, 216
   size: 58, 92
   orig: 62, 93
   offset: 1, 0
   index: -1
+youbian
+  rotate: false
+  xy: 2, 2
+  size: 235, 537
+  orig: 235, 537
+  offset: 0, 0
+  index: -1
 youyan
   rotate: true
-  xy: 623, 3
+  xy: 864, 22
   size: 68, 49
   orig: 68, 49
   offset: 0, 0
   index: -1
-zidan
+zhongjian
   rotate: false
-  xy: 623, 73
+  xy: 445, 2
+  size: 108, 537
+  orig: 108, 537
+  offset: 0, 0
+  index: -1
+zidan
+  rotate: true
+  xy: 1176, 30
   size: 66, 64
   orig: 67, 64
   offset: 1, 0
   index: -1
+zuobian
+  rotate: false
+  xy: 239, 2
+  size: 204, 537
+  orig: 205, 537
+  offset: 1, 0
+  index: -1
 zuoshou
   rotate: true
-  xy: 537, 263
+  xy: 1090, 413
   size: 126, 179
   orig: 126, 179
   offset: 0, 0
   index: -1
 zuoshou2
   rotate: true
-  xy: 537, 391
+  xy: 1090, 277
   size: 134, 178
   orig: 134, 178
   offset: 0, 0
   index: -1
 zuoyan
   rotate: true
-  xy: 674, 35
+  xy: 915, 54
   size: 36, 40
   orig: 36, 40
   offset: 0, 0

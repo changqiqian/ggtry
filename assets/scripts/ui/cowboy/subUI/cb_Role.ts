@@ -57,6 +57,14 @@ export class cb_Role extends BaseUI {
         });
     }
 
+    public PlayLoseSpine()
+    {
+        this.mSpineCtr.SetAnimation("shibai" , false , (_data)=>
+        {
+            this.PlayIdleSpine();
+        });
+    }
+
     public PlayIdleSpine()
     {
         this.mSpineCtr.SetAnimation("daiji",true);
