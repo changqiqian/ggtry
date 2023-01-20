@@ -33,14 +33,17 @@ export class cb_Menu extends BaseUI
         this.AddTouchCloseEvent(this.mBG);
         this.mRuleBtn.SetClickCallback(()=>
         {
-
+            this.Show(false);
+            UIMgr.Instance.ShowToast("功能开发中");
         });
         this.mServiceBtn.SetClickCallback(()=>
         {
-
+            this.Show(false);
+            UIMgr.Instance.ShowToast("功能开发中");
         });
         this.mBringInBtn.SetClickCallback(()=>
         {
+            this.Show(false);
             UIMgr.Instance.ShowWindow("cowboy","prefab/subUI/cb_BuyInWindow",true,null,CowboyData.UITag)
         });
         this.mExitBtn.SetClickCallback(()=>
@@ -67,7 +70,6 @@ export class cb_Menu extends BaseUI
         if(_val)
         {
             this.node.active = true;
-            this.mMovingShow.ShowAnimation();
         }
         else
         {

@@ -202,7 +202,6 @@ export class cb_SelfRecordLayer extends BaseUI {
         if(_val)
         {
             this.node.active = true;
-            this.mMovingShow.ShowAnimation();
             this.ResetUI();
             let gameId = CowboyData.Instance.GetGameId();
             NetworkSend.Instance.GetRecordCowboy(gameId);

@@ -104,7 +104,6 @@ export class Game_ChattingLayer extends BaseUI
         if(_val)
         {
             this.node.active = true;
-            this.mMovingShow.ShowAnimation();
         }
         else
         {

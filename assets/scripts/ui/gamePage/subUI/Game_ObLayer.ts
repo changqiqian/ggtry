@@ -36,7 +36,6 @@ export class Game_ObLayer extends ListViewCtr<PlayerInfo>
         if(_val)
         {
             this.node.active = true;
-            this.mMovingShow.ShowAnimation();
         }
         else
         {

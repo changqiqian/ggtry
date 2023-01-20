@@ -42,7 +42,6 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerHistoryInfo>
         if(_val)
         {
             this.node.active = true;
-            this.mMovingShow.ShowAnimation();
         }
         else
         {

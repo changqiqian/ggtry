@@ -80,7 +80,6 @@ export class AreaCodeView extends BaseUI {
         if(_val)
         {
             this.node.active = true;
-            this.mMovingShow.ShowAnimation();
         }
         else
         {

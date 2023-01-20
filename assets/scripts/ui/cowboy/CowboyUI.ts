@@ -31,10 +31,9 @@ export class CowboyUI extends BaseUI
 
     public Show(_val : boolean)
     {
-        console.log("ShowShowShowShowShow");
         if(_val)
         {
-            this.mMovingShow.ShowAnimation();
+            this.node.active = true;
         }
         else
         {
@@ -48,7 +47,6 @@ export class CowboyUI extends BaseUI
     }
     BindUI() 
     {
-        console.log("BindUIBindUIBindUIBindUI");
         this.OffsetTop();
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);

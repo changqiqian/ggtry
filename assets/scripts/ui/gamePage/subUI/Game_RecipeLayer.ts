@@ -32,7 +32,6 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayData>
         if(_val)
         {
             this.node.active = true;
-            this.mMovingShow.ShowAnimation();
         }
         else
         {

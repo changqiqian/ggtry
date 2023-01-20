@@ -71,7 +71,6 @@ export class HeadChoserView extends BaseUI
         if(_val)
         {
             this.node.active = true;
-            this.mMovingShow.ShowAnimation();
         }
         else
         {

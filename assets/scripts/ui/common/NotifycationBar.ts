@@ -13,10 +13,7 @@ export class NotifycationBar extends BaseUI
     mAnimationNodeOriginX : number = null;
 
     mCallback : Function = null;
-    onEnable()
-    {
-        this.ShowAnimation();
-    }
+
     InitParam()
     {
         this.mAnimationNodeOriginX = this.mBtn.node.position.x;

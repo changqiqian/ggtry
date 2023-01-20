@@ -31,6 +31,7 @@ export class Game_SeatItem extends BaseUI
         {
             widget.updateAlignment();
             widget.enabled = false;
+            widget.destroy();
         }
     }
     RegDataNotify() 

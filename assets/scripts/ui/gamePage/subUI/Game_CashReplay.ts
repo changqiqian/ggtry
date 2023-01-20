@@ -29,7 +29,6 @@ export class Game_CashReplay extends BaseUI {
         if(_val)
         {
             this.node.active = true;
-            this.mMovingShow.ShowAnimation();
         }
         else
         {

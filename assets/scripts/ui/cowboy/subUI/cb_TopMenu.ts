@@ -33,7 +33,8 @@ export class cb_TopMenu extends BaseUI {
         })
         this.mMyHistoryBtn.SetClickCallback((_data)=>
         {
-            UIMgr.Instance.ShowLayer("cowboy","prefab/subUI/cb_SelfRecordLayer",true,null,CowboyData.UITag);
+            UIMgr.Instance.ShowToast("功能开发中");
+            //UIMgr.Instance.ShowLayer("cowboy","prefab/subUI/cb_SelfRecordLayer",true,null,CowboyData.UITag);
         })
         this.mDragDownBtn.SetClickCallback((_data)=>
         {
@@ -47,7 +48,7 @@ export class cb_TopMenu extends BaseUI {
         })
         this.mPlayerBtn.SetClickCallback((_data)=>
         {
-            
+            UIMgr.Instance.ShowToast("功能开发中");
         })
     }
     RegDataNotify() 

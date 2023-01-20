@@ -24,12 +24,10 @@ export class cb_PublicCards extends BaseUI
         CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
         {
             this.RestAllCards();
-
             if(CowboyData.Instance.GetPhase() == CowboyPhase.CowBoyPhase_Settlement)
             {
                 return;
             }
-
             this.DealCards();
             this.ShowCard(_data.oneCard,0);
         });

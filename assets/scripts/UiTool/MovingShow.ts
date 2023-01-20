@@ -10,23 +10,23 @@ export class MovingShow extends BaseUI {
     private mOriginPos : Vec3 = null;
     private mShowCallback : Function = null;
     private mHideCallback : Function = null;
-    private static mDuration : number = 0.3;
+    private static mDuration : number = 0.35;
 
     private mRootNode : Node = null;
+
+    onEnable()
+    {
+        this.ResetPosition();
+        this.ShowAnimation();
+    }
+
     InitParam()
     {
 
     }
     BindUI()
     {
-        let widget = this.node.getComponent(Widget);
-        if(widget && widget.enabled)
-        {
-            widget.updateAlignment();
-            widget.enabled = false;
-        }
-        this.mOriginPos = new Vec3(this.node.position.x , this.node.position.y , this.node.position.z);
-    }
+    }   
     RegDataNotify()
     {
 
@@ -41,7 +41,6 @@ export class MovingShow extends BaseUI {
         this.mHideCallback = null;
         this.mRootNode = null;
     }
-
     public SetRoot(_RootNode : Node)
     {
         this.mRootNode = _RootNode;
@@ -60,6 +59,37 @@ export class MovingShow extends BaseUI {
     public SetAnimationType(_type : AnimationShowType)
     {
         this.mAnimationShowType = _type;
+        let widget = this.node.getComponent(Widget);
+        if(widget)
+        {
+            widget.updateAlignment();
+            widget.enabled = false;
+            widget.destroy();
+        }
+        this.mOriginPos = new Vec3(this.node.position.x , this.node.position.y , this.node.position.z);
+        this.ResetPosition();
+    }
+
+    ResetPosition()
+    {
+        if(this.mAnimationShowType == AnimationShowType.FromLeft)
+        {
+            let width = this.node.getComponent(UITransform).width;
+            let startPos = new Vec3(this.mOriginPos.x - width, this.mOriginPos.y , this.mOriginPos.z);
+            this.node.setPosition(startPos);
+        }
+        else if(this.mAnimationShowType == AnimationShowType.FromBottom)
+        {
+            let height = this.node.getComponent(UITransform).height;
+            let startPos = new Vec3(this.mOriginPos.x, this.mOriginPos.y - height , this.mOriginPos.z);
+            this.node.setPosition(startPos);
+        }
+        else if(this.mAnimationShowType == AnimationShowType.FromRight)
+        {
+            let width = this.node.getComponent(UITransform).width;
+            let startPos = new Vec3(this.mOriginPos.x + width,this.mOriginPos.y , this.mOriginPos.z);
+            this.node.setPosition(startPos);
+        }
     }
 
     public ShowAnimation(_druation : number = MovingShow.mDuration)
@@ -68,25 +98,40 @@ export class MovingShow extends BaseUI {
         {
             return;
         }
+        this.mMoving = true;
+        this.StopAllTween();
 
-        this.scheduleOnce(()=>
+        if(this.mAnimationShowType == AnimationShowType.FromLeft)
         {
-            this.mRootNode.active = true;
-            this.mMoving = true;
-            this.StopAllTween();
-            switch(this.mAnimationShowType)
-            {
-                case AnimationShowType.FromLeft:
-                    this.ShowAnimationFromLeft(_druation);
-                    break
-                case AnimationShowType.FromBottom:
-                    this.ShowAnimationFromBottom(_druation);
-                    break
-                case AnimationShowType.FromRight:
-                    this.ShowAnimationFromRight(_druation);
-                    break
-            }
-        },0.05)
+            let width = this.node.getComponent(UITransform).width;
+            let startPos = new Vec3(this.mOriginPos.x - width, this.mOriginPos.y , this.mOriginPos.z);
+            this.node.setPosition(startPos);
+        }
+        else if(this.mAnimationShowType == AnimationShowType.FromBottom)
+        {
+            let height = this.node.getComponent(UITransform).height;
+            let startPos = new Vec3(this.mOriginPos.x, this.mOriginPos.y - height , this.mOriginPos.z);
+            this.node.setPosition(startPos);
+        }
+        else if(this.mAnimationShowType == AnimationShowType.FromRight)
+        {
+            let width = this.node.getComponent(UITransform).width;
+            let startPos = new Vec3(this.mOriginPos.x + width,this.mOriginPos.y , this.mOriginPos.z);
+            this.node.setPosition(startPos);
+        }
+
+        switch(this.mAnimationShowType)
+        {
+            case AnimationShowType.FromLeft:
+                this.ShowAnimationFromLeft(_druation);
+                break
+            case AnimationShowType.FromBottom:
+                this.ShowAnimationFromBottom(_druation);
+                break
+            case AnimationShowType.FromRight:
+                this.ShowAnimationFromRight(_druation);
+                break
+        }
     }
 
     public HideAnimation(_druation : number = MovingShow.mDuration)
@@ -113,9 +158,6 @@ export class MovingShow extends BaseUI {
 
     private ShowAnimationFromLeft(_druation : number = MovingShow.mDuration)
     {
-        let width = this.node.getComponent(UITransform).width;
-        let startPos = new Vec3(this.mOriginPos.x - width, this.mOriginPos.y , this.mOriginPos.z);
-        this.node.setPosition(startPos);
         let toPos = new Vec3(this.mOriginPos.x, this.mOriginPos.y , this.mOriginPos.z);
         let tempTween = new Tween(this.node);
         tempTween.to(_druation,{position:toPos},{easing:easing.quadIn});
@@ -148,9 +190,6 @@ export class MovingShow extends BaseUI {
 
     private ShowAnimationFromBottom(_druation : number = MovingShow.mDuration)
     {
-        let height = this.node.getComponent(UITransform).height;
-        let startPos = new Vec3(this.mOriginPos.x, this.mOriginPos.y - height , this.mOriginPos.z);
-        this.node.setPosition(startPos);
         let toPos = new Vec3(this.mOriginPos.x, this.mOriginPos.y , this.mOriginPos.z);
         let tempTween = new Tween(this.node);
         tempTween.to(_druation,{position:toPos},{easing:easing.quadIn});
@@ -183,9 +222,7 @@ export class MovingShow extends BaseUI {
     
     private ShowAnimationFromRight(_druation : number = MovingShow.mDuration)
     {
-        let width = this.node.getComponent(UITransform).width;
-        let startPos = new Vec3(this.mOriginPos.x + width,this.mOriginPos.y , this.mOriginPos.z);
-        this.node.setPosition(startPos);
+    
         let toPos = new Vec3(this.mOriginPos.x, this.mOriginPos.y , this.mOriginPos.z);
         let tempTween = new Tween(this.node);
         tempTween.to(_druation,{position:toPos},{easing:easing.quadIn});

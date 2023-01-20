@@ -45,11 +45,12 @@ export class Poker extends BaseUI
 
         for(let i = 0 ; i < this.mRoot.children.length ; i++)
         {
-            let current = this.mRoot.children[i].getComponent(Widget);
-            if(current != null)
+            let widget = this.mRoot.children[i].getComponent(Widget);
+            if(widget != null)
             {
-                current.updateAlignment();
-                current.enabled = false;
+                widget.updateAlignment();
+                widget.enabled = false;
+                widget.destroy();
             }
         }
 
@@ -58,6 +59,7 @@ export class Poker extends BaseUI
         {
             rootWidget.updateAlignment();
             rootWidget.enabled = false;
+            rootWidget.destroy();
         }
     }
     RegDataNotify() 
