@@ -31,9 +31,9 @@ export class CowboyUI extends BaseUI
 
     public Show(_val : boolean)
     {
+        console.log("ShowShowShowShowShow");
         if(_val)
         {
-            this.node.active = true;
             this.mMovingShow.ShowAnimation();
         }
         else
@@ -48,6 +48,7 @@ export class CowboyUI extends BaseUI
     }
     BindUI() 
     {
+        console.log("BindUIBindUIBindUIBindUI");
         this.OffsetTop();
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
@@ -65,7 +66,10 @@ export class CowboyUI extends BaseUI
 
         CowboyData.Instance.Data_HideUI.AddListenner(this,(_data)=>
         {
-            this.mMovingShow.SetHideAnimationCallback(null);
+            this.mMovingShow.SetHideAnimationCallback(()=>
+            {
+                UIMgr.Instance.DeleteUiByTag(CowboyData.UITag);
+            });
             UIMgr.Instance.HideUiByTag(CowboyData.UITag);
         });
 

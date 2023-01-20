@@ -678,6 +678,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             {
                 CowboyData.Instance.Data_Money.mData = msg.money;
                 CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.mData = msg;
+                HallData.Instance.Data_EnterCowboy.mData = true;
             }
             else
             {

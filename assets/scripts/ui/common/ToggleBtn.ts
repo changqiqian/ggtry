@@ -107,6 +107,7 @@ export class ToggleBtn extends BaseUI {
         this.mForbidden = _val;
         this.mSelected.interactable = !this.mForbidden;
         this.mDisabled.interactable = !this.mForbidden;
+        this.SetGray(_val);
     }
 
     public SetGray(_val : boolean)

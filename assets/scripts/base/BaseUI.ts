@@ -62,16 +62,22 @@ export abstract class BaseUI extends Component {
         this.mLayerList = new Array<SubViewKeyPair>();
         this.InitParam();
         this.BindUI();
-    }
 
-    start() 
-    {
         this.scheduleOnce(()=>
         {
             this.RegDataNotify();
             this.LateInit();
         },0.01)
     }
+
+    // start() 
+    // {
+    //     this.scheduleOnce(()=>
+    //     {
+    //         this.RegDataNotify();
+    //         this.LateInit();
+    //     },0.01)
+    // }
 
     onDestroy() 
     {

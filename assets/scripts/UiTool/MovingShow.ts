@@ -13,8 +13,6 @@ export class MovingShow extends BaseUI {
     private static mDuration : number = 0.3;
 
     private mRootNode : Node = null;
-
-
     InitParam()
     {
 
@@ -22,7 +20,7 @@ export class MovingShow extends BaseUI {
     BindUI()
     {
         let widget = this.node.getComponent(Widget);
-        if(widget)
+        if(widget && widget.enabled)
         {
             widget.updateAlignment();
             widget.enabled = false;
@@ -40,6 +38,7 @@ export class MovingShow extends BaseUI {
     CustmoerDestory()
     {
         this.mShowCallback = null;
+        this.mHideCallback = null;
         this.mRootNode = null;
     }
 
@@ -47,7 +46,6 @@ export class MovingShow extends BaseUI {
     {
         this.mRootNode = _RootNode;
     }
-
 
     public SetShowAnimationCallback(_showCallback : Function)
     {
@@ -58,7 +56,6 @@ export class MovingShow extends BaseUI {
     {
         this.mHideCallback = _hideCallback;
     }
-
 
     public SetAnimationType(_type : AnimationShowType)
     {
@@ -71,20 +68,25 @@ export class MovingShow extends BaseUI {
         {
             return;
         }
-        this.mMoving = true;
-        this.StopAllTween();
-        switch(this.mAnimationShowType)
+
+        this.scheduleOnce(()=>
         {
-            case AnimationShowType.FromLeft:
-                this.ShowAnimationFromLeft(_druation);
-                break
-            case AnimationShowType.FromBottom:
-                this.ShowAnimationFromBottom(_druation);
-                break
-            case AnimationShowType.FromRight:
-                this.ShowAnimationFromRight(_druation);
-                break
-        }
+            this.mRootNode.active = true;
+            this.mMoving = true;
+            this.StopAllTween();
+            switch(this.mAnimationShowType)
+            {
+                case AnimationShowType.FromLeft:
+                    this.ShowAnimationFromLeft(_druation);
+                    break
+                case AnimationShowType.FromBottom:
+                    this.ShowAnimationFromBottom(_druation);
+                    break
+                case AnimationShowType.FromRight:
+                    this.ShowAnimationFromRight(_druation);
+                    break
+            }
+        },0.05)
     }
 
     public HideAnimation(_druation : number = MovingShow.mDuration)

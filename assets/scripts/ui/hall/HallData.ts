@@ -25,6 +25,8 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_S2CGetHallSubGameInfoResp  : BaseData<S2CGetHallSubGameInfoResp> = new BaseData<S2CGetHallSubGameInfoResp>(); //小游戏列表
     Data_S2CHallTexasGameInfoResp  : BaseData<S2CHallTexasGameInfoResp> = new BaseData<S2CHallTexasGameInfoResp>(); //德州游戏列表
 
+    Data_EnterCowboy : BaseData<boolean> = new BaseData<boolean>(true); //进入牛仔
+
     Data_DropBoxSeatOption : BaseData<number> = new BaseData<number>(); //现金桌选中的座位下拉框
     Data_DropBoxGameTypeOption : BaseData<number> = new BaseData<number>(); //现金桌选中的游戏类型下拉框
     Data_DropBoxBBOption : BaseData<number> = new BaseData<number>(); //现金桌选中的盲注下拉框

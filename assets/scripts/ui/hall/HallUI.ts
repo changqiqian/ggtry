@@ -59,8 +59,12 @@ export class HallUI extends BaseUI
             }
         });
 
-        CowboyData.Instance.Data_S2CTexasCowboyEnterGameResp.AddListenner(this,(_data)=>
+        HallData.Instance.Data_EnterCowboy.AddListenner(this,(_data)=>
         {
+            if(_data == false)
+            {
+                return;
+            }
             if(AdaptTop.IsIphoneX)
             {
                 UIMgr.Instance.ShowLayer("cowboy","prefab/CowboyUI_Tall",true,null,CowboyData.UITag);  
