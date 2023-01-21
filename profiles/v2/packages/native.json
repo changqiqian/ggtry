@@ -2,7 +2,10 @@
   "__version__": "1.0.0",
   "options": {
     "android": {
-      "remoteServerAddress": "http://13.229.222.39/remote-assets2/"
+      "remoteServerAddress": "http://54.169.147.71/WinPoker/"
+    },
+    "ios": {
+      "remoteServerAddress": "http://54.169.147.71/WinPoker/"
     }
   }
 }

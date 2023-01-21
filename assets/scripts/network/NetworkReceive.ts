@@ -137,6 +137,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(msg.result.resId == MsgResult.Success)
             {
                 LocalPlayerData.Instance.UpdateUserInfo(msg.userInfo);
+                LocalPlayerData.Instance.UpdateJoinGame(msg.enterTexasGameList , msg.userInfo.enterSubGameList);
                 LoginData.Instance.Data_LoginSuccessData.mData = true;
             }
             else

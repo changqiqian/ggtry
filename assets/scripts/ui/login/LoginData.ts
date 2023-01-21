@@ -11,7 +11,7 @@ export class LoginData extends SingletonBaseNotify<LoginData>()
         LoginData.ClearInstance();
     }
     
-    Data_LoginSuccessData : BaseData<boolean> = new BaseData<boolean>();
+    Data_LoginSuccessData : BaseData<boolean> = new BaseData<boolean>(true);
     Data_RegisterSuccessData : BaseData<boolean> = new BaseData<boolean>(true);
     Data_SmsCodeType : BaseData<SmsCodeType> = new BaseData<SmsCodeType>();
     Data_ShowAreaCodeView : BaseData<boolean> = new BaseData<boolean>(true);

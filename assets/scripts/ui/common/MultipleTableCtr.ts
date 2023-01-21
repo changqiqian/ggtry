@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
 import { GameConfig } from '../../GameConfig';
+import { NetworkSend } from '../../network/NetworkSend';
 import { GameBase } from '../gamePage/GameBase';
 import { GameData } from '../gamePage/GameData';
 import { GameDataCash } from '../gamePage/GameDataCash';
@@ -187,9 +188,19 @@ export class MultipleTableCtr extends BaseUI
     {
         let gameType = _data.texasConfig.gameType;
         let gameId = _data.gameId;
+
+        let currentStruct =  MultipleTableCtr.FindGameStructByGameId(gameId);
+        if(currentStruct.mIndex !=  GameConfig.WrongIndex)
+        {
+            currentStruct.mGameData.SetGameInfo(_data);
+            return;
+        }
+
+
+        let prefabName = MultipleTableCtr.GetPrefabName(gameType);
         let seatNum = _data.texasConfig.seatNum;
         let index = MultipleTableCtr.GetAviliableIndex();
-        let prefabName = MultipleTableCtr.GetPrefabName(gameType);
+
         UIMgr.Instance.ShowLayer("gamePage","prefab/" + prefabName,true,(_script)=>
         {
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(gameId);
@@ -202,6 +213,7 @@ export class MultipleTableCtr extends BaseUI
             HallData.Instance.Data_MultipeIndex.mData = index;
         },MultipleTableCtr.GetUiTag(index),index.toString());
     }
+    
 
     public static FindGameStruct(_index : number) : GameStruct
     {
@@ -230,16 +242,17 @@ export class MultipleTableCtr extends BaseUI
         return null;
     }
 
-    public static ShowGameUI(_index : number)
+    public static ShowGameUI(_index : number) : boolean
     {
         let current = MultipleTableCtr.FindGameStruct(_index);
         if(current == null)
         {
             console.log("MultipleTableCtr 当前UI还没有创建====_index===" + _index);
             HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.HomeIndex;
-            return;
+            return false;
         }
         UIMgr.Instance.ShowLayer("gamePage","prefab/" + current.mPrefabName,true,null,MultipleTableCtr.GetUiTag(_index),_index.toString());
+        return true;
     }
 
     public static HideAllGameUI()
@@ -319,29 +332,27 @@ export class MultipleTableCtr extends BaseUI
             MultipleTableCtr.GameStruct.splice(uiIndex , 1);
             return;
         }
-
-        console.log("RemoveGameStructByGameId wrong _gameId===" + _gameId);
     }
 
-    //检查是否能进入房间
-    public static CanEnterGame(_gameId : string , _clubId : string = "") : boolean
+    public static TryToEnterGame(_gameId : string , _gameType : GameType , _clubId : string = "")
     {
-        if(MultipleTableCtr.CheckGameMax())
-        {
-            UIMgr.Instance.ShowToast(Localization.GetString("00239"));
-            return false;
-        } 
-
         let tryToGetGameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
         if(tryToGetGameStruct!=null)
         {
-            //如果已经过当前房间了，直接切换到当前房间页面，就不用重新发送进入房间消息了
-            HallData.Instance.Data_MultipeIndex.mData = tryToGetGameStruct.mIndex;
-            return false;
+            //已经进过房间了
+            //HallData.Instance.Data_MultipeIndex.mData = tryToGetGameStruct.mIndex;
+            NetworkSend.Instance.EnterGame(_gameId,_gameType,_clubId);
         }
-
-        MultipleTableCtr.CreateNewGameStruct(_gameId , _clubId);
-        return true;
+        else
+        {
+            if(MultipleTableCtr.CheckGameMax())
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00239"));
+                return false;
+            } 
+            MultipleTableCtr.CreateNewGameStruct(_gameId , _clubId);
+            NetworkSend.Instance.EnterGame(_gameId,_gameType,_clubId);
+        }
     }
 }
 

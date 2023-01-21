@@ -273,11 +273,6 @@ export class NetworkSend extends Singleton<NetworkSend>()
 
     public EnterGame(_gameId : string , _gameType : GameType , _clubId : string = "")
     {
-        if(MultipleTableCtr.CanEnterGame(_gameId, _clubId) == false)
-        {
-            return;
-        }
-
         UIMgr.Instance.ShowLoading(true);
         switch(_gameType)
         {

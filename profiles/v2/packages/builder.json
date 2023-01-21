@@ -4,24 +4,24 @@
     "level": 4
   },
   "common": {
-    "outputName": "ios",
+    "outputName": "android-WinPoker",
     "mainBundleCompressionType": "merge_dep",
-    "platform": "ios",
-    "debug": true,
+    "platform": "android",
+    "debug": false,
     "replaceSplashScreen": false
   },
   "BuildTaskManager": {
     "taskMap": {
-      "1666816310638": {
-        "id": "1666816310638",
+      "1674289127277": {
+        "id": "1674289127277",
         "progress": 1,
         "state": "success",
-        "message": "10-27-2022 04:38 make package /Users/yamiwang/cowboy/build/android-001 success!",
+        "message": "1-21-2023 16:29 make package /Users/yamiwang/Cowboy2/build/android-WinPoker success!",
         "options": {
           "name": "SY",
           "platform": "android",
           "buildPath": "project://build",
-          "debug": true,
+          "debug": false,
           "md5Cache": false,
           "skipCompressTexture": false,
           "sourceMaps": false,
@@ -40,7 +40,7 @@
               "inBundle": false
             }
           ],
-          "outputName": "android-001",
+          "outputName": "android-WinPoker",
           "packages": {
             "android": {
               "packageName": "SY.TEXAS.COM",
@@ -82,156 +82,15 @@
                 "asyncFunctions": true
               },
               "encrypted": false,
-              "xxteaKey": "beTdBAiGxM1Ly+03",
+              "xxteaKey": "83XyBwqd5GXa/yJM",
               "compressZip": false,
               "makeAfterBuild": false,
               "JobSystem": "none",
-              "remoteServerAddress": "http://13.229.222.39/remote-assets2/"
+              "remoteServerAddress": "http://54.169.147.71/WinPoker/"
             }
           }
         },
-        "time": "10-27-2022 04:31",
-        "dirty": false,
-        "rawOptions": {
-          "name": "SY",
-          "platform": "android",
-          "buildPath": "project://build",
-          "debug": true,
-          "md5Cache": false,
-          "skipCompressTexture": false,
-          "sourceMaps": false,
-          "replaceSplashScreen": false,
-          "mainBundleCompressionType": "merge_dep",
-          "mainBundleIsRemote": false,
-          "mergeStartScene": false,
-          "experimentalEraseModules": false,
-          "compressTexture": true,
-          "packAutoAtlas": true,
-          "startScene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-          "scenes": [
-            {
-              "url": "db://assets/scene/start.scene",
-              "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-              "inBundle": false
-            }
-          ],
-          "outputName": "android-001",
-          "packages": {
-            "android": {
-              "packageName": "SY.TEXAS.COM",
-              "orientation": {
-                "portrait": true,
-                "upsideDown": false,
-                "landscapeRight": false,
-                "landscapeLeft": false
-              },
-              "apiLevel": "android-33",
-              "appABIs": [
-                "arm64-v8a",
-                "armeabi-v7a"
-              ],
-              "useDebugKeystore": true,
-              "keystorePath": "",
-              "keystorePassword": "",
-              "keystoreAlias": "",
-              "keystoreAliasPassword": "",
-              "appBundle": false,
-              "androidInstant": false,
-              "remoteUrl": "",
-              "sdkPath": "",
-              "ndkPath": "",
-              "renderBackEnd": {
-                "vulkan": false,
-                "gles3": true,
-                "gles2": true
-              },
-              "swappy": false
-            },
-            "cocos-service": {
-              "configID": "437b18",
-              "services": []
-            },
-            "hot-update": null,
-            "native": {
-              "polyfills": {
-                "asyncFunctions": true
-              },
-              "encrypted": false,
-              "xxteaKey": "beTdBAiGxM1Ly+03",
-              "compressZip": false,
-              "makeAfterBuild": false,
-              "JobSystem": "none",
-              "remoteServerAddress": "http://13.229.222.39/remote-assets2/"
-            }
-          }
-        }
-      },
-      "1666855786517": {
-        "id": "1666855786517",
-        "progress": 1,
-        "state": "success",
-        "message": "10-27-2022 15:31 Build success in 76584 ms!",
-        "options": {
-          "name": "SY",
-          "platform": "ios",
-          "buildPath": "project://build",
-          "debug": true,
-          "md5Cache": false,
-          "skipCompressTexture": false,
-          "sourceMaps": false,
-          "replaceSplashScreen": false,
-          "mainBundleCompressionType": "merge_dep",
-          "mainBundleIsRemote": false,
-          "mergeStartScene": false,
-          "experimentalEraseModules": false,
-          "compressTexture": true,
-          "packAutoAtlas": true,
-          "startScene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-          "scenes": [
-            {
-              "url": "db://assets/scene/start.scene",
-              "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-              "inBundle": false
-            }
-          ],
-          "outputName": "ios",
-          "packages": {
-            "ios": {
-              "orientation": {
-                "landscapeRight": false,
-                "landscapeLeft": false,
-                "portrait": true
-              },
-              "renderBackEnd": {
-                "metal": true
-              },
-              "skipUpdateXcodeProject": false,
-              "targetVersion": "12.0",
-              "osTarget": {
-                "iphoneos": true,
-                "simulator": false
-              },
-              "developerTeam": "ZTGH2Z5AW9",
-              "packageName": "SY.Texas.Com"
-            },
-            "cocos-service": {
-              "configID": "437b18",
-              "services": []
-            },
-            "hot-update": null,
-            "native": {
-              "polyfills": {
-                "asyncFunctions": true
-              },
-              "encrypted": false,
-              "xxteaKey": "99CkKIFgFBa71q8h",
-              "compressZip": false,
-              "makeAfterBuild": false,
-              "JobSystem": "none"
-            }
-          }
-        },
-        "time": "10-27-2022 15:29",
+        "time": "1-21-2023 16:18",
         "dirty": false
       }
     }

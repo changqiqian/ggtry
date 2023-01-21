@@ -4,6 +4,7 @@ import { Localization } from '../../base/Localization';
 import { NetworkSend } from '../../network/NetworkSend';
 import { Tool } from '../../Tool';
 import { BaseButton } from '../common/BaseButton';
+import { MultipleTableCtr } from '../common/MultipleTableCtr';
 const { ccclass, property } = _decorator;
 
 @ccclass('Cash_GameItem')
@@ -33,7 +34,7 @@ export class Cash_GameItem extends BaseUI
     {
         this.mEnterBtn.SetClickCallback((_data)=>
         {
-            NetworkSend.Instance.EnterGame(this.mHallTexasGameInfo.gameId , this.mHallTexasGameInfo.basicTexasConfig.gameType);
+            MultipleTableCtr.TryToEnterGame(this.mHallTexasGameInfo.gameId , this.mHallTexasGameInfo.basicTexasConfig.gameType);
         })
     }
     RegDataNotify()

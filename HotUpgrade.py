@@ -14,8 +14,10 @@ import json
 import requests
 from ftplib import FTP
 
+remoteIP = "54.169.147.71"
+remoteRootFolderName = "WinPoker"
 #写在热更文件mainifest中的 请求远端存放热更文件的URL地址'http://XXXX.com/pokerlifeAlphaNew/'
-urlToWriteInMainifest = 'http://13.229.222.39/remote-assets2/'
+urlToWriteInMainifest = 'http://'+remoteIP+'/'+remoteRootFolderName+'/'
 #存放游戏配置 版本号文件的地址
 filePathToGameConfig = 'assets/scripts/GameConfig.ts'
 #Creator引擎命令行编译工具文件地址
@@ -23,13 +25,13 @@ filePathToCreatorCompileTools = '/Applications/CocosCreator/Creator/3.5.2/CocosC
 #要进行编译的项目工程地址
 pathProjectToCompile = '../Cowboy2/'
 #存放生成热更新文件的地址
-pathToSaveHotUpdate = '../Cowboy2/HotRelease/remote-assets2/'
+pathToSaveHotUpdate = '../Cowboy2/HotRelease/'+remoteRootFolderName+'/'
 #COCOS项目中存放porject.manifest热更文件的地址
 filePathToProjectManifest = 'assets/'
 #构建生成的资源目录
 SrcPath = 'build/android/assets/'
 
-gVeriosnRemoteUrl = "http://13.229.222.39/remote-assets2/version.manifest"
+gVeriosnRemoteUrl = "http://"+remoteIP+"/"+remoteRootFolderName+"/version.manifest"
 gVersion = "1.0.001"
 
 #存储旧的上一版的版本号，更新目录里的mainifest用
@@ -115,6 +117,7 @@ if __name__ == "__main__":
     response = requests.get(gVeriosnRemoteUrl)
     dictRes = json.loads(response.text)
     gVersion = str(dictRes["version"])
+    #gVersion = '1.0.0'
     print('目前远端的版本为: ' + gVersion)
     gameVersionOld = gVersion
 

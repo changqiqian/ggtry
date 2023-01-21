@@ -29,8 +29,6 @@ export class LoginUI extends BaseUI
     @property(BaseButton) 
     DevIpBtn: BaseButton = null;
     @property(BaseButton) 
-    TestIpBtn: BaseButton = null;
-    @property(BaseButton) 
     JackIpBtn: BaseButton = null;
 
     InitParam() 
@@ -70,16 +68,6 @@ export class LoginUI extends BaseUI
             Network.Instance.CreateWS();
             this.DebugFunction.active = false;
         });
-
-        this.TestIpBtn.SetTitle("测试环境：" + GameConfig.TestIP);
-        this.TestIpBtn.SetClickCallback(()=>
-        {
-            GameConfig.SetSeverUrl(GameConfig.TestIP);
-            Network.Instance.CreateWS();
-            this.DebugFunction.active = false;
-        });
-
-
 
         this.JackIpBtn.SetTitle("Jack :" + GameConfig.JackIP);
         this.JackIpBtn.SetClickCallback(()=>

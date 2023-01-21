@@ -195,6 +195,17 @@ export class UIMgr extends Singleton<UIMgr>()
         return this.mMultipleTableCtr.node.active;
     }
     
+    public HaveLayer(_bundleName :string , _prefabPath:string , _tag : string = "", _aka : string  = "")
+    {
+        let key = this.CreateKey(_bundleName,_prefabPath,_aka);
+        let target = this.FindLayer(key,LayerType.Layer);
+        if(target != null)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null , _tag : string = "", _aka : string  = "")
     {

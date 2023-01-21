@@ -8,6 +8,7 @@ import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
 import { AdaptTop } from '../../UiTool/AdaptTop';
+import { MultipleTableCtr } from '../common/MultipleTableCtr';
 import { TipsWindow } from '../common/TipsWindow';
 import { CowboyData } from '../cowboy/CowboyData';
 import { LoginData } from '../login/LoginData';
@@ -40,8 +41,8 @@ export class HallUI extends BaseUI
         {
             if(_data)
             {
-                NetworkSend.Instance.GetMiniGameListInHall();
-                NetworkSend.Instance.GetTexasGameListInHall();
+                console.log("短线重连 申请游戏数据")
+                this.RefreshMsg();
             }
         });
 
@@ -78,6 +79,7 @@ export class HallUI extends BaseUI
     LateInit() 
     {
         HallData.Instance.Data_SubPage.mData = Hall_SubPage.Cash;
+        this.RefreshMsg();
     }
 
     CustmoerDestory() 
@@ -85,6 +87,18 @@ export class HallUI extends BaseUI
         LocalPlayerData.Instance.Clear();
         HallData.Instance.Clear();
         UIMgr.Instance.ShowMultipleTable(false);
+    }
+
+    RefreshMsg()
+    {
+        NetworkSend.Instance.GetMiniGameListInHall();
+        NetworkSend.Instance.GetTexasGameListInHall();
+        let alreadyJoinList = LocalPlayerData.Instance.Data_JoinTexasList.mData;
+        for(let i = 0 ; i < alreadyJoinList.length ; i++)
+        {
+            let current = alreadyJoinList[i];
+            MultipleTableCtr.TryToEnterGame(current.gameId,current.gameType,"");
+        }
     }
 
 }

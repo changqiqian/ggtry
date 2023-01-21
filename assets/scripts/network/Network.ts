@@ -91,14 +91,15 @@ export class Network  extends Singleton<Network>()
         clearTimeout(this.mConnectTimer);
         this.StopPing();
         console.log("ClearWS _forceClose== " + _forceClose );
-        if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) 
-        {
-            this.mWebSocket.close();
-        }
-        else
-        {
-            this.ResetWS();
-        }
+        this.ResetWS();
+        // if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) 
+        // {
+        //     this.mWebSocket.close();
+        // }
+        // else
+        // {
+        //     this.ResetWS();
+        // }
     }
 
     private OnOpen(event) {
@@ -281,7 +282,6 @@ export class Network  extends Singleton<Network>()
     }
 
     private OnPingTimeOut() {
-        //to do  心跳超时
         console.log('心跳超时');
         this.ClearWS(false);
     }

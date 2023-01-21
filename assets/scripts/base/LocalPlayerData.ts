@@ -24,6 +24,8 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_AccountLevel : BaseData<AccountLevel> = new BaseData<AccountLevel>(); //账户等级
     Data_AccountStatus : BaseData<AccountStatus> = new BaseData<AccountStatus>(); //账户状态
 
+    Data_JoinTexasList : BaseData<Array<InHallGameInfo>> = new BaseData<Array<InHallGameInfo>>(); //短线重连后 已经加入的德州游戏列表
+    Data_JoinMiniGameList : BaseData<Array<InHallGameInfo>> = new BaseData<Array<InHallGameInfo>>(); //短线重连后 已经加入的小游戏列表
 
     Data_LastInputPhoneNum : BaseData<string> = new BaseData<string>(); //最后一次输入的手机号
     Data_LastInputPwd : BaseData<string> = new BaseData<string>();//最后一次输入的密码
@@ -131,15 +133,21 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
         return fullPhoneNumber;
     }
 
+    UpdateJoinGame(_texasGameList : Array<InHallGameInfo> , _miniGameList : Array<InHallGameInfo>)
+    {
+        this.Data_JoinTexasList.mData = _texasGameList;
+        this.Data_JoinMiniGameList.mData = _miniGameList;
+    }
+
     UpdateUserInfo(_userInfo : UserInfo)
     {
-        LocalPlayerData.Instance.Data_Uid.mData = _userInfo.uid;
-        LocalPlayerData.Instance.Data_NickName.mData = _userInfo.nickName;
-        LocalPlayerData.Instance.Data_Head.mData = _userInfo.head;
-        LocalPlayerData.Instance.Data_Coin.mData = _userInfo.coin;
-        LocalPlayerData.Instance.Data_Diamond.mData = _userInfo.diamond;
-        LocalPlayerData.Instance.Data_AccountLevel.mData = _userInfo.accountLevel;
-        LocalPlayerData.Instance.Data_AccountStatus.mData = _userInfo.accountStatus;
+        this.Data_Uid.mData = _userInfo.uid;
+        this.Data_NickName.mData = _userInfo.nickName;
+        this.Data_Head.mData = _userInfo.head;
+        this.Data_Coin.mData = _userInfo.coin;
+        this.Data_Diamond.mData = _userInfo.diamond;
+        this.Data_AccountLevel.mData = _userInfo.accountLevel;
+        this.Data_AccountStatus.mData = _userInfo.accountStatus;
     }
 
     //自定义设置 本地存储变量读取

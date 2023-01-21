@@ -270,7 +270,7 @@ export class Club_Setting extends BaseUI
             let logoName = "Logo" + _data;
             this.LoadSprite("common" , "texture/club/" + logoName , (_spriteFrame)=>
             {
-                this.mLogoBtn.node.getChildByName("Icon").getComponent(Sprite).spriteFrame = _spriteFrame;
+                this.mLogoBtn.SetSprite(_spriteFrame);
             })
         });
 
@@ -283,7 +283,7 @@ export class Club_Setting extends BaseUI
             let stampName = "Stamp" + _data;
             this.LoadSprite("common" , "texture/club/" + stampName , (_spriteFrame)=>
             {
-                this.mStampBtn.node.getChildByName("Icon").getComponent(Sprite).spriteFrame = _spriteFrame;
+                this.mStampBtn.SetSprite(_spriteFrame);
             })
         });
 

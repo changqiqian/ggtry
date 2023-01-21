@@ -22,6 +22,8 @@ export class Club_Main extends BaseUI
     mPageView: PageView = null;
     @property(BaseButton) 
     mCowboyBtn: BaseButton = null;
+    @property(BaseButton) 
+    mDefualtSearchBtn: BaseButton = null;
 
     onEnable()
     {
@@ -42,6 +44,13 @@ export class Club_Main extends BaseUI
         {
             UIMgr.Instance.ShowWindow("clubPage","prefab/Club_SearchLayer");
         })
+
+        this.mDefualtSearchBtn.Show(false);
+        this.mDefualtSearchBtn.SetClickCallback(()=>
+        {
+            UIMgr.Instance.ShowWindow("clubPage","prefab/Club_SearchLayer");
+        })
+
 
         this.mCowboyBtn.Show(false);
         this.mCowboyBtn.SetClickCallback(()=>
@@ -96,6 +105,7 @@ export class Club_Main extends BaseUI
             {
                 this.mPageView.removeAllPages();
                 let enterClubInfos = LocalPlayerData.Instance.Data_EnterClubs.mData;
+                this.mDefualtSearchBtn.Show(enterClubInfos.length==0);
                 for(let i = 0 ; i < enterClubInfos.length ; i++)
                 {
                     let currentInfo = enterClubInfos[i].clubInfo;

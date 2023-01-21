@@ -4,10 +4,12 @@ import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
+import { NetworkSend } from '../../network/NetworkSend';
 import { Tool } from '../../Tool';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { SpineCtr } from '../../UiTool/SpineCtr';
 import { CircleTimer } from '../common/CircleTimer';
+import { LoginData } from '../login/LoginData';
 import { CowboyData } from './CowboyData';
 import { cb_Chip } from './subUI/cb_Chip';
 const { ccclass, property } = _decorator;
@@ -56,6 +58,18 @@ export class CowboyUI extends BaseUI
     }
     RegDataNotify() 
     {
+
+        LoginData.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
+        {
+            if(_data)
+            {
+                if(this.node.activeInHierarchy)
+                {
+                    let gameId = CowboyData.Instance.GetGameId();
+                    NetworkSend.Instance.EnterCowboy(gameId);
+                }
+            }
+        });
         CowboyData.Instance.Data_S2CTexasCowboyExitGameResp.AddListenner(this,(_data)=>
         {
             this.mMovingShow.SetHideAnimationCallback(()=>

@@ -55,7 +55,7 @@ export class Club_GameItem extends BaseUI
             {
                 return;
             }
-            NetworkSend.Instance.EnterGame(this.mGameId , this.mData.basicTexasConfig.gameType , this.mData.clubId);
+            MultipleTableCtr.TryToEnterGame(this.mGameId , this.mData.basicTexasConfig.gameType , this.mData.clubId);
         })
     }
     RegDataNotify()

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, Color, SpriteFrame, Sprite, Button } from 'cc';
+import { _decorator, Component, Node, Label, Color, SpriteFrame, Sprite, Button, UITransform } from 'cc';
 import { Color3 } from '../../../../@types/packages/scene/@types/public';
 import { AudioManager } from '../../base/AudioManager';
 import { BaseUI } from '../../base/BaseUI';
@@ -40,7 +40,10 @@ export class BaseButton extends BaseUI {
 
     public SetSprite(_spriteFrame : SpriteFrame)
     {
-        this.node.getChildByName("Icon").getComponent(Sprite).spriteFrame = _spriteFrame;
+        let Icon = this.node.getChildByName("Icon");
+        let transform = Icon.getComponent(UITransform);
+        let size = transform.contentSize;
+        Icon.getComponent(Sprite).spriteFrame = _spriteFrame;
     }
 
     public SetTitle(_title : string) 

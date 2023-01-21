@@ -6,7 +6,6 @@ export class GameConfig
 {
     public static readonly DebugMode =  true;
     public static DevelopIP = "18.142.179.150:9501"; //开发环境ip 可选
-    public static TestIP = "18.142.179.150:9601"; //测试环境ip 可选
     public static JackIP = "18.142.179.150:9001"; //测试环境ip 可选
     public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip 上面选项选择后，会赋值给UsingIp
     public static SeverUrl = "ws://13.229.222.39:9008/pokerlife"; //完整的地址长这样
@@ -16,7 +15,7 @@ export class GameConfig
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
     }
     //发布的版本号
-    public static Version = "1.5.7"
+    public static Version = "1.0.1"
 
       
     public static LOGIN_TOKEN;
