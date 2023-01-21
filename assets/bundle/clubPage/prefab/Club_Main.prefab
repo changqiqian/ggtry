@@ -5468,10 +5468,6 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "54ff074d-aa0b-4238-94a3-43ec84ecbcd0@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 1,
@@ -5721,8 +5717,6 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "89363435-d7e9-4d03-9281-0c26e1a02c4d@f9941",
-      "__expectedType__": "cc.SpriteFrame"
     }
   },
   {
