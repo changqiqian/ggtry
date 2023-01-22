@@ -20,7 +20,7 @@ export class AdaptTop extends Component
         console.log("Top num===" + num);
         if(num >= 50)
         {
-            let offsetHeight = (fullHeight - safeHeight)/3;
+            let offsetHeight = (fullHeight - safeHeight)/4;
             let widget = this.node.getComponent(Widget);
             if(widget != null)
             {

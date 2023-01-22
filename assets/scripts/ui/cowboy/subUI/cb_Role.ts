@@ -1,4 +1,5 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, Tween } from 'cc';
+import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
 import { SpineCtr } from '../../../UiTool/SpineCtr';
 import { Poker } from '../../common/Poker';
@@ -55,6 +56,31 @@ export class cb_Role extends BaseUI {
         {
             this.PlayIdleSpine();
         });
+        this.StopAllTween();
+
+        if(this.node.activeInHierarchy)
+        {
+            let tween = new Tween(this.node);
+            tween.delay(0.2);
+            tween.call(()=>
+            {
+                if(this.node.activeInHierarchy)
+                {
+                    AudioManager.Instance.PlayMusicOneShot("GunShot");
+                }
+ 
+            });
+            tween.delay(0.4);
+            tween.call(()=>
+            {
+                if(this.node.activeInHierarchy)
+                {
+                    AudioManager.Instance.PlayMusicOneShot("GunShot");
+                }
+ 
+            });
+            tween.start();
+        }
     }
 
     public PlayLoseSpine()

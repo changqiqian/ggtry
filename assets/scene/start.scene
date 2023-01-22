@@ -21,11 +21,11 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 65
+      "__id__": 67
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 66
+      "__id__": 68
     },
     "_id": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94"
   },
@@ -59,16 +59,16 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 61
-      },
-      {
-        "__id__": 62
-      },
-      {
         "__id__": 63
       },
       {
         "__id__": 64
+      },
+      {
+        "__id__": 65
+      },
+      {
+        "__id__": 66
       }
     ],
     "_prefab": null,
@@ -795,15 +795,18 @@
       },
       {
         "__id__": 57
+      },
+      {
+        "__id__": 59
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 59
+        "__id__": 61
       },
       {
-        "__id__": 60
+        "__id__": 62
       }
     ],
     "_prefab": null,
@@ -1934,6 +1937,67 @@
     "_id": "32+IjrMQZBmJVy1H19bTCK"
   },
   {
+    "__type__": "cc.Node",
+    "_name": "GunShot",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 22
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 60
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_layer": 33554432,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "60iHiY8oRKqbiUtXXNuJfL"
+  },
+  {
+    "__type__": "cc.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 59
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_clip": {
+      "__uuid__": "81561466-2fa4-4fcf-a928-5b849664e775",
+      "__expectedType__": "cc.AudioClip"
+    },
+    "_loop": false,
+    "_playOnAwake": false,
+    "_volume": 1,
+    "_id": "a0lhn1y5ZLEoTa7DUaVreA"
+  },
+  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -2049,19 +2113,19 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 67
-    },
-    "shadows": {
-      "__id__": 68
-    },
-    "_skybox": {
       "__id__": 69
     },
-    "fog": {
+    "shadows": {
       "__id__": 70
     },
-    "octree": {
+    "_skybox": {
       "__id__": 71
+    },
+    "fog": {
+      "__id__": 72
+    },
+    "octree": {
+      "__id__": 73
     }
   },
   {

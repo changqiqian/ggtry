@@ -15,7 +15,7 @@ export class GameConfig
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
     }
     //发布的版本号
-    public static Version = "1.0.1"
+    public static Version = "1.0.2"
 
       
     public static LOGIN_TOKEN;

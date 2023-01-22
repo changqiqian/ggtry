@@ -32,6 +32,7 @@ filePathToProjectManifest = 'assets/'
 SrcPath = 'build/android/assets/'
 
 gVeriosnRemoteUrl = "http://"+remoteIP+"/"+remoteRootFolderName+"/version.manifest"
+#http://54.169.147.71/WinPoker/version.manifest
 gVersion = "1.0.001"
 
 #存储旧的上一版的版本号，更新目录里的mainifest用

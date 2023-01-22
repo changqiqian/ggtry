@@ -91,8 +91,6 @@ export class UIMgr extends Singleton<UIMgr>()
         this.mSceneConfig.push(loginConfig);
         this.mSceneConfig.push(hallConfig);
 
-        
-
         this.LoadInitRes(_loadFinish);
 
     }

@@ -49,7 +49,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 1416.094,
+      "y": 3057.183,
       "z": 0
     },
     "_lrot": {
@@ -5450,7 +5450,7 @@
     "__prefab": {
       "__id__": 438
     },
-    "_alignFlags": 41,
+    "_alignFlags": 40,
     "_target": null,
     "_left": 0,
     "_right": 0,
