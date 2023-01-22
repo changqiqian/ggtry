@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, Button, sys, SafeArea } from 'cc';
+import { _decorator, Component, Node, Label, Button, sys, SafeArea, setDisplayStats } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { SceneType, UIMgr } from '../../base/UIMgr';
@@ -30,7 +30,8 @@ export class LoginUI extends BaseUI
     DevIpBtn: BaseButton = null;
     @property(BaseButton) 
     JackIpBtn: BaseButton = null;
-
+    @property(BaseButton) 
+    TurnOff: BaseButton = null;
     InitParam() 
     {
     }
@@ -51,6 +52,11 @@ export class LoginUI extends BaseUI
 
 
 
+        });
+
+        this.TurnOff.SetClickCallback(()=>
+        {
+            setDisplayStats(false);
         });
 
         this.mSignBtn.SetClickCallback(()=>

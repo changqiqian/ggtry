@@ -113,13 +113,13 @@ export class Game_TableInfo extends BaseUI
         let staticData = replayData.texasConfig;
 
 
-        this.mRoomName.string = staticData.basicConfig.gameName;
+        this.mRoomName.string = staticData.gameName;
         this.mRoomID.string = "ID:" + replayData.gameId;
 
-        let ante = Tool.ConvertMoney_S2C(staticData.texasConfig.ante);
-        let sb = Tool.ConvertMoney_S2C(staticData.texasConfig.smallBlind);
+        let ante = Tool.ConvertMoney_S2C(staticData.ante);
+        let sb = Tool.ConvertMoney_S2C(staticData.smallBlind);
         let bb = sb * 2;
-        let straddle = staticData.texasConfig.straddle;
+        let straddle = staticData.straddle;
 
         let bindInfo = "";
         if(straddle)
@@ -139,17 +139,17 @@ export class Game_TableInfo extends BaseUI
 
         
         let otherInfo = "";
-        if(staticData.texasConfig.insurance)
+        if(staticData.insurance)
         {
             otherInfo += Localization.GetString("00060");
         }
 
-        if(staticData.texasConfig.gpsLimit)
+        if(staticData.gpsLimit)
         {
             otherInfo += "/" + "GPS";
         }
 
-        if(staticData.texasConfig.ipLimit)
+        if(staticData.ipLimit)
         {
             otherInfo += "/" + "IP";
         }

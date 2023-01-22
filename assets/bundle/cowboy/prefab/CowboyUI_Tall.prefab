@@ -28963,6 +28963,9 @@
     "__prefab": {
       "__id__": 2364
     },
+    "mBG": {
+      "__id__": 3
+    },
     "mChip": {
       "__uuid__": "6fa4bbe6-034d-4981-bb5b-9ec512ee9299",
       "__expectedType__": "cc.Prefab"

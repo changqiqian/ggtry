@@ -31,6 +31,7 @@ export class GameBase extends BaseUI
     InitParam() 
     {
         this.OffsetTop();
+        this.MaxScreen(this.mBG.node);
     }
     BindUI() 
     {

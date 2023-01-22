@@ -73,6 +73,10 @@ export class Club_Setting extends BaseUI
     {
         let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
         let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentClubId);
+        if(enterClub == null)
+        {
+            return;
+        }
         if(enterClub.clubMember.memberType != ClubMemberType.ClubAccountType_Owner)
         {
             return;

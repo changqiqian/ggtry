@@ -4,11 +4,11 @@
     "level": 4
   },
   "common": {
-    "outputName": "android-WinPoker",
+    "outputName": "ios_WinPoker",
     "mainBundleCompressionType": "merge_dep",
-    "platform": "android",
-    "debug": false,
-    "replaceSplashScreen": false
+    "platform": "ios",
+    "debug": true,
+    "replaceSplashScreen": true
   },
   "BuildTaskManager": {
     "taskMap": {
@@ -16,7 +16,7 @@
         "id": "1674289127277",
         "progress": 1,
         "state": "success",
-        "message": "1-21-2023 16:29 make package /Users/yamiwang/Cowboy2/build/android-WinPoker success!",
+        "message": "1-22-2023 13:49 make package /Users/yamiwang/Cowboy2/build/android-WinPoker success!",
         "options": {
           "name": "SY",
           "platform": "android",
@@ -90,7 +90,76 @@
             }
           }
         },
-        "time": "1-21-2023 16:18",
+        "time": "1-22-2023 13:41",
+        "dirty": false
+      },
+      "1674371306022": {
+        "id": "1674371306022",
+        "progress": 1,
+        "state": "success",
+        "message": "1-22-2023 15:09 Build success in 90818 ms!",
+        "options": {
+          "name": "SY",
+          "platform": "ios",
+          "buildPath": "project://build",
+          "debug": true,
+          "md5Cache": false,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "replaceSplashScreen": true,
+          "mainBundleCompressionType": "merge_dep",
+          "mainBundleIsRemote": false,
+          "mergeStartScene": false,
+          "experimentalEraseModules": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
+          "scenes": [
+            {
+              "url": "db://assets/scene/start.scene",
+              "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
+              "inBundle": false
+            }
+          ],
+          "outputName": "ios_WinPoker",
+          "packages": {
+            "ios": {
+              "orientation": {
+                "landscapeRight": false,
+                "landscapeLeft": false,
+                "portrait": true
+              },
+              "renderBackEnd": {
+                "metal": true
+              },
+              "skipUpdateXcodeProject": false,
+              "targetVersion": "12.0",
+              "osTarget": {
+                "iphoneos": true,
+                "simulator": false
+              },
+              "developerTeam": "ZTGH2Z5AW9",
+              "packageName": "SY.Texas.Com"
+            },
+            "cocos-service": {
+              "configID": "437b18",
+              "services": []
+            },
+            "hot-update": null,
+            "native": {
+              "polyfills": {
+                "asyncFunctions": true
+              },
+              "encrypted": false,
+              "xxteaKey": "17BHk6rK9MFZk2nI",
+              "compressZip": false,
+              "makeAfterBuild": false,
+              "JobSystem": "none",
+              "remoteServerAddress": "http://54.169.147.71/WinPoker/"
+            }
+          }
+        },
+        "time": "1-22-2023 15:08",
         "dirty": false
       }
     }

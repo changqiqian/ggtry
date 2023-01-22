@@ -17,6 +17,8 @@ const { ccclass, property } = _decorator;
 @ccclass('CowboyUI')
 export class CowboyUI extends BaseUI 
 {
+    @property(Node) 
+    mBG: Node = null;
     @property(Prefab) 
     mChip: Prefab = null;
     @property(CircleTimer) 
@@ -53,6 +55,7 @@ export class CowboyUI extends BaseUI
     BindUI() 
     {
         this.OffsetTop();
+        this.MaxScreen(this.mBG);
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
     }
@@ -207,6 +210,7 @@ export class CowboyUI extends BaseUI
     CustmoerDestory()
     {
         this.mChips = null;
+        AudioManager.Instance.StopMusic("CowboyBGM");
         CowboyData.Instance.Clear();
     }
     

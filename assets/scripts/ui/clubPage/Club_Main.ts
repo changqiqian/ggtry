@@ -79,6 +79,7 @@ export class Club_Main extends BaseUI
         HallData.Instance.Data_ClubDismiss.AddListenner(this,(_data)=>
         {
             this.RemovePage(_data);
+            this.UpdateDefualtBtn();
         });
         HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
         {
@@ -88,6 +89,7 @@ export class Club_Main extends BaseUI
             {
                 HallData.Instance.Data_ClubEnter.mData = false;
             }
+            this.UpdateDefualtBtn();
         });
         LocalPlayerData.Instance.Data_AccountLevel.AddListenner(this,(_data)=>
         {
@@ -97,6 +99,7 @@ export class Club_Main extends BaseUI
         HallData.Instance.Data_ClubCreateData.AddListenner(this,(_data)=>
         {
             this.InsertClub(_data);
+            this.UpdateDefualtBtn();
         });
 
         HallData.Instance.Data_UpdateAllClub.AddListenner(this,(_data)=>
@@ -105,12 +108,12 @@ export class Club_Main extends BaseUI
             {
                 this.mPageView.removeAllPages();
                 let enterClubInfos = LocalPlayerData.Instance.Data_EnterClubs.mData;
-                this.mDefualtSearchBtn.Show(enterClubInfos.length==0);
                 for(let i = 0 ; i < enterClubInfos.length ; i++)
                 {
                     let currentInfo = enterClubInfos[i].clubInfo;
                     this.InsertClub(currentInfo);
                 }
+                this.UpdateDefualtBtn();
             }
 
         });
@@ -125,6 +128,7 @@ export class Club_Main extends BaseUI
                 tempScript.SetTips(tips);
                 tempScript.ShowConfirmBtnOnly();
             })
+            this.UpdateDefualtBtn();
         });
 
         HallData.Instance.Data_ClubEnter.AddListenner(this,(_data)=>
@@ -170,6 +174,12 @@ export class Club_Main extends BaseUI
     CustmoerDestory() 
     {
 
+    }
+
+    UpdateDefualtBtn()
+    {
+        let enterClubInfos = LocalPlayerData.Instance.Data_EnterClubs.mData;
+        this.mDefualtSearchBtn.Show(enterClubInfos.length == 0);
     }
 
     InsertClub(_clubData : ClubDetailsInfo)

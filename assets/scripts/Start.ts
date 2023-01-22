@@ -15,7 +15,7 @@ export class Start extends Component
 {
     onLoad()
     {
-        setDisplayStats(false);
+        setDisplayStats(GameConfig.DebugMode);
     }
     start() 
     {
