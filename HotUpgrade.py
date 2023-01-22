@@ -152,7 +152,7 @@ if __name__ == "__main__":
     print('拷贝最新版本信息到项目，完成！')
 
     print('把构建生成的资源拷贝到HotRelease目录')
-    copyFiles('build/android/assets/', pathToSaveHotUpdate)
+    copyFiles(SrcPath, pathToSaveHotUpdate)
     print('拷贝资源到相关目录完成！')
     
     print('更新完毕！！！' + '版本号:' + gameVersion)
