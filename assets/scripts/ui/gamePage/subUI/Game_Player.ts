@@ -197,11 +197,10 @@ export class Game_Player extends BaseUI
 
                 if(winResult.winLose > 0)
                 {
-                    this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
+                    this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_node)=>
                     {
-                        let tempNode = instantiate(_prefab);
-                        this.node.addChild(tempNode);
-                        let script = tempNode.getComponent(Game_WinEffect);
+                        this.node.addChild(_node);
+                        let script = _node.getComponent(Game_WinEffect);
                         script.InitWithData(winResult.winLose);
                     })
                 }
@@ -488,11 +487,10 @@ export class Game_Player extends BaseUI
     {
         if(_winLoseInfo.winLose >0)
         {
-            this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
+            this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_node)=>
             {
-                let tempNode = instantiate(_prefab);
-                this.node.addChild(tempNode);
-                let script = tempNode.getComponent(Game_WinEffect);
+                this.node.addChild(_node);
+                let script = _node.getComponent(Game_WinEffect);
                 script.InitWithData(_winLoseInfo.winLose);
             })
         }
@@ -502,11 +500,10 @@ export class Game_Player extends BaseUI
     {
         if(this.mGame_BetAmount.node.activeInHierarchy == true )
         {
-            this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_prefab)=>
+            this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_node)=>
             {
-                let tempNode = instantiate(_prefab);
-                this.node.addChild(tempNode);
-                let script = tempNode.getComponent(Game_MovingChip);
+                this.node.addChild(_node);
+                let script = _node.getComponent(Game_MovingChip);
                 let startWorldPos = this.mGame_BetAmount.GetChipWorldPos();
                 let screenSize = view.getVisibleSize();
                 script.FlyWithDelay(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
@@ -858,11 +855,10 @@ export class Game_Player extends BaseUI
             }
         }
 
-        this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_prefab)=>
+        this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_node)=>
         {
-            let tempNode = instantiate(_prefab);
-            this.node.addChild(tempNode);
-            let script = tempNode.getComponent(Game_MovingChip);
+            this.node.addChild(_node);
+            let script = _node.getComponent(Game_MovingChip);
             let startWorldPos = this.node.worldPosition;
             let entWorldPos = this.mGame_BetAmount.GetChipWorldPos();
             script.Fly(startWorldPos ,entWorldPos);
@@ -904,11 +900,10 @@ export class Game_Player extends BaseUI
 
         if(isFold)
         {
-            this.LoadPrefab("gamePage","prefab/Game_MovingCards",(_prefab)=>
+            this.LoadPrefab("gamePage","prefab/Game_MovingCards",(_node)=>
             {
-                let tempNode = instantiate(_prefab);
-                this.node.addChild(tempNode);
-                let script = tempNode.getComponent(Game_MovingCards);
+                this.node.addChild(_node);
+                let script = _node.getComponent(Game_MovingCards);
                 let startWorldPos = this.node.worldPosition;
                 let screenSize = view.getVisibleSize();
                 script.FlyTo(startWorldPos , new Vec3(screenSize.width/2 , screenSize.height/2));

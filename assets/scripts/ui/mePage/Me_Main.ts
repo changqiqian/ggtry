@@ -6,6 +6,7 @@ import { BaseButton } from '../common/BaseButton';
 import { FullScreenWebView } from '../common/FullScreenWebView';
 import { InsertWebView } from '../common/InsertWebView';
 import { UIMgr } from '../../base/UIMgr';
+import { Tool } from '../../Tool';
 const { ccclass, property } = _decorator;
 
 @ccclass('Me_Main')
@@ -60,7 +61,10 @@ export class Me_Main extends BaseUI {
     }
     RegDataNotify() 
     {
-
+        LocalPlayerData.Instance.Data_Coin.AddListenner(this,(_data)=>
+        {
+            this.mMoney.string = Tool.ConvertMoney_S2C(_data) + "";
+        });
     }
     LateInit() 
     {

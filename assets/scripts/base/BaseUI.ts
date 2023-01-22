@@ -210,23 +210,23 @@ export abstract class BaseUI extends Component {
         } 
         else 
         {
-            this.LoadPrefab(_bundleName, _assetPath, (_prefab) => 
+            this.LoadPrefab(_bundleName, _assetPath, (_node) => 
             {
                 if (cc.isValid(this.node, true) == false) 
                 {
                     return;
                 }
-                let tempNode = instantiate(_prefab);
+                //let tempNode = instantiate(_prefab);
                 if (_parent != null) 
                 {
-                    _parent.addChild(tempNode);
+                    _parent.addChild(_node);
                 } 
                 else 
                 {
-                    this.node.addChild(tempNode);
+                    this.node.addChild(_node);
                 }
-                let currentScript = tempNode.getComponent(BaseUI);
-                let keyPair = new SubViewKeyPair(key, tempNode);
+                let currentScript = _node.getComponent(BaseUI);
+                let keyPair = new SubViewKeyPair(key, _node);
                 this.mLayerList.push(keyPair);
 
                 if (_loadFinish != null) 

@@ -45,13 +45,12 @@ export class Game_ChatingCtr extends BaseUI
         let aviliableLaneIndex = this.GetAviliableLane();
         let posY = this.UsingLane(aviliableLaneIndex);
 
-        this.LoadPrefab("gamePage","prefab/Game_SingleChat",(_prefab)=>
+        this.LoadPrefab("gamePage","prefab/Game_SingleChat",(_node)=>
         {
-            let tempNode = instantiate(_prefab);
-            this.node.addChild(tempNode);
+            this.node.addChild(_node);
             let width = this.node.getComponent(UITransform).contentSize.width;
-            tempNode.setPosition(width/2 , posY);
-            let tempScript = tempNode.getComponent(Game_SingleChat);
+            _node.setPosition(width/2 , posY);
+            let tempScript = _node.getComponent(Game_SingleChat);
             tempScript.InitWithData(_content,width,aviliableLaneIndex,(_index)=>
             {
                 this.ReleaseLane(_index);

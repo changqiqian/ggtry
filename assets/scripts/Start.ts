@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, director, debug, setDisplayStats, js } from 'cc';
+import { _decorator, Component, Node, director, debug, setDisplayStats, js, macro, dynamicAtlasManager } from 'cc';
 import { JsbScript } from './base/JsbScript';
 import { Localization } from './base/Localization';
 import { LocalPlayerData } from './base/LocalPlayerData';
@@ -6,7 +6,8 @@ import { SceneType, UIMgr } from './base/UIMgr';
 import { GameConfig } from './GameConfig';
 import { NetworkReceive } from './network/NetworkReceive';
 
-
+// macro.CLEANUP_IMAGE_CACHE = false;
+// dynamicAtlasManager.enabled = true;
 
 const { ccclass, property } = _decorator;
 

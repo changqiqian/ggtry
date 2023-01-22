@@ -80,12 +80,11 @@ export class DropBox extends BaseUI
     {
         for(let i = 0 ; i < this.mTitles.length ; i++)
         {
-            this.LoadPrefab("common" , "prefab/DropBoxItem" , (_prefab)=>
+            this.LoadPrefab("common" , "prefab/DropBoxItem" , (_node)=>
             {
                 let currentTitle = this.mTitles[i];
-                let tempNode = instantiate(_prefab);
-                this.mDropDown.addChild(tempNode);
-                tempNode.getComponent(DropBoxItem).InitWithData(this.mDataNotify , i , currentTitle);
+                this.mDropDown.addChild(_node);
+                _node.getComponent(DropBoxItem).InitWithData(this.mDataNotify , i , currentTitle);
             })
         }
     }

@@ -1,5 +1,5 @@
-import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
+import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
 
 export class GameConfig
@@ -15,7 +15,7 @@ export class GameConfig
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
     }
     //发布的版本号
-    public static Version = "1.0.5"
+    public static Version = "1.0.6"
 
       
     public static LOGIN_TOKEN;

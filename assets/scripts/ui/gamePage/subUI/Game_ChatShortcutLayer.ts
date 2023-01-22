@@ -72,12 +72,11 @@ export class Game_ChatShortcutLayer extends BaseUI
         this.mShortcuts.push("8888");
         for(let i = 0 ; i < this.mShortcuts.length ; i++)
         {
-            this.LoadPrefab("gamePage" , "prefab/Game_ChatShortcutItem" , (_prefab)=>
+            this.LoadPrefab("gamePage" , "prefab/Game_ChatShortcutItem" , (_node)=>
             {
                 let currentShortcut = this.mShortcuts[i];
-                let tempNode = instantiate(_prefab);
-                this.mScrollView.content.addChild(tempNode);
-                tempNode.getComponent(Game_ChatShortcutItem).InitWithData(this.mIndex , currentShortcut);
+                this.mScrollView.content.addChild(_node);
+                _node.getComponent(Game_ChatShortcutItem).InitWithData(this.mIndex , currentShortcut);
             })
         }
     }

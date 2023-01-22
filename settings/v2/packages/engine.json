@@ -14,6 +14,12 @@
       "gfx-webgl2": {
         "_value": true
       },
+      "animation": {
+        "_value": true
+      },
+      "skeletal-animation": {
+        "_value": true
+      },
       "3d": {
         "_value": false
       },
@@ -80,18 +86,12 @@
         "_value": false
       },
       "tiled-map": {
-        "_value": true
+        "_value": false
       },
       "spine": {
         "_value": true
       },
       "dragon-bones": {
-        "_value": true
-      },
-      "animation": {
-        "_value": true
-      },
-      "skeletal-animation": {
         "_value": true
       },
       "marionette": {
@@ -113,7 +113,6 @@
       "profiler",
       "skeletal-animation",
       "spine",
-      "tiled-map",
       "tween",
       "ui",
       "video",
@@ -122,6 +121,10 @@
     "noDeprecatedFeatures": {
       "value": false,
       "version": ""
-    }
+    },
+    "flags": {}
+  },
+  "macroConfig": {
+    "BATCHER2D_MEM_INCREMENT": 1024
   }
 }

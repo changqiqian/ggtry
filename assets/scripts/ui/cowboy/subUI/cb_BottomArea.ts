@@ -64,11 +64,10 @@ export class cb_BottomArea extends BaseUI {
                     {
                         if(current.reward > 0)
                         {
-                            this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_prefab)=>
+                            this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_node)=>
                             {
-                                let tempNode = instantiate(_prefab);
-                                this.mPlayerInfo.node.addChild(tempNode);
-                                let script = tempNode.getComponent(Game_WinEffect);
+                                this.mPlayerInfo.node.addChild(_node);
+                                let script = _node.getComponent(Game_WinEffect);
                                 script.InitWithData(current.reward);
                             })
 

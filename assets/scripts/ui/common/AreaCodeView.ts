@@ -12,6 +12,8 @@ const { ccclass, property } = _decorator;
 @ccclass('AreaCodeView')
 export class AreaCodeView extends BaseUI {
 
+    @property(Node) 
+    mBG: Node = null;
     @property(EditBox) 
     mSearchEditBox: EditBox = null;
     @property(BaseButton) 
@@ -32,19 +34,11 @@ export class AreaCodeView extends BaseUI {
     }
     BindUI() 
     {
+
+        this.MaxScreen(this.mBG);
+        this.AddTouchCloseEvent(this.mBG);
         this.mSearchEditBox.placeholder = Localization.GetString("00152");
-        this.node.on(Node.EventType.TOUCH_END,this.TouchEmptyBG.bind(this),this);
-        for(let i = 0 ; i < GameConfig.AreaCodeList.length ; i++)
-        {
-            this.LoadPrefab("common" , "prefab/AreaCodeItem"  ,  (_prefab)=>
-            {
-                let currentData = GameConfig.AreaCodeList[i];
-                let tempNode =  instantiate(_prefab);
-                this.mContent.addChild(tempNode);
-                let countryName = Localization.GetString(currentData.name);
-                tempNode.getComponent(AreaCodeItem).InitWithData(countryName,currentData.areaCode , i);
-            });
-        }
+        this.AddTouchCloseEvent(this.node);
 
         this.mSearchBtn.SetClickCallback(()=>
         {
@@ -53,6 +47,19 @@ export class AreaCodeView extends BaseUI {
 
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
+        this.mMovingShow.SetShowAnimationCallback(()=>
+        {
+            for(let i = 0 ; i < GameConfig.AreaCodeList.length ; i++)
+            {
+                this.LoadPrefab("common" , "prefab/AreaCodeItem"  ,  (_node)=>
+                {
+                    let currentData = GameConfig.AreaCodeList[i];
+                    this.mContent.addChild(_node);
+                    let countryName = Localization.GetString(currentData.name);
+                    _node.getComponent(AreaCodeItem).InitWithData(countryName,currentData.areaCode , i);
+                });
+            }
+        });
 
     }
     RegDataNotify() 
@@ -61,7 +68,7 @@ export class AreaCodeView extends BaseUI {
         {
             if(_data == false)
             {
-                this.mMovingShow.HideAnimation();
+                this.Show(false);
             }
         })
     }
@@ -85,12 +92,6 @@ export class AreaCodeView extends BaseUI {
         {
             this.mMovingShow.HideAnimation();
         }
-    }
-
-
-    TouchEmptyBG()
-    {
-        this.mMovingShow.HideAnimation();
     }
 
     ExcutiveSearch()

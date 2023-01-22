@@ -57,12 +57,11 @@ export class Club_CreateGameModuleLayer extends BaseUI
                 break;
             }
 
-            this.LoadPrefab("clubPage" , "prefab/Club_CreateGameModuleItem",(_prefab)=>
+            this.LoadPrefab("clubPage" , "prefab/Club_CreateGameModuleItem",(_node)=>
             {
                 let classData = JSON.parse(currentStrData) as Club_CreateTexasConfig;
-                let tempNode = instantiate(_prefab);
-                this.mScrollView.content.addChild(tempNode);
-                let script = tempNode.getComponent(Club_CreateGameModuleItem);
+                this.mScrollView.content.addChild(_node);
+                let script = _node.getComponent(Club_CreateGameModuleItem);
                 script.InitWithData(classData , i);
             });
         }

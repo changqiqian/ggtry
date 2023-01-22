@@ -17,13 +17,12 @@ export class Hall_LunBo extends BaseUI
     {
         for(let i = 0 ; i < 3 ; i++)
         {
-            this.LoadPrefab("hall","prefab/Hall_LunBoItem",(_prefab)=>
+            this.LoadPrefab("hall","prefab/Hall_LunBoItem",(_node)=>
             {
                 let url = "";
                 let picUrl = "";
-                let tempNode =  instantiate(_prefab);
-                tempNode.getComponent(Hall_LunBoItem).InitWithData(url,picUrl);
-                this.mPageView.addPage(tempNode);
+                _node.getComponent(Hall_LunBoItem).InitWithData(url,picUrl);
+                this.mPageView.addPage(_node);
             });
         }
     }

@@ -184,11 +184,10 @@ export class Club_Main extends BaseUI
 
     InsertClub(_clubData : ClubDetailsInfo)
     {
-        this.LoadPrefab("clubPage" , "prefab/Club_MainEnter" , (_prefab)=>
+        this.LoadPrefab("clubPage" , "prefab/Club_MainEnter" , (_node)=>
         {
-            let tempNode = instantiate(_prefab);
-            this.mPageView.addPage(tempNode);
-            let tempScript = tempNode.getComponent(Club_MainEnter);
+            this.mPageView.addPage(_node);
+            let tempScript = _node.getComponent(Club_MainEnter);
             tempScript.InitWithData(_clubData);
         });
     }

@@ -9,6 +9,8 @@ const { ccclass, property } = _decorator;
 @ccclass('HeadChoserView')
 export class HeadChoserView extends BaseUI 
 {
+    @property(Node) 
+    mBG: Node = null;
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
     @property(Node) 
@@ -22,12 +24,8 @@ export class HeadChoserView extends BaseUI
     }
     BindUI() 
     {
-        this.node.on(Node.EventType.TOUCH_END,()=>
-        {
-            this.Show(false);
-        });
-
-
+        this.MaxScreen(this.mBG);
+        this.AddTouchCloseEvent(this.mBG);
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
 

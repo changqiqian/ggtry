@@ -3639,9 +3639,9 @@
       "b": 200,
       "a": 255
     },
-    "_string": "内容",
-    "_horizontalAlign": 0,
-    "_verticalAlign": 0,
+    "_string": "-",
+    "_horizontalAlign": 1,
+    "_verticalAlign": 1,
     "_actualFontSize": 34,
     "_fontSize": 34,
     "_fontFamily": "Arial",
