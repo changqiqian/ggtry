@@ -68,6 +68,10 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayData>
 
     public InitWithData(_gameId : string)
     {
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
         this.mGameId = _gameId;
         this.BindData();
     }

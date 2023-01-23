@@ -17,7 +17,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
 {
     public RegisterMsg()
     {
-
         Network.Instance.AddMsgListenner(MessageId.S2C_RefreshUserInfoResp,(_data)=>
         {
             let msg = S2CRefreshUserInfoResp.decode(_data);
@@ -509,6 +508,20 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     let gameData = gameStruct.mGameData;
                     gameData.Data_S2CCommonStandUpResp.mData = msg;
                 }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBuyInsuranceResp,(_data)=>
+        {
+            let msg = S2CCommonBuyInsuranceResp.decode(_data);
+            console.log("收到的内容 S2C_CommonBuyInsuranceResp  自己购买保险==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+
             }
             else
             {
@@ -1104,6 +1117,18 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.Data_S2CCommonActionNotify.mData = msg;
             }
         },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonInsuranceTurnNotify,(_data)=>
+        {
+            let msg = S2CCommonInsuranceTurnNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonInsuranceTurnNotify  轮到谁买保险==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_S2CCommonInsuranceTurnNotify.mData = msg;
+            }
+        },this);
     
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonSettlementNotify,(_data)=>
         {

@@ -114,6 +114,10 @@ export class Game_Player extends BaseUI
 
     public InitWithData(_index : number , _id : number)
     {
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
         this.mIndex = _index;
         this.mSeatID = _id;
         this.HideAllUI();

@@ -2,6 +2,7 @@ import { _decorator, Component, Node, instantiate, Sprite, game, Game, TweenSyst
 import { AudioManager } from '../../base/AudioManager';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
+import { UIMgr } from '../../base/UIMgr';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { MultipleTableCtr } from '../common/MultipleTableCtr';
 import { HallData } from '../hall/HallData';
@@ -9,6 +10,7 @@ import { Game_BottomUI } from './subUI/Game_BottomUI';
 import { Game_ChatingCtr } from './subUI/Game_ChatingCtr';
 import { Game_ControlBtns } from './subUI/Game_ControlBtns';
 import { Game_GameStartInfo } from './subUI/Game_GameStartInfo';
+import { Game_InsuranceLayer } from './subUI/Game_InsuranceLayer';
 import { Game_Pot } from './subUI/Game_Pot';
 import { Game_PublicCards } from './subUI/Game_PublicCards';
 import { Game_SeatUI } from './subUI/Game_SeatUI';
@@ -73,6 +75,28 @@ export class GameBase extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
+
+
+        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        {
+            if(gameData.IsGamePlayingNow() == false)
+            {
+                return;
+            }
+
+            if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                
+            }
+            else
+            {
+                UIMgr.Instance.ShowLayer("gamePage","prefab/Game_InsuranceLayer",true,(_script)=>
+                {
+                    let tempScript = _script as Game_InsuranceLayer;
+                    tempScript.InitWithData(this.mIndex);
+                },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+            }
+        });
 
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {

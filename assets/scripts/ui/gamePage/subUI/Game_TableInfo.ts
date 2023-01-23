@@ -43,6 +43,10 @@ export class Game_TableInfo extends BaseUI
 
     public InitWithData(_index : number)
     {
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
         this.mIndex = _index;
         this.BindData();
     }

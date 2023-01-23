@@ -42,7 +42,7 @@ export class GameDataCash extends GameData
     }
     public BuyInListSendMsgId() : number
     {
-        return MessageId.CS2_TexasCashGetBringInList;
+        return MessageId.C2S_TexasCashGetBringInList;
     }
     
     public RefreshSendMsgId() : number

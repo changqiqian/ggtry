@@ -54,6 +54,10 @@ export class Game_GameStartInfo extends BaseUI
 
     public InitWithData(_index : number)
     {
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
         this.mIndex = _index;
         this.BindData();
     }

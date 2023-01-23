@@ -52,6 +52,10 @@ export class Game_SeatItem extends BaseUI
 
     public InitWithData(_index : number , _id : number)
     {
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
         this.mIndex = _index;
         this.mSeatID = _id;
         this.mGame_Player.InitWithData(this.mIndex , _id);

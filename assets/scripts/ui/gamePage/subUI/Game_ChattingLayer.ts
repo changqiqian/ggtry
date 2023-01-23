@@ -26,11 +26,7 @@ export class Game_ChattingLayer extends BaseUI
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
 
-
     private mIndex : number = null;
-    private mInited : boolean = false;
-
-
 
     InitParam()
     {
@@ -75,12 +71,10 @@ export class Game_ChattingLayer extends BaseUI
 
     public InitWithData(_index : number)
     {
-        if(this.mInited == true)
+        if(this.CheckInitFlag())
         {
             return;
         }
-
-        this.mInited = true;
         this.mIndex = _index;
         this.BindData();
     }

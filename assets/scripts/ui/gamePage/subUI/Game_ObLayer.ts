@@ -25,7 +25,6 @@ export class Game_ObLayer extends ListViewCtr<PlayerInfo>
     @property(ToggleBtn) 
     mChatToggle: ToggleBtn = null;
     private mIndex : number = null;
-
     onEnable()
     {
      
@@ -77,6 +76,10 @@ export class Game_ObLayer extends ListViewCtr<PlayerInfo>
 
     public InitWithData(_index : number)
     {
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
         this.mIndex = _index;
         this.BindData();
         this.OnDragTop();

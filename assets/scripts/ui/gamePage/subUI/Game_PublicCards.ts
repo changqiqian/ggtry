@@ -12,7 +12,6 @@ export class Game_PublicCards extends BaseUI
     mAudio: AudioSource = null;
 
     private mIndex : number = null;
-
     InitParam() 
     {
 
@@ -38,6 +37,10 @@ export class Game_PublicCards extends BaseUI
 
     public InitWithData(_index : number)
     {
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
         this.mIndex = _index;
         this.BindData();
     }

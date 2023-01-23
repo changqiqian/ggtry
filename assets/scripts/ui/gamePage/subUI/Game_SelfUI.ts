@@ -68,6 +68,10 @@ export class Game_SelfUI extends BaseUI
     }
     public InitWithData(_index : number)
     {
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
         this.mIndex = _index;
         this.BindData();
     }

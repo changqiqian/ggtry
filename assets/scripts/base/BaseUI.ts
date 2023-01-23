@@ -44,6 +44,7 @@ const { ccclass, property } = _decorator;
 //如果你这个prefab有撑满全屏的背景图，那么将他放在prefab的根节点下，并且命名成BG
 export abstract class BaseUI extends Component {
     mIsWindow: boolean = false;
+    mInitFlag : boolean = false;
     mLayerList: Array<SubViewKeyPair>;
 
 
@@ -113,6 +114,17 @@ export abstract class BaseUI extends Component {
     PreInit()
     {
         
+    }
+
+    CheckInitFlag()
+    {
+        if(this.mInitFlag)
+        {
+            return true;
+        }
+
+        this.mInitFlag = true;
+        return false;   
     }
 
     LoadSprite(_bundleName: string, _assetPath: string, _loadFinish: Function) 
@@ -264,6 +276,7 @@ export abstract class BaseUI extends Component {
         this.mTimerStartingTime = tempDate.getTime(); 
         this.StopSecondsTimer();
         this.schedule(this.SecondsTimerLogic, _timeSpace);
+        this.SecondsTimerLogic();
     }
 
     StopSecondsTimer()

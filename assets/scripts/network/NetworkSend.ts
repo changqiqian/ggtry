@@ -411,6 +411,15 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("获取观看者列表  === " + JSON.stringify(msg))
     }
 
+    public BuyInsurance(_msgId : number ,_gameId : string , _amount : number)
+    {
+        let msg = new C2SGameBuyInsurance();
+        msg.gameId = _gameId;
+        msg.amount = _amount;
+        Network.Instance.SendMsg(_msgId , C2SGameBuyInsurance.encode(msg).finish());
+        console.log("购买保险  === " + JSON.stringify(msg))
+    }
+
     public GetBringInList(_msgId : number ,_gameId : string , _page : number , _pageSize : number)
     {
         UIMgr.Instance.ShowLoading(true);

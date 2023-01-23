@@ -77,19 +77,18 @@ export class Game_BringOut extends BaseUI
 
     InitWithData(_index : number)
     {
-        this.mIndex = _index;
-        this.BindData();
-    }
-
-    BindData()
-    {
         if(this.mInit)
         {
             return;
         }
 
         this.mInit = true;
+        this.mIndex = _index;
+        this.BindData();
+    }
 
+    BindData()
+    {
 
         LocalPlayerData.Instance.Data_Coin.AddListenner(this,(_data)=>
         {

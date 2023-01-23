@@ -126,6 +126,12 @@ export class Game_BuyInWindow extends BaseUI
 
     InitWithData(_index : number)
     {
+        if(this.mInit)
+        {
+            return;
+        }
+
+        this.mInit = true;
         this.mIndex = _index;
         this.mCountNode.active = false;
         this.StopCountDown();
@@ -134,14 +140,6 @@ export class Game_BuyInWindow extends BaseUI
 
     BindData()
     {
-        if(this.mInit)
-        {
-            return;
-        }
-
-        this.mInit = true;
-
-
         HallData.Instance.Data_S2CClubPlayerPointNotify.AddListenner(this,(_data)=>
         {
             this.UpdateTotalMoney();

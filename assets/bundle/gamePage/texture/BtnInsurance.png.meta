@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "496c2c6c-81fc-413e-8e18-2c63c2b74233",
+  "uuid": "66a04eaf-d532-48fa-a0c7-e0389ffb4a91",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "496c2c6c-81fc-413e-8e18-2c63c2b74233@6c48a",
-      "displayName": "上局回顾",
+      "uuid": "66a04eaf-d532-48fa-a0c7-e0389ffb4a91@6c48a",
+      "displayName": "BtnInsurance",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "496c2c6c-81fc-413e-8e18-2c63c2b74233",
+        "imageUuidOrDatabaseUri": "66a04eaf-d532-48fa-a0c7-e0389ffb4a91",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,29 +33,29 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "496c2c6c-81fc-413e-8e18-2c63c2b74233@f9941",
-      "displayName": "上局回顾",
+      "uuid": "66a04eaf-d532-48fa-a0c7-e0389ffb4a91@f9941",
+      "displayName": "BtnInsurance",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -0.5,
+        "offsetX": 0,
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 1125,
-        "height": 2436,
-        "rawWidth": 1126,
-        "rawHeight": 2436,
+        "width": 252,
+        "height": 120,
+        "rawWidth": 252,
+        "rawHeight": 120,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "496c2c6c-81fc-413e-8e18-2c63c2b74233@6c48a",
+        "imageUuidOrDatabaseUri": "66a04eaf-d532-48fa-a0c7-e0389ffb4a91@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "496c2c6c-81fc-413e-8e18-2c63c2b74233@f9941"
+    "redirect": "66a04eaf-d532-48fa-a0c7-e0389ffb4a91@f9941"
   }
 }

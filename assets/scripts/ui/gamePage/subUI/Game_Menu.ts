@@ -35,8 +35,6 @@ export class Game_Menu extends BaseUI
     mDismiss: BaseButton = null;
     mIndex : number;
 
-    mInited : boolean = false;
-
     onEnable()
     {
         this.UpdateStandBtn();
@@ -112,11 +110,10 @@ export class Game_Menu extends BaseUI
 
     public InitWithData(_index : number)
     {
-        if(this.mInited)
+        if(this.CheckInitFlag())
         {
             return;
         }
-        this.mInited = false;
         this.mIndex = _index;    
         this.BindData();
     }

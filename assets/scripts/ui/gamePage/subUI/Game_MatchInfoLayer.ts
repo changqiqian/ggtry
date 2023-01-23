@@ -31,7 +31,6 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerHistoryInfo>
     @property(ScrollView) 
     mScrollView: ScrollView = null;
     private mIndex : number = null;
-
     
     onEnable()
     {
@@ -71,6 +70,10 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerHistoryInfo>
 
     public InitWithData(_index : number)
     {
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
         this.mIndex = _index;
         this.BindData();
         this.OnDragTop();
