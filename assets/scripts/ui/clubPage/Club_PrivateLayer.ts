@@ -109,6 +109,7 @@ export class Club_PrivateLayer extends ListViewCtr<ClubTexasGameInfo>
         let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
         this.mClubName.string = enterClub.clubInfo.name;
         this.mClubId.string = clubId;
+        this.mAseetsBtn.Show(this.HaveRights());
     }
 
     RegDataNotify()
