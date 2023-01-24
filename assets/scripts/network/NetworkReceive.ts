@@ -31,7 +31,26 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);  
 
-        
+        Network.Instance.AddMsgListenner(MessageId.S2C_AddCurrencyResp,(_data)=>
+        {
+            //UIMgr.Instance.ShowLoading(false);
+            let msg = S2CAddCurrencyResp.decode(_data);
+            console.log("收到的内容 S2C_AddCurrencyResp  给玩家上分返回==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00322"));
+                if(msg.uid == LocalPlayerData.Instance.Data_Uid.mData)
+                {
+                    NetworkSend.Instance.RefreshHallMoney();
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+
         Network.Instance.AddMsgListenner(MessageId.S2C_GetHallSubGameInfoResp,(_data)=>
         {
             let msg = S2CGetHallSubGameInfoResp.decode(_data);

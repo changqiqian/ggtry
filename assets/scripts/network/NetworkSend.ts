@@ -430,6 +430,17 @@ export class NetworkSend extends Singleton<NetworkSend>()
         Network.Instance.SendMsg(_msgId , CS2GetBringInList.encode(msg).finish());
         console.log("获取买入列表  === " + JSON.stringify(msg))
     }
+
+    public GiveHallScore(_uid : string , _currencyType : GameCurrencyType , _amount : number)
+    {
+        //UIMgr.Instance.ShowLoading(true);
+        let msg = new C2SAddCurrency();
+        msg.uid = _uid;
+        msg.currencyNum = Tool.ConvertMoney_C2S(_amount);
+        msg.currencyType = GameCurrencyType.GameCurrencyType_Coin;
+        Network.Instance.SendMsg(MessageId.C2S_AddCurrency , C2SAddCurrency.encode(msg).finish());
+        console.log("给玩家上分  === " + JSON.stringify(msg))
+    }
     
     public RefreshGame(_msgId : number ,_gameId : string)
     {

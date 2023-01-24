@@ -26,6 +26,7 @@ export class Me_Main extends BaseUI {
     @property(BaseButton)
     mGameRecordBtn: BaseButton = null;
 
+
     InitParam() 
     {
 
@@ -57,6 +58,7 @@ export class Me_Main extends BaseUI {
         {
             UIMgr.Instance.ShowWindow('mePage', 'prefab/Me_SettingWindow');
         });
+
 
     }
     RegDataNotify() 

@@ -248,7 +248,9 @@ export class Club_PrivateLayer extends ListViewCtr<ClubTexasGameInfo>
             if(enterClub != null)
             {
                 let clubPoint = enterClub.clubMember.clubPoint;
-                this.mMoney.string = Tool.ConvertMoney_S2C(clubPoint) + "";
+                //this.mMoney.string = Tool.ConvertMoney_S2C(clubPoint) + "";
+                //兼容winpoker
+                this.mMoney.string = Tool.ConvertMoney_S2C(LocalPlayerData.Instance.Data_Coin.mData) + "";
             }
             else
             {

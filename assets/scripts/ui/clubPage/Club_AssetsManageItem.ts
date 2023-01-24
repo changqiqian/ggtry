@@ -52,6 +52,9 @@ export class Club_AssetsManageItem extends BaseUI
         this.mID.string = _member.uid;
         this.mAmount.string = Tool.ConvertMoney_S2C(_member.clubPoint) + "";
         this.mToggleBtn.SetDataNotify(HallData.Instance.Data_ClubScoreManageUid,Number(this.mData.uid));
+
+        //兼容winpoker
+        this.mAmount.node.active = false;
     }
 }
 

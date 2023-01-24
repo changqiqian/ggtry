@@ -343,7 +343,7 @@ export class Localization {
         { name: '00255', ch: '买入', en: 'BuyIn' },
         { name: '00256', ch: '提示', en: 'Tips' },
         { name: '00257', ch: '买入将在下一手开始前生效', en: 'Will buy in next round' },
-        { name: '00258', ch: '余额:', en: 'Amount:' },
+        { name: '00258', ch: '余额:', en: 'Balance:' },
         { name: '00259', ch: '游戏中:', en: 'In game:' },
         { name: '00260', ch: '游戏中', en: 'In game' },
         { name: '00261', ch: '玩家数据', en: 'detail' },
@@ -404,6 +404,12 @@ export class Localization {
         { name: '00317', ch: '1/2池', en: '1/2 pots' },
         { name: '00318', ch: '满池', en: 'full pots' },
         { name: '00319', ch: '本次购买需要带回: xxx', en: 'You need buy back: xxx' },
+        { name: '00320', ch: '发发看', en: 'Deal' },
+        { name: '00321', ch: '看手牌', en: 'Show hands' },
+        { name: '00322', ch: '操作成功', en: 'Success' },
+        { name: '00323', ch: '捐赠', en: 'Donate' },
+        
+        
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

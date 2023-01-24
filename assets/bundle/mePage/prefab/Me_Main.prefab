@@ -3479,6 +3479,9 @@
       },
       {
         "__id__": 287
+      },
+      {
+        "__id__": 289
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -3601,6 +3604,26 @@
     },
     "targetInfo": {
       "__id__": 288
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "eaLy0KjgNMzpJZxdZXV5DR"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 274
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "mAddMoneyBtn"
+    ],
+    "target": null,
+    "targetInfo": {
+      "__id__": 290
     }
   },
   {

@@ -1279,7 +1279,7 @@
     "__prefab": {
       "__id__": 62
     },
-    "mKey": "00117",
+    "mKey": "00323",
     "_id": ""
   },
   {
@@ -1294,7 +1294,7 @@
     "propertyPath": [
       "_name"
     ],
-    "value": "AseetsBtn"
+    "value": "DonateBtn"
   },
   {
     "__type__": "cc.TargetInfo",
@@ -1413,7 +1413,7 @@
     "propertyPath": [
       "_string"
     ],
-    "value": "发放积分"
+    "value": "捐赠"
   },
   {
     "__type__": "cc.TargetInfo",
@@ -1431,7 +1431,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 168,
+      "width": 84,
       "height": 63
     }
   },
@@ -1554,8 +1554,7 @@
     "propertyPath": [
       "_normalSprite"
     ],
-    "value": {
-    }
+    "value": {}
   },
   {
     "__type__": "cc.TargetInfo",
@@ -2263,8 +2262,7 @@
     "propertyPath": [
       "_normalSprite"
     ],
-    "value": {
-    }
+    "value": {}
   },
   {
     "__type__": "cc.TargetInfo",
@@ -12430,7 +12428,7 @@
       "__id__": 848
     },
     "mBackBtn": null,
-    "mAssetsBtn": null,
+    "mDonateBtn": null,
     "mAssetsRecordBtn": null,
     "mMoreMemberBtn": null,
     "mUserContainer": {
@@ -12556,6 +12554,9 @@
       },
       {
         "__id__": 880
+      },
+      {
+        "__id__": 882
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -12919,6 +12920,28 @@
     },
     "targetInfo": {
       "__id__": 881
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "eaLy0KjgNMzpJZxdZXV5DR"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 847
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "mDonateBtn"
+    ],
+    "target": {
+      "__id__": 54
+    },
+    "targetInfo": {
+      "__id__": 883
     }
   },
   {

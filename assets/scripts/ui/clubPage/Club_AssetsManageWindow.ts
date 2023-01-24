@@ -29,6 +29,11 @@ export class Club_AssetsManageWindow extends BaseUI
     mClubAmount: Label = null;
     @property(BaseButton) 
     mConfirmBtn: BaseButton = null;   
+
+    //兼容winpoker
+    @property(Label) 
+    mBalanceTtile: Label = null;
+
     mGive : boolean = null;
 
     onEnable()
@@ -42,6 +47,8 @@ export class Club_AssetsManageWindow extends BaseUI
     }
     BindUI()
     {
+        this.mBalanceTtile.string = Localization.GetString("00168")
+
         this.mEditBox.placeholder = Localization.GetString("00124");
         this.mCloseBtn.SetClickCallback(()=>
         {
@@ -58,17 +65,30 @@ export class Club_AssetsManageWindow extends BaseUI
                 return;
             }   
 
+            // let amount = Number(this.mEditBox.string);
+            // let currentUser = HallData.Instance.Data_ClubScoreManageUserInfo.mData;
+            // if(this.mGive)
+            // {   
+            //     NetworkSend.Instance.ShareClubScore(clubId,currentUser.uid,amount);
+            // }
+            // else
+            // {
+            //     NetworkSend.Instance.ShareClubScore(clubId,currentUser.uid, -amount);
+            // }
+
+
+            //兼容winpoker
             let amount = Number(this.mEditBox.string);
             let currentUser = HallData.Instance.Data_ClubScoreManageUserInfo.mData;
             if(this.mGive)
             {   
-                NetworkSend.Instance.ShareClubScore(clubId,currentUser.uid,amount);
-            }
-            else
-            {
-                NetworkSend.Instance.ShareClubScore(clubId,currentUser.uid, -amount);
+                NetworkSend.Instance.GiveHallScore(currentUser.uid,GameCurrencyType.GameCurrencyType_Coin,amount);
             }
         });
+
+        //兼容winpoker
+        this.mPlayerAmount.node.active = false;
+        this.mBalanceTtile.string = Localization.GetString("00258")
     }
     RegDataNotify()
     {
@@ -120,6 +140,12 @@ export class Club_AssetsManageWindow extends BaseUI
             }
             this.mPlayerAmount.string = Tool.ConvertMoney_S2C(_data.playerRestPoint) + "";
         });
+
+        //兼容winpoker
+        LocalPlayerData.Instance.Data_Coin.AddListenner(this,(_data)=>
+        {
+            this.mClubAmount.string = Tool.ConvertMoney_S2C(_data) + "";
+        });
     }
     LateInit()
     {
@@ -153,7 +179,8 @@ export class Club_AssetsManageWindow extends BaseUI
         let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
         let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
         let clubTotalPoint = enterClub.clubInfo.totalClubPoint;
-        this.mClubAmount.string = Tool.ConvertMoney_S2C(clubTotalPoint) + "";
+        //兼容winpoker
+        //this.mClubAmount.string = Tool.ConvertMoney_S2C(clubTotalPoint) + "";
     }
 }
 

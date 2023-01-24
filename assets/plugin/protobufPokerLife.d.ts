@@ -1017,6 +1017,195 @@ export class ClubSubGameInfo implements IClubSubGameInfo {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ClubSubGameInfo;
 }
 
+/** Represents a CommonResult. */
+export class CommonResult implements ICommonResult {
+
+    /**
+     * Constructs a new CommonResult.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ICommonResult);
+
+    /** CommonResult resId. */
+    public resId: number;
+
+    /** CommonResult resMessage. */
+    public resMessage: string;
+
+    /**
+     * Encodes the specified CommonResult message. Does not implicitly {@link CommonResult.verify|verify} messages.
+     * @param m CommonResult message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ICommonResult, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a CommonResult message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns CommonResult
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CommonResult;
+}
+
+/** AccountLevel enum. */
+export enum AccountLevel {
+    AccountLevel_Normal = 0,
+    AccountLevel_Agent = 1,
+    AccountLevel_Boss = 2
+}
+
+/** AccountStatus enum. */
+export enum AccountStatus {
+    AccountStatus_Normal = 0,
+    AccountStatus_Frozen = 1
+}
+
+/** GameCurrencyType enum. */
+export enum GameCurrencyType {
+    GameCurrencyType_Point = 0,
+    GameCurrencyType_Coin = 1
+}
+
+/** Represents a C2SHeartbeatPing. */
+export class C2SHeartbeatPing implements IC2SHeartbeatPing {
+
+    /**
+     * Constructs a new C2SHeartbeatPing.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SHeartbeatPing);
+
+    /**
+     * Encodes the specified C2SHeartbeatPing message. Does not implicitly {@link C2SHeartbeatPing.verify|verify} messages.
+     * @param m C2SHeartbeatPing message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SHeartbeatPing, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SHeartbeatPing message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SHeartbeatPing
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SHeartbeatPing;
+}
+
+/** Represents a S2CHeartbeatPong. */
+export class S2CHeartbeatPong implements IS2CHeartbeatPong {
+
+    /**
+     * Constructs a new S2CHeartbeatPong.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CHeartbeatPong);
+
+    /**
+     * Encodes the specified S2CHeartbeatPong message. Does not implicitly {@link S2CHeartbeatPong.verify|verify} messages.
+     * @param m S2CHeartbeatPong message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CHeartbeatPong, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CHeartbeatPong message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CHeartbeatPong
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CHeartbeatPong;
+}
+
+/** Represents a S2CKick. */
+export class S2CKick implements IS2CKick {
+
+    /**
+     * Constructs a new S2CKick.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CKick);
+
+    /** S2CKick result. */
+    public result?: (ICommonResult|null);
+
+    /**
+     * Encodes the specified S2CKick message. Does not implicitly {@link S2CKick.verify|verify} messages.
+     * @param m S2CKick message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CKick, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CKick message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CKick
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CKick;
+}
+
+/** Represents a UserInfo. */
+export class UserInfo implements IUserInfo {
+
+    /**
+     * Constructs a new UserInfo.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IUserInfo);
+
+    /** UserInfo uid. */
+    public uid: string;
+
+    /** UserInfo nickName. */
+    public nickName: string;
+
+    /** UserInfo head. */
+    public head: string;
+
+    /** UserInfo coin. */
+    public coin: number;
+
+    /** UserInfo diamond. */
+    public diamond: number;
+
+    /** UserInfo accountLevel. */
+    public accountLevel: AccountLevel;
+
+    /** UserInfo accountStatus. */
+    public accountStatus: AccountStatus;
+
+    /**
+     * Encodes the specified UserInfo message. Does not implicitly {@link UserInfo.verify|verify} messages.
+     * @param m UserInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IUserInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a UserInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns UserInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserInfo;
+}
+
 /** GameType enum. */
 export enum GameType {
     GameType_TexasCash = 0,
@@ -1026,12 +1215,6 @@ export enum GameType {
     GameType_ShortMtt = 4,
     GameType_OmhMtt = 5,
     GameType_Cowboy = 6
-}
-
-/** GameCurrencyType enum. */
-export enum GameCurrencyType {
-    GameCurrencyType_Point = 0,
-    GameCurrencyType_Coin = 1
 }
 
 /** Represents a CardInfo. */
@@ -2599,189 +2782,6 @@ export class S2CDismissClubGameNotify implements IS2CDismissClubGameNotify {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CDismissClubGameNotify;
 }
 
-/** Represents a CommonResult. */
-export class CommonResult implements ICommonResult {
-
-    /**
-     * Constructs a new CommonResult.
-     * @param [p] Properties to set
-     */
-    constructor(p?: ICommonResult);
-
-    /** CommonResult resId. */
-    public resId: number;
-
-    /** CommonResult resMessage. */
-    public resMessage: string;
-
-    /**
-     * Encodes the specified CommonResult message. Does not implicitly {@link CommonResult.verify|verify} messages.
-     * @param m CommonResult message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: ICommonResult, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a CommonResult message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns CommonResult
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CommonResult;
-}
-
-/** AccountLevel enum. */
-export enum AccountLevel {
-    AccountLevel_Normal = 0,
-    AccountLevel_Agent = 1,
-    AccountLevel_Boss = 2
-}
-
-/** AccountStatus enum. */
-export enum AccountStatus {
-    AccountStatus_Normal = 0,
-    AccountStatus_Frozen = 1
-}
-
-/** Represents a C2SHeartbeatPing. */
-export class C2SHeartbeatPing implements IC2SHeartbeatPing {
-
-    /**
-     * Constructs a new C2SHeartbeatPing.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IC2SHeartbeatPing);
-
-    /**
-     * Encodes the specified C2SHeartbeatPing message. Does not implicitly {@link C2SHeartbeatPing.verify|verify} messages.
-     * @param m C2SHeartbeatPing message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IC2SHeartbeatPing, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a C2SHeartbeatPing message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns C2SHeartbeatPing
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SHeartbeatPing;
-}
-
-/** Represents a S2CHeartbeatPong. */
-export class S2CHeartbeatPong implements IS2CHeartbeatPong {
-
-    /**
-     * Constructs a new S2CHeartbeatPong.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IS2CHeartbeatPong);
-
-    /**
-     * Encodes the specified S2CHeartbeatPong message. Does not implicitly {@link S2CHeartbeatPong.verify|verify} messages.
-     * @param m S2CHeartbeatPong message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IS2CHeartbeatPong, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a S2CHeartbeatPong message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns S2CHeartbeatPong
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CHeartbeatPong;
-}
-
-/** Represents a S2CKick. */
-export class S2CKick implements IS2CKick {
-
-    /**
-     * Constructs a new S2CKick.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IS2CKick);
-
-    /** S2CKick result. */
-    public result?: (ICommonResult|null);
-
-    /**
-     * Encodes the specified S2CKick message. Does not implicitly {@link S2CKick.verify|verify} messages.
-     * @param m S2CKick message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IS2CKick, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a S2CKick message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns S2CKick
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CKick;
-}
-
-/** Represents a UserInfo. */
-export class UserInfo implements IUserInfo {
-
-    /**
-     * Constructs a new UserInfo.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IUserInfo);
-
-    /** UserInfo uid. */
-    public uid: string;
-
-    /** UserInfo nickName. */
-    public nickName: string;
-
-    /** UserInfo head. */
-    public head: string;
-
-    /** UserInfo coin. */
-    public coin: number;
-
-    /** UserInfo diamond. */
-    public diamond: number;
-
-    /** UserInfo accountLevel. */
-    public accountLevel: AccountLevel;
-
-    /** UserInfo accountStatus. */
-    public accountStatus: AccountStatus;
-
-    /**
-     * Encodes the specified UserInfo message. Does not implicitly {@link UserInfo.verify|verify} messages.
-     * @param m UserInfo message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IUserInfo, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a UserInfo message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns UserInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): UserInfo;
-}
-
 /** Represents a C2STexasCowboyEnterGame. */
 export class C2STexasCowboyEnterGame implements IC2STexasCowboyEnterGame {
 
@@ -3852,6 +3852,43 @@ export class C2SGetHallSubGameInfo implements IC2SGetHallSubGameInfo {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetHallSubGameInfo;
 }
 
+/** Represents a C2SAddCurrency. */
+export class C2SAddCurrency implements IC2SAddCurrency {
+
+    /**
+     * Constructs a new C2SAddCurrency.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SAddCurrency);
+
+    /** C2SAddCurrency uid. */
+    public uid: string;
+
+    /** C2SAddCurrency currencyNum. */
+    public currencyNum: number;
+
+    /** C2SAddCurrency currencyType. */
+    public currencyType: GameCurrencyType;
+
+    /**
+     * Encodes the specified C2SAddCurrency message. Does not implicitly {@link C2SAddCurrency.verify|verify} messages.
+     * @param m C2SAddCurrency message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SAddCurrency, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SAddCurrency message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SAddCurrency
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SAddCurrency;
+}
+
 /** Represents a HallTexasGameInfo. */
 export class HallTexasGameInfo implements IHallTexasGameInfo {
 
@@ -4137,6 +4174,46 @@ export class S2CGetHallSubGameInfoResp implements IS2CGetHallSubGameInfoResp {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CGetHallSubGameInfoResp;
+}
+
+/** Represents a S2CAddCurrencyResp. */
+export class S2CAddCurrencyResp implements IS2CAddCurrencyResp {
+
+    /**
+     * Constructs a new S2CAddCurrencyResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CAddCurrencyResp);
+
+    /** S2CAddCurrencyResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CAddCurrencyResp uid. */
+    public uid: string;
+
+    /** S2CAddCurrencyResp currencyNum. */
+    public currencyNum: number;
+
+    /** S2CAddCurrencyResp currencyType. */
+    public currencyType: GameCurrencyType;
+
+    /**
+     * Encodes the specified S2CAddCurrencyResp message. Does not implicitly {@link S2CAddCurrencyResp.verify|verify} messages.
+     * @param m S2CAddCurrencyResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CAddCurrencyResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CAddCurrencyResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CAddCurrencyResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CAddCurrencyResp;
 }
 
 /** Represents a C2SLogin. */
@@ -4457,11 +4534,13 @@ export enum MessageId {
     C2S_ChangeUserInfo = 2005,
     C2S_GetHallTexasGameInfo = 2006,
     C2S_GetHallSubGameInfo = 2007,
+    C2S_AddCurrency = 2008,
     S2C_GetUserInfo = 3001,
     S2C_RefreshUserInfoResp = 3002,
     S2C_ChangeUserInfo = 3003,
     S2C_GetHallTexasGameInfoResp = 3004,
     S2C_GetHallSubGameInfoResp = 3005,
+    S2C_AddCurrencyResp = 3006,
     MSG_HallEnd = 3500,
     MSG_ClubBegin = 4001,
     C2S_CreateClub = 4002,

@@ -196,13 +196,20 @@ export class Game_BuyInWindow extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let texasConfig = gameData.GetStaticData();
-
-        let min = texasConfig.minBringIn;
-        let max = (texasConfig.maxBringIn - texasConfig.minBringIn) * _ratio;
-        let sb100 = texasConfig.smallBlind * 20;
-        let roundMax = Math.floor( max/sb100);
-        max = roundMax * sb100;
-        let currentAmount = min + max;
+        let currentAmount;
+        if(_ratio == 1)
+        {
+            currentAmount = texasConfig.maxBringIn;
+        }
+        else
+        {
+            let min = texasConfig.minBringIn;
+            let max = (texasConfig.maxBringIn - texasConfig.minBringIn) * _ratio;
+            let sb100 = texasConfig.smallBlind * 20;
+            let roundMax = Math.floor( max/sb100);
+            max = roundMax * sb100;
+            currentAmount = min + max;
+        }
         return currentAmount;
     }
 

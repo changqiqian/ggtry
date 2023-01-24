@@ -43,6 +43,8 @@ export class Club_AssetsManage extends ListViewCtr<ClubMember>
         {
             this.ShowAssetsManagerWindow(false);
         });
+        //兼容winpoker
+        this.mTakeBackBtn.Show(false);
         this.mGiveBtn.SetClickCallback(()=>
         {
             this.ShowAssetsManagerWindow(true);

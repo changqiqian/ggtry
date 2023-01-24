@@ -5,6 +5,7 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
+import { Tool } from '../../Tool';
 import { BaseButton } from '../common/BaseButton';
 import { InputTipsWindow } from '../common/InputTipsWindow';
 import { InputTipsWindowBig } from '../common/InputTipsWindowBig';
@@ -19,7 +20,7 @@ export class Club_Setting extends BaseUI
     @property(BaseButton) 
     mBackBtn: BaseButton = null;
     @property(BaseButton) 
-    mAssetsBtn: BaseButton = null;
+    mDonateBtn: BaseButton = null;
     @property(BaseButton) 
     mAssetsRecordBtn: BaseButton = null;
     @property(BaseButton) 
@@ -110,12 +111,24 @@ export class Club_Setting extends BaseUI
             this.Show(false);
         });
 
-        this.mAssetsBtn.SetClickCallback(()=>
+        this.mDonateBtn.SetClickCallback(()=>
         {
-            if(this.HaveRights())
+            UIMgr.Instance.ShowWindow("common" , "prefab/InputTipsWindow",true,(_script)=>
             {
-                UIMgr.Instance.ShowWindow("clubPage","prefab/Club_AssetsManage",true,null,HallData.ClubUiTag);
-            }
+                let tempScript = _script as InputTipsWindow;
+                let title = Localization.GetString("00323");
+                tempScript.SetTitle(title);
+                tempScript.SetCallback((_data)=>
+                {
+                    if(Tool.NumberTest(_data))
+                    {
+                        let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+                        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
+                        NetworkSend.Instance.GiveHallScore(enterClub.clubInfo.ownerId,GameCurrencyType.GameCurrencyType_Coin,_data);
+                    }
+
+                })
+            },HallData.ClubUiTag)
         });
 
         this.mAssetsRecordBtn.SetClickCallback(()=>
