@@ -558,7 +558,13 @@
  
          this._allItemSize = result;
          this._allItemSizeNoEdge = this._allItemSize - (this._sizeType ? (this._topGap + this._bottomGap) : (this._leftGap + this._rightGap));
-         let slideOffset: number =  this.lackSlide ? 0 : 0.1;
+
+        //  let tempCyclic = false;    
+        //  let lackCenter = false;
+        //  let tempLack = !tempCyclic && this._allItemSize < (this._sizeType ? this._thisNodeUt.height : this._thisNodeUt.width);
+        //  let slideOffset: number = ((!tempLack || !lackCenter) && this.lackSlide) ? 0 : .1;
+        this.lackSlide = this._numItems == 0;
+        let slideOffset: number =  this.lackSlide ? 0 : 0.1;
          let targetWH: number = this.lackSlide ? ((this._sizeType ? this._thisNodeUt.height : this._thisNodeUt.width) - slideOffset) : (this._allItemSize);
          if (targetWH < 0)
              targetWH = 0;
