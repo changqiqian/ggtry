@@ -485,6 +485,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(msg.result.resId == MsgResult.Success)
             {
                 HallData.Instance.Data_S2CExitGame.mData = msg;
+                NetworkSend.Instance.RefreshHallMoney();
             }
             else
             {
@@ -1111,6 +1112,20 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.Data_S2CCommonRiverRoundNotify.mData = msg;
             }
         },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonIntervalTimeNotify,(_data)=>
+        {
+            let msg = S2CCommonIntervalTimeNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonIntervalTimeNotify  游戏准备进入下一个阶段==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_S2CCommonIntervalTimeNotify.mData = msg;
+            }
+        },this);
+
+        
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonCurrentActionNotify,(_data)=>
         {

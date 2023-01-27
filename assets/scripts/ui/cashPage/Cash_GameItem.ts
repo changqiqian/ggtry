@@ -59,7 +59,6 @@ export class Cash_GameItem extends BaseUI
     UpdateUI()
     {
         this.mGameName.string = this.mHallTexasGameInfo.basicTexasConfig.gameName;
-
         //显示盲注信息
         let sb = this.mHallTexasGameInfo.basicTexasConfig.smallBlind;
         let bb = sb * 2;

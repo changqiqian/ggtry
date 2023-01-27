@@ -33,7 +33,7 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonStandUpNotify : BaseData<S2CCommonStandUpNotify> = new BaseData<S2CCommonStandUpNotify>(true);  //站起推送
     Data_S2CCommonBringInResp : BaseData<S2CCommonBringInResp> = new BaseData<S2CCommonBringInResp>(true);  //带入
 
-
+    Data_S2CCommonIntervalTimeNotify : BaseData<S2CCommonIntervalTimeNotify> = new BaseData<S2CCommonIntervalTimeNotify>(true);  //阶段延时推送
     Data_S2CCommonRoundStartNotify : BaseData<S2CCommonRoundStartNotify> = new BaseData<S2CCommonRoundStartNotify>(true);  //本轮开始推送
     Data_S2CCommonPreFlopRoundNotify: BaseData<S2CCommonPreFlopRoundNotify> = new BaseData<S2CCommonPreFlopRoundNotify>(true);  //翻前发牌推送
     Data_S2CCommonCurrentActionNotify : BaseData<S2CCommonCurrentActionNotify> = new BaseData<S2CCommonCurrentActionNotify>(true);  //轮到谁行动推送
@@ -49,8 +49,6 @@ export abstract class GameData extends MultipleNotify
     Data_Refresh : BaseData<boolean> = new BaseData<boolean>(true);  //刷新场景
 
     mDelayStandUpNotifyMsg : Array<S2CCommonStandUpNotify> = new Array<S2CCommonStandUpNotify>();
-
-    
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
     {
         let act = new ActionInfo();

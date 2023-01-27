@@ -77,13 +77,15 @@ export class Game_CustomerRaise extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let lastBetAct = gameData.FindBiggestBetAction();
-
+        console.log("ShowRaiseBB==" )
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         for(let i = 0 ; i < this.mRaiseByBB.children.length ; i++)
         {
             let bbRatio = i + 2;
             let amount = bbRatio * lastBetAct.roundAmount;
             let clientAmount = Tool.ConvertMoney_S2C(amount);
+            console.log("amount==" + amount)
+            console.log("clientAmount==" + clientAmount)
             let currentBtn = this.mRaiseByBB.children[i].getComponent(BaseButton);
             currentBtn.SetTitle(clientAmount + "");
             currentBtn.SetClickCallback((_data)=>
@@ -132,6 +134,7 @@ export class Game_CustomerRaise extends BaseUI
         let totalPot = gameData.GetTotalPotAmount();
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         let lastBetAct = gameData.FindBiggestBetAction();
+        console.log("ShowRaiseByPot==" )
         for(let i = 0 ; i < this.mRaiseByPot.children.length ; i++)
         {
             let ratio = GameConfig.GetCustomerRaiseRatio(i);
@@ -139,7 +142,8 @@ export class Game_CustomerRaise extends BaseUI
             let amount = ratio *  totalPot;
             amount = Number(amount.toFixed(1));   		
             let clientAmount = Tool.ConvertMoney_S2C(amount);
-
+            console.log("amount==" + amount)
+            console.log("clientAmount==" + clientAmount)
             let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
             currentBtn.node.getChildByName("Describe").getComponent(Label).string = title;
             currentBtn.SetTitle(clientAmount + "");

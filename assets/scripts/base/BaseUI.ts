@@ -306,7 +306,7 @@ export abstract class BaseUI extends Component {
         let timePast = nowTime - this.mTimerStartingTime;
         let restTime = this.mTotalCountTime - timePast;
 
-        if(restTime < 0)
+        if(restTime <= 0)
         {
             return 0;
         }
@@ -317,7 +317,7 @@ export abstract class BaseUI extends Component {
     SecondsTimerLogic()
     {
         let restTime = this.GetRestMillSeconds();
-        if(restTime < 0)
+        if(restTime <= 0)
         {
             restTime = 0;
             this.StopSecondsTimer();

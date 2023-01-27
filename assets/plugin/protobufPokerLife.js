@@ -18601,6 +18601,7 @@ $root.S2CCommonIntervalTimeNotify = (function() {
      * Properties of a S2CCommonIntervalTimeNotify.
      * @exports IS2CCommonIntervalTimeNotify
      * @interface IS2CCommonIntervalTimeNotify
+     * @property {string|null} [gameId] S2CCommonIntervalTimeNotify gameId
      * @property {number|null} [intervalTime] S2CCommonIntervalTimeNotify intervalTime
      */
 
@@ -18618,6 +18619,14 @@ $root.S2CCommonIntervalTimeNotify = (function() {
                 if (p[ks[i]] != null)
                     this[ks[i]] = p[ks[i]];
     }
+
+    /**
+     * S2CCommonIntervalTimeNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonIntervalTimeNotify
+     * @instance
+     */
+    S2CCommonIntervalTimeNotify.prototype.gameId = "";
 
     /**
      * S2CCommonIntervalTimeNotify intervalTime.
@@ -18639,8 +18648,10 @@ $root.S2CCommonIntervalTimeNotify = (function() {
     S2CCommonIntervalTimeNotify.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
         if (m.intervalTime != null && Object.hasOwnProperty.call(m, "intervalTime"))
-            w.uint32(8).int64(m.intervalTime);
+            w.uint32(16).int64(m.intervalTime);
         return w;
     };
 
@@ -18663,6 +18674,9 @@ $root.S2CCommonIntervalTimeNotify = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
                 m.intervalTime = r.int64();
                 break;
             default:

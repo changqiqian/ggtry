@@ -6443,6 +6443,9 @@ export class S2CCommonIntervalTimeNotify implements IS2CCommonIntervalTimeNotify
      */
     constructor(p?: IS2CCommonIntervalTimeNotify);
 
+    /** S2CCommonIntervalTimeNotify gameId. */
+    public gameId: string;
+
     /** S2CCommonIntervalTimeNotify intervalTime. */
     public intervalTime: number;
 
