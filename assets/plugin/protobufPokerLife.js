@@ -12256,6 +12256,101 @@ $root.S2CAddCurrencyResp = (function() {
     return S2CAddCurrencyResp;
 })();
 
+$root.S2CAddCurrencyNotify = (function() {
+
+    /**
+     * Properties of a S2CAddCurrencyNotify.
+     * @exports IS2CAddCurrencyNotify
+     * @interface IS2CAddCurrencyNotify
+     * @property {number|null} [currencyNum] S2CAddCurrencyNotify currencyNum
+     * @property {GameCurrencyType|null} [currencyType] S2CAddCurrencyNotify currencyType
+     */
+
+    /**
+     * Constructs a new S2CAddCurrencyNotify.
+     * @exports S2CAddCurrencyNotify
+     * @classdesc Represents a S2CAddCurrencyNotify.
+     * @implements IS2CAddCurrencyNotify
+     * @constructor
+     * @param {IS2CAddCurrencyNotify=} [p] Properties to set
+     */
+    function S2CAddCurrencyNotify(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CAddCurrencyNotify currencyNum.
+     * @member {number} currencyNum
+     * @memberof S2CAddCurrencyNotify
+     * @instance
+     */
+    S2CAddCurrencyNotify.prototype.currencyNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CAddCurrencyNotify currencyType.
+     * @member {GameCurrencyType} currencyType
+     * @memberof S2CAddCurrencyNotify
+     * @instance
+     */
+    S2CAddCurrencyNotify.prototype.currencyType = 0;
+
+    /**
+     * Encodes the specified S2CAddCurrencyNotify message. Does not implicitly {@link S2CAddCurrencyNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CAddCurrencyNotify
+     * @static
+     * @param {IS2CAddCurrencyNotify} m S2CAddCurrencyNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CAddCurrencyNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.currencyNum != null && Object.hasOwnProperty.call(m, "currencyNum"))
+            w.uint32(8).int64(m.currencyNum);
+        if (m.currencyType != null && Object.hasOwnProperty.call(m, "currencyType"))
+            w.uint32(16).int32(m.currencyType);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CAddCurrencyNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CAddCurrencyNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CAddCurrencyNotify} S2CAddCurrencyNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CAddCurrencyNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CAddCurrencyNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.currencyNum = r.int64();
+                break;
+            case 2:
+                m.currencyType = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CAddCurrencyNotify;
+})();
+
 $root.C2SLogin = (function() {
 
     /**
@@ -13122,6 +13217,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_GetHallTexasGameInfoResp=3004 S2C_GetHallTexasGameInfoResp value
  * @property {number} S2C_GetHallSubGameInfoResp=3005 S2C_GetHallSubGameInfoResp value
  * @property {number} S2C_AddCurrencyResp=3006 S2C_AddCurrencyResp value
+ * @property {number} S2C_AddCurrencyNotify=3007 S2C_AddCurrencyNotify value
  * @property {number} MSG_HallEnd=3500 MSG_HallEnd value
  * @property {number} MSG_ClubBegin=4001 MSG_ClubBegin value
  * @property {number} C2S_CreateClub=4002 C2S_CreateClub value
@@ -13227,6 +13323,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonRiverRoundNotify=8255 S2C_CommonRiverRoundNotify value
  * @property {number} S2C_CommonCurrentActionNotify=8256 S2C_CommonCurrentActionNotify value
  * @property {number} S2C_CommonSettlementNotify=8257 S2C_CommonSettlementNotify value
+ * @property {number} S2C_CommonIntervalTimeNotify=8258 S2C_CommonIntervalTimeNotify value
  * @property {number} MSG_TexasCowboyBegin=10001 MSG_TexasCowboyBegin value
  * @property {number} C2S_TexasCowboyEnterGame=10002 C2S_TexasCowboyEnterGame value
  * @property {number} C2S_TexasCowboyExitGame=10003 C2S_TexasCowboyExitGame value
@@ -13277,6 +13374,7 @@ $root.MessageId = (function() {
     values[valuesById[3004] = "S2C_GetHallTexasGameInfoResp"] = 3004;
     values[valuesById[3005] = "S2C_GetHallSubGameInfoResp"] = 3005;
     values[valuesById[3006] = "S2C_AddCurrencyResp"] = 3006;
+    values[valuesById[3007] = "S2C_AddCurrencyNotify"] = 3007;
     values[valuesById[3500] = "MSG_HallEnd"] = 3500;
     values[valuesById[4001] = "MSG_ClubBegin"] = 4001;
     values[valuesById[4002] = "C2S_CreateClub"] = 4002;
@@ -13382,6 +13480,7 @@ $root.MessageId = (function() {
     values[valuesById[8255] = "S2C_CommonRiverRoundNotify"] = 8255;
     values[valuesById[8256] = "S2C_CommonCurrentActionNotify"] = 8256;
     values[valuesById[8257] = "S2C_CommonSettlementNotify"] = 8257;
+    values[valuesById[8258] = "S2C_CommonIntervalTimeNotify"] = 8258;
     values[valuesById[10001] = "MSG_TexasCowboyBegin"] = 10001;
     values[valuesById[10002] = "C2S_TexasCowboyEnterGame"] = 10002;
     values[valuesById[10003] = "C2S_TexasCowboyExitGame"] = 10003;
@@ -18494,4 +18593,85 @@ $root.S2CCommonSettlementNotify = (function() {
     };
 
     return S2CCommonSettlementNotify;
+})();
+
+$root.S2CCommonIntervalTimeNotify = (function() {
+
+    /**
+     * Properties of a S2CCommonIntervalTimeNotify.
+     * @exports IS2CCommonIntervalTimeNotify
+     * @interface IS2CCommonIntervalTimeNotify
+     * @property {number|null} [intervalTime] S2CCommonIntervalTimeNotify intervalTime
+     */
+
+    /**
+     * Constructs a new S2CCommonIntervalTimeNotify.
+     * @exports S2CCommonIntervalTimeNotify
+     * @classdesc Represents a S2CCommonIntervalTimeNotify.
+     * @implements IS2CCommonIntervalTimeNotify
+     * @constructor
+     * @param {IS2CCommonIntervalTimeNotify=} [p] Properties to set
+     */
+    function S2CCommonIntervalTimeNotify(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonIntervalTimeNotify intervalTime.
+     * @member {number} intervalTime
+     * @memberof S2CCommonIntervalTimeNotify
+     * @instance
+     */
+    S2CCommonIntervalTimeNotify.prototype.intervalTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified S2CCommonIntervalTimeNotify message. Does not implicitly {@link S2CCommonIntervalTimeNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonIntervalTimeNotify
+     * @static
+     * @param {IS2CCommonIntervalTimeNotify} m S2CCommonIntervalTimeNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonIntervalTimeNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.intervalTime != null && Object.hasOwnProperty.call(m, "intervalTime"))
+            w.uint32(8).int64(m.intervalTime);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonIntervalTimeNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonIntervalTimeNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonIntervalTimeNotify} S2CCommonIntervalTimeNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonIntervalTimeNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonIntervalTimeNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.intervalTime = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonIntervalTimeNotify;
 })();

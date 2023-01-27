@@ -109,7 +109,7 @@ export class Club_PrivateLayer extends ListViewCtr<ClubTexasGameInfo>
         let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
         this.mClubName.string = enterClub.clubInfo.name;
         this.mClubId.string = clubId;
-        this.mAseetsBtn.Show(this.HaveRights());
+        this.mAseetsBtn.Show(this.IsOwner());
     }
 
     RegDataNotify()
@@ -266,16 +266,22 @@ export class Club_PrivateLayer extends ListViewCtr<ClubTexasGameInfo>
 
     HaveRights() :boolean
     {
-        let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
-        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentClubId);
-        let selfIsOwner = enterClub.clubMember.memberType == ClubMemberType.ClubAccountType_Owner;
-        if(selfIsOwner)
+        let isOwner = this.IsOwner();
+        if(isOwner)
         {
         }
         else
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00099"));
         }
+        return isOwner;
+    }
+
+    IsOwner():boolean
+    {
+        let currentClubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(currentClubId);
+        let selfIsOwner = enterClub.clubMember.memberType == ClubMemberType.ClubAccountType_Owner;
         return selfIsOwner;
     }
 

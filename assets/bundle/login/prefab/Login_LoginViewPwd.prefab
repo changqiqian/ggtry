@@ -1187,8 +1187,7 @@
     "propertyPath": [
       "_spriteFrame"
     ],
-    "value": {
-    }
+    "value": {}
   },
   {
     "__type__": "cc.TargetInfo",
@@ -1841,7 +1840,7 @@
       "__expectedType__": "cc.SpriteFrame"
     },
     "_inputFlag": 5,
-    "_inputMode": 5,
+    "_inputMode": 2,
     "_maxLength": 14,
     "_id": ""
   },

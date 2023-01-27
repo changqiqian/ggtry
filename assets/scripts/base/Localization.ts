@@ -408,7 +408,8 @@ export class Localization {
         { name: '00321', ch: '看手牌', en: 'Show hands' },
         { name: '00322', ch: '操作成功', en: 'Success' },
         { name: '00323', ch: '捐赠', en: 'Donate' },
-        
+        { name: '00324', ch: '请输入内容', en: 'Click to input ' },
+        { name: '00325', ch: '收到转账，您的余额变为:xxx', en: 'Balance change:xxx' },
         
 
         { name: '01000', ch: '公告', en: 'Notification' },

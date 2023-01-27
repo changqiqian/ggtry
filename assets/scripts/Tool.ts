@@ -125,13 +125,13 @@ export class Tool
     //服务器的钱转成客户端
     public static ConvertMoney_S2C(_serverMoney : number) : number
     {
-        let clientMoney = _serverMoney / 10000;
+        let clientMoney = _serverMoney / 1000;
         return clientMoney;
     }
 
     public static ConvertMoney_C2S(_clientMoney : number) : number
     {
-        let serverMoney = _clientMoney * 10000;
+        let serverMoney = _clientMoney * 1000;
         return serverMoney;
     }
 
@@ -149,7 +149,8 @@ export class Tool
             return false;
         }
 
-        let result = /^[1-9][0-9]*([\.][0-9]{1,2})?$/.test(_target);
+
+        let result = /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/.test(_target);
         if(result == false)
         {
             UIMgr.Instance.ShowToast(Localization.GetString("00109"));

@@ -7,6 +7,7 @@ import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
 import { NetworkSend } from '../../network/NetworkSend';
+import { Tool } from '../../Tool';
 import { AdaptTop } from '../../UiTool/AdaptTop';
 import { MultipleTableCtr } from '../common/MultipleTableCtr';
 import { TipsWindow } from '../common/TipsWindow';
@@ -74,6 +75,18 @@ export class HallUI extends BaseUI
             {
                 UIMgr.Instance.ShowLayer("cowboy","prefab/CowboyUI",true,null,CowboyData.UITag);  
             }
+        })
+
+        HallData.Instance.Data_S2CAddCurrencyNotify.AddListenner(this,(_data)=>
+        {
+            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+            {
+                let tempScript = _script as TipsWindow;
+                let balance = Tool.ConvertMoney_S2C(_data.currencyNum) + "";
+                let tips = Localization.ReplaceString("00325",balance);
+                tempScript.SetTips(tips);
+                tempScript.ShowConfirmBtnOnly();
+            })
         })
     }
     LateInit() 

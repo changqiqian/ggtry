@@ -186,10 +186,9 @@ export class Club_Setting extends BaseUI
                     let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
                     let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(clubId);
                     let title = Localization.GetString("00122");
-                    tempScript.SetTitle(title);
+                    tempScript.SetTitle(title,Localization.GetString("00123"));
                     tempScript.SetMaxInput(100);
                     tempScript.SetContent(enterClub.clubInfo.brief);
-                    tempScript.SetPlaceHolder(Localization.GetString("00123"));
                     tempScript.SetCallback((_data)=>
                     {
                         if(_data != null && _data !="")

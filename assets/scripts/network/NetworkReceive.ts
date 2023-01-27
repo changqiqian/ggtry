@@ -39,10 +39,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(msg.result.resId == MsgResult.Success)
             {
                 UIMgr.Instance.ShowToast(Localization.GetString("00322"));
-                if(msg.uid == LocalPlayerData.Instance.Data_Uid.mData)
-                {
-                    NetworkSend.Instance.RefreshHallMoney();
-                }
+                NetworkSend.Instance.RefreshHallMoney();
             }
             else
             {
@@ -853,6 +850,15 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         ////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_AddCurrencyNotify,(_data)=>
+        {
+            let msg = S2CAddCurrencyNotify.decode(_data);
+            console.log("收到的内容 S2C_AddCurrencyNotify 有人给我上分===" + JSON.stringify(msg));
+            LocalPlayerData.Instance.Data_Coin.mData = msg.currencyNum;
+            HallData.Instance.Data_S2CAddCurrencyNotify.mData = msg;
+        },this);
+
+
         Network.Instance.AddMsgListenner(MessageId.S2C_DismissClubNotify,(_data)=>
         {
             let msg = S2CDismissClubNotify.decode(_data);
@@ -1218,8 +1224,10 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 }
             }
             CowboyData.Instance.Data_S2CTexasCowboyGameSettlementNotify.mData = msg;
-
         },this);  
+
+
+        
     }
 
     public UnregisterMsg()

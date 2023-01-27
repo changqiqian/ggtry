@@ -4216,6 +4216,40 @@ export class S2CAddCurrencyResp implements IS2CAddCurrencyResp {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CAddCurrencyResp;
 }
 
+/** Represents a S2CAddCurrencyNotify. */
+export class S2CAddCurrencyNotify implements IS2CAddCurrencyNotify {
+
+    /**
+     * Constructs a new S2CAddCurrencyNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CAddCurrencyNotify);
+
+    /** S2CAddCurrencyNotify currencyNum. */
+    public currencyNum: number;
+
+    /** S2CAddCurrencyNotify currencyType. */
+    public currencyType: GameCurrencyType;
+
+    /**
+     * Encodes the specified S2CAddCurrencyNotify message. Does not implicitly {@link S2CAddCurrencyNotify.verify|verify} messages.
+     * @param m S2CAddCurrencyNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CAddCurrencyNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CAddCurrencyNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CAddCurrencyNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CAddCurrencyNotify;
+}
+
 /** Represents a C2SLogin. */
 export class C2SLogin implements IC2SLogin {
 
@@ -4541,6 +4575,7 @@ export enum MessageId {
     S2C_GetHallTexasGameInfoResp = 3004,
     S2C_GetHallSubGameInfoResp = 3005,
     S2C_AddCurrencyResp = 3006,
+    S2C_AddCurrencyNotify = 3007,
     MSG_HallEnd = 3500,
     MSG_ClubBegin = 4001,
     C2S_CreateClub = 4002,
@@ -4646,6 +4681,7 @@ export enum MessageId {
     S2C_CommonRiverRoundNotify = 8255,
     S2C_CommonCurrentActionNotify = 8256,
     S2C_CommonSettlementNotify = 8257,
+    S2C_CommonIntervalTimeNotify = 8258,
     MSG_TexasCowboyBegin = 10001,
     C2S_TexasCowboyEnterGame = 10002,
     C2S_TexasCowboyExitGame = 10003,
@@ -6396,6 +6432,37 @@ export class S2CCommonSettlementNotify implements IS2CCommonSettlementNotify {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonSettlementNotify;
+}
+
+/** Represents a S2CCommonIntervalTimeNotify. */
+export class S2CCommonIntervalTimeNotify implements IS2CCommonIntervalTimeNotify {
+
+    /**
+     * Constructs a new S2CCommonIntervalTimeNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonIntervalTimeNotify);
+
+    /** S2CCommonIntervalTimeNotify intervalTime. */
+    public intervalTime: number;
+
+    /**
+     * Encodes the specified S2CCommonIntervalTimeNotify message. Does not implicitly {@link S2CCommonIntervalTimeNotify.verify|verify} messages.
+     * @param m S2CCommonIntervalTimeNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonIntervalTimeNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonIntervalTimeNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonIntervalTimeNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonIntervalTimeNotify;
 }
  
 }

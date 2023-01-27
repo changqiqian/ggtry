@@ -37,7 +37,7 @@ export class LoginUI extends BaseUI
     }
     BindUI() 
     {
-
+        LocalPlayerData.Instance.Data_AreaCode.mData = 1;
         this.MaxScreen(this.mBG);
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
@@ -67,7 +67,7 @@ export class LoginUI extends BaseUI
 
         //debug mode
         this.DebugFunction.active = GameConfig.DebugMode;
-        this.DevIpBtn.SetTitle("开发环境：" + GameConfig.DevelopIP);
+        this.DevIpBtn.SetTitle("Lucky:" + GameConfig.DevelopIP);
         this.DevIpBtn.SetClickCallback(()=>
         {
             GameConfig.SetSeverUrl(GameConfig.DevelopIP);
@@ -75,7 +75,7 @@ export class LoginUI extends BaseUI
             this.DebugFunction.active = false;
         });
 
-        this.JackIpBtn.SetTitle("Jack :" + GameConfig.JackIP);
+        this.JackIpBtn.SetTitle("测试 :" + GameConfig.JackIP);
         this.JackIpBtn.SetClickCallback(()=>
         {
             GameConfig.SetSeverUrl(GameConfig.JackIP);

@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Label, EditBox } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
 import { BaseButton } from './BaseButton';
 const { ccclass, property } = _decorator;
 
@@ -62,9 +63,15 @@ export class InputTipsWindow extends BaseUI {
 
     }
 
-    public SetTitle(_title : string)
+    public SetTitle(_title : string , _placeholder : string = "")
     {
         this.mTitle.string = _title;
+
+        if(_placeholder == "")
+        {
+            _placeholder = Localization.GetString("00324");
+        }
+        this.mEditBox.placeholder = _placeholder;
     }
 
     public SetCallback(_confirm :Function , _cancel : Function = null)
@@ -73,9 +80,6 @@ export class InputTipsWindow extends BaseUI {
         this.mCancelCallback = _cancel;
     }
 
-    public SetPlaceHolder(_placeholder : string)
-    {
-        this.mEditBox.placeholder = _placeholder;
-    }
+
 }
 
