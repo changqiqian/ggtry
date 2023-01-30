@@ -1047,7 +1047,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.SetGameState(TexasCashState.TexasCashState_RoundStart);
                 gameData.UpdatePlayer(msg.players);
                 gameData.SetDealer(msg.dealerUid);
-                gameData.UpdatePots(msg.potInfo);
+                gameData.UpdateTotalPot(msg.totalPot);
                 gameData.SetActions(msg.actionInfo);
                 gameData.Data_S2CCommonRoundStartNotify.mData = msg;
             }
@@ -1078,6 +1078,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 let gameData = gameStruct.mGameData;
                 gameData.ClearActions();
                 gameData.SetGameState(TexasCashState.TexasCashState_FlopRound);
+                gameData.UpdatePots(msg.potInfo);
                 gameData.GetDynamicData().publicCards = msg.cards;
                 gameData.Data_S2CCommonFlopRoundNotify.mData = msg;
             }
@@ -1093,6 +1094,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 let gameData = gameStruct.mGameData;
                 gameData.ClearActions();
                 gameData.SetGameState(TexasCashState.TexasCashState_TurnRound);
+                gameData.UpdatePots(msg.potInfo);
                 gameData.GetDynamicData().publicCards.push(msg.card);
                 gameData.Data_S2CCommonTurnRoundNotify.mData = msg;
             }
@@ -1109,6 +1111,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.ClearActions();
                 gameData.SetGameState(TexasCashState.TexasCashState_RiverRound);
                 gameData.GetDynamicData().publicCards.push(msg.card);
+                gameData.UpdatePots(msg.potInfo);
                 gameData.Data_S2CCommonRiverRoundNotify.mData = msg;
             }
         },this);
@@ -1150,7 +1153,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             {
                 let gameData = gameStruct.mGameData;
                 gameData.PlayerBet(msg.actionInfo.uid , msg.actionInfo.amount );
-                gameData.UpdatePots(msg.potInfo);
+                gameData.UpdateTotalPot(msg.totalPot);
                 gameData.InsertAction(msg.actionInfo);
                 let playerInfo = gameData.GetPlayerInfoByUid(msg.actionInfo.uid);
                 playerInfo.fold = msg.actionInfo.actionType == ActionType.ActionType_Fold;
@@ -1184,6 +1187,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     let currentResult = msg.result[i];
                     gameData.UpdatePlayerMoney(currentResult.uid , currentResult.amount);
                 }
+                gameData.UpdatePots(msg.potInfo);
                 gameData.Data_S2CCommonSettlementNotify.mData = msg;
             }
         },this);  

@@ -1709,6 +1709,9 @@ export class TexasDynamicData implements ITexasDynamicData {
     /** TexasDynamicData dealerUid. */
     public dealerUid: string;
 
+    /** TexasDynamicData totalPot. */
+    public totalPot: number;
+
     /**
      * Encodes the specified TexasDynamicData message. Does not implicitly {@link TexasDynamicData.verify|verify} messages.
      * @param m TexasDynamicData message or plain object to encode
@@ -5959,8 +5962,8 @@ export class S2CCommonRoundStartNotify implements IS2CCommonRoundStartNotify {
     /** S2CCommonRoundStartNotify actionInfo. */
     public actionInfo: IActionInfo[];
 
-    /** S2CCommonRoundStartNotify potInfo. */
-    public potInfo: IPotInfo[];
+    /** S2CCommonRoundStartNotify totalPot. */
+    public totalPot: number;
 
     /**
      * Encodes the specified S2CCommonRoundStartNotify message. Does not implicitly {@link S2CCommonRoundStartNotify.verify|verify} messages.
@@ -5996,8 +5999,8 @@ export class S2CCommonActionNotify implements IS2CCommonActionNotify {
     /** S2CCommonActionNotify actionInfo. */
     public actionInfo?: (IActionInfo|null);
 
-    /** S2CCommonActionNotify potInfo. */
-    public potInfo: IPotInfo[];
+    /** S2CCommonActionNotify totalPot. */
+    public totalPot: number;
 
     /**
      * Encodes the specified S2CCommonActionNotify message. Does not implicitly {@link S2CCommonActionNotify.verify|verify} messages.
@@ -6276,6 +6279,9 @@ export class S2CCommonFlopRoundNotify implements IS2CCommonFlopRoundNotify {
     /** S2CCommonFlopRoundNotify cards. */
     public cards: ICardInfo[];
 
+    /** S2CCommonFlopRoundNotify potInfo. */
+    public potInfo: IPotInfo[];
+
     /**
      * Encodes the specified S2CCommonFlopRoundNotify message. Does not implicitly {@link S2CCommonFlopRoundNotify.verify|verify} messages.
      * @param m S2CCommonFlopRoundNotify message or plain object to encode
@@ -6310,6 +6316,9 @@ export class S2CCommonTurnRoundNotify implements IS2CCommonTurnRoundNotify {
     /** S2CCommonTurnRoundNotify card. */
     public card?: (ICardInfo|null);
 
+    /** S2CCommonTurnRoundNotify potInfo. */
+    public potInfo: IPotInfo[];
+
     /**
      * Encodes the specified S2CCommonTurnRoundNotify message. Does not implicitly {@link S2CCommonTurnRoundNotify.verify|verify} messages.
      * @param m S2CCommonTurnRoundNotify message or plain object to encode
@@ -6343,6 +6352,9 @@ export class S2CCommonRiverRoundNotify implements IS2CCommonRiverRoundNotify {
 
     /** S2CCommonRiverRoundNotify card. */
     public card?: (ICardInfo|null);
+
+    /** S2CCommonRiverRoundNotify potInfo. */
+    public potInfo: IPotInfo[];
 
     /**
      * Encodes the specified S2CCommonRiverRoundNotify message. Does not implicitly {@link S2CCommonRiverRoundNotify.verify|verify} messages.
@@ -6411,6 +6423,9 @@ export class S2CCommonSettlementNotify implements IS2CCommonSettlementNotify {
 
     /** S2CCommonSettlementNotify gameId. */
     public gameId: string;
+
+    /** S2CCommonSettlementNotify potInfo. */
+    public potInfo: IPotInfo[];
 
     /** S2CCommonSettlementNotify result. */
     public result: IPlayerWinLose[];

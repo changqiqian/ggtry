@@ -4531,6 +4531,7 @@ $root.TexasDynamicData = (function() {
      * @property {Array.<IActionInfo>|null} [actions] TexasDynamicData actions
      * @property {Array.<ICardInfo>|null} [publicCards] TexasDynamicData publicCards
      * @property {string|null} [dealerUid] TexasDynamicData dealerUid
+     * @property {number|null} [totalPot] TexasDynamicData totalPot
      */
 
     /**
@@ -4617,6 +4618,14 @@ $root.TexasDynamicData = (function() {
     TexasDynamicData.prototype.dealerUid = "";
 
     /**
+     * TexasDynamicData totalPot.
+     * @member {number} totalPot
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.totalPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified TexasDynamicData message. Does not implicitly {@link TexasDynamicData.verify|verify} messages.
      * @function encode
      * @memberof TexasDynamicData
@@ -4652,6 +4661,8 @@ $root.TexasDynamicData = (function() {
         }
         if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
             w.uint32(66).string(m.dealerUid);
+        if (m.totalPot != null && Object.hasOwnProperty.call(m, "totalPot"))
+            w.uint32(72).int64(m.totalPot);
         return w;
     };
 
@@ -4704,6 +4715,9 @@ $root.TexasDynamicData = (function() {
                 break;
             case 8:
                 m.dealerUid = r.string();
+                break;
+            case 9:
+                m.totalPot = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -17055,7 +17069,7 @@ $root.S2CCommonRoundStartNotify = (function() {
      * @property {string|null} [dealerUid] S2CCommonRoundStartNotify dealerUid
      * @property {number|null} [antes] S2CCommonRoundStartNotify antes
      * @property {Array.<IActionInfo>|null} [actionInfo] S2CCommonRoundStartNotify actionInfo
-     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonRoundStartNotify potInfo
+     * @property {number|null} [totalPot] S2CCommonRoundStartNotify totalPot
      */
 
     /**
@@ -17069,7 +17083,6 @@ $root.S2CCommonRoundStartNotify = (function() {
     function S2CCommonRoundStartNotify(p) {
         this.players = [];
         this.actionInfo = [];
-        this.potInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -17117,12 +17130,12 @@ $root.S2CCommonRoundStartNotify = (function() {
     S2CCommonRoundStartNotify.prototype.actionInfo = $util.emptyArray;
 
     /**
-     * S2CCommonRoundStartNotify potInfo.
-     * @member {Array.<IPotInfo>} potInfo
+     * S2CCommonRoundStartNotify totalPot.
+     * @member {number} totalPot
      * @memberof S2CCommonRoundStartNotify
      * @instance
      */
-    S2CCommonRoundStartNotify.prototype.potInfo = $util.emptyArray;
+    S2CCommonRoundStartNotify.prototype.totalPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
      * Encodes the specified S2CCommonRoundStartNotify message. Does not implicitly {@link S2CCommonRoundStartNotify.verify|verify} messages.
@@ -17150,10 +17163,8 @@ $root.S2CCommonRoundStartNotify = (function() {
             for (var i = 0; i < m.actionInfo.length; ++i)
                 $root.ActionInfo.encode(m.actionInfo[i], w.uint32(42).fork()).ldelim();
         }
-        if (m.potInfo != null && m.potInfo.length) {
-            for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(50).fork()).ldelim();
-        }
+        if (m.totalPot != null && Object.hasOwnProperty.call(m, "totalPot"))
+            w.uint32(48).int64(m.totalPot);
         return w;
     };
 
@@ -17195,9 +17206,7 @@ $root.S2CCommonRoundStartNotify = (function() {
                 m.actionInfo.push($root.ActionInfo.decode(r, r.uint32()));
                 break;
             case 6:
-                if (!(m.potInfo && m.potInfo.length))
-                    m.potInfo = [];
-                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
+                m.totalPot = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -17218,7 +17227,7 @@ $root.S2CCommonActionNotify = (function() {
      * @interface IS2CCommonActionNotify
      * @property {string|null} [gameId] S2CCommonActionNotify gameId
      * @property {IActionInfo|null} [actionInfo] S2CCommonActionNotify actionInfo
-     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonActionNotify potInfo
+     * @property {number|null} [totalPot] S2CCommonActionNotify totalPot
      */
 
     /**
@@ -17230,7 +17239,6 @@ $root.S2CCommonActionNotify = (function() {
      * @param {IS2CCommonActionNotify=} [p] Properties to set
      */
     function S2CCommonActionNotify(p) {
-        this.potInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -17254,12 +17262,12 @@ $root.S2CCommonActionNotify = (function() {
     S2CCommonActionNotify.prototype.actionInfo = null;
 
     /**
-     * S2CCommonActionNotify potInfo.
-     * @member {Array.<IPotInfo>} potInfo
+     * S2CCommonActionNotify totalPot.
+     * @member {number} totalPot
      * @memberof S2CCommonActionNotify
      * @instance
      */
-    S2CCommonActionNotify.prototype.potInfo = $util.emptyArray;
+    S2CCommonActionNotify.prototype.totalPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
      * Encodes the specified S2CCommonActionNotify message. Does not implicitly {@link S2CCommonActionNotify.verify|verify} messages.
@@ -17277,10 +17285,8 @@ $root.S2CCommonActionNotify = (function() {
             w.uint32(10).string(m.gameId);
         if (m.actionInfo != null && Object.hasOwnProperty.call(m, "actionInfo"))
             $root.ActionInfo.encode(m.actionInfo, w.uint32(18).fork()).ldelim();
-        if (m.potInfo != null && m.potInfo.length) {
-            for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(26).fork()).ldelim();
-        }
+        if (m.totalPot != null && Object.hasOwnProperty.call(m, "totalPot"))
+            w.uint32(24).int64(m.totalPot);
         return w;
     };
 
@@ -17309,9 +17315,7 @@ $root.S2CCommonActionNotify = (function() {
                 m.actionInfo = $root.ActionInfo.decode(r, r.uint32());
                 break;
             case 3:
-                if (!(m.potInfo && m.potInfo.length))
-                    m.potInfo = [];
-                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
+                m.totalPot = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -18104,6 +18108,7 @@ $root.S2CCommonFlopRoundNotify = (function() {
      * @interface IS2CCommonFlopRoundNotify
      * @property {string|null} [gameId] S2CCommonFlopRoundNotify gameId
      * @property {Array.<ICardInfo>|null} [cards] S2CCommonFlopRoundNotify cards
+     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonFlopRoundNotify potInfo
      */
 
     /**
@@ -18116,6 +18121,7 @@ $root.S2CCommonFlopRoundNotify = (function() {
      */
     function S2CCommonFlopRoundNotify(p) {
         this.cards = [];
+        this.potInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -18139,6 +18145,14 @@ $root.S2CCommonFlopRoundNotify = (function() {
     S2CCommonFlopRoundNotify.prototype.cards = $util.emptyArray;
 
     /**
+     * S2CCommonFlopRoundNotify potInfo.
+     * @member {Array.<IPotInfo>} potInfo
+     * @memberof S2CCommonFlopRoundNotify
+     * @instance
+     */
+    S2CCommonFlopRoundNotify.prototype.potInfo = $util.emptyArray;
+
+    /**
      * Encodes the specified S2CCommonFlopRoundNotify message. Does not implicitly {@link S2CCommonFlopRoundNotify.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonFlopRoundNotify
@@ -18155,6 +18169,10 @@ $root.S2CCommonFlopRoundNotify = (function() {
         if (m.cards != null && m.cards.length) {
             for (var i = 0; i < m.cards.length; ++i)
                 $root.CardInfo.encode(m.cards[i], w.uint32(18).fork()).ldelim();
+        }
+        if (m.potInfo != null && m.potInfo.length) {
+            for (var i = 0; i < m.potInfo.length; ++i)
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(26).fork()).ldelim();
         }
         return w;
     };
@@ -18185,6 +18203,11 @@ $root.S2CCommonFlopRoundNotify = (function() {
                     m.cards = [];
                 m.cards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
+            case 3:
+                if (!(m.potInfo && m.potInfo.length))
+                    m.potInfo = [];
+                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
+                break;
             default:
                 r.skipType(t & 7);
                 break;
@@ -18204,6 +18227,7 @@ $root.S2CCommonTurnRoundNotify = (function() {
      * @interface IS2CCommonTurnRoundNotify
      * @property {string|null} [gameId] S2CCommonTurnRoundNotify gameId
      * @property {ICardInfo|null} [card] S2CCommonTurnRoundNotify card
+     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonTurnRoundNotify potInfo
      */
 
     /**
@@ -18215,6 +18239,7 @@ $root.S2CCommonTurnRoundNotify = (function() {
      * @param {IS2CCommonTurnRoundNotify=} [p] Properties to set
      */
     function S2CCommonTurnRoundNotify(p) {
+        this.potInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -18238,6 +18263,14 @@ $root.S2CCommonTurnRoundNotify = (function() {
     S2CCommonTurnRoundNotify.prototype.card = null;
 
     /**
+     * S2CCommonTurnRoundNotify potInfo.
+     * @member {Array.<IPotInfo>} potInfo
+     * @memberof S2CCommonTurnRoundNotify
+     * @instance
+     */
+    S2CCommonTurnRoundNotify.prototype.potInfo = $util.emptyArray;
+
+    /**
      * Encodes the specified S2CCommonTurnRoundNotify message. Does not implicitly {@link S2CCommonTurnRoundNotify.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonTurnRoundNotify
@@ -18253,6 +18286,10 @@ $root.S2CCommonTurnRoundNotify = (function() {
             w.uint32(10).string(m.gameId);
         if (m.card != null && Object.hasOwnProperty.call(m, "card"))
             $root.CardInfo.encode(m.card, w.uint32(18).fork()).ldelim();
+        if (m.potInfo != null && m.potInfo.length) {
+            for (var i = 0; i < m.potInfo.length; ++i)
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(26).fork()).ldelim();
+        }
         return w;
     };
 
@@ -18280,6 +18317,11 @@ $root.S2CCommonTurnRoundNotify = (function() {
             case 2:
                 m.card = $root.CardInfo.decode(r, r.uint32());
                 break;
+            case 3:
+                if (!(m.potInfo && m.potInfo.length))
+                    m.potInfo = [];
+                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
+                break;
             default:
                 r.skipType(t & 7);
                 break;
@@ -18299,6 +18341,7 @@ $root.S2CCommonRiverRoundNotify = (function() {
      * @interface IS2CCommonRiverRoundNotify
      * @property {string|null} [gameId] S2CCommonRiverRoundNotify gameId
      * @property {ICardInfo|null} [card] S2CCommonRiverRoundNotify card
+     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonRiverRoundNotify potInfo
      */
 
     /**
@@ -18310,6 +18353,7 @@ $root.S2CCommonRiverRoundNotify = (function() {
      * @param {IS2CCommonRiverRoundNotify=} [p] Properties to set
      */
     function S2CCommonRiverRoundNotify(p) {
+        this.potInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -18333,6 +18377,14 @@ $root.S2CCommonRiverRoundNotify = (function() {
     S2CCommonRiverRoundNotify.prototype.card = null;
 
     /**
+     * S2CCommonRiverRoundNotify potInfo.
+     * @member {Array.<IPotInfo>} potInfo
+     * @memberof S2CCommonRiverRoundNotify
+     * @instance
+     */
+    S2CCommonRiverRoundNotify.prototype.potInfo = $util.emptyArray;
+
+    /**
      * Encodes the specified S2CCommonRiverRoundNotify message. Does not implicitly {@link S2CCommonRiverRoundNotify.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonRiverRoundNotify
@@ -18348,6 +18400,10 @@ $root.S2CCommonRiverRoundNotify = (function() {
             w.uint32(10).string(m.gameId);
         if (m.card != null && Object.hasOwnProperty.call(m, "card"))
             $root.CardInfo.encode(m.card, w.uint32(18).fork()).ldelim();
+        if (m.potInfo != null && m.potInfo.length) {
+            for (var i = 0; i < m.potInfo.length; ++i)
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(26).fork()).ldelim();
+        }
         return w;
     };
 
@@ -18374,6 +18430,11 @@ $root.S2CCommonRiverRoundNotify = (function() {
                 break;
             case 2:
                 m.card = $root.CardInfo.decode(r, r.uint32());
+                break;
+            case 3:
+                if (!(m.potInfo && m.potInfo.length))
+                    m.potInfo = [];
+                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
                 break;
             default:
                 r.skipType(t & 7);
@@ -18502,6 +18563,7 @@ $root.S2CCommonSettlementNotify = (function() {
      * @exports IS2CCommonSettlementNotify
      * @interface IS2CCommonSettlementNotify
      * @property {string|null} [gameId] S2CCommonSettlementNotify gameId
+     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonSettlementNotify potInfo
      * @property {Array.<IPlayerWinLose>|null} [result] S2CCommonSettlementNotify result
      */
 
@@ -18514,6 +18576,7 @@ $root.S2CCommonSettlementNotify = (function() {
      * @param {IS2CCommonSettlementNotify=} [p] Properties to set
      */
     function S2CCommonSettlementNotify(p) {
+        this.potInfo = [];
         this.result = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -18528,6 +18591,14 @@ $root.S2CCommonSettlementNotify = (function() {
      * @instance
      */
     S2CCommonSettlementNotify.prototype.gameId = "";
+
+    /**
+     * S2CCommonSettlementNotify potInfo.
+     * @member {Array.<IPotInfo>} potInfo
+     * @memberof S2CCommonSettlementNotify
+     * @instance
+     */
+    S2CCommonSettlementNotify.prototype.potInfo = $util.emptyArray;
 
     /**
      * S2CCommonSettlementNotify result.
@@ -18551,9 +18622,13 @@ $root.S2CCommonSettlementNotify = (function() {
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(10).string(m.gameId);
+        if (m.potInfo != null && m.potInfo.length) {
+            for (var i = 0; i < m.potInfo.length; ++i)
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(18).fork()).ldelim();
+        }
         if (m.result != null && m.result.length) {
             for (var i = 0; i < m.result.length; ++i)
-                $root.PlayerWinLose.encode(m.result[i], w.uint32(18).fork()).ldelim();
+                $root.PlayerWinLose.encode(m.result[i], w.uint32(26).fork()).ldelim();
         }
         return w;
     };
@@ -18580,6 +18655,11 @@ $root.S2CCommonSettlementNotify = (function() {
                 m.gameId = r.string();
                 break;
             case 2:
+                if (!(m.potInfo && m.potInfo.length))
+                    m.potInfo = [];
+                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 3:
                 if (!(m.result && m.result.length))
                     m.result = [];
                 m.result.push($root.PlayerWinLose.decode(r, r.uint32()));

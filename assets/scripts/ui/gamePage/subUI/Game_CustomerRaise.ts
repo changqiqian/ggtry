@@ -102,7 +102,7 @@ export class Game_CustomerRaise extends BaseUI
                         realMoney -= selfBetAction.roundAmount;
                     }
                 }
-                else if(realMoney >= selfPlayer.currencyNum)
+                if(realMoney >= selfPlayer.currencyNum)
                 {
                     actionInfo.amount = selfPlayer.currencyNum;
                     actionInfo.actionType = ActionType.ActionType_AllIn;
@@ -158,7 +158,7 @@ export class Game_CustomerRaise extends BaseUI
                         realMoney -= selfBetAction.roundAmount;
                     }
                 }
-                else if(realMoney >= selfPlayer.currencyNum)
+                if(realMoney >= selfPlayer.currencyNum)
                 {
                     actionInfo.amount = selfPlayer.currencyNum;
                     actionInfo.actionType = ActionType.ActionType_AllIn;
@@ -176,6 +176,7 @@ export class Game_CustomerRaise extends BaseUI
                         actionInfo.actionType = ActionType.ActionType_Raise;
                     }
                 }
+                
                 NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId() , gameStruct.mGameId ,actionInfo );
             },i)
         }

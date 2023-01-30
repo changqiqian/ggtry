@@ -237,6 +237,11 @@ export abstract class GameData extends MultipleNotify
         playerInfo.cards = _cards;
     }
 
+    public UpdateTotalPot(_tatalPot : number)
+    {
+        this.GetDynamicData().totalPot = _tatalPot;
+    }
+
     public UpdatePots(_pots : Array<PotInfo>)
     {
         this.GetDynamicData().potInfo = _pots;

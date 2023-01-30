@@ -10,6 +10,8 @@ export class Game_Pot extends BaseUI
 {
     @property(Node) 
     mTotalPotBG: Node = null;
+    @property(Node) 
+    mRoundPot: Node = null;
     @property(Label) 
     mTotalAmount: Label = null;
     @property(Node) 
@@ -99,6 +101,12 @@ export class Game_Pot extends BaseUI
             this.UpdateSubPots();
             this.UpdateTotalPot();
         })
+
+        gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateSubPots();
+            this.UpdateTotalPot();
+        })
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
             this.UpdateSubPots();
@@ -124,21 +132,14 @@ export class Game_Pot extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let potInfos = gameData.GetDynamicData().potInfo;
-
-        if(potInfos.length > 1)
-        {
-            let total = 0;
-            for(let i = 0; i < potInfos.length ; i++)
-            {
-                total += potInfos[i].pot;
-            }
-            this.SetTotalPot(total);
-            this.mTotalPotBG.active = true;
-            return;
-        }
+        let totalPot = gameData.GetDynamicData().totalPot;
 
         this.mTotalPotBG.active = false;
+        if(totalPot > 0)
+        {
+            this.SetTotalPot(totalPot);
+            this.mTotalPotBG.active = true;
+        }
     }
 
     UpdateSubPots()
@@ -150,7 +151,6 @@ export class Game_Pot extends BaseUI
         let potInfos = gameData.GetDynamicData().potInfo;
         for(let i = 0; i < potInfos.length ; i++)
         {
-            //let potId = potInfos[i].id;
             let potAmount = potInfos[i].pot;
             let subPotNode = this.mSubPots.children[i];
             subPotNode.active = true;
