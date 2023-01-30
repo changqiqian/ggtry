@@ -83,9 +83,9 @@ export class Game_CustomerRaise extends BaseUI
         {
             let bbRatio = i + 2;
             let amount = bbRatio * lastBetAct.roundAmount;
+            amount = Math.ceil(amount);
             let clientAmount = Tool.ConvertMoney_S2C(amount);
-            console.log("amount==" + amount)
-            console.log("clientAmount==" + clientAmount)
+            //clientAmount = Number(clientAmount.toFixed(1)); 
             let currentBtn = this.mRaiseByBB.children[i].getComponent(BaseButton);
             currentBtn.SetTitle(clientAmount + "");
             currentBtn.SetClickCallback((_data)=>
@@ -102,8 +102,7 @@ export class Game_CustomerRaise extends BaseUI
                         realMoney -= selfBetAction.roundAmount;
                     }
                 }
-
-                if(realMoney >= selfPlayer.currencyNum)
+                else if(realMoney >= selfPlayer.currencyNum)
                 {
                     actionInfo.amount = selfPlayer.currencyNum;
                     actionInfo.actionType = ActionType.ActionType_AllIn;
@@ -139,11 +138,10 @@ export class Game_CustomerRaise extends BaseUI
         {
             let ratio = GameConfig.GetCustomerRaiseRatio(i);
             let title = GameConfig.GetCustomerRaiseTitle(i);
-            let amount = ratio *  totalPot;
-            amount = Number(amount.toFixed(1));   		
+            let amount = ratio *  totalPot; 	
+            amount = Math.ceil(amount);
             let clientAmount = Tool.ConvertMoney_S2C(amount);
-            console.log("amount==" + amount)
-            console.log("clientAmount==" + clientAmount)
+            //clientAmount = Number(clientAmount.toFixed(1));  
             let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
             currentBtn.node.getChildByName("Describe").getComponent(Label).string = title;
             currentBtn.SetTitle(clientAmount + "");
@@ -160,8 +158,7 @@ export class Game_CustomerRaise extends BaseUI
                         realMoney -= selfBetAction.roundAmount;
                     }
                 }
-
-                if(realMoney >= selfPlayer.currencyNum)
+                else if(realMoney >= selfPlayer.currencyNum)
                 {
                     actionInfo.amount = selfPlayer.currencyNum;
                     actionInfo.actionType = ActionType.ActionType_AllIn;
@@ -183,9 +180,5 @@ export class Game_CustomerRaise extends BaseUI
             },i)
         }
     }
-
-
-
-
 }
 

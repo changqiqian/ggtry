@@ -25,10 +25,6 @@ export class Game_ObLayer extends ListViewCtr<PlayerInfo>
     @property(ToggleBtn) 
     mChatToggle: ToggleBtn = null;
     private mIndex : number = null;
-    onEnable()
-    {
-     
-    }
 
     public Show(_val : boolean)
     {
