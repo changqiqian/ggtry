@@ -235,17 +235,17 @@ export class GameConfig
 
     public static GetDropBoxSeatTitle() :Array<string>
     {
-        return ["全部","有空位"];
+        return ["座位","有空位"];
     }
 
     public static GetDropBoxGameTypeTitle() :Array<string>
     {
-        return ["全部","德州","短牌","奥马哈"];
+        return ["玩法","德州","短牌","奥马哈"];
     }
 
     public static GetDropBoxBBTitle() :Array<string>
     {
-        return ["全部","1/2","2/4","3/6","4/8","5/10","10/20","20/40","50/100","100/200"];
+        return ["盲注","1/2","2/4","3/6","4/8","5/10","10/20","20/40","50/100","100/200"];
     }
 
 

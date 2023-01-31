@@ -731,7 +731,7 @@
     "value": {
       "__type__": "cc.Size",
       "width": 326.93,
-      "height": 63
+      "height": 75.6
     }
   },
   {
@@ -758,7 +758,7 @@
     "propertyPath": [
       "_lineHeight"
     ],
-    "value": 50
+    "value": 60
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -825,9 +825,9 @@
     ],
     "value": {
       "__type__": "cc.Color",
-      "r": 142,
-      "g": 144,
-      "b": 149,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     }
   },

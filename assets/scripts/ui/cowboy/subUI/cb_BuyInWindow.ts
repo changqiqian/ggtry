@@ -27,6 +27,7 @@ export class cb_BuyInWindow extends BaseUI
     onEnable()
     {
         this.mProgressSlider.SetPercent(0);
+        this.UpdateBringInAmount(0);
     }
 
     InitParam()
@@ -73,7 +74,6 @@ export class cb_BuyInWindow extends BaseUI
         {
             this.mTotalAmount.string = Tool.ConvertMoney_S2C(_data) + "";
         });
-
 
         CowboyData.Instance.Data_S2CTexasCowboyBringInResp.AddListenner(this,(_data)=>
         {

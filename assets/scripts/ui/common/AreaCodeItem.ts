@@ -55,11 +55,13 @@ export class AreaCodeItem extends BaseUI {
         this.mSelectedBG.active = selected;
         if(selected)
         {
-            this.mBtn.SetTitleColor(new Color(255,255,255));
+            this.mBtn.SetTitleColor(new Color(97,100,116));
+            this.mBtn.SetFontSize(58);
         }
         else
         {
-            this.mBtn.SetTitleColor(new Color(142,144,149));
+            this.mBtn.SetTitleColor(new Color(97,100,116));
+            this.mBtn.SetFontSize(48);
         }
     }
 

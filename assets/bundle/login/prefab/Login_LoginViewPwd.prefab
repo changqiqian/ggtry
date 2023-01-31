@@ -681,8 +681,8 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 144,
-      "g": 151,
+      "r": 146,
+      "g": 150,
       "b": 171,
       "a": 255
     },
@@ -1616,15 +1616,15 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
-    "_actualFontSize": 60,
+    "_actualFontSize": 50,
     "_fontSize": 50,
     "_fontFamily": "Arial",
     "_lineHeight": 80,
@@ -1746,9 +1746,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 94,
+      "r": 97,
       "g": 100,
-      "b": 115,
+      "b": 116,
       "a": 255
     },
     "_string": "请输入手机号码",
@@ -2354,9 +2354,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "",
@@ -2484,9 +2484,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 94,
+      "r": 97,
       "g": 100,
-      "b": 115,
+      "b": 116,
       "a": 255
     },
     "_string": "请输入密码",
@@ -4443,7 +4443,7 @@
     "propertyPath": [
       "_fontSize"
     ],
-    "value": 40
+    "value": 50
   },
   {
     "__type__": "cc.TargetInfo",
@@ -4459,7 +4459,7 @@
     "propertyPath": [
       "_actualFontSize"
     ],
-    "value": 40
+    "value": 50
   },
   {
     "__type__": "cc.TargetInfo",
@@ -4493,7 +4493,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 160.12,
+      "width": 100,
       "height": 75.6
     }
   },
@@ -4511,7 +4511,7 @@
     "propertyPath": [
       "_string"
     ],
-    "value": "Continue"
+    "value": "确定"
   },
   {
     "__type__": "cc.TargetInfo",

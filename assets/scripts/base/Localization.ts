@@ -226,7 +226,7 @@ export class Localization {
         { name: '00137', ch: '编辑', en: 'Edit' },
         { name: '00138', ch: '输入您的昵称', en: 'Plz input nickname' },
         { name: '00139', ch: '确定', en: 'Confirm' },
-        { name: '00140', ch: '推荐码(选填):', en: 'Invite code(optional)' },
+        { name: '00140', ch: '邀请码(选填)', en: 'Invite code(optional)' },
         { name: '00141', ch: '请输入邀请码', en: 'Plz input invite code' },
         { name: '00142', ch: '密码登录', en: 'Password login' },
         { name: '00143', ch: '输入您的密码', en: 'Plz input password' },

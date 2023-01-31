@@ -115,7 +115,13 @@ export class BaseButton extends BaseUI {
         }
     }
 
-    
+    public SetFontSize(_value : number)
+    {
+        if(this.mTitle)
+        {
+            this.mTitle.fontSize = _value;
+        }
+    }    
 
     private OnClick()
     {
