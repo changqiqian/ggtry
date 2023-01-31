@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, Node, color, Color } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { NetworkSend } from '../../../network/NetworkSend';
@@ -44,6 +44,7 @@ export class Game_SelfAction extends BaseUI
     BindUI() 
     {
         this.HideAll();
+        this.mCircleTimer.SetColor(new Color(251,160,2));
         this.mFoldBtn.SetClickCallback(()=>
         {
             this.ExcutiveFold();

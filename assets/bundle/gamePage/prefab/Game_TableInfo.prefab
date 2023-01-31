@@ -29,25 +29,28 @@
       },
       {
         "__id__": 20
+      },
+      {
+        "__id__": 26
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 26
-      },
-      {
-        "__id__": 28
-      },
-      {
-        "__id__": 30
-      },
-      {
         "__id__": 32
+      },
+      {
+        "__id__": 34
+      },
+      {
+        "__id__": 36
+      },
+      {
+        "__id__": 38
       }
     ],
     "_prefab": {
-      "__id__": 34
+      "__id__": 40
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -169,9 +172,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "房间名字",
@@ -209,7 +212,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "RoomID",
+    "_name": "Duration",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -268,7 +271,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 98.07,
+      "width": 106.77,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -280,7 +283,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "49ItWX2P5MgLj1gGdemLW/"
+    "fileId": "e64q37hxRFhLUvkUjGaLcA"
   },
   {
     "__type__": "cc.Label",
@@ -299,16 +302,16 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
-    "_string": "ID:2555",
+    "_string": "2:20:32",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 28,
-    "_fontSize": 28,
+    "_actualFontSize": 32,
+    "_fontSize": 32,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
     "_overflow": 0,
@@ -325,7 +328,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "a35dWNeb9Nvbcuo34xloP4"
+    "fileId": "877BpdQQBKZ55GGXlhao3J"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -335,11 +338,11 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "97oSdWw9xJ8Iga2Afnh4ux"
+    "fileId": "26QZntZ5JHU61pGgxrWCYN"
   },
   {
     "__type__": "cc.Node",
-    "_name": "BlindInfo",
+    "_name": "RoomID",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -398,7 +401,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 135.43,
+      "width": 98.07,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -410,7 +413,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "02NbwrolRKaKTyHuhyxSXL"
+    "fileId": "49ItWX2P5MgLj1gGdemLW/"
   },
   {
     "__type__": "cc.Label",
@@ -429,12 +432,12 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
-    "_string": "100/200(5)",
+    "_string": "ID:2555",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -455,7 +458,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "70/S+XX/xHo5XTlKgi7lqL"
+    "fileId": "a35dWNeb9Nvbcuo34xloP4"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -465,11 +468,11 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "9fQIDKr1FL/63OYn03l28p"
+    "fileId": "97oSdWw9xJ8Iga2Afnh4ux"
   },
   {
     "__type__": "cc.Node",
-    "_name": "OtherInfo",
+    "_name": "BlindInfo",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -528,6 +531,136 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
+      "width": 135.43,
+      "height": 50.4
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "02NbwrolRKaKTyHuhyxSXL"
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 20
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 24
+    },
+    "_visFlags": 0,
+    "_customMaterial": null,
+    "_srcBlendFactor": 2,
+    "_dstBlendFactor": 4,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 97,
+      "g": 100,
+      "b": 116,
+      "a": 255
+    },
+    "_string": "100/200(5)",
+    "_horizontalAlign": 1,
+    "_verticalAlign": 1,
+    "_actualFontSize": 28,
+    "_fontSize": 28,
+    "_fontFamily": "Arial",
+    "_lineHeight": 40,
+    "_overflow": 0,
+    "_enableWrapText": true,
+    "_font": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_isItalic": false,
+    "_isBold": false,
+    "_isUnderline": false,
+    "_underlineHeight": 2,
+    "_cacheMode": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "70/S+XX/xHo5XTlKgi7lqL"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "9fQIDKr1FL/63OYn03l28p"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "OtherInfo",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 27
+      },
+      {
+        "__id__": 29
+      }
+    ],
+    "_prefab": {
+      "__id__": 31
+    },
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": -226.79999999999995,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_layer": 33554432,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 26
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 28
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
       "width": 172.7,
       "height": 50.4
     },
@@ -547,11 +680,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 20
+      "__id__": 26
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 24
+      "__id__": 30
     },
     "_visFlags": 0,
     "_customMaterial": null,
@@ -559,9 +692,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "保險  GPS  IP",
@@ -606,12 +739,12 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 27
+      "__id__": 33
     },
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 500,
-      "height": 201.6
+      "height": 252
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -633,19 +766,19 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 29
+      "__id__": 35
     },
     "mRoomName": {
       "__id__": 5
     },
     "mRoomID": {
-      "__id__": 11
-    },
-    "mBlindInfo": {
       "__id__": 17
     },
-    "mOtherInfo": {
+    "mBlindInfo": {
       "__id__": 23
+    },
+    "mOtherInfo": {
+      "__id__": 29
     },
     "_id": ""
   },
@@ -662,7 +795,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 31
+      "__id__": 37
     },
     "_resizeMode": 1,
     "_layoutType": 2,
@@ -699,7 +832,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 33
+      "__id__": 39
     },
     "_alignFlags": 1,
     "_target": null,

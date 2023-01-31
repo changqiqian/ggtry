@@ -170,6 +170,7 @@ export class GameBase extends BaseUI
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
+            
             this.StartSecondsTimer(6 , 0.01  , ()=>
             {
                 let restTime = this.GetRestMillSeconds();

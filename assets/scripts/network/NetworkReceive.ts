@@ -966,7 +966,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             {
                 let gameData = gameStruct.mGameData;
                 let playerInfo = gameData.GetPlayerInfoByUid(msg.actionUid);
-                if(playerInfo!=null)
+                if(playerInfo != null)
                 {
                     playerInfo.buyInLeftTime = msg.leftTime;
                 }
@@ -1219,6 +1219,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     let currentResult = msg.result[i];
                     gameData.UpdatePlayerMoney(currentResult.uid , currentResult.amount);
                 }
+                gameData.SetGameState(TexasCashState.TexasCashState_Settlement);
                 gameData.UpdatePots(msg.potInfo);
                 gameData.Data_S2CCommonSettlementNotify.mData = msg;
             }

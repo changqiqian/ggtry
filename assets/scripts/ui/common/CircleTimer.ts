@@ -97,19 +97,19 @@ export class CircleTimer extends BaseUI {
 
     UpdateColor()
     {
-        let seconds = this.GetRestSeconds();
-        let color;
-        if(seconds<=3)
-        {
-            color = new Color(220,34,34);
-        }
-        else
-        {
-            color = new Color(34,220,82);
-        }
-        //this.mBG.color = color;
-        this.mProgress.color = color;
-        this.mCount.color = color;
+        // let seconds = this.GetRestSeconds();
+        // let color;
+        // if(seconds<=3)
+        // {
+        //     color = new Color(220,34,34);
+        // }
+        // else
+        // {
+        //     color = new Color(34,220,82);
+        // }
+        // //this.mBG.color = color;
+        // this.mProgress.color = color;
+        // this.mCount.color = color;
     }
 }
 

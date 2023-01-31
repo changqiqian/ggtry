@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite, Label, instantiate, AudioSource, Vec3, view } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, instantiate, AudioSource, Vec3, view, Color } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Combiantion } from '../../../base/Calculator';
 import { Localization } from '../../../base/Localization';
@@ -75,6 +75,8 @@ export class Game_Player extends BaseUI
                 tempScript.InitWithData(this.mIndex,playerInfo.uid);
             },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
+
+        this.mCircleTimer.SetColor(new Color(251,160,2));
     }
 
 

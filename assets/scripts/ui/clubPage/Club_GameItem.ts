@@ -107,7 +107,7 @@ export class Club_GameItem extends BaseUI
         switch(_data.basicTexasConfig.gameType)
         {
             case GameType.GameType_TexasCash:
-                tempColor = new Color(109,176,99);
+                tempColor = new Color(108,176,99);
                 gameTypeName = "NLH";
                 this.mBlindInfo.string = smallBlind + "/" +smallBlind * 2;
                 if(_data.basicTexasConfig.straddle)
@@ -122,7 +122,7 @@ export class Club_GameItem extends BaseUI
                 this.mMaxBringIn.string = Tool.ConvertMoney_S2C(_data.basicTexasConfig.maxBringIn) + "";
             break
             case GameType.GameType_ShortCash:
-                tempColor = new Color(98,174,175);
+                tempColor = new Color(99,174,176);
                 gameTypeName = "Short";
                 this.mBlindInfo.string = _data.basicTexasConfig.smallBlind + "/" + _data.basicTexasConfig.smallBlind * 2;
                 if(_data.basicTexasConfig.straddle)
@@ -136,14 +136,10 @@ export class Club_GameItem extends BaseUI
                 this.mMinBringIn.string = _data.basicTexasConfig.minBringIn + "";
                 this.mMaxBringIn.string = _data.basicTexasConfig.maxBringIn + "";
             break
-            // case GameType.GameType_Mtt:
-            //     gameTypeName = "Mtt"
-            //     tempColor = new Color(59,52,122);
-            // break
-            // case GameType.GameType_Omh:
-            //     gameTypeName = "Omh"
-            //     tempColor = Color.WHITE;
-            // break
+            case GameType.GameType_OmhCash:
+                tempColor = new Color(96,106,195);
+                gameTypeName = "Omh"
+            break
         }
         this.mCircleTimer.SetColor(tempColor);
         this.mGameType.string = gameTypeName;
