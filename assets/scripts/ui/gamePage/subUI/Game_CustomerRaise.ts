@@ -83,9 +83,8 @@ export class Game_CustomerRaise extends BaseUI
         {
             let bbRatio = i + 2;
             let amount = bbRatio * lastBetAct.roundAmount;
-            amount = Math.ceil(amount);
+            amount = Tool.CeilServerMoney(amount);
             let clientAmount = Tool.ConvertMoney_S2C(amount);
-            //clientAmount = Number(clientAmount.toFixed(1)); 
             let currentBtn = this.mRaiseByBB.children[i].getComponent(BaseButton);
             currentBtn.SetTitle(clientAmount + "");
             currentBtn.SetClickCallback((_data)=>
@@ -139,9 +138,8 @@ export class Game_CustomerRaise extends BaseUI
             let ratio = GameConfig.GetCustomerRaiseRatio(i);
             let title = GameConfig.GetCustomerRaiseTitle(i);
             let amount = ratio *  totalPot; 	
-            amount = Math.ceil(amount);
+            amount = Tool.CeilServerMoney(amount);
             let clientAmount = Tool.ConvertMoney_S2C(amount);
-            //clientAmount = Number(clientAmount.toFixed(1));  
             let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
             currentBtn.node.getChildByName("Describe").getComponent(Label).string = title;
             currentBtn.SetTitle(clientAmount + "");

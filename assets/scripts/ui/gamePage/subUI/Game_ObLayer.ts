@@ -26,6 +26,8 @@ export class Game_ObLayer extends ListViewCtr<PlayerInfo>
     mChatToggle: ToggleBtn = null;
     private mIndex : number = null;
 
+    
+
     public Show(_val : boolean)
     {
         if(_val)
@@ -121,6 +123,10 @@ export class Game_ObLayer extends ListViewCtr<PlayerInfo>
 
     Refresh()
     {
+        if(this.mIndex == null)
+        {
+            return;
+        }
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         NetworkSend.Instance.GetObList(gameData.ObListSendMsgId(),gameStruct.mGameId ,this.mCurrentPage,this.mPageSize)

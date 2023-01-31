@@ -75,6 +75,11 @@ export class Game_Menu extends BaseUI
             let gameData = gameStruct.mGameData;
             let msgId = gameData.StandUpSendMsgId();
             let gameId = gameStruct.mGameId;
+            let uid =LocalPlayerData.Instance.Data_Uid.mData;
+            if(gameData.IsPlayerDelayStandUp(uid))
+            {
+                return;
+            }
             let seatId = gameData.GetSeatByUid(LocalPlayerData.Instance.Data_Uid.mData);
             if(seatId != null)
             {

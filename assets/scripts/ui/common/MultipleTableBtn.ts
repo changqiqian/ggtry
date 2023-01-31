@@ -172,7 +172,7 @@ export class MultipleTableBtn extends BaseUI
 
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let totalPot = gameData.GetTotalPots();
+        let totalPot = gameData.GetDynamicData().totalPot;
         this.mPotInfo.string = "$" + Tool.ConvertMoney_S2C(totalPot);
     }
 

@@ -196,6 +196,10 @@ export class Game_SelfAction extends BaseUI
 
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
         {
+            if(_data.seatPlayerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
             this.UpdateUI();
         })
 

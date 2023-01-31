@@ -74,10 +74,25 @@ export class Game_BuyInWindow extends BaseUI
                     else
                     {
                         let gameData = gameStruct.mGameData;
-                        NetworkSend.Instance.StandUp(gameData.StandUpSendMsgId() , gameStruct.mGameId);
+                        let msgId = gameData.StandUpSendMsgId();
+                        let gameId = gameStruct.mGameId;
+                        let uid = LocalPlayerData.Instance.Data_Uid.mData;
+                        if(gameData.IsPlayerDelayStandUp(uid))
+                        {
+                            gameData.ExcutiveDelayStandUp();
+                            return;
+                        }
+
+                        let seatId = gameData.GetSeatByUid(uid);
+                        if(seatId != null)
+                        {
+                            
+                            NetworkSend.Instance.StandUp(msgId,gameId);
+                        }
                     }
                 }
             }
+
         }
     }
 

@@ -3,12 +3,13 @@ import { BaseUI } from '../../../base/BaseUI';
 import { ListViewCtr } from '../../../UiTool/ListViewCtr';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Game_ChattingSubLayer } from '../GameData';
+import { Game_ChatHistoryItem } from './Game_ChatHistoryItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_ChatHistoryLayer')
-export class Game_ChatHistoryLayer extends ListViewCtr<any> 
+export class Game_ChatHistoryLayer extends ListViewCtr<S2CCommonChatNotify> 
 {
-    mIndex : number ;
+    mIndex : number = null;
     InitParam()
     {
 
@@ -23,12 +24,22 @@ export class Game_ChatHistoryLayer extends ListViewCtr<any>
     }
     Refresh()
     {
-
+        if(this.mIndex == null)
+        {
+            return;
+        }
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let chatHistory = gameData.GetChatHistroy();
+        this.ForceSetData(chatHistory);
+        this.RefreshData();
     }
 
     RenderEvent(_item: Node , _index: number)
     {
-
+        let data = this.mCurrentData[_index];
+        let script = _item.getComponent(Game_ChatHistoryItem);
+        script.InitWithData(data);
     }
 
     public InitWithData(_index : number)
@@ -48,6 +59,13 @@ export class Game_ChatHistoryLayer extends ListViewCtr<any>
         gameData.Data_ChatingSubLayer.AddListenner(this , (_data)=>
         {
             this.node.active = _data == Game_ChattingSubLayer.ChatHistory
+        });
+
+        gameData.Data_S2CCommonChatNotify.AddListenner(this , (_data)=>
+        {
+            let chatHistory = gameData.GetChatHistroy();
+            this.ForceSetData(chatHistory);
+            this.RefreshData();
         });
     }
 }

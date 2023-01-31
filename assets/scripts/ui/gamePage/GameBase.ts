@@ -100,6 +100,7 @@ export class GameBase extends BaseUI
 
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
+            this.StopSecondsTimer();
             if(gameData.IsGamePlayingNow() == false)
             {
                 return;
@@ -119,6 +120,8 @@ export class GameBase extends BaseUI
 
         gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
         {
+            this.StopSecondsTimer();
+            gameData.ExcutiveDelayStandUp();
             this.TryToPlayAudio("Bet");
         })
 

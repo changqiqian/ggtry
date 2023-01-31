@@ -17791,6 +17791,8 @@ $root.S2CCommonChatNotify = (function() {
      * @property {string|null} [gameId] S2CCommonChatNotify gameId
      * @property {string|null} [actionUid] S2CCommonChatNotify actionUid
      * @property {string|null} [content] S2CCommonChatNotify content
+     * @property {string|null} [playerName] S2CCommonChatNotify playerName
+     * @property {string|null} [head] S2CCommonChatNotify head
      */
 
     /**
@@ -17833,6 +17835,22 @@ $root.S2CCommonChatNotify = (function() {
     S2CCommonChatNotify.prototype.content = "";
 
     /**
+     * S2CCommonChatNotify playerName.
+     * @member {string} playerName
+     * @memberof S2CCommonChatNotify
+     * @instance
+     */
+    S2CCommonChatNotify.prototype.playerName = "";
+
+    /**
+     * S2CCommonChatNotify head.
+     * @member {string} head
+     * @memberof S2CCommonChatNotify
+     * @instance
+     */
+    S2CCommonChatNotify.prototype.head = "";
+
+    /**
      * Encodes the specified S2CCommonChatNotify message. Does not implicitly {@link S2CCommonChatNotify.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonChatNotify
@@ -17850,6 +17868,10 @@ $root.S2CCommonChatNotify = (function() {
             w.uint32(18).string(m.actionUid);
         if (m.content != null && Object.hasOwnProperty.call(m, "content"))
             w.uint32(26).string(m.content);
+        if (m.playerName != null && Object.hasOwnProperty.call(m, "playerName"))
+            w.uint32(34).string(m.playerName);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(42).string(m.head);
         return w;
     };
 
@@ -17879,6 +17901,12 @@ $root.S2CCommonChatNotify = (function() {
                 break;
             case 3:
                 m.content = r.string();
+                break;
+            case 4:
+                m.playerName = r.string();
+                break;
+            case 5:
+                m.head = r.string();
                 break;
             default:
                 r.skipType(t & 7);

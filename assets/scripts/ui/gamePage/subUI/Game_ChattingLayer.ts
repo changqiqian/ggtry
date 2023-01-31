@@ -1,6 +1,8 @@
 import { _decorator, Component, Node, EditBox } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { UIMgr } from '../../../base/UIMgr';
+import { NetworkSend } from '../../../network/NetworkSend';
 import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
@@ -28,17 +30,36 @@ export class Game_ChattingLayer extends BaseUI
 
     private mIndex : number = null;
 
+    onEnable()
+    {
+        this.mEditBox.string = "";
+    }
+
     InitParam()
     {
     }
     BindUI()
     {
         this.AddTouchCloseEvent(this.node);
-
+        this.mEditBox.placeholder = Localization.GetString("00324");
 
         this.mSendBtn.node.active = true;
         this.mSendBtn.SetClickCallback(()=>
         {
+            let content = this.mEditBox.string;
+            if(content == "")
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("name"));
+                return;
+            }
+
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                NetworkSend.Instance.SendChat(gameData.ChatSendMsgId(),gameStruct.mGameId,content);
+            }
+
         })
 
 

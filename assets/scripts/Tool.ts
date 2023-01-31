@@ -135,6 +135,13 @@ export class Tool
         return serverMoney;
     }
 
+    public static CeilServerMoney(_serverMoney : number) : number
+    {
+        let result = Math.ceil(_serverMoney/1000);
+        result = result* 1000;
+        return result;
+    }
+
     public static PasswordTest(_target : string) : boolean
     {
         if(_target == "")

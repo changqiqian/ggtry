@@ -400,6 +400,15 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("玩家动作  === " + JSON.stringify(msg))
     }
 
+    public SendChat(_msgId : number,_gameId : string , _content : string)
+    {
+        let msg = new C2SGameChat();
+        msg.gameId = _gameId;
+        msg.content = _content;
+        Network.Instance.SendMsg(_msgId , C2SGameChat.encode(msg).finish());
+        console.log("玩家聊天  === " + JSON.stringify(msg))
+    }
+
     public GetObList(_msgId : number ,_gameId : string , _page : number , _pageSize : number)
     {
         UIMgr.Instance.ShowLoading(true);

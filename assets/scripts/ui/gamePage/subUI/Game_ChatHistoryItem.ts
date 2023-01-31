@@ -33,9 +33,16 @@ export class Game_ChatHistoryItem extends BaseUI
 
     }
 
-    public InitWithData()
+    public InitWithData(_chatMsg : S2CCommonChatNotify)
     {
-        
+        let head = parseInt(_chatMsg.head);
+        this.LoadLocalHead(head,(_spriteFrame)=>
+        {
+            this.mHead.spriteFrame = _spriteFrame;
+        });
+
+        this.mName.string = _chatMsg.playerName;
+        this.mContent.string = _chatMsg.content;
     }
 }
 

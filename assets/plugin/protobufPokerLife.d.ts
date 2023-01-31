@@ -6174,6 +6174,12 @@ export class S2CCommonChatNotify implements IS2CCommonChatNotify {
     /** S2CCommonChatNotify content. */
     public content: string;
 
+    /** S2CCommonChatNotify playerName. */
+    public playerName: string;
+
+    /** S2CCommonChatNotify head. */
+    public head: string;
+
     /**
      * Encodes the specified S2CCommonChatNotify message. Does not implicitly {@link S2CCommonChatNotify.verify|verify} messages.
      * @param m S2CCommonChatNotify message or plain object to encode

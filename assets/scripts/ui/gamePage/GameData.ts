@@ -43,11 +43,15 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonActionNotify : BaseData<S2CCommonActionNotify> = new BaseData<S2CCommonActionNotify>(true);  //行动推送
     Data_S2CCommonInsuranceTurnNotify  : BaseData<S2CCommonInsuranceTurnNotify> = new BaseData<S2CCommonInsuranceTurnNotify>(true);  //轮到谁买保险
     Data_S2CCommonSettlementNotify  : BaseData<S2CCommonSettlementNotify> = new BaseData<S2CCommonSettlementNotify>(true);  //游戏结算推送
+    Data_S2CCommonChatNotify: BaseData<S2CCommonChatNotify> = new BaseData<S2CCommonChatNotify>(true);  //聊天推送
+    
 
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_RotateSeatEnd : BaseData<boolean> = new BaseData<boolean>(true);  //座位旋转结束
     Data_Refresh : BaseData<boolean> = new BaseData<boolean>(true);  //刷新场景
 
+
+    mChatHistroy : Array<S2CCommonChatNotify> = new Array<S2CCommonChatNotify>(); //聊天历史
     mDelayStandUpNotifyMsg : Array<S2CCommonStandUpNotify> = new Array<S2CCommonStandUpNotify>();
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
     {
@@ -77,8 +81,8 @@ export abstract class GameData extends MultipleNotify
     {
         for(let i = 0 ; i < this.mDelayStandUpNotifyMsg.length ; i++)
         {
-            this.Data_S2CCommonStandUpNotify.mData = this.mDelayStandUpNotifyMsg[i];
             this.PlayerStand(this.mDelayStandUpNotifyMsg[i].actionUid);
+            this.Data_S2CCommonStandUpNotify.mData = this.mDelayStandUpNotifyMsg[i];
         }
         this.mDelayStandUpNotifyMsg = null;
         this.mDelayStandUpNotifyMsg = new Array<S2CCommonStandUpNotify>();
@@ -453,17 +457,21 @@ export abstract class GameData extends MultipleNotify
         return null;
     }
 
-    public GetTotalPots() : number
-    {
-        let potInfos = this.GetDynamicData().potInfo;
-        let totalPot = 0;
-        for(let i = 0 ; i < potInfos.length ; i++)
-        {
-            totalPot += potInfos[i].pot;
-        }
 
-        return totalPot;
+    public InsertChatHistroy(_chatMsg : S2CCommonChatNotify)
+    {
+        this.mChatHistroy.push(_chatMsg);
     }
+
+    public ClearChatHistroy()
+    {
+        this.mChatHistroy = new Array<S2CCommonChatNotify>();
+    }
+
+    public GetChatHistroy():Array<S2CCommonChatNotify>
+    {
+        return this.mChatHistroy;
+    }   
 
     
     public abstract GameStartSendMsgId() : number

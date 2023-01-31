@@ -699,6 +699,23 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);  
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonChatResp,(_data)=>
+        {
+            let msg = S2CCommonChatResp.decode(_data);
+            console.log("收到的内容 S2C_CommonChatResp  聊天反回==" + JSON.stringify(msg));
+
+            if(msg.result.resId == MsgResult.Success)
+            {
+
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+        
+
 
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyEnterGameResp,(_data)=>
         {
@@ -1160,6 +1177,21 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.Data_S2CCommonActionNotify.mData = msg;
             }
         },this);  
+
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonChatNotify,(_data)=>
+        {
+            let msg = S2CCommonChatNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonChatNotify  游戏内聊天==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.InsertChatHistroy(msg);
+                gameData.Data_S2CCommonChatNotify.mData = msg;
+            }
+        },this);
+        
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonInsuranceTurnNotify,(_data)=>
         {

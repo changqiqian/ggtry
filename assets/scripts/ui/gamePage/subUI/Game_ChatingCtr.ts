@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, instantiate, UITransform } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Game_SingleChat } from './Game_SingleChat';
 const { ccclass, property } = _decorator;
 
@@ -37,7 +38,25 @@ export class Game_ChatingCtr extends BaseUI
 
     public InitWithData(_index : number)
     {
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
         this.mIndex = _index;
+        this.BindData();
+    }
+
+    BindData()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        gameData.Data_S2CCommonChatNotify.AddListenner(this , (_data)=>
+        {
+            let userName = _data.playerName;
+            let content = _data.content;
+            let final = userName + " : " + content;
+            this.CreateChat(final);
+        });
     }
 
     CreateChat(_content : string)

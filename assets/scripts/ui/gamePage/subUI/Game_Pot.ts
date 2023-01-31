@@ -113,7 +113,6 @@ export class Game_Pot extends BaseUI
             this.UpdateTotalPot();
         })
         
-        
     }
 
     public InitWithReplay()
