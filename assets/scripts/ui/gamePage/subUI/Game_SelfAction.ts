@@ -211,7 +211,21 @@ export class Game_SelfAction extends BaseUI
                 gameData.Data_PreCheckOrFold.mData = Game_PreCheckOrFold.UnSelected;
                 this.HideAll();
             }
-            
+        })
+
+        gameData.Data_S2CCommonExtraThinkNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
+            this.mCircleTimer.StartTimer(_data.extraTime);
         })
     }
 

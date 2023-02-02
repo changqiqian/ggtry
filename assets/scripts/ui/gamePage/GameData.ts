@@ -44,7 +44,7 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonInsuranceTurnNotify  : BaseData<S2CCommonInsuranceTurnNotify> = new BaseData<S2CCommonInsuranceTurnNotify>(true);  //轮到谁买保险
     Data_S2CCommonSettlementNotify  : BaseData<S2CCommonSettlementNotify> = new BaseData<S2CCommonSettlementNotify>(true);  //游戏结算推送
     Data_S2CCommonChatNotify: BaseData<S2CCommonChatNotify> = new BaseData<S2CCommonChatNotify>(true);  //聊天推送
-    
+    Data_S2CCommonExtraThinkNotify: BaseData<S2CCommonExtraThinkNotify> = new BaseData<S2CCommonExtraThinkNotify>(true);  //思考时间推送
 
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_RotateSeatEnd : BaseData<boolean> = new BaseData<boolean>(true);  //座位旋转结束
@@ -52,7 +52,7 @@ export abstract class GameData extends MultipleNotify
 
 
     mChatHistroy : Array<S2CCommonChatNotify> = new Array<S2CCommonChatNotify>(); //聊天历史
-    mDelayStandUpNotifyMsg : Array<S2CCommonStandUpNotify> = new Array<S2CCommonStandUpNotify>();
+    //mDelayStandUpNotifyMsg : Array<S2CCommonStandUpNotify> = new Array<S2CCommonStandUpNotify>();
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
     {
         let act = new ActionInfo();
@@ -62,31 +62,31 @@ export abstract class GameData extends MultipleNotify
         return act;
     }
 
-    public AddDelayStandUpNotify(_StandUpNotify : S2CCommonStandUpNotify)
-    {
-        this.mDelayStandUpNotifyMsg.push(_StandUpNotify);
-    }
+    // public AddDelayStandUpNotify(_StandUpNotify : S2CCommonStandUpNotify)
+    // {
+    //     this.mDelayStandUpNotifyMsg.push(_StandUpNotify);
+    // }
 
-    public IsPlayerDelayStandUp(_uid : string)
-    {
-        let index = this.mDelayStandUpNotifyMsg.findIndex((_item) => _item.actionUid === _uid);
-        if(index < 0)
-        {
-            return false;
-        }
-        return true;
-    }
+    // public IsPlayerDelayStandUp(_uid : string)
+    // {
+    //     let index = this.mDelayStandUpNotifyMsg.findIndex((_item) => _item.actionUid === _uid);
+    //     if(index < 0)
+    //     {
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
-    public ExcutiveDelayStandUp()
-    {
-        for(let i = 0 ; i < this.mDelayStandUpNotifyMsg.length ; i++)
-        {
-            this.PlayerStand(this.mDelayStandUpNotifyMsg[i].actionUid);
-            this.Data_S2CCommonStandUpNotify.mData = this.mDelayStandUpNotifyMsg[i];
-        }
-        this.mDelayStandUpNotifyMsg = null;
-        this.mDelayStandUpNotifyMsg = new Array<S2CCommonStandUpNotify>();
-    }
+    // public ExcutiveDelayStandUp()
+    // {
+    //     for(let i = 0 ; i < this.mDelayStandUpNotifyMsg.length ; i++)
+    //     {
+    //         this.PlayerStand(this.mDelayStandUpNotifyMsg[i].actionUid);
+    //         this.Data_S2CCommonStandUpNotify.mData = this.mDelayStandUpNotifyMsg[i];
+    //     }
+    //     this.mDelayStandUpNotifyMsg = null;
+    //     this.mDelayStandUpNotifyMsg = new Array<S2CCommonStandUpNotify>();
+    // }
     
     public SetGameInfo(_S2CCommonEnterGameResp : S2CCommonEnterGameResp)
     {
@@ -484,6 +484,7 @@ export abstract class GameData extends MultipleNotify
     public abstract ObListSendMsgId() : number
     public abstract BuyInListSendMsgId() : number
     public abstract RefreshSendMsgId() : number
+    public abstract ExtraThinkingTimeMsgId() : number
 }
 
 

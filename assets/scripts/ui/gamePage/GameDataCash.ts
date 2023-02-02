@@ -50,5 +50,10 @@ export class GameDataCash extends GameData
         return MessageId.C2S_TexasCashRefresh;
     }
     
+    public ExtraThinkingTimeMsgId() : number
+    {
+        return MessageId.C2S_TexasCashExtraThink;
+    }
+    
 
 }

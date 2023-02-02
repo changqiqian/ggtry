@@ -121,7 +121,7 @@ export class GameBase extends BaseUI
         gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
         {
             this.StopSecondsTimer();
-            gameData.ExcutiveDelayStandUp();
+            //gameData.ExcutiveDelayStandUp();
             this.TryToPlayAudio("Bet");
         })
 
@@ -171,14 +171,14 @@ export class GameBase extends BaseUI
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
             
-            this.StartSecondsTimer(6 , 0.01  , ()=>
-            {
-                let restTime = this.GetRestMillSeconds();
-                if(restTime == 0)
-                {
-                    gameData.ExcutiveDelayStandUp();
-                }
-            });
+            // this.StartSecondsTimer(6 , 0.01  , ()=>
+            // {
+            //     let restTime = this.GetRestMillSeconds();
+            //     if(restTime == 0)
+            //     {
+            //         gameData.ExcutiveDelayStandUp();
+            //     }
+            // });
         })
 
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>

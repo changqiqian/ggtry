@@ -409,6 +409,14 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("玩家聊天  === " + JSON.stringify(msg))
     }
 
+    public SendExtraThinkingTime(_msgId : number,_gameId : string)
+    {
+        let msg = new C2STexasCashExtraThink();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(_msgId , C2STexasCashExtraThink.encode(msg).finish());
+        console.log("申请思考时间  === " + JSON.stringify(msg))
+    }
+
     public GetObList(_msgId : number ,_gameId : string , _page : number , _pageSize : number)
     {
         UIMgr.Instance.ShowLoading(true);

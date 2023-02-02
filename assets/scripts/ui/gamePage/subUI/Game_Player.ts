@@ -393,6 +393,21 @@ export class Game_Player extends BaseUI
             this.RestoreTurn();
         })
 
+        gameData.Data_S2CCommonExtraThinkNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.seat != this.mSeatID)
+            {
+                return;
+            }
+            this.mCircleTimer.StartTimer(_data.extraTime);
+        })
+
 
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {

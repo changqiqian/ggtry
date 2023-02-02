@@ -3,6 +3,7 @@ import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
 import { Combiantion } from '../../../base/Calculator';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { NetworkSend } from '../../../network/NetworkSend';
 import { Tool } from '../../../Tool';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Poker } from '../../common/Poker';
@@ -44,7 +45,10 @@ export class Game_SelfUI extends BaseUI
         this.HideAllUI();
         this.mGame_AddTime.SetCallback(()=>
         {
-
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            let msgId = gameData.ExtraThinkingTimeMsgId();
+            NetworkSend.Instance.SendExtraThinkingTime(msgId,gameStruct.mGameId);
         });
 
         for(let i = 0 ; i < this.mCards.children.length ; i++)

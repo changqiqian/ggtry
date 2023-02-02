@@ -78,11 +78,11 @@ export class Game_Menu extends BaseUI
             let msgId = gameData.StandUpSendMsgId();
             let gameId = gameStruct.mGameId;
             let uid =LocalPlayerData.Instance.Data_Uid.mData;
-            if(gameData.IsPlayerDelayStandUp(uid))
-            {
-                return;
-            }
-            let seatId = gameData.GetSeatByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            // if(gameData.IsPlayerDelayStandUp(uid))
+            // {
+            //     return;
+            // }
+            let seatId = gameData.GetSeatByUid(uid);
             if(seatId != null)
             {
                 NetworkSend.Instance.StandUp(msgId,gameId);
@@ -186,13 +186,14 @@ export class Game_Menu extends BaseUI
             return;
         }
         let gameData = gameStruct.mGameData;
-        if(gameData.IsPlayerDelayStandUp(LocalPlayerData.Instance.Data_Uid.mData))
-        {
-            this.mStandBtn.Show(false);
-            return;
-        }
+        let uid = LocalPlayerData.Instance.Data_Uid.mData;
+        // if(gameData.IsPlayerDelayStandUp(uid))
+        // {
+        //     this.mStandBtn.Show(false);
+        //     return;
+        // }
 
-        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        let selfPlayer = gameData.GetPlayerInfoByUid(uid);
         this.mStandBtn.Show(selfPlayer != null);
     }
 

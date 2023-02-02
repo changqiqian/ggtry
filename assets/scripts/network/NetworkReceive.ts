@@ -674,6 +674,23 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonExtraThinkResp,(_data)=>
+        {
+            let msg = S2CCommonExtraThinkResp.decode(_data);
+            console.log("收到的内容 S2C_CommonExtraThinkResp  申请思考时间==" + JSON.stringify(msg));
+
+            if(msg.result.resId == MsgResult.Success)
+            {
+
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+        
+
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonRefreshResp,(_data)=>
         {
             let msg = S2CCommonRefreshResp.decode(_data);
@@ -1020,16 +1037,16 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 {
                     return;
                 }
-                if(gameData.IsPlayerPlaying(currentStandPlayer.uid) == true)
-                {
-                    currentStandPlayer.gameRole = GameRole.GameRole_Observer;
-                    gameData.AddDelayStandUpNotify(msg);
-                    if(currentStandPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
-                    {
-                        UIMgr.Instance.ShowToast(Localization.GetString("00278"));
-                    }
-                    return;
-                }
+                // if(gameData.IsPlayerPlaying(currentStandPlayer.uid) == true)
+                // {
+                //     currentStandPlayer.gameRole = GameRole.GameRole_Observer;
+                //     gameData.AddDelayStandUpNotify(msg);
+                //     if(currentStandPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
+                //     {
+                //         UIMgr.Instance.ShowToast(Localization.GetString("00278"));
+                //     }
+                //     return;
+                // }
 
                 gameData.PlayerStand(msg.actionUid);
                 gameData.Data_S2CCommonStandUpNotify.mData = msg;
@@ -1223,6 +1240,19 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.UpdatePots(msg.potInfo);
                 gameData.Data_S2CCommonSettlementNotify.mData = msg;
             }
+        },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonExtraThinkNotify,(_data)=>
+        {
+            let msg = S2CCommonExtraThinkNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonExtraThinkNotify  申请思考时间推送==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_S2CCommonExtraThinkNotify.mData = msg;
+            }
+
         },this);  
 
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyBetNotify,(_data)=>
