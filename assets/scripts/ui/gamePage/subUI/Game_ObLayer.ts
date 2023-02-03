@@ -115,7 +115,7 @@ export class Game_ObLayer extends ListViewCtr<PlayerInfo>
                     this.InsertOneData(current);
                 }
             }
-            this.mObNum.string = _data.totalMember + "";
+            this.mObNum.string = "(" + _data.totalMember + ")";
 
             this.UpdateData(_data.totalMember);
         })

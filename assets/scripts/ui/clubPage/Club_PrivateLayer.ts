@@ -46,7 +46,7 @@ export class Club_PrivateLayer extends ListViewCtr<ClubTexasGameInfo>
         this.UpdateNotifyBtn();
         this.UpdateClubInfoUI();
         this.UpdateMoney();
-        this.OnDragTop();
+        super.onEnable();
     }
 
     BindUI()

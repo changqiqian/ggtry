@@ -17928,6 +17928,7 @@ $root.S2CCommonExtraThinkNotify = (function() {
      * @property {string|null} [gameId] S2CCommonExtraThinkNotify gameId
      * @property {string|null} [actionUid] S2CCommonExtraThinkNotify actionUid
      * @property {number|null} [extraTime] S2CCommonExtraThinkNotify extraTime
+     * @property {number|null} [totalTime] S2CCommonExtraThinkNotify totalTime
      */
 
     /**
@@ -17970,6 +17971,14 @@ $root.S2CCommonExtraThinkNotify = (function() {
     S2CCommonExtraThinkNotify.prototype.extraTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * S2CCommonExtraThinkNotify totalTime.
+     * @member {number} totalTime
+     * @memberof S2CCommonExtraThinkNotify
+     * @instance
+     */
+    S2CCommonExtraThinkNotify.prototype.totalTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified S2CCommonExtraThinkNotify message. Does not implicitly {@link S2CCommonExtraThinkNotify.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonExtraThinkNotify
@@ -17987,6 +17996,8 @@ $root.S2CCommonExtraThinkNotify = (function() {
             w.uint32(18).string(m.actionUid);
         if (m.extraTime != null && Object.hasOwnProperty.call(m, "extraTime"))
             w.uint32(24).int64(m.extraTime);
+        if (m.totalTime != null && Object.hasOwnProperty.call(m, "totalTime"))
+            w.uint32(32).int64(m.totalTime);
         return w;
     };
 
@@ -18016,6 +18027,9 @@ $root.S2CCommonExtraThinkNotify = (function() {
                 break;
             case 3:
                 m.extraTime = r.int64();
+                break;
+            case 4:
+                m.totalTime = r.int64();
                 break;
             default:
                 r.skipType(t & 7);

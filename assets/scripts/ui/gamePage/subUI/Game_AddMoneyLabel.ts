@@ -46,7 +46,6 @@ export class Game_AddMoneyLabel extends BaseUI
                 this.DeleteSelf();
             }
         })
-
     }
 }
 

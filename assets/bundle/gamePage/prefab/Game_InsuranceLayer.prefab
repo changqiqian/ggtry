@@ -485,9 +485,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 147,
-      "g": 149,
-      "b": 166,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "购买保险",
@@ -827,9 +827,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 98,
-      "g": 105,
-      "b": 119,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "反超outs:",
@@ -976,8 +976,8 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 251,
-      "g": 161,
-      "b": 0,
+      "g": 160,
+      "b": 2,
       "a": 255
     },
     "_string": "0张",
@@ -1650,9 +1650,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 98,
-      "g": 105,
-      "b": 119,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "追平outs:",
@@ -1799,8 +1799,8 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 251,
-      "g": 161,
-      "b": 0,
+      "g": 160,
+      "b": 2,
       "a": 255
     },
     "_string": "0张",
@@ -2467,9 +2467,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 98,
-      "g": 105,
-      "b": 119,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "公共牌",
@@ -3121,9 +3121,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 98,
-      "g": 105,
-      "b": 119,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "出张",
@@ -3269,9 +3269,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 149,
-      "g": 156,
-      "b": 176,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "0",
@@ -3662,9 +3662,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 98,
-      "g": 105,
-      "b": 119,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "赔率",
@@ -3810,9 +3810,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 149,
-      "g": 156,
-      "b": 176,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "0",
@@ -4203,9 +4203,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 98,
-      "g": 105,
-      "b": 119,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "底池",
@@ -4354,9 +4354,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 149,
-      "g": 156,
-      "b": 176,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "0",
@@ -4759,9 +4759,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 98,
-      "g": 105,
-      "b": 119,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "赔付",
@@ -4892,9 +4892,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 149,
-      "g": 156,
-      "b": 176,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "0",
@@ -5238,9 +5238,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 149,
-      "g": 156,
-      "b": 176,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "本次购买需要带回：500",
@@ -5978,9 +5978,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 149,
-      "g": 156,
-      "b": 176,
+      "r": 251,
+      "g": 160,
+      "b": 2,
       "a": 255
     },
     "_string": "0",
@@ -8331,7 +8331,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96.74,
+      "width": 72.55,
       "height": 88.2
     },
     "_anchorPoint": {
@@ -8362,16 +8362,16 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "59s",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 60,
-    "_fontSize": 60,
+    "_actualFontSize": 45,
+    "_fontSize": 45,
     "_fontFamily": "Arial",
     "_lineHeight": 70,
     "_overflow": 0,

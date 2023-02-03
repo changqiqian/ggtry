@@ -85,7 +85,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 3
@@ -177,6 +177,7 @@
       "b": 255,
       "a": 255
     },
+    "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 0,
@@ -463,9 +464,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "GGTRY",
@@ -593,9 +594,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "32%",
@@ -723,9 +724,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 97,
+      "g": 100,
+      "b": 116,
       "a": 255
     },
     "_string": "700",

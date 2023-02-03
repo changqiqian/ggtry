@@ -86,7 +86,7 @@ export class Game_ChatingCtr extends BaseUI
     {
         this.mLanes[_index] = false;
         let height = this.node.getComponent(UITransform).contentSize.height;
-        let spaceY = height / this.mMaxLane ;
+        let spaceY = height / this.mMaxLane /2;
         let posY =  (height / 2) -  (1 + _index) * spaceY;
         return posY;
     }

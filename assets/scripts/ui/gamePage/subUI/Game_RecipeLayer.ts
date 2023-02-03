@@ -13,14 +13,13 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayData>
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
 
+    @property(Node) 
+    mBG: Node = null;
+
     @property(BaseButton) 
     mCloseBtn: BaseButton = null;
 
     private mGameId : string = null;
-    onEnable()
-    {
-    
-    }
 
     onDisable()
     {
@@ -41,7 +40,7 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayData>
 
     BindUI()
     {
-        this.node.on(Node.EventType.TOUCH_END,this.OnClickEmptyBG.bind(this),this);
+        this.AddTouchCloseEvent(this.mBG);
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
         this.mMovingShow.SetShowAnimationCallback(()=>
@@ -59,11 +58,6 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayData>
     RegDataNotify()
     {
 
-    }
-
-    private OnClickEmptyBG()
-    {
-        this.Show(false);
     }
 
     public InitWithData(_gameId : string)

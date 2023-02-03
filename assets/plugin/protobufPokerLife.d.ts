@@ -6217,6 +6217,9 @@ export class S2CCommonExtraThinkNotify implements IS2CCommonExtraThinkNotify {
     /** S2CCommonExtraThinkNotify extraTime. */
     public extraTime: number;
 
+    /** S2CCommonExtraThinkNotify totalTime. */
+    public totalTime: number;
+
     /**
      * Encodes the specified S2CCommonExtraThinkNotify message. Does not implicitly {@link S2CCommonExtraThinkNotify.verify|verify} messages.
      * @param m S2CCommonExtraThinkNotify message or plain object to encode

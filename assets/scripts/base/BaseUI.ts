@@ -253,6 +253,12 @@ export abstract class BaseUI extends Component {
     {
         let parentNode = this.node.parent;
         let parentScript = parentNode.getComponent(BaseUI);
+        if(parentScript == null)
+        {
+            this.Show(false);
+            return;
+        }
+        
         if (parentScript.mIsWindow) 
         {
             parentScript.Show(false);

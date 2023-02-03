@@ -10,10 +10,6 @@ const { ccclass, property } = _decorator;
 export class Game_ChatHistoryLayer extends ListViewCtr<S2CCommonChatNotify> 
 {
     mIndex : number = null;
-    InitParam()
-    {
-
-    }
     BindUI()
     {
 

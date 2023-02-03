@@ -7559,7 +7559,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "9e32aa22-fc1e-4513-a920-3a4fd550d6fa@f9941",
+      "__uuid__": "9f413441-a060-4e0a-97f3-4b326dd1c2c2@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -7597,7 +7597,7 @@
     "propertyPath": [
       "_sizeMode"
     ],
-    "value": 1
+    "value": 0
   },
   {
     "__type__": "CCPropertyOverrideInfo",

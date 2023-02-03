@@ -453,9 +453,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 129,
-      "g": 149,
-      "b": 202,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "Rose",
@@ -499,7 +499,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 23

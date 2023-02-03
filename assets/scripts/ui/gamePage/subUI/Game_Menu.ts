@@ -59,7 +59,7 @@ export class Game_Menu extends BaseUI
         });
         this.mBringInBtn.SetClickCallback(()=>
         {
-            this.CloseAsWindow();
+            this.Show(false);
             UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyInWindow",true,(_script)=>
             {
                 let temp = _script as Game_BuyInWindow;
@@ -68,7 +68,7 @@ export class Game_Menu extends BaseUI
         });
         this.mSettingBtn.SetClickCallback(()=>
         {
-            this.CloseAsWindow();
+            this.Show(false);
             UIMgr.Instance.ShowWindow("gamePage","prefab/Game_Setting");
         });
         this.mStandBtn.SetClickCallback(()=>
@@ -81,6 +81,7 @@ export class Game_Menu extends BaseUI
             // if(gameData.IsPlayerDelayStandUp(uid))
             // {
             //     return;
+            
             // }
             let seatId = gameData.GetSeatByUid(uid);
             if(seatId != null)

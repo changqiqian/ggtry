@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "683d09d1-7afc-4646-a4ea-3f99edba13f2",
+  "uuid": "6369d0af-4bc5-4df8-9fc7-cfb32bfecec8",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "683d09d1-7afc-4646-a4ea-3f99edba13f2@6c48a",
-      "displayName": "MenuIconBank",
+      "uuid": "6369d0af-4bc5-4df8-9fc7-cfb32bfecec8@6c48a",
+      "displayName": "Btn14",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "683d09d1-7afc-4646-a4ea-3f99edba13f2",
+        "imageUuidOrDatabaseUri": "6369d0af-4bc5-4df8-9fc7-cfb32bfecec8",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "683d09d1-7afc-4646-a4ea-3f99edba13f2@f9941",
-      "displayName": "MenuIconBank",
+      "uuid": "6369d0af-4bc5-4df8-9fc7-cfb32bfecec8@f9941",
+      "displayName": "Btn14",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": 0,
+        "offsetY": -0.5,
         "trimX": 0,
-        "trimY": 0,
-        "width": 48,
-        "height": 45,
-        "rawWidth": 48,
-        "rawHeight": 45,
+        "trimY": 1,
+        "width": 351,
+        "height": 105,
+        "rawWidth": 351,
+        "rawHeight": 106,
         "borderTop": 0,
         "borderBottom": 0,
-        "borderLeft": 0,
-        "borderRight": 0,
+        "borderLeft": 66,
+        "borderRight": 66,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "683d09d1-7afc-4646-a4ea-3f99edba13f2@6c48a",
+        "imageUuidOrDatabaseUri": "6369d0af-4bc5-4df8-9fc7-cfb32bfecec8@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "683d09d1-7afc-4646-a4ea-3f99edba13f2@f9941"
+    "redirect": "6369d0af-4bc5-4df8-9fc7-cfb32bfecec8@f9941"
   }
 }

@@ -52,12 +52,12 @@ export class Game_MatchInfoItem extends BaseUI
         if(_playerHistoryInfo.totalWinLose >=0)
         {
             this.mWinLose.string = "+" + Tool.ConvertMoney_S2C(_playerHistoryInfo.totalWinLose);
-            this.mWinLose.color = new Color(0,255,0);
+            this.mWinLose.color = Color.RED
         }
         else
         {
             this.mWinLose.string = Tool.ConvertMoney_S2C(_playerHistoryInfo.totalWinLose) + "";
-            this.mWinLose.color = new Color(255,0,0);
+            this.mWinLose.color = Color.GREEN
         }
     }
 }

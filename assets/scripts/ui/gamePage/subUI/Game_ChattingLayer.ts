@@ -59,9 +59,12 @@ export class Game_ChattingLayer extends BaseUI
                 let gameData = gameStruct.mGameData;
                 NetworkSend.Instance.SendChat(gameData.ChatSendMsgId(),gameStruct.mGameId,content);
             }
-
         })
-
+       
+        this.mSendBtn.SetProtectDoubleClick(true,5,()=>
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00326"));
+        });
 
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);

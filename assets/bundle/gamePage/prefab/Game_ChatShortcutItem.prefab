@@ -25,17 +25,17 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 38
-      },
-      {
-        "__id__": 40
-      },
-      {
         "__id__": 42
+      },
+      {
+        "__id__": 44
+      },
+      {
+        "__id__": 46
       }
     ],
     "_prefab": {
-      "__id__": 44
+      "__id__": 48
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -156,6 +156,15 @@
       },
       {
         "__id__": 36
+      },
+      {
+        "__id__": 38
+      },
+      {
+        "__id__": 40
+      },
+      {
+        "__id__": 41
       }
     ],
     "removedComponents": []
@@ -524,6 +533,50 @@
     ]
   },
   {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 39
+    },
+    "propertyPath": [
+      "_zoomScale"
+    ],
+    "value": 1.05
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "1at/3s6SVJx65RlKOnzD2P"
+    ]
+  },
+  {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 39
+    },
+    "propertyPath": [
+      "_target"
+    ],
+    "value": {
+      "__id__": 2
+    }
+  },
+  {
+    "__type__": "CCPropertyOverrideInfo",
+    "targetInfo": {
+      "__id__": 23
+    },
+    "propertyPath": [
+      "_color"
+    ],
+    "value": {
+      "__type__": "cc.Color",
+      "r": 146,
+      "g": 150,
+      "b": 171,
+      "a": 255
+    }
+  },
+  {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
@@ -532,7 +585,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 39
+      "__id__": 43
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -559,7 +612,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 41
+      "__id__": 45
     },
     "mBtn": null,
     "_id": ""
@@ -577,7 +630,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 43
+      "__id__": 47
     },
     "_alignFlags": 40,
     "_target": null,
@@ -614,7 +667,7 @@
     "fileId": "9epnFgjUVPtJP6mQk2Fg6k",
     "targetOverrides": [
       {
-        "__id__": 45
+        "__id__": 49
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -626,7 +679,7 @@
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 40
+      "__id__": 44
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -636,7 +689,7 @@
       "__id__": 2
     },
     "targetInfo": {
-      "__id__": 46
+      "__id__": 50
     }
   },
   {

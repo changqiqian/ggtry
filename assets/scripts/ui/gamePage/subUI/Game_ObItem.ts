@@ -55,7 +55,7 @@ export class Game_ObItem extends BaseUI
         })
 
         this.mName.string = _playerInfo.nickName;
-        this.ShowOnLine(_playerInfo.online);
+        //this.ShowOnLine(_playerInfo.online);
     }
 
     ShowOnLine(_online : boolean)

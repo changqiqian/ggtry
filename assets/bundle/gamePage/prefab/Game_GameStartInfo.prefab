@@ -244,8 +244,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 200,
-      "height": 72
+      "width": 220,
+      "height": 100
     }
   },
   {
@@ -339,7 +339,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "530906d1-06a2-4972-b844-2d7b14354629@f9941",
+      "__uuid__": "2318bea3-618b-4665-9458-d582302e876f@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -359,8 +359,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 240,
-      "height": 96
+      "width": 200,
+      "height": 81
     }
   },
   {
@@ -471,9 +471,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 71,
-      "g": 220,
-      "b": 126,
+      "r": 251,
+      "g": 160,
+      "b": 2,
       "a": 255
     },
     "_string": "11:57:53",
@@ -601,9 +601,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     },
     "_string": "提示内容",

@@ -201,7 +201,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 285,
+      "y": 1218,
       "z": 0
     },
     "_lrot": {
@@ -240,7 +240,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1125,
-      "height": 430
+      "height": 140
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -309,8 +309,8 @@
     "_startAxis": 0,
     "_paddingLeft": 0,
     "_paddingRight": 0,
-    "_paddingTop": 0,
-    "_paddingBottom": 0,
+    "_paddingTop": 20,
+    "_paddingBottom": 20,
     "_spacingX": 0,
     "_spacingY": 10,
     "_verticalDirection": 1,
@@ -349,7 +349,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1125,
-      "height": 570
+      "height": 2436
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -454,7 +454,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1125,
-      "height": 570
+      "height": 2436
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -556,7 +556,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1125,
-      "height": 570
+      "height": 2436
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -596,7 +596,7 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": false,
+    "_enabled": true,
     "__prefab": {
       "__id__": 31
     },

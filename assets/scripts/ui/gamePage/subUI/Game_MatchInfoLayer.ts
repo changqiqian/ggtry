@@ -32,10 +32,6 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerHistoryInfo>
     mScrollView: ScrollView = null;
     private mIndex : number = null;
     
-    onEnable()
-    {
-       
-    }
     public Show(_val : boolean)
     {
         if(_val)

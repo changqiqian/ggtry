@@ -13,6 +13,7 @@ export class BaseButton extends BaseUI {
     mClickProtectedDuration : number = 0.1;
     private mCustomerData : any = null;
     private mCallback : Function = null;
+    private mProtectCallback : Function = null;
     InitParam() 
     {
 
@@ -83,10 +84,11 @@ export class BaseButton extends BaseUI {
         return "";
     }
 
-    public SetProtectDoubleClick(_enable:boolean , _duration:number = 0.1)
+    public SetProtectDoubleClick(_enable:boolean , _duration:number = 0.1 , _protectCallback : Function = null)
     {
         this.mProtectDoubleClick = _enable;
         this.mClickProtectedDuration = _duration;
+        this.mProtectCallback = _protectCallback;
     }
 
     public SetGray(_value : boolean)
@@ -129,19 +131,19 @@ export class BaseButton extends BaseUI {
         {
             return;
         }
-
-
         if(this.mProtectDoubleClick == true)
         {
             if(this.mClickProtected == true)
             {
+                if(this.mProtectCallback != null)
+                {
+                    this.mProtectCallback();
+                }
                 return;
             }
-    
             this.mClickProtected = true;
             this.StartSecondsTimer(this.mClickProtectedDuration,0.05)
         }
-
         AudioManager.Instance.PlayMusicOneShot("Btn");
         if(this.mCallback != null)
         {

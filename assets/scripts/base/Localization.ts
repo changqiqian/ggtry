@@ -410,7 +410,7 @@ export class Localization {
         { name: '00323', ch: '捐赠', en: 'Donate' },
         { name: '00324', ch: '请输入内容', en: 'Click to input ' },
         { name: '00325', ch: '收到转账，您的余额变为:xxx', en: 'Balance change:xxx' },
-        
+        { name: '00326', ch: '5秒只能发一次消息', en: 'one msg only in 5s' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },
