@@ -860,7 +860,7 @@
     "_alignFlags": 32,
     "_target": null,
     "_left": 0,
-    "_right": 555.287,
+    "_right": 543.287,
     "_top": 0,
     "_bottom": 0,
     "_horizontalCenter": 0,
@@ -1065,7 +1065,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 288,
+      "width": 312,
       "height": 84
     }
   },
@@ -1227,7 +1227,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 288,
+      "width": 312,
       "height": 81
     }
   },
