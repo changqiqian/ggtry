@@ -16,6 +16,10 @@
     "ios": {
       "configID": "437b18",
       "services": []
+    },
+    "web-mobile": {
+      "configID": "437b18",
+      "services": []
     }
   },
   "builder-options": {

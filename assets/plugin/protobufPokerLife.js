@@ -13289,10 +13289,9 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} C2S_TexasCashChat=5011 C2S_TexasCashChat value
  * @property {number} C2S_TexasCashGetObList=5012 C2S_TexasCashGetObList value
  * @property {number} C2S_TexasCashGetBringInList=5013 C2S_TexasCashGetBringInList value
- * @property {number} C2S_TexasCashRefresh=5014 C2S_TexasCashRefresh value
- * @property {number} C2S_TexasCashExaminePublicCard=5015 C2S_TexasCashExaminePublicCard value
- * @property {number} C2S_TexasCashExaminePrivateCard=5016 C2S_TexasCashExaminePrivateCard value
- * @property {number} C2S_TexasCashExtraThink=5017 C2S_TexasCashExtraThink value
+ * @property {number} C2S_TexasCashExaminePublicCard=5014 C2S_TexasCashExaminePublicCard value
+ * @property {number} C2S_TexasCashExaminePrivateCard=5015 C2S_TexasCashExaminePrivateCard value
+ * @property {number} C2S_TexasCashExtraThink=5016 C2S_TexasCashExtraThink value
  * @property {number} MSG_TexasCashEnd=5500 MSG_TexasCashEnd value
  * @property {number} MSG_TexasMttBegin=5501 MSG_TexasMttBegin value
  * @property {number} MSG_TexasMttEnd=6000 MSG_TexasMttEnd value
@@ -13323,21 +13322,23 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonBringInNotify=8111 S2C_CommonBringInNotify value
  * @property {number} S2C_CommonSitDownNotify=8112 S2C_CommonSitDownNotify value
  * @property {number} S2C_CommonStandUpNotify=8113 S2C_CommonStandUpNotify value
- * @property {number} S2C_CommonActionNotify=8114 S2C_CommonActionNotify value
- * @property {number} S2C_CommonBuyInsuranceNotify=8115 S2C_CommonBuyInsuranceNotify value
  * @property {number} S2C_CommonChatNotify=8116 S2C_CommonChatNotify value
- * @property {number} S2C_CommonExtraThinkNotify=8117 S2C_CommonExtraThinkNotify value
- * @property {number} S2C_CommonInsuranceResultNotify=8118 S2C_CommonInsuranceResultNotify value
- * @property {number} S2C_CommonInsuranceTurnNotify=8119 S2C_CommonInsuranceTurnNotify value
  * @property {number} S2C_CommonOpenNotify=8250 S2C_CommonOpenNotify value
- * @property {number} S2C_CommonRoundStartNotify=8251 S2C_CommonRoundStartNotify value
- * @property {number} S2C_CommonPreFlopRoundNotify=8252 S2C_CommonPreFlopRoundNotify value
- * @property {number} S2C_CommonFlopRoundNotify=8253 S2C_CommonFlopRoundNotify value
- * @property {number} S2C_CommonTurnRoundNotify=8254 S2C_CommonTurnRoundNotify value
- * @property {number} S2C_CommonRiverRoundNotify=8255 S2C_CommonRiverRoundNotify value
- * @property {number} S2C_CommonCurrentActionNotify=8256 S2C_CommonCurrentActionNotify value
- * @property {number} S2C_CommonSettlementNotify=8257 S2C_CommonSettlementNotify value
- * @property {number} S2C_CommonIntervalTimeNotify=8258 S2C_CommonIntervalTimeNotify value
+ * @property {number} S2C_CommonWaitStartNotify=8251 S2C_CommonWaitStartNotify value
+ * @property {number} S2C_CommonRoundStartNotify=8252 S2C_CommonRoundStartNotify value
+ * @property {number} S2C_CommonPreFlopRoundNotify=8253 S2C_CommonPreFlopRoundNotify value
+ * @property {number} S2C_CommonFlopRoundNotify=8254 S2C_CommonFlopRoundNotify value
+ * @property {number} S2C_CommonTurnRoundNotify=8255 S2C_CommonTurnRoundNotify value
+ * @property {number} S2C_CommonRiverRoundNotify=8256 S2C_CommonRiverRoundNotify value
+ * @property {number} S2C_CommonIntervalTimeNotify=8257 S2C_CommonIntervalTimeNotify value
+ * @property {number} S2C_CommonCurrentActionNotify=8258 S2C_CommonCurrentActionNotify value
+ * @property {number} S2C_CommonActionNotify=8259 S2C_CommonActionNotify value
+ * @property {number} S2C_CommonSettlementNotify=8260 S2C_CommonSettlementNotify value
+ * @property {number} S2C_CommonExtraThinkNotify=8261 S2C_CommonExtraThinkNotify value
+ * @property {number} S2C_CommonOpenCardNotify=8262 S2C_CommonOpenCardNotify value
+ * @property {number} S2C_CommonInsuranceTurnNotify=8263 S2C_CommonInsuranceTurnNotify value
+ * @property {number} S2C_CommonBuyInsuranceNotify=8264 S2C_CommonBuyInsuranceNotify value
+ * @property {number} S2C_CommonInsuranceResultNotify=8265 S2C_CommonInsuranceResultNotify value
  * @property {number} MSG_TexasCowboyBegin=10001 MSG_TexasCowboyBegin value
  * @property {number} C2S_TexasCowboyEnterGame=10002 C2S_TexasCowboyEnterGame value
  * @property {number} C2S_TexasCowboyExitGame=10003 C2S_TexasCowboyExitGame value
@@ -13446,10 +13447,9 @@ $root.MessageId = (function() {
     values[valuesById[5011] = "C2S_TexasCashChat"] = 5011;
     values[valuesById[5012] = "C2S_TexasCashGetObList"] = 5012;
     values[valuesById[5013] = "C2S_TexasCashGetBringInList"] = 5013;
-    values[valuesById[5014] = "C2S_TexasCashRefresh"] = 5014;
-    values[valuesById[5015] = "C2S_TexasCashExaminePublicCard"] = 5015;
-    values[valuesById[5016] = "C2S_TexasCashExaminePrivateCard"] = 5016;
-    values[valuesById[5017] = "C2S_TexasCashExtraThink"] = 5017;
+    values[valuesById[5014] = "C2S_TexasCashExaminePublicCard"] = 5014;
+    values[valuesById[5015] = "C2S_TexasCashExaminePrivateCard"] = 5015;
+    values[valuesById[5016] = "C2S_TexasCashExtraThink"] = 5016;
     values[valuesById[5500] = "MSG_TexasCashEnd"] = 5500;
     values[valuesById[5501] = "MSG_TexasMttBegin"] = 5501;
     values[valuesById[6000] = "MSG_TexasMttEnd"] = 6000;
@@ -13480,21 +13480,23 @@ $root.MessageId = (function() {
     values[valuesById[8111] = "S2C_CommonBringInNotify"] = 8111;
     values[valuesById[8112] = "S2C_CommonSitDownNotify"] = 8112;
     values[valuesById[8113] = "S2C_CommonStandUpNotify"] = 8113;
-    values[valuesById[8114] = "S2C_CommonActionNotify"] = 8114;
-    values[valuesById[8115] = "S2C_CommonBuyInsuranceNotify"] = 8115;
     values[valuesById[8116] = "S2C_CommonChatNotify"] = 8116;
-    values[valuesById[8117] = "S2C_CommonExtraThinkNotify"] = 8117;
-    values[valuesById[8118] = "S2C_CommonInsuranceResultNotify"] = 8118;
-    values[valuesById[8119] = "S2C_CommonInsuranceTurnNotify"] = 8119;
     values[valuesById[8250] = "S2C_CommonOpenNotify"] = 8250;
-    values[valuesById[8251] = "S2C_CommonRoundStartNotify"] = 8251;
-    values[valuesById[8252] = "S2C_CommonPreFlopRoundNotify"] = 8252;
-    values[valuesById[8253] = "S2C_CommonFlopRoundNotify"] = 8253;
-    values[valuesById[8254] = "S2C_CommonTurnRoundNotify"] = 8254;
-    values[valuesById[8255] = "S2C_CommonRiverRoundNotify"] = 8255;
-    values[valuesById[8256] = "S2C_CommonCurrentActionNotify"] = 8256;
-    values[valuesById[8257] = "S2C_CommonSettlementNotify"] = 8257;
-    values[valuesById[8258] = "S2C_CommonIntervalTimeNotify"] = 8258;
+    values[valuesById[8251] = "S2C_CommonWaitStartNotify"] = 8251;
+    values[valuesById[8252] = "S2C_CommonRoundStartNotify"] = 8252;
+    values[valuesById[8253] = "S2C_CommonPreFlopRoundNotify"] = 8253;
+    values[valuesById[8254] = "S2C_CommonFlopRoundNotify"] = 8254;
+    values[valuesById[8255] = "S2C_CommonTurnRoundNotify"] = 8255;
+    values[valuesById[8256] = "S2C_CommonRiverRoundNotify"] = 8256;
+    values[valuesById[8257] = "S2C_CommonIntervalTimeNotify"] = 8257;
+    values[valuesById[8258] = "S2C_CommonCurrentActionNotify"] = 8258;
+    values[valuesById[8259] = "S2C_CommonActionNotify"] = 8259;
+    values[valuesById[8260] = "S2C_CommonSettlementNotify"] = 8260;
+    values[valuesById[8261] = "S2C_CommonExtraThinkNotify"] = 8261;
+    values[valuesById[8262] = "S2C_CommonOpenCardNotify"] = 8262;
+    values[valuesById[8263] = "S2C_CommonInsuranceTurnNotify"] = 8263;
+    values[valuesById[8264] = "S2C_CommonBuyInsuranceNotify"] = 8264;
+    values[valuesById[8265] = "S2C_CommonInsuranceResultNotify"] = 8265;
     values[valuesById[10001] = "MSG_TexasCowboyBegin"] = 10001;
     values[valuesById[10002] = "C2S_TexasCowboyEnterGame"] = 10002;
     values[valuesById[10003] = "C2S_TexasCowboyExitGame"] = 10003;
@@ -16239,6 +16241,7 @@ $root.S2CCommonExaminePublicCardResp = (function() {
      * @exports IS2CCommonExaminePublicCardResp
      * @interface IS2CCommonExaminePublicCardResp
      * @property {ICommonResult|null} [result] S2CCommonExaminePublicCardResp result
+     * @property {string|null} [gameId] S2CCommonExaminePublicCardResp gameId
      * @property {Array.<ICardInfo>|null} [publicCardList] S2CCommonExaminePublicCardResp publicCardList
      */
 
@@ -16267,6 +16270,14 @@ $root.S2CCommonExaminePublicCardResp = (function() {
     S2CCommonExaminePublicCardResp.prototype.result = null;
 
     /**
+     * S2CCommonExaminePublicCardResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonExaminePublicCardResp
+     * @instance
+     */
+    S2CCommonExaminePublicCardResp.prototype.gameId = "";
+
+    /**
      * S2CCommonExaminePublicCardResp publicCardList.
      * @member {Array.<ICardInfo>} publicCardList
      * @memberof S2CCommonExaminePublicCardResp
@@ -16288,9 +16299,11 @@ $root.S2CCommonExaminePublicCardResp = (function() {
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
         if (m.publicCardList != null && m.publicCardList.length) {
             for (var i = 0; i < m.publicCardList.length; ++i)
-                $root.CardInfo.encode(m.publicCardList[i], w.uint32(18).fork()).ldelim();
+                $root.CardInfo.encode(m.publicCardList[i], w.uint32(26).fork()).ldelim();
         }
         return w;
     };
@@ -16317,6 +16330,9 @@ $root.S2CCommonExaminePublicCardResp = (function() {
                 m.result = $root.CommonResult.decode(r, r.uint32());
                 break;
             case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
                 if (!(m.publicCardList && m.publicCardList.length))
                     m.publicCardList = [];
                 m.publicCardList.push($root.CardInfo.decode(r, r.uint32()));
@@ -16339,6 +16355,7 @@ $root.S2CCommonExaminePrivateCardResp = (function() {
      * @exports IS2CCommonExaminePrivateCardResp
      * @interface IS2CCommonExaminePrivateCardResp
      * @property {ICommonResult|null} [result] S2CCommonExaminePrivateCardResp result
+     * @property {string|null} [gameId] S2CCommonExaminePrivateCardResp gameId
      * @property {Array.<IPlayerInfo>|null} [playerList] S2CCommonExaminePrivateCardResp playerList
      */
 
@@ -16367,6 +16384,14 @@ $root.S2CCommonExaminePrivateCardResp = (function() {
     S2CCommonExaminePrivateCardResp.prototype.result = null;
 
     /**
+     * S2CCommonExaminePrivateCardResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonExaminePrivateCardResp
+     * @instance
+     */
+    S2CCommonExaminePrivateCardResp.prototype.gameId = "";
+
+    /**
      * S2CCommonExaminePrivateCardResp playerList.
      * @member {Array.<IPlayerInfo>} playerList
      * @memberof S2CCommonExaminePrivateCardResp
@@ -16388,9 +16413,11 @@ $root.S2CCommonExaminePrivateCardResp = (function() {
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
         if (m.playerList != null && m.playerList.length) {
             for (var i = 0; i < m.playerList.length; ++i)
-                $root.PlayerInfo.encode(m.playerList[i], w.uint32(18).fork()).ldelim();
+                $root.PlayerInfo.encode(m.playerList[i], w.uint32(26).fork()).ldelim();
         }
         return w;
     };
@@ -16417,6 +16444,9 @@ $root.S2CCommonExaminePrivateCardResp = (function() {
                 m.result = $root.CommonResult.decode(r, r.uint32());
                 break;
             case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
                 if (!(m.playerList && m.playerList.length))
                     m.playerList = [];
                 m.playerList.push($root.PlayerInfo.decode(r, r.uint32()));
@@ -16439,7 +16469,9 @@ $root.S2CCommonExtraThinkResp = (function() {
      * @exports IS2CCommonExtraThinkResp
      * @interface IS2CCommonExtraThinkResp
      * @property {ICommonResult|null} [result] S2CCommonExtraThinkResp result
+     * @property {string|null} [gameId] S2CCommonExtraThinkResp gameId
      * @property {number|null} [extraTime] S2CCommonExtraThinkResp extraTime
+     * @property {number|null} [totalTime] S2CCommonExtraThinkResp totalTime
      */
 
     /**
@@ -16466,12 +16498,28 @@ $root.S2CCommonExtraThinkResp = (function() {
     S2CCommonExtraThinkResp.prototype.result = null;
 
     /**
+     * S2CCommonExtraThinkResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonExtraThinkResp
+     * @instance
+     */
+    S2CCommonExtraThinkResp.prototype.gameId = "";
+
+    /**
      * S2CCommonExtraThinkResp extraTime.
      * @member {number} extraTime
      * @memberof S2CCommonExtraThinkResp
      * @instance
      */
     S2CCommonExtraThinkResp.prototype.extraTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CCommonExtraThinkResp totalTime.
+     * @member {number} totalTime
+     * @memberof S2CCommonExtraThinkResp
+     * @instance
+     */
+    S2CCommonExtraThinkResp.prototype.totalTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
      * Encodes the specified S2CCommonExtraThinkResp message. Does not implicitly {@link S2CCommonExtraThinkResp.verify|verify} messages.
@@ -16487,8 +16535,12 @@ $root.S2CCommonExtraThinkResp = (function() {
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
         if (m.extraTime != null && Object.hasOwnProperty.call(m, "extraTime"))
-            w.uint32(16).int64(m.extraTime);
+            w.uint32(24).int64(m.extraTime);
+        if (m.totalTime != null && Object.hasOwnProperty.call(m, "totalTime"))
+            w.uint32(32).int64(m.totalTime);
         return w;
     };
 
@@ -16514,7 +16566,13 @@ $root.S2CCommonExtraThinkResp = (function() {
                 m.result = $root.CommonResult.decode(r, r.uint32());
                 break;
             case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
                 m.extraTime = r.int64();
+                break;
+            case 4:
+                m.totalTime = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -18810,4 +18868,185 @@ $root.S2CCommonIntervalTimeNotify = (function() {
     };
 
     return S2CCommonIntervalTimeNotify;
+})();
+
+$root.S2CCommonOpenCardNotify = (function() {
+
+    /**
+     * Properties of a S2CCommonOpenCardNotify.
+     * @exports IS2CCommonOpenCardNotify
+     * @interface IS2CCommonOpenCardNotify
+     * @property {string|null} [gameId] S2CCommonOpenCardNotify gameId
+     * @property {Array.<IPlayerInfo>|null} [players] S2CCommonOpenCardNotify players
+     */
+
+    /**
+     * Constructs a new S2CCommonOpenCardNotify.
+     * @exports S2CCommonOpenCardNotify
+     * @classdesc Represents a S2CCommonOpenCardNotify.
+     * @implements IS2CCommonOpenCardNotify
+     * @constructor
+     * @param {IS2CCommonOpenCardNotify=} [p] Properties to set
+     */
+    function S2CCommonOpenCardNotify(p) {
+        this.players = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonOpenCardNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonOpenCardNotify
+     * @instance
+     */
+    S2CCommonOpenCardNotify.prototype.gameId = "";
+
+    /**
+     * S2CCommonOpenCardNotify players.
+     * @member {Array.<IPlayerInfo>} players
+     * @memberof S2CCommonOpenCardNotify
+     * @instance
+     */
+    S2CCommonOpenCardNotify.prototype.players = $util.emptyArray;
+
+    /**
+     * Encodes the specified S2CCommonOpenCardNotify message. Does not implicitly {@link S2CCommonOpenCardNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonOpenCardNotify
+     * @static
+     * @param {IS2CCommonOpenCardNotify} m S2CCommonOpenCardNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonOpenCardNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.players != null && m.players.length) {
+            for (var i = 0; i < m.players.length; ++i)
+                $root.PlayerInfo.encode(m.players[i], w.uint32(18).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonOpenCardNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonOpenCardNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonOpenCardNotify} S2CCommonOpenCardNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonOpenCardNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonOpenCardNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                if (!(m.players && m.players.length))
+                    m.players = [];
+                m.players.push($root.PlayerInfo.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonOpenCardNotify;
+})();
+
+$root.S2CCommonWaitStartNotify = (function() {
+
+    /**
+     * Properties of a S2CCommonWaitStartNotify.
+     * @exports IS2CCommonWaitStartNotify
+     * @interface IS2CCommonWaitStartNotify
+     * @property {string|null} [gameId] S2CCommonWaitStartNotify gameId
+     */
+
+    /**
+     * Constructs a new S2CCommonWaitStartNotify.
+     * @exports S2CCommonWaitStartNotify
+     * @classdesc Represents a S2CCommonWaitStartNotify.
+     * @implements IS2CCommonWaitStartNotify
+     * @constructor
+     * @param {IS2CCommonWaitStartNotify=} [p] Properties to set
+     */
+    function S2CCommonWaitStartNotify(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonWaitStartNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonWaitStartNotify
+     * @instance
+     */
+    S2CCommonWaitStartNotify.prototype.gameId = "";
+
+    /**
+     * Encodes the specified S2CCommonWaitStartNotify message. Does not implicitly {@link S2CCommonWaitStartNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonWaitStartNotify
+     * @static
+     * @param {IS2CCommonWaitStartNotify} m S2CCommonWaitStartNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonWaitStartNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonWaitStartNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonWaitStartNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonWaitStartNotify} S2CCommonWaitStartNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonWaitStartNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonWaitStartNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonWaitStartNotify;
 })();

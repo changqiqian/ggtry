@@ -470,6 +470,12 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             {
                 HallData.Instance.Data_S2CEnterGame.mData = msg;
             }
+            else if(msg.result.resId == 113) //代表已经在游戏中，直接切换进入游戏画面
+            {
+                let struct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                let index = struct.mIndex;
+                MultipleTableCtr.ShowGameUI(index);
+            }
             else
             {
                 MultipleTableCtr.RemoveGameStructByGameId(msg.gameId);
@@ -731,8 +737,46 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);  
 
-        
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonExaminePublicCardResp,(_data)=>
+        {
+            let msg = S2CCommonExaminePublicCardResp.decode(_data);
+            console.log("收到的内容 S2C_CommonExaminePublicCardResp  看公共牌==" + JSON.stringify(msg));
 
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_S2CCommonExaminePublicCardResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+        
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonExaminePrivateCardResp,(_data)=>
+        {
+            let msg = S2CCommonExaminePrivateCardResp.decode(_data);
+            console.log("收到的内容 S2C_CommonExaminePrivateCardResp  看手牌==" + JSON.stringify(msg));
+
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_S2CCommonExaminePrivateCardResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
 
         Network.Instance.AddMsgListenner(MessageId.S2C_TexasCowboyEnterGameResp,(_data)=>
         {
@@ -1086,6 +1130,35 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.Data_S2CCommonRoundStartNotify.mData = msg;
             }
         },this);
+        
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonWaitStartNotify,(_data)=>
+        {
+            let msg = S2CCommonWaitStartNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonWaitStartNotify  游戏闲置阶段==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.SetGameState(TexasCashState.TexasCashState_WaitStart);
+                gameData.Data_S2CCommonWaitStartNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonOpenCardNotify,(_data)=>
+        {
+            let msg = S2CCommonOpenCardNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonOpenCardNotify  所有玩家亮牌==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_S2CCommonOpenCardNotify.mData = msg;
+            }
+        },this);
+        
+        
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonPreFlopRoundNotify,(_data)=>
         {

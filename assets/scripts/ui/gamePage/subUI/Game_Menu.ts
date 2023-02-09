@@ -32,7 +32,7 @@ export class Game_Menu extends BaseUI
     @property(BaseButton) 
     mExitBtn: BaseButton = null;
     @property(BaseButton) 
-    mDismiss: BaseButton = null;
+    mSettlementBtn: BaseButton = null;
     mIndex : number;
 
     onEnable()
@@ -92,15 +92,18 @@ export class Game_Menu extends BaseUI
         });
         this.mExitBtn.SetClickCallback(()=>
         {
+            HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.HomeIndex;
+            // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            // let gameData = gameStruct.mGameData;
+            // let gameId = gameStruct.mGameId;
+            // NetworkSend.Instance.ExitGame(gameId,gameData.GetStaticData().gameType);
+        });
+        this.mSettlementBtn.SetClickCallback(()=>
+        {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let gameId = gameStruct.mGameId;
             NetworkSend.Instance.ExitGame(gameId,gameData.GetStaticData().gameType);
-        });
-        this.mDismiss.SetClickCallback(()=>
-        {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            NetworkSend.Instance.DismissClubGame(gameStruct.mGameId , gameStruct.mClubId);
         });
     }
     RegDataNotify()
@@ -133,7 +136,7 @@ export class Game_Menu extends BaseUI
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
             this.UpdateStandBtn();
-            this.UpdateDismissBtn();
+            this.UpdateSettlementBtn();
         });
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
         {
@@ -142,6 +145,7 @@ export class Game_Menu extends BaseUI
                 return;
             }
             this.UpdateStandBtn();
+            this.UpdateSettlementBtn();
         });
 
         gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
@@ -151,6 +155,7 @@ export class Game_Menu extends BaseUI
                 return;
             }
             this.UpdateStandBtn();
+            this.UpdateSettlementBtn();
         });
 
 
@@ -160,24 +165,11 @@ export class Game_Menu extends BaseUI
             {
                 return;
             }
-            this.UpdateDismissBtn();
+
         });
     }
 
-    UpdateDismissBtn()
-    {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
 
-        if(gameStruct.mClubId != "")
-        {
-            this.mDismiss.Show(enterClub.clubMember.memberType != ClubMemberType.ClubAccountType_Normal);
-        }
-        else
-        {
-            this.mDismiss.Show(false);
-        }
-    }
 
     UpdateStandBtn()
     {
@@ -188,14 +180,21 @@ export class Game_Menu extends BaseUI
         }
         let gameData = gameStruct.mGameData;
         let uid = LocalPlayerData.Instance.Data_Uid.mData;
-        // if(gameData.IsPlayerDelayStandUp(uid))
-        // {
-        //     this.mStandBtn.Show(false);
-        //     return;
-        // }
-
         let selfPlayer = gameData.GetPlayerInfoByUid(uid);
         this.mStandBtn.Show(selfPlayer != null);
+    }
+
+    UpdateSettlementBtn()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        if(gameStruct == null)
+        {
+            return;
+        }
+        let gameData = gameStruct.mGameData;
+        let uid = LocalPlayerData.Instance.Data_Uid.mData;
+        let selfPlayer = gameData.GetPlayerInfoByUid(uid);
+        this.mSettlementBtn.Show(selfPlayer != null);
     }
 
     public Show(_val : boolean)

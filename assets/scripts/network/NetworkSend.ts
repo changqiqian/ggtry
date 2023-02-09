@@ -409,6 +409,22 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("玩家聊天  === " + JSON.stringify(msg))
     }
 
+    public SendShowPublicCards(_msgId : number,_gameId : string)
+    {
+        let msg = new C2SExaminePublicCard();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(_msgId , C2SExaminePublicCard.encode(msg).finish());
+        console.log("看公共牌  === " + JSON.stringify(msg))
+    }
+
+    public SendShowHands(_msgId : number,_gameId : string)
+    {
+        let msg = new C2SExaminePrivateCard();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(_msgId , C2SExaminePrivateCard.encode(msg).finish());
+        console.log("看手牌  === " + JSON.stringify(msg))
+    }
+
     public SendExtraThinkingTime(_msgId : number,_gameId : string)
     {
         let msg = new C2STexasCashExtraThink();

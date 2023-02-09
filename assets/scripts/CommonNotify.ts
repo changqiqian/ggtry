@@ -9,7 +9,7 @@ export class CommonNotify extends SingletonBaseNotify<CommonNotify>()
         CommonNotify.ClearInstance();
     }
 
-
+    
     Data_SocketOpen : BaseData<boolean> = new BaseData<boolean>(true);
     Data_SocketClose : BaseData<boolean> = new BaseData<boolean>(true);
     Data_SocketError : BaseData<boolean> = new BaseData<boolean>(true);

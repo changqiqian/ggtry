@@ -243,6 +243,7 @@ export class Game_BuyInWindow extends BaseUI
     StopCountDown()
     {
         this.mCountNode.active = false;
+        this.mCountDown.string = "";
         this.StopSecondsTimer();
     }
     

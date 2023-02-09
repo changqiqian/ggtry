@@ -24,7 +24,8 @@ export class Cash_GameItem extends BaseUI
     mGameName: Label = null;
     @property(BaseButton) 
     mEnterBtn: BaseButton = null;
-
+    @property(Node) 
+    mTips: Node = null;
     mHallTexasGameInfo : HallTexasGameInfo = null;
     InitParam()
     {
@@ -106,6 +107,11 @@ export class Cash_GameItem extends BaseUI
         let totalTime = this.mHallTexasGameInfo.basicTexasConfig.gameDuration;
         let currentTime = this.mHallTexasGameInfo.aboutGameInfo.leftTime;
         this.mDuration.string = Tool.ConvertSecondsToHour(currentTime) + " / " + Tool.ConvertSecondsToHour(totalTime);
+
+
+        let gameId = this.mHallTexasGameInfo.gameId;
+        let struct = MultipleTableCtr.FindGameStructByGameId(gameId);
+        this.mTips.active = struct != null;
     }
 
     

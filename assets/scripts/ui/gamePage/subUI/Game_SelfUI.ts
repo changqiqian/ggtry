@@ -112,6 +112,11 @@ export class Game_SelfUI extends BaseUI
             this.UpdateMoney();
         })
 
+        gameData.Data_S2CCommonWaitStartNotify.AddListenner(this,(_data)=>
+        {
+            this.HideAllUI();
+        });
+
         gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
         {
             this.UpdateDealer();

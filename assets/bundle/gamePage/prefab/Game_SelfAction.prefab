@@ -3219,9 +3219,9 @@
     ],
     "value": {
       "__type__": "cc.Color",
-      "r": 146,
-      "g": 150,
-      "b": 171,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     }
   },
@@ -3365,7 +3365,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "3141cf5e-a58a-4210-ae2a-3d0777825b87@f9941",
+      "__uuid__": "e2829885-eab3-46d7-b7e6-20d3c5d3ac74@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -3403,7 +3403,7 @@
     "propertyPath": [
       "_sizeMode"
     ],
-    "value": 1
+    "value": 0
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -6803,8 +6803,8 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
+    "_top": 114.90400000000007,
+    "_bottom": -114.90400000000007,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -7363,7 +7363,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": -114.904,
       "z": 0
     }
   },

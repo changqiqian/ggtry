@@ -118,10 +118,13 @@ export class GameBase extends BaseUI
             this.TryToPlayAudio("YourTurn");
         });
 
-        gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonWaitStartNotify.AddListenner(this,(_data)=>
         {
             this.StopSecondsTimer();
-            //gameData.ExcutiveDelayStandUp();
+        })
+
+        gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
+        {
             this.TryToPlayAudio("Bet");
         })
 

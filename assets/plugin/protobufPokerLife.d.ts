@@ -4636,10 +4636,9 @@ export enum MessageId {
     C2S_TexasCashChat = 5011,
     C2S_TexasCashGetObList = 5012,
     C2S_TexasCashGetBringInList = 5013,
-    C2S_TexasCashRefresh = 5014,
-    C2S_TexasCashExaminePublicCard = 5015,
-    C2S_TexasCashExaminePrivateCard = 5016,
-    C2S_TexasCashExtraThink = 5017,
+    C2S_TexasCashExaminePublicCard = 5014,
+    C2S_TexasCashExaminePrivateCard = 5015,
+    C2S_TexasCashExtraThink = 5016,
     MSG_TexasCashEnd = 5500,
     MSG_TexasMttBegin = 5501,
     MSG_TexasMttEnd = 6000,
@@ -4670,21 +4669,23 @@ export enum MessageId {
     S2C_CommonBringInNotify = 8111,
     S2C_CommonSitDownNotify = 8112,
     S2C_CommonStandUpNotify = 8113,
-    S2C_CommonActionNotify = 8114,
-    S2C_CommonBuyInsuranceNotify = 8115,
     S2C_CommonChatNotify = 8116,
-    S2C_CommonExtraThinkNotify = 8117,
-    S2C_CommonInsuranceResultNotify = 8118,
-    S2C_CommonInsuranceTurnNotify = 8119,
     S2C_CommonOpenNotify = 8250,
-    S2C_CommonRoundStartNotify = 8251,
-    S2C_CommonPreFlopRoundNotify = 8252,
-    S2C_CommonFlopRoundNotify = 8253,
-    S2C_CommonTurnRoundNotify = 8254,
-    S2C_CommonRiverRoundNotify = 8255,
-    S2C_CommonCurrentActionNotify = 8256,
-    S2C_CommonSettlementNotify = 8257,
-    S2C_CommonIntervalTimeNotify = 8258,
+    S2C_CommonWaitStartNotify = 8251,
+    S2C_CommonRoundStartNotify = 8252,
+    S2C_CommonPreFlopRoundNotify = 8253,
+    S2C_CommonFlopRoundNotify = 8254,
+    S2C_CommonTurnRoundNotify = 8255,
+    S2C_CommonRiverRoundNotify = 8256,
+    S2C_CommonIntervalTimeNotify = 8257,
+    S2C_CommonCurrentActionNotify = 8258,
+    S2C_CommonActionNotify = 8259,
+    S2C_CommonSettlementNotify = 8260,
+    S2C_CommonExtraThinkNotify = 8261,
+    S2C_CommonOpenCardNotify = 8262,
+    S2C_CommonInsuranceTurnNotify = 8263,
+    S2C_CommonBuyInsuranceNotify = 8264,
+    S2C_CommonInsuranceResultNotify = 8265,
     MSG_TexasCowboyBegin = 10001,
     C2S_TexasCowboyEnterGame = 10002,
     C2S_TexasCowboyExitGame = 10003,
@@ -5666,6 +5667,9 @@ export class S2CCommonExaminePublicCardResp implements IS2CCommonExaminePublicCa
     /** S2CCommonExaminePublicCardResp result. */
     public result?: (ICommonResult|null);
 
+    /** S2CCommonExaminePublicCardResp gameId. */
+    public gameId: string;
+
     /** S2CCommonExaminePublicCardResp publicCardList. */
     public publicCardList: ICardInfo[];
 
@@ -5699,6 +5703,9 @@ export class S2CCommonExaminePrivateCardResp implements IS2CCommonExaminePrivate
 
     /** S2CCommonExaminePrivateCardResp result. */
     public result?: (ICommonResult|null);
+
+    /** S2CCommonExaminePrivateCardResp gameId. */
+    public gameId: string;
 
     /** S2CCommonExaminePrivateCardResp playerList. */
     public playerList: IPlayerInfo[];
@@ -5734,8 +5741,14 @@ export class S2CCommonExtraThinkResp implements IS2CCommonExtraThinkResp {
     /** S2CCommonExtraThinkResp result. */
     public result?: (ICommonResult|null);
 
+    /** S2CCommonExtraThinkResp gameId. */
+    public gameId: string;
+
     /** S2CCommonExtraThinkResp extraTime. */
     public extraTime: number;
+
+    /** S2CCommonExtraThinkResp totalTime. */
+    public totalTime: number;
 
     /**
      * Encodes the specified S2CCommonExtraThinkResp message. Does not implicitly {@link S2CCommonExtraThinkResp.verify|verify} messages.
@@ -6490,6 +6503,71 @@ export class S2CCommonIntervalTimeNotify implements IS2CCommonIntervalTimeNotify
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonIntervalTimeNotify;
+}
+
+/** Represents a S2CCommonOpenCardNotify. */
+export class S2CCommonOpenCardNotify implements IS2CCommonOpenCardNotify {
+
+    /**
+     * Constructs a new S2CCommonOpenCardNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonOpenCardNotify);
+
+    /** S2CCommonOpenCardNotify gameId. */
+    public gameId: string;
+
+    /** S2CCommonOpenCardNotify players. */
+    public players: IPlayerInfo[];
+
+    /**
+     * Encodes the specified S2CCommonOpenCardNotify message. Does not implicitly {@link S2CCommonOpenCardNotify.verify|verify} messages.
+     * @param m S2CCommonOpenCardNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonOpenCardNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonOpenCardNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonOpenCardNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonOpenCardNotify;
+}
+
+/** Represents a S2CCommonWaitStartNotify. */
+export class S2CCommonWaitStartNotify implements IS2CCommonWaitStartNotify {
+
+    /**
+     * Constructs a new S2CCommonWaitStartNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonWaitStartNotify);
+
+    /** S2CCommonWaitStartNotify gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CCommonWaitStartNotify message. Does not implicitly {@link S2CCommonWaitStartNotify.verify|verify} messages.
+     * @param m S2CCommonWaitStartNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonWaitStartNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonWaitStartNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonWaitStartNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonWaitStartNotify;
 }
  
 }

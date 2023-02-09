@@ -225,7 +225,7 @@ export class Game_SelfAction extends BaseUI
             {
                 return;
             }
-            this.mCircleTimer.StartTimer(_data.extraTime);
+            this.mCircleTimer.StartTimer(_data.totalTime);
         })
     }
 

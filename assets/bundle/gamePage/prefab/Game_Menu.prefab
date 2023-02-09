@@ -4079,7 +4079,7 @@
     "__prefab": {
       "__id__": 251
     },
-    "mKey": "00270",
+    "mKey": "00327",
     "_id": ""
   },
   {
@@ -4272,7 +4272,7 @@
     "propertyPath": [
       "_string"
     ],
-    "value": "退出结算"
+    "value": "返回大厅"
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -4389,9 +4389,9 @@
     ],
     "value": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 67,
-      "b": 67,
+      "r": 146,
+      "g": 150,
+      "b": 171,
       "a": 255
     }
   },
@@ -4736,7 +4736,7 @@
     "propertyPath": [
       "_name"
     ],
-    "value": "DismissBtn"
+    "value": "SettlementBtn"
   },
   {
     "__type__": "cc.TargetInfo",
@@ -5347,7 +5347,7 @@
     "mSettingBtn": null,
     "mStandBtn": null,
     "mExitBtn": null,
-    "mDismiss": null,
+    "mSettlementBtn": null,
     "_id": ""
   },
   {
@@ -5445,6 +5445,9 @@
       },
       {
         "__id__": 372
+      },
+      {
+        "__id__": 374
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -5677,6 +5680,28 @@
     },
     "targetInfo": {
       "__id__": 373
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "eaLy0KjgNMzpJZxdZXV5DR"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 347
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "mSettlementBtn"
+    ],
+    "target": {
+      "__id__": 281
+    },
+    "targetInfo": {
+      "__id__": 375
     }
   },
   {

@@ -146,7 +146,6 @@ export class Game_Player extends BaseUI
             this.mCards.active = false;
             this.mSelfBtn.node.active = false;
             this.mBG.active = true;
-
             this.UpdateName(playerInfo.nickName);
             this.UpdateHead(playerInfo.head);
             this.UpdateMoney(true ,playerInfo);
@@ -330,7 +329,7 @@ export class Game_Player extends BaseUI
             }
         })
 
-        gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonWaitStartNotify.AddListenner(this,(_data)=>
         {
             let currentPlayer = gameData.GetPlayerInfoBySeatId(this.mSeatID);
             if(currentPlayer == null)
@@ -338,6 +337,15 @@ export class Game_Player extends BaseUI
                 return;
             }
             this.PrepareRoundStart();
+        })
+
+        gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
+        {
+            let currentPlayer = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+            if(currentPlayer == null)
+            {
+                return;
+            }
 
             if(gameData.IsPlayerPlaying(currentPlayer.uid) == false)
             {
@@ -405,7 +413,7 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            this.mCircleTimer.StartTimer(_data.extraTime);
+            this.mCircleTimer.StartTimer(_data.totalTime);
         })
 
 
@@ -502,6 +510,53 @@ export class Game_Player extends BaseUI
                 }
             });
         })
+
+        gameData.Data_S2CCommonExaminePrivateCardResp.AddListenner(this,(_data)=>
+        {
+            let playerDatas = _data.playerList;
+            let currentPlayer = null;
+            for(let i = 0 ; i < playerDatas.length ; i++)
+            {
+                let current = playerDatas[i];
+                if(current.seat == this.mSeatID)
+                {
+                    currentPlayer = current;
+                    break;
+                }
+            }
+
+            if(currentPlayer == null)
+            {
+                return;
+            }
+
+            let hands = currentPlayer.cards;
+            this.ShowCards(hands , false);
+        });
+
+        gameData.Data_S2CCommonOpenCardNotify.AddListenner(this,(_data)=>
+        {
+            let playerDatas = _data.players;
+            let currentPlayer = null;
+            for(let i = 0 ; i < playerDatas.length ; i++)
+            {
+                let current = playerDatas[i];
+                if(current.seat == this.mSeatID)
+                {
+                    currentPlayer = current;
+                    break;
+                }
+            }
+
+            if(currentPlayer == null)
+            {
+                return;
+            }
+
+            let hands = currentPlayer.cards;
+            this.ShowCards(hands , false);
+        });
+        
     }
 
     UpdateWinLose(_winLoseInfo : PlayerWinLose)

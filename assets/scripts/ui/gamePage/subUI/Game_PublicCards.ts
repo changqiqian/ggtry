@@ -69,9 +69,14 @@ export class Game_PublicCards extends BaseUI
             }
         });
 
-        gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonWaitStartNotify.AddListenner(this,(_data)=>
         {
             this.ClearPublicCards();
+        });
+
+        gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
+        {
+            //this.ClearPublicCards();
         });
 
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
@@ -92,6 +97,29 @@ export class Game_PublicCards extends BaseUI
         gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
         {
             this.ShowCard(4 , _data.card);
+        });
+        
+
+        gameData.Data_S2CCommonExaminePublicCardResp.AddListenner(this,(_data)=>
+        {
+            let allPublicCards = _data.publicCardList;
+            let historyPublicCards = gameData.GetDynamicData().publicCards;
+            let showCards  = [];
+
+            for(let i = 0 ; i < allPublicCards.length ; i++)
+            {
+                if(i >= historyPublicCards.length)
+                {
+                    showCards.push(allPublicCards[i]);
+                }
+            }
+
+            let startIndex = allPublicCards.length - showCards.length;
+            for(let i = 0 ; i < showCards.length ; i++)
+            {
+                let index = startIndex + i;
+                this.ShowCard(index , showCards[i]);
+            }
         });
         
     }

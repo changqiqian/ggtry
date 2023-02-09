@@ -100,7 +100,7 @@ export class MultipleTableCtr extends BaseUI
 
     public static GameStruct:Array<GameStruct> ;
     public static readonly MaxGame : number = 4;
-    private static readonly HomeIndex : number = -1;
+    public static readonly HomeIndex : number = -1;
 
     InitParam()
     {

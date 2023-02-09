@@ -45,14 +45,18 @@ export class GameDataCash extends GameData
         return MessageId.C2S_TexasCashGetBringInList;
     }
     
-    public RefreshSendMsgId() : number
-    {
-        return MessageId.C2S_TexasCashRefresh;
-    }
-    
+
     public ExtraThinkingTimeMsgId() : number
     {
         return MessageId.C2S_TexasCashExtraThink;
+    }
+    public ShowPublicMsgId() : number
+    {
+        return MessageId.C2S_TexasCashExaminePublicCard;
+    }
+    public ShowHansMsgId() : number
+    {
+        return MessageId.C2S_TexasCashExaminePrivateCard;
     }
     
 

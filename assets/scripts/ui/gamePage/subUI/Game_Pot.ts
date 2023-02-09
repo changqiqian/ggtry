@@ -79,6 +79,12 @@ export class Game_Pot extends BaseUI
             this.UpdateSubPots();
             this.UpdateTotalPot();
         })
+
+        gameData.Data_S2CCommonWaitStartNotify.AddListenner(this,(_data)=>
+        {
+            this.ClearPot();
+        });
+
         gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
         {
             this.UpdateSubPots();

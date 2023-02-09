@@ -508,6 +508,34 @@ export class UIMgr extends Singleton<UIMgr>()
         }
     }
 
+
+    public HideUiByTag2(_tag : string)
+    {
+        for(let i = LayerType.Layer ; i <= LayerType.Window ; i++)
+        {
+            let currentList = this.GetList(i);
+            for(let k = 0 ; k < currentList.length ; k++)
+            {
+                let currentKeyPair = currentList[k];
+                if(currentKeyPair.tag == _tag)
+                {
+                    if(currentKeyPair.value != null)
+                    {
+                        let tempScript = currentKeyPair.value.getComponent(BaseUI);
+                        if(i == LayerType.Window)
+                        {
+                            tempScript.Show(false);
+                        }
+                        else
+                        {
+                            tempScript.node.setSiblingIndex(0);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private CreateKey(_bundleName :string , _prefabPath:string , _aka:string) : string 
     {
         let key = _bundleName + "/"  + _prefabPath + ":aka==" + _aka;

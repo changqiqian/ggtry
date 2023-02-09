@@ -642,8 +642,7 @@
     "propertyPath": [
       "_spriteFrame"
     ],
-    "value": {
-    }
+    "value": {}
   },
   {
     "__type__": "cc.TargetInfo",
@@ -1501,8 +1500,7 @@
     "propertyPath": [
       "_spriteFrame"
     ],
-    "value": {
-    }
+    "value": {}
   },
   {
     "__type__": "cc.TargetInfo",
@@ -1977,8 +1975,7 @@
     "propertyPath": [
       "_spriteFrame"
     ],
-    "value": {
-    }
+    "value": {}
   },
   {
     "__type__": "cc.TargetInfo",

@@ -32,8 +32,11 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonStandUpResp : BaseData<S2CCommonStandUpResp> = new BaseData<S2CCommonStandUpResp>(true);  //站起
     Data_S2CCommonStandUpNotify : BaseData<S2CCommonStandUpNotify> = new BaseData<S2CCommonStandUpNotify>(true);  //站起推送
     Data_S2CCommonBringInResp : BaseData<S2CCommonBringInResp> = new BaseData<S2CCommonBringInResp>(true);  //带入
+    Data_S2CCommonExaminePublicCardResp: BaseData<S2CCommonExaminePublicCardResp> = new BaseData<S2CCommonExaminePublicCardResp>(true);  //看公共牌
+    Data_S2CCommonExaminePrivateCardResp: BaseData<S2CCommonExaminePrivateCardResp> = new BaseData<S2CCommonExaminePrivateCardResp>(true);  //看手牌
 
     Data_S2CCommonIntervalTimeNotify : BaseData<S2CCommonIntervalTimeNotify> = new BaseData<S2CCommonIntervalTimeNotify>(true);  //阶段延时推送
+    Data_S2CCommonWaitStartNotify: BaseData<S2CCommonWaitStartNotify> = new BaseData<S2CCommonWaitStartNotify>(true);  //游戏闲置阶段推送
     Data_S2CCommonRoundStartNotify : BaseData<S2CCommonRoundStartNotify> = new BaseData<S2CCommonRoundStartNotify>(true);  //本轮开始推送
     Data_S2CCommonPreFlopRoundNotify: BaseData<S2CCommonPreFlopRoundNotify> = new BaseData<S2CCommonPreFlopRoundNotify>(true);  //翻前发牌推送
     Data_S2CCommonCurrentActionNotify : BaseData<S2CCommonCurrentActionNotify> = new BaseData<S2CCommonCurrentActionNotify>(true);  //轮到谁行动推送
@@ -45,6 +48,7 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonSettlementNotify  : BaseData<S2CCommonSettlementNotify> = new BaseData<S2CCommonSettlementNotify>(true);  //游戏结算推送
     Data_S2CCommonChatNotify: BaseData<S2CCommonChatNotify> = new BaseData<S2CCommonChatNotify>(true);  //聊天推送
     Data_S2CCommonExtraThinkNotify: BaseData<S2CCommonExtraThinkNotify> = new BaseData<S2CCommonExtraThinkNotify>(true);  //思考时间推送
+    Data_S2CCommonOpenCardNotify: BaseData<S2CCommonOpenCardNotify> = new BaseData<S2CCommonOpenCardNotify>(true);  //所有玩家亮牌
 
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_RotateSeatEnd : BaseData<boolean> = new BaseData<boolean>(true);  //座位旋转结束
@@ -483,8 +487,9 @@ export abstract class GameData extends MultipleNotify
     public abstract ChatSendMsgId() : number
     public abstract ObListSendMsgId() : number
     public abstract BuyInListSendMsgId() : number
-    public abstract RefreshSendMsgId() : number
     public abstract ExtraThinkingTimeMsgId() : number
+    public abstract ShowPublicMsgId() : number
+    public abstract ShowHansMsgId() : number
 }
 
 
