@@ -552,28 +552,41 @@
              }
          }
  
-         let layout: Layout = this.content.getComponent(Layout);
-         if (layout)
-             layout.enabled = false;
- 
-         this._allItemSize = result;
-         this._allItemSizeNoEdge = this._allItemSize - (this._sizeType ? (this._topGap + this._bottomGap) : (this._leftGap + this._rightGap));
+        let layout: Layout = this.content.getComponent(Layout);
+        if (layout)
+        {
+            layout.enabled = false;
+        }
+
+        this._allItemSize = result;
+        this._allItemSizeNoEdge = this._allItemSize - (this._sizeType ? (this._topGap + this._bottomGap) : (this._leftGap + this._rightGap));
 
         //  let tempCyclic = false;    
         //  let lackCenter = false;
         //  let tempLack = !tempCyclic && this._allItemSize < (this._sizeType ? this._thisNodeUt.height : this._thisNodeUt.width);
         //  let slideOffset: number = ((!tempLack || !lackCenter) && this.lackSlide) ? 0 : .1;
-        this.lackSlide = this._numItems == 0;
+        this.lackSlide = false;
+
+        if(this._allItemSize <= this._thisNodeUt.height || this._numItems == 0)
+        {
+            this.lackSlide = true;
+        }
+
         let slideOffset: number =  this.lackSlide ? 0 : 0.1;
-         let targetWH: number = this.lackSlide ? ((this._sizeType ? this._thisNodeUt.height : this._thisNodeUt.width) - slideOffset) : (this._allItemSize);
-         if (targetWH < 0)
-             targetWH = 0;
- 
-         if (this._sizeType) {
-             this._contentUt.height = targetWH;
-         } else {
-             this._contentUt.width = targetWH;
-         }
+        let targetWH: number = this.lackSlide ? ((this._sizeType ? this._thisNodeUt.height : this._thisNodeUt.width) - slideOffset) : (this._allItemSize);
+        if (targetWH < 0)
+        {
+            targetWH = 0;
+        }
+        
+        if (this._sizeType) 
+        {
+            this._contentUt.height = targetWH;
+        } 
+        else 
+        {
+            this._contentUt.width = targetWH;
+        }
 
      }
  

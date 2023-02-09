@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Game_ChattingSubLayer } from '../GameData';
 import { Game_ChatShortcutItem } from './Game_ChatShortcutItem';
@@ -59,14 +60,14 @@ export class Game_ChatShortcutLayer extends BaseUI
     InitShortcutItem()
     {
         this.mShortcuts = new Array<string>();
-        this.mShortcuts.push("1111");
-        this.mShortcuts.push("2222");
-        this.mShortcuts.push("3333");
-        this.mShortcuts.push("4444");
-        this.mShortcuts.push("5555");
-        this.mShortcuts.push("6666");
-        this.mShortcuts.push("7777");
-        this.mShortcuts.push("8888");
+        this.mShortcuts.push(Localization.GetString("00328"));
+        this.mShortcuts.push(Localization.GetString("00329"));
+        this.mShortcuts.push(Localization.GetString("00330"));
+        this.mShortcuts.push(Localization.GetString("00331"));
+        this.mShortcuts.push(Localization.GetString("00332"));
+        this.mShortcuts.push(Localization.GetString("00333"));
+        this.mShortcuts.push(Localization.GetString("00334"));
+        this.mShortcuts.push(Localization.GetString("00335"));
         for(let i = 0 ; i < this.mShortcuts.length ; i++)
         {
             this.LoadPrefab("gamePage" , "prefab/Game_ChatShortcutItem" , (_node)=>

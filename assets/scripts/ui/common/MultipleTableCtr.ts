@@ -125,6 +125,7 @@ export class MultipleTableCtr extends BaseUI
             if(_data == MultipleTableCtr.HomeIndex)
             {
                 MultipleTableCtr.HideAllGameUI();
+                NetworkSend.Instance.GetTexasGameListInHall();
             }
             else
             {

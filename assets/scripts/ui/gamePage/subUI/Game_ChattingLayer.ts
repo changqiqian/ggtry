@@ -49,7 +49,7 @@ export class Game_ChattingLayer extends BaseUI
             let content = this.mEditBox.string;
             if(content == "")
             {
-                UIMgr.Instance.ShowToast(Localization.GetString("name"));
+                UIMgr.Instance.ShowToast(Localization.GetString("00324"));
                 return;
             }
 
