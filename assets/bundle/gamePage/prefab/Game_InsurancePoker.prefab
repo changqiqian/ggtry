@@ -345,8 +345,8 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": 11.889000000000003,
-      "y": 28.927999999999997,
+      "x": 7.389000000000003,
+      "y": 23.427999999999997,
       "z": 0
     }
   },
@@ -360,8 +360,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 84,
-      "height": 110
+      "width": 75,
+      "height": 99
     }
   },
   {
@@ -380,8 +380,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 84,
-      "height": 110
+      "width": 75,
+      "height": 99
     }
   },
   {
@@ -400,8 +400,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 84,
-      "height": 110
+      "width": 75,
+      "height": 99
     }
   },
   {
@@ -420,8 +420,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 84,
-      "height": 110
+      "width": 75,
+      "height": 99
     }
   },
   {
@@ -440,8 +440,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 84,
-      "height": 110
+      "width": 75,
+      "height": 99
     }
   },
   {
@@ -460,8 +460,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 79,
-      "height": 110
+      "width": 70,
+      "height": 99
     }
   },
   {
@@ -836,8 +836,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 22,
-      "y": 35,
+      "x": 17.5,
+      "y": 29.5,
       "z": 0
     },
     "_lrot": {
@@ -992,8 +992,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 84,
-      "height": 110
+      "width": 75,
+      "height": 99
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

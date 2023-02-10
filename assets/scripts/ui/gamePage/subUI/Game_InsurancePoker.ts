@@ -35,7 +35,9 @@ export class Game_InsurancePoker extends BaseUI
 
     public SetCard(_cardInfo : CardInfo)
     {
+        this.mPoker.ResetAndHide();
         this.mPoker.SetFrontByCardInfo(_cardInfo);
+        this.mPoker.ShowFront();
     } 
 }
 

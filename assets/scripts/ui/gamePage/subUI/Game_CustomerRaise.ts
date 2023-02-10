@@ -24,7 +24,6 @@ export class Game_CustomerRaise extends BaseUI
     }
     BindUI()
     {
-        
     }
     RegDataNotify()
     {

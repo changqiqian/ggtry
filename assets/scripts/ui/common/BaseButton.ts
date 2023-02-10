@@ -8,9 +8,9 @@ const { ccclass, property } = _decorator;
 export class BaseButton extends BaseUI {
     @property(Label) 
     mTitle: Label = null;
-    mProtectDoubleClick : boolean = false;
+    mProtectDoubleClick : boolean = true;
     mClickProtecting : boolean = false;
-    mClickProtectedDuration : number = 0.1;
+    mClickProtectedDuration : number = 0.2;
     private mCustomerData : any = null;
     private mCallback : Function = null;
     private mProtectCallback : Function = null;

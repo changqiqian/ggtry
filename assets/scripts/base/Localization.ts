@@ -423,6 +423,7 @@ export class Localization {
         { name: '00336', ch: '对手手牌', en: 'Hands' },
         { name: '00337', ch: '购买:', en: 'buy insurance:' },
         { name: '00338', ch: '击中保险:', en: 'insurance reward:' },
+        { name: '00339', ch: '购买保险中', en: 'buying insurance' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

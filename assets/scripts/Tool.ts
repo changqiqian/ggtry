@@ -122,23 +122,28 @@ export class Tool
         return finalName;
     };
 
+    public static GetMoneyMultiple() : number
+    {
+        return 1000;
+    }
+
     //服务器的钱转成客户端
     public static ConvertMoney_S2C(_serverMoney : number) : number
     {
-        let clientMoney = _serverMoney / 1000;
+        let clientMoney = _serverMoney / Tool.GetMoneyMultiple();
         return clientMoney;
     }
 
     public static ConvertMoney_C2S(_clientMoney : number) : number
     {
-        let serverMoney = _clientMoney * 1000;
+        let serverMoney = _clientMoney * Tool.GetMoneyMultiple();
         return serverMoney;
     }
 
     public static CeilServerMoney(_serverMoney : number) : number
     {
-        let result = Math.ceil(_serverMoney/1000);
-        result = result* 1000;
+        let result = Math.ceil(_serverMoney/Tool.GetMoneyMultiple());
+        result = result* Tool.GetMoneyMultiple();
         return result;
     }
 

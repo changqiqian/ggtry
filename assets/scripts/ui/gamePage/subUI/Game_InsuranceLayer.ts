@@ -96,19 +96,17 @@ export class Game_InsuranceLayer extends BaseUI
         }
         this.mIndex = _index;
 
-        this.mShortcutBtn.children[0].getComponent(BaseButton).SetClickCallback((_data)=>
-        {
-            this.mProgressSlider.SetPercent(0.25);
-        });
-        this.mShortcutBtn.children[1].getComponent(BaseButton).SetClickCallback((_data)=>
-        {
-            this.mProgressSlider.SetPercent(0.5);
-        });
-        this.mShortcutBtn.children[2].getComponent(BaseButton).SetClickCallback((_data)=>
-        {
-            this.mProgressSlider.SetPercent(1);
-        });
 
+        for(let i = 0 ; i < this.mShortcutBtn.children.length ; i++)
+        {
+            let current = this.mShortcutBtn.children[i].getComponent(BaseButton);
+            let multiple = this.GetShortCutMultiple(i);
+            current.SetClickCallback((_data)=>
+            {
+                this.mProgressSlider.SetPercent(multiple);
+                this.UpdateAmount(multiple);
+            });
+        }
         this.mProgressSlider.SetEndCallback((_ratio)=>
         {
             this.UpdateAmount(_ratio);
@@ -211,10 +209,22 @@ export class Game_InsuranceLayer extends BaseUI
                 });
             }
 
+
+
             this.mOutsCount.string = fanchaoCards.length + "";
-            this.mRatio.string = (_data.ratios / 100).toFixed(1);
+            this.mRatio.string = (_data.ratios / 10).toFixed(1);
             this.mPot.string = Tool.ConvertMoney_S2C(_data.pots) + "";
             this.mPay.string = "0";
+
+            for(let i = 0 ; i < this.mShortcutBtn.children.length ; i++)
+            {
+                let current = this.mShortcutBtn.children[i].getComponent(BaseButton);
+                let multiple = this.GetShortCutMultiple(i);
+                let amount = multiple * _data.buyFullPot;
+                amount = Tool.CeilServerMoney(amount);
+                let title = Tool.ConvertMoney_S2C(amount) + "";
+                current.SetTitle(title);
+            }
 
             this.StartSecondsTimer(_data.leftTime,1 , ()=>
             {
@@ -232,7 +242,8 @@ export class Game_InsuranceLayer extends BaseUI
                 this.mTips.string = Localization.ReplaceString("00319",Tool.ConvertMoney_S2C(_data.buyBack)+"");
             }
 
-            this.mProgressSlider.SetPercent(0);
+            this.mProgressSlider.SetPercent(0.5);
+            this.UpdateAmount(0.5);
         });
     }
 
@@ -240,10 +251,10 @@ export class Game_InsuranceLayer extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let ratio = gameData.Data_S2CCommonInsuranceTurnNotify.mData.ratios;
-        ratio = ratio/100;
+        let payRatio = gameData.Data_S2CCommonInsuranceTurnNotify.mData.ratios;
+        payRatio = payRatio/10;
         let amount = this.CalculateControlMoney(_ratio);
-        let payAmount = Tool.ConvertMoney_S2C(amount * ratio) ;
+        let payAmount = Tool.ConvertMoney_S2C(amount * payRatio) ;
         this.mAmount.string = Tool.ConvertMoney_S2C(amount) + "";
         this.mPay.string = payAmount + "";
     }
@@ -256,7 +267,7 @@ export class Game_InsuranceLayer extends BaseUI
         //let min = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyBack;
         let min = 0;
         let max = fullPot * _ratio;
-        let step = 10000;//最小单位 1块钱
+        let step = Tool.GetMoneyMultiple();//最小单位 1块钱
         let roundMax = Math.floor( max/step);
         max = roundMax * step;
         let currentAmount = min + max;
@@ -292,6 +303,12 @@ export class Game_InsuranceLayer extends BaseUI
 
         this.mCountDown.string = "0";
         this.StopSecondsTimer();
+    }
+
+    GetShortCutMultiple(_index : number) : number
+    {
+        let array = [0.25, 0.5 , 1];
+        return array[_index];
     }
 }
 

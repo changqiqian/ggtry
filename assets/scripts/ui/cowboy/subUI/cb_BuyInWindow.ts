@@ -94,7 +94,7 @@ export class cb_BuyInWindow extends BaseUI
     {
         let min = 0;
         let max = LocalPlayerData.Instance.Data_Coin.mData * _ratio;
-        let step = 10000;
+        let step = Tool.GetMoneyMultiple();
         let roundMax = Math.floor( max/step);
         max = roundMax * step;
         let currentAmount = min + max;

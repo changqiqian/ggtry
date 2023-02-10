@@ -75,8 +75,6 @@ export class GameBase extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-
-
         gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
         {
             if(gameData.IsGamePlayingNow() == false)
@@ -86,7 +84,7 @@ export class GameBase extends BaseUI
 
             if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
             {
-                
+                UIMgr.Instance.ShowLayer("gamePage","prefab/Game_InsuranceLayer",false);
             }
             else
             {
