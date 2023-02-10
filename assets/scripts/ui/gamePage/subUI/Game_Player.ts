@@ -557,6 +557,27 @@ export class Game_Player extends BaseUI
             this.ShowCards(hands , false);
         });
         
+        gameData.Data_S2CCommonInsuranceLotteryNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.seat != this.mSeatID)
+            {
+                return;
+            }
+            this.UpdateMoney(false , playerInfo);
+            
+            this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_node)=>
+            {
+                this.node.addChild(_node);
+                let script = _node.getComponent(Game_WinEffect);
+                script.InitWithData(_data.amount);
+            })
+        })
     }
 
     UpdateWinLose(_winLoseInfo : PlayerWinLose)

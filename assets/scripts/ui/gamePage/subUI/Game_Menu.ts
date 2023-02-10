@@ -158,6 +158,15 @@ export class Game_Menu extends BaseUI
             this.UpdateSettlementBtn();
         });
 
+        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        {
+            if(_data.actionUid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                this.Show(false);
+            }
+
+        });
+
 
         HallData.Instance.Data_S2CModifyMemberRoleNotify.AddListenner(this,(_data)=>
         {

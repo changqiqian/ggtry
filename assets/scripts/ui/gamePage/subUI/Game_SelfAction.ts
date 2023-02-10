@@ -227,6 +227,14 @@ export class Game_SelfAction extends BaseUI
             }
             this.mCircleTimer.StartTimer(_data.totalTime);
         })
+
+        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        {
+            if(_data.actionUid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                this.HideAll();
+            }
+        });
     }
 
     HideAll()
@@ -252,8 +260,6 @@ export class Game_SelfAction extends BaseUI
         {
             return;
         }
-
-
 
         let actUid = gameData.GetDynamicData().actionUid;
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
@@ -302,8 +308,6 @@ export class Game_SelfAction extends BaseUI
         }
         this.ShowActionUI();
     }
-
-    
 
     ShowActionUI()
     {

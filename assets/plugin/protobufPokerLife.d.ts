@@ -4683,9 +4683,9 @@ export enum MessageId {
     S2C_CommonSettlementNotify = 8260,
     S2C_CommonExtraThinkNotify = 8261,
     S2C_CommonOpenCardNotify = 8262,
-    S2C_CommonInsuranceTurnNotify = 8263,
-    S2C_CommonBuyInsuranceNotify = 8264,
-    S2C_CommonInsuranceResultNotify = 8265,
+    S2C_CommonBuyInsuranceTurnNotify = 8263,
+    S2C_CommonBuyInsuranceTurnRespNotify = 8264,
+    S2C_CommonInsuranceLotteryNotify = 8265,
     MSG_TexasCowboyBegin = 10001,
     C2S_TexasCowboyEnterGame = 10002,
     C2S_TexasCowboyExitGame = 10003,
@@ -6034,139 +6034,142 @@ export class S2CCommonActionNotify implements IS2CCommonActionNotify {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonActionNotify;
 }
 
-/** Represents a S2CCommonBuyInsuranceNotify. */
-export class S2CCommonBuyInsuranceNotify implements IS2CCommonBuyInsuranceNotify {
+/** Represents a S2CCommonBuyInsuranceTurnNotify. */
+export class S2CCommonBuyInsuranceTurnNotify implements IS2CCommonBuyInsuranceTurnNotify {
 
     /**
-     * Constructs a new S2CCommonBuyInsuranceNotify.
+     * Constructs a new S2CCommonBuyInsuranceTurnNotify.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CCommonBuyInsuranceNotify);
+    constructor(p?: IS2CCommonBuyInsuranceTurnNotify);
 
-    /** S2CCommonBuyInsuranceNotify gameId. */
+    /** S2CCommonBuyInsuranceTurnNotify gameId. */
     public gameId: string;
 
-    /** S2CCommonBuyInsuranceNotify actionUid. */
+    /** S2CCommonBuyInsuranceTurnNotify actionUid. */
     public actionUid: string;
 
-    /** S2CCommonBuyInsuranceNotify amount. */
-    public amount: number;
+    /** S2CCommonBuyInsuranceTurnNotify outsCards. */
+    public outsCards: ICardInfo[];
 
-    /**
-     * Encodes the specified S2CCommonBuyInsuranceNotify message. Does not implicitly {@link S2CCommonBuyInsuranceNotify.verify|verify} messages.
-     * @param m S2CCommonBuyInsuranceNotify message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IS2CCommonBuyInsuranceNotify, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a S2CCommonBuyInsuranceNotify message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns S2CCommonBuyInsuranceNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBuyInsuranceNotify;
-}
-
-/** Represents a S2CCommonInsuranceTurnNotify. */
-export class S2CCommonInsuranceTurnNotify implements IS2CCommonInsuranceTurnNotify {
-
-    /**
-     * Constructs a new S2CCommonInsuranceTurnNotify.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IS2CCommonInsuranceTurnNotify);
-
-    /** S2CCommonInsuranceTurnNotify gameId. */
-    public gameId: string;
-
-    /** S2CCommonInsuranceTurnNotify actionUid. */
-    public actionUid: string;
-
-    /** S2CCommonInsuranceTurnNotify fanChaoCards. */
-    public fanChaoCards: ICardInfo[];
-
-    /** S2CCommonInsuranceTurnNotify tieCards. */
+    /** S2CCommonBuyInsuranceTurnNotify tieCards. */
     public tieCards: ICardInfo[];
 
-    /** S2CCommonInsuranceTurnNotify publicCards. */
+    /** S2CCommonBuyInsuranceTurnNotify publicCards. */
     public publicCards: ICardInfo[];
 
-    /** S2CCommonInsuranceTurnNotify ratios. */
+    /** S2CCommonBuyInsuranceTurnNotify losePlayerInfo. */
+    public losePlayerInfo: IPlayerInfo[];
+
+    /** S2CCommonBuyInsuranceTurnNotify ratios. */
     public ratios: number;
 
-    /** S2CCommonInsuranceTurnNotify pots. */
+    /** S2CCommonBuyInsuranceTurnNotify pots. */
     public pots: number;
 
-    /** S2CCommonInsuranceTurnNotify buyBack. */
-    public buyBack: number;
-
-    /** S2CCommonInsuranceTurnNotify leftTime. */
-    public leftTime: number;
-
-    /** S2CCommonInsuranceTurnNotify buyFullPot. */
+    /** S2CCommonBuyInsuranceTurnNotify buyFullPot. */
     public buyFullPot: number;
 
+    /** S2CCommonBuyInsuranceTurnNotify buyBack. */
+    public buyBack: number;
+
+    /** S2CCommonBuyInsuranceTurnNotify leftTime. */
+    public leftTime: number;
+
     /**
-     * Encodes the specified S2CCommonInsuranceTurnNotify message. Does not implicitly {@link S2CCommonInsuranceTurnNotify.verify|verify} messages.
-     * @param m S2CCommonInsuranceTurnNotify message or plain object to encode
+     * Encodes the specified S2CCommonBuyInsuranceTurnNotify message. Does not implicitly {@link S2CCommonBuyInsuranceTurnNotify.verify|verify} messages.
+     * @param m S2CCommonBuyInsuranceTurnNotify message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CCommonInsuranceTurnNotify, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CCommonBuyInsuranceTurnNotify, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CCommonInsuranceTurnNotify message from the specified reader or buffer.
+     * Decodes a S2CCommonBuyInsuranceTurnNotify message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CCommonInsuranceTurnNotify
+     * @returns S2CCommonBuyInsuranceTurnNotify
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonInsuranceTurnNotify;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBuyInsuranceTurnNotify;
 }
 
-/** Represents a S2CCommonInsuranceResultNotify. */
-export class S2CCommonInsuranceResultNotify implements IS2CCommonInsuranceResultNotify {
+/** Represents a S2CCommonBuyInsuranceTurnRespNotify. */
+export class S2CCommonBuyInsuranceTurnRespNotify implements IS2CCommonBuyInsuranceTurnRespNotify {
 
     /**
-     * Constructs a new S2CCommonInsuranceResultNotify.
+     * Constructs a new S2CCommonBuyInsuranceTurnRespNotify.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CCommonInsuranceResultNotify);
+    constructor(p?: IS2CCommonBuyInsuranceTurnRespNotify);
 
-    /** S2CCommonInsuranceResultNotify gameId. */
+    /** S2CCommonBuyInsuranceTurnRespNotify gameId. */
     public gameId: string;
 
-    /** S2CCommonInsuranceResultNotify actionUid. */
+    /** S2CCommonBuyInsuranceTurnRespNotify actionUid. */
     public actionUid: string;
 
-    /** S2CCommonInsuranceResultNotify amount. */
+    /** S2CCommonBuyInsuranceTurnRespNotify amount. */
     public amount: number;
 
-    /** S2CCommonInsuranceResultNotify restAmount. */
+    /**
+     * Encodes the specified S2CCommonBuyInsuranceTurnRespNotify message. Does not implicitly {@link S2CCommonBuyInsuranceTurnRespNotify.verify|verify} messages.
+     * @param m S2CCommonBuyInsuranceTurnRespNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonBuyInsuranceTurnRespNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonBuyInsuranceTurnRespNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonBuyInsuranceTurnRespNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonBuyInsuranceTurnRespNotify;
+}
+
+/** Represents a S2CCommonInsuranceLotteryNotify. */
+export class S2CCommonInsuranceLotteryNotify implements IS2CCommonInsuranceLotteryNotify {
+
+    /**
+     * Constructs a new S2CCommonInsuranceLotteryNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonInsuranceLotteryNotify);
+
+    /** S2CCommonInsuranceLotteryNotify gameId. */
+    public gameId: string;
+
+    /** S2CCommonInsuranceLotteryNotify actionUid. */
+    public actionUid: string;
+
+    /** S2CCommonInsuranceLotteryNotify amount. */
+    public amount: number;
+
+    /** S2CCommonInsuranceLotteryNotify restAmount. */
     public restAmount: number;
 
     /**
-     * Encodes the specified S2CCommonInsuranceResultNotify message. Does not implicitly {@link S2CCommonInsuranceResultNotify.verify|verify} messages.
-     * @param m S2CCommonInsuranceResultNotify message or plain object to encode
+     * Encodes the specified S2CCommonInsuranceLotteryNotify message. Does not implicitly {@link S2CCommonInsuranceLotteryNotify.verify|verify} messages.
+     * @param m S2CCommonInsuranceLotteryNotify message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CCommonInsuranceResultNotify, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CCommonInsuranceLotteryNotify, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CCommonInsuranceResultNotify message from the specified reader or buffer.
+     * Decodes a S2CCommonInsuranceLotteryNotify message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CCommonInsuranceResultNotify
+     * @returns S2CCommonInsuranceLotteryNotify
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonInsuranceResultNotify;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonInsuranceLotteryNotify;
 }
 
 /** Represents a S2CCommonChatNotify. */

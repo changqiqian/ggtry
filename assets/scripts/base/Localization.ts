@@ -420,6 +420,9 @@ export class Localization {
         { name: '00333', ch: '你给我等着!', en: 'I Will revenge!' },
         { name: '00334', ch: '风水轮流转！', en: 'It is my turn now!' },
         { name: '00335', ch: '一看你就是条鱼', en: 'Catch fish now' },
+        { name: '00336', ch: '对手手牌', en: 'Hands' },
+        { name: '00337', ch: '购买:', en: 'buy insurance:' },
+        { name: '00338', ch: '击中保险:', en: 'insurance reward:' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

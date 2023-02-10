@@ -44,7 +44,9 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonTurnRoundNotify : BaseData<S2CCommonTurnRoundNotify> = new BaseData<S2CCommonTurnRoundNotify>(true);  //发转牌
     Data_S2CCommonRiverRoundNotify : BaseData<S2CCommonRiverRoundNotify> = new BaseData<S2CCommonRiverRoundNotify>(true);  //发河牌
     Data_S2CCommonActionNotify : BaseData<S2CCommonActionNotify> = new BaseData<S2CCommonActionNotify>(true);  //行动推送
-    Data_S2CCommonInsuranceTurnNotify  : BaseData<S2CCommonInsuranceTurnNotify> = new BaseData<S2CCommonInsuranceTurnNotify>(true);  //轮到谁买保险
+    Data_S2CCommonInsuranceTurnNotify  : BaseData<S2CCommonBuyInsuranceTurnNotify> = new BaseData<S2CCommonBuyInsuranceTurnNotify>();  //轮到谁买保险
+    Data_S2CCommonBuyInsuranceTurnRespNotify : BaseData<S2CCommonBuyInsuranceTurnRespNotify> = new BaseData<S2CCommonBuyInsuranceTurnRespNotify>();  //谁买了多少保险推送
+    Data_S2CCommonInsuranceLotteryNotify: BaseData<S2CCommonInsuranceLotteryNotify> = new BaseData<S2CCommonInsuranceLotteryNotify>();  //谁中了多少保险
     Data_S2CCommonSettlementNotify  : BaseData<S2CCommonSettlementNotify> = new BaseData<S2CCommonSettlementNotify>(true);  //游戏结算推送
     Data_S2CCommonChatNotify: BaseData<S2CCommonChatNotify> = new BaseData<S2CCommonChatNotify>(true);  //聊天推送
     Data_S2CCommonExtraThinkNotify: BaseData<S2CCommonExtraThinkNotify> = new BaseData<S2CCommonExtraThinkNotify>(true);  //思考时间推送

@@ -1283,10 +1283,10 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         },this);
         
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonInsuranceTurnNotify,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBuyInsuranceTurnNotify,(_data)=>
         {
-            let msg = S2CCommonInsuranceTurnNotify.decode(_data);
-            console.log("收到的内容 S2C_CommonInsuranceTurnNotify  轮到谁买保险==" + JSON.stringify(msg));
+            let msg = S2CCommonBuyInsuranceTurnNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonBuyInsuranceTurnNotify  轮到谁买保险==" + JSON.stringify(msg));
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
             if(gameStruct != null)
             {
@@ -1294,7 +1294,32 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.Data_S2CCommonInsuranceTurnNotify.mData = msg;
             }
         },this);
-    
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonBuyInsuranceTurnRespNotify,(_data)=>
+        {
+            let msg = S2CCommonBuyInsuranceTurnRespNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonBuyInsuranceTurnRespNotify  谁买了多少保险==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_S2CCommonBuyInsuranceTurnRespNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonInsuranceLotteryNotify,(_data)=>
+        {
+            let msg = S2CCommonInsuranceLotteryNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonInsuranceLotteryNotify  谁中了保险==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.UpdatePlayerMoney(msg.actionUid , msg.restAmount);
+                gameData.Data_S2CCommonInsuranceLotteryNotify.mData = msg;
+            }
+        },this);
+        
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonSettlementNotify,(_data)=>
         {
             let msg = S2CCommonSettlementNotify.decode(_data);

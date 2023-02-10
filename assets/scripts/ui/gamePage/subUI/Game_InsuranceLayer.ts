@@ -8,6 +8,7 @@ import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Poker } from '../../common/Poker';
 import { ProgressSlider } from '../../common/ProgressSlider';
 import { ToggleBtn } from '../../common/ToggleBtn';
+import { Game_InsuranceOpponentCards } from './Game_InsuranceOpponentCards';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_InsuranceLayer')
@@ -29,6 +30,9 @@ export class Game_InsuranceLayer extends BaseUI
 
     @property(Node) 
     mPublicCards: Node = null;
+
+    @property(Node) 
+    mOpponentCards: Node = null;
     
     @property(Label) 
     mOutsCount: Label = null;
@@ -107,12 +111,12 @@ export class Game_InsuranceLayer extends BaseUI
 
         this.mProgressSlider.SetEndCallback((_ratio)=>
         {
-            this.UpdateBringInAmount(_ratio);
+            this.UpdateAmount(_ratio);
         });
 
         this.mProgressSlider.SetDragCallback((_ratio)=>
         {
-            this.UpdateBringInAmount(_ratio);
+            this.UpdateAmount(_ratio);
         });
 
         this.mCancelBtn.SetClickCallback((_data)=>
@@ -143,7 +147,7 @@ export class Game_InsuranceLayer extends BaseUI
         {
             this.ResetUI();
 
-            let fanchaoCards = _data.fanChaoCards;
+            let fanchaoCards = _data.outsCards;
             if(fanchaoCards.length > 0)
             {
                 this.mFanChaoOutsRoot.active = true;
@@ -195,6 +199,18 @@ export class Game_InsuranceLayer extends BaseUI
                 });
             }
 
+            let loserPlayer = _data.losePlayerInfo;
+            for(let i = 0 ; i < loserPlayer.length ; i++)
+            {
+                let current = loserPlayer[i];
+                this.LoadPrefab("gamePage" , "prefab/Game_InsuranceOpponentCards",(_node)=>
+                {
+                    this.mOpponentCards.addChild(_node);
+                    let tempScript = _node.getComponent(Game_InsuranceOpponentCards);
+                    tempScript.SetCards(current.cards);
+                });
+            }
+
             this.mOutsCount.string = fanchaoCards.length + "";
             this.mRatio.string = (_data.ratios / 100).toFixed(1);
             this.mPot.string = Tool.ConvertMoney_S2C(_data.pots) + "";
@@ -220,10 +236,16 @@ export class Game_InsuranceLayer extends BaseUI
         });
     }
 
-    UpdateBringInAmount(_ratio : number)
+    UpdateAmount(_ratio : number)
     {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let ratio = gameData.Data_S2CCommonInsuranceTurnNotify.mData.ratios;
+        ratio = ratio/100;
         let amount = this.CalculateControlMoney(_ratio);
+        let payAmount = Tool.ConvertMoney_S2C(amount * ratio) ;
         this.mAmount.string = Tool.ConvertMoney_S2C(amount) + "";
+        this.mPay.string = payAmount + "";
     }
 
     CalculateControlMoney(_ratio : number) : number
@@ -234,7 +256,7 @@ export class Game_InsuranceLayer extends BaseUI
         //let min = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyBack;
         let min = 0;
         let max = fullPot * _ratio;
-        let step = 10000;
+        let step = 10000;//最小单位 1块钱
         let roundMax = Math.floor( max/step);
         max = roundMax * step;
         let currentAmount = min + max;
@@ -251,6 +273,8 @@ export class Game_InsuranceLayer extends BaseUI
         this.mTieCount.string = "";
         this.RemoveAndDestoryAllChild(this.mTieCards);
         this.RemoveAndDestoryAllChild(this.mPublicCards);
+
+        this.RemoveAndDestoryAllChild(this.mOpponentCards);
 
         this.mOutsCount.string = "0";
         this.mRatio.string = "0";

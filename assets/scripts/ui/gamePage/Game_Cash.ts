@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { Network } from '../../network/Network';
 import { GameBase } from './GameBase';
 import { Game_BottomUI } from './subUI/Game_BottomUI';
+import { Game_CommonTips } from './subUI/Game_CommonTips';
 import { Game_ControlBtns } from './subUI/Game_ControlBtns';
 import { Game_GameStartInfo } from './subUI/Game_GameStartInfo';
 import { Game_Pot } from './subUI/Game_Pot';
@@ -71,8 +72,14 @@ export class Game_Cash extends GameBase
             let tempScript = _script as Game_ControlBtns;
             tempScript.InitWithData(this.mIndex);
         });
-    }
 
+        this.AddSubView("gamePage","prefab/Game_CommonTips", (_script)=>
+        {
+            let tempScript = _script as Game_CommonTips;
+            tempScript.InitWithData(this.mIndex);
+            tempScript.Show(false);
+        });
+    }
 
 }
 

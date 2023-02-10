@@ -39,12 +39,12 @@ export class Game_WinEffect extends BaseUI
         if(clientAmount >= 0)
         {
             this.mWinAmount.string =   "+" + clientAmount;
-            this.mWinAmount.color = new Color(0,255,0);
+            this.mWinAmount.color = Color.GREEN;
         }
         else
         {
             this.mWinAmount.string =   "" + clientAmount;
-            this.mWinAmount.color = new Color(255,0,0);
+            this.mWinAmount.color = Color.RED;
         }
 
         this.StopAllTween(this.mWinAmount.node);

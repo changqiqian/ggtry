@@ -156,10 +156,19 @@ export class Game_SelfUI extends BaseUI
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
-            //this.CleanTable();
             this.HideAllUI();
         })
-        
+
+        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        {
+            let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            if(selfPlayer == null)
+            {
+                return;
+            }
+
+            this.mGame_AddTime.node.active = false;
+        });
     }
 
 
