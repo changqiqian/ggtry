@@ -80,10 +80,15 @@ export class ProgressSlider extends BaseUI
         this.mDragCallback = _callback;
     }
 
-    public SetPercent(_value)
+    public SetPercent(_value : number)
     {
         this.mSlider.progress = _value;
         this.mProgress.fillRange = this.mSlider.progress;
+    }
+
+    public SetEnable(_value : boolean)
+    {
+        this.mSlider.enabled = _value;
     }
 }
 

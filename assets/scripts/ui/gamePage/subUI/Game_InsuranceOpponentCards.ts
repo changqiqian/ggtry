@@ -43,9 +43,9 @@ export class Game_InsuranceOpponentCards extends BaseUI
         {
             let cardInfo = _cards[i];
             let currentNode = this.node.children[i];
-            let script = currentNode.getComponent(Game_InsurancePoker);
-            script.SetCard(cardInfo);
-            currentNode.active = true;
+            let script = currentNode.getComponent(Poker);
+            script.SetFrontByCardInfo(cardInfo);
+            script.ShowFront();
         }
     }
 }

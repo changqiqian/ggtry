@@ -15,7 +15,9 @@ export class Game_RuleLayer extends BaseUI
     mToggleGroup: Node = null;
     @property(Node) 
     mSubLayer: Node = null;
-
+    
+    @property(Node) 
+    mBG: Node = null;
     @property(Node) 
     mCombinationList: Node = null;
     @property(Node) 
@@ -40,8 +42,8 @@ export class Game_RuleLayer extends BaseUI
     }
     BindUI()
     {
-        this.AddTouchCloseEvent(this.node);
-        this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
+        this.AddTouchCloseEvent(this.mBG);
+        this.mMovingShow.SetAnimationType(AnimationShowType.FromLeft);
         this.mMovingShow.SetRoot(this.node);
 
     }
@@ -51,6 +53,7 @@ export class Game_RuleLayer extends BaseUI
     }
     LateInit()
     {
+        
 
     }
     CustmoerDestory()

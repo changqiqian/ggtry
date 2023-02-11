@@ -235,6 +235,7 @@ export class UIMgr extends Singleton<UIMgr>()
             return;
         }
 
+        
         this.CreateRecordItem(key, LayerType.Layer , _tag);
         this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
         {

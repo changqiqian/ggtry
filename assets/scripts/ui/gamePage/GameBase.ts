@@ -1,13 +1,16 @@
 import { _decorator, Component, Node, instantiate, Sprite, game, Game, TweenSystem } from 'cc';
 import { AudioManager } from '../../base/AudioManager';
 import { BaseUI } from '../../base/BaseUI';
+import { Localization } from '../../base/Localization';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
+import { Tool } from '../../Tool';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
 import { MultipleTableCtr } from '../common/MultipleTableCtr';
 import { HallData } from '../hall/HallData';
 import { Game_BottomUI } from './subUI/Game_BottomUI';
 import { Game_ChatingCtr } from './subUI/Game_ChatingCtr';
+import { Game_CommonTips } from './subUI/Game_CommonTips';
 import { Game_ControlBtns } from './subUI/Game_ControlBtns';
 import { Game_GameStartInfo } from './subUI/Game_GameStartInfo';
 import { Game_InsuranceLayer } from './subUI/Game_InsuranceLayer';
@@ -172,15 +175,34 @@ export class GameBase extends BaseUI
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
             
-            // this.StartSecondsTimer(6 , 0.01  , ()=>
-            // {
-            //     let restTime = this.GetRestMillSeconds();
-            //     if(restTime == 0)
-            //     {
-            //         gameData.ExcutiveDelayStandUp();
-            //     }
-            // });
         })
+
+        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        {
+            // UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
+            // {
+            //     let player = gameData.GetPlayerInfoByUid(_data.actionUid);
+            //     if(player == null)
+            //     {
+            //         return;
+            //     }
+            //     let temp = _script as Game_CommonTips;
+            //     let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
+            //     let tips = player.nickName + " " + Localization.GetString("00337") + amount;
+            //     temp.ShowTips(tips);
+            // },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+        })
+
+        gameData.Data_S2CCommonBuyInsuranceTurnRespNotify.AddListenner(this,(_data)=>
+        {
+            
+        })
+
+        gameData.Data_S2CCommonInsuranceLotteryNotify.AddListenner(this,(_data)=>
+        {
+            
+        })
+
 
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {

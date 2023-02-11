@@ -53,7 +53,7 @@ export class Game_Menu extends BaseUI
         this.mRuleBtn.SetClickCallback(()=>
         {
             this.Show(false);
-            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_RuleLayer",true,(_script)=>
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_RuleLayer",true,(_script)=>
             {
                 let temp = _script as Game_RuleLayer;
                 temp.InitWithData(this.mIndex);

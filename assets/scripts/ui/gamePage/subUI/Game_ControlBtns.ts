@@ -104,13 +104,6 @@ export class Game_ControlBtns extends BaseUI
             this.mDealCardsBtn.node.active = publicCards.length< 5;
             this.mShowHandsBtn.node.active = true;
         });
-        gameData.Data_S2CCommonWaitStartNotify.AddListenner(this,(_data)=>
-        {
-            this.mDealCardsBtn.node.active = false;
-            this.mShowHandsBtn.node.active = false;
-        });
-
-        
     }
 }
 

@@ -43,14 +43,6 @@ export class LoginUI extends BaseUI
         this.mLoginBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");   
-            
-            // UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
-            // {
-            //     let tempScript = _script as Game_CashReplay;
-            //     tempScript.InitWithData();
-            // }); 
-
-
 
         });
 

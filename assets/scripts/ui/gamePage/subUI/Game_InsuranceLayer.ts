@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { Tool } from '../../../Tool';
 import { BaseButton } from '../../common/BaseButton';
@@ -64,6 +65,7 @@ export class Game_InsuranceLayer extends BaseUI
     @property(Label) 
     mCountDown: Label = null;
 
+    mControlAble : boolean  = false;
     mIndex : number;
 
 
@@ -103,8 +105,12 @@ export class Game_InsuranceLayer extends BaseUI
             let multiple = this.GetShortCutMultiple(i);
             current.SetClickCallback((_data)=>
             {
-                this.mProgressSlider.SetPercent(multiple);
-                this.UpdateAmount(multiple);
+                if(this.mControlAble )
+                {
+                    this.mProgressSlider.SetPercent(multiple);
+                    this.UpdateAmount(multiple);
+                }
+
             });
         }
         this.mProgressSlider.SetEndCallback((_ratio)=>
@@ -119,19 +125,25 @@ export class Game_InsuranceLayer extends BaseUI
 
         this.mCancelBtn.SetClickCallback((_data)=>
         {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
-
-            let ratio = this.mProgressSlider.GetPercent();
-            let amount = this.CalculateControlMoney(ratio);
-            NetworkSend.Instance.BuyInsurance(gameData.BuyInsuranceSendMsgId(),gameStruct.mGameId,amount);
+            if(this.mControlAble )
+            {
+                let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+                let gameData = gameStruct.mGameData;
+    
+                let ratio = this.mProgressSlider.GetPercent();
+                let amount = this.CalculateControlMoney(ratio);
+                NetworkSend.Instance.BuyInsurance(gameData.BuyInsuranceSendMsgId(),gameStruct.mGameId,amount);
+            }
         });
 
         this.mConfirmBtn.SetClickCallback((_data)=>
         {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
-            NetworkSend.Instance.BuyInsurance(gameData.BuyInsuranceSendMsgId(),gameStruct.mGameId,0);
+            if(this.mControlAble )
+            {
+                let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+                let gameData = gameStruct.mGameData;
+                NetworkSend.Instance.BuyInsurance(gameData.BuyInsuranceSendMsgId(),gameStruct.mGameId,0);
+            }
         });
 
         this.BindData();
@@ -144,6 +156,10 @@ export class Game_InsuranceLayer extends BaseUI
         gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
         {
             this.ResetUI();
+
+
+            this.mControlAble = _data.actionUid == LocalPlayerData.Instance.Data_Uid.mData;
+            this.mProgressSlider.SetEnable(this.mControlAble);
 
             let fanchaoCards = _data.outsCards;
             if(fanchaoCards.length > 0)

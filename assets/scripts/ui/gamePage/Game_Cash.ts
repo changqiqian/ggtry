@@ -72,13 +72,6 @@ export class Game_Cash extends GameBase
             let tempScript = _script as Game_ControlBtns;
             tempScript.InitWithData(this.mIndex);
         });
-
-        this.AddSubView("gamePage","prefab/Game_CommonTips", (_script)=>
-        {
-            let tempScript = _script as Game_CommonTips;
-            tempScript.InitWithData(this.mIndex);
-            tempScript.Show(false);
-        });
     }
 
 }

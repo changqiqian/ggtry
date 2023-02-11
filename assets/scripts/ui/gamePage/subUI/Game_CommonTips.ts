@@ -119,7 +119,7 @@ export class Game_CommonTips extends BaseUI
 
     UpdateTips(_playerName : string , _leftTime : number)
     {
-        let tips = _playerName + Localization.GetString("00339") + "\n" + _leftTime + "S";
+        let tips = _playerName + Localization.GetString("00339") + "/n" + _leftTime + "S";
         this.mTips.string = tips;
     }
 }
