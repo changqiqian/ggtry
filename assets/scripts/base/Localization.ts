@@ -424,6 +424,9 @@ export class Localization {
         { name: '00337', ch: '购买:', en: 'buy insurance:' },
         { name: '00338', ch: '击中保险:', en: 'insurance reward:' },
         { name: '00339', ch: '购买保险中', en: 'buying insurance' },
+        { name: '00340', ch: '规则说明', en: 'Rules' },
+        { name: '00341', ch: '牌型', en: 'Combination' },
+        { name: '00342', ch: '保险赔率', en: 'Insurance' },
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },
@@ -431,7 +434,7 @@ export class Localization {
         { name: '01003', ch: '游戏战绩', en: 'Game records' },
 
         
-
+        
 
         //////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////

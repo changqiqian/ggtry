@@ -9,6 +9,7 @@ import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { HallData } from '../../hall/HallData';
 import { Game_BuyInWindow } from './Game_BuyInWindow';
+import { Game_RuleLayer } from './Game_RuleLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Menu')
@@ -51,11 +52,17 @@ export class Game_Menu extends BaseUI
         this.AddTouchCloseEvent(this.mBG);
         this.mRuleBtn.SetClickCallback(()=>
         {
+            this.Show(false);
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_RuleLayer",true,(_script)=>
+            {
+                let temp = _script as Game_RuleLayer;
+                temp.InitWithData(this.mIndex);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
 
         });
         this.mServiceBtn.SetClickCallback(()=>
         {
-
+            this.Show(false);
         });
         this.mBringInBtn.SetClickCallback(()=>
         {

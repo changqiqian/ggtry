@@ -52,6 +52,9 @@ export class Game_Player extends BaseUI
     mSelfBtn: BaseButton = null;
     @property(Node) 
     mConbination: Node = null;
+    @property(Node) 
+    mInsuranceBG: Node = null;
+    
 
     mSeatID : number = null; //座位编号
     private mIndex : number = null;
@@ -97,6 +100,7 @@ export class Game_Player extends BaseUI
         this.mSelfBtn.node.active = false;
         this.mCountDown.string = "";
         this.mConbination.active = false;
+        this.mInsuranceBG.active = false;
         this.StopSecondsTimer();
     }
 
@@ -556,6 +560,43 @@ export class Game_Player extends BaseUI
             let hands = currentPlayer.cards;
             this.ShowCards(hands , false);
         });
+
+        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.seat != this.mSeatID)
+            {
+                return;
+            }
+
+            this.mInsuranceBG.active = true;
+            this.StartSecondsTimer(_data.leftTime , 1  , ()=>
+            {
+                let seconds = this.GetRestSeconds();
+                this.mInsuranceBG.getChildByName("InsCount").getComponent(Label).string = seconds + "";
+            })
+        })
+
+        gameData.Data_S2CCommonBuyInsuranceTurnRespNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.seat != this.mSeatID)
+            {
+                return;
+            }
+
+            this.mInsuranceBG.active = false;
+        })
         
         gameData.Data_S2CCommonInsuranceLotteryNotify.AddListenner(this,(_data)=>
         {
@@ -569,8 +610,9 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
+            this.mInsuranceBG.active = false;
+
             this.UpdateMoney(false , playerInfo);
-            
             this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_node)=>
             {
                 this.node.addChild(_node);
@@ -616,17 +658,17 @@ export class Game_Player extends BaseUI
     {
         let posX = this.node.parent.worldPosition.x;
         let getVisibleSize = view.getVisibleSize();
-        //let betPos = this.mGame_BetAmount.node.position;
         let dealerPos = this.mDealer.position;
+        let insPos = this.mInsuranceBG.position;
         if(posX >= getVisibleSize.width/2)
         {
-            //this.mGame_BetAmount.node.setPosition(-Math.abs(betPos.x) , betPos.y , betPos.z);
             this.mDealer.setPosition(-Math.abs(dealerPos.x) , dealerPos.y , dealerPos.z);
+            this.mInsuranceBG.setPosition(-Math.abs(insPos.x) , insPos.y , insPos.z);
         }
         else 
         {
-            //this.mGame_BetAmount.node.setPosition(Math.abs(betPos.x) , betPos.y , betPos.z);
             this.mDealer.setPosition(Math.abs(dealerPos.x) , dealerPos.y , dealerPos.z);
+            this.mInsuranceBG.setPosition(Math.abs(insPos.x) , insPos.y , insPos.z);
         }
     }
 

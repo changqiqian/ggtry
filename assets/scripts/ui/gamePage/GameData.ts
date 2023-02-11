@@ -14,7 +14,7 @@ export abstract class GameData extends MultipleNotify
     public static readonly GameUiTag = "GameUiTag";
     //UI控制
     Data_ChatingSubLayer :  BaseData<Game_ChattingSubLayer> = new BaseData<Game_ChattingSubLayer>();  //聊天页面子页面
-
+    Data_RuleSubLayer : BaseData<Game_RuleSubLayer> = new BaseData<Game_RuleSubLayer>();  //规则页面子页面
     //观看者列表
     Data_S2CCommonGetObListResp : BaseData<S2CCommonGetObListResp> = new BaseData<S2CCommonGetObListResp>();  //观看者列表
     //买入列表
@@ -500,6 +500,13 @@ export enum Game_ChattingSubLayer
     ChatHistory,
     Shortcut,
 }
+
+export enum Game_RuleSubLayer
+{
+    Combination,
+    Insurance,
+}
+
 
 export enum Game_PreCheckOrFold
 {
