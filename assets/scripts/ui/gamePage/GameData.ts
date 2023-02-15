@@ -50,7 +50,7 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonSettlementNotify  : BaseData<S2CCommonSettlementNotify> = new BaseData<S2CCommonSettlementNotify>(true);  //游戏结算推送
     Data_S2CCommonChatNotify: BaseData<S2CCommonChatNotify> = new BaseData<S2CCommonChatNotify>(true);  //聊天推送
     Data_S2CCommonExtraThinkNotify: BaseData<S2CCommonExtraThinkNotify> = new BaseData<S2CCommonExtraThinkNotify>(true);  //思考时间推送
-    Data_S2CCommonOpenCardNotify: BaseData<S2CCommonOpenCardNotify> = new BaseData<S2CCommonOpenCardNotify>();  //所有玩家亮牌
+    Data_S2CCommonOpenCardNotify: BaseData<S2CCommonOpenCardNotify> = new BaseData<S2CCommonOpenCardNotify>(false,null);  //所有玩家亮牌
     Data_S2CCommonPotsNotify: BaseData<S2CCommonPotsNotify> = new BaseData<S2CCommonPotsNotify>(true);  //分池信息推送
 
 

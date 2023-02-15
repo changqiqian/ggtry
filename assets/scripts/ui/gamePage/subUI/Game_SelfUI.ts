@@ -170,10 +170,6 @@ export class Game_SelfUI extends BaseUI
             this.mGame_AddTime.node.active = false;
         });
 
-        gameData.Data_S2CCommonOpenCardNotify.AddListenner(this,(_data)=>
-        {
-            this.HideAllUI();
-        });
     }
 
 
