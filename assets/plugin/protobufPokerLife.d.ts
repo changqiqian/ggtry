@@ -1709,6 +1709,9 @@ export class TexasDynamicData implements ITexasDynamicData {
     /** TexasDynamicData dealerUid. */
     public dealerUid: string;
 
+    /** TexasDynamicData buyInsuranceTurn. */
+    public buyInsuranceTurn?: (IBuyInsuranceTurn|null);
+
     /** TexasDynamicData totalPot. */
     public totalPot: number;
 
@@ -1729,6 +1732,67 @@ export class TexasDynamicData implements ITexasDynamicData {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): TexasDynamicData;
+}
+
+/** Represents a BuyInsuranceTurn. */
+export class BuyInsuranceTurn implements IBuyInsuranceTurn {
+
+    /**
+     * Constructs a new BuyInsuranceTurn.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IBuyInsuranceTurn);
+
+    /** BuyInsuranceTurn gameId. */
+    public gameId: string;
+
+    /** BuyInsuranceTurn actionUid. */
+    public actionUid: string;
+
+    /** BuyInsuranceTurn outsCards. */
+    public outsCards: ICardInfo[];
+
+    /** BuyInsuranceTurn tieCards. */
+    public tieCards: ICardInfo[];
+
+    /** BuyInsuranceTurn publicCards. */
+    public publicCards: ICardInfo[];
+
+    /** BuyInsuranceTurn losePlayerInfo. */
+    public losePlayerInfo: IPlayerInfo[];
+
+    /** BuyInsuranceTurn ratios. */
+    public ratios: number;
+
+    /** BuyInsuranceTurn pots. */
+    public pots: number;
+
+    /** BuyInsuranceTurn buyFullPot. */
+    public buyFullPot: number;
+
+    /** BuyInsuranceTurn buyBack. */
+    public buyBack: number;
+
+    /** BuyInsuranceTurn leftTime. */
+    public leftTime: number;
+
+    /**
+     * Encodes the specified BuyInsuranceTurn message. Does not implicitly {@link BuyInsuranceTurn.verify|verify} messages.
+     * @param m BuyInsuranceTurn message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IBuyInsuranceTurn, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a BuyInsuranceTurn message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns BuyInsuranceTurn
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): BuyInsuranceTurn;
 }
 
 /** Represents a SimpleReplayData. */
@@ -4686,6 +4750,7 @@ export enum MessageId {
     S2C_CommonBuyInsuranceTurnNotify = 8263,
     S2C_CommonBuyInsuranceTurnRespNotify = 8264,
     S2C_CommonInsuranceLotteryNotify = 8265,
+    S2C_CommonPotsNotify = 8266,
     MSG_TexasCowboyBegin = 10001,
     C2S_TexasCowboyEnterGame = 10002,
     C2S_TexasCowboyExitGame = 10003,
@@ -6043,38 +6108,8 @@ export class S2CCommonBuyInsuranceTurnNotify implements IS2CCommonBuyInsuranceTu
      */
     constructor(p?: IS2CCommonBuyInsuranceTurnNotify);
 
-    /** S2CCommonBuyInsuranceTurnNotify gameId. */
-    public gameId: string;
-
-    /** S2CCommonBuyInsuranceTurnNotify actionUid. */
-    public actionUid: string;
-
-    /** S2CCommonBuyInsuranceTurnNotify outsCards. */
-    public outsCards: ICardInfo[];
-
-    /** S2CCommonBuyInsuranceTurnNotify tieCards. */
-    public tieCards: ICardInfo[];
-
-    /** S2CCommonBuyInsuranceTurnNotify publicCards. */
-    public publicCards: ICardInfo[];
-
-    /** S2CCommonBuyInsuranceTurnNotify losePlayerInfo. */
-    public losePlayerInfo: IPlayerInfo[];
-
-    /** S2CCommonBuyInsuranceTurnNotify ratios. */
-    public ratios: number;
-
-    /** S2CCommonBuyInsuranceTurnNotify pots. */
-    public pots: number;
-
-    /** S2CCommonBuyInsuranceTurnNotify buyFullPot. */
-    public buyFullPot: number;
-
-    /** S2CCommonBuyInsuranceTurnNotify buyBack. */
-    public buyBack: number;
-
-    /** S2CCommonBuyInsuranceTurnNotify leftTime. */
-    public leftTime: number;
+    /** S2CCommonBuyInsuranceTurnNotify buyInsuranceTurn. */
+    public buyInsuranceTurn?: (IBuyInsuranceTurn|null);
 
     /**
      * Encodes the specified S2CCommonBuyInsuranceTurnNotify message. Does not implicitly {@link S2CCommonBuyInsuranceTurnNotify.verify|verify} messages.
@@ -6304,9 +6339,6 @@ export class S2CCommonFlopRoundNotify implements IS2CCommonFlopRoundNotify {
     /** S2CCommonFlopRoundNotify cards. */
     public cards: ICardInfo[];
 
-    /** S2CCommonFlopRoundNotify potInfo. */
-    public potInfo: IPotInfo[];
-
     /**
      * Encodes the specified S2CCommonFlopRoundNotify message. Does not implicitly {@link S2CCommonFlopRoundNotify.verify|verify} messages.
      * @param m S2CCommonFlopRoundNotify message or plain object to encode
@@ -6340,9 +6372,6 @@ export class S2CCommonTurnRoundNotify implements IS2CCommonTurnRoundNotify {
 
     /** S2CCommonTurnRoundNotify card. */
     public card?: (ICardInfo|null);
-
-    /** S2CCommonTurnRoundNotify potInfo. */
-    public potInfo: IPotInfo[];
 
     /**
      * Encodes the specified S2CCommonTurnRoundNotify message. Does not implicitly {@link S2CCommonTurnRoundNotify.verify|verify} messages.
@@ -6378,9 +6407,6 @@ export class S2CCommonRiverRoundNotify implements IS2CCommonRiverRoundNotify {
     /** S2CCommonRiverRoundNotify card. */
     public card?: (ICardInfo|null);
 
-    /** S2CCommonRiverRoundNotify potInfo. */
-    public potInfo: IPotInfo[];
-
     /**
      * Encodes the specified S2CCommonRiverRoundNotify message. Does not implicitly {@link S2CCommonRiverRoundNotify.verify|verify} messages.
      * @param m S2CCommonRiverRoundNotify message or plain object to encode
@@ -6398,6 +6424,40 @@ export class S2CCommonRiverRoundNotify implements IS2CCommonRiverRoundNotify {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonRiverRoundNotify;
+}
+
+/** Represents a S2CCommonPotsNotify. */
+export class S2CCommonPotsNotify implements IS2CCommonPotsNotify {
+
+    /**
+     * Constructs a new S2CCommonPotsNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonPotsNotify);
+
+    /** S2CCommonPotsNotify gameId. */
+    public gameId: string;
+
+    /** S2CCommonPotsNotify potInfo. */
+    public potInfo: IPotInfo[];
+
+    /**
+     * Encodes the specified S2CCommonPotsNotify message. Does not implicitly {@link S2CCommonPotsNotify.verify|verify} messages.
+     * @param m S2CCommonPotsNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonPotsNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonPotsNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonPotsNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonPotsNotify;
 }
 
 /** Represents a S2CCommonCurrentActionNotify. */
@@ -6448,9 +6508,6 @@ export class S2CCommonSettlementNotify implements IS2CCommonSettlementNotify {
 
     /** S2CCommonSettlementNotify gameId. */
     public gameId: string;
-
-    /** S2CCommonSettlementNotify potInfo. */
-    public potInfo: IPotInfo[];
 
     /** S2CCommonSettlementNotify result. */
     public result: IPlayerWinLose[];

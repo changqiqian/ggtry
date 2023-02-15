@@ -20,7 +20,6 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
     Data_ReStart : BaseData<boolean> = new BaseData<boolean>(); //重置
     Data_Update : BaseData<boolean> = new BaseData<boolean>(); //更新下一步
 
-    Data_RotateSeatEnd: BaseData<boolean> = new BaseData<boolean>(); //旋转座位完成
     public InitData(_data : ReplayData)
     {
         this.Data_CopyReplayData.mData = new ReplayData(_data);

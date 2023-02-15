@@ -136,21 +136,7 @@ export class Game_SeatUI extends BaseUI
             }
             this.TryRotateSeats(playerInfo.seat,true);
         })
-
-        gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
-        {
-        })
-
-        gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
-        {
-        })
-
-        gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
-        {
-        })
     }
-
-
 
     GetSeatNodeBySeatId(_seatId : number) : Game_SeatItem
     {
@@ -225,7 +211,7 @@ export class Game_SeatUI extends BaseUI
                 {
                     let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
                     let gameData = gameStruct.mGameData;
-                    gameData.Data_RotateSeatEnd.mData = true;
+                    movingSeat.UpdatePlayerUIDirection();
                 });
                 tempTween.start();
             }
@@ -233,7 +219,7 @@ export class Game_SeatUI extends BaseUI
             {
 
                 movingSeat.node.position =  current.mPath[current.mPath.length - 1];
-                GameReplayData.Instance.Data_RotateSeatEnd.mData = true;
+                movingSeat.UpdatePlayerUIDirection();
             }
         }
     }

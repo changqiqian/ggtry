@@ -102,7 +102,10 @@ export class Game_ControlBtns extends BaseUI
         {
             let publicCards = gameData.GetDynamicData().publicCards;
             this.mDealCardsBtn.node.active = publicCards.length< 5;
-            this.mShowHandsBtn.node.active = true;
+            if(gameData.Data_S2CCommonOpenCardNotify.mData == null)
+            {
+                this.mShowHandsBtn.node.active = true;
+            }
         });
     }
 }

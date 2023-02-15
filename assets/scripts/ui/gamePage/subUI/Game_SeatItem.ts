@@ -135,5 +135,10 @@ export class Game_SeatItem extends BaseUI
         }
         this.mSitBtn.Show(!occupaid);
     }
+
+    UpdatePlayerUIDirection()
+    {
+        this.mGame_Player.UpdateUIDirection();
+    }
 }
 

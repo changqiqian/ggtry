@@ -78,26 +78,6 @@ export class GameBase extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
-        {
-            if(gameData.IsGamePlayingNow() == false)
-            {
-                return;
-            }
-
-            if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                UIMgr.Instance.ShowLayer("gamePage","prefab/Game_InsuranceLayer",false);
-            }
-            else
-            {
-                UIMgr.Instance.ShowLayer("gamePage","prefab/Game_InsuranceLayer",true,(_script)=>
-                {
-                    let tempScript = _script as Game_InsuranceLayer;
-                    tempScript.InitWithData(this.mIndex);
-                },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
-            }
-        });
 
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
@@ -179,28 +159,68 @@ export class GameBase extends BaseUI
 
         gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
         {
-            // UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
-            // {
-            //     let player = gameData.GetPlayerInfoByUid(_data.actionUid);
-            //     if(player == null)
-            //     {
-            //         return;
-            //     }
-            //     let temp = _script as Game_CommonTips;
-            //     let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
-            //     let tips = player.nickName + " " + Localization.GetString("00337") + amount;
-            //     temp.ShowTips(tips);
-            // },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
-        })
+            if(gameData.IsGamePlayingNow() == false)
+            {
+                return;
+            }
+            let insData = _data.buyInsuranceTurn;
+            if(insData.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                // UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
+                // {
+                //     let player = gameData.GetPlayerInfoByUid(insData.actionUid);
+                //     if(player == null)
+                //     {
+                //         return;
+                //     }
+                //     let temp = _script as Game_CommonTips;
+                //     let tips = player.nickName + " " + Localization.GetString("00339");
+                //     temp.ShowTipsWithCountDown(tips,insData.leftTime);
+                // },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+                
+                UIMgr.Instance.ShowLayer("gamePage","prefab/Game_InsuranceLayer",false,null,MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+            }
+            else
+            {
+                UIMgr.Instance.ShowLayer("gamePage","prefab/Game_InsuranceLayer",true,(_script)=>
+                {
+                    let tempScript = _script as Game_InsuranceLayer;
+                    tempScript.InitWithData(this.mIndex);
+                },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+            }
+
+        });
 
         gameData.Data_S2CCommonBuyInsuranceTurnRespNotify.AddListenner(this,(_data)=>
         {
-            
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
+            {
+                let player = gameData.GetPlayerInfoByUid(_data.actionUid);
+                if(player == null)
+                {
+                    return;
+                }
+                let temp = _script as Game_CommonTips;
+                let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
+                let tips = player.nickName + " " + Localization.GetString("00337") + amount;
+                temp.ShowTips(tips);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         })
 
         gameData.Data_S2CCommonInsuranceLotteryNotify.AddListenner(this,(_data)=>
         {
-            
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
+            {
+                let player = gameData.GetPlayerInfoByUid(_data.actionUid);
+                if(player == null)
+                {
+                    return;
+                }
+                let temp = _script as Game_CommonTips;
+                let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
+                let tips = player.nickName + " " + Localization.GetString("00338") + amount;
+                temp.ShowTips(tips);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         })
 
 

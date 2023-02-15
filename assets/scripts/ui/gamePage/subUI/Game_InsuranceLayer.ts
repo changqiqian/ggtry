@@ -123,7 +123,7 @@ export class Game_InsuranceLayer extends BaseUI
             this.UpdateAmount(_ratio);
         });
 
-        this.mCancelBtn.SetClickCallback((_data)=>
+        this.mConfirmBtn.SetClickCallback((_data)=>
         {
             if(this.mControlAble )
             {
@@ -133,16 +133,19 @@ export class Game_InsuranceLayer extends BaseUI
                 let ratio = this.mProgressSlider.GetPercent();
                 let amount = this.CalculateControlMoney(ratio);
                 NetworkSend.Instance.BuyInsurance(gameData.BuyInsuranceSendMsgId(),gameStruct.mGameId,amount);
+
+                this.CloseAsWindow();
             }
         });
 
-        this.mConfirmBtn.SetClickCallback((_data)=>
+        this.mCancelBtn.SetClickCallback((_data)=>
         {
             if(this.mControlAble )
             {
                 let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
                 let gameData = gameStruct.mGameData;
                 NetworkSend.Instance.BuyInsurance(gameData.BuyInsuranceSendMsgId(),gameStruct.mGameId,0);
+                this.CloseAsWindow();
             }
         });
 
@@ -155,13 +158,12 @@ export class Game_InsuranceLayer extends BaseUI
         let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
         {
+            let insData = _data.buyInsuranceTurn;
             this.ResetUI();
-
-
-            this.mControlAble = _data.actionUid == LocalPlayerData.Instance.Data_Uid.mData;
+            this.mControlAble = insData.actionUid == LocalPlayerData.Instance.Data_Uid.mData;
             this.mProgressSlider.SetEnable(this.mControlAble);
 
-            let fanchaoCards = _data.outsCards;
+            let fanchaoCards = insData.outsCards;
             if(fanchaoCards.length > 0)
             {
                 this.mFanChaoOutsRoot.active = true;
@@ -180,7 +182,7 @@ export class Game_InsuranceLayer extends BaseUI
                 }
             }
 
-            let tieCards = _data.tieCards;
+            let tieCards = insData.tieCards;
             if(tieCards.length > 0)
             {
                 this.mTieOutsRoot.active = true;
@@ -199,7 +201,7 @@ export class Game_InsuranceLayer extends BaseUI
                 }
             }
 
-            let publicCards = _data.publicCards;
+            let publicCards = insData.publicCards;
             for(let i = 0 ; i < publicCards.length ; i++)
             {
                 let current = publicCards[i];
@@ -213,7 +215,7 @@ export class Game_InsuranceLayer extends BaseUI
                 });
             }
 
-            let loserPlayer = _data.losePlayerInfo;
+            let loserPlayer = insData.losePlayerInfo;
             for(let i = 0 ; i < loserPlayer.length ; i++)
             {
                 let current = loserPlayer[i];
@@ -228,38 +230,49 @@ export class Game_InsuranceLayer extends BaseUI
 
 
             this.mOutsCount.string = fanchaoCards.length + "";
-            this.mRatio.string = (_data.ratios / 10).toFixed(1);
-            this.mPot.string = Tool.ConvertMoney_S2C(_data.pots) + "";
+            this.mRatio.string = (insData.ratios / 10).toFixed(1);
+            this.mPot.string = Tool.ConvertMoney_S2C(insData.pots) + "";
             this.mPay.string = "0";
 
             for(let i = 0 ; i < this.mShortcutBtn.children.length ; i++)
             {
                 let current = this.mShortcutBtn.children[i].getComponent(BaseButton);
                 let multiple = this.GetShortCutMultiple(i);
-                let amount = multiple * _data.buyFullPot;
+                let amount = multiple * insData.buyFullPot;
                 amount = Tool.CeilServerMoney(amount);
                 let title = Tool.ConvertMoney_S2C(amount) + "";
                 current.SetTitle(title);
             }
 
-            this.StartSecondsTimer(_data.leftTime,1 , ()=>
+            this.StartSecondsTimer(insData.leftTime,1 , ()=>
             {
                 let restTime = this.GetRestSeconds();
                 this.mCountDown.string = restTime + "S";
-                if(restTime == 0)
-                {
-                    this.CloseAsWindow();
-                }
+                // if(restTime == 0)
+                // {
+                //     this.CloseAsWindow();
+                // }
             });
 
-            if(_data.buyBack > 0)
+            if(insData.buyBack > 0)
             {
                 this.mBuyBackTips.active = true;
-                this.mTips.string = Localization.ReplaceString("00319",Tool.ConvertMoney_S2C(_data.buyBack)+"");
+                this.mTips.string = Localization.ReplaceString("00319",Tool.ConvertMoney_S2C(insData.buyBack)+"");
             }
 
             this.mProgressSlider.SetPercent(0.5);
             this.UpdateAmount(0.5);
+        });
+
+
+        gameData.Data_S2CCommonBuyInsuranceTurnRespNotify.AddListenner(this,(_data)=>
+        {
+            this.CloseAsWindow();
+        });
+
+        gameData.Data_S2CCommonInsuranceLotteryNotify.AddListenner(this,(_data)=>
+        {
+            //this.CloseAsWindow();
         });
     }
 
@@ -267,7 +280,7 @@ export class Game_InsuranceLayer extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let payRatio = gameData.Data_S2CCommonInsuranceTurnNotify.mData.ratios;
+        let payRatio = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyInsuranceTurn.ratios;
         payRatio = payRatio/10;
         let amount = this.CalculateControlMoney(_ratio);
         let payAmount = Tool.ConvertMoney_S2C(amount * payRatio) ;
@@ -279,7 +292,7 @@ export class Game_InsuranceLayer extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let fullPot = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyFullPot;
+        let fullPot = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyInsuranceTurn.buyFullPot;
         //let min = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyBack;
         let min = 0;
         let max = fullPot * _ratio;

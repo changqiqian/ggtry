@@ -17,7 +17,7 @@ export class GameConfig
         //GameConfig.SeverUrl  = "ws://13.214.131.201:8199/ws";
     }
     //发布的版本号
-    public static Version = "1.0.9"
+    public static Version = "1.1.1"
 
       
     public static LOGIN_TOKEN;

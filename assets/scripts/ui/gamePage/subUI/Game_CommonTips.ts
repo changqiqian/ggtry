@@ -12,8 +12,10 @@ export class Game_CommonTips extends BaseUI
     @property(Label) 
     mTips: Label = null;
 
+
+    mCustomerTips : string ;
     mDuration : number;
-    private mIndex : number = null;
+
     InitParam()
     {
 
@@ -38,9 +40,26 @@ export class Game_CommonTips extends BaseUI
     ShowTips(_tips : string , _duration:number = 3)
     {
         this.mTips.string = _tips;
-        this.Show(true);
-        this.StartAnm();
         this.mDuration = _duration;
+        this.StopSecondsTimer();
+        this.StartAnm();
+    }
+
+    ShowTipsWithCountDown(_tips : string , _duration:number = 30)
+    {
+        this.mCustomerTips = _tips;
+        this.mDuration = _duration;
+        this.StartAnm();
+        this.UpdateTips(_duration);
+        this.StartSecondsTimer(_duration,1 , ()=>
+        {
+            let restTime = this.GetRestSeconds();
+            this.UpdateTips(restTime);
+            if(restTime == 0)
+            {
+
+            }
+        });
     }
 
     StartAnm()
@@ -55,71 +74,11 @@ export class Game_CommonTips extends BaseUI
         tempTween.start();   
     }
 
-    public InitWithData(_index : number)
+ 
+
+    UpdateTips(_leftTime : number)
     {
-        if(this.CheckInitFlag())
-        {
-            return;
-        }
-        this.mIndex = _index;
-        this.BindData()
-    }
-
-    BindData()
-    {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
-        gameData.Data_S2CCommonBuyInsuranceTurnRespNotify.AddListenner(this,(_data)=>
-        {
-            this.Show(false);
-            let player = gameData.GetPlayerInfoByUid(_data.actionUid);
-            if(player == null)
-            {
-                return;
-            }
-            let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
-            let tips = player.nickName + " " + Localization.GetString("00337") + amount;
-            this.ShowTips(tips);
-        });
-
-        gameData.Data_S2CCommonInsuranceLotteryNotify.AddListenner(this,(_data)=>
-        {
-            let player = gameData.GetPlayerInfoByUid(_data.actionUid);
-            if(player == null)
-            {
-                return;
-            }
-            let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
-            let tips = player.nickName + " " + Localization.GetString("00338") + amount;
-            this.ShowTips(tips);
-        })
-
-        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
-        {
-            if(LocalPlayerData.Instance.Data_Uid.mData == _data.actionUid)
-            {
-                return;
-            }
-            this.ShowTips("" , _data.leftTime);
-            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
-            this.UpdateTips(playerInfo.nickName , _data.leftTime);
-            this.StartSecondsTimer(_data.leftTime,1 , ()=>
-            {
-                let restTime = this.GetRestSeconds();
-                this.UpdateTips(playerInfo.nickName , restTime);
-                if(restTime == 0)
-                {
-
-                }
-            });
-
-            
-        })
-    }
-
-    UpdateTips(_playerName : string , _leftTime : number)
-    {
-        let tips = _playerName + Localization.GetString("00339") + "/n" + _leftTime + "S";
+        let tips = this.mCustomerTips + "\n" + _leftTime + "s";
         this.mTips.string = tips;
     }
 }

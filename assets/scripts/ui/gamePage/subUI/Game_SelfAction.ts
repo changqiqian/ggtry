@@ -230,7 +230,7 @@ export class Game_SelfAction extends BaseUI
 
         gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
         {
-            if(_data.actionUid == LocalPlayerData.Instance.Data_Uid.mData)
+            if(_data.buyInsuranceTurn.actionUid == LocalPlayerData.Instance.Data_Uid.mData)
             {
                 this.HideAll();
             }

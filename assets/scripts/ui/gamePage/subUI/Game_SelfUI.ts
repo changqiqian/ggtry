@@ -169,6 +169,11 @@ export class Game_SelfUI extends BaseUI
 
             this.mGame_AddTime.node.active = false;
         });
+
+        gameData.Data_S2CCommonOpenCardNotify.AddListenner(this,(_data)=>
+        {
+            this.HideAllUI();
+        });
     }
 
 
@@ -202,19 +207,19 @@ export class Game_SelfUI extends BaseUI
             return;
         }
 
-        if(this.mGame_BetAmount.node.activeInHierarchy == true )
-        {
-            this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_node)=>
-            {
-                this.node.addChild(_node);
-                let script = _node.getComponent(Game_MovingChip);
-                let startWorldPos = this.mGame_BetAmount.GetChipWorldPos();
-                let screenSize = view.getVisibleSize();
-                script.FlyWithDelay(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
-            })
-        }
-        this.mGame_BetAmount.node.active = false;
-        this.mGame_ActionTag.node.active = false;
+        // if(this.mGame_BetAmount.node.activeInHierarchy == true )
+        // {
+        //     this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_node)=>
+        //     {
+        //         this.node.addChild(_node);
+        //         let script = _node.getComponent(Game_MovingChip);
+        //         let startWorldPos = this.mGame_BetAmount.GetChipWorldPos();
+        //         let screenSize = view.getVisibleSize();
+        //         script.FlyWithDelay(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
+        //     })
+        // }
+        // this.mGame_BetAmount.node.active = false;
+        // this.mGame_ActionTag.node.active = false;
     }
 
     UpdateUI()
@@ -297,8 +302,8 @@ export class Game_SelfUI extends BaseUI
         let lastAct = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
         if(lastAct != null)
         {
-            this.ShowActionType(lastAct.actionType);
-            this.Bet(lastAct.roundAmount , lastAct.actionType);
+            //this.ShowActionType(lastAct.actionType);
+            //this.Bet(lastAct.roundAmount , lastAct.actionType);
         }
     }
 
@@ -316,52 +321,52 @@ export class Game_SelfUI extends BaseUI
         {
             if(lastAct.uid == LocalPlayerData.Instance.Data_Uid.mData)
             {
-                this.ShowActionType(lastAct.actionType);
-                this.Bet(lastAct.roundAmount , lastAct.actionType);
+                //this.ShowActionType(lastAct.actionType);
+                //this.Bet(lastAct.roundAmount , lastAct.actionType);
             }
         }
     }
 
     Bet(_amount : number , _actionType : ActionType)
     {
-        if(_actionType == ActionType.ActionType_Check)
-        {
-            return;
-        }
+        // if(_actionType == ActionType.ActionType_Check)
+        // {
+        //     return;
+        // }
 
-        if(_actionType == ActionType.ActionType_Fold)
-        {
-            return;
-        }
+        // if(_actionType == ActionType.ActionType_Fold)
+        // {
+        //     return;
+        // }
 
-        this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_node)=>
-        {
-            this.node.addChild(_node);
-            let script = _node.getComponent(Game_MovingChip);
-            let startWorldPos = this.node.worldPosition;
-            let entWorldPos = this.mGame_BetAmount.GetChipWorldPos();
-            script.Fly(startWorldPos ,entWorldPos);
-        })
-        let amountS2C = Tool.ConvertMoney_S2C(_amount);
-        this.mGame_BetAmount.Bet(amountS2C);
+        // this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_node)=>
+        // {
+        //     this.node.addChild(_node);
+        //     let script = _node.getComponent(Game_MovingChip);
+        //     let startWorldPos = this.node.worldPosition;
+        //     let entWorldPos = this.mGame_BetAmount.GetChipWorldPos();
+        //     script.Fly(startWorldPos ,entWorldPos);
+        // })
+        // let amountS2C = Tool.ConvertMoney_S2C(_amount);
+        // this.mGame_BetAmount.Bet(amountS2C);
     }
 
     ShowActionType(_actionType : ActionType )
     {
-        if(_actionType == ActionType.ActionType_Fold)
-        {
-            this.LoadPrefab("gamePage","prefab/Game_MovingCards",(_node)=>
-            {
-                this.node.addChild(_node);
-                let script = _node.getComponent(Game_MovingCards);
-                let startWorldPos = this.mCards.worldPosition;
-                let screenSize = view.getVisibleSize();
-                script.FlyTo(startWorldPos , new Vec3(screenSize.width/2 , screenSize.height/2));
-            })
-            this.FoldCards();
+        // if(_actionType == ActionType.ActionType_Fold)
+        // {
+        //     this.LoadPrefab("gamePage","prefab/Game_MovingCards",(_node)=>
+        //     {
+        //         this.node.addChild(_node);
+        //         let script = _node.getComponent(Game_MovingCards);
+        //         let startWorldPos = this.mCards.worldPosition;
+        //         let screenSize = view.getVisibleSize();
+        //         script.FlyTo(startWorldPos , new Vec3(screenSize.width/2 , screenSize.height/2));
+        //     })
+        //     this.FoldCards();
 
-        }
-        this.mGame_ActionTag.SetType(_actionType);
+        // }
+        // this.mGame_ActionTag.SetType(_actionType);
     }
 
 

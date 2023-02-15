@@ -4531,6 +4531,7 @@ $root.TexasDynamicData = (function() {
      * @property {Array.<IActionInfo>|null} [actions] TexasDynamicData actions
      * @property {Array.<ICardInfo>|null} [publicCards] TexasDynamicData publicCards
      * @property {string|null} [dealerUid] TexasDynamicData dealerUid
+     * @property {IBuyInsuranceTurn|null} [buyInsuranceTurn] TexasDynamicData buyInsuranceTurn
      * @property {number|null} [totalPot] TexasDynamicData totalPot
      */
 
@@ -4618,6 +4619,14 @@ $root.TexasDynamicData = (function() {
     TexasDynamicData.prototype.dealerUid = "";
 
     /**
+     * TexasDynamicData buyInsuranceTurn.
+     * @member {IBuyInsuranceTurn|null|undefined} buyInsuranceTurn
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.buyInsuranceTurn = null;
+
+    /**
      * TexasDynamicData totalPot.
      * @member {number} totalPot
      * @memberof TexasDynamicData
@@ -4661,8 +4670,10 @@ $root.TexasDynamicData = (function() {
         }
         if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
             w.uint32(66).string(m.dealerUid);
+        if (m.buyInsuranceTurn != null && Object.hasOwnProperty.call(m, "buyInsuranceTurn"))
+            $root.BuyInsuranceTurn.encode(m.buyInsuranceTurn, w.uint32(74).fork()).ldelim();
         if (m.totalPot != null && Object.hasOwnProperty.call(m, "totalPot"))
-            w.uint32(72).int64(m.totalPot);
+            w.uint32(80).int64(m.totalPot);
         return w;
     };
 
@@ -4717,6 +4728,9 @@ $root.TexasDynamicData = (function() {
                 m.dealerUid = r.string();
                 break;
             case 9:
+                m.buyInsuranceTurn = $root.BuyInsuranceTurn.decode(r, r.uint32());
+                break;
+            case 10:
                 m.totalPot = r.int64();
                 break;
             default:
@@ -4728,6 +4742,247 @@ $root.TexasDynamicData = (function() {
     };
 
     return TexasDynamicData;
+})();
+
+$root.BuyInsuranceTurn = (function() {
+
+    /**
+     * Properties of a BuyInsuranceTurn.
+     * @exports IBuyInsuranceTurn
+     * @interface IBuyInsuranceTurn
+     * @property {string|null} [gameId] BuyInsuranceTurn gameId
+     * @property {string|null} [actionUid] BuyInsuranceTurn actionUid
+     * @property {Array.<ICardInfo>|null} [outsCards] BuyInsuranceTurn outsCards
+     * @property {Array.<ICardInfo>|null} [tieCards] BuyInsuranceTurn tieCards
+     * @property {Array.<ICardInfo>|null} [publicCards] BuyInsuranceTurn publicCards
+     * @property {Array.<IPlayerInfo>|null} [losePlayerInfo] BuyInsuranceTurn losePlayerInfo
+     * @property {number|null} [ratios] BuyInsuranceTurn ratios
+     * @property {number|null} [pots] BuyInsuranceTurn pots
+     * @property {number|null} [buyFullPot] BuyInsuranceTurn buyFullPot
+     * @property {number|null} [buyBack] BuyInsuranceTurn buyBack
+     * @property {number|null} [leftTime] BuyInsuranceTurn leftTime
+     */
+
+    /**
+     * Constructs a new BuyInsuranceTurn.
+     * @exports BuyInsuranceTurn
+     * @classdesc Represents a BuyInsuranceTurn.
+     * @implements IBuyInsuranceTurn
+     * @constructor
+     * @param {IBuyInsuranceTurn=} [p] Properties to set
+     */
+    function BuyInsuranceTurn(p) {
+        this.outsCards = [];
+        this.tieCards = [];
+        this.publicCards = [];
+        this.losePlayerInfo = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * BuyInsuranceTurn gameId.
+     * @member {string} gameId
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.gameId = "";
+
+    /**
+     * BuyInsuranceTurn actionUid.
+     * @member {string} actionUid
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.actionUid = "";
+
+    /**
+     * BuyInsuranceTurn outsCards.
+     * @member {Array.<ICardInfo>} outsCards
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.outsCards = $util.emptyArray;
+
+    /**
+     * BuyInsuranceTurn tieCards.
+     * @member {Array.<ICardInfo>} tieCards
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.tieCards = $util.emptyArray;
+
+    /**
+     * BuyInsuranceTurn publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * BuyInsuranceTurn losePlayerInfo.
+     * @member {Array.<IPlayerInfo>} losePlayerInfo
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.losePlayerInfo = $util.emptyArray;
+
+    /**
+     * BuyInsuranceTurn ratios.
+     * @member {number} ratios
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.ratios = 0;
+
+    /**
+     * BuyInsuranceTurn pots.
+     * @member {number} pots
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.pots = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BuyInsuranceTurn buyFullPot.
+     * @member {number} buyFullPot
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.buyFullPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BuyInsuranceTurn buyBack.
+     * @member {number} buyBack
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.buyBack = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BuyInsuranceTurn leftTime.
+     * @member {number} leftTime
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified BuyInsuranceTurn message. Does not implicitly {@link BuyInsuranceTurn.verify|verify} messages.
+     * @function encode
+     * @memberof BuyInsuranceTurn
+     * @static
+     * @param {IBuyInsuranceTurn} m BuyInsuranceTurn message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    BuyInsuranceTurn.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.actionUid != null && Object.hasOwnProperty.call(m, "actionUid"))
+            w.uint32(18).string(m.actionUid);
+        if (m.outsCards != null && m.outsCards.length) {
+            for (var i = 0; i < m.outsCards.length; ++i)
+                $root.CardInfo.encode(m.outsCards[i], w.uint32(26).fork()).ldelim();
+        }
+        if (m.tieCards != null && m.tieCards.length) {
+            for (var i = 0; i < m.tieCards.length; ++i)
+                $root.CardInfo.encode(m.tieCards[i], w.uint32(34).fork()).ldelim();
+        }
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(42).fork()).ldelim();
+        }
+        if (m.losePlayerInfo != null && m.losePlayerInfo.length) {
+            for (var i = 0; i < m.losePlayerInfo.length; ++i)
+                $root.PlayerInfo.encode(m.losePlayerInfo[i], w.uint32(50).fork()).ldelim();
+        }
+        if (m.ratios != null && Object.hasOwnProperty.call(m, "ratios"))
+            w.uint32(56).int32(m.ratios);
+        if (m.pots != null && Object.hasOwnProperty.call(m, "pots"))
+            w.uint32(64).int64(m.pots);
+        if (m.buyFullPot != null && Object.hasOwnProperty.call(m, "buyFullPot"))
+            w.uint32(72).int64(m.buyFullPot);
+        if (m.buyBack != null && Object.hasOwnProperty.call(m, "buyBack"))
+            w.uint32(80).int64(m.buyBack);
+        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
+            w.uint32(88).int64(m.leftTime);
+        return w;
+    };
+
+    /**
+     * Decodes a BuyInsuranceTurn message from the specified reader or buffer.
+     * @function decode
+     * @memberof BuyInsuranceTurn
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {BuyInsuranceTurn} BuyInsuranceTurn
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    BuyInsuranceTurn.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.BuyInsuranceTurn();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.actionUid = r.string();
+                break;
+            case 3:
+                if (!(m.outsCards && m.outsCards.length))
+                    m.outsCards = [];
+                m.outsCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 4:
+                if (!(m.tieCards && m.tieCards.length))
+                    m.tieCards = [];
+                m.tieCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 5:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 6:
+                if (!(m.losePlayerInfo && m.losePlayerInfo.length))
+                    m.losePlayerInfo = [];
+                m.losePlayerInfo.push($root.PlayerInfo.decode(r, r.uint32()));
+                break;
+            case 7:
+                m.ratios = r.int32();
+                break;
+            case 8:
+                m.pots = r.int64();
+                break;
+            case 9:
+                m.buyFullPot = r.int64();
+                break;
+            case 10:
+                m.buyBack = r.int64();
+                break;
+            case 11:
+                m.leftTime = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return BuyInsuranceTurn;
 })();
 
 $root.SimpleReplayData = (function() {
@@ -13339,6 +13594,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonBuyInsuranceTurnNotify=8263 S2C_CommonBuyInsuranceTurnNotify value
  * @property {number} S2C_CommonBuyInsuranceTurnRespNotify=8264 S2C_CommonBuyInsuranceTurnRespNotify value
  * @property {number} S2C_CommonInsuranceLotteryNotify=8265 S2C_CommonInsuranceLotteryNotify value
+ * @property {number} S2C_CommonPotsNotify=8266 S2C_CommonPotsNotify value
  * @property {number} MSG_TexasCowboyBegin=10001 MSG_TexasCowboyBegin value
  * @property {number} C2S_TexasCowboyEnterGame=10002 C2S_TexasCowboyEnterGame value
  * @property {number} C2S_TexasCowboyExitGame=10003 C2S_TexasCowboyExitGame value
@@ -13497,6 +13753,7 @@ $root.MessageId = (function() {
     values[valuesById[8263] = "S2C_CommonBuyInsuranceTurnNotify"] = 8263;
     values[valuesById[8264] = "S2C_CommonBuyInsuranceTurnRespNotify"] = 8264;
     values[valuesById[8265] = "S2C_CommonInsuranceLotteryNotify"] = 8265;
+    values[valuesById[8266] = "S2C_CommonPotsNotify"] = 8266;
     values[valuesById[10001] = "MSG_TexasCowboyBegin"] = 10001;
     values[valuesById[10002] = "C2S_TexasCowboyEnterGame"] = 10002;
     values[valuesById[10003] = "C2S_TexasCowboyExitGame"] = 10003;
@@ -17392,17 +17649,7 @@ $root.S2CCommonBuyInsuranceTurnNotify = (function() {
      * Properties of a S2CCommonBuyInsuranceTurnNotify.
      * @exports IS2CCommonBuyInsuranceTurnNotify
      * @interface IS2CCommonBuyInsuranceTurnNotify
-     * @property {string|null} [gameId] S2CCommonBuyInsuranceTurnNotify gameId
-     * @property {string|null} [actionUid] S2CCommonBuyInsuranceTurnNotify actionUid
-     * @property {Array.<ICardInfo>|null} [outsCards] S2CCommonBuyInsuranceTurnNotify outsCards
-     * @property {Array.<ICardInfo>|null} [tieCards] S2CCommonBuyInsuranceTurnNotify tieCards
-     * @property {Array.<ICardInfo>|null} [publicCards] S2CCommonBuyInsuranceTurnNotify publicCards
-     * @property {Array.<IPlayerInfo>|null} [losePlayerInfo] S2CCommonBuyInsuranceTurnNotify losePlayerInfo
-     * @property {number|null} [ratios] S2CCommonBuyInsuranceTurnNotify ratios
-     * @property {number|null} [pots] S2CCommonBuyInsuranceTurnNotify pots
-     * @property {number|null} [buyFullPot] S2CCommonBuyInsuranceTurnNotify buyFullPot
-     * @property {number|null} [buyBack] S2CCommonBuyInsuranceTurnNotify buyBack
-     * @property {number|null} [leftTime] S2CCommonBuyInsuranceTurnNotify leftTime
+     * @property {IBuyInsuranceTurn|null} [buyInsuranceTurn] S2CCommonBuyInsuranceTurnNotify buyInsuranceTurn
      */
 
     /**
@@ -17414,10 +17661,6 @@ $root.S2CCommonBuyInsuranceTurnNotify = (function() {
      * @param {IS2CCommonBuyInsuranceTurnNotify=} [p] Properties to set
      */
     function S2CCommonBuyInsuranceTurnNotify(p) {
-        this.outsCards = [];
-        this.tieCards = [];
-        this.publicCards = [];
-        this.losePlayerInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -17425,92 +17668,12 @@ $root.S2CCommonBuyInsuranceTurnNotify = (function() {
     }
 
     /**
-     * S2CCommonBuyInsuranceTurnNotify gameId.
-     * @member {string} gameId
+     * S2CCommonBuyInsuranceTurnNotify buyInsuranceTurn.
+     * @member {IBuyInsuranceTurn|null|undefined} buyInsuranceTurn
      * @memberof S2CCommonBuyInsuranceTurnNotify
      * @instance
      */
-    S2CCommonBuyInsuranceTurnNotify.prototype.gameId = "";
-
-    /**
-     * S2CCommonBuyInsuranceTurnNotify actionUid.
-     * @member {string} actionUid
-     * @memberof S2CCommonBuyInsuranceTurnNotify
-     * @instance
-     */
-    S2CCommonBuyInsuranceTurnNotify.prototype.actionUid = "";
-
-    /**
-     * S2CCommonBuyInsuranceTurnNotify outsCards.
-     * @member {Array.<ICardInfo>} outsCards
-     * @memberof S2CCommonBuyInsuranceTurnNotify
-     * @instance
-     */
-    S2CCommonBuyInsuranceTurnNotify.prototype.outsCards = $util.emptyArray;
-
-    /**
-     * S2CCommonBuyInsuranceTurnNotify tieCards.
-     * @member {Array.<ICardInfo>} tieCards
-     * @memberof S2CCommonBuyInsuranceTurnNotify
-     * @instance
-     */
-    S2CCommonBuyInsuranceTurnNotify.prototype.tieCards = $util.emptyArray;
-
-    /**
-     * S2CCommonBuyInsuranceTurnNotify publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof S2CCommonBuyInsuranceTurnNotify
-     * @instance
-     */
-    S2CCommonBuyInsuranceTurnNotify.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * S2CCommonBuyInsuranceTurnNotify losePlayerInfo.
-     * @member {Array.<IPlayerInfo>} losePlayerInfo
-     * @memberof S2CCommonBuyInsuranceTurnNotify
-     * @instance
-     */
-    S2CCommonBuyInsuranceTurnNotify.prototype.losePlayerInfo = $util.emptyArray;
-
-    /**
-     * S2CCommonBuyInsuranceTurnNotify ratios.
-     * @member {number} ratios
-     * @memberof S2CCommonBuyInsuranceTurnNotify
-     * @instance
-     */
-    S2CCommonBuyInsuranceTurnNotify.prototype.ratios = 0;
-
-    /**
-     * S2CCommonBuyInsuranceTurnNotify pots.
-     * @member {number} pots
-     * @memberof S2CCommonBuyInsuranceTurnNotify
-     * @instance
-     */
-    S2CCommonBuyInsuranceTurnNotify.prototype.pots = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CCommonBuyInsuranceTurnNotify buyFullPot.
-     * @member {number} buyFullPot
-     * @memberof S2CCommonBuyInsuranceTurnNotify
-     * @instance
-     */
-    S2CCommonBuyInsuranceTurnNotify.prototype.buyFullPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CCommonBuyInsuranceTurnNotify buyBack.
-     * @member {number} buyBack
-     * @memberof S2CCommonBuyInsuranceTurnNotify
-     * @instance
-     */
-    S2CCommonBuyInsuranceTurnNotify.prototype.buyBack = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CCommonBuyInsuranceTurnNotify leftTime.
-     * @member {number} leftTime
-     * @memberof S2CCommonBuyInsuranceTurnNotify
-     * @instance
-     */
-    S2CCommonBuyInsuranceTurnNotify.prototype.leftTime = 0;
+    S2CCommonBuyInsuranceTurnNotify.prototype.buyInsuranceTurn = null;
 
     /**
      * Encodes the specified S2CCommonBuyInsuranceTurnNotify message. Does not implicitly {@link S2CCommonBuyInsuranceTurnNotify.verify|verify} messages.
@@ -17524,36 +17687,8 @@ $root.S2CCommonBuyInsuranceTurnNotify = (function() {
     S2CCommonBuyInsuranceTurnNotify.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.actionUid != null && Object.hasOwnProperty.call(m, "actionUid"))
-            w.uint32(18).string(m.actionUid);
-        if (m.outsCards != null && m.outsCards.length) {
-            for (var i = 0; i < m.outsCards.length; ++i)
-                $root.CardInfo.encode(m.outsCards[i], w.uint32(26).fork()).ldelim();
-        }
-        if (m.tieCards != null && m.tieCards.length) {
-            for (var i = 0; i < m.tieCards.length; ++i)
-                $root.CardInfo.encode(m.tieCards[i], w.uint32(34).fork()).ldelim();
-        }
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(42).fork()).ldelim();
-        }
-        if (m.losePlayerInfo != null && m.losePlayerInfo.length) {
-            for (var i = 0; i < m.losePlayerInfo.length; ++i)
-                $root.PlayerInfo.encode(m.losePlayerInfo[i], w.uint32(50).fork()).ldelim();
-        }
-        if (m.ratios != null && Object.hasOwnProperty.call(m, "ratios"))
-            w.uint32(56).int32(m.ratios);
-        if (m.pots != null && Object.hasOwnProperty.call(m, "pots"))
-            w.uint32(64).int64(m.pots);
-        if (m.buyFullPot != null && Object.hasOwnProperty.call(m, "buyFullPot"))
-            w.uint32(72).int64(m.buyFullPot);
-        if (m.buyBack != null && Object.hasOwnProperty.call(m, "buyBack"))
-            w.uint32(80).int64(m.buyBack);
-        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
-            w.uint32(88).int32(m.leftTime);
+        if (m.buyInsuranceTurn != null && Object.hasOwnProperty.call(m, "buyInsuranceTurn"))
+            $root.BuyInsuranceTurn.encode(m.buyInsuranceTurn, w.uint32(10).fork()).ldelim();
         return w;
     };
 
@@ -17576,45 +17711,7 @@ $root.S2CCommonBuyInsuranceTurnNotify = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.actionUid = r.string();
-                break;
-            case 3:
-                if (!(m.outsCards && m.outsCards.length))
-                    m.outsCards = [];
-                m.outsCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 4:
-                if (!(m.tieCards && m.tieCards.length))
-                    m.tieCards = [];
-                m.tieCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 5:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 6:
-                if (!(m.losePlayerInfo && m.losePlayerInfo.length))
-                    m.losePlayerInfo = [];
-                m.losePlayerInfo.push($root.PlayerInfo.decode(r, r.uint32()));
-                break;
-            case 7:
-                m.ratios = r.int32();
-                break;
-            case 8:
-                m.pots = r.int64();
-                break;
-            case 9:
-                m.buyFullPot = r.int64();
-                break;
-            case 10:
-                m.buyBack = r.int64();
-                break;
-            case 11:
-                m.leftTime = r.int32();
+                m.buyInsuranceTurn = $root.BuyInsuranceTurn.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);
@@ -18227,7 +18324,6 @@ $root.S2CCommonFlopRoundNotify = (function() {
      * @interface IS2CCommonFlopRoundNotify
      * @property {string|null} [gameId] S2CCommonFlopRoundNotify gameId
      * @property {Array.<ICardInfo>|null} [cards] S2CCommonFlopRoundNotify cards
-     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonFlopRoundNotify potInfo
      */
 
     /**
@@ -18240,7 +18336,6 @@ $root.S2CCommonFlopRoundNotify = (function() {
      */
     function S2CCommonFlopRoundNotify(p) {
         this.cards = [];
-        this.potInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -18264,14 +18359,6 @@ $root.S2CCommonFlopRoundNotify = (function() {
     S2CCommonFlopRoundNotify.prototype.cards = $util.emptyArray;
 
     /**
-     * S2CCommonFlopRoundNotify potInfo.
-     * @member {Array.<IPotInfo>} potInfo
-     * @memberof S2CCommonFlopRoundNotify
-     * @instance
-     */
-    S2CCommonFlopRoundNotify.prototype.potInfo = $util.emptyArray;
-
-    /**
      * Encodes the specified S2CCommonFlopRoundNotify message. Does not implicitly {@link S2CCommonFlopRoundNotify.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonFlopRoundNotify
@@ -18288,10 +18375,6 @@ $root.S2CCommonFlopRoundNotify = (function() {
         if (m.cards != null && m.cards.length) {
             for (var i = 0; i < m.cards.length; ++i)
                 $root.CardInfo.encode(m.cards[i], w.uint32(18).fork()).ldelim();
-        }
-        if (m.potInfo != null && m.potInfo.length) {
-            for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(26).fork()).ldelim();
         }
         return w;
     };
@@ -18322,11 +18405,6 @@ $root.S2CCommonFlopRoundNotify = (function() {
                     m.cards = [];
                 m.cards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
-            case 3:
-                if (!(m.potInfo && m.potInfo.length))
-                    m.potInfo = [];
-                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
-                break;
             default:
                 r.skipType(t & 7);
                 break;
@@ -18346,7 +18424,6 @@ $root.S2CCommonTurnRoundNotify = (function() {
      * @interface IS2CCommonTurnRoundNotify
      * @property {string|null} [gameId] S2CCommonTurnRoundNotify gameId
      * @property {ICardInfo|null} [card] S2CCommonTurnRoundNotify card
-     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonTurnRoundNotify potInfo
      */
 
     /**
@@ -18358,7 +18435,6 @@ $root.S2CCommonTurnRoundNotify = (function() {
      * @param {IS2CCommonTurnRoundNotify=} [p] Properties to set
      */
     function S2CCommonTurnRoundNotify(p) {
-        this.potInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -18382,14 +18458,6 @@ $root.S2CCommonTurnRoundNotify = (function() {
     S2CCommonTurnRoundNotify.prototype.card = null;
 
     /**
-     * S2CCommonTurnRoundNotify potInfo.
-     * @member {Array.<IPotInfo>} potInfo
-     * @memberof S2CCommonTurnRoundNotify
-     * @instance
-     */
-    S2CCommonTurnRoundNotify.prototype.potInfo = $util.emptyArray;
-
-    /**
      * Encodes the specified S2CCommonTurnRoundNotify message. Does not implicitly {@link S2CCommonTurnRoundNotify.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonTurnRoundNotify
@@ -18405,10 +18473,6 @@ $root.S2CCommonTurnRoundNotify = (function() {
             w.uint32(10).string(m.gameId);
         if (m.card != null && Object.hasOwnProperty.call(m, "card"))
             $root.CardInfo.encode(m.card, w.uint32(18).fork()).ldelim();
-        if (m.potInfo != null && m.potInfo.length) {
-            for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(26).fork()).ldelim();
-        }
         return w;
     };
 
@@ -18436,11 +18500,6 @@ $root.S2CCommonTurnRoundNotify = (function() {
             case 2:
                 m.card = $root.CardInfo.decode(r, r.uint32());
                 break;
-            case 3:
-                if (!(m.potInfo && m.potInfo.length))
-                    m.potInfo = [];
-                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
-                break;
             default:
                 r.skipType(t & 7);
                 break;
@@ -18460,7 +18519,6 @@ $root.S2CCommonRiverRoundNotify = (function() {
      * @interface IS2CCommonRiverRoundNotify
      * @property {string|null} [gameId] S2CCommonRiverRoundNotify gameId
      * @property {ICardInfo|null} [card] S2CCommonRiverRoundNotify card
-     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonRiverRoundNotify potInfo
      */
 
     /**
@@ -18472,7 +18530,6 @@ $root.S2CCommonRiverRoundNotify = (function() {
      * @param {IS2CCommonRiverRoundNotify=} [p] Properties to set
      */
     function S2CCommonRiverRoundNotify(p) {
-        this.potInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -18496,14 +18553,6 @@ $root.S2CCommonRiverRoundNotify = (function() {
     S2CCommonRiverRoundNotify.prototype.card = null;
 
     /**
-     * S2CCommonRiverRoundNotify potInfo.
-     * @member {Array.<IPotInfo>} potInfo
-     * @memberof S2CCommonRiverRoundNotify
-     * @instance
-     */
-    S2CCommonRiverRoundNotify.prototype.potInfo = $util.emptyArray;
-
-    /**
      * Encodes the specified S2CCommonRiverRoundNotify message. Does not implicitly {@link S2CCommonRiverRoundNotify.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonRiverRoundNotify
@@ -18519,10 +18568,6 @@ $root.S2CCommonRiverRoundNotify = (function() {
             w.uint32(10).string(m.gameId);
         if (m.card != null && Object.hasOwnProperty.call(m, "card"))
             $root.CardInfo.encode(m.card, w.uint32(18).fork()).ldelim();
-        if (m.potInfo != null && m.potInfo.length) {
-            for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(26).fork()).ldelim();
-        }
         return w;
     };
 
@@ -18550,7 +18595,102 @@ $root.S2CCommonRiverRoundNotify = (function() {
             case 2:
                 m.card = $root.CardInfo.decode(r, r.uint32());
                 break;
-            case 3:
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonRiverRoundNotify;
+})();
+
+$root.S2CCommonPotsNotify = (function() {
+
+    /**
+     * Properties of a S2CCommonPotsNotify.
+     * @exports IS2CCommonPotsNotify
+     * @interface IS2CCommonPotsNotify
+     * @property {string|null} [gameId] S2CCommonPotsNotify gameId
+     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonPotsNotify potInfo
+     */
+
+    /**
+     * Constructs a new S2CCommonPotsNotify.
+     * @exports S2CCommonPotsNotify
+     * @classdesc Represents a S2CCommonPotsNotify.
+     * @implements IS2CCommonPotsNotify
+     * @constructor
+     * @param {IS2CCommonPotsNotify=} [p] Properties to set
+     */
+    function S2CCommonPotsNotify(p) {
+        this.potInfo = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonPotsNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonPotsNotify
+     * @instance
+     */
+    S2CCommonPotsNotify.prototype.gameId = "";
+
+    /**
+     * S2CCommonPotsNotify potInfo.
+     * @member {Array.<IPotInfo>} potInfo
+     * @memberof S2CCommonPotsNotify
+     * @instance
+     */
+    S2CCommonPotsNotify.prototype.potInfo = $util.emptyArray;
+
+    /**
+     * Encodes the specified S2CCommonPotsNotify message. Does not implicitly {@link S2CCommonPotsNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonPotsNotify
+     * @static
+     * @param {IS2CCommonPotsNotify} m S2CCommonPotsNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonPotsNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.potInfo != null && m.potInfo.length) {
+            for (var i = 0; i < m.potInfo.length; ++i)
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(18).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonPotsNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonPotsNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonPotsNotify} S2CCommonPotsNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonPotsNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonPotsNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
                 if (!(m.potInfo && m.potInfo.length))
                     m.potInfo = [];
                 m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
@@ -18563,7 +18703,7 @@ $root.S2CCommonRiverRoundNotify = (function() {
         return m;
     };
 
-    return S2CCommonRiverRoundNotify;
+    return S2CCommonPotsNotify;
 })();
 
 $root.S2CCommonCurrentActionNotify = (function() {
@@ -18682,7 +18822,6 @@ $root.S2CCommonSettlementNotify = (function() {
      * @exports IS2CCommonSettlementNotify
      * @interface IS2CCommonSettlementNotify
      * @property {string|null} [gameId] S2CCommonSettlementNotify gameId
-     * @property {Array.<IPotInfo>|null} [potInfo] S2CCommonSettlementNotify potInfo
      * @property {Array.<IPlayerWinLose>|null} [result] S2CCommonSettlementNotify result
      */
 
@@ -18695,7 +18834,6 @@ $root.S2CCommonSettlementNotify = (function() {
      * @param {IS2CCommonSettlementNotify=} [p] Properties to set
      */
     function S2CCommonSettlementNotify(p) {
-        this.potInfo = [];
         this.result = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -18710,14 +18848,6 @@ $root.S2CCommonSettlementNotify = (function() {
      * @instance
      */
     S2CCommonSettlementNotify.prototype.gameId = "";
-
-    /**
-     * S2CCommonSettlementNotify potInfo.
-     * @member {Array.<IPotInfo>} potInfo
-     * @memberof S2CCommonSettlementNotify
-     * @instance
-     */
-    S2CCommonSettlementNotify.prototype.potInfo = $util.emptyArray;
 
     /**
      * S2CCommonSettlementNotify result.
@@ -18741,13 +18871,9 @@ $root.S2CCommonSettlementNotify = (function() {
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(10).string(m.gameId);
-        if (m.potInfo != null && m.potInfo.length) {
-            for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(18).fork()).ldelim();
-        }
         if (m.result != null && m.result.length) {
             for (var i = 0; i < m.result.length; ++i)
-                $root.PlayerWinLose.encode(m.result[i], w.uint32(26).fork()).ldelim();
+                $root.PlayerWinLose.encode(m.result[i], w.uint32(18).fork()).ldelim();
         }
         return w;
     };
@@ -18774,11 +18900,6 @@ $root.S2CCommonSettlementNotify = (function() {
                 m.gameId = r.string();
                 break;
             case 2:
-                if (!(m.potInfo && m.potInfo.length))
-                    m.potInfo = [];
-                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 3:
                 if (!(m.result && m.result.length))
                     m.result = [];
                 m.result.push($root.PlayerWinLose.decode(r, r.uint32()));

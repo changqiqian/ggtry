@@ -91,28 +91,12 @@ export class Game_Pot extends BaseUI
             this.UpdateTotalPot();
         })
 
-        gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonPotsNotify.AddListenner(this,(_data)=>
         {
             this.UpdateSubPots();
             this.UpdateTotalPot();
         })
 
-        gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
-        {
-            this.UpdateSubPots();
-            this.UpdateTotalPot();
-        })
-        gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
-        {
-            this.UpdateSubPots();
-            this.UpdateTotalPot();
-        })
-
-        gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
-        {
-            this.UpdateSubPots();
-            this.UpdateTotalPot();
-        })
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
             this.UpdateSubPots();

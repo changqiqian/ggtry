@@ -153,7 +153,7 @@ export class Game_Player extends BaseUI
             this.UpdateName(playerInfo.nickName);
             this.UpdateHead(playerInfo.head);
             this.UpdateMoney(true ,playerInfo);
-            this.UpdateDealer(replayData.dealerUid , playerInfo , true);
+            this.UpdateDealer(replayData.dealerUid , playerInfo );
 
             if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
             {
@@ -221,13 +221,6 @@ export class Game_Player extends BaseUI
             }
         })
 
-        GameReplayData.Instance.Data_RotateSeatEnd.AddListenner(this,(_data)=>
-        {
-            if(_data)
-            {
-                this.UpdateUIDirection();
-            }
-        })    
 
         GameReplayData.Instance.Data_State.AddListenner(this,(_data)=>
         {
@@ -292,7 +285,7 @@ export class Game_Player extends BaseUI
 
             this.RestoreAction();
             this.RestoreTurn();
-            this.UpdateDealer(gameData.GetDynamicData().dealerUid , playerInfo , false);
+            this.UpdateDealer(gameData.GetDynamicData().dealerUid , playerInfo );
             this.UpdatePlayerPlayingState(playerInfo);
         });
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
@@ -365,7 +358,7 @@ export class Game_Player extends BaseUI
             }
 
             let dealerId = gameData.GetDynamicData().dealerUid;
-            this.UpdateDealer(dealerId,currentPlayer,false);
+            this.UpdateDealer(dealerId,currentPlayer);
             this.UpdateMoney(false , currentPlayer);
         })
 
@@ -386,16 +379,19 @@ export class Game_Player extends BaseUI
 
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
         {
+            this.ShowLocalPlayerLogic(true);
             this.CleanTable(false);
         })
 
         gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
         {
+            this.ShowLocalPlayerLogic(true);
             this.CleanTable(false);
         })
 
         gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
         {
+            this.ShowLocalPlayerLogic(true);
             this.CleanTable(false);
         })
         
@@ -429,6 +425,12 @@ export class Game_Player extends BaseUI
                 return;
             }
 
+            if(currentPlayer.uid == _data.actionInfo.uid)
+            {
+                this.ShowLocalPlayerLogic(true);
+            }
+
+            
             this.ExcutiveAction(false);
             this.UpdateMoney(false,currentPlayer);
         })
@@ -464,14 +466,7 @@ export class Game_Player extends BaseUI
             this.ShowBuying(false);
             this.UpdateMoney(false, playerInfo);
         })
-
-        gameData.Data_RotateSeatEnd.AddListenner(this,(_data)=>
-        {
-            if(_data)
-            {
-                this.UpdateUIDirection();
-            }
-        })            
+   
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
@@ -481,10 +476,8 @@ export class Game_Player extends BaseUI
                 return;
             }
 
-            if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                this.node.active = true;
-            }
+            this.ShowLocalPlayerLogic(true);
+
             let winLoseInfos = _data.result;
             let index = winLoseInfos.findIndex((_item) => _item.uid === playerInfo.uid);
             if(index < 0)
@@ -556,14 +549,14 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-
+            this.ShowLocalPlayerLogic(true);
             let hands = currentPlayer.cards;
             this.ShowCards(hands , false);
         });
 
         gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
         {
-            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.buyInsuranceTurn.actionUid);
             if(playerInfo == null)
             {
                 return;
@@ -575,7 +568,8 @@ export class Game_Player extends BaseUI
             }
 
             this.mInsuranceBG.active = true;
-            this.StartSecondsTimer(_data.leftTime , 1  , ()=>
+            this.UpdateUIDirection();
+            this.StartSecondsTimer(_data.buyInsuranceTurn.leftTime , 1  , ()=>
             {
                 let seconds = this.GetRestSeconds();
                 this.mInsuranceBG.getChildByName("InsCount").getComponent(Label).string = seconds + "";
@@ -654,7 +648,7 @@ export class Game_Player extends BaseUI
     }
 
 
-    UpdateUIDirection()
+    public UpdateUIDirection()
     {
         let posX = this.node.parent.worldPosition.x;
         let getVisibleSize = view.getVisibleSize();
@@ -699,7 +693,6 @@ export class Game_Player extends BaseUI
         }
 
         this.mSelfBtn.node.active = true;
-        //this.mBG.active = !(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData);
         this.UpdateName(playerInfo.nickName);
         this.UpdateHead(playerInfo.head);
         this.UpdateMoney(false,playerInfo);
@@ -874,17 +867,12 @@ export class Game_Player extends BaseUI
         let currentActionUid =  gameData.GetDynamicData().actionUid;
         this.mCircleTimer.StopTimer();
 
-        if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+        if(currentActionUid == playerInfo.uid)
         {
-            this.node.active = currentActionUid != playerInfo.uid
+            this.mCircleTimer.StartTimer(actionLeftTime);
         }
-        else
-        {
-            if(currentActionUid == playerInfo.uid)
-            {
-                this.mCircleTimer.StartTimer(actionLeftTime);
-            }
-        }
+
+        this.ShowLocalPlayerLogic(currentActionUid != LocalPlayerData.Instance.Data_Uid.mData);
     }
 
     UpdateName(_name : string)
@@ -957,18 +945,11 @@ export class Game_Player extends BaseUI
         }
     }
 
-    UpdateDealer(_dealerId : string , _playerInfo : PlayerInfo , _replay : boolean)
+    UpdateDealer(_dealerId : string , _playerInfo : PlayerInfo )
     {
-        if(_replay == false)
-        {
-            if(_playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
-        }
-
         let currentUid = _playerInfo.uid;
         this.mDealer.active = currentUid == _dealerId;
+        this.UpdateUIDirection();
     }
 
     Bet(_amount : number ,_actionType : ActionType ,  _replay : boolean)
@@ -1017,13 +998,7 @@ export class Game_Player extends BaseUI
         
         if(_replay == false)
         {
-            // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            // let gameData = gameStruct.mGameData;
-            // let isSelf = gameData.IsSelfBySeat(this.mSeatID);
-            // if(isSelf)
-            // {
-            //     return;
-            // }
+
         }
         else
         {
@@ -1088,6 +1063,26 @@ export class Game_Player extends BaseUI
         }
         this.mConbination.active = true;
         this.mConbination.getChildByName("Conbination").getComponent(Label).string = Poker.GetConbinationName(_conbination);
+    }
+
+    ShowLocalPlayerLogic(_value : boolean)
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        if(playerInfo == null)
+        {
+            return;
+        }
+        if(gameData.IsPlayerPlaying(playerInfo.uid) == false)
+        {
+            return;
+        }
+
+        if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+        {
+            this.node.active = _value;
+        }
     }
 }
 

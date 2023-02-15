@@ -1142,6 +1142,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 let gameData = gameStruct.mGameData;
                 gameData.SetGameState(TexasCashState.TexasCashState_WaitStart);
                 gameData.Data_S2CCommonWaitStartNotify.mData = msg;
+                gameData.Data_S2CCommonOpenCardNotify.mData = null;
             }
         },this);
 
@@ -1175,6 +1176,19 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonPotsNotify,(_data)=>
+        {
+            let msg = S2CCommonPotsNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonPotsNotify  分池信息==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.UpdatePots(msg.potInfo);
+                gameData.Data_S2CCommonPotsNotify.mData = msg;
+            }
+        },this);
+
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonFlopRoundNotify,(_data)=>
         {
             let msg = S2CCommonFlopRoundNotify.decode(_data);
@@ -1185,7 +1199,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 let gameData = gameStruct.mGameData;
                 gameData.ClearActions();
                 gameData.SetGameState(TexasCashState.TexasCashState_FlopRound);
-                gameData.UpdatePots(msg.potInfo);
                 gameData.GetDynamicData().publicCards = msg.cards;
                 gameData.Data_S2CCommonFlopRoundNotify.mData = msg;
             }
@@ -1201,7 +1214,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 let gameData = gameStruct.mGameData;
                 gameData.ClearActions();
                 gameData.SetGameState(TexasCashState.TexasCashState_TurnRound);
-                gameData.UpdatePots(msg.potInfo);
                 gameData.GetDynamicData().publicCards.push(msg.card);
                 gameData.Data_S2CCommonTurnRoundNotify.mData = msg;
             }
@@ -1218,7 +1230,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 gameData.ClearActions();
                 gameData.SetGameState(TexasCashState.TexasCashState_RiverRound);
                 gameData.GetDynamicData().publicCards.push(msg.card);
-                gameData.UpdatePots(msg.potInfo);
                 gameData.Data_S2CCommonRiverRoundNotify.mData = msg;
             }
         },this);
@@ -1287,7 +1298,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         {
             let msg = S2CCommonBuyInsuranceTurnNotify.decode(_data);
             console.log("收到的内容 S2C_CommonBuyInsuranceTurnNotify  轮到谁买保险==" + JSON.stringify(msg));
-            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.buyInsuranceTurn.gameId);
             if(gameStruct != null)
             {
                 let gameData = gameStruct.mGameData;
@@ -1335,7 +1346,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     gameData.UpdatePlayerMoney(currentResult.uid , currentResult.amount);
                 }
                 gameData.SetGameState(TexasCashState.TexasCashState_Settlement);
-                gameData.UpdatePots(msg.potInfo);
                 gameData.Data_S2CCommonSettlementNotify.mData = msg;
             }
         },this);  

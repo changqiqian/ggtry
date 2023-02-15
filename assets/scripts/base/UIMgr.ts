@@ -210,6 +210,11 @@ export class UIMgr extends Singleton<UIMgr>()
         let key = this.CreateKey(_bundleName,_prefabPath,_aka);
         let target = this.FindLayer(key,LayerType.Layer);
 
+        if(_prefabPath == "prefab/Game_InsuranceLayer")
+        {
+            console.log("尝试打开or关闭======" + _show);
+        }
+
         if(target != null && target.value == null)
         {
             console.log("ShowLayer 正在创建中，请不要重复创建 ===key" + key);

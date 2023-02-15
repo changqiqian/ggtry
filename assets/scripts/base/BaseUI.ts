@@ -43,7 +43,6 @@ const { ccclass, property } = _decorator;
 
 //如果你这个prefab有撑满全屏的背景图，那么将他放在prefab的根节点下，并且命名成BG
 export abstract class BaseUI extends Component {
-    mIsWindow: boolean = false;
     mInitFlag : boolean = false;
     mLayerList: Array<SubViewKeyPair>;
 
@@ -59,7 +58,6 @@ export abstract class BaseUI extends Component {
         game.on(Game.EVENT_SHOW,this.OnGameShow,this);
         game.on(Game.EVENT_HIDE,this.OnGameHide,this);
         this.PreInit();
-        this.mIsWindow = false;
         this.mLayerList = new Array<SubViewKeyPair>();
         this.InitParam();
         this.BindUI();
@@ -259,14 +257,7 @@ export abstract class BaseUI extends Component {
             return;
         }
         
-        if (parentScript.mIsWindow) 
-        {
-            parentScript.Show(false);
-        } 
-        else 
-        {
-            this.Show(false);
-        }
+        parentScript.Show(false);
     }
     //启动秒表  
     StartSecondsTimer(_totalTime : number , _timeSpace :number = 1 , _callback : Function = null)
