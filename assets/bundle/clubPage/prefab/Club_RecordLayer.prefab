@@ -3200,7 +3200,7 @@
         "__id__": 290
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 353
@@ -4951,7 +4951,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 209.697,
+      "x": 0,
       "y": 79.707,
       "z": 0
     },
@@ -5291,7 +5291,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": -162,
+      "x": -320,
       "y": 0,
       "z": 0
     }
@@ -5469,7 +5469,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -5489,7 +5489,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -5509,7 +5509,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -5654,7 +5654,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -5734,7 +5734,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -6133,7 +6133,7 @@
     "propertyPath": [
       "_string"
     ],
-    "value": "今日"
+    "value": "本周"
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -6251,7 +6251,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -6271,7 +6271,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -6291,7 +6291,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -6369,7 +6369,7 @@
     "propertyPath": [
       "_string"
     ],
-    "value": "今日"
+    "value": "本周"
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -6436,7 +6436,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -6516,7 +6516,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -6855,7 +6855,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": 162,
+      "x": 320,
       "y": 0,
       "z": 0
     }
@@ -6915,7 +6915,7 @@
     "propertyPath": [
       "_string"
     ],
-    "value": "今日"
+    "value": "本月"
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -7033,7 +7033,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -7053,7 +7053,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -7073,7 +7073,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -7151,7 +7151,7 @@
     "propertyPath": [
       "_string"
     ],
-    "value": "今日"
+    "value": "本月"
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -7218,7 +7218,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -7298,7 +7298,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 162,
+      "width": 300,
       "height": 69
     }
   },
@@ -7336,7 +7336,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 486,
+      "width": 940,
       "height": 100
     },
     "_anchorPoint": {
@@ -7373,7 +7373,7 @@
     "_paddingRight": 0,
     "_paddingTop": 0,
     "_paddingBottom": 0,
-    "_spacingX": 0,
+    "_spacingX": 20,
     "_spacingY": 0,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,
@@ -7401,7 +7401,7 @@
     "_alignFlags": 33,
     "_target": null,
     "_left": 482.023,
-    "_right": 59.803,
+    "_right": 42.5,
     "_top": 30.292999999999992,
     "_bottom": 0,
     "_horizontalCenter": 0,
@@ -10020,9 +10020,6 @@
     "mBackBtn": null,
     "mGameTypeLayout": {
       "__id__": 54
-    },
-    "mCurrencyLayout": {
-      "__id__": 226
     },
     "mDateLayout": {
       "__id__": 360

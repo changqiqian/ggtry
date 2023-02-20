@@ -201,7 +201,6 @@ export class UIMgr extends Singleton<UIMgr>()
         {
             return true;
         }
-
         return false;
     }
 
@@ -209,11 +208,6 @@ export class UIMgr extends Singleton<UIMgr>()
     {
         let key = this.CreateKey(_bundleName,_prefabPath,_aka);
         let target = this.FindLayer(key,LayerType.Layer);
-
-        if(_prefabPath == "prefab/Game_InsuranceLayer")
-        {
-            console.log("尝试打开or关闭======" + _show);
-        }
 
         if(target != null && target.value == null)
         {

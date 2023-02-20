@@ -14,8 +14,8 @@ export class Club_RecordLayer extends ListViewCtr<any>
     mBackBtn: BaseButton = null;
     @property(Node) 
     mGameTypeLayout: Node = null;
-    @property(Node) 
-    mCurrencyLayout: Node = null;
+    // @property(Node) 
+    // mCurrencyLayout: Node = null;
     @property(Node) 
     mDateLayout: Node = null;
     @property(Label) 
@@ -39,11 +39,11 @@ export class Club_RecordLayer extends ListViewCtr<any>
             let currentToggle = this.mGameTypeLayout.children[i].getComponent(ToggleBtn);
             currentToggle.SetDataNotify(HallData.Instance.Data_ClubRecordSubPage , i);
         }
-        for(let i = 0 ; i < this.mCurrencyLayout.children.length ; i++)
-        {
-            let currentToggle = this.mCurrencyLayout.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(HallData.Instance.Data_ClubRecordCoinType, i);
-        }
+        // for(let i = 0 ; i < this.mCurrencyLayout.children.length ; i++)
+        // {
+        //     let currentToggle = this.mCurrencyLayout.children[i].getComponent(ToggleBtn);
+        //     currentToggle.SetDataNotify(HallData.Instance.Data_ClubRecordCoinType, i);
+        // }
         for(let i = 0 ; i < this.mDateLayout.children.length ; i++)
         {
             let currentToggle = this.mDateLayout.children[i].getComponent(ToggleBtn);

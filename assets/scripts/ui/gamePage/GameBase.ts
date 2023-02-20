@@ -87,6 +87,11 @@ export class GameBase extends BaseUI
                 return;
             }
 
+            if(_data.buyInsuranceTurn != null)
+            {
+                gameData.Data_BuyInsuranceTurn.mData = _data.buyInsuranceTurn ;
+            }
+
             let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData)
             if(selfPlayer == null)
             {
@@ -157,14 +162,13 @@ export class GameBase extends BaseUI
             
         })
 
-        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
         {
             if(gameData.IsGamePlayingNow() == false)
             {
                 return;
             }
-            let insData = _data.buyInsuranceTurn;
-            if(insData.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
+            if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
             {
                 // UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
                 // {
@@ -222,7 +226,23 @@ export class GameBase extends BaseUI
                 temp.ShowTips(tips);
             },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         })
+        gameData.Data_S2CCommonJackpotLotteryNotify.AddListenner(this,(_data)=>
+        {
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
+            {
+                let player = gameData.GetPlayerInfoByUid(_data.uid);
+                if(player == null)
+                {
+                    return;
+                }
+                let temp = _script as Game_CommonTips;
+                let amount = Tool.ConvertMoney_S2C(_data.lotteryNum) + "";
+                let tips = player.nickName + " " + Localization.GetString("00343") + amount;
+                temp.ShowTips(tips);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+        })
 
+        
 
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {

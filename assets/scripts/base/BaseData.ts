@@ -44,6 +44,7 @@ export class BaseData <T>
     private mAutoReset : boolean = false;
     private UpdateData(_value : T)
     {
+        this.mSavingData = _value;
         if(_value == null || _value == undefined)
         {
             return;

@@ -7,7 +7,7 @@ import { BriefRecordItem } from '../../common/BriefRecordItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_RecipeLayer')
-export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayData>  
+export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>  
 {
 
     @property(MovingShow) 
@@ -79,7 +79,7 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayData>
     {
         for(let i = 0 ; i < 20 ; i++)
         {
-            let temp = new SimpleReplayData();
+            let temp = new SimpleReplay();
             temp.gameId = "1111111";
             temp.index = i;
     

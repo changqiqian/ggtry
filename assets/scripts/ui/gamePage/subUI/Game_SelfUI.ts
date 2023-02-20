@@ -159,7 +159,7 @@ export class Game_SelfUI extends BaseUI
             this.HideAllUI();
         })
 
-        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
         {
             let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
             if(selfPlayer == null)

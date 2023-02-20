@@ -5,6 +5,7 @@ import { SceneType, UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
+import { NetworkHttp } from '../../network/NetworkHttp';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
 import { TipsWindow } from '../common/TipsWindow';
@@ -43,12 +44,15 @@ export class LoginUI extends BaseUI
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");   
+            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");  
+            NetworkHttp.Instance.PostRecordDetailData("1");
         });
 
         this.TurnOff.SetClickCallback(()=>
         {
             setDisplayStats(false);
+
+            
         });
 
         this.mSignBtn.SetClickCallback(()=>

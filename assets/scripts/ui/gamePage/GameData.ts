@@ -44,7 +44,7 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonTurnRoundNotify : BaseData<S2CCommonTurnRoundNotify> = new BaseData<S2CCommonTurnRoundNotify>(true);  //发转牌
     Data_S2CCommonRiverRoundNotify : BaseData<S2CCommonRiverRoundNotify> = new BaseData<S2CCommonRiverRoundNotify>(true);  //发河牌
     Data_S2CCommonActionNotify : BaseData<S2CCommonActionNotify> = new BaseData<S2CCommonActionNotify>(true);  //行动推送
-    Data_S2CCommonInsuranceTurnNotify  : BaseData<S2CCommonBuyInsuranceTurnNotify> = new BaseData<S2CCommonBuyInsuranceTurnNotify>();  //轮到谁买保险
+    Data_BuyInsuranceTurn  : BaseData<BuyInsuranceTurn> = new BaseData<BuyInsuranceTurn>();  //轮到谁买保险
     Data_S2CCommonBuyInsuranceTurnRespNotify : BaseData<S2CCommonBuyInsuranceTurnRespNotify> = new BaseData<S2CCommonBuyInsuranceTurnRespNotify>(true);  //谁买了多少保险推送
     Data_S2CCommonInsuranceLotteryNotify: BaseData<S2CCommonInsuranceLotteryNotify> = new BaseData<S2CCommonInsuranceLotteryNotify>(true);  //谁中了多少保险
     Data_S2CCommonSettlementNotify  : BaseData<S2CCommonSettlementNotify> = new BaseData<S2CCommonSettlementNotify>(true);  //游戏结算推送
@@ -52,7 +52,7 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonExtraThinkNotify: BaseData<S2CCommonExtraThinkNotify> = new BaseData<S2CCommonExtraThinkNotify>(true);  //思考时间推送
     Data_S2CCommonOpenCardNotify: BaseData<S2CCommonOpenCardNotify> = new BaseData<S2CCommonOpenCardNotify>(false,null);  //所有玩家亮牌
     Data_S2CCommonPotsNotify: BaseData<S2CCommonPotsNotify> = new BaseData<S2CCommonPotsNotify>(true);  //分池信息推送
-
+    Data_S2CCommonJackpotLotteryNotify: BaseData<S2CCommonJackpotLotteryNotify> = new BaseData<S2CCommonJackpotLotteryNotify>();  //jackpot推送
 
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_Refresh : BaseData<boolean> = new BaseData<boolean>(true);  //刷新场景

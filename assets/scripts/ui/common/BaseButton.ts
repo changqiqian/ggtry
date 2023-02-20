@@ -10,7 +10,7 @@ export class BaseButton extends BaseUI {
     mTitle: Label = null;
     mProtectDoubleClick : boolean = true;
     mClickProtecting : boolean = false;
-    mClickProtectedDuration : number = 0.2;
+    mClickProtectedDuration : number = 0.1;
     private mCustomerData : any = null;
     private mCallback : Function = null;
     private mProtectCallback : Function = null;

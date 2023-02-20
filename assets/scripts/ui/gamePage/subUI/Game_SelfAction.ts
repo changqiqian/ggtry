@@ -228,7 +228,7 @@ export class Game_SelfAction extends BaseUI
             this.mCircleTimer.StartTimer(_data.totalTime);
         })
 
-        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
         {
             if(gameData.IsPlayerPlaying(LocalPlayerData.Instance.Data_Uid.mData))
             {

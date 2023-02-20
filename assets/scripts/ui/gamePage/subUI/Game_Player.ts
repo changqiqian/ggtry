@@ -554,9 +554,9 @@ export class Game_Player extends BaseUI
             this.ShowCards(hands , false);
         });
 
-        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
         {
-            let playerInfo = gameData.GetPlayerInfoByUid(_data.buyInsuranceTurn.actionUid);
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
             if(playerInfo == null)
             {
                 return;
@@ -569,7 +569,7 @@ export class Game_Player extends BaseUI
 
             this.mInsuranceBG.active = true;
             this.UpdateUIDirection();
-            this.StartSecondsTimer(_data.buyInsuranceTurn.leftTime , 1  , ()=>
+            this.StartSecondsTimer(_data.leftTime , 1  , ()=>
             {
                 let seconds = this.GetRestSeconds();
                 this.mInsuranceBG.getChildByName("InsCount").getComponent(Label).string = seconds + "";
@@ -612,6 +612,27 @@ export class Game_Player extends BaseUI
                 this.node.addChild(_node);
                 let script = _node.getComponent(Game_WinEffect);
                 script.InitWithData(_data.amount);
+            })
+        })
+        gameData.Data_S2CCommonJackpotLotteryNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.seat != this.mSeatID)
+            {
+                return;
+            }
+
+            this.UpdateMoney(false , playerInfo);
+            this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_node)=>
+            {
+                this.node.addChild(_node);
+                let script = _node.getComponent(Game_WinEffect);
+                script.InitWithData(_data.lotteryNum);
             })
         })
     }

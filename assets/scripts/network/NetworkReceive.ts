@@ -1159,6 +1159,21 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
         
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonJackpotLotteryNotify,(_data)=>
+        {
+            let msg = S2CCommonJackpotLotteryNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonJackpotLotteryNotify  jackpot中奖了==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.UpdatePlayerMoney(msg.uid , msg.currencyNum);
+                gameData.Data_S2CCommonJackpotLotteryNotify.mData = msg;
+            }
+        },this);
+
+        
         
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonPreFlopRoundNotify,(_data)=>
@@ -1302,7 +1317,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(gameStruct != null)
             {
                 let gameData = gameStruct.mGameData;
-                gameData.Data_S2CCommonInsuranceTurnNotify.mData = msg;
+                gameData.Data_BuyInsuranceTurn.mData = msg.buyInsuranceTurn;
             }
         },this);
 

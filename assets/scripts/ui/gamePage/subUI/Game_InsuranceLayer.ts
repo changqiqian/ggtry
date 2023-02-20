@@ -156,14 +156,14 @@ export class Game_InsuranceLayer extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
         {
-            let insData = _data.buyInsuranceTurn;
+
             this.ResetUI();
-            this.mControlAble = insData.actionUid == LocalPlayerData.Instance.Data_Uid.mData;
+            this.mControlAble = _data.actionUid == LocalPlayerData.Instance.Data_Uid.mData;
             this.mProgressSlider.SetEnable(this.mControlAble);
 
-            let fanchaoCards = insData.outsCards;
+            let fanchaoCards = _data.outsCards;
             if(fanchaoCards.length > 0)
             {
                 this.mFanChaoOutsRoot.active = true;
@@ -182,7 +182,7 @@ export class Game_InsuranceLayer extends BaseUI
                 }
             }
 
-            let tieCards = insData.tieCards;
+            let tieCards = _data.tieCards;
             if(tieCards.length > 0)
             {
                 this.mTieOutsRoot.active = true;
@@ -201,7 +201,7 @@ export class Game_InsuranceLayer extends BaseUI
                 }
             }
 
-            let publicCards = insData.publicCards;
+            let publicCards = _data.publicCards;
             for(let i = 0 ; i < publicCards.length ; i++)
             {
                 let current = publicCards[i];
@@ -215,7 +215,7 @@ export class Game_InsuranceLayer extends BaseUI
                 });
             }
 
-            let loserPlayer = insData.losePlayerInfo;
+            let loserPlayer = _data.losePlayerInfo;
             for(let i = 0 ; i < loserPlayer.length ; i++)
             {
                 let current = loserPlayer[i];
@@ -230,21 +230,21 @@ export class Game_InsuranceLayer extends BaseUI
 
 
             this.mOutsCount.string = fanchaoCards.length + "";
-            this.mRatio.string = (insData.ratios / 10).toFixed(1);
-            this.mPot.string = Tool.ConvertMoney_S2C(insData.pots) + "";
+            this.mRatio.string = (_data.ratios / 10).toFixed(1);
+            this.mPot.string = Tool.ConvertMoney_S2C(_data.pots) + "";
             this.mPay.string = "0";
 
             for(let i = 0 ; i < this.mShortcutBtn.children.length ; i++)
             {
                 let current = this.mShortcutBtn.children[i].getComponent(BaseButton);
                 let multiple = this.GetShortCutMultiple(i);
-                let amount = multiple * insData.buyFullPot;
+                let amount = multiple * _data.buyFullPot;
                 amount = Tool.CeilServerMoney(amount);
                 let title = Tool.ConvertMoney_S2C(amount) + "";
                 current.SetTitle(title);
             }
 
-            this.StartSecondsTimer(insData.leftTime,1 , ()=>
+            this.StartSecondsTimer(_data.leftTime,1 , ()=>
             {
                 let restTime = this.GetRestSeconds();
                 this.mCountDown.string = restTime + "S";
@@ -254,10 +254,10 @@ export class Game_InsuranceLayer extends BaseUI
                 // }
             });
 
-            if(insData.buyBack > 0)
+            if(_data.buyBack > 0)
             {
                 this.mBuyBackTips.active = true;
-                this.mTips.string = Localization.ReplaceString("00319",Tool.ConvertMoney_S2C(insData.buyBack)+"");
+                this.mTips.string = Localization.ReplaceString("00319",Tool.ConvertMoney_S2C(_data.buyBack)+"");
             }
 
             this.mProgressSlider.SetPercent(0.5);
@@ -280,7 +280,7 @@ export class Game_InsuranceLayer extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let payRatio = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyInsuranceTurn.ratios;
+        let payRatio = gameData.Data_BuyInsuranceTurn.mData.ratios;
         payRatio = payRatio/10;
         let amount = this.CalculateControlMoney(_ratio);
         let payAmount = Tool.ConvertMoney_S2C(amount * payRatio) ;
@@ -292,7 +292,7 @@ export class Game_InsuranceLayer extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let fullPot = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyInsuranceTurn.buyFullPot;
+        let fullPot = gameData.Data_BuyInsuranceTurn.mData.buyFullPot;
         //let min = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyBack;
         let min = 0;
         let max = fullPot * _ratio;

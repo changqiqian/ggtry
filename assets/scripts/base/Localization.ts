@@ -427,6 +427,8 @@ export class Localization {
         { name: '00340', ch: '规则说明', en: 'Rules' },
         { name: '00341', ch: '牌型', en: 'Combination' },
         { name: '00342', ch: '保险赔率', en: 'Insurance' },
+        { name: '00343', ch: '击中Jackpot:', en: 'hit jackpot:' },
+        
 
         { name: '01000', ch: '公告', en: 'Notification' },
         { name: '01001', ch: '消息', en: 'MESSAGES' },

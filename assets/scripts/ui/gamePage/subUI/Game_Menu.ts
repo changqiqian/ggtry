@@ -165,9 +165,9 @@ export class Game_Menu extends BaseUI
             this.UpdateSettlementBtn();
         });
 
-        gameData.Data_S2CCommonInsuranceTurnNotify.AddListenner(this,(_data)=>
+        gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
         {
-            if(_data.buyInsuranceTurn.actionUid == LocalPlayerData.Instance.Data_Uid.mData)
+            if(_data.actionUid == LocalPlayerData.Instance.Data_Uid.mData)
             {
                 this.Show(false);
             }
