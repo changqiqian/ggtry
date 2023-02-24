@@ -5,6 +5,7 @@ import { NetworkHttp } from '../../network/NetworkHttp';
 import { Tool } from '../../Tool';
 import { BaseButton } from '../common/BaseButton';
 import { CircleTimer } from '../common/CircleTimer';
+import { Club_RecordDetailsLayer } from './Club_RecordDetailsLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_RecordItem')
@@ -26,7 +27,6 @@ export class Club_RecordItem extends BaseUI
     mProfit: Label = null;
     @property(BaseButton) 
     mBtn: BaseButton = null;
-
     mData : RecordSingle;
     InitParam()
     {

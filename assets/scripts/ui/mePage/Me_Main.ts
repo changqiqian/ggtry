@@ -7,6 +7,7 @@ import { FullScreenWebView } from '../common/FullScreenWebView';
 import { InsertWebView } from '../common/InsertWebView';
 import { UIMgr } from '../../base/UIMgr';
 import { Tool } from '../../Tool';
+import { Club_RecordLayer } from '../clubPage/Club_RecordLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('Me_Main')
@@ -51,7 +52,11 @@ export class Me_Main extends BaseUI {
 
         this.mGameRecordBtn.SetClickCallback(() => 
         {
-            //UIMgr.Instance.ShowLayer('mePage', 'prefab/Me_Rank');
+            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_RecordLayer",true,(_script)=>
+            {
+                let temp = _script as Club_RecordLayer;
+                temp.InitWitData("");
+            });  
         });
 
         this.mSettingBtn.SetClickCallback(() =>

@@ -78,7 +78,7 @@ export class Game_CashReplay extends BaseUI {
             let tempScript = _script as Game_ReplayCtr;
             tempScript.SetExitCallback(()=>
             {
-                this.Show(false);
+                UIMgr.Instance.DeleteUIByTarget(this);
             })
         },this.mMovingShow.node);
         this.AddSubView("gamePage","prefab/Game_Pot", (_script)=>

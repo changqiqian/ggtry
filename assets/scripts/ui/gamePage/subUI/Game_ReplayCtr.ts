@@ -172,10 +172,7 @@ export class Game_ReplayCtr extends BaseUI
                 GameReplayData.Instance.Data_Step.mData++;
                 if(GameReplayData.Instance.Data_Step.mData >= riverActions.length)
                 {
-                    if(this.TrySettlment()  == false)
-                    {
-                        
-                    }
+                    GameReplayData.Instance.Data_State.mData = TexasCashState.TexasCashState_Settlement;
                 }
             }
             break;
@@ -230,7 +227,7 @@ export class Game_ReplayCtr extends BaseUI
             break;
             case TexasCashState.TexasCashState_RiverRound:
             {
-                return false;
+      
             }
             case TexasCashState.TexasCashState_Settlement:
             {

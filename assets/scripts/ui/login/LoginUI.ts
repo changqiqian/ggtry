@@ -7,6 +7,7 @@ import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { NetworkHttp } from '../../network/NetworkHttp';
 import { NetworkSend } from '../../network/NetworkSend';
+import { Club_RecordLayer } from '../clubPage/Club_RecordLayer';
 import { BaseButton } from '../common/BaseButton';
 
 import { LoginData } from './LoginData';
@@ -41,9 +42,12 @@ export class LoginUI extends BaseUI
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
         {
-            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");  
-            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_RecordLayer");  
-            //
+            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");  
+            // UIMgr.Instance.ShowLayer("clubPage","prefab/Club_RecordLayer",true,(_script)=>
+            // {
+            //     let temp = _script as Club_RecordLayer;
+            //     temp.InitWitData("");
+            // });  
         });
 
         this.TurnOff.SetClickCallback(()=>

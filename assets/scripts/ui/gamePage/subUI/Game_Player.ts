@@ -177,10 +177,14 @@ export class Game_Player extends BaseUI
                 this.ShowActionType(ActionType.ActionType_BB , true);
                 this.Bet(replayData.texasConfig.smallBlind * 2,ActionType.ActionType_BB, true);
             }
-            else if(straddleActionResult.actionInfo.uid == playerInfo.uid)
+            else 
             {
-                this.ShowActionType(ActionType.ActionType_Straddle , true);
-                this.Bet(replayData.texasConfig.smallBlind * 4,ActionType.ActionType_Straddle, true);
+                if(straddleActionResult != null)
+                {
+                    if(straddleActionResult.actionInfo.uid == playerInfo.uid)
+                    this.ShowActionType(ActionType.ActionType_Straddle , true);
+                    this.Bet(replayData.texasConfig.smallBlind * 4,ActionType.ActionType_Straddle, true);
+                }
             }
         })
 

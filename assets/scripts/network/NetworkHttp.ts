@@ -3,10 +3,11 @@ import { Singleton } from "../base/Singleton";
 
 export class NetworkHttp extends Singleton<NetworkHttp>()
 {
-    public HttpSend( _xhr : XMLHttpRequest , _param : string ,_success: Function, _error: Function ) 
+    public HttpSend( _xhr : XMLHttpRequest , _param  ,_success: Function, _error: Function ) 
     {
+        let token = "BearereyJhbGciOiJIUzI1NiIsInppcCI6IkRFRiJ9.eNqqViouTVKyUkpMyc3MMzAwVNJRKi1OLYrPTFGyMjQw1FEqTs4vSIUpAMpmJpYAZczMzY0MLcwNTWsBAAAA__8.zDHnip5yjb9ElXCnZaAV6nDNw_ivlWFYXyogQ6acajg"
         _xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        _xhr.setRequestHeader("token", "BearereyJhbGciOiJIUzI1NiIsInppcCI6IkRFRiJ9.eNqqViouTVKyUkpMyc3MMzAwUNJRKi1OLYrPTFGyMjQw0FEqTs4vSIUpAMpmJpYAZczMzQ2NzQ2MLGsBAAAA__8.8sz9TH-s_3E-ek8-jWa6PydEb3g2ImtDMX1B6Hyg2vs");
+        _xhr.setRequestHeader("token", token);
         _xhr.onreadystatechange = function () 
         {
             if (_xhr.readyState == 4) 
@@ -21,7 +22,10 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
             console.log('HttpGet url ====' + _err);
             _error && _error(_err);
         };
-        _xhr.send(_param);
+
+        _param.userId = "6743682430";
+
+        _xhr.send(JSON.stringify(_param));
     }
 
     //获取 今日，本周，本月 总战绩概括
@@ -35,13 +39,12 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         console.log("http 获取 今日，本周，本月 总战绩概括==");
         let param = 
         {
-            userId : "6743682430",
             gameType : _gameType,
             day : _day
         }
 
 
-        this.HttpSend(xhr,JSON.stringify(param),(_result)=>
+        this.HttpSend(xhr,param,(_result)=>
         {
             console.log("_收到http==今日，本周，本月 总战绩概括==" + _result);
             let json = JSON.parse(_result);
@@ -65,11 +68,10 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         xhr.setRequestHeader("timestamp", "1672821524273");
         let param = 
         {
-            userId : "6743682430",
             gameType : _gameType,
             day : _day
         }
-        this.HttpSend(xhr,JSON.stringify(param),(_result)=>
+        this.HttpSend(xhr,param,(_result)=>
         {
             console.log("_收到http==获取战绩细节入口数据==" + _result);
             let json = JSON.parse(_result);
@@ -93,12 +95,11 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         xhr.setRequestHeader("timestamp", "1672821524273");
         let param = 
         {
-            userId : "6743682430",
             gameId : _gameId,
             endDate : _date,
             gameType : _gameType
         }
-        this.HttpSend(xhr,JSON.stringify(param),(_result)=>
+        this.HttpSend(xhr,param,(_result)=>
         {
             console.log("_收到http==获取战绩细节数据==" + _result);
             let json = JSON.parse(_result);
@@ -123,12 +124,11 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         xhr.setRequestHeader("timestamp", "1672821524273");
         let param = 
         {
-            userId : "6743682430",
             gameId : "G1001",
             endDate : _date,
             gameType : _gameType
         }
-        this.HttpSend(xhr,JSON.stringify(param),(_result)=>
+        this.HttpSend(xhr,param,(_result)=>
         {
             console.log("_收到http==获取简单手牌数据==" + _result);
             let json = JSON.parse(_result);
@@ -153,12 +153,11 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         xhr.setRequestHeader("timestamp", "1672821524273");
         let param = 
         {
-            userId : "6743682430",
             gameId : "G1001",
             index : _index,
             endDate : _date,
         }
-        this.HttpSend(xhr,JSON.stringify(param),(_result)=>
+        this.HttpSend(xhr,param,(_result)=>
         {
             console.log("_收到http==获取详细手牌数据==" + _result);
             let json = JSON.parse(_result);

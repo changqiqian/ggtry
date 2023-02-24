@@ -29,10 +29,11 @@ export class Club_RecordLayer extends ListViewCtr<RecordSingle>
     @property(Label) 
     mVPIP: Label = null;
 
+    mClubId : string = "";
+
     onEnable()
     {
-        super.onEnable();
-        this.RequireTotalRecord();
+
     }
 
     BindUI()
@@ -70,10 +71,6 @@ export class Club_RecordLayer extends ListViewCtr<RecordSingle>
             let currentToggle = this.mDateLayout.children[i].getComponent(ToggleBtn);
             currentToggle.SetDataNotify(HallData.Instance.Data_ClubRecordDateType, i);
         }
-
-
-        HallData.Instance.Data_ClubRecordSubPage.mData = GameType.GameType_TexasCash;
-        HallData.Instance.Data_ClubRecordDateType.mData = HTTP_Date.Today;
     }
     RegDataNotify()
     {
@@ -136,6 +133,15 @@ export class Club_RecordLayer extends ListViewCtr<RecordSingle>
     CustmoerDestory()
     {
 
+    }
+
+    public InitWitData(_clubId : string)
+    {
+        this.mClubId = _clubId;
+        HallData.Instance.Data_ClubRecordSubPage.mData = GameType.GameType_TexasCash;
+        HallData.Instance.Data_ClubRecordDateType.mData = HTTP_Date.Today;
+        this.Refresh();
+        this.RequireTotalRecord();
     }
 
     Refresh()
