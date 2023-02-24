@@ -6119,6 +6119,9 @@
     "__prefab": {
       "__id__": 304
     },
+    "mListView": {
+      "__id__": 293
+    },
     "mCreator": {
       "__id__": 15
     },
@@ -6143,17 +6146,17 @@
     "mDuration": {
       "__id__": 105
     },
-    "mMaxPool": {
+    "mInsurance": {
       "__id__": 119
+    },
+    "mJackPot": {
+      "__id__": 133
     },
     "mTotalHands": {
       "__id__": 147
     },
     "mTotalBringIn": {
       "__id__": 161
-    },
-    "mListView": {
-      "__id__": 293
     },
     "_id": ""
   },

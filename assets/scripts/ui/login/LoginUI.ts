@@ -8,10 +8,7 @@ import {  Network } from '../../network/Network';
 import { NetworkHttp } from '../../network/NetworkHttp';
 import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from '../common/BaseButton';
-import { TipsWindow } from '../common/TipsWindow';
-import { Game_CashReplay } from '../gamePage/subUI/Game_CashReplay';
-import { Game_CommonTips } from '../gamePage/subUI/Game_CommonTips';
-import { Game_RecipeLayer } from '../gamePage/subUI/Game_RecipeLayer';
+
 import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
 
@@ -45,14 +42,13 @@ export class LoginUI extends BaseUI
         this.mLoginBtn.SetClickCallback(()=>
         {
             //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");  
-            NetworkHttp.Instance.PostRecordDetailData("1");
+            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_RecordLayer");  
+            //
         });
 
         this.TurnOff.SetClickCallback(()=>
         {
-            setDisplayStats(false);
-
-            
+            setDisplayStats(false);            
         });
 
         this.mSignBtn.SetClickCallback(()=>

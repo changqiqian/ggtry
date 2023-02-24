@@ -475,8 +475,6 @@ export class GameConfig
         let preffix = "CREATE_GAME_MODULE";
         let currentKey = preffix + _index;
         GameConfig.WriteSimpleData(currentKey, _data);
-        console.log("SaveCreateRoomModule index ==" + _index)
-        console.log("SaveCreateRoomModule _data ==" + _data)
     }
 
     public static GetCreateRoomModule(_index : number)

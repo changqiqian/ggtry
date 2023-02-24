@@ -2,6 +2,7 @@ import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
+import { NetworkHttp } from '../../network/NetworkHttp';
 import { Tool } from '../../Tool';
 import { Game_CashReplay } from '../gamePage/subUI/Game_CashReplay';
 import { BaseButton } from './BaseButton';
@@ -27,7 +28,7 @@ export class BriefRecordItem extends BaseUI
     @property(BaseButton) 
     mVideoBtn: BaseButton = null;
     
-    mData : any = null;
+    mData : SimpleReplay = null;
     InitParam()
     {
 
@@ -36,11 +37,10 @@ export class BriefRecordItem extends BaseUI
     {
         this.mVideoBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
-            {
-                let tempScript = _script as Game_CashReplay;
-                tempScript.InitWithData();
-            });      
+            let gameId = this.mData.gameId;
+            let index = this.mData.index;
+            let date = this.mData.date;
+            NetworkHttp.Instance.PostReplayDetail(gameId,index,date);
         })
     }
     RegDataNotify()
@@ -55,7 +55,7 @@ export class BriefRecordItem extends BaseUI
     {
 
     }
-    public InitWithData(_data : any)
+    public InitWithData(_data : SimpleReplay)
     {
         this.mData = _data;
         this.mVideoBtn.SetTitle(Localization.GetString("00271") + _data.index)

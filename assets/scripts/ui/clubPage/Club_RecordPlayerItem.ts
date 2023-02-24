@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { Tool } from '../../Tool';
 import { PlayerInfo } from '../common/PlayerInfo';
 const { ccclass, property } = _decorator;
 
@@ -25,6 +26,8 @@ export class Club_RecordPlayerItem extends BaseUI
     mRich: Node = null;
     @property(Node)
     mFish: Node = null;
+
+    mData : RecordPlayer;
     InitParam()
     {
 
@@ -47,6 +50,18 @@ export class Club_RecordPlayerItem extends BaseUI
     CustmoerDestory()
     {
 
+    }
+
+    public InitWithData(_data : RecordPlayer)
+    {
+        this.mData = _data;
+
+        this.mPlayerInfo.SetLocalHead(parseInt(_data.head));
+        this.mPlayerInfo.SetName(_data.name);
+        this.mHands.string = _data.hands;
+        this.mVPIP.string = _data.vpip + "%";
+        this.mBringIn.string = Tool.ConvertMoney_S2C(_data.buyIn) + "";
+        this.mProfit.string = Tool.ConvertMoney_S2C(_data.winLose) + "";
     }
 }
 

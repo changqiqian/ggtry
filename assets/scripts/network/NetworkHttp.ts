@@ -1,11 +1,12 @@
+import { LocalPlayerData } from "../base/LocalPlayerData";
 import { Singleton } from "../base/Singleton";
 
 export class NetworkHttp extends Singleton<NetworkHttp>()
 {
-    public HttpGet( _xhr : XMLHttpRequest , _param : string ,_success: Function, _error: Function ) 
+    public HttpSend( _xhr : XMLHttpRequest , _param : string ,_success: Function, _error: Function ) 
     {
         _xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        _xhr.setRequestHeader("token", "BearereyJhbGciOiJIUzI1NiIsInppcCI6IkRFRiJ9.eNqqViouTVKyUkpMyc3MMzAwUNJRKi1OLYrPTFGyMjQw0FEqTs4vSIUpAMpmJpYAZczMzSwMzU1MzWsBAAAA__8.tn7KmGfRAdpI_3sbn0_JfFIZP98xFdrzaaL0dhmUGqg");
+        _xhr.setRequestHeader("token", "BearereyJhbGciOiJIUzI1NiIsInppcCI6IkRFRiJ9.eNqqViouTVKyUkpMyc3MMzAwUNJRKi1OLYrPTFGyMjQw0FEqTs4vSIUpAMpmJpYAZczMzQ2NzQ2MLGsBAAAA__8.8sz9TH-s_3E-ek8-jWa6PydEb3g2ImtDMX1B6Hyg2vs");
         _xhr.onreadystatechange = function () 
         {
             if (_xhr.readyState == 4) 
@@ -24,14 +25,14 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     }
 
     //获取 今日，本周，本月 总战绩概括
-    //day = 1; // 1=今天  2=本周 3=本月
-    public PostTotalRecordData(_gameType : GameType , _day : HTTP_Day)
+    public PostTotalRecordData(_gameType : GameType , _day : HTTP_Date)
     {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/record/sum");
         xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
         xhr.setRequestHeader("timestamp", "1672821524273");
 
+        console.log("http 获取 今日，本周，本月 总战绩概括==");
         let param = 
         {
             userId : "6743682430",
@@ -40,9 +41,12 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         }
 
 
-        this.HttpGet(xhr,JSON.stringify(param),(_result)=>
+        this.HttpSend(xhr,JSON.stringify(param),(_result)=>
         {
-            console.log("_result==" + _result);
+            console.log("_收到http==今日，本周，本月 总战绩概括==" + _result);
+            let json = JSON.parse(_result);
+            let protoData = json.data as RecordData;
+            LocalPlayerData.Instance.Data_RecordData.mData = protoData;
         },
         (_err)=>
         {
@@ -51,10 +55,11 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     }
 
     //获取战绩细节入口数据
-    public PostRecordData(_gameType:GameType , _pageNum : number , _pageSize : number)
+    public PostRecordData(_gameType:GameType ,_day : HTTP_Date, _pageNum : number , _pageSize : number)
     {
+        console.log("http 获取战绩细节入口数据==");
         let xhr = new XMLHttpRequest();
-        let url = "http://54.169.147.71:8080/api/game/sy/record?page="+_pageNum+"&limit=" + _pageSize;
+        let url = "http://54.169.147.71:8080/api/game/sy/record?page=" + _pageNum + "&limit=" + _pageSize;
         xhr.open('POST', url);
         xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
         xhr.setRequestHeader("timestamp", "1672821524273");
@@ -62,10 +67,15 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         {
             userId : "6743682430",
             gameType : _gameType,
+            day : _day
         }
-        this.HttpGet(xhr,JSON.stringify(param),(_result)=>
+        this.HttpSend(xhr,JSON.stringify(param),(_result)=>
         {
-            console.log("_result==" + _result);
+            console.log("_收到http==获取战绩细节入口数据==" + _result);
+            let json = JSON.parse(_result);
+            let protoData = json.data as RecordSingleData;
+            LocalPlayerData.Instance.Data_RecordSingleData.mData = protoData;
+        
         },
         (_err)=>
         {
@@ -74,8 +84,9 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     }
 
     //获取战绩细节数据
-    public PostRecordDetailData(_gameId : string)
+    public PostRecordDetailData(_gameId : string , _date : string  , _gameType : GameType)
     {
+        console.log("http 获取战绩细节数据==");
         let xhr = new XMLHttpRequest();
         xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/game/detail");
         xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
@@ -83,11 +94,76 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         let param = 
         {
             userId : "6743682430",
-            gameId : "G1001",
+            gameId : _gameId,
+            endDate : _date,
+            gameType : _gameType
         }
-        this.HttpGet(xhr,JSON.stringify(param),(_result)=>
+        this.HttpSend(xhr,JSON.stringify(param),(_result)=>
         {
-            console.log("_result==" + _result);
+            console.log("_收到http==获取战绩细节数据==" + _result);
+            let json = JSON.parse(_result);
+            let protoData = json.data as RecordDetail;
+            LocalPlayerData.Instance.Data_RecordDetail.mData = protoData;
+        },
+        (_err)=>
+        {
+
+        })
+    }
+
+    //获取简单手牌数据
+    public PostSimpleReplay(_gameType : GameType, _gameId : string , _pageNum : number , _pageSize : number , _date : string )
+    {
+        console.log("http 获取简单手牌数据==");
+        let xhr = new XMLHttpRequest();
+        let url = "http://54.169.147.71:8080/api/game/sy/hand?page="+_pageNum+"&limit=" + _pageSize;
+
+        xhr.open('POST', url);
+        xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
+        xhr.setRequestHeader("timestamp", "1672821524273");
+        let param = 
+        {
+            userId : "6743682430",
+            gameId : "G1001",
+            endDate : _date,
+            gameType : _gameType
+        }
+        this.HttpSend(xhr,JSON.stringify(param),(_result)=>
+        {
+            console.log("_收到http==获取简单手牌数据==" + _result);
+            let json = JSON.parse(_result);
+            let protoData = json.data as SimpleReplayData;
+            LocalPlayerData.Instance.Data_SimpleReplayData.mData = protoData;
+            
+        },
+        (_err)=>
+        {
+
+        })
+    }
+
+    //获取详细手牌数据
+    public PostReplayDetail(_gameId : string , _index : number ,_date : string)
+    {
+        console.log("http 获取详细手牌数据==");
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/hand/detail");
+        xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
+        xhr.setRequestHeader("timestamp", "1672821524273");
+        let param = 
+        {
+            userId : "6743682430",
+            gameId : "G1001",
+            index : _index,
+            endDate : _date,
+        }
+        this.HttpSend(xhr,JSON.stringify(param),(_result)=>
+        {
+            console.log("_收到http==获取详细手牌数据==" + _result);
+            let json = JSON.parse(_result);
+            let protoData = json.data as ReplayData;
+            LocalPlayerData.Instance.Data_ReplayData.mData = protoData;
         },
         (_err)=>
         {
@@ -97,9 +173,9 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
 }
 
 
-export enum HTTP_Day
+export enum HTTP_Date
 {
-    Today = 1,
+    Today = 0,
     Week,
     Month ,
 }

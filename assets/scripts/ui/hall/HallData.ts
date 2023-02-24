@@ -3,6 +3,7 @@ import { DataNotify } from '../../base/DataNotify';
 import { SingletonBaseNotify } from '../../base/Singleton';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
+import { HTTP_Date } from '../../network/NetworkHttp';
 import { Tool } from '../../Tool';
 
 export class HallData extends SingletonBaseNotify<HallData>()
@@ -70,10 +71,10 @@ export class HallData extends SingletonBaseNotify<HallData>()
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static readonly ClubUiTag = "ClubTag";            
-    Data_ClubRecordSubPage : BaseData<Club_RecordSubPage> = new BaseData<Club_RecordSubPage>();//俱乐部战绩 子页面
+    Data_ClubRecordSubPage : BaseData<GameType> = new BaseData<GameType>();//俱乐部战绩 子页面
     Data_ClubRecordDetailSubPage : BaseData<Club_RecordDetailSubPage> = new BaseData<Club_RecordDetailSubPage>();//俱乐部战绩详情 子页面
     Data_ClubRecordCoinType : BaseData<GameCurrencyType> = new BaseData<GameCurrencyType>();//俱乐部战绩 货币类型
-    Data_ClubRecordDateType : BaseData<Club_RecordDateType> = new BaseData<Club_RecordDateType>();//俱乐部战绩 战绩时间段
+    Data_ClubRecordDateType : BaseData<HTTP_Date> = new BaseData<HTTP_Date>();//俱乐部战绩 战绩时间段
     Data_ClubLogoIndex : BaseData<number> = new BaseData<number>(false,0); //创建俱乐部时候选择的logo编号
     Data_ClubStampIndex : BaseData<number> = new BaseData<number>(false,0); //创建俱乐部时候选的封面编号
     Data_ClubCreateData : BaseData<ClubDetailsInfo> = new BaseData<ClubDetailsInfo>(); //生产一个新俱乐部
@@ -401,22 +402,10 @@ export enum Me_ReocordSubPage { //收支记录内容
     DiamondReocd = 1,
 }
 
-export enum Club_RecordSubPage { //俱乐部战绩页面 子页面
-    Texas = 0,
-    Short = 1,
-    Omh = 2,
-}
 
 export enum Club_RecordDetailSubPage { //俱乐部战绩详情 子页面
     General = 0, //牌局概述页面
     Recipe = 1, //牌铺页面
-}
-
-
-export enum Club_RecordDateType{ //俱乐部战记
-    Today = 0,
-    Week,
-    Month
 }
 
 

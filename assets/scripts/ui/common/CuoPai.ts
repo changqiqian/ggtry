@@ -1,5 +1,6 @@
-import { _decorator, Component, Node, Size, UITransform, Vec3, Vec2, PolygonCollider2D, EventTouch, Intersection2D, Sprite } from 'cc';
+import { _decorator, Component, Node, Size, UITransform, Vec3, Vec2, PolygonCollider2D, EventTouch, Intersection2D, Sprite, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { CardStruct, CardType } from '../../base/Calculator';
 import { UIMgr } from '../../base/UIMgr';
 import { BaseButton } from './BaseButton';
 const { ccclass, property } = _decorator;
@@ -20,6 +21,12 @@ export class CuoPai extends BaseUI {
     /**卡牌正面*/
     @property(Node)
     mCardFace:Node | undefined;
+    @property(Sprite)
+    mTopNum:Sprite
+    @property(Sprite)
+    mBottomNum:Sprite
+    @property(Label)
+    mCountDown:Label
     /**渐变层的遮罩*/
     @property(Node)
     mMaskShadow:Node | undefined;
@@ -59,10 +66,6 @@ export class CuoPai extends BaseUI {
 
         this.mFinishBtn.SetClickCallback(()=>
         {
-            if(this.mPeekCardEnd)
-            {
-                return;
-            }
             this.Finish();
         })
     }
@@ -79,8 +82,45 @@ export class CuoPai extends BaseUI {
 
     }
 
+    public LoadFace(_cardInfo : CardInfo)
+    {
+        let cardStruct = new CardStruct(_cardInfo.number,_cardInfo.type);
+        let path = this.GetPokerTexturePath(cardStruct);
+        let pathNum = this.GetPokerNumTexturePath(cardStruct);
+        this.LoadSprite('common', path, (_spriteFrame) => 
+        {
+            this.mCardFace.getComponent(Sprite).spriteFrame = _spriteFrame;
+        });
+
+        this.LoadSprite('common', pathNum, (_spriteFrame) => 
+        {
+            this.mTopNum.spriteFrame = _spriteFrame;
+        });
+        this.LoadSprite('common', pathNum, (_spriteFrame) => 
+        {
+            this.mBottomNum.spriteFrame = _spriteFrame;
+        });
+
+    }
+
+    public InitWitData(_cardInfo : CardInfo , _leftTime : number)
+    {
+        this.Reset();
+        this.LoadFace(_cardInfo);
+        this.StartSecondsTimer(_leftTime,1,()=>
+        {
+            let restTime = this.GetRestSeconds();
+            if(restTime <= 0)
+            {
+                UIMgr.Instance.DeleteUIByTarget(this);
+            }
+        });
+    }
+
     public Reset()
     {
+        this.mTopNum.node.active = false;
+        this.mBottomNum.node.active = false;
         this.mPeekCardEnd = false;
         //这是为了遮罩层旋转了也不会让纸牌缺边
         let hypotenuse = this.getSignHypotenuse(this.mCardSize.width,this.mCardSize.height);
@@ -116,6 +156,57 @@ export class CuoPai extends BaseUI {
 
         this.mLayoutCardWorldPosition = this.mLayoutCard!.getWorldPosition();
         this.mCardFace!.active = false;
+    }
+
+    public GetPokerNumTexturePath(_card : CardStruct) : string
+    {
+        let path = "texture/cPoker/";
+        let num = _card.mNum;
+        let type = "";
+        switch(_card.mType)
+        {
+            case CardType.Speades:
+                type = "ss";
+            break;
+            case CardType.Club:
+                type = "cc";
+            break;
+            case CardType.Heart:
+                type = "hh";
+            break;
+            case CardType.Diamond:
+                type = "dd";
+            break;
+        }
+
+        let finalPath = path + num + type ;
+        return finalPath;
+    }
+
+
+    public GetPokerTexturePath(_card : CardStruct) : string
+    {
+        let path = "texture/cPoker/";
+        let num = _card.mNum;
+        let type = "";
+        switch(_card.mType)
+        {
+            case CardType.Speades:
+                type = "s";
+            break;
+            case CardType.Club:
+                type = "c";
+            break;
+            case CardType.Heart:
+                type = "h";
+            break;
+            case CardType.Diamond:
+                type = "d";
+            break;
+        }
+
+        let finalPath = path + num + type ;
+        return finalPath;
     }
 
     private TouchStart(_event:EventTouch)
@@ -392,18 +483,16 @@ export class CuoPai extends BaseUI {
 
     private Finish()
     {
+        if(this.mPeekCardEnd)
+        {
+            return;
+        }
+        this.mTopNum.node.active = true;
+        this.mBottomNum.node.active = true;
         this.mPeekCardEnd = true;
         this.TouchEnd();
         this.mFinishBtn.Show(false);
         this.mCardBack!.getComponent(Sprite)!.spriteFrame = this.mCardFace!.getComponent(Sprite)!.spriteFrame;
-        this.StartSecondsTimer(2,1,()=>
-        {
-            let restTime = this.GetRestSeconds();
-            if(restTime <= 0)
-            {
-                UIMgr.Instance.DeleteUIByTarget(this);
-            }
-        });
     }
 
     private getSignDistance(_endPos:Vec2, _startPos:Vec2) 

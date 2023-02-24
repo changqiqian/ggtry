@@ -5228,6 +5228,7 @@ $root.SimpleReplay = (function() {
      * @property {string|null} [winnerName] SimpleReplay winnerName
      * @property {string|null} [winnerHead] SimpleReplay winnerHead
      * @property {number|null} [winnerResult] SimpleReplay winnerResult
+     * @property {string|null} [date] SimpleReplay date
      */
 
     /**
@@ -5321,6 +5322,14 @@ $root.SimpleReplay = (function() {
     SimpleReplay.prototype.winnerResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * SimpleReplay date.
+     * @member {string} date
+     * @memberof SimpleReplay
+     * @instance
+     */
+    SimpleReplay.prototype.date = "";
+
+    /**
      * Encodes the specified SimpleReplay message. Does not implicitly {@link SimpleReplay.verify|verify} messages.
      * @function encode
      * @memberof SimpleReplay
@@ -5356,6 +5365,8 @@ $root.SimpleReplay = (function() {
             w.uint32(66).string(m.winnerHead);
         if (m.winnerResult != null && Object.hasOwnProperty.call(m, "winnerResult"))
             w.uint32(72).int64(m.winnerResult);
+        if (m.date != null && Object.hasOwnProperty.call(m, "date"))
+            w.uint32(82).string(m.date);
         return w;
     };
 
@@ -5409,6 +5420,9 @@ $root.SimpleReplay = (function() {
                 break;
             case 9:
                 m.winnerResult = r.int64();
+                break;
+            case 10:
+                m.date = r.string();
                 break;
             default:
                 r.skipType(t & 7);
@@ -5717,7 +5731,7 @@ $root.RecordData = (function() {
      * @exports IRecordData
      * @interface IRecordData
      * @property {number|null} [day] RecordData day
-     * @property {number|null} [winlose] RecordData winlose
+     * @property {number|null} [winLose] RecordData winLose
      * @property {number|null} [hands] RecordData hands
      * @property {number|null} [vpip] RecordData vpip
      * @property {GameType|null} [gameType] RecordData gameType
@@ -5747,12 +5761,12 @@ $root.RecordData = (function() {
     RecordData.prototype.day = 0;
 
     /**
-     * RecordData winlose.
-     * @member {number} winlose
+     * RecordData winLose.
+     * @member {number} winLose
      * @memberof RecordData
      * @instance
      */
-    RecordData.prototype.winlose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    RecordData.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
      * RecordData hands.
@@ -5792,8 +5806,8 @@ $root.RecordData = (function() {
             w = $Writer.create();
         if (m.day != null && Object.hasOwnProperty.call(m, "day"))
             w.uint32(8).int32(m.day);
-        if (m.winlose != null && Object.hasOwnProperty.call(m, "winlose"))
-            w.uint32(16).int64(m.winlose);
+        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
+            w.uint32(16).int64(m.winLose);
         if (m.hands != null && Object.hasOwnProperty.call(m, "hands"))
             w.uint32(24).int32(m.hands);
         if (m.vpip != null && Object.hasOwnProperty.call(m, "vpip"))
@@ -5825,7 +5839,7 @@ $root.RecordData = (function() {
                 m.day = r.int32();
                 break;
             case 2:
-                m.winlose = r.int64();
+                m.winLose = r.int64();
                 break;
             case 3:
                 m.hands = r.int32();
@@ -5983,7 +5997,7 @@ $root.RecordSingle = (function() {
      * @interface IRecordSingle
      * @property {string|null} [gameCode] RecordSingle gameCode
      * @property {IBasicTexasConfig|null} [texasConfig] RecordSingle texasConfig
-     * @property {number|null} [winlose] RecordSingle winlose
+     * @property {number|null} [winLose] RecordSingle winLose
      * @property {string|null} [date] RecordSingle date
      */
 
@@ -6019,12 +6033,12 @@ $root.RecordSingle = (function() {
     RecordSingle.prototype.texasConfig = null;
 
     /**
-     * RecordSingle winlose.
-     * @member {number} winlose
+     * RecordSingle winLose.
+     * @member {number} winLose
      * @memberof RecordSingle
      * @instance
      */
-    RecordSingle.prototype.winlose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    RecordSingle.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
      * RecordSingle date.
@@ -6050,8 +6064,8 @@ $root.RecordSingle = (function() {
             w.uint32(10).string(m.gameCode);
         if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
             $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(18).fork()).ldelim();
-        if (m.winlose != null && Object.hasOwnProperty.call(m, "winlose"))
-            w.uint32(24).int64(m.winlose);
+        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
+            w.uint32(24).int64(m.winLose);
         if (m.date != null && Object.hasOwnProperty.call(m, "date"))
             w.uint32(34).string(m.date);
         return w;
@@ -6082,7 +6096,7 @@ $root.RecordSingle = (function() {
                 m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
                 break;
             case 3:
-                m.winlose = r.int64();
+                m.winLose = r.int64();
                 break;
             case 4:
                 m.date = r.string();
@@ -6308,6 +6322,7 @@ $root.RecordPlayer = (function() {
      * @property {number|null} [vpip] RecordPlayer vpip
      * @property {number|null} [buyIn] RecordPlayer buyIn
      * @property {number|null} [winLose] RecordPlayer winLose
+     * @property {string|null} [date] RecordPlayer date
      */
 
     /**
@@ -6374,6 +6389,14 @@ $root.RecordPlayer = (function() {
     RecordPlayer.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * RecordPlayer date.
+     * @member {string} date
+     * @memberof RecordPlayer
+     * @instance
+     */
+    RecordPlayer.prototype.date = "";
+
+    /**
      * Encodes the specified RecordPlayer message. Does not implicitly {@link RecordPlayer.verify|verify} messages.
      * @function encode
      * @memberof RecordPlayer
@@ -6397,6 +6420,8 @@ $root.RecordPlayer = (function() {
             w.uint32(40).int64(m.buyIn);
         if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
             w.uint32(48).int64(m.winLose);
+        if (m.date != null && Object.hasOwnProperty.call(m, "date"))
+            w.uint32(58).string(m.date);
         return w;
     };
 
@@ -6435,6 +6460,9 @@ $root.RecordPlayer = (function() {
                 break;
             case 6:
                 m.winLose = r.int64();
+                break;
+            case 7:
+                m.date = r.string();
                 break;
             default:
                 r.skipType(t & 7);
@@ -18993,6 +19021,8 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} C2S_TexasCashExaminePublicCard=5014 C2S_TexasCashExaminePublicCard value
  * @property {number} C2S_TexasCashExaminePrivateCard=5015 C2S_TexasCashExaminePrivateCard value
  * @property {number} C2S_TexasCashExtraThink=5016 C2S_TexasCashExtraThink value
+ * @property {number} C2S_TexasCashSqueezeStart=5017 C2S_TexasCashSqueezeStart value
+ * @property {number} C2S_TexasCashSqueezeFinish=5018 C2S_TexasCashSqueezeFinish value
  * @property {number} MSG_TexasCashEnd=5500 MSG_TexasCashEnd value
  * @property {number} MSG_TexasMttBegin=5501 MSG_TexasMttBegin value
  * @property {number} MSG_TexasMttEnd=6000 MSG_TexasMttEnd value
@@ -19019,6 +19049,8 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonExaminePublicCardResp=8013 S2C_CommonExaminePublicCardResp value
  * @property {number} S2C_CommonExaminePrivateCardResp=8014 S2C_CommonExaminePrivateCardResp value
  * @property {number} S2C_CommonExtraThinkResp=8015 S2C_CommonExtraThinkResp value
+ * @property {number} S2C_CommonSqueezeStartResp=8016 S2C_CommonSqueezeStartResp value
+ * @property {number} S2C_CommonSqueezeFinishResp=8017 S2C_CommonSqueezeFinishResp value
  * @property {number} S2C_CommonBringInTimerNotify=8110 S2C_CommonBringInTimerNotify value
  * @property {number} S2C_CommonBringInNotify=8111 S2C_CommonBringInNotify value
  * @property {number} S2C_CommonSitDownNotify=8112 S2C_CommonSitDownNotify value
@@ -19042,6 +19074,7 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonInsuranceLotteryNotify=8265 S2C_CommonInsuranceLotteryNotify value
  * @property {number} S2C_CommonPotsNotify=8266 S2C_CommonPotsNotify value
  * @property {number} S2C_CommonJackpotLotteryNotify=8267 S2C_CommonJackpotLotteryNotify value
+ * @property {number} S2C_CommonSqueezeRoundNotify=8268 S2C_CommonSqueezeRoundNotify value
  * @property {number} MSG_TexasCowboyBegin=10001 MSG_TexasCowboyBegin value
  * @property {number} C2S_TexasCowboyEnterGame=10002 C2S_TexasCowboyEnterGame value
  * @property {number} C2S_TexasCowboyExitGame=10003 C2S_TexasCowboyExitGame value
@@ -19153,6 +19186,8 @@ $root.MessageId = (function() {
     values[valuesById[5014] = "C2S_TexasCashExaminePublicCard"] = 5014;
     values[valuesById[5015] = "C2S_TexasCashExaminePrivateCard"] = 5015;
     values[valuesById[5016] = "C2S_TexasCashExtraThink"] = 5016;
+    values[valuesById[5017] = "C2S_TexasCashSqueezeStart"] = 5017;
+    values[valuesById[5018] = "C2S_TexasCashSqueezeFinish"] = 5018;
     values[valuesById[5500] = "MSG_TexasCashEnd"] = 5500;
     values[valuesById[5501] = "MSG_TexasMttBegin"] = 5501;
     values[valuesById[6000] = "MSG_TexasMttEnd"] = 6000;
@@ -19179,6 +19214,8 @@ $root.MessageId = (function() {
     values[valuesById[8013] = "S2C_CommonExaminePublicCardResp"] = 8013;
     values[valuesById[8014] = "S2C_CommonExaminePrivateCardResp"] = 8014;
     values[valuesById[8015] = "S2C_CommonExtraThinkResp"] = 8015;
+    values[valuesById[8016] = "S2C_CommonSqueezeStartResp"] = 8016;
+    values[valuesById[8017] = "S2C_CommonSqueezeFinishResp"] = 8017;
     values[valuesById[8110] = "S2C_CommonBringInTimerNotify"] = 8110;
     values[valuesById[8111] = "S2C_CommonBringInNotify"] = 8111;
     values[valuesById[8112] = "S2C_CommonSitDownNotify"] = 8112;
@@ -19202,6 +19239,7 @@ $root.MessageId = (function() {
     values[valuesById[8265] = "S2C_CommonInsuranceLotteryNotify"] = 8265;
     values[valuesById[8266] = "S2C_CommonPotsNotify"] = 8266;
     values[valuesById[8267] = "S2C_CommonJackpotLotteryNotify"] = 8267;
+    values[valuesById[8268] = "S2C_CommonSqueezeRoundNotify"] = 8268;
     values[valuesById[10001] = "MSG_TexasCowboyBegin"] = 10001;
     values[valuesById[10002] = "C2S_TexasCowboyEnterGame"] = 10002;
     values[valuesById[10003] = "C2S_TexasCowboyExitGame"] = 10003;
@@ -20563,6 +20601,168 @@ $root.C2STexasCashExtraThink = (function() {
     };
 
     return C2STexasCashExtraThink;
+})();
+
+$root.C2STexasCashSqueezeStart = (function() {
+
+    /**
+     * Properties of a C2STexasCashSqueezeStart.
+     * @exports IC2STexasCashSqueezeStart
+     * @interface IC2STexasCashSqueezeStart
+     * @property {string|null} [gameId] C2STexasCashSqueezeStart gameId
+     */
+
+    /**
+     * Constructs a new C2STexasCashSqueezeStart.
+     * @exports C2STexasCashSqueezeStart
+     * @classdesc Represents a C2STexasCashSqueezeStart.
+     * @implements IC2STexasCashSqueezeStart
+     * @constructor
+     * @param {IC2STexasCashSqueezeStart=} [p] Properties to set
+     */
+    function C2STexasCashSqueezeStart(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCashSqueezeStart gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCashSqueezeStart
+     * @instance
+     */
+    C2STexasCashSqueezeStart.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2STexasCashSqueezeStart message. Does not implicitly {@link C2STexasCashSqueezeStart.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCashSqueezeStart
+     * @static
+     * @param {IC2STexasCashSqueezeStart} m C2STexasCashSqueezeStart message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCashSqueezeStart.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCashSqueezeStart message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCashSqueezeStart
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCashSqueezeStart} C2STexasCashSqueezeStart
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCashSqueezeStart.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashSqueezeStart();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCashSqueezeStart;
+})();
+
+$root.C2STexasCashSqueezeFinish = (function() {
+
+    /**
+     * Properties of a C2STexasCashSqueezeFinish.
+     * @exports IC2STexasCashSqueezeFinish
+     * @interface IC2STexasCashSqueezeFinish
+     * @property {string|null} [gameId] C2STexasCashSqueezeFinish gameId
+     */
+
+    /**
+     * Constructs a new C2STexasCashSqueezeFinish.
+     * @exports C2STexasCashSqueezeFinish
+     * @classdesc Represents a C2STexasCashSqueezeFinish.
+     * @implements IC2STexasCashSqueezeFinish
+     * @constructor
+     * @param {IC2STexasCashSqueezeFinish=} [p] Properties to set
+     */
+    function C2STexasCashSqueezeFinish(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCashSqueezeFinish gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCashSqueezeFinish
+     * @instance
+     */
+    C2STexasCashSqueezeFinish.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2STexasCashSqueezeFinish message. Does not implicitly {@link C2STexasCashSqueezeFinish.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCashSqueezeFinish
+     * @static
+     * @param {IC2STexasCashSqueezeFinish} m C2STexasCashSqueezeFinish message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCashSqueezeFinish.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCashSqueezeFinish message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCashSqueezeFinish
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCashSqueezeFinish} C2STexasCashSqueezeFinish
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCashSqueezeFinish.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashSqueezeFinish();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCashSqueezeFinish;
 })();
 
 $root.S2CCommonEnterGameResp = (function() {
@@ -22288,6 +22488,196 @@ $root.S2CCommonExtraThinkResp = (function() {
     };
 
     return S2CCommonExtraThinkResp;
+})();
+
+$root.S2CCommonSqueezeStartResp = (function() {
+
+    /**
+     * Properties of a S2CCommonSqueezeStartResp.
+     * @exports IS2CCommonSqueezeStartResp
+     * @interface IS2CCommonSqueezeStartResp
+     * @property {ICommonResult|null} [result] S2CCommonSqueezeStartResp result
+     * @property {string|null} [gameId] S2CCommonSqueezeStartResp gameId
+     */
+
+    /**
+     * Constructs a new S2CCommonSqueezeStartResp.
+     * @exports S2CCommonSqueezeStartResp
+     * @classdesc Represents a S2CCommonSqueezeStartResp.
+     * @implements IS2CCommonSqueezeStartResp
+     * @constructor
+     * @param {IS2CCommonSqueezeStartResp=} [p] Properties to set
+     */
+    function S2CCommonSqueezeStartResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonSqueezeStartResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonSqueezeStartResp
+     * @instance
+     */
+    S2CCommonSqueezeStartResp.prototype.result = null;
+
+    /**
+     * S2CCommonSqueezeStartResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonSqueezeStartResp
+     * @instance
+     */
+    S2CCommonSqueezeStartResp.prototype.gameId = "";
+
+    /**
+     * Encodes the specified S2CCommonSqueezeStartResp message. Does not implicitly {@link S2CCommonSqueezeStartResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonSqueezeStartResp
+     * @static
+     * @param {IS2CCommonSqueezeStartResp} m S2CCommonSqueezeStartResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonSqueezeStartResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonSqueezeStartResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonSqueezeStartResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonSqueezeStartResp} S2CCommonSqueezeStartResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonSqueezeStartResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonSqueezeStartResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonSqueezeStartResp;
+})();
+
+$root.S2CCommonSqueezeFinishResp = (function() {
+
+    /**
+     * Properties of a S2CCommonSqueezeFinishResp.
+     * @exports IS2CCommonSqueezeFinishResp
+     * @interface IS2CCommonSqueezeFinishResp
+     * @property {ICommonResult|null} [result] S2CCommonSqueezeFinishResp result
+     * @property {string|null} [gameId] S2CCommonSqueezeFinishResp gameId
+     */
+
+    /**
+     * Constructs a new S2CCommonSqueezeFinishResp.
+     * @exports S2CCommonSqueezeFinishResp
+     * @classdesc Represents a S2CCommonSqueezeFinishResp.
+     * @implements IS2CCommonSqueezeFinishResp
+     * @constructor
+     * @param {IS2CCommonSqueezeFinishResp=} [p] Properties to set
+     */
+    function S2CCommonSqueezeFinishResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonSqueezeFinishResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonSqueezeFinishResp
+     * @instance
+     */
+    S2CCommonSqueezeFinishResp.prototype.result = null;
+
+    /**
+     * S2CCommonSqueezeFinishResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonSqueezeFinishResp
+     * @instance
+     */
+    S2CCommonSqueezeFinishResp.prototype.gameId = "";
+
+    /**
+     * Encodes the specified S2CCommonSqueezeFinishResp message. Does not implicitly {@link S2CCommonSqueezeFinishResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonSqueezeFinishResp
+     * @static
+     * @param {IS2CCommonSqueezeFinishResp} m S2CCommonSqueezeFinishResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonSqueezeFinishResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonSqueezeFinishResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonSqueezeFinishResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonSqueezeFinishResp} S2CCommonSqueezeFinishResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonSqueezeFinishResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonSqueezeFinishResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonSqueezeFinishResp;
 })();
 
 $root.S2CCommonBringInTimerNotify = (function() {
@@ -24779,4 +25169,85 @@ $root.S2CCommonJackpotLotteryNotify = (function() {
     };
 
     return S2CCommonJackpotLotteryNotify;
+})();
+
+$root.S2CCommonSqueezeRoundNotify = (function() {
+
+    /**
+     * Properties of a S2CCommonSqueezeRoundNotify.
+     * @exports IS2CCommonSqueezeRoundNotify
+     * @interface IS2CCommonSqueezeRoundNotify
+     * @property {string|null} [gameId] S2CCommonSqueezeRoundNotify gameId
+     */
+
+    /**
+     * Constructs a new S2CCommonSqueezeRoundNotify.
+     * @exports S2CCommonSqueezeRoundNotify
+     * @classdesc Represents a S2CCommonSqueezeRoundNotify.
+     * @implements IS2CCommonSqueezeRoundNotify
+     * @constructor
+     * @param {IS2CCommonSqueezeRoundNotify=} [p] Properties to set
+     */
+    function S2CCommonSqueezeRoundNotify(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonSqueezeRoundNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonSqueezeRoundNotify
+     * @instance
+     */
+    S2CCommonSqueezeRoundNotify.prototype.gameId = "";
+
+    /**
+     * Encodes the specified S2CCommonSqueezeRoundNotify message. Does not implicitly {@link S2CCommonSqueezeRoundNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonSqueezeRoundNotify
+     * @static
+     * @param {IS2CCommonSqueezeRoundNotify} m S2CCommonSqueezeRoundNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonSqueezeRoundNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonSqueezeRoundNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonSqueezeRoundNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonSqueezeRoundNotify} S2CCommonSqueezeRoundNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonSqueezeRoundNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonSqueezeRoundNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonSqueezeRoundNotify;
 })();

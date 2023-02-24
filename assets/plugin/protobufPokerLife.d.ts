@@ -1905,6 +1905,9 @@ export class SimpleReplay implements ISimpleReplay {
     /** SimpleReplay winnerResult. */
     public winnerResult: number;
 
+    /** SimpleReplay date. */
+    public date: string;
+
     /**
      * Encodes the specified SimpleReplay message. Does not implicitly {@link SimpleReplay.verify|verify} messages.
      * @param m SimpleReplay message or plain object to encode
@@ -2003,8 +2006,8 @@ export class RecordData implements IRecordData {
     /** RecordData day. */
     public day: number;
 
-    /** RecordData winlose. */
-    public winlose: number;
+    /** RecordData winLose. */
+    public winLose: number;
 
     /** RecordData hands. */
     public hands: number;
@@ -2089,8 +2092,8 @@ export class RecordSingle implements IRecordSingle {
     /** RecordSingle texasConfig. */
     public texasConfig?: (IBasicTexasConfig|null);
 
-    /** RecordSingle winlose. */
-    public winlose: number;
+    /** RecordSingle winLose. */
+    public winLose: number;
 
     /** RecordSingle date. */
     public date: string;
@@ -2195,6 +2198,9 @@ export class RecordPlayer implements IRecordPlayer {
 
     /** RecordPlayer winLose. */
     public winLose: number;
+
+    /** RecordPlayer date. */
+    public date: string;
 
     /**
      * Encodes the specified RecordPlayer message. Does not implicitly {@link RecordPlayer.verify|verify} messages.
@@ -6298,6 +6304,8 @@ export enum MessageId {
     C2S_TexasCashExaminePublicCard = 5014,
     C2S_TexasCashExaminePrivateCard = 5015,
     C2S_TexasCashExtraThink = 5016,
+    C2S_TexasCashSqueezeStart = 5017,
+    C2S_TexasCashSqueezeFinish = 5018,
     MSG_TexasCashEnd = 5500,
     MSG_TexasMttBegin = 5501,
     MSG_TexasMttEnd = 6000,
@@ -6324,6 +6332,8 @@ export enum MessageId {
     S2C_CommonExaminePublicCardResp = 8013,
     S2C_CommonExaminePrivateCardResp = 8014,
     S2C_CommonExtraThinkResp = 8015,
+    S2C_CommonSqueezeStartResp = 8016,
+    S2C_CommonSqueezeFinishResp = 8017,
     S2C_CommonBringInTimerNotify = 8110,
     S2C_CommonBringInNotify = 8111,
     S2C_CommonSitDownNotify = 8112,
@@ -6347,6 +6357,7 @@ export enum MessageId {
     S2C_CommonInsuranceLotteryNotify = 8265,
     S2C_CommonPotsNotify = 8266,
     S2C_CommonJackpotLotteryNotify = 8267,
+    S2C_CommonSqueezeRoundNotify = 8268,
     MSG_TexasCowboyBegin = 10001,
     C2S_TexasCowboyEnterGame = 10002,
     C2S_TexasCowboyExitGame = 10003,
@@ -6858,6 +6869,68 @@ export class C2STexasCashExtraThink implements IC2STexasCashExtraThink {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashExtraThink;
+}
+
+/** Represents a C2STexasCashSqueezeStart. */
+export class C2STexasCashSqueezeStart implements IC2STexasCashSqueezeStart {
+
+    /**
+     * Constructs a new C2STexasCashSqueezeStart.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2STexasCashSqueezeStart);
+
+    /** C2STexasCashSqueezeStart gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2STexasCashSqueezeStart message. Does not implicitly {@link C2STexasCashSqueezeStart.verify|verify} messages.
+     * @param m C2STexasCashSqueezeStart message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2STexasCashSqueezeStart, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2STexasCashSqueezeStart message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2STexasCashSqueezeStart
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashSqueezeStart;
+}
+
+/** Represents a C2STexasCashSqueezeFinish. */
+export class C2STexasCashSqueezeFinish implements IC2STexasCashSqueezeFinish {
+
+    /**
+     * Constructs a new C2STexasCashSqueezeFinish.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2STexasCashSqueezeFinish);
+
+    /** C2STexasCashSqueezeFinish gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2STexasCashSqueezeFinish message. Does not implicitly {@link C2STexasCashSqueezeFinish.verify|verify} messages.
+     * @param m C2STexasCashSqueezeFinish message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2STexasCashSqueezeFinish, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2STexasCashSqueezeFinish message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2STexasCashSqueezeFinish
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashSqueezeFinish;
 }
 
 /** Represents a S2CCommonEnterGameResp. */
@@ -7428,6 +7501,74 @@ export class S2CCommonExtraThinkResp implements IS2CCommonExtraThinkResp {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonExtraThinkResp;
+}
+
+/** Represents a S2CCommonSqueezeStartResp. */
+export class S2CCommonSqueezeStartResp implements IS2CCommonSqueezeStartResp {
+
+    /**
+     * Constructs a new S2CCommonSqueezeStartResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonSqueezeStartResp);
+
+    /** S2CCommonSqueezeStartResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CCommonSqueezeStartResp gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CCommonSqueezeStartResp message. Does not implicitly {@link S2CCommonSqueezeStartResp.verify|verify} messages.
+     * @param m S2CCommonSqueezeStartResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonSqueezeStartResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonSqueezeStartResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonSqueezeStartResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonSqueezeStartResp;
+}
+
+/** Represents a S2CCommonSqueezeFinishResp. */
+export class S2CCommonSqueezeFinishResp implements IS2CCommonSqueezeFinishResp {
+
+    /**
+     * Constructs a new S2CCommonSqueezeFinishResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonSqueezeFinishResp);
+
+    /** S2CCommonSqueezeFinishResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CCommonSqueezeFinishResp gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CCommonSqueezeFinishResp message. Does not implicitly {@link S2CCommonSqueezeFinishResp.verify|verify} messages.
+     * @param m S2CCommonSqueezeFinishResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonSqueezeFinishResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonSqueezeFinishResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonSqueezeFinishResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonSqueezeFinishResp;
 }
 
 /** Represents a S2CCommonBringInTimerNotify. */
@@ -8267,6 +8408,37 @@ export class S2CCommonJackpotLotteryNotify implements IS2CCommonJackpotLotteryNo
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonJackpotLotteryNotify;
+}
+
+/** Represents a S2CCommonSqueezeRoundNotify. */
+export class S2CCommonSqueezeRoundNotify implements IS2CCommonSqueezeRoundNotify {
+
+    /**
+     * Constructs a new S2CCommonSqueezeRoundNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonSqueezeRoundNotify);
+
+    /** S2CCommonSqueezeRoundNotify gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CCommonSqueezeRoundNotify message. Does not implicitly {@link S2CCommonSqueezeRoundNotify.verify|verify} messages.
+     * @param m S2CCommonSqueezeRoundNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonSqueezeRoundNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonSqueezeRoundNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonSqueezeRoundNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonSqueezeRoundNotify;
 }
  
 }

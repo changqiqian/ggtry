@@ -1,8 +1,9 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
+import { UIMgr } from '../../base/UIMgr';
 import { BaseButton } from '../common/BaseButton';
 import { ToggleBtn } from '../common/ToggleBtn';
-import { HallData } from '../hall/HallData';
+import { Club_RecordDetailSubPage, HallData } from '../hall/HallData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_RecordDetailsLayer')
@@ -27,9 +28,14 @@ export class Club_RecordDetailsLayer extends BaseUI
             currentToggle.SetDataNotify(HallData.Instance.Data_ClubRecordDetailSubPage, i);
         }
 
+        this.mBackBtn.SetClickCallback(()=>
+        {
+            UIMgr.Instance.DeleteUIByTarget(this);
+        });
+
         this.AddSubView("clubPage" , "prefab/Club_RecordGeneralLayer" ,null , this.mSubLayer);
         this.AddSubView("clubPage" , "prefab/Club_RecordRecipeLayer" ,null , this.mSubLayer);
-
+        HallData.Instance.Data_ClubRecordDetailSubPage.mData = Club_RecordDetailSubPage.General;
     }
     RegDataNotify()
     {

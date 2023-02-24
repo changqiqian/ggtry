@@ -77,61 +77,7 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
 
     Refresh()
     {
-        for(let i = 0 ; i < 20 ; i++)
-        {
-            let temp = new SimpleReplay();
-            temp.gameId = "1111111";
-            temp.index = i;
-    
-    
-            let myCard1 = new CardInfo();
-            myCard1.number =2;
-            myCard1.type = 2;
-            let myCard2 = new CardInfo();
-            myCard2.number =3;
-            myCard2.type = 3;
-    
-            temp.myCards = new Array<CardInfo>();
-            temp.myCards.push(myCard1)
-            temp.myCards.push(myCard2)
-    
-            temp.myResult = -30000;
-    
-            let publicCards = new Array<CardInfo>();
-            let pub1 = new CardInfo();
-            pub1.number = 5;
-            pub1.type = 3;
-            let pub2 = new CardInfo();
-            pub2.number = 6;
-            pub2.type = 3;
-            let pub3 = new CardInfo();
-            pub3.number = 7;
-            pub3.type = 3;
-            publicCards.push(pub1);
-            publicCards.push(pub2);
-            publicCards.push(pub3);
-    
-            temp.publicCards = publicCards;
-    
-            let winnerCards = new Array<CardInfo>();
-            let wC1 = new CardInfo();
-            wC1.number = 8;
-            wC1.type = 3;
-            let wC2 = new CardInfo();
-            wC2.number = 9;
-            wC2.type = 3;
-            winnerCards.push(wC1);
-            winnerCards.push(wC2);
-            temp.winnerCards  = winnerCards;
-    
-            temp.winnerHead = "5";
-            temp.winnerName = "test";
-            temp.winnerResult = 40000;
-            this.mCurrentData.push(temp);
-        }
 
-        this.RefreshData();
-        this.mIsLastPage = true;
     }
 
     RenderEvent(_item: Node , _index: number)

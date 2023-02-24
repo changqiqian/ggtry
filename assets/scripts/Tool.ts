@@ -6,7 +6,7 @@ export class Tool
     public static ConvertSecondsToHour(_time :number) : string
     {
         let result = _time/3600;
-        return result.toFixed(1);
+        return result.toFixed(1) + "h";
     }
     //获取几分几秒对应的字符串时间显示格式  00:00
     public static GetRestTime_M_S(_time :number ) : string
