@@ -433,6 +433,24 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("申请思考时间  === " + JSON.stringify(msg))
     }
 
+
+    public SendCuoPaiStart(_msgId : number,_gameId : string)
+    {
+        let msg = new C2STexasCashSqueezeStart();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(_msgId , C2STexasCashSqueezeStart.encode(msg).finish());
+        console.log("申请开始搓牌  === " + JSON.stringify(msg))
+    }
+
+
+    public SendCuoPaiEnd(_msgId : number,_gameId : string)
+    {
+        let msg = new C2STexasCashSqueezeFinish();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(_msgId , C2STexasCashSqueezeFinish.encode(msg).finish());
+        console.log("申请搓牌结束  === " + JSON.stringify(msg))
+    }
+
     public GetObList(_msgId : number ,_gameId : string , _page : number , _pageSize : number)
     {
         UIMgr.Instance.ShowLoading(true);

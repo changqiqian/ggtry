@@ -2,7 +2,9 @@ import { _decorator, Component, Node, Size, UITransform, Vec3, Vec2, PolygonColl
 import { BaseUI } from '../../base/BaseUI';
 import { CardStruct, CardType } from '../../base/Calculator';
 import { UIMgr } from '../../base/UIMgr';
+import { NetworkSend } from '../../network/NetworkSend';
 import { BaseButton } from './BaseButton';
+import { MultipleTableCtr } from './MultipleTableCtr';
 const { ccclass, property } = _decorator;
 
 @ccclass('CuoPai')
@@ -36,6 +38,8 @@ export class CuoPai extends BaseUI {
 
     @property(BaseButton)
     mFinishBtn:BaseButton;
+
+    mIndex : number;
 
     /**卡牌层的固定位置  为了防止 搓牌效果遮罩移动时 卡牌层同时位移*/
     private mLayoutCardWorldPosition:Vec3 = new Vec3();
@@ -82,7 +86,7 @@ export class CuoPai extends BaseUI {
 
     }
 
-    public LoadFace(_cardInfo : CardInfo)
+    public LoadFace(_cardInfo : CardInfo )
     {
         let cardStruct = new CardStruct(_cardInfo.number,_cardInfo.type);
         let path = this.GetPokerTexturePath(cardStruct);
@@ -103,18 +107,39 @@ export class CuoPai extends BaseUI {
 
     }
 
-    public InitWitData(_cardInfo : CardInfo , _leftTime : number)
+    public InitWithData( _index : number, _cardInfo : CardInfo , _leftTime : number)
     {
+        this.mIndex = _index;
         this.Reset();
         this.LoadFace(_cardInfo);
         this.StartSecondsTimer(_leftTime,1,()=>
         {
-            let restTime = this.GetRestSeconds();
+            let restTime = this.GetRestMillSeconds();
+            let seconds = this.GetRestSeconds();
+            this.mCountDown.string = seconds + "";
             if(restTime <= 0)
             {
-                UIMgr.Instance.DeleteUIByTarget(this);
+                this.Show(false);
             }
         });
+
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
+
+        this.BindData();
+    }
+
+    BindData()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        gameData.Data_S2CCommonSqueezeFinishResp.AddListenner(this,(_data)=>
+        {
+            this.Show(false);
+        })
+        
     }
 
     public Reset()
@@ -493,6 +518,13 @@ export class CuoPai extends BaseUI {
         this.TouchEnd();
         this.mFinishBtn.Show(false);
         this.mCardBack!.getComponent(Sprite)!.spriteFrame = this.mCardFace!.getComponent(Sprite)!.spriteFrame;
+
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let msgId = gameData.EndCuoPaiMsgId();
+        let gameId = gameStruct.mGameId;
+        NetworkSend.Instance.SendCuoPaiEnd(msgId , gameId)
+        
     }
 
     private getSignDistance(_endPos:Vec2, _startPos:Vec2) 

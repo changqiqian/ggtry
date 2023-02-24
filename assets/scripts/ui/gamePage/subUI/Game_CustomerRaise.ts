@@ -17,6 +17,7 @@ export class Game_CustomerRaise extends BaseUI
     @property(Node) 
     mRaiseByBB: Node;
 
+    mClickCallback : Function;
     mIndex : number;
     InitParam()
     {
@@ -41,8 +42,9 @@ export class Game_CustomerRaise extends BaseUI
 
     }
 
-    public InitWithData(_index :number)
+    public InitWithData(_index :number , _clickCallback : Function)
     {
+        this.mClickCallback = _clickCallback;
         this.mIndex = _index;
         this.Show(true);
         
@@ -76,7 +78,6 @@ export class Game_CustomerRaise extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let lastBetAct = gameData.FindBiggestBetAction();
-        console.log("ShowRaiseBB==" )
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         for(let i = 0 ; i < this.mRaiseByBB.children.length ; i++)
         {
@@ -119,6 +120,10 @@ export class Game_CustomerRaise extends BaseUI
                     }
                 }
                 NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId() , gameStruct.mGameId ,actionInfo );
+                if(this.mClickCallback!=null)
+                {
+                    this.mClickCallback();
+                }
             },i);
         }
     }
@@ -131,7 +136,6 @@ export class Game_CustomerRaise extends BaseUI
         let totalPot = gameData.GetTotalPotAmount();
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         let lastBetAct = gameData.FindBiggestBetAction();
-        console.log("ShowRaiseByPot==" )
         for(let i = 0 ; i < this.mRaiseByPot.children.length ; i++)
         {
             let ratio = GameConfig.GetCustomerRaiseRatio(i);
@@ -175,6 +179,9 @@ export class Game_CustomerRaise extends BaseUI
                 }
                 
                 NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId() , gameStruct.mGameId ,actionInfo );
+                {
+                    this.mClickCallback();
+                }
             },i)
         }
     }

@@ -59,5 +59,15 @@ export class GameDataCash extends GameData
         return MessageId.C2S_TexasCashExaminePrivateCard;
     }
     
+    public StartCuoPaiMsgId() : number
+    {
+        return MessageId.C2S_TexasCashSqueezeStart;
+    }
+    public EndCuoPaiMsgId() : number
+    {
+        return MessageId.C2S_TexasCashSqueezeFinish;
+    }
+    
+
 
 }

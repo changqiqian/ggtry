@@ -620,7 +620,7 @@ export class Game_Player extends BaseUI
         })
         gameData.Data_S2CCommonJackpotLotteryNotify.AddListenner(this,(_data)=>
         {
-            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.uid);
             if(playerInfo == null)
             {
                 return;

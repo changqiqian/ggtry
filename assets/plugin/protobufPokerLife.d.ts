@@ -2199,9 +2199,6 @@ export class RecordPlayer implements IRecordPlayer {
     /** RecordPlayer winLose. */
     public winLose: number;
 
-    /** RecordPlayer date. */
-    public date: string;
-
     /**
      * Encodes the specified RecordPlayer message. Does not implicitly {@link RecordPlayer.verify|verify} messages.
      * @param m RecordPlayer message or plain object to encode
@@ -4637,6 +4634,9 @@ export class Game2LoggerGameRecord implements IGame2LoggerGameRecord {
 
     /** Game2LoggerGameRecord gameId. */
     public gameId: string;
+
+    /** Game2LoggerGameRecord creator. */
+    public creator: string;
 
     /** Game2LoggerGameRecord beginTime. */
     public beginTime: string;
@@ -7518,6 +7518,12 @@ export class S2CCommonSqueezeStartResp implements IS2CCommonSqueezeStartResp {
     /** S2CCommonSqueezeStartResp gameId. */
     public gameId: string;
 
+    /** S2CCommonSqueezeStartResp cardInfo. */
+    public cardInfo?: (ICardInfo|null);
+
+    /** S2CCommonSqueezeStartResp leftTime. */
+    public leftTime: number;
+
     /**
      * Encodes the specified S2CCommonSqueezeStartResp message. Does not implicitly {@link S2CCommonSqueezeStartResp.verify|verify} messages.
      * @param m S2CCommonSqueezeStartResp message or plain object to encode
@@ -7551,6 +7557,12 @@ export class S2CCommonSqueezeFinishResp implements IS2CCommonSqueezeFinishResp {
 
     /** S2CCommonSqueezeFinishResp gameId. */
     public gameId: string;
+
+    /** S2CCommonSqueezeFinishResp cardInfo. */
+    public cardInfo?: (ICardInfo|null);
+
+    /** S2CCommonSqueezeFinishResp leftTime. */
+    public leftTime: number;
 
     /**
      * Encodes the specified S2CCommonSqueezeFinishResp message. Does not implicitly {@link S2CCommonSqueezeFinishResp.verify|verify} messages.
@@ -8421,6 +8433,9 @@ export class S2CCommonSqueezeRoundNotify implements IS2CCommonSqueezeRoundNotify
 
     /** S2CCommonSqueezeRoundNotify gameId. */
     public gameId: string;
+
+    /** S2CCommonSqueezeRoundNotify leftTime. */
+    public leftTime: number;
 
     /**
      * Encodes the specified S2CCommonSqueezeRoundNotify message. Does not implicitly {@link S2CCommonSqueezeRoundNotify.verify|verify} messages.

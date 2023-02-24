@@ -134,7 +134,7 @@ export class Game_InsuranceLayer extends BaseUI
                 let amount = this.CalculateControlMoney(ratio);
                 NetworkSend.Instance.BuyInsurance(gameData.BuyInsuranceSendMsgId(),gameStruct.mGameId,amount);
 
-                this.CloseAsWindow();
+                this.Show(false);
             }
         });
 
@@ -145,7 +145,7 @@ export class Game_InsuranceLayer extends BaseUI
                 let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
                 let gameData = gameStruct.mGameData;
                 NetworkSend.Instance.BuyInsurance(gameData.BuyInsuranceSendMsgId(),gameStruct.mGameId,0);
-                this.CloseAsWindow();
+                this.Show(false);
             }
         });
 
@@ -238,7 +238,7 @@ export class Game_InsuranceLayer extends BaseUI
             {
                 let current = this.mShortcutBtn.children[i].getComponent(BaseButton);
                 let multiple = this.GetShortCutMultiple(i);
-                let amount = multiple * _data.buyFullPot;
+                let amount =  Tool.CeilServerMoney(multiple * _data.buyFullPot);
                 amount = Tool.CeilServerMoney(amount);
                 let title = Tool.ConvertMoney_S2C(amount) + "";
                 current.SetTitle(title);
@@ -267,7 +267,7 @@ export class Game_InsuranceLayer extends BaseUI
 
         gameData.Data_S2CCommonBuyInsuranceTurnRespNotify.AddListenner(this,(_data)=>
         {
-            this.CloseAsWindow();
+            this.Show(false);
         });
 
         gameData.Data_S2CCommonInsuranceLotteryNotify.AddListenner(this,(_data)=>
@@ -295,10 +295,7 @@ export class Game_InsuranceLayer extends BaseUI
         let fullPot = gameData.Data_BuyInsuranceTurn.mData.buyFullPot;
         //let min = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyBack;
         let min = 0;
-        let max = fullPot * _ratio;
-        let step = Tool.GetMoneyMultiple();//最小单位 1块钱
-        let roundMax = Math.floor( max/step);
-        max = roundMax * step;
+        let max = Tool.CeilServerMoney(fullPot * _ratio);
         let currentAmount = min + max;
         return currentAmount;
     }

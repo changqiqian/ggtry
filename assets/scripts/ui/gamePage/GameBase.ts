@@ -6,12 +6,14 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { UIMgr } from '../../base/UIMgr';
 import { Tool } from '../../Tool';
 import { AnimationShowType, MovingShow } from '../../UiTool/MovingShow';
+import { CuoPai } from '../common/CuoPai';
 import { MultipleTableCtr } from '../common/MultipleTableCtr';
 import { HallData } from '../hall/HallData';
 import { Game_BottomUI } from './subUI/Game_BottomUI';
 import { Game_ChatingCtr } from './subUI/Game_ChatingCtr';
 import { Game_CommonTips } from './subUI/Game_CommonTips';
 import { Game_ControlBtns } from './subUI/Game_ControlBtns';
+import { Game_CuoPaiTips } from './subUI/Game_CuoPaiTips';
 import { Game_GameStartInfo } from './subUI/Game_GameStartInfo';
 import { Game_InsuranceLayer } from './subUI/Game_InsuranceLayer';
 import { Game_Pot } from './subUI/Game_Pot';
@@ -170,34 +172,27 @@ export class GameBase extends BaseUI
             }
             if(_data.actionUid != LocalPlayerData.Instance.Data_Uid.mData)
             {
-                // UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
-                // {
-                //     let player = gameData.GetPlayerInfoByUid(insData.actionUid);
-                //     if(player == null)
-                //     {
-                //         return;
-                //     }
-                //     let temp = _script as Game_CommonTips;
-                //     let tips = player.nickName + " " + Localization.GetString("00339");
-                //     temp.ShowTipsWithCountDown(tips,insData.leftTime);
-                // },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
-                
-                UIMgr.Instance.ShowLayer("gamePage","prefab/Game_InsuranceLayer",false,null,MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+                let layer =  this.GetSubView("gamePage","prefab/Game_InsuranceLayer" );
+                if(layer != null)
+                {
+                    let script = layer.getComponent(Game_InsuranceLayer);
+                    script.Show(false);
+                }
             }
             else
             {
-                UIMgr.Instance.ShowLayer("gamePage","prefab/Game_InsuranceLayer",true,(_script)=>
+                this.AddSubView("gamePage","prefab/Game_InsuranceLayer" , (_script)=>
                 {
                     let tempScript = _script as Game_InsuranceLayer;
                     tempScript.InitWithData(this.mIndex);
-                },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+                });
             }
 
         });
 
         gameData.Data_S2CCommonBuyInsuranceTurnRespNotify.AddListenner(this,(_data)=>
         {
-            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
+            this.AddSubView("gamePage","prefab/Game_CommonTips" , (_script)=>
             {
                 let player = gameData.GetPlayerInfoByUid(_data.actionUid);
                 if(player == null)
@@ -208,12 +203,14 @@ export class GameBase extends BaseUI
                 let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
                 let tips = player.nickName + " " + Localization.GetString("00337") + amount;
                 temp.ShowTips(tips);
-            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+            });
+
+
         })
 
         gameData.Data_S2CCommonInsuranceLotteryNotify.AddListenner(this,(_data)=>
         {
-            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
+            this.AddSubView("gamePage","prefab/Game_CommonTips" , (_script)=>
             {
                 let player = gameData.GetPlayerInfoByUid(_data.actionUid);
                 if(player == null)
@@ -224,11 +221,13 @@ export class GameBase extends BaseUI
                 let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
                 let tips = player.nickName + " " + Localization.GetString("00338") + amount;
                 temp.ShowTips(tips);
-            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+            });
+
+
         })
         gameData.Data_S2CCommonJackpotLotteryNotify.AddListenner(this,(_data)=>
         {
-            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CommonTips",true,(_script)=>
+            this.AddSubView("gamePage","prefab/Game_CommonTips" , (_script)=>
             {
                 let player = gameData.GetPlayerInfoByUid(_data.uid);
                 if(player == null)
@@ -239,7 +238,53 @@ export class GameBase extends BaseUI
                 let amount = Tool.ConvertMoney_S2C(_data.lotteryNum) + "";
                 let tips = player.nickName + " " + Localization.GetString("00343") + amount;
                 temp.ShowTips(tips);
-            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+            });
+
+        })
+
+        gameData.Data_S2CCommonSqueezeRoundNotify.AddListenner(this,(_data)=>
+        {
+            let localUid = LocalPlayerData.Instance.Data_Uid.mData;
+
+            if(gameData.IsPlayerPlaying(localUid) == false)
+            {
+                this.AddSubView("gamePage","prefab/Game_CommonTips" , (_script)=>
+                {
+                    let temp = _script as Game_CommonTips;
+                    let tips = Localization.GetString("00344");
+                    temp.ShowTips(tips,_data.leftTime);
+                });
+                return;
+            }
+
+
+            let selfPlayer = gameData.GetPlayerInfoByUid(localUid);
+            if(selfPlayer.fold == true)
+            {
+                this.AddSubView("gamePage","prefab/Game_CommonTips" , (_script)=>
+                {
+                    let temp = _script as Game_CommonTips;
+                    let tips = Localization.GetString("00344");
+                    temp.ShowTips(tips,_data.leftTime);
+                });
+                return;
+            }
+
+            this.AddSubView("gamePage","prefab/Game_CuoPaiTips" , (_script)=>
+            {
+                let tempScript = _script as Game_CuoPaiTips;
+                tempScript.InitWithData(_data.leftTime , this.mIndex);
+            });
+
+        })
+
+        gameData.Data_S2CCommonSqueezeStartResp.AddListenner(this,(_data)=>
+        {
+            this.AddSubView("common","prefab/CuoPai" , (_script)=>
+            {
+                let tempScript = _script as CuoPai;
+                tempScript.InitWithData(this.mIndex ,_data.cardInfo  , _data.leftTime );
+            });
         })
 
         

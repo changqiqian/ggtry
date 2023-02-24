@@ -34,6 +34,8 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonBringInResp : BaseData<S2CCommonBringInResp> = new BaseData<S2CCommonBringInResp>(true);  //带入
     Data_S2CCommonExaminePublicCardResp: BaseData<S2CCommonExaminePublicCardResp> = new BaseData<S2CCommonExaminePublicCardResp>(true);  //看公共牌
     Data_S2CCommonExaminePrivateCardResp: BaseData<S2CCommonExaminePrivateCardResp> = new BaseData<S2CCommonExaminePrivateCardResp>(true);  //看手牌
+    Data_S2CCommonSqueezeStartResp: BaseData<S2CCommonSqueezeStartResp> = new BaseData<S2CCommonSqueezeStartResp>(true);  //搓牌回复
+    Data_S2CCommonSqueezeFinishResp: BaseData<S2CCommonSqueezeFinishResp> = new BaseData<S2CCommonSqueezeFinishResp>(true);  //搓牌结束
 
     Data_S2CCommonIntervalTimeNotify : BaseData<S2CCommonIntervalTimeNotify> = new BaseData<S2CCommonIntervalTimeNotify>(true);  //阶段延时推送
     Data_S2CCommonWaitStartNotify: BaseData<S2CCommonWaitStartNotify> = new BaseData<S2CCommonWaitStartNotify>(true);  //游戏闲置阶段推送
@@ -53,6 +55,8 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonOpenCardNotify: BaseData<S2CCommonOpenCardNotify> = new BaseData<S2CCommonOpenCardNotify>(false,null);  //所有玩家亮牌
     Data_S2CCommonPotsNotify: BaseData<S2CCommonPotsNotify> = new BaseData<S2CCommonPotsNotify>(true);  //分池信息推送
     Data_S2CCommonJackpotLotteryNotify: BaseData<S2CCommonJackpotLotteryNotify> = new BaseData<S2CCommonJackpotLotteryNotify>();  //jackpot推送
+    Data_S2CCommonSqueezeRoundNotify: BaseData<S2CCommonSqueezeRoundNotify> = new BaseData<S2CCommonSqueezeRoundNotify>();  //搓牌推送
+
 
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_Refresh : BaseData<boolean> = new BaseData<boolean>(true);  //刷新场景
@@ -467,6 +471,9 @@ export abstract class GameData extends MultipleNotify
     public abstract ExtraThinkingTimeMsgId() : number
     public abstract ShowPublicMsgId() : number
     public abstract ShowHansMsgId() : number
+    public abstract StartCuoPaiMsgId() : number
+    public abstract EndCuoPaiMsgId() : number
+
 }
 
 

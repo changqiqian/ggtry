@@ -213,6 +213,7 @@ export abstract class BaseUI extends Component {
         {
             let currentScript = this.mLayerList[index].value.getComponent(BaseUI);
             currentScript.Show(true);
+            currentScript.node.setSiblingIndex(currentScript.node.parent.children.length);
             if (_loadFinish != null) 
             {
                 _loadFinish(currentScript);
@@ -226,15 +227,12 @@ export abstract class BaseUI extends Component {
                 {
                     return;
                 }
-                //let tempNode = instantiate(_prefab);
-                if (_parent != null) 
+                if (_parent == null) 
                 {
-                    _parent.addChild(_node);
+                    _parent = this.node;
+             
                 } 
-                else 
-                {
-                    this.node.addChild(_node);
-                }
+                _parent.addChild(_node);
                 let currentScript = _node.getComponent(BaseUI);
                 let keyPair = new SubViewKeyPair(key, _node);
                 this.mLayerList.push(keyPair);

@@ -428,6 +428,11 @@ export class Localization {
         { name: '00341', ch: '牌型', en: 'Combination' },
         { name: '00342', ch: '保险赔率', en: 'Insurance' },
         { name: '00343', ch: '击中Jackpot:', en: 'hit jackpot:' },
+        { name: '00344', ch: '玩家搓牌中:', en: 'Player sneaking card' },
+        { name: '00345', ch: '直接显示', en: 'Show directly' },
+        { name: '00346', ch: '搓牌', en: 'Sneak card' },
+        { name: '00347', ch: '想要花费1金币体验搓牌吗？其乐无穷哦～', en: 'cost 1 coin to Sneak card?you will enjoy it' },
+
         
 
         { name: '01000', ch: '公告', en: 'Notification' },

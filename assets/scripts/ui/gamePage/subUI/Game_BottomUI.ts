@@ -28,10 +28,7 @@ export class Game_BottomUI extends BaseUI
     }
     BindUI() 
     {
-        this.mTestBtn.SetClickCallback(()=>
-        {
-            UIMgr.Instance.ShowLayer("common","prefab/CuoPai",true,null,MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
-        })
+
 
         this.mInfoBtn.SetClickCallback(()=>
         {

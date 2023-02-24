@@ -596,6 +596,46 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonSqueezeStartResp,(_data)=>
+        {
+            let msg = S2CCommonSqueezeStartResp.decode(_data);
+            console.log("收到的内容 S2C_CommonSqueezeStartResp  请求搓牌回复==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_S2CCommonSqueezeStartResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonSqueezeFinishResp,(_data)=>
+        {
+            let msg = S2CCommonSqueezeFinishResp.decode(_data);
+            console.log("收到的内容 S2C_CommonSqueezeFinishResp  搓牌结束==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_S2CCommonSqueezeFinishResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonBringInResp,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
@@ -1173,6 +1213,19 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonSqueezeRoundNotify,(_data)=>
+        {
+            let msg = S2CCommonSqueezeRoundNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonSqueezeRoundNotify  搓牌通知==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_S2CCommonSqueezeRoundNotify.mData = msg;
+            }
+        },this);
+        
         
         
 

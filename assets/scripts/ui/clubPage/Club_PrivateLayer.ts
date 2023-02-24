@@ -12,6 +12,7 @@ import ListView from '../../UiTool/ListView';
 import { Club_GameItem } from './Club_GameItem';
 import { NetworkSend } from '../../network/NetworkSend';
 import { ListViewCtr } from '../../UiTool/ListViewCtr';
+import { Club_RecordLayer } from './Club_RecordLayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('Club_PrivateLayer')
@@ -89,7 +90,12 @@ export class Club_PrivateLayer extends ListViewCtr<ClubTexasGameInfo>
         });
         this.mRecordBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_RecordLayer",true,null,HallData.ClubUiTag);
+            UIMgr.Instance.ShowLayer("clubPage","prefab/Club_RecordLayer",true,(_script)=>
+            {
+                let clubId = LocalPlayerData.Instance.Data_CurrentEnterClubId.mData;
+                let temp = _script as Club_RecordLayer;
+                temp.InitWitData(clubId);
+            },HallData.ClubUiTag);  
         });
         this.mDataBtn.SetClickCallback(()=>
         {

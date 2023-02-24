@@ -156,7 +156,7 @@ export class Game_SelfUI extends BaseUI
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
-            this.HideAllUI();
+            //this.HideAllUI();
         })
 
         gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>

@@ -44,6 +44,35 @@ export class Game_SeatUI extends BaseUI
         this.BindData();
     }
 
+    BindData()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
+        {
+            let seatInfos = _data.gameDynamic.seatInfos;
+            for(let i = 0 ; i < seatInfos.length ; i++)
+            {
+                let current = seatInfos[i];
+                if(current.uid == LocalPlayerData.Instance.Data_Uid.mData)
+                {
+                    this.TryRotateSeats(current.seat , true);
+                    break;
+                }
+            }
+        })
+
+        gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = _data.seatPlayerInfo;
+            if(playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
+            this.TryRotateSeats(playerInfo.seat,true);
+        })
+    }
+
     public InitWithReplayData()
     {
         this.InitSeatWithReplay();
@@ -107,35 +136,6 @@ export class Game_SeatUI extends BaseUI
             let current = this.node.children[i].getComponent(Game_SeatItem);
             current.InitWithData(this.mIndex , i);
         }
-    }
-
-    BindData()
-    {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
-        gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
-        {
-            let seatInfos = _data.gameDynamic.seatInfos;
-            for(let i = 0 ; i < seatInfos.length ; i++)
-            {
-                let current = seatInfos[i];
-                if(current.uid == LocalPlayerData.Instance.Data_Uid.mData)
-                {
-                    this.TryRotateSeats(current.seat , true);
-                    break;
-                }
-            }
-        })
-
-        gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
-        {
-            let playerInfo = _data.seatPlayerInfo;
-            if(playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
-            this.TryRotateSeats(playerInfo.seat,true);
-        })
     }
 
     GetSeatNodeBySeatId(_seatId : number) : Game_SeatItem

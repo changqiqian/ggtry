@@ -6322,7 +6322,6 @@ $root.RecordPlayer = (function() {
      * @property {number|null} [vpip] RecordPlayer vpip
      * @property {number|null} [buyIn] RecordPlayer buyIn
      * @property {number|null} [winLose] RecordPlayer winLose
-     * @property {string|null} [date] RecordPlayer date
      */
 
     /**
@@ -6389,14 +6388,6 @@ $root.RecordPlayer = (function() {
     RecordPlayer.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * RecordPlayer date.
-     * @member {string} date
-     * @memberof RecordPlayer
-     * @instance
-     */
-    RecordPlayer.prototype.date = "";
-
-    /**
      * Encodes the specified RecordPlayer message. Does not implicitly {@link RecordPlayer.verify|verify} messages.
      * @function encode
      * @memberof RecordPlayer
@@ -6420,8 +6411,6 @@ $root.RecordPlayer = (function() {
             w.uint32(40).int64(m.buyIn);
         if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
             w.uint32(48).int64(m.winLose);
-        if (m.date != null && Object.hasOwnProperty.call(m, "date"))
-            w.uint32(58).string(m.date);
         return w;
     };
 
@@ -6460,9 +6449,6 @@ $root.RecordPlayer = (function() {
                 break;
             case 6:
                 m.winLose = r.int64();
-                break;
-            case 7:
-                m.date = r.string();
                 break;
             default:
                 r.skipType(t & 7);
@@ -13599,6 +13585,7 @@ $root.Game2LoggerGameRecord = (function() {
      * @interface IGame2LoggerGameRecord
      * @property {GameType|null} [gameType] Game2LoggerGameRecord gameType
      * @property {string|null} [gameId] Game2LoggerGameRecord gameId
+     * @property {string|null} [creator] Game2LoggerGameRecord creator
      * @property {string|null} [beginTime] Game2LoggerGameRecord beginTime
      * @property {string|null} [endTime] Game2LoggerGameRecord endTime
      * @property {number|null} [configAnte] Game2LoggerGameRecord configAnte
@@ -13641,6 +13628,14 @@ $root.Game2LoggerGameRecord = (function() {
      * @instance
      */
     Game2LoggerGameRecord.prototype.gameId = "";
+
+    /**
+     * Game2LoggerGameRecord creator.
+     * @member {string} creator
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.creator = "";
 
     /**
      * Game2LoggerGameRecord beginTime.
@@ -13730,25 +13725,27 @@ $root.Game2LoggerGameRecord = (function() {
             w.uint32(8).int32(m.gameType);
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(18).string(m.gameId);
+        if (m.creator != null && Object.hasOwnProperty.call(m, "creator"))
+            w.uint32(26).string(m.creator);
         if (m.beginTime != null && Object.hasOwnProperty.call(m, "beginTime"))
-            w.uint32(26).string(m.beginTime);
+            w.uint32(34).string(m.beginTime);
         if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
-            w.uint32(34).string(m.endTime);
+            w.uint32(42).string(m.endTime);
         if (m.configAnte != null && Object.hasOwnProperty.call(m, "configAnte"))
-            w.uint32(40).int64(m.configAnte);
+            w.uint32(48).int64(m.configAnte);
         if (m.configSmallBet != null && Object.hasOwnProperty.call(m, "configSmallBet"))
-            w.uint32(48).int64(m.configSmallBet);
+            w.uint32(56).int64(m.configSmallBet);
         if (m.configBigBet != null && Object.hasOwnProperty.call(m, "configBigBet"))
-            w.uint32(56).int64(m.configBigBet);
+            w.uint32(64).int64(m.configBigBet);
         if (m.configStraddleBet != null && Object.hasOwnProperty.call(m, "configStraddleBet"))
-            w.uint32(64).int64(m.configStraddleBet);
+            w.uint32(72).int64(m.configStraddleBet);
         if (m.configPlayerNum != null && Object.hasOwnProperty.call(m, "configPlayerNum"))
-            w.uint32(72).int32(m.configPlayerNum);
+            w.uint32(80).int32(m.configPlayerNum);
         if (m.totalPlayerNum != null && Object.hasOwnProperty.call(m, "totalPlayerNum"))
-            w.uint32(80).int32(m.totalPlayerNum);
+            w.uint32(88).int32(m.totalPlayerNum);
         if (m.gameSubRecord != null && m.gameSubRecord.length) {
             for (var i = 0; i < m.gameSubRecord.length; ++i)
-                $root.GameSubRecord.encode(m.gameSubRecord[i], w.uint32(90).fork()).ldelim();
+                $root.GameSubRecord.encode(m.gameSubRecord[i], w.uint32(98).fork()).ldelim();
         }
         return w;
     };
@@ -13778,30 +13775,33 @@ $root.Game2LoggerGameRecord = (function() {
                 m.gameId = r.string();
                 break;
             case 3:
-                m.beginTime = r.string();
+                m.creator = r.string();
                 break;
             case 4:
-                m.endTime = r.string();
+                m.beginTime = r.string();
                 break;
             case 5:
-                m.configAnte = r.int64();
+                m.endTime = r.string();
                 break;
             case 6:
-                m.configSmallBet = r.int64();
+                m.configAnte = r.int64();
                 break;
             case 7:
-                m.configBigBet = r.int64();
+                m.configSmallBet = r.int64();
                 break;
             case 8:
-                m.configStraddleBet = r.int64();
+                m.configBigBet = r.int64();
                 break;
             case 9:
-                m.configPlayerNum = r.int32();
+                m.configStraddleBet = r.int64();
                 break;
             case 10:
-                m.totalPlayerNum = r.int32();
+                m.configPlayerNum = r.int32();
                 break;
             case 11:
+                m.totalPlayerNum = r.int32();
+                break;
+            case 12:
                 if (!(m.gameSubRecord && m.gameSubRecord.length))
                     m.gameSubRecord = [];
                 m.gameSubRecord.push($root.GameSubRecord.decode(r, r.uint32()));
@@ -22498,6 +22498,8 @@ $root.S2CCommonSqueezeStartResp = (function() {
      * @interface IS2CCommonSqueezeStartResp
      * @property {ICommonResult|null} [result] S2CCommonSqueezeStartResp result
      * @property {string|null} [gameId] S2CCommonSqueezeStartResp gameId
+     * @property {ICardInfo|null} [cardInfo] S2CCommonSqueezeStartResp cardInfo
+     * @property {number|null} [leftTime] S2CCommonSqueezeStartResp leftTime
      */
 
     /**
@@ -22532,6 +22534,22 @@ $root.S2CCommonSqueezeStartResp = (function() {
     S2CCommonSqueezeStartResp.prototype.gameId = "";
 
     /**
+     * S2CCommonSqueezeStartResp cardInfo.
+     * @member {ICardInfo|null|undefined} cardInfo
+     * @memberof S2CCommonSqueezeStartResp
+     * @instance
+     */
+    S2CCommonSqueezeStartResp.prototype.cardInfo = null;
+
+    /**
+     * S2CCommonSqueezeStartResp leftTime.
+     * @member {number} leftTime
+     * @memberof S2CCommonSqueezeStartResp
+     * @instance
+     */
+    S2CCommonSqueezeStartResp.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified S2CCommonSqueezeStartResp message. Does not implicitly {@link S2CCommonSqueezeStartResp.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonSqueezeStartResp
@@ -22547,6 +22565,10 @@ $root.S2CCommonSqueezeStartResp = (function() {
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(18).string(m.gameId);
+        if (m.cardInfo != null && Object.hasOwnProperty.call(m, "cardInfo"))
+            $root.CardInfo.encode(m.cardInfo, w.uint32(26).fork()).ldelim();
+        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
+            w.uint32(32).int64(m.leftTime);
         return w;
     };
 
@@ -22574,6 +22596,12 @@ $root.S2CCommonSqueezeStartResp = (function() {
             case 2:
                 m.gameId = r.string();
                 break;
+            case 3:
+                m.cardInfo = $root.CardInfo.decode(r, r.uint32());
+                break;
+            case 4:
+                m.leftTime = r.int64();
+                break;
             default:
                 r.skipType(t & 7);
                 break;
@@ -22593,6 +22621,8 @@ $root.S2CCommonSqueezeFinishResp = (function() {
      * @interface IS2CCommonSqueezeFinishResp
      * @property {ICommonResult|null} [result] S2CCommonSqueezeFinishResp result
      * @property {string|null} [gameId] S2CCommonSqueezeFinishResp gameId
+     * @property {ICardInfo|null} [cardInfo] S2CCommonSqueezeFinishResp cardInfo
+     * @property {number|null} [leftTime] S2CCommonSqueezeFinishResp leftTime
      */
 
     /**
@@ -22627,6 +22657,22 @@ $root.S2CCommonSqueezeFinishResp = (function() {
     S2CCommonSqueezeFinishResp.prototype.gameId = "";
 
     /**
+     * S2CCommonSqueezeFinishResp cardInfo.
+     * @member {ICardInfo|null|undefined} cardInfo
+     * @memberof S2CCommonSqueezeFinishResp
+     * @instance
+     */
+    S2CCommonSqueezeFinishResp.prototype.cardInfo = null;
+
+    /**
+     * S2CCommonSqueezeFinishResp leftTime.
+     * @member {number} leftTime
+     * @memberof S2CCommonSqueezeFinishResp
+     * @instance
+     */
+    S2CCommonSqueezeFinishResp.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified S2CCommonSqueezeFinishResp message. Does not implicitly {@link S2CCommonSqueezeFinishResp.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonSqueezeFinishResp
@@ -22642,6 +22688,10 @@ $root.S2CCommonSqueezeFinishResp = (function() {
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(18).string(m.gameId);
+        if (m.cardInfo != null && Object.hasOwnProperty.call(m, "cardInfo"))
+            $root.CardInfo.encode(m.cardInfo, w.uint32(26).fork()).ldelim();
+        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
+            w.uint32(32).int64(m.leftTime);
         return w;
     };
 
@@ -22668,6 +22718,12 @@ $root.S2CCommonSqueezeFinishResp = (function() {
                 break;
             case 2:
                 m.gameId = r.string();
+                break;
+            case 3:
+                m.cardInfo = $root.CardInfo.decode(r, r.uint32());
+                break;
+            case 4:
+                m.leftTime = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -25178,6 +25234,7 @@ $root.S2CCommonSqueezeRoundNotify = (function() {
      * @exports IS2CCommonSqueezeRoundNotify
      * @interface IS2CCommonSqueezeRoundNotify
      * @property {string|null} [gameId] S2CCommonSqueezeRoundNotify gameId
+     * @property {number|null} [leftTime] S2CCommonSqueezeRoundNotify leftTime
      */
 
     /**
@@ -25204,6 +25261,14 @@ $root.S2CCommonSqueezeRoundNotify = (function() {
     S2CCommonSqueezeRoundNotify.prototype.gameId = "";
 
     /**
+     * S2CCommonSqueezeRoundNotify leftTime.
+     * @member {number} leftTime
+     * @memberof S2CCommonSqueezeRoundNotify
+     * @instance
+     */
+    S2CCommonSqueezeRoundNotify.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified S2CCommonSqueezeRoundNotify message. Does not implicitly {@link S2CCommonSqueezeRoundNotify.verify|verify} messages.
      * @function encode
      * @memberof S2CCommonSqueezeRoundNotify
@@ -25217,6 +25282,8 @@ $root.S2CCommonSqueezeRoundNotify = (function() {
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(10).string(m.gameId);
+        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
+            w.uint32(16).int64(m.leftTime);
         return w;
     };
 
@@ -25240,6 +25307,9 @@ $root.S2CCommonSqueezeRoundNotify = (function() {
             switch (t >>> 3) {
             case 1:
                 m.gameId = r.string();
+                break;
+            case 2:
+                m.leftTime = r.int64();
                 break;
             default:
                 r.skipType(t & 7);

@@ -29,7 +29,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     }
 
     //获取 今日，本周，本月 总战绩概括
-    public PostTotalRecordData(_gameType : GameType , _day : HTTP_Date)
+    public PostTotalRecordData(_gameType : GameType , _day : HTTP_Date , _clubId : string = "")
     {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/record/sum");
@@ -40,7 +40,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         let param = 
         {
             gameType : _gameType,
-            day : _day
+            day : _day,
+            clubId : _clubId
         }
 
 
@@ -58,7 +59,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     }
 
     //获取战绩细节入口数据
-    public PostRecordData(_gameType:GameType ,_day : HTTP_Date, _pageNum : number , _pageSize : number)
+    public PostRecordData(_gameType:GameType ,_day : HTTP_Date, _pageNum : number , _pageSize : number , _clubId : string = "")
     {
         console.log("http 获取战绩细节入口数据==");
         let xhr = new XMLHttpRequest();
@@ -69,7 +70,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         let param = 
         {
             gameType : _gameType,
-            day : _day
+            day : _day,
+            clubId : _clubId
         }
         this.HttpSend(xhr,param,(_result)=>
         {

@@ -148,7 +148,7 @@ export class Club_RecordLayer extends ListViewCtr<RecordSingle>
     {
         let type = HallData.Instance.Data_ClubRecordSubPage.mData;
         let day = HallData.Instance.Data_ClubRecordDateType.mData;
-        NetworkHttp.Instance.PostRecordData(type ,day, this.mCurrentPage , this.mPageSize);
+        NetworkHttp.Instance.PostRecordData(type ,day, this.mCurrentPage , this.mPageSize,this.mClubId);
     }
     RenderEvent(_item: Node , _index: number)
     {
@@ -160,7 +160,7 @@ export class Club_RecordLayer extends ListViewCtr<RecordSingle>
     {
         let type = HallData.Instance.Data_ClubRecordSubPage.mData;
         let day = HallData.Instance.Data_ClubRecordDateType.mData;
-        NetworkHttp.Instance.PostTotalRecordData(type,day)
+        NetworkHttp.Instance.PostTotalRecordData(type,day,this.mClubId)
     }
 
 }

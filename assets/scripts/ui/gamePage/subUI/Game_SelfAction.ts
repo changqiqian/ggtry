@@ -365,7 +365,10 @@ export class Game_SelfAction extends BaseUI
         let clientCallAmount = Tool.ConvertMoney_S2C(_lastBetAction.roundAmount);
         this.mCallBtn.SetTitle(clientCallAmount + "");
         this.mCheckBtn.node.active = false;
-        this.mGame_CustomerRaise.InitWithData(this.mIndex);
+        this.mGame_CustomerRaise.InitWithData(this.mIndex , ()=>
+        {
+            this.HideAll();
+        });
         this.mSliderRaiseBtn.node.active = true;
         this.mGame_Slider.node.active = false;
     }
@@ -375,7 +378,10 @@ export class Game_SelfAction extends BaseUI
         this.mFoldBtn.node.active = true;
         this.mCallBtn.node.active = false;
         this.mCheckBtn.node.active = true;
-        this.mGame_CustomerRaise.InitWithData(this.mIndex);
+        this.mGame_CustomerRaise.InitWithData(this.mIndex , ()=>
+        {
+            this.HideAll();
+        });
         this.mSliderRaiseBtn.node.active = true;
         this.mGame_Slider.node.active = false;
     }
