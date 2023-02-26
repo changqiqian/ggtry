@@ -4,10 +4,10 @@ class DataEvent
 {
     constructor(_target: any, _callfunc: Function) 
     {
-        this.mtarget = _target;
+        this.mTarget = _target;
         this.mCallfunc = _callfunc;
     }
-    mtarget: any;
+    mTarget: any;
     mCallfunc: Function;
 }
 
@@ -56,7 +56,10 @@ export class BaseData <T>
         for(let i = 0 ; i < this.mEventArray.length ; i++)
         {
             let current = this.mEventArray[i];
-            current.mCallfunc(this.mSavingData);
+            if (cc.isValid(current.mTarget, true))
+            {
+                current.mCallfunc(this.mSavingData);
+            } 
         }
 
         if(this.mAutoReset)
@@ -69,7 +72,7 @@ export class BaseData <T>
 
     public AddListenner(_target : any , _callfunc : Function)
     {
-        let index = this.mEventArray.findIndex((_item) => _item.mtarget === _target);
+        let index = this.mEventArray.findIndex((_item) => _item.mTarget === _target);
         if(index >= 0)
         {
             console.log("当前target已经添加过 相同的数据监听了  _target==" + _target.name);
@@ -88,7 +91,7 @@ export class BaseData <T>
 
     public RemoveListennerByTarget(_target : any)
     {
-        let index = this.mEventArray.findIndex((_item) => _item.mtarget === _target);
+        let index = this.mEventArray.findIndex((_item) => _item.mTarget === _target);
         if(index < 0)
         {
             //console.log("当前target并没有添加这个数据监听  _target==" + _target.name);

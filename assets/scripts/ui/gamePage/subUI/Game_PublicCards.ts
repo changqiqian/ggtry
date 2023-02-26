@@ -150,8 +150,6 @@ export class Game_PublicCards extends BaseUI
 
     InitWithReplayData()
     {
-
-
         GameReplayData.Instance.Data_State.AddListenner(this,(_data)=>
         {
             this.UpdateReplayUI();

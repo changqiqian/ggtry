@@ -32,12 +32,12 @@ export class Game_BottomUI extends BaseUI
 
         this.mInfoBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowToast("功能开发中");
-            // UIMgr.Instance.ShowLayer("gamePage","prefab/Game_MatchInfoLayer",true,(_script)=>
-            // {
-            //     let tempScript = _script as Game_MatchInfoLayer;
-            //     tempScript.InitWithData(this.mIndex);
-            // },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_MatchInfoLayer",true,(_script)=>
+            {
+                let tempScript = _script as Game_MatchInfoLayer;
+                tempScript.InitWithData(this.mIndex);
+                tempScript.Refresh();
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
             
         });
 
@@ -45,10 +45,10 @@ export class Game_BottomUI extends BaseUI
         {
             UIMgr.Instance.ShowLayer("gamePage","prefab/Game_RecipeLayer",true,(_script)=>
             {
-                let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
                 let tempScript = _script as Game_RecipeLayer;
-                tempScript.InitWithData(gameStruct.mGameId);
-            });
+                tempScript.InitWithData(this.mIndex);
+                tempScript.Refresh();
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
 
         this.mChatBtn.SetClickCallback(()=>

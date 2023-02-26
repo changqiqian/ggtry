@@ -3,6 +3,7 @@ import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { Tool } from '../../../Tool';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { GameReplayData } from '../GameReplayData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Pot')
@@ -53,6 +54,18 @@ export class Game_Pot extends BaseUI
             this.mSubPots.children[i].active = false;
         }
         this.mSubPots.active = false;
+    }
+
+    InitWithReplayData()
+    {
+        GameReplayData.Instance.Data_ReStart.AddListenner(this,(_data)=>
+        {
+            if(_data == false)
+            {
+                return;
+            }
+            this.ClearPot();
+        })
     }
 
     public InitWithData(_index : number)

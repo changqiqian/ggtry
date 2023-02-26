@@ -471,15 +471,34 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("购买保险  === " + JSON.stringify(msg))
     }
 
-    public GetBringInList(_msgId : number ,_gameId : string , _page : number , _pageSize : number)
+    public GetRecordPlayerList(_msgId : number ,_gameId : string)
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new CS2GetBringInList();
+        let msg = new C2STexasCashPlayerRecord();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(_msgId , C2STexasCashPlayerRecord.encode(msg).finish());
+        console.log("获取买入列表  === " + JSON.stringify(msg))
+    }
+    
+    public GetReplayList(_msgId : number ,_gameId : string , _page : number , _pageSize : number) 
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2STexasCashReplayList();
         msg.gameId = _gameId;
         msg.page = _page;
         msg.pageSize = _pageSize;
-        Network.Instance.SendMsg(_msgId , CS2GetBringInList.encode(msg).finish());
-        console.log("获取买入列表  === " + JSON.stringify(msg))
+        Network.Instance.SendMsg(_msgId , C2STexasCashReplayList.encode(msg).finish());
+        console.log("获取游戏实时手牌列表  === " + JSON.stringify(msg))
+    }
+
+    public GetReplayDetail(_msgId : number ,_gameId : string , _index : number ) 
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2STexasCashReplayDetails();
+        msg.gameId = _gameId;
+        msg.index = _index;
+        Network.Instance.SendMsg(_msgId , C2STexasCashReplayDetails.encode(msg).finish());
+        console.log("获取实时牌局回放诗句  === " + JSON.stringify(msg))
     }
 
     public GiveHallScore(_uid : string , _currencyType : GameCurrencyType , _amount : number)

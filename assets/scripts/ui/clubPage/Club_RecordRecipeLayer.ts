@@ -73,7 +73,12 @@ export class Club_RecordRecipeLayer extends ListViewCtr<SimpleReplay>
     RenderEvent(_item: Node , _index: number)
     {
         let script = _item.getComponent(BriefRecordItem);
-        script.InitWithData(this.mCurrentData[_index]);
+        script.InitWithData(this.mCurrentData[_index],this.OnVedioBtn);
+    }
+
+    OnVedioBtn(_gameId : string , _index : number , _date : string)
+    {
+        NetworkHttp.Instance.PostReplayDetail(_gameId,_index,_date);
     }
 }
 

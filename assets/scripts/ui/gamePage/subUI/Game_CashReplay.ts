@@ -22,6 +22,7 @@ export class Game_CashReplay extends BaseUI {
     onDisable()
     {
         UIMgr.Instance.DeleteUIByTarget(this);
+
     }
 
     public Show(_val : boolean)
@@ -84,6 +85,7 @@ export class Game_CashReplay extends BaseUI {
         this.AddSubView("gamePage","prefab/Game_Pot", (_script)=>
         {
             let tempScript = _script as Game_Pot;
+            tempScript.InitWithReplayData();
 
         },this.mBG.node);
         this.AddSubView("gamePage","prefab/Game_PublicCards", (_script)=>

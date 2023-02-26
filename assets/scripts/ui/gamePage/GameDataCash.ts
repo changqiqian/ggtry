@@ -40,11 +40,7 @@ export class GameDataCash extends GameData
     {
         return MessageId.C2S_TexasCashGetObList;
     }
-    public BuyInListSendMsgId() : number
-    {
-        return MessageId.C2S_TexasCashGetBringInList;
-    }
-    
+
 
     public ExtraThinkingTimeMsgId() : number
     {
@@ -69,5 +65,16 @@ export class GameDataCash extends GameData
     }
     
 
-
+    public RecordPlayerMsgId() : number
+    {
+        return MessageId.C2S_TexasCashPlayerRecord;
+    }
+    public ReplayListMsgId() : number
+    {
+        return MessageId.C2S_TexasCashReplayList;
+    }
+    public ReplayDetailMsgId() : number
+    {
+        return MessageId.C2S_TexasCashReplayDetails;
+    }
 }

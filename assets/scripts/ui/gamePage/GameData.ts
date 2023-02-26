@@ -18,9 +18,15 @@ export abstract class GameData extends MultipleNotify
     //观看者列表
     Data_S2CCommonGetObListResp : BaseData<S2CCommonGetObListResp> = new BaseData<S2CCommonGetObListResp>();  //观看者列表
     //买入列表
-    Data_S2CCommonGetBringInListResp : BaseData<S2CCommonGetBringInListResp> = new BaseData<S2CCommonGetBringInListResp>();  //买入列表
+    Data_S2CCommonPlayerRecordResp : BaseData<S2CCommonPlayerRecordResp> = new BaseData<S2CCommonPlayerRecordResp>();  //买入列表
+    //实时牌普列表
+    Data_S2CCommonReplayListResp: BaseData<S2CCommonReplayListResp> = new BaseData<S2CCommonReplayListResp>();  //实时牌普列表
+    //实时牌普回放数据
+    Data_S2CCommonReplayDetailsResp: BaseData<S2CCommonReplayDetailsResp> = new BaseData<S2CCommonReplayDetailsResp>();    //实时牌普回放数据
+
 
     
+
     //服务器数据返回
     Data_S2CCommonEnterGameResp : BaseData<S2CCommonEnterGameResp> = new BaseData<S2CCommonEnterGameResp>();  //游戏基础配置信息
     Data_S2CCommonOpenNotify : BaseData<S2CCommonOpenNotify> = new BaseData<S2CCommonOpenNotify>(true);  //游戏开始推送
@@ -467,12 +473,14 @@ export abstract class GameData extends MultipleNotify
     public abstract BuyInsuranceSendMsgId() : number
     public abstract ChatSendMsgId() : number
     public abstract ObListSendMsgId() : number
-    public abstract BuyInListSendMsgId() : number
     public abstract ExtraThinkingTimeMsgId() : number
     public abstract ShowPublicMsgId() : number
     public abstract ShowHansMsgId() : number
     public abstract StartCuoPaiMsgId() : number
     public abstract EndCuoPaiMsgId() : number
+    public abstract RecordPlayerMsgId() : number
+    public abstract ReplayListMsgId() : number
+    public abstract ReplayDetailMsgId() : number
 
 }
 

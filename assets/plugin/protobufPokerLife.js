@@ -6322,6 +6322,7 @@ $root.RecordPlayer = (function() {
      * @property {number|null} [vpip] RecordPlayer vpip
      * @property {number|null} [buyIn] RecordPlayer buyIn
      * @property {number|null} [winLose] RecordPlayer winLose
+     * @property {string|null} [uid] RecordPlayer uid
      */
 
     /**
@@ -6388,6 +6389,14 @@ $root.RecordPlayer = (function() {
     RecordPlayer.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * RecordPlayer uid.
+     * @member {string} uid
+     * @memberof RecordPlayer
+     * @instance
+     */
+    RecordPlayer.prototype.uid = "";
+
+    /**
      * Encodes the specified RecordPlayer message. Does not implicitly {@link RecordPlayer.verify|verify} messages.
      * @function encode
      * @memberof RecordPlayer
@@ -6411,6 +6420,8 @@ $root.RecordPlayer = (function() {
             w.uint32(40).int64(m.buyIn);
         if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
             w.uint32(48).int64(m.winLose);
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(58).string(m.uid);
         return w;
     };
 
@@ -6449,6 +6460,9 @@ $root.RecordPlayer = (function() {
                 break;
             case 6:
                 m.winLose = r.int64();
+                break;
+            case 7:
+                m.uid = r.string();
                 break;
             default:
                 r.skipType(t & 7);
@@ -14046,6 +14060,7 @@ $root.Game2LoggerReplayRecord = (function() {
      * @interface IGame2LoggerReplayRecord
      * @property {GameType|null} [gameType] Game2LoggerReplayRecord gameType
      * @property {string|null} [gameId] Game2LoggerReplayRecord gameId
+     * @property {string|null} [endTime] Game2LoggerReplayRecord endTime
      * @property {Array.<IReplayRecord>|null} [replayRecord] Game2LoggerReplayRecord replayRecord
      */
 
@@ -14082,6 +14097,14 @@ $root.Game2LoggerReplayRecord = (function() {
     Game2LoggerReplayRecord.prototype.gameId = "";
 
     /**
+     * Game2LoggerReplayRecord endTime.
+     * @member {string} endTime
+     * @memberof Game2LoggerReplayRecord
+     * @instance
+     */
+    Game2LoggerReplayRecord.prototype.endTime = "";
+
+    /**
      * Game2LoggerReplayRecord replayRecord.
      * @member {Array.<IReplayRecord>} replayRecord
      * @memberof Game2LoggerReplayRecord
@@ -14105,9 +14128,11 @@ $root.Game2LoggerReplayRecord = (function() {
             w.uint32(8).int32(m.gameType);
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(18).string(m.gameId);
+        if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
+            w.uint32(26).string(m.endTime);
         if (m.replayRecord != null && m.replayRecord.length) {
             for (var i = 0; i < m.replayRecord.length; ++i)
-                $root.ReplayRecord.encode(m.replayRecord[i], w.uint32(26).fork()).ldelim();
+                $root.ReplayRecord.encode(m.replayRecord[i], w.uint32(34).fork()).ldelim();
         }
         return w;
     };
@@ -14137,6 +14162,9 @@ $root.Game2LoggerReplayRecord = (function() {
                 m.gameId = r.string();
                 break;
             case 3:
+                m.endTime = r.string();
+                break;
+            case 4:
                 if (!(m.replayRecord && m.replayRecord.length))
                     m.replayRecord = [];
                 m.replayRecord.push($root.ReplayRecord.decode(r, r.uint32()));
@@ -19023,6 +19051,9 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} C2S_TexasCashExtraThink=5016 C2S_TexasCashExtraThink value
  * @property {number} C2S_TexasCashSqueezeStart=5017 C2S_TexasCashSqueezeStart value
  * @property {number} C2S_TexasCashSqueezeFinish=5018 C2S_TexasCashSqueezeFinish value
+ * @property {number} C2S_TexasCashPlayerRecord=5019 C2S_TexasCashPlayerRecord value
+ * @property {number} C2S_TexasCashReplayList=5020 C2S_TexasCashReplayList value
+ * @property {number} C2S_TexasCashReplayDetails=5021 C2S_TexasCashReplayDetails value
  * @property {number} MSG_TexasCashEnd=5500 MSG_TexasCashEnd value
  * @property {number} MSG_TexasMttBegin=5501 MSG_TexasMttBegin value
  * @property {number} MSG_TexasMttEnd=6000 MSG_TexasMttEnd value
@@ -19051,6 +19082,9 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} S2C_CommonExtraThinkResp=8015 S2C_CommonExtraThinkResp value
  * @property {number} S2C_CommonSqueezeStartResp=8016 S2C_CommonSqueezeStartResp value
  * @property {number} S2C_CommonSqueezeFinishResp=8017 S2C_CommonSqueezeFinishResp value
+ * @property {number} S2C_CommonPlayerRecordResp=8018 S2C_CommonPlayerRecordResp value
+ * @property {number} S2C_CommonReplayListResp=8019 S2C_CommonReplayListResp value
+ * @property {number} S2C_CommonReplayDetailsResp=8020 S2C_CommonReplayDetailsResp value
  * @property {number} S2C_CommonBringInTimerNotify=8110 S2C_CommonBringInTimerNotify value
  * @property {number} S2C_CommonBringInNotify=8111 S2C_CommonBringInNotify value
  * @property {number} S2C_CommonSitDownNotify=8112 S2C_CommonSitDownNotify value
@@ -19188,6 +19222,9 @@ $root.MessageId = (function() {
     values[valuesById[5016] = "C2S_TexasCashExtraThink"] = 5016;
     values[valuesById[5017] = "C2S_TexasCashSqueezeStart"] = 5017;
     values[valuesById[5018] = "C2S_TexasCashSqueezeFinish"] = 5018;
+    values[valuesById[5019] = "C2S_TexasCashPlayerRecord"] = 5019;
+    values[valuesById[5020] = "C2S_TexasCashReplayList"] = 5020;
+    values[valuesById[5021] = "C2S_TexasCashReplayDetails"] = 5021;
     values[valuesById[5500] = "MSG_TexasCashEnd"] = 5500;
     values[valuesById[5501] = "MSG_TexasMttBegin"] = 5501;
     values[valuesById[6000] = "MSG_TexasMttEnd"] = 6000;
@@ -19216,6 +19253,9 @@ $root.MessageId = (function() {
     values[valuesById[8015] = "S2C_CommonExtraThinkResp"] = 8015;
     values[valuesById[8016] = "S2C_CommonSqueezeStartResp"] = 8016;
     values[valuesById[8017] = "S2C_CommonSqueezeFinishResp"] = 8017;
+    values[valuesById[8018] = "S2C_CommonPlayerRecordResp"] = 8018;
+    values[valuesById[8019] = "S2C_CommonReplayListResp"] = 8019;
+    values[valuesById[8020] = "S2C_CommonReplayDetailsResp"] = 8020;
     values[valuesById[8110] = "S2C_CommonBringInTimerNotify"] = 8110;
     values[valuesById[8111] = "S2C_CommonBringInNotify"] = 8111;
     values[valuesById[8112] = "S2C_CommonSitDownNotify"] = 8112;
@@ -20763,6 +20803,291 @@ $root.C2STexasCashSqueezeFinish = (function() {
     };
 
     return C2STexasCashSqueezeFinish;
+})();
+
+$root.C2STexasCashPlayerRecord = (function() {
+
+    /**
+     * Properties of a C2STexasCashPlayerRecord.
+     * @exports IC2STexasCashPlayerRecord
+     * @interface IC2STexasCashPlayerRecord
+     * @property {string|null} [gameId] C2STexasCashPlayerRecord gameId
+     */
+
+    /**
+     * Constructs a new C2STexasCashPlayerRecord.
+     * @exports C2STexasCashPlayerRecord
+     * @classdesc Represents a C2STexasCashPlayerRecord.
+     * @implements IC2STexasCashPlayerRecord
+     * @constructor
+     * @param {IC2STexasCashPlayerRecord=} [p] Properties to set
+     */
+    function C2STexasCashPlayerRecord(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCashPlayerRecord gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCashPlayerRecord
+     * @instance
+     */
+    C2STexasCashPlayerRecord.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2STexasCashPlayerRecord message. Does not implicitly {@link C2STexasCashPlayerRecord.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCashPlayerRecord
+     * @static
+     * @param {IC2STexasCashPlayerRecord} m C2STexasCashPlayerRecord message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCashPlayerRecord.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCashPlayerRecord message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCashPlayerRecord
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCashPlayerRecord} C2STexasCashPlayerRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCashPlayerRecord.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashPlayerRecord();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCashPlayerRecord;
+})();
+
+$root.C2STexasCashReplayList = (function() {
+
+    /**
+     * Properties of a C2STexasCashReplayList.
+     * @exports IC2STexasCashReplayList
+     * @interface IC2STexasCashReplayList
+     * @property {string|null} [gameId] C2STexasCashReplayList gameId
+     * @property {number|null} [page] C2STexasCashReplayList page
+     * @property {number|null} [pageSize] C2STexasCashReplayList pageSize
+     */
+
+    /**
+     * Constructs a new C2STexasCashReplayList.
+     * @exports C2STexasCashReplayList
+     * @classdesc Represents a C2STexasCashReplayList.
+     * @implements IC2STexasCashReplayList
+     * @constructor
+     * @param {IC2STexasCashReplayList=} [p] Properties to set
+     */
+    function C2STexasCashReplayList(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCashReplayList gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCashReplayList
+     * @instance
+     */
+    C2STexasCashReplayList.prototype.gameId = "";
+
+    /**
+     * C2STexasCashReplayList page.
+     * @member {number} page
+     * @memberof C2STexasCashReplayList
+     * @instance
+     */
+    C2STexasCashReplayList.prototype.page = 0;
+
+    /**
+     * C2STexasCashReplayList pageSize.
+     * @member {number} pageSize
+     * @memberof C2STexasCashReplayList
+     * @instance
+     */
+    C2STexasCashReplayList.prototype.pageSize = 0;
+
+    /**
+     * Encodes the specified C2STexasCashReplayList message. Does not implicitly {@link C2STexasCashReplayList.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCashReplayList
+     * @static
+     * @param {IC2STexasCashReplayList} m C2STexasCashReplayList message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCashReplayList.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.page != null && Object.hasOwnProperty.call(m, "page"))
+            w.uint32(16).int32(m.page);
+        if (m.pageSize != null && Object.hasOwnProperty.call(m, "pageSize"))
+            w.uint32(24).int32(m.pageSize);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCashReplayList message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCashReplayList
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCashReplayList} C2STexasCashReplayList
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCashReplayList.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashReplayList();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.page = r.int32();
+                break;
+            case 3:
+                m.pageSize = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCashReplayList;
+})();
+
+$root.C2STexasCashReplayDetails = (function() {
+
+    /**
+     * Properties of a C2STexasCashReplayDetails.
+     * @exports IC2STexasCashReplayDetails
+     * @interface IC2STexasCashReplayDetails
+     * @property {string|null} [gameId] C2STexasCashReplayDetails gameId
+     * @property {number|null} [index] C2STexasCashReplayDetails index
+     */
+
+    /**
+     * Constructs a new C2STexasCashReplayDetails.
+     * @exports C2STexasCashReplayDetails
+     * @classdesc Represents a C2STexasCashReplayDetails.
+     * @implements IC2STexasCashReplayDetails
+     * @constructor
+     * @param {IC2STexasCashReplayDetails=} [p] Properties to set
+     */
+    function C2STexasCashReplayDetails(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCashReplayDetails gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCashReplayDetails
+     * @instance
+     */
+    C2STexasCashReplayDetails.prototype.gameId = "";
+
+    /**
+     * C2STexasCashReplayDetails index.
+     * @member {number} index
+     * @memberof C2STexasCashReplayDetails
+     * @instance
+     */
+    C2STexasCashReplayDetails.prototype.index = 0;
+
+    /**
+     * Encodes the specified C2STexasCashReplayDetails message. Does not implicitly {@link C2STexasCashReplayDetails.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCashReplayDetails
+     * @static
+     * @param {IC2STexasCashReplayDetails} m C2STexasCashReplayDetails message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCashReplayDetails.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
+            w.uint32(16).int32(m.index);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCashReplayDetails message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCashReplayDetails
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCashReplayDetails} C2STexasCashReplayDetails
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCashReplayDetails.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashReplayDetails();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.index = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCashReplayDetails;
 })();
 
 $root.S2CCommonEnterGameResp = (function() {
@@ -22734,6 +23059,366 @@ $root.S2CCommonSqueezeFinishResp = (function() {
     };
 
     return S2CCommonSqueezeFinishResp;
+})();
+
+$root.S2CCommonPlayerRecordResp = (function() {
+
+    /**
+     * Properties of a S2CCommonPlayerRecordResp.
+     * @exports IS2CCommonPlayerRecordResp
+     * @interface IS2CCommonPlayerRecordResp
+     * @property {ICommonResult|null} [result] S2CCommonPlayerRecordResp result
+     * @property {string|null} [gameId] S2CCommonPlayerRecordResp gameId
+     * @property {number|null} [insuranceWinlose] S2CCommonPlayerRecordResp insuranceWinlose
+     * @property {number|null} [jackpotWinlose] S2CCommonPlayerRecordResp jackpotWinlose
+     * @property {Array.<IRecordPlayer>|null} [list] S2CCommonPlayerRecordResp list
+     */
+
+    /**
+     * Constructs a new S2CCommonPlayerRecordResp.
+     * @exports S2CCommonPlayerRecordResp
+     * @classdesc Represents a S2CCommonPlayerRecordResp.
+     * @implements IS2CCommonPlayerRecordResp
+     * @constructor
+     * @param {IS2CCommonPlayerRecordResp=} [p] Properties to set
+     */
+    function S2CCommonPlayerRecordResp(p) {
+        this.list = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonPlayerRecordResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonPlayerRecordResp
+     * @instance
+     */
+    S2CCommonPlayerRecordResp.prototype.result = null;
+
+    /**
+     * S2CCommonPlayerRecordResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonPlayerRecordResp
+     * @instance
+     */
+    S2CCommonPlayerRecordResp.prototype.gameId = "";
+
+    /**
+     * S2CCommonPlayerRecordResp insuranceWinlose.
+     * @member {number} insuranceWinlose
+     * @memberof S2CCommonPlayerRecordResp
+     * @instance
+     */
+    S2CCommonPlayerRecordResp.prototype.insuranceWinlose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CCommonPlayerRecordResp jackpotWinlose.
+     * @member {number} jackpotWinlose
+     * @memberof S2CCommonPlayerRecordResp
+     * @instance
+     */
+    S2CCommonPlayerRecordResp.prototype.jackpotWinlose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CCommonPlayerRecordResp list.
+     * @member {Array.<IRecordPlayer>} list
+     * @memberof S2CCommonPlayerRecordResp
+     * @instance
+     */
+    S2CCommonPlayerRecordResp.prototype.list = $util.emptyArray;
+
+    /**
+     * Encodes the specified S2CCommonPlayerRecordResp message. Does not implicitly {@link S2CCommonPlayerRecordResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonPlayerRecordResp
+     * @static
+     * @param {IS2CCommonPlayerRecordResp} m S2CCommonPlayerRecordResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonPlayerRecordResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.insuranceWinlose != null && Object.hasOwnProperty.call(m, "insuranceWinlose"))
+            w.uint32(24).int64(m.insuranceWinlose);
+        if (m.jackpotWinlose != null && Object.hasOwnProperty.call(m, "jackpotWinlose"))
+            w.uint32(32).int64(m.jackpotWinlose);
+        if (m.list != null && m.list.length) {
+            for (var i = 0; i < m.list.length; ++i)
+                $root.RecordPlayer.encode(m.list[i], w.uint32(42).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonPlayerRecordResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonPlayerRecordResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonPlayerRecordResp} S2CCommonPlayerRecordResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonPlayerRecordResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonPlayerRecordResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.insuranceWinlose = r.int64();
+                break;
+            case 4:
+                m.jackpotWinlose = r.int64();
+                break;
+            case 5:
+                if (!(m.list && m.list.length))
+                    m.list = [];
+                m.list.push($root.RecordPlayer.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonPlayerRecordResp;
+})();
+
+$root.S2CCommonReplayListResp = (function() {
+
+    /**
+     * Properties of a S2CCommonReplayListResp.
+     * @exports IS2CCommonReplayListResp
+     * @interface IS2CCommonReplayListResp
+     * @property {ICommonResult|null} [result] S2CCommonReplayListResp result
+     * @property {string|null} [gameId] S2CCommonReplayListResp gameId
+     * @property {ISimpleReplayData|null} [data] S2CCommonReplayListResp data
+     */
+
+    /**
+     * Constructs a new S2CCommonReplayListResp.
+     * @exports S2CCommonReplayListResp
+     * @classdesc Represents a S2CCommonReplayListResp.
+     * @implements IS2CCommonReplayListResp
+     * @constructor
+     * @param {IS2CCommonReplayListResp=} [p] Properties to set
+     */
+    function S2CCommonReplayListResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonReplayListResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonReplayListResp
+     * @instance
+     */
+    S2CCommonReplayListResp.prototype.result = null;
+
+    /**
+     * S2CCommonReplayListResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonReplayListResp
+     * @instance
+     */
+    S2CCommonReplayListResp.prototype.gameId = "";
+
+    /**
+     * S2CCommonReplayListResp data.
+     * @member {ISimpleReplayData|null|undefined} data
+     * @memberof S2CCommonReplayListResp
+     * @instance
+     */
+    S2CCommonReplayListResp.prototype.data = null;
+
+    /**
+     * Encodes the specified S2CCommonReplayListResp message. Does not implicitly {@link S2CCommonReplayListResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonReplayListResp
+     * @static
+     * @param {IS2CCommonReplayListResp} m S2CCommonReplayListResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonReplayListResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.data != null && Object.hasOwnProperty.call(m, "data"))
+            $root.SimpleReplayData.encode(m.data, w.uint32(26).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonReplayListResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonReplayListResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonReplayListResp} S2CCommonReplayListResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonReplayListResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonReplayListResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.data = $root.SimpleReplayData.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonReplayListResp;
+})();
+
+$root.S2CCommonReplayDetailsResp = (function() {
+
+    /**
+     * Properties of a S2CCommonReplayDetailsResp.
+     * @exports IS2CCommonReplayDetailsResp
+     * @interface IS2CCommonReplayDetailsResp
+     * @property {ICommonResult|null} [result] S2CCommonReplayDetailsResp result
+     * @property {string|null} [gameId] S2CCommonReplayDetailsResp gameId
+     * @property {IReplayData|null} [data] S2CCommonReplayDetailsResp data
+     */
+
+    /**
+     * Constructs a new S2CCommonReplayDetailsResp.
+     * @exports S2CCommonReplayDetailsResp
+     * @classdesc Represents a S2CCommonReplayDetailsResp.
+     * @implements IS2CCommonReplayDetailsResp
+     * @constructor
+     * @param {IS2CCommonReplayDetailsResp=} [p] Properties to set
+     */
+    function S2CCommonReplayDetailsResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonReplayDetailsResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonReplayDetailsResp
+     * @instance
+     */
+    S2CCommonReplayDetailsResp.prototype.result = null;
+
+    /**
+     * S2CCommonReplayDetailsResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonReplayDetailsResp
+     * @instance
+     */
+    S2CCommonReplayDetailsResp.prototype.gameId = "";
+
+    /**
+     * S2CCommonReplayDetailsResp data.
+     * @member {IReplayData|null|undefined} data
+     * @memberof S2CCommonReplayDetailsResp
+     * @instance
+     */
+    S2CCommonReplayDetailsResp.prototype.data = null;
+
+    /**
+     * Encodes the specified S2CCommonReplayDetailsResp message. Does not implicitly {@link S2CCommonReplayDetailsResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonReplayDetailsResp
+     * @static
+     * @param {IS2CCommonReplayDetailsResp} m S2CCommonReplayDetailsResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonReplayDetailsResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.data != null && Object.hasOwnProperty.call(m, "data"))
+            $root.ReplayData.encode(m.data, w.uint32(26).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonReplayDetailsResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonReplayDetailsResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonReplayDetailsResp} S2CCommonReplayDetailsResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonReplayDetailsResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonReplayDetailsResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.data = $root.ReplayData.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonReplayDetailsResp;
 })();
 
 $root.S2CCommonBringInTimerNotify = (function() {

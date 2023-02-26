@@ -3,6 +3,7 @@ import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { NetworkSend } from '../../../network/NetworkSend';
+import { Tool } from '../../../Tool';
 import { ListViewCtr } from '../../../UiTool/ListViewCtr';
 import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
@@ -11,9 +12,8 @@ import { Game_MatchInfoItem } from './Game_MatchInfoItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_MatchInfoLayer')
-export class Game_MatchInfoLayer extends ListViewCtr<PlayerHistoryInfo> 
+export class Game_MatchInfoLayer extends ListViewCtr<RecordPlayer> 
 {
-
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
     @property(Node) 
@@ -27,10 +27,17 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerHistoryInfo>
 
     @property(Label) 
     mInsAmount: Label = null;
+    @property(Label) 
+    mJackpotAmount: Label = null;
 
     @property(ScrollView) 
     mScrollView: ScrollView = null;
     private mIndex : number = null;
+
+    onEnable()
+    {
+
+    }
     
     public Show(_val : boolean)
     {
@@ -66,13 +73,12 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerHistoryInfo>
 
     public InitWithData(_index : number)
     {
-        if(this.CheckInitFlag())
+        if(this.CheckInitFlag() )
         {
             return;
         }
         this.mIndex = _index;
         this.BindData();
-        this.OnDragTop();
     }
 
     BindData()
@@ -94,34 +100,12 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerHistoryInfo>
             this.mClubName.string = Localization.GetString("00267");
         }
 
-        gameData.Data_S2CCommonGetBringInListResp.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonPlayerRecordResp.AddListenner(this,(_data)=>
         {
-            if(this.node.activeInHierarchy == false)
-            {
-                return;
-            }
-
-            if(this.mCurrentPage != _data.page)
-            {
-                return;
-            }
-
-            if(this.mPageSize != _data.pageSize)
-            {
-                return;
-            }
-
-            for(let i = 0 ; i < _data.playerHistoryInfo.length ; i++)
-            {
-                let current = _data.playerHistoryInfo[i];
-                let index = this.mCurrentData.findIndex((_item) => _item.uid === current.uid);
-                if(index < 0)
-                {
-                    this.InsertOneData(current);
-                }
-            }
-
-            this.UpdateData(_data.totalMember);
+            this.mInsAmount.string = Tool.ConvertMoney_S2C(_data.insuranceWinlose) + "";
+            this.mJackpotAmount.string = Tool.ConvertMoney_S2C(_data.jackpotWinlose) + "";
+            this.ForceSetData(_data.list);
+            this.RefreshData();
         })
     }
 
@@ -136,10 +120,10 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerHistoryInfo>
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        NetworkSend.Instance.GetBringInList(gameData.BuyInListSendMsgId(),
-                                            gameStruct.mGameId,
-                                            this.mCurrentPage, 
-                                            this.mPageSize);
+        NetworkSend.Instance.GetRecordPlayerList(gameData.RecordPlayerMsgId(),gameStruct.mGameId,);
+    }
+    OnDragBottom() 
+    {
 
     }
 }

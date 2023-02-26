@@ -40,23 +40,23 @@ export class Game_MatchInfoItem extends BaseUI
 
     }
 
-    public InitWithData(_index : number , _playerHistoryInfo : PlayerHistoryInfo)
+    public InitWithData(_index : number , _data : RecordPlayer)
     {
         this.mBG.active = _index%2 == 0;
-        this.mSelfTag.active = _playerHistoryInfo.uid == LocalPlayerData.Instance.Data_Uid.mData;
-        this.mNickName.string = _playerHistoryInfo.nickName;
-        this.mHands.string = _playerHistoryInfo.totalGames + "";
-        this.mBringIn.string = Tool.ConvertMoney_S2C(_playerHistoryInfo.totalBringIn) + "";
+        this.mSelfTag.active = _data.uid == LocalPlayerData.Instance.Data_Uid.mData;
+        this.mNickName.string = _data.name;
+        this.mHands.string = _data.hands + "";
+        this.mBringIn.string = Tool.ConvertMoney_S2C(_data.buyIn) + "";
 
         
-        if(_playerHistoryInfo.totalWinLose >=0)
+        if(_data.winLose >=0)
         {
-            this.mWinLose.string = "+" + Tool.ConvertMoney_S2C(_playerHistoryInfo.totalWinLose);
+            this.mWinLose.string = "+" + Tool.ConvertMoney_S2C(_data.winLose);
             this.mWinLose.color = Color.RED
         }
         else
         {
-            this.mWinLose.string = Tool.ConvertMoney_S2C(_playerHistoryInfo.totalWinLose) + "";
+            this.mWinLose.string = Tool.ConvertMoney_S2C(_data.winLose) + "";
             this.mWinLose.color = Color.GREEN
         }
     }

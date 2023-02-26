@@ -27,6 +27,8 @@ export class BriefRecordItem extends BaseUI
     mMyProfit: Label = null;
     @property(BaseButton) 
     mVideoBtn: BaseButton = null;
+
+    mVideoCallback : Function;
     
     mData : SimpleReplay = null;
     InitParam()
@@ -40,7 +42,10 @@ export class BriefRecordItem extends BaseUI
             let gameId = this.mData.gameId;
             let index = this.mData.index;
             let date = this.mData.date;
-            NetworkHttp.Instance.PostReplayDetail(gameId,index,date);
+            if(this.mVideoCallback  != null)
+            {
+                this.mVideoCallback(gameId , index , date);
+            }
         })
     }
     RegDataNotify()
@@ -55,8 +60,9 @@ export class BriefRecordItem extends BaseUI
     {
 
     }
-    public InitWithData(_data : SimpleReplay)
+    public InitWithData(_data : SimpleReplay , _VedioCallback)
     {
+        this.mVideoCallback = _VedioCallback;
         this.mData = _data;
         this.mVideoBtn.SetTitle(Localization.GetString("00271") + _data.index)
         this.ResetCards();
