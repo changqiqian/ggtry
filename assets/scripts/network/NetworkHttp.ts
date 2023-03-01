@@ -29,7 +29,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     }
 
     //获取 今日，本周，本月 总战绩概括
-    public PostTotalRecordData(_gameType : GameType , _day : HTTP_Date , _clubId : string = "")
+    public PostTotalRecordData(_gameType : GameType , _startDate : string , _endDate : string , _clubId : string = "")
     {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/record/sum");
@@ -40,10 +40,10 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         let param = 
         {
             gameType : _gameType,
-            day : _day,
+            dayStart : _startDate,
+            dayEnd : _endDate,
             clubId : _clubId
         }
-
 
         this.HttpSend(xhr,param,(_result)=>
         {
@@ -59,7 +59,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     }
 
     //获取战绩细节入口数据
-    public PostRecordData(_gameType:GameType ,_day : HTTP_Date, _pageNum : number , _pageSize : number , _clubId : string = "")
+    public PostRecordData(_gameType:GameType ,_startDate : string , _endDate : string , _pageNum : number , _pageSize : number , _clubId : string = "")
     {
         console.log("http 获取战绩细节入口数据==");
         let xhr = new XMLHttpRequest();
@@ -70,7 +70,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         let param = 
         {
             gameType : _gameType,
-            day : _day,
+            dayStart : _startDate,
+            dayEnd : _endDate,
             clubId : _clubId
         }
         this.HttpSend(xhr,param,(_result)=>
@@ -115,7 +116,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     }
 
     //获取简单手牌数据
-    public PostSimpleReplay(_gameType : GameType, _gameId : string , _pageNum : number , _pageSize : number , _date : string )
+    public PostSimpleReplay(_gameType : GameType, _gameId : string , _pageNum : number , _pageSize : number , _date : string , _inGame : boolean)
     {
         console.log("http 获取简单手牌数据==");
         let xhr = new XMLHttpRequest();
@@ -135,7 +136,14 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
             console.log("_收到http==获取简单手牌数据==" + _result);
             let json = JSON.parse(_result);
             let protoData = json.data as SimpleReplayData;
-            LocalPlayerData.Instance.Data_SimpleReplayData.mData = protoData;
+            if(_inGame)
+            {
+                LocalPlayerData.Instance.Data_SimpleReplayDataInGame.mData = protoData;
+            }
+            else
+            {
+                LocalPlayerData.Instance.Data_SimpleReplayData.mData = protoData;
+            }
         },
         (_err)=>
         {
@@ -144,7 +152,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     }
 
     //获取详细手牌数据
-    public PostReplayDetail(_gameId : string , _index : number ,_date : string)
+    public PostReplayDetail(_gameId : string , _index : number ,_date : string, _inGame : boolean)
     {
         console.log("http 获取详细手牌数据==");
         let xhr = new XMLHttpRequest();
@@ -163,7 +171,15 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
             console.log("_收到http==获取详细手牌数据==" + _result);
             let json = JSON.parse(_result);
             let protoData = json.data as ReplayData;
-            LocalPlayerData.Instance.Data_ReplayData.mData = protoData;
+
+            if(_inGame)
+            {
+                LocalPlayerData.Instance.Data_ReplayDataInGame.mData = protoData;
+            }
+            else
+            {
+                LocalPlayerData.Instance.Data_ReplayData.mData = protoData;
+            }
         },
         (_err)=>
         {

@@ -67,7 +67,7 @@ export class Club_RecordRecipeLayer extends ListViewCtr<SimpleReplay>
         let type = HallData.Instance.Data_ClubRecordSubPage.mData;
         let date = LocalPlayerData.Instance.Data_RecordDetail.mData.date;
         let gameId = LocalPlayerData.Instance.Data_RecordDetail.mData.gameCode;
-        NetworkHttp.Instance.PostSimpleReplay(type , gameId,this.mCurrentPage , this.mPageSize , date);
+        NetworkHttp.Instance.PostSimpleReplay(type , gameId,this.mCurrentPage , this.mPageSize , date , false);
     }
 
     RenderEvent(_item: Node , _index: number)
@@ -78,7 +78,7 @@ export class Club_RecordRecipeLayer extends ListViewCtr<SimpleReplay>
 
     OnVedioBtn(_gameId : string , _index : number , _date : string)
     {
-        NetworkHttp.Instance.PostReplayDetail(_gameId,_index,_date);
+        NetworkHttp.Instance.PostReplayDetail(_gameId,_index,_date , false);
     }
 }
 

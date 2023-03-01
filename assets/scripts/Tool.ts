@@ -74,27 +74,37 @@ export class Tool
         return finalTime;
     }
 
-    public static DateFormat(fmt, date :Date)  : string
+    public static DateFormat(_fmt : string, _date :Date)  : string
     {
         let ret;
         const opt = 
         {
-            "Y+": date.getFullYear().toString(),        // 年
-            "m+": (date.getMonth() + 1).toString(),     // 月
-            "d+": date.getDate().toString(),            // 日
-            "H+": date.getHours().toString(),           // 时
-            "M+": date.getMinutes().toString(),         // 分
-            "S+": date.getSeconds().toString()          // 秒
+            "Y+": _date.getFullYear().toString(),        // 年
+            "m+": (_date.getMonth() + 1).toString(),     // 月
+            "d+": _date.getDate().toString(),            // 日
+            "H+": _date.getHours().toString(),           // 时
+            "M+": _date.getMinutes().toString(),         // 分
+            "S+": _date.getSeconds().toString()          // 秒
             // 有其他格式化字符需求可以继续添加，必须转化成字符串
         };
         for (let k in opt) 
         {
-            ret = new RegExp("(" + k + ")").exec(fmt);
+            ret = new RegExp("(" + k + ")").exec(_fmt);
             if (ret) {
-                fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+                _fmt = _fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
             };
         };
-        return fmt;
+        return _fmt;
+    }
+
+    //_offset = 从今天开始往前推几天  0=今天 1=昨天 2=两天前 3=3天前
+    public static GetDateDurationFromToday(_offset : number) : string
+    {
+        var date = new Date();
+        date.setDate(date.getDate() - _offset); 
+        let result = Tool.DateFormat("YYYY-mm-dd",date);
+        console.log("GetDateDurationFromToday==" +  result);
+        return result;
     }
 
     //以...来代替多出来的文字

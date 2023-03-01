@@ -80,10 +80,6 @@ export class LoginUI extends BaseUI
             this.DebugFunction.active = false;
         });
 
-        var myDate = new Date();
-        myDate.setDate(myDate.getDate() + 1); 
-        console.log("toLocaleDateString==" +  myDate.toLocaleDateString());
-        console.log("DateFormat==" +  Tool.DateFormat("YYYY-mm-dd",myDate));
     }
     RegDataNotify() 
     {

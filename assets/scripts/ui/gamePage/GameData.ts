@@ -20,9 +20,9 @@ export abstract class GameData extends MultipleNotify
     //买入列表
     Data_S2CCommonPlayerRecordResp : BaseData<S2CCommonPlayerRecordResp> = new BaseData<S2CCommonPlayerRecordResp>();  //买入列表
     //实时牌普列表
-    Data_S2CCommonReplayListResp: BaseData<S2CCommonReplayListResp> = new BaseData<S2CCommonReplayListResp>();  //实时牌普列表
+    //Data_S2CCommonReplayListResp: BaseData<S2CCommonReplayListResp> = new BaseData<S2CCommonReplayListResp>();  //实时牌普列表
     //实时牌普回放数据
-    Data_S2CCommonReplayDetailsResp: BaseData<S2CCommonReplayDetailsResp> = new BaseData<S2CCommonReplayDetailsResp>();    //实时牌普回放数据
+    //Data_S2CCommonReplayDetailsResp: BaseData<S2CCommonReplayDetailsResp> = new BaseData<S2CCommonReplayDetailsResp>();    //实时牌普回放数据
 
 
     

@@ -38,6 +38,8 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_RecordDetail: BaseData<RecordDetail> = new BaseData<RecordDetail>();//战绩详细
     Data_SimpleReplayData : BaseData<SimpleReplayData> = new BaseData<SimpleReplayData>();//获取手牌简要数据
     Data_ReplayData: BaseData<ReplayData> = new BaseData<ReplayData>();//获取手牌详细数据
+    Data_SimpleReplayDataInGame : BaseData<SimpleReplayData> = new BaseData<SimpleReplayData>();//游戏中获取手牌简要数据
+    Data_ReplayDataInGame: BaseData<ReplayData> = new BaseData<ReplayData>();//游戏中获取手牌详细数据
     public ClearEnterClubInfo()
     {
         this.Data_EnterClubs.mData = new Array<S2CEnterClub>();

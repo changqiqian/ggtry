@@ -22,7 +22,6 @@ export class Game_CashReplay extends BaseUI {
     onDisable()
     {
         UIMgr.Instance.DeleteUIByTarget(this);
-
     }
 
     public Show(_val : boolean)
@@ -44,7 +43,6 @@ export class Game_CashReplay extends BaseUI {
     {
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
-
         this.mMovingShow.SetShowAnimationCallback(()=>
         {
             
@@ -70,7 +68,6 @@ export class Game_CashReplay extends BaseUI {
         GameReplayData.Instance.InitData(_data);
         this.InitSubView();
     }
-    
 
     InitSubView()
     {
@@ -86,13 +83,11 @@ export class Game_CashReplay extends BaseUI {
         {
             let tempScript = _script as Game_Pot;
             tempScript.InitWithReplayData();
-
         },this.mBG.node);
         this.AddSubView("gamePage","prefab/Game_PublicCards", (_script)=>
         {
             let tempScript = _script as Game_PublicCards;
             tempScript.InitWithReplayData();
-  
         },this.mBG.node);
 
         this.AddSubView("gamePage","prefab/Game_TableInfo", (_script)=>
