@@ -28,8 +28,6 @@ export class Game_BottomUI extends BaseUI
     }
     BindUI() 
     {
-
-
         this.mInfoBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowLayer("gamePage","prefab/Game_MatchInfoLayer",true,(_script)=>
@@ -38,7 +36,6 @@ export class Game_BottomUI extends BaseUI
                 tempScript.InitWithData(this.mIndex);
                 tempScript.Refresh();
             },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
-            
         });
 
         this.mHistoryBtn.SetClickCallback(()=>
@@ -59,12 +56,10 @@ export class Game_BottomUI extends BaseUI
                 tempScript.InitWithData(this.mIndex);
             },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
-
     }
     RegDataNotify() 
     {
        
-
     }
     LateInit() 
     {

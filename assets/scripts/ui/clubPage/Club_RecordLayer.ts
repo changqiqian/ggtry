@@ -160,6 +160,27 @@ export class Club_RecordLayer extends ListViewCtr<RecordSingle>
     {
         let type = HallData.Instance.Data_ClubRecordSubPage.mData;
         let day = HallData.Instance.Data_ClubRecordDateType.mData;
+
+        switch(day)
+        {
+            case HTTP_Date.Today:
+                {
+
+                }
+                break;
+            case HTTP_Date.Week:
+                {
+
+                }
+                break;
+            case HTTP_Date.Month:
+                {
+
+                }
+                break;
+        }
+
+
         NetworkHttp.Instance.PostTotalRecordData(type,day,this.mClubId)
     }
 

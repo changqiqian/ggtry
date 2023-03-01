@@ -1829,7 +1829,7 @@ export class ActionResult implements IActionResult {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ActionResult;
 }
 
-/** Represents a SimpleReplayData. */
+/** HTTP用到的结构//////////////////////////////////// */
 export class SimpleReplayData implements ISimpleReplayData {
 
     /**
@@ -1974,6 +1974,15 @@ export class ReplayData implements IReplayData {
 
     /** ReplayData result. */
     public result: IPlayerWinLose[];
+
+    /** ReplayData potInfoFlop. */
+    public potInfoFlop: IPotInfo[];
+
+    /** ReplayData potInfoTurn. */
+    public potInfoTurn: IPotInfo[];
+
+    /** ReplayData potInfoRiver. */
+    public potInfoRiver: IPotInfo[];
 
     /**
      * Encodes the specified ReplayData message. Does not implicitly {@link ReplayData.verify|verify} messages.
@@ -2181,6 +2190,9 @@ export class RecordPlayer implements IRecordPlayer {
      */
     constructor(p?: IRecordPlayer);
 
+    /** RecordPlayer uid. */
+    public uid: string;
+
     /** RecordPlayer head. */
     public head: string;
 
@@ -2188,7 +2200,7 @@ export class RecordPlayer implements IRecordPlayer {
     public name: string;
 
     /** RecordPlayer hands. */
-    public hands: string;
+    public hands: number;
 
     /** RecordPlayer vpip. */
     public vpip: number;
@@ -2198,9 +2210,6 @@ export class RecordPlayer implements IRecordPlayer {
 
     /** RecordPlayer winLose. */
     public winLose: number;
-
-    /** RecordPlayer uid. */
-    public uid: string;
 
     /**
      * Encodes the specified RecordPlayer message. Does not implicitly {@link RecordPlayer.verify|verify} messages.
@@ -4587,8 +4596,8 @@ export class S2CAddCurrencyNotify implements IS2CAddCurrencyNotify {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CAddCurrencyNotify;
 }
 
-/** AmountType enum. */
-export enum AmountType {
+/** AmountChangeType enum. */
+export enum AmountChangeType {
     AmountType_Other = 0,
     AmountType_Charge = 1,
     AmountType_Grant = 2,
@@ -4885,1043 +4894,169 @@ export class ReplayRecord implements IReplayRecord {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ReplayRecord;
 }
 
-/** Represents a Game2LoggerPropRecord. */
-export class Game2LoggerPropRecord implements IGame2LoggerPropRecord {
+/** Represents a Game2LoggerAmountChange. */
+export class Game2LoggerAmountChange implements IGame2LoggerAmountChange {
 
     /**
-     * Constructs a new Game2LoggerPropRecord.
+     * Constructs a new Game2LoggerAmountChange.
      * @param [p] Properties to set
      */
-    constructor(p?: IGame2LoggerPropRecord);
+    constructor(p?: IGame2LoggerAmountChange);
 
-    /** Game2LoggerPropRecord gameId. */
-    public gameId: string;
-
-    /** Game2LoggerPropRecord gameType. */
+    /** Game2LoggerAmountChange gameType. */
     public gameType: GameType;
 
-    /** Game2LoggerPropRecord propRecord. */
-    public propRecord: IPropRecord[];
+    /** Game2LoggerAmountChange gameId. */
+    public gameId: string;
+
+    /** Game2LoggerAmountChange amountChangeInfo. */
+    public amountChangeInfo: IAmountChangeInfo[];
 
     /**
-     * Encodes the specified Game2LoggerPropRecord message. Does not implicitly {@link Game2LoggerPropRecord.verify|verify} messages.
-     * @param m Game2LoggerPropRecord message or plain object to encode
+     * Encodes the specified Game2LoggerAmountChange message. Does not implicitly {@link Game2LoggerAmountChange.verify|verify} messages.
+     * @param m Game2LoggerAmountChange message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IGame2LoggerPropRecord, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IGame2LoggerAmountChange, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a Game2LoggerPropRecord message from the specified reader or buffer.
+     * Decodes a Game2LoggerAmountChange message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns Game2LoggerPropRecord
+     * @returns Game2LoggerAmountChange
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerPropRecord;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerAmountChange;
 }
 
-/** Represents a PropRecord. */
-export class PropRecord implements IPropRecord {
+/** Represents an AmountChangeInfo. */
+export class AmountChangeInfo implements IAmountChangeInfo {
 
     /**
-     * Constructs a new PropRecord.
+     * Constructs a new AmountChangeInfo.
      * @param [p] Properties to set
      */
-    constructor(p?: IPropRecord);
+    constructor(p?: IAmountChangeInfo);
 
-    /** PropRecord happenTime. */
+    /** AmountChangeInfo happenTime. */
     public happenTime: string;
 
-    /** PropRecord userName. */
-    public userName: string;
-
-    /** PropRecord userId. */
+    /** AmountChangeInfo userId. */
     public userId: string;
 
-    /** PropRecord clubName. */
+    /** AmountChangeInfo userName. */
+    public userName: string;
+
+    /** AmountChangeInfo head. */
+    public head: string;
+
+    /** AmountChangeInfo amountChange. */
+    public amountChange: number;
+
+    /** AmountChangeInfo preChange. */
+    public preChange: number;
+
+    /** AmountChangeInfo afterChange. */
+    public afterChange: number;
+
+    /** AmountChangeInfo amountChangeType. */
+    public amountChangeType: AmountChangeType;
+
+    /** AmountChangeInfo amountChangeGenerics. */
+    public amountChangeGenerics?: (IAmountChangeGenerics|null);
+
+    /**
+     * Encodes the specified AmountChangeInfo message. Does not implicitly {@link AmountChangeInfo.verify|verify} messages.
+     * @param m AmountChangeInfo message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IAmountChangeInfo, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes an AmountChangeInfo message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns AmountChangeInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): AmountChangeInfo;
+}
+
+/** Represents an AmountChangeGenerics. */
+export class AmountChangeGenerics implements IAmountChangeGenerics {
+
+    /**
+     * Constructs a new AmountChangeGenerics.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IAmountChangeGenerics);
+
+    /** AmountChangeGenerics clubName. */
     public clubName: string;
 
-    /** PropRecord clubId. */
+    /** AmountChangeGenerics clubId. */
     public clubId: string;
 
-    /** PropRecord propType. */
+    /** AmountChangeGenerics baseProfit. */
+    public baseProfit: number;
+
+    /** AmountChangeGenerics propRate. */
+    public propRate: number;
+
+    /** AmountChangeGenerics propType. */
     public propType: PropType;
 
-    /** PropRecord amount. */
-    public amount: number;
-
-    /** PropRecord preChange. */
-    public preChange: number;
-
-    /** PropRecord afterChange. */
-    public afterChange: number;
-
-    /**
-     * Encodes the specified PropRecord message. Does not implicitly {@link PropRecord.verify|verify} messages.
-     * @param m PropRecord message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IPropRecord, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a PropRecord message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns PropRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): PropRecord;
-}
-
-/** Represents a Game2LoggerCommission. */
-export class Game2LoggerCommission implements IGame2LoggerCommission {
-
-    /**
-     * Constructs a new Game2LoggerCommission.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGame2LoggerCommission);
-
-    /** Game2LoggerCommission gameId. */
-    public gameId: string;
-
-    /** Game2LoggerCommission gameType. */
-    public gameType: GameType;
-
-    /** Game2LoggerCommission commissionRecord. */
-    public commissionRecord: ICommissionRecord[];
-
-    /**
-     * Encodes the specified Game2LoggerCommission message. Does not implicitly {@link Game2LoggerCommission.verify|verify} messages.
-     * @param m Game2LoggerCommission message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGame2LoggerCommission, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a Game2LoggerCommission message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns Game2LoggerCommission
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerCommission;
-}
-
-/** Represents a CommissionRecord. */
-export class CommissionRecord implements ICommissionRecord {
-
-    /**
-     * Constructs a new CommissionRecord.
-     * @param [p] Properties to set
-     */
-    constructor(p?: ICommissionRecord);
-
-    /** CommissionRecord happenTime. */
-    public happenTime: string;
-
-    /** CommissionRecord userName. */
-    public userName: string;
-
-    /** CommissionRecord userId. */
-    public userId: string;
-
-    /** CommissionRecord clubName. */
-    public clubName: string;
-
-    /** CommissionRecord clubId. */
-    public clubId: string;
-
-    /** CommissionRecord amount. */
-    public amount: number;
-
-    /** CommissionRecord propRate. */
-    public propRate: number;
-
-    /** CommissionRecord preSettlement. */
+    /** AmountChangeGenerics preSettlement. */
     public preSettlement: number;
 
-    /** CommissionRecord baseProfit. */
-    public baseProfit: number;
-
-    /** CommissionRecord preChange. */
-    public preChange: number;
-
-    /** CommissionRecord afterChange. */
-    public afterChange: number;
-
-    /**
-     * Encodes the specified CommissionRecord message. Does not implicitly {@link CommissionRecord.verify|verify} messages.
-     * @param m CommissionRecord message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: ICommissionRecord, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a CommissionRecord message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns CommissionRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CommissionRecord;
-}
-
-/** Represents a Game2LoggerReturn. */
-export class Game2LoggerReturn implements IGame2LoggerReturn {
-
-    /**
-     * Constructs a new Game2LoggerReturn.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGame2LoggerReturn);
-
-    /** Game2LoggerReturn gameId. */
-    public gameId: string;
-
-    /** Game2LoggerReturn gameType. */
-    public gameType: GameType;
-
-    /** Game2LoggerReturn returnRecord. */
-    public returnRecord: IReturnRecord[];
-
-    /**
-     * Encodes the specified Game2LoggerReturn message. Does not implicitly {@link Game2LoggerReturn.verify|verify} messages.
-     * @param m Game2LoggerReturn message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGame2LoggerReturn, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a Game2LoggerReturn message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns Game2LoggerReturn
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerReturn;
-}
-
-/** Represents a ReturnRecord. */
-export class ReturnRecord implements IReturnRecord {
-
-    /**
-     * Constructs a new ReturnRecord.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IReturnRecord);
-
-    /** ReturnRecord happenTime. */
-    public happenTime: string;
-
-    /** ReturnRecord userName. */
-    public userName: string;
-
-    /** ReturnRecord userId. */
-    public userId: string;
-
-    /** ReturnRecord clubName. */
-    public clubName: string;
-
-    /** ReturnRecord clubId. */
-    public clubId: string;
-
-    /** ReturnRecord amount. */
-    public amount: number;
-
-    /** ReturnRecord propRate. */
-    public propRate: number;
-
-    /** ReturnRecord preSettlement. */
-    public preSettlement: number;
-
-    /** ReturnRecord baseProfit. */
-    public baseProfit: number;
-
-    /** ReturnRecord preChange. */
-    public preChange: number;
-
-    /** ReturnRecord afterChange. */
-    public afterChange: number;
-
-    /**
-     * Encodes the specified ReturnRecord message. Does not implicitly {@link ReturnRecord.verify|verify} messages.
-     * @param m ReturnRecord message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IReturnRecord, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a ReturnRecord message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns ReturnRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ReturnRecord;
-}
-
-/** Represents a Game2LoggerInsurance. */
-export class Game2LoggerInsurance implements IGame2LoggerInsurance {
-
-    /**
-     * Constructs a new Game2LoggerInsurance.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGame2LoggerInsurance);
-
-    /** Game2LoggerInsurance gameId. */
-    public gameId: string;
-
-    /** Game2LoggerInsurance gameType. */
-    public gameType: GameType;
-
-    /** Game2LoggerInsurance insuranceRecord. */
-    public insuranceRecord: IInsuranceRecord[];
-
-    /**
-     * Encodes the specified Game2LoggerInsurance message. Does not implicitly {@link Game2LoggerInsurance.verify|verify} messages.
-     * @param m Game2LoggerInsurance message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGame2LoggerInsurance, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a Game2LoggerInsurance message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns Game2LoggerInsurance
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerInsurance;
-}
-
-/** Represents an InsuranceRecord. */
-export class InsuranceRecord implements IInsuranceRecord {
-
-    /**
-     * Constructs a new InsuranceRecord.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IInsuranceRecord);
-
-    /** InsuranceRecord happenTime. */
-    public happenTime: string;
-
-    /** InsuranceRecord userName. */
-    public userName: string;
-
-    /** InsuranceRecord userId. */
-    public userId: string;
-
-    /** InsuranceRecord clubName. */
-    public clubName: string;
-
-    /** InsuranceRecord clubId. */
-    public clubId: string;
-
-    /** InsuranceRecord amount. */
-    public amount: number;
-
-    /** InsuranceRecord handId. */
+    /** AmountChangeGenerics handId. */
     public handId: string;
 
-    /** InsuranceRecord preChange. */
-    public preChange: number;
+    /** AmountChangeGenerics poolRate. */
+    public poolRate: number;
 
-    /** InsuranceRecord afterChange. */
-    public afterChange: number;
-
-    /**
-     * Encodes the specified InsuranceRecord message. Does not implicitly {@link InsuranceRecord.verify|verify} messages.
-     * @param m InsuranceRecord message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IInsuranceRecord, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes an InsuranceRecord message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns InsuranceRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): InsuranceRecord;
-}
-
-/** Represents a Game2LoggerInsuranceIn. */
-export class Game2LoggerInsuranceIn implements IGame2LoggerInsuranceIn {
-
-    /**
-     * Constructs a new Game2LoggerInsuranceIn.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGame2LoggerInsuranceIn);
-
-    /** Game2LoggerInsuranceIn gameId. */
-    public gameId: string;
-
-    /** Game2LoggerInsuranceIn gameType. */
-    public gameType: GameType;
-
-    /** Game2LoggerInsuranceIn insuranceInRecord. */
-    public insuranceInRecord: IInsuranceInRecord[];
-
-    /**
-     * Encodes the specified Game2LoggerInsuranceIn message. Does not implicitly {@link Game2LoggerInsuranceIn.verify|verify} messages.
-     * @param m Game2LoggerInsuranceIn message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGame2LoggerInsuranceIn, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a Game2LoggerInsuranceIn message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns Game2LoggerInsuranceIn
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerInsuranceIn;
-}
-
-/** Represents an InsuranceInRecord. */
-export class InsuranceInRecord implements IInsuranceInRecord {
-
-    /**
-     * Constructs a new InsuranceInRecord.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IInsuranceInRecord);
-
-    /** InsuranceInRecord happenTime. */
-    public happenTime: string;
-
-    /** InsuranceInRecord userName. */
-    public userName: string;
-
-    /** InsuranceInRecord userId. */
-    public userId: string;
-
-    /** InsuranceInRecord clubName. */
-    public clubName: string;
-
-    /** InsuranceInRecord clubId. */
-    public clubId: string;
-
-    /** InsuranceInRecord amount. */
-    public amount: number;
-
-    /** InsuranceInRecord handId. */
-    public handId: string;
-
-    /** InsuranceInRecord preChange. */
-    public preChange: number;
-
-    /** InsuranceInRecord afterChange. */
-    public afterChange: number;
-
-    /**
-     * Encodes the specified InsuranceInRecord message. Does not implicitly {@link InsuranceInRecord.verify|verify} messages.
-     * @param m InsuranceInRecord message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IInsuranceInRecord, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes an InsuranceInRecord message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns InsuranceInRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): InsuranceInRecord;
-}
-
-/** Represents a Game2LoggerBringIn. */
-export class Game2LoggerBringIn implements IGame2LoggerBringIn {
-
-    /**
-     * Constructs a new Game2LoggerBringIn.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGame2LoggerBringIn);
-
-    /** Game2LoggerBringIn gameId. */
-    public gameId: string;
-
-    /** Game2LoggerBringIn gameType. */
-    public gameType: GameType;
-
-    /** Game2LoggerBringIn bringIdRecord. */
-    public bringIdRecord: IBringInRecord[];
-
-    /**
-     * Encodes the specified Game2LoggerBringIn message. Does not implicitly {@link Game2LoggerBringIn.verify|verify} messages.
-     * @param m Game2LoggerBringIn message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGame2LoggerBringIn, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a Game2LoggerBringIn message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns Game2LoggerBringIn
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerBringIn;
-}
-
-/** Represents a BringInRecord. */
-export class BringInRecord implements IBringInRecord {
-
-    /**
-     * Constructs a new BringInRecord.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IBringInRecord);
-
-    /** BringInRecord happenTime. */
-    public happenTime: string;
-
-    /** BringInRecord userName. */
-    public userName: string;
-
-    /** BringInRecord userId. */
-    public userId: string;
-
-    /** BringInRecord clubName. */
-    public clubName: string;
-
-    /** BringInRecord clubId. */
-    public clubId: string;
-
-    /** BringInRecord amount. */
-    public amount: number;
-
-    /** BringInRecord preChange. */
-    public preChange: number;
-
-    /** BringInRecord afterChange. */
-    public afterChange: number;
-
-    /**
-     * Encodes the specified BringInRecord message. Does not implicitly {@link BringInRecord.verify|verify} messages.
-     * @param m BringInRecord message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IBringInRecord, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a BringInRecord message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns BringInRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): BringInRecord;
-}
-
-/** Represents a Game2LoggerBringOut. */
-export class Game2LoggerBringOut implements IGame2LoggerBringOut {
-
-    /**
-     * Constructs a new Game2LoggerBringOut.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGame2LoggerBringOut);
-
-    /** Game2LoggerBringOut gameId. */
-    public gameId: string;
-
-    /** Game2LoggerBringOut gameType. */
-    public gameType: GameType;
-
-    /** Game2LoggerBringOut bringOutRecord. */
-    public bringOutRecord: IBringOutRecord[];
-
-    /**
-     * Encodes the specified Game2LoggerBringOut message. Does not implicitly {@link Game2LoggerBringOut.verify|verify} messages.
-     * @param m Game2LoggerBringOut message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGame2LoggerBringOut, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a Game2LoggerBringOut message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns Game2LoggerBringOut
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerBringOut;
-}
-
-/** Represents a BringOutRecord. */
-export class BringOutRecord implements IBringOutRecord {
-
-    /**
-     * Constructs a new BringOutRecord.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IBringOutRecord);
-
-    /** BringOutRecord happenTime. */
-    public happenTime: string;
-
-    /** BringOutRecord userName. */
-    public userName: string;
-
-    /** BringOutRecord userId. */
-    public userId: string;
-
-    /** BringOutRecord clubName. */
-    public clubName: string;
-
-    /** BringOutRecord clubId. */
-    public clubId: string;
-
-    /** BringOutRecord amount. */
-    public amount: number;
-
-    /** BringOutRecord propRate. */
-    public propRate: number;
-
-    /** BringOutRecord currentHandCount. */
+    /** AmountChangeGenerics currentHandCount. */
     public currentHandCount: number;
 
-    /** BringOutRecord currentWinCount. */
+    /** AmountChangeGenerics currentWinCount. */
     public currentWinCount: number;
 
-    /** BringOutRecord preChange. */
-    public preChange: number;
+    /** AmountChangeGenerics betType. */
+    public betType: CowboyAreaType;
 
-    /** BringOutRecord afterChange. */
-    public afterChange: number;
-
-    /**
-     * Encodes the specified BringOutRecord message. Does not implicitly {@link BringOutRecord.verify|verify} messages.
-     * @param m BringOutRecord message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IBringOutRecord, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a BringOutRecord message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns BringOutRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): BringOutRecord;
-}
-
-/** Represents a Game2LoggerJackpotCommission. */
-export class Game2LoggerJackpotCommission implements IGame2LoggerJackpotCommission {
-
-    /**
-     * Constructs a new Game2LoggerJackpotCommission.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGame2LoggerJackpotCommission);
-
-    /** Game2LoggerJackpotCommission gameId. */
-    public gameId: string;
-
-    /** Game2LoggerJackpotCommission gameType. */
-    public gameType: GameType;
-
-    /** Game2LoggerJackpotCommission jackpotCommissionRecord. */
-    public jackpotCommissionRecord: IJackpotCommissionRecord[];
-
-    /**
-     * Encodes the specified Game2LoggerJackpotCommission message. Does not implicitly {@link Game2LoggerJackpotCommission.verify|verify} messages.
-     * @param m Game2LoggerJackpotCommission message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGame2LoggerJackpotCommission, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a Game2LoggerJackpotCommission message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns Game2LoggerJackpotCommission
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerJackpotCommission;
-}
-
-/** Represents a JackpotCommissionRecord. */
-export class JackpotCommissionRecord implements IJackpotCommissionRecord {
-
-    /**
-     * Constructs a new JackpotCommissionRecord.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IJackpotCommissionRecord);
-
-    /** JackpotCommissionRecord happenTime. */
-    public happenTime: string;
-
-    /** JackpotCommissionRecord userName. */
-    public userName: string;
-
-    /** JackpotCommissionRecord userId. */
-    public userId: string;
-
-    /** JackpotCommissionRecord clubName. */
-    public clubName: string;
-
-    /** JackpotCommissionRecord clubId. */
-    public clubId: string;
-
-    /** JackpotCommissionRecord amount. */
-    public amount: number;
-
-    /** JackpotCommissionRecord preChange. */
-    public preChange: number;
-
-    /** JackpotCommissionRecord afterChange. */
-    public afterChange: number;
-
-    /**
-     * Encodes the specified JackpotCommissionRecord message. Does not implicitly {@link JackpotCommissionRecord.verify|verify} messages.
-     * @param m JackpotCommissionRecord message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IJackpotCommissionRecord, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a JackpotCommissionRecord message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns JackpotCommissionRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): JackpotCommissionRecord;
-}
-
-/** Represents a Game2LoggerJackpot. */
-export class Game2LoggerJackpot implements IGame2LoggerJackpot {
-
-    /**
-     * Constructs a new Game2LoggerJackpot.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGame2LoggerJackpot);
-
-    /** Game2LoggerJackpot gameId. */
-    public gameId: string;
-
-    /** Game2LoggerJackpot gameType. */
-    public gameType: GameType;
-
-    /** Game2LoggerJackpot jackpotRecord. */
-    public jackpotRecord: IJackpotRecord[];
-
-    /**
-     * Encodes the specified Game2LoggerJackpot message. Does not implicitly {@link Game2LoggerJackpot.verify|verify} messages.
-     * @param m Game2LoggerJackpot message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGame2LoggerJackpot, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a Game2LoggerJackpot message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns Game2LoggerJackpot
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerJackpot;
-}
-
-/** Represents a JackpotRecord. */
-export class JackpotRecord implements IJackpotRecord {
-
-    /**
-     * Constructs a new JackpotRecord.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IJackpotRecord);
-
-    /** JackpotRecord happenTime. */
-    public happenTime: string;
-
-    /** JackpotRecord userName. */
-    public userName: string;
-
-    /** JackpotRecord userId. */
-    public userId: string;
-
-    /** JackpotRecord clubName. */
-    public clubName: string;
-
-    /** JackpotRecord clubId. */
-    public clubId: string;
-
-    /** JackpotRecord amount. */
-    public amount: number;
-
-    /** JackpotRecord propType. */
-    public propType: JackpotType;
-
-    /** JackpotRecord propRate. */
-    public propRate: number;
-
-    /** JackpotRecord levelRate. */
+    /** AmountChangeGenerics levelRate. */
     public levelRate: number;
 
-    /** JackpotRecord baseProfit. */
-    public baseProfit: number;
+    /** AmountChangeGenerics jackpotType. */
+    public jackpotType: JackpotType;
 
-    /** JackpotRecord preChange. */
-    public preChange: number;
+    /** AmountChangeGenerics jackpotRate. */
+    public jackpotRate: number;
 
-    /** JackpotRecord afterChange. */
-    public afterChange: number;
+    /** AmountChangeGenerics jackpotPool. */
+    public jackpotPool: number;
 
     /**
-     * Encodes the specified JackpotRecord message. Does not implicitly {@link JackpotRecord.verify|verify} messages.
-     * @param m JackpotRecord message or plain object to encode
+     * Encodes the specified AmountChangeGenerics message. Does not implicitly {@link AmountChangeGenerics.verify|verify} messages.
+     * @param m AmountChangeGenerics message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IJackpotRecord, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IAmountChangeGenerics, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a JackpotRecord message from the specified reader or buffer.
+     * Decodes an AmountChangeGenerics message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns JackpotRecord
+     * @returns AmountChangeGenerics
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): JackpotRecord;
-}
-
-/** Represents a Game2LoggerCowboyBet. */
-export class Game2LoggerCowboyBet implements IGame2LoggerCowboyBet {
-
-    /**
-     * Constructs a new Game2LoggerCowboyBet.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGame2LoggerCowboyBet);
-
-    /** Game2LoggerCowboyBet gameId. */
-    public gameId: string;
-
-    /** Game2LoggerCowboyBet gameType. */
-    public gameType: GameType;
-
-    /** Game2LoggerCowboyBet cowboyBetRecord. */
-    public cowboyBetRecord: ICowboyBetRecord[];
-
-    /**
-     * Encodes the specified Game2LoggerCowboyBet message. Does not implicitly {@link Game2LoggerCowboyBet.verify|verify} messages.
-     * @param m Game2LoggerCowboyBet message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGame2LoggerCowboyBet, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a Game2LoggerCowboyBet message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns Game2LoggerCowboyBet
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerCowboyBet;
-}
-
-/** Represents a CowboyBetRecord. */
-export class CowboyBetRecord implements ICowboyBetRecord {
-
-    /**
-     * Constructs a new CowboyBetRecord.
-     * @param [p] Properties to set
-     */
-    constructor(p?: ICowboyBetRecord);
-
-    /** CowboyBetRecord happenTime. */
-    public happenTime: string;
-
-    /** CowboyBetRecord userName. */
-    public userName: string;
-
-    /** CowboyBetRecord userId. */
-    public userId: string;
-
-    /** CowboyBetRecord clubName. */
-    public clubName: string;
-
-    /** CowboyBetRecord clubId. */
-    public clubId: string;
-
-    /** CowboyBetRecord amount. */
-    public amount: number;
-
-    /** CowboyBetRecord propType. */
-    public propType: CowboyAreaType;
-
-    /** CowboyBetRecord propRate. */
-    public propRate: number;
-
-    /** CowboyBetRecord preChange. */
-    public preChange: number;
-
-    /** CowboyBetRecord afterChange. */
-    public afterChange: number;
-
-    /**
-     * Encodes the specified CowboyBetRecord message. Does not implicitly {@link CowboyBetRecord.verify|verify} messages.
-     * @param m CowboyBetRecord message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: ICowboyBetRecord, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a CowboyBetRecord message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns CowboyBetRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CowboyBetRecord;
-}
-
-/** Represents a Game2LoggerCowboyReward. */
-export class Game2LoggerCowboyReward implements IGame2LoggerCowboyReward {
-
-    /**
-     * Constructs a new Game2LoggerCowboyReward.
-     * @param [p] Properties to set
-     */
-    constructor(p?: IGame2LoggerCowboyReward);
-
-    /** Game2LoggerCowboyReward gameId. */
-    public gameId: string;
-
-    /** Game2LoggerCowboyReward gameType. */
-    public gameType: GameType;
-
-    /** Game2LoggerCowboyReward cowboyRewardRecord. */
-    public cowboyRewardRecord: ICowboyRewardRecord[];
-
-    /**
-     * Encodes the specified Game2LoggerCowboyReward message. Does not implicitly {@link Game2LoggerCowboyReward.verify|verify} messages.
-     * @param m Game2LoggerCowboyReward message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: IGame2LoggerCowboyReward, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a Game2LoggerCowboyReward message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns Game2LoggerCowboyReward
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): Game2LoggerCowboyReward;
-}
-
-/** Represents a CowboyRewardRecord. */
-export class CowboyRewardRecord implements ICowboyRewardRecord {
-
-    /**
-     * Constructs a new CowboyRewardRecord.
-     * @param [p] Properties to set
-     */
-    constructor(p?: ICowboyRewardRecord);
-
-    /** CowboyRewardRecord happenTime. */
-    public happenTime: string;
-
-    /** CowboyRewardRecord userName. */
-    public userName: string;
-
-    /** CowboyRewardRecord userId. */
-    public userId: string;
-
-    /** CowboyRewardRecord clubName. */
-    public clubName: string;
-
-    /** CowboyRewardRecord clubId. */
-    public clubId: string;
-
-    /** CowboyRewardRecord amount. */
-    public amount: number;
-
-    /** CowboyRewardRecord propType. */
-    public propType: CowboyAreaType;
-
-    /** CowboyRewardRecord propRate. */
-    public propRate: number;
-
-    /** CowboyRewardRecord preChange. */
-    public preChange: number;
-
-    /** CowboyRewardRecord afterChange. */
-    public afterChange: number;
-
-    /**
-     * Encodes the specified CowboyRewardRecord message. Does not implicitly {@link CowboyRewardRecord.verify|verify} messages.
-     * @param m CowboyRewardRecord message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: ICowboyRewardRecord, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a CowboyRewardRecord message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns CowboyRewardRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): CowboyRewardRecord;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): AmountChangeGenerics;
 }
 
 /** Represents a C2SLogin. */

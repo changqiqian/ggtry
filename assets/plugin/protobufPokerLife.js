@@ -5100,7 +5100,7 @@ $root.SimpleReplayData = (function() {
     /**
      * Constructs a new SimpleReplayData.
      * @exports SimpleReplayData
-     * @classdesc Represents a SimpleReplayData.
+     * @classdesc HTTP用到的结构////////////////////////////////////
      * @implements ISimpleReplayData
      * @constructor
      * @param {ISimpleReplayData=} [p] Properties to set
@@ -5454,6 +5454,9 @@ $root.ReplayData = (function() {
      * @property {Array.<IActionResult>|null} [turnActions] ReplayData turnActions
      * @property {Array.<IActionResult>|null} [riverActions] ReplayData riverActions
      * @property {Array.<IPlayerWinLose>|null} [result] ReplayData result
+     * @property {Array.<IPotInfo>|null} [potInfoFlop] ReplayData potInfoFlop
+     * @property {Array.<IPotInfo>|null} [potInfoTurn] ReplayData potInfoTurn
+     * @property {Array.<IPotInfo>|null} [potInfoRiver] ReplayData potInfoRiver
      */
 
     /**
@@ -5473,6 +5476,9 @@ $root.ReplayData = (function() {
         this.turnActions = [];
         this.riverActions = [];
         this.result = [];
+        this.potInfoFlop = [];
+        this.potInfoTurn = [];
+        this.potInfoRiver = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -5584,6 +5590,30 @@ $root.ReplayData = (function() {
     ReplayData.prototype.result = $util.emptyArray;
 
     /**
+     * ReplayData potInfoFlop.
+     * @member {Array.<IPotInfo>} potInfoFlop
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.potInfoFlop = $util.emptyArray;
+
+    /**
+     * ReplayData potInfoTurn.
+     * @member {Array.<IPotInfo>} potInfoTurn
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.potInfoTurn = $util.emptyArray;
+
+    /**
+     * ReplayData potInfoRiver.
+     * @member {Array.<IPotInfo>} potInfoRiver
+     * @memberof ReplayData
+     * @instance
+     */
+    ReplayData.prototype.potInfoRiver = $util.emptyArray;
+
+    /**
      * Encodes the specified ReplayData message. Does not implicitly {@link ReplayData.verify|verify} messages.
      * @function encode
      * @memberof ReplayData
@@ -5636,6 +5666,18 @@ $root.ReplayData = (function() {
         if (m.result != null && m.result.length) {
             for (var i = 0; i < m.result.length; ++i)
                 $root.PlayerWinLose.encode(m.result[i], w.uint32(106).fork()).ldelim();
+        }
+        if (m.potInfoFlop != null && m.potInfoFlop.length) {
+            for (var i = 0; i < m.potInfoFlop.length; ++i)
+                $root.PotInfo.encode(m.potInfoFlop[i], w.uint32(114).fork()).ldelim();
+        }
+        if (m.potInfoTurn != null && m.potInfoTurn.length) {
+            for (var i = 0; i < m.potInfoTurn.length; ++i)
+                $root.PotInfo.encode(m.potInfoTurn[i], w.uint32(122).fork()).ldelim();
+        }
+        if (m.potInfoRiver != null && m.potInfoRiver.length) {
+            for (var i = 0; i < m.potInfoRiver.length; ++i)
+                $root.PotInfo.encode(m.potInfoRiver[i], w.uint32(130).fork()).ldelim();
         }
         return w;
     };
@@ -5712,6 +5754,21 @@ $root.ReplayData = (function() {
                 if (!(m.result && m.result.length))
                     m.result = [];
                 m.result.push($root.PlayerWinLose.decode(r, r.uint32()));
+                break;
+            case 14:
+                if (!(m.potInfoFlop && m.potInfoFlop.length))
+                    m.potInfoFlop = [];
+                m.potInfoFlop.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 15:
+                if (!(m.potInfoTurn && m.potInfoTurn.length))
+                    m.potInfoTurn = [];
+                m.potInfoTurn.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 16:
+                if (!(m.potInfoRiver && m.potInfoRiver.length))
+                    m.potInfoRiver = [];
+                m.potInfoRiver.push($root.PotInfo.decode(r, r.uint32()));
                 break;
             default:
                 r.skipType(t & 7);
@@ -6316,13 +6373,13 @@ $root.RecordPlayer = (function() {
      * Properties of a RecordPlayer.
      * @exports IRecordPlayer
      * @interface IRecordPlayer
+     * @property {string|null} [uid] RecordPlayer uid
      * @property {string|null} [head] RecordPlayer head
      * @property {string|null} [name] RecordPlayer name
-     * @property {string|null} [hands] RecordPlayer hands
+     * @property {number|null} [hands] RecordPlayer hands
      * @property {number|null} [vpip] RecordPlayer vpip
      * @property {number|null} [buyIn] RecordPlayer buyIn
      * @property {number|null} [winLose] RecordPlayer winLose
-     * @property {string|null} [uid] RecordPlayer uid
      */
 
     /**
@@ -6339,6 +6396,14 @@ $root.RecordPlayer = (function() {
                 if (p[ks[i]] != null)
                     this[ks[i]] = p[ks[i]];
     }
+
+    /**
+     * RecordPlayer uid.
+     * @member {string} uid
+     * @memberof RecordPlayer
+     * @instance
+     */
+    RecordPlayer.prototype.uid = "";
 
     /**
      * RecordPlayer head.
@@ -6358,11 +6423,11 @@ $root.RecordPlayer = (function() {
 
     /**
      * RecordPlayer hands.
-     * @member {string} hands
+     * @member {number} hands
      * @memberof RecordPlayer
      * @instance
      */
-    RecordPlayer.prototype.hands = "";
+    RecordPlayer.prototype.hands = 0;
 
     /**
      * RecordPlayer vpip.
@@ -6389,14 +6454,6 @@ $root.RecordPlayer = (function() {
     RecordPlayer.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * RecordPlayer uid.
-     * @member {string} uid
-     * @memberof RecordPlayer
-     * @instance
-     */
-    RecordPlayer.prototype.uid = "";
-
-    /**
      * Encodes the specified RecordPlayer message. Does not implicitly {@link RecordPlayer.verify|verify} messages.
      * @function encode
      * @memberof RecordPlayer
@@ -6408,20 +6465,20 @@ $root.RecordPlayer = (function() {
     RecordPlayer.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(10).string(m.head);
-        if (m.name != null && Object.hasOwnProperty.call(m, "name"))
-            w.uint32(18).string(m.name);
-        if (m.hands != null && Object.hasOwnProperty.call(m, "hands"))
-            w.uint32(26).string(m.hands);
-        if (m.vpip != null && Object.hasOwnProperty.call(m, "vpip"))
-            w.uint32(32).int32(m.vpip);
-        if (m.buyIn != null && Object.hasOwnProperty.call(m, "buyIn"))
-            w.uint32(40).int64(m.buyIn);
-        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(48).int64(m.winLose);
         if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(58).string(m.uid);
+            w.uint32(10).string(m.uid);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(18).string(m.head);
+        if (m.name != null && Object.hasOwnProperty.call(m, "name"))
+            w.uint32(26).string(m.name);
+        if (m.hands != null && Object.hasOwnProperty.call(m, "hands"))
+            w.uint32(32).int32(m.hands);
+        if (m.vpip != null && Object.hasOwnProperty.call(m, "vpip"))
+            w.uint32(40).int32(m.vpip);
+        if (m.buyIn != null && Object.hasOwnProperty.call(m, "buyIn"))
+            w.uint32(48).int64(m.buyIn);
+        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
+            w.uint32(56).int64(m.winLose);
         return w;
     };
 
@@ -6444,25 +6501,25 @@ $root.RecordPlayer = (function() {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.head = r.string();
+                m.uid = r.string();
                 break;
             case 2:
-                m.name = r.string();
+                m.head = r.string();
                 break;
             case 3:
-                m.hands = r.string();
+                m.name = r.string();
                 break;
             case 4:
-                m.vpip = r.int32();
+                m.hands = r.int32();
                 break;
             case 5:
-                m.buyIn = r.int64();
+                m.vpip = r.int32();
                 break;
             case 6:
-                m.winLose = r.int64();
+                m.buyIn = r.int64();
                 break;
             case 7:
-                m.uid = r.string();
+                m.winLose = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -13514,8 +13571,8 @@ $root.S2CAddCurrencyNotify = (function() {
 })();
 
 /**
- * AmountType enum.
- * @exports AmountType
+ * AmountChangeType enum.
+ * @exports AmountChangeType
  * @enum {number}
  * @property {number} AmountType_Other=0 AmountType_Other value
  * @property {number} AmountType_Charge=1 AmountType_Charge value
@@ -13532,7 +13589,7 @@ $root.S2CAddCurrencyNotify = (function() {
  * @property {number} AmountType_CowboyBet=12 AmountType_CowboyBet value
  * @property {number} AmountType_CowboyReturn=13 AmountType_CowboyReturn value
  */
-$root.AmountType = (function() {
+$root.AmountChangeType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "AmountType_Other"] = 0;
     values[valuesById[1] = "AmountType_Charge"] = 1;
@@ -14619,27 +14676,27 @@ $root.ReplayRecord = (function() {
     return ReplayRecord;
 })();
 
-$root.Game2LoggerPropRecord = (function() {
+$root.Game2LoggerAmountChange = (function() {
 
     /**
-     * Properties of a Game2LoggerPropRecord.
-     * @exports IGame2LoggerPropRecord
-     * @interface IGame2LoggerPropRecord
-     * @property {string|null} [gameId] Game2LoggerPropRecord gameId
-     * @property {GameType|null} [gameType] Game2LoggerPropRecord gameType
-     * @property {Array.<IPropRecord>|null} [propRecord] Game2LoggerPropRecord propRecord
+     * Properties of a Game2LoggerAmountChange.
+     * @exports IGame2LoggerAmountChange
+     * @interface IGame2LoggerAmountChange
+     * @property {GameType|null} [gameType] Game2LoggerAmountChange gameType
+     * @property {string|null} [gameId] Game2LoggerAmountChange gameId
+     * @property {Array.<IAmountChangeInfo>|null} [amountChangeInfo] Game2LoggerAmountChange amountChangeInfo
      */
 
     /**
-     * Constructs a new Game2LoggerPropRecord.
-     * @exports Game2LoggerPropRecord
-     * @classdesc Represents a Game2LoggerPropRecord.
-     * @implements IGame2LoggerPropRecord
+     * Constructs a new Game2LoggerAmountChange.
+     * @exports Game2LoggerAmountChange
+     * @classdesc Represents a Game2LoggerAmountChange.
+     * @implements IGame2LoggerAmountChange
      * @constructor
-     * @param {IGame2LoggerPropRecord=} [p] Properties to set
+     * @param {IGame2LoggerAmountChange=} [p] Properties to set
      */
-    function Game2LoggerPropRecord(p) {
-        this.propRecord = [];
+    function Game2LoggerAmountChange(p) {
+        this.amountChangeInfo = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -14647,80 +14704,80 @@ $root.Game2LoggerPropRecord = (function() {
     }
 
     /**
-     * Game2LoggerPropRecord gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerPropRecord
-     * @instance
-     */
-    Game2LoggerPropRecord.prototype.gameId = "";
-
-    /**
-     * Game2LoggerPropRecord gameType.
+     * Game2LoggerAmountChange gameType.
      * @member {GameType} gameType
-     * @memberof Game2LoggerPropRecord
+     * @memberof Game2LoggerAmountChange
      * @instance
      */
-    Game2LoggerPropRecord.prototype.gameType = 0;
+    Game2LoggerAmountChange.prototype.gameType = 0;
 
     /**
-     * Game2LoggerPropRecord propRecord.
-     * @member {Array.<IPropRecord>} propRecord
-     * @memberof Game2LoggerPropRecord
+     * Game2LoggerAmountChange gameId.
+     * @member {string} gameId
+     * @memberof Game2LoggerAmountChange
      * @instance
      */
-    Game2LoggerPropRecord.prototype.propRecord = $util.emptyArray;
+    Game2LoggerAmountChange.prototype.gameId = "";
 
     /**
-     * Encodes the specified Game2LoggerPropRecord message. Does not implicitly {@link Game2LoggerPropRecord.verify|verify} messages.
+     * Game2LoggerAmountChange amountChangeInfo.
+     * @member {Array.<IAmountChangeInfo>} amountChangeInfo
+     * @memberof Game2LoggerAmountChange
+     * @instance
+     */
+    Game2LoggerAmountChange.prototype.amountChangeInfo = $util.emptyArray;
+
+    /**
+     * Encodes the specified Game2LoggerAmountChange message. Does not implicitly {@link Game2LoggerAmountChange.verify|verify} messages.
      * @function encode
-     * @memberof Game2LoggerPropRecord
+     * @memberof Game2LoggerAmountChange
      * @static
-     * @param {IGame2LoggerPropRecord} m Game2LoggerPropRecord message or plain object to encode
+     * @param {IGame2LoggerAmountChange} m Game2LoggerAmountChange message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    Game2LoggerPropRecord.encode = function encode(m, w) {
+    Game2LoggerAmountChange.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
         if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.propRecord != null && m.propRecord.length) {
-            for (var i = 0; i < m.propRecord.length; ++i)
-                $root.PropRecord.encode(m.propRecord[i], w.uint32(26).fork()).ldelim();
+            w.uint32(8).int32(m.gameType);
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.amountChangeInfo != null && m.amountChangeInfo.length) {
+            for (var i = 0; i < m.amountChangeInfo.length; ++i)
+                $root.AmountChangeInfo.encode(m.amountChangeInfo[i], w.uint32(26).fork()).ldelim();
         }
         return w;
     };
 
     /**
-     * Decodes a Game2LoggerPropRecord message from the specified reader or buffer.
+     * Decodes a Game2LoggerAmountChange message from the specified reader or buffer.
      * @function decode
-     * @memberof Game2LoggerPropRecord
+     * @memberof Game2LoggerAmountChange
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerPropRecord} Game2LoggerPropRecord
+     * @returns {Game2LoggerAmountChange} Game2LoggerAmountChange
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    Game2LoggerPropRecord.decode = function decode(r, l) {
+    Game2LoggerAmountChange.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerPropRecord();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerAmountChange();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
                 m.gameType = r.int32();
                 break;
+            case 2:
+                m.gameId = r.string();
+                break;
             case 3:
-                if (!(m.propRecord && m.propRecord.length))
-                    m.propRecord = [];
-                m.propRecord.push($root.PropRecord.decode(r, r.uint32()));
+                if (!(m.amountChangeInfo && m.amountChangeInfo.length))
+                    m.amountChangeInfo = [];
+                m.amountChangeInfo.push($root.AmountChangeInfo.decode(r, r.uint32()));
                 break;
             default:
                 r.skipType(t & 7);
@@ -14730,35 +14787,35 @@ $root.Game2LoggerPropRecord = (function() {
         return m;
     };
 
-    return Game2LoggerPropRecord;
+    return Game2LoggerAmountChange;
 })();
 
-$root.PropRecord = (function() {
+$root.AmountChangeInfo = (function() {
 
     /**
-     * Properties of a PropRecord.
-     * @exports IPropRecord
-     * @interface IPropRecord
-     * @property {string|null} [happenTime] PropRecord happenTime
-     * @property {string|null} [userName] PropRecord userName
-     * @property {string|null} [userId] PropRecord userId
-     * @property {string|null} [clubName] PropRecord clubName
-     * @property {string|null} [clubId] PropRecord clubId
-     * @property {PropType|null} [propType] PropRecord propType
-     * @property {number|null} [amount] PropRecord amount
-     * @property {number|null} [preChange] PropRecord preChange
-     * @property {number|null} [afterChange] PropRecord afterChange
+     * Properties of an AmountChangeInfo.
+     * @exports IAmountChangeInfo
+     * @interface IAmountChangeInfo
+     * @property {string|null} [happenTime] AmountChangeInfo happenTime
+     * @property {string|null} [userId] AmountChangeInfo userId
+     * @property {string|null} [userName] AmountChangeInfo userName
+     * @property {string|null} [head] AmountChangeInfo head
+     * @property {number|null} [amountChange] AmountChangeInfo amountChange
+     * @property {number|null} [preChange] AmountChangeInfo preChange
+     * @property {number|null} [afterChange] AmountChangeInfo afterChange
+     * @property {AmountChangeType|null} [amountChangeType] AmountChangeInfo amountChangeType
+     * @property {IAmountChangeGenerics|null} [amountChangeGenerics] AmountChangeInfo amountChangeGenerics
      */
 
     /**
-     * Constructs a new PropRecord.
-     * @exports PropRecord
-     * @classdesc Represents a PropRecord.
-     * @implements IPropRecord
+     * Constructs a new AmountChangeInfo.
+     * @exports AmountChangeInfo
+     * @classdesc Represents an AmountChangeInfo.
+     * @implements IAmountChangeInfo
      * @constructor
-     * @param {IPropRecord=} [p] Properties to set
+     * @param {IAmountChangeInfo=} [p] Properties to set
      */
-    function PropRecord(p) {
+    function AmountChangeInfo(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -14766,125 +14823,125 @@ $root.PropRecord = (function() {
     }
 
     /**
-     * PropRecord happenTime.
+     * AmountChangeInfo happenTime.
      * @member {string} happenTime
-     * @memberof PropRecord
+     * @memberof AmountChangeInfo
      * @instance
      */
-    PropRecord.prototype.happenTime = "";
+    AmountChangeInfo.prototype.happenTime = "";
 
     /**
-     * PropRecord userName.
-     * @member {string} userName
-     * @memberof PropRecord
-     * @instance
-     */
-    PropRecord.prototype.userName = "";
-
-    /**
-     * PropRecord userId.
+     * AmountChangeInfo userId.
      * @member {string} userId
-     * @memberof PropRecord
+     * @memberof AmountChangeInfo
      * @instance
      */
-    PropRecord.prototype.userId = "";
+    AmountChangeInfo.prototype.userId = "";
 
     /**
-     * PropRecord clubName.
-     * @member {string} clubName
-     * @memberof PropRecord
+     * AmountChangeInfo userName.
+     * @member {string} userName
+     * @memberof AmountChangeInfo
      * @instance
      */
-    PropRecord.prototype.clubName = "";
+    AmountChangeInfo.prototype.userName = "";
 
     /**
-     * PropRecord clubId.
-     * @member {string} clubId
-     * @memberof PropRecord
+     * AmountChangeInfo head.
+     * @member {string} head
+     * @memberof AmountChangeInfo
      * @instance
      */
-    PropRecord.prototype.clubId = "";
+    AmountChangeInfo.prototype.head = "";
 
     /**
-     * PropRecord propType.
-     * @member {PropType} propType
-     * @memberof PropRecord
+     * AmountChangeInfo amountChange.
+     * @member {number} amountChange
+     * @memberof AmountChangeInfo
      * @instance
      */
-    PropRecord.prototype.propType = 0;
+    AmountChangeInfo.prototype.amountChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * PropRecord amount.
-     * @member {number} amount
-     * @memberof PropRecord
-     * @instance
-     */
-    PropRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PropRecord preChange.
+     * AmountChangeInfo preChange.
      * @member {number} preChange
-     * @memberof PropRecord
+     * @memberof AmountChangeInfo
      * @instance
      */
-    PropRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    AmountChangeInfo.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * PropRecord afterChange.
+     * AmountChangeInfo afterChange.
      * @member {number} afterChange
-     * @memberof PropRecord
+     * @memberof AmountChangeInfo
      * @instance
      */
-    PropRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    AmountChangeInfo.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * Encodes the specified PropRecord message. Does not implicitly {@link PropRecord.verify|verify} messages.
+     * AmountChangeInfo amountChangeType.
+     * @member {AmountChangeType} amountChangeType
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.amountChangeType = 0;
+
+    /**
+     * AmountChangeInfo amountChangeGenerics.
+     * @member {IAmountChangeGenerics|null|undefined} amountChangeGenerics
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.amountChangeGenerics = null;
+
+    /**
+     * Encodes the specified AmountChangeInfo message. Does not implicitly {@link AmountChangeInfo.verify|verify} messages.
      * @function encode
-     * @memberof PropRecord
+     * @memberof AmountChangeInfo
      * @static
-     * @param {IPropRecord} m PropRecord message or plain object to encode
+     * @param {IAmountChangeInfo} m AmountChangeInfo message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    PropRecord.encode = function encode(m, w) {
+    AmountChangeInfo.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
             w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
         if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.propType != null && Object.hasOwnProperty.call(m, "propType"))
-            w.uint32(48).int32(m.propType);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(56).int64(m.amount);
+            w.uint32(18).string(m.userId);
+        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
+            w.uint32(26).string(m.userName);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(34).string(m.head);
+        if (m.amountChange != null && Object.hasOwnProperty.call(m, "amountChange"))
+            w.uint32(40).int64(m.amountChange);
         if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(64).int64(m.preChange);
+            w.uint32(48).int64(m.preChange);
         if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(72).int64(m.afterChange);
+            w.uint32(56).int64(m.afterChange);
+        if (m.amountChangeType != null && Object.hasOwnProperty.call(m, "amountChangeType"))
+            w.uint32(64).int32(m.amountChangeType);
+        if (m.amountChangeGenerics != null && Object.hasOwnProperty.call(m, "amountChangeGenerics"))
+            $root.AmountChangeGenerics.encode(m.amountChangeGenerics, w.uint32(74).fork()).ldelim();
         return w;
     };
 
     /**
-     * Decodes a PropRecord message from the specified reader or buffer.
+     * Decodes an AmountChangeInfo message from the specified reader or buffer.
      * @function decode
-     * @memberof PropRecord
+     * @memberof AmountChangeInfo
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {PropRecord} PropRecord
+     * @returns {AmountChangeInfo} AmountChangeInfo
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    PropRecord.decode = function decode(r, l) {
+    AmountChangeInfo.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.PropRecord();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.AmountChangeInfo();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -14892,2582 +14949,305 @@ $root.PropRecord = (function() {
                 m.happenTime = r.string();
                 break;
             case 2:
-                m.userName = r.string();
-                break;
-            case 3:
                 m.userId = r.string();
                 break;
+            case 3:
+                m.userName = r.string();
+                break;
             case 4:
-                m.clubName = r.string();
+                m.head = r.string();
                 break;
             case 5:
-                m.clubId = r.string();
+                m.amountChange = r.int64();
                 break;
             case 6:
+                m.preChange = r.int64();
+                break;
+            case 7:
+                m.afterChange = r.int64();
+                break;
+            case 8:
+                m.amountChangeType = r.int32();
+                break;
+            case 9:
+                m.amountChangeGenerics = $root.AmountChangeGenerics.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return AmountChangeInfo;
+})();
+
+$root.AmountChangeGenerics = (function() {
+
+    /**
+     * Properties of an AmountChangeGenerics.
+     * @exports IAmountChangeGenerics
+     * @interface IAmountChangeGenerics
+     * @property {string|null} [clubName] AmountChangeGenerics clubName
+     * @property {string|null} [clubId] AmountChangeGenerics clubId
+     * @property {number|null} [baseProfit] AmountChangeGenerics baseProfit
+     * @property {number|null} [propRate] AmountChangeGenerics propRate
+     * @property {PropType|null} [propType] AmountChangeGenerics propType
+     * @property {number|null} [preSettlement] AmountChangeGenerics preSettlement
+     * @property {string|null} [handId] AmountChangeGenerics handId
+     * @property {number|null} [poolRate] AmountChangeGenerics poolRate
+     * @property {number|null} [currentHandCount] AmountChangeGenerics currentHandCount
+     * @property {number|null} [currentWinCount] AmountChangeGenerics currentWinCount
+     * @property {CowboyAreaType|null} [betType] AmountChangeGenerics betType
+     * @property {number|null} [levelRate] AmountChangeGenerics levelRate
+     * @property {JackpotType|null} [jackpotType] AmountChangeGenerics jackpotType
+     * @property {number|null} [jackpotRate] AmountChangeGenerics jackpotRate
+     * @property {number|null} [jackpotPool] AmountChangeGenerics jackpotPool
+     */
+
+    /**
+     * Constructs a new AmountChangeGenerics.
+     * @exports AmountChangeGenerics
+     * @classdesc Represents an AmountChangeGenerics.
+     * @implements IAmountChangeGenerics
+     * @constructor
+     * @param {IAmountChangeGenerics=} [p] Properties to set
+     */
+    function AmountChangeGenerics(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * AmountChangeGenerics clubName.
+     * @member {string} clubName
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.clubName = "";
+
+    /**
+     * AmountChangeGenerics clubId.
+     * @member {string} clubId
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.clubId = "";
+
+    /**
+     * AmountChangeGenerics baseProfit.
+     * @member {number} baseProfit
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.baseProfit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeGenerics propRate.
+     * @member {number} propRate
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.propRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeGenerics propType.
+     * @member {PropType} propType
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.propType = 0;
+
+    /**
+     * AmountChangeGenerics preSettlement.
+     * @member {number} preSettlement
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.preSettlement = 0;
+
+    /**
+     * AmountChangeGenerics handId.
+     * @member {string} handId
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.handId = "";
+
+    /**
+     * AmountChangeGenerics poolRate.
+     * @member {number} poolRate
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.poolRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeGenerics currentHandCount.
+     * @member {number} currentHandCount
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.currentHandCount = 0;
+
+    /**
+     * AmountChangeGenerics currentWinCount.
+     * @member {number} currentWinCount
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.currentWinCount = 0;
+
+    /**
+     * AmountChangeGenerics betType.
+     * @member {CowboyAreaType} betType
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.betType = 0;
+
+    /**
+     * AmountChangeGenerics levelRate.
+     * @member {number} levelRate
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.levelRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeGenerics jackpotType.
+     * @member {JackpotType} jackpotType
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.jackpotType = 0;
+
+    /**
+     * AmountChangeGenerics jackpotRate.
+     * @member {number} jackpotRate
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.jackpotRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeGenerics jackpotPool.
+     * @member {number} jackpotPool
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.jackpotPool = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified AmountChangeGenerics message. Does not implicitly {@link AmountChangeGenerics.verify|verify} messages.
+     * @function encode
+     * @memberof AmountChangeGenerics
+     * @static
+     * @param {IAmountChangeGenerics} m AmountChangeGenerics message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    AmountChangeGenerics.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
+            w.uint32(10).string(m.clubName);
+        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
+            w.uint32(18).string(m.clubId);
+        if (m.baseProfit != null && Object.hasOwnProperty.call(m, "baseProfit"))
+            w.uint32(24).int64(m.baseProfit);
+        if (m.propRate != null && Object.hasOwnProperty.call(m, "propRate"))
+            w.uint32(32).int64(m.propRate);
+        if (m.propType != null && Object.hasOwnProperty.call(m, "propType"))
+            w.uint32(40).int32(m.propType);
+        if (m.preSettlement != null && Object.hasOwnProperty.call(m, "preSettlement"))
+            w.uint32(48).int32(m.preSettlement);
+        if (m.handId != null && Object.hasOwnProperty.call(m, "handId"))
+            w.uint32(58).string(m.handId);
+        if (m.poolRate != null && Object.hasOwnProperty.call(m, "poolRate"))
+            w.uint32(64).int64(m.poolRate);
+        if (m.currentHandCount != null && Object.hasOwnProperty.call(m, "currentHandCount"))
+            w.uint32(72).int32(m.currentHandCount);
+        if (m.currentWinCount != null && Object.hasOwnProperty.call(m, "currentWinCount"))
+            w.uint32(80).int32(m.currentWinCount);
+        if (m.betType != null && Object.hasOwnProperty.call(m, "betType"))
+            w.uint32(88).int32(m.betType);
+        if (m.levelRate != null && Object.hasOwnProperty.call(m, "levelRate"))
+            w.uint32(96).int64(m.levelRate);
+        if (m.jackpotType != null && Object.hasOwnProperty.call(m, "jackpotType"))
+            w.uint32(104).int32(m.jackpotType);
+        if (m.jackpotRate != null && Object.hasOwnProperty.call(m, "jackpotRate"))
+            w.uint32(112).int64(m.jackpotRate);
+        if (m.jackpotPool != null && Object.hasOwnProperty.call(m, "jackpotPool"))
+            w.uint32(120).int64(m.jackpotPool);
+        return w;
+    };
+
+    /**
+     * Decodes an AmountChangeGenerics message from the specified reader or buffer.
+     * @function decode
+     * @memberof AmountChangeGenerics
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {AmountChangeGenerics} AmountChangeGenerics
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    AmountChangeGenerics.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.AmountChangeGenerics();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.clubName = r.string();
+                break;
+            case 2:
+                m.clubId = r.string();
+                break;
+            case 3:
+                m.baseProfit = r.int64();
+                break;
+            case 4:
+                m.propRate = r.int64();
+                break;
+            case 5:
                 m.propType = r.int32();
                 break;
-            case 7:
-                m.amount = r.int64();
-                break;
-            case 8:
-                m.preChange = r.int64();
-                break;
-            case 9:
-                m.afterChange = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return PropRecord;
-})();
-
-$root.Game2LoggerCommission = (function() {
-
-    /**
-     * Properties of a Game2LoggerCommission.
-     * @exports IGame2LoggerCommission
-     * @interface IGame2LoggerCommission
-     * @property {string|null} [gameId] Game2LoggerCommission gameId
-     * @property {GameType|null} [gameType] Game2LoggerCommission gameType
-     * @property {Array.<ICommissionRecord>|null} [commissionRecord] Game2LoggerCommission commissionRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerCommission.
-     * @exports Game2LoggerCommission
-     * @classdesc Represents a Game2LoggerCommission.
-     * @implements IGame2LoggerCommission
-     * @constructor
-     * @param {IGame2LoggerCommission=} [p] Properties to set
-     */
-    function Game2LoggerCommission(p) {
-        this.commissionRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerCommission gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerCommission
-     * @instance
-     */
-    Game2LoggerCommission.prototype.gameId = "";
-
-    /**
-     * Game2LoggerCommission gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerCommission
-     * @instance
-     */
-    Game2LoggerCommission.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerCommission commissionRecord.
-     * @member {Array.<ICommissionRecord>} commissionRecord
-     * @memberof Game2LoggerCommission
-     * @instance
-     */
-    Game2LoggerCommission.prototype.commissionRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerCommission message. Does not implicitly {@link Game2LoggerCommission.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerCommission
-     * @static
-     * @param {IGame2LoggerCommission} m Game2LoggerCommission message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerCommission.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.commissionRecord != null && m.commissionRecord.length) {
-            for (var i = 0; i < m.commissionRecord.length; ++i)
-                $root.CommissionRecord.encode(m.commissionRecord[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerCommission message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerCommission
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerCommission} Game2LoggerCommission
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerCommission.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerCommission();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            case 3:
-                if (!(m.commissionRecord && m.commissionRecord.length))
-                    m.commissionRecord = [];
-                m.commissionRecord.push($root.CommissionRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerCommission;
-})();
-
-$root.CommissionRecord = (function() {
-
-    /**
-     * Properties of a CommissionRecord.
-     * @exports ICommissionRecord
-     * @interface ICommissionRecord
-     * @property {string|null} [happenTime] CommissionRecord happenTime
-     * @property {string|null} [userName] CommissionRecord userName
-     * @property {string|null} [userId] CommissionRecord userId
-     * @property {string|null} [clubName] CommissionRecord clubName
-     * @property {string|null} [clubId] CommissionRecord clubId
-     * @property {number|null} [amount] CommissionRecord amount
-     * @property {number|null} [propRate] CommissionRecord propRate
-     * @property {number|null} [preSettlement] CommissionRecord preSettlement
-     * @property {number|null} [baseProfit] CommissionRecord baseProfit
-     * @property {number|null} [preChange] CommissionRecord preChange
-     * @property {number|null} [afterChange] CommissionRecord afterChange
-     */
-
-    /**
-     * Constructs a new CommissionRecord.
-     * @exports CommissionRecord
-     * @classdesc Represents a CommissionRecord.
-     * @implements ICommissionRecord
-     * @constructor
-     * @param {ICommissionRecord=} [p] Properties to set
-     */
-    function CommissionRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * CommissionRecord happenTime.
-     * @member {string} happenTime
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.happenTime = "";
-
-    /**
-     * CommissionRecord userName.
-     * @member {string} userName
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.userName = "";
-
-    /**
-     * CommissionRecord userId.
-     * @member {string} userId
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.userId = "";
-
-    /**
-     * CommissionRecord clubName.
-     * @member {string} clubName
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.clubName = "";
-
-    /**
-     * CommissionRecord clubId.
-     * @member {string} clubId
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.clubId = "";
-
-    /**
-     * CommissionRecord amount.
-     * @member {number} amount
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CommissionRecord propRate.
-     * @member {number} propRate
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.propRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CommissionRecord preSettlement.
-     * @member {number} preSettlement
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.preSettlement = 0;
-
-    /**
-     * CommissionRecord baseProfit.
-     * @member {number} baseProfit
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.baseProfit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CommissionRecord preChange.
-     * @member {number} preChange
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CommissionRecord afterChange.
-     * @member {number} afterChange
-     * @memberof CommissionRecord
-     * @instance
-     */
-    CommissionRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified CommissionRecord message. Does not implicitly {@link CommissionRecord.verify|verify} messages.
-     * @function encode
-     * @memberof CommissionRecord
-     * @static
-     * @param {ICommissionRecord} m CommissionRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    CommissionRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(48).int64(m.amount);
-        if (m.propRate != null && Object.hasOwnProperty.call(m, "propRate"))
-            w.uint32(56).int64(m.propRate);
-        if (m.preSettlement != null && Object.hasOwnProperty.call(m, "preSettlement"))
-            w.uint32(64).int32(m.preSettlement);
-        if (m.baseProfit != null && Object.hasOwnProperty.call(m, "baseProfit"))
-            w.uint32(72).int64(m.baseProfit);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(80).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(88).int64(m.afterChange);
-        return w;
-    };
-
-    /**
-     * Decodes a CommissionRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof CommissionRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {CommissionRecord} CommissionRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    CommissionRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.CommissionRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
             case 6:
-                m.amount = r.int64();
-                break;
-            case 7:
-                m.propRate = r.int64();
-                break;
-            case 8:
                 m.preSettlement = r.int32();
-                break;
-            case 9:
-                m.baseProfit = r.int64();
-                break;
-            case 10:
-                m.preChange = r.int64();
-                break;
-            case 11:
-                m.afterChange = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return CommissionRecord;
-})();
-
-$root.Game2LoggerReturn = (function() {
-
-    /**
-     * Properties of a Game2LoggerReturn.
-     * @exports IGame2LoggerReturn
-     * @interface IGame2LoggerReturn
-     * @property {string|null} [gameId] Game2LoggerReturn gameId
-     * @property {GameType|null} [gameType] Game2LoggerReturn gameType
-     * @property {Array.<IReturnRecord>|null} [returnRecord] Game2LoggerReturn returnRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerReturn.
-     * @exports Game2LoggerReturn
-     * @classdesc Represents a Game2LoggerReturn.
-     * @implements IGame2LoggerReturn
-     * @constructor
-     * @param {IGame2LoggerReturn=} [p] Properties to set
-     */
-    function Game2LoggerReturn(p) {
-        this.returnRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerReturn gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerReturn
-     * @instance
-     */
-    Game2LoggerReturn.prototype.gameId = "";
-
-    /**
-     * Game2LoggerReturn gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerReturn
-     * @instance
-     */
-    Game2LoggerReturn.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerReturn returnRecord.
-     * @member {Array.<IReturnRecord>} returnRecord
-     * @memberof Game2LoggerReturn
-     * @instance
-     */
-    Game2LoggerReturn.prototype.returnRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerReturn message. Does not implicitly {@link Game2LoggerReturn.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerReturn
-     * @static
-     * @param {IGame2LoggerReturn} m Game2LoggerReturn message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerReturn.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.returnRecord != null && m.returnRecord.length) {
-            for (var i = 0; i < m.returnRecord.length; ++i)
-                $root.ReturnRecord.encode(m.returnRecord[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerReturn message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerReturn
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerReturn} Game2LoggerReturn
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerReturn.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerReturn();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            case 3:
-                if (!(m.returnRecord && m.returnRecord.length))
-                    m.returnRecord = [];
-                m.returnRecord.push($root.ReturnRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerReturn;
-})();
-
-$root.ReturnRecord = (function() {
-
-    /**
-     * Properties of a ReturnRecord.
-     * @exports IReturnRecord
-     * @interface IReturnRecord
-     * @property {string|null} [happenTime] ReturnRecord happenTime
-     * @property {string|null} [userName] ReturnRecord userName
-     * @property {string|null} [userId] ReturnRecord userId
-     * @property {string|null} [clubName] ReturnRecord clubName
-     * @property {string|null} [clubId] ReturnRecord clubId
-     * @property {number|null} [amount] ReturnRecord amount
-     * @property {number|null} [propRate] ReturnRecord propRate
-     * @property {number|null} [preSettlement] ReturnRecord preSettlement
-     * @property {number|null} [baseProfit] ReturnRecord baseProfit
-     * @property {number|null} [preChange] ReturnRecord preChange
-     * @property {number|null} [afterChange] ReturnRecord afterChange
-     */
-
-    /**
-     * Constructs a new ReturnRecord.
-     * @exports ReturnRecord
-     * @classdesc Represents a ReturnRecord.
-     * @implements IReturnRecord
-     * @constructor
-     * @param {IReturnRecord=} [p] Properties to set
-     */
-    function ReturnRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ReturnRecord happenTime.
-     * @member {string} happenTime
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.happenTime = "";
-
-    /**
-     * ReturnRecord userName.
-     * @member {string} userName
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.userName = "";
-
-    /**
-     * ReturnRecord userId.
-     * @member {string} userId
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.userId = "";
-
-    /**
-     * ReturnRecord clubName.
-     * @member {string} clubName
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.clubName = "";
-
-    /**
-     * ReturnRecord clubId.
-     * @member {string} clubId
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.clubId = "";
-
-    /**
-     * ReturnRecord amount.
-     * @member {number} amount
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReturnRecord propRate.
-     * @member {number} propRate
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.propRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReturnRecord preSettlement.
-     * @member {number} preSettlement
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.preSettlement = 0;
-
-    /**
-     * ReturnRecord baseProfit.
-     * @member {number} baseProfit
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.baseProfit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReturnRecord preChange.
-     * @member {number} preChange
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReturnRecord afterChange.
-     * @member {number} afterChange
-     * @memberof ReturnRecord
-     * @instance
-     */
-    ReturnRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified ReturnRecord message. Does not implicitly {@link ReturnRecord.verify|verify} messages.
-     * @function encode
-     * @memberof ReturnRecord
-     * @static
-     * @param {IReturnRecord} m ReturnRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ReturnRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(48).int64(m.amount);
-        if (m.propRate != null && Object.hasOwnProperty.call(m, "propRate"))
-            w.uint32(56).int64(m.propRate);
-        if (m.preSettlement != null && Object.hasOwnProperty.call(m, "preSettlement"))
-            w.uint32(64).int32(m.preSettlement);
-        if (m.baseProfit != null && Object.hasOwnProperty.call(m, "baseProfit"))
-            w.uint32(72).int64(m.baseProfit);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(80).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(88).int64(m.afterChange);
-        return w;
-    };
-
-    /**
-     * Decodes a ReturnRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof ReturnRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ReturnRecord} ReturnRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ReturnRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ReturnRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.amount = r.int64();
-                break;
-            case 7:
-                m.propRate = r.int64();
-                break;
-            case 8:
-                m.preSettlement = r.int32();
-                break;
-            case 9:
-                m.baseProfit = r.int64();
-                break;
-            case 10:
-                m.preChange = r.int64();
-                break;
-            case 11:
-                m.afterChange = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ReturnRecord;
-})();
-
-$root.Game2LoggerInsurance = (function() {
-
-    /**
-     * Properties of a Game2LoggerInsurance.
-     * @exports IGame2LoggerInsurance
-     * @interface IGame2LoggerInsurance
-     * @property {string|null} [gameId] Game2LoggerInsurance gameId
-     * @property {GameType|null} [gameType] Game2LoggerInsurance gameType
-     * @property {Array.<IInsuranceRecord>|null} [insuranceRecord] Game2LoggerInsurance insuranceRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerInsurance.
-     * @exports Game2LoggerInsurance
-     * @classdesc Represents a Game2LoggerInsurance.
-     * @implements IGame2LoggerInsurance
-     * @constructor
-     * @param {IGame2LoggerInsurance=} [p] Properties to set
-     */
-    function Game2LoggerInsurance(p) {
-        this.insuranceRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerInsurance gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerInsurance
-     * @instance
-     */
-    Game2LoggerInsurance.prototype.gameId = "";
-
-    /**
-     * Game2LoggerInsurance gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerInsurance
-     * @instance
-     */
-    Game2LoggerInsurance.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerInsurance insuranceRecord.
-     * @member {Array.<IInsuranceRecord>} insuranceRecord
-     * @memberof Game2LoggerInsurance
-     * @instance
-     */
-    Game2LoggerInsurance.prototype.insuranceRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerInsurance message. Does not implicitly {@link Game2LoggerInsurance.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerInsurance
-     * @static
-     * @param {IGame2LoggerInsurance} m Game2LoggerInsurance message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerInsurance.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.insuranceRecord != null && m.insuranceRecord.length) {
-            for (var i = 0; i < m.insuranceRecord.length; ++i)
-                $root.InsuranceRecord.encode(m.insuranceRecord[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerInsurance message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerInsurance
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerInsurance} Game2LoggerInsurance
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerInsurance.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerInsurance();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            case 3:
-                if (!(m.insuranceRecord && m.insuranceRecord.length))
-                    m.insuranceRecord = [];
-                m.insuranceRecord.push($root.InsuranceRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerInsurance;
-})();
-
-$root.InsuranceRecord = (function() {
-
-    /**
-     * Properties of an InsuranceRecord.
-     * @exports IInsuranceRecord
-     * @interface IInsuranceRecord
-     * @property {string|null} [happenTime] InsuranceRecord happenTime
-     * @property {string|null} [userName] InsuranceRecord userName
-     * @property {string|null} [userId] InsuranceRecord userId
-     * @property {string|null} [clubName] InsuranceRecord clubName
-     * @property {string|null} [clubId] InsuranceRecord clubId
-     * @property {number|null} [amount] InsuranceRecord amount
-     * @property {string|null} [handId] InsuranceRecord handId
-     * @property {number|null} [preChange] InsuranceRecord preChange
-     * @property {number|null} [afterChange] InsuranceRecord afterChange
-     */
-
-    /**
-     * Constructs a new InsuranceRecord.
-     * @exports InsuranceRecord
-     * @classdesc Represents an InsuranceRecord.
-     * @implements IInsuranceRecord
-     * @constructor
-     * @param {IInsuranceRecord=} [p] Properties to set
-     */
-    function InsuranceRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * InsuranceRecord happenTime.
-     * @member {string} happenTime
-     * @memberof InsuranceRecord
-     * @instance
-     */
-    InsuranceRecord.prototype.happenTime = "";
-
-    /**
-     * InsuranceRecord userName.
-     * @member {string} userName
-     * @memberof InsuranceRecord
-     * @instance
-     */
-    InsuranceRecord.prototype.userName = "";
-
-    /**
-     * InsuranceRecord userId.
-     * @member {string} userId
-     * @memberof InsuranceRecord
-     * @instance
-     */
-    InsuranceRecord.prototype.userId = "";
-
-    /**
-     * InsuranceRecord clubName.
-     * @member {string} clubName
-     * @memberof InsuranceRecord
-     * @instance
-     */
-    InsuranceRecord.prototype.clubName = "";
-
-    /**
-     * InsuranceRecord clubId.
-     * @member {string} clubId
-     * @memberof InsuranceRecord
-     * @instance
-     */
-    InsuranceRecord.prototype.clubId = "";
-
-    /**
-     * InsuranceRecord amount.
-     * @member {number} amount
-     * @memberof InsuranceRecord
-     * @instance
-     */
-    InsuranceRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * InsuranceRecord handId.
-     * @member {string} handId
-     * @memberof InsuranceRecord
-     * @instance
-     */
-    InsuranceRecord.prototype.handId = "";
-
-    /**
-     * InsuranceRecord preChange.
-     * @member {number} preChange
-     * @memberof InsuranceRecord
-     * @instance
-     */
-    InsuranceRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * InsuranceRecord afterChange.
-     * @member {number} afterChange
-     * @memberof InsuranceRecord
-     * @instance
-     */
-    InsuranceRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified InsuranceRecord message. Does not implicitly {@link InsuranceRecord.verify|verify} messages.
-     * @function encode
-     * @memberof InsuranceRecord
-     * @static
-     * @param {IInsuranceRecord} m InsuranceRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    InsuranceRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(48).int64(m.amount);
-        if (m.handId != null && Object.hasOwnProperty.call(m, "handId"))
-            w.uint32(58).string(m.handId);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(64).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(72).int64(m.afterChange);
-        return w;
-    };
-
-    /**
-     * Decodes an InsuranceRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof InsuranceRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {InsuranceRecord} InsuranceRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    InsuranceRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.InsuranceRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.amount = r.int64();
                 break;
             case 7:
                 m.handId = r.string();
                 break;
             case 8:
-                m.preChange = r.int64();
+                m.poolRate = r.int64();
                 break;
             case 9:
-                m.afterChange = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return InsuranceRecord;
-})();
-
-$root.Game2LoggerInsuranceIn = (function() {
-
-    /**
-     * Properties of a Game2LoggerInsuranceIn.
-     * @exports IGame2LoggerInsuranceIn
-     * @interface IGame2LoggerInsuranceIn
-     * @property {string|null} [gameId] Game2LoggerInsuranceIn gameId
-     * @property {GameType|null} [gameType] Game2LoggerInsuranceIn gameType
-     * @property {Array.<IInsuranceInRecord>|null} [insuranceInRecord] Game2LoggerInsuranceIn insuranceInRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerInsuranceIn.
-     * @exports Game2LoggerInsuranceIn
-     * @classdesc Represents a Game2LoggerInsuranceIn.
-     * @implements IGame2LoggerInsuranceIn
-     * @constructor
-     * @param {IGame2LoggerInsuranceIn=} [p] Properties to set
-     */
-    function Game2LoggerInsuranceIn(p) {
-        this.insuranceInRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerInsuranceIn gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerInsuranceIn
-     * @instance
-     */
-    Game2LoggerInsuranceIn.prototype.gameId = "";
-
-    /**
-     * Game2LoggerInsuranceIn gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerInsuranceIn
-     * @instance
-     */
-    Game2LoggerInsuranceIn.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerInsuranceIn insuranceInRecord.
-     * @member {Array.<IInsuranceInRecord>} insuranceInRecord
-     * @memberof Game2LoggerInsuranceIn
-     * @instance
-     */
-    Game2LoggerInsuranceIn.prototype.insuranceInRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerInsuranceIn message. Does not implicitly {@link Game2LoggerInsuranceIn.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerInsuranceIn
-     * @static
-     * @param {IGame2LoggerInsuranceIn} m Game2LoggerInsuranceIn message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerInsuranceIn.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.insuranceInRecord != null && m.insuranceInRecord.length) {
-            for (var i = 0; i < m.insuranceInRecord.length; ++i)
-                $root.InsuranceInRecord.encode(m.insuranceInRecord[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerInsuranceIn message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerInsuranceIn
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerInsuranceIn} Game2LoggerInsuranceIn
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerInsuranceIn.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerInsuranceIn();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            case 3:
-                if (!(m.insuranceInRecord && m.insuranceInRecord.length))
-                    m.insuranceInRecord = [];
-                m.insuranceInRecord.push($root.InsuranceInRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerInsuranceIn;
-})();
-
-$root.InsuranceInRecord = (function() {
-
-    /**
-     * Properties of an InsuranceInRecord.
-     * @exports IInsuranceInRecord
-     * @interface IInsuranceInRecord
-     * @property {string|null} [happenTime] InsuranceInRecord happenTime
-     * @property {string|null} [userName] InsuranceInRecord userName
-     * @property {string|null} [userId] InsuranceInRecord userId
-     * @property {string|null} [clubName] InsuranceInRecord clubName
-     * @property {string|null} [clubId] InsuranceInRecord clubId
-     * @property {number|null} [amount] InsuranceInRecord amount
-     * @property {string|null} [handId] InsuranceInRecord handId
-     * @property {number|null} [preChange] InsuranceInRecord preChange
-     * @property {number|null} [afterChange] InsuranceInRecord afterChange
-     */
-
-    /**
-     * Constructs a new InsuranceInRecord.
-     * @exports InsuranceInRecord
-     * @classdesc Represents an InsuranceInRecord.
-     * @implements IInsuranceInRecord
-     * @constructor
-     * @param {IInsuranceInRecord=} [p] Properties to set
-     */
-    function InsuranceInRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * InsuranceInRecord happenTime.
-     * @member {string} happenTime
-     * @memberof InsuranceInRecord
-     * @instance
-     */
-    InsuranceInRecord.prototype.happenTime = "";
-
-    /**
-     * InsuranceInRecord userName.
-     * @member {string} userName
-     * @memberof InsuranceInRecord
-     * @instance
-     */
-    InsuranceInRecord.prototype.userName = "";
-
-    /**
-     * InsuranceInRecord userId.
-     * @member {string} userId
-     * @memberof InsuranceInRecord
-     * @instance
-     */
-    InsuranceInRecord.prototype.userId = "";
-
-    /**
-     * InsuranceInRecord clubName.
-     * @member {string} clubName
-     * @memberof InsuranceInRecord
-     * @instance
-     */
-    InsuranceInRecord.prototype.clubName = "";
-
-    /**
-     * InsuranceInRecord clubId.
-     * @member {string} clubId
-     * @memberof InsuranceInRecord
-     * @instance
-     */
-    InsuranceInRecord.prototype.clubId = "";
-
-    /**
-     * InsuranceInRecord amount.
-     * @member {number} amount
-     * @memberof InsuranceInRecord
-     * @instance
-     */
-    InsuranceInRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * InsuranceInRecord handId.
-     * @member {string} handId
-     * @memberof InsuranceInRecord
-     * @instance
-     */
-    InsuranceInRecord.prototype.handId = "";
-
-    /**
-     * InsuranceInRecord preChange.
-     * @member {number} preChange
-     * @memberof InsuranceInRecord
-     * @instance
-     */
-    InsuranceInRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * InsuranceInRecord afterChange.
-     * @member {number} afterChange
-     * @memberof InsuranceInRecord
-     * @instance
-     */
-    InsuranceInRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified InsuranceInRecord message. Does not implicitly {@link InsuranceInRecord.verify|verify} messages.
-     * @function encode
-     * @memberof InsuranceInRecord
-     * @static
-     * @param {IInsuranceInRecord} m InsuranceInRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    InsuranceInRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(48).int64(m.amount);
-        if (m.handId != null && Object.hasOwnProperty.call(m, "handId"))
-            w.uint32(58).string(m.handId);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(64).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(72).int64(m.afterChange);
-        return w;
-    };
-
-    /**
-     * Decodes an InsuranceInRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof InsuranceInRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {InsuranceInRecord} InsuranceInRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    InsuranceInRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.InsuranceInRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.amount = r.int64();
-                break;
-            case 7:
-                m.handId = r.string();
-                break;
-            case 8:
-                m.preChange = r.int64();
-                break;
-            case 9:
-                m.afterChange = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return InsuranceInRecord;
-})();
-
-$root.Game2LoggerBringIn = (function() {
-
-    /**
-     * Properties of a Game2LoggerBringIn.
-     * @exports IGame2LoggerBringIn
-     * @interface IGame2LoggerBringIn
-     * @property {string|null} [gameId] Game2LoggerBringIn gameId
-     * @property {GameType|null} [gameType] Game2LoggerBringIn gameType
-     * @property {Array.<IBringInRecord>|null} [bringIdRecord] Game2LoggerBringIn bringIdRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerBringIn.
-     * @exports Game2LoggerBringIn
-     * @classdesc Represents a Game2LoggerBringIn.
-     * @implements IGame2LoggerBringIn
-     * @constructor
-     * @param {IGame2LoggerBringIn=} [p] Properties to set
-     */
-    function Game2LoggerBringIn(p) {
-        this.bringIdRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerBringIn gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerBringIn
-     * @instance
-     */
-    Game2LoggerBringIn.prototype.gameId = "";
-
-    /**
-     * Game2LoggerBringIn gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerBringIn
-     * @instance
-     */
-    Game2LoggerBringIn.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerBringIn bringIdRecord.
-     * @member {Array.<IBringInRecord>} bringIdRecord
-     * @memberof Game2LoggerBringIn
-     * @instance
-     */
-    Game2LoggerBringIn.prototype.bringIdRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerBringIn message. Does not implicitly {@link Game2LoggerBringIn.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerBringIn
-     * @static
-     * @param {IGame2LoggerBringIn} m Game2LoggerBringIn message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerBringIn.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.bringIdRecord != null && m.bringIdRecord.length) {
-            for (var i = 0; i < m.bringIdRecord.length; ++i)
-                $root.BringInRecord.encode(m.bringIdRecord[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerBringIn message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerBringIn
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerBringIn} Game2LoggerBringIn
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerBringIn.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerBringIn();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            case 3:
-                if (!(m.bringIdRecord && m.bringIdRecord.length))
-                    m.bringIdRecord = [];
-                m.bringIdRecord.push($root.BringInRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerBringIn;
-})();
-
-$root.BringInRecord = (function() {
-
-    /**
-     * Properties of a BringInRecord.
-     * @exports IBringInRecord
-     * @interface IBringInRecord
-     * @property {string|null} [happenTime] BringInRecord happenTime
-     * @property {string|null} [userName] BringInRecord userName
-     * @property {string|null} [userId] BringInRecord userId
-     * @property {string|null} [clubName] BringInRecord clubName
-     * @property {string|null} [clubId] BringInRecord clubId
-     * @property {number|null} [amount] BringInRecord amount
-     * @property {number|null} [preChange] BringInRecord preChange
-     * @property {number|null} [afterChange] BringInRecord afterChange
-     */
-
-    /**
-     * Constructs a new BringInRecord.
-     * @exports BringInRecord
-     * @classdesc Represents a BringInRecord.
-     * @implements IBringInRecord
-     * @constructor
-     * @param {IBringInRecord=} [p] Properties to set
-     */
-    function BringInRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * BringInRecord happenTime.
-     * @member {string} happenTime
-     * @memberof BringInRecord
-     * @instance
-     */
-    BringInRecord.prototype.happenTime = "";
-
-    /**
-     * BringInRecord userName.
-     * @member {string} userName
-     * @memberof BringInRecord
-     * @instance
-     */
-    BringInRecord.prototype.userName = "";
-
-    /**
-     * BringInRecord userId.
-     * @member {string} userId
-     * @memberof BringInRecord
-     * @instance
-     */
-    BringInRecord.prototype.userId = "";
-
-    /**
-     * BringInRecord clubName.
-     * @member {string} clubName
-     * @memberof BringInRecord
-     * @instance
-     */
-    BringInRecord.prototype.clubName = "";
-
-    /**
-     * BringInRecord clubId.
-     * @member {string} clubId
-     * @memberof BringInRecord
-     * @instance
-     */
-    BringInRecord.prototype.clubId = "";
-
-    /**
-     * BringInRecord amount.
-     * @member {number} amount
-     * @memberof BringInRecord
-     * @instance
-     */
-    BringInRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BringInRecord preChange.
-     * @member {number} preChange
-     * @memberof BringInRecord
-     * @instance
-     */
-    BringInRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BringInRecord afterChange.
-     * @member {number} afterChange
-     * @memberof BringInRecord
-     * @instance
-     */
-    BringInRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified BringInRecord message. Does not implicitly {@link BringInRecord.verify|verify} messages.
-     * @function encode
-     * @memberof BringInRecord
-     * @static
-     * @param {IBringInRecord} m BringInRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    BringInRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(48).int64(m.amount);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(56).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(64).int64(m.afterChange);
-        return w;
-    };
-
-    /**
-     * Decodes a BringInRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof BringInRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {BringInRecord} BringInRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    BringInRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.BringInRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.amount = r.int64();
-                break;
-            case 7:
-                m.preChange = r.int64();
-                break;
-            case 8:
-                m.afterChange = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return BringInRecord;
-})();
-
-$root.Game2LoggerBringOut = (function() {
-
-    /**
-     * Properties of a Game2LoggerBringOut.
-     * @exports IGame2LoggerBringOut
-     * @interface IGame2LoggerBringOut
-     * @property {string|null} [gameId] Game2LoggerBringOut gameId
-     * @property {GameType|null} [gameType] Game2LoggerBringOut gameType
-     * @property {Array.<IBringOutRecord>|null} [bringOutRecord] Game2LoggerBringOut bringOutRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerBringOut.
-     * @exports Game2LoggerBringOut
-     * @classdesc Represents a Game2LoggerBringOut.
-     * @implements IGame2LoggerBringOut
-     * @constructor
-     * @param {IGame2LoggerBringOut=} [p] Properties to set
-     */
-    function Game2LoggerBringOut(p) {
-        this.bringOutRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerBringOut gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerBringOut
-     * @instance
-     */
-    Game2LoggerBringOut.prototype.gameId = "";
-
-    /**
-     * Game2LoggerBringOut gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerBringOut
-     * @instance
-     */
-    Game2LoggerBringOut.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerBringOut bringOutRecord.
-     * @member {Array.<IBringOutRecord>} bringOutRecord
-     * @memberof Game2LoggerBringOut
-     * @instance
-     */
-    Game2LoggerBringOut.prototype.bringOutRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerBringOut message. Does not implicitly {@link Game2LoggerBringOut.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerBringOut
-     * @static
-     * @param {IGame2LoggerBringOut} m Game2LoggerBringOut message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerBringOut.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.bringOutRecord != null && m.bringOutRecord.length) {
-            for (var i = 0; i < m.bringOutRecord.length; ++i)
-                $root.BringOutRecord.encode(m.bringOutRecord[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerBringOut message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerBringOut
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerBringOut} Game2LoggerBringOut
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerBringOut.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerBringOut();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            case 3:
-                if (!(m.bringOutRecord && m.bringOutRecord.length))
-                    m.bringOutRecord = [];
-                m.bringOutRecord.push($root.BringOutRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerBringOut;
-})();
-
-$root.BringOutRecord = (function() {
-
-    /**
-     * Properties of a BringOutRecord.
-     * @exports IBringOutRecord
-     * @interface IBringOutRecord
-     * @property {string|null} [happenTime] BringOutRecord happenTime
-     * @property {string|null} [userName] BringOutRecord userName
-     * @property {string|null} [userId] BringOutRecord userId
-     * @property {string|null} [clubName] BringOutRecord clubName
-     * @property {string|null} [clubId] BringOutRecord clubId
-     * @property {number|null} [amount] BringOutRecord amount
-     * @property {number|null} [propRate] BringOutRecord propRate
-     * @property {number|null} [currentHandCount] BringOutRecord currentHandCount
-     * @property {number|null} [currentWinCount] BringOutRecord currentWinCount
-     * @property {number|null} [preChange] BringOutRecord preChange
-     * @property {number|null} [afterChange] BringOutRecord afterChange
-     */
-
-    /**
-     * Constructs a new BringOutRecord.
-     * @exports BringOutRecord
-     * @classdesc Represents a BringOutRecord.
-     * @implements IBringOutRecord
-     * @constructor
-     * @param {IBringOutRecord=} [p] Properties to set
-     */
-    function BringOutRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * BringOutRecord happenTime.
-     * @member {string} happenTime
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.happenTime = "";
-
-    /**
-     * BringOutRecord userName.
-     * @member {string} userName
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.userName = "";
-
-    /**
-     * BringOutRecord userId.
-     * @member {string} userId
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.userId = "";
-
-    /**
-     * BringOutRecord clubName.
-     * @member {string} clubName
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.clubName = "";
-
-    /**
-     * BringOutRecord clubId.
-     * @member {string} clubId
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.clubId = "";
-
-    /**
-     * BringOutRecord amount.
-     * @member {number} amount
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BringOutRecord propRate.
-     * @member {number} propRate
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.propRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BringOutRecord currentHandCount.
-     * @member {number} currentHandCount
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.currentHandCount = 0;
-
-    /**
-     * BringOutRecord currentWinCount.
-     * @member {number} currentWinCount
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.currentWinCount = 0;
-
-    /**
-     * BringOutRecord preChange.
-     * @member {number} preChange
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BringOutRecord afterChange.
-     * @member {number} afterChange
-     * @memberof BringOutRecord
-     * @instance
-     */
-    BringOutRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified BringOutRecord message. Does not implicitly {@link BringOutRecord.verify|verify} messages.
-     * @function encode
-     * @memberof BringOutRecord
-     * @static
-     * @param {IBringOutRecord} m BringOutRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    BringOutRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(48).int64(m.amount);
-        if (m.propRate != null && Object.hasOwnProperty.call(m, "propRate"))
-            w.uint32(56).int64(m.propRate);
-        if (m.currentHandCount != null && Object.hasOwnProperty.call(m, "currentHandCount"))
-            w.uint32(64).int32(m.currentHandCount);
-        if (m.currentWinCount != null && Object.hasOwnProperty.call(m, "currentWinCount"))
-            w.uint32(72).int32(m.currentWinCount);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(80).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(88).int64(m.afterChange);
-        return w;
-    };
-
-    /**
-     * Decodes a BringOutRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof BringOutRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {BringOutRecord} BringOutRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    BringOutRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.BringOutRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.amount = r.int64();
-                break;
-            case 7:
-                m.propRate = r.int64();
-                break;
-            case 8:
                 m.currentHandCount = r.int32();
                 break;
-            case 9:
+            case 10:
                 m.currentWinCount = r.int32();
                 break;
-            case 10:
-                m.preChange = r.int64();
-                break;
             case 11:
-                m.afterChange = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return BringOutRecord;
-})();
-
-$root.Game2LoggerJackpotCommission = (function() {
-
-    /**
-     * Properties of a Game2LoggerJackpotCommission.
-     * @exports IGame2LoggerJackpotCommission
-     * @interface IGame2LoggerJackpotCommission
-     * @property {string|null} [gameId] Game2LoggerJackpotCommission gameId
-     * @property {GameType|null} [gameType] Game2LoggerJackpotCommission gameType
-     * @property {Array.<IJackpotCommissionRecord>|null} [jackpotCommissionRecord] Game2LoggerJackpotCommission jackpotCommissionRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerJackpotCommission.
-     * @exports Game2LoggerJackpotCommission
-     * @classdesc Represents a Game2LoggerJackpotCommission.
-     * @implements IGame2LoggerJackpotCommission
-     * @constructor
-     * @param {IGame2LoggerJackpotCommission=} [p] Properties to set
-     */
-    function Game2LoggerJackpotCommission(p) {
-        this.jackpotCommissionRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerJackpotCommission gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerJackpotCommission
-     * @instance
-     */
-    Game2LoggerJackpotCommission.prototype.gameId = "";
-
-    /**
-     * Game2LoggerJackpotCommission gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerJackpotCommission
-     * @instance
-     */
-    Game2LoggerJackpotCommission.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerJackpotCommission jackpotCommissionRecord.
-     * @member {Array.<IJackpotCommissionRecord>} jackpotCommissionRecord
-     * @memberof Game2LoggerJackpotCommission
-     * @instance
-     */
-    Game2LoggerJackpotCommission.prototype.jackpotCommissionRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerJackpotCommission message. Does not implicitly {@link Game2LoggerJackpotCommission.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerJackpotCommission
-     * @static
-     * @param {IGame2LoggerJackpotCommission} m Game2LoggerJackpotCommission message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerJackpotCommission.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.jackpotCommissionRecord != null && m.jackpotCommissionRecord.length) {
-            for (var i = 0; i < m.jackpotCommissionRecord.length; ++i)
-                $root.JackpotCommissionRecord.encode(m.jackpotCommissionRecord[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerJackpotCommission message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerJackpotCommission
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerJackpotCommission} Game2LoggerJackpotCommission
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerJackpotCommission.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerJackpotCommission();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            case 3:
-                if (!(m.jackpotCommissionRecord && m.jackpotCommissionRecord.length))
-                    m.jackpotCommissionRecord = [];
-                m.jackpotCommissionRecord.push($root.JackpotCommissionRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerJackpotCommission;
-})();
-
-$root.JackpotCommissionRecord = (function() {
-
-    /**
-     * Properties of a JackpotCommissionRecord.
-     * @exports IJackpotCommissionRecord
-     * @interface IJackpotCommissionRecord
-     * @property {string|null} [happenTime] JackpotCommissionRecord happenTime
-     * @property {string|null} [userName] JackpotCommissionRecord userName
-     * @property {string|null} [userId] JackpotCommissionRecord userId
-     * @property {string|null} [clubName] JackpotCommissionRecord clubName
-     * @property {string|null} [clubId] JackpotCommissionRecord clubId
-     * @property {number|null} [amount] JackpotCommissionRecord amount
-     * @property {number|null} [preChange] JackpotCommissionRecord preChange
-     * @property {number|null} [afterChange] JackpotCommissionRecord afterChange
-     */
-
-    /**
-     * Constructs a new JackpotCommissionRecord.
-     * @exports JackpotCommissionRecord
-     * @classdesc Represents a JackpotCommissionRecord.
-     * @implements IJackpotCommissionRecord
-     * @constructor
-     * @param {IJackpotCommissionRecord=} [p] Properties to set
-     */
-    function JackpotCommissionRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * JackpotCommissionRecord happenTime.
-     * @member {string} happenTime
-     * @memberof JackpotCommissionRecord
-     * @instance
-     */
-    JackpotCommissionRecord.prototype.happenTime = "";
-
-    /**
-     * JackpotCommissionRecord userName.
-     * @member {string} userName
-     * @memberof JackpotCommissionRecord
-     * @instance
-     */
-    JackpotCommissionRecord.prototype.userName = "";
-
-    /**
-     * JackpotCommissionRecord userId.
-     * @member {string} userId
-     * @memberof JackpotCommissionRecord
-     * @instance
-     */
-    JackpotCommissionRecord.prototype.userId = "";
-
-    /**
-     * JackpotCommissionRecord clubName.
-     * @member {string} clubName
-     * @memberof JackpotCommissionRecord
-     * @instance
-     */
-    JackpotCommissionRecord.prototype.clubName = "";
-
-    /**
-     * JackpotCommissionRecord clubId.
-     * @member {string} clubId
-     * @memberof JackpotCommissionRecord
-     * @instance
-     */
-    JackpotCommissionRecord.prototype.clubId = "";
-
-    /**
-     * JackpotCommissionRecord amount.
-     * @member {number} amount
-     * @memberof JackpotCommissionRecord
-     * @instance
-     */
-    JackpotCommissionRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * JackpotCommissionRecord preChange.
-     * @member {number} preChange
-     * @memberof JackpotCommissionRecord
-     * @instance
-     */
-    JackpotCommissionRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * JackpotCommissionRecord afterChange.
-     * @member {number} afterChange
-     * @memberof JackpotCommissionRecord
-     * @instance
-     */
-    JackpotCommissionRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified JackpotCommissionRecord message. Does not implicitly {@link JackpotCommissionRecord.verify|verify} messages.
-     * @function encode
-     * @memberof JackpotCommissionRecord
-     * @static
-     * @param {IJackpotCommissionRecord} m JackpotCommissionRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    JackpotCommissionRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(48).int64(m.amount);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(56).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(64).int64(m.afterChange);
-        return w;
-    };
-
-    /**
-     * Decodes a JackpotCommissionRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof JackpotCommissionRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {JackpotCommissionRecord} JackpotCommissionRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    JackpotCommissionRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.JackpotCommissionRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.amount = r.int64();
-                break;
-            case 7:
-                m.preChange = r.int64();
-                break;
-            case 8:
-                m.afterChange = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return JackpotCommissionRecord;
-})();
-
-$root.Game2LoggerJackpot = (function() {
-
-    /**
-     * Properties of a Game2LoggerJackpot.
-     * @exports IGame2LoggerJackpot
-     * @interface IGame2LoggerJackpot
-     * @property {string|null} [gameId] Game2LoggerJackpot gameId
-     * @property {GameType|null} [gameType] Game2LoggerJackpot gameType
-     * @property {Array.<IJackpotRecord>|null} [jackpotRecord] Game2LoggerJackpot jackpotRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerJackpot.
-     * @exports Game2LoggerJackpot
-     * @classdesc Represents a Game2LoggerJackpot.
-     * @implements IGame2LoggerJackpot
-     * @constructor
-     * @param {IGame2LoggerJackpot=} [p] Properties to set
-     */
-    function Game2LoggerJackpot(p) {
-        this.jackpotRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerJackpot gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerJackpot
-     * @instance
-     */
-    Game2LoggerJackpot.prototype.gameId = "";
-
-    /**
-     * Game2LoggerJackpot gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerJackpot
-     * @instance
-     */
-    Game2LoggerJackpot.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerJackpot jackpotRecord.
-     * @member {Array.<IJackpotRecord>} jackpotRecord
-     * @memberof Game2LoggerJackpot
-     * @instance
-     */
-    Game2LoggerJackpot.prototype.jackpotRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerJackpot message. Does not implicitly {@link Game2LoggerJackpot.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerJackpot
-     * @static
-     * @param {IGame2LoggerJackpot} m Game2LoggerJackpot message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerJackpot.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.jackpotRecord != null && m.jackpotRecord.length) {
-            for (var i = 0; i < m.jackpotRecord.length; ++i)
-                $root.JackpotRecord.encode(m.jackpotRecord[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerJackpot message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerJackpot
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerJackpot} Game2LoggerJackpot
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerJackpot.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerJackpot();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            case 3:
-                if (!(m.jackpotRecord && m.jackpotRecord.length))
-                    m.jackpotRecord = [];
-                m.jackpotRecord.push($root.JackpotRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerJackpot;
-})();
-
-$root.JackpotRecord = (function() {
-
-    /**
-     * Properties of a JackpotRecord.
-     * @exports IJackpotRecord
-     * @interface IJackpotRecord
-     * @property {string|null} [happenTime] JackpotRecord happenTime
-     * @property {string|null} [userName] JackpotRecord userName
-     * @property {string|null} [userId] JackpotRecord userId
-     * @property {string|null} [clubName] JackpotRecord clubName
-     * @property {string|null} [clubId] JackpotRecord clubId
-     * @property {number|null} [amount] JackpotRecord amount
-     * @property {JackpotType|null} [propType] JackpotRecord propType
-     * @property {number|null} [propRate] JackpotRecord propRate
-     * @property {number|null} [levelRate] JackpotRecord levelRate
-     * @property {number|null} [baseProfit] JackpotRecord baseProfit
-     * @property {number|null} [preChange] JackpotRecord preChange
-     * @property {number|null} [afterChange] JackpotRecord afterChange
-     */
-
-    /**
-     * Constructs a new JackpotRecord.
-     * @exports JackpotRecord
-     * @classdesc Represents a JackpotRecord.
-     * @implements IJackpotRecord
-     * @constructor
-     * @param {IJackpotRecord=} [p] Properties to set
-     */
-    function JackpotRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * JackpotRecord happenTime.
-     * @member {string} happenTime
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.happenTime = "";
-
-    /**
-     * JackpotRecord userName.
-     * @member {string} userName
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.userName = "";
-
-    /**
-     * JackpotRecord userId.
-     * @member {string} userId
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.userId = "";
-
-    /**
-     * JackpotRecord clubName.
-     * @member {string} clubName
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.clubName = "";
-
-    /**
-     * JackpotRecord clubId.
-     * @member {string} clubId
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.clubId = "";
-
-    /**
-     * JackpotRecord amount.
-     * @member {number} amount
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * JackpotRecord propType.
-     * @member {JackpotType} propType
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.propType = 0;
-
-    /**
-     * JackpotRecord propRate.
-     * @member {number} propRate
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.propRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * JackpotRecord levelRate.
-     * @member {number} levelRate
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.levelRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * JackpotRecord baseProfit.
-     * @member {number} baseProfit
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.baseProfit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * JackpotRecord preChange.
-     * @member {number} preChange
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * JackpotRecord afterChange.
-     * @member {number} afterChange
-     * @memberof JackpotRecord
-     * @instance
-     */
-    JackpotRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified JackpotRecord message. Does not implicitly {@link JackpotRecord.verify|verify} messages.
-     * @function encode
-     * @memberof JackpotRecord
-     * @static
-     * @param {IJackpotRecord} m JackpotRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    JackpotRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(48).int64(m.amount);
-        if (m.propType != null && Object.hasOwnProperty.call(m, "propType"))
-            w.uint32(56).int32(m.propType);
-        if (m.propRate != null && Object.hasOwnProperty.call(m, "propRate"))
-            w.uint32(64).int64(m.propRate);
-        if (m.levelRate != null && Object.hasOwnProperty.call(m, "levelRate"))
-            w.uint32(72).int64(m.levelRate);
-        if (m.baseProfit != null && Object.hasOwnProperty.call(m, "baseProfit"))
-            w.uint32(80).int64(m.baseProfit);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(88).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(96).int64(m.afterChange);
-        return w;
-    };
-
-    /**
-     * Decodes a JackpotRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof JackpotRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {JackpotRecord} JackpotRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    JackpotRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.JackpotRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.amount = r.int64();
-                break;
-            case 7:
-                m.propType = r.int32();
-                break;
-            case 8:
-                m.propRate = r.int64();
-                break;
-            case 9:
-                m.levelRate = r.int64();
-                break;
-            case 10:
-                m.baseProfit = r.int64();
-                break;
-            case 11:
-                m.preChange = r.int64();
+                m.betType = r.int32();
                 break;
             case 12:
-                m.afterChange = r.int64();
+                m.levelRate = r.int64();
+                break;
+            case 13:
+                m.jackpotType = r.int32();
+                break;
+            case 14:
+                m.jackpotRate = r.int64();
+                break;
+            case 15:
+                m.jackpotPool = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -17477,649 +15257,7 @@ $root.JackpotRecord = (function() {
         return m;
     };
 
-    return JackpotRecord;
-})();
-
-$root.Game2LoggerCowboyBet = (function() {
-
-    /**
-     * Properties of a Game2LoggerCowboyBet.
-     * @exports IGame2LoggerCowboyBet
-     * @interface IGame2LoggerCowboyBet
-     * @property {string|null} [gameId] Game2LoggerCowboyBet gameId
-     * @property {GameType|null} [gameType] Game2LoggerCowboyBet gameType
-     * @property {Array.<ICowboyBetRecord>|null} [cowboyBetRecord] Game2LoggerCowboyBet cowboyBetRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerCowboyBet.
-     * @exports Game2LoggerCowboyBet
-     * @classdesc Represents a Game2LoggerCowboyBet.
-     * @implements IGame2LoggerCowboyBet
-     * @constructor
-     * @param {IGame2LoggerCowboyBet=} [p] Properties to set
-     */
-    function Game2LoggerCowboyBet(p) {
-        this.cowboyBetRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerCowboyBet gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerCowboyBet
-     * @instance
-     */
-    Game2LoggerCowboyBet.prototype.gameId = "";
-
-    /**
-     * Game2LoggerCowboyBet gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerCowboyBet
-     * @instance
-     */
-    Game2LoggerCowboyBet.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerCowboyBet cowboyBetRecord.
-     * @member {Array.<ICowboyBetRecord>} cowboyBetRecord
-     * @memberof Game2LoggerCowboyBet
-     * @instance
-     */
-    Game2LoggerCowboyBet.prototype.cowboyBetRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerCowboyBet message. Does not implicitly {@link Game2LoggerCowboyBet.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerCowboyBet
-     * @static
-     * @param {IGame2LoggerCowboyBet} m Game2LoggerCowboyBet message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerCowboyBet.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.cowboyBetRecord != null && m.cowboyBetRecord.length) {
-            for (var i = 0; i < m.cowboyBetRecord.length; ++i)
-                $root.CowboyBetRecord.encode(m.cowboyBetRecord[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerCowboyBet message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerCowboyBet
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerCowboyBet} Game2LoggerCowboyBet
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerCowboyBet.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerCowboyBet();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            case 3:
-                if (!(m.cowboyBetRecord && m.cowboyBetRecord.length))
-                    m.cowboyBetRecord = [];
-                m.cowboyBetRecord.push($root.CowboyBetRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerCowboyBet;
-})();
-
-$root.CowboyBetRecord = (function() {
-
-    /**
-     * Properties of a CowboyBetRecord.
-     * @exports ICowboyBetRecord
-     * @interface ICowboyBetRecord
-     * @property {string|null} [happenTime] CowboyBetRecord happenTime
-     * @property {string|null} [userName] CowboyBetRecord userName
-     * @property {string|null} [userId] CowboyBetRecord userId
-     * @property {string|null} [clubName] CowboyBetRecord clubName
-     * @property {string|null} [clubId] CowboyBetRecord clubId
-     * @property {number|null} [amount] CowboyBetRecord amount
-     * @property {CowboyAreaType|null} [propType] CowboyBetRecord propType
-     * @property {number|null} [propRate] CowboyBetRecord propRate
-     * @property {number|null} [preChange] CowboyBetRecord preChange
-     * @property {number|null} [afterChange] CowboyBetRecord afterChange
-     */
-
-    /**
-     * Constructs a new CowboyBetRecord.
-     * @exports CowboyBetRecord
-     * @classdesc Represents a CowboyBetRecord.
-     * @implements ICowboyBetRecord
-     * @constructor
-     * @param {ICowboyBetRecord=} [p] Properties to set
-     */
-    function CowboyBetRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * CowboyBetRecord happenTime.
-     * @member {string} happenTime
-     * @memberof CowboyBetRecord
-     * @instance
-     */
-    CowboyBetRecord.prototype.happenTime = "";
-
-    /**
-     * CowboyBetRecord userName.
-     * @member {string} userName
-     * @memberof CowboyBetRecord
-     * @instance
-     */
-    CowboyBetRecord.prototype.userName = "";
-
-    /**
-     * CowboyBetRecord userId.
-     * @member {string} userId
-     * @memberof CowboyBetRecord
-     * @instance
-     */
-    CowboyBetRecord.prototype.userId = "";
-
-    /**
-     * CowboyBetRecord clubName.
-     * @member {string} clubName
-     * @memberof CowboyBetRecord
-     * @instance
-     */
-    CowboyBetRecord.prototype.clubName = "";
-
-    /**
-     * CowboyBetRecord clubId.
-     * @member {string} clubId
-     * @memberof CowboyBetRecord
-     * @instance
-     */
-    CowboyBetRecord.prototype.clubId = "";
-
-    /**
-     * CowboyBetRecord amount.
-     * @member {number} amount
-     * @memberof CowboyBetRecord
-     * @instance
-     */
-    CowboyBetRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CowboyBetRecord propType.
-     * @member {CowboyAreaType} propType
-     * @memberof CowboyBetRecord
-     * @instance
-     */
-    CowboyBetRecord.prototype.propType = 0;
-
-    /**
-     * CowboyBetRecord propRate.
-     * @member {number} propRate
-     * @memberof CowboyBetRecord
-     * @instance
-     */
-    CowboyBetRecord.prototype.propRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CowboyBetRecord preChange.
-     * @member {number} preChange
-     * @memberof CowboyBetRecord
-     * @instance
-     */
-    CowboyBetRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CowboyBetRecord afterChange.
-     * @member {number} afterChange
-     * @memberof CowboyBetRecord
-     * @instance
-     */
-    CowboyBetRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified CowboyBetRecord message. Does not implicitly {@link CowboyBetRecord.verify|verify} messages.
-     * @function encode
-     * @memberof CowboyBetRecord
-     * @static
-     * @param {ICowboyBetRecord} m CowboyBetRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    CowboyBetRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(48).int64(m.amount);
-        if (m.propType != null && Object.hasOwnProperty.call(m, "propType"))
-            w.uint32(56).int32(m.propType);
-        if (m.propRate != null && Object.hasOwnProperty.call(m, "propRate"))
-            w.uint32(64).int64(m.propRate);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(72).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(80).int64(m.afterChange);
-        return w;
-    };
-
-    /**
-     * Decodes a CowboyBetRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof CowboyBetRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {CowboyBetRecord} CowboyBetRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    CowboyBetRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyBetRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.amount = r.int64();
-                break;
-            case 7:
-                m.propType = r.int32();
-                break;
-            case 8:
-                m.propRate = r.int64();
-                break;
-            case 9:
-                m.preChange = r.int64();
-                break;
-            case 10:
-                m.afterChange = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return CowboyBetRecord;
-})();
-
-$root.Game2LoggerCowboyReward = (function() {
-
-    /**
-     * Properties of a Game2LoggerCowboyReward.
-     * @exports IGame2LoggerCowboyReward
-     * @interface IGame2LoggerCowboyReward
-     * @property {string|null} [gameId] Game2LoggerCowboyReward gameId
-     * @property {GameType|null} [gameType] Game2LoggerCowboyReward gameType
-     * @property {Array.<ICowboyRewardRecord>|null} [cowboyRewardRecord] Game2LoggerCowboyReward cowboyRewardRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerCowboyReward.
-     * @exports Game2LoggerCowboyReward
-     * @classdesc Represents a Game2LoggerCowboyReward.
-     * @implements IGame2LoggerCowboyReward
-     * @constructor
-     * @param {IGame2LoggerCowboyReward=} [p] Properties to set
-     */
-    function Game2LoggerCowboyReward(p) {
-        this.cowboyRewardRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerCowboyReward gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerCowboyReward
-     * @instance
-     */
-    Game2LoggerCowboyReward.prototype.gameId = "";
-
-    /**
-     * Game2LoggerCowboyReward gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerCowboyReward
-     * @instance
-     */
-    Game2LoggerCowboyReward.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerCowboyReward cowboyRewardRecord.
-     * @member {Array.<ICowboyRewardRecord>} cowboyRewardRecord
-     * @memberof Game2LoggerCowboyReward
-     * @instance
-     */
-    Game2LoggerCowboyReward.prototype.cowboyRewardRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerCowboyReward message. Does not implicitly {@link Game2LoggerCowboyReward.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerCowboyReward
-     * @static
-     * @param {IGame2LoggerCowboyReward} m Game2LoggerCowboyReward message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerCowboyReward.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        if (m.cowboyRewardRecord != null && m.cowboyRewardRecord.length) {
-            for (var i = 0; i < m.cowboyRewardRecord.length; ++i)
-                $root.CowboyRewardRecord.encode(m.cowboyRewardRecord[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerCowboyReward message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerCowboyReward
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerCowboyReward} Game2LoggerCowboyReward
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerCowboyReward.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerCowboyReward();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            case 3:
-                if (!(m.cowboyRewardRecord && m.cowboyRewardRecord.length))
-                    m.cowboyRewardRecord = [];
-                m.cowboyRewardRecord.push($root.CowboyRewardRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerCowboyReward;
-})();
-
-$root.CowboyRewardRecord = (function() {
-
-    /**
-     * Properties of a CowboyRewardRecord.
-     * @exports ICowboyRewardRecord
-     * @interface ICowboyRewardRecord
-     * @property {string|null} [happenTime] CowboyRewardRecord happenTime
-     * @property {string|null} [userName] CowboyRewardRecord userName
-     * @property {string|null} [userId] CowboyRewardRecord userId
-     * @property {string|null} [clubName] CowboyRewardRecord clubName
-     * @property {string|null} [clubId] CowboyRewardRecord clubId
-     * @property {number|null} [amount] CowboyRewardRecord amount
-     * @property {CowboyAreaType|null} [propType] CowboyRewardRecord propType
-     * @property {number|null} [propRate] CowboyRewardRecord propRate
-     * @property {number|null} [preChange] CowboyRewardRecord preChange
-     * @property {number|null} [afterChange] CowboyRewardRecord afterChange
-     */
-
-    /**
-     * Constructs a new CowboyRewardRecord.
-     * @exports CowboyRewardRecord
-     * @classdesc Represents a CowboyRewardRecord.
-     * @implements ICowboyRewardRecord
-     * @constructor
-     * @param {ICowboyRewardRecord=} [p] Properties to set
-     */
-    function CowboyRewardRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * CowboyRewardRecord happenTime.
-     * @member {string} happenTime
-     * @memberof CowboyRewardRecord
-     * @instance
-     */
-    CowboyRewardRecord.prototype.happenTime = "";
-
-    /**
-     * CowboyRewardRecord userName.
-     * @member {string} userName
-     * @memberof CowboyRewardRecord
-     * @instance
-     */
-    CowboyRewardRecord.prototype.userName = "";
-
-    /**
-     * CowboyRewardRecord userId.
-     * @member {string} userId
-     * @memberof CowboyRewardRecord
-     * @instance
-     */
-    CowboyRewardRecord.prototype.userId = "";
-
-    /**
-     * CowboyRewardRecord clubName.
-     * @member {string} clubName
-     * @memberof CowboyRewardRecord
-     * @instance
-     */
-    CowboyRewardRecord.prototype.clubName = "";
-
-    /**
-     * CowboyRewardRecord clubId.
-     * @member {string} clubId
-     * @memberof CowboyRewardRecord
-     * @instance
-     */
-    CowboyRewardRecord.prototype.clubId = "";
-
-    /**
-     * CowboyRewardRecord amount.
-     * @member {number} amount
-     * @memberof CowboyRewardRecord
-     * @instance
-     */
-    CowboyRewardRecord.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CowboyRewardRecord propType.
-     * @member {CowboyAreaType} propType
-     * @memberof CowboyRewardRecord
-     * @instance
-     */
-    CowboyRewardRecord.prototype.propType = 0;
-
-    /**
-     * CowboyRewardRecord propRate.
-     * @member {number} propRate
-     * @memberof CowboyRewardRecord
-     * @instance
-     */
-    CowboyRewardRecord.prototype.propRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CowboyRewardRecord preChange.
-     * @member {number} preChange
-     * @memberof CowboyRewardRecord
-     * @instance
-     */
-    CowboyRewardRecord.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CowboyRewardRecord afterChange.
-     * @member {number} afterChange
-     * @memberof CowboyRewardRecord
-     * @instance
-     */
-    CowboyRewardRecord.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified CowboyRewardRecord message. Does not implicitly {@link CowboyRewardRecord.verify|verify} messages.
-     * @function encode
-     * @memberof CowboyRewardRecord
-     * @static
-     * @param {ICowboyRewardRecord} m CowboyRewardRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    CowboyRewardRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(48).int64(m.amount);
-        if (m.propType != null && Object.hasOwnProperty.call(m, "propType"))
-            w.uint32(56).int32(m.propType);
-        if (m.propRate != null && Object.hasOwnProperty.call(m, "propRate"))
-            w.uint32(64).int64(m.propRate);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(72).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(80).int64(m.afterChange);
-        return w;
-    };
-
-    /**
-     * Decodes a CowboyRewardRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof CowboyRewardRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {CowboyRewardRecord} CowboyRewardRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    CowboyRewardRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyRewardRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.amount = r.int64();
-                break;
-            case 7:
-                m.propType = r.int32();
-                break;
-            case 8:
-                m.propRate = r.int64();
-                break;
-            case 9:
-                m.preChange = r.int64();
-                break;
-            case 10:
-                m.afterChange = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return CowboyRewardRecord;
+    return AmountChangeGenerics;
 })();
 
 $root.C2SLogin = (function() {

@@ -7,6 +7,7 @@ import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { NetworkHttp } from '../../network/NetworkHttp';
 import { NetworkSend } from '../../network/NetworkSend';
+import { Tool } from '../../Tool';
 import { Club_RecordLayer } from '../clubPage/Club_RecordLayer';
 import { BaseButton } from '../common/BaseButton';
 
@@ -79,7 +80,10 @@ export class LoginUI extends BaseUI
             this.DebugFunction.active = false;
         });
 
-
+        var myDate = new Date();
+        myDate.setDate(myDate.getDate() + 1); 
+        console.log("toLocaleDateString==" +  myDate.toLocaleDateString());
+        console.log("DateFormat==" +  Tool.DateFormat("YYYY-mm-dd",myDate));
     }
     RegDataNotify() 
     {

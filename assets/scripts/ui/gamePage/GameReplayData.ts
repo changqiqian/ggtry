@@ -19,6 +19,7 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
     Data_Auto : BaseData<boolean> = new BaseData<boolean>(); //是否自动播放
     Data_ReStart : BaseData<boolean> = new BaseData<boolean>(); //重置
     Data_Update : BaseData<boolean> = new BaseData<boolean>(); //更新下一步
+    Data_TotalPots : BaseData<number> = new BaseData<number>(); //总底池
 
     public InitData(_data : ReplayData)
     {
@@ -30,6 +31,7 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
 
     public ReStart()
     {
+        this.Data_TotalPots.mData = 0;
         this.Data_ReplayData.mData = this.Data_CopyReplayData.mData;
         this.Data_State.mData = TexasCashState.TexasCashState_RoundStart;
         this.Data_Step.mData = 0;

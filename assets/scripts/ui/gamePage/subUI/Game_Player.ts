@@ -876,6 +876,7 @@ export class Game_Player extends BaseUI
             }
             this.ShowActionType(currentAction.actionInfo.actionType , true);
             this.Bet(currentAction.actionInfo.roundAmount ,currentAction.actionInfo.actionType, true);
+            GameReplayData.Instance.Data_TotalPots.mData += currentAction.actionInfo.amount;
         }
     }
 

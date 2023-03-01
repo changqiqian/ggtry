@@ -19,7 +19,7 @@ export class Me_MessageItem extends BaseUI {
     @property(Node)
     mReadDot: Node = null;
 
-    _data: any = null;
+    mdata: any = null;
 
     InitParam() {}
     BindUI() {
@@ -35,6 +35,6 @@ export class Me_MessageItem extends BaseUI {
         this.mSubTitle.string = _data.summary;
         this.mDate.string = _data.pubTime;
         this.mReadDot.active = !_data.isRead;
-        this._data = _data;
+        this.mdata = _data;
     }
 }

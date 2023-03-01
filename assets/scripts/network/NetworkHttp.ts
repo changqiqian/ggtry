@@ -55,7 +55,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         (_err)=>
         {
 
-        })
+        }) 
     }
 
     //获取战绩细节入口数据
@@ -136,7 +136,6 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
             let json = JSON.parse(_result);
             let protoData = json.data as SimpleReplayData;
             LocalPlayerData.Instance.Data_SimpleReplayData.mData = protoData;
-            
         },
         (_err)=>
         {

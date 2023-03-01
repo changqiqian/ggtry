@@ -66,6 +66,21 @@ export class Game_Pot extends BaseUI
             }
             this.ClearPot();
         })
+
+        GameReplayData.Instance.Data_State.AddListenner(this,(_data)=>
+        {
+            this.UpdateSubPotsReplay(_data);
+        })
+
+        GameReplayData.Instance.Data_TotalPots.AddListenner(this,(_data)=>
+        {
+            if(_data > 0)
+            {
+                this.SetTotalPot(_data);
+                this.mTotalPotBG.active = true;
+            }
+        })
+        
     }
 
     public InitWithData(_index : number)
@@ -159,5 +174,60 @@ export class Game_Pot extends BaseUI
             subPotNode.children[0].getComponent(Label).string = Tool.ConvertMoney_S2C(potAmount) + "";
         }
     }
+
+    UpdateSubPotsReplay(_state : TexasCashState)
+    {
+        this.HideSubPot();
+        this.mSubPots.active = true;
+        let pots = null;
+        switch(_state)
+        {
+            case TexasCashState.TexasCashState_RoundStart:
+            {
+                
+            }
+            break;
+            case TexasCashState.TexasCashState_PreFlopRound:
+            {
+    
+            }
+            break;
+            case TexasCashState.TexasCashState_FlopRound:
+            {
+                pots = GameReplayData.Instance.Data_ReplayData.mData.potInfoFlop;
+            }
+            break;
+            case TexasCashState.TexasCashState_TurnRound:
+            {
+                pots = GameReplayData.Instance.Data_ReplayData.mData.potInfoTurn;
+            }
+            break;
+            case TexasCashState.TexasCashState_RiverRound:
+            {
+                pots = GameReplayData.Instance.Data_ReplayData.mData.potInfoRiver;
+            }
+            break;
+            case TexasCashState.TexasCashState_Settlement:
+            {
+      
+            }
+            break;
+        }
+
+        if(pots == null)
+        {
+            return;
+        }
+
+        for(let i = 0; i < pots.length ; i++)
+        {
+            let potAmount = pots[i].pot;
+            let subPotNode = this.mSubPots.children[i];
+            subPotNode.active = true;
+            subPotNode.children[0].getComponent(Label).string = Tool.ConvertMoney_S2C(potAmount) + "";
+        }
+    
+    }
+
 }
 
