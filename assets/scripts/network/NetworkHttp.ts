@@ -1,5 +1,6 @@
 import { LocalPlayerData } from "../base/LocalPlayerData";
 import { Singleton } from "../base/Singleton";
+import { UIMgr } from "../base/UIMgr";
 
 export class NetworkHttp extends Singleton<NetworkHttp>()
 {
@@ -8,6 +9,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         let token = "BearereyJhbGciOiJIUzI1NiIsInppcCI6IkRFRiJ9.eNqqViouTVKyUkpMyc3MMzAwVNJRKi1OLYrPTFGyMjQw1FEqTs4vSIUpAMpmJpYAZczMzY0MLcwNTWsBAAAA__8.zDHnip5yjb9ElXCnZaAV6nDNw_ivlWFYXyogQ6acajg"
         _xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         _xhr.setRequestHeader("token", token);
+        _xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
+        _xhr.setRequestHeader("timestamp", "1672821524273");
         _xhr.onreadystatechange = function () 
         {
             if (_xhr.readyState == 4) 
@@ -19,12 +22,11 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         _xhr.onerror = function (_err) 
         {
             console.log('HttpGet err ====' + _err);
-            console.log('HttpGet url ====' + _err);
+            UIMgr.Instance.ShowToast("http error");
             _error && _error(_err);
         };
 
         _param.userId = "6743682430";
-
         _xhr.send(JSON.stringify(_param));
     }
 
@@ -33,8 +35,6 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/record/sum");
-        xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
-        xhr.setRequestHeader("timestamp", "1672821524273");
 
         console.log("http 获取 今日，本周，本月 总战绩概括==");
         let param = 
@@ -65,8 +65,6 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         let xhr = new XMLHttpRequest();
         let url = "http://54.169.147.71:8080/api/game/sy/record?page=" + _pageNum + "&limit=" + _pageSize;
         xhr.open('POST', url);
-        xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
-        xhr.setRequestHeader("timestamp", "1672821524273");
         let param = 
         {
             gameType : _gameType,
@@ -94,8 +92,6 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         console.log("http 获取战绩细节数据==");
         let xhr = new XMLHttpRequest();
         xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/game/detail");
-        xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
-        xhr.setRequestHeader("timestamp", "1672821524273");
         let param = 
         {
             gameId : _gameId,
@@ -123,8 +119,6 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         let url = "http://54.169.147.71:8080/api/game/sy/hand?page="+_pageNum+"&limit=" + _pageSize;
 
         xhr.open('POST', url);
-        xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
-        xhr.setRequestHeader("timestamp", "1672821524273");
         let param = 
         {
             gameId : "G1001",
@@ -158,8 +152,6 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         let xhr = new XMLHttpRequest();
 
         xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/hand/detail");
-        xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
-        xhr.setRequestHeader("timestamp", "1672821524273");
         let param = 
         {
             gameId : "G1001",
