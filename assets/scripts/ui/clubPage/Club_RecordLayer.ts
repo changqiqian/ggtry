@@ -51,17 +51,14 @@ export class Club_RecordLayer extends ListViewCtr<RecordSingle>
             if(i == 0)
             {
                 type = GameType.GameType_TexasCash;
-                currentToggle.SetTitle(Localization.GetString("00306"));
             }
             else if(i == 1)
             {
                 type = GameType.GameType_ShortCash;
-                currentToggle.SetTitle(Localization.GetString("00188"));
             }
             else if(i == 2)
             {
                 type = GameType.GameType_OmhCash;
-                currentToggle.SetTitle(Localization.GetString("00238"));
             }
             currentToggle.SetDataNotify(HallData.Instance.Data_ClubRecordSubPage , type);
         }
