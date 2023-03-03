@@ -96,9 +96,7 @@ export class Game_ActionTag extends BaseUI
             }
             break;
         }
-
         this.mAction.string = title;
-
         this.ShowAnimation();
     }
 

@@ -105,7 +105,7 @@ export class HallUI extends BaseUI
     RefreshMsg()
     {
         NetworkSend.Instance.GetMiniGameListInHall();
-        NetworkSend.Instance.GetTexasGameListInHall();
+        //NetworkSend.Instance.GetTexasGameListInHall();
         let alreadyJoinList = LocalPlayerData.Instance.Data_JoinTexasList.mData;
         for(let i = 0 ; i < alreadyJoinList.length ; i++)
         {

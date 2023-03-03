@@ -3,8 +3,8 @@
   "options": {
     "web-desktop": {
       "resolution": {
-        "designWidth": 1080,
-        "designHeight": 1920
+        "designWidth": 540,
+        "designHeight": 960
       }
     }
   }

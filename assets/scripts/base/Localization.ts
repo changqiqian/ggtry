@@ -450,6 +450,8 @@ export class Localization {
         { name: '00363', ch: '战绩详情', en: 'Details' , korea :""},
         { name: '00364', ch: '获胜玩家', en: 'Winner' , korea :""},
         { name: '00365', ch: '我的手牌', en: 'My cards' , korea :""},
+        { name: '00366', ch: '已断线', en: 'Disconnected' , korea :""},
+
 
         { name: '01000', ch: '公告', en: 'Notification' , korea :""},
         { name: '01001', ch: '消息', en: 'MESSAGES' , korea :""},

@@ -89,14 +89,17 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
 
     BindData()
     {
-        LocalPlayerData.Instance.Data_SimpleReplayDataInGame.AddListenner(this,(_data)=>
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        gameData.Data_S2CCommonReplayListResp.AddListenner(this,(_data)=>
         {
-            if(this.mCurrentPage != _data.pageNum)
+            let coreData : SimpleReplayData = _data.data;
+            if(this.mCurrentPage != coreData.pageNum)
             {
                 return;
             }
 
-            for(let i = 0 ; i < _data.list.length ; i++)
+            for(let i = 0 ; i < coreData.list.length ; i++)
             {
                 let current = _data.list[i];
                 let index = this.mCurrentData.findIndex((_item) => _item.index === current.index);
@@ -105,58 +108,25 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
                     this.InsertOneData(current);
                 }
             }
-
             this.UpdateData(_data.total);
-        })
+        });
 
-        LocalPlayerData.Instance.Data_ReplayDataInGame.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonReplayDetailsResp.AddListenner(this,(_data)=>
         {
             UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
             {
                 let tempScript = _script as Game_CashReplay;
-                tempScript.InitWithData(_data);
+                tempScript.InitWithData(_data.data);
             });      
-
         });
-        // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        // let gameData = gameStruct.mGameData;
-        // gameData.Data_S2CCommonReplayListResp.AddListenner(this,(_data)=>
-        // {
-        //     let coreData : SimpleReplayData = _data.data;
-        //     if(this.mCurrentPage != coreData.pageNum)
-        //     {
-        //         return;
-        //     }
-
-        //     for(let i = 0 ; i < coreData.list.length ; i++)
-        //     {
-        //         let current = _data.list[i];
-        //         let index = this.mCurrentData.findIndex((_item) => _item.index === current.index);
-        //         if(index < 0)
-        //         {
-        //             this.InsertOneData(current);
-        //         }
-        //     }
-        //     this.UpdateData(_data.total);
-        // });
-
-        // gameData.Data_S2CCommonReplayDetailsResp.AddListenner(this,(_data)=>
-        // {
-        //     UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
-        //     {
-        //         let tempScript = _script as Game_CashReplay;
-        //         tempScript.InitWithData(_data.data);
-        //     });      
-        // });
     }
 
     Refresh()
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        //let gameData = gameStruct.mGameData;
-        //let msgId = gameData.ReplayListMsgId();
-        NetworkHttp.Instance.PostSimpleReplay(gameStruct.mGameType,gameStruct.mGameId,
-            this.mCurrentPage , this.mPageSize , Tool.GetDateDurationFromToday(0),true);
+        let gameData = gameStruct.mGameData;
+        let msgId = gameData.ReplayListMsgId();
+        NetworkSend.Instance.GetReplayList(msgId , gameStruct.mGameId , this.mCurrentPage , this.mPageSize);
     }
 
     RenderEvent(_item: Node , _index: number)
@@ -167,9 +137,10 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
     OnVedioBtn(_gameId : string , _index : number , _date : string)
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        // let gameData = gameStruct.mGameData;
-        // let msgId = gameData.ReplayDetailMsgId();
-        NetworkHttp.Instance.PostReplayDetail(gameStruct.mGameId,_index, Tool.GetDateDurationFromToday(0),true);
+        let gameData = gameStruct.mGameData;
+        let msgId = gameData.ReplayDetailMsgId();
+
+        NetworkSend.Instance.GetReplayDetail(msgId,gameStruct.mGameId,_index);
     }
 
 }

@@ -145,30 +145,7 @@ export class Club_RecordLayer extends ListViewCtr<RecordSingle>
     {
         let type = HallData.Instance.Data_ClubRecordSubPage.mData;
         let day = HallData.Instance.Data_ClubRecordDateType.mData;
-        let dateStart;
-        let dateEnd;
-        switch(day)
-        {
-            case HTTP_Date.Today:
-                {
-                    dateEnd = Tool.GetDateDurationFromToday(0);
-                    dateStart = Tool.GetDateDurationFromToday(0);
-                }
-                break;
-            case HTTP_Date.Week:
-                {
-                    dateEnd = Tool.GetDateDurationFromToday(0);
-                    dateStart = Tool.GetDateDurationFromToday(7);
-                }
-                break;
-            case HTTP_Date.Month:
-                {
-                    dateEnd = Tool.GetDateDurationFromToday(0);
-                    dateStart = Tool.GetDateDurationFromToday(30);
-                }
-                break;
-        }
-        NetworkHttp.Instance.PostRecordData(type ,dateStart,dateEnd, this.mCurrentPage , this.mPageSize,this.mClubId);
+        NetworkHttp.Instance.PostRecordData(type ,day, this.mCurrentPage , this.mPageSize,this.mClubId);
     }
     RenderEvent(_item: Node , _index: number)
     {
@@ -181,30 +158,7 @@ export class Club_RecordLayer extends ListViewCtr<RecordSingle>
         let type = HallData.Instance.Data_ClubRecordSubPage.mData;
         let day = HallData.Instance.Data_ClubRecordDateType.mData;
 
-        let dateStart;
-        let dateEnd;
-        switch(day)
-        {
-            case HTTP_Date.Today:
-                {
-                    dateEnd = Tool.GetDateDurationFromToday(0);
-                    dateStart = Tool.GetDateDurationFromToday(0);
-                }
-                break;
-            case HTTP_Date.Week:
-                {
-                    dateEnd = Tool.GetDateDurationFromToday(0);
-                    dateStart = Tool.GetDateDurationFromToday(7);
-                }
-                break;
-            case HTTP_Date.Month:
-                {
-                    dateEnd = Tool.GetDateDurationFromToday(0);
-                    dateStart = Tool.GetDateDurationFromToday(30);
-                }
-                break;
-        }
-        NetworkHttp.Instance.PostTotalRecordData(type,dateStart,dateEnd,this.mClubId)
+        NetworkHttp.Instance.PostTotalRecordData(type,day,this.mClubId)
     }
 
 }
