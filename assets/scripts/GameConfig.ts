@@ -14,7 +14,7 @@ export class GameConfig
         GameConfig.UsingIp = _ip;
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
 
-        GameConfig.SeverUrl  = "ws://13.214.131.201:8199/ws";
+        //GameConfig.SeverUrl  = "ws://13.214.131.201:8199/ws";
     }
     //发布的版本号
     public static Version = "1.1.1"

@@ -720,46 +720,46 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
-        // Network.Instance.AddMsgListenner(MessageId.S2C_CommonReplayListResp,(_data)=>
-        // {
-        //     UIMgr.Instance.ShowLoading(false);
-        //     let msg = S2CCommonReplayListResp.decode(_data);
-        //     console.log("收到的内容 S2C_CommonReplayListResp  实时牌普列表==" + JSON.stringify(msg));
-        //     if(msg.result.resId == MsgResult.Success)
-        //     {
-        //         let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
-        //         if(gameStruct != null)
-        //         {
-        //             let gameData = gameStruct.mGameData;
-        //             gameData.Data_S2CCommonReplayListResp.mData = msg;
-        //         }
-        //     }
-        //     else
-        //     {
-        //         UIMgr.Instance.ShowToast(msg.result.resMessage);
-        //     }
-        // },this);
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonReplayListResp,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonReplayListResp.decode(_data);
+            console.log("收到的内容 S2C_CommonReplayListResp  实时牌普列表==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_S2CCommonReplayListResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
 
 
-        // Network.Instance.AddMsgListenner(MessageId.S2C_CommonReplayDetailsResp,(_data)=>
-        // {
-        //     UIMgr.Instance.ShowLoading(false);
-        //     let msg = S2CCommonReplayDetailsResp.decode(_data);
-        //     console.log("收到的内容 S2C_CommonReplayDetailsResp  实时牌普回放数据==" + JSON.stringify(msg));
-        //     if(msg.result.resId == MsgResult.Success)
-        //     {
-        //         let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
-        //         if(gameStruct != null)
-        //         {
-        //             let gameData = gameStruct.mGameData;
-        //             gameData.Data_S2CCommonReplayDetailsResp.mData = msg;
-        //         }
-        //     }
-        //     else
-        //     {
-        //         UIMgr.Instance.ShowToast(msg.result.resMessage);
-        //     }
-        // },this);
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonReplayDetailsResp,(_data)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonReplayDetailsResp.decode(_data);
+            console.log("收到的内容 S2C_CommonReplayDetailsResp  实时牌普回放数据==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_S2CCommonReplayDetailsResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonExtraThinkResp,(_data)=>
         {
