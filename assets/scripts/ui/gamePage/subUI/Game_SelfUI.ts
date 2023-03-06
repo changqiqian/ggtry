@@ -132,6 +132,11 @@ export class Game_SelfUI extends BaseUI
         gameData.Data_S2CCommonCurrentActionNotify.AddListenner(this,(_data)=>
         {
             this.UpdateAddTime();
+            let state = gameData.GetGameState();
+            if(state == TexasCashState.TexasCashState_PreFlopRound)
+            {
+                this.UpdateCards();
+            }
         })
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
@@ -383,10 +388,54 @@ export class Game_SelfUI extends BaseUI
             return;
         }
         this.mCards.active = true;
-        for(let i = 0 ; i < cards.length ; i++)
+
+        let state = gameData.GetGameState();
+        if(state == TexasCashState.TexasCashState_PreFlopRound)
         {
-            let delayTime = i*0.05;
-            this.ShowCard(i , cards[i] , delayTime);
+            let lastAct = gameData.FindLastActionByUid(selfPlayer.uid)
+            let cardNodes = this.mCards.children;
+            for(let i = 0 ; i < cards.length ; i++)
+            {
+                let currentPoker = cardNodes[i].getComponent(Poker);
+                currentPoker.ResetAndHide();
+                currentPoker.ShowBack(); 
+            }
+
+            let currentActionUid = gameData.GetActionUid();
+            if(currentActionUid != selfPlayer.uid)
+            {
+                if(lastAct == null)
+                {
+                    return;
+                }
+    
+                if(lastAct.actionType == ActionType.ActionType_Ante)
+                {
+                    return;
+                }
+    
+                if(lastAct.actionType == ActionType.ActionType_SB)
+                {
+                    return;
+                }
+    
+                if(lastAct.actionType == ActionType.ActionType_BB)
+                {
+                    return;
+                }
+    
+                if(lastAct.actionType == ActionType.ActionType_Straddle)
+                {
+                    return;
+                }
+            }
+        }
+
+        
+        for(let k = 0 ; k < cards.length ; k++)
+        {
+            let delayTime = k*0.05;
+            this.ShowCard(k , cards[k] , delayTime);
         }
     }
 

@@ -1266,8 +1266,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
         
-        
-        
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonPreFlopRoundNotify,(_data)=>
         {
