@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, color, Color } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { GameConfig } from '../../../GameConfig';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { Tool } from '../../../Tool';
 import { BaseButton } from '../../common/BaseButton';
@@ -29,12 +30,16 @@ export class Game_SelfAction extends BaseUI
     @property(CircleTimer) 
     mCircleTimer: CircleTimer = null;
 
-    mCallAmount : number = null;
-    mMinRaiseAmount : number = null;
-    private mIndex : number = null;
+    mCallAmount : number = GameConfig.WrongIndex;
+    private mIndex : number = GameConfig.WrongIndex;
     onEnable()
     {
 
+    }
+
+    onDisable()
+    {
+        this.mCallAmount = GameConfig.WrongIndex;
     }
 
     InitParam() 
@@ -243,6 +248,11 @@ export class Game_SelfAction extends BaseUI
                 this.HideAll();
             }
         });
+
+        LocalPlayerData.Instance.Data_BBModeSetting.AddListenner(this,(_data)=>
+        {
+            this.UpdateCallBtn();
+        });
     }
 
     HideAll()
@@ -358,12 +368,39 @@ export class Game_SelfAction extends BaseUI
         this.mCircleTimer.StartTimer(actionTime);
     }
 
+    UpdateCallBtn()
+    {
+        if(this.mIndex == GameConfig.WrongIndex)
+        {
+            return;
+        }
+
+        if(this.mCallAmount == GameConfig.WrongIndex)
+        {
+            return;
+        }
+
+        if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
+        {
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            let bb = gameData.GetStaticData().smallBlind * 2;
+            let showBB = Tool.ConvertToBB(this.mCallAmount , bb);
+            this.mCallBtn.SetTitle(showBB);
+        }
+        else
+        {
+            this.mCallBtn.SetTitle(this.mCallAmount + "");
+        }
+        
+    }
+
     ShowBetUI(_lastBetAction : ActionInfo)
     {
         this.mFoldBtn.node.active = true;
         this.mCallBtn.node.active = true;
-        let clientCallAmount = Tool.ConvertMoney_S2C(_lastBetAction.roundAmount);
-        this.mCallBtn.SetTitle(clientCallAmount + "");
+        this.mCallAmount = _lastBetAction.roundAmount;
+        this.UpdateCallBtn();
         this.mCheckBtn.node.active = false;
         this.mGame_CustomerRaise.InitWithData(this.mIndex , ()=>
         {

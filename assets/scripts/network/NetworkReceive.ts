@@ -1387,7 +1387,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);  
 
-
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonChatNotify,(_data)=>
         {
             let msg = S2CCommonChatNotify.decode(_data);

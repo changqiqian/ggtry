@@ -18,9 +18,6 @@ export class Game_BottomUI extends BaseUI
     @property(BaseButton) 
     mChatBtn: BaseButton = null;
 
-    @property(BaseButton) 
-    mTestBtn: BaseButton = null;
-
     private mIndex : number = null;
     InitParam() 
     {

@@ -298,4 +298,11 @@ export class Tool
         return Math.floor(Math.random() * (upper - lower+1)) + lower;
     }
 
+    public static ConvertToBB(_amount : number , _bb : number) : string
+    {
+        let resultBB = _amount/_bb;
+        let result = this.ConvertMoney_S2C(resultBB);
+        return result.toFixed(1);
+    }
+
 }

@@ -69,7 +69,24 @@ export class Game_CustomerRaise extends BaseUI
                 this.ShowRaiseBB();
             }
         }
+        if(this.CheckInitFlag())
+        {
+            return;
+        }
+        this.BindData();
+    }
 
+    BindData()
+    {
+        LocalPlayerData.Instance.Data_BBModeSetting.AddListenner(this,(_data)=>
+        {
+            if(this.mRaiseByPot.activeInHierarchy == false)
+            {
+                return;
+            }
+            this.ShowRaiseByPot();
+            
+        });
     }
 
     ShowRaiseBB()
@@ -142,10 +159,22 @@ export class Game_CustomerRaise extends BaseUI
             let title = GameConfig.GetCustomerRaiseTitle(i);
             let amount = ratio *  totalPot; 	
             amount = Tool.CeilServerMoney(amount);
-            let clientAmount = Tool.ConvertMoney_S2C(amount);
+            
             let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
             currentBtn.node.getChildByName("Describe").getComponent(Label).string = title;
-            currentBtn.SetTitle(clientAmount + "");
+
+            if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
+            {
+                let bb = gameData.GetStaticData().smallBlind * 2;
+                let showBB = Tool.ConvertToBB(amount , bb);
+                currentBtn.SetTitle(showBB + "");
+            }
+            else
+            {
+                let clientAmount = Tool.ConvertMoney_S2C(amount);
+                currentBtn.SetTitle(clientAmount + "");
+            }
+
             currentBtn.SetClickCallback((_data)=>
             {
                 let actionInfo = new ActionInfo();

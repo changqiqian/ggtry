@@ -639,6 +639,17 @@ export class Game_Player extends BaseUI
                 script.InitWithData(_data.lotteryNum);
             })
         })
+
+        LocalPlayerData.Instance.Data_BBModeSetting.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            this.UpdateMoney(false , playerInfo);
+        });
     }
 
     UpdateWinLose(_winLoseInfo : PlayerWinLose)
@@ -924,14 +935,30 @@ export class Game_Player extends BaseUI
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
 
+            let bb = gameData.GetStaticData().smallBlind * 2;
             if(gameData.CanPlayerBuyIn(_playerInfo.uid))
             {
                 let totalMoney = _playerInfo.bringInNum + _playerInfo.currencyNum;
-                this.mAmount.string =  Tool.ConvertMoney_S2C(totalMoney) + "";
+                if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
+                {
+                    Tool.ConvertToBB(totalMoney,bb);
+                }
+                else
+                {
+                    this.mAmount.string =  Tool.ConvertMoney_S2C(totalMoney) + "";
+                }
             }
             else
             {
                 this.mAmount.string =  Tool.ConvertMoney_S2C(_playerInfo.currencyNum) + "";
+                if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
+                {
+                    Tool.ConvertToBB(_playerInfo.currencyNum , bb);
+                }
+                else
+                {
+                    this.mAmount.string =  Tool.ConvertMoney_S2C(_playerInfo.currencyNum) + "";
+                }
             }
         }
         else
@@ -990,10 +1017,11 @@ export class Game_Player extends BaseUI
             return;
         }
 
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
         if(_replay == false)
         {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
+           
             let isSelf = gameData.IsSelfBySeat(this.mSeatID);
             if(isSelf)
             {
@@ -1010,8 +1038,8 @@ export class Game_Player extends BaseUI
             script.Fly(startWorldPos ,entWorldPos);
         })
 
-        let amountS2C = Tool.ConvertMoney_S2C(_amount);
-        this.mGame_BetAmount.Bet(amountS2C);
+
+        this.mGame_BetAmount.Bet(_amount, gameData , _replay);
 
     }
 

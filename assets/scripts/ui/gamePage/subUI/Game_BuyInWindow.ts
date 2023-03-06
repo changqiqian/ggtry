@@ -47,7 +47,6 @@ export class Game_BuyInWindow extends BaseUI
 
 
     mIndex : number = null;
-    mInit : boolean = false;
 
     onEnable()
     {
@@ -141,12 +140,11 @@ export class Game_BuyInWindow extends BaseUI
 
     InitWithData(_index : number)
     {
-        if(this.mInit)
+        if(this.CheckInitFlag())
         {
             return;
         }
 
-        this.mInit = true;
         this.mIndex = _index;
         this.mCountNode.active = false;
         this.StopCountDown();

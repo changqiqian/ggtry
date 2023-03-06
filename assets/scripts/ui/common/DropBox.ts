@@ -91,6 +91,7 @@ export class DropBox extends BaseUI
 
     NotifyCallback(_val)
     {
+        this.mTitle.string = this.mTitles[_val];
         this.mBtn.SetTitle(this.mTitles[_val]);
     }
 }

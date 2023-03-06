@@ -53,13 +53,29 @@ export class BaseData <T>
         this.mSetValueAlready = true;
         this.mSavingData = _value;
 
-        for(let i = 0 ; i < this.mEventArray.length ; i++)
+        // for(let i = 0 ; i < this.mEventArray.length ; i++)
+        // {
+        //     let current = this.mEventArray[i];
+        //     if (cc.isValid(current.mTarget, true))
+        //     {
+        //         current.mCallfunc(this.mSavingData);
+        //     } 
+        // }
+
+
+        let step = 0;
+        while(step < this.mEventArray.length)
         {
-            let current = this.mEventArray[i];
+            let current = this.mEventArray[step];
             if (cc.isValid(current.mTarget, true))
             {
                 current.mCallfunc(this.mSavingData);
+                step++;
             } 
+            else
+            {
+                this.RemoveListennerByTarget(current.mTarget);
+            }
         }
 
         if(this.mAutoReset)

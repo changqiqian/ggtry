@@ -26,7 +26,6 @@ export class Game_BringOut extends BaseUI
     mConfirmBtn: BaseButton = null;
 
     mIndex : number = null;
-    mInit : boolean = false;
 
     onEnable()
     {
@@ -77,12 +76,10 @@ export class Game_BringOut extends BaseUI
 
     InitWithData(_index : number)
     {
-        if(this.mInit)
+        if(this.CheckInitFlag())
         {
             return;
         }
-
-        this.mInit = true;
         this.mIndex = _index;
         this.BindData();
     }
