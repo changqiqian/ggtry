@@ -4,9 +4,9 @@
     "level": 1
   },
   "common": {
-    "outputName": "web-desktop",
+    "outputName": "web-mobile",
     "mainBundleCompressionType": "merge_dep",
-    "platform": "web-desktop",
+    "platform": "web-mobile",
     "debug": true,
     "replaceSplashScreen": true
   },
@@ -160,101 +160,6 @@
           }
         },
         "time": "1-22-2023 15:08",
-        "dirty": false
-      },
-      "1677769139083": {
-        "id": "1677769139083",
-        "progress": 1,
-        "state": "success",
-        "message": "3-2-2023 23:01 Build success in 160908 ms!",
-        "options": {
-          "name": "SY",
-          "platform": "web-mobile",
-          "buildPath": "project://build",
-          "debug": false,
-          "md5Cache": false,
-          "skipCompressTexture": false,
-          "sourceMaps": false,
-          "replaceSplashScreen": true,
-          "mainBundleCompressionType": "merge_dep",
-          "mainBundleIsRemote": false,
-          "mergeStartScene": false,
-          "experimentalEraseModules": false,
-          "compressTexture": true,
-          "packAutoAtlas": true,
-          "startScene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-          "scenes": [
-            {
-              "url": "db://assets/scene/start.scene",
-              "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-              "inBundle": false
-            }
-          ],
-          "outputName": "web-mobile",
-          "packages": {
-            "web-mobile": {
-              "orientation": "portrait",
-              "polyfills": {
-                "asyncFunctions": true
-              }
-            },
-            "cocos-service": {
-              "configID": "437b18",
-              "services": []
-            },
-            "hot-update": null
-          }
-        },
-        "time": "3-2-2023 22:58",
-        "dirty": false
-      },
-      "1677769381813": {
-        "id": "1677769381813",
-        "progress": 1,
-        "state": "success",
-        "message": "3-2-2023 23:05 Build success in 139167 ms!",
-        "options": {
-          "name": "SY",
-          "platform": "web-desktop",
-          "buildPath": "project://build",
-          "debug": true,
-          "md5Cache": false,
-          "skipCompressTexture": false,
-          "sourceMaps": false,
-          "replaceSplashScreen": true,
-          "mainBundleCompressionType": "merge_dep",
-          "mainBundleIsRemote": false,
-          "mergeStartScene": false,
-          "experimentalEraseModules": false,
-          "compressTexture": true,
-          "packAutoAtlas": true,
-          "startScene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-          "scenes": [
-            {
-              "url": "db://assets/scene/start.scene",
-              "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-              "inBundle": false
-            }
-          ],
-          "outputName": "web-desktop",
-          "packages": {
-            "web-desktop": {
-              "resolution": {
-                "designWidth": 540,
-                "designHeight": 960
-              },
-              "polyfills": {
-                "asyncFunctions": true
-              }
-            },
-            "cocos-service": {
-              "configID": "437b18",
-              "services": []
-            },
-            "hot-update": null
-          }
-        },
-        "time": "3-2-2023 23:03",
         "dirty": false
       }
     }
