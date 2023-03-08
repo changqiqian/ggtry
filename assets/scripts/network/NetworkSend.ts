@@ -462,6 +462,15 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("获取观看者列表  === " + JSON.stringify(msg))
     }
 
+    public AutoState(_msgId : number ,_gameId : string )
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2STexasCashCancelAutoOperator();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(_msgId , C2STexasCashCancelAutoOperator.encode(msg).finish());
+        console.log("托管状态申请  === " + JSON.stringify(msg))
+    }
+
     public BuyInsurance(_msgId : number ,_gameId : string , _amount : number)
     {
         let msg = new C2SGameBuyInsurance();

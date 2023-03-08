@@ -635,6 +635,25 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonCancelAutoOperatorResp,(_data)=>
+        {
+            let msg = S2CCommonCancelAutoOperatorResp.decode(_data);
+            console.log("收到的内容 S2C_CommonCancelAutoOperatorResp  取消托管回复==" + JSON.stringify(msg));
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);
+
+
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonBringInResp,(_data)=>
         {
@@ -1161,16 +1180,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 {
                     return;
                 }
-                // if(gameData.IsPlayerPlaying(currentStandPlayer.uid) == true)
-                // {
-                //     currentStandPlayer.gameRole = GameRole.GameRole_Observer;
-                //     gameData.AddDelayStandUpNotify(msg);
-                //     if(currentStandPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
-                //     {
-                //         UIMgr.Instance.ShowToast(Localization.GetString("00278"));
-                //     }
-                //     return;
-                // }
 
                 gameData.PlayerStand(msg.actionUid);
                 gameData.Data_S2CCommonStandUpNotify.mData = msg;
@@ -1382,6 +1391,20 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 let playerInfo = gameData.GetPlayerInfoByUid(msg.actionInfo.uid);
                 playerInfo.fold = msg.actionInfo.actionType == ActionType.ActionType_Fold;
                 gameData.Data_S2CCommonActionNotify.mData = msg;
+            }
+        },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonAutoOperatorNotify,(_data)=>
+        {
+            let msg = S2CCommonAutoOperatorNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonAutoOperatorNotify  托管推送==" + JSON.stringify(msg));
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.PlayerAuto(msg.uid , msg.leftTime);
+                gameData.Data_S2CCommonAutoOperatorNotify.mData = msg;
             }
         },this);  
 

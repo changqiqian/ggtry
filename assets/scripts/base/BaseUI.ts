@@ -45,7 +45,7 @@ export abstract class BaseUI extends Component {
     mInitFlag : boolean = false;
     mLayerList: Array<SubViewKeyPair>;
 
-
+    mIsWindow : boolean = false;
     //计时器，可以自动补偿切到后台的时间，定时器停止造成的时间对不上
     mTotalCountTime : number;
     mTimerStartingTime : number;
@@ -260,8 +260,16 @@ export abstract class BaseUI extends Component {
             this.Show(false);
             return;
         }
+
+        if(parentScript.mIsWindow)
+        {
+            parentScript.Show(false);
+        }
+        else
+        {
+            this.Show(false);
+        }
         
-        parentScript.Show(false);
     }
     //启动秒表  
     StartSecondsTimer(_totalTime : number , _timeSpace :number = 1 , _callback : Function = null)

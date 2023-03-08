@@ -1420,9 +1420,6 @@ export class PlayerInfo implements IPlayerInfo {
     /** PlayerInfo fold. */
     public fold: boolean;
 
-    /** PlayerInfo auto. */
-    public auto: boolean;
-
     /** PlayerInfo autoLeftTime. */
     public autoLeftTime: number;
 
@@ -1829,7 +1826,7 @@ export class ActionResult implements IActionResult {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ActionResult;
 }
 
-/** HTTP用到的结构//////////////////////////////////// */
+/** Represents a SimpleReplayData. */
 export class SimpleReplayData implements ISimpleReplayData {
 
     /**
@@ -2199,14 +2196,17 @@ export class RecordPlayer implements IRecordPlayer {
     /** RecordPlayer name. */
     public name: string;
 
-    /** RecordPlayer hands. */
-    public hands: number;
+    /** RecordPlayer totalHands. */
+    public totalHands: number;
 
-    /** RecordPlayer vpip. */
-    public vpip: number;
+    /** RecordPlayer totalTurnHands. */
+    public totalTurnHands: number;
 
-    /** RecordPlayer buyIn. */
-    public buyIn: number;
+    /** RecordPlayer totalBringIn. */
+    public totalBringIn: number;
+
+    /** RecordPlayer totalBringOut. */
+    public totalBringOut: number;
 
     /** RecordPlayer winLose. */
     public winLose: number;
@@ -4875,6 +4875,15 @@ export class ReplayRecord implements IReplayRecord {
     /** ReplayRecord result. */
     public result: IPlayerWinLose[];
 
+    /** ReplayRecord potInfoFlop. */
+    public potInfoFlop: IPotInfo[];
+
+    /** ReplayRecord potInfoTurn. */
+    public potInfoTurn: IPotInfo[];
+
+    /** ReplayRecord potInfoRiver. */
+    public potInfoRiver: IPotInfo[];
+
     /**
      * Encodes the specified ReplayRecord message. Does not implicitly {@link ReplayRecord.verify|verify} messages.
      * @param m ReplayRecord message or plain object to encode
@@ -5450,6 +5459,7 @@ export enum MessageId {
     C2S_TexasCashPlayerRecord = 5019,
     C2S_TexasCashReplayList = 5020,
     C2S_TexasCashReplayDetails = 5021,
+    C2S_TexasCashCancelAutoOperator = 5022,
     MSG_TexasCashEnd = 5500,
     MSG_TexasMttBegin = 5501,
     MSG_TexasMttEnd = 6000,
@@ -5481,6 +5491,7 @@ export enum MessageId {
     S2C_CommonPlayerRecordResp = 8018,
     S2C_CommonReplayListResp = 8019,
     S2C_CommonReplayDetailsResp = 8020,
+    S2C_CommonCancelAutoOperatorResp = 8021,
     S2C_CommonBringInTimerNotify = 8110,
     S2C_CommonBringInNotify = 8111,
     S2C_CommonSitDownNotify = 8112,
@@ -5505,6 +5516,7 @@ export enum MessageId {
     S2C_CommonPotsNotify = 8266,
     S2C_CommonJackpotLotteryNotify = 8267,
     S2C_CommonSqueezeRoundNotify = 8268,
+    S2C_CommonAutoOperatorNotify = 8269,
     MSG_TexasCowboyBegin = 10001,
     C2S_TexasCowboyEnterGame = 10002,
     C2S_TexasCowboyExitGame = 10003,
@@ -6180,6 +6192,37 @@ export class C2STexasCashReplayDetails implements IC2STexasCashReplayDetails {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashReplayDetails;
+}
+
+/** Represents a C2STexasCashCancelAutoOperator. */
+export class C2STexasCashCancelAutoOperator implements IC2STexasCashCancelAutoOperator {
+
+    /**
+     * Constructs a new C2STexasCashCancelAutoOperator.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2STexasCashCancelAutoOperator);
+
+    /** C2STexasCashCancelAutoOperator gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2STexasCashCancelAutoOperator message. Does not implicitly {@link C2STexasCashCancelAutoOperator.verify|verify} messages.
+     * @param m C2STexasCashCancelAutoOperator message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2STexasCashCancelAutoOperator, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2STexasCashCancelAutoOperator message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2STexasCashCancelAutoOperator
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashCancelAutoOperator;
 }
 
 /** Represents a S2CCommonEnterGameResp. */
@@ -6947,6 +6990,40 @@ export class S2CCommonReplayDetailsResp implements IS2CCommonReplayDetailsResp {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonReplayDetailsResp;
+}
+
+/** Represents a S2CCommonCancelAutoOperatorResp. */
+export class S2CCommonCancelAutoOperatorResp implements IS2CCommonCancelAutoOperatorResp {
+
+    /**
+     * Constructs a new S2CCommonCancelAutoOperatorResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonCancelAutoOperatorResp);
+
+    /** S2CCommonCancelAutoOperatorResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CCommonCancelAutoOperatorResp gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified S2CCommonCancelAutoOperatorResp message. Does not implicitly {@link S2CCommonCancelAutoOperatorResp.verify|verify} messages.
+     * @param m S2CCommonCancelAutoOperatorResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonCancelAutoOperatorResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonCancelAutoOperatorResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonCancelAutoOperatorResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonCancelAutoOperatorResp;
 }
 
 /** Represents a S2CCommonBringInTimerNotify. */
@@ -7820,6 +7897,46 @@ export class S2CCommonSqueezeRoundNotify implements IS2CCommonSqueezeRoundNotify
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonSqueezeRoundNotify;
+}
+
+/** Represents a S2CCommonAutoOperatorNotify. */
+export class S2CCommonAutoOperatorNotify implements IS2CCommonAutoOperatorNotify {
+
+    /**
+     * Constructs a new S2CCommonAutoOperatorNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonAutoOperatorNotify);
+
+    /** S2CCommonAutoOperatorNotify uid. */
+    public uid: string;
+
+    /** S2CCommonAutoOperatorNotify gameId. */
+    public gameId: string;
+
+    /** S2CCommonAutoOperatorNotify auto. */
+    public auto: boolean;
+
+    /** S2CCommonAutoOperatorNotify leftTime. */
+    public leftTime: number;
+
+    /**
+     * Encodes the specified S2CCommonAutoOperatorNotify message. Does not implicitly {@link S2CCommonAutoOperatorNotify.verify|verify} messages.
+     * @param m S2CCommonAutoOperatorNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonAutoOperatorNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonAutoOperatorNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonAutoOperatorNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonAutoOperatorNotify;
 }
  
 }

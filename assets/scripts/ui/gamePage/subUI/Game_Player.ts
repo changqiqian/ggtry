@@ -292,6 +292,23 @@ export class Game_Player extends BaseUI
             this.UpdateDealer(gameData.GetDynamicData().dealerUid , playerInfo );
             this.UpdatePlayerPlayingState(playerInfo);
         });
+
+        gameData.Data_S2CCommonAutoOperatorNotify.AddListenner(this,(_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoBySeatId(_data.uid);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.seat != this.mSeatID)
+            {
+                return;
+            }
+
+            this.ShowAuto(playerInfo.autoLeftTime);
+        });
+
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
         {
             let playerInfo = _data.seatPlayerInfo;
@@ -745,9 +762,9 @@ export class Game_Player extends BaseUI
             this.ShowMiniCard(isPlaying ,false);
             if(isPlaying)
             {
-                if(_playerInfo.auto)
+                if(_playerInfo.autoLeftTime > 0)
                 {
-                    this.ShowAuto(true , _playerInfo.autoLeftTime);
+                    this.ShowAuto(_playerInfo.autoLeftTime);
                 }
                 else
                 {
@@ -764,13 +781,14 @@ export class Game_Player extends BaseUI
         }
     }
 
-    ShowAuto( _show :boolean , _leftTime : number)
+    ShowAuto( _leftTime : number)
     {
+        let show = _leftTime > 0;
         this.StopSecondsTimer();
         this.mCountDown.string = "";
-        this.mStateTitle.node.active =_show;
-        this.mDarkCover.active = _show;
-        if(_show == false)
+        this.mStateTitle.node.active =show;
+        this.mDarkCover.active = show;
+        if(show == false)
         {
             return;
         }

@@ -33,6 +33,12 @@ export class LoginUI extends BaseUI
     JackIpBtn: BaseButton = null;
     @property(BaseButton) 
     TurnOff: BaseButton = null;
+
+    @property(Label) 
+    mUid: Label = null;
+    @property(Label) 
+    mGameID: Label = null;
+
     InitParam() 
     {
     }
@@ -80,6 +86,8 @@ export class LoginUI extends BaseUI
             this.DebugFunction.active = false;
         });
 
+        this.mUid.string = "Uid=====" + top.USER_ID ;
+        this.mGameID.string = "GameID====" + top.GAME_ID ;
     }
     RegDataNotify() 
     {

@@ -27,6 +27,9 @@ export class Game_ControlBtns extends BaseUI
 
         this.mBackToGameBtn.SetClickCallback(()=>
         {
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            NetworkSend.Instance.AutoState(gameData.AutoMsgId(),gameStruct.mGameId);
         });
         this.mBackToGameBtn.node.active = false;
 
@@ -86,6 +89,8 @@ export class Game_ControlBtns extends BaseUI
         {
             this.mDealCardsBtn.node.active = false;
             this.mShowHandsBtn.node.active = false;
+            this.mBackToGameBtn.node.active = false;
+            this.UpdateBackGameBtn();
         });
 
         gameData.Data_S2CCommonWaitStartNotify.AddListenner(this,(_data)=>
@@ -107,6 +112,50 @@ export class Game_ControlBtns extends BaseUI
                 this.mShowHandsBtn.node.active = true;
             }
         });
+
+        gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
+        {
+            let localUid =  LocalPlayerData.Instance.Data_Uid.mData;
+            if(_data.actionUid == localUid)
+            {
+                this.mBackToGameBtn.node.active = false;
+            }
+        });
+
+        gameData.Data_S2CCommonAutoOperatorNotify.AddListenner(this,(_data)=>
+        {
+            let localUid =  LocalPlayerData.Instance.Data_Uid.mData;
+            if(_data.uid == localUid)
+            {
+                this.UpdateBackGameBtn();
+            }
+        });
+    }
+
+    UpdateBackGameBtn()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let localUid =  LocalPlayerData.Instance.Data_Uid.mData;
+        let playerInfo = gameData.GetPlayerInfoByUid(localUid);
+        if(playerInfo == null)
+        {
+            return;
+        }
+        this.StopSecondsTimer();
+        if(playerInfo.autoLeftTime > 0)
+        {
+            this.mBackToGameBtn.node.active = true;
+            this.StartSecondsTimer(playerInfo.autoLeftTime,1,()=>
+            {
+                let restTime = this.GetRestSeconds();
+                this.mBackToGameBtn.SetTitle(restTime + "s");
+            });
+        }
+        else
+        {
+            this.mBackToGameBtn.node.active = false;
+        }
     }
 }
 

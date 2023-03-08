@@ -77,4 +77,9 @@ export class GameDataCash extends GameData
     {
         return MessageId.C2S_TexasCashReplayDetails;
     }
+
+    public  AutoMsgId() : number
+    {
+        return MessageId.C2S_TexasCashCancelAutoOperator;
+    }
 }

@@ -62,7 +62,7 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonPotsNotify: BaseData<S2CCommonPotsNotify> = new BaseData<S2CCommonPotsNotify>(true);  //分池信息推送
     Data_S2CCommonJackpotLotteryNotify: BaseData<S2CCommonJackpotLotteryNotify> = new BaseData<S2CCommonJackpotLotteryNotify>();  //jackpot推送
     Data_S2CCommonSqueezeRoundNotify: BaseData<S2CCommonSqueezeRoundNotify> = new BaseData<S2CCommonSqueezeRoundNotify>();  //搓牌推送
-
+    Data_S2CCommonAutoOperatorNotify: BaseData<S2CCommonAutoOperatorNotify> = new BaseData<S2CCommonAutoOperatorNotify>();  //托管推送
 
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_Refresh : BaseData<boolean> = new BaseData<boolean>(true);  //刷新场景
@@ -267,6 +267,16 @@ export abstract class GameData extends MultipleNotify
             return;
         }
         playerInfo.currencyNum -= _amount;
+    }
+
+    public PlayerAuto(_uid : string , _leftTime : number )
+    {
+        let playerInfo = this.GetPlayerInfoByUid(_uid);
+        if(playerInfo == null)
+        {
+            return;
+        }
+        playerInfo.autoLeftTime = _leftTime;
     }
 
     public InsertAction(_action : ActionInfo)
@@ -481,6 +491,7 @@ export abstract class GameData extends MultipleNotify
     public abstract RecordPlayerMsgId() : number
     public abstract ReplayListMsgId() : number
     public abstract ReplayDetailMsgId() : number
+    public abstract AutoMsgId() : number
 
 }
 

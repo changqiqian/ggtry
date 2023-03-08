@@ -13,6 +13,7 @@ export class BaseWindow extends BaseUI {
     mContentScript : BaseUI = null;
     InitParam() 
     {
+        this.mIsWindow = true;
     }
     BindUI() 
     {
