@@ -86,6 +86,7 @@ export class Game_SelfUI extends BaseUI
         let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
+            console.log("Data_S2CCommonEnterGameResp")
             this.UpdateUI();
         });
 
@@ -95,6 +96,7 @@ export class Game_SelfUI extends BaseUI
             {
                 return;
             }
+            console.log("Data_S2CCommonSitDownNotify")
             this.UpdateUI();
         });
 
@@ -126,6 +128,7 @@ export class Game_SelfUI extends BaseUI
 
         gameData.Data_S2CCommonPreFlopRoundNotify.AddListenner(this,(_data)=>
         {
+            console.log("Data_S2CCommonPreFlopRoundNotify")
             this.UpdateCards();
         })
 
@@ -135,6 +138,7 @@ export class Game_SelfUI extends BaseUI
             let state = gameData.GetGameState();
             if(state == TexasCashState.TexasCashState_PreFlopRound)
             {
+                console.log("Data_S2CCommonCurrentActionNotify")
                 this.UpdateCards();
             }
         })
@@ -241,7 +245,7 @@ export class Game_SelfUI extends BaseUI
             return;
         }
 
-
+        console.log("UpdateUI")
         this.UpdateDealer();
         this.UpdateMoney();
         this.RestoreAction();

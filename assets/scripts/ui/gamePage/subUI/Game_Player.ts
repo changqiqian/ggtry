@@ -941,7 +941,7 @@ export class Game_Player extends BaseUI
                 let totalMoney = _playerInfo.bringInNum + _playerInfo.currencyNum;
                 if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
                 {
-                    Tool.ConvertToBB(totalMoney,bb);
+                    this.mAmount.string = Tool.ConvertToBB(totalMoney,bb);
                 }
                 else
                 {
@@ -953,7 +953,7 @@ export class Game_Player extends BaseUI
                 this.mAmount.string =  Tool.ConvertMoney_S2C(_playerInfo.currencyNum) + "";
                 if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
                 {
-                    Tool.ConvertToBB(_playerInfo.currencyNum , bb);
+                    this.mAmount.string = Tool.ConvertToBB(_playerInfo.currencyNum , bb);
                 }
                 else
                 {
