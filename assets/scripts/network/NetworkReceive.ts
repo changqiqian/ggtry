@@ -637,6 +637,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonCancelAutoOperatorResp,(_data)=>
         {
+            UIMgr.Instance.ShowLoading(false);
             let msg = S2CCommonCancelAutoOperatorResp.decode(_data);
             console.log("收到的内容 S2C_CommonCancelAutoOperatorResp  取消托管回复==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
@@ -1396,6 +1397,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonAutoOperatorNotify,(_data)=>
         {
+            UIMgr.Instance.ShowLoading(false);
             let msg = S2CCommonAutoOperatorNotify.decode(_data);
             console.log("收到的内容 S2C_CommonAutoOperatorNotify  托管推送==" + JSON.stringify(msg));
 

@@ -1020,6 +1020,10 @@ export class Game_Player extends BaseUI
     {
         let currentUid = _playerInfo.uid;
         this.mDealer.active = currentUid == _dealerId;
+        if(currentUid == LocalPlayerData.Instance.Data_Uid.mData)
+        {
+            this.mDealer.active = false;
+        }
         this.UpdateUIDirection();
     }
 
@@ -1039,12 +1043,11 @@ export class Game_Player extends BaseUI
         let gameData = gameStruct.mGameData;
         if(_replay == false)
         {
-           
-            let isSelf = gameData.IsSelfBySeat(this.mSeatID);
-            if(isSelf)
-            {
-                return;
-            }
+            // let isSelf = gameData.IsSelfBySeat(this.mSeatID);
+            // if(isSelf)
+            // {
+            //     return;
+            // }
         }
 
         this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_node)=>

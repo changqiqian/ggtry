@@ -187,21 +187,21 @@ export class Game_BuyInWindow extends BaseUI
 
     UpdateTotalMoney()
     {
-        // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        // this.mProgressSlider.SetPercent(0);
-        // this.UpdateBringInAmount(0);
-        // let currentMoney;
-        // let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
-        // if(gameStruct.mIsClubGame)
-        // {
-        //     currentMoney = enterClub.clubMember.clubPoint;
-        // }
-        // else 
-        // {
-        //     currentMoney = LocalPlayerData.Instance.Data_Coin.mData;
-        // }
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        this.mProgressSlider.SetPercent(0);
+        this.UpdateBringInAmount(0);
+        let currentMoney;
+        //let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
+        if(gameStruct.mIsClubGame)
+        {
+            //currentMoney = enterClub.clubMember.clubPoint;
+        }
+        else 
+        {
+            currentMoney = LocalPlayerData.Instance.Data_Coin.mData;
+        }
 
-        // this.mTotalAmount.string = Tool.ConvertMoney_S2C(currentMoney) + "";
+        this.mTotalAmount.string = Tool.ConvertMoney_S2C(currentMoney) + "";
     }
 
     CalculateControlMoney(_ratio : number) : number

@@ -295,6 +295,11 @@ export class Game_SelfAction extends BaseUI
             return;
         }
 
+        if(selfPlayer.autoLeftTime > 0)
+        {
+            return;
+        }
+
         if(gameData.Data_PreCheckOrFold.mData == Game_PreCheckOrFold.Selected)
         {
             let selfLastAct = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
@@ -379,18 +384,21 @@ export class Game_SelfAction extends BaseUI
         {
             return;
         }
-
+        let selfUid = LocalPlayerData.Instance.Data_Uid.mData;
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let selfLastAct = gameData.FindLastActionByUid(selfUid)
+        let alreadyBetAmount = selfLastAct.roundAmount;
+        let needBetAmount = this.mCallAmount - alreadyBetAmount;
         if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
         {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
             let bb = gameData.GetStaticData().smallBlind * 2;
-            let showBB = Tool.ConvertToBB(this.mCallAmount , bb);
+            let showBB = Tool.ConvertToBB(needBetAmount , bb);
             this.mCallBtn.SetTitle(showBB);
         }
         else
         {
-            this.mCallBtn.SetTitle(Tool.ConvertMoney_S2C(this.mCallAmount) + "");
+            this.mCallBtn.SetTitle(Tool.ConvertMoney_S2C(needBetAmount) + "");
         }
         
     }

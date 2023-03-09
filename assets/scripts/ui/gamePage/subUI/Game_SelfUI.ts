@@ -3,6 +3,7 @@ import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
 import { Combiantion } from '../../../base/Calculator';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { GameConfig } from '../../../GameConfig';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { Tool } from '../../../Tool';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
@@ -86,7 +87,6 @@ export class Game_SelfUI extends BaseUI
         let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
-            console.log("Data_S2CCommonEnterGameResp")
             this.UpdateUI();
         });
 
@@ -96,7 +96,6 @@ export class Game_SelfUI extends BaseUI
             {
                 return;
             }
-            console.log("Data_S2CCommonSitDownNotify")
             this.UpdateUI();
         });
 
@@ -128,7 +127,6 @@ export class Game_SelfUI extends BaseUI
 
         gameData.Data_S2CCommonPreFlopRoundNotify.AddListenner(this,(_data)=>
         {
-            console.log("Data_S2CCommonPreFlopRoundNotify")
             this.UpdateCards();
         })
 
@@ -138,7 +136,6 @@ export class Game_SelfUI extends BaseUI
             let state = gameData.GetGameState();
             if(state == TexasCashState.TexasCashState_PreFlopRound)
             {
-                console.log("Data_S2CCommonCurrentActionNotify")
                 this.UpdateCards();
             }
         })
@@ -179,6 +176,10 @@ export class Game_SelfUI extends BaseUI
             this.mGame_AddTime.node.active = false;
         });
 
+        LocalPlayerData.Instance.Data_BBModeSetting.AddListenner(this,(_data)=>
+        {
+            this.UpdateMoney();
+        });
     }
 
 
@@ -245,7 +246,6 @@ export class Game_SelfUI extends BaseUI
             return;
         }
 
-        console.log("UpdateUI")
         this.UpdateDealer();
         this.UpdateMoney();
         this.RestoreAction();
@@ -271,13 +271,35 @@ export class Game_SelfUI extends BaseUI
         {
             return;
         }
+        let bbMode = LocalPlayerData.Instance.Data_BBModeSetting.mData;
+        let bb = gameData.GetStaticData().smallBlind * 2;
         if(gameData.CanPlayerBuyIn(selfPlayer.uid))
         {
-            this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum + selfPlayer.bringInNum) + "";
+            if(bbMode)
+            {
+                let amount = selfPlayer.currencyNum + selfPlayer.bringInNum;
+                let bbShow = Tool.ConvertToBB(amount,bb);
+                this.mMoney.string = bbShow;
+            }
+            else
+            {
+                this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum + selfPlayer.bringInNum) + "";
+            }
+
         }
         else
         {
-            this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum) + "";
+            if(bbMode)
+            {
+                let amount = selfPlayer.currencyNum;
+                let bbShow = Tool.ConvertToBB(amount,bb);
+                this.mMoney.string = bbShow;
+            }
+            else
+            {
+                this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum) + "";
+            }
+            
         }
     }
     UpdateAddTimeBtn(_show : boolean , _delaySpend : string)
@@ -497,7 +519,12 @@ export class Game_SelfUI extends BaseUI
             return;
         }
         let actionUid =  gameData.GetDynamicData().actionUid;
+
         this.mGame_AddTime.Show(actionUid == LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer.autoLeftTime>0)
+        {
+            this.mGame_AddTime.Show(false);
+        }
     }
 
     UpdateConbination(_conbination : Combiantion)

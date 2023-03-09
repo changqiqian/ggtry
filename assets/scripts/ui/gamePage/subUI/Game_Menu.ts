@@ -71,6 +71,7 @@ export class Game_Menu extends BaseUI
             {
                 let temp = _script as Game_BuyInWindow;
                 temp.InitWithData(this.mIndex);
+                temp.StopCountDown();
             },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
         this.mSettingBtn.SetClickCallback(()=>
@@ -174,14 +175,12 @@ export class Game_Menu extends BaseUI
 
         });
 
-
         // HallData.Instance.Data_S2CModifyMemberRoleNotify.AddListenner(this,(_data)=>
         // {
         //     if(gameStruct.mClubId != _data.clubId)
         //     {
         //         return;
         //     }
-
         // });
     }
 
