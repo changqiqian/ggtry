@@ -27,7 +27,7 @@ export class Club_Main extends BaseUI
 
     onEnable()
     {
-        NetworkSend.Instance.GetMiniGameListInHall();
+        //NetworkSend.Instance.GetMiniGameListInHall();
     }
 
     InitParam() 
@@ -53,12 +53,12 @@ export class Club_Main extends BaseUI
 
 
         this.mCowboyBtn.Show(false);
-        this.mCowboyBtn.SetClickCallback(()=>
-        {
-            let cowboyList = HallData.Instance.GetHallGameList(GameType.GameType_Cowboy);
-            let gameId = cowboyList[0].gameId;
-            NetworkSend.Instance.EnterCowboy(gameId);
-        })
+        // this.mCowboyBtn.SetClickCallback(()=>
+        // {
+        //     let cowboyList = HallData.Instance.GetHallGameList(GameType.GameType_Cowboy);
+        //     let gameId = cowboyList[0].gameId;
+        //     NetworkSend.Instance.EnterCowboy(gameId);
+        // })
     }
 
     RemovePage(_clubId : string)
@@ -79,7 +79,7 @@ export class Club_Main extends BaseUI
         HallData.Instance.Data_ClubDismiss.AddListenner(this,(_data)=>
         {
             this.RemovePage(_data);
-            this.UpdateDefualtBtn();
+            //this.UpdateDefualtBtn();
         });
         HallData.Instance.Data_ClubRemoveNotify.AddListenner(this,(_data)=>
         {
@@ -89,47 +89,47 @@ export class Club_Main extends BaseUI
             {
                 HallData.Instance.Data_ClubEnter.mData = false;
             }
-            this.UpdateDefualtBtn();
+            //this.UpdateDefualtBtn();
         });
         LocalPlayerData.Instance.Data_AccountLevel.AddListenner(this,(_data)=>
         {
             this.mCreateBtn.node.active = !(_data == AccountLevel.AccountLevel_Normal);
         });
 
-        HallData.Instance.Data_ClubCreateData.AddListenner(this,(_data)=>
-        {
-            this.InsertClub(_data);
-            this.UpdateDefualtBtn();
-        });
+        // HallData.Instance.Data_ClubCreateData.AddListenner(this,(_data)=>
+        // {
+        //     this.InsertClub(_data);
+        //     this.UpdateDefualtBtn();
+        // });
 
-        HallData.Instance.Data_UpdateAllClub.AddListenner(this,(_data)=>
-        {
-            if(_data)
-            {
-                this.mPageView.removeAllPages();
-                let enterClubInfos = LocalPlayerData.Instance.Data_EnterClubs.mData;
-                for(let i = 0 ; i < enterClubInfos.length ; i++)
-                {
-                    let currentInfo = enterClubInfos[i].clubInfo;
-                    this.InsertClub(currentInfo);
-                }
-                this.UpdateDefualtBtn();
-            }
+        // HallData.Instance.Data_UpdateAllClub.AddListenner(this,(_data)=>
+        // {
+        //     if(_data)
+        //     {
+        //         this.mPageView.removeAllPages();
+        //         let enterClubInfos = LocalPlayerData.Instance.Data_EnterClubs.mData;
+        //         for(let i = 0 ; i < enterClubInfos.length ; i++)
+        //         {
+        //             let currentInfo = enterClubInfos[i].clubInfo;
+        //             this.InsertClub(currentInfo);
+        //         }
+        //         this.UpdateDefualtBtn();
+        //     }
 
-        });
+        // });
 
-        HallData.Instance.Data_ClubJoinNotify.AddListenner(this,(_data)=>
-        {
-            this.InsertClub(_data);
-            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
-            {
-                let tempScript = _script as TipsWindow;
-                let tips = Localization.ReplaceString("00106",_data.id);
-                tempScript.SetTips(tips);
-                tempScript.ShowConfirmBtnOnly();
-            })
-            this.UpdateDefualtBtn();
-        });
+        // HallData.Instance.Data_ClubJoinNotify.AddListenner(this,(_data)=>
+        // {
+        //     this.InsertClub(_data);
+        //     UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+        //     {
+        //         let tempScript = _script as TipsWindow;
+        //         let tips = Localization.ReplaceString("00106",_data.id);
+        //         tempScript.SetTips(tips);
+        //         tempScript.ShowConfirmBtnOnly();
+        //     })
+        //     this.UpdateDefualtBtn();
+        // });
 
         HallData.Instance.Data_ClubEnter.AddListenner(this,(_data)=>
         {
@@ -152,23 +152,23 @@ export class Club_Main extends BaseUI
         });
 
 
-        HallData.Instance.Data_S2CGetHallSubGameInfoResp.AddListenner(this,(_data)=>
-        {
-            let cowboyList = HallData.Instance.GetHallGameList(GameType.GameType_Cowboy);
-            if(cowboyList == null || cowboyList.length == 0)
-            {
-                this.mCowboyBtn.Show(false);
-                return;
-            }
+        // HallData.Instance.Data_S2CGetHallSubGameInfoResp.AddListenner(this,(_data)=>
+        // {
+        //     let cowboyList = HallData.Instance.GetHallGameList(GameType.GameType_Cowboy);
+        //     if(cowboyList == null || cowboyList.length == 0)
+        //     {
+        //         this.mCowboyBtn.Show(false);
+        //         return;
+        //     }
 
-            this.mCowboyBtn.Show(true);
+        //     this.mCowboyBtn.Show(true);
 
-        });
+        // });
 
     }
     LateInit() 
     {
-        NetworkSend.Instance.GetAllClubs();
+        // NetworkSend.Instance.GetAllClubs();
     }
 
     CustmoerDestory() 
@@ -176,20 +176,20 @@ export class Club_Main extends BaseUI
 
     }
 
-    UpdateDefualtBtn()
-    {
-        let enterClubInfos = LocalPlayerData.Instance.Data_EnterClubs.mData;
-        this.mDefualtSearchBtn.Show(enterClubInfos.length == 0);
-    }
+    // UpdateDefualtBtn()
+    // {
+    //     let enterClubInfos = LocalPlayerData.Instance.Data_EnterClubs.mData;
+    //     this.mDefualtSearchBtn.Show(enterClubInfos.length == 0);
+    // }
 
-    InsertClub(_clubData : ClubDetailsInfo)
-    {
-        this.LoadPrefab("clubPage" , "prefab/Club_MainEnter" , (_node)=>
-        {
-            this.mPageView.addPage(_node);
-            let tempScript = _node.getComponent(Club_MainEnter);
-            tempScript.InitWithData(_clubData);
-        });
-    }
+    // InsertClub(_clubData : ClubDetailsInfo)
+    // {
+    //     this.LoadPrefab("clubPage" , "prefab/Club_MainEnter" , (_node)=>
+    //     {
+    //         this.mPageView.addPage(_node);
+    //         let tempScript = _node.getComponent(Club_MainEnter);
+    //         tempScript.InitWithData(_clubData);
+    //     });
+    // }
 }
 

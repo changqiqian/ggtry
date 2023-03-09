@@ -390,7 +390,7 @@ export class Game_SelfAction extends BaseUI
         }
         else
         {
-            this.mCallBtn.SetTitle(this.mCallAmount + "");
+            this.mCallBtn.SetTitle(Tool.ConvertMoney_S2C(this.mCallAmount) + "");
         }
         
     }

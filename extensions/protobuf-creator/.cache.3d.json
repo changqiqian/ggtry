@@ -5,6 +5,6 @@
     "watchUpdate": false,
     "filter": "\\.proto$",
     "fileName": "PokerLife",
-    "input": "/Users/yamiwang/Cowboy2/protoSrc",
-    "output": "/Users/yamiwang/Cowboy2/assets/plugin"
+    "input": "/Users/yamiwang/JiuDing/protoSrc",
+    "output": "/Users/yamiwang/JiuDing/assets/plugin"
 }

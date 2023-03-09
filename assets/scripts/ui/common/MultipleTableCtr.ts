@@ -125,7 +125,7 @@ export class MultipleTableCtr extends BaseUI
             if(_data == MultipleTableCtr.HomeIndex)
             {
                 MultipleTableCtr.HideAllGameUI();
-                NetworkSend.Instance.GetTexasGameListInHall();
+                //NetworkSend.Instance.GetTexasGameListInHall();
             }
             else
             {
@@ -142,15 +142,15 @@ export class MultipleTableCtr extends BaseUI
         {
             this.DeleteGameUI(_data.gameId);
         });
-        HallData.Instance.Data_S2CDismissClubGame.AddListenner(this,(_data)=>
-        {
-            this.DeleteGameUI(_data.gameId);
-        });
+        // HallData.Instance.Data_S2CDismissClubGame.AddListenner(this,(_data)=>
+        // {
+        //     this.DeleteGameUI(_data.gameId);
+        // });
 
-        HallData.Instance.Data_S2CDismissClubGameNotify.AddListenner(this,(_data)=>
-        {
-            this.DeleteGameUI(_data.gameId);
-        });
+        // HallData.Instance.Data_S2CDismissClubGameNotify.AddListenner(this,(_data)=>
+        // {
+        //     this.DeleteGameUI(_data.gameId);
+        // });
     }
     LateInit()
     {
@@ -335,14 +335,14 @@ export class MultipleTableCtr extends BaseUI
         }
     }
 
-    public static TryToEnterGame(_gameId : string , _gameType : GameType , _clubId : string = "")
+    public static TryToEnterGame(_gameId : string , _gameType : GameType , _clubId : string = "", _uid : string)
     {
         let tryToGetGameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
         if(tryToGetGameStruct!=null)
         {
             //已经进过房间了
             //HallData.Instance.Data_MultipeIndex.mData = tryToGetGameStruct.mIndex;
-            NetworkSend.Instance.EnterGame(_gameId,_gameType,_clubId);
+            NetworkSend.Instance.EnterGame(_gameId,_gameType,_clubId,_uid);
         }
         else
         {
@@ -352,7 +352,7 @@ export class MultipleTableCtr extends BaseUI
                 return false;
             } 
             MultipleTableCtr.CreateNewGameStruct(_gameId , _clubId);
-            NetworkSend.Instance.EnterGame(_gameId,_gameType,_clubId);
+            NetworkSend.Instance.EnterGame(_gameId,_gameType,_clubId,_uid);
         }
     }
 }

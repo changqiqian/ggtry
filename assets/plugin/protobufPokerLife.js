@@ -4,2488 +4,6 @@ var $Reader = protobuf.Reader, $Writer = protobuf.Writer, $util = protobuf.util;
 // Exported root namespace
 var $root = protobuf.roots.creator || (protobuf.roots.creator = $util.global);
 
-$root.C2SCreateClub = (function() {
-
-    /**
-     * Properties of a C2SCreateClub.
-     * @exports IC2SCreateClub
-     * @interface IC2SCreateClub
-     * @property {number|null} [logo] C2SCreateClub logo
-     * @property {number|null} [stamp] C2SCreateClub stamp
-     * @property {string|null} [name] C2SCreateClub name
-     * @property {string|null} [brief] C2SCreateClub brief
-     */
-
-    /**
-     * Constructs a new C2SCreateClub.
-     * @exports C2SCreateClub
-     * @classdesc Represents a C2SCreateClub.
-     * @implements IC2SCreateClub
-     * @constructor
-     * @param {IC2SCreateClub=} [p] Properties to set
-     */
-    function C2SCreateClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SCreateClub logo.
-     * @member {number} logo
-     * @memberof C2SCreateClub
-     * @instance
-     */
-    C2SCreateClub.prototype.logo = 0;
-
-    /**
-     * C2SCreateClub stamp.
-     * @member {number} stamp
-     * @memberof C2SCreateClub
-     * @instance
-     */
-    C2SCreateClub.prototype.stamp = 0;
-
-    /**
-     * C2SCreateClub name.
-     * @member {string} name
-     * @memberof C2SCreateClub
-     * @instance
-     */
-    C2SCreateClub.prototype.name = "";
-
-    /**
-     * C2SCreateClub brief.
-     * @member {string} brief
-     * @memberof C2SCreateClub
-     * @instance
-     */
-    C2SCreateClub.prototype.brief = "";
-
-    /**
-     * Encodes the specified C2SCreateClub message. Does not implicitly {@link C2SCreateClub.verify|verify} messages.
-     * @function encode
-     * @memberof C2SCreateClub
-     * @static
-     * @param {IC2SCreateClub} m C2SCreateClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SCreateClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.logo != null && Object.hasOwnProperty.call(m, "logo"))
-            w.uint32(8).int32(m.logo);
-        if (m.stamp != null && Object.hasOwnProperty.call(m, "stamp"))
-            w.uint32(16).int32(m.stamp);
-        if (m.name != null && Object.hasOwnProperty.call(m, "name"))
-            w.uint32(26).string(m.name);
-        if (m.brief != null && Object.hasOwnProperty.call(m, "brief"))
-            w.uint32(34).string(m.brief);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SCreateClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SCreateClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SCreateClub} C2SCreateClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SCreateClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SCreateClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.logo = r.int32();
-                break;
-            case 2:
-                m.stamp = r.int32();
-                break;
-            case 3:
-                m.name = r.string();
-                break;
-            case 4:
-                m.brief = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SCreateClub;
-})();
-
-$root.C2SGetClubInfos = (function() {
-
-    /**
-     * Properties of a C2SGetClubInfos.
-     * @exports IC2SGetClubInfos
-     * @interface IC2SGetClubInfos
-     */
-
-    /**
-     * Constructs a new C2SGetClubInfos.
-     * @exports C2SGetClubInfos
-     * @classdesc Represents a C2SGetClubInfos.
-     * @implements IC2SGetClubInfos
-     * @constructor
-     * @param {IC2SGetClubInfos=} [p] Properties to set
-     */
-    function C2SGetClubInfos(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Encodes the specified C2SGetClubInfos message. Does not implicitly {@link C2SGetClubInfos.verify|verify} messages.
-     * @function encode
-     * @memberof C2SGetClubInfos
-     * @static
-     * @param {IC2SGetClubInfos} m C2SGetClubInfos message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SGetClubInfos.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        return w;
-    };
-
-    /**
-     * Decodes a C2SGetClubInfos message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SGetClubInfos
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SGetClubInfos} C2SGetClubInfos
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SGetClubInfos.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetClubInfos();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SGetClubInfos;
-})();
-
-$root.C2SEnterClub = (function() {
-
-    /**
-     * Properties of a C2SEnterClub.
-     * @exports IC2SEnterClub
-     * @interface IC2SEnterClub
-     * @property {string|null} [clubId] C2SEnterClub clubId
-     */
-
-    /**
-     * Constructs a new C2SEnterClub.
-     * @exports C2SEnterClub
-     * @classdesc Represents a C2SEnterClub.
-     * @implements IC2SEnterClub
-     * @constructor
-     * @param {IC2SEnterClub=} [p] Properties to set
-     */
-    function C2SEnterClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SEnterClub clubId.
-     * @member {string} clubId
-     * @memberof C2SEnterClub
-     * @instance
-     */
-    C2SEnterClub.prototype.clubId = "";
-
-    /**
-     * Encodes the specified C2SEnterClub message. Does not implicitly {@link C2SEnterClub.verify|verify} messages.
-     * @function encode
-     * @memberof C2SEnterClub
-     * @static
-     * @param {IC2SEnterClub} m C2SEnterClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SEnterClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SEnterClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SEnterClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SEnterClub} C2SEnterClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SEnterClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SEnterClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SEnterClub;
-})();
-
-$root.C2SSearchClub = (function() {
-
-    /**
-     * Properties of a C2SSearchClub.
-     * @exports IC2SSearchClub
-     * @interface IC2SSearchClub
-     * @property {string|null} [clubId] C2SSearchClub clubId
-     */
-
-    /**
-     * Constructs a new C2SSearchClub.
-     * @exports C2SSearchClub
-     * @classdesc Represents a C2SSearchClub.
-     * @implements IC2SSearchClub
-     * @constructor
-     * @param {IC2SSearchClub=} [p] Properties to set
-     */
-    function C2SSearchClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SSearchClub clubId.
-     * @member {string} clubId
-     * @memberof C2SSearchClub
-     * @instance
-     */
-    C2SSearchClub.prototype.clubId = "";
-
-    /**
-     * Encodes the specified C2SSearchClub message. Does not implicitly {@link C2SSearchClub.verify|verify} messages.
-     * @function encode
-     * @memberof C2SSearchClub
-     * @static
-     * @param {IC2SSearchClub} m C2SSearchClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SSearchClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SSearchClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SSearchClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SSearchClub} C2SSearchClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SSearchClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SSearchClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SSearchClub;
-})();
-
-$root.C2SJoinClub = (function() {
-
-    /**
-     * Properties of a C2SJoinClub.
-     * @exports IC2SJoinClub
-     * @interface IC2SJoinClub
-     * @property {string|null} [clubId] C2SJoinClub clubId
-     */
-
-    /**
-     * Constructs a new C2SJoinClub.
-     * @exports C2SJoinClub
-     * @classdesc Represents a C2SJoinClub.
-     * @implements IC2SJoinClub
-     * @constructor
-     * @param {IC2SJoinClub=} [p] Properties to set
-     */
-    function C2SJoinClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SJoinClub clubId.
-     * @member {string} clubId
-     * @memberof C2SJoinClub
-     * @instance
-     */
-    C2SJoinClub.prototype.clubId = "";
-
-    /**
-     * Encodes the specified C2SJoinClub message. Does not implicitly {@link C2SJoinClub.verify|verify} messages.
-     * @function encode
-     * @memberof C2SJoinClub
-     * @static
-     * @param {IC2SJoinClub} m C2SJoinClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SJoinClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SJoinClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SJoinClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SJoinClub} C2SJoinClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SJoinClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SJoinClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SJoinClub;
-})();
-
-$root.C2SGetClubMember = (function() {
-
-    /**
-     * Properties of a C2SGetClubMember.
-     * @exports IC2SGetClubMember
-     * @interface IC2SGetClubMember
-     * @property {string|null} [clubId] C2SGetClubMember clubId
-     * @property {number|null} [page] C2SGetClubMember page
-     * @property {number|null} [pageSize] C2SGetClubMember pageSize
-     */
-
-    /**
-     * Constructs a new C2SGetClubMember.
-     * @exports C2SGetClubMember
-     * @classdesc Represents a C2SGetClubMember.
-     * @implements IC2SGetClubMember
-     * @constructor
-     * @param {IC2SGetClubMember=} [p] Properties to set
-     */
-    function C2SGetClubMember(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SGetClubMember clubId.
-     * @member {string} clubId
-     * @memberof C2SGetClubMember
-     * @instance
-     */
-    C2SGetClubMember.prototype.clubId = "";
-
-    /**
-     * C2SGetClubMember page.
-     * @member {number} page
-     * @memberof C2SGetClubMember
-     * @instance
-     */
-    C2SGetClubMember.prototype.page = 0;
-
-    /**
-     * C2SGetClubMember pageSize.
-     * @member {number} pageSize
-     * @memberof C2SGetClubMember
-     * @instance
-     */
-    C2SGetClubMember.prototype.pageSize = 0;
-
-    /**
-     * Encodes the specified C2SGetClubMember message. Does not implicitly {@link C2SGetClubMember.verify|verify} messages.
-     * @function encode
-     * @memberof C2SGetClubMember
-     * @static
-     * @param {IC2SGetClubMember} m C2SGetClubMember message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SGetClubMember.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.page != null && Object.hasOwnProperty.call(m, "page"))
-            w.uint32(16).int32(m.page);
-        if (m.pageSize != null && Object.hasOwnProperty.call(m, "pageSize"))
-            w.uint32(24).int32(m.pageSize);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SGetClubMember message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SGetClubMember
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SGetClubMember} C2SGetClubMember
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SGetClubMember.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetClubMember();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.page = r.int32();
-                break;
-            case 3:
-                m.pageSize = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SGetClubMember;
-})();
-
-$root.C2SAddClubMember = (function() {
-
-    /**
-     * Properties of a C2SAddClubMember.
-     * @exports IC2SAddClubMember
-     * @interface IC2SAddClubMember
-     * @property {string|null} [clubId] C2SAddClubMember clubId
-     * @property {Array.<string>|null} [uids] C2SAddClubMember uids
-     * @property {boolean|null} [agree] C2SAddClubMember agree
-     */
-
-    /**
-     * Constructs a new C2SAddClubMember.
-     * @exports C2SAddClubMember
-     * @classdesc Represents a C2SAddClubMember.
-     * @implements IC2SAddClubMember
-     * @constructor
-     * @param {IC2SAddClubMember=} [p] Properties to set
-     */
-    function C2SAddClubMember(p) {
-        this.uids = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SAddClubMember clubId.
-     * @member {string} clubId
-     * @memberof C2SAddClubMember
-     * @instance
-     */
-    C2SAddClubMember.prototype.clubId = "";
-
-    /**
-     * C2SAddClubMember uids.
-     * @member {Array.<string>} uids
-     * @memberof C2SAddClubMember
-     * @instance
-     */
-    C2SAddClubMember.prototype.uids = $util.emptyArray;
-
-    /**
-     * C2SAddClubMember agree.
-     * @member {boolean} agree
-     * @memberof C2SAddClubMember
-     * @instance
-     */
-    C2SAddClubMember.prototype.agree = false;
-
-    /**
-     * Encodes the specified C2SAddClubMember message. Does not implicitly {@link C2SAddClubMember.verify|verify} messages.
-     * @function encode
-     * @memberof C2SAddClubMember
-     * @static
-     * @param {IC2SAddClubMember} m C2SAddClubMember message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SAddClubMember.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.uids != null && m.uids.length) {
-            for (var i = 0; i < m.uids.length; ++i)
-                w.uint32(18).string(m.uids[i]);
-        }
-        if (m.agree != null && Object.hasOwnProperty.call(m, "agree"))
-            w.uint32(24).bool(m.agree);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SAddClubMember message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SAddClubMember
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SAddClubMember} C2SAddClubMember
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SAddClubMember.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SAddClubMember();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                if (!(m.uids && m.uids.length))
-                    m.uids = [];
-                m.uids.push(r.string());
-                break;
-            case 3:
-                m.agree = r.bool();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SAddClubMember;
-})();
-
-$root.C2SDismissClub = (function() {
-
-    /**
-     * Properties of a C2SDismissClub.
-     * @exports IC2SDismissClub
-     * @interface IC2SDismissClub
-     * @property {string|null} [clubId] C2SDismissClub clubId
-     */
-
-    /**
-     * Constructs a new C2SDismissClub.
-     * @exports C2SDismissClub
-     * @classdesc Represents a C2SDismissClub.
-     * @implements IC2SDismissClub
-     * @constructor
-     * @param {IC2SDismissClub=} [p] Properties to set
-     */
-    function C2SDismissClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SDismissClub clubId.
-     * @member {string} clubId
-     * @memberof C2SDismissClub
-     * @instance
-     */
-    C2SDismissClub.prototype.clubId = "";
-
-    /**
-     * Encodes the specified C2SDismissClub message. Does not implicitly {@link C2SDismissClub.verify|verify} messages.
-     * @function encode
-     * @memberof C2SDismissClub
-     * @static
-     * @param {IC2SDismissClub} m C2SDismissClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SDismissClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SDismissClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SDismissClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SDismissClub} C2SDismissClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SDismissClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SDismissClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SDismissClub;
-})();
-
-$root.C2SQuitClub = (function() {
-
-    /**
-     * Properties of a C2SQuitClub.
-     * @exports IC2SQuitClub
-     * @interface IC2SQuitClub
-     * @property {string|null} [clubId] C2SQuitClub clubId
-     */
-
-    /**
-     * Constructs a new C2SQuitClub.
-     * @exports C2SQuitClub
-     * @classdesc Represents a C2SQuitClub.
-     * @implements IC2SQuitClub
-     * @constructor
-     * @param {IC2SQuitClub=} [p] Properties to set
-     */
-    function C2SQuitClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SQuitClub clubId.
-     * @member {string} clubId
-     * @memberof C2SQuitClub
-     * @instance
-     */
-    C2SQuitClub.prototype.clubId = "";
-
-    /**
-     * Encodes the specified C2SQuitClub message. Does not implicitly {@link C2SQuitClub.verify|verify} messages.
-     * @function encode
-     * @memberof C2SQuitClub
-     * @static
-     * @param {IC2SQuitClub} m C2SQuitClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SQuitClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SQuitClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SQuitClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SQuitClub} C2SQuitClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SQuitClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SQuitClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SQuitClub;
-})();
-
-$root.C2SRemoveMember = (function() {
-
-    /**
-     * Properties of a C2SRemoveMember.
-     * @exports IC2SRemoveMember
-     * @interface IC2SRemoveMember
-     * @property {string|null} [clubId] C2SRemoveMember clubId
-     * @property {Array.<string>|null} [uids] C2SRemoveMember uids
-     */
-
-    /**
-     * Constructs a new C2SRemoveMember.
-     * @exports C2SRemoveMember
-     * @classdesc Represents a C2SRemoveMember.
-     * @implements IC2SRemoveMember
-     * @constructor
-     * @param {IC2SRemoveMember=} [p] Properties to set
-     */
-    function C2SRemoveMember(p) {
-        this.uids = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SRemoveMember clubId.
-     * @member {string} clubId
-     * @memberof C2SRemoveMember
-     * @instance
-     */
-    C2SRemoveMember.prototype.clubId = "";
-
-    /**
-     * C2SRemoveMember uids.
-     * @member {Array.<string>} uids
-     * @memberof C2SRemoveMember
-     * @instance
-     */
-    C2SRemoveMember.prototype.uids = $util.emptyArray;
-
-    /**
-     * Encodes the specified C2SRemoveMember message. Does not implicitly {@link C2SRemoveMember.verify|verify} messages.
-     * @function encode
-     * @memberof C2SRemoveMember
-     * @static
-     * @param {IC2SRemoveMember} m C2SRemoveMember message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SRemoveMember.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.uids != null && m.uids.length) {
-            for (var i = 0; i < m.uids.length; ++i)
-                w.uint32(18).string(m.uids[i]);
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a C2SRemoveMember message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SRemoveMember
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SRemoveMember} C2SRemoveMember
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SRemoveMember.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SRemoveMember();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                if (!(m.uids && m.uids.length))
-                    m.uids = [];
-                m.uids.push(r.string());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SRemoveMember;
-})();
-
-$root.C2SModifyClubInfo = (function() {
-
-    /**
-     * Properties of a C2SModifyClubInfo.
-     * @exports IC2SModifyClubInfo
-     * @interface IC2SModifyClubInfo
-     * @property {string|null} [clubId] C2SModifyClubInfo clubId
-     * @property {string|null} [newName] C2SModifyClubInfo newName
-     * @property {string|null} [newBrief] C2SModifyClubInfo newBrief
-     * @property {number|null} [newLogo] C2SModifyClubInfo newLogo
-     * @property {number|null} [newStamp] C2SModifyClubInfo newStamp
-     */
-
-    /**
-     * Constructs a new C2SModifyClubInfo.
-     * @exports C2SModifyClubInfo
-     * @classdesc Represents a C2SModifyClubInfo.
-     * @implements IC2SModifyClubInfo
-     * @constructor
-     * @param {IC2SModifyClubInfo=} [p] Properties to set
-     */
-    function C2SModifyClubInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SModifyClubInfo clubId.
-     * @member {string} clubId
-     * @memberof C2SModifyClubInfo
-     * @instance
-     */
-    C2SModifyClubInfo.prototype.clubId = "";
-
-    /**
-     * C2SModifyClubInfo newName.
-     * @member {string} newName
-     * @memberof C2SModifyClubInfo
-     * @instance
-     */
-    C2SModifyClubInfo.prototype.newName = "";
-
-    /**
-     * C2SModifyClubInfo newBrief.
-     * @member {string} newBrief
-     * @memberof C2SModifyClubInfo
-     * @instance
-     */
-    C2SModifyClubInfo.prototype.newBrief = "";
-
-    /**
-     * C2SModifyClubInfo newLogo.
-     * @member {number} newLogo
-     * @memberof C2SModifyClubInfo
-     * @instance
-     */
-    C2SModifyClubInfo.prototype.newLogo = 0;
-
-    /**
-     * C2SModifyClubInfo newStamp.
-     * @member {number} newStamp
-     * @memberof C2SModifyClubInfo
-     * @instance
-     */
-    C2SModifyClubInfo.prototype.newStamp = 0;
-
-    /**
-     * Encodes the specified C2SModifyClubInfo message. Does not implicitly {@link C2SModifyClubInfo.verify|verify} messages.
-     * @function encode
-     * @memberof C2SModifyClubInfo
-     * @static
-     * @param {IC2SModifyClubInfo} m C2SModifyClubInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SModifyClubInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.newName != null && Object.hasOwnProperty.call(m, "newName"))
-            w.uint32(18).string(m.newName);
-        if (m.newBrief != null && Object.hasOwnProperty.call(m, "newBrief"))
-            w.uint32(26).string(m.newBrief);
-        if (m.newLogo != null && Object.hasOwnProperty.call(m, "newLogo"))
-            w.uint32(32).int32(m.newLogo);
-        if (m.newStamp != null && Object.hasOwnProperty.call(m, "newStamp"))
-            w.uint32(40).int32(m.newStamp);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SModifyClubInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SModifyClubInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SModifyClubInfo} C2SModifyClubInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SModifyClubInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SModifyClubInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.newName = r.string();
-                break;
-            case 3:
-                m.newBrief = r.string();
-                break;
-            case 4:
-                m.newLogo = r.int32();
-                break;
-            case 5:
-                m.newStamp = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SModifyClubInfo;
-})();
-
-$root.C2SShareClubScore = (function() {
-
-    /**
-     * Properties of a C2SShareClubScore.
-     * @exports IC2SShareClubScore
-     * @interface IC2SShareClubScore
-     * @property {string|null} [clubId] C2SShareClubScore clubId
-     * @property {string|null} [uid] C2SShareClubScore uid
-     * @property {number|null} [amount] C2SShareClubScore amount
-     */
-
-    /**
-     * Constructs a new C2SShareClubScore.
-     * @exports C2SShareClubScore
-     * @classdesc Represents a C2SShareClubScore.
-     * @implements IC2SShareClubScore
-     * @constructor
-     * @param {IC2SShareClubScore=} [p] Properties to set
-     */
-    function C2SShareClubScore(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SShareClubScore clubId.
-     * @member {string} clubId
-     * @memberof C2SShareClubScore
-     * @instance
-     */
-    C2SShareClubScore.prototype.clubId = "";
-
-    /**
-     * C2SShareClubScore uid.
-     * @member {string} uid
-     * @memberof C2SShareClubScore
-     * @instance
-     */
-    C2SShareClubScore.prototype.uid = "";
-
-    /**
-     * C2SShareClubScore amount.
-     * @member {number} amount
-     * @memberof C2SShareClubScore
-     * @instance
-     */
-    C2SShareClubScore.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified C2SShareClubScore message. Does not implicitly {@link C2SShareClubScore.verify|verify} messages.
-     * @function encode
-     * @memberof C2SShareClubScore
-     * @static
-     * @param {IC2SShareClubScore} m C2SShareClubScore message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SShareClubScore.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(18).string(m.uid);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(24).int64(m.amount);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SShareClubScore message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SShareClubScore
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SShareClubScore} C2SShareClubScore
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SShareClubScore.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SShareClubScore();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.uid = r.string();
-                break;
-            case 3:
-                m.amount = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SShareClubScore;
-})();
-
-$root.C2SModifyMemberRole = (function() {
-
-    /**
-     * Properties of a C2SModifyMemberRole.
-     * @exports IC2SModifyMemberRole
-     * @interface IC2SModifyMemberRole
-     * @property {string|null} [clubId] C2SModifyMemberRole clubId
-     * @property {string|null} [uid] C2SModifyMemberRole uid
-     * @property {ClubMemberType|null} [memberType] C2SModifyMemberRole memberType
-     */
-
-    /**
-     * Constructs a new C2SModifyMemberRole.
-     * @exports C2SModifyMemberRole
-     * @classdesc Represents a C2SModifyMemberRole.
-     * @implements IC2SModifyMemberRole
-     * @constructor
-     * @param {IC2SModifyMemberRole=} [p] Properties to set
-     */
-    function C2SModifyMemberRole(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SModifyMemberRole clubId.
-     * @member {string} clubId
-     * @memberof C2SModifyMemberRole
-     * @instance
-     */
-    C2SModifyMemberRole.prototype.clubId = "";
-
-    /**
-     * C2SModifyMemberRole uid.
-     * @member {string} uid
-     * @memberof C2SModifyMemberRole
-     * @instance
-     */
-    C2SModifyMemberRole.prototype.uid = "";
-
-    /**
-     * C2SModifyMemberRole memberType.
-     * @member {ClubMemberType} memberType
-     * @memberof C2SModifyMemberRole
-     * @instance
-     */
-    C2SModifyMemberRole.prototype.memberType = 0;
-
-    /**
-     * Encodes the specified C2SModifyMemberRole message. Does not implicitly {@link C2SModifyMemberRole.verify|verify} messages.
-     * @function encode
-     * @memberof C2SModifyMemberRole
-     * @static
-     * @param {IC2SModifyMemberRole} m C2SModifyMemberRole message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SModifyMemberRole.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(18).string(m.uid);
-        if (m.memberType != null && Object.hasOwnProperty.call(m, "memberType"))
-            w.uint32(24).int32(m.memberType);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SModifyMemberRole message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SModifyMemberRole
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SModifyMemberRole} C2SModifyMemberRole
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SModifyMemberRole.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SModifyMemberRole();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.uid = r.string();
-                break;
-            case 3:
-                m.memberType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SModifyMemberRole;
-})();
-
-$root.C2SCreateClubGame = (function() {
-
-    /**
-     * Properties of a C2SCreateClubGame.
-     * @exports IC2SCreateClubGame
-     * @interface IC2SCreateClubGame
-     * @property {string|null} [clubId] C2SCreateClubGame clubId
-     * @property {IBasicTexasConfig|null} [texasConfig] C2SCreateClubGame texasConfig
-     */
-
-    /**
-     * Constructs a new C2SCreateClubGame.
-     * @exports C2SCreateClubGame
-     * @classdesc Represents a C2SCreateClubGame.
-     * @implements IC2SCreateClubGame
-     * @constructor
-     * @param {IC2SCreateClubGame=} [p] Properties to set
-     */
-    function C2SCreateClubGame(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SCreateClubGame clubId.
-     * @member {string} clubId
-     * @memberof C2SCreateClubGame
-     * @instance
-     */
-    C2SCreateClubGame.prototype.clubId = "";
-
-    /**
-     * C2SCreateClubGame texasConfig.
-     * @member {IBasicTexasConfig|null|undefined} texasConfig
-     * @memberof C2SCreateClubGame
-     * @instance
-     */
-    C2SCreateClubGame.prototype.texasConfig = null;
-
-    /**
-     * Encodes the specified C2SCreateClubGame message. Does not implicitly {@link C2SCreateClubGame.verify|verify} messages.
-     * @function encode
-     * @memberof C2SCreateClubGame
-     * @static
-     * @param {IC2SCreateClubGame} m C2SCreateClubGame message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SCreateClubGame.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
-            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(18).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a C2SCreateClubGame message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SCreateClubGame
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SCreateClubGame} C2SCreateClubGame
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SCreateClubGame.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SCreateClubGame();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SCreateClubGame;
-})();
-
-$root.C2SGetClubTexasGameInfo = (function() {
-
-    /**
-     * Properties of a C2SGetClubTexasGameInfo.
-     * @exports IC2SGetClubTexasGameInfo
-     * @interface IC2SGetClubTexasGameInfo
-     * @property {string|null} [clubId] C2SGetClubTexasGameInfo clubId
-     */
-
-    /**
-     * Constructs a new C2SGetClubTexasGameInfo.
-     * @exports C2SGetClubTexasGameInfo
-     * @classdesc Represents a C2SGetClubTexasGameInfo.
-     * @implements IC2SGetClubTexasGameInfo
-     * @constructor
-     * @param {IC2SGetClubTexasGameInfo=} [p] Properties to set
-     */
-    function C2SGetClubTexasGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SGetClubTexasGameInfo clubId.
-     * @member {string} clubId
-     * @memberof C2SGetClubTexasGameInfo
-     * @instance
-     */
-    C2SGetClubTexasGameInfo.prototype.clubId = "";
-
-    /**
-     * Encodes the specified C2SGetClubTexasGameInfo message. Does not implicitly {@link C2SGetClubTexasGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof C2SGetClubTexasGameInfo
-     * @static
-     * @param {IC2SGetClubTexasGameInfo} m C2SGetClubTexasGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SGetClubTexasGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SGetClubTexasGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SGetClubTexasGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SGetClubTexasGameInfo} C2SGetClubTexasGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SGetClubTexasGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetClubTexasGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SGetClubTexasGameInfo;
-})();
-
-$root.C2SGetClubSubGameInfo = (function() {
-
-    /**
-     * Properties of a C2SGetClubSubGameInfo.
-     * @exports IC2SGetClubSubGameInfo
-     * @interface IC2SGetClubSubGameInfo
-     * @property {string|null} [clubId] C2SGetClubSubGameInfo clubId
-     */
-
-    /**
-     * Constructs a new C2SGetClubSubGameInfo.
-     * @exports C2SGetClubSubGameInfo
-     * @classdesc Represents a C2SGetClubSubGameInfo.
-     * @implements IC2SGetClubSubGameInfo
-     * @constructor
-     * @param {IC2SGetClubSubGameInfo=} [p] Properties to set
-     */
-    function C2SGetClubSubGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SGetClubSubGameInfo clubId.
-     * @member {string} clubId
-     * @memberof C2SGetClubSubGameInfo
-     * @instance
-     */
-    C2SGetClubSubGameInfo.prototype.clubId = "";
-
-    /**
-     * Encodes the specified C2SGetClubSubGameInfo message. Does not implicitly {@link C2SGetClubSubGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof C2SGetClubSubGameInfo
-     * @static
-     * @param {IC2SGetClubSubGameInfo} m C2SGetClubSubGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SGetClubSubGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SGetClubSubGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SGetClubSubGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SGetClubSubGameInfo} C2SGetClubSubGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SGetClubSubGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetClubSubGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SGetClubSubGameInfo;
-})();
-
-$root.C2SDismissClubGame = (function() {
-
-    /**
-     * Properties of a C2SDismissClubGame.
-     * @exports IC2SDismissClubGame
-     * @interface IC2SDismissClubGame
-     * @property {string|null} [clubId] C2SDismissClubGame clubId
-     * @property {string|null} [gameId] C2SDismissClubGame gameId
-     */
-
-    /**
-     * Constructs a new C2SDismissClubGame.
-     * @exports C2SDismissClubGame
-     * @classdesc Represents a C2SDismissClubGame.
-     * @implements IC2SDismissClubGame
-     * @constructor
-     * @param {IC2SDismissClubGame=} [p] Properties to set
-     */
-    function C2SDismissClubGame(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SDismissClubGame clubId.
-     * @member {string} clubId
-     * @memberof C2SDismissClubGame
-     * @instance
-     */
-    C2SDismissClubGame.prototype.clubId = "";
-
-    /**
-     * C2SDismissClubGame gameId.
-     * @member {string} gameId
-     * @memberof C2SDismissClubGame
-     * @instance
-     */
-    C2SDismissClubGame.prototype.gameId = "";
-
-    /**
-     * Encodes the specified C2SDismissClubGame message. Does not implicitly {@link C2SDismissClubGame.verify|verify} messages.
-     * @function encode
-     * @memberof C2SDismissClubGame
-     * @static
-     * @param {IC2SDismissClubGame} m C2SDismissClubGame message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SDismissClubGame.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SDismissClubGame message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SDismissClubGame
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SDismissClubGame} C2SDismissClubGame
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SDismissClubGame.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SDismissClubGame();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SDismissClubGame;
-})();
-
-/**
- * ClubMemberType enum.
- * @exports ClubMemberType
- * @enum {number}
- * @property {number} ClubAccountType_Normal=0 ClubAccountType_Normal value
- * @property {number} ClubAccountType_Manager=1 ClubAccountType_Manager value
- * @property {number} ClubAccountType_Owner=2 ClubAccountType_Owner value
- */
-$root.ClubMemberType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "ClubAccountType_Normal"] = 0;
-    values[valuesById[1] = "ClubAccountType_Manager"] = 1;
-    values[valuesById[2] = "ClubAccountType_Owner"] = 2;
-    return values;
-})();
-
-$root.ClubDetailsInfo = (function() {
-
-    /**
-     * Properties of a ClubDetailsInfo.
-     * @exports IClubDetailsInfo
-     * @interface IClubDetailsInfo
-     * @property {number|null} [logo] ClubDetailsInfo logo
-     * @property {number|null} [stamp] ClubDetailsInfo stamp
-     * @property {string|null} [name] ClubDetailsInfo name
-     * @property {string|null} [brief] ClubDetailsInfo brief
-     * @property {string|null} [id] ClubDetailsInfo id
-     * @property {string|null} [ownerId] ClubDetailsInfo ownerId
-     * @property {number|null} [memberCount] ClubDetailsInfo memberCount
-     * @property {number|null} [tableCount] ClubDetailsInfo tableCount
-     * @property {number|null} [totalClubPoint] ClubDetailsInfo totalClubPoint
-     */
-
-    /**
-     * Constructs a new ClubDetailsInfo.
-     * @exports ClubDetailsInfo
-     * @classdesc Represents a ClubDetailsInfo.
-     * @implements IClubDetailsInfo
-     * @constructor
-     * @param {IClubDetailsInfo=} [p] Properties to set
-     */
-    function ClubDetailsInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ClubDetailsInfo logo.
-     * @member {number} logo
-     * @memberof ClubDetailsInfo
-     * @instance
-     */
-    ClubDetailsInfo.prototype.logo = 0;
-
-    /**
-     * ClubDetailsInfo stamp.
-     * @member {number} stamp
-     * @memberof ClubDetailsInfo
-     * @instance
-     */
-    ClubDetailsInfo.prototype.stamp = 0;
-
-    /**
-     * ClubDetailsInfo name.
-     * @member {string} name
-     * @memberof ClubDetailsInfo
-     * @instance
-     */
-    ClubDetailsInfo.prototype.name = "";
-
-    /**
-     * ClubDetailsInfo brief.
-     * @member {string} brief
-     * @memberof ClubDetailsInfo
-     * @instance
-     */
-    ClubDetailsInfo.prototype.brief = "";
-
-    /**
-     * ClubDetailsInfo id.
-     * @member {string} id
-     * @memberof ClubDetailsInfo
-     * @instance
-     */
-    ClubDetailsInfo.prototype.id = "";
-
-    /**
-     * ClubDetailsInfo ownerId.
-     * @member {string} ownerId
-     * @memberof ClubDetailsInfo
-     * @instance
-     */
-    ClubDetailsInfo.prototype.ownerId = "";
-
-    /**
-     * ClubDetailsInfo memberCount.
-     * @member {number} memberCount
-     * @memberof ClubDetailsInfo
-     * @instance
-     */
-    ClubDetailsInfo.prototype.memberCount = 0;
-
-    /**
-     * ClubDetailsInfo tableCount.
-     * @member {number} tableCount
-     * @memberof ClubDetailsInfo
-     * @instance
-     */
-    ClubDetailsInfo.prototype.tableCount = 0;
-
-    /**
-     * ClubDetailsInfo totalClubPoint.
-     * @member {number} totalClubPoint
-     * @memberof ClubDetailsInfo
-     * @instance
-     */
-    ClubDetailsInfo.prototype.totalClubPoint = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified ClubDetailsInfo message. Does not implicitly {@link ClubDetailsInfo.verify|verify} messages.
-     * @function encode
-     * @memberof ClubDetailsInfo
-     * @static
-     * @param {IClubDetailsInfo} m ClubDetailsInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ClubDetailsInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.logo != null && Object.hasOwnProperty.call(m, "logo"))
-            w.uint32(8).int32(m.logo);
-        if (m.stamp != null && Object.hasOwnProperty.call(m, "stamp"))
-            w.uint32(16).int32(m.stamp);
-        if (m.name != null && Object.hasOwnProperty.call(m, "name"))
-            w.uint32(26).string(m.name);
-        if (m.brief != null && Object.hasOwnProperty.call(m, "brief"))
-            w.uint32(34).string(m.brief);
-        if (m.id != null && Object.hasOwnProperty.call(m, "id"))
-            w.uint32(42).string(m.id);
-        if (m.ownerId != null && Object.hasOwnProperty.call(m, "ownerId"))
-            w.uint32(50).string(m.ownerId);
-        if (m.memberCount != null && Object.hasOwnProperty.call(m, "memberCount"))
-            w.uint32(56).int32(m.memberCount);
-        if (m.tableCount != null && Object.hasOwnProperty.call(m, "tableCount"))
-            w.uint32(64).int32(m.tableCount);
-        if (m.totalClubPoint != null && Object.hasOwnProperty.call(m, "totalClubPoint"))
-            w.uint32(72).int64(m.totalClubPoint);
-        return w;
-    };
-
-    /**
-     * Decodes a ClubDetailsInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof ClubDetailsInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ClubDetailsInfo} ClubDetailsInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ClubDetailsInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ClubDetailsInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.logo = r.int32();
-                break;
-            case 2:
-                m.stamp = r.int32();
-                break;
-            case 3:
-                m.name = r.string();
-                break;
-            case 4:
-                m.brief = r.string();
-                break;
-            case 5:
-                m.id = r.string();
-                break;
-            case 6:
-                m.ownerId = r.string();
-                break;
-            case 7:
-                m.memberCount = r.int32();
-                break;
-            case 8:
-                m.tableCount = r.int32();
-                break;
-            case 9:
-                m.totalClubPoint = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ClubDetailsInfo;
-})();
-
-$root.ClubMember = (function() {
-
-    /**
-     * Properties of a ClubMember.
-     * @exports IClubMember
-     * @interface IClubMember
-     * @property {string|null} [id] ClubMember id
-     * @property {string|null} [uid] ClubMember uid
-     * @property {string|null} [nickName] ClubMember nickName
-     * @property {string|null} [head] ClubMember head
-     * @property {number|null} [clubPoint] ClubMember clubPoint
-     * @property {ClubMemberType|null} [memberType] ClubMember memberType
-     */
-
-    /**
-     * Constructs a new ClubMember.
-     * @exports ClubMember
-     * @classdesc Represents a ClubMember.
-     * @implements IClubMember
-     * @constructor
-     * @param {IClubMember=} [p] Properties to set
-     */
-    function ClubMember(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ClubMember id.
-     * @member {string} id
-     * @memberof ClubMember
-     * @instance
-     */
-    ClubMember.prototype.id = "";
-
-    /**
-     * ClubMember uid.
-     * @member {string} uid
-     * @memberof ClubMember
-     * @instance
-     */
-    ClubMember.prototype.uid = "";
-
-    /**
-     * ClubMember nickName.
-     * @member {string} nickName
-     * @memberof ClubMember
-     * @instance
-     */
-    ClubMember.prototype.nickName = "";
-
-    /**
-     * ClubMember head.
-     * @member {string} head
-     * @memberof ClubMember
-     * @instance
-     */
-    ClubMember.prototype.head = "";
-
-    /**
-     * ClubMember clubPoint.
-     * @member {number} clubPoint
-     * @memberof ClubMember
-     * @instance
-     */
-    ClubMember.prototype.clubPoint = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ClubMember memberType.
-     * @member {ClubMemberType} memberType
-     * @memberof ClubMember
-     * @instance
-     */
-    ClubMember.prototype.memberType = 0;
-
-    /**
-     * Encodes the specified ClubMember message. Does not implicitly {@link ClubMember.verify|verify} messages.
-     * @function encode
-     * @memberof ClubMember
-     * @static
-     * @param {IClubMember} m ClubMember message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ClubMember.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.id != null && Object.hasOwnProperty.call(m, "id"))
-            w.uint32(10).string(m.id);
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(18).string(m.uid);
-        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
-            w.uint32(26).string(m.nickName);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(34).string(m.head);
-        if (m.clubPoint != null && Object.hasOwnProperty.call(m, "clubPoint"))
-            w.uint32(40).int64(m.clubPoint);
-        if (m.memberType != null && Object.hasOwnProperty.call(m, "memberType"))
-            w.uint32(48).int32(m.memberType);
-        return w;
-    };
-
-    /**
-     * Decodes a ClubMember message from the specified reader or buffer.
-     * @function decode
-     * @memberof ClubMember
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ClubMember} ClubMember
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ClubMember.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ClubMember();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.id = r.string();
-                break;
-            case 2:
-                m.uid = r.string();
-                break;
-            case 3:
-                m.nickName = r.string();
-                break;
-            case 4:
-                m.head = r.string();
-                break;
-            case 5:
-                m.clubPoint = r.int64();
-                break;
-            case 6:
-                m.memberType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ClubMember;
-})();
-
-$root.ClubBasicJoinRequest = (function() {
-
-    /**
-     * Properties of a ClubBasicJoinRequest.
-     * @exports IClubBasicJoinRequest
-     * @interface IClubBasicJoinRequest
-     * @property {string|null} [id] ClubBasicJoinRequest id
-     * @property {string|null} [uid] ClubBasicJoinRequest uid
-     * @property {string|null} [nickName] ClubBasicJoinRequest nickName
-     * @property {string|null} [head] ClubBasicJoinRequest head
-     */
-
-    /**
-     * Constructs a new ClubBasicJoinRequest.
-     * @exports ClubBasicJoinRequest
-     * @classdesc Represents a ClubBasicJoinRequest.
-     * @implements IClubBasicJoinRequest
-     * @constructor
-     * @param {IClubBasicJoinRequest=} [p] Properties to set
-     */
-    function ClubBasicJoinRequest(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ClubBasicJoinRequest id.
-     * @member {string} id
-     * @memberof ClubBasicJoinRequest
-     * @instance
-     */
-    ClubBasicJoinRequest.prototype.id = "";
-
-    /**
-     * ClubBasicJoinRequest uid.
-     * @member {string} uid
-     * @memberof ClubBasicJoinRequest
-     * @instance
-     */
-    ClubBasicJoinRequest.prototype.uid = "";
-
-    /**
-     * ClubBasicJoinRequest nickName.
-     * @member {string} nickName
-     * @memberof ClubBasicJoinRequest
-     * @instance
-     */
-    ClubBasicJoinRequest.prototype.nickName = "";
-
-    /**
-     * ClubBasicJoinRequest head.
-     * @member {string} head
-     * @memberof ClubBasicJoinRequest
-     * @instance
-     */
-    ClubBasicJoinRequest.prototype.head = "";
-
-    /**
-     * Encodes the specified ClubBasicJoinRequest message. Does not implicitly {@link ClubBasicJoinRequest.verify|verify} messages.
-     * @function encode
-     * @memberof ClubBasicJoinRequest
-     * @static
-     * @param {IClubBasicJoinRequest} m ClubBasicJoinRequest message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ClubBasicJoinRequest.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.id != null && Object.hasOwnProperty.call(m, "id"))
-            w.uint32(10).string(m.id);
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(18).string(m.uid);
-        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
-            w.uint32(26).string(m.nickName);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(34).string(m.head);
-        return w;
-    };
-
-    /**
-     * Decodes a ClubBasicJoinRequest message from the specified reader or buffer.
-     * @function decode
-     * @memberof ClubBasicJoinRequest
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ClubBasicJoinRequest} ClubBasicJoinRequest
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ClubBasicJoinRequest.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ClubBasicJoinRequest();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.id = r.string();
-                break;
-            case 2:
-                m.uid = r.string();
-                break;
-            case 3:
-                m.nickName = r.string();
-                break;
-            case 4:
-                m.head = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ClubBasicJoinRequest;
-})();
-
-$root.ClubJoinRequest = (function() {
-
-    /**
-     * Properties of a ClubJoinRequest.
-     * @exports IClubJoinRequest
-     * @interface IClubJoinRequest
-     * @property {Array.<IClubBasicJoinRequest>|null} [clubBasicJoinRequest] ClubJoinRequest clubBasicJoinRequest
-     * @property {IClubDetailsInfo|null} [clubInfo] ClubJoinRequest clubInfo
-     */
-
-    /**
-     * Constructs a new ClubJoinRequest.
-     * @exports ClubJoinRequest
-     * @classdesc Represents a ClubJoinRequest.
-     * @implements IClubJoinRequest
-     * @constructor
-     * @param {IClubJoinRequest=} [p] Properties to set
-     */
-    function ClubJoinRequest(p) {
-        this.clubBasicJoinRequest = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ClubJoinRequest clubBasicJoinRequest.
-     * @member {Array.<IClubBasicJoinRequest>} clubBasicJoinRequest
-     * @memberof ClubJoinRequest
-     * @instance
-     */
-    ClubJoinRequest.prototype.clubBasicJoinRequest = $util.emptyArray;
-
-    /**
-     * ClubJoinRequest clubInfo.
-     * @member {IClubDetailsInfo|null|undefined} clubInfo
-     * @memberof ClubJoinRequest
-     * @instance
-     */
-    ClubJoinRequest.prototype.clubInfo = null;
-
-    /**
-     * Encodes the specified ClubJoinRequest message. Does not implicitly {@link ClubJoinRequest.verify|verify} messages.
-     * @function encode
-     * @memberof ClubJoinRequest
-     * @static
-     * @param {IClubJoinRequest} m ClubJoinRequest message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ClubJoinRequest.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubBasicJoinRequest != null && m.clubBasicJoinRequest.length) {
-            for (var i = 0; i < m.clubBasicJoinRequest.length; ++i)
-                $root.ClubBasicJoinRequest.encode(m.clubBasicJoinRequest[i], w.uint32(10).fork()).ldelim();
-        }
-        if (m.clubInfo != null && Object.hasOwnProperty.call(m, "clubInfo"))
-            $root.ClubDetailsInfo.encode(m.clubInfo, w.uint32(18).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a ClubJoinRequest message from the specified reader or buffer.
-     * @function decode
-     * @memberof ClubJoinRequest
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ClubJoinRequest} ClubJoinRequest
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ClubJoinRequest.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ClubJoinRequest();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                if (!(m.clubBasicJoinRequest && m.clubBasicJoinRequest.length))
-                    m.clubBasicJoinRequest = [];
-                m.clubBasicJoinRequest.push($root.ClubBasicJoinRequest.decode(r, r.uint32()));
-                break;
-            case 2:
-                m.clubInfo = $root.ClubDetailsInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ClubJoinRequest;
-})();
-
-$root.ClubTexasGameInfo = (function() {
-
-    /**
-     * Properties of a ClubTexasGameInfo.
-     * @exports IClubTexasGameInfo
-     * @interface IClubTexasGameInfo
-     * @property {string|null} [clubId] ClubTexasGameInfo clubId
-     * @property {string|null} [gameId] ClubTexasGameInfo gameId
-     * @property {IClubMember|null} [creatorInfo] ClubTexasGameInfo creatorInfo
-     * @property {IAboutTexasGameInfo|null} [aboutGameInfo] ClubTexasGameInfo aboutGameInfo
-     * @property {IBasicTexasConfig|null} [basicTexasConfig] ClubTexasGameInfo basicTexasConfig
-     */
-
-    /**
-     * Constructs a new ClubTexasGameInfo.
-     * @exports ClubTexasGameInfo
-     * @classdesc Represents a ClubTexasGameInfo.
-     * @implements IClubTexasGameInfo
-     * @constructor
-     * @param {IClubTexasGameInfo=} [p] Properties to set
-     */
-    function ClubTexasGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ClubTexasGameInfo clubId.
-     * @member {string} clubId
-     * @memberof ClubTexasGameInfo
-     * @instance
-     */
-    ClubTexasGameInfo.prototype.clubId = "";
-
-    /**
-     * ClubTexasGameInfo gameId.
-     * @member {string} gameId
-     * @memberof ClubTexasGameInfo
-     * @instance
-     */
-    ClubTexasGameInfo.prototype.gameId = "";
-
-    /**
-     * ClubTexasGameInfo creatorInfo.
-     * @member {IClubMember|null|undefined} creatorInfo
-     * @memberof ClubTexasGameInfo
-     * @instance
-     */
-    ClubTexasGameInfo.prototype.creatorInfo = null;
-
-    /**
-     * ClubTexasGameInfo aboutGameInfo.
-     * @member {IAboutTexasGameInfo|null|undefined} aboutGameInfo
-     * @memberof ClubTexasGameInfo
-     * @instance
-     */
-    ClubTexasGameInfo.prototype.aboutGameInfo = null;
-
-    /**
-     * ClubTexasGameInfo basicTexasConfig.
-     * @member {IBasicTexasConfig|null|undefined} basicTexasConfig
-     * @memberof ClubTexasGameInfo
-     * @instance
-     */
-    ClubTexasGameInfo.prototype.basicTexasConfig = null;
-
-    /**
-     * Encodes the specified ClubTexasGameInfo message. Does not implicitly {@link ClubTexasGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof ClubTexasGameInfo
-     * @static
-     * @param {IClubTexasGameInfo} m ClubTexasGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ClubTexasGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.creatorInfo != null && Object.hasOwnProperty.call(m, "creatorInfo"))
-            $root.ClubMember.encode(m.creatorInfo, w.uint32(26).fork()).ldelim();
-        if (m.aboutGameInfo != null && Object.hasOwnProperty.call(m, "aboutGameInfo"))
-            $root.AboutTexasGameInfo.encode(m.aboutGameInfo, w.uint32(34).fork()).ldelim();
-        if (m.basicTexasConfig != null && Object.hasOwnProperty.call(m, "basicTexasConfig"))
-            $root.BasicTexasConfig.encode(m.basicTexasConfig, w.uint32(42).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a ClubTexasGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof ClubTexasGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ClubTexasGameInfo} ClubTexasGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ClubTexasGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ClubTexasGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                m.creatorInfo = $root.ClubMember.decode(r, r.uint32());
-                break;
-            case 4:
-                m.aboutGameInfo = $root.AboutTexasGameInfo.decode(r, r.uint32());
-                break;
-            case 5:
-                m.basicTexasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ClubTexasGameInfo;
-})();
-
-$root.ClubSubGameInfo = (function() {
-
-    /**
-     * Properties of a ClubSubGameInfo.
-     * @exports IClubSubGameInfo
-     * @interface IClubSubGameInfo
-     * @property {string|null} [clubId] ClubSubGameInfo clubId
-     * @property {string|null} [gameId] ClubSubGameInfo gameId
-     * @property {string|null} [gameName] ClubSubGameInfo gameName
-     * @property {GameType|null} [gameType] ClubSubGameInfo gameType
-     * @property {GameCurrencyType|null} [currencyType] ClubSubGameInfo currencyType
-     */
-
-    /**
-     * Constructs a new ClubSubGameInfo.
-     * @exports ClubSubGameInfo
-     * @classdesc Represents a ClubSubGameInfo.
-     * @implements IClubSubGameInfo
-     * @constructor
-     * @param {IClubSubGameInfo=} [p] Properties to set
-     */
-    function ClubSubGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ClubSubGameInfo clubId.
-     * @member {string} clubId
-     * @memberof ClubSubGameInfo
-     * @instance
-     */
-    ClubSubGameInfo.prototype.clubId = "";
-
-    /**
-     * ClubSubGameInfo gameId.
-     * @member {string} gameId
-     * @memberof ClubSubGameInfo
-     * @instance
-     */
-    ClubSubGameInfo.prototype.gameId = "";
-
-    /**
-     * ClubSubGameInfo gameName.
-     * @member {string} gameName
-     * @memberof ClubSubGameInfo
-     * @instance
-     */
-    ClubSubGameInfo.prototype.gameName = "";
-
-    /**
-     * ClubSubGameInfo gameType.
-     * @member {GameType} gameType
-     * @memberof ClubSubGameInfo
-     * @instance
-     */
-    ClubSubGameInfo.prototype.gameType = 0;
-
-    /**
-     * ClubSubGameInfo currencyType.
-     * @member {GameCurrencyType} currencyType
-     * @memberof ClubSubGameInfo
-     * @instance
-     */
-    ClubSubGameInfo.prototype.currencyType = 0;
-
-    /**
-     * Encodes the specified ClubSubGameInfo message. Does not implicitly {@link ClubSubGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof ClubSubGameInfo
-     * @static
-     * @param {IClubSubGameInfo} m ClubSubGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ClubSubGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.gameName != null && Object.hasOwnProperty.call(m, "gameName"))
-            w.uint32(26).string(m.gameName);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(32).int32(m.gameType);
-        if (m.currencyType != null && Object.hasOwnProperty.call(m, "currencyType"))
-            w.uint32(40).int32(m.currencyType);
-        return w;
-    };
-
-    /**
-     * Decodes a ClubSubGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof ClubSubGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ClubSubGameInfo} ClubSubGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ClubSubGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ClubSubGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                m.gameName = r.string();
-                break;
-            case 4:
-                m.gameType = r.int32();
-                break;
-            case 5:
-                m.currencyType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ClubSubGameInfo;
-})();
-
 $root.CommonResult = (function() {
 
     /**
@@ -3005,6 +523,1420 @@ $root.UserInfo = (function() {
     return UserInfo;
 })();
 
+$root.C2STexasCowboyEnterGame = (function() {
+
+    /**
+     * Properties of a C2STexasCowboyEnterGame.
+     * @exports IC2STexasCowboyEnterGame
+     * @interface IC2STexasCowboyEnterGame
+     * @property {string|null} [gameId] C2STexasCowboyEnterGame gameId
+     */
+
+    /**
+     * Constructs a new C2STexasCowboyEnterGame.
+     * @exports C2STexasCowboyEnterGame
+     * @classdesc Represents a C2STexasCowboyEnterGame.
+     * @implements IC2STexasCowboyEnterGame
+     * @constructor
+     * @param {IC2STexasCowboyEnterGame=} [p] Properties to set
+     */
+    function C2STexasCowboyEnterGame(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCowboyEnterGame gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCowboyEnterGame
+     * @instance
+     */
+    C2STexasCowboyEnterGame.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2STexasCowboyEnterGame message. Does not implicitly {@link C2STexasCowboyEnterGame.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCowboyEnterGame
+     * @static
+     * @param {IC2STexasCowboyEnterGame} m C2STexasCowboyEnterGame message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCowboyEnterGame.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCowboyEnterGame message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCowboyEnterGame
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCowboyEnterGame} C2STexasCowboyEnterGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCowboyEnterGame.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyEnterGame();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCowboyEnterGame;
+})();
+
+$root.C2STexasCowboyExitGame = (function() {
+
+    /**
+     * Properties of a C2STexasCowboyExitGame.
+     * @exports IC2STexasCowboyExitGame
+     * @interface IC2STexasCowboyExitGame
+     * @property {string|null} [gameId] C2STexasCowboyExitGame gameId
+     */
+
+    /**
+     * Constructs a new C2STexasCowboyExitGame.
+     * @exports C2STexasCowboyExitGame
+     * @classdesc Represents a C2STexasCowboyExitGame.
+     * @implements IC2STexasCowboyExitGame
+     * @constructor
+     * @param {IC2STexasCowboyExitGame=} [p] Properties to set
+     */
+    function C2STexasCowboyExitGame(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCowboyExitGame gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCowboyExitGame
+     * @instance
+     */
+    C2STexasCowboyExitGame.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2STexasCowboyExitGame message. Does not implicitly {@link C2STexasCowboyExitGame.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCowboyExitGame
+     * @static
+     * @param {IC2STexasCowboyExitGame} m C2STexasCowboyExitGame message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCowboyExitGame.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCowboyExitGame message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCowboyExitGame
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCowboyExitGame} C2STexasCowboyExitGame
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCowboyExitGame.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyExitGame();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCowboyExitGame;
+})();
+
+$root.C2STexasCowboyBet = (function() {
+
+    /**
+     * Properties of a C2STexasCowboyBet.
+     * @exports IC2STexasCowboyBet
+     * @interface IC2STexasCowboyBet
+     * @property {string|null} [gameId] C2STexasCowboyBet gameId
+     * @property {ICowboySingleBet|null} [betInfo] C2STexasCowboyBet betInfo
+     */
+
+    /**
+     * Constructs a new C2STexasCowboyBet.
+     * @exports C2STexasCowboyBet
+     * @classdesc Represents a C2STexasCowboyBet.
+     * @implements IC2STexasCowboyBet
+     * @constructor
+     * @param {IC2STexasCowboyBet=} [p] Properties to set
+     */
+    function C2STexasCowboyBet(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCowboyBet gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCowboyBet
+     * @instance
+     */
+    C2STexasCowboyBet.prototype.gameId = "";
+
+    /**
+     * C2STexasCowboyBet betInfo.
+     * @member {ICowboySingleBet|null|undefined} betInfo
+     * @memberof C2STexasCowboyBet
+     * @instance
+     */
+    C2STexasCowboyBet.prototype.betInfo = null;
+
+    /**
+     * Encodes the specified C2STexasCowboyBet message. Does not implicitly {@link C2STexasCowboyBet.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCowboyBet
+     * @static
+     * @param {IC2STexasCowboyBet} m C2STexasCowboyBet message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCowboyBet.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.betInfo != null && Object.hasOwnProperty.call(m, "betInfo"))
+            $root.CowboySingleBet.encode(m.betInfo, w.uint32(18).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCowboyBet message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCowboyBet
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCowboyBet} C2STexasCowboyBet
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCowboyBet.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyBet();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.betInfo = $root.CowboySingleBet.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCowboyBet;
+})();
+
+$root.C2STexasCowboyRecord = (function() {
+
+    /**
+     * Properties of a C2STexasCowboyRecord.
+     * @exports IC2STexasCowboyRecord
+     * @interface IC2STexasCowboyRecord
+     * @property {string|null} [gameId] C2STexasCowboyRecord gameId
+     * @property {number|null} [whichGame] C2STexasCowboyRecord whichGame
+     */
+
+    /**
+     * Constructs a new C2STexasCowboyRecord.
+     * @exports C2STexasCowboyRecord
+     * @classdesc Represents a C2STexasCowboyRecord.
+     * @implements IC2STexasCowboyRecord
+     * @constructor
+     * @param {IC2STexasCowboyRecord=} [p] Properties to set
+     */
+    function C2STexasCowboyRecord(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCowboyRecord gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCowboyRecord
+     * @instance
+     */
+    C2STexasCowboyRecord.prototype.gameId = "";
+
+    /**
+     * C2STexasCowboyRecord whichGame.
+     * @member {number} whichGame
+     * @memberof C2STexasCowboyRecord
+     * @instance
+     */
+    C2STexasCowboyRecord.prototype.whichGame = 0;
+
+    /**
+     * Encodes the specified C2STexasCowboyRecord message. Does not implicitly {@link C2STexasCowboyRecord.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCowboyRecord
+     * @static
+     * @param {IC2STexasCowboyRecord} m C2STexasCowboyRecord message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCowboyRecord.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.whichGame != null && Object.hasOwnProperty.call(m, "whichGame"))
+            w.uint32(16).int32(m.whichGame);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCowboyRecord message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCowboyRecord
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCowboyRecord} C2STexasCowboyRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCowboyRecord.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyRecord();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.whichGame = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCowboyRecord;
+})();
+
+$root.C2STexasCowboyBringIn = (function() {
+
+    /**
+     * Properties of a C2STexasCowboyBringIn.
+     * @exports IC2STexasCowboyBringIn
+     * @interface IC2STexasCowboyBringIn
+     * @property {string|null} [gameId] C2STexasCowboyBringIn gameId
+     * @property {number|null} [amount] C2STexasCowboyBringIn amount
+     */
+
+    /**
+     * Constructs a new C2STexasCowboyBringIn.
+     * @exports C2STexasCowboyBringIn
+     * @classdesc Represents a C2STexasCowboyBringIn.
+     * @implements IC2STexasCowboyBringIn
+     * @constructor
+     * @param {IC2STexasCowboyBringIn=} [p] Properties to set
+     */
+    function C2STexasCowboyBringIn(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCowboyBringIn gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCowboyBringIn
+     * @instance
+     */
+    C2STexasCowboyBringIn.prototype.gameId = "";
+
+    /**
+     * C2STexasCowboyBringIn amount.
+     * @member {number} amount
+     * @memberof C2STexasCowboyBringIn
+     * @instance
+     */
+    C2STexasCowboyBringIn.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified C2STexasCowboyBringIn message. Does not implicitly {@link C2STexasCowboyBringIn.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCowboyBringIn
+     * @static
+     * @param {IC2STexasCowboyBringIn} m C2STexasCowboyBringIn message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCowboyBringIn.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
+            w.uint32(16).int64(m.amount);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCowboyBringIn message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCowboyBringIn
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCowboyBringIn} C2STexasCowboyBringIn
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCowboyBringIn.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyBringIn();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.amount = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCowboyBringIn;
+})();
+
+$root.C2STexasCowboyBringOut = (function() {
+
+    /**
+     * Properties of a C2STexasCowboyBringOut.
+     * @exports IC2STexasCowboyBringOut
+     * @interface IC2STexasCowboyBringOut
+     * @property {string|null} [gameId] C2STexasCowboyBringOut gameId
+     * @property {number|null} [amount] C2STexasCowboyBringOut amount
+     */
+
+    /**
+     * Constructs a new C2STexasCowboyBringOut.
+     * @exports C2STexasCowboyBringOut
+     * @classdesc Represents a C2STexasCowboyBringOut.
+     * @implements IC2STexasCowboyBringOut
+     * @constructor
+     * @param {IC2STexasCowboyBringOut=} [p] Properties to set
+     */
+    function C2STexasCowboyBringOut(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCowboyBringOut gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCowboyBringOut
+     * @instance
+     */
+    C2STexasCowboyBringOut.prototype.gameId = "";
+
+    /**
+     * C2STexasCowboyBringOut amount.
+     * @member {number} amount
+     * @memberof C2STexasCowboyBringOut
+     * @instance
+     */
+    C2STexasCowboyBringOut.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified C2STexasCowboyBringOut message. Does not implicitly {@link C2STexasCowboyBringOut.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCowboyBringOut
+     * @static
+     * @param {IC2STexasCowboyBringOut} m C2STexasCowboyBringOut message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCowboyBringOut.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
+            w.uint32(16).int64(m.amount);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCowboyBringOut message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCowboyBringOut
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCowboyBringOut} C2STexasCowboyBringOut
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCowboyBringOut.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyBringOut();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.amount = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCowboyBringOut;
+})();
+
+$root.C2STexasCowboyTotalHistory = (function() {
+
+    /**
+     * Properties of a C2STexasCowboyTotalHistory.
+     * @exports IC2STexasCowboyTotalHistory
+     * @interface IC2STexasCowboyTotalHistory
+     * @property {string|null} [gameId] C2STexasCowboyTotalHistory gameId
+     */
+
+    /**
+     * Constructs a new C2STexasCowboyTotalHistory.
+     * @exports C2STexasCowboyTotalHistory
+     * @classdesc Represents a C2STexasCowboyTotalHistory.
+     * @implements IC2STexasCowboyTotalHistory
+     * @constructor
+     * @param {IC2STexasCowboyTotalHistory=} [p] Properties to set
+     */
+    function C2STexasCowboyTotalHistory(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCowboyTotalHistory gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCowboyTotalHistory
+     * @instance
+     */
+    C2STexasCowboyTotalHistory.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2STexasCowboyTotalHistory message. Does not implicitly {@link C2STexasCowboyTotalHistory.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCowboyTotalHistory
+     * @static
+     * @param {IC2STexasCowboyTotalHistory} m C2STexasCowboyTotalHistory message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCowboyTotalHistory.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCowboyTotalHistory message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCowboyTotalHistory
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCowboyTotalHistory} C2STexasCowboyTotalHistory
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCowboyTotalHistory.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyTotalHistory();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCowboyTotalHistory;
+})();
+
+/**
+ * CowboyAreaType enum.
+ * @exports CowboyAreaType
+ * @enum {number}
+ * @property {number} CowboyAreaType_0=0 CowboyAreaType_0 value
+ * @property {number} CowboyAreaType_1=1 CowboyAreaType_1 value
+ * @property {number} CowboyAreaType_2=2 CowboyAreaType_2 value
+ * @property {number} CowboyAreaType_3=3 CowboyAreaType_3 value
+ * @property {number} CowboyAreaType_4=4 CowboyAreaType_4 value
+ * @property {number} CowboyAreaType_5=5 CowboyAreaType_5 value
+ * @property {number} CowboyAreaType_6=6 CowboyAreaType_6 value
+ * @property {number} CowboyAreaType_7=7 CowboyAreaType_7 value
+ * @property {number} CowboyAreaType_8=8 CowboyAreaType_8 value
+ * @property {number} CowboyAreaType_9=9 CowboyAreaType_9 value
+ * @property {number} CowboyAreaType_10=10 CowboyAreaType_10 value
+ */
+$root.CowboyAreaType = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "CowboyAreaType_0"] = 0;
+    values[valuesById[1] = "CowboyAreaType_1"] = 1;
+    values[valuesById[2] = "CowboyAreaType_2"] = 2;
+    values[valuesById[3] = "CowboyAreaType_3"] = 3;
+    values[valuesById[4] = "CowboyAreaType_4"] = 4;
+    values[valuesById[5] = "CowboyAreaType_5"] = 5;
+    values[valuesById[6] = "CowboyAreaType_6"] = 6;
+    values[valuesById[7] = "CowboyAreaType_7"] = 7;
+    values[valuesById[8] = "CowboyAreaType_8"] = 8;
+    values[valuesById[9] = "CowboyAreaType_9"] = 9;
+    values[valuesById[10] = "CowboyAreaType_10"] = 10;
+    return values;
+})();
+
+/**
+ * CowboyPhase enum.
+ * @exports CowboyPhase
+ * @enum {number}
+ * @property {number} CowBoyPhase_Start=0 CowBoyPhase_Start value
+ * @property {number} CowBoyPhase_Settlement=1 CowBoyPhase_Settlement value
+ */
+$root.CowboyPhase = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "CowBoyPhase_Start"] = 0;
+    values[valuesById[1] = "CowBoyPhase_Settlement"] = 1;
+    return values;
+})();
+
+$root.CowboyAreaInfo = (function() {
+
+    /**
+     * Properties of a CowboyAreaInfo.
+     * @exports ICowboyAreaInfo
+     * @interface ICowboyAreaInfo
+     * @property {CowboyAreaType|null} [cowboyAreaType] CowboyAreaInfo cowboyAreaType
+     * @property {number|null} [totalBetNum] CowboyAreaInfo totalBetNum
+     */
+
+    /**
+     * Constructs a new CowboyAreaInfo.
+     * @exports CowboyAreaInfo
+     * @classdesc Represents a CowboyAreaInfo.
+     * @implements ICowboyAreaInfo
+     * @constructor
+     * @param {ICowboyAreaInfo=} [p] Properties to set
+     */
+    function CowboyAreaInfo(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * CowboyAreaInfo cowboyAreaType.
+     * @member {CowboyAreaType} cowboyAreaType
+     * @memberof CowboyAreaInfo
+     * @instance
+     */
+    CowboyAreaInfo.prototype.cowboyAreaType = 0;
+
+    /**
+     * CowboyAreaInfo totalBetNum.
+     * @member {number} totalBetNum
+     * @memberof CowboyAreaInfo
+     * @instance
+     */
+    CowboyAreaInfo.prototype.totalBetNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified CowboyAreaInfo message. Does not implicitly {@link CowboyAreaInfo.verify|verify} messages.
+     * @function encode
+     * @memberof CowboyAreaInfo
+     * @static
+     * @param {ICowboyAreaInfo} m CowboyAreaInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    CowboyAreaInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.cowboyAreaType != null && Object.hasOwnProperty.call(m, "cowboyAreaType"))
+            w.uint32(8).int32(m.cowboyAreaType);
+        if (m.totalBetNum != null && Object.hasOwnProperty.call(m, "totalBetNum"))
+            w.uint32(16).int64(m.totalBetNum);
+        return w;
+    };
+
+    /**
+     * Decodes a CowboyAreaInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof CowboyAreaInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {CowboyAreaInfo} CowboyAreaInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    CowboyAreaInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyAreaInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.cowboyAreaType = r.int32();
+                break;
+            case 2:
+                m.totalBetNum = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return CowboyAreaInfo;
+})();
+
+$root.CowboySingleBet = (function() {
+
+    /**
+     * Properties of a CowboySingleBet.
+     * @exports ICowboySingleBet
+     * @interface ICowboySingleBet
+     * @property {string|null} [actionId] CowboySingleBet actionId
+     * @property {number|null} [amount] CowboySingleBet amount
+     * @property {CowboyAreaType|null} [betArea] CowboySingleBet betArea
+     */
+
+    /**
+     * Constructs a new CowboySingleBet.
+     * @exports CowboySingleBet
+     * @classdesc Represents a CowboySingleBet.
+     * @implements ICowboySingleBet
+     * @constructor
+     * @param {ICowboySingleBet=} [p] Properties to set
+     */
+    function CowboySingleBet(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * CowboySingleBet actionId.
+     * @member {string} actionId
+     * @memberof CowboySingleBet
+     * @instance
+     */
+    CowboySingleBet.prototype.actionId = "";
+
+    /**
+     * CowboySingleBet amount.
+     * @member {number} amount
+     * @memberof CowboySingleBet
+     * @instance
+     */
+    CowboySingleBet.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * CowboySingleBet betArea.
+     * @member {CowboyAreaType} betArea
+     * @memberof CowboySingleBet
+     * @instance
+     */
+    CowboySingleBet.prototype.betArea = 0;
+
+    /**
+     * Encodes the specified CowboySingleBet message. Does not implicitly {@link CowboySingleBet.verify|verify} messages.
+     * @function encode
+     * @memberof CowboySingleBet
+     * @static
+     * @param {ICowboySingleBet} m CowboySingleBet message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    CowboySingleBet.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.actionId != null && Object.hasOwnProperty.call(m, "actionId"))
+            w.uint32(10).string(m.actionId);
+        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
+            w.uint32(16).int64(m.amount);
+        if (m.betArea != null && Object.hasOwnProperty.call(m, "betArea"))
+            w.uint32(24).int32(m.betArea);
+        return w;
+    };
+
+    /**
+     * Decodes a CowboySingleBet message from the specified reader or buffer.
+     * @function decode
+     * @memberof CowboySingleBet
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {CowboySingleBet} CowboySingleBet
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    CowboySingleBet.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboySingleBet();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.actionId = r.string();
+                break;
+            case 2:
+                m.amount = r.int64();
+                break;
+            case 3:
+                m.betArea = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return CowboySingleBet;
+})();
+
+$root.CowboyHistory = (function() {
+
+    /**
+     * Properties of a CowboyHistory.
+     * @exports ICowboyHistory
+     * @interface ICowboyHistory
+     * @property {CowboyAreaType|null} [cowboyAreaType] CowboyHistory cowboyAreaType
+     * @property {Array.<boolean>|null} [result] CowboyHistory result
+     */
+
+    /**
+     * Constructs a new CowboyHistory.
+     * @exports CowboyHistory
+     * @classdesc Represents a CowboyHistory.
+     * @implements ICowboyHistory
+     * @constructor
+     * @param {ICowboyHistory=} [p] Properties to set
+     */
+    function CowboyHistory(p) {
+        this.result = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * CowboyHistory cowboyAreaType.
+     * @member {CowboyAreaType} cowboyAreaType
+     * @memberof CowboyHistory
+     * @instance
+     */
+    CowboyHistory.prototype.cowboyAreaType = 0;
+
+    /**
+     * CowboyHistory result.
+     * @member {Array.<boolean>} result
+     * @memberof CowboyHistory
+     * @instance
+     */
+    CowboyHistory.prototype.result = $util.emptyArray;
+
+    /**
+     * Encodes the specified CowboyHistory message. Does not implicitly {@link CowboyHistory.verify|verify} messages.
+     * @function encode
+     * @memberof CowboyHistory
+     * @static
+     * @param {ICowboyHistory} m CowboyHistory message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    CowboyHistory.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.cowboyAreaType != null && Object.hasOwnProperty.call(m, "cowboyAreaType"))
+            w.uint32(8).int32(m.cowboyAreaType);
+        if (m.result != null && m.result.length) {
+            w.uint32(18).fork();
+            for (var i = 0; i < m.result.length; ++i)
+                w.bool(m.result[i]);
+            w.ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a CowboyHistory message from the specified reader or buffer.
+     * @function decode
+     * @memberof CowboyHistory
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {CowboyHistory} CowboyHistory
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    CowboyHistory.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyHistory();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.cowboyAreaType = r.int32();
+                break;
+            case 2:
+                if (!(m.result && m.result.length))
+                    m.result = [];
+                if ((t & 7) === 2) {
+                    var c2 = r.uint32() + r.pos;
+                    while (r.pos < c2)
+                        m.result.push(r.bool());
+                } else
+                    m.result.push(r.bool());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return CowboyHistory;
+})();
+
+$root.CowboyTotalHistory = (function() {
+
+    /**
+     * Properties of a CowboyTotalHistory.
+     * @exports ICowboyTotalHistory
+     * @interface ICowboyTotalHistory
+     * @property {CowboyAreaType|null} [cowboyAreaType] CowboyTotalHistory cowboyAreaType
+     * @property {number|null} [count] CowboyTotalHistory count
+     */
+
+    /**
+     * Constructs a new CowboyTotalHistory.
+     * @exports CowboyTotalHistory
+     * @classdesc Represents a CowboyTotalHistory.
+     * @implements ICowboyTotalHistory
+     * @constructor
+     * @param {ICowboyTotalHistory=} [p] Properties to set
+     */
+    function CowboyTotalHistory(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * CowboyTotalHistory cowboyAreaType.
+     * @member {CowboyAreaType} cowboyAreaType
+     * @memberof CowboyTotalHistory
+     * @instance
+     */
+    CowboyTotalHistory.prototype.cowboyAreaType = 0;
+
+    /**
+     * CowboyTotalHistory count.
+     * @member {number} count
+     * @memberof CowboyTotalHistory
+     * @instance
+     */
+    CowboyTotalHistory.prototype.count = 0;
+
+    /**
+     * Encodes the specified CowboyTotalHistory message. Does not implicitly {@link CowboyTotalHistory.verify|verify} messages.
+     * @function encode
+     * @memberof CowboyTotalHistory
+     * @static
+     * @param {ICowboyTotalHistory} m CowboyTotalHistory message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    CowboyTotalHistory.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.cowboyAreaType != null && Object.hasOwnProperty.call(m, "cowboyAreaType"))
+            w.uint32(8).int32(m.cowboyAreaType);
+        if (m.count != null && Object.hasOwnProperty.call(m, "count"))
+            w.uint32(16).int32(m.count);
+        return w;
+    };
+
+    /**
+     * Decodes a CowboyTotalHistory message from the specified reader or buffer.
+     * @function decode
+     * @memberof CowboyTotalHistory
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {CowboyTotalHistory} CowboyTotalHistory
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    CowboyTotalHistory.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyTotalHistory();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.cowboyAreaType = r.int32();
+                break;
+            case 2:
+                m.count = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return CowboyTotalHistory;
+})();
+
+$root.CowboyRecord = (function() {
+
+    /**
+     * Properties of a CowboyRecord.
+     * @exports ICowboyRecord
+     * @interface ICowboyRecord
+     * @property {Array.<CowboyAreaType>|null} [cowboyAreaType] CowboyRecord cowboyAreaType
+     * @property {Array.<number>|null} [areaWinLose] CowboyRecord areaWinLose
+     * @property {Array.<number>|null} [betAmount] CowboyRecord betAmount
+     * @property {Array.<ICardInfo>|null} [boyCards] CowboyRecord boyCards
+     * @property {Array.<ICardInfo>|null} [girlCards] CowboyRecord girlCards
+     * @property {Array.<ICardInfo>|null} [publicCards] CowboyRecord publicCards
+     * @property {string|null} [gameCode] CowboyRecord gameCode
+     */
+
+    /**
+     * Constructs a new CowboyRecord.
+     * @exports CowboyRecord
+     * @classdesc Represents a CowboyRecord.
+     * @implements ICowboyRecord
+     * @constructor
+     * @param {ICowboyRecord=} [p] Properties to set
+     */
+    function CowboyRecord(p) {
+        this.cowboyAreaType = [];
+        this.areaWinLose = [];
+        this.betAmount = [];
+        this.boyCards = [];
+        this.girlCards = [];
+        this.publicCards = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * CowboyRecord cowboyAreaType.
+     * @member {Array.<CowboyAreaType>} cowboyAreaType
+     * @memberof CowboyRecord
+     * @instance
+     */
+    CowboyRecord.prototype.cowboyAreaType = $util.emptyArray;
+
+    /**
+     * CowboyRecord areaWinLose.
+     * @member {Array.<number>} areaWinLose
+     * @memberof CowboyRecord
+     * @instance
+     */
+    CowboyRecord.prototype.areaWinLose = $util.emptyArray;
+
+    /**
+     * CowboyRecord betAmount.
+     * @member {Array.<number>} betAmount
+     * @memberof CowboyRecord
+     * @instance
+     */
+    CowboyRecord.prototype.betAmount = $util.emptyArray;
+
+    /**
+     * CowboyRecord boyCards.
+     * @member {Array.<ICardInfo>} boyCards
+     * @memberof CowboyRecord
+     * @instance
+     */
+    CowboyRecord.prototype.boyCards = $util.emptyArray;
+
+    /**
+     * CowboyRecord girlCards.
+     * @member {Array.<ICardInfo>} girlCards
+     * @memberof CowboyRecord
+     * @instance
+     */
+    CowboyRecord.prototype.girlCards = $util.emptyArray;
+
+    /**
+     * CowboyRecord publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof CowboyRecord
+     * @instance
+     */
+    CowboyRecord.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * CowboyRecord gameCode.
+     * @member {string} gameCode
+     * @memberof CowboyRecord
+     * @instance
+     */
+    CowboyRecord.prototype.gameCode = "";
+
+    /**
+     * Encodes the specified CowboyRecord message. Does not implicitly {@link CowboyRecord.verify|verify} messages.
+     * @function encode
+     * @memberof CowboyRecord
+     * @static
+     * @param {ICowboyRecord} m CowboyRecord message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    CowboyRecord.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.cowboyAreaType != null && m.cowboyAreaType.length) {
+            w.uint32(10).fork();
+            for (var i = 0; i < m.cowboyAreaType.length; ++i)
+                w.int32(m.cowboyAreaType[i]);
+            w.ldelim();
+        }
+        if (m.areaWinLose != null && m.areaWinLose.length) {
+            w.uint32(18).fork();
+            for (var i = 0; i < m.areaWinLose.length; ++i)
+                w.int64(m.areaWinLose[i]);
+            w.ldelim();
+        }
+        if (m.betAmount != null && m.betAmount.length) {
+            w.uint32(26).fork();
+            for (var i = 0; i < m.betAmount.length; ++i)
+                w.int64(m.betAmount[i]);
+            w.ldelim();
+        }
+        if (m.boyCards != null && m.boyCards.length) {
+            for (var i = 0; i < m.boyCards.length; ++i)
+                $root.CardInfo.encode(m.boyCards[i], w.uint32(34).fork()).ldelim();
+        }
+        if (m.girlCards != null && m.girlCards.length) {
+            for (var i = 0; i < m.girlCards.length; ++i)
+                $root.CardInfo.encode(m.girlCards[i], w.uint32(42).fork()).ldelim();
+        }
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(50).fork()).ldelim();
+        }
+        if (m.gameCode != null && Object.hasOwnProperty.call(m, "gameCode"))
+            w.uint32(58).string(m.gameCode);
+        return w;
+    };
+
+    /**
+     * Decodes a CowboyRecord message from the specified reader or buffer.
+     * @function decode
+     * @memberof CowboyRecord
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {CowboyRecord} CowboyRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    CowboyRecord.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyRecord();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                if (!(m.cowboyAreaType && m.cowboyAreaType.length))
+                    m.cowboyAreaType = [];
+                if ((t & 7) === 2) {
+                    var c2 = r.uint32() + r.pos;
+                    while (r.pos < c2)
+                        m.cowboyAreaType.push(r.int32());
+                } else
+                    m.cowboyAreaType.push(r.int32());
+                break;
+            case 2:
+                if (!(m.areaWinLose && m.areaWinLose.length))
+                    m.areaWinLose = [];
+                if ((t & 7) === 2) {
+                    var c2 = r.uint32() + r.pos;
+                    while (r.pos < c2)
+                        m.areaWinLose.push(r.int64());
+                } else
+                    m.areaWinLose.push(r.int64());
+                break;
+            case 3:
+                if (!(m.betAmount && m.betAmount.length))
+                    m.betAmount = [];
+                if ((t & 7) === 2) {
+                    var c2 = r.uint32() + r.pos;
+                    while (r.pos < c2)
+                        m.betAmount.push(r.int64());
+                } else
+                    m.betAmount.push(r.int64());
+                break;
+            case 4:
+                if (!(m.boyCards && m.boyCards.length))
+                    m.boyCards = [];
+                m.boyCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 5:
+                if (!(m.girlCards && m.girlCards.length))
+                    m.girlCards = [];
+                m.girlCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 6:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 7:
+                m.gameCode = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return CowboyRecord;
+})();
+
+$root.CowboyWinLose = (function() {
+
+    /**
+     * Properties of a CowboyWinLose.
+     * @exports ICowboyWinLose
+     * @interface ICowboyWinLose
+     * @property {string|null} [uid] CowboyWinLose uid
+     * @property {number|null} [winLose] CowboyWinLose winLose
+     * @property {number|null} [restAmount] CowboyWinLose restAmount
+     * @property {number|null} [reward] CowboyWinLose reward
+     */
+
+    /**
+     * Constructs a new CowboyWinLose.
+     * @exports CowboyWinLose
+     * @classdesc Represents a CowboyWinLose.
+     * @implements ICowboyWinLose
+     * @constructor
+     * @param {ICowboyWinLose=} [p] Properties to set
+     */
+    function CowboyWinLose(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * CowboyWinLose uid.
+     * @member {string} uid
+     * @memberof CowboyWinLose
+     * @instance
+     */
+    CowboyWinLose.prototype.uid = "";
+
+    /**
+     * CowboyWinLose winLose.
+     * @member {number} winLose
+     * @memberof CowboyWinLose
+     * @instance
+     */
+    CowboyWinLose.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * CowboyWinLose restAmount.
+     * @member {number} restAmount
+     * @memberof CowboyWinLose
+     * @instance
+     */
+    CowboyWinLose.prototype.restAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * CowboyWinLose reward.
+     * @member {number} reward
+     * @memberof CowboyWinLose
+     * @instance
+     */
+    CowboyWinLose.prototype.reward = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified CowboyWinLose message. Does not implicitly {@link CowboyWinLose.verify|verify} messages.
+     * @function encode
+     * @memberof CowboyWinLose
+     * @static
+     * @param {ICowboyWinLose} m CowboyWinLose message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    CowboyWinLose.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(10).string(m.uid);
+        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
+            w.uint32(16).int64(m.winLose);
+        if (m.restAmount != null && Object.hasOwnProperty.call(m, "restAmount"))
+            w.uint32(24).int64(m.restAmount);
+        if (m.reward != null && Object.hasOwnProperty.call(m, "reward"))
+            w.uint32(32).int64(m.reward);
+        return w;
+    };
+
+    /**
+     * Decodes a CowboyWinLose message from the specified reader or buffer.
+     * @function decode
+     * @memberof CowboyWinLose
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {CowboyWinLose} CowboyWinLose
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    CowboyWinLose.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyWinLose();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.uid = r.string();
+                break;
+            case 2:
+                m.winLose = r.int64();
+                break;
+            case 3:
+                m.restAmount = r.int64();
+                break;
+            case 4:
+                m.reward = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return CowboyWinLose;
+})();
+
 /**
  * GameType enum.
  * @exports GameType
@@ -3122,6 +2054,3122 @@ $root.CardInfo = (function() {
     };
 
     return CardInfo;
+})();
+
+$root.S2CTexasCowboyEnterGameResp = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyEnterGameResp.
+     * @exports IS2CTexasCowboyEnterGameResp
+     * @interface IS2CTexasCowboyEnterGameResp
+     * @property {ICommonResult|null} [result] S2CTexasCowboyEnterGameResp result
+     * @property {string|null} [gameId] S2CTexasCowboyEnterGameResp gameId
+     * @property {CowboyPhase|null} [phase] S2CTexasCowboyEnterGameResp phase
+     * @property {Array.<ICowboyAreaInfo>|null} [cowboyAreaInfoList] S2CTexasCowboyEnterGameResp cowboyAreaInfoList
+     * @property {Array.<ICowboySingleBet>|null} [myBetInfo] S2CTexasCowboyEnterGameResp myBetInfo
+     * @property {Array.<ICowboyHistory>|null} [history] S2CTexasCowboyEnterGameResp history
+     * @property {number|null} [settlementTime] S2CTexasCowboyEnterGameResp settlementTime
+     * @property {number|null} [betTime] S2CTexasCowboyEnterGameResp betTime
+     * @property {number|null} [restTime] S2CTexasCowboyEnterGameResp restTime
+     * @property {ICardInfo|null} [oneCard] S2CTexasCowboyEnterGameResp oneCard
+     * @property {number|null} [money] S2CTexasCowboyEnterGameResp money
+     * @property {Array.<number>|null} [ratio] S2CTexasCowboyEnterGameResp ratio
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyEnterGameResp.
+     * @exports S2CTexasCowboyEnterGameResp
+     * @classdesc Represents a S2CTexasCowboyEnterGameResp.
+     * @implements IS2CTexasCowboyEnterGameResp
+     * @constructor
+     * @param {IS2CTexasCowboyEnterGameResp=} [p] Properties to set
+     */
+    function S2CTexasCowboyEnterGameResp(p) {
+        this.cowboyAreaInfoList = [];
+        this.myBetInfo = [];
+        this.history = [];
+        this.ratio = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyEnterGameResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.result = null;
+
+    /**
+     * S2CTexasCowboyEnterGameResp gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.gameId = "";
+
+    /**
+     * S2CTexasCowboyEnterGameResp phase.
+     * @member {CowboyPhase} phase
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.phase = 0;
+
+    /**
+     * S2CTexasCowboyEnterGameResp cowboyAreaInfoList.
+     * @member {Array.<ICowboyAreaInfo>} cowboyAreaInfoList
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.cowboyAreaInfoList = $util.emptyArray;
+
+    /**
+     * S2CTexasCowboyEnterGameResp myBetInfo.
+     * @member {Array.<ICowboySingleBet>} myBetInfo
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.myBetInfo = $util.emptyArray;
+
+    /**
+     * S2CTexasCowboyEnterGameResp history.
+     * @member {Array.<ICowboyHistory>} history
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.history = $util.emptyArray;
+
+    /**
+     * S2CTexasCowboyEnterGameResp settlementTime.
+     * @member {number} settlementTime
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.settlementTime = 0;
+
+    /**
+     * S2CTexasCowboyEnterGameResp betTime.
+     * @member {number} betTime
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.betTime = 0;
+
+    /**
+     * S2CTexasCowboyEnterGameResp restTime.
+     * @member {number} restTime
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.restTime = 0;
+
+    /**
+     * S2CTexasCowboyEnterGameResp oneCard.
+     * @member {ICardInfo|null|undefined} oneCard
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.oneCard = null;
+
+    /**
+     * S2CTexasCowboyEnterGameResp money.
+     * @member {number} money
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CTexasCowboyEnterGameResp ratio.
+     * @member {Array.<number>} ratio
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @instance
+     */
+    S2CTexasCowboyEnterGameResp.prototype.ratio = $util.emptyArray;
+
+    /**
+     * Encodes the specified S2CTexasCowboyEnterGameResp message. Does not implicitly {@link S2CTexasCowboyEnterGameResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @static
+     * @param {IS2CTexasCowboyEnterGameResp} m S2CTexasCowboyEnterGameResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyEnterGameResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.phase != null && Object.hasOwnProperty.call(m, "phase"))
+            w.uint32(24).int32(m.phase);
+        if (m.cowboyAreaInfoList != null && m.cowboyAreaInfoList.length) {
+            for (var i = 0; i < m.cowboyAreaInfoList.length; ++i)
+                $root.CowboyAreaInfo.encode(m.cowboyAreaInfoList[i], w.uint32(34).fork()).ldelim();
+        }
+        if (m.myBetInfo != null && m.myBetInfo.length) {
+            for (var i = 0; i < m.myBetInfo.length; ++i)
+                $root.CowboySingleBet.encode(m.myBetInfo[i], w.uint32(42).fork()).ldelim();
+        }
+        if (m.history != null && m.history.length) {
+            for (var i = 0; i < m.history.length; ++i)
+                $root.CowboyHistory.encode(m.history[i], w.uint32(50).fork()).ldelim();
+        }
+        if (m.settlementTime != null && Object.hasOwnProperty.call(m, "settlementTime"))
+            w.uint32(56).int32(m.settlementTime);
+        if (m.betTime != null && Object.hasOwnProperty.call(m, "betTime"))
+            w.uint32(64).int32(m.betTime);
+        if (m.restTime != null && Object.hasOwnProperty.call(m, "restTime"))
+            w.uint32(72).int32(m.restTime);
+        if (m.oneCard != null && Object.hasOwnProperty.call(m, "oneCard"))
+            $root.CardInfo.encode(m.oneCard, w.uint32(82).fork()).ldelim();
+        if (m.money != null && Object.hasOwnProperty.call(m, "money"))
+            w.uint32(88).int64(m.money);
+        if (m.ratio != null && m.ratio.length) {
+            w.uint32(98).fork();
+            for (var i = 0; i < m.ratio.length; ++i)
+                w.int64(m.ratio[i]);
+            w.ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyEnterGameResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyEnterGameResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyEnterGameResp} S2CTexasCowboyEnterGameResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyEnterGameResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyEnterGameResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.phase = r.int32();
+                break;
+            case 4:
+                if (!(m.cowboyAreaInfoList && m.cowboyAreaInfoList.length))
+                    m.cowboyAreaInfoList = [];
+                m.cowboyAreaInfoList.push($root.CowboyAreaInfo.decode(r, r.uint32()));
+                break;
+            case 5:
+                if (!(m.myBetInfo && m.myBetInfo.length))
+                    m.myBetInfo = [];
+                m.myBetInfo.push($root.CowboySingleBet.decode(r, r.uint32()));
+                break;
+            case 6:
+                if (!(m.history && m.history.length))
+                    m.history = [];
+                m.history.push($root.CowboyHistory.decode(r, r.uint32()));
+                break;
+            case 7:
+                m.settlementTime = r.int32();
+                break;
+            case 8:
+                m.betTime = r.int32();
+                break;
+            case 9:
+                m.restTime = r.int32();
+                break;
+            case 10:
+                m.oneCard = $root.CardInfo.decode(r, r.uint32());
+                break;
+            case 11:
+                m.money = r.int64();
+                break;
+            case 12:
+                if (!(m.ratio && m.ratio.length))
+                    m.ratio = [];
+                if ((t & 7) === 2) {
+                    var c2 = r.uint32() + r.pos;
+                    while (r.pos < c2)
+                        m.ratio.push(r.int64());
+                } else
+                    m.ratio.push(r.int64());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyEnterGameResp;
+})();
+
+$root.S2CTexasCowboyExitGameResp = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyExitGameResp.
+     * @exports IS2CTexasCowboyExitGameResp
+     * @interface IS2CTexasCowboyExitGameResp
+     * @property {ICommonResult|null} [result] S2CTexasCowboyExitGameResp result
+     * @property {string|null} [gameId] S2CTexasCowboyExitGameResp gameId
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyExitGameResp.
+     * @exports S2CTexasCowboyExitGameResp
+     * @classdesc Represents a S2CTexasCowboyExitGameResp.
+     * @implements IS2CTexasCowboyExitGameResp
+     * @constructor
+     * @param {IS2CTexasCowboyExitGameResp=} [p] Properties to set
+     */
+    function S2CTexasCowboyExitGameResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyExitGameResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CTexasCowboyExitGameResp
+     * @instance
+     */
+    S2CTexasCowboyExitGameResp.prototype.result = null;
+
+    /**
+     * S2CTexasCowboyExitGameResp gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyExitGameResp
+     * @instance
+     */
+    S2CTexasCowboyExitGameResp.prototype.gameId = "";
+
+    /**
+     * Encodes the specified S2CTexasCowboyExitGameResp message. Does not implicitly {@link S2CTexasCowboyExitGameResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyExitGameResp
+     * @static
+     * @param {IS2CTexasCowboyExitGameResp} m S2CTexasCowboyExitGameResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyExitGameResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyExitGameResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyExitGameResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyExitGameResp} S2CTexasCowboyExitGameResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyExitGameResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyExitGameResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyExitGameResp;
+})();
+
+$root.S2CTexasCowboyBetResp = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyBetResp.
+     * @exports IS2CTexasCowboyBetResp
+     * @interface IS2CTexasCowboyBetResp
+     * @property {ICommonResult|null} [result] S2CTexasCowboyBetResp result
+     * @property {string|null} [gameId] S2CTexasCowboyBetResp gameId
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyBetResp.
+     * @exports S2CTexasCowboyBetResp
+     * @classdesc Represents a S2CTexasCowboyBetResp.
+     * @implements IS2CTexasCowboyBetResp
+     * @constructor
+     * @param {IS2CTexasCowboyBetResp=} [p] Properties to set
+     */
+    function S2CTexasCowboyBetResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyBetResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CTexasCowboyBetResp
+     * @instance
+     */
+    S2CTexasCowboyBetResp.prototype.result = null;
+
+    /**
+     * S2CTexasCowboyBetResp gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyBetResp
+     * @instance
+     */
+    S2CTexasCowboyBetResp.prototype.gameId = "";
+
+    /**
+     * Encodes the specified S2CTexasCowboyBetResp message. Does not implicitly {@link S2CTexasCowboyBetResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyBetResp
+     * @static
+     * @param {IS2CTexasCowboyBetResp} m S2CTexasCowboyBetResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyBetResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyBetResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyBetResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyBetResp} S2CTexasCowboyBetResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyBetResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyBetResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyBetResp;
+})();
+
+$root.S2CTexasCowboyRecordResp = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyRecordResp.
+     * @exports IS2CTexasCowboyRecordResp
+     * @interface IS2CTexasCowboyRecordResp
+     * @property {ICommonResult|null} [result] S2CTexasCowboyRecordResp result
+     * @property {string|null} [gameId] S2CTexasCowboyRecordResp gameId
+     * @property {ICowboyRecord|null} [record] S2CTexasCowboyRecordResp record
+     * @property {number|null} [whichGame] S2CTexasCowboyRecordResp whichGame
+     * @property {number|null} [totalGame] S2CTexasCowboyRecordResp totalGame
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyRecordResp.
+     * @exports S2CTexasCowboyRecordResp
+     * @classdesc Represents a S2CTexasCowboyRecordResp.
+     * @implements IS2CTexasCowboyRecordResp
+     * @constructor
+     * @param {IS2CTexasCowboyRecordResp=} [p] Properties to set
+     */
+    function S2CTexasCowboyRecordResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyRecordResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CTexasCowboyRecordResp
+     * @instance
+     */
+    S2CTexasCowboyRecordResp.prototype.result = null;
+
+    /**
+     * S2CTexasCowboyRecordResp gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyRecordResp
+     * @instance
+     */
+    S2CTexasCowboyRecordResp.prototype.gameId = "";
+
+    /**
+     * S2CTexasCowboyRecordResp record.
+     * @member {ICowboyRecord|null|undefined} record
+     * @memberof S2CTexasCowboyRecordResp
+     * @instance
+     */
+    S2CTexasCowboyRecordResp.prototype.record = null;
+
+    /**
+     * S2CTexasCowboyRecordResp whichGame.
+     * @member {number} whichGame
+     * @memberof S2CTexasCowboyRecordResp
+     * @instance
+     */
+    S2CTexasCowboyRecordResp.prototype.whichGame = 0;
+
+    /**
+     * S2CTexasCowboyRecordResp totalGame.
+     * @member {number} totalGame
+     * @memberof S2CTexasCowboyRecordResp
+     * @instance
+     */
+    S2CTexasCowboyRecordResp.prototype.totalGame = 0;
+
+    /**
+     * Encodes the specified S2CTexasCowboyRecordResp message. Does not implicitly {@link S2CTexasCowboyRecordResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyRecordResp
+     * @static
+     * @param {IS2CTexasCowboyRecordResp} m S2CTexasCowboyRecordResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyRecordResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.record != null && Object.hasOwnProperty.call(m, "record"))
+            $root.CowboyRecord.encode(m.record, w.uint32(26).fork()).ldelim();
+        if (m.whichGame != null && Object.hasOwnProperty.call(m, "whichGame"))
+            w.uint32(32).int32(m.whichGame);
+        if (m.totalGame != null && Object.hasOwnProperty.call(m, "totalGame"))
+            w.uint32(40).int32(m.totalGame);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyRecordResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyRecordResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyRecordResp} S2CTexasCowboyRecordResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyRecordResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyRecordResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.record = $root.CowboyRecord.decode(r, r.uint32());
+                break;
+            case 4:
+                m.whichGame = r.int32();
+                break;
+            case 5:
+                m.totalGame = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyRecordResp;
+})();
+
+$root.S2CTexasCowboyBringInResp = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyBringInResp.
+     * @exports IS2CTexasCowboyBringInResp
+     * @interface IS2CTexasCowboyBringInResp
+     * @property {ICommonResult|null} [result] S2CTexasCowboyBringInResp result
+     * @property {string|null} [gameId] S2CTexasCowboyBringInResp gameId
+     * @property {number|null} [amount] S2CTexasCowboyBringInResp amount
+     * @property {number|null} [totalAmount] S2CTexasCowboyBringInResp totalAmount
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyBringInResp.
+     * @exports S2CTexasCowboyBringInResp
+     * @classdesc Represents a S2CTexasCowboyBringInResp.
+     * @implements IS2CTexasCowboyBringInResp
+     * @constructor
+     * @param {IS2CTexasCowboyBringInResp=} [p] Properties to set
+     */
+    function S2CTexasCowboyBringInResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyBringInResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CTexasCowboyBringInResp
+     * @instance
+     */
+    S2CTexasCowboyBringInResp.prototype.result = null;
+
+    /**
+     * S2CTexasCowboyBringInResp gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyBringInResp
+     * @instance
+     */
+    S2CTexasCowboyBringInResp.prototype.gameId = "";
+
+    /**
+     * S2CTexasCowboyBringInResp amount.
+     * @member {number} amount
+     * @memberof S2CTexasCowboyBringInResp
+     * @instance
+     */
+    S2CTexasCowboyBringInResp.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CTexasCowboyBringInResp totalAmount.
+     * @member {number} totalAmount
+     * @memberof S2CTexasCowboyBringInResp
+     * @instance
+     */
+    S2CTexasCowboyBringInResp.prototype.totalAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified S2CTexasCowboyBringInResp message. Does not implicitly {@link S2CTexasCowboyBringInResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyBringInResp
+     * @static
+     * @param {IS2CTexasCowboyBringInResp} m S2CTexasCowboyBringInResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyBringInResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
+            w.uint32(24).int64(m.amount);
+        if (m.totalAmount != null && Object.hasOwnProperty.call(m, "totalAmount"))
+            w.uint32(32).int64(m.totalAmount);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyBringInResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyBringInResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyBringInResp} S2CTexasCowboyBringInResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyBringInResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyBringInResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.amount = r.int64();
+                break;
+            case 4:
+                m.totalAmount = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyBringInResp;
+})();
+
+$root.S2CTexasCowboyBringOutResp = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyBringOutResp.
+     * @exports IS2CTexasCowboyBringOutResp
+     * @interface IS2CTexasCowboyBringOutResp
+     * @property {ICommonResult|null} [result] S2CTexasCowboyBringOutResp result
+     * @property {string|null} [gameId] S2CTexasCowboyBringOutResp gameId
+     * @property {number|null} [amount] S2CTexasCowboyBringOutResp amount
+     * @property {number|null} [totalAmount] S2CTexasCowboyBringOutResp totalAmount
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyBringOutResp.
+     * @exports S2CTexasCowboyBringOutResp
+     * @classdesc Represents a S2CTexasCowboyBringOutResp.
+     * @implements IS2CTexasCowboyBringOutResp
+     * @constructor
+     * @param {IS2CTexasCowboyBringOutResp=} [p] Properties to set
+     */
+    function S2CTexasCowboyBringOutResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyBringOutResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CTexasCowboyBringOutResp
+     * @instance
+     */
+    S2CTexasCowboyBringOutResp.prototype.result = null;
+
+    /**
+     * S2CTexasCowboyBringOutResp gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyBringOutResp
+     * @instance
+     */
+    S2CTexasCowboyBringOutResp.prototype.gameId = "";
+
+    /**
+     * S2CTexasCowboyBringOutResp amount.
+     * @member {number} amount
+     * @memberof S2CTexasCowboyBringOutResp
+     * @instance
+     */
+    S2CTexasCowboyBringOutResp.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * S2CTexasCowboyBringOutResp totalAmount.
+     * @member {number} totalAmount
+     * @memberof S2CTexasCowboyBringOutResp
+     * @instance
+     */
+    S2CTexasCowboyBringOutResp.prototype.totalAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified S2CTexasCowboyBringOutResp message. Does not implicitly {@link S2CTexasCowboyBringOutResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyBringOutResp
+     * @static
+     * @param {IS2CTexasCowboyBringOutResp} m S2CTexasCowboyBringOutResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyBringOutResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
+            w.uint32(24).int64(m.amount);
+        if (m.totalAmount != null && Object.hasOwnProperty.call(m, "totalAmount"))
+            w.uint32(32).int64(m.totalAmount);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyBringOutResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyBringOutResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyBringOutResp} S2CTexasCowboyBringOutResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyBringOutResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyBringOutResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.amount = r.int64();
+                break;
+            case 4:
+                m.totalAmount = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyBringOutResp;
+})();
+
+$root.S2CTexasCowboyTotalHistoryResp = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyTotalHistoryResp.
+     * @exports IS2CTexasCowboyTotalHistoryResp
+     * @interface IS2CTexasCowboyTotalHistoryResp
+     * @property {ICommonResult|null} [result] S2CTexasCowboyTotalHistoryResp result
+     * @property {string|null} [gameId] S2CTexasCowboyTotalHistoryResp gameId
+     * @property {Array.<ICowboyTotalHistory>|null} [totalHistory] S2CTexasCowboyTotalHistoryResp totalHistory
+     * @property {number|null} [totalGameCount] S2CTexasCowboyTotalHistoryResp totalGameCount
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyTotalHistoryResp.
+     * @exports S2CTexasCowboyTotalHistoryResp
+     * @classdesc Represents a S2CTexasCowboyTotalHistoryResp.
+     * @implements IS2CTexasCowboyTotalHistoryResp
+     * @constructor
+     * @param {IS2CTexasCowboyTotalHistoryResp=} [p] Properties to set
+     */
+    function S2CTexasCowboyTotalHistoryResp(p) {
+        this.totalHistory = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyTotalHistoryResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @instance
+     */
+    S2CTexasCowboyTotalHistoryResp.prototype.result = null;
+
+    /**
+     * S2CTexasCowboyTotalHistoryResp gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @instance
+     */
+    S2CTexasCowboyTotalHistoryResp.prototype.gameId = "";
+
+    /**
+     * S2CTexasCowboyTotalHistoryResp totalHistory.
+     * @member {Array.<ICowboyTotalHistory>} totalHistory
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @instance
+     */
+    S2CTexasCowboyTotalHistoryResp.prototype.totalHistory = $util.emptyArray;
+
+    /**
+     * S2CTexasCowboyTotalHistoryResp totalGameCount.
+     * @member {number} totalGameCount
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @instance
+     */
+    S2CTexasCowboyTotalHistoryResp.prototype.totalGameCount = 0;
+
+    /**
+     * Encodes the specified S2CTexasCowboyTotalHistoryResp message. Does not implicitly {@link S2CTexasCowboyTotalHistoryResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @static
+     * @param {IS2CTexasCowboyTotalHistoryResp} m S2CTexasCowboyTotalHistoryResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyTotalHistoryResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.totalHistory != null && m.totalHistory.length) {
+            for (var i = 0; i < m.totalHistory.length; ++i)
+                $root.CowboyTotalHistory.encode(m.totalHistory[i], w.uint32(26).fork()).ldelim();
+        }
+        if (m.totalGameCount != null && Object.hasOwnProperty.call(m, "totalGameCount"))
+            w.uint32(32).int32(m.totalGameCount);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyTotalHistoryResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyTotalHistoryResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyTotalHistoryResp} S2CTexasCowboyTotalHistoryResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyTotalHistoryResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyTotalHistoryResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                if (!(m.totalHistory && m.totalHistory.length))
+                    m.totalHistory = [];
+                m.totalHistory.push($root.CowboyTotalHistory.decode(r, r.uint32()));
+                break;
+            case 4:
+                m.totalGameCount = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyTotalHistoryResp;
+})();
+
+$root.S2CTexasCowboyBetNotify = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyBetNotify.
+     * @exports IS2CTexasCowboyBetNotify
+     * @interface IS2CTexasCowboyBetNotify
+     * @property {string|null} [gameId] S2CTexasCowboyBetNotify gameId
+     * @property {Array.<ICowboySingleBet>|null} [betInfo] S2CTexasCowboyBetNotify betInfo
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyBetNotify.
+     * @exports S2CTexasCowboyBetNotify
+     * @classdesc Represents a S2CTexasCowboyBetNotify.
+     * @implements IS2CTexasCowboyBetNotify
+     * @constructor
+     * @param {IS2CTexasCowboyBetNotify=} [p] Properties to set
+     */
+    function S2CTexasCowboyBetNotify(p) {
+        this.betInfo = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyBetNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyBetNotify
+     * @instance
+     */
+    S2CTexasCowboyBetNotify.prototype.gameId = "";
+
+    /**
+     * S2CTexasCowboyBetNotify betInfo.
+     * @member {Array.<ICowboySingleBet>} betInfo
+     * @memberof S2CTexasCowboyBetNotify
+     * @instance
+     */
+    S2CTexasCowboyBetNotify.prototype.betInfo = $util.emptyArray;
+
+    /**
+     * Encodes the specified S2CTexasCowboyBetNotify message. Does not implicitly {@link S2CTexasCowboyBetNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyBetNotify
+     * @static
+     * @param {IS2CTexasCowboyBetNotify} m S2CTexasCowboyBetNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyBetNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.betInfo != null && m.betInfo.length) {
+            for (var i = 0; i < m.betInfo.length; ++i)
+                $root.CowboySingleBet.encode(m.betInfo[i], w.uint32(18).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyBetNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyBetNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyBetNotify} S2CTexasCowboyBetNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyBetNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyBetNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                if (!(m.betInfo && m.betInfo.length))
+                    m.betInfo = [];
+                m.betInfo.push($root.CowboySingleBet.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyBetNotify;
+})();
+
+$root.S2CTexasCowboyGameStartNotify = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyGameStartNotify.
+     * @exports IS2CTexasCowboyGameStartNotify
+     * @interface IS2CTexasCowboyGameStartNotify
+     * @property {string|null} [gameId] S2CTexasCowboyGameStartNotify gameId
+     * @property {ICardInfo|null} [oneCard] S2CTexasCowboyGameStartNotify oneCard
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyGameStartNotify.
+     * @exports S2CTexasCowboyGameStartNotify
+     * @classdesc Represents a S2CTexasCowboyGameStartNotify.
+     * @implements IS2CTexasCowboyGameStartNotify
+     * @constructor
+     * @param {IS2CTexasCowboyGameStartNotify=} [p] Properties to set
+     */
+    function S2CTexasCowboyGameStartNotify(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyGameStartNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyGameStartNotify
+     * @instance
+     */
+    S2CTexasCowboyGameStartNotify.prototype.gameId = "";
+
+    /**
+     * S2CTexasCowboyGameStartNotify oneCard.
+     * @member {ICardInfo|null|undefined} oneCard
+     * @memberof S2CTexasCowboyGameStartNotify
+     * @instance
+     */
+    S2CTexasCowboyGameStartNotify.prototype.oneCard = null;
+
+    /**
+     * Encodes the specified S2CTexasCowboyGameStartNotify message. Does not implicitly {@link S2CTexasCowboyGameStartNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyGameStartNotify
+     * @static
+     * @param {IS2CTexasCowboyGameStartNotify} m S2CTexasCowboyGameStartNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyGameStartNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.oneCard != null && Object.hasOwnProperty.call(m, "oneCard"))
+            $root.CardInfo.encode(m.oneCard, w.uint32(18).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyGameStartNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyGameStartNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyGameStartNotify} S2CTexasCowboyGameStartNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyGameStartNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyGameStartNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.oneCard = $root.CardInfo.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyGameStartNotify;
+})();
+
+$root.S2CTexasCowboyGameSettlementNotify = (function() {
+
+    /**
+     * Properties of a S2CTexasCowboyGameSettlementNotify.
+     * @exports IS2CTexasCowboyGameSettlementNotify
+     * @interface IS2CTexasCowboyGameSettlementNotify
+     * @property {string|null} [gameId] S2CTexasCowboyGameSettlementNotify gameId
+     * @property {Array.<CowboyAreaType>|null} [reward] S2CTexasCowboyGameSettlementNotify reward
+     * @property {Array.<ICowboyWinLose>|null} [result] S2CTexasCowboyGameSettlementNotify result
+     * @property {Array.<ICardInfo>|null} [boyCards] S2CTexasCowboyGameSettlementNotify boyCards
+     * @property {Array.<ICardInfo>|null} [girlCards] S2CTexasCowboyGameSettlementNotify girlCards
+     * @property {Array.<ICardInfo>|null} [publicCards] S2CTexasCowboyGameSettlementNotify publicCards
+     * @property {number|null} [winner] S2CTexasCowboyGameSettlementNotify winner
+     * @property {number|null} [winnerCombination] S2CTexasCowboyGameSettlementNotify winnerCombination
+     */
+
+    /**
+     * Constructs a new S2CTexasCowboyGameSettlementNotify.
+     * @exports S2CTexasCowboyGameSettlementNotify
+     * @classdesc Represents a S2CTexasCowboyGameSettlementNotify.
+     * @implements IS2CTexasCowboyGameSettlementNotify
+     * @constructor
+     * @param {IS2CTexasCowboyGameSettlementNotify=} [p] Properties to set
+     */
+    function S2CTexasCowboyGameSettlementNotify(p) {
+        this.reward = [];
+        this.result = [];
+        this.boyCards = [];
+        this.girlCards = [];
+        this.publicCards = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CTexasCowboyGameSettlementNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CTexasCowboyGameSettlementNotify
+     * @instance
+     */
+    S2CTexasCowboyGameSettlementNotify.prototype.gameId = "";
+
+    /**
+     * S2CTexasCowboyGameSettlementNotify reward.
+     * @member {Array.<CowboyAreaType>} reward
+     * @memberof S2CTexasCowboyGameSettlementNotify
+     * @instance
+     */
+    S2CTexasCowboyGameSettlementNotify.prototype.reward = $util.emptyArray;
+
+    /**
+     * S2CTexasCowboyGameSettlementNotify result.
+     * @member {Array.<ICowboyWinLose>} result
+     * @memberof S2CTexasCowboyGameSettlementNotify
+     * @instance
+     */
+    S2CTexasCowboyGameSettlementNotify.prototype.result = $util.emptyArray;
+
+    /**
+     * S2CTexasCowboyGameSettlementNotify boyCards.
+     * @member {Array.<ICardInfo>} boyCards
+     * @memberof S2CTexasCowboyGameSettlementNotify
+     * @instance
+     */
+    S2CTexasCowboyGameSettlementNotify.prototype.boyCards = $util.emptyArray;
+
+    /**
+     * S2CTexasCowboyGameSettlementNotify girlCards.
+     * @member {Array.<ICardInfo>} girlCards
+     * @memberof S2CTexasCowboyGameSettlementNotify
+     * @instance
+     */
+    S2CTexasCowboyGameSettlementNotify.prototype.girlCards = $util.emptyArray;
+
+    /**
+     * S2CTexasCowboyGameSettlementNotify publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof S2CTexasCowboyGameSettlementNotify
+     * @instance
+     */
+    S2CTexasCowboyGameSettlementNotify.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * S2CTexasCowboyGameSettlementNotify winner.
+     * @member {number} winner
+     * @memberof S2CTexasCowboyGameSettlementNotify
+     * @instance
+     */
+    S2CTexasCowboyGameSettlementNotify.prototype.winner = 0;
+
+    /**
+     * S2CTexasCowboyGameSettlementNotify winnerCombination.
+     * @member {number} winnerCombination
+     * @memberof S2CTexasCowboyGameSettlementNotify
+     * @instance
+     */
+    S2CTexasCowboyGameSettlementNotify.prototype.winnerCombination = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+    /**
+     * Encodes the specified S2CTexasCowboyGameSettlementNotify message. Does not implicitly {@link S2CTexasCowboyGameSettlementNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CTexasCowboyGameSettlementNotify
+     * @static
+     * @param {IS2CTexasCowboyGameSettlementNotify} m S2CTexasCowboyGameSettlementNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CTexasCowboyGameSettlementNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.reward != null && m.reward.length) {
+            w.uint32(18).fork();
+            for (var i = 0; i < m.reward.length; ++i)
+                w.int32(m.reward[i]);
+            w.ldelim();
+        }
+        if (m.result != null && m.result.length) {
+            for (var i = 0; i < m.result.length; ++i)
+                $root.CowboyWinLose.encode(m.result[i], w.uint32(26).fork()).ldelim();
+        }
+        if (m.boyCards != null && m.boyCards.length) {
+            for (var i = 0; i < m.boyCards.length; ++i)
+                $root.CardInfo.encode(m.boyCards[i], w.uint32(34).fork()).ldelim();
+        }
+        if (m.girlCards != null && m.girlCards.length) {
+            for (var i = 0; i < m.girlCards.length; ++i)
+                $root.CardInfo.encode(m.girlCards[i], w.uint32(42).fork()).ldelim();
+        }
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(50).fork()).ldelim();
+        }
+        if (m.winner != null && Object.hasOwnProperty.call(m, "winner"))
+            w.uint32(56).int32(m.winner);
+        if (m.winnerCombination != null && Object.hasOwnProperty.call(m, "winnerCombination"))
+            w.uint32(64).uint64(m.winnerCombination);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CTexasCowboyGameSettlementNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CTexasCowboyGameSettlementNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CTexasCowboyGameSettlementNotify} S2CTexasCowboyGameSettlementNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CTexasCowboyGameSettlementNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyGameSettlementNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                if (!(m.reward && m.reward.length))
+                    m.reward = [];
+                if ((t & 7) === 2) {
+                    var c2 = r.uint32() + r.pos;
+                    while (r.pos < c2)
+                        m.reward.push(r.int32());
+                } else
+                    m.reward.push(r.int32());
+                break;
+            case 3:
+                if (!(m.result && m.result.length))
+                    m.result = [];
+                m.result.push($root.CowboyWinLose.decode(r, r.uint32()));
+                break;
+            case 4:
+                if (!(m.boyCards && m.boyCards.length))
+                    m.boyCards = [];
+                m.boyCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 5:
+                if (!(m.girlCards && m.girlCards.length))
+                    m.girlCards = [];
+                m.girlCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 6:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 7:
+                m.winner = r.int32();
+                break;
+            case 8:
+                m.winnerCombination = r.uint64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CTexasCowboyGameSettlementNotify;
+})();
+
+/**
+ * AmountChangeType enum.
+ * @exports AmountChangeType
+ * @enum {number}
+ * @property {number} AmountType_Other=0 AmountType_Other value
+ * @property {number} AmountType_Charge=1 AmountType_Charge value
+ * @property {number} AmountType_Grant=2 AmountType_Grant value
+ * @property {number} AmountType_Prop=3 AmountType_Prop value
+ * @property {number} AmountType_Commission=4 AmountType_Commission value
+ * @property {number} AmountType_Return=5 AmountType_Return value
+ * @property {number} AmountType_Insurance=6 AmountType_Insurance value
+ * @property {number} AmountType_InsuranceReturn=7 AmountType_InsuranceReturn value
+ * @property {number} AmountType_BringIn=8 AmountType_BringIn value
+ * @property {number} AmountType_BringOut=9 AmountType_BringOut value
+ * @property {number} AmountType_JackpotIn=10 AmountType_JackpotIn value
+ * @property {number} AmountType_Jackpot=11 AmountType_Jackpot value
+ * @property {number} AmountType_CowboyBet=12 AmountType_CowboyBet value
+ * @property {number} AmountType_CowboyReturn=13 AmountType_CowboyReturn value
+ */
+$root.AmountChangeType = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "AmountType_Other"] = 0;
+    values[valuesById[1] = "AmountType_Charge"] = 1;
+    values[valuesById[2] = "AmountType_Grant"] = 2;
+    values[valuesById[3] = "AmountType_Prop"] = 3;
+    values[valuesById[4] = "AmountType_Commission"] = 4;
+    values[valuesById[5] = "AmountType_Return"] = 5;
+    values[valuesById[6] = "AmountType_Insurance"] = 6;
+    values[valuesById[7] = "AmountType_InsuranceReturn"] = 7;
+    values[valuesById[8] = "AmountType_BringIn"] = 8;
+    values[valuesById[9] = "AmountType_BringOut"] = 9;
+    values[valuesById[10] = "AmountType_JackpotIn"] = 10;
+    values[valuesById[11] = "AmountType_Jackpot"] = 11;
+    values[valuesById[12] = "AmountType_CowboyBet"] = 12;
+    values[valuesById[13] = "AmountType_CowboyReturn"] = 13;
+    return values;
+})();
+
+/**
+ * PropType enum.
+ * @exports PropType
+ * @enum {number}
+ * @property {number} PropType_Other=0 PropType_Other value
+ * @property {number} PropType_ForceHand=1 PropType_ForceHand value
+ * @property {number} PropType_RubbingCards=2 PropType_RubbingCards value
+ * @property {number} PropType_PublicCard=3 PropType_PublicCard value
+ * @property {number} PropType_DelayThinking=4 PropType_DelayThinking value
+ * @property {number} PropType_Interaction=5 PropType_Interaction value
+ */
+$root.PropType = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "PropType_Other"] = 0;
+    values[valuesById[1] = "PropType_ForceHand"] = 1;
+    values[valuesById[2] = "PropType_RubbingCards"] = 2;
+    values[valuesById[3] = "PropType_PublicCard"] = 3;
+    values[valuesById[4] = "PropType_DelayThinking"] = 4;
+    values[valuesById[5] = "PropType_Interaction"] = 5;
+    return values;
+})();
+
+/**
+ * JackpotType enum.
+ * @exports JackpotType
+ * @enum {number}
+ * @property {number} JackpotType_Other=0 JackpotType_Other value
+ * @property {number} JackpotType_RoyalStraightFlash=1 JackpotType_RoyalStraightFlash value
+ * @property {number} JackpotType_RoyalStraightFlash6=2 JackpotType_RoyalStraightFlash6 value
+ * @property {number} JackpotType_RoyalStraightFlash7=3 JackpotType_RoyalStraightFlash7 value
+ */
+$root.JackpotType = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "JackpotType_Other"] = 0;
+    values[valuesById[1] = "JackpotType_RoyalStraightFlash"] = 1;
+    values[valuesById[2] = "JackpotType_RoyalStraightFlash6"] = 2;
+    values[valuesById[3] = "JackpotType_RoyalStraightFlash7"] = 3;
+    return values;
+})();
+
+$root.Game2LoggerGameRecord = (function() {
+
+    /**
+     * Properties of a Game2LoggerGameRecord.
+     * @exports IGame2LoggerGameRecord
+     * @interface IGame2LoggerGameRecord
+     * @property {GameType|null} [gameType] Game2LoggerGameRecord gameType
+     * @property {string|null} [gameId] Game2LoggerGameRecord gameId
+     * @property {string|null} [creator] Game2LoggerGameRecord creator
+     * @property {string|null} [beginTime] Game2LoggerGameRecord beginTime
+     * @property {string|null} [endTime] Game2LoggerGameRecord endTime
+     * @property {number|null} [configAnte] Game2LoggerGameRecord configAnte
+     * @property {number|null} [configSmallBet] Game2LoggerGameRecord configSmallBet
+     * @property {number|null} [configBigBet] Game2LoggerGameRecord configBigBet
+     * @property {number|null} [configStraddleBet] Game2LoggerGameRecord configStraddleBet
+     * @property {number|null} [configPlayerNum] Game2LoggerGameRecord configPlayerNum
+     * @property {number|null} [totalPlayerNum] Game2LoggerGameRecord totalPlayerNum
+     * @property {Array.<IGameSubRecord>|null} [gameSubRecord] Game2LoggerGameRecord gameSubRecord
+     */
+
+    /**
+     * Constructs a new Game2LoggerGameRecord.
+     * @exports Game2LoggerGameRecord
+     * @classdesc Represents a Game2LoggerGameRecord.
+     * @implements IGame2LoggerGameRecord
+     * @constructor
+     * @param {IGame2LoggerGameRecord=} [p] Properties to set
+     */
+    function Game2LoggerGameRecord(p) {
+        this.gameSubRecord = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * Game2LoggerGameRecord gameType.
+     * @member {GameType} gameType
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.gameType = 0;
+
+    /**
+     * Game2LoggerGameRecord gameId.
+     * @member {string} gameId
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.gameId = "";
+
+    /**
+     * Game2LoggerGameRecord creator.
+     * @member {string} creator
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.creator = "";
+
+    /**
+     * Game2LoggerGameRecord beginTime.
+     * @member {string} beginTime
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.beginTime = "";
+
+    /**
+     * Game2LoggerGameRecord endTime.
+     * @member {string} endTime
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.endTime = "";
+
+    /**
+     * Game2LoggerGameRecord configAnte.
+     * @member {number} configAnte
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.configAnte = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Game2LoggerGameRecord configSmallBet.
+     * @member {number} configSmallBet
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.configSmallBet = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Game2LoggerGameRecord configBigBet.
+     * @member {number} configBigBet
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.configBigBet = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Game2LoggerGameRecord configStraddleBet.
+     * @member {number} configStraddleBet
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.configStraddleBet = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Game2LoggerGameRecord configPlayerNum.
+     * @member {number} configPlayerNum
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.configPlayerNum = 0;
+
+    /**
+     * Game2LoggerGameRecord totalPlayerNum.
+     * @member {number} totalPlayerNum
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.totalPlayerNum = 0;
+
+    /**
+     * Game2LoggerGameRecord gameSubRecord.
+     * @member {Array.<IGameSubRecord>} gameSubRecord
+     * @memberof Game2LoggerGameRecord
+     * @instance
+     */
+    Game2LoggerGameRecord.prototype.gameSubRecord = $util.emptyArray;
+
+    /**
+     * Encodes the specified Game2LoggerGameRecord message. Does not implicitly {@link Game2LoggerGameRecord.verify|verify} messages.
+     * @function encode
+     * @memberof Game2LoggerGameRecord
+     * @static
+     * @param {IGame2LoggerGameRecord} m Game2LoggerGameRecord message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    Game2LoggerGameRecord.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
+            w.uint32(8).int32(m.gameType);
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.creator != null && Object.hasOwnProperty.call(m, "creator"))
+            w.uint32(26).string(m.creator);
+        if (m.beginTime != null && Object.hasOwnProperty.call(m, "beginTime"))
+            w.uint32(34).string(m.beginTime);
+        if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
+            w.uint32(42).string(m.endTime);
+        if (m.configAnte != null && Object.hasOwnProperty.call(m, "configAnte"))
+            w.uint32(48).int64(m.configAnte);
+        if (m.configSmallBet != null && Object.hasOwnProperty.call(m, "configSmallBet"))
+            w.uint32(56).int64(m.configSmallBet);
+        if (m.configBigBet != null && Object.hasOwnProperty.call(m, "configBigBet"))
+            w.uint32(64).int64(m.configBigBet);
+        if (m.configStraddleBet != null && Object.hasOwnProperty.call(m, "configStraddleBet"))
+            w.uint32(72).int64(m.configStraddleBet);
+        if (m.configPlayerNum != null && Object.hasOwnProperty.call(m, "configPlayerNum"))
+            w.uint32(80).int32(m.configPlayerNum);
+        if (m.totalPlayerNum != null && Object.hasOwnProperty.call(m, "totalPlayerNum"))
+            w.uint32(88).int32(m.totalPlayerNum);
+        if (m.gameSubRecord != null && m.gameSubRecord.length) {
+            for (var i = 0; i < m.gameSubRecord.length; ++i)
+                $root.GameSubRecord.encode(m.gameSubRecord[i], w.uint32(98).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a Game2LoggerGameRecord message from the specified reader or buffer.
+     * @function decode
+     * @memberof Game2LoggerGameRecord
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {Game2LoggerGameRecord} Game2LoggerGameRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    Game2LoggerGameRecord.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerGameRecord();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameType = r.int32();
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.creator = r.string();
+                break;
+            case 4:
+                m.beginTime = r.string();
+                break;
+            case 5:
+                m.endTime = r.string();
+                break;
+            case 6:
+                m.configAnte = r.int64();
+                break;
+            case 7:
+                m.configSmallBet = r.int64();
+                break;
+            case 8:
+                m.configBigBet = r.int64();
+                break;
+            case 9:
+                m.configStraddleBet = r.int64();
+                break;
+            case 10:
+                m.configPlayerNum = r.int32();
+                break;
+            case 11:
+                m.totalPlayerNum = r.int32();
+                break;
+            case 12:
+                if (!(m.gameSubRecord && m.gameSubRecord.length))
+                    m.gameSubRecord = [];
+                m.gameSubRecord.push($root.GameSubRecord.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return Game2LoggerGameRecord;
+})();
+
+$root.GameSubRecord = (function() {
+
+    /**
+     * Properties of a GameSubRecord.
+     * @exports IGameSubRecord
+     * @interface IGameSubRecord
+     * @property {number|null} [subRoundId] GameSubRecord subRoundId
+     * @property {string|null} [subBeginTime] GameSubRecord subBeginTime
+     * @property {string|null} [subEndTime] GameSubRecord subEndTime
+     * @property {number|null} [subTotalPlayerNum] GameSubRecord subTotalPlayerNum
+     * @property {number|null} [subTotalBringin] GameSubRecord subTotalBringin
+     * @property {number|null} [subTotalBringout] GameSubRecord subTotalBringout
+     * @property {number|null} [subTotalCommission] GameSubRecord subTotalCommission
+     * @property {number|null} [subTotalReturn] GameSubRecord subTotalReturn
+     * @property {number|null} [subTotalInsurance] GameSubRecord subTotalInsurance
+     * @property {number|null} [jackpot] GameSubRecord jackpot
+     * @property {number|null} [jackpotCommission] GameSubRecord jackpotCommission
+     */
+
+    /**
+     * Constructs a new GameSubRecord.
+     * @exports GameSubRecord
+     * @classdesc Represents a GameSubRecord.
+     * @implements IGameSubRecord
+     * @constructor
+     * @param {IGameSubRecord=} [p] Properties to set
+     */
+    function GameSubRecord(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * GameSubRecord subRoundId.
+     * @member {number} subRoundId
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.subRoundId = 0;
+
+    /**
+     * GameSubRecord subBeginTime.
+     * @member {string} subBeginTime
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.subBeginTime = "";
+
+    /**
+     * GameSubRecord subEndTime.
+     * @member {string} subEndTime
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.subEndTime = "";
+
+    /**
+     * GameSubRecord subTotalPlayerNum.
+     * @member {number} subTotalPlayerNum
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.subTotalPlayerNum = 0;
+
+    /**
+     * GameSubRecord subTotalBringin.
+     * @member {number} subTotalBringin
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.subTotalBringin = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * GameSubRecord subTotalBringout.
+     * @member {number} subTotalBringout
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.subTotalBringout = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * GameSubRecord subTotalCommission.
+     * @member {number} subTotalCommission
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.subTotalCommission = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * GameSubRecord subTotalReturn.
+     * @member {number} subTotalReturn
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.subTotalReturn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * GameSubRecord subTotalInsurance.
+     * @member {number} subTotalInsurance
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.subTotalInsurance = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * GameSubRecord jackpot.
+     * @member {number} jackpot
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.jackpot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * GameSubRecord jackpotCommission.
+     * @member {number} jackpotCommission
+     * @memberof GameSubRecord
+     * @instance
+     */
+    GameSubRecord.prototype.jackpotCommission = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified GameSubRecord message. Does not implicitly {@link GameSubRecord.verify|verify} messages.
+     * @function encode
+     * @memberof GameSubRecord
+     * @static
+     * @param {IGameSubRecord} m GameSubRecord message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    GameSubRecord.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.subRoundId != null && Object.hasOwnProperty.call(m, "subRoundId"))
+            w.uint32(8).int32(m.subRoundId);
+        if (m.subBeginTime != null && Object.hasOwnProperty.call(m, "subBeginTime"))
+            w.uint32(18).string(m.subBeginTime);
+        if (m.subEndTime != null && Object.hasOwnProperty.call(m, "subEndTime"))
+            w.uint32(26).string(m.subEndTime);
+        if (m.subTotalPlayerNum != null && Object.hasOwnProperty.call(m, "subTotalPlayerNum"))
+            w.uint32(32).int32(m.subTotalPlayerNum);
+        if (m.subTotalBringin != null && Object.hasOwnProperty.call(m, "subTotalBringin"))
+            w.uint32(40).int64(m.subTotalBringin);
+        if (m.subTotalBringout != null && Object.hasOwnProperty.call(m, "subTotalBringout"))
+            w.uint32(48).int64(m.subTotalBringout);
+        if (m.subTotalCommission != null && Object.hasOwnProperty.call(m, "subTotalCommission"))
+            w.uint32(56).int64(m.subTotalCommission);
+        if (m.subTotalReturn != null && Object.hasOwnProperty.call(m, "subTotalReturn"))
+            w.uint32(64).int64(m.subTotalReturn);
+        if (m.subTotalInsurance != null && Object.hasOwnProperty.call(m, "subTotalInsurance"))
+            w.uint32(72).int64(m.subTotalInsurance);
+        if (m.jackpot != null && Object.hasOwnProperty.call(m, "jackpot"))
+            w.uint32(80).int64(m.jackpot);
+        if (m.jackpotCommission != null && Object.hasOwnProperty.call(m, "jackpotCommission"))
+            w.uint32(88).int64(m.jackpotCommission);
+        return w;
+    };
+
+    /**
+     * Decodes a GameSubRecord message from the specified reader or buffer.
+     * @function decode
+     * @memberof GameSubRecord
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {GameSubRecord} GameSubRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    GameSubRecord.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.GameSubRecord();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.subRoundId = r.int32();
+                break;
+            case 2:
+                m.subBeginTime = r.string();
+                break;
+            case 3:
+                m.subEndTime = r.string();
+                break;
+            case 4:
+                m.subTotalPlayerNum = r.int32();
+                break;
+            case 5:
+                m.subTotalBringin = r.int64();
+                break;
+            case 6:
+                m.subTotalBringout = r.int64();
+                break;
+            case 7:
+                m.subTotalCommission = r.int64();
+                break;
+            case 8:
+                m.subTotalReturn = r.int64();
+                break;
+            case 9:
+                m.subTotalInsurance = r.int64();
+                break;
+            case 10:
+                m.jackpot = r.int64();
+                break;
+            case 11:
+                m.jackpotCommission = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return GameSubRecord;
+})();
+
+$root.Game2LoggerReplayRecord = (function() {
+
+    /**
+     * Properties of a Game2LoggerReplayRecord.
+     * @exports IGame2LoggerReplayRecord
+     * @interface IGame2LoggerReplayRecord
+     * @property {GameType|null} [gameType] Game2LoggerReplayRecord gameType
+     * @property {string|null} [gameId] Game2LoggerReplayRecord gameId
+     * @property {string|null} [endTime] Game2LoggerReplayRecord endTime
+     * @property {Array.<IReplayRecord>|null} [replayRecord] Game2LoggerReplayRecord replayRecord
+     */
+
+    /**
+     * Constructs a new Game2LoggerReplayRecord.
+     * @exports Game2LoggerReplayRecord
+     * @classdesc Represents a Game2LoggerReplayRecord.
+     * @implements IGame2LoggerReplayRecord
+     * @constructor
+     * @param {IGame2LoggerReplayRecord=} [p] Properties to set
+     */
+    function Game2LoggerReplayRecord(p) {
+        this.replayRecord = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * Game2LoggerReplayRecord gameType.
+     * @member {GameType} gameType
+     * @memberof Game2LoggerReplayRecord
+     * @instance
+     */
+    Game2LoggerReplayRecord.prototype.gameType = 0;
+
+    /**
+     * Game2LoggerReplayRecord gameId.
+     * @member {string} gameId
+     * @memberof Game2LoggerReplayRecord
+     * @instance
+     */
+    Game2LoggerReplayRecord.prototype.gameId = "";
+
+    /**
+     * Game2LoggerReplayRecord endTime.
+     * @member {string} endTime
+     * @memberof Game2LoggerReplayRecord
+     * @instance
+     */
+    Game2LoggerReplayRecord.prototype.endTime = "";
+
+    /**
+     * Game2LoggerReplayRecord replayRecord.
+     * @member {Array.<IReplayRecord>} replayRecord
+     * @memberof Game2LoggerReplayRecord
+     * @instance
+     */
+    Game2LoggerReplayRecord.prototype.replayRecord = $util.emptyArray;
+
+    /**
+     * Encodes the specified Game2LoggerReplayRecord message. Does not implicitly {@link Game2LoggerReplayRecord.verify|verify} messages.
+     * @function encode
+     * @memberof Game2LoggerReplayRecord
+     * @static
+     * @param {IGame2LoggerReplayRecord} m Game2LoggerReplayRecord message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    Game2LoggerReplayRecord.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
+            w.uint32(8).int32(m.gameType);
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
+            w.uint32(26).string(m.endTime);
+        if (m.replayRecord != null && m.replayRecord.length) {
+            for (var i = 0; i < m.replayRecord.length; ++i)
+                $root.ReplayRecord.encode(m.replayRecord[i], w.uint32(34).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a Game2LoggerReplayRecord message from the specified reader or buffer.
+     * @function decode
+     * @memberof Game2LoggerReplayRecord
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {Game2LoggerReplayRecord} Game2LoggerReplayRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    Game2LoggerReplayRecord.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerReplayRecord();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameType = r.int32();
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.endTime = r.string();
+                break;
+            case 4:
+                if (!(m.replayRecord && m.replayRecord.length))
+                    m.replayRecord = [];
+                m.replayRecord.push($root.ReplayRecord.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return Game2LoggerReplayRecord;
+})();
+
+$root.ReplayRecord = (function() {
+
+    /**
+     * Properties of a ReplayRecord.
+     * @exports IReplayRecord
+     * @interface IReplayRecord
+     * @property {string|null} [happenTime] ReplayRecord happenTime
+     * @property {string|null} [userName] ReplayRecord userName
+     * @property {string|null} [userId] ReplayRecord userId
+     * @property {string|null} [clubName] ReplayRecord clubName
+     * @property {string|null} [clubId] ReplayRecord clubId
+     * @property {number|null} [index] ReplayRecord index
+     * @property {Array.<ICardInfo>|null} [publicCards] ReplayRecord publicCards
+     * @property {Array.<ICardInfo>|null} [myCards] ReplayRecord myCards
+     * @property {number|null} [myResult] ReplayRecord myResult
+     * @property {Array.<ICardInfo>|null} [winnerCards] ReplayRecord winnerCards
+     * @property {string|null} [winnerName] ReplayRecord winnerName
+     * @property {string|null} [winnerHead] ReplayRecord winnerHead
+     * @property {number|null} [winnerResult] ReplayRecord winnerResult
+     * @property {IBasicTexasConfig|null} [texasConfig] ReplayRecord texasConfig
+     * @property {Array.<IPlayerInfo>|null} [players] ReplayRecord players
+     * @property {string|null} [dealerUid] ReplayRecord dealerUid
+     * @property {number|null} [antes] ReplayRecord antes
+     * @property {Array.<IActionResult>|null} [roundStartActions] ReplayRecord roundStartActions
+     * @property {Array.<IActionResult>|null} [preFlopActions] ReplayRecord preFlopActions
+     * @property {Array.<IActionResult>|null} [flopActions] ReplayRecord flopActions
+     * @property {Array.<IActionResult>|null} [turnActions] ReplayRecord turnActions
+     * @property {Array.<IActionResult>|null} [riverActions] ReplayRecord riverActions
+     * @property {Array.<IPlayerWinLose>|null} [result] ReplayRecord result
+     * @property {Array.<IPotInfo>|null} [potInfoFlop] ReplayRecord potInfoFlop
+     * @property {Array.<IPotInfo>|null} [potInfoTurn] ReplayRecord potInfoTurn
+     * @property {Array.<IPotInfo>|null} [potInfoRiver] ReplayRecord potInfoRiver
+     */
+
+    /**
+     * Constructs a new ReplayRecord.
+     * @exports ReplayRecord
+     * @classdesc Represents a ReplayRecord.
+     * @implements IReplayRecord
+     * @constructor
+     * @param {IReplayRecord=} [p] Properties to set
+     */
+    function ReplayRecord(p) {
+        this.publicCards = [];
+        this.myCards = [];
+        this.winnerCards = [];
+        this.players = [];
+        this.roundStartActions = [];
+        this.preFlopActions = [];
+        this.flopActions = [];
+        this.turnActions = [];
+        this.riverActions = [];
+        this.result = [];
+        this.potInfoFlop = [];
+        this.potInfoTurn = [];
+        this.potInfoRiver = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * ReplayRecord happenTime.
+     * @member {string} happenTime
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.happenTime = "";
+
+    /**
+     * ReplayRecord userName.
+     * @member {string} userName
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.userName = "";
+
+    /**
+     * ReplayRecord userId.
+     * @member {string} userId
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.userId = "";
+
+    /**
+     * ReplayRecord clubName.
+     * @member {string} clubName
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.clubName = "";
+
+    /**
+     * ReplayRecord clubId.
+     * @member {string} clubId
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.clubId = "";
+
+    /**
+     * ReplayRecord index.
+     * @member {number} index
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * ReplayRecord publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * ReplayRecord myCards.
+     * @member {Array.<ICardInfo>} myCards
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.myCards = $util.emptyArray;
+
+    /**
+     * ReplayRecord myResult.
+     * @member {number} myResult
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.myResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * ReplayRecord winnerCards.
+     * @member {Array.<ICardInfo>} winnerCards
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.winnerCards = $util.emptyArray;
+
+    /**
+     * ReplayRecord winnerName.
+     * @member {string} winnerName
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.winnerName = "";
+
+    /**
+     * ReplayRecord winnerHead.
+     * @member {string} winnerHead
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.winnerHead = "";
+
+    /**
+     * ReplayRecord winnerResult.
+     * @member {number} winnerResult
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.winnerResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * ReplayRecord texasConfig.
+     * @member {IBasicTexasConfig|null|undefined} texasConfig
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.texasConfig = null;
+
+    /**
+     * ReplayRecord players.
+     * @member {Array.<IPlayerInfo>} players
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.players = $util.emptyArray;
+
+    /**
+     * ReplayRecord dealerUid.
+     * @member {string} dealerUid
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.dealerUid = "";
+
+    /**
+     * ReplayRecord antes.
+     * @member {number} antes
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.antes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * ReplayRecord roundStartActions.
+     * @member {Array.<IActionResult>} roundStartActions
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.roundStartActions = $util.emptyArray;
+
+    /**
+     * ReplayRecord preFlopActions.
+     * @member {Array.<IActionResult>} preFlopActions
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.preFlopActions = $util.emptyArray;
+
+    /**
+     * ReplayRecord flopActions.
+     * @member {Array.<IActionResult>} flopActions
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.flopActions = $util.emptyArray;
+
+    /**
+     * ReplayRecord turnActions.
+     * @member {Array.<IActionResult>} turnActions
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.turnActions = $util.emptyArray;
+
+    /**
+     * ReplayRecord riverActions.
+     * @member {Array.<IActionResult>} riverActions
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.riverActions = $util.emptyArray;
+
+    /**
+     * ReplayRecord result.
+     * @member {Array.<IPlayerWinLose>} result
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.result = $util.emptyArray;
+
+    /**
+     * ReplayRecord potInfoFlop.
+     * @member {Array.<IPotInfo>} potInfoFlop
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.potInfoFlop = $util.emptyArray;
+
+    /**
+     * ReplayRecord potInfoTurn.
+     * @member {Array.<IPotInfo>} potInfoTurn
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.potInfoTurn = $util.emptyArray;
+
+    /**
+     * ReplayRecord potInfoRiver.
+     * @member {Array.<IPotInfo>} potInfoRiver
+     * @memberof ReplayRecord
+     * @instance
+     */
+    ReplayRecord.prototype.potInfoRiver = $util.emptyArray;
+
+    /**
+     * Encodes the specified ReplayRecord message. Does not implicitly {@link ReplayRecord.verify|verify} messages.
+     * @function encode
+     * @memberof ReplayRecord
+     * @static
+     * @param {IReplayRecord} m ReplayRecord message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    ReplayRecord.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
+            w.uint32(10).string(m.happenTime);
+        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
+            w.uint32(18).string(m.userName);
+        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
+            w.uint32(26).string(m.userId);
+        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
+            w.uint32(34).string(m.clubName);
+        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
+            w.uint32(42).string(m.clubId);
+        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
+            w.uint32(48).int64(m.index);
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
+        }
+        if (m.myCards != null && m.myCards.length) {
+            for (var i = 0; i < m.myCards.length; ++i)
+                $root.CardInfo.encode(m.myCards[i], w.uint32(66).fork()).ldelim();
+        }
+        if (m.myResult != null && Object.hasOwnProperty.call(m, "myResult"))
+            w.uint32(72).int64(m.myResult);
+        if (m.winnerCards != null && m.winnerCards.length) {
+            for (var i = 0; i < m.winnerCards.length; ++i)
+                $root.CardInfo.encode(m.winnerCards[i], w.uint32(82).fork()).ldelim();
+        }
+        if (m.winnerName != null && Object.hasOwnProperty.call(m, "winnerName"))
+            w.uint32(90).string(m.winnerName);
+        if (m.winnerHead != null && Object.hasOwnProperty.call(m, "winnerHead"))
+            w.uint32(98).string(m.winnerHead);
+        if (m.winnerResult != null && Object.hasOwnProperty.call(m, "winnerResult"))
+            w.uint32(104).int64(m.winnerResult);
+        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
+            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(114).fork()).ldelim();
+        if (m.players != null && m.players.length) {
+            for (var i = 0; i < m.players.length; ++i)
+                $root.PlayerInfo.encode(m.players[i], w.uint32(122).fork()).ldelim();
+        }
+        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
+            w.uint32(130).string(m.dealerUid);
+        if (m.antes != null && Object.hasOwnProperty.call(m, "antes"))
+            w.uint32(136).int64(m.antes);
+        if (m.roundStartActions != null && m.roundStartActions.length) {
+            for (var i = 0; i < m.roundStartActions.length; ++i)
+                $root.ActionResult.encode(m.roundStartActions[i], w.uint32(146).fork()).ldelim();
+        }
+        if (m.preFlopActions != null && m.preFlopActions.length) {
+            for (var i = 0; i < m.preFlopActions.length; ++i)
+                $root.ActionResult.encode(m.preFlopActions[i], w.uint32(154).fork()).ldelim();
+        }
+        if (m.flopActions != null && m.flopActions.length) {
+            for (var i = 0; i < m.flopActions.length; ++i)
+                $root.ActionResult.encode(m.flopActions[i], w.uint32(162).fork()).ldelim();
+        }
+        if (m.turnActions != null && m.turnActions.length) {
+            for (var i = 0; i < m.turnActions.length; ++i)
+                $root.ActionResult.encode(m.turnActions[i], w.uint32(170).fork()).ldelim();
+        }
+        if (m.riverActions != null && m.riverActions.length) {
+            for (var i = 0; i < m.riverActions.length; ++i)
+                $root.ActionResult.encode(m.riverActions[i], w.uint32(178).fork()).ldelim();
+        }
+        if (m.result != null && m.result.length) {
+            for (var i = 0; i < m.result.length; ++i)
+                $root.PlayerWinLose.encode(m.result[i], w.uint32(186).fork()).ldelim();
+        }
+        if (m.potInfoFlop != null && m.potInfoFlop.length) {
+            for (var i = 0; i < m.potInfoFlop.length; ++i)
+                $root.PotInfo.encode(m.potInfoFlop[i], w.uint32(194).fork()).ldelim();
+        }
+        if (m.potInfoTurn != null && m.potInfoTurn.length) {
+            for (var i = 0; i < m.potInfoTurn.length; ++i)
+                $root.PotInfo.encode(m.potInfoTurn[i], w.uint32(202).fork()).ldelim();
+        }
+        if (m.potInfoRiver != null && m.potInfoRiver.length) {
+            for (var i = 0; i < m.potInfoRiver.length; ++i)
+                $root.PotInfo.encode(m.potInfoRiver[i], w.uint32(210).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a ReplayRecord message from the specified reader or buffer.
+     * @function decode
+     * @memberof ReplayRecord
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {ReplayRecord} ReplayRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    ReplayRecord.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.ReplayRecord();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.happenTime = r.string();
+                break;
+            case 2:
+                m.userName = r.string();
+                break;
+            case 3:
+                m.userId = r.string();
+                break;
+            case 4:
+                m.clubName = r.string();
+                break;
+            case 5:
+                m.clubId = r.string();
+                break;
+            case 6:
+                m.index = r.int64();
+                break;
+            case 7:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 8:
+                if (!(m.myCards && m.myCards.length))
+                    m.myCards = [];
+                m.myCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 9:
+                m.myResult = r.int64();
+                break;
+            case 10:
+                if (!(m.winnerCards && m.winnerCards.length))
+                    m.winnerCards = [];
+                m.winnerCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 11:
+                m.winnerName = r.string();
+                break;
+            case 12:
+                m.winnerHead = r.string();
+                break;
+            case 13:
+                m.winnerResult = r.int64();
+                break;
+            case 14:
+                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
+                break;
+            case 15:
+                if (!(m.players && m.players.length))
+                    m.players = [];
+                m.players.push($root.PlayerInfo.decode(r, r.uint32()));
+                break;
+            case 16:
+                m.dealerUid = r.string();
+                break;
+            case 17:
+                m.antes = r.int64();
+                break;
+            case 18:
+                if (!(m.roundStartActions && m.roundStartActions.length))
+                    m.roundStartActions = [];
+                m.roundStartActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 19:
+                if (!(m.preFlopActions && m.preFlopActions.length))
+                    m.preFlopActions = [];
+                m.preFlopActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 20:
+                if (!(m.flopActions && m.flopActions.length))
+                    m.flopActions = [];
+                m.flopActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 21:
+                if (!(m.turnActions && m.turnActions.length))
+                    m.turnActions = [];
+                m.turnActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 22:
+                if (!(m.riverActions && m.riverActions.length))
+                    m.riverActions = [];
+                m.riverActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 23:
+                if (!(m.result && m.result.length))
+                    m.result = [];
+                m.result.push($root.PlayerWinLose.decode(r, r.uint32()));
+                break;
+            case 24:
+                if (!(m.potInfoFlop && m.potInfoFlop.length))
+                    m.potInfoFlop = [];
+                m.potInfoFlop.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 25:
+                if (!(m.potInfoTurn && m.potInfoTurn.length))
+                    m.potInfoTurn = [];
+                m.potInfoTurn.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 26:
+                if (!(m.potInfoRiver && m.potInfoRiver.length))
+                    m.potInfoRiver = [];
+                m.potInfoRiver.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return ReplayRecord;
+})();
+
+$root.Game2LoggerAmountChange = (function() {
+
+    /**
+     * Properties of a Game2LoggerAmountChange.
+     * @exports IGame2LoggerAmountChange
+     * @interface IGame2LoggerAmountChange
+     * @property {GameType|null} [gameType] Game2LoggerAmountChange gameType
+     * @property {string|null} [gameId] Game2LoggerAmountChange gameId
+     * @property {Array.<IAmountChangeInfo>|null} [amountChangeInfo] Game2LoggerAmountChange amountChangeInfo
+     */
+
+    /**
+     * Constructs a new Game2LoggerAmountChange.
+     * @exports Game2LoggerAmountChange
+     * @classdesc Represents a Game2LoggerAmountChange.
+     * @implements IGame2LoggerAmountChange
+     * @constructor
+     * @param {IGame2LoggerAmountChange=} [p] Properties to set
+     */
+    function Game2LoggerAmountChange(p) {
+        this.amountChangeInfo = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * Game2LoggerAmountChange gameType.
+     * @member {GameType} gameType
+     * @memberof Game2LoggerAmountChange
+     * @instance
+     */
+    Game2LoggerAmountChange.prototype.gameType = 0;
+
+    /**
+     * Game2LoggerAmountChange gameId.
+     * @member {string} gameId
+     * @memberof Game2LoggerAmountChange
+     * @instance
+     */
+    Game2LoggerAmountChange.prototype.gameId = "";
+
+    /**
+     * Game2LoggerAmountChange amountChangeInfo.
+     * @member {Array.<IAmountChangeInfo>} amountChangeInfo
+     * @memberof Game2LoggerAmountChange
+     * @instance
+     */
+    Game2LoggerAmountChange.prototype.amountChangeInfo = $util.emptyArray;
+
+    /**
+     * Encodes the specified Game2LoggerAmountChange message. Does not implicitly {@link Game2LoggerAmountChange.verify|verify} messages.
+     * @function encode
+     * @memberof Game2LoggerAmountChange
+     * @static
+     * @param {IGame2LoggerAmountChange} m Game2LoggerAmountChange message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    Game2LoggerAmountChange.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
+            w.uint32(8).int32(m.gameType);
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.amountChangeInfo != null && m.amountChangeInfo.length) {
+            for (var i = 0; i < m.amountChangeInfo.length; ++i)
+                $root.AmountChangeInfo.encode(m.amountChangeInfo[i], w.uint32(26).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a Game2LoggerAmountChange message from the specified reader or buffer.
+     * @function decode
+     * @memberof Game2LoggerAmountChange
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {Game2LoggerAmountChange} Game2LoggerAmountChange
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    Game2LoggerAmountChange.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerAmountChange();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameType = r.int32();
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                if (!(m.amountChangeInfo && m.amountChangeInfo.length))
+                    m.amountChangeInfo = [];
+                m.amountChangeInfo.push($root.AmountChangeInfo.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return Game2LoggerAmountChange;
+})();
+
+$root.AmountChangeInfo = (function() {
+
+    /**
+     * Properties of an AmountChangeInfo.
+     * @exports IAmountChangeInfo
+     * @interface IAmountChangeInfo
+     * @property {string|null} [happenTime] AmountChangeInfo happenTime
+     * @property {string|null} [userId] AmountChangeInfo userId
+     * @property {string|null} [userName] AmountChangeInfo userName
+     * @property {string|null} [head] AmountChangeInfo head
+     * @property {number|null} [amountChange] AmountChangeInfo amountChange
+     * @property {number|null} [preChange] AmountChangeInfo preChange
+     * @property {number|null} [afterChange] AmountChangeInfo afterChange
+     * @property {AmountChangeType|null} [amountChangeType] AmountChangeInfo amountChangeType
+     * @property {IAmountChangeGenerics|null} [amountChangeGenerics] AmountChangeInfo amountChangeGenerics
+     */
+
+    /**
+     * Constructs a new AmountChangeInfo.
+     * @exports AmountChangeInfo
+     * @classdesc Represents an AmountChangeInfo.
+     * @implements IAmountChangeInfo
+     * @constructor
+     * @param {IAmountChangeInfo=} [p] Properties to set
+     */
+    function AmountChangeInfo(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * AmountChangeInfo happenTime.
+     * @member {string} happenTime
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.happenTime = "";
+
+    /**
+     * AmountChangeInfo userId.
+     * @member {string} userId
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.userId = "";
+
+    /**
+     * AmountChangeInfo userName.
+     * @member {string} userName
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.userName = "";
+
+    /**
+     * AmountChangeInfo head.
+     * @member {string} head
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.head = "";
+
+    /**
+     * AmountChangeInfo amountChange.
+     * @member {number} amountChange
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.amountChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeInfo preChange.
+     * @member {number} preChange
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeInfo afterChange.
+     * @member {number} afterChange
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeInfo amountChangeType.
+     * @member {AmountChangeType} amountChangeType
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.amountChangeType = 0;
+
+    /**
+     * AmountChangeInfo amountChangeGenerics.
+     * @member {IAmountChangeGenerics|null|undefined} amountChangeGenerics
+     * @memberof AmountChangeInfo
+     * @instance
+     */
+    AmountChangeInfo.prototype.amountChangeGenerics = null;
+
+    /**
+     * Encodes the specified AmountChangeInfo message. Does not implicitly {@link AmountChangeInfo.verify|verify} messages.
+     * @function encode
+     * @memberof AmountChangeInfo
+     * @static
+     * @param {IAmountChangeInfo} m AmountChangeInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    AmountChangeInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
+            w.uint32(10).string(m.happenTime);
+        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
+            w.uint32(18).string(m.userId);
+        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
+            w.uint32(26).string(m.userName);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(34).string(m.head);
+        if (m.amountChange != null && Object.hasOwnProperty.call(m, "amountChange"))
+            w.uint32(40).int64(m.amountChange);
+        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
+            w.uint32(48).int64(m.preChange);
+        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
+            w.uint32(56).int64(m.afterChange);
+        if (m.amountChangeType != null && Object.hasOwnProperty.call(m, "amountChangeType"))
+            w.uint32(64).int32(m.amountChangeType);
+        if (m.amountChangeGenerics != null && Object.hasOwnProperty.call(m, "amountChangeGenerics"))
+            $root.AmountChangeGenerics.encode(m.amountChangeGenerics, w.uint32(74).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes an AmountChangeInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof AmountChangeInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {AmountChangeInfo} AmountChangeInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    AmountChangeInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.AmountChangeInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.happenTime = r.string();
+                break;
+            case 2:
+                m.userId = r.string();
+                break;
+            case 3:
+                m.userName = r.string();
+                break;
+            case 4:
+                m.head = r.string();
+                break;
+            case 5:
+                m.amountChange = r.int64();
+                break;
+            case 6:
+                m.preChange = r.int64();
+                break;
+            case 7:
+                m.afterChange = r.int64();
+                break;
+            case 8:
+                m.amountChangeType = r.int32();
+                break;
+            case 9:
+                m.amountChangeGenerics = $root.AmountChangeGenerics.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return AmountChangeInfo;
+})();
+
+$root.AmountChangeGenerics = (function() {
+
+    /**
+     * Properties of an AmountChangeGenerics.
+     * @exports IAmountChangeGenerics
+     * @interface IAmountChangeGenerics
+     * @property {string|null} [clubName] AmountChangeGenerics clubName
+     * @property {string|null} [clubId] AmountChangeGenerics clubId
+     * @property {number|null} [baseProfit] AmountChangeGenerics baseProfit
+     * @property {number|null} [propRate] AmountChangeGenerics propRate
+     * @property {PropType|null} [propType] AmountChangeGenerics propType
+     * @property {number|null} [preSettlement] AmountChangeGenerics preSettlement
+     * @property {string|null} [handId] AmountChangeGenerics handId
+     * @property {number|null} [poolRate] AmountChangeGenerics poolRate
+     * @property {number|null} [currentHandCount] AmountChangeGenerics currentHandCount
+     * @property {number|null} [currentWinCount] AmountChangeGenerics currentWinCount
+     * @property {CowboyAreaType|null} [betType] AmountChangeGenerics betType
+     * @property {number|null} [levelRate] AmountChangeGenerics levelRate
+     * @property {JackpotType|null} [jackpotType] AmountChangeGenerics jackpotType
+     * @property {number|null} [jackpotRate] AmountChangeGenerics jackpotRate
+     * @property {number|null} [jackpotPool] AmountChangeGenerics jackpotPool
+     */
+
+    /**
+     * Constructs a new AmountChangeGenerics.
+     * @exports AmountChangeGenerics
+     * @classdesc Represents an AmountChangeGenerics.
+     * @implements IAmountChangeGenerics
+     * @constructor
+     * @param {IAmountChangeGenerics=} [p] Properties to set
+     */
+    function AmountChangeGenerics(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * AmountChangeGenerics clubName.
+     * @member {string} clubName
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.clubName = "";
+
+    /**
+     * AmountChangeGenerics clubId.
+     * @member {string} clubId
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.clubId = "";
+
+    /**
+     * AmountChangeGenerics baseProfit.
+     * @member {number} baseProfit
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.baseProfit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeGenerics propRate.
+     * @member {number} propRate
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.propRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeGenerics propType.
+     * @member {PropType} propType
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.propType = 0;
+
+    /**
+     * AmountChangeGenerics preSettlement.
+     * @member {number} preSettlement
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.preSettlement = 0;
+
+    /**
+     * AmountChangeGenerics handId.
+     * @member {string} handId
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.handId = "";
+
+    /**
+     * AmountChangeGenerics poolRate.
+     * @member {number} poolRate
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.poolRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeGenerics currentHandCount.
+     * @member {number} currentHandCount
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.currentHandCount = 0;
+
+    /**
+     * AmountChangeGenerics currentWinCount.
+     * @member {number} currentWinCount
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.currentWinCount = 0;
+
+    /**
+     * AmountChangeGenerics betType.
+     * @member {CowboyAreaType} betType
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.betType = 0;
+
+    /**
+     * AmountChangeGenerics levelRate.
+     * @member {number} levelRate
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.levelRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeGenerics jackpotType.
+     * @member {JackpotType} jackpotType
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.jackpotType = 0;
+
+    /**
+     * AmountChangeGenerics jackpotRate.
+     * @member {number} jackpotRate
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.jackpotRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AmountChangeGenerics jackpotPool.
+     * @member {number} jackpotPool
+     * @memberof AmountChangeGenerics
+     * @instance
+     */
+    AmountChangeGenerics.prototype.jackpotPool = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified AmountChangeGenerics message. Does not implicitly {@link AmountChangeGenerics.verify|verify} messages.
+     * @function encode
+     * @memberof AmountChangeGenerics
+     * @static
+     * @param {IAmountChangeGenerics} m AmountChangeGenerics message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    AmountChangeGenerics.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
+            w.uint32(10).string(m.clubName);
+        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
+            w.uint32(18).string(m.clubId);
+        if (m.baseProfit != null && Object.hasOwnProperty.call(m, "baseProfit"))
+            w.uint32(24).int64(m.baseProfit);
+        if (m.propRate != null && Object.hasOwnProperty.call(m, "propRate"))
+            w.uint32(32).int64(m.propRate);
+        if (m.propType != null && Object.hasOwnProperty.call(m, "propType"))
+            w.uint32(40).int32(m.propType);
+        if (m.preSettlement != null && Object.hasOwnProperty.call(m, "preSettlement"))
+            w.uint32(48).int32(m.preSettlement);
+        if (m.handId != null && Object.hasOwnProperty.call(m, "handId"))
+            w.uint32(58).string(m.handId);
+        if (m.poolRate != null && Object.hasOwnProperty.call(m, "poolRate"))
+            w.uint32(64).int64(m.poolRate);
+        if (m.currentHandCount != null && Object.hasOwnProperty.call(m, "currentHandCount"))
+            w.uint32(72).int32(m.currentHandCount);
+        if (m.currentWinCount != null && Object.hasOwnProperty.call(m, "currentWinCount"))
+            w.uint32(80).int32(m.currentWinCount);
+        if (m.betType != null && Object.hasOwnProperty.call(m, "betType"))
+            w.uint32(88).int32(m.betType);
+        if (m.levelRate != null && Object.hasOwnProperty.call(m, "levelRate"))
+            w.uint32(96).int64(m.levelRate);
+        if (m.jackpotType != null && Object.hasOwnProperty.call(m, "jackpotType"))
+            w.uint32(104).int32(m.jackpotType);
+        if (m.jackpotRate != null && Object.hasOwnProperty.call(m, "jackpotRate"))
+            w.uint32(112).int64(m.jackpotRate);
+        if (m.jackpotPool != null && Object.hasOwnProperty.call(m, "jackpotPool"))
+            w.uint32(120).int64(m.jackpotPool);
+        return w;
+    };
+
+    /**
+     * Decodes an AmountChangeGenerics message from the specified reader or buffer.
+     * @function decode
+     * @memberof AmountChangeGenerics
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {AmountChangeGenerics} AmountChangeGenerics
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    AmountChangeGenerics.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.AmountChangeGenerics();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.clubName = r.string();
+                break;
+            case 2:
+                m.clubId = r.string();
+                break;
+            case 3:
+                m.baseProfit = r.int64();
+                break;
+            case 4:
+                m.propRate = r.int64();
+                break;
+            case 5:
+                m.propType = r.int32();
+                break;
+            case 6:
+                m.preSettlement = r.int32();
+                break;
+            case 7:
+                m.handId = r.string();
+                break;
+            case 8:
+                m.poolRate = r.int64();
+                break;
+            case 9:
+                m.currentHandCount = r.int32();
+                break;
+            case 10:
+                m.currentWinCount = r.int32();
+                break;
+            case 11:
+                m.betType = r.int32();
+                break;
+            case 12:
+                m.levelRate = r.int64();
+                break;
+            case 13:
+                m.jackpotType = r.int32();
+                break;
+            case 14:
+                m.jackpotRate = r.int64();
+                break;
+            case 15:
+                m.jackpotPool = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return AmountChangeGenerics;
 })();
 
 /**
@@ -6532,9625 +8580,6 @@ $root.RecordPlayer = (function() {
     return RecordPlayer;
 })();
 
-$root.S2CCreateClub = (function() {
-
-    /**
-     * Properties of a S2CCreateClub.
-     * @exports IS2CCreateClub
-     * @interface IS2CCreateClub
-     * @property {ICommonResult|null} [result] S2CCreateClub result
-     * @property {IClubDetailsInfo|null} [clubInfo] S2CCreateClub clubInfo
-     */
-
-    /**
-     * Constructs a new S2CCreateClub.
-     * @exports S2CCreateClub
-     * @classdesc Represents a S2CCreateClub.
-     * @implements IS2CCreateClub
-     * @constructor
-     * @param {IS2CCreateClub=} [p] Properties to set
-     */
-    function S2CCreateClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CCreateClub result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CCreateClub
-     * @instance
-     */
-    S2CCreateClub.prototype.result = null;
-
-    /**
-     * S2CCreateClub clubInfo.
-     * @member {IClubDetailsInfo|null|undefined} clubInfo
-     * @memberof S2CCreateClub
-     * @instance
-     */
-    S2CCreateClub.prototype.clubInfo = null;
-
-    /**
-     * Encodes the specified S2CCreateClub message. Does not implicitly {@link S2CCreateClub.verify|verify} messages.
-     * @function encode
-     * @memberof S2CCreateClub
-     * @static
-     * @param {IS2CCreateClub} m S2CCreateClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CCreateClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubInfo != null && Object.hasOwnProperty.call(m, "clubInfo"))
-            $root.ClubDetailsInfo.encode(m.clubInfo, w.uint32(18).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CCreateClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CCreateClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CCreateClub} S2CCreateClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CCreateClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCreateClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubInfo = $root.ClubDetailsInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CCreateClub;
-})();
-
-$root.S2CGetClubInfos = (function() {
-
-    /**
-     * Properties of a S2CGetClubInfos.
-     * @exports IS2CGetClubInfos
-     * @interface IS2CGetClubInfos
-     * @property {ICommonResult|null} [result] S2CGetClubInfos result
-     * @property {Array.<IClubDetailsInfo>|null} [clubInfos] S2CGetClubInfos clubInfos
-     */
-
-    /**
-     * Constructs a new S2CGetClubInfos.
-     * @exports S2CGetClubInfos
-     * @classdesc Represents a S2CGetClubInfos.
-     * @implements IS2CGetClubInfos
-     * @constructor
-     * @param {IS2CGetClubInfos=} [p] Properties to set
-     */
-    function S2CGetClubInfos(p) {
-        this.clubInfos = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CGetClubInfos result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CGetClubInfos
-     * @instance
-     */
-    S2CGetClubInfos.prototype.result = null;
-
-    /**
-     * S2CGetClubInfos clubInfos.
-     * @member {Array.<IClubDetailsInfo>} clubInfos
-     * @memberof S2CGetClubInfos
-     * @instance
-     */
-    S2CGetClubInfos.prototype.clubInfos = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CGetClubInfos message. Does not implicitly {@link S2CGetClubInfos.verify|verify} messages.
-     * @function encode
-     * @memberof S2CGetClubInfos
-     * @static
-     * @param {IS2CGetClubInfos} m S2CGetClubInfos message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CGetClubInfos.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubInfos != null && m.clubInfos.length) {
-            for (var i = 0; i < m.clubInfos.length; ++i)
-                $root.ClubDetailsInfo.encode(m.clubInfos[i], w.uint32(18).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CGetClubInfos message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CGetClubInfos
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CGetClubInfos} S2CGetClubInfos
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CGetClubInfos.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CGetClubInfos();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                if (!(m.clubInfos && m.clubInfos.length))
-                    m.clubInfos = [];
-                m.clubInfos.push($root.ClubDetailsInfo.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CGetClubInfos;
-})();
-
-$root.S2CEnterClub = (function() {
-
-    /**
-     * Properties of a S2CEnterClub.
-     * @exports IS2CEnterClub
-     * @interface IS2CEnterClub
-     * @property {ICommonResult|null} [result] S2CEnterClub result
-     * @property {IClubMember|null} [clubMember] S2CEnterClub clubMember
-     * @property {IClubDetailsInfo|null} [clubInfo] S2CEnterClub clubInfo
-     */
-
-    /**
-     * Constructs a new S2CEnterClub.
-     * @exports S2CEnterClub
-     * @classdesc Represents a S2CEnterClub.
-     * @implements IS2CEnterClub
-     * @constructor
-     * @param {IS2CEnterClub=} [p] Properties to set
-     */
-    function S2CEnterClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CEnterClub result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CEnterClub
-     * @instance
-     */
-    S2CEnterClub.prototype.result = null;
-
-    /**
-     * S2CEnterClub clubMember.
-     * @member {IClubMember|null|undefined} clubMember
-     * @memberof S2CEnterClub
-     * @instance
-     */
-    S2CEnterClub.prototype.clubMember = null;
-
-    /**
-     * S2CEnterClub clubInfo.
-     * @member {IClubDetailsInfo|null|undefined} clubInfo
-     * @memberof S2CEnterClub
-     * @instance
-     */
-    S2CEnterClub.prototype.clubInfo = null;
-
-    /**
-     * Encodes the specified S2CEnterClub message. Does not implicitly {@link S2CEnterClub.verify|verify} messages.
-     * @function encode
-     * @memberof S2CEnterClub
-     * @static
-     * @param {IS2CEnterClub} m S2CEnterClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CEnterClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubMember != null && Object.hasOwnProperty.call(m, "clubMember"))
-            $root.ClubMember.encode(m.clubMember, w.uint32(18).fork()).ldelim();
-        if (m.clubInfo != null && Object.hasOwnProperty.call(m, "clubInfo"))
-            $root.ClubDetailsInfo.encode(m.clubInfo, w.uint32(26).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CEnterClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CEnterClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CEnterClub} S2CEnterClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CEnterClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CEnterClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubMember = $root.ClubMember.decode(r, r.uint32());
-                break;
-            case 3:
-                m.clubInfo = $root.ClubDetailsInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CEnterClub;
-})();
-
-$root.S2CSearchClub = (function() {
-
-    /**
-     * Properties of a S2CSearchClub.
-     * @exports IS2CSearchClub
-     * @interface IS2CSearchClub
-     * @property {ICommonResult|null} [result] S2CSearchClub result
-     * @property {IClubDetailsInfo|null} [clubInfo] S2CSearchClub clubInfo
-     */
-
-    /**
-     * Constructs a new S2CSearchClub.
-     * @exports S2CSearchClub
-     * @classdesc Represents a S2CSearchClub.
-     * @implements IS2CSearchClub
-     * @constructor
-     * @param {IS2CSearchClub=} [p] Properties to set
-     */
-    function S2CSearchClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CSearchClub result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CSearchClub
-     * @instance
-     */
-    S2CSearchClub.prototype.result = null;
-
-    /**
-     * S2CSearchClub clubInfo.
-     * @member {IClubDetailsInfo|null|undefined} clubInfo
-     * @memberof S2CSearchClub
-     * @instance
-     */
-    S2CSearchClub.prototype.clubInfo = null;
-
-    /**
-     * Encodes the specified S2CSearchClub message. Does not implicitly {@link S2CSearchClub.verify|verify} messages.
-     * @function encode
-     * @memberof S2CSearchClub
-     * @static
-     * @param {IS2CSearchClub} m S2CSearchClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CSearchClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubInfo != null && Object.hasOwnProperty.call(m, "clubInfo"))
-            $root.ClubDetailsInfo.encode(m.clubInfo, w.uint32(18).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CSearchClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CSearchClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CSearchClub} S2CSearchClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CSearchClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CSearchClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubInfo = $root.ClubDetailsInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CSearchClub;
-})();
-
-$root.S2CJoinClub = (function() {
-
-    /**
-     * Properties of a S2CJoinClub.
-     * @exports IS2CJoinClub
-     * @interface IS2CJoinClub
-     * @property {ICommonResult|null} [result] S2CJoinClub result
-     */
-
-    /**
-     * Constructs a new S2CJoinClub.
-     * @exports S2CJoinClub
-     * @classdesc Represents a S2CJoinClub.
-     * @implements IS2CJoinClub
-     * @constructor
-     * @param {IS2CJoinClub=} [p] Properties to set
-     */
-    function S2CJoinClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CJoinClub result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CJoinClub
-     * @instance
-     */
-    S2CJoinClub.prototype.result = null;
-
-    /**
-     * Encodes the specified S2CJoinClub message. Does not implicitly {@link S2CJoinClub.verify|verify} messages.
-     * @function encode
-     * @memberof S2CJoinClub
-     * @static
-     * @param {IS2CJoinClub} m S2CJoinClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CJoinClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CJoinClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CJoinClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CJoinClub} S2CJoinClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CJoinClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CJoinClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CJoinClub;
-})();
-
-$root.S2CGetClubMember = (function() {
-
-    /**
-     * Properties of a S2CGetClubMember.
-     * @exports IS2CGetClubMember
-     * @interface IS2CGetClubMember
-     * @property {ICommonResult|null} [result] S2CGetClubMember result
-     * @property {string|null} [clubId] S2CGetClubMember clubId
-     * @property {Array.<IClubMember>|null} [clubMembers] S2CGetClubMember clubMembers
-     * @property {number|null} [page] S2CGetClubMember page
-     * @property {number|null} [pageSize] S2CGetClubMember pageSize
-     * @property {number|null} [totalMember] S2CGetClubMember totalMember
-     */
-
-    /**
-     * Constructs a new S2CGetClubMember.
-     * @exports S2CGetClubMember
-     * @classdesc Represents a S2CGetClubMember.
-     * @implements IS2CGetClubMember
-     * @constructor
-     * @param {IS2CGetClubMember=} [p] Properties to set
-     */
-    function S2CGetClubMember(p) {
-        this.clubMembers = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CGetClubMember result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CGetClubMember
-     * @instance
-     */
-    S2CGetClubMember.prototype.result = null;
-
-    /**
-     * S2CGetClubMember clubId.
-     * @member {string} clubId
-     * @memberof S2CGetClubMember
-     * @instance
-     */
-    S2CGetClubMember.prototype.clubId = "";
-
-    /**
-     * S2CGetClubMember clubMembers.
-     * @member {Array.<IClubMember>} clubMembers
-     * @memberof S2CGetClubMember
-     * @instance
-     */
-    S2CGetClubMember.prototype.clubMembers = $util.emptyArray;
-
-    /**
-     * S2CGetClubMember page.
-     * @member {number} page
-     * @memberof S2CGetClubMember
-     * @instance
-     */
-    S2CGetClubMember.prototype.page = 0;
-
-    /**
-     * S2CGetClubMember pageSize.
-     * @member {number} pageSize
-     * @memberof S2CGetClubMember
-     * @instance
-     */
-    S2CGetClubMember.prototype.pageSize = 0;
-
-    /**
-     * S2CGetClubMember totalMember.
-     * @member {number} totalMember
-     * @memberof S2CGetClubMember
-     * @instance
-     */
-    S2CGetClubMember.prototype.totalMember = 0;
-
-    /**
-     * Encodes the specified S2CGetClubMember message. Does not implicitly {@link S2CGetClubMember.verify|verify} messages.
-     * @function encode
-     * @memberof S2CGetClubMember
-     * @static
-     * @param {IS2CGetClubMember} m S2CGetClubMember message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CGetClubMember.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.clubMembers != null && m.clubMembers.length) {
-            for (var i = 0; i < m.clubMembers.length; ++i)
-                $root.ClubMember.encode(m.clubMembers[i], w.uint32(26).fork()).ldelim();
-        }
-        if (m.page != null && Object.hasOwnProperty.call(m, "page"))
-            w.uint32(32).int32(m.page);
-        if (m.pageSize != null && Object.hasOwnProperty.call(m, "pageSize"))
-            w.uint32(40).int32(m.pageSize);
-        if (m.totalMember != null && Object.hasOwnProperty.call(m, "totalMember"))
-            w.uint32(48).int32(m.totalMember);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CGetClubMember message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CGetClubMember
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CGetClubMember} S2CGetClubMember
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CGetClubMember.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CGetClubMember();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                if (!(m.clubMembers && m.clubMembers.length))
-                    m.clubMembers = [];
-                m.clubMembers.push($root.ClubMember.decode(r, r.uint32()));
-                break;
-            case 4:
-                m.page = r.int32();
-                break;
-            case 5:
-                m.pageSize = r.int32();
-                break;
-            case 6:
-                m.totalMember = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CGetClubMember;
-})();
-
-$root.S2CAddClubMember = (function() {
-
-    /**
-     * Properties of a S2CAddClubMember.
-     * @exports IS2CAddClubMember
-     * @interface IS2CAddClubMember
-     * @property {ICommonResult|null} [result] S2CAddClubMember result
-     * @property {string|null} [clubId] S2CAddClubMember clubId
-     * @property {Array.<string>|null} [uids] S2CAddClubMember uids
-     * @property {boolean|null} [agree] S2CAddClubMember agree
-     */
-
-    /**
-     * Constructs a new S2CAddClubMember.
-     * @exports S2CAddClubMember
-     * @classdesc Represents a S2CAddClubMember.
-     * @implements IS2CAddClubMember
-     * @constructor
-     * @param {IS2CAddClubMember=} [p] Properties to set
-     */
-    function S2CAddClubMember(p) {
-        this.uids = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CAddClubMember result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CAddClubMember
-     * @instance
-     */
-    S2CAddClubMember.prototype.result = null;
-
-    /**
-     * S2CAddClubMember clubId.
-     * @member {string} clubId
-     * @memberof S2CAddClubMember
-     * @instance
-     */
-    S2CAddClubMember.prototype.clubId = "";
-
-    /**
-     * S2CAddClubMember uids.
-     * @member {Array.<string>} uids
-     * @memberof S2CAddClubMember
-     * @instance
-     */
-    S2CAddClubMember.prototype.uids = $util.emptyArray;
-
-    /**
-     * S2CAddClubMember agree.
-     * @member {boolean} agree
-     * @memberof S2CAddClubMember
-     * @instance
-     */
-    S2CAddClubMember.prototype.agree = false;
-
-    /**
-     * Encodes the specified S2CAddClubMember message. Does not implicitly {@link S2CAddClubMember.verify|verify} messages.
-     * @function encode
-     * @memberof S2CAddClubMember
-     * @static
-     * @param {IS2CAddClubMember} m S2CAddClubMember message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CAddClubMember.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.uids != null && m.uids.length) {
-            for (var i = 0; i < m.uids.length; ++i)
-                w.uint32(26).string(m.uids[i]);
-        }
-        if (m.agree != null && Object.hasOwnProperty.call(m, "agree"))
-            w.uint32(32).bool(m.agree);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CAddClubMember message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CAddClubMember
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CAddClubMember} S2CAddClubMember
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CAddClubMember.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CAddClubMember();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                if (!(m.uids && m.uids.length))
-                    m.uids = [];
-                m.uids.push(r.string());
-                break;
-            case 4:
-                m.agree = r.bool();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CAddClubMember;
-})();
-
-$root.S2CDismissClub = (function() {
-
-    /**
-     * Properties of a S2CDismissClub.
-     * @exports IS2CDismissClub
-     * @interface IS2CDismissClub
-     * @property {ICommonResult|null} [result] S2CDismissClub result
-     * @property {string|null} [clubId] S2CDismissClub clubId
-     */
-
-    /**
-     * Constructs a new S2CDismissClub.
-     * @exports S2CDismissClub
-     * @classdesc Represents a S2CDismissClub.
-     * @implements IS2CDismissClub
-     * @constructor
-     * @param {IS2CDismissClub=} [p] Properties to set
-     */
-    function S2CDismissClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CDismissClub result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CDismissClub
-     * @instance
-     */
-    S2CDismissClub.prototype.result = null;
-
-    /**
-     * S2CDismissClub clubId.
-     * @member {string} clubId
-     * @memberof S2CDismissClub
-     * @instance
-     */
-    S2CDismissClub.prototype.clubId = "";
-
-    /**
-     * Encodes the specified S2CDismissClub message. Does not implicitly {@link S2CDismissClub.verify|verify} messages.
-     * @function encode
-     * @memberof S2CDismissClub
-     * @static
-     * @param {IS2CDismissClub} m S2CDismissClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CDismissClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CDismissClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CDismissClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CDismissClub} S2CDismissClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CDismissClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CDismissClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CDismissClub;
-})();
-
-$root.S2CQuitClub = (function() {
-
-    /**
-     * Properties of a S2CQuitClub.
-     * @exports IS2CQuitClub
-     * @interface IS2CQuitClub
-     * @property {ICommonResult|null} [result] S2CQuitClub result
-     * @property {string|null} [clubId] S2CQuitClub clubId
-     */
-
-    /**
-     * Constructs a new S2CQuitClub.
-     * @exports S2CQuitClub
-     * @classdesc Represents a S2CQuitClub.
-     * @implements IS2CQuitClub
-     * @constructor
-     * @param {IS2CQuitClub=} [p] Properties to set
-     */
-    function S2CQuitClub(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CQuitClub result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CQuitClub
-     * @instance
-     */
-    S2CQuitClub.prototype.result = null;
-
-    /**
-     * S2CQuitClub clubId.
-     * @member {string} clubId
-     * @memberof S2CQuitClub
-     * @instance
-     */
-    S2CQuitClub.prototype.clubId = "";
-
-    /**
-     * Encodes the specified S2CQuitClub message. Does not implicitly {@link S2CQuitClub.verify|verify} messages.
-     * @function encode
-     * @memberof S2CQuitClub
-     * @static
-     * @param {IS2CQuitClub} m S2CQuitClub message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CQuitClub.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CQuitClub message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CQuitClub
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CQuitClub} S2CQuitClub
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CQuitClub.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CQuitClub();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CQuitClub;
-})();
-
-$root.S2CRemoveMember = (function() {
-
-    /**
-     * Properties of a S2CRemoveMember.
-     * @exports IS2CRemoveMember
-     * @interface IS2CRemoveMember
-     * @property {ICommonResult|null} [result] S2CRemoveMember result
-     * @property {string|null} [clubId] S2CRemoveMember clubId
-     * @property {Array.<string>|null} [uids] S2CRemoveMember uids
-     */
-
-    /**
-     * Constructs a new S2CRemoveMember.
-     * @exports S2CRemoveMember
-     * @classdesc Represents a S2CRemoveMember.
-     * @implements IS2CRemoveMember
-     * @constructor
-     * @param {IS2CRemoveMember=} [p] Properties to set
-     */
-    function S2CRemoveMember(p) {
-        this.uids = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CRemoveMember result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CRemoveMember
-     * @instance
-     */
-    S2CRemoveMember.prototype.result = null;
-
-    /**
-     * S2CRemoveMember clubId.
-     * @member {string} clubId
-     * @memberof S2CRemoveMember
-     * @instance
-     */
-    S2CRemoveMember.prototype.clubId = "";
-
-    /**
-     * S2CRemoveMember uids.
-     * @member {Array.<string>} uids
-     * @memberof S2CRemoveMember
-     * @instance
-     */
-    S2CRemoveMember.prototype.uids = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CRemoveMember message. Does not implicitly {@link S2CRemoveMember.verify|verify} messages.
-     * @function encode
-     * @memberof S2CRemoveMember
-     * @static
-     * @param {IS2CRemoveMember} m S2CRemoveMember message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CRemoveMember.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.uids != null && m.uids.length) {
-            for (var i = 0; i < m.uids.length; ++i)
-                w.uint32(26).string(m.uids[i]);
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CRemoveMember message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CRemoveMember
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CRemoveMember} S2CRemoveMember
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CRemoveMember.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CRemoveMember();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                if (!(m.uids && m.uids.length))
-                    m.uids = [];
-                m.uids.push(r.string());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CRemoveMember;
-})();
-
-$root.S2CModifyClubInfo = (function() {
-
-    /**
-     * Properties of a S2CModifyClubInfo.
-     * @exports IS2CModifyClubInfo
-     * @interface IS2CModifyClubInfo
-     * @property {ICommonResult|null} [result] S2CModifyClubInfo result
-     * @property {IClubDetailsInfo|null} [clubInfo] S2CModifyClubInfo clubInfo
-     */
-
-    /**
-     * Constructs a new S2CModifyClubInfo.
-     * @exports S2CModifyClubInfo
-     * @classdesc Represents a S2CModifyClubInfo.
-     * @implements IS2CModifyClubInfo
-     * @constructor
-     * @param {IS2CModifyClubInfo=} [p] Properties to set
-     */
-    function S2CModifyClubInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CModifyClubInfo result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CModifyClubInfo
-     * @instance
-     */
-    S2CModifyClubInfo.prototype.result = null;
-
-    /**
-     * S2CModifyClubInfo clubInfo.
-     * @member {IClubDetailsInfo|null|undefined} clubInfo
-     * @memberof S2CModifyClubInfo
-     * @instance
-     */
-    S2CModifyClubInfo.prototype.clubInfo = null;
-
-    /**
-     * Encodes the specified S2CModifyClubInfo message. Does not implicitly {@link S2CModifyClubInfo.verify|verify} messages.
-     * @function encode
-     * @memberof S2CModifyClubInfo
-     * @static
-     * @param {IS2CModifyClubInfo} m S2CModifyClubInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CModifyClubInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubInfo != null && Object.hasOwnProperty.call(m, "clubInfo"))
-            $root.ClubDetailsInfo.encode(m.clubInfo, w.uint32(18).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CModifyClubInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CModifyClubInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CModifyClubInfo} S2CModifyClubInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CModifyClubInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CModifyClubInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubInfo = $root.ClubDetailsInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CModifyClubInfo;
-})();
-
-$root.S2CShareClubScore = (function() {
-
-    /**
-     * Properties of a S2CShareClubScore.
-     * @exports IS2CShareClubScore
-     * @interface IS2CShareClubScore
-     * @property {ICommonResult|null} [result] S2CShareClubScore result
-     * @property {string|null} [clubId] S2CShareClubScore clubId
-     * @property {string|null} [uid] S2CShareClubScore uid
-     * @property {number|null} [amount] S2CShareClubScore amount
-     * @property {number|null} [playerRestPoint] S2CShareClubScore playerRestPoint
-     * @property {number|null} [clubRestPoint] S2CShareClubScore clubRestPoint
-     */
-
-    /**
-     * Constructs a new S2CShareClubScore.
-     * @exports S2CShareClubScore
-     * @classdesc Represents a S2CShareClubScore.
-     * @implements IS2CShareClubScore
-     * @constructor
-     * @param {IS2CShareClubScore=} [p] Properties to set
-     */
-    function S2CShareClubScore(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CShareClubScore result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CShareClubScore
-     * @instance
-     */
-    S2CShareClubScore.prototype.result = null;
-
-    /**
-     * S2CShareClubScore clubId.
-     * @member {string} clubId
-     * @memberof S2CShareClubScore
-     * @instance
-     */
-    S2CShareClubScore.prototype.clubId = "";
-
-    /**
-     * S2CShareClubScore uid.
-     * @member {string} uid
-     * @memberof S2CShareClubScore
-     * @instance
-     */
-    S2CShareClubScore.prototype.uid = "";
-
-    /**
-     * S2CShareClubScore amount.
-     * @member {number} amount
-     * @memberof S2CShareClubScore
-     * @instance
-     */
-    S2CShareClubScore.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CShareClubScore playerRestPoint.
-     * @member {number} playerRestPoint
-     * @memberof S2CShareClubScore
-     * @instance
-     */
-    S2CShareClubScore.prototype.playerRestPoint = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CShareClubScore clubRestPoint.
-     * @member {number} clubRestPoint
-     * @memberof S2CShareClubScore
-     * @instance
-     */
-    S2CShareClubScore.prototype.clubRestPoint = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified S2CShareClubScore message. Does not implicitly {@link S2CShareClubScore.verify|verify} messages.
-     * @function encode
-     * @memberof S2CShareClubScore
-     * @static
-     * @param {IS2CShareClubScore} m S2CShareClubScore message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CShareClubScore.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(26).string(m.uid);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(32).int64(m.amount);
-        if (m.playerRestPoint != null && Object.hasOwnProperty.call(m, "playerRestPoint"))
-            w.uint32(40).int64(m.playerRestPoint);
-        if (m.clubRestPoint != null && Object.hasOwnProperty.call(m, "clubRestPoint"))
-            w.uint32(48).int64(m.clubRestPoint);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CShareClubScore message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CShareClubScore
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CShareClubScore} S2CShareClubScore
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CShareClubScore.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CShareClubScore();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                m.uid = r.string();
-                break;
-            case 4:
-                m.amount = r.int64();
-                break;
-            case 5:
-                m.playerRestPoint = r.int64();
-                break;
-            case 6:
-                m.clubRestPoint = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CShareClubScore;
-})();
-
-$root.S2CModifyMemberRole = (function() {
-
-    /**
-     * Properties of a S2CModifyMemberRole.
-     * @exports IS2CModifyMemberRole
-     * @interface IS2CModifyMemberRole
-     * @property {ICommonResult|null} [result] S2CModifyMemberRole result
-     * @property {string|null} [clubId] S2CModifyMemberRole clubId
-     * @property {string|null} [uid] S2CModifyMemberRole uid
-     * @property {ClubMemberType|null} [memberType] S2CModifyMemberRole memberType
-     */
-
-    /**
-     * Constructs a new S2CModifyMemberRole.
-     * @exports S2CModifyMemberRole
-     * @classdesc Represents a S2CModifyMemberRole.
-     * @implements IS2CModifyMemberRole
-     * @constructor
-     * @param {IS2CModifyMemberRole=} [p] Properties to set
-     */
-    function S2CModifyMemberRole(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CModifyMemberRole result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CModifyMemberRole
-     * @instance
-     */
-    S2CModifyMemberRole.prototype.result = null;
-
-    /**
-     * S2CModifyMemberRole clubId.
-     * @member {string} clubId
-     * @memberof S2CModifyMemberRole
-     * @instance
-     */
-    S2CModifyMemberRole.prototype.clubId = "";
-
-    /**
-     * S2CModifyMemberRole uid.
-     * @member {string} uid
-     * @memberof S2CModifyMemberRole
-     * @instance
-     */
-    S2CModifyMemberRole.prototype.uid = "";
-
-    /**
-     * S2CModifyMemberRole memberType.
-     * @member {ClubMemberType} memberType
-     * @memberof S2CModifyMemberRole
-     * @instance
-     */
-    S2CModifyMemberRole.prototype.memberType = 0;
-
-    /**
-     * Encodes the specified S2CModifyMemberRole message. Does not implicitly {@link S2CModifyMemberRole.verify|verify} messages.
-     * @function encode
-     * @memberof S2CModifyMemberRole
-     * @static
-     * @param {IS2CModifyMemberRole} m S2CModifyMemberRole message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CModifyMemberRole.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(26).string(m.uid);
-        if (m.memberType != null && Object.hasOwnProperty.call(m, "memberType"))
-            w.uint32(32).int32(m.memberType);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CModifyMemberRole message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CModifyMemberRole
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CModifyMemberRole} S2CModifyMemberRole
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CModifyMemberRole.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CModifyMemberRole();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                m.uid = r.string();
-                break;
-            case 4:
-                m.memberType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CModifyMemberRole;
-})();
-
-$root.S2CCreateClubGame = (function() {
-
-    /**
-     * Properties of a S2CCreateClubGame.
-     * @exports IS2CCreateClubGame
-     * @interface IS2CCreateClubGame
-     * @property {ICommonResult|null} [result] S2CCreateClubGame result
-     * @property {string|null} [clubId] S2CCreateClubGame clubId
-     * @property {IClubTexasGameInfo|null} [gameInfo] S2CCreateClubGame gameInfo
-     */
-
-    /**
-     * Constructs a new S2CCreateClubGame.
-     * @exports S2CCreateClubGame
-     * @classdesc Represents a S2CCreateClubGame.
-     * @implements IS2CCreateClubGame
-     * @constructor
-     * @param {IS2CCreateClubGame=} [p] Properties to set
-     */
-    function S2CCreateClubGame(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CCreateClubGame result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CCreateClubGame
-     * @instance
-     */
-    S2CCreateClubGame.prototype.result = null;
-
-    /**
-     * S2CCreateClubGame clubId.
-     * @member {string} clubId
-     * @memberof S2CCreateClubGame
-     * @instance
-     */
-    S2CCreateClubGame.prototype.clubId = "";
-
-    /**
-     * S2CCreateClubGame gameInfo.
-     * @member {IClubTexasGameInfo|null|undefined} gameInfo
-     * @memberof S2CCreateClubGame
-     * @instance
-     */
-    S2CCreateClubGame.prototype.gameInfo = null;
-
-    /**
-     * Encodes the specified S2CCreateClubGame message. Does not implicitly {@link S2CCreateClubGame.verify|verify} messages.
-     * @function encode
-     * @memberof S2CCreateClubGame
-     * @static
-     * @param {IS2CCreateClubGame} m S2CCreateClubGame message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CCreateClubGame.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.gameInfo != null && Object.hasOwnProperty.call(m, "gameInfo"))
-            $root.ClubTexasGameInfo.encode(m.gameInfo, w.uint32(26).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CCreateClubGame message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CCreateClubGame
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CCreateClubGame} S2CCreateClubGame
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CCreateClubGame.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCreateClubGame();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                m.gameInfo = $root.ClubTexasGameInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CCreateClubGame;
-})();
-
-$root.S2CGetClubTexasGameInfoResp = (function() {
-
-    /**
-     * Properties of a S2CGetClubTexasGameInfoResp.
-     * @exports IS2CGetClubTexasGameInfoResp
-     * @interface IS2CGetClubTexasGameInfoResp
-     * @property {ICommonResult|null} [result] S2CGetClubTexasGameInfoResp result
-     * @property {string|null} [clubId] S2CGetClubTexasGameInfoResp clubId
-     * @property {Array.<IClubTexasGameInfo>|null} [gameInfo] S2CGetClubTexasGameInfoResp gameInfo
-     */
-
-    /**
-     * Constructs a new S2CGetClubTexasGameInfoResp.
-     * @exports S2CGetClubTexasGameInfoResp
-     * @classdesc Represents a S2CGetClubTexasGameInfoResp.
-     * @implements IS2CGetClubTexasGameInfoResp
-     * @constructor
-     * @param {IS2CGetClubTexasGameInfoResp=} [p] Properties to set
-     */
-    function S2CGetClubTexasGameInfoResp(p) {
-        this.gameInfo = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CGetClubTexasGameInfoResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CGetClubTexasGameInfoResp
-     * @instance
-     */
-    S2CGetClubTexasGameInfoResp.prototype.result = null;
-
-    /**
-     * S2CGetClubTexasGameInfoResp clubId.
-     * @member {string} clubId
-     * @memberof S2CGetClubTexasGameInfoResp
-     * @instance
-     */
-    S2CGetClubTexasGameInfoResp.prototype.clubId = "";
-
-    /**
-     * S2CGetClubTexasGameInfoResp gameInfo.
-     * @member {Array.<IClubTexasGameInfo>} gameInfo
-     * @memberof S2CGetClubTexasGameInfoResp
-     * @instance
-     */
-    S2CGetClubTexasGameInfoResp.prototype.gameInfo = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CGetClubTexasGameInfoResp message. Does not implicitly {@link S2CGetClubTexasGameInfoResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CGetClubTexasGameInfoResp
-     * @static
-     * @param {IS2CGetClubTexasGameInfoResp} m S2CGetClubTexasGameInfoResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CGetClubTexasGameInfoResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.gameInfo != null && m.gameInfo.length) {
-            for (var i = 0; i < m.gameInfo.length; ++i)
-                $root.ClubTexasGameInfo.encode(m.gameInfo[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CGetClubTexasGameInfoResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CGetClubTexasGameInfoResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CGetClubTexasGameInfoResp} S2CGetClubTexasGameInfoResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CGetClubTexasGameInfoResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CGetClubTexasGameInfoResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                if (!(m.gameInfo && m.gameInfo.length))
-                    m.gameInfo = [];
-                m.gameInfo.push($root.ClubTexasGameInfo.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CGetClubTexasGameInfoResp;
-})();
-
-$root.S2CGetClubSubGameInfoResp = (function() {
-
-    /**
-     * Properties of a S2CGetClubSubGameInfoResp.
-     * @exports IS2CGetClubSubGameInfoResp
-     * @interface IS2CGetClubSubGameInfoResp
-     * @property {ICommonResult|null} [result] S2CGetClubSubGameInfoResp result
-     * @property {string|null} [clubId] S2CGetClubSubGameInfoResp clubId
-     * @property {Array.<IClubSubGameInfo>|null} [gameInfo] S2CGetClubSubGameInfoResp gameInfo
-     */
-
-    /**
-     * Constructs a new S2CGetClubSubGameInfoResp.
-     * @exports S2CGetClubSubGameInfoResp
-     * @classdesc Represents a S2CGetClubSubGameInfoResp.
-     * @implements IS2CGetClubSubGameInfoResp
-     * @constructor
-     * @param {IS2CGetClubSubGameInfoResp=} [p] Properties to set
-     */
-    function S2CGetClubSubGameInfoResp(p) {
-        this.gameInfo = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CGetClubSubGameInfoResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CGetClubSubGameInfoResp
-     * @instance
-     */
-    S2CGetClubSubGameInfoResp.prototype.result = null;
-
-    /**
-     * S2CGetClubSubGameInfoResp clubId.
-     * @member {string} clubId
-     * @memberof S2CGetClubSubGameInfoResp
-     * @instance
-     */
-    S2CGetClubSubGameInfoResp.prototype.clubId = "";
-
-    /**
-     * S2CGetClubSubGameInfoResp gameInfo.
-     * @member {Array.<IClubSubGameInfo>} gameInfo
-     * @memberof S2CGetClubSubGameInfoResp
-     * @instance
-     */
-    S2CGetClubSubGameInfoResp.prototype.gameInfo = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CGetClubSubGameInfoResp message. Does not implicitly {@link S2CGetClubSubGameInfoResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CGetClubSubGameInfoResp
-     * @static
-     * @param {IS2CGetClubSubGameInfoResp} m S2CGetClubSubGameInfoResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CGetClubSubGameInfoResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.gameInfo != null && m.gameInfo.length) {
-            for (var i = 0; i < m.gameInfo.length; ++i)
-                $root.ClubSubGameInfo.encode(m.gameInfo[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CGetClubSubGameInfoResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CGetClubSubGameInfoResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CGetClubSubGameInfoResp} S2CGetClubSubGameInfoResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CGetClubSubGameInfoResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CGetClubSubGameInfoResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                if (!(m.gameInfo && m.gameInfo.length))
-                    m.gameInfo = [];
-                m.gameInfo.push($root.ClubSubGameInfo.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CGetClubSubGameInfoResp;
-})();
-
-$root.S2CDismissClubGame = (function() {
-
-    /**
-     * Properties of a S2CDismissClubGame.
-     * @exports IS2CDismissClubGame
-     * @interface IS2CDismissClubGame
-     * @property {ICommonResult|null} [result] S2CDismissClubGame result
-     * @property {string|null} [clubId] S2CDismissClubGame clubId
-     * @property {string|null} [gameId] S2CDismissClubGame gameId
-     */
-
-    /**
-     * Constructs a new S2CDismissClubGame.
-     * @exports S2CDismissClubGame
-     * @classdesc Represents a S2CDismissClubGame.
-     * @implements IS2CDismissClubGame
-     * @constructor
-     * @param {IS2CDismissClubGame=} [p] Properties to set
-     */
-    function S2CDismissClubGame(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CDismissClubGame result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CDismissClubGame
-     * @instance
-     */
-    S2CDismissClubGame.prototype.result = null;
-
-    /**
-     * S2CDismissClubGame clubId.
-     * @member {string} clubId
-     * @memberof S2CDismissClubGame
-     * @instance
-     */
-    S2CDismissClubGame.prototype.clubId = "";
-
-    /**
-     * S2CDismissClubGame gameId.
-     * @member {string} gameId
-     * @memberof S2CDismissClubGame
-     * @instance
-     */
-    S2CDismissClubGame.prototype.gameId = "";
-
-    /**
-     * Encodes the specified S2CDismissClubGame message. Does not implicitly {@link S2CDismissClubGame.verify|verify} messages.
-     * @function encode
-     * @memberof S2CDismissClubGame
-     * @static
-     * @param {IS2CDismissClubGame} m S2CDismissClubGame message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CDismissClubGame.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(26).string(m.gameId);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CDismissClubGame message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CDismissClubGame
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CDismissClubGame} S2CDismissClubGame
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CDismissClubGame.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CDismissClubGame();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                m.gameId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CDismissClubGame;
-})();
-
-$root.S2CClubJoinNotify = (function() {
-
-    /**
-     * Properties of a S2CClubJoinNotify.
-     * @exports IS2CClubJoinNotify
-     * @interface IS2CClubJoinNotify
-     * @property {Array.<IClubJoinRequest>|null} [request] S2CClubJoinNotify request
-     */
-
-    /**
-     * Constructs a new S2CClubJoinNotify.
-     * @exports S2CClubJoinNotify
-     * @classdesc Represents a S2CClubJoinNotify.
-     * @implements IS2CClubJoinNotify
-     * @constructor
-     * @param {IS2CClubJoinNotify=} [p] Properties to set
-     */
-    function S2CClubJoinNotify(p) {
-        this.request = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CClubJoinNotify request.
-     * @member {Array.<IClubJoinRequest>} request
-     * @memberof S2CClubJoinNotify
-     * @instance
-     */
-    S2CClubJoinNotify.prototype.request = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CClubJoinNotify message. Does not implicitly {@link S2CClubJoinNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CClubJoinNotify
-     * @static
-     * @param {IS2CClubJoinNotify} m S2CClubJoinNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CClubJoinNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.request != null && m.request.length) {
-            for (var i = 0; i < m.request.length; ++i)
-                $root.ClubJoinRequest.encode(m.request[i], w.uint32(10).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CClubJoinNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CClubJoinNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CClubJoinNotify} S2CClubJoinNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CClubJoinNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CClubJoinNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                if (!(m.request && m.request.length))
-                    m.request = [];
-                m.request.push($root.ClubJoinRequest.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CClubJoinNotify;
-})();
-
-$root.S2CJoinClubNotify = (function() {
-
-    /**
-     * Properties of a S2CJoinClubNotify.
-     * @exports IS2CJoinClubNotify
-     * @interface IS2CJoinClubNotify
-     * @property {ICommonResult|null} [result] S2CJoinClubNotify result
-     * @property {IClubDetailsInfo|null} [clubInfo] S2CJoinClubNotify clubInfo
-     */
-
-    /**
-     * Constructs a new S2CJoinClubNotify.
-     * @exports S2CJoinClubNotify
-     * @classdesc Represents a S2CJoinClubNotify.
-     * @implements IS2CJoinClubNotify
-     * @constructor
-     * @param {IS2CJoinClubNotify=} [p] Properties to set
-     */
-    function S2CJoinClubNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CJoinClubNotify result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CJoinClubNotify
-     * @instance
-     */
-    S2CJoinClubNotify.prototype.result = null;
-
-    /**
-     * S2CJoinClubNotify clubInfo.
-     * @member {IClubDetailsInfo|null|undefined} clubInfo
-     * @memberof S2CJoinClubNotify
-     * @instance
-     */
-    S2CJoinClubNotify.prototype.clubInfo = null;
-
-    /**
-     * Encodes the specified S2CJoinClubNotify message. Does not implicitly {@link S2CJoinClubNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CJoinClubNotify
-     * @static
-     * @param {IS2CJoinClubNotify} m S2CJoinClubNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CJoinClubNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.clubInfo != null && Object.hasOwnProperty.call(m, "clubInfo"))
-            $root.ClubDetailsInfo.encode(m.clubInfo, w.uint32(18).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CJoinClubNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CJoinClubNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CJoinClubNotify} S2CJoinClubNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CJoinClubNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CJoinClubNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.clubInfo = $root.ClubDetailsInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CJoinClubNotify;
-})();
-
-$root.S2CRemoveNotify = (function() {
-
-    /**
-     * Properties of a S2CRemoveNotify.
-     * @exports IS2CRemoveNotify
-     * @interface IS2CRemoveNotify
-     * @property {string|null} [clubId] S2CRemoveNotify clubId
-     */
-
-    /**
-     * Constructs a new S2CRemoveNotify.
-     * @exports S2CRemoveNotify
-     * @classdesc Represents a S2CRemoveNotify.
-     * @implements IS2CRemoveNotify
-     * @constructor
-     * @param {IS2CRemoveNotify=} [p] Properties to set
-     */
-    function S2CRemoveNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CRemoveNotify clubId.
-     * @member {string} clubId
-     * @memberof S2CRemoveNotify
-     * @instance
-     */
-    S2CRemoveNotify.prototype.clubId = "";
-
-    /**
-     * Encodes the specified S2CRemoveNotify message. Does not implicitly {@link S2CRemoveNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CRemoveNotify
-     * @static
-     * @param {IS2CRemoveNotify} m S2CRemoveNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CRemoveNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CRemoveNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CRemoveNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CRemoveNotify} S2CRemoveNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CRemoveNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CRemoveNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CRemoveNotify;
-})();
-
-$root.S2CDismissClubNotify = (function() {
-
-    /**
-     * Properties of a S2CDismissClubNotify.
-     * @exports IS2CDismissClubNotify
-     * @interface IS2CDismissClubNotify
-     * @property {string|null} [clubId] S2CDismissClubNotify clubId
-     */
-
-    /**
-     * Constructs a new S2CDismissClubNotify.
-     * @exports S2CDismissClubNotify
-     * @classdesc Represents a S2CDismissClubNotify.
-     * @implements IS2CDismissClubNotify
-     * @constructor
-     * @param {IS2CDismissClubNotify=} [p] Properties to set
-     */
-    function S2CDismissClubNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CDismissClubNotify clubId.
-     * @member {string} clubId
-     * @memberof S2CDismissClubNotify
-     * @instance
-     */
-    S2CDismissClubNotify.prototype.clubId = "";
-
-    /**
-     * Encodes the specified S2CDismissClubNotify message. Does not implicitly {@link S2CDismissClubNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CDismissClubNotify
-     * @static
-     * @param {IS2CDismissClubNotify} m S2CDismissClubNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CDismissClubNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CDismissClubNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CDismissClubNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CDismissClubNotify} S2CDismissClubNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CDismissClubNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CDismissClubNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CDismissClubNotify;
-})();
-
-$root.S2CClubTotalPointNotify = (function() {
-
-    /**
-     * Properties of a S2CClubTotalPointNotify.
-     * @exports IS2CClubTotalPointNotify
-     * @interface IS2CClubTotalPointNotify
-     * @property {string|null} [clubId] S2CClubTotalPointNotify clubId
-     * @property {number|null} [clubRestAmount] S2CClubTotalPointNotify clubRestAmount
-     * @property {number|null} [amount] S2CClubTotalPointNotify amount
-     */
-
-    /**
-     * Constructs a new S2CClubTotalPointNotify.
-     * @exports S2CClubTotalPointNotify
-     * @classdesc Represents a S2CClubTotalPointNotify.
-     * @implements IS2CClubTotalPointNotify
-     * @constructor
-     * @param {IS2CClubTotalPointNotify=} [p] Properties to set
-     */
-    function S2CClubTotalPointNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CClubTotalPointNotify clubId.
-     * @member {string} clubId
-     * @memberof S2CClubTotalPointNotify
-     * @instance
-     */
-    S2CClubTotalPointNotify.prototype.clubId = "";
-
-    /**
-     * S2CClubTotalPointNotify clubRestAmount.
-     * @member {number} clubRestAmount
-     * @memberof S2CClubTotalPointNotify
-     * @instance
-     */
-    S2CClubTotalPointNotify.prototype.clubRestAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CClubTotalPointNotify amount.
-     * @member {number} amount
-     * @memberof S2CClubTotalPointNotify
-     * @instance
-     */
-    S2CClubTotalPointNotify.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified S2CClubTotalPointNotify message. Does not implicitly {@link S2CClubTotalPointNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CClubTotalPointNotify
-     * @static
-     * @param {IS2CClubTotalPointNotify} m S2CClubTotalPointNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CClubTotalPointNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.clubRestAmount != null && Object.hasOwnProperty.call(m, "clubRestAmount"))
-            w.uint32(16).int64(m.clubRestAmount);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(24).int64(m.amount);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CClubTotalPointNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CClubTotalPointNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CClubTotalPointNotify} S2CClubTotalPointNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CClubTotalPointNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CClubTotalPointNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.clubRestAmount = r.int64();
-                break;
-            case 3:
-                m.amount = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CClubTotalPointNotify;
-})();
-
-$root.S2CClubPlayerPointNotify = (function() {
-
-    /**
-     * Properties of a S2CClubPlayerPointNotify.
-     * @exports IS2CClubPlayerPointNotify
-     * @interface IS2CClubPlayerPointNotify
-     * @property {string|null} [clubId] S2CClubPlayerPointNotify clubId
-     * @property {number|null} [playerRestAmount] S2CClubPlayerPointNotify playerRestAmount
-     * @property {number|null} [amount] S2CClubPlayerPointNotify amount
-     */
-
-    /**
-     * Constructs a new S2CClubPlayerPointNotify.
-     * @exports S2CClubPlayerPointNotify
-     * @classdesc Represents a S2CClubPlayerPointNotify.
-     * @implements IS2CClubPlayerPointNotify
-     * @constructor
-     * @param {IS2CClubPlayerPointNotify=} [p] Properties to set
-     */
-    function S2CClubPlayerPointNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CClubPlayerPointNotify clubId.
-     * @member {string} clubId
-     * @memberof S2CClubPlayerPointNotify
-     * @instance
-     */
-    S2CClubPlayerPointNotify.prototype.clubId = "";
-
-    /**
-     * S2CClubPlayerPointNotify playerRestAmount.
-     * @member {number} playerRestAmount
-     * @memberof S2CClubPlayerPointNotify
-     * @instance
-     */
-    S2CClubPlayerPointNotify.prototype.playerRestAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CClubPlayerPointNotify amount.
-     * @member {number} amount
-     * @memberof S2CClubPlayerPointNotify
-     * @instance
-     */
-    S2CClubPlayerPointNotify.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified S2CClubPlayerPointNotify message. Does not implicitly {@link S2CClubPlayerPointNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CClubPlayerPointNotify
-     * @static
-     * @param {IS2CClubPlayerPointNotify} m S2CClubPlayerPointNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CClubPlayerPointNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.playerRestAmount != null && Object.hasOwnProperty.call(m, "playerRestAmount"))
-            w.uint32(16).int64(m.playerRestAmount);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(24).int64(m.amount);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CClubPlayerPointNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CClubPlayerPointNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CClubPlayerPointNotify} S2CClubPlayerPointNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CClubPlayerPointNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CClubPlayerPointNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.playerRestAmount = r.int64();
-                break;
-            case 3:
-                m.amount = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CClubPlayerPointNotify;
-})();
-
-$root.S2CModifyMemberRoleNotify = (function() {
-
-    /**
-     * Properties of a S2CModifyMemberRoleNotify.
-     * @exports IS2CModifyMemberRoleNotify
-     * @interface IS2CModifyMemberRoleNotify
-     * @property {string|null} [clubId] S2CModifyMemberRoleNotify clubId
-     * @property {ClubMemberType|null} [memberType] S2CModifyMemberRoleNotify memberType
-     */
-
-    /**
-     * Constructs a new S2CModifyMemberRoleNotify.
-     * @exports S2CModifyMemberRoleNotify
-     * @classdesc Represents a S2CModifyMemberRoleNotify.
-     * @implements IS2CModifyMemberRoleNotify
-     * @constructor
-     * @param {IS2CModifyMemberRoleNotify=} [p] Properties to set
-     */
-    function S2CModifyMemberRoleNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CModifyMemberRoleNotify clubId.
-     * @member {string} clubId
-     * @memberof S2CModifyMemberRoleNotify
-     * @instance
-     */
-    S2CModifyMemberRoleNotify.prototype.clubId = "";
-
-    /**
-     * S2CModifyMemberRoleNotify memberType.
-     * @member {ClubMemberType} memberType
-     * @memberof S2CModifyMemberRoleNotify
-     * @instance
-     */
-    S2CModifyMemberRoleNotify.prototype.memberType = 0;
-
-    /**
-     * Encodes the specified S2CModifyMemberRoleNotify message. Does not implicitly {@link S2CModifyMemberRoleNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CModifyMemberRoleNotify
-     * @static
-     * @param {IS2CModifyMemberRoleNotify} m S2CModifyMemberRoleNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CModifyMemberRoleNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.memberType != null && Object.hasOwnProperty.call(m, "memberType"))
-            w.uint32(16).int32(m.memberType);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CModifyMemberRoleNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CModifyMemberRoleNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CModifyMemberRoleNotify} S2CModifyMemberRoleNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CModifyMemberRoleNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CModifyMemberRoleNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.memberType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CModifyMemberRoleNotify;
-})();
-
-$root.S2CDismissClubGameNotify = (function() {
-
-    /**
-     * Properties of a S2CDismissClubGameNotify.
-     * @exports IS2CDismissClubGameNotify
-     * @interface IS2CDismissClubGameNotify
-     * @property {string|null} [clubId] S2CDismissClubGameNotify clubId
-     * @property {string|null} [gameId] S2CDismissClubGameNotify gameId
-     */
-
-    /**
-     * Constructs a new S2CDismissClubGameNotify.
-     * @exports S2CDismissClubGameNotify
-     * @classdesc Represents a S2CDismissClubGameNotify.
-     * @implements IS2CDismissClubGameNotify
-     * @constructor
-     * @param {IS2CDismissClubGameNotify=} [p] Properties to set
-     */
-    function S2CDismissClubGameNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CDismissClubGameNotify clubId.
-     * @member {string} clubId
-     * @memberof S2CDismissClubGameNotify
-     * @instance
-     */
-    S2CDismissClubGameNotify.prototype.clubId = "";
-
-    /**
-     * S2CDismissClubGameNotify gameId.
-     * @member {string} gameId
-     * @memberof S2CDismissClubGameNotify
-     * @instance
-     */
-    S2CDismissClubGameNotify.prototype.gameId = "";
-
-    /**
-     * Encodes the specified S2CDismissClubGameNotify message. Does not implicitly {@link S2CDismissClubGameNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CDismissClubGameNotify
-     * @static
-     * @param {IS2CDismissClubGameNotify} m S2CDismissClubGameNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CDismissClubGameNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(10).string(m.clubId);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CDismissClubGameNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CDismissClubGameNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CDismissClubGameNotify} S2CDismissClubGameNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CDismissClubGameNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CDismissClubGameNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubId = r.string();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CDismissClubGameNotify;
-})();
-
-$root.C2STexasCowboyEnterGame = (function() {
-
-    /**
-     * Properties of a C2STexasCowboyEnterGame.
-     * @exports IC2STexasCowboyEnterGame
-     * @interface IC2STexasCowboyEnterGame
-     * @property {string|null} [gameId] C2STexasCowboyEnterGame gameId
-     */
-
-    /**
-     * Constructs a new C2STexasCowboyEnterGame.
-     * @exports C2STexasCowboyEnterGame
-     * @classdesc Represents a C2STexasCowboyEnterGame.
-     * @implements IC2STexasCowboyEnterGame
-     * @constructor
-     * @param {IC2STexasCowboyEnterGame=} [p] Properties to set
-     */
-    function C2STexasCowboyEnterGame(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2STexasCowboyEnterGame gameId.
-     * @member {string} gameId
-     * @memberof C2STexasCowboyEnterGame
-     * @instance
-     */
-    C2STexasCowboyEnterGame.prototype.gameId = "";
-
-    /**
-     * Encodes the specified C2STexasCowboyEnterGame message. Does not implicitly {@link C2STexasCowboyEnterGame.verify|verify} messages.
-     * @function encode
-     * @memberof C2STexasCowboyEnterGame
-     * @static
-     * @param {IC2STexasCowboyEnterGame} m C2STexasCowboyEnterGame message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2STexasCowboyEnterGame.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2STexasCowboyEnterGame message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2STexasCowboyEnterGame
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCowboyEnterGame} C2STexasCowboyEnterGame
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2STexasCowboyEnterGame.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyEnterGame();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2STexasCowboyEnterGame;
-})();
-
-$root.C2STexasCowboyExitGame = (function() {
-
-    /**
-     * Properties of a C2STexasCowboyExitGame.
-     * @exports IC2STexasCowboyExitGame
-     * @interface IC2STexasCowboyExitGame
-     * @property {string|null} [gameId] C2STexasCowboyExitGame gameId
-     */
-
-    /**
-     * Constructs a new C2STexasCowboyExitGame.
-     * @exports C2STexasCowboyExitGame
-     * @classdesc Represents a C2STexasCowboyExitGame.
-     * @implements IC2STexasCowboyExitGame
-     * @constructor
-     * @param {IC2STexasCowboyExitGame=} [p] Properties to set
-     */
-    function C2STexasCowboyExitGame(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2STexasCowboyExitGame gameId.
-     * @member {string} gameId
-     * @memberof C2STexasCowboyExitGame
-     * @instance
-     */
-    C2STexasCowboyExitGame.prototype.gameId = "";
-
-    /**
-     * Encodes the specified C2STexasCowboyExitGame message. Does not implicitly {@link C2STexasCowboyExitGame.verify|verify} messages.
-     * @function encode
-     * @memberof C2STexasCowboyExitGame
-     * @static
-     * @param {IC2STexasCowboyExitGame} m C2STexasCowboyExitGame message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2STexasCowboyExitGame.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2STexasCowboyExitGame message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2STexasCowboyExitGame
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCowboyExitGame} C2STexasCowboyExitGame
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2STexasCowboyExitGame.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyExitGame();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2STexasCowboyExitGame;
-})();
-
-$root.C2STexasCowboyBet = (function() {
-
-    /**
-     * Properties of a C2STexasCowboyBet.
-     * @exports IC2STexasCowboyBet
-     * @interface IC2STexasCowboyBet
-     * @property {string|null} [gameId] C2STexasCowboyBet gameId
-     * @property {ICowboySingleBet|null} [betInfo] C2STexasCowboyBet betInfo
-     */
-
-    /**
-     * Constructs a new C2STexasCowboyBet.
-     * @exports C2STexasCowboyBet
-     * @classdesc Represents a C2STexasCowboyBet.
-     * @implements IC2STexasCowboyBet
-     * @constructor
-     * @param {IC2STexasCowboyBet=} [p] Properties to set
-     */
-    function C2STexasCowboyBet(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2STexasCowboyBet gameId.
-     * @member {string} gameId
-     * @memberof C2STexasCowboyBet
-     * @instance
-     */
-    C2STexasCowboyBet.prototype.gameId = "";
-
-    /**
-     * C2STexasCowboyBet betInfo.
-     * @member {ICowboySingleBet|null|undefined} betInfo
-     * @memberof C2STexasCowboyBet
-     * @instance
-     */
-    C2STexasCowboyBet.prototype.betInfo = null;
-
-    /**
-     * Encodes the specified C2STexasCowboyBet message. Does not implicitly {@link C2STexasCowboyBet.verify|verify} messages.
-     * @function encode
-     * @memberof C2STexasCowboyBet
-     * @static
-     * @param {IC2STexasCowboyBet} m C2STexasCowboyBet message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2STexasCowboyBet.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.betInfo != null && Object.hasOwnProperty.call(m, "betInfo"))
-            $root.CowboySingleBet.encode(m.betInfo, w.uint32(18).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a C2STexasCowboyBet message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2STexasCowboyBet
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCowboyBet} C2STexasCowboyBet
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2STexasCowboyBet.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyBet();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.betInfo = $root.CowboySingleBet.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2STexasCowboyBet;
-})();
-
-$root.C2STexasCowboyRecord = (function() {
-
-    /**
-     * Properties of a C2STexasCowboyRecord.
-     * @exports IC2STexasCowboyRecord
-     * @interface IC2STexasCowboyRecord
-     * @property {string|null} [gameId] C2STexasCowboyRecord gameId
-     * @property {number|null} [whichGame] C2STexasCowboyRecord whichGame
-     */
-
-    /**
-     * Constructs a new C2STexasCowboyRecord.
-     * @exports C2STexasCowboyRecord
-     * @classdesc Represents a C2STexasCowboyRecord.
-     * @implements IC2STexasCowboyRecord
-     * @constructor
-     * @param {IC2STexasCowboyRecord=} [p] Properties to set
-     */
-    function C2STexasCowboyRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2STexasCowboyRecord gameId.
-     * @member {string} gameId
-     * @memberof C2STexasCowboyRecord
-     * @instance
-     */
-    C2STexasCowboyRecord.prototype.gameId = "";
-
-    /**
-     * C2STexasCowboyRecord whichGame.
-     * @member {number} whichGame
-     * @memberof C2STexasCowboyRecord
-     * @instance
-     */
-    C2STexasCowboyRecord.prototype.whichGame = 0;
-
-    /**
-     * Encodes the specified C2STexasCowboyRecord message. Does not implicitly {@link C2STexasCowboyRecord.verify|verify} messages.
-     * @function encode
-     * @memberof C2STexasCowboyRecord
-     * @static
-     * @param {IC2STexasCowboyRecord} m C2STexasCowboyRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2STexasCowboyRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.whichGame != null && Object.hasOwnProperty.call(m, "whichGame"))
-            w.uint32(16).int32(m.whichGame);
-        return w;
-    };
-
-    /**
-     * Decodes a C2STexasCowboyRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2STexasCowboyRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCowboyRecord} C2STexasCowboyRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2STexasCowboyRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.whichGame = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2STexasCowboyRecord;
-})();
-
-$root.C2STexasCowboyBringIn = (function() {
-
-    /**
-     * Properties of a C2STexasCowboyBringIn.
-     * @exports IC2STexasCowboyBringIn
-     * @interface IC2STexasCowboyBringIn
-     * @property {string|null} [gameId] C2STexasCowboyBringIn gameId
-     * @property {number|null} [amount] C2STexasCowboyBringIn amount
-     */
-
-    /**
-     * Constructs a new C2STexasCowboyBringIn.
-     * @exports C2STexasCowboyBringIn
-     * @classdesc Represents a C2STexasCowboyBringIn.
-     * @implements IC2STexasCowboyBringIn
-     * @constructor
-     * @param {IC2STexasCowboyBringIn=} [p] Properties to set
-     */
-    function C2STexasCowboyBringIn(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2STexasCowboyBringIn gameId.
-     * @member {string} gameId
-     * @memberof C2STexasCowboyBringIn
-     * @instance
-     */
-    C2STexasCowboyBringIn.prototype.gameId = "";
-
-    /**
-     * C2STexasCowboyBringIn amount.
-     * @member {number} amount
-     * @memberof C2STexasCowboyBringIn
-     * @instance
-     */
-    C2STexasCowboyBringIn.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified C2STexasCowboyBringIn message. Does not implicitly {@link C2STexasCowboyBringIn.verify|verify} messages.
-     * @function encode
-     * @memberof C2STexasCowboyBringIn
-     * @static
-     * @param {IC2STexasCowboyBringIn} m C2STexasCowboyBringIn message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2STexasCowboyBringIn.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(16).int64(m.amount);
-        return w;
-    };
-
-    /**
-     * Decodes a C2STexasCowboyBringIn message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2STexasCowboyBringIn
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCowboyBringIn} C2STexasCowboyBringIn
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2STexasCowboyBringIn.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyBringIn();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.amount = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2STexasCowboyBringIn;
-})();
-
-$root.C2STexasCowboyBringOut = (function() {
-
-    /**
-     * Properties of a C2STexasCowboyBringOut.
-     * @exports IC2STexasCowboyBringOut
-     * @interface IC2STexasCowboyBringOut
-     * @property {string|null} [gameId] C2STexasCowboyBringOut gameId
-     * @property {number|null} [amount] C2STexasCowboyBringOut amount
-     */
-
-    /**
-     * Constructs a new C2STexasCowboyBringOut.
-     * @exports C2STexasCowboyBringOut
-     * @classdesc Represents a C2STexasCowboyBringOut.
-     * @implements IC2STexasCowboyBringOut
-     * @constructor
-     * @param {IC2STexasCowboyBringOut=} [p] Properties to set
-     */
-    function C2STexasCowboyBringOut(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2STexasCowboyBringOut gameId.
-     * @member {string} gameId
-     * @memberof C2STexasCowboyBringOut
-     * @instance
-     */
-    C2STexasCowboyBringOut.prototype.gameId = "";
-
-    /**
-     * C2STexasCowboyBringOut amount.
-     * @member {number} amount
-     * @memberof C2STexasCowboyBringOut
-     * @instance
-     */
-    C2STexasCowboyBringOut.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified C2STexasCowboyBringOut message. Does not implicitly {@link C2STexasCowboyBringOut.verify|verify} messages.
-     * @function encode
-     * @memberof C2STexasCowboyBringOut
-     * @static
-     * @param {IC2STexasCowboyBringOut} m C2STexasCowboyBringOut message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2STexasCowboyBringOut.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(16).int64(m.amount);
-        return w;
-    };
-
-    /**
-     * Decodes a C2STexasCowboyBringOut message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2STexasCowboyBringOut
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCowboyBringOut} C2STexasCowboyBringOut
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2STexasCowboyBringOut.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyBringOut();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.amount = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2STexasCowboyBringOut;
-})();
-
-$root.C2STexasCowboyTotalHistory = (function() {
-
-    /**
-     * Properties of a C2STexasCowboyTotalHistory.
-     * @exports IC2STexasCowboyTotalHistory
-     * @interface IC2STexasCowboyTotalHistory
-     * @property {string|null} [gameId] C2STexasCowboyTotalHistory gameId
-     */
-
-    /**
-     * Constructs a new C2STexasCowboyTotalHistory.
-     * @exports C2STexasCowboyTotalHistory
-     * @classdesc Represents a C2STexasCowboyTotalHistory.
-     * @implements IC2STexasCowboyTotalHistory
-     * @constructor
-     * @param {IC2STexasCowboyTotalHistory=} [p] Properties to set
-     */
-    function C2STexasCowboyTotalHistory(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2STexasCowboyTotalHistory gameId.
-     * @member {string} gameId
-     * @memberof C2STexasCowboyTotalHistory
-     * @instance
-     */
-    C2STexasCowboyTotalHistory.prototype.gameId = "";
-
-    /**
-     * Encodes the specified C2STexasCowboyTotalHistory message. Does not implicitly {@link C2STexasCowboyTotalHistory.verify|verify} messages.
-     * @function encode
-     * @memberof C2STexasCowboyTotalHistory
-     * @static
-     * @param {IC2STexasCowboyTotalHistory} m C2STexasCowboyTotalHistory message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2STexasCowboyTotalHistory.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        return w;
-    };
-
-    /**
-     * Decodes a C2STexasCowboyTotalHistory message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2STexasCowboyTotalHistory
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCowboyTotalHistory} C2STexasCowboyTotalHistory
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2STexasCowboyTotalHistory.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCowboyTotalHistory();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2STexasCowboyTotalHistory;
-})();
-
-/**
- * CowboyAreaType enum.
- * @exports CowboyAreaType
- * @enum {number}
- * @property {number} CowboyAreaType_0=0 CowboyAreaType_0 value
- * @property {number} CowboyAreaType_1=1 CowboyAreaType_1 value
- * @property {number} CowboyAreaType_2=2 CowboyAreaType_2 value
- * @property {number} CowboyAreaType_3=3 CowboyAreaType_3 value
- * @property {number} CowboyAreaType_4=4 CowboyAreaType_4 value
- * @property {number} CowboyAreaType_5=5 CowboyAreaType_5 value
- * @property {number} CowboyAreaType_6=6 CowboyAreaType_6 value
- * @property {number} CowboyAreaType_7=7 CowboyAreaType_7 value
- * @property {number} CowboyAreaType_8=8 CowboyAreaType_8 value
- * @property {number} CowboyAreaType_9=9 CowboyAreaType_9 value
- * @property {number} CowboyAreaType_10=10 CowboyAreaType_10 value
- */
-$root.CowboyAreaType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "CowboyAreaType_0"] = 0;
-    values[valuesById[1] = "CowboyAreaType_1"] = 1;
-    values[valuesById[2] = "CowboyAreaType_2"] = 2;
-    values[valuesById[3] = "CowboyAreaType_3"] = 3;
-    values[valuesById[4] = "CowboyAreaType_4"] = 4;
-    values[valuesById[5] = "CowboyAreaType_5"] = 5;
-    values[valuesById[6] = "CowboyAreaType_6"] = 6;
-    values[valuesById[7] = "CowboyAreaType_7"] = 7;
-    values[valuesById[8] = "CowboyAreaType_8"] = 8;
-    values[valuesById[9] = "CowboyAreaType_9"] = 9;
-    values[valuesById[10] = "CowboyAreaType_10"] = 10;
-    return values;
-})();
-
-/**
- * CowboyPhase enum.
- * @exports CowboyPhase
- * @enum {number}
- * @property {number} CowBoyPhase_Start=0 CowBoyPhase_Start value
- * @property {number} CowBoyPhase_Settlement=1 CowBoyPhase_Settlement value
- */
-$root.CowboyPhase = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "CowBoyPhase_Start"] = 0;
-    values[valuesById[1] = "CowBoyPhase_Settlement"] = 1;
-    return values;
-})();
-
-$root.CowboyAreaInfo = (function() {
-
-    /**
-     * Properties of a CowboyAreaInfo.
-     * @exports ICowboyAreaInfo
-     * @interface ICowboyAreaInfo
-     * @property {CowboyAreaType|null} [cowboyAreaType] CowboyAreaInfo cowboyAreaType
-     * @property {number|null} [totalBetNum] CowboyAreaInfo totalBetNum
-     */
-
-    /**
-     * Constructs a new CowboyAreaInfo.
-     * @exports CowboyAreaInfo
-     * @classdesc Represents a CowboyAreaInfo.
-     * @implements ICowboyAreaInfo
-     * @constructor
-     * @param {ICowboyAreaInfo=} [p] Properties to set
-     */
-    function CowboyAreaInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * CowboyAreaInfo cowboyAreaType.
-     * @member {CowboyAreaType} cowboyAreaType
-     * @memberof CowboyAreaInfo
-     * @instance
-     */
-    CowboyAreaInfo.prototype.cowboyAreaType = 0;
-
-    /**
-     * CowboyAreaInfo totalBetNum.
-     * @member {number} totalBetNum
-     * @memberof CowboyAreaInfo
-     * @instance
-     */
-    CowboyAreaInfo.prototype.totalBetNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified CowboyAreaInfo message. Does not implicitly {@link CowboyAreaInfo.verify|verify} messages.
-     * @function encode
-     * @memberof CowboyAreaInfo
-     * @static
-     * @param {ICowboyAreaInfo} m CowboyAreaInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    CowboyAreaInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.cowboyAreaType != null && Object.hasOwnProperty.call(m, "cowboyAreaType"))
-            w.uint32(8).int32(m.cowboyAreaType);
-        if (m.totalBetNum != null && Object.hasOwnProperty.call(m, "totalBetNum"))
-            w.uint32(16).int64(m.totalBetNum);
-        return w;
-    };
-
-    /**
-     * Decodes a CowboyAreaInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof CowboyAreaInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {CowboyAreaInfo} CowboyAreaInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    CowboyAreaInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyAreaInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.cowboyAreaType = r.int32();
-                break;
-            case 2:
-                m.totalBetNum = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return CowboyAreaInfo;
-})();
-
-$root.CowboySingleBet = (function() {
-
-    /**
-     * Properties of a CowboySingleBet.
-     * @exports ICowboySingleBet
-     * @interface ICowboySingleBet
-     * @property {string|null} [actionId] CowboySingleBet actionId
-     * @property {number|null} [amount] CowboySingleBet amount
-     * @property {CowboyAreaType|null} [betArea] CowboySingleBet betArea
-     */
-
-    /**
-     * Constructs a new CowboySingleBet.
-     * @exports CowboySingleBet
-     * @classdesc Represents a CowboySingleBet.
-     * @implements ICowboySingleBet
-     * @constructor
-     * @param {ICowboySingleBet=} [p] Properties to set
-     */
-    function CowboySingleBet(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * CowboySingleBet actionId.
-     * @member {string} actionId
-     * @memberof CowboySingleBet
-     * @instance
-     */
-    CowboySingleBet.prototype.actionId = "";
-
-    /**
-     * CowboySingleBet amount.
-     * @member {number} amount
-     * @memberof CowboySingleBet
-     * @instance
-     */
-    CowboySingleBet.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CowboySingleBet betArea.
-     * @member {CowboyAreaType} betArea
-     * @memberof CowboySingleBet
-     * @instance
-     */
-    CowboySingleBet.prototype.betArea = 0;
-
-    /**
-     * Encodes the specified CowboySingleBet message. Does not implicitly {@link CowboySingleBet.verify|verify} messages.
-     * @function encode
-     * @memberof CowboySingleBet
-     * @static
-     * @param {ICowboySingleBet} m CowboySingleBet message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    CowboySingleBet.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.actionId != null && Object.hasOwnProperty.call(m, "actionId"))
-            w.uint32(10).string(m.actionId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(16).int64(m.amount);
-        if (m.betArea != null && Object.hasOwnProperty.call(m, "betArea"))
-            w.uint32(24).int32(m.betArea);
-        return w;
-    };
-
-    /**
-     * Decodes a CowboySingleBet message from the specified reader or buffer.
-     * @function decode
-     * @memberof CowboySingleBet
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {CowboySingleBet} CowboySingleBet
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    CowboySingleBet.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboySingleBet();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.actionId = r.string();
-                break;
-            case 2:
-                m.amount = r.int64();
-                break;
-            case 3:
-                m.betArea = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return CowboySingleBet;
-})();
-
-$root.CowboyHistory = (function() {
-
-    /**
-     * Properties of a CowboyHistory.
-     * @exports ICowboyHistory
-     * @interface ICowboyHistory
-     * @property {CowboyAreaType|null} [cowboyAreaType] CowboyHistory cowboyAreaType
-     * @property {Array.<boolean>|null} [result] CowboyHistory result
-     */
-
-    /**
-     * Constructs a new CowboyHistory.
-     * @exports CowboyHistory
-     * @classdesc Represents a CowboyHistory.
-     * @implements ICowboyHistory
-     * @constructor
-     * @param {ICowboyHistory=} [p] Properties to set
-     */
-    function CowboyHistory(p) {
-        this.result = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * CowboyHistory cowboyAreaType.
-     * @member {CowboyAreaType} cowboyAreaType
-     * @memberof CowboyHistory
-     * @instance
-     */
-    CowboyHistory.prototype.cowboyAreaType = 0;
-
-    /**
-     * CowboyHistory result.
-     * @member {Array.<boolean>} result
-     * @memberof CowboyHistory
-     * @instance
-     */
-    CowboyHistory.prototype.result = $util.emptyArray;
-
-    /**
-     * Encodes the specified CowboyHistory message. Does not implicitly {@link CowboyHistory.verify|verify} messages.
-     * @function encode
-     * @memberof CowboyHistory
-     * @static
-     * @param {ICowboyHistory} m CowboyHistory message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    CowboyHistory.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.cowboyAreaType != null && Object.hasOwnProperty.call(m, "cowboyAreaType"))
-            w.uint32(8).int32(m.cowboyAreaType);
-        if (m.result != null && m.result.length) {
-            w.uint32(18).fork();
-            for (var i = 0; i < m.result.length; ++i)
-                w.bool(m.result[i]);
-            w.ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a CowboyHistory message from the specified reader or buffer.
-     * @function decode
-     * @memberof CowboyHistory
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {CowboyHistory} CowboyHistory
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    CowboyHistory.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyHistory();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.cowboyAreaType = r.int32();
-                break;
-            case 2:
-                if (!(m.result && m.result.length))
-                    m.result = [];
-                if ((t & 7) === 2) {
-                    var c2 = r.uint32() + r.pos;
-                    while (r.pos < c2)
-                        m.result.push(r.bool());
-                } else
-                    m.result.push(r.bool());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return CowboyHistory;
-})();
-
-$root.CowboyTotalHistory = (function() {
-
-    /**
-     * Properties of a CowboyTotalHistory.
-     * @exports ICowboyTotalHistory
-     * @interface ICowboyTotalHistory
-     * @property {CowboyAreaType|null} [cowboyAreaType] CowboyTotalHistory cowboyAreaType
-     * @property {number|null} [count] CowboyTotalHistory count
-     */
-
-    /**
-     * Constructs a new CowboyTotalHistory.
-     * @exports CowboyTotalHistory
-     * @classdesc Represents a CowboyTotalHistory.
-     * @implements ICowboyTotalHistory
-     * @constructor
-     * @param {ICowboyTotalHistory=} [p] Properties to set
-     */
-    function CowboyTotalHistory(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * CowboyTotalHistory cowboyAreaType.
-     * @member {CowboyAreaType} cowboyAreaType
-     * @memberof CowboyTotalHistory
-     * @instance
-     */
-    CowboyTotalHistory.prototype.cowboyAreaType = 0;
-
-    /**
-     * CowboyTotalHistory count.
-     * @member {number} count
-     * @memberof CowboyTotalHistory
-     * @instance
-     */
-    CowboyTotalHistory.prototype.count = 0;
-
-    /**
-     * Encodes the specified CowboyTotalHistory message. Does not implicitly {@link CowboyTotalHistory.verify|verify} messages.
-     * @function encode
-     * @memberof CowboyTotalHistory
-     * @static
-     * @param {ICowboyTotalHistory} m CowboyTotalHistory message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    CowboyTotalHistory.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.cowboyAreaType != null && Object.hasOwnProperty.call(m, "cowboyAreaType"))
-            w.uint32(8).int32(m.cowboyAreaType);
-        if (m.count != null && Object.hasOwnProperty.call(m, "count"))
-            w.uint32(16).int32(m.count);
-        return w;
-    };
-
-    /**
-     * Decodes a CowboyTotalHistory message from the specified reader or buffer.
-     * @function decode
-     * @memberof CowboyTotalHistory
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {CowboyTotalHistory} CowboyTotalHistory
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    CowboyTotalHistory.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyTotalHistory();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.cowboyAreaType = r.int32();
-                break;
-            case 2:
-                m.count = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return CowboyTotalHistory;
-})();
-
-$root.CowboyRecord = (function() {
-
-    /**
-     * Properties of a CowboyRecord.
-     * @exports ICowboyRecord
-     * @interface ICowboyRecord
-     * @property {Array.<CowboyAreaType>|null} [cowboyAreaType] CowboyRecord cowboyAreaType
-     * @property {Array.<number>|null} [areaWinLose] CowboyRecord areaWinLose
-     * @property {Array.<number>|null} [betAmount] CowboyRecord betAmount
-     * @property {Array.<ICardInfo>|null} [boyCards] CowboyRecord boyCards
-     * @property {Array.<ICardInfo>|null} [girlCards] CowboyRecord girlCards
-     * @property {Array.<ICardInfo>|null} [publicCards] CowboyRecord publicCards
-     * @property {string|null} [gameCode] CowboyRecord gameCode
-     */
-
-    /**
-     * Constructs a new CowboyRecord.
-     * @exports CowboyRecord
-     * @classdesc Represents a CowboyRecord.
-     * @implements ICowboyRecord
-     * @constructor
-     * @param {ICowboyRecord=} [p] Properties to set
-     */
-    function CowboyRecord(p) {
-        this.cowboyAreaType = [];
-        this.areaWinLose = [];
-        this.betAmount = [];
-        this.boyCards = [];
-        this.girlCards = [];
-        this.publicCards = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * CowboyRecord cowboyAreaType.
-     * @member {Array.<CowboyAreaType>} cowboyAreaType
-     * @memberof CowboyRecord
-     * @instance
-     */
-    CowboyRecord.prototype.cowboyAreaType = $util.emptyArray;
-
-    /**
-     * CowboyRecord areaWinLose.
-     * @member {Array.<number>} areaWinLose
-     * @memberof CowboyRecord
-     * @instance
-     */
-    CowboyRecord.prototype.areaWinLose = $util.emptyArray;
-
-    /**
-     * CowboyRecord betAmount.
-     * @member {Array.<number>} betAmount
-     * @memberof CowboyRecord
-     * @instance
-     */
-    CowboyRecord.prototype.betAmount = $util.emptyArray;
-
-    /**
-     * CowboyRecord boyCards.
-     * @member {Array.<ICardInfo>} boyCards
-     * @memberof CowboyRecord
-     * @instance
-     */
-    CowboyRecord.prototype.boyCards = $util.emptyArray;
-
-    /**
-     * CowboyRecord girlCards.
-     * @member {Array.<ICardInfo>} girlCards
-     * @memberof CowboyRecord
-     * @instance
-     */
-    CowboyRecord.prototype.girlCards = $util.emptyArray;
-
-    /**
-     * CowboyRecord publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof CowboyRecord
-     * @instance
-     */
-    CowboyRecord.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * CowboyRecord gameCode.
-     * @member {string} gameCode
-     * @memberof CowboyRecord
-     * @instance
-     */
-    CowboyRecord.prototype.gameCode = "";
-
-    /**
-     * Encodes the specified CowboyRecord message. Does not implicitly {@link CowboyRecord.verify|verify} messages.
-     * @function encode
-     * @memberof CowboyRecord
-     * @static
-     * @param {ICowboyRecord} m CowboyRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    CowboyRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.cowboyAreaType != null && m.cowboyAreaType.length) {
-            w.uint32(10).fork();
-            for (var i = 0; i < m.cowboyAreaType.length; ++i)
-                w.int32(m.cowboyAreaType[i]);
-            w.ldelim();
-        }
-        if (m.areaWinLose != null && m.areaWinLose.length) {
-            w.uint32(18).fork();
-            for (var i = 0; i < m.areaWinLose.length; ++i)
-                w.int64(m.areaWinLose[i]);
-            w.ldelim();
-        }
-        if (m.betAmount != null && m.betAmount.length) {
-            w.uint32(26).fork();
-            for (var i = 0; i < m.betAmount.length; ++i)
-                w.int64(m.betAmount[i]);
-            w.ldelim();
-        }
-        if (m.boyCards != null && m.boyCards.length) {
-            for (var i = 0; i < m.boyCards.length; ++i)
-                $root.CardInfo.encode(m.boyCards[i], w.uint32(34).fork()).ldelim();
-        }
-        if (m.girlCards != null && m.girlCards.length) {
-            for (var i = 0; i < m.girlCards.length; ++i)
-                $root.CardInfo.encode(m.girlCards[i], w.uint32(42).fork()).ldelim();
-        }
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(50).fork()).ldelim();
-        }
-        if (m.gameCode != null && Object.hasOwnProperty.call(m, "gameCode"))
-            w.uint32(58).string(m.gameCode);
-        return w;
-    };
-
-    /**
-     * Decodes a CowboyRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof CowboyRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {CowboyRecord} CowboyRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    CowboyRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                if (!(m.cowboyAreaType && m.cowboyAreaType.length))
-                    m.cowboyAreaType = [];
-                if ((t & 7) === 2) {
-                    var c2 = r.uint32() + r.pos;
-                    while (r.pos < c2)
-                        m.cowboyAreaType.push(r.int32());
-                } else
-                    m.cowboyAreaType.push(r.int32());
-                break;
-            case 2:
-                if (!(m.areaWinLose && m.areaWinLose.length))
-                    m.areaWinLose = [];
-                if ((t & 7) === 2) {
-                    var c2 = r.uint32() + r.pos;
-                    while (r.pos < c2)
-                        m.areaWinLose.push(r.int64());
-                } else
-                    m.areaWinLose.push(r.int64());
-                break;
-            case 3:
-                if (!(m.betAmount && m.betAmount.length))
-                    m.betAmount = [];
-                if ((t & 7) === 2) {
-                    var c2 = r.uint32() + r.pos;
-                    while (r.pos < c2)
-                        m.betAmount.push(r.int64());
-                } else
-                    m.betAmount.push(r.int64());
-                break;
-            case 4:
-                if (!(m.boyCards && m.boyCards.length))
-                    m.boyCards = [];
-                m.boyCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 5:
-                if (!(m.girlCards && m.girlCards.length))
-                    m.girlCards = [];
-                m.girlCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 6:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 7:
-                m.gameCode = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return CowboyRecord;
-})();
-
-$root.CowboyWinLose = (function() {
-
-    /**
-     * Properties of a CowboyWinLose.
-     * @exports ICowboyWinLose
-     * @interface ICowboyWinLose
-     * @property {string|null} [uid] CowboyWinLose uid
-     * @property {number|null} [winLose] CowboyWinLose winLose
-     * @property {number|null} [restAmount] CowboyWinLose restAmount
-     * @property {number|null} [reward] CowboyWinLose reward
-     */
-
-    /**
-     * Constructs a new CowboyWinLose.
-     * @exports CowboyWinLose
-     * @classdesc Represents a CowboyWinLose.
-     * @implements ICowboyWinLose
-     * @constructor
-     * @param {ICowboyWinLose=} [p] Properties to set
-     */
-    function CowboyWinLose(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * CowboyWinLose uid.
-     * @member {string} uid
-     * @memberof CowboyWinLose
-     * @instance
-     */
-    CowboyWinLose.prototype.uid = "";
-
-    /**
-     * CowboyWinLose winLose.
-     * @member {number} winLose
-     * @memberof CowboyWinLose
-     * @instance
-     */
-    CowboyWinLose.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CowboyWinLose restAmount.
-     * @member {number} restAmount
-     * @memberof CowboyWinLose
-     * @instance
-     */
-    CowboyWinLose.prototype.restAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * CowboyWinLose reward.
-     * @member {number} reward
-     * @memberof CowboyWinLose
-     * @instance
-     */
-    CowboyWinLose.prototype.reward = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified CowboyWinLose message. Does not implicitly {@link CowboyWinLose.verify|verify} messages.
-     * @function encode
-     * @memberof CowboyWinLose
-     * @static
-     * @param {ICowboyWinLose} m CowboyWinLose message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    CowboyWinLose.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(10).string(m.uid);
-        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(16).int64(m.winLose);
-        if (m.restAmount != null && Object.hasOwnProperty.call(m, "restAmount"))
-            w.uint32(24).int64(m.restAmount);
-        if (m.reward != null && Object.hasOwnProperty.call(m, "reward"))
-            w.uint32(32).int64(m.reward);
-        return w;
-    };
-
-    /**
-     * Decodes a CowboyWinLose message from the specified reader or buffer.
-     * @function decode
-     * @memberof CowboyWinLose
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {CowboyWinLose} CowboyWinLose
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    CowboyWinLose.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.CowboyWinLose();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.uid = r.string();
-                break;
-            case 2:
-                m.winLose = r.int64();
-                break;
-            case 3:
-                m.restAmount = r.int64();
-                break;
-            case 4:
-                m.reward = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return CowboyWinLose;
-})();
-
-$root.S2CTexasCowboyEnterGameResp = (function() {
-
-    /**
-     * Properties of a S2CTexasCowboyEnterGameResp.
-     * @exports IS2CTexasCowboyEnterGameResp
-     * @interface IS2CTexasCowboyEnterGameResp
-     * @property {ICommonResult|null} [result] S2CTexasCowboyEnterGameResp result
-     * @property {string|null} [gameId] S2CTexasCowboyEnterGameResp gameId
-     * @property {CowboyPhase|null} [phase] S2CTexasCowboyEnterGameResp phase
-     * @property {Array.<ICowboyAreaInfo>|null} [cowboyAreaInfoList] S2CTexasCowboyEnterGameResp cowboyAreaInfoList
-     * @property {Array.<ICowboySingleBet>|null} [myBetInfo] S2CTexasCowboyEnterGameResp myBetInfo
-     * @property {Array.<ICowboyHistory>|null} [history] S2CTexasCowboyEnterGameResp history
-     * @property {number|null} [settlementTime] S2CTexasCowboyEnterGameResp settlementTime
-     * @property {number|null} [betTime] S2CTexasCowboyEnterGameResp betTime
-     * @property {number|null} [restTime] S2CTexasCowboyEnterGameResp restTime
-     * @property {ICardInfo|null} [oneCard] S2CTexasCowboyEnterGameResp oneCard
-     * @property {number|null} [money] S2CTexasCowboyEnterGameResp money
-     * @property {Array.<number>|null} [ratio] S2CTexasCowboyEnterGameResp ratio
-     */
-
-    /**
-     * Constructs a new S2CTexasCowboyEnterGameResp.
-     * @exports S2CTexasCowboyEnterGameResp
-     * @classdesc Represents a S2CTexasCowboyEnterGameResp.
-     * @implements IS2CTexasCowboyEnterGameResp
-     * @constructor
-     * @param {IS2CTexasCowboyEnterGameResp=} [p] Properties to set
-     */
-    function S2CTexasCowboyEnterGameResp(p) {
-        this.cowboyAreaInfoList = [];
-        this.myBetInfo = [];
-        this.history = [];
-        this.ratio = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CTexasCowboyEnterGameResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.result = null;
-
-    /**
-     * S2CTexasCowboyEnterGameResp gameId.
-     * @member {string} gameId
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.gameId = "";
-
-    /**
-     * S2CTexasCowboyEnterGameResp phase.
-     * @member {CowboyPhase} phase
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.phase = 0;
-
-    /**
-     * S2CTexasCowboyEnterGameResp cowboyAreaInfoList.
-     * @member {Array.<ICowboyAreaInfo>} cowboyAreaInfoList
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.cowboyAreaInfoList = $util.emptyArray;
-
-    /**
-     * S2CTexasCowboyEnterGameResp myBetInfo.
-     * @member {Array.<ICowboySingleBet>} myBetInfo
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.myBetInfo = $util.emptyArray;
-
-    /**
-     * S2CTexasCowboyEnterGameResp history.
-     * @member {Array.<ICowboyHistory>} history
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.history = $util.emptyArray;
-
-    /**
-     * S2CTexasCowboyEnterGameResp settlementTime.
-     * @member {number} settlementTime
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.settlementTime = 0;
-
-    /**
-     * S2CTexasCowboyEnterGameResp betTime.
-     * @member {number} betTime
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.betTime = 0;
-
-    /**
-     * S2CTexasCowboyEnterGameResp restTime.
-     * @member {number} restTime
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.restTime = 0;
-
-    /**
-     * S2CTexasCowboyEnterGameResp oneCard.
-     * @member {ICardInfo|null|undefined} oneCard
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.oneCard = null;
-
-    /**
-     * S2CTexasCowboyEnterGameResp money.
-     * @member {number} money
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CTexasCowboyEnterGameResp ratio.
-     * @member {Array.<number>} ratio
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @instance
-     */
-    S2CTexasCowboyEnterGameResp.prototype.ratio = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CTexasCowboyEnterGameResp message. Does not implicitly {@link S2CTexasCowboyEnterGameResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @static
-     * @param {IS2CTexasCowboyEnterGameResp} m S2CTexasCowboyEnterGameResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CTexasCowboyEnterGameResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.phase != null && Object.hasOwnProperty.call(m, "phase"))
-            w.uint32(24).int32(m.phase);
-        if (m.cowboyAreaInfoList != null && m.cowboyAreaInfoList.length) {
-            for (var i = 0; i < m.cowboyAreaInfoList.length; ++i)
-                $root.CowboyAreaInfo.encode(m.cowboyAreaInfoList[i], w.uint32(34).fork()).ldelim();
-        }
-        if (m.myBetInfo != null && m.myBetInfo.length) {
-            for (var i = 0; i < m.myBetInfo.length; ++i)
-                $root.CowboySingleBet.encode(m.myBetInfo[i], w.uint32(42).fork()).ldelim();
-        }
-        if (m.history != null && m.history.length) {
-            for (var i = 0; i < m.history.length; ++i)
-                $root.CowboyHistory.encode(m.history[i], w.uint32(50).fork()).ldelim();
-        }
-        if (m.settlementTime != null && Object.hasOwnProperty.call(m, "settlementTime"))
-            w.uint32(56).int32(m.settlementTime);
-        if (m.betTime != null && Object.hasOwnProperty.call(m, "betTime"))
-            w.uint32(64).int32(m.betTime);
-        if (m.restTime != null && Object.hasOwnProperty.call(m, "restTime"))
-            w.uint32(72).int32(m.restTime);
-        if (m.oneCard != null && Object.hasOwnProperty.call(m, "oneCard"))
-            $root.CardInfo.encode(m.oneCard, w.uint32(82).fork()).ldelim();
-        if (m.money != null && Object.hasOwnProperty.call(m, "money"))
-            w.uint32(88).int64(m.money);
-        if (m.ratio != null && m.ratio.length) {
-            w.uint32(98).fork();
-            for (var i = 0; i < m.ratio.length; ++i)
-                w.int64(m.ratio[i]);
-            w.ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CTexasCowboyEnterGameResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CTexasCowboyEnterGameResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CTexasCowboyEnterGameResp} S2CTexasCowboyEnterGameResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CTexasCowboyEnterGameResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyEnterGameResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                m.phase = r.int32();
-                break;
-            case 4:
-                if (!(m.cowboyAreaInfoList && m.cowboyAreaInfoList.length))
-                    m.cowboyAreaInfoList = [];
-                m.cowboyAreaInfoList.push($root.CowboyAreaInfo.decode(r, r.uint32()));
-                break;
-            case 5:
-                if (!(m.myBetInfo && m.myBetInfo.length))
-                    m.myBetInfo = [];
-                m.myBetInfo.push($root.CowboySingleBet.decode(r, r.uint32()));
-                break;
-            case 6:
-                if (!(m.history && m.history.length))
-                    m.history = [];
-                m.history.push($root.CowboyHistory.decode(r, r.uint32()));
-                break;
-            case 7:
-                m.settlementTime = r.int32();
-                break;
-            case 8:
-                m.betTime = r.int32();
-                break;
-            case 9:
-                m.restTime = r.int32();
-                break;
-            case 10:
-                m.oneCard = $root.CardInfo.decode(r, r.uint32());
-                break;
-            case 11:
-                m.money = r.int64();
-                break;
-            case 12:
-                if (!(m.ratio && m.ratio.length))
-                    m.ratio = [];
-                if ((t & 7) === 2) {
-                    var c2 = r.uint32() + r.pos;
-                    while (r.pos < c2)
-                        m.ratio.push(r.int64());
-                } else
-                    m.ratio.push(r.int64());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CTexasCowboyEnterGameResp;
-})();
-
-$root.S2CTexasCowboyExitGameResp = (function() {
-
-    /**
-     * Properties of a S2CTexasCowboyExitGameResp.
-     * @exports IS2CTexasCowboyExitGameResp
-     * @interface IS2CTexasCowboyExitGameResp
-     * @property {ICommonResult|null} [result] S2CTexasCowboyExitGameResp result
-     * @property {string|null} [gameId] S2CTexasCowboyExitGameResp gameId
-     */
-
-    /**
-     * Constructs a new S2CTexasCowboyExitGameResp.
-     * @exports S2CTexasCowboyExitGameResp
-     * @classdesc Represents a S2CTexasCowboyExitGameResp.
-     * @implements IS2CTexasCowboyExitGameResp
-     * @constructor
-     * @param {IS2CTexasCowboyExitGameResp=} [p] Properties to set
-     */
-    function S2CTexasCowboyExitGameResp(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CTexasCowboyExitGameResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CTexasCowboyExitGameResp
-     * @instance
-     */
-    S2CTexasCowboyExitGameResp.prototype.result = null;
-
-    /**
-     * S2CTexasCowboyExitGameResp gameId.
-     * @member {string} gameId
-     * @memberof S2CTexasCowboyExitGameResp
-     * @instance
-     */
-    S2CTexasCowboyExitGameResp.prototype.gameId = "";
-
-    /**
-     * Encodes the specified S2CTexasCowboyExitGameResp message. Does not implicitly {@link S2CTexasCowboyExitGameResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CTexasCowboyExitGameResp
-     * @static
-     * @param {IS2CTexasCowboyExitGameResp} m S2CTexasCowboyExitGameResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CTexasCowboyExitGameResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CTexasCowboyExitGameResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CTexasCowboyExitGameResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CTexasCowboyExitGameResp} S2CTexasCowboyExitGameResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CTexasCowboyExitGameResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyExitGameResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CTexasCowboyExitGameResp;
-})();
-
-$root.S2CTexasCowboyBetResp = (function() {
-
-    /**
-     * Properties of a S2CTexasCowboyBetResp.
-     * @exports IS2CTexasCowboyBetResp
-     * @interface IS2CTexasCowboyBetResp
-     * @property {ICommonResult|null} [result] S2CTexasCowboyBetResp result
-     * @property {string|null} [gameId] S2CTexasCowboyBetResp gameId
-     */
-
-    /**
-     * Constructs a new S2CTexasCowboyBetResp.
-     * @exports S2CTexasCowboyBetResp
-     * @classdesc Represents a S2CTexasCowboyBetResp.
-     * @implements IS2CTexasCowboyBetResp
-     * @constructor
-     * @param {IS2CTexasCowboyBetResp=} [p] Properties to set
-     */
-    function S2CTexasCowboyBetResp(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CTexasCowboyBetResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CTexasCowboyBetResp
-     * @instance
-     */
-    S2CTexasCowboyBetResp.prototype.result = null;
-
-    /**
-     * S2CTexasCowboyBetResp gameId.
-     * @member {string} gameId
-     * @memberof S2CTexasCowboyBetResp
-     * @instance
-     */
-    S2CTexasCowboyBetResp.prototype.gameId = "";
-
-    /**
-     * Encodes the specified S2CTexasCowboyBetResp message. Does not implicitly {@link S2CTexasCowboyBetResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CTexasCowboyBetResp
-     * @static
-     * @param {IS2CTexasCowboyBetResp} m S2CTexasCowboyBetResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CTexasCowboyBetResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CTexasCowboyBetResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CTexasCowboyBetResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CTexasCowboyBetResp} S2CTexasCowboyBetResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CTexasCowboyBetResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyBetResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CTexasCowboyBetResp;
-})();
-
-$root.S2CTexasCowboyRecordResp = (function() {
-
-    /**
-     * Properties of a S2CTexasCowboyRecordResp.
-     * @exports IS2CTexasCowboyRecordResp
-     * @interface IS2CTexasCowboyRecordResp
-     * @property {ICommonResult|null} [result] S2CTexasCowboyRecordResp result
-     * @property {string|null} [gameId] S2CTexasCowboyRecordResp gameId
-     * @property {ICowboyRecord|null} [record] S2CTexasCowboyRecordResp record
-     * @property {number|null} [whichGame] S2CTexasCowboyRecordResp whichGame
-     * @property {number|null} [totalGame] S2CTexasCowboyRecordResp totalGame
-     */
-
-    /**
-     * Constructs a new S2CTexasCowboyRecordResp.
-     * @exports S2CTexasCowboyRecordResp
-     * @classdesc Represents a S2CTexasCowboyRecordResp.
-     * @implements IS2CTexasCowboyRecordResp
-     * @constructor
-     * @param {IS2CTexasCowboyRecordResp=} [p] Properties to set
-     */
-    function S2CTexasCowboyRecordResp(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CTexasCowboyRecordResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CTexasCowboyRecordResp
-     * @instance
-     */
-    S2CTexasCowboyRecordResp.prototype.result = null;
-
-    /**
-     * S2CTexasCowboyRecordResp gameId.
-     * @member {string} gameId
-     * @memberof S2CTexasCowboyRecordResp
-     * @instance
-     */
-    S2CTexasCowboyRecordResp.prototype.gameId = "";
-
-    /**
-     * S2CTexasCowboyRecordResp record.
-     * @member {ICowboyRecord|null|undefined} record
-     * @memberof S2CTexasCowboyRecordResp
-     * @instance
-     */
-    S2CTexasCowboyRecordResp.prototype.record = null;
-
-    /**
-     * S2CTexasCowboyRecordResp whichGame.
-     * @member {number} whichGame
-     * @memberof S2CTexasCowboyRecordResp
-     * @instance
-     */
-    S2CTexasCowboyRecordResp.prototype.whichGame = 0;
-
-    /**
-     * S2CTexasCowboyRecordResp totalGame.
-     * @member {number} totalGame
-     * @memberof S2CTexasCowboyRecordResp
-     * @instance
-     */
-    S2CTexasCowboyRecordResp.prototype.totalGame = 0;
-
-    /**
-     * Encodes the specified S2CTexasCowboyRecordResp message. Does not implicitly {@link S2CTexasCowboyRecordResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CTexasCowboyRecordResp
-     * @static
-     * @param {IS2CTexasCowboyRecordResp} m S2CTexasCowboyRecordResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CTexasCowboyRecordResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.record != null && Object.hasOwnProperty.call(m, "record"))
-            $root.CowboyRecord.encode(m.record, w.uint32(26).fork()).ldelim();
-        if (m.whichGame != null && Object.hasOwnProperty.call(m, "whichGame"))
-            w.uint32(32).int32(m.whichGame);
-        if (m.totalGame != null && Object.hasOwnProperty.call(m, "totalGame"))
-            w.uint32(40).int32(m.totalGame);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CTexasCowboyRecordResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CTexasCowboyRecordResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CTexasCowboyRecordResp} S2CTexasCowboyRecordResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CTexasCowboyRecordResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyRecordResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                m.record = $root.CowboyRecord.decode(r, r.uint32());
-                break;
-            case 4:
-                m.whichGame = r.int32();
-                break;
-            case 5:
-                m.totalGame = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CTexasCowboyRecordResp;
-})();
-
-$root.S2CTexasCowboyBringInResp = (function() {
-
-    /**
-     * Properties of a S2CTexasCowboyBringInResp.
-     * @exports IS2CTexasCowboyBringInResp
-     * @interface IS2CTexasCowboyBringInResp
-     * @property {ICommonResult|null} [result] S2CTexasCowboyBringInResp result
-     * @property {string|null} [gameId] S2CTexasCowboyBringInResp gameId
-     * @property {number|null} [amount] S2CTexasCowboyBringInResp amount
-     * @property {number|null} [totalAmount] S2CTexasCowboyBringInResp totalAmount
-     */
-
-    /**
-     * Constructs a new S2CTexasCowboyBringInResp.
-     * @exports S2CTexasCowboyBringInResp
-     * @classdesc Represents a S2CTexasCowboyBringInResp.
-     * @implements IS2CTexasCowboyBringInResp
-     * @constructor
-     * @param {IS2CTexasCowboyBringInResp=} [p] Properties to set
-     */
-    function S2CTexasCowboyBringInResp(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CTexasCowboyBringInResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CTexasCowboyBringInResp
-     * @instance
-     */
-    S2CTexasCowboyBringInResp.prototype.result = null;
-
-    /**
-     * S2CTexasCowboyBringInResp gameId.
-     * @member {string} gameId
-     * @memberof S2CTexasCowboyBringInResp
-     * @instance
-     */
-    S2CTexasCowboyBringInResp.prototype.gameId = "";
-
-    /**
-     * S2CTexasCowboyBringInResp amount.
-     * @member {number} amount
-     * @memberof S2CTexasCowboyBringInResp
-     * @instance
-     */
-    S2CTexasCowboyBringInResp.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CTexasCowboyBringInResp totalAmount.
-     * @member {number} totalAmount
-     * @memberof S2CTexasCowboyBringInResp
-     * @instance
-     */
-    S2CTexasCowboyBringInResp.prototype.totalAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified S2CTexasCowboyBringInResp message. Does not implicitly {@link S2CTexasCowboyBringInResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CTexasCowboyBringInResp
-     * @static
-     * @param {IS2CTexasCowboyBringInResp} m S2CTexasCowboyBringInResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CTexasCowboyBringInResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(24).int64(m.amount);
-        if (m.totalAmount != null && Object.hasOwnProperty.call(m, "totalAmount"))
-            w.uint32(32).int64(m.totalAmount);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CTexasCowboyBringInResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CTexasCowboyBringInResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CTexasCowboyBringInResp} S2CTexasCowboyBringInResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CTexasCowboyBringInResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyBringInResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                m.amount = r.int64();
-                break;
-            case 4:
-                m.totalAmount = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CTexasCowboyBringInResp;
-})();
-
-$root.S2CTexasCowboyBringOutResp = (function() {
-
-    /**
-     * Properties of a S2CTexasCowboyBringOutResp.
-     * @exports IS2CTexasCowboyBringOutResp
-     * @interface IS2CTexasCowboyBringOutResp
-     * @property {ICommonResult|null} [result] S2CTexasCowboyBringOutResp result
-     * @property {string|null} [gameId] S2CTexasCowboyBringOutResp gameId
-     * @property {number|null} [amount] S2CTexasCowboyBringOutResp amount
-     * @property {number|null} [totalAmount] S2CTexasCowboyBringOutResp totalAmount
-     */
-
-    /**
-     * Constructs a new S2CTexasCowboyBringOutResp.
-     * @exports S2CTexasCowboyBringOutResp
-     * @classdesc Represents a S2CTexasCowboyBringOutResp.
-     * @implements IS2CTexasCowboyBringOutResp
-     * @constructor
-     * @param {IS2CTexasCowboyBringOutResp=} [p] Properties to set
-     */
-    function S2CTexasCowboyBringOutResp(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CTexasCowboyBringOutResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CTexasCowboyBringOutResp
-     * @instance
-     */
-    S2CTexasCowboyBringOutResp.prototype.result = null;
-
-    /**
-     * S2CTexasCowboyBringOutResp gameId.
-     * @member {string} gameId
-     * @memberof S2CTexasCowboyBringOutResp
-     * @instance
-     */
-    S2CTexasCowboyBringOutResp.prototype.gameId = "";
-
-    /**
-     * S2CTexasCowboyBringOutResp amount.
-     * @member {number} amount
-     * @memberof S2CTexasCowboyBringOutResp
-     * @instance
-     */
-    S2CTexasCowboyBringOutResp.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CTexasCowboyBringOutResp totalAmount.
-     * @member {number} totalAmount
-     * @memberof S2CTexasCowboyBringOutResp
-     * @instance
-     */
-    S2CTexasCowboyBringOutResp.prototype.totalAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified S2CTexasCowboyBringOutResp message. Does not implicitly {@link S2CTexasCowboyBringOutResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CTexasCowboyBringOutResp
-     * @static
-     * @param {IS2CTexasCowboyBringOutResp} m S2CTexasCowboyBringOutResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CTexasCowboyBringOutResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(24).int64(m.amount);
-        if (m.totalAmount != null && Object.hasOwnProperty.call(m, "totalAmount"))
-            w.uint32(32).int64(m.totalAmount);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CTexasCowboyBringOutResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CTexasCowboyBringOutResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CTexasCowboyBringOutResp} S2CTexasCowboyBringOutResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CTexasCowboyBringOutResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyBringOutResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                m.amount = r.int64();
-                break;
-            case 4:
-                m.totalAmount = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CTexasCowboyBringOutResp;
-})();
-
-$root.S2CTexasCowboyTotalHistoryResp = (function() {
-
-    /**
-     * Properties of a S2CTexasCowboyTotalHistoryResp.
-     * @exports IS2CTexasCowboyTotalHistoryResp
-     * @interface IS2CTexasCowboyTotalHistoryResp
-     * @property {ICommonResult|null} [result] S2CTexasCowboyTotalHistoryResp result
-     * @property {string|null} [gameId] S2CTexasCowboyTotalHistoryResp gameId
-     * @property {Array.<ICowboyTotalHistory>|null} [totalHistory] S2CTexasCowboyTotalHistoryResp totalHistory
-     * @property {number|null} [totalGameCount] S2CTexasCowboyTotalHistoryResp totalGameCount
-     */
-
-    /**
-     * Constructs a new S2CTexasCowboyTotalHistoryResp.
-     * @exports S2CTexasCowboyTotalHistoryResp
-     * @classdesc Represents a S2CTexasCowboyTotalHistoryResp.
-     * @implements IS2CTexasCowboyTotalHistoryResp
-     * @constructor
-     * @param {IS2CTexasCowboyTotalHistoryResp=} [p] Properties to set
-     */
-    function S2CTexasCowboyTotalHistoryResp(p) {
-        this.totalHistory = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CTexasCowboyTotalHistoryResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CTexasCowboyTotalHistoryResp
-     * @instance
-     */
-    S2CTexasCowboyTotalHistoryResp.prototype.result = null;
-
-    /**
-     * S2CTexasCowboyTotalHistoryResp gameId.
-     * @member {string} gameId
-     * @memberof S2CTexasCowboyTotalHistoryResp
-     * @instance
-     */
-    S2CTexasCowboyTotalHistoryResp.prototype.gameId = "";
-
-    /**
-     * S2CTexasCowboyTotalHistoryResp totalHistory.
-     * @member {Array.<ICowboyTotalHistory>} totalHistory
-     * @memberof S2CTexasCowboyTotalHistoryResp
-     * @instance
-     */
-    S2CTexasCowboyTotalHistoryResp.prototype.totalHistory = $util.emptyArray;
-
-    /**
-     * S2CTexasCowboyTotalHistoryResp totalGameCount.
-     * @member {number} totalGameCount
-     * @memberof S2CTexasCowboyTotalHistoryResp
-     * @instance
-     */
-    S2CTexasCowboyTotalHistoryResp.prototype.totalGameCount = 0;
-
-    /**
-     * Encodes the specified S2CTexasCowboyTotalHistoryResp message. Does not implicitly {@link S2CTexasCowboyTotalHistoryResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CTexasCowboyTotalHistoryResp
-     * @static
-     * @param {IS2CTexasCowboyTotalHistoryResp} m S2CTexasCowboyTotalHistoryResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CTexasCowboyTotalHistoryResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.totalHistory != null && m.totalHistory.length) {
-            for (var i = 0; i < m.totalHistory.length; ++i)
-                $root.CowboyTotalHistory.encode(m.totalHistory[i], w.uint32(26).fork()).ldelim();
-        }
-        if (m.totalGameCount != null && Object.hasOwnProperty.call(m, "totalGameCount"))
-            w.uint32(32).int32(m.totalGameCount);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CTexasCowboyTotalHistoryResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CTexasCowboyTotalHistoryResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CTexasCowboyTotalHistoryResp} S2CTexasCowboyTotalHistoryResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CTexasCowboyTotalHistoryResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyTotalHistoryResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                if (!(m.totalHistory && m.totalHistory.length))
-                    m.totalHistory = [];
-                m.totalHistory.push($root.CowboyTotalHistory.decode(r, r.uint32()));
-                break;
-            case 4:
-                m.totalGameCount = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CTexasCowboyTotalHistoryResp;
-})();
-
-$root.S2CTexasCowboyBetNotify = (function() {
-
-    /**
-     * Properties of a S2CTexasCowboyBetNotify.
-     * @exports IS2CTexasCowboyBetNotify
-     * @interface IS2CTexasCowboyBetNotify
-     * @property {string|null} [gameId] S2CTexasCowboyBetNotify gameId
-     * @property {Array.<ICowboySingleBet>|null} [betInfo] S2CTexasCowboyBetNotify betInfo
-     */
-
-    /**
-     * Constructs a new S2CTexasCowboyBetNotify.
-     * @exports S2CTexasCowboyBetNotify
-     * @classdesc Represents a S2CTexasCowboyBetNotify.
-     * @implements IS2CTexasCowboyBetNotify
-     * @constructor
-     * @param {IS2CTexasCowboyBetNotify=} [p] Properties to set
-     */
-    function S2CTexasCowboyBetNotify(p) {
-        this.betInfo = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CTexasCowboyBetNotify gameId.
-     * @member {string} gameId
-     * @memberof S2CTexasCowboyBetNotify
-     * @instance
-     */
-    S2CTexasCowboyBetNotify.prototype.gameId = "";
-
-    /**
-     * S2CTexasCowboyBetNotify betInfo.
-     * @member {Array.<ICowboySingleBet>} betInfo
-     * @memberof S2CTexasCowboyBetNotify
-     * @instance
-     */
-    S2CTexasCowboyBetNotify.prototype.betInfo = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CTexasCowboyBetNotify message. Does not implicitly {@link S2CTexasCowboyBetNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CTexasCowboyBetNotify
-     * @static
-     * @param {IS2CTexasCowboyBetNotify} m S2CTexasCowboyBetNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CTexasCowboyBetNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.betInfo != null && m.betInfo.length) {
-            for (var i = 0; i < m.betInfo.length; ++i)
-                $root.CowboySingleBet.encode(m.betInfo[i], w.uint32(18).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CTexasCowboyBetNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CTexasCowboyBetNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CTexasCowboyBetNotify} S2CTexasCowboyBetNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CTexasCowboyBetNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyBetNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                if (!(m.betInfo && m.betInfo.length))
-                    m.betInfo = [];
-                m.betInfo.push($root.CowboySingleBet.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CTexasCowboyBetNotify;
-})();
-
-$root.S2CTexasCowboyGameStartNotify = (function() {
-
-    /**
-     * Properties of a S2CTexasCowboyGameStartNotify.
-     * @exports IS2CTexasCowboyGameStartNotify
-     * @interface IS2CTexasCowboyGameStartNotify
-     * @property {string|null} [gameId] S2CTexasCowboyGameStartNotify gameId
-     * @property {ICardInfo|null} [oneCard] S2CTexasCowboyGameStartNotify oneCard
-     */
-
-    /**
-     * Constructs a new S2CTexasCowboyGameStartNotify.
-     * @exports S2CTexasCowboyGameStartNotify
-     * @classdesc Represents a S2CTexasCowboyGameStartNotify.
-     * @implements IS2CTexasCowboyGameStartNotify
-     * @constructor
-     * @param {IS2CTexasCowboyGameStartNotify=} [p] Properties to set
-     */
-    function S2CTexasCowboyGameStartNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CTexasCowboyGameStartNotify gameId.
-     * @member {string} gameId
-     * @memberof S2CTexasCowboyGameStartNotify
-     * @instance
-     */
-    S2CTexasCowboyGameStartNotify.prototype.gameId = "";
-
-    /**
-     * S2CTexasCowboyGameStartNotify oneCard.
-     * @member {ICardInfo|null|undefined} oneCard
-     * @memberof S2CTexasCowboyGameStartNotify
-     * @instance
-     */
-    S2CTexasCowboyGameStartNotify.prototype.oneCard = null;
-
-    /**
-     * Encodes the specified S2CTexasCowboyGameStartNotify message. Does not implicitly {@link S2CTexasCowboyGameStartNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CTexasCowboyGameStartNotify
-     * @static
-     * @param {IS2CTexasCowboyGameStartNotify} m S2CTexasCowboyGameStartNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CTexasCowboyGameStartNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.oneCard != null && Object.hasOwnProperty.call(m, "oneCard"))
-            $root.CardInfo.encode(m.oneCard, w.uint32(18).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CTexasCowboyGameStartNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CTexasCowboyGameStartNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CTexasCowboyGameStartNotify} S2CTexasCowboyGameStartNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CTexasCowboyGameStartNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyGameStartNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.oneCard = $root.CardInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CTexasCowboyGameStartNotify;
-})();
-
-$root.S2CTexasCowboyGameSettlementNotify = (function() {
-
-    /**
-     * Properties of a S2CTexasCowboyGameSettlementNotify.
-     * @exports IS2CTexasCowboyGameSettlementNotify
-     * @interface IS2CTexasCowboyGameSettlementNotify
-     * @property {string|null} [gameId] S2CTexasCowboyGameSettlementNotify gameId
-     * @property {Array.<CowboyAreaType>|null} [reward] S2CTexasCowboyGameSettlementNotify reward
-     * @property {Array.<ICowboyWinLose>|null} [result] S2CTexasCowboyGameSettlementNotify result
-     * @property {Array.<ICardInfo>|null} [boyCards] S2CTexasCowboyGameSettlementNotify boyCards
-     * @property {Array.<ICardInfo>|null} [girlCards] S2CTexasCowboyGameSettlementNotify girlCards
-     * @property {Array.<ICardInfo>|null} [publicCards] S2CTexasCowboyGameSettlementNotify publicCards
-     * @property {number|null} [winner] S2CTexasCowboyGameSettlementNotify winner
-     * @property {number|null} [winnerCombination] S2CTexasCowboyGameSettlementNotify winnerCombination
-     */
-
-    /**
-     * Constructs a new S2CTexasCowboyGameSettlementNotify.
-     * @exports S2CTexasCowboyGameSettlementNotify
-     * @classdesc Represents a S2CTexasCowboyGameSettlementNotify.
-     * @implements IS2CTexasCowboyGameSettlementNotify
-     * @constructor
-     * @param {IS2CTexasCowboyGameSettlementNotify=} [p] Properties to set
-     */
-    function S2CTexasCowboyGameSettlementNotify(p) {
-        this.reward = [];
-        this.result = [];
-        this.boyCards = [];
-        this.girlCards = [];
-        this.publicCards = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CTexasCowboyGameSettlementNotify gameId.
-     * @member {string} gameId
-     * @memberof S2CTexasCowboyGameSettlementNotify
-     * @instance
-     */
-    S2CTexasCowboyGameSettlementNotify.prototype.gameId = "";
-
-    /**
-     * S2CTexasCowboyGameSettlementNotify reward.
-     * @member {Array.<CowboyAreaType>} reward
-     * @memberof S2CTexasCowboyGameSettlementNotify
-     * @instance
-     */
-    S2CTexasCowboyGameSettlementNotify.prototype.reward = $util.emptyArray;
-
-    /**
-     * S2CTexasCowboyGameSettlementNotify result.
-     * @member {Array.<ICowboyWinLose>} result
-     * @memberof S2CTexasCowboyGameSettlementNotify
-     * @instance
-     */
-    S2CTexasCowboyGameSettlementNotify.prototype.result = $util.emptyArray;
-
-    /**
-     * S2CTexasCowboyGameSettlementNotify boyCards.
-     * @member {Array.<ICardInfo>} boyCards
-     * @memberof S2CTexasCowboyGameSettlementNotify
-     * @instance
-     */
-    S2CTexasCowboyGameSettlementNotify.prototype.boyCards = $util.emptyArray;
-
-    /**
-     * S2CTexasCowboyGameSettlementNotify girlCards.
-     * @member {Array.<ICardInfo>} girlCards
-     * @memberof S2CTexasCowboyGameSettlementNotify
-     * @instance
-     */
-    S2CTexasCowboyGameSettlementNotify.prototype.girlCards = $util.emptyArray;
-
-    /**
-     * S2CTexasCowboyGameSettlementNotify publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof S2CTexasCowboyGameSettlementNotify
-     * @instance
-     */
-    S2CTexasCowboyGameSettlementNotify.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * S2CTexasCowboyGameSettlementNotify winner.
-     * @member {number} winner
-     * @memberof S2CTexasCowboyGameSettlementNotify
-     * @instance
-     */
-    S2CTexasCowboyGameSettlementNotify.prototype.winner = 0;
-
-    /**
-     * S2CTexasCowboyGameSettlementNotify winnerCombination.
-     * @member {number} winnerCombination
-     * @memberof S2CTexasCowboyGameSettlementNotify
-     * @instance
-     */
-    S2CTexasCowboyGameSettlementNotify.prototype.winnerCombination = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-
-    /**
-     * Encodes the specified S2CTexasCowboyGameSettlementNotify message. Does not implicitly {@link S2CTexasCowboyGameSettlementNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CTexasCowboyGameSettlementNotify
-     * @static
-     * @param {IS2CTexasCowboyGameSettlementNotify} m S2CTexasCowboyGameSettlementNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CTexasCowboyGameSettlementNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.reward != null && m.reward.length) {
-            w.uint32(18).fork();
-            for (var i = 0; i < m.reward.length; ++i)
-                w.int32(m.reward[i]);
-            w.ldelim();
-        }
-        if (m.result != null && m.result.length) {
-            for (var i = 0; i < m.result.length; ++i)
-                $root.CowboyWinLose.encode(m.result[i], w.uint32(26).fork()).ldelim();
-        }
-        if (m.boyCards != null && m.boyCards.length) {
-            for (var i = 0; i < m.boyCards.length; ++i)
-                $root.CardInfo.encode(m.boyCards[i], w.uint32(34).fork()).ldelim();
-        }
-        if (m.girlCards != null && m.girlCards.length) {
-            for (var i = 0; i < m.girlCards.length; ++i)
-                $root.CardInfo.encode(m.girlCards[i], w.uint32(42).fork()).ldelim();
-        }
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(50).fork()).ldelim();
-        }
-        if (m.winner != null && Object.hasOwnProperty.call(m, "winner"))
-            w.uint32(56).int32(m.winner);
-        if (m.winnerCombination != null && Object.hasOwnProperty.call(m, "winnerCombination"))
-            w.uint32(64).uint64(m.winnerCombination);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CTexasCowboyGameSettlementNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CTexasCowboyGameSettlementNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CTexasCowboyGameSettlementNotify} S2CTexasCowboyGameSettlementNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CTexasCowboyGameSettlementNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CTexasCowboyGameSettlementNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                if (!(m.reward && m.reward.length))
-                    m.reward = [];
-                if ((t & 7) === 2) {
-                    var c2 = r.uint32() + r.pos;
-                    while (r.pos < c2)
-                        m.reward.push(r.int32());
-                } else
-                    m.reward.push(r.int32());
-                break;
-            case 3:
-                if (!(m.result && m.result.length))
-                    m.result = [];
-                m.result.push($root.CowboyWinLose.decode(r, r.uint32()));
-                break;
-            case 4:
-                if (!(m.boyCards && m.boyCards.length))
-                    m.boyCards = [];
-                m.boyCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 5:
-                if (!(m.girlCards && m.girlCards.length))
-                    m.girlCards = [];
-                m.girlCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 6:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 7:
-                m.winner = r.int32();
-                break;
-            case 8:
-                m.winnerCombination = r.uint64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CTexasCowboyGameSettlementNotify;
-})();
-
-$root.C2SLogout = (function() {
-
-    /**
-     * Properties of a C2SLogout.
-     * @exports IC2SLogout
-     * @interface IC2SLogout
-     */
-
-    /**
-     * Constructs a new C2SLogout.
-     * @exports C2SLogout
-     * @classdesc Represents a C2SLogout.
-     * @implements IC2SLogout
-     * @constructor
-     * @param {IC2SLogout=} [p] Properties to set
-     */
-    function C2SLogout(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Encodes the specified C2SLogout message. Does not implicitly {@link C2SLogout.verify|verify} messages.
-     * @function encode
-     * @memberof C2SLogout
-     * @static
-     * @param {IC2SLogout} m C2SLogout message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SLogout.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        return w;
-    };
-
-    /**
-     * Decodes a C2SLogout message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SLogout
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SLogout} C2SLogout
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SLogout.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SLogout();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SLogout;
-})();
-
-$root.C2SRefreshUserInfo = (function() {
-
-    /**
-     * Properties of a C2SRefreshUserInfo.
-     * @exports IC2SRefreshUserInfo
-     * @interface IC2SRefreshUserInfo
-     */
-
-    /**
-     * Constructs a new C2SRefreshUserInfo.
-     * @exports C2SRefreshUserInfo
-     * @classdesc Represents a C2SRefreshUserInfo.
-     * @implements IC2SRefreshUserInfo
-     * @constructor
-     * @param {IC2SRefreshUserInfo=} [p] Properties to set
-     */
-    function C2SRefreshUserInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Encodes the specified C2SRefreshUserInfo message. Does not implicitly {@link C2SRefreshUserInfo.verify|verify} messages.
-     * @function encode
-     * @memberof C2SRefreshUserInfo
-     * @static
-     * @param {IC2SRefreshUserInfo} m C2SRefreshUserInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SRefreshUserInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        return w;
-    };
-
-    /**
-     * Decodes a C2SRefreshUserInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SRefreshUserInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SRefreshUserInfo} C2SRefreshUserInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SRefreshUserInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SRefreshUserInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SRefreshUserInfo;
-})();
-
-$root.C2SGetUserInfo = (function() {
-
-    /**
-     * Properties of a C2SGetUserInfo.
-     * @exports IC2SGetUserInfo
-     * @interface IC2SGetUserInfo
-     * @property {string|null} [token] C2SGetUserInfo token
-     */
-
-    /**
-     * Constructs a new C2SGetUserInfo.
-     * @exports C2SGetUserInfo
-     * @classdesc Represents a C2SGetUserInfo.
-     * @implements IC2SGetUserInfo
-     * @constructor
-     * @param {IC2SGetUserInfo=} [p] Properties to set
-     */
-    function C2SGetUserInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SGetUserInfo token.
-     * @member {string} token
-     * @memberof C2SGetUserInfo
-     * @instance
-     */
-    C2SGetUserInfo.prototype.token = "";
-
-    /**
-     * Encodes the specified C2SGetUserInfo message. Does not implicitly {@link C2SGetUserInfo.verify|verify} messages.
-     * @function encode
-     * @memberof C2SGetUserInfo
-     * @static
-     * @param {IC2SGetUserInfo} m C2SGetUserInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SGetUserInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-            w.uint32(10).string(m.token);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SGetUserInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SGetUserInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SGetUserInfo} C2SGetUserInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SGetUserInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetUserInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.token = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SGetUserInfo;
-})();
-
-$root.C2SChangeUserInfo = (function() {
-
-    /**
-     * Properties of a C2SChangeUserInfo.
-     * @exports IC2SChangeUserInfo
-     * @interface IC2SChangeUserInfo
-     * @property {string|null} [nickName] C2SChangeUserInfo nickName
-     * @property {string|null} [head] C2SChangeUserInfo head
-     */
-
-    /**
-     * Constructs a new C2SChangeUserInfo.
-     * @exports C2SChangeUserInfo
-     * @classdesc Represents a C2SChangeUserInfo.
-     * @implements IC2SChangeUserInfo
-     * @constructor
-     * @param {IC2SChangeUserInfo=} [p] Properties to set
-     */
-    function C2SChangeUserInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SChangeUserInfo nickName.
-     * @member {string} nickName
-     * @memberof C2SChangeUserInfo
-     * @instance
-     */
-    C2SChangeUserInfo.prototype.nickName = "";
-
-    /**
-     * C2SChangeUserInfo head.
-     * @member {string} head
-     * @memberof C2SChangeUserInfo
-     * @instance
-     */
-    C2SChangeUserInfo.prototype.head = "";
-
-    /**
-     * Encodes the specified C2SChangeUserInfo message. Does not implicitly {@link C2SChangeUserInfo.verify|verify} messages.
-     * @function encode
-     * @memberof C2SChangeUserInfo
-     * @static
-     * @param {IC2SChangeUserInfo} m C2SChangeUserInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SChangeUserInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
-            w.uint32(10).string(m.nickName);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(18).string(m.head);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SChangeUserInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SChangeUserInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SChangeUserInfo} C2SChangeUserInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SChangeUserInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SChangeUserInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.nickName = r.string();
-                break;
-            case 2:
-                m.head = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SChangeUserInfo;
-})();
-
-$root.C2SGetHallTexasGameInfo = (function() {
-
-    /**
-     * Properties of a C2SGetHallTexasGameInfo.
-     * @exports IC2SGetHallTexasGameInfo
-     * @interface IC2SGetHallTexasGameInfo
-     */
-
-    /**
-     * Constructs a new C2SGetHallTexasGameInfo.
-     * @exports C2SGetHallTexasGameInfo
-     * @classdesc Represents a C2SGetHallTexasGameInfo.
-     * @implements IC2SGetHallTexasGameInfo
-     * @constructor
-     * @param {IC2SGetHallTexasGameInfo=} [p] Properties to set
-     */
-    function C2SGetHallTexasGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Encodes the specified C2SGetHallTexasGameInfo message. Does not implicitly {@link C2SGetHallTexasGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof C2SGetHallTexasGameInfo
-     * @static
-     * @param {IC2SGetHallTexasGameInfo} m C2SGetHallTexasGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SGetHallTexasGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        return w;
-    };
-
-    /**
-     * Decodes a C2SGetHallTexasGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SGetHallTexasGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SGetHallTexasGameInfo} C2SGetHallTexasGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SGetHallTexasGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetHallTexasGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SGetHallTexasGameInfo;
-})();
-
-$root.C2SGetHallSubGameInfo = (function() {
-
-    /**
-     * Properties of a C2SGetHallSubGameInfo.
-     * @exports IC2SGetHallSubGameInfo
-     * @interface IC2SGetHallSubGameInfo
-     */
-
-    /**
-     * Constructs a new C2SGetHallSubGameInfo.
-     * @exports C2SGetHallSubGameInfo
-     * @classdesc Represents a C2SGetHallSubGameInfo.
-     * @implements IC2SGetHallSubGameInfo
-     * @constructor
-     * @param {IC2SGetHallSubGameInfo=} [p] Properties to set
-     */
-    function C2SGetHallSubGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Encodes the specified C2SGetHallSubGameInfo message. Does not implicitly {@link C2SGetHallSubGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof C2SGetHallSubGameInfo
-     * @static
-     * @param {IC2SGetHallSubGameInfo} m C2SGetHallSubGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SGetHallSubGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        return w;
-    };
-
-    /**
-     * Decodes a C2SGetHallSubGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SGetHallSubGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SGetHallSubGameInfo} C2SGetHallSubGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SGetHallSubGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetHallSubGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SGetHallSubGameInfo;
-})();
-
-$root.C2SAddCurrency = (function() {
-
-    /**
-     * Properties of a C2SAddCurrency.
-     * @exports IC2SAddCurrency
-     * @interface IC2SAddCurrency
-     * @property {string|null} [uid] C2SAddCurrency uid
-     * @property {number|null} [currencyNum] C2SAddCurrency currencyNum
-     * @property {GameCurrencyType|null} [currencyType] C2SAddCurrency currencyType
-     */
-
-    /**
-     * Constructs a new C2SAddCurrency.
-     * @exports C2SAddCurrency
-     * @classdesc Represents a C2SAddCurrency.
-     * @implements IC2SAddCurrency
-     * @constructor
-     * @param {IC2SAddCurrency=} [p] Properties to set
-     */
-    function C2SAddCurrency(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SAddCurrency uid.
-     * @member {string} uid
-     * @memberof C2SAddCurrency
-     * @instance
-     */
-    C2SAddCurrency.prototype.uid = "";
-
-    /**
-     * C2SAddCurrency currencyNum.
-     * @member {number} currencyNum
-     * @memberof C2SAddCurrency
-     * @instance
-     */
-    C2SAddCurrency.prototype.currencyNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * C2SAddCurrency currencyType.
-     * @member {GameCurrencyType} currencyType
-     * @memberof C2SAddCurrency
-     * @instance
-     */
-    C2SAddCurrency.prototype.currencyType = 0;
-
-    /**
-     * Encodes the specified C2SAddCurrency message. Does not implicitly {@link C2SAddCurrency.verify|verify} messages.
-     * @function encode
-     * @memberof C2SAddCurrency
-     * @static
-     * @param {IC2SAddCurrency} m C2SAddCurrency message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SAddCurrency.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(10).string(m.uid);
-        if (m.currencyNum != null && Object.hasOwnProperty.call(m, "currencyNum"))
-            w.uint32(16).int64(m.currencyNum);
-        if (m.currencyType != null && Object.hasOwnProperty.call(m, "currencyType"))
-            w.uint32(24).int32(m.currencyType);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SAddCurrency message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SAddCurrency
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SAddCurrency} C2SAddCurrency
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SAddCurrency.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SAddCurrency();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.uid = r.string();
-                break;
-            case 2:
-                m.currencyNum = r.int64();
-                break;
-            case 3:
-                m.currencyType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SAddCurrency;
-})();
-
-$root.HallTexasGameInfo = (function() {
-
-    /**
-     * Properties of a HallTexasGameInfo.
-     * @exports IHallTexasGameInfo
-     * @interface IHallTexasGameInfo
-     * @property {string|null} [gameId] HallTexasGameInfo gameId
-     * @property {IAboutTexasGameInfo|null} [aboutGameInfo] HallTexasGameInfo aboutGameInfo
-     * @property {IBasicTexasConfig|null} [basicTexasConfig] HallTexasGameInfo basicTexasConfig
-     */
-
-    /**
-     * Constructs a new HallTexasGameInfo.
-     * @exports HallTexasGameInfo
-     * @classdesc Represents a HallTexasGameInfo.
-     * @implements IHallTexasGameInfo
-     * @constructor
-     * @param {IHallTexasGameInfo=} [p] Properties to set
-     */
-    function HallTexasGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * HallTexasGameInfo gameId.
-     * @member {string} gameId
-     * @memberof HallTexasGameInfo
-     * @instance
-     */
-    HallTexasGameInfo.prototype.gameId = "";
-
-    /**
-     * HallTexasGameInfo aboutGameInfo.
-     * @member {IAboutTexasGameInfo|null|undefined} aboutGameInfo
-     * @memberof HallTexasGameInfo
-     * @instance
-     */
-    HallTexasGameInfo.prototype.aboutGameInfo = null;
-
-    /**
-     * HallTexasGameInfo basicTexasConfig.
-     * @member {IBasicTexasConfig|null|undefined} basicTexasConfig
-     * @memberof HallTexasGameInfo
-     * @instance
-     */
-    HallTexasGameInfo.prototype.basicTexasConfig = null;
-
-    /**
-     * Encodes the specified HallTexasGameInfo message. Does not implicitly {@link HallTexasGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof HallTexasGameInfo
-     * @static
-     * @param {IHallTexasGameInfo} m HallTexasGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    HallTexasGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.aboutGameInfo != null && Object.hasOwnProperty.call(m, "aboutGameInfo"))
-            $root.AboutTexasGameInfo.encode(m.aboutGameInfo, w.uint32(18).fork()).ldelim();
-        if (m.basicTexasConfig != null && Object.hasOwnProperty.call(m, "basicTexasConfig"))
-            $root.BasicTexasConfig.encode(m.basicTexasConfig, w.uint32(26).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a HallTexasGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof HallTexasGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {HallTexasGameInfo} HallTexasGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    HallTexasGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.HallTexasGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.aboutGameInfo = $root.AboutTexasGameInfo.decode(r, r.uint32());
-                break;
-            case 3:
-                m.basicTexasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return HallTexasGameInfo;
-})();
-
-$root.HallSubGameInfo = (function() {
-
-    /**
-     * Properties of a HallSubGameInfo.
-     * @exports IHallSubGameInfo
-     * @interface IHallSubGameInfo
-     * @property {string|null} [gameId] HallSubGameInfo gameId
-     * @property {string|null} [gameName] HallSubGameInfo gameName
-     * @property {GameType|null} [gameType] HallSubGameInfo gameType
-     * @property {GameCurrencyType|null} [currencyType] HallSubGameInfo currencyType
-     */
-
-    /**
-     * Constructs a new HallSubGameInfo.
-     * @exports HallSubGameInfo
-     * @classdesc Represents a HallSubGameInfo.
-     * @implements IHallSubGameInfo
-     * @constructor
-     * @param {IHallSubGameInfo=} [p] Properties to set
-     */
-    function HallSubGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * HallSubGameInfo gameId.
-     * @member {string} gameId
-     * @memberof HallSubGameInfo
-     * @instance
-     */
-    HallSubGameInfo.prototype.gameId = "";
-
-    /**
-     * HallSubGameInfo gameName.
-     * @member {string} gameName
-     * @memberof HallSubGameInfo
-     * @instance
-     */
-    HallSubGameInfo.prototype.gameName = "";
-
-    /**
-     * HallSubGameInfo gameType.
-     * @member {GameType} gameType
-     * @memberof HallSubGameInfo
-     * @instance
-     */
-    HallSubGameInfo.prototype.gameType = 0;
-
-    /**
-     * HallSubGameInfo currencyType.
-     * @member {GameCurrencyType} currencyType
-     * @memberof HallSubGameInfo
-     * @instance
-     */
-    HallSubGameInfo.prototype.currencyType = 0;
-
-    /**
-     * Encodes the specified HallSubGameInfo message. Does not implicitly {@link HallSubGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof HallSubGameInfo
-     * @static
-     * @param {IHallSubGameInfo} m HallSubGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    HallSubGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameName != null && Object.hasOwnProperty.call(m, "gameName"))
-            w.uint32(18).string(m.gameName);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(24).int32(m.gameType);
-        if (m.currencyType != null && Object.hasOwnProperty.call(m, "currencyType"))
-            w.uint32(32).int32(m.currencyType);
-        return w;
-    };
-
-    /**
-     * Decodes a HallSubGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof HallSubGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {HallSubGameInfo} HallSubGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    HallSubGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.HallSubGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameName = r.string();
-                break;
-            case 3:
-                m.gameType = r.int32();
-                break;
-            case 4:
-                m.currencyType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return HallSubGameInfo;
-})();
-
-$root.InHallGameInfo = (function() {
-
-    /**
-     * Properties of an InHallGameInfo.
-     * @exports IInHallGameInfo
-     * @interface IInHallGameInfo
-     * @property {string|null} [gameId] InHallGameInfo gameId
-     * @property {GameType|null} [gameType] InHallGameInfo gameType
-     */
-
-    /**
-     * Constructs a new InHallGameInfo.
-     * @exports InHallGameInfo
-     * @classdesc Represents an InHallGameInfo.
-     * @implements IInHallGameInfo
-     * @constructor
-     * @param {IInHallGameInfo=} [p] Properties to set
-     */
-    function InHallGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * InHallGameInfo gameId.
-     * @member {string} gameId
-     * @memberof InHallGameInfo
-     * @instance
-     */
-    InHallGameInfo.prototype.gameId = "";
-
-    /**
-     * InHallGameInfo gameType.
-     * @member {GameType} gameType
-     * @memberof InHallGameInfo
-     * @instance
-     */
-    InHallGameInfo.prototype.gameType = 0;
-
-    /**
-     * Encodes the specified InHallGameInfo message. Does not implicitly {@link InHallGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof InHallGameInfo
-     * @static
-     * @param {IInHallGameInfo} m InHallGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    InHallGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(16).int32(m.gameType);
-        return w;
-    };
-
-    /**
-     * Decodes an InHallGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof InHallGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {InHallGameInfo} InHallGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    InHallGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.InHallGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.gameType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return InHallGameInfo;
-})();
-
-$root.S2CGetUserInfo = (function() {
-
-    /**
-     * Properties of a S2CGetUserInfo.
-     * @exports IS2CGetUserInfo
-     * @interface IS2CGetUserInfo
-     * @property {ICommonResult|null} [result] S2CGetUserInfo result
-     * @property {IUserInfo|null} [userInfo] S2CGetUserInfo userInfo
-     * @property {Array.<IInHallGameInfo>|null} [enterTexasGameList] S2CGetUserInfo enterTexasGameList
-     * @property {Array.<IInHallGameInfo>|null} [enterSubGameList] S2CGetUserInfo enterSubGameList
-     */
-
-    /**
-     * Constructs a new S2CGetUserInfo.
-     * @exports S2CGetUserInfo
-     * @classdesc Represents a S2CGetUserInfo.
-     * @implements IS2CGetUserInfo
-     * @constructor
-     * @param {IS2CGetUserInfo=} [p] Properties to set
-     */
-    function S2CGetUserInfo(p) {
-        this.enterTexasGameList = [];
-        this.enterSubGameList = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CGetUserInfo result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CGetUserInfo
-     * @instance
-     */
-    S2CGetUserInfo.prototype.result = null;
-
-    /**
-     * S2CGetUserInfo userInfo.
-     * @member {IUserInfo|null|undefined} userInfo
-     * @memberof S2CGetUserInfo
-     * @instance
-     */
-    S2CGetUserInfo.prototype.userInfo = null;
-
-    /**
-     * S2CGetUserInfo enterTexasGameList.
-     * @member {Array.<IInHallGameInfo>} enterTexasGameList
-     * @memberof S2CGetUserInfo
-     * @instance
-     */
-    S2CGetUserInfo.prototype.enterTexasGameList = $util.emptyArray;
-
-    /**
-     * S2CGetUserInfo enterSubGameList.
-     * @member {Array.<IInHallGameInfo>} enterSubGameList
-     * @memberof S2CGetUserInfo
-     * @instance
-     */
-    S2CGetUserInfo.prototype.enterSubGameList = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CGetUserInfo message. Does not implicitly {@link S2CGetUserInfo.verify|verify} messages.
-     * @function encode
-     * @memberof S2CGetUserInfo
-     * @static
-     * @param {IS2CGetUserInfo} m S2CGetUserInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CGetUserInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.userInfo != null && Object.hasOwnProperty.call(m, "userInfo"))
-            $root.UserInfo.encode(m.userInfo, w.uint32(18).fork()).ldelim();
-        if (m.enterTexasGameList != null && m.enterTexasGameList.length) {
-            for (var i = 0; i < m.enterTexasGameList.length; ++i)
-                $root.InHallGameInfo.encode(m.enterTexasGameList[i], w.uint32(26).fork()).ldelim();
-        }
-        if (m.enterSubGameList != null && m.enterSubGameList.length) {
-            for (var i = 0; i < m.enterSubGameList.length; ++i)
-                $root.InHallGameInfo.encode(m.enterSubGameList[i], w.uint32(34).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CGetUserInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CGetUserInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CGetUserInfo} S2CGetUserInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CGetUserInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CGetUserInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.userInfo = $root.UserInfo.decode(r, r.uint32());
-                break;
-            case 3:
-                if (!(m.enterTexasGameList && m.enterTexasGameList.length))
-                    m.enterTexasGameList = [];
-                m.enterTexasGameList.push($root.InHallGameInfo.decode(r, r.uint32()));
-                break;
-            case 4:
-                if (!(m.enterSubGameList && m.enterSubGameList.length))
-                    m.enterSubGameList = [];
-                m.enterSubGameList.push($root.InHallGameInfo.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CGetUserInfo;
-})();
-
-$root.S2CRefreshUserInfoResp = (function() {
-
-    /**
-     * Properties of a S2CRefreshUserInfoResp.
-     * @exports IS2CRefreshUserInfoResp
-     * @interface IS2CRefreshUserInfoResp
-     * @property {ICommonResult|null} [result] S2CRefreshUserInfoResp result
-     * @property {IUserInfo|null} [userInfo] S2CRefreshUserInfoResp userInfo
-     */
-
-    /**
-     * Constructs a new S2CRefreshUserInfoResp.
-     * @exports S2CRefreshUserInfoResp
-     * @classdesc Represents a S2CRefreshUserInfoResp.
-     * @implements IS2CRefreshUserInfoResp
-     * @constructor
-     * @param {IS2CRefreshUserInfoResp=} [p] Properties to set
-     */
-    function S2CRefreshUserInfoResp(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CRefreshUserInfoResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CRefreshUserInfoResp
-     * @instance
-     */
-    S2CRefreshUserInfoResp.prototype.result = null;
-
-    /**
-     * S2CRefreshUserInfoResp userInfo.
-     * @member {IUserInfo|null|undefined} userInfo
-     * @memberof S2CRefreshUserInfoResp
-     * @instance
-     */
-    S2CRefreshUserInfoResp.prototype.userInfo = null;
-
-    /**
-     * Encodes the specified S2CRefreshUserInfoResp message. Does not implicitly {@link S2CRefreshUserInfoResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CRefreshUserInfoResp
-     * @static
-     * @param {IS2CRefreshUserInfoResp} m S2CRefreshUserInfoResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CRefreshUserInfoResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.userInfo != null && Object.hasOwnProperty.call(m, "userInfo"))
-            $root.UserInfo.encode(m.userInfo, w.uint32(18).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CRefreshUserInfoResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CRefreshUserInfoResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CRefreshUserInfoResp} S2CRefreshUserInfoResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CRefreshUserInfoResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CRefreshUserInfoResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.userInfo = $root.UserInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CRefreshUserInfoResp;
-})();
-
-$root.S2CChangeUserInfo = (function() {
-
-    /**
-     * Properties of a S2CChangeUserInfo.
-     * @exports IS2CChangeUserInfo
-     * @interface IS2CChangeUserInfo
-     * @property {ICommonResult|null} [result] S2CChangeUserInfo result
-     * @property {IUserInfo|null} [userInfo] S2CChangeUserInfo userInfo
-     */
-
-    /**
-     * Constructs a new S2CChangeUserInfo.
-     * @exports S2CChangeUserInfo
-     * @classdesc Represents a S2CChangeUserInfo.
-     * @implements IS2CChangeUserInfo
-     * @constructor
-     * @param {IS2CChangeUserInfo=} [p] Properties to set
-     */
-    function S2CChangeUserInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CChangeUserInfo result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CChangeUserInfo
-     * @instance
-     */
-    S2CChangeUserInfo.prototype.result = null;
-
-    /**
-     * S2CChangeUserInfo userInfo.
-     * @member {IUserInfo|null|undefined} userInfo
-     * @memberof S2CChangeUserInfo
-     * @instance
-     */
-    S2CChangeUserInfo.prototype.userInfo = null;
-
-    /**
-     * Encodes the specified S2CChangeUserInfo message. Does not implicitly {@link S2CChangeUserInfo.verify|verify} messages.
-     * @function encode
-     * @memberof S2CChangeUserInfo
-     * @static
-     * @param {IS2CChangeUserInfo} m S2CChangeUserInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CChangeUserInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.userInfo != null && Object.hasOwnProperty.call(m, "userInfo"))
-            $root.UserInfo.encode(m.userInfo, w.uint32(26).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CChangeUserInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CChangeUserInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CChangeUserInfo} S2CChangeUserInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CChangeUserInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CChangeUserInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 3:
-                m.userInfo = $root.UserInfo.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CChangeUserInfo;
-})();
-
-$root.S2CHallTexasGameInfoResp = (function() {
-
-    /**
-     * Properties of a S2CHallTexasGameInfoResp.
-     * @exports IS2CHallTexasGameInfoResp
-     * @interface IS2CHallTexasGameInfoResp
-     * @property {ICommonResult|null} [result] S2CHallTexasGameInfoResp result
-     * @property {Array.<IHallTexasGameInfo>|null} [gameList] S2CHallTexasGameInfoResp gameList
-     */
-
-    /**
-     * Constructs a new S2CHallTexasGameInfoResp.
-     * @exports S2CHallTexasGameInfoResp
-     * @classdesc Represents a S2CHallTexasGameInfoResp.
-     * @implements IS2CHallTexasGameInfoResp
-     * @constructor
-     * @param {IS2CHallTexasGameInfoResp=} [p] Properties to set
-     */
-    function S2CHallTexasGameInfoResp(p) {
-        this.gameList = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CHallTexasGameInfoResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CHallTexasGameInfoResp
-     * @instance
-     */
-    S2CHallTexasGameInfoResp.prototype.result = null;
-
-    /**
-     * S2CHallTexasGameInfoResp gameList.
-     * @member {Array.<IHallTexasGameInfo>} gameList
-     * @memberof S2CHallTexasGameInfoResp
-     * @instance
-     */
-    S2CHallTexasGameInfoResp.prototype.gameList = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CHallTexasGameInfoResp message. Does not implicitly {@link S2CHallTexasGameInfoResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CHallTexasGameInfoResp
-     * @static
-     * @param {IS2CHallTexasGameInfoResp} m S2CHallTexasGameInfoResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CHallTexasGameInfoResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.gameList != null && m.gameList.length) {
-            for (var i = 0; i < m.gameList.length; ++i)
-                $root.HallTexasGameInfo.encode(m.gameList[i], w.uint32(18).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CHallTexasGameInfoResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CHallTexasGameInfoResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CHallTexasGameInfoResp} S2CHallTexasGameInfoResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CHallTexasGameInfoResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CHallTexasGameInfoResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                if (!(m.gameList && m.gameList.length))
-                    m.gameList = [];
-                m.gameList.push($root.HallTexasGameInfo.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CHallTexasGameInfoResp;
-})();
-
-$root.S2CGetHallSubGameInfoResp = (function() {
-
-    /**
-     * Properties of a S2CGetHallSubGameInfoResp.
-     * @exports IS2CGetHallSubGameInfoResp
-     * @interface IS2CGetHallSubGameInfoResp
-     * @property {ICommonResult|null} [result] S2CGetHallSubGameInfoResp result
-     * @property {Array.<IHallSubGameInfo>|null} [gameList] S2CGetHallSubGameInfoResp gameList
-     */
-
-    /**
-     * Constructs a new S2CGetHallSubGameInfoResp.
-     * @exports S2CGetHallSubGameInfoResp
-     * @classdesc Represents a S2CGetHallSubGameInfoResp.
-     * @implements IS2CGetHallSubGameInfoResp
-     * @constructor
-     * @param {IS2CGetHallSubGameInfoResp=} [p] Properties to set
-     */
-    function S2CGetHallSubGameInfoResp(p) {
-        this.gameList = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CGetHallSubGameInfoResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CGetHallSubGameInfoResp
-     * @instance
-     */
-    S2CGetHallSubGameInfoResp.prototype.result = null;
-
-    /**
-     * S2CGetHallSubGameInfoResp gameList.
-     * @member {Array.<IHallSubGameInfo>} gameList
-     * @memberof S2CGetHallSubGameInfoResp
-     * @instance
-     */
-    S2CGetHallSubGameInfoResp.prototype.gameList = $util.emptyArray;
-
-    /**
-     * Encodes the specified S2CGetHallSubGameInfoResp message. Does not implicitly {@link S2CGetHallSubGameInfoResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CGetHallSubGameInfoResp
-     * @static
-     * @param {IS2CGetHallSubGameInfoResp} m S2CGetHallSubGameInfoResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CGetHallSubGameInfoResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.gameList != null && m.gameList.length) {
-            for (var i = 0; i < m.gameList.length; ++i)
-                $root.HallSubGameInfo.encode(m.gameList[i], w.uint32(18).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a S2CGetHallSubGameInfoResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CGetHallSubGameInfoResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CGetHallSubGameInfoResp} S2CGetHallSubGameInfoResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CGetHallSubGameInfoResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CGetHallSubGameInfoResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                if (!(m.gameList && m.gameList.length))
-                    m.gameList = [];
-                m.gameList.push($root.HallSubGameInfo.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CGetHallSubGameInfoResp;
-})();
-
-$root.S2CAddCurrencyResp = (function() {
-
-    /**
-     * Properties of a S2CAddCurrencyResp.
-     * @exports IS2CAddCurrencyResp
-     * @interface IS2CAddCurrencyResp
-     * @property {ICommonResult|null} [result] S2CAddCurrencyResp result
-     * @property {string|null} [uid] S2CAddCurrencyResp uid
-     * @property {number|null} [currencyNum] S2CAddCurrencyResp currencyNum
-     * @property {GameCurrencyType|null} [currencyType] S2CAddCurrencyResp currencyType
-     */
-
-    /**
-     * Constructs a new S2CAddCurrencyResp.
-     * @exports S2CAddCurrencyResp
-     * @classdesc Represents a S2CAddCurrencyResp.
-     * @implements IS2CAddCurrencyResp
-     * @constructor
-     * @param {IS2CAddCurrencyResp=} [p] Properties to set
-     */
-    function S2CAddCurrencyResp(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CAddCurrencyResp result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CAddCurrencyResp
-     * @instance
-     */
-    S2CAddCurrencyResp.prototype.result = null;
-
-    /**
-     * S2CAddCurrencyResp uid.
-     * @member {string} uid
-     * @memberof S2CAddCurrencyResp
-     * @instance
-     */
-    S2CAddCurrencyResp.prototype.uid = "";
-
-    /**
-     * S2CAddCurrencyResp currencyNum.
-     * @member {number} currencyNum
-     * @memberof S2CAddCurrencyResp
-     * @instance
-     */
-    S2CAddCurrencyResp.prototype.currencyNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CAddCurrencyResp currencyType.
-     * @member {GameCurrencyType} currencyType
-     * @memberof S2CAddCurrencyResp
-     * @instance
-     */
-    S2CAddCurrencyResp.prototype.currencyType = 0;
-
-    /**
-     * Encodes the specified S2CAddCurrencyResp message. Does not implicitly {@link S2CAddCurrencyResp.verify|verify} messages.
-     * @function encode
-     * @memberof S2CAddCurrencyResp
-     * @static
-     * @param {IS2CAddCurrencyResp} m S2CAddCurrencyResp message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CAddCurrencyResp.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(18).string(m.uid);
-        if (m.currencyNum != null && Object.hasOwnProperty.call(m, "currencyNum"))
-            w.uint32(24).int64(m.currencyNum);
-        if (m.currencyType != null && Object.hasOwnProperty.call(m, "currencyType"))
-            w.uint32(32).int32(m.currencyType);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CAddCurrencyResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CAddCurrencyResp
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CAddCurrencyResp} S2CAddCurrencyResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CAddCurrencyResp.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CAddCurrencyResp();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.uid = r.string();
-                break;
-            case 3:
-                m.currencyNum = r.int64();
-                break;
-            case 4:
-                m.currencyType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CAddCurrencyResp;
-})();
-
-$root.S2CAddCurrencyNotify = (function() {
-
-    /**
-     * Properties of a S2CAddCurrencyNotify.
-     * @exports IS2CAddCurrencyNotify
-     * @interface IS2CAddCurrencyNotify
-     * @property {number|null} [currencyNum] S2CAddCurrencyNotify currencyNum
-     * @property {GameCurrencyType|null} [currencyType] S2CAddCurrencyNotify currencyType
-     */
-
-    /**
-     * Constructs a new S2CAddCurrencyNotify.
-     * @exports S2CAddCurrencyNotify
-     * @classdesc Represents a S2CAddCurrencyNotify.
-     * @implements IS2CAddCurrencyNotify
-     * @constructor
-     * @param {IS2CAddCurrencyNotify=} [p] Properties to set
-     */
-    function S2CAddCurrencyNotify(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CAddCurrencyNotify currencyNum.
-     * @member {number} currencyNum
-     * @memberof S2CAddCurrencyNotify
-     * @instance
-     */
-    S2CAddCurrencyNotify.prototype.currencyNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * S2CAddCurrencyNotify currencyType.
-     * @member {GameCurrencyType} currencyType
-     * @memberof S2CAddCurrencyNotify
-     * @instance
-     */
-    S2CAddCurrencyNotify.prototype.currencyType = 0;
-
-    /**
-     * Encodes the specified S2CAddCurrencyNotify message. Does not implicitly {@link S2CAddCurrencyNotify.verify|verify} messages.
-     * @function encode
-     * @memberof S2CAddCurrencyNotify
-     * @static
-     * @param {IS2CAddCurrencyNotify} m S2CAddCurrencyNotify message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CAddCurrencyNotify.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.currencyNum != null && Object.hasOwnProperty.call(m, "currencyNum"))
-            w.uint32(8).int64(m.currencyNum);
-        if (m.currencyType != null && Object.hasOwnProperty.call(m, "currencyType"))
-            w.uint32(16).int32(m.currencyType);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CAddCurrencyNotify message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CAddCurrencyNotify
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CAddCurrencyNotify} S2CAddCurrencyNotify
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CAddCurrencyNotify.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CAddCurrencyNotify();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.currencyNum = r.int64();
-                break;
-            case 2:
-                m.currencyType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CAddCurrencyNotify;
-})();
-
-/**
- * AmountChangeType enum.
- * @exports AmountChangeType
- * @enum {number}
- * @property {number} AmountType_Other=0 AmountType_Other value
- * @property {number} AmountType_Charge=1 AmountType_Charge value
- * @property {number} AmountType_Grant=2 AmountType_Grant value
- * @property {number} AmountType_Prop=3 AmountType_Prop value
- * @property {number} AmountType_Commission=4 AmountType_Commission value
- * @property {number} AmountType_Return=5 AmountType_Return value
- * @property {number} AmountType_Insurance=6 AmountType_Insurance value
- * @property {number} AmountType_InsuranceReturn=7 AmountType_InsuranceReturn value
- * @property {number} AmountType_BringIn=8 AmountType_BringIn value
- * @property {number} AmountType_BringOut=9 AmountType_BringOut value
- * @property {number} AmountType_JackpotIn=10 AmountType_JackpotIn value
- * @property {number} AmountType_Jackpot=11 AmountType_Jackpot value
- * @property {number} AmountType_CowboyBet=12 AmountType_CowboyBet value
- * @property {number} AmountType_CowboyReturn=13 AmountType_CowboyReturn value
- */
-$root.AmountChangeType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "AmountType_Other"] = 0;
-    values[valuesById[1] = "AmountType_Charge"] = 1;
-    values[valuesById[2] = "AmountType_Grant"] = 2;
-    values[valuesById[3] = "AmountType_Prop"] = 3;
-    values[valuesById[4] = "AmountType_Commission"] = 4;
-    values[valuesById[5] = "AmountType_Return"] = 5;
-    values[valuesById[6] = "AmountType_Insurance"] = 6;
-    values[valuesById[7] = "AmountType_InsuranceReturn"] = 7;
-    values[valuesById[8] = "AmountType_BringIn"] = 8;
-    values[valuesById[9] = "AmountType_BringOut"] = 9;
-    values[valuesById[10] = "AmountType_JackpotIn"] = 10;
-    values[valuesById[11] = "AmountType_Jackpot"] = 11;
-    values[valuesById[12] = "AmountType_CowboyBet"] = 12;
-    values[valuesById[13] = "AmountType_CowboyReturn"] = 13;
-    return values;
-})();
-
-/**
- * PropType enum.
- * @exports PropType
- * @enum {number}
- * @property {number} PropType_Other=0 PropType_Other value
- * @property {number} PropType_ForceHand=1 PropType_ForceHand value
- * @property {number} PropType_RubbingCards=2 PropType_RubbingCards value
- * @property {number} PropType_PublicCard=3 PropType_PublicCard value
- * @property {number} PropType_DelayThinking=4 PropType_DelayThinking value
- * @property {number} PropType_Interaction=5 PropType_Interaction value
- */
-$root.PropType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "PropType_Other"] = 0;
-    values[valuesById[1] = "PropType_ForceHand"] = 1;
-    values[valuesById[2] = "PropType_RubbingCards"] = 2;
-    values[valuesById[3] = "PropType_PublicCard"] = 3;
-    values[valuesById[4] = "PropType_DelayThinking"] = 4;
-    values[valuesById[5] = "PropType_Interaction"] = 5;
-    return values;
-})();
-
-/**
- * JackpotType enum.
- * @exports JackpotType
- * @enum {number}
- * @property {number} JackpotType_Other=0 JackpotType_Other value
- * @property {number} JackpotType_RoyalStraightFlash=1 JackpotType_RoyalStraightFlash value
- * @property {number} JackpotType_RoyalStraightFlash6=2 JackpotType_RoyalStraightFlash6 value
- * @property {number} JackpotType_RoyalStraightFlash7=3 JackpotType_RoyalStraightFlash7 value
- */
-$root.JackpotType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "JackpotType_Other"] = 0;
-    values[valuesById[1] = "JackpotType_RoyalStraightFlash"] = 1;
-    values[valuesById[2] = "JackpotType_RoyalStraightFlash6"] = 2;
-    values[valuesById[3] = "JackpotType_RoyalStraightFlash7"] = 3;
-    return values;
-})();
-
-$root.Game2LoggerGameRecord = (function() {
-
-    /**
-     * Properties of a Game2LoggerGameRecord.
-     * @exports IGame2LoggerGameRecord
-     * @interface IGame2LoggerGameRecord
-     * @property {GameType|null} [gameType] Game2LoggerGameRecord gameType
-     * @property {string|null} [gameId] Game2LoggerGameRecord gameId
-     * @property {string|null} [creator] Game2LoggerGameRecord creator
-     * @property {string|null} [beginTime] Game2LoggerGameRecord beginTime
-     * @property {string|null} [endTime] Game2LoggerGameRecord endTime
-     * @property {number|null} [configAnte] Game2LoggerGameRecord configAnte
-     * @property {number|null} [configSmallBet] Game2LoggerGameRecord configSmallBet
-     * @property {number|null} [configBigBet] Game2LoggerGameRecord configBigBet
-     * @property {number|null} [configStraddleBet] Game2LoggerGameRecord configStraddleBet
-     * @property {number|null} [configPlayerNum] Game2LoggerGameRecord configPlayerNum
-     * @property {number|null} [totalPlayerNum] Game2LoggerGameRecord totalPlayerNum
-     * @property {Array.<IGameSubRecord>|null} [gameSubRecord] Game2LoggerGameRecord gameSubRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerGameRecord.
-     * @exports Game2LoggerGameRecord
-     * @classdesc Represents a Game2LoggerGameRecord.
-     * @implements IGame2LoggerGameRecord
-     * @constructor
-     * @param {IGame2LoggerGameRecord=} [p] Properties to set
-     */
-    function Game2LoggerGameRecord(p) {
-        this.gameSubRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerGameRecord gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerGameRecord gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.gameId = "";
-
-    /**
-     * Game2LoggerGameRecord creator.
-     * @member {string} creator
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.creator = "";
-
-    /**
-     * Game2LoggerGameRecord beginTime.
-     * @member {string} beginTime
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.beginTime = "";
-
-    /**
-     * Game2LoggerGameRecord endTime.
-     * @member {string} endTime
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.endTime = "";
-
-    /**
-     * Game2LoggerGameRecord configAnte.
-     * @member {number} configAnte
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.configAnte = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Game2LoggerGameRecord configSmallBet.
-     * @member {number} configSmallBet
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.configSmallBet = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Game2LoggerGameRecord configBigBet.
-     * @member {number} configBigBet
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.configBigBet = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Game2LoggerGameRecord configStraddleBet.
-     * @member {number} configStraddleBet
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.configStraddleBet = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Game2LoggerGameRecord configPlayerNum.
-     * @member {number} configPlayerNum
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.configPlayerNum = 0;
-
-    /**
-     * Game2LoggerGameRecord totalPlayerNum.
-     * @member {number} totalPlayerNum
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.totalPlayerNum = 0;
-
-    /**
-     * Game2LoggerGameRecord gameSubRecord.
-     * @member {Array.<IGameSubRecord>} gameSubRecord
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.gameSubRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerGameRecord message. Does not implicitly {@link Game2LoggerGameRecord.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerGameRecord
-     * @static
-     * @param {IGame2LoggerGameRecord} m Game2LoggerGameRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerGameRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(8).int32(m.gameType);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.creator != null && Object.hasOwnProperty.call(m, "creator"))
-            w.uint32(26).string(m.creator);
-        if (m.beginTime != null && Object.hasOwnProperty.call(m, "beginTime"))
-            w.uint32(34).string(m.beginTime);
-        if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
-            w.uint32(42).string(m.endTime);
-        if (m.configAnte != null && Object.hasOwnProperty.call(m, "configAnte"))
-            w.uint32(48).int64(m.configAnte);
-        if (m.configSmallBet != null && Object.hasOwnProperty.call(m, "configSmallBet"))
-            w.uint32(56).int64(m.configSmallBet);
-        if (m.configBigBet != null && Object.hasOwnProperty.call(m, "configBigBet"))
-            w.uint32(64).int64(m.configBigBet);
-        if (m.configStraddleBet != null && Object.hasOwnProperty.call(m, "configStraddleBet"))
-            w.uint32(72).int64(m.configStraddleBet);
-        if (m.configPlayerNum != null && Object.hasOwnProperty.call(m, "configPlayerNum"))
-            w.uint32(80).int32(m.configPlayerNum);
-        if (m.totalPlayerNum != null && Object.hasOwnProperty.call(m, "totalPlayerNum"))
-            w.uint32(88).int32(m.totalPlayerNum);
-        if (m.gameSubRecord != null && m.gameSubRecord.length) {
-            for (var i = 0; i < m.gameSubRecord.length; ++i)
-                $root.GameSubRecord.encode(m.gameSubRecord[i], w.uint32(98).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerGameRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerGameRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerGameRecord} Game2LoggerGameRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerGameRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerGameRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameType = r.int32();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                m.creator = r.string();
-                break;
-            case 4:
-                m.beginTime = r.string();
-                break;
-            case 5:
-                m.endTime = r.string();
-                break;
-            case 6:
-                m.configAnte = r.int64();
-                break;
-            case 7:
-                m.configSmallBet = r.int64();
-                break;
-            case 8:
-                m.configBigBet = r.int64();
-                break;
-            case 9:
-                m.configStraddleBet = r.int64();
-                break;
-            case 10:
-                m.configPlayerNum = r.int32();
-                break;
-            case 11:
-                m.totalPlayerNum = r.int32();
-                break;
-            case 12:
-                if (!(m.gameSubRecord && m.gameSubRecord.length))
-                    m.gameSubRecord = [];
-                m.gameSubRecord.push($root.GameSubRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerGameRecord;
-})();
-
-$root.GameSubRecord = (function() {
-
-    /**
-     * Properties of a GameSubRecord.
-     * @exports IGameSubRecord
-     * @interface IGameSubRecord
-     * @property {number|null} [subRoundId] GameSubRecord subRoundId
-     * @property {string|null} [subBeginTime] GameSubRecord subBeginTime
-     * @property {string|null} [subEndTime] GameSubRecord subEndTime
-     * @property {number|null} [subTotalPlayerNum] GameSubRecord subTotalPlayerNum
-     * @property {number|null} [subTotalBringin] GameSubRecord subTotalBringin
-     * @property {number|null} [subTotalBringout] GameSubRecord subTotalBringout
-     * @property {number|null} [subTotalCommission] GameSubRecord subTotalCommission
-     * @property {number|null} [subTotalReturn] GameSubRecord subTotalReturn
-     * @property {number|null} [subTotalInsurance] GameSubRecord subTotalInsurance
-     * @property {number|null} [jackpot] GameSubRecord jackpot
-     * @property {number|null} [jackpotCommission] GameSubRecord jackpotCommission
-     */
-
-    /**
-     * Constructs a new GameSubRecord.
-     * @exports GameSubRecord
-     * @classdesc Represents a GameSubRecord.
-     * @implements IGameSubRecord
-     * @constructor
-     * @param {IGameSubRecord=} [p] Properties to set
-     */
-    function GameSubRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * GameSubRecord subRoundId.
-     * @member {number} subRoundId
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subRoundId = 0;
-
-    /**
-     * GameSubRecord subBeginTime.
-     * @member {string} subBeginTime
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subBeginTime = "";
-
-    /**
-     * GameSubRecord subEndTime.
-     * @member {string} subEndTime
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subEndTime = "";
-
-    /**
-     * GameSubRecord subTotalPlayerNum.
-     * @member {number} subTotalPlayerNum
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalPlayerNum = 0;
-
-    /**
-     * GameSubRecord subTotalBringin.
-     * @member {number} subTotalBringin
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalBringin = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord subTotalBringout.
-     * @member {number} subTotalBringout
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalBringout = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord subTotalCommission.
-     * @member {number} subTotalCommission
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalCommission = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord subTotalReturn.
-     * @member {number} subTotalReturn
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalReturn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord subTotalInsurance.
-     * @member {number} subTotalInsurance
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalInsurance = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord jackpot.
-     * @member {number} jackpot
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.jackpot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord jackpotCommission.
-     * @member {number} jackpotCommission
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.jackpotCommission = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified GameSubRecord message. Does not implicitly {@link GameSubRecord.verify|verify} messages.
-     * @function encode
-     * @memberof GameSubRecord
-     * @static
-     * @param {IGameSubRecord} m GameSubRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    GameSubRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.subRoundId != null && Object.hasOwnProperty.call(m, "subRoundId"))
-            w.uint32(8).int32(m.subRoundId);
-        if (m.subBeginTime != null && Object.hasOwnProperty.call(m, "subBeginTime"))
-            w.uint32(18).string(m.subBeginTime);
-        if (m.subEndTime != null && Object.hasOwnProperty.call(m, "subEndTime"))
-            w.uint32(26).string(m.subEndTime);
-        if (m.subTotalPlayerNum != null && Object.hasOwnProperty.call(m, "subTotalPlayerNum"))
-            w.uint32(32).int32(m.subTotalPlayerNum);
-        if (m.subTotalBringin != null && Object.hasOwnProperty.call(m, "subTotalBringin"))
-            w.uint32(40).int64(m.subTotalBringin);
-        if (m.subTotalBringout != null && Object.hasOwnProperty.call(m, "subTotalBringout"))
-            w.uint32(48).int64(m.subTotalBringout);
-        if (m.subTotalCommission != null && Object.hasOwnProperty.call(m, "subTotalCommission"))
-            w.uint32(56).int64(m.subTotalCommission);
-        if (m.subTotalReturn != null && Object.hasOwnProperty.call(m, "subTotalReturn"))
-            w.uint32(64).int64(m.subTotalReturn);
-        if (m.subTotalInsurance != null && Object.hasOwnProperty.call(m, "subTotalInsurance"))
-            w.uint32(72).int64(m.subTotalInsurance);
-        if (m.jackpot != null && Object.hasOwnProperty.call(m, "jackpot"))
-            w.uint32(80).int64(m.jackpot);
-        if (m.jackpotCommission != null && Object.hasOwnProperty.call(m, "jackpotCommission"))
-            w.uint32(88).int64(m.jackpotCommission);
-        return w;
-    };
-
-    /**
-     * Decodes a GameSubRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof GameSubRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {GameSubRecord} GameSubRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    GameSubRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.GameSubRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.subRoundId = r.int32();
-                break;
-            case 2:
-                m.subBeginTime = r.string();
-                break;
-            case 3:
-                m.subEndTime = r.string();
-                break;
-            case 4:
-                m.subTotalPlayerNum = r.int32();
-                break;
-            case 5:
-                m.subTotalBringin = r.int64();
-                break;
-            case 6:
-                m.subTotalBringout = r.int64();
-                break;
-            case 7:
-                m.subTotalCommission = r.int64();
-                break;
-            case 8:
-                m.subTotalReturn = r.int64();
-                break;
-            case 9:
-                m.subTotalInsurance = r.int64();
-                break;
-            case 10:
-                m.jackpot = r.int64();
-                break;
-            case 11:
-                m.jackpotCommission = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return GameSubRecord;
-})();
-
-$root.Game2LoggerReplayRecord = (function() {
-
-    /**
-     * Properties of a Game2LoggerReplayRecord.
-     * @exports IGame2LoggerReplayRecord
-     * @interface IGame2LoggerReplayRecord
-     * @property {GameType|null} [gameType] Game2LoggerReplayRecord gameType
-     * @property {string|null} [gameId] Game2LoggerReplayRecord gameId
-     * @property {string|null} [endTime] Game2LoggerReplayRecord endTime
-     * @property {Array.<IReplayRecord>|null} [replayRecord] Game2LoggerReplayRecord replayRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerReplayRecord.
-     * @exports Game2LoggerReplayRecord
-     * @classdesc Represents a Game2LoggerReplayRecord.
-     * @implements IGame2LoggerReplayRecord
-     * @constructor
-     * @param {IGame2LoggerReplayRecord=} [p] Properties to set
-     */
-    function Game2LoggerReplayRecord(p) {
-        this.replayRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerReplayRecord gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerReplayRecord
-     * @instance
-     */
-    Game2LoggerReplayRecord.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerReplayRecord gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerReplayRecord
-     * @instance
-     */
-    Game2LoggerReplayRecord.prototype.gameId = "";
-
-    /**
-     * Game2LoggerReplayRecord endTime.
-     * @member {string} endTime
-     * @memberof Game2LoggerReplayRecord
-     * @instance
-     */
-    Game2LoggerReplayRecord.prototype.endTime = "";
-
-    /**
-     * Game2LoggerReplayRecord replayRecord.
-     * @member {Array.<IReplayRecord>} replayRecord
-     * @memberof Game2LoggerReplayRecord
-     * @instance
-     */
-    Game2LoggerReplayRecord.prototype.replayRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerReplayRecord message. Does not implicitly {@link Game2LoggerReplayRecord.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerReplayRecord
-     * @static
-     * @param {IGame2LoggerReplayRecord} m Game2LoggerReplayRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerReplayRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(8).int32(m.gameType);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
-            w.uint32(26).string(m.endTime);
-        if (m.replayRecord != null && m.replayRecord.length) {
-            for (var i = 0; i < m.replayRecord.length; ++i)
-                $root.ReplayRecord.encode(m.replayRecord[i], w.uint32(34).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerReplayRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerReplayRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerReplayRecord} Game2LoggerReplayRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerReplayRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerReplayRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameType = r.int32();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                m.endTime = r.string();
-                break;
-            case 4:
-                if (!(m.replayRecord && m.replayRecord.length))
-                    m.replayRecord = [];
-                m.replayRecord.push($root.ReplayRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerReplayRecord;
-})();
-
-$root.ReplayRecord = (function() {
-
-    /**
-     * Properties of a ReplayRecord.
-     * @exports IReplayRecord
-     * @interface IReplayRecord
-     * @property {string|null} [happenTime] ReplayRecord happenTime
-     * @property {string|null} [userName] ReplayRecord userName
-     * @property {string|null} [userId] ReplayRecord userId
-     * @property {string|null} [clubName] ReplayRecord clubName
-     * @property {string|null} [clubId] ReplayRecord clubId
-     * @property {number|null} [index] ReplayRecord index
-     * @property {Array.<ICardInfo>|null} [publicCards] ReplayRecord publicCards
-     * @property {Array.<ICardInfo>|null} [myCards] ReplayRecord myCards
-     * @property {number|null} [myResult] ReplayRecord myResult
-     * @property {Array.<ICardInfo>|null} [winnerCards] ReplayRecord winnerCards
-     * @property {string|null} [winnerName] ReplayRecord winnerName
-     * @property {string|null} [winnerHead] ReplayRecord winnerHead
-     * @property {number|null} [winnerResult] ReplayRecord winnerResult
-     * @property {IBasicTexasConfig|null} [texasConfig] ReplayRecord texasConfig
-     * @property {Array.<IPlayerInfo>|null} [players] ReplayRecord players
-     * @property {string|null} [dealerUid] ReplayRecord dealerUid
-     * @property {number|null} [antes] ReplayRecord antes
-     * @property {Array.<IActionResult>|null} [roundStartActions] ReplayRecord roundStartActions
-     * @property {Array.<IActionResult>|null} [preFlopActions] ReplayRecord preFlopActions
-     * @property {Array.<IActionResult>|null} [flopActions] ReplayRecord flopActions
-     * @property {Array.<IActionResult>|null} [turnActions] ReplayRecord turnActions
-     * @property {Array.<IActionResult>|null} [riverActions] ReplayRecord riverActions
-     * @property {Array.<IPlayerWinLose>|null} [result] ReplayRecord result
-     * @property {Array.<IPotInfo>|null} [potInfoFlop] ReplayRecord potInfoFlop
-     * @property {Array.<IPotInfo>|null} [potInfoTurn] ReplayRecord potInfoTurn
-     * @property {Array.<IPotInfo>|null} [potInfoRiver] ReplayRecord potInfoRiver
-     */
-
-    /**
-     * Constructs a new ReplayRecord.
-     * @exports ReplayRecord
-     * @classdesc Represents a ReplayRecord.
-     * @implements IReplayRecord
-     * @constructor
-     * @param {IReplayRecord=} [p] Properties to set
-     */
-    function ReplayRecord(p) {
-        this.publicCards = [];
-        this.myCards = [];
-        this.winnerCards = [];
-        this.players = [];
-        this.roundStartActions = [];
-        this.preFlopActions = [];
-        this.flopActions = [];
-        this.turnActions = [];
-        this.riverActions = [];
-        this.result = [];
-        this.potInfoFlop = [];
-        this.potInfoTurn = [];
-        this.potInfoRiver = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ReplayRecord happenTime.
-     * @member {string} happenTime
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.happenTime = "";
-
-    /**
-     * ReplayRecord userName.
-     * @member {string} userName
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.userName = "";
-
-    /**
-     * ReplayRecord userId.
-     * @member {string} userId
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.userId = "";
-
-    /**
-     * ReplayRecord clubName.
-     * @member {string} clubName
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.clubName = "";
-
-    /**
-     * ReplayRecord clubId.
-     * @member {string} clubId
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.clubId = "";
-
-    /**
-     * ReplayRecord index.
-     * @member {number} index
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReplayRecord publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * ReplayRecord myCards.
-     * @member {Array.<ICardInfo>} myCards
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.myCards = $util.emptyArray;
-
-    /**
-     * ReplayRecord myResult.
-     * @member {number} myResult
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.myResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReplayRecord winnerCards.
-     * @member {Array.<ICardInfo>} winnerCards
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.winnerCards = $util.emptyArray;
-
-    /**
-     * ReplayRecord winnerName.
-     * @member {string} winnerName
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.winnerName = "";
-
-    /**
-     * ReplayRecord winnerHead.
-     * @member {string} winnerHead
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.winnerHead = "";
-
-    /**
-     * ReplayRecord winnerResult.
-     * @member {number} winnerResult
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.winnerResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReplayRecord texasConfig.
-     * @member {IBasicTexasConfig|null|undefined} texasConfig
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.texasConfig = null;
-
-    /**
-     * ReplayRecord players.
-     * @member {Array.<IPlayerInfo>} players
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.players = $util.emptyArray;
-
-    /**
-     * ReplayRecord dealerUid.
-     * @member {string} dealerUid
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.dealerUid = "";
-
-    /**
-     * ReplayRecord antes.
-     * @member {number} antes
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.antes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReplayRecord roundStartActions.
-     * @member {Array.<IActionResult>} roundStartActions
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.roundStartActions = $util.emptyArray;
-
-    /**
-     * ReplayRecord preFlopActions.
-     * @member {Array.<IActionResult>} preFlopActions
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.preFlopActions = $util.emptyArray;
-
-    /**
-     * ReplayRecord flopActions.
-     * @member {Array.<IActionResult>} flopActions
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.flopActions = $util.emptyArray;
-
-    /**
-     * ReplayRecord turnActions.
-     * @member {Array.<IActionResult>} turnActions
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.turnActions = $util.emptyArray;
-
-    /**
-     * ReplayRecord riverActions.
-     * @member {Array.<IActionResult>} riverActions
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.riverActions = $util.emptyArray;
-
-    /**
-     * ReplayRecord result.
-     * @member {Array.<IPlayerWinLose>} result
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.result = $util.emptyArray;
-
-    /**
-     * ReplayRecord potInfoFlop.
-     * @member {Array.<IPotInfo>} potInfoFlop
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.potInfoFlop = $util.emptyArray;
-
-    /**
-     * ReplayRecord potInfoTurn.
-     * @member {Array.<IPotInfo>} potInfoTurn
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.potInfoTurn = $util.emptyArray;
-
-    /**
-     * ReplayRecord potInfoRiver.
-     * @member {Array.<IPotInfo>} potInfoRiver
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.potInfoRiver = $util.emptyArray;
-
-    /**
-     * Encodes the specified ReplayRecord message. Does not implicitly {@link ReplayRecord.verify|verify} messages.
-     * @function encode
-     * @memberof ReplayRecord
-     * @static
-     * @param {IReplayRecord} m ReplayRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ReplayRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
-            w.uint32(48).int64(m.index);
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
-        }
-        if (m.myCards != null && m.myCards.length) {
-            for (var i = 0; i < m.myCards.length; ++i)
-                $root.CardInfo.encode(m.myCards[i], w.uint32(66).fork()).ldelim();
-        }
-        if (m.myResult != null && Object.hasOwnProperty.call(m, "myResult"))
-            w.uint32(72).int64(m.myResult);
-        if (m.winnerCards != null && m.winnerCards.length) {
-            for (var i = 0; i < m.winnerCards.length; ++i)
-                $root.CardInfo.encode(m.winnerCards[i], w.uint32(82).fork()).ldelim();
-        }
-        if (m.winnerName != null && Object.hasOwnProperty.call(m, "winnerName"))
-            w.uint32(90).string(m.winnerName);
-        if (m.winnerHead != null && Object.hasOwnProperty.call(m, "winnerHead"))
-            w.uint32(98).string(m.winnerHead);
-        if (m.winnerResult != null && Object.hasOwnProperty.call(m, "winnerResult"))
-            w.uint32(104).int64(m.winnerResult);
-        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
-            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(114).fork()).ldelim();
-        if (m.players != null && m.players.length) {
-            for (var i = 0; i < m.players.length; ++i)
-                $root.PlayerInfo.encode(m.players[i], w.uint32(122).fork()).ldelim();
-        }
-        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
-            w.uint32(130).string(m.dealerUid);
-        if (m.antes != null && Object.hasOwnProperty.call(m, "antes"))
-            w.uint32(136).int64(m.antes);
-        if (m.roundStartActions != null && m.roundStartActions.length) {
-            for (var i = 0; i < m.roundStartActions.length; ++i)
-                $root.ActionResult.encode(m.roundStartActions[i], w.uint32(146).fork()).ldelim();
-        }
-        if (m.preFlopActions != null && m.preFlopActions.length) {
-            for (var i = 0; i < m.preFlopActions.length; ++i)
-                $root.ActionResult.encode(m.preFlopActions[i], w.uint32(154).fork()).ldelim();
-        }
-        if (m.flopActions != null && m.flopActions.length) {
-            for (var i = 0; i < m.flopActions.length; ++i)
-                $root.ActionResult.encode(m.flopActions[i], w.uint32(162).fork()).ldelim();
-        }
-        if (m.turnActions != null && m.turnActions.length) {
-            for (var i = 0; i < m.turnActions.length; ++i)
-                $root.ActionResult.encode(m.turnActions[i], w.uint32(170).fork()).ldelim();
-        }
-        if (m.riverActions != null && m.riverActions.length) {
-            for (var i = 0; i < m.riverActions.length; ++i)
-                $root.ActionResult.encode(m.riverActions[i], w.uint32(178).fork()).ldelim();
-        }
-        if (m.result != null && m.result.length) {
-            for (var i = 0; i < m.result.length; ++i)
-                $root.PlayerWinLose.encode(m.result[i], w.uint32(186).fork()).ldelim();
-        }
-        if (m.potInfoFlop != null && m.potInfoFlop.length) {
-            for (var i = 0; i < m.potInfoFlop.length; ++i)
-                $root.PotInfo.encode(m.potInfoFlop[i], w.uint32(194).fork()).ldelim();
-        }
-        if (m.potInfoTurn != null && m.potInfoTurn.length) {
-            for (var i = 0; i < m.potInfoTurn.length; ++i)
-                $root.PotInfo.encode(m.potInfoTurn[i], w.uint32(202).fork()).ldelim();
-        }
-        if (m.potInfoRiver != null && m.potInfoRiver.length) {
-            for (var i = 0; i < m.potInfoRiver.length; ++i)
-                $root.PotInfo.encode(m.potInfoRiver[i], w.uint32(210).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a ReplayRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof ReplayRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ReplayRecord} ReplayRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ReplayRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ReplayRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.index = r.int64();
-                break;
-            case 7:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 8:
-                if (!(m.myCards && m.myCards.length))
-                    m.myCards = [];
-                m.myCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 9:
-                m.myResult = r.int64();
-                break;
-            case 10:
-                if (!(m.winnerCards && m.winnerCards.length))
-                    m.winnerCards = [];
-                m.winnerCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 11:
-                m.winnerName = r.string();
-                break;
-            case 12:
-                m.winnerHead = r.string();
-                break;
-            case 13:
-                m.winnerResult = r.int64();
-                break;
-            case 14:
-                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
-                break;
-            case 15:
-                if (!(m.players && m.players.length))
-                    m.players = [];
-                m.players.push($root.PlayerInfo.decode(r, r.uint32()));
-                break;
-            case 16:
-                m.dealerUid = r.string();
-                break;
-            case 17:
-                m.antes = r.int64();
-                break;
-            case 18:
-                if (!(m.roundStartActions && m.roundStartActions.length))
-                    m.roundStartActions = [];
-                m.roundStartActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 19:
-                if (!(m.preFlopActions && m.preFlopActions.length))
-                    m.preFlopActions = [];
-                m.preFlopActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 20:
-                if (!(m.flopActions && m.flopActions.length))
-                    m.flopActions = [];
-                m.flopActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 21:
-                if (!(m.turnActions && m.turnActions.length))
-                    m.turnActions = [];
-                m.turnActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 22:
-                if (!(m.riverActions && m.riverActions.length))
-                    m.riverActions = [];
-                m.riverActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 23:
-                if (!(m.result && m.result.length))
-                    m.result = [];
-                m.result.push($root.PlayerWinLose.decode(r, r.uint32()));
-                break;
-            case 24:
-                if (!(m.potInfoFlop && m.potInfoFlop.length))
-                    m.potInfoFlop = [];
-                m.potInfoFlop.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 25:
-                if (!(m.potInfoTurn && m.potInfoTurn.length))
-                    m.potInfoTurn = [];
-                m.potInfoTurn.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 26:
-                if (!(m.potInfoRiver && m.potInfoRiver.length))
-                    m.potInfoRiver = [];
-                m.potInfoRiver.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ReplayRecord;
-})();
-
-$root.Game2LoggerAmountChange = (function() {
-
-    /**
-     * Properties of a Game2LoggerAmountChange.
-     * @exports IGame2LoggerAmountChange
-     * @interface IGame2LoggerAmountChange
-     * @property {GameType|null} [gameType] Game2LoggerAmountChange gameType
-     * @property {string|null} [gameId] Game2LoggerAmountChange gameId
-     * @property {Array.<IAmountChangeInfo>|null} [amountChangeInfo] Game2LoggerAmountChange amountChangeInfo
-     */
-
-    /**
-     * Constructs a new Game2LoggerAmountChange.
-     * @exports Game2LoggerAmountChange
-     * @classdesc Represents a Game2LoggerAmountChange.
-     * @implements IGame2LoggerAmountChange
-     * @constructor
-     * @param {IGame2LoggerAmountChange=} [p] Properties to set
-     */
-    function Game2LoggerAmountChange(p) {
-        this.amountChangeInfo = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerAmountChange gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerAmountChange
-     * @instance
-     */
-    Game2LoggerAmountChange.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerAmountChange gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerAmountChange
-     * @instance
-     */
-    Game2LoggerAmountChange.prototype.gameId = "";
-
-    /**
-     * Game2LoggerAmountChange amountChangeInfo.
-     * @member {Array.<IAmountChangeInfo>} amountChangeInfo
-     * @memberof Game2LoggerAmountChange
-     * @instance
-     */
-    Game2LoggerAmountChange.prototype.amountChangeInfo = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerAmountChange message. Does not implicitly {@link Game2LoggerAmountChange.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerAmountChange
-     * @static
-     * @param {IGame2LoggerAmountChange} m Game2LoggerAmountChange message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerAmountChange.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(8).int32(m.gameType);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.amountChangeInfo != null && m.amountChangeInfo.length) {
-            for (var i = 0; i < m.amountChangeInfo.length; ++i)
-                $root.AmountChangeInfo.encode(m.amountChangeInfo[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerAmountChange message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerAmountChange
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerAmountChange} Game2LoggerAmountChange
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerAmountChange.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerAmountChange();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameType = r.int32();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                if (!(m.amountChangeInfo && m.amountChangeInfo.length))
-                    m.amountChangeInfo = [];
-                m.amountChangeInfo.push($root.AmountChangeInfo.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerAmountChange;
-})();
-
-$root.AmountChangeInfo = (function() {
-
-    /**
-     * Properties of an AmountChangeInfo.
-     * @exports IAmountChangeInfo
-     * @interface IAmountChangeInfo
-     * @property {string|null} [happenTime] AmountChangeInfo happenTime
-     * @property {string|null} [userId] AmountChangeInfo userId
-     * @property {string|null} [userName] AmountChangeInfo userName
-     * @property {string|null} [head] AmountChangeInfo head
-     * @property {number|null} [amountChange] AmountChangeInfo amountChange
-     * @property {number|null} [preChange] AmountChangeInfo preChange
-     * @property {number|null} [afterChange] AmountChangeInfo afterChange
-     * @property {AmountChangeType|null} [amountChangeType] AmountChangeInfo amountChangeType
-     * @property {IAmountChangeGenerics|null} [amountChangeGenerics] AmountChangeInfo amountChangeGenerics
-     */
-
-    /**
-     * Constructs a new AmountChangeInfo.
-     * @exports AmountChangeInfo
-     * @classdesc Represents an AmountChangeInfo.
-     * @implements IAmountChangeInfo
-     * @constructor
-     * @param {IAmountChangeInfo=} [p] Properties to set
-     */
-    function AmountChangeInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * AmountChangeInfo happenTime.
-     * @member {string} happenTime
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.happenTime = "";
-
-    /**
-     * AmountChangeInfo userId.
-     * @member {string} userId
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.userId = "";
-
-    /**
-     * AmountChangeInfo userName.
-     * @member {string} userName
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.userName = "";
-
-    /**
-     * AmountChangeInfo head.
-     * @member {string} head
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.head = "";
-
-    /**
-     * AmountChangeInfo amountChange.
-     * @member {number} amountChange
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.amountChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeInfo preChange.
-     * @member {number} preChange
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeInfo afterChange.
-     * @member {number} afterChange
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeInfo amountChangeType.
-     * @member {AmountChangeType} amountChangeType
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.amountChangeType = 0;
-
-    /**
-     * AmountChangeInfo amountChangeGenerics.
-     * @member {IAmountChangeGenerics|null|undefined} amountChangeGenerics
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.amountChangeGenerics = null;
-
-    /**
-     * Encodes the specified AmountChangeInfo message. Does not implicitly {@link AmountChangeInfo.verify|verify} messages.
-     * @function encode
-     * @memberof AmountChangeInfo
-     * @static
-     * @param {IAmountChangeInfo} m AmountChangeInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    AmountChangeInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(18).string(m.userId);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(26).string(m.userName);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(34).string(m.head);
-        if (m.amountChange != null && Object.hasOwnProperty.call(m, "amountChange"))
-            w.uint32(40).int64(m.amountChange);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(48).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(56).int64(m.afterChange);
-        if (m.amountChangeType != null && Object.hasOwnProperty.call(m, "amountChangeType"))
-            w.uint32(64).int32(m.amountChangeType);
-        if (m.amountChangeGenerics != null && Object.hasOwnProperty.call(m, "amountChangeGenerics"))
-            $root.AmountChangeGenerics.encode(m.amountChangeGenerics, w.uint32(74).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes an AmountChangeInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof AmountChangeInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {AmountChangeInfo} AmountChangeInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    AmountChangeInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.AmountChangeInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userId = r.string();
-                break;
-            case 3:
-                m.userName = r.string();
-                break;
-            case 4:
-                m.head = r.string();
-                break;
-            case 5:
-                m.amountChange = r.int64();
-                break;
-            case 6:
-                m.preChange = r.int64();
-                break;
-            case 7:
-                m.afterChange = r.int64();
-                break;
-            case 8:
-                m.amountChangeType = r.int32();
-                break;
-            case 9:
-                m.amountChangeGenerics = $root.AmountChangeGenerics.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return AmountChangeInfo;
-})();
-
-$root.AmountChangeGenerics = (function() {
-
-    /**
-     * Properties of an AmountChangeGenerics.
-     * @exports IAmountChangeGenerics
-     * @interface IAmountChangeGenerics
-     * @property {string|null} [clubName] AmountChangeGenerics clubName
-     * @property {string|null} [clubId] AmountChangeGenerics clubId
-     * @property {number|null} [baseProfit] AmountChangeGenerics baseProfit
-     * @property {number|null} [propRate] AmountChangeGenerics propRate
-     * @property {PropType|null} [propType] AmountChangeGenerics propType
-     * @property {number|null} [preSettlement] AmountChangeGenerics preSettlement
-     * @property {string|null} [handId] AmountChangeGenerics handId
-     * @property {number|null} [poolRate] AmountChangeGenerics poolRate
-     * @property {number|null} [currentHandCount] AmountChangeGenerics currentHandCount
-     * @property {number|null} [currentWinCount] AmountChangeGenerics currentWinCount
-     * @property {CowboyAreaType|null} [betType] AmountChangeGenerics betType
-     * @property {number|null} [levelRate] AmountChangeGenerics levelRate
-     * @property {JackpotType|null} [jackpotType] AmountChangeGenerics jackpotType
-     * @property {number|null} [jackpotRate] AmountChangeGenerics jackpotRate
-     * @property {number|null} [jackpotPool] AmountChangeGenerics jackpotPool
-     */
-
-    /**
-     * Constructs a new AmountChangeGenerics.
-     * @exports AmountChangeGenerics
-     * @classdesc Represents an AmountChangeGenerics.
-     * @implements IAmountChangeGenerics
-     * @constructor
-     * @param {IAmountChangeGenerics=} [p] Properties to set
-     */
-    function AmountChangeGenerics(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * AmountChangeGenerics clubName.
-     * @member {string} clubName
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.clubName = "";
-
-    /**
-     * AmountChangeGenerics clubId.
-     * @member {string} clubId
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.clubId = "";
-
-    /**
-     * AmountChangeGenerics baseProfit.
-     * @member {number} baseProfit
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.baseProfit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeGenerics propRate.
-     * @member {number} propRate
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.propRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeGenerics propType.
-     * @member {PropType} propType
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.propType = 0;
-
-    /**
-     * AmountChangeGenerics preSettlement.
-     * @member {number} preSettlement
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.preSettlement = 0;
-
-    /**
-     * AmountChangeGenerics handId.
-     * @member {string} handId
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.handId = "";
-
-    /**
-     * AmountChangeGenerics poolRate.
-     * @member {number} poolRate
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.poolRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeGenerics currentHandCount.
-     * @member {number} currentHandCount
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.currentHandCount = 0;
-
-    /**
-     * AmountChangeGenerics currentWinCount.
-     * @member {number} currentWinCount
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.currentWinCount = 0;
-
-    /**
-     * AmountChangeGenerics betType.
-     * @member {CowboyAreaType} betType
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.betType = 0;
-
-    /**
-     * AmountChangeGenerics levelRate.
-     * @member {number} levelRate
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.levelRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeGenerics jackpotType.
-     * @member {JackpotType} jackpotType
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.jackpotType = 0;
-
-    /**
-     * AmountChangeGenerics jackpotRate.
-     * @member {number} jackpotRate
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.jackpotRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeGenerics jackpotPool.
-     * @member {number} jackpotPool
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.jackpotPool = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified AmountChangeGenerics message. Does not implicitly {@link AmountChangeGenerics.verify|verify} messages.
-     * @function encode
-     * @memberof AmountChangeGenerics
-     * @static
-     * @param {IAmountChangeGenerics} m AmountChangeGenerics message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    AmountChangeGenerics.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(10).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.baseProfit != null && Object.hasOwnProperty.call(m, "baseProfit"))
-            w.uint32(24).int64(m.baseProfit);
-        if (m.propRate != null && Object.hasOwnProperty.call(m, "propRate"))
-            w.uint32(32).int64(m.propRate);
-        if (m.propType != null && Object.hasOwnProperty.call(m, "propType"))
-            w.uint32(40).int32(m.propType);
-        if (m.preSettlement != null && Object.hasOwnProperty.call(m, "preSettlement"))
-            w.uint32(48).int32(m.preSettlement);
-        if (m.handId != null && Object.hasOwnProperty.call(m, "handId"))
-            w.uint32(58).string(m.handId);
-        if (m.poolRate != null && Object.hasOwnProperty.call(m, "poolRate"))
-            w.uint32(64).int64(m.poolRate);
-        if (m.currentHandCount != null && Object.hasOwnProperty.call(m, "currentHandCount"))
-            w.uint32(72).int32(m.currentHandCount);
-        if (m.currentWinCount != null && Object.hasOwnProperty.call(m, "currentWinCount"))
-            w.uint32(80).int32(m.currentWinCount);
-        if (m.betType != null && Object.hasOwnProperty.call(m, "betType"))
-            w.uint32(88).int32(m.betType);
-        if (m.levelRate != null && Object.hasOwnProperty.call(m, "levelRate"))
-            w.uint32(96).int64(m.levelRate);
-        if (m.jackpotType != null && Object.hasOwnProperty.call(m, "jackpotType"))
-            w.uint32(104).int32(m.jackpotType);
-        if (m.jackpotRate != null && Object.hasOwnProperty.call(m, "jackpotRate"))
-            w.uint32(112).int64(m.jackpotRate);
-        if (m.jackpotPool != null && Object.hasOwnProperty.call(m, "jackpotPool"))
-            w.uint32(120).int64(m.jackpotPool);
-        return w;
-    };
-
-    /**
-     * Decodes an AmountChangeGenerics message from the specified reader or buffer.
-     * @function decode
-     * @memberof AmountChangeGenerics
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {AmountChangeGenerics} AmountChangeGenerics
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    AmountChangeGenerics.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.AmountChangeGenerics();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubName = r.string();
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                m.baseProfit = r.int64();
-                break;
-            case 4:
-                m.propRate = r.int64();
-                break;
-            case 5:
-                m.propType = r.int32();
-                break;
-            case 6:
-                m.preSettlement = r.int32();
-                break;
-            case 7:
-                m.handId = r.string();
-                break;
-            case 8:
-                m.poolRate = r.int64();
-                break;
-            case 9:
-                m.currentHandCount = r.int32();
-                break;
-            case 10:
-                m.currentWinCount = r.int32();
-                break;
-            case 11:
-                m.betType = r.int32();
-                break;
-            case 12:
-                m.levelRate = r.int64();
-                break;
-            case 13:
-                m.jackpotType = r.int32();
-                break;
-            case 14:
-                m.jackpotRate = r.int64();
-                break;
-            case 15:
-                m.jackpotPool = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return AmountChangeGenerics;
-})();
-
-$root.C2SLogin = (function() {
-
-    /**
-     * Properties of a C2SLogin.
-     * @exports IC2SLogin
-     * @interface IC2SLogin
-     * @property {LoginType|null} [loginType] C2SLogin loginType
-     * @property {string|null} [phoneNumber] C2SLogin phoneNumber
-     * @property {string|null} [code] C2SLogin code
-     * @property {string|null} [psw] C2SLogin psw
-     */
-
-    /**
-     * Constructs a new C2SLogin.
-     * @exports C2SLogin
-     * @classdesc Represents a C2SLogin.
-     * @implements IC2SLogin
-     * @constructor
-     * @param {IC2SLogin=} [p] Properties to set
-     */
-    function C2SLogin(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SLogin loginType.
-     * @member {LoginType} loginType
-     * @memberof C2SLogin
-     * @instance
-     */
-    C2SLogin.prototype.loginType = 0;
-
-    /**
-     * C2SLogin phoneNumber.
-     * @member {string} phoneNumber
-     * @memberof C2SLogin
-     * @instance
-     */
-    C2SLogin.prototype.phoneNumber = "";
-
-    /**
-     * C2SLogin code.
-     * @member {string} code
-     * @memberof C2SLogin
-     * @instance
-     */
-    C2SLogin.prototype.code = "";
-
-    /**
-     * C2SLogin psw.
-     * @member {string} psw
-     * @memberof C2SLogin
-     * @instance
-     */
-    C2SLogin.prototype.psw = "";
-
-    /**
-     * Encodes the specified C2SLogin message. Does not implicitly {@link C2SLogin.verify|verify} messages.
-     * @function encode
-     * @memberof C2SLogin
-     * @static
-     * @param {IC2SLogin} m C2SLogin message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SLogin.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.loginType != null && Object.hasOwnProperty.call(m, "loginType"))
-            w.uint32(8).int32(m.loginType);
-        if (m.phoneNumber != null && Object.hasOwnProperty.call(m, "phoneNumber"))
-            w.uint32(18).string(m.phoneNumber);
-        if (m.code != null && Object.hasOwnProperty.call(m, "code"))
-            w.uint32(26).string(m.code);
-        if (m.psw != null && Object.hasOwnProperty.call(m, "psw"))
-            w.uint32(34).string(m.psw);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SLogin message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SLogin
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SLogin} C2SLogin
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SLogin.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SLogin();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.loginType = r.int32();
-                break;
-            case 2:
-                m.phoneNumber = r.string();
-                break;
-            case 3:
-                m.code = r.string();
-                break;
-            case 4:
-                m.psw = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SLogin;
-})();
-
-$root.C2SRegister = (function() {
-
-    /**
-     * Properties of a C2SRegister.
-     * @exports IC2SRegister
-     * @interface IC2SRegister
-     * @property {string|null} [phoneNumber] C2SRegister phoneNumber
-     * @property {string|null} [code] C2SRegister code
-     * @property {string|null} [nickName] C2SRegister nickName
-     * @property {string|null} [psw] C2SRegister psw
-     * @property {string|null} [head] C2SRegister head
-     * @property {string|null} [inviteCode] C2SRegister inviteCode
-     */
-
-    /**
-     * Constructs a new C2SRegister.
-     * @exports C2SRegister
-     * @classdesc Represents a C2SRegister.
-     * @implements IC2SRegister
-     * @constructor
-     * @param {IC2SRegister=} [p] Properties to set
-     */
-    function C2SRegister(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SRegister phoneNumber.
-     * @member {string} phoneNumber
-     * @memberof C2SRegister
-     * @instance
-     */
-    C2SRegister.prototype.phoneNumber = "";
-
-    /**
-     * C2SRegister code.
-     * @member {string} code
-     * @memberof C2SRegister
-     * @instance
-     */
-    C2SRegister.prototype.code = "";
-
-    /**
-     * C2SRegister nickName.
-     * @member {string} nickName
-     * @memberof C2SRegister
-     * @instance
-     */
-    C2SRegister.prototype.nickName = "";
-
-    /**
-     * C2SRegister psw.
-     * @member {string} psw
-     * @memberof C2SRegister
-     * @instance
-     */
-    C2SRegister.prototype.psw = "";
-
-    /**
-     * C2SRegister head.
-     * @member {string} head
-     * @memberof C2SRegister
-     * @instance
-     */
-    C2SRegister.prototype.head = "";
-
-    /**
-     * C2SRegister inviteCode.
-     * @member {string} inviteCode
-     * @memberof C2SRegister
-     * @instance
-     */
-    C2SRegister.prototype.inviteCode = "";
-
-    /**
-     * Encodes the specified C2SRegister message. Does not implicitly {@link C2SRegister.verify|verify} messages.
-     * @function encode
-     * @memberof C2SRegister
-     * @static
-     * @param {IC2SRegister} m C2SRegister message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SRegister.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.phoneNumber != null && Object.hasOwnProperty.call(m, "phoneNumber"))
-            w.uint32(10).string(m.phoneNumber);
-        if (m.code != null && Object.hasOwnProperty.call(m, "code"))
-            w.uint32(18).string(m.code);
-        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
-            w.uint32(26).string(m.nickName);
-        if (m.psw != null && Object.hasOwnProperty.call(m, "psw"))
-            w.uint32(34).string(m.psw);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(42).string(m.head);
-        if (m.inviteCode != null && Object.hasOwnProperty.call(m, "inviteCode"))
-            w.uint32(50).string(m.inviteCode);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SRegister message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SRegister
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SRegister} C2SRegister
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SRegister.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SRegister();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.phoneNumber = r.string();
-                break;
-            case 2:
-                m.code = r.string();
-                break;
-            case 3:
-                m.nickName = r.string();
-                break;
-            case 4:
-                m.psw = r.string();
-                break;
-            case 5:
-                m.head = r.string();
-                break;
-            case 6:
-                m.inviteCode = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SRegister;
-})();
-
-$root.C2SGetSmsCode = (function() {
-
-    /**
-     * Properties of a C2SGetSmsCode.
-     * @exports IC2SGetSmsCode
-     * @interface IC2SGetSmsCode
-     * @property {string|null} [phoneNumber] C2SGetSmsCode phoneNumber
-     * @property {SmsCodeType|null} [type] C2SGetSmsCode type
-     */
-
-    /**
-     * Constructs a new C2SGetSmsCode.
-     * @exports C2SGetSmsCode
-     * @classdesc Represents a C2SGetSmsCode.
-     * @implements IC2SGetSmsCode
-     * @constructor
-     * @param {IC2SGetSmsCode=} [p] Properties to set
-     */
-    function C2SGetSmsCode(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SGetSmsCode phoneNumber.
-     * @member {string} phoneNumber
-     * @memberof C2SGetSmsCode
-     * @instance
-     */
-    C2SGetSmsCode.prototype.phoneNumber = "";
-
-    /**
-     * C2SGetSmsCode type.
-     * @member {SmsCodeType} type
-     * @memberof C2SGetSmsCode
-     * @instance
-     */
-    C2SGetSmsCode.prototype.type = 0;
-
-    /**
-     * Encodes the specified C2SGetSmsCode message. Does not implicitly {@link C2SGetSmsCode.verify|verify} messages.
-     * @function encode
-     * @memberof C2SGetSmsCode
-     * @static
-     * @param {IC2SGetSmsCode} m C2SGetSmsCode message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SGetSmsCode.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.phoneNumber != null && Object.hasOwnProperty.call(m, "phoneNumber"))
-            w.uint32(10).string(m.phoneNumber);
-        if (m.type != null && Object.hasOwnProperty.call(m, "type"))
-            w.uint32(16).int32(m.type);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SGetSmsCode message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SGetSmsCode
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SGetSmsCode} C2SGetSmsCode
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SGetSmsCode.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetSmsCode();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.phoneNumber = r.string();
-                break;
-            case 2:
-                m.type = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SGetSmsCode;
-})();
-
-$root.C2SVerifyPhoneNumber = (function() {
-
-    /**
-     * Properties of a C2SVerifyPhoneNumber.
-     * @exports IC2SVerifyPhoneNumber
-     * @interface IC2SVerifyPhoneNumber
-     * @property {string|null} [phoneNumber] C2SVerifyPhoneNumber phoneNumber
-     */
-
-    /**
-     * Constructs a new C2SVerifyPhoneNumber.
-     * @exports C2SVerifyPhoneNumber
-     * @classdesc Represents a C2SVerifyPhoneNumber.
-     * @implements IC2SVerifyPhoneNumber
-     * @constructor
-     * @param {IC2SVerifyPhoneNumber=} [p] Properties to set
-     */
-    function C2SVerifyPhoneNumber(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * C2SVerifyPhoneNumber phoneNumber.
-     * @member {string} phoneNumber
-     * @memberof C2SVerifyPhoneNumber
-     * @instance
-     */
-    C2SVerifyPhoneNumber.prototype.phoneNumber = "";
-
-    /**
-     * Encodes the specified C2SVerifyPhoneNumber message. Does not implicitly {@link C2SVerifyPhoneNumber.verify|verify} messages.
-     * @function encode
-     * @memberof C2SVerifyPhoneNumber
-     * @static
-     * @param {IC2SVerifyPhoneNumber} m C2SVerifyPhoneNumber message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    C2SVerifyPhoneNumber.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.phoneNumber != null && Object.hasOwnProperty.call(m, "phoneNumber"))
-            w.uint32(10).string(m.phoneNumber);
-        return w;
-    };
-
-    /**
-     * Decodes a C2SVerifyPhoneNumber message from the specified reader or buffer.
-     * @function decode
-     * @memberof C2SVerifyPhoneNumber
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {C2SVerifyPhoneNumber} C2SVerifyPhoneNumber
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    C2SVerifyPhoneNumber.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SVerifyPhoneNumber();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.phoneNumber = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return C2SVerifyPhoneNumber;
-})();
-
-/**
- * SmsCodeType enum.
- * @exports SmsCodeType
- * @enum {number}
- * @property {number} Register=0 Register value
- * @property {number} Login=1 Login value
- * @property {number} ResetPassword=2 ResetPassword value
- */
-$root.SmsCodeType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "Register"] = 0;
-    values[valuesById[1] = "Login"] = 1;
-    values[valuesById[2] = "ResetPassword"] = 2;
-    return values;
-})();
-
-/**
- * LoginType enum.
- * @exports LoginType
- * @enum {number}
- * @property {number} LoginType_UnKnow=0 LoginType_UnKnow value
- * @property {number} LoginType_PhoneCode=1 LoginType_PhoneCode value
- * @property {number} LoginType_PhonePsw=2 LoginType_PhonePsw value
- */
-$root.LoginType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "LoginType_UnKnow"] = 0;
-    values[valuesById[1] = "LoginType_PhoneCode"] = 1;
-    values[valuesById[2] = "LoginType_PhonePsw"] = 2;
-    return values;
-})();
-
-$root.S2CLogin = (function() {
-
-    /**
-     * Properties of a S2CLogin.
-     * @exports IS2CLogin
-     * @interface IS2CLogin
-     * @property {ICommonResult|null} [result] S2CLogin result
-     * @property {string|null} [token] S2CLogin token
-     */
-
-    /**
-     * Constructs a new S2CLogin.
-     * @exports S2CLogin
-     * @classdesc Represents a S2CLogin.
-     * @implements IS2CLogin
-     * @constructor
-     * @param {IS2CLogin=} [p] Properties to set
-     */
-    function S2CLogin(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CLogin result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CLogin
-     * @instance
-     */
-    S2CLogin.prototype.result = null;
-
-    /**
-     * S2CLogin token.
-     * @member {string} token
-     * @memberof S2CLogin
-     * @instance
-     */
-    S2CLogin.prototype.token = "";
-
-    /**
-     * Encodes the specified S2CLogin message. Does not implicitly {@link S2CLogin.verify|verify} messages.
-     * @function encode
-     * @memberof S2CLogin
-     * @static
-     * @param {IS2CLogin} m S2CLogin message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CLogin.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-            w.uint32(18).string(m.token);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CLogin message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CLogin
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CLogin} S2CLogin
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CLogin.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CLogin();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            case 2:
-                m.token = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CLogin;
-})();
-
-$root.S2CRegister = (function() {
-
-    /**
-     * Properties of a S2CRegister.
-     * @exports IS2CRegister
-     * @interface IS2CRegister
-     * @property {ICommonResult|null} [result] S2CRegister result
-     */
-
-    /**
-     * Constructs a new S2CRegister.
-     * @exports S2CRegister
-     * @classdesc Represents a S2CRegister.
-     * @implements IS2CRegister
-     * @constructor
-     * @param {IS2CRegister=} [p] Properties to set
-     */
-    function S2CRegister(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CRegister result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CRegister
-     * @instance
-     */
-    S2CRegister.prototype.result = null;
-
-    /**
-     * Encodes the specified S2CRegister message. Does not implicitly {@link S2CRegister.verify|verify} messages.
-     * @function encode
-     * @memberof S2CRegister
-     * @static
-     * @param {IS2CRegister} m S2CRegister message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CRegister.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CRegister message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CRegister
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CRegister} S2CRegister
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CRegister.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CRegister();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CRegister;
-})();
-
-$root.S2CGetSmsCode = (function() {
-
-    /**
-     * Properties of a S2CGetSmsCode.
-     * @exports IS2CGetSmsCode
-     * @interface IS2CGetSmsCode
-     * @property {number|null} [code] S2CGetSmsCode code
-     * @property {SmsCodeType|null} [type] S2CGetSmsCode type
-     */
-
-    /**
-     * Constructs a new S2CGetSmsCode.
-     * @exports S2CGetSmsCode
-     * @classdesc Represents a S2CGetSmsCode.
-     * @implements IS2CGetSmsCode
-     * @constructor
-     * @param {IS2CGetSmsCode=} [p] Properties to set
-     */
-    function S2CGetSmsCode(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CGetSmsCode code.
-     * @member {number} code
-     * @memberof S2CGetSmsCode
-     * @instance
-     */
-    S2CGetSmsCode.prototype.code = 0;
-
-    /**
-     * S2CGetSmsCode type.
-     * @member {SmsCodeType} type
-     * @memberof S2CGetSmsCode
-     * @instance
-     */
-    S2CGetSmsCode.prototype.type = 0;
-
-    /**
-     * Encodes the specified S2CGetSmsCode message. Does not implicitly {@link S2CGetSmsCode.verify|verify} messages.
-     * @function encode
-     * @memberof S2CGetSmsCode
-     * @static
-     * @param {IS2CGetSmsCode} m S2CGetSmsCode message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CGetSmsCode.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.code != null && Object.hasOwnProperty.call(m, "code"))
-            w.uint32(8).int32(m.code);
-        if (m.type != null && Object.hasOwnProperty.call(m, "type"))
-            w.uint32(16).int32(m.type);
-        return w;
-    };
-
-    /**
-     * Decodes a S2CGetSmsCode message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CGetSmsCode
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CGetSmsCode} S2CGetSmsCode
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CGetSmsCode.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CGetSmsCode();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.code = r.int32();
-                break;
-            case 2:
-                m.type = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CGetSmsCode;
-})();
-
-$root.S2CVerifyPhoneNumber = (function() {
-
-    /**
-     * Properties of a S2CVerifyPhoneNumber.
-     * @exports IS2CVerifyPhoneNumber
-     * @interface IS2CVerifyPhoneNumber
-     * @property {ICommonResult|null} [result] S2CVerifyPhoneNumber result
-     */
-
-    /**
-     * Constructs a new S2CVerifyPhoneNumber.
-     * @exports S2CVerifyPhoneNumber
-     * @classdesc Represents a S2CVerifyPhoneNumber.
-     * @implements IS2CVerifyPhoneNumber
-     * @constructor
-     * @param {IS2CVerifyPhoneNumber=} [p] Properties to set
-     */
-    function S2CVerifyPhoneNumber(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * S2CVerifyPhoneNumber result.
-     * @member {ICommonResult|null|undefined} result
-     * @memberof S2CVerifyPhoneNumber
-     * @instance
-     */
-    S2CVerifyPhoneNumber.prototype.result = null;
-
-    /**
-     * Encodes the specified S2CVerifyPhoneNumber message. Does not implicitly {@link S2CVerifyPhoneNumber.verify|verify} messages.
-     * @function encode
-     * @memberof S2CVerifyPhoneNumber
-     * @static
-     * @param {IS2CVerifyPhoneNumber} m S2CVerifyPhoneNumber message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    S2CVerifyPhoneNumber.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a S2CVerifyPhoneNumber message from the specified reader or buffer.
-     * @function decode
-     * @memberof S2CVerifyPhoneNumber
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {S2CVerifyPhoneNumber} S2CVerifyPhoneNumber
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    S2CVerifyPhoneNumber.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CVerifyPhoneNumber();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.result = $root.CommonResult.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return S2CVerifyPhoneNumber;
-})();
-
 /**
  * MessageId enum.
  * @exports MessageId
@@ -16159,81 +8588,12 @@ $root.S2CVerifyPhoneNumber = (function() {
  * @property {number} C2S_HeartbeatPing=10 C2S_HeartbeatPing value
  * @property {number} S2C_HeartbeatPong=11 S2C_HeartbeatPong value
  * @property {number} S2C_Kick=20 S2C_Kick value
- * @property {number} MSG_LoginBegin=1001 MSG_LoginBegin value
- * @property {number} C2S_Login=1002 C2S_Login value
- * @property {number} C2S_Register=1004 C2S_Register value
- * @property {number} C2S_GetSmsCode=1005 C2S_GetSmsCode value
- * @property {number} C2S_VerifyPhoneNumber=1006 C2S_VerifyPhoneNumber value
- * @property {number} S2C_Login=1101 S2C_Login value
- * @property {number} S2C_Register=1102 S2C_Register value
- * @property {number} S2C_GetSmsCode=1103 S2C_GetSmsCode value
- * @property {number} S2C_VerifyPhoneNumber=1104 S2C_VerifyPhoneNumber value
- * @property {number} MSG_LoginEnd=2000 MSG_LoginEnd value
- * @property {number} MSG_HallBegin=2001 MSG_HallBegin value
- * @property {number} C2S_Logout=2002 C2S_Logout value
- * @property {number} C2S_GetUserInfo=2003 C2S_GetUserInfo value
- * @property {number} C2S_RefreshUserInfo=2004 C2S_RefreshUserInfo value
- * @property {number} C2S_ChangeUserInfo=2005 C2S_ChangeUserInfo value
- * @property {number} C2S_GetHallTexasGameInfo=2006 C2S_GetHallTexasGameInfo value
- * @property {number} C2S_GetHallSubGameInfo=2007 C2S_GetHallSubGameInfo value
- * @property {number} C2S_AddCurrency=2008 C2S_AddCurrency value
- * @property {number} S2C_GetUserInfo=3001 S2C_GetUserInfo value
- * @property {number} S2C_RefreshUserInfoResp=3002 S2C_RefreshUserInfoResp value
- * @property {number} S2C_ChangeUserInfo=3003 S2C_ChangeUserInfo value
- * @property {number} S2C_GetHallTexasGameInfoResp=3004 S2C_GetHallTexasGameInfoResp value
- * @property {number} S2C_GetHallSubGameInfoResp=3005 S2C_GetHallSubGameInfoResp value
- * @property {number} S2C_AddCurrencyResp=3006 S2C_AddCurrencyResp value
- * @property {number} S2C_AddCurrencyNotify=3007 S2C_AddCurrencyNotify value
- * @property {number} MSG_HallEnd=3500 MSG_HallEnd value
- * @property {number} MSG_ClubBegin=4001 MSG_ClubBegin value
- * @property {number} C2S_CreateClub=4002 C2S_CreateClub value
- * @property {number} C2S_GetClubInfos=4003 C2S_GetClubInfos value
- * @property {number} C2S_EnterClub=4004 C2S_EnterClub value
- * @property {number} C2S_SearchClub=4005 C2S_SearchClub value
- * @property {number} C2S_JoinClub=4006 C2S_JoinClub value
- * @property {number} C2S_GetClubMember=4007 C2S_GetClubMember value
- * @property {number} C2S_AddClubMember=4008 C2S_AddClubMember value
- * @property {number} C2S_DismissClub=4009 C2S_DismissClub value
- * @property {number} C2S_QuitClub=4010 C2S_QuitClub value
- * @property {number} C2S_RemoveMember=4011 C2S_RemoveMember value
- * @property {number} C2S_ModifyClubInfo=4012 C2S_ModifyClubInfo value
- * @property {number} C2S_ShareClubScore=4013 C2S_ShareClubScore value
- * @property {number} C2S_ModifyMemberRole=4014 C2S_ModifyMemberRole value
- * @property {number} C2S_CreateClubGame=4015 C2S_CreateClubGame value
- * @property {number} C2S_GetClubTexasGameInfo=4016 C2S_GetClubTexasGameInfo value
- * @property {number} C2S_GetClubSubGameInfo=4017 C2S_GetClubSubGameInfo value
- * @property {number} C2S_DismissClubGame=4018 C2S_DismissClubGame value
- * @property {number} S2C_CreateClub=4501 S2C_CreateClub value
- * @property {number} S2C_GetClubInfos=4502 S2C_GetClubInfos value
- * @property {number} S2C_EnterClub=4503 S2C_EnterClub value
- * @property {number} S2C_SearchClub=4504 S2C_SearchClub value
- * @property {number} S2C_JoinClub=4505 S2C_JoinClub value
- * @property {number} S2C_GetClubMember=4506 S2C_GetClubMember value
- * @property {number} S2C_AddClubMember=4507 S2C_AddClubMember value
- * @property {number} S2C_DismissClub=4508 S2C_DismissClub value
- * @property {number} S2C_QuitClub=4509 S2C_QuitClub value
- * @property {number} S2C_RemoveMember=4510 S2C_RemoveMember value
- * @property {number} S2C_ModifyClubInfo=4511 S2C_ModifyClubInfo value
- * @property {number} S2C_ShareClubScore=4512 S2C_ShareClubScore value
- * @property {number} S2C_ModifyMemberRole=4513 S2C_ModifyMemberRole value
- * @property {number} S2C_CreateClubGame=4514 S2C_CreateClubGame value
- * @property {number} S2C_GetClubTexasGameInfoResp=4515 S2C_GetClubTexasGameInfoResp value
- * @property {number} S2C_GetClubSubGameInfoResp=4516 S2C_GetClubSubGameInfoResp value
- * @property {number} S2C_DismissClubGame=4517 S2C_DismissClubGame value
- * @property {number} S2C_ClubJoinNotify=4611 S2C_ClubJoinNotify value
- * @property {number} S2C_JoinClubNotify=4612 S2C_JoinClubNotify value
- * @property {number} S2C_RemoveNotify=4613 S2C_RemoveNotify value
- * @property {number} S2C_DismissClubNotify=4614 S2C_DismissClubNotify value
- * @property {number} S2C_ClubTotalPointNotify=4615 S2C_ClubTotalPointNotify value
- * @property {number} S2C_ClubPlayerPointNotify=4616 S2C_ClubPlayerPointNotify value
- * @property {number} S2C_ModifyMemberRoleNotify=4617 S2C_ModifyMemberRoleNotify value
- * @property {number} S2C_DismissClubGameNotify=4618 S2C_DismissClubGameNotify value
- * @property {number} MSG_ClubEnd=5000 MSG_ClubEnd value
  * @property {number} MSG_TexasCashBegin=5001 MSG_TexasCashBegin value
- * @property {number} C2S_TexasCashEnterGame=5002 C2S_TexasCashEnterGame value
- * @property {number} C2S_TexasCashExitGame=5003 C2S_TexasCashExitGame value
- * @property {number} C2S_TexasCashOpen=5004 C2S_TexasCashOpen value
- * @property {number} C2S_TexasCashSitDown=5005 C2S_TexasCashSitDown value
+ * @property {number} C2S_TexasCashLogout=5002 C2S_TexasCashLogout value
+ * @property {number} C2S_TexasCashEnterGame=5003 C2S_TexasCashEnterGame value
+ * @property {number} C2S_TexasCashExitGame=5004 C2S_TexasCashExitGame value
+ * @property {number} C2S_TexasCashOpen=5005 C2S_TexasCashOpen value
+ * @property {number} C2S_TexasCashSitDown=5006 C2S_TexasCashSitDown value
  * @property {number} C2S_TexasCashStandUp=5007 C2S_TexasCashStandUp value
  * @property {number} C2S_TexasCashBringIn=5008 C2S_TexasCashBringIn value
  * @property {number} C2S_TexasCashAction=5009 C2S_TexasCashAction value
@@ -16333,81 +8693,12 @@ $root.MessageId = (function() {
     values[valuesById[10] = "C2S_HeartbeatPing"] = 10;
     values[valuesById[11] = "S2C_HeartbeatPong"] = 11;
     values[valuesById[20] = "S2C_Kick"] = 20;
-    values[valuesById[1001] = "MSG_LoginBegin"] = 1001;
-    values[valuesById[1002] = "C2S_Login"] = 1002;
-    values[valuesById[1004] = "C2S_Register"] = 1004;
-    values[valuesById[1005] = "C2S_GetSmsCode"] = 1005;
-    values[valuesById[1006] = "C2S_VerifyPhoneNumber"] = 1006;
-    values[valuesById[1101] = "S2C_Login"] = 1101;
-    values[valuesById[1102] = "S2C_Register"] = 1102;
-    values[valuesById[1103] = "S2C_GetSmsCode"] = 1103;
-    values[valuesById[1104] = "S2C_VerifyPhoneNumber"] = 1104;
-    values[valuesById[2000] = "MSG_LoginEnd"] = 2000;
-    values[valuesById[2001] = "MSG_HallBegin"] = 2001;
-    values[valuesById[2002] = "C2S_Logout"] = 2002;
-    values[valuesById[2003] = "C2S_GetUserInfo"] = 2003;
-    values[valuesById[2004] = "C2S_RefreshUserInfo"] = 2004;
-    values[valuesById[2005] = "C2S_ChangeUserInfo"] = 2005;
-    values[valuesById[2006] = "C2S_GetHallTexasGameInfo"] = 2006;
-    values[valuesById[2007] = "C2S_GetHallSubGameInfo"] = 2007;
-    values[valuesById[2008] = "C2S_AddCurrency"] = 2008;
-    values[valuesById[3001] = "S2C_GetUserInfo"] = 3001;
-    values[valuesById[3002] = "S2C_RefreshUserInfoResp"] = 3002;
-    values[valuesById[3003] = "S2C_ChangeUserInfo"] = 3003;
-    values[valuesById[3004] = "S2C_GetHallTexasGameInfoResp"] = 3004;
-    values[valuesById[3005] = "S2C_GetHallSubGameInfoResp"] = 3005;
-    values[valuesById[3006] = "S2C_AddCurrencyResp"] = 3006;
-    values[valuesById[3007] = "S2C_AddCurrencyNotify"] = 3007;
-    values[valuesById[3500] = "MSG_HallEnd"] = 3500;
-    values[valuesById[4001] = "MSG_ClubBegin"] = 4001;
-    values[valuesById[4002] = "C2S_CreateClub"] = 4002;
-    values[valuesById[4003] = "C2S_GetClubInfos"] = 4003;
-    values[valuesById[4004] = "C2S_EnterClub"] = 4004;
-    values[valuesById[4005] = "C2S_SearchClub"] = 4005;
-    values[valuesById[4006] = "C2S_JoinClub"] = 4006;
-    values[valuesById[4007] = "C2S_GetClubMember"] = 4007;
-    values[valuesById[4008] = "C2S_AddClubMember"] = 4008;
-    values[valuesById[4009] = "C2S_DismissClub"] = 4009;
-    values[valuesById[4010] = "C2S_QuitClub"] = 4010;
-    values[valuesById[4011] = "C2S_RemoveMember"] = 4011;
-    values[valuesById[4012] = "C2S_ModifyClubInfo"] = 4012;
-    values[valuesById[4013] = "C2S_ShareClubScore"] = 4013;
-    values[valuesById[4014] = "C2S_ModifyMemberRole"] = 4014;
-    values[valuesById[4015] = "C2S_CreateClubGame"] = 4015;
-    values[valuesById[4016] = "C2S_GetClubTexasGameInfo"] = 4016;
-    values[valuesById[4017] = "C2S_GetClubSubGameInfo"] = 4017;
-    values[valuesById[4018] = "C2S_DismissClubGame"] = 4018;
-    values[valuesById[4501] = "S2C_CreateClub"] = 4501;
-    values[valuesById[4502] = "S2C_GetClubInfos"] = 4502;
-    values[valuesById[4503] = "S2C_EnterClub"] = 4503;
-    values[valuesById[4504] = "S2C_SearchClub"] = 4504;
-    values[valuesById[4505] = "S2C_JoinClub"] = 4505;
-    values[valuesById[4506] = "S2C_GetClubMember"] = 4506;
-    values[valuesById[4507] = "S2C_AddClubMember"] = 4507;
-    values[valuesById[4508] = "S2C_DismissClub"] = 4508;
-    values[valuesById[4509] = "S2C_QuitClub"] = 4509;
-    values[valuesById[4510] = "S2C_RemoveMember"] = 4510;
-    values[valuesById[4511] = "S2C_ModifyClubInfo"] = 4511;
-    values[valuesById[4512] = "S2C_ShareClubScore"] = 4512;
-    values[valuesById[4513] = "S2C_ModifyMemberRole"] = 4513;
-    values[valuesById[4514] = "S2C_CreateClubGame"] = 4514;
-    values[valuesById[4515] = "S2C_GetClubTexasGameInfoResp"] = 4515;
-    values[valuesById[4516] = "S2C_GetClubSubGameInfoResp"] = 4516;
-    values[valuesById[4517] = "S2C_DismissClubGame"] = 4517;
-    values[valuesById[4611] = "S2C_ClubJoinNotify"] = 4611;
-    values[valuesById[4612] = "S2C_JoinClubNotify"] = 4612;
-    values[valuesById[4613] = "S2C_RemoveNotify"] = 4613;
-    values[valuesById[4614] = "S2C_DismissClubNotify"] = 4614;
-    values[valuesById[4615] = "S2C_ClubTotalPointNotify"] = 4615;
-    values[valuesById[4616] = "S2C_ClubPlayerPointNotify"] = 4616;
-    values[valuesById[4617] = "S2C_ModifyMemberRoleNotify"] = 4617;
-    values[valuesById[4618] = "S2C_DismissClubGameNotify"] = 4618;
-    values[valuesById[5000] = "MSG_ClubEnd"] = 5000;
     values[valuesById[5001] = "MSG_TexasCashBegin"] = 5001;
-    values[valuesById[5002] = "C2S_TexasCashEnterGame"] = 5002;
-    values[valuesById[5003] = "C2S_TexasCashExitGame"] = 5003;
-    values[valuesById[5004] = "C2S_TexasCashOpen"] = 5004;
-    values[valuesById[5005] = "C2S_TexasCashSitDown"] = 5005;
+    values[valuesById[5002] = "C2S_TexasCashLogout"] = 5002;
+    values[valuesById[5003] = "C2S_TexasCashEnterGame"] = 5003;
+    values[valuesById[5004] = "C2S_TexasCashExitGame"] = 5004;
+    values[valuesById[5005] = "C2S_TexasCashOpen"] = 5005;
+    values[valuesById[5006] = "C2S_TexasCashSitDown"] = 5006;
     values[valuesById[5007] = "C2S_TexasCashStandUp"] = 5007;
     values[valuesById[5008] = "C2S_TexasCashBringIn"] = 5008;
     values[valuesById[5009] = "C2S_TexasCashAction"] = 5009;
@@ -16510,6 +8801,7 @@ $root.C2SEnterGame = (function() {
      * @exports IC2SEnterGame
      * @interface IC2SEnterGame
      * @property {string|null} [gameId] C2SEnterGame gameId
+     * @property {string|null} [uid] C2SEnterGame uid
      */
 
     /**
@@ -16536,6 +8828,14 @@ $root.C2SEnterGame = (function() {
     C2SEnterGame.prototype.gameId = "";
 
     /**
+     * C2SEnterGame uid.
+     * @member {string} uid
+     * @memberof C2SEnterGame
+     * @instance
+     */
+    C2SEnterGame.prototype.uid = "";
+
+    /**
      * Encodes the specified C2SEnterGame message. Does not implicitly {@link C2SEnterGame.verify|verify} messages.
      * @function encode
      * @memberof C2SEnterGame
@@ -16549,6 +8849,8 @@ $root.C2SEnterGame = (function() {
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(10).string(m.gameId);
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(18).string(m.uid);
         return w;
     };
 
@@ -16572,6 +8874,9 @@ $root.C2SEnterGame = (function() {
             switch (t >>> 3) {
             case 1:
                 m.gameId = r.string();
+                break;
+            case 2:
+                m.uid = r.string();
                 break;
             default:
                 r.skipType(t & 7);

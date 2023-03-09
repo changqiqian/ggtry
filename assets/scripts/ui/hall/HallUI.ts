@@ -53,7 +53,7 @@ export class HallUI extends BaseUI
             if(GameConfig.LOGIN_TOKEN != null)
             {
                 console.log("Token 自动登录")
-                NetworkSend.Instance.GetUserInfo();
+                //NetworkSend.Instance.GetUserInfo();
             }
             else
             {
@@ -77,17 +77,17 @@ export class HallUI extends BaseUI
             }
         })
 
-        HallData.Instance.Data_S2CAddCurrencyNotify.AddListenner(this,(_data)=>
-        {
-            UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
-            {
-                let tempScript = _script as TipsWindow;
-                let balance = Tool.ConvertMoney_S2C(_data.currencyNum) + "";
-                let tips = Localization.ReplaceString("00325",balance);
-                tempScript.SetTips(tips);
-                tempScript.ShowConfirmBtnOnly();
-            })
-        })
+        // HallData.Instance.Data_S2CAddCurrencyNotify.AddListenner(this,(_data)=>
+        // {
+        //     UIMgr.Instance.ShowWindow("common" , "prefab/TipsWindow",true,(_script)=>
+        //     {
+        //         let tempScript = _script as TipsWindow;
+        //         let balance = Tool.ConvertMoney_S2C(_data.currencyNum) + "";
+        //         let tips = Localization.ReplaceString("00325",balance);
+        //         tempScript.SetTips(tips);
+        //         tempScript.ShowConfirmBtnOnly();
+        //     })
+        // })
     }
     LateInit() 
     {
@@ -104,14 +104,14 @@ export class HallUI extends BaseUI
 
     RefreshMsg()
     {
-        NetworkSend.Instance.GetMiniGameListInHall();
+        //NetworkSend.Instance.GetMiniGameListInHall();
         //NetworkSend.Instance.GetTexasGameListInHall();
-        let alreadyJoinList = LocalPlayerData.Instance.Data_JoinTexasList.mData;
-        for(let i = 0 ; i < alreadyJoinList.length ; i++)
-        {
-            let current = alreadyJoinList[i];
-            MultipleTableCtr.TryToEnterGame(current.gameId,current.gameType,"");
-        }
+        //let alreadyJoinList = LocalPlayerData.Instance.Data_JoinTexasList.mData;
+        // for(let i = 0 ; i < alreadyJoinList.length ; i++)
+        // {
+        //     let current = alreadyJoinList[i];
+        //     MultipleTableCtr.TryToEnterGame(current.gameId,current.gameType,"");
+        // }
     }
 
 }

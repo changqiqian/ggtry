@@ -1,4 +1,5 @@
 
+import { Tool } from "./Tool";
 import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
 
@@ -14,7 +15,6 @@ export class GameConfig
         GameConfig.UsingIp = _ip;
         GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
 
-        //GameConfig.SeverUrl  = "ws://13.214.131.201:8199/ws";
     }
     //发布的版本号
     public static Version = "1.1.2"
@@ -545,5 +545,27 @@ export class GameConfig
         }
         return Number(result) == 1 ? true : false;
     }
+
+
+    public static uid : string;
+
+    public static CreateUID()
+    {
+        let rand = Tool.Random(100,1000);
+        GameConfig.uid = rand.toString();
+    }
+
+    public static GetTopUid() : string
+    {
+        //return top.USER_ID;
+        return GameConfig.uid;
+    }
+
+    public static GetTopGameId() : string
+    {
+        //return top.GAME_ID;
+        return "3300";
+    }
+    
     
 } 

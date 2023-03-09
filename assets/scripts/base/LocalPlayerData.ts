@@ -24,13 +24,13 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_AccountLevel : BaseData<AccountLevel> = new BaseData<AccountLevel>(); //账户等级
     Data_AccountStatus : BaseData<AccountStatus> = new BaseData<AccountStatus>(); //账户状态
 
-    Data_JoinTexasList : BaseData<Array<InHallGameInfo>> = new BaseData<Array<InHallGameInfo>>(); //短线重连后 已经加入的德州游戏列表
-    Data_JoinMiniGameList : BaseData<Array<InHallGameInfo>> = new BaseData<Array<InHallGameInfo>>(); //短线重连后 已经加入的小游戏列表
+    //Data_JoinTexasList : BaseData<Array<InHallGameInfo>> = new BaseData<Array<InHallGameInfo>>(); //短线重连后 已经加入的德州游戏列表
+    //Data_JoinMiniGameList : BaseData<Array<InHallGameInfo>> = new BaseData<Array<InHallGameInfo>>(); //短线重连后 已经加入的小游戏列表
 
     Data_LastInputPhoneNum : BaseData<string> = new BaseData<string>(); //最后一次输入的手机号
     Data_LastInputPwd : BaseData<string> = new BaseData<string>();//最后一次输入的密码
 
-    Data_EnterClubs : BaseData<Array<S2CEnterClub>> = new BaseData<Array<S2CEnterClub>>(false,new Array<S2CEnterClub>()); //玩家的俱乐部数据
+    //Data_EnterClubs : BaseData<Array<S2CEnterClub>> = new BaseData<Array<S2CEnterClub>>(false,new Array<S2CEnterClub>()); //玩家的俱乐部数据
     Data_CurrentEnterClubId : BaseData<string> = new BaseData<string>();//当前进入的俱乐部
 
     Data_RecordData: BaseData<RecordData> = new BaseData<RecordData>();//日月星期-战绩数据
@@ -38,92 +38,92 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_RecordDetail: BaseData<RecordDetail> = new BaseData<RecordDetail>();//战绩详细
     Data_SimpleReplayData : BaseData<SimpleReplayData> = new BaseData<SimpleReplayData>();//获取手牌简要数据
     Data_ReplayData: BaseData<ReplayData> = new BaseData<ReplayData>();//获取手牌详细数据
-    public ClearEnterClubInfo()
-    {
-        this.Data_EnterClubs.mData = new Array<S2CEnterClub>();
-        this.Data_CurrentEnterClubId.ResetData();
-    }
+    // public ClearEnterClubInfo()
+    // {
+    //     this.Data_EnterClubs.mData = new Array<S2CEnterClub>();
+    //     this.Data_CurrentEnterClubId.ResetData();
+    // }
 
-    public GetClubInfoByClubId(_clubId : string):S2CEnterClub
-    {
-        for(let i = 0 ; i < this.Data_EnterClubs.mData.length ; i++)
-        {
-            let current = this.Data_EnterClubs.mData[i];
-            if(current.clubInfo.id == _clubId)
-            {
-                return current;
-            }
-        }
-        console.log("GetClubInfoByClubId 没有找到这个俱乐部信息 _clubId===" + _clubId);
-        return null;
-    }
+    // public GetClubInfoByClubId(_clubId : string):S2CEnterClub
+    // {
+    //     for(let i = 0 ; i < this.Data_EnterClubs.mData.length ; i++)
+    //     {
+    //         let current = this.Data_EnterClubs.mData[i];
+    //         if(current.clubInfo.id == _clubId)
+    //         {
+    //             return current;
+    //         }
+    //     }
+    //     console.log("GetClubInfoByClubId 没有找到这个俱乐部信息 _clubId===" + _clubId);
+    //     return null;
+    // }
 
-    public UpdateClubInfo(_enterClub : S2CEnterClub)
-    {
-        let index = this.Data_EnterClubs.mData.findIndex((_item) => _item.clubInfo.id === _enterClub.clubInfo.id);
-        if(index < 0)
-        {
-            this.Data_EnterClubs.mData.push(_enterClub);
-        }
-        else
-        {
-            if(_enterClub.clubInfo !=null)
-            {
-                this.Data_EnterClubs.mData[index].clubInfo = _enterClub.clubInfo;
-            }
-            if(_enterClub.clubMember !=null)
-            {
-                this.Data_EnterClubs.mData[index].clubMember = _enterClub.clubMember;
-            }
-        }
-    }
+    // public UpdateClubInfo(_enterClub : S2CEnterClub)
+    // {
+    //     let index = this.Data_EnterClubs.mData.findIndex((_item) => _item.clubInfo.id === _enterClub.clubInfo.id);
+    //     if(index < 0)
+    //     {
+    //         this.Data_EnterClubs.mData.push(_enterClub);
+    //     }
+    //     else
+    //     {
+    //         if(_enterClub.clubInfo !=null)
+    //         {
+    //             this.Data_EnterClubs.mData[index].clubInfo = _enterClub.clubInfo;
+    //         }
+    //         if(_enterClub.clubMember !=null)
+    //         {
+    //             this.Data_EnterClubs.mData[index].clubMember = _enterClub.clubMember;
+    //         }
+    //     }
+    // }
 
-    public ReUpdateClubInfo(_clubInfos : Array<ClubDetailsInfo>)
-    {
-        let needRemoveClubId = new Array<string>();
-        for(let i = 0 ; i < this.Data_EnterClubs.mData.length ; i++)
-        {
-            let currentOldClub = this.Data_EnterClubs.mData[i].clubInfo;
-            let index = _clubInfos.findIndex((_item) => _item.id === currentOldClub.id);
-            if(index < 0)
-            {
-                needRemoveClubId.push(currentOldClub.id);
-            }
-        }
+    // public ReUpdateClubInfo(_clubInfos : Array<ClubDetailsInfo>)
+    // {
+    //     let needRemoveClubId = new Array<string>();
+    //     for(let i = 0 ; i < this.Data_EnterClubs.mData.length ; i++)
+    //     {
+    //         let currentOldClub = this.Data_EnterClubs.mData[i].clubInfo;
+    //         let index = _clubInfos.findIndex((_item) => _item.id === currentOldClub.id);
+    //         if(index < 0)
+    //         {
+    //             needRemoveClubId.push(currentOldClub.id);
+    //         }
+    //     }
 
-        for(let i = 0 ; i < needRemoveClubId.length ; i++)
-        {
-            let needRemoveId = needRemoveClubId[i];
-            let index = this.Data_EnterClubs.mData.findIndex((_item) => _item.clubInfo.id === needRemoveId);
-            if(index >= 0)
-            {
-                this.Data_EnterClubs.mData.splice(index , 1);
-            }
-        }
+    //     for(let i = 0 ; i < needRemoveClubId.length ; i++)
+    //     {
+    //         let needRemoveId = needRemoveClubId[i];
+    //         let index = this.Data_EnterClubs.mData.findIndex((_item) => _item.clubInfo.id === needRemoveId);
+    //         if(index >= 0)
+    //         {
+    //             this.Data_EnterClubs.mData.splice(index , 1);
+    //         }
+    //     }
 
-        for(let i = 0 ; i < _clubInfos.length ; i++)
-        {
-            this.CreateEnterClubWithClubInfo(_clubInfos[i]);
-        }
+    //     for(let i = 0 ; i < _clubInfos.length ; i++)
+    //     {
+    //         this.CreateEnterClubWithClubInfo(_clubInfos[i]);
+    //     }
 
-    }
+    // }
 
-    public CreateEnterClubWithClubInfo(_clubInfo : ClubDetailsInfo)
-    {
-        let tempEnterClub = new S2CEnterClub();
-        tempEnterClub.clubInfo = _clubInfo;
-        tempEnterClub.clubMember = null;
-        this.UpdateClubInfo(tempEnterClub);
-    }
+    // public CreateEnterClubWithClubInfo(_clubInfo : ClubDetailsInfo)
+    // {
+    //     let tempEnterClub = new S2CEnterClub();
+    //     tempEnterClub.clubInfo = _clubInfo;
+    //     tempEnterClub.clubMember = null;
+    //     this.UpdateClubInfo(tempEnterClub);
+    // }
 
-    public RemoveEnterClub(_clubId : string)
-    {
-        let index = this.Data_EnterClubs.mData.findIndex((_item) => _item.clubInfo.id === _clubId);
-        if(index >= 0)
-        {
-            this.Data_EnterClubs.mData.splice(index , 1);
-        }
-    }
+    // public RemoveEnterClub(_clubId : string)
+    // {
+    //     let index = this.Data_EnterClubs.mData.findIndex((_item) => _item.clubInfo.id === _clubId);
+    //     if(index >= 0)
+    //     {
+    //         this.Data_EnterClubs.mData.splice(index , 1);
+    //     }
+    // }
 
     GetFullPhoneNumber(_phoneNum : string = null)
     {
@@ -138,11 +138,11 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
         return fullPhoneNumber;
     }
 
-    UpdateJoinGame(_texasGameList : Array<InHallGameInfo> , _miniGameList : Array<InHallGameInfo>)
-    {
-        this.Data_JoinTexasList.mData = _texasGameList;
-        this.Data_JoinMiniGameList.mData = _miniGameList;
-    }
+    // UpdateJoinGame(_texasGameList : Array<InHallGameInfo> , _miniGameList : Array<InHallGameInfo>)
+    // {
+    //     this.Data_JoinTexasList.mData = _texasGameList;
+    //     this.Data_JoinMiniGameList.mData = _miniGameList;
+    // }
 
     UpdateUserInfo(_userInfo : UserInfo)
     {

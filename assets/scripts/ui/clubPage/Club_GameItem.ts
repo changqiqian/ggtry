@@ -41,7 +41,7 @@ export class Club_GameItem extends BaseUI
     mEnterBtn: BaseButton = null;
 
     mViewOnly : boolean = false;
-    mData : ClubTexasGameInfo = null;
+    //mData : ClubTexasGameInfo = null;
     mGameId : string ;
     InitParam()
     {
@@ -55,7 +55,7 @@ export class Club_GameItem extends BaseUI
             {
                 return;
             }
-            MultipleTableCtr.TryToEnterGame(this.mGameId , this.mData.basicTexasConfig.gameType , this.mData.clubId);
+            //MultipleTableCtr.TryToEnterGame(this.mGameId , this.mData.basicTexasConfig.gameType , this.mData.clubId);
         })
     }
     RegDataNotify()
@@ -73,8 +73,8 @@ export class Club_GameItem extends BaseUI
 
     public InitWithData(_gameId : string ,_data : Club_CreateTexasConfig)
     {
-        let tempData = HallData.Instance.ConvertCreateTexasConfigToProto(_data);
-        this.InitWithServerData(_gameId,tempData);
+        //let tempData = HallData.Instance.ConvertCreateTexasConfigToProto(_data);
+        //this.InitWithServerData(_gameId,tempData);
     }
 
     public ForbbidenEnter()
@@ -96,101 +96,101 @@ export class Club_GameItem extends BaseUI
         }
     }
 
-    public InitWithServerData(_gameId : string , _data : ClubTexasGameInfo)
-    {
-        this.mGameId = _gameId;
-        this.mData = _data;
-        let tempColor;
-        let gameTypeName;
+    // public InitWithServerData(_gameId : string , _data : ClubTexasGameInfo)
+    // {
+    //     this.mGameId = _gameId;
+    //     this.mData = _data;
+    //     let tempColor;
+    //     let gameTypeName;
 
-        let smallBlind = Tool.ConvertMoney_S2C(_data.basicTexasConfig.smallBlind);
-        switch(_data.basicTexasConfig.gameType)
-        {
-            case GameType.GameType_TexasCash:
-                tempColor = new Color(108,176,99);
-                gameTypeName = "NLH";
-                this.mBlindInfo.string = smallBlind + "/" +smallBlind * 2;
-                if(_data.basicTexasConfig.straddle)
-                {
-                    this.mBlindInfo.string += "/" + smallBlind * 4;
-                }
-                if(_data.basicTexasConfig.ante > 0)
-                {
-                    this.mBlindInfo.string += "(" + _data.basicTexasConfig.ante+ ")";
-                }
-                this.mMinBringIn.string = Tool.ConvertMoney_S2C(_data.basicTexasConfig.minBringIn) + "";
-                this.mMaxBringIn.string = Tool.ConvertMoney_S2C(_data.basicTexasConfig.maxBringIn) + "";
-            break
-            case GameType.GameType_ShortCash:
-                tempColor = new Color(99,174,176);
-                gameTypeName = "Short";
-                this.mBlindInfo.string = _data.basicTexasConfig.smallBlind + "/" + _data.basicTexasConfig.smallBlind * 2;
-                if(_data.basicTexasConfig.straddle)
-                {
-                    this.mBlindInfo.string += "/" + _data.basicTexasConfig.smallBlind * 4;
-                }
-                if(_data.basicTexasConfig.ante > 0)
-                {
-                    this.mBlindInfo.string += "(" + _data.basicTexasConfig.ante+ ")";
-                }
-                this.mMinBringIn.string = _data.basicTexasConfig.minBringIn + "";
-                this.mMaxBringIn.string = _data.basicTexasConfig.maxBringIn + "";
-            break
-            case GameType.GameType_OmhCash:
-                tempColor = new Color(96,106,195);
-                gameTypeName = "Omh"
-            break
-        }
-        this.mCircleTimer.SetColor(tempColor);
-        this.mGameType.string = gameTypeName;
-        this.mGameType.color = tempColor;
+    //     let smallBlind = Tool.ConvertMoney_S2C(_data.basicTexasConfig.smallBlind);
+    //     switch(_data.basicTexasConfig.gameType)
+    //     {
+    //         case GameType.GameType_TexasCash:
+    //             tempColor = new Color(108,176,99);
+    //             gameTypeName = "NLH";
+    //             this.mBlindInfo.string = smallBlind + "/" +smallBlind * 2;
+    //             if(_data.basicTexasConfig.straddle)
+    //             {
+    //                 this.mBlindInfo.string += "/" + smallBlind * 4;
+    //             }
+    //             if(_data.basicTexasConfig.ante > 0)
+    //             {
+    //                 this.mBlindInfo.string += "(" + _data.basicTexasConfig.ante+ ")";
+    //             }
+    //             this.mMinBringIn.string = Tool.ConvertMoney_S2C(_data.basicTexasConfig.minBringIn) + "";
+    //             this.mMaxBringIn.string = Tool.ConvertMoney_S2C(_data.basicTexasConfig.maxBringIn) + "";
+    //         break
+    //         case GameType.GameType_ShortCash:
+    //             tempColor = new Color(99,174,176);
+    //             gameTypeName = "Short";
+    //             this.mBlindInfo.string = _data.basicTexasConfig.smallBlind + "/" + _data.basicTexasConfig.smallBlind * 2;
+    //             if(_data.basicTexasConfig.straddle)
+    //             {
+    //                 this.mBlindInfo.string += "/" + _data.basicTexasConfig.smallBlind * 4;
+    //             }
+    //             if(_data.basicTexasConfig.ante > 0)
+    //             {
+    //                 this.mBlindInfo.string += "(" + _data.basicTexasConfig.ante+ ")";
+    //             }
+    //             this.mMinBringIn.string = _data.basicTexasConfig.minBringIn + "";
+    //             this.mMaxBringIn.string = _data.basicTexasConfig.maxBringIn + "";
+    //         break
+    //         case GameType.GameType_OmhCash:
+    //             tempColor = new Color(96,106,195);
+    //             gameTypeName = "Omh"
+    //         break
+    //     }
+    //     this.mCircleTimer.SetColor(tempColor);
+    //     this.mGameType.string = gameTypeName;
+    //     this.mGameType.color = tempColor;
 
 
-        this.mCircleTimer.SetProgress(1);
-        if(_data.aboutGameInfo != null)
-        {
-            this.mCircleTimer.SetTimerTitle(_data.aboutGameInfo.currentPlayerNum + "/"+_data.basicTexasConfig.seatNum);
-            this.mLeftTime.string = _data.aboutGameInfo.leftTime+ "/" + _data.basicTexasConfig.gameDuration + "h";
-        }
-        else
-        {
-            this.mCircleTimer.SetTimerTitle(_data.basicTexasConfig.seatNum + "");
-            this.mLeftTime.string = _data.basicTexasConfig.gameDuration + "h";
-        }
+    //     this.mCircleTimer.SetProgress(1);
+    //     if(_data.aboutGameInfo != null)
+    //     {
+    //         this.mCircleTimer.SetTimerTitle(_data.aboutGameInfo.currentPlayerNum + "/"+_data.basicTexasConfig.seatNum);
+    //         this.mLeftTime.string = _data.aboutGameInfo.leftTime+ "/" + _data.basicTexasConfig.gameDuration + "h";
+    //     }
+    //     else
+    //     {
+    //         this.mCircleTimer.SetTimerTitle(_data.basicTexasConfig.seatNum + "");
+    //         this.mLeftTime.string = _data.basicTexasConfig.gameDuration + "h";
+    //     }
 
-        this.mGameName.string = _data.basicTexasConfig.gameName;
-        if(_data.basicTexasConfig.currencyType == GameCurrencyType.GameCurrencyType_Coin)
-        {
-            this.mScoreTag.getChildByName("Label").getComponent(Label).string = Localization.GetString("00092");
-        }
-        else if(_data.basicTexasConfig.currencyType == GameCurrencyType.GameCurrencyType_Point)
-        {
-            this.mScoreTag.getChildByName("Label").getComponent(Label).string = Localization.GetString("00093");
-        }
+    //     this.mGameName.string = _data.basicTexasConfig.gameName;
+    //     if(_data.basicTexasConfig.currencyType == GameCurrencyType.GameCurrencyType_Coin)
+    //     {
+    //         this.mScoreTag.getChildByName("Label").getComponent(Label).string = Localization.GetString("00092");
+    //     }
+    //     else if(_data.basicTexasConfig.currencyType == GameCurrencyType.GameCurrencyType_Point)
+    //     {
+    //         this.mScoreTag.getChildByName("Label").getComponent(Label).string = Localization.GetString("00093");
+    //     }
 
-        this.mInsuranceTag.active = _data.basicTexasConfig.insurance;
+    //     this.mInsuranceTag.active = _data.basicTexasConfig.insurance;
 
-        this.mIpTag.active = _data.basicTexasConfig.gpsLimit || _data.basicTexasConfig.ipLimit;
-        let gpsAndIp = "";
-        if(_data.basicTexasConfig.gpsLimit)
-        {
-            gpsAndIp = "GPS";
-            if(_data.basicTexasConfig.ipLimit)
-            {
-                gpsAndIp += "/IP";
-            }
-        }
-        else if(_data.basicTexasConfig.ipLimit)
-        {
-            gpsAndIp = "IP";
-        }
-        this.mIpTag.getChildByName("Label").getComponent(Label).string = gpsAndIp;
+    //     this.mIpTag.active = _data.basicTexasConfig.gpsLimit || _data.basicTexasConfig.ipLimit;
+    //     let gpsAndIp = "";
+    //     if(_data.basicTexasConfig.gpsLimit)
+    //     {
+    //         gpsAndIp = "GPS";
+    //         if(_data.basicTexasConfig.ipLimit)
+    //         {
+    //             gpsAndIp += "/IP";
+    //         }
+    //     }
+    //     else if(_data.basicTexasConfig.ipLimit)
+    //     {
+    //         gpsAndIp = "IP";
+    //     }
+    //     this.mIpTag.getChildByName("Label").getComponent(Label).string = gpsAndIp;
 
-        if(this.mViewOnly )
-        {
-            return;
-        }
-        this.UpdateEnterAlready();
-    }
+    //     if(this.mViewOnly )
+    //     {
+    //         return;
+    //     }
+    //     this.UpdateEnterAlready();
+    // }
 }
 

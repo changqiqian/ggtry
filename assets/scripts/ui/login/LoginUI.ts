@@ -10,6 +10,7 @@ import { NetworkSend } from '../../network/NetworkSend';
 import { Tool } from '../../Tool';
 import { Club_RecordLayer } from '../clubPage/Club_RecordLayer';
 import { BaseButton } from '../common/BaseButton';
+import { MultipleTableCtr } from '../common/MultipleTableCtr';
 
 import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
@@ -41,20 +42,24 @@ export class LoginUI extends BaseUI
 
     InitParam() 
     {
+
+        GameConfig.CreateUID();
     }
     BindUI() 
     {
         LocalPlayerData.Instance.Data_AreaCode.mData = 1;
         this.MaxScreen(this.mBG);
+        UIMgr.Instance.ShowMultipleTable(true);
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");  
+            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");  
             // UIMgr.Instance.ShowLayer("clubPage","prefab/Club_RecordLayer",true,(_script)=>
             // {
             //     let temp = _script as Club_RecordLayer;
             //     temp.InitWitData("");
             // });  
+
         });
 
         this.TurnOff.SetClickCallback(()=>
@@ -64,7 +69,7 @@ export class LoginUI extends BaseUI
 
         this.mSignBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("login","prefab/Login_SignView");
+            //UIMgr.Instance.ShowLayer("login","prefab/Login_SignView");
         });
    
 
@@ -86,47 +91,60 @@ export class LoginUI extends BaseUI
             this.DebugFunction.active = false;
         });
 
-        this.mUid.string = "Uid=====" + top.USER_ID ;
-        this.mGameID.string = "GameID====" + top.GAME_ID ;
+
+        let userData = new UserInfo();
+        userData.accountLevel = AccountLevel.AccountLevel_Normal;
+        userData.uid = GameConfig.GetTopUid();
+        userData.accountStatus = AccountStatus.AccountStatus_Normal;
+        userData.coin = 100000;
+        userData.diamond = 10000;
+        userData.head = "1";
+        userData.nickName = "ggtry";
+        LocalPlayerData.Instance.UpdateUserInfo(userData);
+
+        this.mUid.string = "Uid=====" + GameConfig.GetTopUid()
+        this.mGameID.string = "GameID====" + GameConfig.GetTopGameId();
     }
     RegDataNotify() 
     {
-        LoginData.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
-        {
-            if(_data == true)
-            {
-                UIMgr.Instance.ChangeScene(SceneType.Hall);
-            }
-        });
+        // LoginData.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
+        // {
+        //     if(_data == true)
+        //     {
+        //         UIMgr.Instance.ChangeScene(SceneType.Hall);
+        //     }
+        // });
 
-        LoginData.Instance.Data_RegisterSuccessData.AddListenner(this,(_data)=>
-        {
-            if(_data == true)
-            {
-                let pwd = LocalPlayerData.Instance.Data_LastInputPwd.mData
-                let fullPhoneNumber = LocalPlayerData.Instance.GetFullPhoneNumber();
-                NetworkSend.Instance.LoginWithPwd(fullPhoneNumber,pwd);
-            }
-        });
+        // LoginData.Instance.Data_RegisterSuccessData.AddListenner(this,(_data)=>
+        // {
+        //     if(_data == true)
+        //     {
+        //         let pwd = LocalPlayerData.Instance.Data_LastInputPwd.mData
+        //         let fullPhoneNumber = LocalPlayerData.Instance.GetFullPhoneNumber();
+        //         NetworkSend.Instance.LoginWithPwd(fullPhoneNumber,pwd);
+        //     }
+        // });
         
         CommonNotify.Instance.Data_SocketOpen.AddListenner(this,(_data)=>
         {
-            if(GameConfig.DebugMode)
-            {
-                return;
-            }
+            MultipleTableCtr.TryToEnterGame(GameConfig.GetTopGameId() , GameType.GameType_TexasCash,"",GameConfig.GetTopUid());
 
-            if(GameConfig.LOGIN_TOKEN != null)
-            {
-                console.log("Token 自动登录")
-                NetworkSend.Instance.GetUserInfo();       
-            }
+            // if(GameConfig.DebugMode)
+            // {
+            //     return;
+            // }
+
+            // if(GameConfig.LOGIN_TOKEN != null)
+            // {
+            //     console.log("Token 自动登录")
+            //     NetworkSend.Instance.GetUserInfo();       
+            // }
         });
 
-        LoginData.Instance.Data_SmsCodeType.AddListenner(this,(_data)=>
-        {
-            UIMgr.Instance.ShowLayer("common","prefab/SMSCodeView");
-        });
+        // LoginData.Instance.Data_SmsCodeType.AddListenner(this,(_data)=>
+        // {
+        //     UIMgr.Instance.ShowLayer("common","prefab/SMSCodeView");
+        // });
     }
     LateInit() 
     {

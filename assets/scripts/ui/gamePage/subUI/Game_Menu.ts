@@ -175,14 +175,14 @@ export class Game_Menu extends BaseUI
         });
 
 
-        HallData.Instance.Data_S2CModifyMemberRoleNotify.AddListenner(this,(_data)=>
-        {
-            if(gameStruct.mClubId != _data.clubId)
-            {
-                return;
-            }
+        // HallData.Instance.Data_S2CModifyMemberRoleNotify.AddListenner(this,(_data)=>
+        // {
+        //     if(gameStruct.mClubId != _data.clubId)
+        //     {
+        //         return;
+        //     }
 
-        });
+        // });
     }
 
 
@@ -207,10 +207,10 @@ export class Game_Menu extends BaseUI
         {
             return;
         }
-        let gameData = gameStruct.mGameData;
-        let uid = LocalPlayerData.Instance.Data_Uid.mData;
-        let selfPlayer = gameData.GetPlayerInfoByUid(uid);
-        this.mSettlementBtn.Show(selfPlayer != null);
+        //let gameData = gameStruct.mGameData;
+        //let uid = LocalPlayerData.Instance.Data_Uid.mData;
+        //let selfPlayer = gameData.GetPlayerInfoByUid(uid);
+        //this.mSettlementBtn.Show(selfPlayer != null);
     }
 
     public Show(_val : boolean)
