@@ -452,7 +452,9 @@ export class Localization {
         { name: '00365', ch: '我的手牌', en: 'My cards' , korea :""},
         { name: '00366', ch: '已断线', en: 'Disconnected' , korea :""},
         { name: '00367', ch: '返回游戏', en: 'Back game' , korea :""},
-        
+        { name: '00368', ch: '下局站起', en: 'Stand soon' , korea :""},
+        { name: '00369', ch: '请先站起', en: 'Stand first' , korea :""},
+        { name: '00370', ch: '托管中无法站起', en: 'Back to game first' , korea :""},
 
 
         { name: '01000', ch: '公告', en: 'Notification' , korea :""},

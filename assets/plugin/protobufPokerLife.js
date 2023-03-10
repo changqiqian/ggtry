@@ -5623,6 +5623,7 @@ $root.PlayerInfo = (function() {
      * @property {number|null} [buyInLeftTime] PlayerInfo buyInLeftTime
      * @property {boolean|null} [fold] PlayerInfo fold
      * @property {number|null} [autoLeftTime] PlayerInfo autoLeftTime
+     * @property {boolean|null} [auto] PlayerInfo auto
      */
 
     /**
@@ -5738,6 +5739,14 @@ $root.PlayerInfo = (function() {
     PlayerInfo.prototype.autoLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * PlayerInfo auto.
+     * @member {boolean} auto
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.auto = false;
+
+    /**
      * Encodes the specified PlayerInfo message. Does not implicitly {@link PlayerInfo.verify|verify} messages.
      * @function encode
      * @memberof PlayerInfo
@@ -5775,6 +5784,8 @@ $root.PlayerInfo = (function() {
             w.uint32(88).bool(m.fold);
         if (m.autoLeftTime != null && Object.hasOwnProperty.call(m, "autoLeftTime"))
             w.uint32(96).int64(m.autoLeftTime);
+        if (m.auto != null && Object.hasOwnProperty.call(m, "auto"))
+            w.uint32(104).bool(m.auto);
         return w;
     };
 
@@ -5833,6 +5844,9 @@ $root.PlayerInfo = (function() {
                 break;
             case 12:
                 m.autoLeftTime = r.int64();
+                break;
+            case 13:
+                m.auto = r.bool();
                 break;
             default:
                 r.skipType(t & 7);
@@ -8792,6 +8806,73 @@ $root.MessageId = (function() {
     values[valuesById[10052] = "S2C_TexasCowboyGameSettlementNotify"] = 10052;
     values[valuesById[10100] = "MSG_TexasCowboyEnd"] = 10100;
     return values;
+})();
+
+$root.C2SLogout = (function() {
+
+    /**
+     * Properties of a C2SLogout.
+     * @exports IC2SLogout
+     * @interface IC2SLogout
+     */
+
+    /**
+     * Constructs a new C2SLogout.
+     * @exports C2SLogout
+     * @classdesc Represents a C2SLogout.
+     * @implements IC2SLogout
+     * @constructor
+     * @param {IC2SLogout=} [p] Properties to set
+     */
+    function C2SLogout(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * Encodes the specified C2SLogout message. Does not implicitly {@link C2SLogout.verify|verify} messages.
+     * @function encode
+     * @memberof C2SLogout
+     * @static
+     * @param {IC2SLogout} m C2SLogout message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2SLogout.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        return w;
+    };
+
+    /**
+     * Decodes a C2SLogout message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2SLogout
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2SLogout} C2SLogout
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2SLogout.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SLogout();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2SLogout;
 })();
 
 $root.C2SEnterGame = (function() {

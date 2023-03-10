@@ -38,28 +38,22 @@ export class Game_ChattingLayer extends BaseUI
     InitParam()
     {
     }
+
+    onEditingReturn(_editbox,  _customEventData) 
+    {
+        //这里 editbox 是一个 cc.EditBox 对象
+        //这里的 customEventData 参数就等于你之前设置的 "foobar"
+    }
     BindUI()
     {
         this.AddTouchCloseEvent(this.node);
         this.mEditBox.placeholder = Localization.GetString("00324");
 
-        this.mSendBtn.node.active = true;
-        this.mSendBtn.SetClickCallback(()=>
-        {
-            let content = this.mEditBox.string;
-            if(content == "")
-            {
-                UIMgr.Instance.ShowToast(Localization.GetString("00324"));
-                return;
-            }
 
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            if(gameStruct != null)
-            {
-                let gameData = gameStruct.mGameData;
-                NetworkSend.Instance.SendChat(gameData.ChatSendMsgId(),gameStruct.mGameId,content);
-            }
-        })
+        this.mEditBox.node.on(EditBox.EventType.EDITING_RETURN,this.OnEditBoxReturn.bind(this) ) 
+
+        this.mSendBtn.node.active = true;
+        this.mSendBtn.SetClickCallback(this.OnEditBoxReturn.bind(this));
        
         this.mSendBtn.SetProtectDoubleClick(true,5,()=>
         {
@@ -127,6 +121,25 @@ export class Game_ChattingLayer extends BaseUI
         {
             this.mMovingShow.HideAnimation();
         }
+    }
+
+    OnEditBoxReturn()
+    {
+        let content = this.mEditBox.string;
+        if(content == "")
+        {
+            UIMgr.Instance.ShowToast(Localization.GetString("00324"));
+            return;
+        }
+
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        if(gameStruct != null)
+        {
+            let gameData = gameStruct.mGameData;
+            NetworkSend.Instance.SendChat(gameData.ChatSendMsgId(),gameStruct.mGameId,content);
+        }
+
+        this.mEditBox.string = "";
     }
 
 }

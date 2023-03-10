@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, Label, instantiate, Vec3, view } from 'cc';
 import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
-import { Combiantion } from '../../../base/Calculator';
+import { Calculator, CardType, Combiantion } from '../../../base/Calculator';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { GameConfig } from '../../../GameConfig';
 import { NetworkSend } from '../../../network/NetworkSend';
@@ -35,6 +35,9 @@ export class Game_SelfUI extends BaseUI
     mDealer: Node = null;
     @property(Label) 
     mMoney: Label = null;
+
+
+    mAlreadyShowCards : boolean = false;
 
     private mIndex : number = null;
     InitParam() 
@@ -88,6 +91,7 @@ export class Game_SelfUI extends BaseUI
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
             this.UpdateUI();
+            this.UpdateCombination();
         });
 
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
@@ -133,11 +137,7 @@ export class Game_SelfUI extends BaseUI
         gameData.Data_S2CCommonCurrentActionNotify.AddListenner(this,(_data)=>
         {
             this.UpdateAddTime();
-            let state = gameData.GetGameState();
-            if(state == TexasCashState.TexasCashState_PreFlopRound)
-            {
-                this.UpdateCards();
-            }
+            this.UpdateCards();
         })
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
@@ -148,16 +148,19 @@ export class Game_SelfUI extends BaseUI
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
         {
             this.CleanTable();
+            this.UpdateCombination();
         })
 
         gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
         {
             this.CleanTable();
+            this.UpdateCombination();
         })
 
         gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
         {
             this.CleanTable();
+            this.UpdateCombination();
         })
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
@@ -192,6 +195,7 @@ export class Game_SelfUI extends BaseUI
         this.mDealer.active = false;
         this.mConbinationBG.active = false;
         this.mMoney.string = "";
+        this.mAlreadyShowCards = false;
     }
 
     CleanTable()
@@ -285,7 +289,6 @@ export class Game_SelfUI extends BaseUI
             {
                 this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum + selfPlayer.bringInNum) + "";
             }
-
         }
         else
         {
@@ -415,43 +418,31 @@ export class Game_SelfUI extends BaseUI
         }
         this.mCards.active = true;
 
-        let state = gameData.GetGameState();
-        if(state == TexasCashState.TexasCashState_PreFlopRound)
-        {
-            let lastAct = gameData.FindLastActionByUid(selfPlayer.uid)
-            let cardNodes = this.mCards.children;
-            for(let i = 0 ; i < cards.length ; i++)
-            {
-                let currentPoker = cardNodes[i].getComponent(Poker);
-                currentPoker.ResetAndHide();
-                currentPoker.ShowBack(); 
-            }
 
-            let currentActionUid = gameData.GetActionUid();
-            if(currentActionUid != selfPlayer.uid)
+        if(this.mAlreadyShowCards == true)
+        {
+            return;
+        }
+
+        let state = gameData.GetGameState();
+        let lastAct = gameData.FindLastActionByUid(selfPlayer.uid)
+        let cardNodes = this.mCards.children;
+        if(state <= TexasCashState.TexasCashState_PreFlopRound)
+        {
+            if(lastAct == null ||
+                lastAct.actionType == ActionType.ActionType_Ante ||
+                lastAct.actionType == ActionType.ActionType_SB ||
+                lastAct.actionType == ActionType.ActionType_BB ||
+                lastAct.actionType == ActionType.ActionType_Straddle )
             {
-                if(lastAct == null)
+                if(gameData.GetActionUid() != selfPlayer.uid)
                 {
-                    return;
-                }
-    
-                if(lastAct.actionType == ActionType.ActionType_Ante)
-                {
-                    return;
-                }
-    
-                if(lastAct.actionType == ActionType.ActionType_SB)
-                {
-                    return;
-                }
-    
-                if(lastAct.actionType == ActionType.ActionType_BB)
-                {
-                    return;
-                }
-    
-                if(lastAct.actionType == ActionType.ActionType_Straddle)
-                {
+                    for(let i = 0 ; i < cards.length ; i++)
+                    {
+                        let currentPoker = cardNodes[i].getComponent(Poker);
+                        currentPoker.ResetAndHide();
+                        currentPoker.ShowBack(); 
+                    }
                     return;
                 }
             }
@@ -498,6 +489,8 @@ export class Game_SelfUI extends BaseUI
             currentPoker.SetFrontByCardInfo(_cardInfo);
             currentPoker.DealAnimation();
         },_delayTime)
+
+        this.mAlreadyShowCards = true;
     }
 
     FoldCards()
@@ -521,21 +514,65 @@ export class Game_SelfUI extends BaseUI
         let actionUid =  gameData.GetDynamicData().actionUid;
 
         this.mGame_AddTime.Show(actionUid == LocalPlayerData.Instance.Data_Uid.mData);
-        if(selfPlayer.autoLeftTime>0)
+        if(selfPlayer.auto)
         {
             this.mGame_AddTime.Show(false);
         }
     }
 
-    UpdateConbination(_conbination : Combiantion)
+    UpdateCombination()
     {
-        if(_conbination == Combiantion.None)
+        this.mConbinationBG.active = false;
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer == null)
         {
-            this.mConbinationBG.active = false;
             return;
         }
+        
+        let playerCards = selfPlayer.cards;
+
+        if(playerCards.length == 0)
+        {
+            return;
+        }
+
+        for(let i = 0 ; i < playerCards.length ; i++)
+        {
+            let current = playerCards[i];
+            if(current.type == CardType.None || current.number == 0)
+            {
+                return;
+            }
+        }
+
+        let publicCards = gameData.GetDynamicData().publicCards;
+
+        if(publicCards == null)
+        {
+            return;
+        }
+        if(publicCards.length == 0)
+        {
+            return;
+        }
+
+        let hands = Calculator.ConvertCardInfos(playerCards);
+        let publics = Calculator.ConvertCardInfos(publicCards);
+
+        let calculator = new Calculator();
+        calculator.TryToCalculate(publics,hands);
+        let combination = calculator.mCurrentCombination;
+
+        if(combination == Combiantion.None)
+        {
+            
+            return;
+        }
+
         this.mConbinationBG.active = true;
-        this.mConbination.string = Poker.GetConbinationName(_conbination);
+        this.mConbination.string = Poker.GetConbinationName(combination);
     }
 
 }

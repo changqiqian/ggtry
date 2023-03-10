@@ -1400,12 +1400,11 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             UIMgr.Instance.ShowLoading(false);
             let msg = S2CCommonAutoOperatorNotify.decode(_data);
             console.log("收到的内容 S2C_CommonAutoOperatorNotify  托管推送==" + JSON.stringify(msg));
-
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
             if(gameStruct != null)
             {
                 let gameData = gameStruct.mGameData;
-                gameData.PlayerAuto(msg.uid , msg.leftTime);
+                gameData.PlayerAuto(msg.uid , msg.leftTime , _data.auto);
                 gameData.Data_S2CCommonAutoOperatorNotify.mData = msg;
             }
         },this);  

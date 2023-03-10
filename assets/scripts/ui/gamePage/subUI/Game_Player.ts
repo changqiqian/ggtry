@@ -15,6 +15,7 @@ import { Game_BetAmount } from './Game_BetAmount';
 import { Game_BuyInWindow } from './Game_BuyInWindow';
 import { Game_MovingCards } from './Game_MovingCards';
 import { Game_MovingChip } from './Game_MovingChip';
+import { Game_PlayerState } from './Game_PlayerState';
 import { Game_ProfileLayer } from './Game_ProfileLayer';
 import { Game_WinEffect } from './Game_WinEffect';
 const { ccclass, property } = _decorator;
@@ -42,19 +43,14 @@ export class Game_Player extends BaseUI
     mGame_BetAmount: Game_BetAmount = null;
     @property(Node) 
     mCards: Node = null;
-    @property(Label) 
-    mStateTitle: Label = null;
-    @property(Node) 
-    mDarkCover: Node = null;
-    @property(Label) 
-    mCountDown: Label = null;
     @property(BaseButton) 
     mSelfBtn: BaseButton = null;
     @property(Node) 
     mConbination: Node = null;
     @property(Node) 
     mInsuranceBG: Node = null;
-    
+    @property(Game_PlayerState) 
+    mGame_PlayerState: Game_PlayerState = null;
 
     mSeatID : number = null; //座位编号
     private mIndex : number = null;
@@ -94,13 +90,11 @@ export class Game_Player extends BaseUI
         this.mDealer.active = false;
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
-        this.mDarkCover.active = false;
         this.mCards.active = false;
-        this.mStateTitle.node.active = false;
         this.mSelfBtn.node.active = false;
-        this.mCountDown.string = "";
         this.mConbination.active = false;
         this.mInsuranceBG.active = false;
+        this.mGame_PlayerState.HideAll();
         this.StopSecondsTimer();
     }
 
@@ -295,7 +289,7 @@ export class Game_Player extends BaseUI
 
         gameData.Data_S2CCommonAutoOperatorNotify.AddListenner(this,(_data)=>
         {
-            let playerInfo = gameData.GetPlayerInfoBySeatId(_data.uid);
+            let playerInfo = gameData.GetPlayerInfoByUid(_data.uid);
             if(playerInfo == null)
             {
                 return;
@@ -306,7 +300,7 @@ export class Game_Player extends BaseUI
                 return;
             }
 
-            this.ShowAuto(playerInfo.autoLeftTime);
+            this.mGame_PlayerState.ShowAuto(playerInfo.autoLeftTime,playerInfo.auto);
         });
 
         gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
@@ -342,7 +336,7 @@ export class Game_Player extends BaseUI
             }
             if(selfPlayer.seat == this.mSeatID)
             {
-                this.ShowBuying(false)
+                this.mGame_PlayerState.ShowBuyin(0);
                 this.UpdateMoney(false , selfPlayer);
             }
         })
@@ -484,7 +478,7 @@ export class Game_Player extends BaseUI
                 return;
             }
 
-            this.ShowBuying(false);
+            this.mGame_PlayerState.ShowBuyin(0);
             this.UpdateMoney(false, playerInfo);
         })
    
@@ -514,7 +508,10 @@ export class Game_Player extends BaseUI
             {
                 if(currentWinLose.combinationResult.Combination != null)
                 {
-                    this.ShowConbination(currentWinLose.combinationResult.Combination);
+                    if(playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+                    {
+                        this.ShowConbination(currentWinLose.combinationResult.Combination);
+                    }
                 }
             }
             this.StartSecondsTimer(1.5 , 0.01  , ()=>
@@ -727,10 +724,6 @@ export class Game_Player extends BaseUI
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
         this.mCards.active = false;
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
-        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
-        this.mDarkCover.active = !gameData.IsPlayerPlaying(playerInfo.uid);
         this.mConbination.active = false;
     }
 
@@ -760,17 +753,7 @@ export class Game_Player extends BaseUI
         if(_playerInfo.currencyNum)
         {
             this.ShowMiniCard(isPlaying ,false);
-            if(isPlaying)
-            {
-                if(_playerInfo.autoLeftTime > 0)
-                {
-                    this.ShowAuto(_playerInfo.autoLeftTime);
-                }
-                else
-                {
-                    this.mDarkCover.active = _playerInfo.fold;
-                }
-            }
+            this.mGame_PlayerState.ShowAuto(_playerInfo.autoLeftTime,_playerInfo.auto);
         }
         else
         {
@@ -780,44 +763,6 @@ export class Game_Player extends BaseUI
             }
         }
     }
-
-    ShowAuto( _leftTime : number)
-    {
-        let show = _leftTime > 0;
-        this.StopSecondsTimer();
-        this.mCountDown.string = "";
-        this.mStateTitle.node.active =show;
-        this.mDarkCover.active = show;
-        if(show == false)
-        {
-            return;
-        }
-        this.mStateTitle.string = Localization.GetString("00241");
-        this.StartSecondsTimer(_leftTime , 1  , ()=>
-        {
-            let seconds = this.GetRestSeconds();
-            this.mCountDown.string = seconds + "";
-        })
-    }
-
-    ShowBuying(_show :boolean ,_leftTime : number = 0)
-    {
-        this.StopSecondsTimer();
-        this.mCountDown.string = "";
-        this.mDarkCover.active = _show;
-        this.mStateTitle.node.active =_show;
-        if(_show == false)
-        {
-            return;
-        }
-        this.mStateTitle.string = Localization.GetString("00248");
-        this.StartSecondsTimer(_leftTime , 1  , ()=>
-        {
-            let seconds = this.GetRestSeconds();
-            this.mCountDown.string = seconds + "";
-        })
-    }
-
     UpdateBuyInCountDown()
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
@@ -828,7 +773,8 @@ export class Game_Player extends BaseUI
         {
             return;
         }
-        this.ShowBuying(true , playerInfo.buyInLeftTime);
+
+        this.mGame_PlayerState.ShowBuyin(playerInfo.buyInLeftTime);
         if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
         {
             UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyInWindow",true,(_script)=>
@@ -1067,8 +1013,6 @@ export class Game_Player extends BaseUI
     ShowActionType(_actionType : ActionType , _replay : boolean)
     {
         let isFold = _actionType == ActionType.ActionType_Fold;
-        this.mDarkCover.active = isFold;
-
         this.ShowMiniCard(!isFold , _replay);
         
         if(_replay == false)

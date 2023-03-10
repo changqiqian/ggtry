@@ -48,8 +48,6 @@ export class Game_SeatItem extends BaseUI
 
     }
 
-
-
     public InitWithData(_index : number , _id : number)
     {
         if(this.CheckInitFlag())
@@ -70,6 +68,10 @@ export class Game_SeatItem extends BaseUI
                 let msgId = gameData.SitDownSendMsgId();
                 let gameId = gameStruct.mGameId;
                 NetworkSend.Instance.SitDown(msgId , gameId , this.mSeatID);
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00369"));
             }
         });
         this.mSitBtn.Show(true);
@@ -116,29 +118,21 @@ export class Game_SeatItem extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        if(selfPlayer != null)
-        {
-            this.mSitBtn.Show(false);
-            return;
-        }
-        let seatInfos = gameData.GetDynamicData().seatInfos;
-        let occupaid = false;
-        for(let i = 0 ; i < seatInfos.length ; i++)
-        {
-            let current = seatInfos[i];
-            if(current.seat == this.mSeatID)
-            {
-                occupaid = true;
-                break;
-            }
-        }
-        this.mSitBtn.Show(!occupaid);
+        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        this.mSitBtn.Show(playerInfo == null);
     }
 
     UpdatePlayerUIDirection()
     {
-        this.mGame_Player.UpdateUIDirection();
+        this.StartSecondsTimer(0.5,0.1,()=>
+        {
+            let restTime = this.GetRestMillSeconds();
+            if(restTime == 0)
+            {
+                this.mGame_Player.UpdateUIDirection();
+            }
+        });
+        
     }
 }
 

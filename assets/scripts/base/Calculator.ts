@@ -77,6 +77,24 @@ export class Calculator extends Singleton<Calculator>()
     mCurrentCombineList : Array<Combiantion>;
     mCurrentFindFunctions : Array<Function>;
 
+    public static ConvertCardInfo(_cardInfo : CardInfo) : CardStruct
+    {
+        let struct = new CardStruct(_cardInfo.number , _cardInfo.type);
+        return struct;
+    }
+
+    public static ConvertCardInfos(_cardInfos : Array<CardInfo>) : Array<CardStruct>
+    {
+        let structs = new Array<CardStruct>();
+        for(let i = 0 ; i < _cardInfos.length ; i++)
+        {
+            let current = _cardInfos[i];
+            let struct = Calculator.ConvertCardInfo(current);
+            structs.push(struct);
+        }
+        return structs;
+    }
+
     public TryToCalculate( _publicCards:Array<CardStruct> , _playerCards:Array<CardStruct> ) : Array<CardStruct>
     {
         let tempPublicCards = this.DeepCopyCards(_publicCards);
@@ -86,7 +104,7 @@ export class Calculator extends Singleton<Calculator>()
         let result = this.CalculateCombination(totalCardList);
 
         console.log("this.mCurrentCombination===" + this.mCurrentCombination.toString());
-        this.LogCards(result);
+        //this.LogCards(result);
         return result;
     }
 

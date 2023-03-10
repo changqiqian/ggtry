@@ -209,8 +209,6 @@ export class Game_SeatUI extends BaseUI
                 tempTween.to(totalDuration , {position : new Vec3(destination)});
                 tempTween.call(()=>
                 {
-                    let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-                    let gameData = gameStruct.mGameData;
                     movingSeat.UpdatePlayerUIDirection();
                 });
                 tempTween.start();

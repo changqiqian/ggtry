@@ -1782,6 +1782,9 @@ export class PlayerInfo implements IPlayerInfo {
     /** PlayerInfo autoLeftTime. */
     public autoLeftTime: number;
 
+    /** PlayerInfo auto. */
+    public auto: boolean;
+
     /**
      * Encodes the specified PlayerInfo message. Does not implicitly {@link PlayerInfo.verify|verify} messages.
      * @param m PlayerInfo message or plain object to encode
@@ -2693,6 +2696,34 @@ export enum MessageId {
     S2C_TexasCowboyGameStartNotify = 10051,
     S2C_TexasCowboyGameSettlementNotify = 10052,
     MSG_TexasCowboyEnd = 10100
+}
+
+/** Represents a C2SLogout. */
+export class C2SLogout implements IC2SLogout {
+
+    /**
+     * Constructs a new C2SLogout.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SLogout);
+
+    /**
+     * Encodes the specified C2SLogout message. Does not implicitly {@link C2SLogout.verify|verify} messages.
+     * @param m C2SLogout message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SLogout, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SLogout message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SLogout
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SLogout;
 }
 
 /** Represents a C2SEnterGame. */

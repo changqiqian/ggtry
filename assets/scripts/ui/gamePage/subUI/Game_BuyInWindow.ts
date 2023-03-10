@@ -1,6 +1,8 @@
 import { _decorator, Component, Node, Label, Sprite } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { UIMgr } from '../../../base/UIMgr';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { Tool } from '../../../Tool';
 import { BaseButton } from '../../common/BaseButton';
@@ -76,17 +78,19 @@ export class Game_BuyInWindow extends BaseUI
                         let msgId = gameData.StandUpSendMsgId();
                         let gameId = gameStruct.mGameId;
                         let uid = LocalPlayerData.Instance.Data_Uid.mData;
-                        // if(gameData.IsPlayerDelayStandUp(uid))
-                        // {
-                        //     gameData.ExcutiveDelayStandUp();
-                        //     return;
-                        // }
 
-                        let seatId = gameData.GetSeatByUid(uid);
-                        if(seatId != null)
+                        let selfPlayer = gameData.GetPlayerInfoByUid(uid);
+                        if(selfPlayer != null)
                         {
+                            if(selfPlayer.auto)
+                            {
+                                UIMgr.Instance.ShowToast(Localization.GetString("00370"));
+                            }
+                            else
+                            {
+                                NetworkSend.Instance.StandUp(msgId,gameId);
+                            }
                             
-                            NetworkSend.Instance.StandUp(msgId,gameId);
                         }
                     }
                 }

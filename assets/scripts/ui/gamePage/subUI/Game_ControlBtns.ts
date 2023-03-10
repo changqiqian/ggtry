@@ -1,5 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Network } from '../../../network/Network';
 import { NetworkSend } from '../../../network/NetworkSend';
@@ -137,25 +138,35 @@ export class Game_ControlBtns extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let localUid =  LocalPlayerData.Instance.Data_Uid.mData;
-        let playerInfo = gameData.GetPlayerInfoByUid(localUid);
-        if(playerInfo == null)
+        let selfPlayer = gameData.GetPlayerInfoByUid(localUid);
+        if(selfPlayer == null)
         {
             return;
         }
         this.StopSecondsTimer();
-        if(playerInfo.autoLeftTime > 0)
+
+        if(selfPlayer.auto)
         {
             this.mBackToGameBtn.node.active = true;
-            this.StartSecondsTimer(playerInfo.autoLeftTime,1,()=>
+            if(selfPlayer.autoLeftTime > 0)
             {
-                let restTime = this.GetRestSeconds();
-                this.mBackToGameBtn.SetTitle(restTime + "s");
-            });
+                this.StartSecondsTimer(selfPlayer.autoLeftTime,1,()=>
+                {
+                    let restTime = this.GetRestSeconds();
+                    this.mBackToGameBtn.SetTitle(restTime + "s");
+                });
+            }
+            else
+            {
+                this.mBackToGameBtn.SetTitle(Localization.GetString("00368"));
+            }
         }
         else
         {
             this.mBackToGameBtn.node.active = false;
         }
+
+
     }
 }
 

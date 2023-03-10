@@ -67,7 +67,6 @@ export abstract class GameData extends MultipleNotify
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_Refresh : BaseData<boolean> = new BaseData<boolean>(true);  //刷新场景
 
-
     mChatHistroy : Array<S2CCommonChatNotify> = new Array<S2CCommonChatNotify>(); //聊天历史
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
     {
@@ -269,13 +268,14 @@ export abstract class GameData extends MultipleNotify
         playerInfo.currencyNum -= _amount;
     }
 
-    public PlayerAuto(_uid : string , _leftTime : number )
+    public PlayerAuto(_uid : string , _leftTime : number  , _auto : boolean)
     {
         let playerInfo = this.GetPlayerInfoByUid(_uid);
         if(playerInfo == null)
         {
             return;
         }
+        playerInfo.auto = _auto;
         playerInfo.autoLeftTime = _leftTime;
     }
 
@@ -428,34 +428,6 @@ export abstract class GameData extends MultipleNotify
         }
 
         return true;
-    }
-
-    public GetSeatByUid(_uid : string) : number
-    {
-        let seatInfos = this.GetDynamicData().seatInfos;
-        for(let i = 0 ; i < seatInfos.length ; i++)
-        {
-            let current = seatInfos[i];
-            if(current.uid == _uid)
-            {
-                return current.seat;
-            }
-        }
-        return null;
-    }
-
-    public GetUidBySeat(_seatId : number) : string
-    {
-        let seatInfos = this.GetDynamicData().seatInfos;
-        for(let i = 0 ; i < seatInfos.length ; i++)
-        {
-            let current = seatInfos[i];
-            if(current.seat == _seatId)
-            {
-                return current.uid;
-            }
-        }
-        return null;
     }
 
 

@@ -295,7 +295,7 @@ export class Game_SelfAction extends BaseUI
             return;
         }
 
-        if(selfPlayer.autoLeftTime > 0)
+        if(selfPlayer.auto)
         {
             return;
         }
@@ -388,7 +388,23 @@ export class Game_SelfAction extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let selfLastAct = gameData.FindLastActionByUid(selfUid)
-        let alreadyBetAmount = selfLastAct.roundAmount;
+        let alreadyBetAmount;
+
+        if(selfLastAct == null)
+        {
+            alreadyBetAmount = 0;
+        }
+        else
+        {
+            if(selfLastAct.roundAmount == null)
+            {
+                alreadyBetAmount = 0;
+            }
+            else
+            {
+                alreadyBetAmount = selfLastAct.roundAmount;
+            }
+        }
         let needBetAmount = this.mCallAmount - alreadyBetAmount;
         if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
         {
