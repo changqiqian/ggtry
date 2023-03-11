@@ -11,8 +11,6 @@ const { ccclass, property } = _decorator;
 export class LoadingUI extends BaseUI 
 {
     
-    @property(Node) 
-    mBG: Node = null;
     @property(Label) 
     mTips: Label = null;
     @property(Label) 
@@ -27,7 +25,7 @@ export class LoadingUI extends BaseUI
     }
     BindUI() 
     {
-        this.MaxScreen(this.mBG);
+
     }
 
     RegDataNotify() 
@@ -80,7 +78,7 @@ export class LoadingUI extends BaseUI
     }
     LateInit()
     {
-
+        LoadingData.Instance.Data_HotUpdateEnd.mData = true;
     }
 
 

@@ -455,8 +455,14 @@ export class Localization {
         { name: '00368', ch: '下局站起', en: 'Stand soon' , korea :""},
         { name: '00369', ch: '请先站起', en: 'Stand first' , korea :""},
         { name: '00370', ch: '托管中无法站起', en: 'Back to game first' , korea :""},
-
-
+        { name: '00371', ch: '桌面设置', en: 'BG setting' , korea :""},
+        { name: '00372', ch: '扑克设置', en: 'Poker setting' , korea :""},
+        { name: '00373', ch: '默认加注设定', en: 'Bet setting' , korea :""},
+        { name: '00374', ch: '个人设置', en: 'Setting' , korea :""},
+        { name: '00375', ch: '拉杆确认', en: 'Slider Comfirm' , korea :""},
+        { name: '00376', ch: '显示bb', en: 'BB MODE' , korea :""},
+        
+        
         { name: '01000', ch: '公告', en: 'Notification' , korea :""},
         { name: '01001', ch: '消息', en: 'MESSAGES' , korea :""},
         { name: '01002', ch: '收支记录', en: 'Bill' , korea :""},

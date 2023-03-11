@@ -63,7 +63,6 @@ export class GameDataCash extends GameData
     {
         return MessageId.C2S_TexasCashSqueezeFinish;
     }
-    
 
     public RecordPlayerMsgId() : number
     {

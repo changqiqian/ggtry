@@ -48,7 +48,14 @@ export class GameBase extends BaseUI
     }
     RegDataNotify() 
     {
-
+        LocalPlayerData.Instance.Data_BGSetting.AddListenner(this,(_data)=>
+        {
+            let name = "BG" + _data;
+            this.LoadSprite("gamePage","texture/bg/" + name ,(_spriteFrame)=>
+            {
+                this.mBG.spriteFrame = _spriteFrame;
+            })
+        });
     }
     LateInit() 
     {

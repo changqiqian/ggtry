@@ -3,9 +3,7 @@ import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
-import { Emoji, Emoji_Const, SelfEmoji } from '../../emoji/Emoji_Const';
-import { Emoji_Item } from '../../emoji/Emoji_Item';
-import { Emoji_SelfItem } from '../../emoji/Emoji_SelfItem';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_ProfileLayer')

@@ -89,11 +89,11 @@ export class Game_MatchInfoLayer extends ListViewCtr<RecordPlayer>
         this.mMatchName.string = gameData.GetStaticData().gameName;
         if(gameStruct.mIsClubGame)
         {
-            let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId);
-            if(enterClub != null)
-            {
-                this.mClubName.string = enterClub.clubInfo.name;
-            }
+            // let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId);
+            // if(enterClub != null)
+            // {
+            //     this.mClubName.string = enterClub.clubInfo.name;
+            // }
         }
         else
         {

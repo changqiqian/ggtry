@@ -1404,7 +1404,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             if(gameStruct != null)
             {
                 let gameData = gameStruct.mGameData;
-                gameData.PlayerAuto(msg.uid , msg.leftTime , _data.auto);
+                gameData.PlayerAuto(msg.uid , msg.leftTime , msg.auto);
                 gameData.Data_S2CCommonAutoOperatorNotify.mData = msg;
             }
         },this);  
