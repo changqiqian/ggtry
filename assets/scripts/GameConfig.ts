@@ -17,7 +17,7 @@ export class GameConfig
 
     }
     //发布的版本号
-    public static Version = "1.1.2"
+    public static Version = "1.1.4"
 
       
     public static LOGIN_TOKEN;

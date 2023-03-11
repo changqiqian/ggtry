@@ -7261,7 +7261,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "9f413441-a060-4e0a-97f3-4b326dd1c2c2@f9941",
+      "__uuid__": "2318bea3-618b-4665-9458-d582302e876f@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -7651,7 +7651,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "9f413441-a060-4e0a-97f3-4b326dd1c2c2@f9941",
+      "__uuid__": "2318bea3-618b-4665-9458-d582302e876f@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -7672,8 +7672,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 164,
-      "height": 69
+      "width": 250,
+      "height": 103
     }
   },
   {

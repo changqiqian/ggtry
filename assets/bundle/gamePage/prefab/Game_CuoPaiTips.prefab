@@ -1782,7 +1782,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "fa6372c4-e124-47b1-8afb-3df0a9eb42d3@f9941",
+      "__uuid__": "e08a21a3-250f-4203-8b41-8d6bb5a0aed7@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -1800,7 +1800,7 @@
     "propertyPath": [
       "_sizeMode"
     ],
-    "value": 1
+    "value": 0
   },
   {
     "__type__": "cc.UITransform",

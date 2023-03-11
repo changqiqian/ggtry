@@ -230,9 +230,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 146,
-      "g": 150,
-      "b": 171,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_string": "买入",
@@ -837,9 +837,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 251,
-      "g": 160,
-      "b": 2,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_string": "0s",
@@ -3042,7 +3042,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 600,
+      "width": 500,
       "height": 128.502
     }
   },
@@ -3271,7 +3271,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 600,
+      "width": 500,
       "height": 128.502
     }
   },

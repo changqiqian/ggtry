@@ -131,6 +131,11 @@ export class Game_ControlBtns extends BaseUI
                 this.UpdateBackGameBtn();
             }
         });
+
+        gameData.Data_S2CCommonSitDownNotify.AddListenner(this,(_data)=>
+        {
+            this.UpdateBackGameBtn();
+        });
     }
 
     UpdateBackGameBtn()
@@ -165,8 +170,6 @@ export class Game_ControlBtns extends BaseUI
         {
             this.mBackToGameBtn.node.active = false;
         }
-
-
     }
 }
 

@@ -4,171 +4,22 @@
     "level": 1
   },
   "common": {
-    "outputName": "web-mobile",
+    "outputName": "web-mobile14",
     "mainBundleCompressionType": "merge_dep",
     "platform": "web-mobile",
     "debug": true,
-    "replaceSplashScreen": true
+    "replaceSplashScreen": true,
+    "name": "9D"
   },
   "BuildTaskManager": {
     "taskMap": {
-      "1674289127277": {
-        "id": "1674289127277",
+      "1678529540001": {
+        "id": "1678529540001",
         "progress": 1,
         "state": "success",
-        "message": "1-22-2023 13:49 make package /Users/yamiwang/Cowboy2/build/android-WinPoker success!",
+        "message": "3-11-2023 18:12 Build success in 17653 ms!",
         "options": {
-          "name": "SY",
-          "platform": "android",
-          "buildPath": "project://build",
-          "debug": false,
-          "md5Cache": false,
-          "skipCompressTexture": false,
-          "sourceMaps": false,
-          "replaceSplashScreen": false,
-          "mainBundleCompressionType": "merge_dep",
-          "mainBundleIsRemote": false,
-          "mergeStartScene": false,
-          "experimentalEraseModules": false,
-          "compressTexture": true,
-          "packAutoAtlas": true,
-          "startScene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-          "scenes": [
-            {
-              "url": "db://assets/scene/start.scene",
-              "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-              "inBundle": false
-            }
-          ],
-          "outputName": "android-WinPoker",
-          "packages": {
-            "android": {
-              "packageName": "SY.TEXAS.COM",
-              "orientation": {
-                "portrait": true,
-                "upsideDown": false,
-                "landscapeRight": false,
-                "landscapeLeft": false
-              },
-              "apiLevel": "android-33",
-              "appABIs": [
-                "arm64-v8a",
-                "armeabi-v7a"
-              ],
-              "useDebugKeystore": true,
-              "keystorePath": "",
-              "keystorePassword": "",
-              "keystoreAlias": "",
-              "keystoreAliasPassword": "",
-              "appBundle": false,
-              "androidInstant": false,
-              "remoteUrl": "",
-              "sdkPath": "",
-              "ndkPath": "",
-              "renderBackEnd": {
-                "vulkan": false,
-                "gles3": true,
-                "gles2": true
-              },
-              "swappy": false
-            },
-            "cocos-service": {
-              "configID": "437b18",
-              "services": []
-            },
-            "hot-update": null,
-            "native": {
-              "polyfills": {
-                "asyncFunctions": true
-              },
-              "encrypted": false,
-              "xxteaKey": "83XyBwqd5GXa/yJM",
-              "compressZip": false,
-              "makeAfterBuild": false,
-              "JobSystem": "none",
-              "remoteServerAddress": "http://54.169.147.71/WinPoker/"
-            }
-          }
-        },
-        "time": "1-22-2023 13:41",
-        "dirty": false
-      },
-      "1674371306022": {
-        "id": "1674371306022",
-        "progress": 1,
-        "state": "success",
-        "message": "1-22-2023 15:09 Build success in 90818 ms!",
-        "options": {
-          "name": "SY",
-          "platform": "ios",
-          "buildPath": "project://build",
-          "debug": true,
-          "md5Cache": false,
-          "skipCompressTexture": false,
-          "sourceMaps": false,
-          "replaceSplashScreen": true,
-          "mainBundleCompressionType": "merge_dep",
-          "mainBundleIsRemote": false,
-          "mergeStartScene": false,
-          "experimentalEraseModules": false,
-          "compressTexture": true,
-          "packAutoAtlas": true,
-          "startScene": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-          "scenes": [
-            {
-              "url": "db://assets/scene/start.scene",
-              "uuid": "72b6b67a-8025-4f0e-8fb0-5b454d58bd94",
-              "inBundle": false
-            }
-          ],
-          "outputName": "ios_WinPoker",
-          "packages": {
-            "ios": {
-              "orientation": {
-                "landscapeRight": false,
-                "landscapeLeft": false,
-                "portrait": true
-              },
-              "renderBackEnd": {
-                "metal": true
-              },
-              "skipUpdateXcodeProject": false,
-              "targetVersion": "12.0",
-              "osTarget": {
-                "iphoneos": true,
-                "simulator": false
-              },
-              "developerTeam": "ZTGH2Z5AW9",
-              "packageName": "SY.Texas.Com"
-            },
-            "cocos-service": {
-              "configID": "437b18",
-              "services": []
-            },
-            "hot-update": null,
-            "native": {
-              "polyfills": {
-                "asyncFunctions": true
-              },
-              "encrypted": false,
-              "xxteaKey": "17BHk6rK9MFZk2nI",
-              "compressZip": false,
-              "makeAfterBuild": false,
-              "JobSystem": "none",
-              "remoteServerAddress": "http://54.169.147.71/WinPoker/"
-            }
-          }
-        },
-        "time": "1-22-2023 15:08",
-        "dirty": false
-      },
-      "1678521323801": {
-        "id": "1678521323801",
-        "progress": 1,
-        "state": "success",
-        "message": "3-11-2023 15:55 Build success in 19200 ms!",
-        "options": {
-          "name": "SY",
+          "name": "9D",
           "platform": "web-mobile",
           "buildPath": "project://build",
           "debug": true,
@@ -190,7 +41,7 @@
               "inBundle": false
             }
           ],
-          "outputName": "web-mobile",
+          "outputName": "web-mobile14",
           "packages": {
             "web-mobile": {
               "orientation": "portrait",
@@ -205,7 +56,7 @@
             "hot-update": null
           }
         },
-        "time": "3-11-2023 15:55",
+        "time": "3-11-2023 18:12",
         "dirty": false
       }
     }

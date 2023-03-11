@@ -270,6 +270,7 @@ export class Game_Player extends BaseUI
                 return;
             }
             this.PlayerSit();
+            
 
             if(gameData.IsGamePlayingNow() == false)
             {
@@ -737,7 +738,7 @@ export class Game_Player extends BaseUI
         {
             return;
         }
-
+        this.mGame_PlayerState.ShowAuto(playerInfo.autoLeftTime , playerInfo.auto);
         this.mSelfBtn.node.active = true;
         this.UpdateName(playerInfo.nickName);
         this.UpdateHead(playerInfo.head);
