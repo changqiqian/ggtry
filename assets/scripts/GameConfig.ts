@@ -17,7 +17,7 @@ export class GameConfig
 
     }
     //发布的版本号
-    public static Version = "1.1.4"
+    public static Version = "1.1.5"
 
       
     public static LOGIN_TOKEN;
@@ -557,15 +557,15 @@ export class GameConfig
 
     public static GetTopUid() : string
     {
-        //return top.USER_ID;
+        return top.USER_ID;
         //return GameConfig.uid;
-        return "9527"
+        //return "9527"
     }
 
     public static GetTopGameId() : string
     {
-        //return top.GAME_ID;
-        return "3300";
+        return top.GAME_ID;
+        //return "3300";
     }
     
     
