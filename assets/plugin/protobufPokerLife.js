@@ -6335,6 +6335,8 @@ $root.PlayerWinLose = (function() {
      * @exports IPlayerWinLose
      * @interface IPlayerWinLose
      * @property {string|null} [uid] PlayerWinLose uid
+     * @property {string|null} [nickName] PlayerWinLose nickName
+     * @property {string|null} [head] PlayerWinLose head
      * @property {number|null} [winLose] PlayerWinLose winLose
      * @property {Array.<ICardInfo>|null} [cardInfo] PlayerWinLose cardInfo
      * @property {ICombinationResult|null} [combinationResult] PlayerWinLose combinationResult
@@ -6364,6 +6366,22 @@ $root.PlayerWinLose = (function() {
      * @instance
      */
     PlayerWinLose.prototype.uid = "";
+
+    /**
+     * PlayerWinLose nickName.
+     * @member {string} nickName
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.nickName = "";
+
+    /**
+     * PlayerWinLose head.
+     * @member {string} head
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.head = "";
 
     /**
      * PlayerWinLose winLose.
@@ -6411,16 +6429,20 @@ $root.PlayerWinLose = (function() {
             w = $Writer.create();
         if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
             w.uint32(10).string(m.uid);
+        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
+            w.uint32(18).string(m.nickName);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(26).string(m.head);
         if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(16).int64(m.winLose);
+            w.uint32(32).int64(m.winLose);
         if (m.cardInfo != null && m.cardInfo.length) {
             for (var i = 0; i < m.cardInfo.length; ++i)
-                $root.CardInfo.encode(m.cardInfo[i], w.uint32(26).fork()).ldelim();
+                $root.CardInfo.encode(m.cardInfo[i], w.uint32(42).fork()).ldelim();
         }
         if (m.combinationResult != null && Object.hasOwnProperty.call(m, "combinationResult"))
-            $root.CombinationResult.encode(m.combinationResult, w.uint32(34).fork()).ldelim();
+            $root.CombinationResult.encode(m.combinationResult, w.uint32(50).fork()).ldelim();
         if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(40).int64(m.amount);
+            w.uint32(56).int64(m.amount);
         return w;
     };
 
@@ -6446,17 +6468,23 @@ $root.PlayerWinLose = (function() {
                 m.uid = r.string();
                 break;
             case 2:
-                m.winLose = r.int64();
+                m.nickName = r.string();
                 break;
             case 3:
+                m.head = r.string();
+                break;
+            case 4:
+                m.winLose = r.int64();
+                break;
+            case 5:
                 if (!(m.cardInfo && m.cardInfo.length))
                     m.cardInfo = [];
                 m.cardInfo.push($root.CardInfo.decode(r, r.uint32()));
                 break;
-            case 4:
+            case 6:
                 m.combinationResult = $root.CombinationResult.decode(r, r.uint32());
                 break;
-            case 5:
+            case 7:
                 m.amount = r.int64();
                 break;
             default:
@@ -7041,6 +7069,7 @@ $root.ActionResult = (function() {
      * @interface IActionResult
      * @property {IActionInfo|null} [actionInfo] ActionResult actionInfo
      * @property {Array.<IPotInfo>|null} [potInfo] ActionResult potInfo
+     * @property {number|null} [totalNUm] ActionResult totalNUm
      */
 
     /**
@@ -7076,6 +7105,14 @@ $root.ActionResult = (function() {
     ActionResult.prototype.potInfo = $util.emptyArray;
 
     /**
+     * ActionResult totalNUm.
+     * @member {number} totalNUm
+     * @memberof ActionResult
+     * @instance
+     */
+    ActionResult.prototype.totalNUm = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
      * Encodes the specified ActionResult message. Does not implicitly {@link ActionResult.verify|verify} messages.
      * @function encode
      * @memberof ActionResult
@@ -7093,6 +7130,8 @@ $root.ActionResult = (function() {
             for (var i = 0; i < m.potInfo.length; ++i)
                 $root.PotInfo.encode(m.potInfo[i], w.uint32(18).fork()).ldelim();
         }
+        if (m.totalNUm != null && Object.hasOwnProperty.call(m, "totalNUm"))
+            w.uint32(24).int64(m.totalNUm);
         return w;
     };
 
@@ -7122,6 +7161,9 @@ $root.ActionResult = (function() {
                     m.potInfo = [];
                 m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
                 break;
+            case 3:
+                m.totalNUm = r.int64();
+                break;
             default:
                 r.skipType(t & 7);
                 break;
@@ -7133,28 +7175,26 @@ $root.ActionResult = (function() {
     return ActionResult;
 })();
 
-$root.SimpleReplayData = (function() {
+$root.MySimpleInfo = (function() {
 
     /**
-     * Properties of a SimpleReplayData.
-     * @exports ISimpleReplayData
-     * @interface ISimpleReplayData
-     * @property {Array.<ISimpleReplay>|null} [list] SimpleReplayData list
-     * @property {number|null} [pageNum] SimpleReplayData pageNum
-     * @property {number|null} [size] SimpleReplayData size
-     * @property {number|null} [total] SimpleReplayData total
+     * Properties of a MySimpleInfo.
+     * @exports IMySimpleInfo
+     * @interface IMySimpleInfo
+     * @property {Array.<ICardInfo>|null} [myCards] MySimpleInfo myCards
+     * @property {number|null} [myResult] MySimpleInfo myResult
      */
 
     /**
-     * Constructs a new SimpleReplayData.
-     * @exports SimpleReplayData
-     * @classdesc Represents a SimpleReplayData.
-     * @implements ISimpleReplayData
+     * Constructs a new MySimpleInfo.
+     * @exports MySimpleInfo
+     * @classdesc Represents a MySimpleInfo.
+     * @implements IMySimpleInfo
      * @constructor
-     * @param {ISimpleReplayData=} [p] Properties to set
+     * @param {IMySimpleInfo=} [p] Properties to set
      */
-    function SimpleReplayData(p) {
-        this.list = [];
+    function MySimpleInfo(p) {
+        this.myCards = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -7162,93 +7202,67 @@ $root.SimpleReplayData = (function() {
     }
 
     /**
-     * SimpleReplayData list.
-     * @member {Array.<ISimpleReplay>} list
-     * @memberof SimpleReplayData
+     * MySimpleInfo myCards.
+     * @member {Array.<ICardInfo>} myCards
+     * @memberof MySimpleInfo
      * @instance
      */
-    SimpleReplayData.prototype.list = $util.emptyArray;
+    MySimpleInfo.prototype.myCards = $util.emptyArray;
 
     /**
-     * SimpleReplayData pageNum.
-     * @member {number} pageNum
-     * @memberof SimpleReplayData
+     * MySimpleInfo myResult.
+     * @member {number} myResult
+     * @memberof MySimpleInfo
      * @instance
      */
-    SimpleReplayData.prototype.pageNum = 0;
+    MySimpleInfo.prototype.myResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * SimpleReplayData size.
-     * @member {number} size
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.size = 0;
-
-    /**
-     * SimpleReplayData total.
-     * @member {number} total
-     * @memberof SimpleReplayData
-     * @instance
-     */
-    SimpleReplayData.prototype.total = 0;
-
-    /**
-     * Encodes the specified SimpleReplayData message. Does not implicitly {@link SimpleReplayData.verify|verify} messages.
+     * Encodes the specified MySimpleInfo message. Does not implicitly {@link MySimpleInfo.verify|verify} messages.
      * @function encode
-     * @memberof SimpleReplayData
+     * @memberof MySimpleInfo
      * @static
-     * @param {ISimpleReplayData} m SimpleReplayData message or plain object to encode
+     * @param {IMySimpleInfo} m MySimpleInfo message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    SimpleReplayData.encode = function encode(m, w) {
+    MySimpleInfo.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
-        if (m.list != null && m.list.length) {
-            for (var i = 0; i < m.list.length; ++i)
-                $root.SimpleReplay.encode(m.list[i], w.uint32(10).fork()).ldelim();
+        if (m.myCards != null && m.myCards.length) {
+            for (var i = 0; i < m.myCards.length; ++i)
+                $root.CardInfo.encode(m.myCards[i], w.uint32(10).fork()).ldelim();
         }
-        if (m.pageNum != null && Object.hasOwnProperty.call(m, "pageNum"))
-            w.uint32(16).int32(m.pageNum);
-        if (m.size != null && Object.hasOwnProperty.call(m, "size"))
-            w.uint32(24).int32(m.size);
-        if (m.total != null && Object.hasOwnProperty.call(m, "total"))
-            w.uint32(32).int32(m.total);
+        if (m.myResult != null && Object.hasOwnProperty.call(m, "myResult"))
+            w.uint32(16).int64(m.myResult);
         return w;
     };
 
     /**
-     * Decodes a SimpleReplayData message from the specified reader or buffer.
+     * Decodes a MySimpleInfo message from the specified reader or buffer.
      * @function decode
-     * @memberof SimpleReplayData
+     * @memberof MySimpleInfo
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {SimpleReplayData} SimpleReplayData
+     * @returns {MySimpleInfo} MySimpleInfo
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    SimpleReplayData.decode = function decode(r, l) {
+    MySimpleInfo.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.SimpleReplayData();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.MySimpleInfo();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
             case 1:
-                if (!(m.list && m.list.length))
-                    m.list = [];
-                m.list.push($root.SimpleReplay.decode(r, r.uint32()));
+                if (!(m.myCards && m.myCards.length))
+                    m.myCards = [];
+                m.myCards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
             case 2:
-                m.pageNum = r.int32();
-                break;
-            case 3:
-                m.size = r.int32();
-                break;
-            case 4:
-                m.total = r.int32();
+                m.myResult = r.int64();
                 break;
             default:
                 r.skipType(t & 7);
@@ -7258,7 +7272,7 @@ $root.SimpleReplayData = (function() {
         return m;
     };
 
-    return SimpleReplayData;
+    return MySimpleInfo;
 })();
 
 $root.SimpleReplay = (function() {
@@ -7270,13 +7284,10 @@ $root.SimpleReplay = (function() {
      * @property {string|null} [gameId] SimpleReplay gameId
      * @property {number|null} [index] SimpleReplay index
      * @property {Array.<ICardInfo>|null} [publicCards] SimpleReplay publicCards
-     * @property {Array.<ICardInfo>|null} [myCards] SimpleReplay myCards
-     * @property {number|null} [myResult] SimpleReplay myResult
-     * @property {Array.<ICardInfo>|null} [winnerCards] SimpleReplay winnerCards
-     * @property {string|null} [winnerName] SimpleReplay winnerName
-     * @property {string|null} [winnerHead] SimpleReplay winnerHead
-     * @property {number|null} [winnerResult] SimpleReplay winnerResult
+     * @property {Array.<IPlayerWinLose>|null} [winnerResult] SimpleReplay winnerResult
+     * @property {IMySimpleInfo|null} [mySimpleInfo] SimpleReplay mySimpleInfo
      * @property {string|null} [date] SimpleReplay date
+     * @property {Array.<IPlayerWinLose>|null} [winLoseResults] SimpleReplay winLoseResults
      */
 
     /**
@@ -7289,8 +7300,8 @@ $root.SimpleReplay = (function() {
      */
     function SimpleReplay(p) {
         this.publicCards = [];
-        this.myCards = [];
-        this.winnerCards = [];
+        this.winnerResult = [];
+        this.winLoseResults = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -7322,52 +7333,20 @@ $root.SimpleReplay = (function() {
     SimpleReplay.prototype.publicCards = $util.emptyArray;
 
     /**
-     * SimpleReplay myCards.
-     * @member {Array.<ICardInfo>} myCards
-     * @memberof SimpleReplay
-     * @instance
-     */
-    SimpleReplay.prototype.myCards = $util.emptyArray;
-
-    /**
-     * SimpleReplay myResult.
-     * @member {number} myResult
-     * @memberof SimpleReplay
-     * @instance
-     */
-    SimpleReplay.prototype.myResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * SimpleReplay winnerCards.
-     * @member {Array.<ICardInfo>} winnerCards
-     * @memberof SimpleReplay
-     * @instance
-     */
-    SimpleReplay.prototype.winnerCards = $util.emptyArray;
-
-    /**
-     * SimpleReplay winnerName.
-     * @member {string} winnerName
-     * @memberof SimpleReplay
-     * @instance
-     */
-    SimpleReplay.prototype.winnerName = "";
-
-    /**
-     * SimpleReplay winnerHead.
-     * @member {string} winnerHead
-     * @memberof SimpleReplay
-     * @instance
-     */
-    SimpleReplay.prototype.winnerHead = "";
-
-    /**
      * SimpleReplay winnerResult.
-     * @member {number} winnerResult
+     * @member {Array.<IPlayerWinLose>} winnerResult
      * @memberof SimpleReplay
      * @instance
      */
-    SimpleReplay.prototype.winnerResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    SimpleReplay.prototype.winnerResult = $util.emptyArray;
+
+    /**
+     * SimpleReplay mySimpleInfo.
+     * @member {IMySimpleInfo|null|undefined} mySimpleInfo
+     * @memberof SimpleReplay
+     * @instance
+     */
+    SimpleReplay.prototype.mySimpleInfo = null;
 
     /**
      * SimpleReplay date.
@@ -7376,6 +7355,14 @@ $root.SimpleReplay = (function() {
      * @instance
      */
     SimpleReplay.prototype.date = "";
+
+    /**
+     * SimpleReplay winLoseResults.
+     * @member {Array.<IPlayerWinLose>} winLoseResults
+     * @memberof SimpleReplay
+     * @instance
+     */
+    SimpleReplay.prototype.winLoseResults = $util.emptyArray;
 
     /**
      * Encodes the specified SimpleReplay message. Does not implicitly {@link SimpleReplay.verify|verify} messages.
@@ -7397,24 +7384,18 @@ $root.SimpleReplay = (function() {
             for (var i = 0; i < m.publicCards.length; ++i)
                 $root.CardInfo.encode(m.publicCards[i], w.uint32(26).fork()).ldelim();
         }
-        if (m.myCards != null && m.myCards.length) {
-            for (var i = 0; i < m.myCards.length; ++i)
-                $root.CardInfo.encode(m.myCards[i], w.uint32(34).fork()).ldelim();
+        if (m.winnerResult != null && m.winnerResult.length) {
+            for (var i = 0; i < m.winnerResult.length; ++i)
+                $root.PlayerWinLose.encode(m.winnerResult[i], w.uint32(34).fork()).ldelim();
         }
-        if (m.myResult != null && Object.hasOwnProperty.call(m, "myResult"))
-            w.uint32(40).int64(m.myResult);
-        if (m.winnerCards != null && m.winnerCards.length) {
-            for (var i = 0; i < m.winnerCards.length; ++i)
-                $root.CardInfo.encode(m.winnerCards[i], w.uint32(50).fork()).ldelim();
-        }
-        if (m.winnerName != null && Object.hasOwnProperty.call(m, "winnerName"))
-            w.uint32(58).string(m.winnerName);
-        if (m.winnerHead != null && Object.hasOwnProperty.call(m, "winnerHead"))
-            w.uint32(66).string(m.winnerHead);
-        if (m.winnerResult != null && Object.hasOwnProperty.call(m, "winnerResult"))
-            w.uint32(72).int64(m.winnerResult);
+        if (m.mySimpleInfo != null && Object.hasOwnProperty.call(m, "mySimpleInfo"))
+            $root.MySimpleInfo.encode(m.mySimpleInfo, w.uint32(42).fork()).ldelim();
         if (m.date != null && Object.hasOwnProperty.call(m, "date"))
-            w.uint32(82).string(m.date);
+            w.uint32(50).string(m.date);
+        if (m.winLoseResults != null && m.winLoseResults.length) {
+            for (var i = 0; i < m.winLoseResults.length; ++i)
+                $root.PlayerWinLose.encode(m.winLoseResults[i], w.uint32(58).fork()).ldelim();
+        }
         return w;
     };
 
@@ -7448,29 +7429,20 @@ $root.SimpleReplay = (function() {
                 m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
             case 4:
-                if (!(m.myCards && m.myCards.length))
-                    m.myCards = [];
-                m.myCards.push($root.CardInfo.decode(r, r.uint32()));
+                if (!(m.winnerResult && m.winnerResult.length))
+                    m.winnerResult = [];
+                m.winnerResult.push($root.PlayerWinLose.decode(r, r.uint32()));
                 break;
             case 5:
-                m.myResult = r.int64();
+                m.mySimpleInfo = $root.MySimpleInfo.decode(r, r.uint32());
                 break;
             case 6:
-                if (!(m.winnerCards && m.winnerCards.length))
-                    m.winnerCards = [];
-                m.winnerCards.push($root.CardInfo.decode(r, r.uint32()));
+                m.date = r.string();
                 break;
             case 7:
-                m.winnerName = r.string();
-                break;
-            case 8:
-                m.winnerHead = r.string();
-                break;
-            case 9:
-                m.winnerResult = r.int64();
-                break;
-            case 10:
-                m.date = r.string();
+                if (!(m.winLoseResults && m.winLoseResults.length))
+                    m.winLoseResults = [];
+                m.winLoseResults.push($root.PlayerWinLose.decode(r, r.uint32()));
                 break;
             default:
                 r.skipType(t & 7);
@@ -7492,9 +7464,8 @@ $root.ReplayData = (function() {
      * @property {string|null} [gameId] ReplayData gameId
      * @property {number|null} [index] ReplayData index
      * @property {IBasicTexasConfig|null} [texasConfig] ReplayData texasConfig
-     * @property {Array.<IPlayerInfo>|null} [players] ReplayData players
      * @property {string|null} [dealerUid] ReplayData dealerUid
-     * @property {number|null} [antes] ReplayData antes
+     * @property {Array.<IPlayerInfo>|null} [players] ReplayData players
      * @property {Array.<ICardInfo>|null} [publicCards] ReplayData publicCards
      * @property {Array.<IActionResult>|null} [roundStartActions] ReplayData roundStartActions
      * @property {Array.<IActionResult>|null} [preFlopActions] ReplayData preFlopActions
@@ -7558,14 +7529,6 @@ $root.ReplayData = (function() {
     ReplayData.prototype.texasConfig = null;
 
     /**
-     * ReplayData players.
-     * @member {Array.<IPlayerInfo>} players
-     * @memberof ReplayData
-     * @instance
-     */
-    ReplayData.prototype.players = $util.emptyArray;
-
-    /**
      * ReplayData dealerUid.
      * @member {string} dealerUid
      * @memberof ReplayData
@@ -7574,12 +7537,12 @@ $root.ReplayData = (function() {
     ReplayData.prototype.dealerUid = "";
 
     /**
-     * ReplayData antes.
-     * @member {number} antes
+     * ReplayData players.
+     * @member {Array.<IPlayerInfo>} players
      * @memberof ReplayData
      * @instance
      */
-    ReplayData.prototype.antes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    ReplayData.prototype.players = $util.emptyArray;
 
     /**
      * ReplayData publicCards.
@@ -7679,53 +7642,51 @@ $root.ReplayData = (function() {
             w.uint32(16).int64(m.index);
         if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
             $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(26).fork()).ldelim();
+        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
+            w.uint32(34).string(m.dealerUid);
         if (m.players != null && m.players.length) {
             for (var i = 0; i < m.players.length; ++i)
-                $root.PlayerInfo.encode(m.players[i], w.uint32(34).fork()).ldelim();
+                $root.PlayerInfo.encode(m.players[i], w.uint32(42).fork()).ldelim();
         }
-        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
-            w.uint32(42).string(m.dealerUid);
-        if (m.antes != null && Object.hasOwnProperty.call(m, "antes"))
-            w.uint32(48).int64(m.antes);
         if (m.publicCards != null && m.publicCards.length) {
             for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(50).fork()).ldelim();
         }
         if (m.roundStartActions != null && m.roundStartActions.length) {
             for (var i = 0; i < m.roundStartActions.length; ++i)
-                $root.ActionResult.encode(m.roundStartActions[i], w.uint32(66).fork()).ldelim();
+                $root.ActionResult.encode(m.roundStartActions[i], w.uint32(58).fork()).ldelim();
         }
         if (m.preFlopActions != null && m.preFlopActions.length) {
             for (var i = 0; i < m.preFlopActions.length; ++i)
-                $root.ActionResult.encode(m.preFlopActions[i], w.uint32(74).fork()).ldelim();
+                $root.ActionResult.encode(m.preFlopActions[i], w.uint32(66).fork()).ldelim();
         }
         if (m.flopActions != null && m.flopActions.length) {
             for (var i = 0; i < m.flopActions.length; ++i)
-                $root.ActionResult.encode(m.flopActions[i], w.uint32(82).fork()).ldelim();
+                $root.ActionResult.encode(m.flopActions[i], w.uint32(74).fork()).ldelim();
         }
         if (m.turnActions != null && m.turnActions.length) {
             for (var i = 0; i < m.turnActions.length; ++i)
-                $root.ActionResult.encode(m.turnActions[i], w.uint32(90).fork()).ldelim();
+                $root.ActionResult.encode(m.turnActions[i], w.uint32(82).fork()).ldelim();
         }
         if (m.riverActions != null && m.riverActions.length) {
             for (var i = 0; i < m.riverActions.length; ++i)
-                $root.ActionResult.encode(m.riverActions[i], w.uint32(98).fork()).ldelim();
+                $root.ActionResult.encode(m.riverActions[i], w.uint32(90).fork()).ldelim();
         }
         if (m.result != null && m.result.length) {
             for (var i = 0; i < m.result.length; ++i)
-                $root.PlayerWinLose.encode(m.result[i], w.uint32(106).fork()).ldelim();
+                $root.PlayerWinLose.encode(m.result[i], w.uint32(98).fork()).ldelim();
         }
         if (m.potInfoFlop != null && m.potInfoFlop.length) {
             for (var i = 0; i < m.potInfoFlop.length; ++i)
-                $root.PotInfo.encode(m.potInfoFlop[i], w.uint32(114).fork()).ldelim();
+                $root.PotInfo.encode(m.potInfoFlop[i], w.uint32(106).fork()).ldelim();
         }
         if (m.potInfoTurn != null && m.potInfoTurn.length) {
             for (var i = 0; i < m.potInfoTurn.length; ++i)
-                $root.PotInfo.encode(m.potInfoTurn[i], w.uint32(122).fork()).ldelim();
+                $root.PotInfo.encode(m.potInfoTurn[i], w.uint32(114).fork()).ldelim();
         }
         if (m.potInfoRiver != null && m.potInfoRiver.length) {
             for (var i = 0; i < m.potInfoRiver.length; ++i)
-                $root.PotInfo.encode(m.potInfoRiver[i], w.uint32(130).fork()).ldelim();
+                $root.PotInfo.encode(m.potInfoRiver[i], w.uint32(122).fork()).ldelim();
         }
         return w;
     };
@@ -7758,62 +7719,59 @@ $root.ReplayData = (function() {
                 m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
                 break;
             case 4:
+                m.dealerUid = r.string();
+                break;
+            case 5:
                 if (!(m.players && m.players.length))
                     m.players = [];
                 m.players.push($root.PlayerInfo.decode(r, r.uint32()));
                 break;
-            case 5:
-                m.dealerUid = r.string();
-                break;
             case 6:
-                m.antes = r.int64();
-                break;
-            case 7:
                 if (!(m.publicCards && m.publicCards.length))
                     m.publicCards = [];
                 m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
                 break;
-            case 8:
+            case 7:
                 if (!(m.roundStartActions && m.roundStartActions.length))
                     m.roundStartActions = [];
                 m.roundStartActions.push($root.ActionResult.decode(r, r.uint32()));
                 break;
-            case 9:
+            case 8:
                 if (!(m.preFlopActions && m.preFlopActions.length))
                     m.preFlopActions = [];
                 m.preFlopActions.push($root.ActionResult.decode(r, r.uint32()));
                 break;
-            case 10:
+            case 9:
                 if (!(m.flopActions && m.flopActions.length))
                     m.flopActions = [];
                 m.flopActions.push($root.ActionResult.decode(r, r.uint32()));
                 break;
-            case 11:
+            case 10:
                 if (!(m.turnActions && m.turnActions.length))
                     m.turnActions = [];
                 m.turnActions.push($root.ActionResult.decode(r, r.uint32()));
                 break;
-            case 12:
+            case 11:
                 if (!(m.riverActions && m.riverActions.length))
                     m.riverActions = [];
                 m.riverActions.push($root.ActionResult.decode(r, r.uint32()));
                 break;
-            case 13:
+            case 12:
                 if (!(m.result && m.result.length))
                     m.result = [];
                 m.result.push($root.PlayerWinLose.decode(r, r.uint32()));
                 break;
-            case 14:
+            case 13:
                 if (!(m.potInfoFlop && m.potInfoFlop.length))
                     m.potInfoFlop = [];
                 m.potInfoFlop.push($root.PotInfo.decode(r, r.uint32()));
                 break;
-            case 15:
+            case 14:
                 if (!(m.potInfoTurn && m.potInfoTurn.length))
                     m.potInfoTurn = [];
                 m.potInfoTurn.push($root.PotInfo.decode(r, r.uint32()));
                 break;
-            case 16:
+            case 15:
                 if (!(m.potInfoRiver && m.potInfoRiver.length))
                     m.potInfoRiver = [];
                 m.potInfoRiver.push($root.PotInfo.decode(r, r.uint32()));
@@ -12879,7 +12837,10 @@ $root.S2CCommonReplayListResp = (function() {
      * @interface IS2CCommonReplayListResp
      * @property {ICommonResult|null} [result] S2CCommonReplayListResp result
      * @property {string|null} [gameId] S2CCommonReplayListResp gameId
-     * @property {ISimpleReplayData|null} [data] S2CCommonReplayListResp data
+     * @property {Array.<ISimpleReplay>|null} [data] S2CCommonReplayListResp data
+     * @property {number|null} [page] S2CCommonReplayListResp page
+     * @property {number|null} [pageSize] S2CCommonReplayListResp pageSize
+     * @property {number|null} [totalNum] S2CCommonReplayListResp totalNum
      */
 
     /**
@@ -12891,6 +12852,7 @@ $root.S2CCommonReplayListResp = (function() {
      * @param {IS2CCommonReplayListResp=} [p] Properties to set
      */
     function S2CCommonReplayListResp(p) {
+        this.data = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -12915,11 +12877,35 @@ $root.S2CCommonReplayListResp = (function() {
 
     /**
      * S2CCommonReplayListResp data.
-     * @member {ISimpleReplayData|null|undefined} data
+     * @member {Array.<ISimpleReplay>} data
      * @memberof S2CCommonReplayListResp
      * @instance
      */
-    S2CCommonReplayListResp.prototype.data = null;
+    S2CCommonReplayListResp.prototype.data = $util.emptyArray;
+
+    /**
+     * S2CCommonReplayListResp page.
+     * @member {number} page
+     * @memberof S2CCommonReplayListResp
+     * @instance
+     */
+    S2CCommonReplayListResp.prototype.page = 0;
+
+    /**
+     * S2CCommonReplayListResp pageSize.
+     * @member {number} pageSize
+     * @memberof S2CCommonReplayListResp
+     * @instance
+     */
+    S2CCommonReplayListResp.prototype.pageSize = 0;
+
+    /**
+     * S2CCommonReplayListResp totalNum.
+     * @member {number} totalNum
+     * @memberof S2CCommonReplayListResp
+     * @instance
+     */
+    S2CCommonReplayListResp.prototype.totalNum = 0;
 
     /**
      * Encodes the specified S2CCommonReplayListResp message. Does not implicitly {@link S2CCommonReplayListResp.verify|verify} messages.
@@ -12937,8 +12923,16 @@ $root.S2CCommonReplayListResp = (function() {
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(18).string(m.gameId);
-        if (m.data != null && Object.hasOwnProperty.call(m, "data"))
-            $root.SimpleReplayData.encode(m.data, w.uint32(26).fork()).ldelim();
+        if (m.data != null && m.data.length) {
+            for (var i = 0; i < m.data.length; ++i)
+                $root.SimpleReplay.encode(m.data[i], w.uint32(26).fork()).ldelim();
+        }
+        if (m.page != null && Object.hasOwnProperty.call(m, "page"))
+            w.uint32(32).int32(m.page);
+        if (m.pageSize != null && Object.hasOwnProperty.call(m, "pageSize"))
+            w.uint32(40).int32(m.pageSize);
+        if (m.totalNum != null && Object.hasOwnProperty.call(m, "totalNum"))
+            w.uint32(48).int32(m.totalNum);
         return w;
     };
 
@@ -12967,7 +12961,18 @@ $root.S2CCommonReplayListResp = (function() {
                 m.gameId = r.string();
                 break;
             case 3:
-                m.data = $root.SimpleReplayData.decode(r, r.uint32());
+                if (!(m.data && m.data.length))
+                    m.data = [];
+                m.data.push($root.SimpleReplay.decode(r, r.uint32()));
+                break;
+            case 4:
+                m.page = r.int32();
+                break;
+            case 5:
+                m.pageSize = r.int32();
+                break;
+            case 6:
+                m.totalNum = r.int32();
                 break;
             default:
                 r.skipType(t & 7);

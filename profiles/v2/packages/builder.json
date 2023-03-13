@@ -13,11 +13,11 @@
   },
   "BuildTaskManager": {
     "taskMap": {
-      "1678602163783": {
-        "id": "1678602163783",
+      "1678690362884": {
+        "id": "1678690362884",
         "progress": 1,
         "state": "success",
-        "message": "3-12-2023 14:23 Build success in 22518 ms!",
+        "message": "3-13-2023 14:53 Build success in 32658 ms!",
         "options": {
           "name": "9D",
           "platform": "web-mobile",
@@ -41,7 +41,7 @@
               "inBundle": false
             }
           ],
-          "outputName": "web-mobile1.15",
+          "outputName": "web-mobile",
           "packages": {
             "web-mobile": {
               "orientation": "portrait",
@@ -56,7 +56,7 @@
             "hot-update": null
           }
         },
-        "time": "3-12-2023 14:22",
+        "time": "3-13-2023 14:52",
         "dirty": false
       }
     }

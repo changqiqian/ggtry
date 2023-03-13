@@ -103,7 +103,6 @@ export class Calculator extends Singleton<Calculator>()
         totalCardList = this.SortCardList(totalCardList);
         let result = this.CalculateCombination(totalCardList);
 
-        console.log("this.mCurrentCombination===" + this.mCurrentCombination.toString());
         //this.LogCards(result);
         return result;
     }

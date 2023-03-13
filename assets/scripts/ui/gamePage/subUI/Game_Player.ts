@@ -986,15 +986,18 @@ export class Game_Player extends BaseUI
             return;
         }
 
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
-        if(_replay == false)
+
+        let bb;
+
+        if(_replay)
         {
-            // let isSelf = gameData.IsSelfBySeat(this.mSeatID);
-            // if(isSelf)
-            // {
-            //     return;
-            // }
+            bb = GameReplayData.Instance.Data_ReplayData.mData.texasConfig.smallBlind * 2;
+        }
+        else
+        {
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            bb = gameData.GetStaticData().smallBlind * 2;
         }
 
         this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_node)=>
@@ -1007,7 +1010,7 @@ export class Game_Player extends BaseUI
         })
 
 
-        this.mGame_BetAmount.Bet(_amount, gameData , _replay);
+        this.mGame_BetAmount.Bet(_amount,bb , _replay);
 
     }
 

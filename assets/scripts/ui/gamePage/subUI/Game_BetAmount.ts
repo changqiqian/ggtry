@@ -16,7 +16,7 @@ export class Game_BetAmount extends BaseUI
 
     mData : number = GameConfig.WrongIndex;
     mReplay : boolean = false;
-    mGameData :GameData  = null;
+    mBB : number= 0;
     InitParam() 
     {
 
@@ -41,9 +41,9 @@ export class Game_BetAmount extends BaseUI
 
     }
 
-    Bet(_amount : number , _gameData : GameData , _replay : boolean)
+    Bet(_amount : number ,_bb : number ,_replay : boolean)
     {
-        this.mGameData = _gameData;
+        this.mBB = _bb;
         this.mReplay = _replay;
         this.mData = _amount;
         this.node.active =  true;
@@ -66,8 +66,7 @@ export class Game_BetAmount extends BaseUI
 
         if(LocalPlayerData.Instance.Data_BBModeSetting.mData == true)
         {
-            let bb =  this.mGameData.GetStaticData().smallBlind * 2;
-            this.mAmount.string = Tool.ConvertToBB(this.mData , bb) +""; 
+            this.mAmount.string = Tool.ConvertToBB(this.mData , this.mBB) +""; 
         }
     }
 

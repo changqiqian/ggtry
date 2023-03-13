@@ -66,23 +66,29 @@ export class BriefRecordItem extends BaseUI
         this.mData = _data;
         this.mVideoBtn.SetTitle(Localization.GetString("00271") + _data.index)
         this.ResetCards();
-        this.mWinnerPlayerInfo.SetLocalHead(parseInt(_data.winnerHead));
-        this.mWinnerPlayerInfo.SetName(_data.winnerName);
-        this.mMyProfit.string = Tool.ConvertMoney_S2C(_data.myResult) + "";
-        this.mWinnerProfit.string = Tool.ConvertMoney_S2C(_data.winnerResult) + "";
 
+        let winner : PlayerWinLose = this.GetBigestWinner(_data.winnerResult);
+        
+        this.mWinnerPlayerInfo.SetLocalHead(parseInt(winner.head));
+        this.mWinnerPlayerInfo.SetName(winner.nickName);
+        this.mWinnerProfit.string = Tool.ConvertMoney_S2C(winner.winLose) + "";
 
-        for(let i = 0 ; i < _data.myCards.length ; i++)
+        let selfInfo = _data.mySimpleInfo
+        if(selfInfo !=null)
         {
-            let currentCard = this.mMineCards.children[i].getComponent(Poker);
-            currentCard.SetFrontByCardInfo(_data.myCards[i]);
-            currentCard.ShowFront();
+            this.mMyProfit.string = Tool.ConvertMoney_S2C(selfInfo.myResult) + "";
+            for(let i = 0 ; i < selfInfo.myCards.length ; i++)
+            {
+                let currentCard = this.mMineCards.children[i].getComponent(Poker);
+                currentCard.SetFrontByCardInfo(selfInfo.myCards[i]);
+                currentCard.ShowFront();
+            }
         }
 
-        for(let i = 0 ; i < _data.winnerCards.length ; i++)
+        for(let i = 0 ; i < winner.cardInfo.length ; i++)
         {
             let currentCard = this.mWinnerCards.children[i].getComponent(Poker);
-            currentCard.SetFrontByCardInfo(_data.winnerCards[i]);
+            currentCard.SetFrontByCardInfo(winner.cardInfo[i]);
             currentCard.ShowFront();
         }
 
@@ -94,6 +100,27 @@ export class BriefRecordItem extends BaseUI
         }
     }
     
+    GetBigestWinner(_winners : Array<PlayerWinLose>) : PlayerWinLose
+    {
+        let bigWinner = null;
+        for(let i = 0 ; i < _winners.length ; i++)
+        {
+            if(i == 0)
+            {
+                bigWinner = _winners[i];
+            }
+            else
+            {
+                let current = _winners[i];
+                if(current.winLose > bigWinner.winLose)
+                {
+                    bigWinner = current;
+                }
+            }
+        }
+
+        return bigWinner;
+    }
 
     ResetCards()
     {

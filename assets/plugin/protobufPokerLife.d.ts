@@ -1970,6 +1970,12 @@ export class PlayerWinLose implements IPlayerWinLose {
     /** PlayerWinLose uid. */
     public uid: string;
 
+    /** PlayerWinLose nickName. */
+    public nickName: string;
+
+    /** PlayerWinLose head. */
+    public head: string;
+
     /** PlayerWinLose winLose. */
     public winLose: number;
 
@@ -2169,6 +2175,9 @@ export class ActionResult implements IActionResult {
     /** ActionResult potInfo. */
     public potInfo: IPotInfo[];
 
+    /** ActionResult totalNUm. */
+    public totalNUm: number;
+
     /**
      * Encodes the specified ActionResult message. Does not implicitly {@link ActionResult.verify|verify} messages.
      * @param m ActionResult message or plain object to encode
@@ -2188,44 +2197,38 @@ export class ActionResult implements IActionResult {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ActionResult;
 }
 
-/** Represents a SimpleReplayData. */
-export class SimpleReplayData implements ISimpleReplayData {
+/** Represents a MySimpleInfo. */
+export class MySimpleInfo implements IMySimpleInfo {
 
     /**
-     * Constructs a new SimpleReplayData.
+     * Constructs a new MySimpleInfo.
      * @param [p] Properties to set
      */
-    constructor(p?: ISimpleReplayData);
+    constructor(p?: IMySimpleInfo);
 
-    /** SimpleReplayData list. */
-    public list: ISimpleReplay[];
+    /** MySimpleInfo myCards. */
+    public myCards: ICardInfo[];
 
-    /** SimpleReplayData pageNum. */
-    public pageNum: number;
-
-    /** SimpleReplayData size. */
-    public size: number;
-
-    /** SimpleReplayData total. */
-    public total: number;
+    /** MySimpleInfo myResult. */
+    public myResult: number;
 
     /**
-     * Encodes the specified SimpleReplayData message. Does not implicitly {@link SimpleReplayData.verify|verify} messages.
-     * @param m SimpleReplayData message or plain object to encode
+     * Encodes the specified MySimpleInfo message. Does not implicitly {@link MySimpleInfo.verify|verify} messages.
+     * @param m MySimpleInfo message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: ISimpleReplayData, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IMySimpleInfo, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a SimpleReplayData message from the specified reader or buffer.
+     * Decodes a MySimpleInfo message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns SimpleReplayData
+     * @returns MySimpleInfo
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): SimpleReplayData;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): MySimpleInfo;
 }
 
 /** Represents a SimpleReplay. */
@@ -2246,26 +2249,17 @@ export class SimpleReplay implements ISimpleReplay {
     /** SimpleReplay publicCards. */
     public publicCards: ICardInfo[];
 
-    /** SimpleReplay myCards. */
-    public myCards: ICardInfo[];
-
-    /** SimpleReplay myResult. */
-    public myResult: number;
-
-    /** SimpleReplay winnerCards. */
-    public winnerCards: ICardInfo[];
-
-    /** SimpleReplay winnerName. */
-    public winnerName: string;
-
-    /** SimpleReplay winnerHead. */
-    public winnerHead: string;
-
     /** SimpleReplay winnerResult. */
-    public winnerResult: number;
+    public winnerResult: IPlayerWinLose[];
+
+    /** SimpleReplay mySimpleInfo. */
+    public mySimpleInfo?: (IMySimpleInfo|null);
 
     /** SimpleReplay date. */
     public date: string;
+
+    /** SimpleReplay winLoseResults. */
+    public winLoseResults: IPlayerWinLose[];
 
     /**
      * Encodes the specified SimpleReplay message. Does not implicitly {@link SimpleReplay.verify|verify} messages.
@@ -2304,14 +2298,11 @@ export class ReplayData implements IReplayData {
     /** ReplayData texasConfig. */
     public texasConfig?: (IBasicTexasConfig|null);
 
-    /** ReplayData players. */
-    public players: IPlayerInfo[];
-
     /** ReplayData dealerUid. */
     public dealerUid: string;
 
-    /** ReplayData antes. */
-    public antes: number;
+    /** ReplayData players. */
+    public players: IPlayerInfo[];
 
     /** ReplayData publicCards. */
     public publicCards: ICardInfo[];
@@ -4125,7 +4116,16 @@ export class S2CCommonReplayListResp implements IS2CCommonReplayListResp {
     public gameId: string;
 
     /** S2CCommonReplayListResp data. */
-    public data?: (ISimpleReplayData|null);
+    public data: ISimpleReplay[];
+
+    /** S2CCommonReplayListResp page. */
+    public page: number;
+
+    /** S2CCommonReplayListResp pageSize. */
+    public pageSize: number;
+
+    /** S2CCommonReplayListResp totalNum. */
+    public totalNum: number;
 
     /**
      * Encodes the specified S2CCommonReplayListResp message. Does not implicitly {@link S2CCommonReplayListResp.verify|verify} messages.

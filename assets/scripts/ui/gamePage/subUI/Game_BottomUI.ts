@@ -37,13 +37,13 @@ export class Game_BottomUI extends BaseUI
 
         this.mHistoryBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowToast("不要乱点，别点这个按钮");
-            // UIMgr.Instance.ShowLayer("gamePage","prefab/Game_RecipeLayer",true,(_script)=>
-            // {
-            //     let tempScript = _script as Game_RecipeLayer;
-            //     tempScript.InitWithData(this.mIndex);
-            //     tempScript.Refresh();
-            // },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+            //UIMgr.Instance.ShowToast("不要乱点，别点这个按钮");
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_RecipeLayer",true,(_script)=>
+            {
+                let tempScript = _script as Game_RecipeLayer;
+                tempScript.InitWithData(this.mIndex);
+                tempScript.OnDragTop();
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
 
         this.mChatBtn.SetClickCallback(()=>

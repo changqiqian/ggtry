@@ -55,7 +55,7 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
         this.mMovingShow.SetRoot(this.node);
         this.mMovingShow.SetShowAnimationCallback(()=>
         {
-            this.OnDragTop();
+            //this.OnDragTop();
         })
 
         this.mCloseBtn.SetClickCallback(()=>
@@ -73,6 +73,7 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
         super.CustmoerDestory();
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
+        gameData.Data_S2CCommonReplayListResp.Clear();
         gameData.RemoveAllDataListennerByTarget(this);
     }
     
@@ -93,22 +94,22 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
         let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonReplayListResp.AddListenner(this,(_data)=>
         {
-            let coreData : SimpleReplayData = _data.data;
-            if(this.mCurrentPage != coreData.pageNum)
+            let list = _data.data;
+            if(this.mCurrentPage != _data.page)
             {
                 return;
             }
 
-            for(let i = 0 ; i < coreData.list.length ; i++)
+            for(let i = 0 ; i < list.length ; i++)
             {
-                let current = _data.list[i];
+                let current = list[i];
                 let index = this.mCurrentData.findIndex((_item) => _item.index === current.index);
                 if(index < 0)
                 {
                     this.InsertOneData(current);
                 }
             }
-            this.UpdateData(_data.total);
+            this.UpdateData(_data.totalNum);
         });
 
         gameData.Data_S2CCommonReplayDetailsResp.AddListenner(this,(_data)=>
@@ -136,7 +137,7 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
 
     OnVedioBtn(_gameId : string , _index : number , _date : string)
     {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
         let gameData = gameStruct.mGameData;
         let msgId = gameData.ReplayDetailMsgId();
 
