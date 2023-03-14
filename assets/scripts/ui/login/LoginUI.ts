@@ -5,10 +5,6 @@ import { SceneType, UIMgr } from '../../base/UIMgr';
 import { CommonNotify } from '../../CommonNotify';
 import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
-import { NetworkHttp } from '../../network/NetworkHttp';
-import { NetworkSend } from '../../network/NetworkSend';
-import { Tool } from '../../Tool';
-import { Club_RecordLayer } from '../clubPage/Club_RecordLayer';
 import { BaseButton } from '../common/BaseButton';
 import { MultipleTableCtr } from '../common/MultipleTableCtr';
 
@@ -18,8 +14,6 @@ const { ccclass, property } = _decorator;
 @ccclass('LoginUI')
 export class LoginUI extends BaseUI 
 {
-    @property(Node) 
-    mBG: Node = null;
     @property(Label) 
     mVersion: Label = null;
     @property(BaseButton) 
@@ -48,7 +42,6 @@ export class LoginUI extends BaseUI
     BindUI() 
     {
         LocalPlayerData.Instance.Data_AreaCode.mData = 1;
-        this.MaxScreen(this.mBG);
         UIMgr.Instance.ShowMultipleTable(true);
         this.mVersion.string = GameConfig.Version;
         this.mLoginBtn.SetClickCallback(()=>

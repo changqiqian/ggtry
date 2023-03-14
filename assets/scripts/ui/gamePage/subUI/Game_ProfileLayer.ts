@@ -23,10 +23,12 @@ export class Game_ProfileLayer extends BaseUI
     mVPIP: Label = null;
     @property(Label) 
     mRaiseRate: Label = null;
-    @property(ScrollView) 
-    mScrollView: ScrollView = null;
-    @property(ScrollView) 
-    mScrollViewForSelf: ScrollView = null;
+
+
+    @property(BaseButton) 
+    mKickBtn: BaseButton = null;
+    @property(BaseButton) 
+    mAddFriendBtn: BaseButton = null;
     
     private mIndex : number = null;
     mTargetUid: string = null;
@@ -37,33 +39,22 @@ export class Game_ProfileLayer extends BaseUI
     }
     BindUI()
     {
-        // for(let i = Emoji.Chick ; i <= Emoji.Foot ; i++)
-        // {
-        //     this.LoadPrefab("emoji" , "prefab/Emoji_Item" , (_prefab)=>
-        //     {
-        //         let tempNode = instantiate(_prefab);
-        //         this.mScrollView.content.addChild(tempNode);
-        //         tempNode.getComponent(Emoji_Item).InitWithData(i , Emoji_Const.Cost);
-        //     })
-        // }
-
-        // for(let i = SelfEmoji.Alarm ; i <= SelfEmoji.Mute ; i++)
-        // {
-        //     this.LoadPrefab("emoji" , "prefab/Emoji_SelfItem" , (_prefab)=>
-        //     {
-        //         let tempNode = instantiate(_prefab);
-        //         this.mScrollViewForSelf.content.addChild(tempNode);
-        //         tempNode.getComponent(Emoji_SelfItem).InitWithData(i);
-        //     })
-        // }
 
         this.mCloseBtn.SetClickCallback(()=>
         {
             this.CloseAsWindow();
         })
 
-        this.mScrollView.node.active = false;
-        this.mScrollViewForSelf.node.active = false;
+        this.mKickBtn.SetClickCallback(()=>
+        {
+           
+        })
+
+        this.mAddFriendBtn.SetClickCallback(()=>
+        {
+         
+        })
+
     }
     RegDataNotify()
     {
@@ -82,18 +73,6 @@ export class Game_ProfileLayer extends BaseUI
     {
         this.mIndex = _index;
         this.mTargetUid = _targetUid;
-
-        this.mScrollView.node.active = false;
-        this.mScrollViewForSelf.node.active = false;
-
-        if(_targetUid == LocalPlayerData.Instance.Data_Uid.mData)
-        {
-            this.mScrollViewForSelf.node.active = true;
-        }
-        else
-        {
-            this.mScrollView.node.active = true;
-        }
 
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;

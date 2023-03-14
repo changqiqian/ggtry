@@ -124,6 +124,7 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
 
     Refresh()
     {
+        this.mPageSize = 10;
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let msgId = gameData.ReplayListMsgId();

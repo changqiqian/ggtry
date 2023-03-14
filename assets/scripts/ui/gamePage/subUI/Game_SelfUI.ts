@@ -416,6 +416,17 @@ export class Game_SelfUI extends BaseUI
             this.mCards.active = false;
             return;
         }
+
+        for(let i = 0 ; i < cards.length ; i++)
+        {
+            let currentCard = cards[i];
+            if(currentCard.number == 0)
+            {
+                this.mCards.active = false;
+                return;
+            }
+        }
+
         this.mCards.active = true;
 
 

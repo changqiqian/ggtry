@@ -2552,8 +2552,8 @@ export class RecordPlayer implements IRecordPlayer {
     /** RecordPlayer totalHands. */
     public totalHands: number;
 
-    /** RecordPlayer totalTurnHands. */
-    public totalTurnHands: number;
+    /** RecordPlayer totalFlopHands. */
+    public totalFlopHands: number;
 
     /** RecordPlayer totalBringIn. */
     public totalBringIn: number;

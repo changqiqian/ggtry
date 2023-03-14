@@ -187,6 +187,9 @@ export class Game_BuyInWindow extends BaseUI
                 this.CloseAsWindow();
             }
         })
+
+        let staticData = gameData.GetStaticData();
+        this.mBlindInfo.string = Tool.GetBlindInfo(staticData.smallBlind,staticData.straddle , staticData.ante);
     }
 
     UpdateTotalMoney()

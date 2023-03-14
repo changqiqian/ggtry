@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, UITransform, Tween, Vec3, easing, Widget } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { UIMgr } from '../../../base/UIMgr';
 import { GameConfig } from '../../../GameConfig';
@@ -90,7 +91,11 @@ export class Game_Menu extends BaseUI
             let selfPlayer = gameData.GetPlayerInfoByUid(uid);
             if(selfPlayer != null)
             {
-
+                if(selfPlayer.auto)
+                {
+                    UIMgr.Instance.ShowToast(Localization.GetString("00370"));
+                    return;
+                }
                 NetworkSend.Instance.StandUp(msgId,gameId);
             }
 

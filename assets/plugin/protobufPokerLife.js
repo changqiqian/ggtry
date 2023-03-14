@@ -8383,7 +8383,7 @@ $root.RecordPlayer = (function() {
      * @property {string|null} [head] RecordPlayer head
      * @property {string|null} [name] RecordPlayer name
      * @property {number|null} [totalHands] RecordPlayer totalHands
-     * @property {number|null} [totalTurnHands] RecordPlayer totalTurnHands
+     * @property {number|null} [totalFlopHands] RecordPlayer totalFlopHands
      * @property {number|null} [totalBringIn] RecordPlayer totalBringIn
      * @property {number|null} [totalBringOut] RecordPlayer totalBringOut
      * @property {number|null} [winLose] RecordPlayer winLose
@@ -8437,12 +8437,12 @@ $root.RecordPlayer = (function() {
     RecordPlayer.prototype.totalHands = 0;
 
     /**
-     * RecordPlayer totalTurnHands.
-     * @member {number} totalTurnHands
+     * RecordPlayer totalFlopHands.
+     * @member {number} totalFlopHands
      * @memberof RecordPlayer
      * @instance
      */
-    RecordPlayer.prototype.totalTurnHands = 0;
+    RecordPlayer.prototype.totalFlopHands = 0;
 
     /**
      * RecordPlayer totalBringIn.
@@ -8488,8 +8488,8 @@ $root.RecordPlayer = (function() {
             w.uint32(26).string(m.name);
         if (m.totalHands != null && Object.hasOwnProperty.call(m, "totalHands"))
             w.uint32(32).int32(m.totalHands);
-        if (m.totalTurnHands != null && Object.hasOwnProperty.call(m, "totalTurnHands"))
-            w.uint32(40).int32(m.totalTurnHands);
+        if (m.totalFlopHands != null && Object.hasOwnProperty.call(m, "totalFlopHands"))
+            w.uint32(40).int32(m.totalFlopHands);
         if (m.totalBringIn != null && Object.hasOwnProperty.call(m, "totalBringIn"))
             w.uint32(48).int64(m.totalBringIn);
         if (m.totalBringOut != null && Object.hasOwnProperty.call(m, "totalBringOut"))
@@ -8530,7 +8530,7 @@ $root.RecordPlayer = (function() {
                 m.totalHands = r.int32();
                 break;
             case 5:
-                m.totalTurnHands = r.int32();
+                m.totalFlopHands = r.int32();
                 break;
             case 6:
                 m.totalBringIn = r.int64();

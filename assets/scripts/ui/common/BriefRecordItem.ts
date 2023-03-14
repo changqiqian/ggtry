@@ -39,6 +39,11 @@ export class BriefRecordItem extends BaseUI
     {
         this.mVideoBtn.SetClickCallback(()=>
         {
+            if(this.mData  == null)
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00377"));
+                return;
+            }
             let gameId = this.mData.gameId;
             let index = this.mData.index;
             let date = this.mData.date;
@@ -62,11 +67,30 @@ export class BriefRecordItem extends BaseUI
     }
     public InitWithData(_data : SimpleReplay , _VedioCallback)
     {
-        this.mVideoCallback = _VedioCallback;
-        this.mData = _data;
-        this.mVideoBtn.SetTitle(Localization.GetString("00271") + _data.index)
+        this.ResetLabel();
         this.ResetCards();
+        if(_data.winnerResult == null)
+        {
+            this.mData = null;
+        }
+        else if(_data.winnerResult.length == 0)
+        {
+            this.mData = null;
+        }
+        else
+        {
+            this.mData = _data;
+        }
 
+
+        if(this.mData == null)
+        {
+            return;
+        }
+
+        this.mVideoCallback = _VedioCallback;
+        this.mVideoBtn.SetTitle(Localization.GetString("00271") + _data.index)
+       
         let winner : PlayerWinLose = this.GetBigestWinner(_data.winnerResult);
         
         this.mWinnerPlayerInfo.SetLocalHead(parseInt(winner.head));
@@ -84,6 +108,7 @@ export class BriefRecordItem extends BaseUI
                 currentCard.ShowFront();
             }
         }
+
 
         for(let i = 0 ; i < winner.cardInfo.length ; i++)
         {
@@ -134,14 +159,23 @@ export class BriefRecordItem extends BaseUI
         {
             let currentCard = this.mPublicCards.children[i].getComponent(Poker);
             currentCard.ShowBack();
+            currentCard.Show(false);
         }
 
         for(let i = 0 ; i < this.mMineCards.children.length ; i++)
         {
             let currentCard = this.mMineCards.children[i].getComponent(Poker);
+            currentCard.Show(false)
             currentCard.ShowBack();
         }
     }
     
+    ResetLabel()
+    {
+        this.mWinnerProfit.string = "";
+        this.mMyProfit.string = "";
+        this.mVideoBtn.SetTitle("");
+        this.mWinnerPlayerInfo.SetName("");
+    }
 }
 

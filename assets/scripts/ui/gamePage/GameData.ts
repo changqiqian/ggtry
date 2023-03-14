@@ -427,6 +427,7 @@ export abstract class GameData extends MultipleNotify
             return false;
         }
 
+
         return true;
     }
 

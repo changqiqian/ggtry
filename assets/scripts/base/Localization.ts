@@ -461,6 +461,21 @@ export class Localization {
         { name: '00374', ch: '个人设置', en: 'Setting' , korea :""},
         { name: '00375', ch: '拉杆确认', en: 'Slider Comfirm' , korea :""},
         { name: '00376', ch: '显示bb', en: 'BB MODE' , korea :""},
+        { name: '00377', ch: '牌局进行中', en: 'Processing' , korea :""},
+        { name: '00378', ch: '踢出', en: 'Kick' , korea :""},
+        { name: '00379', ch: '加好友', en: 'Add' , korea :""},
+        { name: '00380', ch: '牌局回放', en: 'Replay' , korea :""},
+        { name: '00381', ch: '补充保险池', en: 'Buy Insurance' , korea :""},
+        { name: '00382', ch: '保险池', en: 'Pool' , korea :""},
+        { name: '00383', ch: '充入', en: 'Charge' , korea :""},
+        { name: '00384', ch: '占成', en: 'Ratio' , korea :""},
+        { name: '00385', ch: '充入保险池后自下一手牌生效', en: 'Will valid in next hands' , korea :""},
+        { name: '00386', ch: '立即补充', en: 'Buy now' , korea :""},
+        { name: '00387', ch: '带入', en: 'Buy in' , korea :""},
+        { name: '00388', ch: '联系客服', en: 'Help' , korea :""},
+        { name: '00389', ch: '站起围观', en: 'Stand up' , korea :""},
+        
+        
         
         
         { name: '01000', ch: '公告', en: 'Notification' , korea :""},

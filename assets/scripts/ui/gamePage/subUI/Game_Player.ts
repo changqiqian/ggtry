@@ -364,7 +364,8 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            this.ShowMiniCard(true,false);
+
+            this.ShowMiniCard(currentPlayer.auto,false);
 
             let lastBet = gameData.FindLastActionByUid(currentPlayer.uid);
             if(lastBet != null)
@@ -390,7 +391,7 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            this.ShowMiniCard(true , false);
+            this.ShowMiniCard(playerInfo.auto , false);
         })
 
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
@@ -753,7 +754,7 @@ export class Game_Player extends BaseUI
         let isPlaying = gameData.IsPlayerPlaying(_playerInfo.uid);
         if(_playerInfo.currencyNum)
         {
-            this.ShowMiniCard(isPlaying ,false);
+            this.ShowMiniCard(isPlaying &&  _playerInfo.auto,false);
             this.mGame_PlayerState.ShowAuto(_playerInfo.autoLeftTime,_playerInfo.auto);
         }
         else

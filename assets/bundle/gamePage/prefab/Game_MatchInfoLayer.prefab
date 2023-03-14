@@ -3356,7 +3356,7 @@
     "propertyPath": [
       "_string"
     ],
-    "value": ""
+    "value": "123"
   },
   {
     "__type__": "cc.TargetInfo",
@@ -3997,7 +3997,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "1c4db30b-2d40-4714-9edc-74366f617872@f9941",
+      "__uuid__": "fd319b08-9fca-4ee9-b9e4-19f58b879ed2@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 1,

@@ -304,4 +304,23 @@ export class Tool
         return resultBB.toFixed(1) + "bb";
     }
 
+    public static GetBlindInfo(_sb :number , _straddle : boolean , _ante : number) : string
+    {
+        let blindInfo = "";
+        let sb = Tool.ConvertMoney_S2C(_sb);
+        let bb = sb*2;
+        let straddle = bb * 2;
+        blindInfo += sb + "/";
+        blindInfo += bb;
+        if(_straddle)
+        {
+            blindInfo += "/" + straddle;
+        }
+        if(_ante > 0)
+        {
+            blindInfo += "(" + Tool.ConvertMoney_S2C(_ante) + ")"
+        }
+        return blindInfo;
+    }
+
 }

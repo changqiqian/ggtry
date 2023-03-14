@@ -66,33 +66,9 @@ export class Game_TableInfo extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let staticData = gameData.GetStaticData();
-
-
         this.mRoomName.string = staticData.gameName;
         this.mRoomID.string = "ID:" + gameStruct.mGameId;
-
-        let ante = Tool.ConvertMoney_S2C(staticData.ante);
-        let sb = Tool.ConvertMoney_S2C(staticData.smallBlind);
-        let bb = sb * 2;
-        let straddle = staticData.straddle;
-
-        let bindInfo = "";
-        if(straddle)
-        {
-            bindInfo = sb + "/" + bb + "/" + bb*2;
-        }
-        else
-        {
-            bindInfo = sb + "/" + bb;
-        }
-
-        if(ante > 0)
-        {
-            bindInfo += "("+ ante +")";
-        }
-        this.mBlindInfo.string = bindInfo;
-
-        
+        this.mBlindInfo.string = Tool.GetBlindInfo(staticData.smallBlind,staticData.straddle , staticData.ante);
         let otherInfo = "";
         if(staticData.insurance)
         {

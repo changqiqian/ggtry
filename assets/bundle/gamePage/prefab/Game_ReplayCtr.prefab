@@ -381,7 +381,7 @@
     },
     "_alignFlags": 8,
     "_target": null,
-    "_left": 53.033000000000015,
+    "_left": 43.033000000000015,
     "_right": 45.045999999999935,
     "_top": 0,
     "_bottom": 0,
@@ -532,7 +532,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 130,
+      "width": 150,
       "height": 180
     }
   },
@@ -1044,8 +1044,7 @@
     "propertyPath": [
       "_spriteFrame"
     ],
-    "value": {
-    }
+    "value": {}
   },
   {
     "__type__": "cc.TargetInfo",
@@ -1480,7 +1479,7 @@
     "_alignFlags": 32,
     "_target": null,
     "_left": 0,
-    "_right": 298.03499999999997,
+    "_right": 288.03499999999997,
     "_top": 0,
     "_bottom": 0,
     "_horizontalCenter": 0,
@@ -1700,8 +1699,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 130,
-      "height": 150
+      "width": 150,
+      "height": 180
     }
   },
   {
@@ -1740,8 +1739,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 130,
-      "height": 130
+      "width": 150,
+      "height": 180
     }
   },
   {
@@ -1760,8 +1759,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 130,
-      "height": 150
+      "width": 150,
+      "height": 180
     }
   },
   {
@@ -2278,7 +2277,7 @@
     "_alignFlags": 32,
     "_target": null,
     "_left": 0,
-    "_right": 61.77499999999998,
+    "_right": 51.77499999999998,
     "_top": 0,
     "_bottom": 0,
     "_horizontalCenter": 0,
@@ -2428,8 +2427,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 130,
-      "height": 130
+      "width": 150,
+      "height": 180
     }
   },
   {
