@@ -1979,14 +1979,14 @@ export class PlayerWinLose implements IPlayerWinLose {
     /** PlayerWinLose winLose. */
     public winLose: number;
 
+    /** PlayerWinLose amount. */
+    public amount: number;
+
     /** PlayerWinLose cardInfo. */
     public cardInfo: ICardInfo[];
 
     /** PlayerWinLose combinationResult. */
     public combinationResult?: (ICombinationResult|null);
-
-    /** PlayerWinLose amount. */
-    public amount: number;
 
     /**
      * Encodes the specified PlayerWinLose message. Does not implicitly {@link PlayerWinLose.verify|verify} messages.
@@ -2249,8 +2249,8 @@ export class SimpleReplay implements ISimpleReplay {
     /** SimpleReplay publicCards. */
     public publicCards: ICardInfo[];
 
-    /** SimpleReplay winnerResult. */
-    public winnerResult: IPlayerWinLose[];
+    /** SimpleReplay winnerSettlementResult. */
+    public winnerSettlementResult: IPlayerWinLose[];
 
     /** SimpleReplay mySimpleInfo. */
     public mySimpleInfo?: (IMySimpleInfo|null);
@@ -2258,8 +2258,8 @@ export class SimpleReplay implements ISimpleReplay {
     /** SimpleReplay date. */
     public date: string;
 
-    /** SimpleReplay winLoseResults. */
-    public winLoseResults: IPlayerWinLose[];
+    /** SimpleReplay intactSettlementResults. */
+    public intactSettlementResults: IPlayerWinLose[];
 
     /**
      * Encodes the specified SimpleReplay message. Does not implicitly {@link SimpleReplay.verify|verify} messages.
@@ -2322,8 +2322,8 @@ export class ReplayData implements IReplayData {
     /** ReplayData riverActions. */
     public riverActions: IActionResult[];
 
-    /** ReplayData result. */
-    public result: IPlayerWinLose[];
+    /** ReplayData correspondSettlementResult. */
+    public correspondSettlementResult: IPlayerWinLose[];
 
     /** ReplayData potInfoFlop. */
     public potInfoFlop: IPotInfo[];
@@ -2333,6 +2333,9 @@ export class ReplayData implements IReplayData {
 
     /** ReplayData potInfoRiver. */
     public potInfoRiver: IPotInfo[];
+
+    /** ReplayData intactSettlementResults. */
+    public intactSettlementResults: IPlayerWinLose[];
 
     /**
      * Encodes the specified ReplayData message. Does not implicitly {@link ReplayData.verify|verify} messages.

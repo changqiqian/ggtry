@@ -268,5 +268,10 @@ export class Poker extends BaseUI
             this.mFront.getComponent(Sprite).color = Color.WHITE;
         }
     }
+
+    public ShowRoot(_value : boolean)
+    {
+        this.mRoot.active = _value;
+    }
 }
 

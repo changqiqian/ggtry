@@ -414,6 +414,39 @@ export abstract class GameData extends MultipleNotify
         return null;
     }
 
+    public PlayerHaveCards(_uid : string) : boolean
+    {
+        let playerInfo = this.GetPlayerInfoByUid(_uid);
+        if(playerInfo == null)
+        {
+            return false;
+        }
+
+
+        if(playerInfo.cards == null)
+        {
+            return false;
+        }
+
+        if(playerInfo.cards.length == 0)
+        {
+            return false;
+        }
+
+        for(let i = 0 ; i < playerInfo.cards.length ; i++)
+        {
+            let current = playerInfo.cards[i];
+            if(current.number == 0 || current.type == 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+
+
+    }
+
     public IsPlayerPlaying(_uid : string) : boolean
     {
         let playerInfo = this.GetPlayerInfoByUid(_uid);

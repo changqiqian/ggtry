@@ -356,7 +356,7 @@ export class Localization {
         { name: '00268', ch: '实时战绩', en: 'Details' , korea :""},
         { name: '00269', ch: '昵称', en: 'Name' , korea :""},
         { name: '00270', ch: '退出结算', en: 'Settlement' , korea :""},
-        { name: '00271', ch: '编号:', en: 'No.' , korea :""},
+        { name: '00271', ch: '编号.', en: 'No.' , korea :""},
         { name: '00272', ch: '开始播放', en: 'Auto play' , korea :""},
         { name: '00273', ch: '停止播放', en: 'Stop play' , korea :""},
         { name: '00274', ch: '重置', en: 'Reset' , korea :""},

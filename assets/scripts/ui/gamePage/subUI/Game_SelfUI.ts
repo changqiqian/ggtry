@@ -410,25 +410,14 @@ export class Game_SelfUI extends BaseUI
             return;
         }
 
-        let cards = selfPlayer.cards;
-        if(cards == null || cards.length == 0)
+
+        if(gameData.PlayerHaveCards(selfPlayer.uid) == false)
         {
             this.mCards.active = false;
             return;
         }
 
-        for(let i = 0 ; i < cards.length ; i++)
-        {
-            let currentCard = cards[i];
-            if(currentCard.number == 0)
-            {
-                this.mCards.active = false;
-                return;
-            }
-        }
-
         this.mCards.active = true;
-
 
         if(this.mAlreadyShowCards == true)
         {
@@ -438,6 +427,8 @@ export class Game_SelfUI extends BaseUI
         let state = gameData.GetGameState();
         let lastAct = gameData.FindLastActionByUid(selfPlayer.uid)
         let cardNodes = this.mCards.children;
+
+        let cards = selfPlayer.cards;
         if(state <= TexasCashState.TexasCashState_PreFlopRound)
         {
             if(lastAct == null ||

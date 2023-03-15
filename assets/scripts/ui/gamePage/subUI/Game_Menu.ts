@@ -35,6 +35,8 @@ export class Game_Menu extends BaseUI
     mExitBtn: BaseButton = null;
     @property(BaseButton) 
     mSettlementBtn: BaseButton = null;
+    @property(BaseButton) 
+    mAddInsBtn: BaseButton = null;
     mIndex : number;
 
     onEnable()
@@ -114,6 +116,12 @@ export class Game_Menu extends BaseUI
             let gameData = gameStruct.mGameData;
             let gameId = gameStruct.mGameId;
             NetworkSend.Instance.ExitGame(gameId,gameData.GetStaticData().gameType);
+        });
+
+
+        this.mAddInsBtn.SetClickCallback(()=>
+        {
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_AddInsWindow");
         });
     }
     RegDataNotify()

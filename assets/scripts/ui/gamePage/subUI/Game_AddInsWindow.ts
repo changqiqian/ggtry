@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { UIMgr } from '../../../base/UIMgr';
 import { BaseButton } from '../../common/BaseButton';
 const { ccclass, property } = _decorator;
 
@@ -27,12 +28,12 @@ export class Game_AddInsWindow extends BaseUI {
     {
         this.mCloseBtn.SetClickCallback(()=>
         {
-
+            this.CloseAsWindow();
         });
 
         this.mConfirmBtn.SetClickCallback(()=>
         {
-
+            UIMgr.Instance.ShowToast("没有功能");
         });
     }
     RegDataNotify()

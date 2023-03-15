@@ -137,10 +137,18 @@ export class Game_Player extends BaseUI
             this.HideAllUI();
             let replayData = GameReplayData.Instance.Data_ReplayData.mData;
             let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID );
+            let selfUid = LocalPlayerData.Instance.Data_Uid.mData;
             if(playerInfo == null)
             {
                 return;
             }
+
+            if(playerInfo.uid == selfUid)
+            {
+                playerInfo.cards = GameReplayData.Instance.GetCardsByUid(selfUid);
+            }
+
+
             this.mCards.active = false;
             this.mSelfBtn.node.active = false;
             this.mBG.active = true;
@@ -149,7 +157,7 @@ export class Game_Player extends BaseUI
             this.UpdateMoney(true ,playerInfo);
             this.UpdateDealer(replayData.dealerUid , playerInfo );
 
-            if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            if(playerInfo.uid == selfUid)
             {
                 this.ShowCards(playerInfo.cards , true);
             }
@@ -158,28 +166,14 @@ export class Game_Player extends BaseUI
                 this.ShowMiniCard(true , true);
             }
 
-            let sbActionResult = GameReplayData.Instance.GetRoundStartActionByActionType(ActionType.ActionType_SB);
-            let bbActionResult = GameReplayData.Instance.GetRoundStartActionByActionType(ActionType.ActionType_BB);
-            let straddleActionResult = GameReplayData.Instance.GetRoundStartActionByActionType(ActionType.ActionType_Straddle);
-            if(sbActionResult.actionInfo.uid == playerInfo.uid)
+
+            let act = GameReplayData.Instance.GetRoundStartActionUid(playerInfo.uid);
+            if(act != null)
             {
-                this.ShowActionType(ActionType.ActionType_SB , true);
-                this.Bet(replayData.texasConfig.smallBlind ,ActionType.ActionType_SB, true);
+                this.ShowActionType(act.actionInfo.actionType , true);
+                this.Bet(act.actionInfo.amount ,act.actionInfo.actionType, true);
             }
-            else if(bbActionResult.actionInfo.uid == playerInfo.uid)
-            {
-                this.ShowActionType(ActionType.ActionType_BB , true);
-                this.Bet(replayData.texasConfig.smallBlind * 2,ActionType.ActionType_BB, true);
-            }
-            else 
-            {
-                if(straddleActionResult != null)
-                {
-                    if(straddleActionResult.actionInfo.uid == playerInfo.uid)
-                    this.ShowActionType(ActionType.ActionType_Straddle , true);
-                    this.Bet(replayData.texasConfig.smallBlind * 4,ActionType.ActionType_Straddle, true);
-                }
-            }
+
         })
 
         GameReplayData.Instance.Data_Update.AddListenner(this,(_data)=>
@@ -365,7 +359,8 @@ export class Game_Player extends BaseUI
                 return;
             }
 
-            this.ShowMiniCard(currentPlayer.auto,false);
+            
+            this.ShowMiniCard(gameData.IsPlayerPlaying(currentPlayer.uid),false);
 
             let lastBet = gameData.FindLastActionByUid(currentPlayer.uid);
             if(lastBet != null)
@@ -391,7 +386,7 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            this.ShowMiniCard(playerInfo.auto , false);
+            this.ShowMiniCard(true , false);
         })
 
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
@@ -751,10 +746,10 @@ export class Game_Player extends BaseUI
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        let isPlaying = gameData.IsPlayerPlaying(_playerInfo.uid);
+        let playerPlaying = gameData.IsPlayerPlaying(_playerInfo.uid);
         if(_playerInfo.currencyNum)
         {
-            this.ShowMiniCard(isPlaying &&  _playerInfo.auto,false);
+            this.ShowMiniCard(playerPlaying && _playerInfo.fold == false,false);
             this.mGame_PlayerState.ShowAuto(_playerInfo.autoLeftTime,_playerInfo.auto);
         }
         else

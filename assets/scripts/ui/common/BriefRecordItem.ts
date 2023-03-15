@@ -2,9 +2,7 @@ import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { Localization } from '../../base/Localization';
 import { UIMgr } from '../../base/UIMgr';
-import { NetworkHttp } from '../../network/NetworkHttp';
 import { Tool } from '../../Tool';
-import { Game_CashReplay } from '../gamePage/subUI/Game_CashReplay';
 import { BaseButton } from './BaseButton';
 import { PlayerInfo } from './PlayerInfo';
 import { Poker } from './Poker';
@@ -69,29 +67,12 @@ export class BriefRecordItem extends BaseUI
     {
         this.ResetLabel();
         this.ResetCards();
-        if(_data.winnerResult == null)
-        {
-            this.mData = null;
-        }
-        else if(_data.winnerResult.length == 0)
-        {
-            this.mData = null;
-        }
-        else
-        {
-            this.mData = _data;
-        }
-
-
-        if(this.mData == null)
-        {
-            return;
-        }
+        this.mData = _data;
 
         this.mVideoCallback = _VedioCallback;
         this.mVideoBtn.SetTitle(Localization.GetString("00271") + _data.index)
        
-        let winner : PlayerWinLose = this.GetBigestWinner(_data.winnerResult);
+        let winner : PlayerWinLose = this.GetBigestWinner(_data.winnerSettlementResult);
         
         this.mWinnerPlayerInfo.SetLocalHead(parseInt(winner.head));
         this.mWinnerPlayerInfo.SetName(winner.nickName);
@@ -104,6 +85,7 @@ export class BriefRecordItem extends BaseUI
             for(let i = 0 ; i < selfInfo.myCards.length ; i++)
             {
                 let currentCard = this.mMineCards.children[i].getComponent(Poker);
+                currentCard.ShowRoot(true);
                 currentCard.SetFrontByCardInfo(selfInfo.myCards[i]);
                 currentCard.ShowFront();
             }
@@ -113,6 +95,7 @@ export class BriefRecordItem extends BaseUI
         for(let i = 0 ; i < winner.cardInfo.length ; i++)
         {
             let currentCard = this.mWinnerCards.children[i].getComponent(Poker);
+            //currentCard.ShowRoot(true);
             currentCard.SetFrontByCardInfo(winner.cardInfo[i]);
             currentCard.ShowFront();
         }
@@ -120,6 +103,7 @@ export class BriefRecordItem extends BaseUI
         for(let i = 0 ; i < _data.publicCards.length ; i++)
         {
             let currentCard = this.mPublicCards.children[i].getComponent(Poker);
+            currentCard.ShowRoot(true);
             currentCard.SetFrontByCardInfo(_data.publicCards[i]);
             currentCard.ShowFront();
         }
@@ -153,20 +137,21 @@ export class BriefRecordItem extends BaseUI
         {
             let currentCard = this.mWinnerCards.children[i].getComponent(Poker);
             currentCard.ShowBack();
+            //currentCard.ShowRoot(false);
         }
 
         for(let i = 0 ; i < this.mPublicCards.children.length ; i++)
         {
             let currentCard = this.mPublicCards.children[i].getComponent(Poker);
             currentCard.ShowBack();
-            currentCard.Show(false);
+            currentCard.ShowRoot(false);
         }
 
         for(let i = 0 ; i < this.mMineCards.children.length ; i++)
         {
             let currentCard = this.mMineCards.children[i].getComponent(Poker);
-            currentCard.Show(false)
             currentCard.ShowBack();
+            currentCard.ShowRoot(false);
         }
     }
     

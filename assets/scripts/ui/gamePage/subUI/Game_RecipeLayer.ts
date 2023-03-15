@@ -74,6 +74,7 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonReplayListResp.Clear();
+        gameData.Data_S2CCommonReplayDetailsResp.Clear();
         gameData.RemoveAllDataListennerByTarget(this);
     }
     
@@ -103,6 +104,10 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
             for(let i = 0 ; i < list.length ; i++)
             {
                 let current = list[i];
+                if(current.winnerSettlementResult == null)
+                {
+                    continue;
+                }
                 let index = this.mCurrentData.findIndex((_item) => _item.index === current.index);
                 if(index < 0)
                 {

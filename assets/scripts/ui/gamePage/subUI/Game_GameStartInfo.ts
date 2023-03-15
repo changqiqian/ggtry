@@ -92,11 +92,11 @@ export class Game_GameStartInfo extends BaseUI
             return;
         }
 
-        let currentClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId);
-        if(currentClub == null)
-        {
-            return;
-        }
+        // let currentClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId);
+        // if(currentClub == null)
+        // {
+        //     return;
+        // }
 
 
         let gameStarted = state >= TexasCashState.TexasCashState_WaitStart;
@@ -105,9 +105,9 @@ export class Game_GameStartInfo extends BaseUI
             return;
         }
         this.node.active = true;
-        let haveRights = currentClub.clubMember.memberType > ClubMemberType.ClubAccountType_Normal;
-        this.mStartBtn.Show(haveRights);
-        this.mTips.node.active = !haveRights;
+        //let haveRights = currentClub.clubMember.memberType > ClubMemberType.ClubAccountType_Normal;
+        //this.mStartBtn.Show(haveRights);
+        //this.mTips.node.active = !haveRights;
 
     }
 }

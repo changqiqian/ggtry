@@ -1,5 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseData } from '../../base/BaseData';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { SingletonBaseNotify } from '../../base/Singleton';
 
 
@@ -56,39 +57,51 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
             {
                 return null;
             }
-            break;
             case TexasCashState.TexasCashState_PreFlopRound:
             {
                 let preFlopActions = GameReplayData.Instance.GetPreflopActions(); 
                 return preFlopActions[step];
             }
-            break;
             case TexasCashState.TexasCashState_FlopRound:
             {
                 let flopActions = GameReplayData.Instance.GetFlopActions(); 
                 return flopActions[step];
             }
-            break;
             case TexasCashState.TexasCashState_TurnRound:
             {
                 let turnActions = GameReplayData.Instance.GetTurnActions(); 
                 return turnActions[step];
             }
-            break;
             case TexasCashState.TexasCashState_RiverRound:
             {
                 let riverActions = GameReplayData.Instance.GetRiverActions(); 
                 return riverActions[step];
             }
-            break;
             case TexasCashState.TexasCashState_Settlement:
             {
                 return null;
             }
-            break;
         }
 
         return null;
+        
+    }
+
+    GetCardsByUid(_uid : string) : Array<CardInfo>
+    {
+        let result = null;
+        let winLoseResult = this.Data_ReplayData.mData.correspondSettlementResult;
+        for(let i = 0 ; i < winLoseResult.length ; i++)
+        {
+            let current = winLoseResult[i];
+            if(current.uid == _uid)
+            {
+                result = current.cardInfo;
+                break;
+            }
+        }
+
+        return result;
     }
 
     GetPlayerInfoByUid(_uid : string) : PlayerInfo
@@ -115,13 +128,13 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
     }
 
 
-    GetRoundStartActionByActionType(_actionType : ActionType) : ActionResult
+    GetRoundStartActionUid(_uid : string) : ActionResult
     {
         let roundStartActions = this.GetRoundStartActions();
         for(let i = 0 ; i < roundStartActions.length ; i++)
         {
             let current = roundStartActions[i];
-            if(current.actionInfo.actionType == _actionType)
+            if(current.actionInfo.uid == _uid)
             {
                 return current;
             }
@@ -169,10 +182,10 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
             return null;
         }
 
-        index = this.Data_ReplayData.mData.result.findIndex((_item) => _item.uid === playerInfo.uid);
+        index = this.Data_ReplayData.mData.correspondSettlementResult.findIndex((_item) => _item.uid === playerInfo.uid);
         if(index >=0)
         {
-            return this.Data_ReplayData.mData.result[index];
+            return this.Data_ReplayData.mData.correspondSettlementResult[index];
         }
 
         return null;
