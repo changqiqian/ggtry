@@ -127,7 +127,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         {
             console.log("_收到http==获取简单手牌数据==" + _result);
             let json = JSON.parse(_result);
-            let protoData = json.data as SimpleReplayData;
+            let protoData = json.data as SimpleReplay;
             LocalPlayerData.Instance.Data_SimpleReplayData.mData = protoData;
         },
         (_err)=>

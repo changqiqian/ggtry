@@ -25,15 +25,21 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
     public InitData(_data : ReplayData)
     {
         this.Data_CopyReplayData.mData = new ReplayData(_data);
-        this.Data_ReplayData.mData = _data;
+        this.DeepCopyReplayData();
         this.ReStart();
 
+    }
+
+    DeepCopyReplayData()
+    {
+        let str = JSON.stringify(this.Data_CopyReplayData.mData);
+        this.Data_ReplayData.mData = JSON.parse(str) as ReplayData;
     }
 
     public ReStart()
     {
         this.Data_TotalPots.mData = 0;
-        this.Data_ReplayData.mData = this.Data_CopyReplayData.mData;
+        this.DeepCopyReplayData();
         this.Data_State.mData = TexasCashState.TexasCashState_RoundStart;
         this.Data_Step.mData = 0;
         this.Data_Auto.mData = false;

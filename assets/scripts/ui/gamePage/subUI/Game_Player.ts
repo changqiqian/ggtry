@@ -171,7 +171,7 @@ export class Game_Player extends BaseUI
             if(act != null)
             {
                 this.ShowActionType(act.actionInfo.actionType , true);
-                this.Bet(act.actionInfo.amount ,act.actionInfo.actionType, true);
+                this.Bet(act.actionInfo.amount ,act.actionInfo.roundAmount,act.actionInfo.actionType, true);
             }
 
         })
@@ -366,7 +366,7 @@ export class Game_Player extends BaseUI
             if(lastBet != null)
             {
                 this.ShowActionType(lastBet.actionType , false);
-                this.Bet(lastBet.roundAmount ,lastBet.actionType , false)
+                this.Bet( lastBet.amount,lastBet.roundAmount ,lastBet.actionType , false)
             }
 
             let dealerId = gameData.GetDynamicData().dealerUid;
@@ -797,7 +797,7 @@ export class Game_Player extends BaseUI
         if(lastAct != null)
         {
             this.ShowActionType(lastAct.actionType , false);
-            this.Bet(lastAct.roundAmount ,lastAct.actionType, false);
+            this.Bet( lastAct.amount,lastAct.roundAmount ,lastAct.actionType, false);
         }
 
     }
@@ -827,7 +827,7 @@ export class Game_Player extends BaseUI
     
             this.mCircleTimer.StopTimer();
             this.ShowActionType(lastAct.actionType , false);
-            this.Bet(lastAct.roundAmount ,lastAct.actionType , false);
+            this.Bet( lastAct.amount,lastAct.roundAmount ,lastAct.actionType , false);
         }
         else
         {
@@ -847,8 +847,7 @@ export class Game_Player extends BaseUI
                 return;
             }
             this.ShowActionType(currentAction.actionInfo.actionType , true);
-            this.Bet(currentAction.actionInfo.roundAmount ,currentAction.actionInfo.actionType, true);
-            GameReplayData.Instance.Data_TotalPots.mData += currentAction.actionInfo.amount;
+            this.Bet(currentAction.actionInfo.amount,currentAction.actionInfo.roundAmount ,currentAction.actionInfo.actionType, true);
         }
     }
 
@@ -970,7 +969,7 @@ export class Game_Player extends BaseUI
         this.UpdateUIDirection();
     }
 
-    Bet(_amount : number ,_actionType : ActionType ,  _replay : boolean)
+    Bet(_amount : number ,_roundAmount : number ,_actionType : ActionType ,  _replay : boolean)
     {
         if(_actionType == ActionType.ActionType_Check)
         {
@@ -984,10 +983,13 @@ export class Game_Player extends BaseUI
 
 
         let bb;
-
         if(_replay)
         {
             bb = GameReplayData.Instance.Data_ReplayData.mData.texasConfig.smallBlind * 2;
+            let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID);
+            playerInfo.currencyNum -= _amount;
+            this.UpdateMoney(true,playerInfo);
+            GameReplayData.Instance.Data_TotalPots.mData += _amount;
         }
         else
         {
@@ -1006,7 +1008,7 @@ export class Game_Player extends BaseUI
         })
 
 
-        this.mGame_BetAmount.Bet(_amount,bb , _replay);
+        this.mGame_BetAmount.Bet(_roundAmount , bb , _replay);
 
     }
 

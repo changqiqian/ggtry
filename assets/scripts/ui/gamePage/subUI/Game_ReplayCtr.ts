@@ -191,7 +191,7 @@ export class Game_ReplayCtr extends BaseUI
     TrySettlment()
     {
         let state = GameReplayData.Instance.Data_State.mData;
-
+        let publicCards = GameReplayData.Instance.Data_ReplayData.mData.publicCards;
         switch(state)
         {
             case TexasCashState.TexasCashState_RoundStart:
@@ -205,6 +205,10 @@ export class Game_ReplayCtr extends BaseUI
                 {
                     return false;
                 }
+                if(publicCards.length >= 3)
+                {
+                    return false
+                }
             }
             break;
             case TexasCashState.TexasCashState_FlopRound:
@@ -214,6 +218,10 @@ export class Game_ReplayCtr extends BaseUI
                 {
                     return false;
                 }
+                if(publicCards.length >= 4)
+                {
+                    return false
+                }
             }
             break;
             case TexasCashState.TexasCashState_TurnRound:
@@ -222,6 +230,11 @@ export class Game_ReplayCtr extends BaseUI
                 if(riverActions && riverActions.length > 0)
                 {
                     return false;
+                }
+
+                if(publicCards.length >= 5)
+                {
+                    return false
                 }
             }
             break;

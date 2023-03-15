@@ -108,6 +108,10 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
                 {
                     continue;
                 }
+                if(current.winnerSettlementResult.length == 0)
+                {
+                    continue;
+                }
                 let index = this.mCurrentData.findIndex((_item) => _item.index === current.index);
                 if(index < 0)
                 {
