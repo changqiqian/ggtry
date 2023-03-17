@@ -67,11 +67,17 @@ export class Game_SelfAction extends BaseUI
             let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
             let biggestBetAction = gameData.FindBiggestBetAction();
             let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            let bb = gameData.GetStaticData().smallBlind * 2;
 
             let actionInfo = new ActionInfo();
             actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
-
             let callAmount = biggestBetAction.roundAmount;
+            if(callAmount < bb)
+            {
+                callAmount = bb;
+            }
+
+
             if(callAmount < selfPlayer.currencyNum)
             {
                 if(selfBetAction != null)

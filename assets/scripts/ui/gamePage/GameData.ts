@@ -18,13 +18,13 @@ export abstract class GameData extends MultipleNotify
     //观看者列表
     Data_S2CCommonGetObListResp : BaseData<S2CCommonGetObListResp> = new BaseData<S2CCommonGetObListResp>();  //观看者列表
     //买入列表
-    Data_S2CCommonPlayerRecordResp : BaseData<S2CCommonPlayerRecordResp> = new BaseData<S2CCommonPlayerRecordResp>();  //买入列表
+    Data_S2CCommonGetStatisticsResp : BaseData<S2CCommonGetStatisticsResp> = new BaseData<S2CCommonGetStatisticsResp>();  //买入列表
     //实时牌普列表
     Data_S2CCommonReplayListResp: BaseData<S2CCommonReplayListResp> = new BaseData<S2CCommonReplayListResp>();  //实时牌普列表
     //实时牌普回放数据
     Data_S2CCommonReplayDetailsResp: BaseData<S2CCommonReplayDetailsResp> = new BaseData<S2CCommonReplayDetailsResp>();    //实时牌普回放数据
-
-
+    //玩家静态数据
+    Data_S2CCommonGetPlayerStatisticsResp: BaseData<S2CCommonGetPlayerStatisticsResp> = new BaseData<S2CCommonGetPlayerStatisticsResp>();    
     
 
     //服务器数据返回
@@ -498,7 +498,7 @@ export abstract class GameData extends MultipleNotify
     public abstract ReplayListMsgId() : number
     public abstract ReplayDetailMsgId() : number
     public abstract AutoMsgId() : number
-
+    public abstract PlayerStatisticMsgId() : number
 }
 
 

@@ -7175,6 +7175,185 @@ $root.ActionResult = (function() {
     return ActionResult;
 })();
 
+$root.PlayerStatistic = (function() {
+
+    /**
+     * Properties of a PlayerStatistic.
+     * @exports IPlayerStatistic
+     * @interface IPlayerStatistic
+     * @property {string|null} [uid] PlayerStatistic uid
+     * @property {string|null} [head] PlayerStatistic head
+     * @property {string|null} [name] PlayerStatistic name
+     * @property {number|null} [totalHands] PlayerStatistic totalHands
+     * @property {number|null} [totalFlopHands] PlayerStatistic totalFlopHands
+     * @property {number|null} [totalBringIn] PlayerStatistic totalBringIn
+     * @property {number|null} [totalBringOut] PlayerStatistic totalBringOut
+     * @property {number|null} [winLose] PlayerStatistic winLose
+     */
+
+    /**
+     * Constructs a new PlayerStatistic.
+     * @exports PlayerStatistic
+     * @classdesc Represents a PlayerStatistic.
+     * @implements IPlayerStatistic
+     * @constructor
+     * @param {IPlayerStatistic=} [p] Properties to set
+     */
+    function PlayerStatistic(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * PlayerStatistic uid.
+     * @member {string} uid
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.uid = "";
+
+    /**
+     * PlayerStatistic head.
+     * @member {string} head
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.head = "";
+
+    /**
+     * PlayerStatistic name.
+     * @member {string} name
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.name = "";
+
+    /**
+     * PlayerStatistic totalHands.
+     * @member {number} totalHands
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalHands = 0;
+
+    /**
+     * PlayerStatistic totalFlopHands.
+     * @member {number} totalFlopHands
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalFlopHands = 0;
+
+    /**
+     * PlayerStatistic totalBringIn.
+     * @member {number} totalBringIn
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerStatistic totalBringOut.
+     * @member {number} totalBringOut
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalBringOut = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerStatistic winLose.
+     * @member {number} winLose
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified PlayerStatistic message. Does not implicitly {@link PlayerStatistic.verify|verify} messages.
+     * @function encode
+     * @memberof PlayerStatistic
+     * @static
+     * @param {IPlayerStatistic} m PlayerStatistic message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    PlayerStatistic.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(10).string(m.uid);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(18).string(m.head);
+        if (m.name != null && Object.hasOwnProperty.call(m, "name"))
+            w.uint32(26).string(m.name);
+        if (m.totalHands != null && Object.hasOwnProperty.call(m, "totalHands"))
+            w.uint32(32).int32(m.totalHands);
+        if (m.totalFlopHands != null && Object.hasOwnProperty.call(m, "totalFlopHands"))
+            w.uint32(40).int32(m.totalFlopHands);
+        if (m.totalBringIn != null && Object.hasOwnProperty.call(m, "totalBringIn"))
+            w.uint32(48).int64(m.totalBringIn);
+        if (m.totalBringOut != null && Object.hasOwnProperty.call(m, "totalBringOut"))
+            w.uint32(56).int64(m.totalBringOut);
+        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
+            w.uint32(64).int64(m.winLose);
+        return w;
+    };
+
+    /**
+     * Decodes a PlayerStatistic message from the specified reader or buffer.
+     * @function decode
+     * @memberof PlayerStatistic
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {PlayerStatistic} PlayerStatistic
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    PlayerStatistic.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.PlayerStatistic();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.uid = r.string();
+                break;
+            case 2:
+                m.head = r.string();
+                break;
+            case 3:
+                m.name = r.string();
+                break;
+            case 4:
+                m.totalHands = r.int32();
+                break;
+            case 5:
+                m.totalFlopHands = r.int32();
+                break;
+            case 6:
+                m.totalBringIn = r.int64();
+                break;
+            case 7:
+                m.totalBringOut = r.int64();
+                break;
+            case 8:
+                m.winLose = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return PlayerStatistic;
+})();
+
 $root.MySimpleInfo = (function() {
 
     /**
@@ -8208,7 +8387,7 @@ $root.RecordDetail = (function() {
      * @property {number|null} [jackpot] RecordDetail jackpot
      * @property {number|null} [totalHands] RecordDetail totalHands
      * @property {number|null} [totalBuyIn] RecordDetail totalBuyIn
-     * @property {Array.<IRecordPlayer>|null} [list] RecordDetail list
+     * @property {Array.<IPlayerStatistic>|null} [playerStatisticList] RecordDetail playerStatisticList
      */
 
     /**
@@ -8220,7 +8399,7 @@ $root.RecordDetail = (function() {
      * @param {IRecordDetail=} [p] Properties to set
      */
     function RecordDetail(p) {
-        this.list = [];
+        this.playerStatisticList = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -8292,12 +8471,12 @@ $root.RecordDetail = (function() {
     RecordDetail.prototype.totalBuyIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * RecordDetail list.
-     * @member {Array.<IRecordPlayer>} list
+     * RecordDetail playerStatisticList.
+     * @member {Array.<IPlayerStatistic>} playerStatisticList
      * @memberof RecordDetail
      * @instance
      */
-    RecordDetail.prototype.list = $util.emptyArray;
+    RecordDetail.prototype.playerStatisticList = $util.emptyArray;
 
     /**
      * Encodes the specified RecordDetail message. Does not implicitly {@link RecordDetail.verify|verify} messages.
@@ -8327,9 +8506,9 @@ $root.RecordDetail = (function() {
             w.uint32(56).int32(m.totalHands);
         if (m.totalBuyIn != null && Object.hasOwnProperty.call(m, "totalBuyIn"))
             w.uint32(64).int64(m.totalBuyIn);
-        if (m.list != null && m.list.length) {
-            for (var i = 0; i < m.list.length; ++i)
-                $root.RecordPlayer.encode(m.list[i], w.uint32(74).fork()).ldelim();
+        if (m.playerStatisticList != null && m.playerStatisticList.length) {
+            for (var i = 0; i < m.playerStatisticList.length; ++i)
+                $root.PlayerStatistic.encode(m.playerStatisticList[i], w.uint32(74).fork()).ldelim();
         }
         return w;
     };
@@ -8377,9 +8556,9 @@ $root.RecordDetail = (function() {
                 m.totalBuyIn = r.int64();
                 break;
             case 9:
-                if (!(m.list && m.list.length))
-                    m.list = [];
-                m.list.push($root.RecordPlayer.decode(r, r.uint32()));
+                if (!(m.playerStatisticList && m.playerStatisticList.length))
+                    m.playerStatisticList = [];
+                m.playerStatisticList.push($root.PlayerStatistic.decode(r, r.uint32()));
                 break;
             default:
                 r.skipType(t & 7);
@@ -8390,185 +8569,6 @@ $root.RecordDetail = (function() {
     };
 
     return RecordDetail;
-})();
-
-$root.RecordPlayer = (function() {
-
-    /**
-     * Properties of a RecordPlayer.
-     * @exports IRecordPlayer
-     * @interface IRecordPlayer
-     * @property {string|null} [uid] RecordPlayer uid
-     * @property {string|null} [head] RecordPlayer head
-     * @property {string|null} [name] RecordPlayer name
-     * @property {number|null} [totalHands] RecordPlayer totalHands
-     * @property {number|null} [totalFlopHands] RecordPlayer totalFlopHands
-     * @property {number|null} [totalBringIn] RecordPlayer totalBringIn
-     * @property {number|null} [totalBringOut] RecordPlayer totalBringOut
-     * @property {number|null} [winLose] RecordPlayer winLose
-     */
-
-    /**
-     * Constructs a new RecordPlayer.
-     * @exports RecordPlayer
-     * @classdesc Represents a RecordPlayer.
-     * @implements IRecordPlayer
-     * @constructor
-     * @param {IRecordPlayer=} [p] Properties to set
-     */
-    function RecordPlayer(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * RecordPlayer uid.
-     * @member {string} uid
-     * @memberof RecordPlayer
-     * @instance
-     */
-    RecordPlayer.prototype.uid = "";
-
-    /**
-     * RecordPlayer head.
-     * @member {string} head
-     * @memberof RecordPlayer
-     * @instance
-     */
-    RecordPlayer.prototype.head = "";
-
-    /**
-     * RecordPlayer name.
-     * @member {string} name
-     * @memberof RecordPlayer
-     * @instance
-     */
-    RecordPlayer.prototype.name = "";
-
-    /**
-     * RecordPlayer totalHands.
-     * @member {number} totalHands
-     * @memberof RecordPlayer
-     * @instance
-     */
-    RecordPlayer.prototype.totalHands = 0;
-
-    /**
-     * RecordPlayer totalFlopHands.
-     * @member {number} totalFlopHands
-     * @memberof RecordPlayer
-     * @instance
-     */
-    RecordPlayer.prototype.totalFlopHands = 0;
-
-    /**
-     * RecordPlayer totalBringIn.
-     * @member {number} totalBringIn
-     * @memberof RecordPlayer
-     * @instance
-     */
-    RecordPlayer.prototype.totalBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * RecordPlayer totalBringOut.
-     * @member {number} totalBringOut
-     * @memberof RecordPlayer
-     * @instance
-     */
-    RecordPlayer.prototype.totalBringOut = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * RecordPlayer winLose.
-     * @member {number} winLose
-     * @memberof RecordPlayer
-     * @instance
-     */
-    RecordPlayer.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified RecordPlayer message. Does not implicitly {@link RecordPlayer.verify|verify} messages.
-     * @function encode
-     * @memberof RecordPlayer
-     * @static
-     * @param {IRecordPlayer} m RecordPlayer message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    RecordPlayer.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(10).string(m.uid);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(18).string(m.head);
-        if (m.name != null && Object.hasOwnProperty.call(m, "name"))
-            w.uint32(26).string(m.name);
-        if (m.totalHands != null && Object.hasOwnProperty.call(m, "totalHands"))
-            w.uint32(32).int32(m.totalHands);
-        if (m.totalFlopHands != null && Object.hasOwnProperty.call(m, "totalFlopHands"))
-            w.uint32(40).int32(m.totalFlopHands);
-        if (m.totalBringIn != null && Object.hasOwnProperty.call(m, "totalBringIn"))
-            w.uint32(48).int64(m.totalBringIn);
-        if (m.totalBringOut != null && Object.hasOwnProperty.call(m, "totalBringOut"))
-            w.uint32(56).int64(m.totalBringOut);
-        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(64).int64(m.winLose);
-        return w;
-    };
-
-    /**
-     * Decodes a RecordPlayer message from the specified reader or buffer.
-     * @function decode
-     * @memberof RecordPlayer
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {RecordPlayer} RecordPlayer
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    RecordPlayer.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.RecordPlayer();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.uid = r.string();
-                break;
-            case 2:
-                m.head = r.string();
-                break;
-            case 3:
-                m.name = r.string();
-                break;
-            case 4:
-                m.totalHands = r.int32();
-                break;
-            case 5:
-                m.totalFlopHands = r.int32();
-                break;
-            case 6:
-                m.totalBringIn = r.int64();
-                break;
-            case 7:
-                m.totalBringOut = r.int64();
-                break;
-            case 8:
-                m.winLose = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return RecordPlayer;
 })();
 
 /**
@@ -8597,10 +8597,11 @@ $root.RecordPlayer = (function() {
  * @property {number} C2S_TexasCashExtraThink=5016 C2S_TexasCashExtraThink value
  * @property {number} C2S_TexasCashSqueezeStart=5017 C2S_TexasCashSqueezeStart value
  * @property {number} C2S_TexasCashSqueezeFinish=5018 C2S_TexasCashSqueezeFinish value
- * @property {number} C2S_TexasCashPlayerRecord=5019 C2S_TexasCashPlayerRecord value
+ * @property {number} C2S_TexasCashGetStatistics=5019 C2S_TexasCashGetStatistics value
  * @property {number} C2S_TexasCashReplayList=5020 C2S_TexasCashReplayList value
  * @property {number} C2S_TexasCashReplayDetails=5021 C2S_TexasCashReplayDetails value
  * @property {number} C2S_TexasCashCancelAutoOperator=5022 C2S_TexasCashCancelAutoOperator value
+ * @property {number} C2S_TexasCashGetPlayerStatistics=5023 C2S_TexasCashGetPlayerStatistics value
  * @property {number} MSG_TexasCashEnd=5500 MSG_TexasCashEnd value
  * @property {number} MSG_TexasMttBegin=5501 MSG_TexasMttBegin value
  * @property {number} MSG_TexasMttEnd=6000 MSG_TexasMttEnd value
@@ -8629,10 +8630,11 @@ $root.RecordPlayer = (function() {
  * @property {number} S2C_CommonExtraThinkResp=8015 S2C_CommonExtraThinkResp value
  * @property {number} S2C_CommonSqueezeStartResp=8016 S2C_CommonSqueezeStartResp value
  * @property {number} S2C_CommonSqueezeFinishResp=8017 S2C_CommonSqueezeFinishResp value
- * @property {number} S2C_CommonPlayerRecordResp=8018 S2C_CommonPlayerRecordResp value
+ * @property {number} S2C_CommonGetStatisticsResp=8018 S2C_CommonGetStatisticsResp value
  * @property {number} S2C_CommonReplayListResp=8019 S2C_CommonReplayListResp value
  * @property {number} S2C_CommonReplayDetailsResp=8020 S2C_CommonReplayDetailsResp value
  * @property {number} S2C_CommonCancelAutoOperatorResp=8021 S2C_CommonCancelAutoOperatorResp value
+ * @property {number} S2C_CommonGetPlayerStatisticsResp=8022 S2C_CommonGetPlayerStatisticsResp value
  * @property {number} S2C_CommonBringInTimerNotify=8110 S2C_CommonBringInTimerNotify value
  * @property {number} S2C_CommonBringInNotify=8111 S2C_CommonBringInNotify value
  * @property {number} S2C_CommonSitDownNotify=8112 S2C_CommonSitDownNotify value
@@ -8702,10 +8704,11 @@ $root.MessageId = (function() {
     values[valuesById[5016] = "C2S_TexasCashExtraThink"] = 5016;
     values[valuesById[5017] = "C2S_TexasCashSqueezeStart"] = 5017;
     values[valuesById[5018] = "C2S_TexasCashSqueezeFinish"] = 5018;
-    values[valuesById[5019] = "C2S_TexasCashPlayerRecord"] = 5019;
+    values[valuesById[5019] = "C2S_TexasCashGetStatistics"] = 5019;
     values[valuesById[5020] = "C2S_TexasCashReplayList"] = 5020;
     values[valuesById[5021] = "C2S_TexasCashReplayDetails"] = 5021;
     values[valuesById[5022] = "C2S_TexasCashCancelAutoOperator"] = 5022;
+    values[valuesById[5023] = "C2S_TexasCashGetPlayerStatistics"] = 5023;
     values[valuesById[5500] = "MSG_TexasCashEnd"] = 5500;
     values[valuesById[5501] = "MSG_TexasMttBegin"] = 5501;
     values[valuesById[6000] = "MSG_TexasMttEnd"] = 6000;
@@ -8734,10 +8737,11 @@ $root.MessageId = (function() {
     values[valuesById[8015] = "S2C_CommonExtraThinkResp"] = 8015;
     values[valuesById[8016] = "S2C_CommonSqueezeStartResp"] = 8016;
     values[valuesById[8017] = "S2C_CommonSqueezeFinishResp"] = 8017;
-    values[valuesById[8018] = "S2C_CommonPlayerRecordResp"] = 8018;
+    values[valuesById[8018] = "S2C_CommonGetStatisticsResp"] = 8018;
     values[valuesById[8019] = "S2C_CommonReplayListResp"] = 8019;
     values[valuesById[8020] = "S2C_CommonReplayDetailsResp"] = 8020;
     values[valuesById[8021] = "S2C_CommonCancelAutoOperatorResp"] = 8021;
+    values[valuesById[8022] = "S2C_CommonGetPlayerStatisticsResp"] = 8022;
     values[valuesById[8110] = "S2C_CommonBringInTimerNotify"] = 8110;
     values[valuesById[8111] = "S2C_CommonBringInNotify"] = 8111;
     values[valuesById[8112] = "S2C_CommonSitDownNotify"] = 8112;
@@ -10369,24 +10373,24 @@ $root.C2STexasCashSqueezeFinish = (function() {
     return C2STexasCashSqueezeFinish;
 })();
 
-$root.C2STexasCashPlayerRecord = (function() {
+$root.C2STexasCashGetStatistics = (function() {
 
     /**
-     * Properties of a C2STexasCashPlayerRecord.
-     * @exports IC2STexasCashPlayerRecord
-     * @interface IC2STexasCashPlayerRecord
-     * @property {string|null} [gameId] C2STexasCashPlayerRecord gameId
+     * Properties of a C2STexasCashGetStatistics.
+     * @exports IC2STexasCashGetStatistics
+     * @interface IC2STexasCashGetStatistics
+     * @property {string|null} [gameId] C2STexasCashGetStatistics gameId
      */
 
     /**
-     * Constructs a new C2STexasCashPlayerRecord.
-     * @exports C2STexasCashPlayerRecord
-     * @classdesc Represents a C2STexasCashPlayerRecord.
-     * @implements IC2STexasCashPlayerRecord
+     * Constructs a new C2STexasCashGetStatistics.
+     * @exports C2STexasCashGetStatistics
+     * @classdesc Represents a C2STexasCashGetStatistics.
+     * @implements IC2STexasCashGetStatistics
      * @constructor
-     * @param {IC2STexasCashPlayerRecord=} [p] Properties to set
+     * @param {IC2STexasCashGetStatistics=} [p] Properties to set
      */
-    function C2STexasCashPlayerRecord(p) {
+    function C2STexasCashGetStatistics(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -10394,23 +10398,23 @@ $root.C2STexasCashPlayerRecord = (function() {
     }
 
     /**
-     * C2STexasCashPlayerRecord gameId.
+     * C2STexasCashGetStatistics gameId.
      * @member {string} gameId
-     * @memberof C2STexasCashPlayerRecord
+     * @memberof C2STexasCashGetStatistics
      * @instance
      */
-    C2STexasCashPlayerRecord.prototype.gameId = "";
+    C2STexasCashGetStatistics.prototype.gameId = "";
 
     /**
-     * Encodes the specified C2STexasCashPlayerRecord message. Does not implicitly {@link C2STexasCashPlayerRecord.verify|verify} messages.
+     * Encodes the specified C2STexasCashGetStatistics message. Does not implicitly {@link C2STexasCashGetStatistics.verify|verify} messages.
      * @function encode
-     * @memberof C2STexasCashPlayerRecord
+     * @memberof C2STexasCashGetStatistics
      * @static
-     * @param {IC2STexasCashPlayerRecord} m C2STexasCashPlayerRecord message or plain object to encode
+     * @param {IC2STexasCashGetStatistics} m C2STexasCashGetStatistics message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    C2STexasCashPlayerRecord.encode = function encode(m, w) {
+    C2STexasCashGetStatistics.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -10419,20 +10423,20 @@ $root.C2STexasCashPlayerRecord = (function() {
     };
 
     /**
-     * Decodes a C2STexasCashPlayerRecord message from the specified reader or buffer.
+     * Decodes a C2STexasCashGetStatistics message from the specified reader or buffer.
      * @function decode
-     * @memberof C2STexasCashPlayerRecord
+     * @memberof C2STexasCashGetStatistics
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCashPlayerRecord} C2STexasCashPlayerRecord
+     * @returns {C2STexasCashGetStatistics} C2STexasCashGetStatistics
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    C2STexasCashPlayerRecord.decode = function decode(r, l) {
+    C2STexasCashGetStatistics.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashPlayerRecord();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashGetStatistics();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -10447,7 +10451,7 @@ $root.C2STexasCashPlayerRecord = (function() {
         return m;
     };
 
-    return C2STexasCashPlayerRecord;
+    return C2STexasCashGetStatistics;
 })();
 
 $root.C2STexasCashReplayList = (function() {
@@ -10733,6 +10737,101 @@ $root.C2STexasCashCancelAutoOperator = (function() {
     };
 
     return C2STexasCashCancelAutoOperator;
+})();
+
+$root.C2STexasCashGetPlayerStatistics = (function() {
+
+    /**
+     * Properties of a C2STexasCashGetPlayerStatistics.
+     * @exports IC2STexasCashGetPlayerStatistics
+     * @interface IC2STexasCashGetPlayerStatistics
+     * @property {string|null} [gameId] C2STexasCashGetPlayerStatistics gameId
+     * @property {string|null} [uid] C2STexasCashGetPlayerStatistics uid
+     */
+
+    /**
+     * Constructs a new C2STexasCashGetPlayerStatistics.
+     * @exports C2STexasCashGetPlayerStatistics
+     * @classdesc Represents a C2STexasCashGetPlayerStatistics.
+     * @implements IC2STexasCashGetPlayerStatistics
+     * @constructor
+     * @param {IC2STexasCashGetPlayerStatistics=} [p] Properties to set
+     */
+    function C2STexasCashGetPlayerStatistics(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2STexasCashGetPlayerStatistics gameId.
+     * @member {string} gameId
+     * @memberof C2STexasCashGetPlayerStatistics
+     * @instance
+     */
+    C2STexasCashGetPlayerStatistics.prototype.gameId = "";
+
+    /**
+     * C2STexasCashGetPlayerStatistics uid.
+     * @member {string} uid
+     * @memberof C2STexasCashGetPlayerStatistics
+     * @instance
+     */
+    C2STexasCashGetPlayerStatistics.prototype.uid = "";
+
+    /**
+     * Encodes the specified C2STexasCashGetPlayerStatistics message. Does not implicitly {@link C2STexasCashGetPlayerStatistics.verify|verify} messages.
+     * @function encode
+     * @memberof C2STexasCashGetPlayerStatistics
+     * @static
+     * @param {IC2STexasCashGetPlayerStatistics} m C2STexasCashGetPlayerStatistics message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2STexasCashGetPlayerStatistics.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(18).string(m.uid);
+        return w;
+    };
+
+    /**
+     * Decodes a C2STexasCashGetPlayerStatistics message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2STexasCashGetPlayerStatistics
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2STexasCashGetPlayerStatistics} C2STexasCashGetPlayerStatistics
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2STexasCashGetPlayerStatistics.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashGetPlayerStatistics();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.uid = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2STexasCashGetPlayerStatistics;
 })();
 
 $root.S2CCommonEnterGameResp = (function() {
@@ -12706,29 +12805,29 @@ $root.S2CCommonSqueezeFinishResp = (function() {
     return S2CCommonSqueezeFinishResp;
 })();
 
-$root.S2CCommonPlayerRecordResp = (function() {
+$root.S2CCommonGetStatisticsResp = (function() {
 
     /**
-     * Properties of a S2CCommonPlayerRecordResp.
-     * @exports IS2CCommonPlayerRecordResp
-     * @interface IS2CCommonPlayerRecordResp
-     * @property {ICommonResult|null} [result] S2CCommonPlayerRecordResp result
-     * @property {string|null} [gameId] S2CCommonPlayerRecordResp gameId
-     * @property {number|null} [insuranceWinlose] S2CCommonPlayerRecordResp insuranceWinlose
-     * @property {number|null} [jackpotWinlose] S2CCommonPlayerRecordResp jackpotWinlose
-     * @property {Array.<IRecordPlayer>|null} [list] S2CCommonPlayerRecordResp list
+     * Properties of a S2CCommonGetStatisticsResp.
+     * @exports IS2CCommonGetStatisticsResp
+     * @interface IS2CCommonGetStatisticsResp
+     * @property {ICommonResult|null} [result] S2CCommonGetStatisticsResp result
+     * @property {string|null} [gameId] S2CCommonGetStatisticsResp gameId
+     * @property {number|null} [insuranceWinlose] S2CCommonGetStatisticsResp insuranceWinlose
+     * @property {number|null} [jackpotWinlose] S2CCommonGetStatisticsResp jackpotWinlose
+     * @property {Array.<IPlayerStatistic>|null} [playerStatisticList] S2CCommonGetStatisticsResp playerStatisticList
      */
 
     /**
-     * Constructs a new S2CCommonPlayerRecordResp.
-     * @exports S2CCommonPlayerRecordResp
-     * @classdesc Represents a S2CCommonPlayerRecordResp.
-     * @implements IS2CCommonPlayerRecordResp
+     * Constructs a new S2CCommonGetStatisticsResp.
+     * @exports S2CCommonGetStatisticsResp
+     * @classdesc Represents a S2CCommonGetStatisticsResp.
+     * @implements IS2CCommonGetStatisticsResp
      * @constructor
-     * @param {IS2CCommonPlayerRecordResp=} [p] Properties to set
+     * @param {IS2CCommonGetStatisticsResp=} [p] Properties to set
      */
-    function S2CCommonPlayerRecordResp(p) {
-        this.list = [];
+    function S2CCommonGetStatisticsResp(p) {
+        this.playerStatisticList = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -12736,55 +12835,55 @@ $root.S2CCommonPlayerRecordResp = (function() {
     }
 
     /**
-     * S2CCommonPlayerRecordResp result.
+     * S2CCommonGetStatisticsResp result.
      * @member {ICommonResult|null|undefined} result
-     * @memberof S2CCommonPlayerRecordResp
+     * @memberof S2CCommonGetStatisticsResp
      * @instance
      */
-    S2CCommonPlayerRecordResp.prototype.result = null;
+    S2CCommonGetStatisticsResp.prototype.result = null;
 
     /**
-     * S2CCommonPlayerRecordResp gameId.
+     * S2CCommonGetStatisticsResp gameId.
      * @member {string} gameId
-     * @memberof S2CCommonPlayerRecordResp
+     * @memberof S2CCommonGetStatisticsResp
      * @instance
      */
-    S2CCommonPlayerRecordResp.prototype.gameId = "";
+    S2CCommonGetStatisticsResp.prototype.gameId = "";
 
     /**
-     * S2CCommonPlayerRecordResp insuranceWinlose.
+     * S2CCommonGetStatisticsResp insuranceWinlose.
      * @member {number} insuranceWinlose
-     * @memberof S2CCommonPlayerRecordResp
+     * @memberof S2CCommonGetStatisticsResp
      * @instance
      */
-    S2CCommonPlayerRecordResp.prototype.insuranceWinlose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    S2CCommonGetStatisticsResp.prototype.insuranceWinlose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * S2CCommonPlayerRecordResp jackpotWinlose.
+     * S2CCommonGetStatisticsResp jackpotWinlose.
      * @member {number} jackpotWinlose
-     * @memberof S2CCommonPlayerRecordResp
+     * @memberof S2CCommonGetStatisticsResp
      * @instance
      */
-    S2CCommonPlayerRecordResp.prototype.jackpotWinlose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    S2CCommonGetStatisticsResp.prototype.jackpotWinlose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
-     * S2CCommonPlayerRecordResp list.
-     * @member {Array.<IRecordPlayer>} list
-     * @memberof S2CCommonPlayerRecordResp
+     * S2CCommonGetStatisticsResp playerStatisticList.
+     * @member {Array.<IPlayerStatistic>} playerStatisticList
+     * @memberof S2CCommonGetStatisticsResp
      * @instance
      */
-    S2CCommonPlayerRecordResp.prototype.list = $util.emptyArray;
+    S2CCommonGetStatisticsResp.prototype.playerStatisticList = $util.emptyArray;
 
     /**
-     * Encodes the specified S2CCommonPlayerRecordResp message. Does not implicitly {@link S2CCommonPlayerRecordResp.verify|verify} messages.
+     * Encodes the specified S2CCommonGetStatisticsResp message. Does not implicitly {@link S2CCommonGetStatisticsResp.verify|verify} messages.
      * @function encode
-     * @memberof S2CCommonPlayerRecordResp
+     * @memberof S2CCommonGetStatisticsResp
      * @static
-     * @param {IS2CCommonPlayerRecordResp} m S2CCommonPlayerRecordResp message or plain object to encode
+     * @param {IS2CCommonGetStatisticsResp} m S2CCommonGetStatisticsResp message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    S2CCommonPlayerRecordResp.encode = function encode(m, w) {
+    S2CCommonGetStatisticsResp.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.result != null && Object.hasOwnProperty.call(m, "result"))
@@ -12795,28 +12894,28 @@ $root.S2CCommonPlayerRecordResp = (function() {
             w.uint32(24).int64(m.insuranceWinlose);
         if (m.jackpotWinlose != null && Object.hasOwnProperty.call(m, "jackpotWinlose"))
             w.uint32(32).int64(m.jackpotWinlose);
-        if (m.list != null && m.list.length) {
-            for (var i = 0; i < m.list.length; ++i)
-                $root.RecordPlayer.encode(m.list[i], w.uint32(42).fork()).ldelim();
+        if (m.playerStatisticList != null && m.playerStatisticList.length) {
+            for (var i = 0; i < m.playerStatisticList.length; ++i)
+                $root.PlayerStatistic.encode(m.playerStatisticList[i], w.uint32(42).fork()).ldelim();
         }
         return w;
     };
 
     /**
-     * Decodes a S2CCommonPlayerRecordResp message from the specified reader or buffer.
+     * Decodes a S2CCommonGetStatisticsResp message from the specified reader or buffer.
      * @function decode
-     * @memberof S2CCommonPlayerRecordResp
+     * @memberof S2CCommonGetStatisticsResp
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {S2CCommonPlayerRecordResp} S2CCommonPlayerRecordResp
+     * @returns {S2CCommonGetStatisticsResp} S2CCommonGetStatisticsResp
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    S2CCommonPlayerRecordResp.decode = function decode(r, l) {
+    S2CCommonGetStatisticsResp.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonPlayerRecordResp();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonGetStatisticsResp();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -12833,9 +12932,9 @@ $root.S2CCommonPlayerRecordResp = (function() {
                 m.jackpotWinlose = r.int64();
                 break;
             case 5:
-                if (!(m.list && m.list.length))
-                    m.list = [];
-                m.list.push($root.RecordPlayer.decode(r, r.uint32()));
+                if (!(m.playerStatisticList && m.playerStatisticList.length))
+                    m.playerStatisticList = [];
+                m.playerStatisticList.push($root.PlayerStatistic.decode(r, r.uint32()));
                 break;
             default:
                 r.skipType(t & 7);
@@ -12845,7 +12944,7 @@ $root.S2CCommonPlayerRecordResp = (function() {
         return m;
     };
 
-    return S2CCommonPlayerRecordResp;
+    return S2CCommonGetStatisticsResp;
 })();
 
 $root.S2CCommonReplayListResp = (function() {
@@ -13012,7 +13111,7 @@ $root.S2CCommonReplayDetailsResp = (function() {
      * @interface IS2CCommonReplayDetailsResp
      * @property {ICommonResult|null} [result] S2CCommonReplayDetailsResp result
      * @property {string|null} [gameId] S2CCommonReplayDetailsResp gameId
-     * @property {IReplayData|null} [data] S2CCommonReplayDetailsResp data
+     * @property {IReplayData|null} [replayData] S2CCommonReplayDetailsResp replayData
      */
 
     /**
@@ -13047,12 +13146,12 @@ $root.S2CCommonReplayDetailsResp = (function() {
     S2CCommonReplayDetailsResp.prototype.gameId = "";
 
     /**
-     * S2CCommonReplayDetailsResp data.
-     * @member {IReplayData|null|undefined} data
+     * S2CCommonReplayDetailsResp replayData.
+     * @member {IReplayData|null|undefined} replayData
      * @memberof S2CCommonReplayDetailsResp
      * @instance
      */
-    S2CCommonReplayDetailsResp.prototype.data = null;
+    S2CCommonReplayDetailsResp.prototype.replayData = null;
 
     /**
      * Encodes the specified S2CCommonReplayDetailsResp message. Does not implicitly {@link S2CCommonReplayDetailsResp.verify|verify} messages.
@@ -13070,8 +13169,8 @@ $root.S2CCommonReplayDetailsResp = (function() {
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(18).string(m.gameId);
-        if (m.data != null && Object.hasOwnProperty.call(m, "data"))
-            $root.ReplayData.encode(m.data, w.uint32(26).fork()).ldelim();
+        if (m.replayData != null && Object.hasOwnProperty.call(m, "replayData"))
+            $root.ReplayData.encode(m.replayData, w.uint32(26).fork()).ldelim();
         return w;
     };
 
@@ -13100,7 +13199,7 @@ $root.S2CCommonReplayDetailsResp = (function() {
                 m.gameId = r.string();
                 break;
             case 3:
-                m.data = $root.ReplayData.decode(r, r.uint32());
+                m.replayData = $root.ReplayData.decode(r, r.uint32());
                 break;
             default:
                 r.skipType(t & 7);
@@ -13206,6 +13305,115 @@ $root.S2CCommonCancelAutoOperatorResp = (function() {
     };
 
     return S2CCommonCancelAutoOperatorResp;
+})();
+
+$root.S2CCommonGetPlayerStatisticsResp = (function() {
+
+    /**
+     * Properties of a S2CCommonGetPlayerStatisticsResp.
+     * @exports IS2CCommonGetPlayerStatisticsResp
+     * @interface IS2CCommonGetPlayerStatisticsResp
+     * @property {ICommonResult|null} [result] S2CCommonGetPlayerStatisticsResp result
+     * @property {string|null} [gameId] S2CCommonGetPlayerStatisticsResp gameId
+     * @property {IPlayerStatistic|null} [playerStatistic] S2CCommonGetPlayerStatisticsResp playerStatistic
+     */
+
+    /**
+     * Constructs a new S2CCommonGetPlayerStatisticsResp.
+     * @exports S2CCommonGetPlayerStatisticsResp
+     * @classdesc Represents a S2CCommonGetPlayerStatisticsResp.
+     * @implements IS2CCommonGetPlayerStatisticsResp
+     * @constructor
+     * @param {IS2CCommonGetPlayerStatisticsResp=} [p] Properties to set
+     */
+    function S2CCommonGetPlayerStatisticsResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonGetPlayerStatisticsResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonGetPlayerStatisticsResp
+     * @instance
+     */
+    S2CCommonGetPlayerStatisticsResp.prototype.result = null;
+
+    /**
+     * S2CCommonGetPlayerStatisticsResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonGetPlayerStatisticsResp
+     * @instance
+     */
+    S2CCommonGetPlayerStatisticsResp.prototype.gameId = "";
+
+    /**
+     * S2CCommonGetPlayerStatisticsResp playerStatistic.
+     * @member {IPlayerStatistic|null|undefined} playerStatistic
+     * @memberof S2CCommonGetPlayerStatisticsResp
+     * @instance
+     */
+    S2CCommonGetPlayerStatisticsResp.prototype.playerStatistic = null;
+
+    /**
+     * Encodes the specified S2CCommonGetPlayerStatisticsResp message. Does not implicitly {@link S2CCommonGetPlayerStatisticsResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonGetPlayerStatisticsResp
+     * @static
+     * @param {IS2CCommonGetPlayerStatisticsResp} m S2CCommonGetPlayerStatisticsResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonGetPlayerStatisticsResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.playerStatistic != null && Object.hasOwnProperty.call(m, "playerStatistic"))
+            $root.PlayerStatistic.encode(m.playerStatistic, w.uint32(26).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonGetPlayerStatisticsResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonGetPlayerStatisticsResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonGetPlayerStatisticsResp} S2CCommonGetPlayerStatisticsResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonGetPlayerStatisticsResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonGetPlayerStatisticsResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.playerStatistic = $root.PlayerStatistic.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonGetPlayerStatisticsResp;
 })();
 
 $root.S2CCommonBringInTimerNotify = (function() {

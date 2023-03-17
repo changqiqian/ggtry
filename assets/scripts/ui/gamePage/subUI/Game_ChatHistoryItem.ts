@@ -37,7 +37,6 @@ export class Game_ChatHistoryItem extends BaseUI
 
     public InitWithData(_chatMsg : S2CCommonChatNotify)
     {
-        console.log(" 游戏内聊天==" + JSON.stringify(_chatMsg));
         let head = parseInt(_chatMsg.head);
         this.LoadLocalHead(head,(_spriteFrame)=>
         {

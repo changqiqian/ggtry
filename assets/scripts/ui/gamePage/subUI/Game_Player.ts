@@ -61,18 +61,18 @@ export class Game_Player extends BaseUI
     {
         this.mSelfBtn.SetClickCallback(()=>
         {
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+            if(playerInfo == null)
+            {
+                return;
+            }
             UIMgr.Instance.ShowWindow("gamePage","prefab/Game_ProfileLayer",true,(_script)=>
             {
-                let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-                let gameData = gameStruct.mGameData;
                 let tempScript = _script as Game_ProfileLayer;
-                let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
-                if(playerInfo == null)
-                {
-                    return;
-                }
-                tempScript.InitWithData(this.mIndex,playerInfo.uid);
-            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+                tempScript.InitWithData(this.mIndex  , playerInfo.uid);
+            },MultipleTableCtr.GetUiTag(this.mIndex) , this.mIndex.toString());
         });
 
         this.mCircleTimer.SetColor(new Color(251,160,2));
@@ -496,16 +496,19 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            
+            let selfUid = LocalPlayerData.Instance.Data_Uid.mData;
             this.mGame_ActionTag.node.active = false;
             this.mGame_BetAmount.node.active = false;
             let currentWinLose = winLoseInfos[index];
-            this.ShowCards(currentWinLose.cardInfo , false);
+            if(playerInfo.fold == false && playerInfo.uid != selfUid)
+            {
+                this.ShowCards(currentWinLose.cardInfo , false);
+            }
             if(currentWinLose.combinationResult != null)
             {
                 if(currentWinLose.combinationResult.Combination != null)
                 {
-                    if(playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+                    if(playerInfo.uid != selfUid)
                     {
                         this.ShowConbination(currentWinLose.combinationResult.Combination);
                     }

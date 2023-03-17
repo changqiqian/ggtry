@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Sprite, Label, ScrollView, instantiate } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { NetworkSend } from '../../../network/NetworkSend';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 
@@ -71,6 +72,7 @@ export class Game_ProfileLayer extends BaseUI
 
     public InitWithData(_index : number , _targetUid : string)
     {
+        this.ResetUI();
         this.mIndex = _index;
         this.mTargetUid = _targetUid;
 
@@ -84,8 +86,25 @@ export class Game_ProfileLayer extends BaseUI
         });
 
         this.mName.string = playerInfo.nickName;
+
+        let msgId = gameData.PlayerStatisticMsgId();
+        NetworkSend.Instance.GetPlaterStatistic(msgId , gameStruct.mGameId , _targetUid);
+        gameData.Data_S2CCommonGetPlayerStatisticsResp.RemoveListennerByTarget(this);
+        gameData.Data_S2CCommonGetPlayerStatisticsResp.AddListenner(this,(_data)=>
+        {
+            let record = _data.playerStatistic;
+            this.mTotalHands.string = record.totalHands + "";
+            this.mVPIP.string = (record.totalFlopHands / record.totalHands).toFixed(2) + "%";
+        });
     }
 
+    ResetUI()
+    {
+        this.mTotalGame.string = "";
+        this.mTotalHands.string = "";
+        this.mVPIP.string = "";
+        this.mRaiseRate.string = "";
+    }
 
 }
 

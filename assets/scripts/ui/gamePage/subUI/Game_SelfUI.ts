@@ -351,6 +351,10 @@ export class Game_SelfUI extends BaseUI
         {
             if(lastAct.uid == LocalPlayerData.Instance.Data_Uid.mData)
             {
+                if(selfPlayer.fold)
+                {
+
+                }
                 //this.ShowActionType(lastAct.actionType);
                 //this.Bet(lastAct.roundAmount , lastAct.actionType);
             }
@@ -453,8 +457,7 @@ export class Game_SelfUI extends BaseUI
         
         for(let k = 0 ; k < cards.length ; k++)
         {
-            let delayTime = k*0.05;
-            this.ShowCard(k , cards[k] , delayTime);
+            this.ShowCard(k , cards[k] );
         }
     }
 
@@ -480,17 +483,14 @@ export class Game_SelfUI extends BaseUI
         this.FoldCards();
     }
 
-    ShowCard(_index : number , _cardInfo : CardInfo , _delayTime : number)
+    ShowCard(_index : number , _cardInfo : CardInfo )
     {
-        this.scheduleOnce(()=>
-        {
-            let cardNodes = this.mCards.children;
-            let currentPoker = cardNodes[_index].getComponent(Poker);
-            currentPoker.ResetAndHide();
-            currentPoker.ShowBack(); 
-            currentPoker.SetFrontByCardInfo(_cardInfo);
-            currentPoker.DealAnimation();
-        },_delayTime)
+        let cardNodes = this.mCards.children;
+        let currentPoker = cardNodes[_index].getComponent(Poker);
+        currentPoker.ResetAndHide();
+        currentPoker.ShowBack(); 
+        currentPoker.SetFrontByCardInfo(_cardInfo);
+        currentPoker.DealAnimation();
 
         this.mAlreadyShowCards = true;
     }

@@ -484,9 +484,9 @@ export class NetworkSend extends Singleton<NetworkSend>()
     public GetRecordPlayerList(_msgId : number ,_gameId : string)
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new C2STexasCashPlayerRecord();
+        let msg = new C2STexasCashGetStatistics();
         msg.gameId = _gameId;
-        Network.Instance.SendMsg(_msgId , C2STexasCashPlayerRecord.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2STexasCashGetStatistics.encode(msg).finish());
         console.log("获取买入列表  === " + JSON.stringify(msg))
     }
     
@@ -499,6 +499,16 @@ export class NetworkSend extends Singleton<NetworkSend>()
         msg.pageSize = _pageSize;
         Network.Instance.SendMsg(_msgId , C2STexasCashReplayList.encode(msg).finish());
         console.log("获取游戏实时手牌列表  === " + JSON.stringify(msg))
+    }
+
+    public GetPlaterStatistic(_msgId : number ,_gameId : string , _uid : string)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let msg = new C2STexasCashGetPlayerStatistics();
+        msg.gameId = _gameId;
+        msg.uid = _uid;
+        Network.Instance.SendMsg(_msgId , C2STexasCashGetPlayerStatistics.encode(msg).finish());
+        console.log("获取玩家静态数据  === " + JSON.stringify(msg))
     }
 
     public GetReplayDetail(_msgId : number ,_gameId : string , _index : number ) 

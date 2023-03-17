@@ -126,7 +126,7 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
             UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
             {
                 let tempScript = _script as Game_CashReplay;
-                tempScript.InitWithData(_data.data);
+                tempScript.InitWithData(_data.replayData);
             });      
         });
     }

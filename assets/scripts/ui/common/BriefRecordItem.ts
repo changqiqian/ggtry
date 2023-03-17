@@ -81,7 +81,10 @@ export class BriefRecordItem extends BaseUI
         let selfInfo = _data.mySimpleInfo
         if(selfInfo !=null)
         {
-            this.mMyProfit.string = Tool.ConvertMoney_S2C(selfInfo.myResult) + "";
+            if(selfInfo.myResult != 0)
+            {
+                this.mMyProfit.string = Tool.ConvertMoney_S2C(selfInfo.myResult) + "";
+            }
             for(let i = 0 ; i < selfInfo.myCards.length ; i++)
             {
                 let currentCard = this.mMineCards.children[i].getComponent(Poker);

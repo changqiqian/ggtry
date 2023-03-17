@@ -66,7 +66,7 @@ export class GameDataCash extends GameData
 
     public RecordPlayerMsgId() : number
     {
-        return MessageId.C2S_TexasCashPlayerRecord;
+        return MessageId.C2S_TexasCashGetStatistics;
     }
     public ReplayListMsgId() : number
     {
@@ -81,4 +81,11 @@ export class GameDataCash extends GameData
     {
         return MessageId.C2S_TexasCashCancelAutoOperator;
     }
+
+    public PlayerStatisticMsgId() : number
+    {
+        return MessageId.C2S_TexasCashGetPlayerStatistics;
+    }
+
+    
 }

@@ -720,10 +720,10 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 UIMgr.Instance.ShowToast(msg.result.resMessage);
             }
         },this);
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonPlayerRecordResp,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonGetStatisticsResp,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
-            let msg = S2CCommonPlayerRecordResp.decode(_data);
+            let msg = S2CCommonGetStatisticsResp.decode(_data);
             console.log("收到的内容 S2C_CommonPlayerRecordResp  买入列表==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
@@ -731,7 +731,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 if(gameStruct != null)
                 {
                     let gameData = gameStruct.mGameData;
-                    gameData.Data_S2CCommonPlayerRecordResp.mData = msg;
+                    gameData.Data_S2CCommonGetStatisticsResp.mData = msg;
                 }
             }
             else
@@ -796,6 +796,25 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);  
         
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonGetPlayerStatisticsResp,(_data)=>
+        {
+            let msg = S2CCommonExtraThinkResp.decode(_data);
+            console.log("收到的内容 S2C_CommonGetPlayerStatisticsResp  获取玩家静态数据==" + JSON.stringify(msg));
+
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_S2CCommonGetPlayerStatisticsResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonRefreshResp,(_data)=>
         {

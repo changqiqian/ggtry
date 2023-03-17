@@ -12,7 +12,7 @@ import { Game_MatchInfoItem } from './Game_MatchInfoItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_MatchInfoLayer')
-export class Game_MatchInfoLayer extends ListViewCtr<RecordPlayer> 
+export class Game_MatchInfoLayer extends ListViewCtr<PlayerStatistic> 
 {
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
@@ -100,11 +100,11 @@ export class Game_MatchInfoLayer extends ListViewCtr<RecordPlayer>
             this.mClubName.string = Localization.GetString("00267");
         }
 
-        gameData.Data_S2CCommonPlayerRecordResp.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonGetStatisticsResp.AddListenner(this,(_data)=>
         {
             this.mInsAmount.string = Tool.ConvertMoney_S2C(_data.insuranceWinlose) + "";
             this.mJackpotAmount.string = Tool.ConvertMoney_S2C(_data.jackpotWinlose) + "";
-            this.ForceSetData(_data.list);
+            this.ForceSetData(_data.playerStatisticList);
             this.RefreshData();
         })
     }

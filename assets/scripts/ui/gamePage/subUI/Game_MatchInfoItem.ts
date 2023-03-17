@@ -40,7 +40,7 @@ export class Game_MatchInfoItem extends BaseUI
 
     }
 
-    public InitWithData(_index : number , _data : RecordPlayer)
+    public InitWithData(_index : number , _data : PlayerStatistic)
     {
         this.mBG.active = _index%2 == 0;
         this.mSelfTag.active = _data.uid == LocalPlayerData.Instance.Data_Uid.mData;
