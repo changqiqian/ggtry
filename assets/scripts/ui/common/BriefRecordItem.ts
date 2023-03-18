@@ -28,7 +28,7 @@ export class BriefRecordItem extends BaseUI
 
     mVideoCallback : Function;
     
-    mData : SimpleReplay = null;
+    mData : SimpleReplayRecord = null;
     InitParam()
     {
 
@@ -63,7 +63,7 @@ export class BriefRecordItem extends BaseUI
     {
 
     }
-    public InitWithData(_data : SimpleReplay , _VedioCallback)
+    public InitWithData(_data : SimpleReplayRecord , _VedioCallback)
     {
         this.ResetLabel();
         this.ResetCards();

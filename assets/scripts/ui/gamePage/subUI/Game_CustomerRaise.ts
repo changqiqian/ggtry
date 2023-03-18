@@ -153,19 +153,24 @@ export class Game_CustomerRaise extends BaseUI
         let totalPot = gameData.GetTotalPotAmount();
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         let lastBetAct = gameData.FindBiggestBetAction();
+        let bb = gameData.GetStaticData().smallBlind * 2;
         for(let i = 0 ; i < this.mRaiseByPot.children.length ; i++)
         {
             let ratio = GameConfig.GetCustomerRaiseRatio(i);
             let title = GameConfig.GetCustomerRaiseTitle(i);
             let amount = ratio *  totalPot; 	
             amount = Tool.CeilServerMoney(amount);
+            if(amount <  bb)
+            {
+                amount = bb;
+            }
             
             let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
             currentBtn.node.getChildByName("Describe").getComponent(Label).string = title;
 
             if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
             {
-                let bb = gameData.GetStaticData().smallBlind * 2;
+                
                 let showBB = Tool.ConvertToBB(amount , bb);
                 currentBtn.SetTitle(showBB + "");
             }

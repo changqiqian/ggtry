@@ -230,22 +230,22 @@ export class Game_Player extends BaseUI
                 break;
                 case TexasCashState.TexasCashState_FlopRound:
                 {
-                    this.CleanTable(true);
+                    this.CleanTable();
                 }
                 break;
                 case TexasCashState.TexasCashState_TurnRound:
                 {
-                    this.CleanTable(true);
+                    this.CleanTable();
                 }
                 break;
                 case TexasCashState.TexasCashState_RiverRound:
                 {
-                    this.CleanTable(true);
+                    this.CleanTable();
                 }
                 break;
                 case TexasCashState.TexasCashState_Settlement:
                 {
-                    this.CleanTable(true);
+                    this.CleanTable();
                 }
                 break;
             }
@@ -392,19 +392,19 @@ export class Game_Player extends BaseUI
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
         {
             this.ShowLocalPlayerLogic(true);
-            this.CleanTable(false);
+            this.CleanTable();
         })
 
         gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
         {
             this.ShowLocalPlayerLogic(true);
-            this.CleanTable(false);
+            this.CleanTable();
         })
 
         gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
         {
             this.ShowLocalPlayerLogic(true);
-            this.CleanTable(false);
+            this.CleanTable();
         })
         
 
@@ -545,6 +545,10 @@ export class Game_Player extends BaseUI
                 return;
             }
 
+            if(currentPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
             let hands = currentPlayer.cards;
             this.ShowCards(hands , false);
         });
@@ -568,6 +572,11 @@ export class Game_Player extends BaseUI
                 return;
             }
             this.ShowLocalPlayerLogic(true);
+
+            if(currentPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
             let hands = currentPlayer.cards;
             this.ShowCards(hands , false);
         });
@@ -679,20 +688,20 @@ export class Game_Player extends BaseUI
         }
     }
 
-    CleanTable(_replay : boolean)
+    CleanTable()
     {
-        if(this.mGame_BetAmount.node.activeInHierarchy == true )
-        {
-            this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_node)=>
-            {
-                this.node.addChild(_node);
-                let script = _node.getComponent(Game_MovingChip);
-                let startWorldPos = this.mGame_BetAmount.GetChipWorldPos();
-                let screenSize = view.getVisibleSize();
-                script.FlyWithDelay(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
+        // if(this.mGame_BetAmount.node.activeInHierarchy == true )
+        // {
+        //     this.LoadPrefab("gamePage","prefab/Game_MovingChip",(_node)=>
+        //     {
+        //         this.node.addChild(_node);
+        //         let script = _node.getComponent(Game_MovingChip);
+        //         let startWorldPos = this.mGame_BetAmount.GetChipWorldPos();
+        //         let screenSize = view.getVisibleSize();
+        //         script.FlyWithDelay(startWorldPos ,new Vec3(screenSize.width/2 , screenSize.height/2));
 
-            })
-        }
+        //     })
+        // }
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
     }
@@ -761,6 +770,7 @@ export class Game_Player extends BaseUI
             {
                 this.UpdateBuyInCountDown();
             }
+            
         }
     }
     UpdateBuyInCountDown()
@@ -1050,28 +1060,19 @@ export class Game_Player extends BaseUI
         this.mGame_ActionTag.SetType(_actionType);
     }
 
-
     ShowMiniCard(_value : boolean , _replay : boolean)
     {
-        let isSelf = false;
         if(_replay)
         {
             let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID);
-            isSelf = playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData;
-        }
-        else
-        {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
-            isSelf = gameData.IsSelfBySeat(this.mSeatID);
-        }
+            let isSelf = playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData;
 
-        if(isSelf)
-        {
-            this.mMiniCard.active = false;
-            return;
+            if(isSelf)
+            {
+                this.mMiniCard.active = false;
+                return;
+            }
         }
-
         this.mMiniCard.active = _value;
     }
 

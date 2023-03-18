@@ -36,8 +36,8 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_RecordData: BaseData<RecordData> = new BaseData<RecordData>();//日月星期-战绩数据
     Data_RecordSingleData: BaseData<RecordSingleData> = new BaseData<RecordSingleData>();//战绩入口数据
     Data_RecordDetail: BaseData<RecordDetail> = new BaseData<RecordDetail>();//战绩详细
-    Data_SimpleReplayData : BaseData<SimpleReplayData> = new BaseData<SimpleReplayData>();//获取手牌简要数据
-    Data_ReplayData: BaseData<ReplayData> = new BaseData<ReplayData>();//获取手牌详细数据
+    Data_SimpleReplayData : BaseData<SimpleReplayRecord> = new BaseData<SimpleReplayRecord>();//获取手牌简要数据
+    Data_ReplayData: BaseData<DetailReplayRecord> = new BaseData<DetailReplayRecord>();//获取手牌详细数据
     // public ClearEnterClubInfo()
     // {
     //     this.Data_EnterClubs.mData = new Array<S2CEnterClub>();

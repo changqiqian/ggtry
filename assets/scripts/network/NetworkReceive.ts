@@ -740,18 +740,18 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonReplayListResp,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonSimpleReplayResp,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
-            let msg = S2CCommonReplayListResp.decode(_data);
-            console.log("收到的内容 S2C_CommonReplayListResp  实时牌普列表==" + JSON.stringify(msg));
+            let msg = S2CCommonSimpleReplayResp.decode(_data);
+            console.log("收到的内容 S2C_CommonSimpleReplayResp  实时牌普列表==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
                 let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
                 if(gameStruct != null)
                 {
                     let gameData = gameStruct.mGameData;
-                    gameData.Data_S2CCommonReplayListResp.mData = msg;
+                    gameData.Data_S2CCommonSimpleReplayResp.mData = msg;
                 }
             }
             else
@@ -761,18 +761,18 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         },this);
 
 
-        Network.Instance.AddMsgListenner(MessageId.S2C_CommonReplayDetailsResp,(_data)=>
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonDetailReplayResp,(_data)=>
         {
             UIMgr.Instance.ShowLoading(false);
-            let msg = S2CCommonReplayDetailsResp.decode(_data);
-            console.log("收到的内容 S2C_CommonReplayDetailsResp  实时牌普回放数据==" + JSON.stringify(msg));
+            let msg = S2CCommonDetailReplayResp.decode(_data);
+            console.log("收到的内容 S2C_CommonDetailReplayResp  实时牌普回放数据==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
                 let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
                 if(gameStruct != null)
                 {
                     let gameData = gameStruct.mGameData;
-                    gameData.Data_S2CCommonReplayDetailsResp.mData = msg;
+                    gameData.Data_S2CCommonDetailReplayResp.mData = msg;
                 }
             }
             else
@@ -783,6 +783,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
 
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonExtraThinkResp,(_data)=>
         {
+
             let msg = S2CCommonExtraThinkResp.decode(_data);
             console.log("收到的内容 S2C_CommonExtraThinkResp  申请思考时间==" + JSON.stringify(msg));
 
@@ -798,7 +799,8 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
         
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonGetPlayerStatisticsResp,(_data)=>
         {
-            let msg = S2CCommonExtraThinkResp.decode(_data);
+            UIMgr.Instance.ShowLoading(false);
+            let msg = S2CCommonGetPlayerStatisticsResp.decode(_data);
             console.log("收到的内容 S2C_CommonGetPlayerStatisticsResp  获取玩家静态数据==" + JSON.stringify(msg));
 
             if(msg.result.resId == MsgResult.Success)

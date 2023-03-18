@@ -63,7 +63,7 @@ export class Game_CashReplay extends BaseUI {
         GameReplayData.Instance.Clear();
     }
 
-    public InitWithData(_data : ReplayData)
+    public InitWithData(_data : DetailReplayRecord)
     {
         GameReplayData.Instance.InitData(_data);
         this.InitSubView();

@@ -93,11 +93,6 @@ export class Game_Menu extends BaseUI
             let selfPlayer = gameData.GetPlayerInfoByUid(uid);
             if(selfPlayer != null)
             {
-                if(selfPlayer.auto)
-                {
-                    UIMgr.Instance.ShowToast(Localization.GetString("00370"));
-                    return;
-                }
                 NetworkSend.Instance.StandUp(msgId,gameId);
             }
 

@@ -493,11 +493,11 @@ export class NetworkSend extends Singleton<NetworkSend>()
     public GetReplayList(_msgId : number ,_gameId : string , _page : number , _pageSize : number) 
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new C2STexasCashReplayList();
+        let msg = new C2STexasCashSimpleReplay();
         msg.gameId = _gameId;
         msg.page = _page;
         msg.pageSize = _pageSize;
-        Network.Instance.SendMsg(_msgId , C2STexasCashReplayList.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2STexasCashSimpleReplay.encode(msg).finish());
         console.log("获取游戏实时手牌列表  === " + JSON.stringify(msg))
     }
 
@@ -514,10 +514,10 @@ export class NetworkSend extends Singleton<NetworkSend>()
     public GetReplayDetail(_msgId : number ,_gameId : string , _index : number ) 
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new C2STexasCashReplayDetails();
+        let msg = new C2STexasCashDetailReplay();
         msg.gameId = _gameId;
         msg.index = _index;
-        Network.Instance.SendMsg(_msgId , C2STexasCashReplayDetails.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2STexasCashDetailReplay.encode(msg).finish());
         console.log("获取实时牌局回放诗句  === " + JSON.stringify(msg))
     }
 

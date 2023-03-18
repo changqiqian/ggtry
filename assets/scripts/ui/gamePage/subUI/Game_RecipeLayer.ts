@@ -13,7 +13,7 @@ import { Game_CashReplay } from './Game_CashReplay';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_RecipeLayer')
-export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>  
+export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayRecord>  
 {
 
     @property(MovingShow) 
@@ -73,8 +73,8 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
         super.CustmoerDestory();
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        gameData.Data_S2CCommonReplayListResp.Clear();
-        gameData.Data_S2CCommonReplayDetailsResp.Clear();
+        gameData.Data_S2CCommonSimpleReplayResp.Clear();
+        gameData.Data_S2CCommonDetailReplayResp.Clear();
         gameData.RemoveAllDataListennerByTarget(this);
     }
     
@@ -93,9 +93,9 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        gameData.Data_S2CCommonReplayListResp.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonSimpleReplayResp.AddListenner(this,(_data)=>
         {
-            let list = _data.data;
+            let list = _data.simpleReplayRecord;
             if(this.mCurrentPage != _data.page)
             {
                 return;
@@ -121,12 +121,12 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplay>
             this.UpdateData(_data.totalNum);
         });
 
-        gameData.Data_S2CCommonReplayDetailsResp.AddListenner(this,(_data)=>
+        gameData.Data_S2CCommonDetailReplayResp.AddListenner(this,(_data)=>
         {
             UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
             {
                 let tempScript = _script as Game_CashReplay;
-                tempScript.InitWithData(_data.replayData);
+                tempScript.InitWithData(_data.detailReplayRecord);
             });      
         });
     }

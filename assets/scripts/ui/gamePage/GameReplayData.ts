@@ -13,8 +13,8 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
 
 
     //回放数据
-    Data_CopyReplayData  : BaseData<ReplayData> = new BaseData<ReplayData>(); //把回放数据保存一份
-    Data_ReplayData : BaseData<ReplayData> = new BaseData<ReplayData>(); //回放数据，会根据播放实时变动
+    Data_CopyReplayData  : BaseData<DetailReplayRecord> = new BaseData<DetailReplayRecord>(); //把回放数据保存一份
+    Data_ReplayData : BaseData<DetailReplayRecord> = new BaseData<DetailReplayRecord>(); //回放数据，会根据播放实时变动
     Data_State  : BaseData<TexasCashState> = new BaseData<TexasCashState>(); //当前展示到哪一个阶段
     Data_Step  : BaseData<number> = new BaseData<number>(); //展示到当前阶段的第几步了
     Data_Auto : BaseData<boolean> = new BaseData<boolean>(); //是否自动播放
@@ -22,9 +22,9 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
     Data_Update : BaseData<boolean> = new BaseData<boolean>(); //更新下一步
     Data_TotalPots : BaseData<number> = new BaseData<number>(); //总底池
 
-    public InitData(_data : ReplayData)
+    public InitData(_data : DetailReplayRecord)
     {
-        this.Data_CopyReplayData.mData = new ReplayData(_data);
+        this.Data_CopyReplayData.mData = new DetailReplayRecord(_data);
         this.DeepCopyReplayData();
         this.ReStart();
 
@@ -33,7 +33,7 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
     DeepCopyReplayData()
     {
         let str = JSON.stringify(this.Data_CopyReplayData.mData);
-        this.Data_ReplayData.mData = JSON.parse(str) as ReplayData;
+        this.Data_ReplayData.mData = JSON.parse(str) as DetailReplayRecord;
     }
 
     public ReStart()

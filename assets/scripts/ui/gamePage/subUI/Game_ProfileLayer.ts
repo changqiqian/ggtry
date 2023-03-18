@@ -94,16 +94,24 @@ export class Game_ProfileLayer extends BaseUI
         {
             let record = _data.playerStatistic;
             this.mTotalHands.string = record.totalHands + "";
-            this.mVPIP.string = (record.totalFlopHands / record.totalHands).toFixed(2) + "%";
+
+            if(record.totalHands == 0 || record.totalFlopHands == 0)
+            {
+                this.mVPIP.string = "0";
+            }
+            else
+            {
+                this.mVPIP.string = (record.totalFlopHands / record.totalHands).toFixed(2) + "%";
+            }
         });
     }
 
     ResetUI()
     {
-        this.mTotalGame.string = "";
-        this.mTotalHands.string = "";
-        this.mVPIP.string = "";
-        this.mRaiseRate.string = "";
+        this.mTotalGame.string = "--";
+        this.mTotalHands.string = "0";
+        this.mVPIP.string = "0";
+        this.mRaiseRate.string = "--";
     }
 
 }

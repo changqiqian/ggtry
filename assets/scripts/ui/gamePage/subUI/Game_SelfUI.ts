@@ -166,6 +166,26 @@ export class Game_SelfUI extends BaseUI
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
             //this.HideAllUI();
+            if(this.mAlreadyShowCards == false)
+            {
+                let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+                if(selfPlayer == null)
+                {
+                    return
+                }
+
+                let winLoseInfos = _data.result;
+                let index = winLoseInfos.findIndex((_item) => _item.uid === selfPlayer.uid);
+                if(index < 0)
+                {
+                    return;
+                }
+
+                for(let k = 0 ; k < selfPlayer.cards.length ; k++)
+                {
+                    this.ShowCard(k , selfPlayer.cards[k] );
+                }
+            }
         })
 
         gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
@@ -353,7 +373,7 @@ export class Game_SelfUI extends BaseUI
             {
                 if(selfPlayer.fold)
                 {
-
+                    this.FoldCards();
                 }
                 //this.ShowActionType(lastAct.actionType);
                 //this.Bet(lastAct.roundAmount , lastAct.actionType);
@@ -491,7 +511,6 @@ export class Game_SelfUI extends BaseUI
         currentPoker.ShowBack(); 
         currentPoker.SetFrontByCardInfo(_cardInfo);
         currentPoker.DealAnimation();
-
         this.mAlreadyShowCards = true;
     }
 

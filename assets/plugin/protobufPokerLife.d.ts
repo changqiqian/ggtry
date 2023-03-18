@@ -1625,6 +1625,19 @@ export enum ActionType {
     ActionType_Call = 10
 }
 
+/** SettlementType enum. */
+export enum SettlementType {
+    SettlementType_AdvanceFold = 0,
+    SettlementType_AdvanceSettlement = 1,
+    SettlementType_NormalSettlement = 2
+}
+
+/** WinLoseType enum. */
+export enum WinLoseType {
+    WinLoseType_Win = 0,
+    WinLoseType_Lose = 1
+}
+
 /** GameTaxType enum. */
 export enum GameTaxType {
     GameTaxType_EveryRound = 0,
@@ -1976,6 +1989,12 @@ export class PlayerWinLose implements IPlayerWinLose {
     /** PlayerWinLose head. */
     public head: string;
 
+    /** PlayerWinLose settlementType. */
+    public settlementType: SettlementType;
+
+    /** PlayerWinLose winLoseType. */
+    public winLoseType: WinLoseType;
+
     /** PlayerWinLose winLose. */
     public winLose: number;
 
@@ -2283,129 +2302,129 @@ export class MySimpleInfo implements IMySimpleInfo {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): MySimpleInfo;
 }
 
-/** Represents a SimpleReplay. */
-export class SimpleReplay implements ISimpleReplay {
+/** Represents a SimpleReplayRecord. */
+export class SimpleReplayRecord implements ISimpleReplayRecord {
 
     /**
-     * Constructs a new SimpleReplay.
+     * Constructs a new SimpleReplayRecord.
      * @param [p] Properties to set
      */
-    constructor(p?: ISimpleReplay);
+    constructor(p?: ISimpleReplayRecord);
 
-    /** SimpleReplay gameId. */
+    /** SimpleReplayRecord gameId. */
     public gameId: string;
 
-    /** SimpleReplay index. */
+    /** SimpleReplayRecord index. */
     public index: number;
 
-    /** SimpleReplay publicCards. */
+    /** SimpleReplayRecord publicCards. */
     public publicCards: ICardInfo[];
 
-    /** SimpleReplay winnerSettlementResult. */
+    /** SimpleReplayRecord winnerSettlementResult. */
     public winnerSettlementResult: IPlayerWinLose[];
 
-    /** SimpleReplay mySimpleInfo. */
+    /** SimpleReplayRecord mySimpleInfo. */
     public mySimpleInfo?: (IMySimpleInfo|null);
 
-    /** SimpleReplay date. */
+    /** SimpleReplayRecord date. */
     public date: string;
 
-    /** SimpleReplay intactSettlementResults. */
+    /** SimpleReplayRecord intactSettlementResults. */
     public intactSettlementResults: IPlayerWinLose[];
 
     /**
-     * Encodes the specified SimpleReplay message. Does not implicitly {@link SimpleReplay.verify|verify} messages.
-     * @param m SimpleReplay message or plain object to encode
+     * Encodes the specified SimpleReplayRecord message. Does not implicitly {@link SimpleReplayRecord.verify|verify} messages.
+     * @param m SimpleReplayRecord message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: ISimpleReplay, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: ISimpleReplayRecord, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a SimpleReplay message from the specified reader or buffer.
+     * Decodes a SimpleReplayRecord message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns SimpleReplay
+     * @returns SimpleReplayRecord
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): SimpleReplay;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): SimpleReplayRecord;
 }
 
-/** Represents a ReplayData. */
-export class ReplayData implements IReplayData {
+/** Represents a DetailReplayRecord. */
+export class DetailReplayRecord implements IDetailReplayRecord {
 
     /**
-     * Constructs a new ReplayData.
+     * Constructs a new DetailReplayRecord.
      * @param [p] Properties to set
      */
-    constructor(p?: IReplayData);
+    constructor(p?: IDetailReplayRecord);
 
-    /** ReplayData gameId. */
+    /** DetailReplayRecord gameId. */
     public gameId: string;
 
-    /** ReplayData index. */
+    /** DetailReplayRecord index. */
     public index: number;
 
-    /** ReplayData texasConfig. */
+    /** DetailReplayRecord texasConfig. */
     public texasConfig?: (IBasicTexasConfig|null);
 
-    /** ReplayData dealerUid. */
+    /** DetailReplayRecord dealerUid. */
     public dealerUid: string;
 
-    /** ReplayData players. */
+    /** DetailReplayRecord players. */
     public players: IPlayerInfo[];
 
-    /** ReplayData publicCards. */
+    /** DetailReplayRecord publicCards. */
     public publicCards: ICardInfo[];
 
-    /** ReplayData roundStartActions. */
+    /** DetailReplayRecord roundStartActions. */
     public roundStartActions: IActionResult[];
 
-    /** ReplayData preFlopActions. */
+    /** DetailReplayRecord preFlopActions. */
     public preFlopActions: IActionResult[];
 
-    /** ReplayData flopActions. */
+    /** DetailReplayRecord flopActions. */
     public flopActions: IActionResult[];
 
-    /** ReplayData turnActions. */
+    /** DetailReplayRecord turnActions. */
     public turnActions: IActionResult[];
 
-    /** ReplayData riverActions. */
+    /** DetailReplayRecord riverActions. */
     public riverActions: IActionResult[];
 
-    /** ReplayData correspondSettlementResult. */
+    /** DetailReplayRecord correspondSettlementResult. */
     public correspondSettlementResult: IPlayerWinLose[];
 
-    /** ReplayData potInfoFlop. */
+    /** DetailReplayRecord potInfoFlop. */
     public potInfoFlop: IPotInfo[];
 
-    /** ReplayData potInfoTurn. */
+    /** DetailReplayRecord potInfoTurn. */
     public potInfoTurn: IPotInfo[];
 
-    /** ReplayData potInfoRiver. */
+    /** DetailReplayRecord potInfoRiver. */
     public potInfoRiver: IPotInfo[];
 
-    /** ReplayData intactSettlementResults. */
+    /** DetailReplayRecord intactSettlementResults. */
     public intactSettlementResults: IPlayerWinLose[];
 
     /**
-     * Encodes the specified ReplayData message. Does not implicitly {@link ReplayData.verify|verify} messages.
-     * @param m ReplayData message or plain object to encode
+     * Encodes the specified DetailReplayRecord message. Does not implicitly {@link DetailReplayRecord.verify|verify} messages.
+     * @param m DetailReplayRecord message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IReplayData, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IDetailReplayRecord, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a ReplayData message from the specified reader or buffer.
+     * Decodes a DetailReplayRecord message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns ReplayData
+     * @returns DetailReplayRecord
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): ReplayData;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): DetailReplayRecord;
 }
 
 /** Represents a RecordData. */
@@ -2611,8 +2630,8 @@ export enum MessageId {
     C2S_TexasCashSqueezeStart = 5017,
     C2S_TexasCashSqueezeFinish = 5018,
     C2S_TexasCashGetStatistics = 5019,
-    C2S_TexasCashReplayList = 5020,
-    C2S_TexasCashReplayDetails = 5021,
+    C2S_TexasCashSimpleReplay = 5020,
+    C2S_TexasCashDetailReplay = 5021,
     C2S_TexasCashCancelAutoOperator = 5022,
     C2S_TexasCashGetPlayerStatistics = 5023,
     MSG_TexasCashEnd = 5500,
@@ -2644,8 +2663,8 @@ export enum MessageId {
     S2C_CommonSqueezeStartResp = 8016,
     S2C_CommonSqueezeFinishResp = 8017,
     S2C_CommonGetStatisticsResp = 8018,
-    S2C_CommonReplayListResp = 8019,
-    S2C_CommonReplayDetailsResp = 8020,
+    S2C_CommonSimpleReplayResp = 8019,
+    S2C_CommonDetailReplayResp = 8020,
     S2C_CommonCancelAutoOperatorResp = 8021,
     S2C_CommonGetPlayerStatisticsResp = 8022,
     S2C_CommonBringInTimerNotify = 8110,
@@ -3310,75 +3329,75 @@ export class C2STexasCashGetStatistics implements IC2STexasCashGetStatistics {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashGetStatistics;
 }
 
-/** Represents a C2STexasCashReplayList. */
-export class C2STexasCashReplayList implements IC2STexasCashReplayList {
+/** Represents a C2STexasCashSimpleReplay. */
+export class C2STexasCashSimpleReplay implements IC2STexasCashSimpleReplay {
 
     /**
-     * Constructs a new C2STexasCashReplayList.
+     * Constructs a new C2STexasCashSimpleReplay.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2STexasCashReplayList);
+    constructor(p?: IC2STexasCashSimpleReplay);
 
-    /** C2STexasCashReplayList gameId. */
+    /** C2STexasCashSimpleReplay gameId. */
     public gameId: string;
 
-    /** C2STexasCashReplayList page. */
+    /** C2STexasCashSimpleReplay page. */
     public page: number;
 
-    /** C2STexasCashReplayList pageSize. */
+    /** C2STexasCashSimpleReplay pageSize. */
     public pageSize: number;
 
     /**
-     * Encodes the specified C2STexasCashReplayList message. Does not implicitly {@link C2STexasCashReplayList.verify|verify} messages.
-     * @param m C2STexasCashReplayList message or plain object to encode
+     * Encodes the specified C2STexasCashSimpleReplay message. Does not implicitly {@link C2STexasCashSimpleReplay.verify|verify} messages.
+     * @param m C2STexasCashSimpleReplay message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2STexasCashReplayList, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2STexasCashSimpleReplay, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2STexasCashReplayList message from the specified reader or buffer.
+     * Decodes a C2STexasCashSimpleReplay message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2STexasCashReplayList
+     * @returns C2STexasCashSimpleReplay
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashReplayList;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashSimpleReplay;
 }
 
-/** Represents a C2STexasCashReplayDetails. */
-export class C2STexasCashReplayDetails implements IC2STexasCashReplayDetails {
+/** Represents a C2STexasCashDetailReplay. */
+export class C2STexasCashDetailReplay implements IC2STexasCashDetailReplay {
 
     /**
-     * Constructs a new C2STexasCashReplayDetails.
+     * Constructs a new C2STexasCashDetailReplay.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2STexasCashReplayDetails);
+    constructor(p?: IC2STexasCashDetailReplay);
 
-    /** C2STexasCashReplayDetails gameId. */
+    /** C2STexasCashDetailReplay gameId. */
     public gameId: string;
 
-    /** C2STexasCashReplayDetails index. */
+    /** C2STexasCashDetailReplay index. */
     public index: number;
 
     /**
-     * Encodes the specified C2STexasCashReplayDetails message. Does not implicitly {@link C2STexasCashReplayDetails.verify|verify} messages.
-     * @param m C2STexasCashReplayDetails message or plain object to encode
+     * Encodes the specified C2STexasCashDetailReplay message. Does not implicitly {@link C2STexasCashDetailReplay.verify|verify} messages.
+     * @param m C2STexasCashDetailReplay message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2STexasCashReplayDetails, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2STexasCashDetailReplay, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2STexasCashReplayDetails message from the specified reader or buffer.
+     * Decodes a C2STexasCashDetailReplay message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2STexasCashReplayDetails
+     * @returns C2STexasCashDetailReplay
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashReplayDetails;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashDetailReplay;
 }
 
 /** Represents a C2STexasCashCancelAutoOperator. */
@@ -4139,87 +4158,87 @@ export class S2CCommonGetStatisticsResp implements IS2CCommonGetStatisticsResp {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonGetStatisticsResp;
 }
 
-/** Represents a S2CCommonReplayListResp. */
-export class S2CCommonReplayListResp implements IS2CCommonReplayListResp {
+/** Represents a S2CCommonSimpleReplayResp. */
+export class S2CCommonSimpleReplayResp implements IS2CCommonSimpleReplayResp {
 
     /**
-     * Constructs a new S2CCommonReplayListResp.
+     * Constructs a new S2CCommonSimpleReplayResp.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CCommonReplayListResp);
+    constructor(p?: IS2CCommonSimpleReplayResp);
 
-    /** S2CCommonReplayListResp result. */
+    /** S2CCommonSimpleReplayResp result. */
     public result?: (ICommonResult|null);
 
-    /** S2CCommonReplayListResp gameId. */
+    /** S2CCommonSimpleReplayResp gameId. */
     public gameId: string;
 
-    /** S2CCommonReplayListResp data. */
-    public data: ISimpleReplay[];
+    /** S2CCommonSimpleReplayResp simpleReplayRecord. */
+    public simpleReplayRecord: ISimpleReplayRecord[];
 
-    /** S2CCommonReplayListResp page. */
+    /** S2CCommonSimpleReplayResp page. */
     public page: number;
 
-    /** S2CCommonReplayListResp pageSize. */
+    /** S2CCommonSimpleReplayResp pageSize. */
     public pageSize: number;
 
-    /** S2CCommonReplayListResp totalNum. */
+    /** S2CCommonSimpleReplayResp totalNum. */
     public totalNum: number;
 
     /**
-     * Encodes the specified S2CCommonReplayListResp message. Does not implicitly {@link S2CCommonReplayListResp.verify|verify} messages.
-     * @param m S2CCommonReplayListResp message or plain object to encode
+     * Encodes the specified S2CCommonSimpleReplayResp message. Does not implicitly {@link S2CCommonSimpleReplayResp.verify|verify} messages.
+     * @param m S2CCommonSimpleReplayResp message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CCommonReplayListResp, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CCommonSimpleReplayResp, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CCommonReplayListResp message from the specified reader or buffer.
+     * Decodes a S2CCommonSimpleReplayResp message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CCommonReplayListResp
+     * @returns S2CCommonSimpleReplayResp
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonReplayListResp;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonSimpleReplayResp;
 }
 
-/** Represents a S2CCommonReplayDetailsResp. */
-export class S2CCommonReplayDetailsResp implements IS2CCommonReplayDetailsResp {
+/** Represents a S2CCommonDetailReplayResp. */
+export class S2CCommonDetailReplayResp implements IS2CCommonDetailReplayResp {
 
     /**
-     * Constructs a new S2CCommonReplayDetailsResp.
+     * Constructs a new S2CCommonDetailReplayResp.
      * @param [p] Properties to set
      */
-    constructor(p?: IS2CCommonReplayDetailsResp);
+    constructor(p?: IS2CCommonDetailReplayResp);
 
-    /** S2CCommonReplayDetailsResp result. */
+    /** S2CCommonDetailReplayResp result. */
     public result?: (ICommonResult|null);
 
-    /** S2CCommonReplayDetailsResp gameId. */
+    /** S2CCommonDetailReplayResp gameId. */
     public gameId: string;
 
-    /** S2CCommonReplayDetailsResp replayData. */
-    public replayData?: (IReplayData|null);
+    /** S2CCommonDetailReplayResp detailReplayRecord. */
+    public detailReplayRecord?: (IDetailReplayRecord|null);
 
     /**
-     * Encodes the specified S2CCommonReplayDetailsResp message. Does not implicitly {@link S2CCommonReplayDetailsResp.verify|verify} messages.
-     * @param m S2CCommonReplayDetailsResp message or plain object to encode
+     * Encodes the specified S2CCommonDetailReplayResp message. Does not implicitly {@link S2CCommonDetailReplayResp.verify|verify} messages.
+     * @param m S2CCommonDetailReplayResp message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IS2CCommonReplayDetailsResp, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IS2CCommonDetailReplayResp, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a S2CCommonReplayDetailsResp message from the specified reader or buffer.
+     * Decodes a S2CCommonDetailReplayResp message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns S2CCommonReplayDetailsResp
+     * @returns S2CCommonDetailReplayResp
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonReplayDetailsResp;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonDetailReplayResp;
 }
 
 /** Represents a S2CCommonCancelAutoOperatorResp. */

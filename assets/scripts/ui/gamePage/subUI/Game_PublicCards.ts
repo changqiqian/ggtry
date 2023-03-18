@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, AudioSource } from 'cc';
+import { _decorator, Component, Node, AudioSource, Vec2, Vec3 } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Poker } from '../../common/Poker';
@@ -8,17 +8,17 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_PublicCards')
 export class Game_PublicCards extends BaseUI 
 {
-    @property(AudioSource) 
-    mAudio: AudioSource = null;
 
     private mIndex : number = null;
+
+    mPos : Array<Vec3>;
     InitParam() 
     {
 
     }
     BindUI() 
     {
-        this.ClearPublicCards();
+
     }
     RegDataNotify() 
     {
@@ -42,7 +42,22 @@ export class Game_PublicCards extends BaseUI
             return;
         }
         this.mIndex = _index;
+        this.InitPos();
+        this.ClearPublicCards();
         this.BindData();
+    }
+
+    InitPos()
+    {
+        if(this.mPos == null)
+        {
+            this.mPos = new Array<Vec3>();
+        }
+        for(let i = 0 ; i < this.node.children.length ; i++)
+        {
+            let pos = this.node.children[i].getPosition();
+            this.mPos.push(pos);
+        }
     }
 
     BindData()
@@ -60,12 +75,7 @@ export class Game_PublicCards extends BaseUI
             let cards = gameData.GetDynamicData().publicCards;
             for(let i = 0 ; i < cards.length ; i++)
             {
-                let delayTime = i * 0.1;
-                let poker = this.GetCardNode(i);
-                poker.ResetAndHide();
-                poker.ShowBack();
-                poker.SetFrontByCardInfo(cards[i]);
-                poker.DealAnimation(delayTime);
+                this.ShowCardWithAnimation(i,cards[i]);
             }
         });
 
@@ -85,18 +95,18 @@ export class Game_PublicCards extends BaseUI
             let cards = gameData.GetDynamicData().publicCards;
             for(let i = 0 ; i < cards.length ; i++)
             {
-                this.ShowCard(i , cards[i]);
+                this.ShowCardWithAnimation(i,cards[i]);
             }
         });
 
         gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
         {
-            this.ShowCard(3 , _data.card);
+            this.ShowCardDirectly(3 , _data.card);
         });
 
         gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
         {
-            this.ShowCard(4 , _data.card);
+            this.ShowCardDirectly(4 , _data.card);
         });
         
 
@@ -118,7 +128,7 @@ export class Game_PublicCards extends BaseUI
             for(let i = 0 ; i < showCards.length ; i++)
             {
                 let index = startIndex + i;
-                this.ShowCard(index , showCards[i]);
+                this.ShowCardDirectly(index , showCards[i]);
             }
         });
         
@@ -134,9 +144,19 @@ export class Game_PublicCards extends BaseUI
         }
     }
 
-    ShowCard(_index , _cardInfo : CardInfo)
+    ShowCardWithAnimation(_index , _cardInfo : CardInfo)
     {
         let poker = this.GetCardNode(_index);
+        poker.ResetAndHide();
+        poker.ShowBack();
+        poker.SetFrontByCardInfo(_cardInfo);
+        poker.DealAnimation2(this.mPos[0],this.mPos[_index]);
+    }
+
+    ShowCardDirectly(_index  : number, _cardInfo : CardInfo)
+    {
+        let poker = this.GetCardNode(_index);
+        poker.node.setPosition(this.mPos[_index]);
         poker.ResetAndHide();
         poker.ShowBack();
         poker.SetFrontByCardInfo(_cardInfo);

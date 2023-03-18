@@ -218,6 +218,18 @@ export class Poker extends BaseUI
         tweenDeal.start();
     }
 
+    public DealAnimation2(_fromPos : Vec3 , _toPos : Vec3 ,_duration : number = 0.3 )
+    {
+        this.node.setPosition(_fromPos);
+        let tweenDeal = new Tween(this.node); 
+        tweenDeal.to(_duration , {position : new Vec3(_toPos.x,_toPos.y,_toPos.z)} , {easing : easing.quadIn});
+        tweenDeal.call(()=>
+        {
+            this.FlipToFront()
+        });
+        tweenDeal.start();
+    }
+
     public ShowFront()
     {
         this.node.active = true;

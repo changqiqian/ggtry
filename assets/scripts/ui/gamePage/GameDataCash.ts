@@ -70,11 +70,11 @@ export class GameDataCash extends GameData
     }
     public ReplayListMsgId() : number
     {
-        return MessageId.C2S_TexasCashReplayList;
+        return MessageId.C2S_TexasCashSimpleReplay;
     }
     public ReplayDetailMsgId() : number
     {
-        return MessageId.C2S_TexasCashReplayDetails;
+        return MessageId.C2S_TexasCashDetailReplay;
     }
 
     public  AutoMsgId() : number
