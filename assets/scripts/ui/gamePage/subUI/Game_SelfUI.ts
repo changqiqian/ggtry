@@ -1,9 +1,7 @@
 import { _decorator, Component, Node, Label, instantiate, Vec3, view } from 'cc';
-import { AudioManager } from '../../../base/AudioManager';
 import { BaseUI } from '../../../base/BaseUI';
 import { Calculator, CardType, Combiantion } from '../../../base/Calculator';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
-import { GameConfig } from '../../../GameConfig';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { Tool } from '../../../Tool';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
@@ -11,8 +9,7 @@ import { Poker } from '../../common/Poker';
 import { Game_ActionTag } from './Game_ActionTag';
 import { Game_AddTime } from './Game_AddTime';
 import { Game_BetAmount } from './Game_BetAmount';
-import { Game_MovingCards } from './Game_MovingCards';
-import { Game_MovingChip } from './Game_MovingChip';
+
 
 const { ccclass, property } = _decorator;
 

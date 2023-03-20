@@ -194,6 +194,12 @@ export abstract class GameData extends MultipleNotify
 
     public UpdatePlayer(_players : Array<PlayerInfo>)
     {
+        for(let k = 0 ; k < this.GetDynamicData().seatInfos.length ; k++)
+        {
+            this.GetDynamicData().seatInfos[k].gameRole = GameRole.GameRole_Observer;
+        }
+
+
         for(let i = 0 ; i < _players.length ; i++)
         {
             let currentPlayer = _players[i];

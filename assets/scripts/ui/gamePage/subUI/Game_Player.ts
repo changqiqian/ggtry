@@ -1062,16 +1062,25 @@ export class Game_Player extends BaseUI
 
     ShowMiniCard(_value : boolean , _replay : boolean)
     {
+        let selfUid = LocalPlayerData.Instance.Data_Uid.mData;
+        let isSelf;
         if(_replay)
         {
             let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID);
-            let isSelf = playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData;
+            isSelf = playerInfo.uid == selfUid;
+        }
+        else
+        {
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+            isSelf = playerInfo.uid == selfUid;
+        }
 
-            if(isSelf)
-            {
-                this.mMiniCard.active = false;
-                return;
-            }
+        if(isSelf)
+        {
+            this.mMiniCard.active = false;
+            return;
         }
         this.mMiniCard.active = _value;
     }

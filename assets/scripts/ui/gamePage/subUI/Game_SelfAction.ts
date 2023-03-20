@@ -39,7 +39,6 @@ export class Game_SelfAction extends BaseUI
 
     onDisable()
     {
-        this.mCallAmount = GameConfig.WrongIndex;
     }
 
     InitParam() 
@@ -65,34 +64,17 @@ export class Game_SelfAction extends BaseUI
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-            let biggestBetAction = gameData.FindBiggestBetAction();
-            let selfBetAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
-            let bb = gameData.GetStaticData().smallBlind * 2;
-
             let actionInfo = new ActionInfo();
             actionInfo.uid = LocalPlayerData.Instance.Data_Uid.mData;
-            let callAmount = biggestBetAction.roundAmount;
-            if(callAmount < bb)
-            {
-                callAmount = bb;
-            }
 
-
-            if(callAmount < selfPlayer.currencyNum)
-            {
-                if(selfBetAction != null)
-                {
-                    callAmount -= selfBetAction.roundAmount;
-                }
-            }
-            if(callAmount >= selfPlayer.currencyNum)
+            if(this.mCallAmount >= selfPlayer.currencyNum)
             {
                 actionInfo.amount = selfPlayer.currencyNum;
                 actionInfo.actionType = ActionType.ActionType_AllIn;
             }
             else
             {
-                actionInfo.amount = callAmount;
+                actionInfo.amount = this.mCallAmount;
                 actionInfo.actionType = ActionType.ActionType_Call;
             }
             
@@ -257,7 +239,26 @@ export class Game_SelfAction extends BaseUI
 
         LocalPlayerData.Instance.Data_BBModeSetting.AddListenner(this,(_data)=>
         {
+            if( gameData.IsGamePlayingNow() == false)
+            {
+                return;
+            }
+
+            let selfPlayer =  gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            if(selfPlayer == null)
+            {
+                return;
+            }
+
+            if(gameData.GetDynamicData().actionUid !=  LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
+
+
+
             this.UpdateCallBtn();
+
         });
     }
 
@@ -355,7 +356,7 @@ export class Game_SelfAction extends BaseUI
             {
                 if(lastBigBetAction.roundAmount > 0)
                 {
-                    this.ShowBetUI(lastBigBetAction);
+                    this.ShowBetUI();
                 }
                 else
                 {
@@ -370,7 +371,7 @@ export class Game_SelfAction extends BaseUI
                 }
                 else
                 {
-                    this.ShowBetUI(lastBigBetAction);
+                    this.ShowBetUI();
                 }
             }
             
@@ -386,15 +387,24 @@ export class Game_SelfAction extends BaseUI
             return;
         }
 
-        if(this.mCallAmount == GameConfig.WrongIndex)
-        {
-            return;
-        }
+
+
         let selfUid = LocalPlayerData.Instance.Data_Uid.mData;
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let selfLastAct = gameData.FindLastActionByUid(selfUid)
         let alreadyBetAmount;
+
+        let lastBigBetAction = gameData.FindBiggestBetAction();
+        this.mCircleTimer.StopTimer();
+        let bb = gameData.GetStaticData().smallBlind * 2;
+
+        let bigestBet = lastBigBetAction.roundAmount;
+
+        if(bigestBet < bb)
+        {
+            bigestBet = bb;
+        }
 
         if(selfLastAct == null)
         {
@@ -411,25 +421,34 @@ export class Game_SelfAction extends BaseUI
                 alreadyBetAmount = selfLastAct.roundAmount;
             }
         }
-        let needBetAmount = this.mCallAmount - alreadyBetAmount;
+        let needBetAmount = bigestBet - alreadyBetAmount;
+
+        this.mCallAmount = needBetAmount;
+        if(alreadyBetAmount == 0)
+        {
+            if(this.mCallAmount < bb)
+            {
+                this.mCallAmount = bb;
+            }
+        }
+
+
         if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
         {
-            let bb = gameData.GetStaticData().smallBlind * 2;
-            let showBB = Tool.ConvertToBB(needBetAmount , bb);
+            let showBB = Tool.ConvertToBB(this.mCallAmount , bb);
             this.mCallBtn.SetTitle(showBB);
         }
         else
         {
-            this.mCallBtn.SetTitle(Tool.ConvertMoney_S2C(needBetAmount) + "");
+            this.mCallBtn.SetTitle(Tool.ConvertMoney_S2C(this.mCallAmount) + "");
         }
         
     }
 
-    ShowBetUI(_lastBetAction : ActionInfo)
+    ShowBetUI()
     {
         this.mFoldBtn.node.active = true;
         this.mCallBtn.node.active = true;
-        this.mCallAmount = _lastBetAction.roundAmount;
         this.UpdateCallBtn();
         this.mCheckBtn.node.active = false;
         this.mGame_CustomerRaise.InitWithData(this.mIndex , ()=>
