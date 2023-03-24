@@ -42,6 +42,9 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonExaminePrivateCardResp: BaseData<S2CCommonExaminePrivateCardResp> = new BaseData<S2CCommonExaminePrivateCardResp>(true);  //看手牌
     Data_S2CCommonSqueezeStartResp: BaseData<S2CCommonSqueezeStartResp> = new BaseData<S2CCommonSqueezeStartResp>(true);  //搓牌回复
     Data_S2CCommonSqueezeFinishResp: BaseData<S2CCommonSqueezeFinishResp> = new BaseData<S2CCommonSqueezeFinishResp>(true);  //搓牌结束
+    Data_S2CCommonGetObSizeResp: BaseData<S2CCommonGetObSizeResp> = new BaseData<S2CCommonGetObSizeResp>();  //观看者数量
+
+
 
     Data_S2CCommonIntervalTimeNotify : BaseData<S2CCommonIntervalTimeNotify> = new BaseData<S2CCommonIntervalTimeNotify>(true);  //阶段延时推送
     Data_S2CCommonWaitStartNotify: BaseData<S2CCommonWaitStartNotify> = new BaseData<S2CCommonWaitStartNotify>(true);  //游戏闲置阶段推送
@@ -63,6 +66,8 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonJackpotLotteryNotify: BaseData<S2CCommonJackpotLotteryNotify> = new BaseData<S2CCommonJackpotLotteryNotify>();  //jackpot推送
     Data_S2CCommonSqueezeRoundNotify: BaseData<S2CCommonSqueezeRoundNotify> = new BaseData<S2CCommonSqueezeRoundNotify>();  //搓牌推送
     Data_S2CCommonAutoOperatorNotify: BaseData<S2CCommonAutoOperatorNotify> = new BaseData<S2CCommonAutoOperatorNotify>();  //托管推送
+    Data_S2CCommonShowSelfCardNotify: BaseData<S2CCommonShowSelfCardNotify> = new BaseData<S2CCommonShowSelfCardNotify>();  //亮手牌推送
+
 
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_Refresh : BaseData<boolean> = new BaseData<boolean>(true);  //刷新场景
@@ -505,6 +510,9 @@ export abstract class GameData extends MultipleNotify
     public abstract ReplayDetailMsgId() : number
     public abstract AutoMsgId() : number
     public abstract PlayerStatisticMsgId() : number
+    public abstract OBSizeMsgId() : number
+    public abstract ShowSelfCardsMsgId() : number
+    
 }
 
 

@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { UIMgr } from '../../../base/UIMgr';
+import { NetworkSend } from '../../../network/NetworkSend';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Game_Menu } from './Game_Menu';
@@ -22,7 +23,6 @@ export class Game_TopUI extends BaseUI
     }
     BindUI() 
     {
-        
         this.mMenuBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ShowLayer("gamePage","prefab/Game_Menu",true,(_script)=>
@@ -40,8 +40,6 @@ export class Game_TopUI extends BaseUI
                 tempScript.InitWithData(this.mIndex);
             },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
-
-        
     }
     
     RegDataNotify() 
@@ -50,7 +48,6 @@ export class Game_TopUI extends BaseUI
     }
     LateInit() 
     {
-
     }
 
     CustmoerDestory() 
@@ -70,7 +67,24 @@ export class Game_TopUI extends BaseUI
 
     BindData()
     {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
 
+
+        gameData.Data_S2CCommonGetObSizeResp.AddListenner(this,(_data)=>
+        {
+            this.mObBtn.SetTitle(_data.obSize + "");
+        })
+
+        this.StartSecondsTimer(1000000,1,()=>
+        {
+            let seconds = this.GetRestSeconds();
+            if(seconds%30 == 0)
+            {
+                let msgID = gameData.OBSizeMsgId();
+                NetworkSend.Instance.GetObNum(msgID , gameStruct.mGameId);
+            }
+        })
     }
 }
 

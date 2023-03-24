@@ -17,7 +17,7 @@ export class Game_ProfileLayer extends BaseUI
     @property(Label) 
     mName: Label = null;
     @property(Label) 
-    mTotalGame: Label = null;
+    mThreeBet: Label = null;
     @property(Label) 
     mTotalHands: Label = null;
     @property(Label) 
@@ -95,23 +95,25 @@ export class Game_ProfileLayer extends BaseUI
             let record = _data.playerStatistic;
             this.mTotalHands.string = record.totalHands + "";
 
-            if(record.totalHands == 0 || record.totalFlopHands == 0)
+            if(record.totalHands == 0)
             {
-                this.mVPIP.string = "0";
+                this.ResetUI();
             }
             else
             {
-                this.mVPIP.string = (record.totalFlopHands / record.totalHands).toFixed(2) + "%";
+                this.mThreeBet.string = (100*record.totalPreFlopAgainRaiseCount/record.totalHands).toFixed(2) + "%";
+                this.mRaiseRate.string = (100*record.totalPreFlopRaiseCount/record.totalHands).toFixed(2) + "%";
+                this.mVPIP.string = (100*record.totalFlopHands / record.totalHands).toFixed(2) + "%";
             }
         });
     }
 
     ResetUI()
     {
-        this.mTotalGame.string = "--";
+        this.mThreeBet.string = "0%";
         this.mTotalHands.string = "0";
-        this.mVPIP.string = "0";
-        this.mRaiseRate.string = "--";
+        this.mVPIP.string = "0%";
+        this.mRaiseRate.string = "0%";
     }
 
 }

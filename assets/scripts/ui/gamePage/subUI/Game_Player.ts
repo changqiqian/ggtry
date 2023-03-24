@@ -90,12 +90,21 @@ export class Game_Player extends BaseUI
         this.mDealer.active = false;
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
-        this.mCards.active = false;
+        this.HideHandsCard();
         this.mSelfBtn.node.active = false;
         this.mConbination.active = false;
         this.mInsuranceBG.active = false;
         this.mGame_PlayerState.HideAll();
         this.StopSecondsTimer();
+    }
+
+    HideHandsCard()
+    {
+        this.mCards.active = false;
+        for(let i = 0 ; i < this.mCards.children.length ; i++)
+        {
+            this.mCards.children[i].active = false;
+        }
     }
 
     RegDataNotify() 
@@ -149,7 +158,7 @@ export class Game_Player extends BaseUI
             }
 
 
-            this.mCards.active = false;
+            this.HideHandsCard();
             this.mSelfBtn.node.active = false;
             this.mBG.active = true;
             this.UpdateName(playerInfo.nickName);
@@ -663,6 +672,31 @@ export class Game_Player extends BaseUI
             })
         })
 
+        gameData.Data_S2CCommonShowSelfCardNotify.AddListenner(this , (_data)=>
+        {
+            let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+            if(playerInfo == null)
+            {
+                return;
+            }
+
+            if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                return;
+            }
+
+            if(playerInfo.uid != _data.uid)
+            {
+                return;
+            }
+            if(_data.cardList != null && _data.cardList.length > 0)
+            {
+                this.ShowCards(_data.cardList,false);
+            }
+            
+        });
+
+
         LocalPlayerData.Instance.Data_BBModeSetting.AddListenner(this,(_data)=>
         {
             let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
@@ -732,7 +766,7 @@ export class Game_Player extends BaseUI
         this.mDealer.active = false;
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
-        this.mCards.active = false;
+        this.HideHandsCard();
         this.mConbination.active = false;
     }
 
@@ -944,7 +978,7 @@ export class Game_Player extends BaseUI
     {
         if(_cards == null || _cards.length == 0)
         {
-            this.mCards.active = false;
+            this.HideHandsCard();
             return;
         }
         this.ShowMiniCard(false , _replay);
@@ -967,6 +1001,7 @@ export class Game_Player extends BaseUI
         for(let i = 0 ; i < cardNodes.length ; i++)
         {
             let currentPoker = cardNodes[i].getComponent(Poker);
+            currentPoker.ShowFront();
             currentPoker.SetGary(true);
         }
     }

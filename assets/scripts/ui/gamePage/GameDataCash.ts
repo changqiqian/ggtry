@@ -87,5 +87,15 @@ export class GameDataCash extends GameData
         return MessageId.C2S_TexasCashGetPlayerStatistics;
     }
 
+
+    public OBSizeMsgId() : number
+    {
+        return MessageId.C2S_TexasCashGetObSize;
+    }
+    public ShowSelfCardsMsgId() : number
+    {
+        return MessageId.C2S_TexasCashShowSelfCard;
+    }
+
     
 }

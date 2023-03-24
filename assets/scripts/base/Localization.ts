@@ -475,7 +475,9 @@ export class Localization {
         { name: '00388', ch: '联系客服', en: 'Help' , korea :""},
         { name: '00389', ch: '站起围观', en: 'Stand up' , korea :""},
         { name: '00390', ch: '赢取', en: 'Win amout' , korea :""},
+        { name: '00391', ch: '3 Bet', en: '3 Bet' , korea :"3 Bet"},
         
+
         
         
         { name: '01000', ch: '公告', en: 'Notification' , korea :""},

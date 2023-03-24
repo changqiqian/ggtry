@@ -35,8 +35,8 @@ export class Game_SelfUI extends BaseUI
 
 
     mAlreadyShowCards : boolean = false;
-
     private mIndex : number = null;
+    mSelectedPoker : Array<boolean>;
     InitParam() 
     {
 
@@ -44,6 +44,7 @@ export class Game_SelfUI extends BaseUI
     BindUI() 
     {
         this.HideAllUI();
+        this.ResetShowCard();
         this.mGame_AddTime.SetCallback(()=>
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
@@ -55,7 +56,10 @@ export class Game_SelfUI extends BaseUI
         for(let i = 0 ; i < this.mCards.children.length ; i++)
         {
             let currentCard = this.mCards.children[i].getComponent(Poker);
-            currentCard.SetClickAble(this.ClickPoker.bind(this),i);
+            currentCard.SetClickAble((_selected , _index)=>
+            {
+                this.mSelectedPoker[_index] = _selected;
+            },i);
         }
     }
     RegDataNotify() 
@@ -87,6 +91,7 @@ export class Game_SelfUI extends BaseUI
         let gameData = gameStruct.mGameData;
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
+            this.ResetShowCard();
             this.UpdateUI();
             this.UpdateCombination();
         });
@@ -162,17 +167,26 @@ export class Game_SelfUI extends BaseUI
 
         gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
         {
-            //this.HideAllUI();
+            let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+            if(selfPlayer == null)
+            {
+                return
+            }
+
+            let needShow = false;
+            for(let h = 0 ; h < this.mSelectedPoker.length ; h++)
+            {
+                if(this.mSelectedPoker[h] ==  true)
+                {
+                    needShow = true;
+                    break;
+                }
+            }
+            
+            let winLoseInfos = _data.result;
+            let index = winLoseInfos.findIndex((_item) => _item.uid === selfPlayer.uid);
             if(this.mAlreadyShowCards == false)
             {
-                let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-                if(selfPlayer == null)
-                {
-                    return
-                }
-
-                let winLoseInfos = _data.result;
-                let index = winLoseInfos.findIndex((_item) => _item.uid === selfPlayer.uid);
                 if(index < 0)
                 {
                     return;
@@ -183,6 +197,32 @@ export class Game_SelfUI extends BaseUI
                     this.ShowCard(k , selfPlayer.cards[k] );
                 }
             }
+
+            if(needShow)
+            {
+                let cardNodes = this.mCards.children;
+                let showCards = new Array<CardInfo>();
+
+                for(let g = 0 ; g < cardNodes.length ; g++)
+                {
+                    if(this.mSelectedPoker[g] ==  true)
+                    {
+                        showCards.push(selfPlayer.cards[g]);
+                        let currentPoker = cardNodes[g].getComponent(Poker);
+                        currentPoker.SetFrontByCardInfo(selfPlayer.cards[g]);
+                        currentPoker.ShowBack();
+                        currentPoker.FlipToFront();
+                    }
+                }
+      
+                if(showCards.length != 0)
+                {
+                    let msgId = gameData.ShowSelfCardsMsgId();
+                    NetworkSend.Instance.ShowSelfCards(msgId,gameStruct.mGameId ,showCards );
+                }
+            }
+
+            this.ResetShowCard();
         })
 
         gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
@@ -213,6 +253,22 @@ export class Game_SelfUI extends BaseUI
         this.mConbinationBG.active = false;
         this.mMoney.string = "";
         this.mAlreadyShowCards = false;
+    }
+
+    ResetShowCard()
+    {
+        if(this.mSelectedPoker == null)
+        {
+            this.mSelectedPoker = new Array<boolean>();
+            this.mSelectedPoker.push(false);
+            this.mSelectedPoker.push(false);
+            this.mSelectedPoker.push(false);
+            this.mSelectedPoker.push(false);
+        }
+        for(let i = 0 ; i < this.mSelectedPoker.length ; i++)
+        {
+            this.mSelectedPoker[i] = false;
+        }
     }
 
     CleanTable()
@@ -471,7 +527,6 @@ export class Game_SelfUI extends BaseUI
             }
         }
 
-        
         for(let k = 0 ; k < cards.length ; k++)
         {
             this.ShowCard(k , cards[k] );
@@ -480,7 +535,7 @@ export class Game_SelfUI extends BaseUI
 
     ClickPoker(_index : number)
     {
-
+        
     }
 
     UpdateFold()

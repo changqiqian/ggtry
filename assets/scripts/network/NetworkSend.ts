@@ -428,32 +428,33 @@ export class NetworkSend extends Singleton<NetworkSend>()
 
     public SendExtraThinkingTime(_msgId : number,_gameId : string)
     {
-        let msg = new C2STexasCashExtraThink();
+        let msg = new C2SExtraThink();
         msg.gameId = _gameId;
-        Network.Instance.SendMsg(_msgId , C2STexasCashExtraThink.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2SExtraThink.encode(msg).finish());
         console.log("申请思考时间  === " + JSON.stringify(msg))
     }
 
 
     public SendCuoPaiStart(_msgId : number,_gameId : string)
     {
-        let msg = new C2STexasCashSqueezeStart();
+        let msg = new C2SSqueezeStart();
         msg.gameId = _gameId;
-        Network.Instance.SendMsg(_msgId , C2STexasCashSqueezeStart.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2SSqueezeStart.encode(msg).finish());
         console.log("申请开始搓牌  === " + JSON.stringify(msg))
     }
 
 
     public SendCuoPaiEnd(_msgId : number,_gameId : string)
     {
-        let msg = new C2STexasCashSqueezeFinish();
+        let msg = new C2SSqueezeFinish();
         msg.gameId = _gameId;
-        Network.Instance.SendMsg(_msgId , C2STexasCashSqueezeFinish.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2SSqueezeFinish.encode(msg).finish());
         console.log("申请搓牌结束  === " + JSON.stringify(msg))
     }
 
     public GetObList(_msgId : number ,_gameId : string , _page : number , _pageSize : number)
     {
+        
         UIMgr.Instance.ShowLoading(true);
         let msg = new C2SGetObList();
         msg.gameId = _gameId;
@@ -463,12 +464,30 @@ export class NetworkSend extends Singleton<NetworkSend>()
         console.log("获取观看者列表  === " + JSON.stringify(msg))
     }
 
+    public GetObNum(_msgId : number ,_gameId : string )
+    {
+        let msg = new C2SGetObSize();
+        msg.gameId = _gameId;
+        Network.Instance.SendMsg(_msgId , C2SGetObSize.encode(msg).finish());
+        console.log("获取观看者列表数量  === " + JSON.stringify(msg))
+    }
+
+    public ShowSelfCards(_msgId : number ,_gameId : string , _cards : Array<CardInfo> )
+    {
+        let msg = new C2SShowSelfCard();
+        msg.gameId = _gameId;
+        msg.cardList = _cards;
+        Network.Instance.SendMsg(_msgId , C2SShowSelfCard.encode(msg).finish());
+        console.log("公开自己的手牌  === " + JSON.stringify(msg))
+    }
+
+
     public AutoState(_msgId : number ,_gameId : string )
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new C2STexasCashCancelAutoOperator();
+        let msg = new C2SCancelAutoOperator();
         msg.gameId = _gameId;
-        Network.Instance.SendMsg(_msgId , C2STexasCashCancelAutoOperator.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2SCancelAutoOperator.encode(msg).finish());
         console.log("托管状态申请  === " + JSON.stringify(msg))
     }
 
@@ -484,40 +503,40 @@ export class NetworkSend extends Singleton<NetworkSend>()
     public GetRecordPlayerList(_msgId : number ,_gameId : string)
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new C2STexasCashGetStatistics();
+        let msg = new C2SGetStatistics();
         msg.gameId = _gameId;
-        Network.Instance.SendMsg(_msgId , C2STexasCashGetStatistics.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2SGetStatistics.encode(msg).finish());
         console.log("获取买入列表  === " + JSON.stringify(msg))
     }
     
     public GetReplayList(_msgId : number ,_gameId : string , _page : number , _pageSize : number) 
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new C2STexasCashSimpleReplay();
+        let msg = new C2SSimpleReplay();
         msg.gameId = _gameId;
         msg.page = _page;
         msg.pageSize = _pageSize;
-        Network.Instance.SendMsg(_msgId , C2STexasCashSimpleReplay.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2SSimpleReplay.encode(msg).finish());
         console.log("获取游戏实时手牌列表  === " + JSON.stringify(msg))
     }
 
     public GetPlaterStatistic(_msgId : number ,_gameId : string , _uid : string)
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new C2STexasCashGetPlayerStatistics();
+        let msg = new C2SGetPlayerStatistics();
         msg.gameId = _gameId;
         msg.uid = _uid;
-        Network.Instance.SendMsg(_msgId , C2STexasCashGetPlayerStatistics.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2SGetPlayerStatistics.encode(msg).finish());
         console.log("获取玩家静态数据  === " + JSON.stringify(msg))
     }
 
     public GetReplayDetail(_msgId : number ,_gameId : string , _index : number ) 
     {
         UIMgr.Instance.ShowLoading(true);
-        let msg = new C2STexasCashDetailReplay();
+        let msg = new C2SDetailReplay();
         msg.gameId = _gameId;
         msg.index = _index;
-        Network.Instance.SendMsg(_msgId , C2STexasCashDetailReplay.encode(msg).finish());
+        Network.Instance.SendMsg(_msgId , C2SDetailReplay.encode(msg).finish());
         console.log("获取实时牌局回放诗句  === " + JSON.stringify(msg))
     }
 

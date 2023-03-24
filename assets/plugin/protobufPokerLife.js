@@ -5654,6 +5654,8 @@ $root.PlayerInfo = (function() {
      * @property {boolean|null} [fold] PlayerInfo fold
      * @property {number|null} [autoLeftTime] PlayerInfo autoLeftTime
      * @property {boolean|null} [auto] PlayerInfo auto
+     * @property {number|null} [totalHands] PlayerInfo totalHands
+     * @property {number|null} [totalFlopHands] PlayerInfo totalFlopHands
      */
 
     /**
@@ -5777,6 +5779,22 @@ $root.PlayerInfo = (function() {
     PlayerInfo.prototype.auto = false;
 
     /**
+     * PlayerInfo totalHands.
+     * @member {number} totalHands
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.totalHands = 0;
+
+    /**
+     * PlayerInfo totalFlopHands.
+     * @member {number} totalFlopHands
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.totalFlopHands = 0;
+
+    /**
      * Encodes the specified PlayerInfo message. Does not implicitly {@link PlayerInfo.verify|verify} messages.
      * @function encode
      * @memberof PlayerInfo
@@ -5816,6 +5834,10 @@ $root.PlayerInfo = (function() {
             w.uint32(96).int64(m.autoLeftTime);
         if (m.auto != null && Object.hasOwnProperty.call(m, "auto"))
             w.uint32(104).bool(m.auto);
+        if (m.totalHands != null && Object.hasOwnProperty.call(m, "totalHands"))
+            w.uint32(112).int32(m.totalHands);
+        if (m.totalFlopHands != null && Object.hasOwnProperty.call(m, "totalFlopHands"))
+            w.uint32(120).int32(m.totalFlopHands);
         return w;
     };
 
@@ -5877,6 +5899,12 @@ $root.PlayerInfo = (function() {
                 break;
             case 13:
                 m.auto = r.bool();
+                break;
+            case 14:
+                m.totalHands = r.int32();
+                break;
+            case 15:
+                m.totalFlopHands = r.int32();
                 break;
             default:
                 r.skipType(t & 7);
@@ -7244,6 +7272,8 @@ $root.PlayerStatistic = (function() {
      * @property {string|null} [name] PlayerStatistic name
      * @property {number|null} [totalHands] PlayerStatistic totalHands
      * @property {number|null} [totalFlopHands] PlayerStatistic totalFlopHands
+     * @property {number|null} [totalPreFlopRaiseCount] PlayerStatistic totalPreFlopRaiseCount
+     * @property {number|null} [totalPreFlopAgainRaiseCount] PlayerStatistic totalPreFlopAgainRaiseCount
      * @property {number|null} [totalBringIn] PlayerStatistic totalBringIn
      * @property {number|null} [totalBringOut] PlayerStatistic totalBringOut
      * @property {number|null} [winLose] PlayerStatistic winLose
@@ -7305,6 +7335,22 @@ $root.PlayerStatistic = (function() {
     PlayerStatistic.prototype.totalFlopHands = 0;
 
     /**
+     * PlayerStatistic totalPreFlopRaiseCount.
+     * @member {number} totalPreFlopRaiseCount
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalPreFlopRaiseCount = 0;
+
+    /**
+     * PlayerStatistic totalPreFlopAgainRaiseCount.
+     * @member {number} totalPreFlopAgainRaiseCount
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalPreFlopAgainRaiseCount = 0;
+
+    /**
      * PlayerStatistic totalBringIn.
      * @member {number} totalBringIn
      * @memberof PlayerStatistic
@@ -7350,12 +7396,16 @@ $root.PlayerStatistic = (function() {
             w.uint32(32).int32(m.totalHands);
         if (m.totalFlopHands != null && Object.hasOwnProperty.call(m, "totalFlopHands"))
             w.uint32(40).int32(m.totalFlopHands);
+        if (m.totalPreFlopRaiseCount != null && Object.hasOwnProperty.call(m, "totalPreFlopRaiseCount"))
+            w.uint32(48).int32(m.totalPreFlopRaiseCount);
+        if (m.totalPreFlopAgainRaiseCount != null && Object.hasOwnProperty.call(m, "totalPreFlopAgainRaiseCount"))
+            w.uint32(56).int32(m.totalPreFlopAgainRaiseCount);
         if (m.totalBringIn != null && Object.hasOwnProperty.call(m, "totalBringIn"))
-            w.uint32(48).int64(m.totalBringIn);
+            w.uint32(64).int64(m.totalBringIn);
         if (m.totalBringOut != null && Object.hasOwnProperty.call(m, "totalBringOut"))
-            w.uint32(56).int64(m.totalBringOut);
+            w.uint32(72).int64(m.totalBringOut);
         if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(64).int64(m.winLose);
+            w.uint32(80).int64(m.winLose);
         return w;
     };
 
@@ -7393,12 +7443,18 @@ $root.PlayerStatistic = (function() {
                 m.totalFlopHands = r.int32();
                 break;
             case 6:
-                m.totalBringIn = r.int64();
+                m.totalPreFlopRaiseCount = r.int32();
                 break;
             case 7:
-                m.totalBringOut = r.int64();
+                m.totalPreFlopAgainRaiseCount = r.int32();
                 break;
             case 8:
+                m.totalBringIn = r.int64();
+                break;
+            case 9:
+                m.totalBringOut = r.int64();
+                break;
+            case 10:
                 m.winLose = r.int64();
                 break;
             default:
@@ -8649,17 +8705,19 @@ $root.RecordDetail = (function() {
  * @property {number} C2S_TexasCashBuyInsurance=5010 C2S_TexasCashBuyInsurance value
  * @property {number} C2S_TexasCashChat=5011 C2S_TexasCashChat value
  * @property {number} C2S_TexasCashGetObList=5012 C2S_TexasCashGetObList value
- * @property {number} C2S_TexasCashGetBringInList=5013 C2S_TexasCashGetBringInList value
- * @property {number} C2S_TexasCashExaminePublicCard=5014 C2S_TexasCashExaminePublicCard value
- * @property {number} C2S_TexasCashExaminePrivateCard=5015 C2S_TexasCashExaminePrivateCard value
- * @property {number} C2S_TexasCashExtraThink=5016 C2S_TexasCashExtraThink value
- * @property {number} C2S_TexasCashSqueezeStart=5017 C2S_TexasCashSqueezeStart value
- * @property {number} C2S_TexasCashSqueezeFinish=5018 C2S_TexasCashSqueezeFinish value
- * @property {number} C2S_TexasCashGetStatistics=5019 C2S_TexasCashGetStatistics value
- * @property {number} C2S_TexasCashSimpleReplay=5020 C2S_TexasCashSimpleReplay value
- * @property {number} C2S_TexasCashDetailReplay=5021 C2S_TexasCashDetailReplay value
- * @property {number} C2S_TexasCashCancelAutoOperator=5022 C2S_TexasCashCancelAutoOperator value
- * @property {number} C2S_TexasCashGetPlayerStatistics=5023 C2S_TexasCashGetPlayerStatistics value
+ * @property {number} C2S_TexasCashGetObSize=5013 C2S_TexasCashGetObSize value
+ * @property {number} C2S_TexasCashGetBringInList=5014 C2S_TexasCashGetBringInList value
+ * @property {number} C2S_TexasCashExaminePublicCard=5015 C2S_TexasCashExaminePublicCard value
+ * @property {number} C2S_TexasCashExaminePrivateCard=5016 C2S_TexasCashExaminePrivateCard value
+ * @property {number} C2S_TexasCashShowSelfCard=5017 C2S_TexasCashShowSelfCard value
+ * @property {number} C2S_TexasCashExtraThink=5018 C2S_TexasCashExtraThink value
+ * @property {number} C2S_TexasCashSqueezeStart=5019 C2S_TexasCashSqueezeStart value
+ * @property {number} C2S_TexasCashSqueezeFinish=5020 C2S_TexasCashSqueezeFinish value
+ * @property {number} C2S_TexasCashGetStatistics=5021 C2S_TexasCashGetStatistics value
+ * @property {number} C2S_TexasCashSimpleReplay=5022 C2S_TexasCashSimpleReplay value
+ * @property {number} C2S_TexasCashDetailReplay=5023 C2S_TexasCashDetailReplay value
+ * @property {number} C2S_TexasCashCancelAutoOperator=5024 C2S_TexasCashCancelAutoOperator value
+ * @property {number} C2S_TexasCashGetPlayerStatistics=5025 C2S_TexasCashGetPlayerStatistics value
  * @property {number} MSG_TexasCashEnd=5500 MSG_TexasCashEnd value
  * @property {number} MSG_TexasMttBegin=5501 MSG_TexasMttBegin value
  * @property {number} MSG_TexasMttEnd=6000 MSG_TexasMttEnd value
@@ -8681,18 +8739,20 @@ $root.RecordDetail = (function() {
  * @property {number} S2C_CommonBuyInsuranceResp=8008 S2C_CommonBuyInsuranceResp value
  * @property {number} S2C_CommonChatResp=8009 S2C_CommonChatResp value
  * @property {number} S2C_CommonGetObListResp=8010 S2C_CommonGetObListResp value
- * @property {number} S2C_CommonGetBringInListResp=8011 S2C_CommonGetBringInListResp value
- * @property {number} S2C_CommonRefreshResp=8012 S2C_CommonRefreshResp value
- * @property {number} S2C_CommonExaminePublicCardResp=8013 S2C_CommonExaminePublicCardResp value
- * @property {number} S2C_CommonExaminePrivateCardResp=8014 S2C_CommonExaminePrivateCardResp value
- * @property {number} S2C_CommonExtraThinkResp=8015 S2C_CommonExtraThinkResp value
- * @property {number} S2C_CommonSqueezeStartResp=8016 S2C_CommonSqueezeStartResp value
- * @property {number} S2C_CommonSqueezeFinishResp=8017 S2C_CommonSqueezeFinishResp value
- * @property {number} S2C_CommonGetStatisticsResp=8018 S2C_CommonGetStatisticsResp value
- * @property {number} S2C_CommonSimpleReplayResp=8019 S2C_CommonSimpleReplayResp value
- * @property {number} S2C_CommonDetailReplayResp=8020 S2C_CommonDetailReplayResp value
- * @property {number} S2C_CommonCancelAutoOperatorResp=8021 S2C_CommonCancelAutoOperatorResp value
- * @property {number} S2C_CommonGetPlayerStatisticsResp=8022 S2C_CommonGetPlayerStatisticsResp value
+ * @property {number} S2C_CommonGetObSizeResp=8011 S2C_CommonGetObSizeResp value
+ * @property {number} S2C_CommonGetBringInListResp=8012 S2C_CommonGetBringInListResp value
+ * @property {number} S2C_CommonRefreshResp=8013 S2C_CommonRefreshResp value
+ * @property {number} S2C_CommonExaminePublicCardResp=8014 S2C_CommonExaminePublicCardResp value
+ * @property {number} S2C_CommonExaminePrivateCardResp=8015 S2C_CommonExaminePrivateCardResp value
+ * @property {number} S2C_CommonShowSelfCardResp=8016 S2C_CommonShowSelfCardResp value
+ * @property {number} S2C_CommonExtraThinkResp=8017 S2C_CommonExtraThinkResp value
+ * @property {number} S2C_CommonSqueezeStartResp=8018 S2C_CommonSqueezeStartResp value
+ * @property {number} S2C_CommonSqueezeFinishResp=8019 S2C_CommonSqueezeFinishResp value
+ * @property {number} S2C_CommonGetStatisticsResp=8020 S2C_CommonGetStatisticsResp value
+ * @property {number} S2C_CommonSimpleReplayResp=8021 S2C_CommonSimpleReplayResp value
+ * @property {number} S2C_CommonDetailReplayResp=8022 S2C_CommonDetailReplayResp value
+ * @property {number} S2C_CommonCancelAutoOperatorResp=8023 S2C_CommonCancelAutoOperatorResp value
+ * @property {number} S2C_CommonGetPlayerStatisticsResp=8024 S2C_CommonGetPlayerStatisticsResp value
  * @property {number} S2C_CommonBringInTimerNotify=8110 S2C_CommonBringInTimerNotify value
  * @property {number} S2C_CommonBringInNotify=8111 S2C_CommonBringInNotify value
  * @property {number} S2C_CommonSitDownNotify=8112 S2C_CommonSitDownNotify value
@@ -8718,6 +8778,7 @@ $root.RecordDetail = (function() {
  * @property {number} S2C_CommonJackpotLotteryNotify=8267 S2C_CommonJackpotLotteryNotify value
  * @property {number} S2C_CommonSqueezeRoundNotify=8268 S2C_CommonSqueezeRoundNotify value
  * @property {number} S2C_CommonAutoOperatorNotify=8269 S2C_CommonAutoOperatorNotify value
+ * @property {number} S2C_CommonShowSelfCardNotify=8270 S2C_CommonShowSelfCardNotify value
  * @property {number} MSG_TexasCowboyBegin=10001 MSG_TexasCowboyBegin value
  * @property {number} C2S_TexasCowboyEnterGame=10002 C2S_TexasCowboyEnterGame value
  * @property {number} C2S_TexasCowboyExitGame=10003 C2S_TexasCowboyExitGame value
@@ -8756,17 +8817,19 @@ $root.MessageId = (function() {
     values[valuesById[5010] = "C2S_TexasCashBuyInsurance"] = 5010;
     values[valuesById[5011] = "C2S_TexasCashChat"] = 5011;
     values[valuesById[5012] = "C2S_TexasCashGetObList"] = 5012;
-    values[valuesById[5013] = "C2S_TexasCashGetBringInList"] = 5013;
-    values[valuesById[5014] = "C2S_TexasCashExaminePublicCard"] = 5014;
-    values[valuesById[5015] = "C2S_TexasCashExaminePrivateCard"] = 5015;
-    values[valuesById[5016] = "C2S_TexasCashExtraThink"] = 5016;
-    values[valuesById[5017] = "C2S_TexasCashSqueezeStart"] = 5017;
-    values[valuesById[5018] = "C2S_TexasCashSqueezeFinish"] = 5018;
-    values[valuesById[5019] = "C2S_TexasCashGetStatistics"] = 5019;
-    values[valuesById[5020] = "C2S_TexasCashSimpleReplay"] = 5020;
-    values[valuesById[5021] = "C2S_TexasCashDetailReplay"] = 5021;
-    values[valuesById[5022] = "C2S_TexasCashCancelAutoOperator"] = 5022;
-    values[valuesById[5023] = "C2S_TexasCashGetPlayerStatistics"] = 5023;
+    values[valuesById[5013] = "C2S_TexasCashGetObSize"] = 5013;
+    values[valuesById[5014] = "C2S_TexasCashGetBringInList"] = 5014;
+    values[valuesById[5015] = "C2S_TexasCashExaminePublicCard"] = 5015;
+    values[valuesById[5016] = "C2S_TexasCashExaminePrivateCard"] = 5016;
+    values[valuesById[5017] = "C2S_TexasCashShowSelfCard"] = 5017;
+    values[valuesById[5018] = "C2S_TexasCashExtraThink"] = 5018;
+    values[valuesById[5019] = "C2S_TexasCashSqueezeStart"] = 5019;
+    values[valuesById[5020] = "C2S_TexasCashSqueezeFinish"] = 5020;
+    values[valuesById[5021] = "C2S_TexasCashGetStatistics"] = 5021;
+    values[valuesById[5022] = "C2S_TexasCashSimpleReplay"] = 5022;
+    values[valuesById[5023] = "C2S_TexasCashDetailReplay"] = 5023;
+    values[valuesById[5024] = "C2S_TexasCashCancelAutoOperator"] = 5024;
+    values[valuesById[5025] = "C2S_TexasCashGetPlayerStatistics"] = 5025;
     values[valuesById[5500] = "MSG_TexasCashEnd"] = 5500;
     values[valuesById[5501] = "MSG_TexasMttBegin"] = 5501;
     values[valuesById[6000] = "MSG_TexasMttEnd"] = 6000;
@@ -8788,18 +8851,20 @@ $root.MessageId = (function() {
     values[valuesById[8008] = "S2C_CommonBuyInsuranceResp"] = 8008;
     values[valuesById[8009] = "S2C_CommonChatResp"] = 8009;
     values[valuesById[8010] = "S2C_CommonGetObListResp"] = 8010;
-    values[valuesById[8011] = "S2C_CommonGetBringInListResp"] = 8011;
-    values[valuesById[8012] = "S2C_CommonRefreshResp"] = 8012;
-    values[valuesById[8013] = "S2C_CommonExaminePublicCardResp"] = 8013;
-    values[valuesById[8014] = "S2C_CommonExaminePrivateCardResp"] = 8014;
-    values[valuesById[8015] = "S2C_CommonExtraThinkResp"] = 8015;
-    values[valuesById[8016] = "S2C_CommonSqueezeStartResp"] = 8016;
-    values[valuesById[8017] = "S2C_CommonSqueezeFinishResp"] = 8017;
-    values[valuesById[8018] = "S2C_CommonGetStatisticsResp"] = 8018;
-    values[valuesById[8019] = "S2C_CommonSimpleReplayResp"] = 8019;
-    values[valuesById[8020] = "S2C_CommonDetailReplayResp"] = 8020;
-    values[valuesById[8021] = "S2C_CommonCancelAutoOperatorResp"] = 8021;
-    values[valuesById[8022] = "S2C_CommonGetPlayerStatisticsResp"] = 8022;
+    values[valuesById[8011] = "S2C_CommonGetObSizeResp"] = 8011;
+    values[valuesById[8012] = "S2C_CommonGetBringInListResp"] = 8012;
+    values[valuesById[8013] = "S2C_CommonRefreshResp"] = 8013;
+    values[valuesById[8014] = "S2C_CommonExaminePublicCardResp"] = 8014;
+    values[valuesById[8015] = "S2C_CommonExaminePrivateCardResp"] = 8015;
+    values[valuesById[8016] = "S2C_CommonShowSelfCardResp"] = 8016;
+    values[valuesById[8017] = "S2C_CommonExtraThinkResp"] = 8017;
+    values[valuesById[8018] = "S2C_CommonSqueezeStartResp"] = 8018;
+    values[valuesById[8019] = "S2C_CommonSqueezeFinishResp"] = 8019;
+    values[valuesById[8020] = "S2C_CommonGetStatisticsResp"] = 8020;
+    values[valuesById[8021] = "S2C_CommonSimpleReplayResp"] = 8021;
+    values[valuesById[8022] = "S2C_CommonDetailReplayResp"] = 8022;
+    values[valuesById[8023] = "S2C_CommonCancelAutoOperatorResp"] = 8023;
+    values[valuesById[8024] = "S2C_CommonGetPlayerStatisticsResp"] = 8024;
     values[valuesById[8110] = "S2C_CommonBringInTimerNotify"] = 8110;
     values[valuesById[8111] = "S2C_CommonBringInNotify"] = 8111;
     values[valuesById[8112] = "S2C_CommonSitDownNotify"] = 8112;
@@ -8825,6 +8890,7 @@ $root.MessageId = (function() {
     values[valuesById[8267] = "S2C_CommonJackpotLotteryNotify"] = 8267;
     values[valuesById[8268] = "S2C_CommonSqueezeRoundNotify"] = 8268;
     values[valuesById[8269] = "S2C_CommonAutoOperatorNotify"] = 8269;
+    values[valuesById[8270] = "S2C_CommonShowSelfCardNotify"] = 8270;
     values[valuesById[10001] = "MSG_TexasCowboyBegin"] = 10001;
     values[valuesById[10002] = "C2S_TexasCowboyEnterGame"] = 10002;
     values[valuesById[10003] = "C2S_TexasCowboyExitGame"] = 10003;
@@ -9836,6 +9902,87 @@ $root.C2SGetObList = (function() {
     return C2SGetObList;
 })();
 
+$root.C2SGetObSize = (function() {
+
+    /**
+     * Properties of a C2SGetObSize.
+     * @exports IC2SGetObSize
+     * @interface IC2SGetObSize
+     * @property {string|null} [gameId] C2SGetObSize gameId
+     */
+
+    /**
+     * Constructs a new C2SGetObSize.
+     * @exports C2SGetObSize
+     * @classdesc Represents a C2SGetObSize.
+     * @implements IC2SGetObSize
+     * @constructor
+     * @param {IC2SGetObSize=} [p] Properties to set
+     */
+    function C2SGetObSize(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2SGetObSize gameId.
+     * @member {string} gameId
+     * @memberof C2SGetObSize
+     * @instance
+     */
+    C2SGetObSize.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2SGetObSize message. Does not implicitly {@link C2SGetObSize.verify|verify} messages.
+     * @function encode
+     * @memberof C2SGetObSize
+     * @static
+     * @param {IC2SGetObSize} m C2SGetObSize message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2SGetObSize.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        return w;
+    };
+
+    /**
+     * Decodes a C2SGetObSize message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2SGetObSize
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2SGetObSize} C2SGetObSize
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2SGetObSize.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetObSize();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2SGetObSize;
+})();
+
 $root.CS2GetBringInList = (function() {
 
     /**
@@ -10188,24 +10335,26 @@ $root.C2SExaminePrivateCard = (function() {
     return C2SExaminePrivateCard;
 })();
 
-$root.C2STexasCashExtraThink = (function() {
+$root.C2SShowSelfCard = (function() {
 
     /**
-     * Properties of a C2STexasCashExtraThink.
-     * @exports IC2STexasCashExtraThink
-     * @interface IC2STexasCashExtraThink
-     * @property {string|null} [gameId] C2STexasCashExtraThink gameId
+     * Properties of a C2SShowSelfCard.
+     * @exports IC2SShowSelfCard
+     * @interface IC2SShowSelfCard
+     * @property {string|null} [gameId] C2SShowSelfCard gameId
+     * @property {Array.<ICardInfo>|null} [cardList] C2SShowSelfCard cardList
      */
 
     /**
-     * Constructs a new C2STexasCashExtraThink.
-     * @exports C2STexasCashExtraThink
-     * @classdesc Represents a C2STexasCashExtraThink.
-     * @implements IC2STexasCashExtraThink
+     * Constructs a new C2SShowSelfCard.
+     * @exports C2SShowSelfCard
+     * @classdesc Represents a C2SShowSelfCard.
+     * @implements IC2SShowSelfCard
      * @constructor
-     * @param {IC2STexasCashExtraThink=} [p] Properties to set
+     * @param {IC2SShowSelfCard=} [p] Properties to set
      */
-    function C2STexasCashExtraThink(p) {
+    function C2SShowSelfCard(p) {
+        this.cardList = [];
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -10213,23 +10362,121 @@ $root.C2STexasCashExtraThink = (function() {
     }
 
     /**
-     * C2STexasCashExtraThink gameId.
+     * C2SShowSelfCard gameId.
      * @member {string} gameId
-     * @memberof C2STexasCashExtraThink
+     * @memberof C2SShowSelfCard
      * @instance
      */
-    C2STexasCashExtraThink.prototype.gameId = "";
+    C2SShowSelfCard.prototype.gameId = "";
 
     /**
-     * Encodes the specified C2STexasCashExtraThink message. Does not implicitly {@link C2STexasCashExtraThink.verify|verify} messages.
+     * C2SShowSelfCard cardList.
+     * @member {Array.<ICardInfo>} cardList
+     * @memberof C2SShowSelfCard
+     * @instance
+     */
+    C2SShowSelfCard.prototype.cardList = $util.emptyArray;
+
+    /**
+     * Encodes the specified C2SShowSelfCard message. Does not implicitly {@link C2SShowSelfCard.verify|verify} messages.
      * @function encode
-     * @memberof C2STexasCashExtraThink
+     * @memberof C2SShowSelfCard
      * @static
-     * @param {IC2STexasCashExtraThink} m C2STexasCashExtraThink message or plain object to encode
+     * @param {IC2SShowSelfCard} m C2SShowSelfCard message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    C2STexasCashExtraThink.encode = function encode(m, w) {
+    C2SShowSelfCard.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.cardList != null && m.cardList.length) {
+            for (var i = 0; i < m.cardList.length; ++i)
+                $root.CardInfo.encode(m.cardList[i], w.uint32(26).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a C2SShowSelfCard message from the specified reader or buffer.
+     * @function decode
+     * @memberof C2SShowSelfCard
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {C2SShowSelfCard} C2SShowSelfCard
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    C2SShowSelfCard.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SShowSelfCard();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 3:
+                if (!(m.cardList && m.cardList.length))
+                    m.cardList = [];
+                m.cardList.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return C2SShowSelfCard;
+})();
+
+$root.C2SExtraThink = (function() {
+
+    /**
+     * Properties of a C2SExtraThink.
+     * @exports IC2SExtraThink
+     * @interface IC2SExtraThink
+     * @property {string|null} [gameId] C2SExtraThink gameId
+     */
+
+    /**
+     * Constructs a new C2SExtraThink.
+     * @exports C2SExtraThink
+     * @classdesc Represents a C2SExtraThink.
+     * @implements IC2SExtraThink
+     * @constructor
+     * @param {IC2SExtraThink=} [p] Properties to set
+     */
+    function C2SExtraThink(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * C2SExtraThink gameId.
+     * @member {string} gameId
+     * @memberof C2SExtraThink
+     * @instance
+     */
+    C2SExtraThink.prototype.gameId = "";
+
+    /**
+     * Encodes the specified C2SExtraThink message. Does not implicitly {@link C2SExtraThink.verify|verify} messages.
+     * @function encode
+     * @memberof C2SExtraThink
+     * @static
+     * @param {IC2SExtraThink} m C2SExtraThink message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    C2SExtraThink.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -10238,20 +10485,20 @@ $root.C2STexasCashExtraThink = (function() {
     };
 
     /**
-     * Decodes a C2STexasCashExtraThink message from the specified reader or buffer.
+     * Decodes a C2SExtraThink message from the specified reader or buffer.
      * @function decode
-     * @memberof C2STexasCashExtraThink
+     * @memberof C2SExtraThink
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCashExtraThink} C2STexasCashExtraThink
+     * @returns {C2SExtraThink} C2SExtraThink
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    C2STexasCashExtraThink.decode = function decode(r, l) {
+    C2SExtraThink.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashExtraThink();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SExtraThink();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -10266,27 +10513,27 @@ $root.C2STexasCashExtraThink = (function() {
         return m;
     };
 
-    return C2STexasCashExtraThink;
+    return C2SExtraThink;
 })();
 
-$root.C2STexasCashSqueezeStart = (function() {
+$root.C2SSqueezeStart = (function() {
 
     /**
-     * Properties of a C2STexasCashSqueezeStart.
-     * @exports IC2STexasCashSqueezeStart
-     * @interface IC2STexasCashSqueezeStart
-     * @property {string|null} [gameId] C2STexasCashSqueezeStart gameId
+     * Properties of a C2SSqueezeStart.
+     * @exports IC2SSqueezeStart
+     * @interface IC2SSqueezeStart
+     * @property {string|null} [gameId] C2SSqueezeStart gameId
      */
 
     /**
-     * Constructs a new C2STexasCashSqueezeStart.
-     * @exports C2STexasCashSqueezeStart
-     * @classdesc Represents a C2STexasCashSqueezeStart.
-     * @implements IC2STexasCashSqueezeStart
+     * Constructs a new C2SSqueezeStart.
+     * @exports C2SSqueezeStart
+     * @classdesc Represents a C2SSqueezeStart.
+     * @implements IC2SSqueezeStart
      * @constructor
-     * @param {IC2STexasCashSqueezeStart=} [p] Properties to set
+     * @param {IC2SSqueezeStart=} [p] Properties to set
      */
-    function C2STexasCashSqueezeStart(p) {
+    function C2SSqueezeStart(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -10294,23 +10541,23 @@ $root.C2STexasCashSqueezeStart = (function() {
     }
 
     /**
-     * C2STexasCashSqueezeStart gameId.
+     * C2SSqueezeStart gameId.
      * @member {string} gameId
-     * @memberof C2STexasCashSqueezeStart
+     * @memberof C2SSqueezeStart
      * @instance
      */
-    C2STexasCashSqueezeStart.prototype.gameId = "";
+    C2SSqueezeStart.prototype.gameId = "";
 
     /**
-     * Encodes the specified C2STexasCashSqueezeStart message. Does not implicitly {@link C2STexasCashSqueezeStart.verify|verify} messages.
+     * Encodes the specified C2SSqueezeStart message. Does not implicitly {@link C2SSqueezeStart.verify|verify} messages.
      * @function encode
-     * @memberof C2STexasCashSqueezeStart
+     * @memberof C2SSqueezeStart
      * @static
-     * @param {IC2STexasCashSqueezeStart} m C2STexasCashSqueezeStart message or plain object to encode
+     * @param {IC2SSqueezeStart} m C2SSqueezeStart message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    C2STexasCashSqueezeStart.encode = function encode(m, w) {
+    C2SSqueezeStart.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -10319,20 +10566,20 @@ $root.C2STexasCashSqueezeStart = (function() {
     };
 
     /**
-     * Decodes a C2STexasCashSqueezeStart message from the specified reader or buffer.
+     * Decodes a C2SSqueezeStart message from the specified reader or buffer.
      * @function decode
-     * @memberof C2STexasCashSqueezeStart
+     * @memberof C2SSqueezeStart
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCashSqueezeStart} C2STexasCashSqueezeStart
+     * @returns {C2SSqueezeStart} C2SSqueezeStart
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    C2STexasCashSqueezeStart.decode = function decode(r, l) {
+    C2SSqueezeStart.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashSqueezeStart();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SSqueezeStart();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -10347,27 +10594,27 @@ $root.C2STexasCashSqueezeStart = (function() {
         return m;
     };
 
-    return C2STexasCashSqueezeStart;
+    return C2SSqueezeStart;
 })();
 
-$root.C2STexasCashSqueezeFinish = (function() {
+$root.C2SSqueezeFinish = (function() {
 
     /**
-     * Properties of a C2STexasCashSqueezeFinish.
-     * @exports IC2STexasCashSqueezeFinish
-     * @interface IC2STexasCashSqueezeFinish
-     * @property {string|null} [gameId] C2STexasCashSqueezeFinish gameId
+     * Properties of a C2SSqueezeFinish.
+     * @exports IC2SSqueezeFinish
+     * @interface IC2SSqueezeFinish
+     * @property {string|null} [gameId] C2SSqueezeFinish gameId
      */
 
     /**
-     * Constructs a new C2STexasCashSqueezeFinish.
-     * @exports C2STexasCashSqueezeFinish
-     * @classdesc Represents a C2STexasCashSqueezeFinish.
-     * @implements IC2STexasCashSqueezeFinish
+     * Constructs a new C2SSqueezeFinish.
+     * @exports C2SSqueezeFinish
+     * @classdesc Represents a C2SSqueezeFinish.
+     * @implements IC2SSqueezeFinish
      * @constructor
-     * @param {IC2STexasCashSqueezeFinish=} [p] Properties to set
+     * @param {IC2SSqueezeFinish=} [p] Properties to set
      */
-    function C2STexasCashSqueezeFinish(p) {
+    function C2SSqueezeFinish(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -10375,23 +10622,23 @@ $root.C2STexasCashSqueezeFinish = (function() {
     }
 
     /**
-     * C2STexasCashSqueezeFinish gameId.
+     * C2SSqueezeFinish gameId.
      * @member {string} gameId
-     * @memberof C2STexasCashSqueezeFinish
+     * @memberof C2SSqueezeFinish
      * @instance
      */
-    C2STexasCashSqueezeFinish.prototype.gameId = "";
+    C2SSqueezeFinish.prototype.gameId = "";
 
     /**
-     * Encodes the specified C2STexasCashSqueezeFinish message. Does not implicitly {@link C2STexasCashSqueezeFinish.verify|verify} messages.
+     * Encodes the specified C2SSqueezeFinish message. Does not implicitly {@link C2SSqueezeFinish.verify|verify} messages.
      * @function encode
-     * @memberof C2STexasCashSqueezeFinish
+     * @memberof C2SSqueezeFinish
      * @static
-     * @param {IC2STexasCashSqueezeFinish} m C2STexasCashSqueezeFinish message or plain object to encode
+     * @param {IC2SSqueezeFinish} m C2SSqueezeFinish message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    C2STexasCashSqueezeFinish.encode = function encode(m, w) {
+    C2SSqueezeFinish.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -10400,20 +10647,20 @@ $root.C2STexasCashSqueezeFinish = (function() {
     };
 
     /**
-     * Decodes a C2STexasCashSqueezeFinish message from the specified reader or buffer.
+     * Decodes a C2SSqueezeFinish message from the specified reader or buffer.
      * @function decode
-     * @memberof C2STexasCashSqueezeFinish
+     * @memberof C2SSqueezeFinish
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCashSqueezeFinish} C2STexasCashSqueezeFinish
+     * @returns {C2SSqueezeFinish} C2SSqueezeFinish
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    C2STexasCashSqueezeFinish.decode = function decode(r, l) {
+    C2SSqueezeFinish.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashSqueezeFinish();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SSqueezeFinish();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -10428,27 +10675,27 @@ $root.C2STexasCashSqueezeFinish = (function() {
         return m;
     };
 
-    return C2STexasCashSqueezeFinish;
+    return C2SSqueezeFinish;
 })();
 
-$root.C2STexasCashGetStatistics = (function() {
+$root.C2SGetStatistics = (function() {
 
     /**
-     * Properties of a C2STexasCashGetStatistics.
-     * @exports IC2STexasCashGetStatistics
-     * @interface IC2STexasCashGetStatistics
-     * @property {string|null} [gameId] C2STexasCashGetStatistics gameId
+     * Properties of a C2SGetStatistics.
+     * @exports IC2SGetStatistics
+     * @interface IC2SGetStatistics
+     * @property {string|null} [gameId] C2SGetStatistics gameId
      */
 
     /**
-     * Constructs a new C2STexasCashGetStatistics.
-     * @exports C2STexasCashGetStatistics
-     * @classdesc Represents a C2STexasCashGetStatistics.
-     * @implements IC2STexasCashGetStatistics
+     * Constructs a new C2SGetStatistics.
+     * @exports C2SGetStatistics
+     * @classdesc Represents a C2SGetStatistics.
+     * @implements IC2SGetStatistics
      * @constructor
-     * @param {IC2STexasCashGetStatistics=} [p] Properties to set
+     * @param {IC2SGetStatistics=} [p] Properties to set
      */
-    function C2STexasCashGetStatistics(p) {
+    function C2SGetStatistics(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -10456,23 +10703,23 @@ $root.C2STexasCashGetStatistics = (function() {
     }
 
     /**
-     * C2STexasCashGetStatistics gameId.
+     * C2SGetStatistics gameId.
      * @member {string} gameId
-     * @memberof C2STexasCashGetStatistics
+     * @memberof C2SGetStatistics
      * @instance
      */
-    C2STexasCashGetStatistics.prototype.gameId = "";
+    C2SGetStatistics.prototype.gameId = "";
 
     /**
-     * Encodes the specified C2STexasCashGetStatistics message. Does not implicitly {@link C2STexasCashGetStatistics.verify|verify} messages.
+     * Encodes the specified C2SGetStatistics message. Does not implicitly {@link C2SGetStatistics.verify|verify} messages.
      * @function encode
-     * @memberof C2STexasCashGetStatistics
+     * @memberof C2SGetStatistics
      * @static
-     * @param {IC2STexasCashGetStatistics} m C2STexasCashGetStatistics message or plain object to encode
+     * @param {IC2SGetStatistics} m C2SGetStatistics message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    C2STexasCashGetStatistics.encode = function encode(m, w) {
+    C2SGetStatistics.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -10481,20 +10728,20 @@ $root.C2STexasCashGetStatistics = (function() {
     };
 
     /**
-     * Decodes a C2STexasCashGetStatistics message from the specified reader or buffer.
+     * Decodes a C2SGetStatistics message from the specified reader or buffer.
      * @function decode
-     * @memberof C2STexasCashGetStatistics
+     * @memberof C2SGetStatistics
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCashGetStatistics} C2STexasCashGetStatistics
+     * @returns {C2SGetStatistics} C2SGetStatistics
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    C2STexasCashGetStatistics.decode = function decode(r, l) {
+    C2SGetStatistics.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashGetStatistics();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetStatistics();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -10509,29 +10756,29 @@ $root.C2STexasCashGetStatistics = (function() {
         return m;
     };
 
-    return C2STexasCashGetStatistics;
+    return C2SGetStatistics;
 })();
 
-$root.C2STexasCashSimpleReplay = (function() {
+$root.C2SSimpleReplay = (function() {
 
     /**
-     * Properties of a C2STexasCashSimpleReplay.
-     * @exports IC2STexasCashSimpleReplay
-     * @interface IC2STexasCashSimpleReplay
-     * @property {string|null} [gameId] C2STexasCashSimpleReplay gameId
-     * @property {number|null} [page] C2STexasCashSimpleReplay page
-     * @property {number|null} [pageSize] C2STexasCashSimpleReplay pageSize
+     * Properties of a C2SSimpleReplay.
+     * @exports IC2SSimpleReplay
+     * @interface IC2SSimpleReplay
+     * @property {string|null} [gameId] C2SSimpleReplay gameId
+     * @property {number|null} [page] C2SSimpleReplay page
+     * @property {number|null} [pageSize] C2SSimpleReplay pageSize
      */
 
     /**
-     * Constructs a new C2STexasCashSimpleReplay.
-     * @exports C2STexasCashSimpleReplay
-     * @classdesc Represents a C2STexasCashSimpleReplay.
-     * @implements IC2STexasCashSimpleReplay
+     * Constructs a new C2SSimpleReplay.
+     * @exports C2SSimpleReplay
+     * @classdesc Represents a C2SSimpleReplay.
+     * @implements IC2SSimpleReplay
      * @constructor
-     * @param {IC2STexasCashSimpleReplay=} [p] Properties to set
+     * @param {IC2SSimpleReplay=} [p] Properties to set
      */
-    function C2STexasCashSimpleReplay(p) {
+    function C2SSimpleReplay(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -10539,39 +10786,39 @@ $root.C2STexasCashSimpleReplay = (function() {
     }
 
     /**
-     * C2STexasCashSimpleReplay gameId.
+     * C2SSimpleReplay gameId.
      * @member {string} gameId
-     * @memberof C2STexasCashSimpleReplay
+     * @memberof C2SSimpleReplay
      * @instance
      */
-    C2STexasCashSimpleReplay.prototype.gameId = "";
+    C2SSimpleReplay.prototype.gameId = "";
 
     /**
-     * C2STexasCashSimpleReplay page.
+     * C2SSimpleReplay page.
      * @member {number} page
-     * @memberof C2STexasCashSimpleReplay
+     * @memberof C2SSimpleReplay
      * @instance
      */
-    C2STexasCashSimpleReplay.prototype.page = 0;
+    C2SSimpleReplay.prototype.page = 0;
 
     /**
-     * C2STexasCashSimpleReplay pageSize.
+     * C2SSimpleReplay pageSize.
      * @member {number} pageSize
-     * @memberof C2STexasCashSimpleReplay
+     * @memberof C2SSimpleReplay
      * @instance
      */
-    C2STexasCashSimpleReplay.prototype.pageSize = 0;
+    C2SSimpleReplay.prototype.pageSize = 0;
 
     /**
-     * Encodes the specified C2STexasCashSimpleReplay message. Does not implicitly {@link C2STexasCashSimpleReplay.verify|verify} messages.
+     * Encodes the specified C2SSimpleReplay message. Does not implicitly {@link C2SSimpleReplay.verify|verify} messages.
      * @function encode
-     * @memberof C2STexasCashSimpleReplay
+     * @memberof C2SSimpleReplay
      * @static
-     * @param {IC2STexasCashSimpleReplay} m C2STexasCashSimpleReplay message or plain object to encode
+     * @param {IC2SSimpleReplay} m C2SSimpleReplay message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    C2STexasCashSimpleReplay.encode = function encode(m, w) {
+    C2SSimpleReplay.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -10584,20 +10831,20 @@ $root.C2STexasCashSimpleReplay = (function() {
     };
 
     /**
-     * Decodes a C2STexasCashSimpleReplay message from the specified reader or buffer.
+     * Decodes a C2SSimpleReplay message from the specified reader or buffer.
      * @function decode
-     * @memberof C2STexasCashSimpleReplay
+     * @memberof C2SSimpleReplay
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCashSimpleReplay} C2STexasCashSimpleReplay
+     * @returns {C2SSimpleReplay} C2SSimpleReplay
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    C2STexasCashSimpleReplay.decode = function decode(r, l) {
+    C2SSimpleReplay.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashSimpleReplay();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SSimpleReplay();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -10618,28 +10865,28 @@ $root.C2STexasCashSimpleReplay = (function() {
         return m;
     };
 
-    return C2STexasCashSimpleReplay;
+    return C2SSimpleReplay;
 })();
 
-$root.C2STexasCashDetailReplay = (function() {
+$root.C2SDetailReplay = (function() {
 
     /**
-     * Properties of a C2STexasCashDetailReplay.
-     * @exports IC2STexasCashDetailReplay
-     * @interface IC2STexasCashDetailReplay
-     * @property {string|null} [gameId] C2STexasCashDetailReplay gameId
-     * @property {number|null} [index] C2STexasCashDetailReplay index
+     * Properties of a C2SDetailReplay.
+     * @exports IC2SDetailReplay
+     * @interface IC2SDetailReplay
+     * @property {string|null} [gameId] C2SDetailReplay gameId
+     * @property {number|null} [index] C2SDetailReplay index
      */
 
     /**
-     * Constructs a new C2STexasCashDetailReplay.
-     * @exports C2STexasCashDetailReplay
-     * @classdesc Represents a C2STexasCashDetailReplay.
-     * @implements IC2STexasCashDetailReplay
+     * Constructs a new C2SDetailReplay.
+     * @exports C2SDetailReplay
+     * @classdesc Represents a C2SDetailReplay.
+     * @implements IC2SDetailReplay
      * @constructor
-     * @param {IC2STexasCashDetailReplay=} [p] Properties to set
+     * @param {IC2SDetailReplay=} [p] Properties to set
      */
-    function C2STexasCashDetailReplay(p) {
+    function C2SDetailReplay(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -10647,31 +10894,31 @@ $root.C2STexasCashDetailReplay = (function() {
     }
 
     /**
-     * C2STexasCashDetailReplay gameId.
+     * C2SDetailReplay gameId.
      * @member {string} gameId
-     * @memberof C2STexasCashDetailReplay
+     * @memberof C2SDetailReplay
      * @instance
      */
-    C2STexasCashDetailReplay.prototype.gameId = "";
+    C2SDetailReplay.prototype.gameId = "";
 
     /**
-     * C2STexasCashDetailReplay index.
+     * C2SDetailReplay index.
      * @member {number} index
-     * @memberof C2STexasCashDetailReplay
+     * @memberof C2SDetailReplay
      * @instance
      */
-    C2STexasCashDetailReplay.prototype.index = 0;
+    C2SDetailReplay.prototype.index = 0;
 
     /**
-     * Encodes the specified C2STexasCashDetailReplay message. Does not implicitly {@link C2STexasCashDetailReplay.verify|verify} messages.
+     * Encodes the specified C2SDetailReplay message. Does not implicitly {@link C2SDetailReplay.verify|verify} messages.
      * @function encode
-     * @memberof C2STexasCashDetailReplay
+     * @memberof C2SDetailReplay
      * @static
-     * @param {IC2STexasCashDetailReplay} m C2STexasCashDetailReplay message or plain object to encode
+     * @param {IC2SDetailReplay} m C2SDetailReplay message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    C2STexasCashDetailReplay.encode = function encode(m, w) {
+    C2SDetailReplay.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -10682,20 +10929,20 @@ $root.C2STexasCashDetailReplay = (function() {
     };
 
     /**
-     * Decodes a C2STexasCashDetailReplay message from the specified reader or buffer.
+     * Decodes a C2SDetailReplay message from the specified reader or buffer.
      * @function decode
-     * @memberof C2STexasCashDetailReplay
+     * @memberof C2SDetailReplay
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCashDetailReplay} C2STexasCashDetailReplay
+     * @returns {C2SDetailReplay} C2SDetailReplay
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    C2STexasCashDetailReplay.decode = function decode(r, l) {
+    C2SDetailReplay.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashDetailReplay();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SDetailReplay();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -10713,27 +10960,27 @@ $root.C2STexasCashDetailReplay = (function() {
         return m;
     };
 
-    return C2STexasCashDetailReplay;
+    return C2SDetailReplay;
 })();
 
-$root.C2STexasCashCancelAutoOperator = (function() {
+$root.C2SCancelAutoOperator = (function() {
 
     /**
-     * Properties of a C2STexasCashCancelAutoOperator.
-     * @exports IC2STexasCashCancelAutoOperator
-     * @interface IC2STexasCashCancelAutoOperator
-     * @property {string|null} [gameId] C2STexasCashCancelAutoOperator gameId
+     * Properties of a C2SCancelAutoOperator.
+     * @exports IC2SCancelAutoOperator
+     * @interface IC2SCancelAutoOperator
+     * @property {string|null} [gameId] C2SCancelAutoOperator gameId
      */
 
     /**
-     * Constructs a new C2STexasCashCancelAutoOperator.
-     * @exports C2STexasCashCancelAutoOperator
-     * @classdesc Represents a C2STexasCashCancelAutoOperator.
-     * @implements IC2STexasCashCancelAutoOperator
+     * Constructs a new C2SCancelAutoOperator.
+     * @exports C2SCancelAutoOperator
+     * @classdesc Represents a C2SCancelAutoOperator.
+     * @implements IC2SCancelAutoOperator
      * @constructor
-     * @param {IC2STexasCashCancelAutoOperator=} [p] Properties to set
+     * @param {IC2SCancelAutoOperator=} [p] Properties to set
      */
-    function C2STexasCashCancelAutoOperator(p) {
+    function C2SCancelAutoOperator(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -10741,23 +10988,23 @@ $root.C2STexasCashCancelAutoOperator = (function() {
     }
 
     /**
-     * C2STexasCashCancelAutoOperator gameId.
+     * C2SCancelAutoOperator gameId.
      * @member {string} gameId
-     * @memberof C2STexasCashCancelAutoOperator
+     * @memberof C2SCancelAutoOperator
      * @instance
      */
-    C2STexasCashCancelAutoOperator.prototype.gameId = "";
+    C2SCancelAutoOperator.prototype.gameId = "";
 
     /**
-     * Encodes the specified C2STexasCashCancelAutoOperator message. Does not implicitly {@link C2STexasCashCancelAutoOperator.verify|verify} messages.
+     * Encodes the specified C2SCancelAutoOperator message. Does not implicitly {@link C2SCancelAutoOperator.verify|verify} messages.
      * @function encode
-     * @memberof C2STexasCashCancelAutoOperator
+     * @memberof C2SCancelAutoOperator
      * @static
-     * @param {IC2STexasCashCancelAutoOperator} m C2STexasCashCancelAutoOperator message or plain object to encode
+     * @param {IC2SCancelAutoOperator} m C2SCancelAutoOperator message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    C2STexasCashCancelAutoOperator.encode = function encode(m, w) {
+    C2SCancelAutoOperator.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -10766,20 +11013,20 @@ $root.C2STexasCashCancelAutoOperator = (function() {
     };
 
     /**
-     * Decodes a C2STexasCashCancelAutoOperator message from the specified reader or buffer.
+     * Decodes a C2SCancelAutoOperator message from the specified reader or buffer.
      * @function decode
-     * @memberof C2STexasCashCancelAutoOperator
+     * @memberof C2SCancelAutoOperator
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCashCancelAutoOperator} C2STexasCashCancelAutoOperator
+     * @returns {C2SCancelAutoOperator} C2SCancelAutoOperator
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    C2STexasCashCancelAutoOperator.decode = function decode(r, l) {
+    C2SCancelAutoOperator.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashCancelAutoOperator();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SCancelAutoOperator();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -10794,28 +11041,28 @@ $root.C2STexasCashCancelAutoOperator = (function() {
         return m;
     };
 
-    return C2STexasCashCancelAutoOperator;
+    return C2SCancelAutoOperator;
 })();
 
-$root.C2STexasCashGetPlayerStatistics = (function() {
+$root.C2SGetPlayerStatistics = (function() {
 
     /**
-     * Properties of a C2STexasCashGetPlayerStatistics.
-     * @exports IC2STexasCashGetPlayerStatistics
-     * @interface IC2STexasCashGetPlayerStatistics
-     * @property {string|null} [gameId] C2STexasCashGetPlayerStatistics gameId
-     * @property {string|null} [uid] C2STexasCashGetPlayerStatistics uid
+     * Properties of a C2SGetPlayerStatistics.
+     * @exports IC2SGetPlayerStatistics
+     * @interface IC2SGetPlayerStatistics
+     * @property {string|null} [gameId] C2SGetPlayerStatistics gameId
+     * @property {string|null} [uid] C2SGetPlayerStatistics uid
      */
 
     /**
-     * Constructs a new C2STexasCashGetPlayerStatistics.
-     * @exports C2STexasCashGetPlayerStatistics
-     * @classdesc Represents a C2STexasCashGetPlayerStatistics.
-     * @implements IC2STexasCashGetPlayerStatistics
+     * Constructs a new C2SGetPlayerStatistics.
+     * @exports C2SGetPlayerStatistics
+     * @classdesc Represents a C2SGetPlayerStatistics.
+     * @implements IC2SGetPlayerStatistics
      * @constructor
-     * @param {IC2STexasCashGetPlayerStatistics=} [p] Properties to set
+     * @param {IC2SGetPlayerStatistics=} [p] Properties to set
      */
-    function C2STexasCashGetPlayerStatistics(p) {
+    function C2SGetPlayerStatistics(p) {
         if (p)
             for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                 if (p[ks[i]] != null)
@@ -10823,31 +11070,31 @@ $root.C2STexasCashGetPlayerStatistics = (function() {
     }
 
     /**
-     * C2STexasCashGetPlayerStatistics gameId.
+     * C2SGetPlayerStatistics gameId.
      * @member {string} gameId
-     * @memberof C2STexasCashGetPlayerStatistics
+     * @memberof C2SGetPlayerStatistics
      * @instance
      */
-    C2STexasCashGetPlayerStatistics.prototype.gameId = "";
+    C2SGetPlayerStatistics.prototype.gameId = "";
 
     /**
-     * C2STexasCashGetPlayerStatistics uid.
+     * C2SGetPlayerStatistics uid.
      * @member {string} uid
-     * @memberof C2STexasCashGetPlayerStatistics
+     * @memberof C2SGetPlayerStatistics
      * @instance
      */
-    C2STexasCashGetPlayerStatistics.prototype.uid = "";
+    C2SGetPlayerStatistics.prototype.uid = "";
 
     /**
-     * Encodes the specified C2STexasCashGetPlayerStatistics message. Does not implicitly {@link C2STexasCashGetPlayerStatistics.verify|verify} messages.
+     * Encodes the specified C2SGetPlayerStatistics message. Does not implicitly {@link C2SGetPlayerStatistics.verify|verify} messages.
      * @function encode
-     * @memberof C2STexasCashGetPlayerStatistics
+     * @memberof C2SGetPlayerStatistics
      * @static
-     * @param {IC2STexasCashGetPlayerStatistics} m C2STexasCashGetPlayerStatistics message or plain object to encode
+     * @param {IC2SGetPlayerStatistics} m C2SGetPlayerStatistics message or plain object to encode
      * @param {protobuf.Writer} [w] Writer to encode to
      * @returns {protobuf.Writer} Writer
      */
-    C2STexasCashGetPlayerStatistics.encode = function encode(m, w) {
+    C2SGetPlayerStatistics.encode = function encode(m, w) {
         if (!w)
             w = $Writer.create();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
@@ -10858,20 +11105,20 @@ $root.C2STexasCashGetPlayerStatistics = (function() {
     };
 
     /**
-     * Decodes a C2STexasCashGetPlayerStatistics message from the specified reader or buffer.
+     * Decodes a C2SGetPlayerStatistics message from the specified reader or buffer.
      * @function decode
-     * @memberof C2STexasCashGetPlayerStatistics
+     * @memberof C2SGetPlayerStatistics
      * @static
      * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
      * @param {number} [l] Message length if known beforehand
-     * @returns {C2STexasCashGetPlayerStatistics} C2STexasCashGetPlayerStatistics
+     * @returns {C2SGetPlayerStatistics} C2SGetPlayerStatistics
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    C2STexasCashGetPlayerStatistics.decode = function decode(r, l) {
+    C2SGetPlayerStatistics.decode = function decode(r, l) {
         if (!(r instanceof $Reader))
             r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2STexasCashGetPlayerStatistics();
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.C2SGetPlayerStatistics();
         while (r.pos < c) {
             var t = r.uint32();
             switch (t >>> 3) {
@@ -10889,7 +11136,7 @@ $root.C2STexasCashGetPlayerStatistics = (function() {
         return m;
     };
 
-    return C2STexasCashGetPlayerStatistics;
+    return C2SGetPlayerStatistics;
 })();
 
 $root.S2CCommonEnterGameResp = (function() {
@@ -12001,6 +12248,115 @@ $root.S2CCommonGetObListResp = (function() {
     return S2CCommonGetObListResp;
 })();
 
+$root.S2CCommonGetObSizeResp = (function() {
+
+    /**
+     * Properties of a S2CCommonGetObSizeResp.
+     * @exports IS2CCommonGetObSizeResp
+     * @interface IS2CCommonGetObSizeResp
+     * @property {ICommonResult|null} [result] S2CCommonGetObSizeResp result
+     * @property {string|null} [gameId] S2CCommonGetObSizeResp gameId
+     * @property {number|null} [obSize] S2CCommonGetObSizeResp obSize
+     */
+
+    /**
+     * Constructs a new S2CCommonGetObSizeResp.
+     * @exports S2CCommonGetObSizeResp
+     * @classdesc Represents a S2CCommonGetObSizeResp.
+     * @implements IS2CCommonGetObSizeResp
+     * @constructor
+     * @param {IS2CCommonGetObSizeResp=} [p] Properties to set
+     */
+    function S2CCommonGetObSizeResp(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonGetObSizeResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonGetObSizeResp
+     * @instance
+     */
+    S2CCommonGetObSizeResp.prototype.result = null;
+
+    /**
+     * S2CCommonGetObSizeResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonGetObSizeResp
+     * @instance
+     */
+    S2CCommonGetObSizeResp.prototype.gameId = "";
+
+    /**
+     * S2CCommonGetObSizeResp obSize.
+     * @member {number} obSize
+     * @memberof S2CCommonGetObSizeResp
+     * @instance
+     */
+    S2CCommonGetObSizeResp.prototype.obSize = 0;
+
+    /**
+     * Encodes the specified S2CCommonGetObSizeResp message. Does not implicitly {@link S2CCommonGetObSizeResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonGetObSizeResp
+     * @static
+     * @param {IS2CCommonGetObSizeResp} m S2CCommonGetObSizeResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonGetObSizeResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.obSize != null && Object.hasOwnProperty.call(m, "obSize"))
+            w.uint32(24).int32(m.obSize);
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonGetObSizeResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonGetObSizeResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonGetObSizeResp} S2CCommonGetObSizeResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonGetObSizeResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonGetObSizeResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                m.obSize = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonGetObSizeResp;
+})();
+
 $root.S2CCommonGetBringInListResp = (function() {
 
     /**
@@ -12492,6 +12848,120 @@ $root.S2CCommonExaminePrivateCardResp = (function() {
     };
 
     return S2CCommonExaminePrivateCardResp;
+})();
+
+$root.S2CCommonShowSelfCardResp = (function() {
+
+    /**
+     * Properties of a S2CCommonShowSelfCardResp.
+     * @exports IS2CCommonShowSelfCardResp
+     * @interface IS2CCommonShowSelfCardResp
+     * @property {ICommonResult|null} [result] S2CCommonShowSelfCardResp result
+     * @property {string|null} [gameId] S2CCommonShowSelfCardResp gameId
+     * @property {Array.<ICardInfo>|null} [cardList] S2CCommonShowSelfCardResp cardList
+     */
+
+    /**
+     * Constructs a new S2CCommonShowSelfCardResp.
+     * @exports S2CCommonShowSelfCardResp
+     * @classdesc Represents a S2CCommonShowSelfCardResp.
+     * @implements IS2CCommonShowSelfCardResp
+     * @constructor
+     * @param {IS2CCommonShowSelfCardResp=} [p] Properties to set
+     */
+    function S2CCommonShowSelfCardResp(p) {
+        this.cardList = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonShowSelfCardResp result.
+     * @member {ICommonResult|null|undefined} result
+     * @memberof S2CCommonShowSelfCardResp
+     * @instance
+     */
+    S2CCommonShowSelfCardResp.prototype.result = null;
+
+    /**
+     * S2CCommonShowSelfCardResp gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonShowSelfCardResp
+     * @instance
+     */
+    S2CCommonShowSelfCardResp.prototype.gameId = "";
+
+    /**
+     * S2CCommonShowSelfCardResp cardList.
+     * @member {Array.<ICardInfo>} cardList
+     * @memberof S2CCommonShowSelfCardResp
+     * @instance
+     */
+    S2CCommonShowSelfCardResp.prototype.cardList = $util.emptyArray;
+
+    /**
+     * Encodes the specified S2CCommonShowSelfCardResp message. Does not implicitly {@link S2CCommonShowSelfCardResp.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonShowSelfCardResp
+     * @static
+     * @param {IS2CCommonShowSelfCardResp} m S2CCommonShowSelfCardResp message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonShowSelfCardResp.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+            $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(18).string(m.gameId);
+        if (m.cardList != null && m.cardList.length) {
+            for (var i = 0; i < m.cardList.length; ++i)
+                $root.CardInfo.encode(m.cardList[i], w.uint32(26).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonShowSelfCardResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonShowSelfCardResp
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonShowSelfCardResp} S2CCommonShowSelfCardResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonShowSelfCardResp.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonShowSelfCardResp();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.result = $root.CommonResult.decode(r, r.uint32());
+                break;
+            case 2:
+                m.gameId = r.string();
+                break;
+            case 3:
+                if (!(m.cardList && m.cardList.length))
+                    m.cardList = [];
+                m.cardList.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonShowSelfCardResp;
 })();
 
 $root.S2CCommonExtraThinkResp = (function() {
@@ -16181,4 +16651,118 @@ $root.S2CCommonAutoOperatorNotify = (function() {
     };
 
     return S2CCommonAutoOperatorNotify;
+})();
+
+$root.S2CCommonShowSelfCardNotify = (function() {
+
+    /**
+     * Properties of a S2CCommonShowSelfCardNotify.
+     * @exports IS2CCommonShowSelfCardNotify
+     * @interface IS2CCommonShowSelfCardNotify
+     * @property {string|null} [gameId] S2CCommonShowSelfCardNotify gameId
+     * @property {string|null} [uid] S2CCommonShowSelfCardNotify uid
+     * @property {Array.<ICardInfo>|null} [cardList] S2CCommonShowSelfCardNotify cardList
+     */
+
+    /**
+     * Constructs a new S2CCommonShowSelfCardNotify.
+     * @exports S2CCommonShowSelfCardNotify
+     * @classdesc Represents a S2CCommonShowSelfCardNotify.
+     * @implements IS2CCommonShowSelfCardNotify
+     * @constructor
+     * @param {IS2CCommonShowSelfCardNotify=} [p] Properties to set
+     */
+    function S2CCommonShowSelfCardNotify(p) {
+        this.cardList = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * S2CCommonShowSelfCardNotify gameId.
+     * @member {string} gameId
+     * @memberof S2CCommonShowSelfCardNotify
+     * @instance
+     */
+    S2CCommonShowSelfCardNotify.prototype.gameId = "";
+
+    /**
+     * S2CCommonShowSelfCardNotify uid.
+     * @member {string} uid
+     * @memberof S2CCommonShowSelfCardNotify
+     * @instance
+     */
+    S2CCommonShowSelfCardNotify.prototype.uid = "";
+
+    /**
+     * S2CCommonShowSelfCardNotify cardList.
+     * @member {Array.<ICardInfo>} cardList
+     * @memberof S2CCommonShowSelfCardNotify
+     * @instance
+     */
+    S2CCommonShowSelfCardNotify.prototype.cardList = $util.emptyArray;
+
+    /**
+     * Encodes the specified S2CCommonShowSelfCardNotify message. Does not implicitly {@link S2CCommonShowSelfCardNotify.verify|verify} messages.
+     * @function encode
+     * @memberof S2CCommonShowSelfCardNotify
+     * @static
+     * @param {IS2CCommonShowSelfCardNotify} m S2CCommonShowSelfCardNotify message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    S2CCommonShowSelfCardNotify.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(18).string(m.uid);
+        if (m.cardList != null && m.cardList.length) {
+            for (var i = 0; i < m.cardList.length; ++i)
+                $root.CardInfo.encode(m.cardList[i], w.uint32(26).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a S2CCommonShowSelfCardNotify message from the specified reader or buffer.
+     * @function decode
+     * @memberof S2CCommonShowSelfCardNotify
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {S2CCommonShowSelfCardNotify} S2CCommonShowSelfCardNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    S2CCommonShowSelfCardNotify.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.S2CCommonShowSelfCardNotify();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.uid = r.string();
+                break;
+            case 3:
+                if (!(m.cardList && m.cardList.length))
+                    m.cardList = [];
+                m.cardList.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return S2CCommonShowSelfCardNotify;
 })();

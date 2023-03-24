@@ -878,6 +878,45 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             }
         },this);  
 
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonGetObSizeResp,(_data)=>
+        {
+            let msg = S2CCommonGetObSizeResp.decode(_data);
+            console.log("收到的内容 S2C_CommonGetObSizeResp  观看者数量==" + JSON.stringify(msg));
+
+            if(msg.result.resId == MsgResult.Success)
+            {
+                let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                if(gameStruct != null)
+                {
+                    let gameData = gameStruct.mGameData;
+                    gameData.Data_S2CCommonGetObSizeResp.mData = msg;
+                }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonShowSelfCardResp,(_data)=>
+        {
+            let msg = S2CCommonShowSelfCardResp.decode(_data);
+            console.log("收到的内容 S2C_CommonShowSelfCardResp  自己亮手牌回复==" + JSON.stringify(msg));
+
+            if(msg.result.resId == MsgResult.Success)
+            {
+                // let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+                // if(gameStruct != null)
+                // {
+
+                // }
+            }
+            else
+            {
+                UIMgr.Instance.ShowToast(msg.result.resMessage);
+            }
+        },this);  
+
         
         Network.Instance.AddMsgListenner(MessageId.S2C_CommonExaminePrivateCardResp,(_data)=>
         {
@@ -1323,6 +1362,18 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 let gameData = gameStruct.mGameData;
                 gameData.UpdatePots(msg.potInfo);
                 gameData.Data_S2CCommonPotsNotify.mData = msg;
+            }
+        },this);
+
+        Network.Instance.AddMsgListenner(MessageId.S2C_CommonShowSelfCardNotify,(_data)=>
+        {
+            let msg = S2CCommonShowSelfCardNotify.decode(_data);
+            console.log("收到的内容 S2C_CommonShowSelfCardNotify  亮手牌推送==" + JSON.stringify(msg));
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(msg.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_S2CCommonShowSelfCardNotify.mData = msg;
             }
         },this);
 

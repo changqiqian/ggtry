@@ -20,11 +20,10 @@ export class Poker extends BaseUI
     mShowBtn: BaseButton = null;
     @property(Node) 
     mIcon: Node = null;
-
-    mClickCallback : Function = null;
-    mIndex : number = null;
+    mClickCallBack : Function;
     mCardStruct : CardStruct = null;
     mServerData : number = null;
+    mPokerIndex : number = null;
     InitParam() 
     {
         
@@ -32,13 +31,12 @@ export class Poker extends BaseUI
     BindUI() 
     {
         this.ShowBack();
-        this.mShowBtn.node.active = false;
         this.mShowBtn.SetClickCallback(()=>
         {
             this.mIcon.active = !this.mIcon.active;
-            if(this.mClickCallback)
+            if(this.mClickCallBack)
             {
-                this.mClickCallback(this.mIndex);
+                this.mClickCallBack(this.mIcon.active , this.mPokerIndex);
             }
         })
 
@@ -240,33 +238,36 @@ export class Poker extends BaseUI
 
     public ShowBack() 
     {
+        this.ResetAndHide();
         this.node.active = true;
-        this.mRoot.scale =Vec3.ONE;
-        this.mGlow.active = false;
-        this.mIcon.active = false;
         this.mBack.active = true;
-        this.mFront.active = false;
-        this.SetGary(false);
     }
+
+
 
     public ResetAndHide()
     {
         this.StopAllTween(this.mRoot);
+        this.StopAllTween(this.node);
         this.node.active = false;
         this.mBack.scale =Vec3.ONE;
         this.mFront.scale =Vec3.ONE;
+        this.mRoot.scale =Vec3.ONE;
+        this.mRoot.setPosition(Vec3.ZERO);
         this.mGlow.active = false;
         this.mIcon.active = false;
         this.mBack.active = false;
         this.mFront.active = false;
+        // this.mCardInfo = null;
+        // this.mCardStruct = null;
         this.SetGary(false);
     }
 
     public SetClickAble(_callback : Function , _index : number)
     {
         this.mShowBtn.node.active = true;
-        this.mIndex = _index;
-        this.mClickCallback = _callback;
+        this.mPokerIndex = _index;
+        this.mClickCallBack = _callback;
     }
 
     public SetGary(_value : boolean)
@@ -285,5 +286,6 @@ export class Poker extends BaseUI
     {
         this.mRoot.active = _value;
     }
+
 }
 

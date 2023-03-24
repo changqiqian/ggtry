@@ -43,7 +43,7 @@ export class InputTipsWindowBig extends BaseUI {
             this.CloseAsWindow();
         });
 
-        this.mEditBox.node.on('text-changed', (_param)=>
+        this.mEditBox.node.on(EditBox.EventType.TEXT_CHANGED, (_param)=>
         {
             this.UpdateMaxInput();
         }, this);

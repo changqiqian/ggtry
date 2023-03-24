@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, Button, sys, SafeArea, setDisplayStats } from 'cc';
+import { _decorator, Component, Node, Label, Button, sys, SafeArea, setDisplayStats, EditBox } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { SceneType, UIMgr } from '../../base/UIMgr';
@@ -33,6 +33,9 @@ export class LoginUI extends BaseUI
     mUid: Label = null;
     @property(Label) 
     mGameID: Label = null;
+
+    @property(EditBox) 
+    mEditBox: EditBox = null;
 
     InitParam() 
     {
@@ -85,6 +88,9 @@ export class LoginUI extends BaseUI
         });
 
 
+        this.mEditBox.node.on(EditBox.EventType.EDITING_RETURN,this.OnEditBoxReturn.bind(this) ) 
+        this.mEditBox.node.on(EditBox.EventType.EDITING_DID_ENDED,this.OnEditBoxReturn.bind(this) ) 
+
         let userData = new UserInfo();
         userData.accountLevel = AccountLevel.AccountLevel_Normal;
         userData.uid = GameConfig.GetTopUid();
@@ -97,6 +103,18 @@ export class LoginUI extends BaseUI
 
         this.mUid.string = "Uid=====" + GameConfig.GetTopUid()
         this.mGameID.string = "GameID====" + GameConfig.GetTopGameId();
+    }
+
+    OnEditBoxReturn()
+    {
+        let content = this.mEditBox.string;
+        if(content == "")
+        {
+            return;
+        }
+        GameConfig.uid = content;
+        LocalPlayerData.Instance.Data_Uid.mData = content;
+        this.mUid.string = "Uid=====" + content;
     }
     RegDataNotify() 
     {

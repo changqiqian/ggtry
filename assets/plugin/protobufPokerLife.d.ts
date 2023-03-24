@@ -1798,6 +1798,12 @@ export class PlayerInfo implements IPlayerInfo {
     /** PlayerInfo auto. */
     public auto: boolean;
 
+    /** PlayerInfo totalHands. */
+    public totalHands: number;
+
+    /** PlayerInfo totalFlopHands. */
+    public totalFlopHands: number;
+
     /**
      * Encodes the specified PlayerInfo message. Does not implicitly {@link PlayerInfo.verify|verify} messages.
      * @param m PlayerInfo message or plain object to encode
@@ -2240,6 +2246,12 @@ export class PlayerStatistic implements IPlayerStatistic {
     /** PlayerStatistic totalFlopHands. */
     public totalFlopHands: number;
 
+    /** PlayerStatistic totalPreFlopRaiseCount. */
+    public totalPreFlopRaiseCount: number;
+
+    /** PlayerStatistic totalPreFlopAgainRaiseCount. */
+    public totalPreFlopAgainRaiseCount: number;
+
     /** PlayerStatistic totalBringIn. */
     public totalBringIn: number;
 
@@ -2623,17 +2635,19 @@ export enum MessageId {
     C2S_TexasCashBuyInsurance = 5010,
     C2S_TexasCashChat = 5011,
     C2S_TexasCashGetObList = 5012,
-    C2S_TexasCashGetBringInList = 5013,
-    C2S_TexasCashExaminePublicCard = 5014,
-    C2S_TexasCashExaminePrivateCard = 5015,
-    C2S_TexasCashExtraThink = 5016,
-    C2S_TexasCashSqueezeStart = 5017,
-    C2S_TexasCashSqueezeFinish = 5018,
-    C2S_TexasCashGetStatistics = 5019,
-    C2S_TexasCashSimpleReplay = 5020,
-    C2S_TexasCashDetailReplay = 5021,
-    C2S_TexasCashCancelAutoOperator = 5022,
-    C2S_TexasCashGetPlayerStatistics = 5023,
+    C2S_TexasCashGetObSize = 5013,
+    C2S_TexasCashGetBringInList = 5014,
+    C2S_TexasCashExaminePublicCard = 5015,
+    C2S_TexasCashExaminePrivateCard = 5016,
+    C2S_TexasCashShowSelfCard = 5017,
+    C2S_TexasCashExtraThink = 5018,
+    C2S_TexasCashSqueezeStart = 5019,
+    C2S_TexasCashSqueezeFinish = 5020,
+    C2S_TexasCashGetStatistics = 5021,
+    C2S_TexasCashSimpleReplay = 5022,
+    C2S_TexasCashDetailReplay = 5023,
+    C2S_TexasCashCancelAutoOperator = 5024,
+    C2S_TexasCashGetPlayerStatistics = 5025,
     MSG_TexasCashEnd = 5500,
     MSG_TexasMttBegin = 5501,
     MSG_TexasMttEnd = 6000,
@@ -2655,18 +2669,20 @@ export enum MessageId {
     S2C_CommonBuyInsuranceResp = 8008,
     S2C_CommonChatResp = 8009,
     S2C_CommonGetObListResp = 8010,
-    S2C_CommonGetBringInListResp = 8011,
-    S2C_CommonRefreshResp = 8012,
-    S2C_CommonExaminePublicCardResp = 8013,
-    S2C_CommonExaminePrivateCardResp = 8014,
-    S2C_CommonExtraThinkResp = 8015,
-    S2C_CommonSqueezeStartResp = 8016,
-    S2C_CommonSqueezeFinishResp = 8017,
-    S2C_CommonGetStatisticsResp = 8018,
-    S2C_CommonSimpleReplayResp = 8019,
-    S2C_CommonDetailReplayResp = 8020,
-    S2C_CommonCancelAutoOperatorResp = 8021,
-    S2C_CommonGetPlayerStatisticsResp = 8022,
+    S2C_CommonGetObSizeResp = 8011,
+    S2C_CommonGetBringInListResp = 8012,
+    S2C_CommonRefreshResp = 8013,
+    S2C_CommonExaminePublicCardResp = 8014,
+    S2C_CommonExaminePrivateCardResp = 8015,
+    S2C_CommonShowSelfCardResp = 8016,
+    S2C_CommonExtraThinkResp = 8017,
+    S2C_CommonSqueezeStartResp = 8018,
+    S2C_CommonSqueezeFinishResp = 8019,
+    S2C_CommonGetStatisticsResp = 8020,
+    S2C_CommonSimpleReplayResp = 8021,
+    S2C_CommonDetailReplayResp = 8022,
+    S2C_CommonCancelAutoOperatorResp = 8023,
+    S2C_CommonGetPlayerStatisticsResp = 8024,
     S2C_CommonBringInTimerNotify = 8110,
     S2C_CommonBringInNotify = 8111,
     S2C_CommonSitDownNotify = 8112,
@@ -2692,6 +2708,7 @@ export enum MessageId {
     S2C_CommonJackpotLotteryNotify = 8267,
     S2C_CommonSqueezeRoundNotify = 8268,
     S2C_CommonAutoOperatorNotify = 8269,
+    S2C_CommonShowSelfCardNotify = 8270,
     MSG_TexasCowboyBegin = 10001,
     C2S_TexasCowboyEnterGame = 10002,
     C2S_TexasCowboyExitGame = 10003,
@@ -3075,6 +3092,37 @@ export class C2SGetObList implements IC2SGetObList {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetObList;
 }
 
+/** Represents a C2SGetObSize. */
+export class C2SGetObSize implements IC2SGetObSize {
+
+    /**
+     * Constructs a new C2SGetObSize.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SGetObSize);
+
+    /** C2SGetObSize gameId. */
+    public gameId: string;
+
+    /**
+     * Encodes the specified C2SGetObSize message. Does not implicitly {@link C2SGetObSize.verify|verify} messages.
+     * @param m C2SGetObSize message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SGetObSize, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SGetObSize message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SGetObSize
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetObSize;
+}
+
 /** Represents a CS2GetBringInList. */
 export class CS2GetBringInList implements ICS2GetBringInList {
 
@@ -3205,264 +3253,298 @@ export class C2SExaminePrivateCard implements IC2SExaminePrivateCard {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SExaminePrivateCard;
 }
 
-/** Represents a C2STexasCashExtraThink. */
-export class C2STexasCashExtraThink implements IC2STexasCashExtraThink {
+/** Represents a C2SShowSelfCard. */
+export class C2SShowSelfCard implements IC2SShowSelfCard {
 
     /**
-     * Constructs a new C2STexasCashExtraThink.
+     * Constructs a new C2SShowSelfCard.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2STexasCashExtraThink);
+    constructor(p?: IC2SShowSelfCard);
 
-    /** C2STexasCashExtraThink gameId. */
+    /** C2SShowSelfCard gameId. */
     public gameId: string;
 
+    /** C2SShowSelfCard cardList. */
+    public cardList: ICardInfo[];
+
     /**
-     * Encodes the specified C2STexasCashExtraThink message. Does not implicitly {@link C2STexasCashExtraThink.verify|verify} messages.
-     * @param m C2STexasCashExtraThink message or plain object to encode
+     * Encodes the specified C2SShowSelfCard message. Does not implicitly {@link C2SShowSelfCard.verify|verify} messages.
+     * @param m C2SShowSelfCard message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2STexasCashExtraThink, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SShowSelfCard, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2STexasCashExtraThink message from the specified reader or buffer.
+     * Decodes a C2SShowSelfCard message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2STexasCashExtraThink
+     * @returns C2SShowSelfCard
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashExtraThink;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SShowSelfCard;
 }
 
-/** Represents a C2STexasCashSqueezeStart. */
-export class C2STexasCashSqueezeStart implements IC2STexasCashSqueezeStart {
+/** Represents a C2SExtraThink. */
+export class C2SExtraThink implements IC2SExtraThink {
 
     /**
-     * Constructs a new C2STexasCashSqueezeStart.
+     * Constructs a new C2SExtraThink.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2STexasCashSqueezeStart);
+    constructor(p?: IC2SExtraThink);
 
-    /** C2STexasCashSqueezeStart gameId. */
+    /** C2SExtraThink gameId. */
     public gameId: string;
 
     /**
-     * Encodes the specified C2STexasCashSqueezeStart message. Does not implicitly {@link C2STexasCashSqueezeStart.verify|verify} messages.
-     * @param m C2STexasCashSqueezeStart message or plain object to encode
+     * Encodes the specified C2SExtraThink message. Does not implicitly {@link C2SExtraThink.verify|verify} messages.
+     * @param m C2SExtraThink message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2STexasCashSqueezeStart, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SExtraThink, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2STexasCashSqueezeStart message from the specified reader or buffer.
+     * Decodes a C2SExtraThink message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2STexasCashSqueezeStart
+     * @returns C2SExtraThink
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashSqueezeStart;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SExtraThink;
 }
 
-/** Represents a C2STexasCashSqueezeFinish. */
-export class C2STexasCashSqueezeFinish implements IC2STexasCashSqueezeFinish {
+/** Represents a C2SSqueezeStart. */
+export class C2SSqueezeStart implements IC2SSqueezeStart {
 
     /**
-     * Constructs a new C2STexasCashSqueezeFinish.
+     * Constructs a new C2SSqueezeStart.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2STexasCashSqueezeFinish);
+    constructor(p?: IC2SSqueezeStart);
 
-    /** C2STexasCashSqueezeFinish gameId. */
+    /** C2SSqueezeStart gameId. */
     public gameId: string;
 
     /**
-     * Encodes the specified C2STexasCashSqueezeFinish message. Does not implicitly {@link C2STexasCashSqueezeFinish.verify|verify} messages.
-     * @param m C2STexasCashSqueezeFinish message or plain object to encode
+     * Encodes the specified C2SSqueezeStart message. Does not implicitly {@link C2SSqueezeStart.verify|verify} messages.
+     * @param m C2SSqueezeStart message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2STexasCashSqueezeFinish, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SSqueezeStart, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2STexasCashSqueezeFinish message from the specified reader or buffer.
+     * Decodes a C2SSqueezeStart message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2STexasCashSqueezeFinish
+     * @returns C2SSqueezeStart
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashSqueezeFinish;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SSqueezeStart;
 }
 
-/** Represents a C2STexasCashGetStatistics. */
-export class C2STexasCashGetStatistics implements IC2STexasCashGetStatistics {
+/** Represents a C2SSqueezeFinish. */
+export class C2SSqueezeFinish implements IC2SSqueezeFinish {
 
     /**
-     * Constructs a new C2STexasCashGetStatistics.
+     * Constructs a new C2SSqueezeFinish.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2STexasCashGetStatistics);
+    constructor(p?: IC2SSqueezeFinish);
 
-    /** C2STexasCashGetStatistics gameId. */
+    /** C2SSqueezeFinish gameId. */
     public gameId: string;
 
     /**
-     * Encodes the specified C2STexasCashGetStatistics message. Does not implicitly {@link C2STexasCashGetStatistics.verify|verify} messages.
-     * @param m C2STexasCashGetStatistics message or plain object to encode
+     * Encodes the specified C2SSqueezeFinish message. Does not implicitly {@link C2SSqueezeFinish.verify|verify} messages.
+     * @param m C2SSqueezeFinish message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2STexasCashGetStatistics, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SSqueezeFinish, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2STexasCashGetStatistics message from the specified reader or buffer.
+     * Decodes a C2SSqueezeFinish message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2STexasCashGetStatistics
+     * @returns C2SSqueezeFinish
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashGetStatistics;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SSqueezeFinish;
 }
 
-/** Represents a C2STexasCashSimpleReplay. */
-export class C2STexasCashSimpleReplay implements IC2STexasCashSimpleReplay {
+/** Represents a C2SGetStatistics. */
+export class C2SGetStatistics implements IC2SGetStatistics {
 
     /**
-     * Constructs a new C2STexasCashSimpleReplay.
+     * Constructs a new C2SGetStatistics.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2STexasCashSimpleReplay);
+    constructor(p?: IC2SGetStatistics);
 
-    /** C2STexasCashSimpleReplay gameId. */
+    /** C2SGetStatistics gameId. */
     public gameId: string;
 
-    /** C2STexasCashSimpleReplay page. */
+    /**
+     * Encodes the specified C2SGetStatistics message. Does not implicitly {@link C2SGetStatistics.verify|verify} messages.
+     * @param m C2SGetStatistics message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IC2SGetStatistics, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a C2SGetStatistics message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns C2SGetStatistics
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetStatistics;
+}
+
+/** Represents a C2SSimpleReplay. */
+export class C2SSimpleReplay implements IC2SSimpleReplay {
+
+    /**
+     * Constructs a new C2SSimpleReplay.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IC2SSimpleReplay);
+
+    /** C2SSimpleReplay gameId. */
+    public gameId: string;
+
+    /** C2SSimpleReplay page. */
     public page: number;
 
-    /** C2STexasCashSimpleReplay pageSize. */
+    /** C2SSimpleReplay pageSize. */
     public pageSize: number;
 
     /**
-     * Encodes the specified C2STexasCashSimpleReplay message. Does not implicitly {@link C2STexasCashSimpleReplay.verify|verify} messages.
-     * @param m C2STexasCashSimpleReplay message or plain object to encode
+     * Encodes the specified C2SSimpleReplay message. Does not implicitly {@link C2SSimpleReplay.verify|verify} messages.
+     * @param m C2SSimpleReplay message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2STexasCashSimpleReplay, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SSimpleReplay, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2STexasCashSimpleReplay message from the specified reader or buffer.
+     * Decodes a C2SSimpleReplay message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2STexasCashSimpleReplay
+     * @returns C2SSimpleReplay
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashSimpleReplay;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SSimpleReplay;
 }
 
-/** Represents a C2STexasCashDetailReplay. */
-export class C2STexasCashDetailReplay implements IC2STexasCashDetailReplay {
+/** Represents a C2SDetailReplay. */
+export class C2SDetailReplay implements IC2SDetailReplay {
 
     /**
-     * Constructs a new C2STexasCashDetailReplay.
+     * Constructs a new C2SDetailReplay.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2STexasCashDetailReplay);
+    constructor(p?: IC2SDetailReplay);
 
-    /** C2STexasCashDetailReplay gameId. */
+    /** C2SDetailReplay gameId. */
     public gameId: string;
 
-    /** C2STexasCashDetailReplay index. */
+    /** C2SDetailReplay index. */
     public index: number;
 
     /**
-     * Encodes the specified C2STexasCashDetailReplay message. Does not implicitly {@link C2STexasCashDetailReplay.verify|verify} messages.
-     * @param m C2STexasCashDetailReplay message or plain object to encode
+     * Encodes the specified C2SDetailReplay message. Does not implicitly {@link C2SDetailReplay.verify|verify} messages.
+     * @param m C2SDetailReplay message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2STexasCashDetailReplay, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SDetailReplay, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2STexasCashDetailReplay message from the specified reader or buffer.
+     * Decodes a C2SDetailReplay message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2STexasCashDetailReplay
+     * @returns C2SDetailReplay
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashDetailReplay;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SDetailReplay;
 }
 
-/** Represents a C2STexasCashCancelAutoOperator. */
-export class C2STexasCashCancelAutoOperator implements IC2STexasCashCancelAutoOperator {
+/** Represents a C2SCancelAutoOperator. */
+export class C2SCancelAutoOperator implements IC2SCancelAutoOperator {
 
     /**
-     * Constructs a new C2STexasCashCancelAutoOperator.
+     * Constructs a new C2SCancelAutoOperator.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2STexasCashCancelAutoOperator);
+    constructor(p?: IC2SCancelAutoOperator);
 
-    /** C2STexasCashCancelAutoOperator gameId. */
+    /** C2SCancelAutoOperator gameId. */
     public gameId: string;
 
     /**
-     * Encodes the specified C2STexasCashCancelAutoOperator message. Does not implicitly {@link C2STexasCashCancelAutoOperator.verify|verify} messages.
-     * @param m C2STexasCashCancelAutoOperator message or plain object to encode
+     * Encodes the specified C2SCancelAutoOperator message. Does not implicitly {@link C2SCancelAutoOperator.verify|verify} messages.
+     * @param m C2SCancelAutoOperator message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2STexasCashCancelAutoOperator, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SCancelAutoOperator, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2STexasCashCancelAutoOperator message from the specified reader or buffer.
+     * Decodes a C2SCancelAutoOperator message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2STexasCashCancelAutoOperator
+     * @returns C2SCancelAutoOperator
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashCancelAutoOperator;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SCancelAutoOperator;
 }
 
-/** Represents a C2STexasCashGetPlayerStatistics. */
-export class C2STexasCashGetPlayerStatistics implements IC2STexasCashGetPlayerStatistics {
+/** Represents a C2SGetPlayerStatistics. */
+export class C2SGetPlayerStatistics implements IC2SGetPlayerStatistics {
 
     /**
-     * Constructs a new C2STexasCashGetPlayerStatistics.
+     * Constructs a new C2SGetPlayerStatistics.
      * @param [p] Properties to set
      */
-    constructor(p?: IC2STexasCashGetPlayerStatistics);
+    constructor(p?: IC2SGetPlayerStatistics);
 
-    /** C2STexasCashGetPlayerStatistics gameId. */
+    /** C2SGetPlayerStatistics gameId. */
     public gameId: string;
 
-    /** C2STexasCashGetPlayerStatistics uid. */
+    /** C2SGetPlayerStatistics uid. */
     public uid: string;
 
     /**
-     * Encodes the specified C2STexasCashGetPlayerStatistics message. Does not implicitly {@link C2STexasCashGetPlayerStatistics.verify|verify} messages.
-     * @param m C2STexasCashGetPlayerStatistics message or plain object to encode
+     * Encodes the specified C2SGetPlayerStatistics message. Does not implicitly {@link C2SGetPlayerStatistics.verify|verify} messages.
+     * @param m C2SGetPlayerStatistics message or plain object to encode
      * @param [w] Writer to encode to
      * @returns Writer
      */
-    public static encode(m: IC2STexasCashGetPlayerStatistics, w?: protobuf.Writer): protobuf.Writer;
+    public static encode(m: IC2SGetPlayerStatistics, w?: protobuf.Writer): protobuf.Writer;
 
     /**
-     * Decodes a C2STexasCashGetPlayerStatistics message from the specified reader or buffer.
+     * Decodes a C2SGetPlayerStatistics message from the specified reader or buffer.
      * @param r Reader or buffer to decode from
      * @param [l] Message length if known beforehand
-     * @returns C2STexasCashGetPlayerStatistics
+     * @returns C2SGetPlayerStatistics
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2STexasCashGetPlayerStatistics;
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetPlayerStatistics;
 }
 
 /** Represents a S2CCommonEnterGameResp. */
@@ -3838,6 +3920,43 @@ export class S2CCommonGetObListResp implements IS2CCommonGetObListResp {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonGetObListResp;
 }
 
+/** Represents a S2CCommonGetObSizeResp. */
+export class S2CCommonGetObSizeResp implements IS2CCommonGetObSizeResp {
+
+    /**
+     * Constructs a new S2CCommonGetObSizeResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonGetObSizeResp);
+
+    /** S2CCommonGetObSizeResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CCommonGetObSizeResp gameId. */
+    public gameId: string;
+
+    /** S2CCommonGetObSizeResp obSize. */
+    public obSize: number;
+
+    /**
+     * Encodes the specified S2CCommonGetObSizeResp message. Does not implicitly {@link S2CCommonGetObSizeResp.verify|verify} messages.
+     * @param m S2CCommonGetObSizeResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonGetObSizeResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonGetObSizeResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonGetObSizeResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonGetObSizeResp;
+}
+
 /** Represents a S2CCommonGetBringInListResp. */
 export class S2CCommonGetBringInListResp implements IS2CCommonGetBringInListResp {
 
@@ -3993,6 +4112,43 @@ export class S2CCommonExaminePrivateCardResp implements IS2CCommonExaminePrivate
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonExaminePrivateCardResp;
+}
+
+/** Represents a S2CCommonShowSelfCardResp. */
+export class S2CCommonShowSelfCardResp implements IS2CCommonShowSelfCardResp {
+
+    /**
+     * Constructs a new S2CCommonShowSelfCardResp.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonShowSelfCardResp);
+
+    /** S2CCommonShowSelfCardResp result. */
+    public result?: (ICommonResult|null);
+
+    /** S2CCommonShowSelfCardResp gameId. */
+    public gameId: string;
+
+    /** S2CCommonShowSelfCardResp cardList. */
+    public cardList: ICardInfo[];
+
+    /**
+     * Encodes the specified S2CCommonShowSelfCardResp message. Does not implicitly {@link S2CCommonShowSelfCardResp.verify|verify} messages.
+     * @param m S2CCommonShowSelfCardResp message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonShowSelfCardResp, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonShowSelfCardResp message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonShowSelfCardResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonShowSelfCardResp;
 }
 
 /** Represents a S2CCommonExtraThinkResp. */
@@ -5223,6 +5379,43 @@ export class S2CCommonAutoOperatorNotify implements IS2CCommonAutoOperatorNotify
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonAutoOperatorNotify;
+}
+
+/** Represents a S2CCommonShowSelfCardNotify. */
+export class S2CCommonShowSelfCardNotify implements IS2CCommonShowSelfCardNotify {
+
+    /**
+     * Constructs a new S2CCommonShowSelfCardNotify.
+     * @param [p] Properties to set
+     */
+    constructor(p?: IS2CCommonShowSelfCardNotify);
+
+    /** S2CCommonShowSelfCardNotify gameId. */
+    public gameId: string;
+
+    /** S2CCommonShowSelfCardNotify uid. */
+    public uid: string;
+
+    /** S2CCommonShowSelfCardNotify cardList. */
+    public cardList: ICardInfo[];
+
+    /**
+     * Encodes the specified S2CCommonShowSelfCardNotify message. Does not implicitly {@link S2CCommonShowSelfCardNotify.verify|verify} messages.
+     * @param m S2CCommonShowSelfCardNotify message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: IS2CCommonShowSelfCardNotify, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a S2CCommonShowSelfCardNotify message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns S2CCommonShowSelfCardNotify
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): S2CCommonShowSelfCardNotify;
 }
  
 }
