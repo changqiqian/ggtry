@@ -1,5 +1,7 @@
 import { _decorator, Component, Node, Vec3 } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { GameReplayData } from '../GameReplayData';
 import { Game_MiniPlayer } from './Game_MiniPlayer';
 const { ccclass, property } = _decorator;
 
@@ -26,27 +28,35 @@ export class Game_MiniSeatUI extends BaseUI {
 
     }
 
+    
+
     InitSeat()
     {
-        // let childCount = this.node.children.length; 
-        // for(let i = 0 ; i < childCount ; i++)
-        // {
-        //     let current = this.node.children[i].getComponent(Game_SeatItem);
-        //     current.InitWithData(this.mIndex , i);
-        // }
+        let childCount = this.node.children.length; 
+        for(let i = 0 ; i < childCount ; i++)
+        {
+            let current = this.node.children[i].getComponent(Game_MiniPlayer);
+            current.InitSeat(i);
+        }
+
+        let selfPlayer = GameReplayData.Instance.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+        if(selfPlayer != null)
+        {
+            this.TryRotateSeats(selfPlayer.seat);
+        }
     }
 
     GetSeatNodeBySeatId(_seatId : number) : Game_MiniPlayer
     {
-        // let childCount = this.node.children.length; 
-        // for(let i = 0 ; i < childCount ; i++)
-        // {
-        //     let current = this.node.children[i].getComponent(Game_SeatItem);
-        //     if(current.mSeatID == _seatId)
-        //     {
-        //         return current;
-        //     }
-        // }
+        let childCount = this.node.children.length; 
+        for(let i = 0 ; i < childCount ; i++)
+        {
+            let current = this.node.children[i].getComponent(Game_MiniPlayer);
+            if(current.mSeatID == _seatId)
+            {
+                return current;
+            }
+        }
 
         return null;
     }
@@ -54,17 +64,17 @@ export class Game_MiniSeatUI extends BaseUI {
     FindBottomSeat() : Game_MiniPlayer
     {
         let index = 0;
-        // let pos = this.node.children[0].position;
-        // let childCount = this.node.children.length; 
-        // for(let i = 1 ; i < childCount ; i++)
-        // {
-        //     let current = this.node.children[i];
-        //     if(current.position.y < pos.y)
-        //     {
-        //         pos = current.position;
-        //         index = i;
-        //     }
-        // }
+        let pos = this.node.children[0].position;
+        let childCount = this.node.children.length; 
+        for(let i = 1 ; i < childCount ; i++)
+        {
+            let current = this.node.children[i];
+            if(current.position.y < pos.y)
+            {
+                pos = current.position;
+                index = i;
+            }
+        }
 
         return this.node.children[index].getComponent(Game_MiniPlayer);
     }
@@ -75,7 +85,7 @@ export class Game_MiniSeatUI extends BaseUI {
         let bottomSeat = this.FindBottomSeat();
         if(localSeat.mSeatID == bottomSeat.mSeatID) //自己已经是最底部的座位了
         {
-            console.log("Game_SeatUI 自己已经是最底部的座位了");
+            console.log("Game_MiniSeatUI 自己已经是最底部的座位了");
             return;
         }
 
