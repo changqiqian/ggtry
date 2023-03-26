@@ -36,7 +36,7 @@ export class Game_SelfUI extends BaseUI
 
     mAlreadyShowCards : boolean = false;
     private mIndex : number = null;
-    mSelectedPoker : Array<boolean>;
+    mSelectedPoker : Array<ShowPokerState>;
     InitParam() 
     {
 
@@ -44,7 +44,6 @@ export class Game_SelfUI extends BaseUI
     BindUI() 
     {
         this.HideAllUI();
-        this.ResetShowCard();
         this.mGame_AddTime.SetCallback(()=>
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
@@ -58,7 +57,35 @@ export class Game_SelfUI extends BaseUI
             let currentCard = this.mCards.children[i].getComponent(Poker);
             currentCard.SetClickAble((_selected , _index)=>
             {
-                this.mSelectedPoker[_index] = _selected;
+                if(this.mSelectedPoker[_index] == ShowPokerState.AlreadyShow)
+                {
+                    currentCard.ShowEye(false);
+                    return;
+                }
+
+                if(_selected)
+                {
+                    this.mSelectedPoker[_index] = ShowPokerState.ReadyToShow;
+                }
+                else
+                {
+                    this.mSelectedPoker[_index] = ShowPokerState.DontShow;
+                }
+
+                let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+                let gameData = gameStruct.mGameData;
+                if(gameData.GetGameState()== TexasCashState.TexasCashState_Settlement)
+                {
+                    if(_selected == true)
+                    {
+                        let msgId = gameData.ShowSelfCardsMsgId();
+                        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
+                        let showCards = new Array<CardInfo>();
+                        showCards.push(selfPlayer.cards[_index]);
+                        NetworkSend.Instance.ShowSelfCards(msgId,gameStruct.mGameId ,showCards );
+                        this.mSelectedPoker[_index] = ShowPokerState.AlreadyShow;
+                    }
+                }
             },i);
         }
     }
@@ -129,6 +156,7 @@ export class Game_SelfUI extends BaseUI
             this.UpdateDealer();
             this.UpdateMoney();
             this.RestoreAction();
+            this.ResetShowCard();
         })
 
         gameData.Data_S2CCommonPreFlopRoundNotify.AddListenner(this,(_data)=>
@@ -176,7 +204,7 @@ export class Game_SelfUI extends BaseUI
             let needShow = false;
             for(let h = 0 ; h < this.mSelectedPoker.length ; h++)
             {
-                if(this.mSelectedPoker[h] ==  true)
+                if(this.mSelectedPoker[h] ==  ShowPokerState.ReadyToShow)
                 {
                     needShow = true;
                     break;
@@ -205,13 +233,14 @@ export class Game_SelfUI extends BaseUI
 
                 for(let g = 0 ; g < cardNodes.length ; g++)
                 {
-                    if(this.mSelectedPoker[g] ==  true)
+                    if(this.mSelectedPoker[g] ==  ShowPokerState.ReadyToShow)
                     {
                         showCards.push(selfPlayer.cards[g]);
                         let currentPoker = cardNodes[g].getComponent(Poker);
                         currentPoker.SetFrontByCardInfo(selfPlayer.cards[g]);
                         currentPoker.ShowBack();
                         currentPoker.FlipToFront();
+                        this.mSelectedPoker[g] =  ShowPokerState.AlreadyShow;
                     }
                 }
       
@@ -221,8 +250,6 @@ export class Game_SelfUI extends BaseUI
                     NetworkSend.Instance.ShowSelfCards(msgId,gameStruct.mGameId ,showCards );
                 }
             }
-
-            this.ResetShowCard();
         })
 
         gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
@@ -245,6 +272,7 @@ export class Game_SelfUI extends BaseUI
 
     HideAllUI()
     {
+        this.ResetShowCard();
         this.mCards.active = false;
         this.mGame_AddTime.node.active = false;
         this.mGame_BetAmount.node.active = false;
@@ -259,15 +287,15 @@ export class Game_SelfUI extends BaseUI
     {
         if(this.mSelectedPoker == null)
         {
-            this.mSelectedPoker = new Array<boolean>();
-            this.mSelectedPoker.push(false);
-            this.mSelectedPoker.push(false);
-            this.mSelectedPoker.push(false);
-            this.mSelectedPoker.push(false);
+            this.mSelectedPoker = new Array<ShowPokerState>();
+            this.mSelectedPoker.push(ShowPokerState.DontShow);
+            this.mSelectedPoker.push(ShowPokerState.DontShow);
+            this.mSelectedPoker.push(ShowPokerState.DontShow);
+            this.mSelectedPoker.push(ShowPokerState.DontShow);
         }
         for(let i = 0 ; i < this.mSelectedPoker.length ; i++)
         {
-            this.mSelectedPoker[i] = false;
+            this.mSelectedPoker[i] = ShowPokerState.DontShow;
         }
     }
 
@@ -329,6 +357,7 @@ export class Game_SelfUI extends BaseUI
         this.UpdateCards();
         this.UpdateFold();
         this.UpdateAddTime();
+        this.ResetShowCard();
     }
 
     UpdateDealer()
@@ -650,3 +679,9 @@ export class Game_SelfUI extends BaseUI
 
 }
 
+enum ShowPokerState
+{
+    DontShow = 0,
+    ReadyToShow = 1,
+    AlreadyShow = 2,
+}

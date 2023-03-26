@@ -63,20 +63,22 @@ export class Game_MiniSeatUI extends BaseUI {
 
     FindBottomSeat() : Game_MiniPlayer
     {
-        let index = 0;
-        let pos = this.node.children[0].position;
-        let childCount = this.node.children.length; 
-        for(let i = 1 ; i < childCount ; i++)
-        {
-            let current = this.node.children[i];
-            if(current.position.y < pos.y)
-            {
-                pos = current.position;
-                index = i;
-            }
-        }
+        // let index = 0;
+        // let pos = this.node.children[0].position;
+        // let childCount = this.node.children.length; 
+        // for(let i = 1 ; i < childCount ; i++)
+        // {
+        //     let current = this.node.children[i];
+        //     if(current.position.y < pos.y)
+        //     {
+        //         pos = current.position;
+        //         index = i;
+        //     }
+        // }
 
-        return this.node.children[index].getComponent(Game_MiniPlayer);
+        // return this.node.children[index].getComponent(Game_MiniPlayer);
+
+        return this.node.children[0].getComponent(Game_MiniPlayer);
     }
 
     TryRotateSeats(_LocalPlayerSeatId : number )
@@ -88,7 +90,6 @@ export class Game_MiniSeatUI extends BaseUI {
             console.log("Game_MiniSeatUI 自己已经是最底部的座位了");
             return;
         }
-
         let step = this.GetStepFromTarget(localSeat.mSeatID , bottomSeat.mSeatID);
         if(step != 0)
         {

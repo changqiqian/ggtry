@@ -14,6 +14,9 @@ export class MovingShow extends BaseUI {
 
     private mRootNode : Node = null;
 
+
+    private mShowing : boolean = false;
+
     onEnable()
     {
         this.ResetPosition();
@@ -98,7 +101,13 @@ export class MovingShow extends BaseUI {
         {
             return;
         }
+
+        if(this.mShowing)
+        {
+            return;
+        }
         this.mMoving = true;
+        this.mShowing = true;
         this.StopAllTween();
 
         if(this.mAnimationShowType == AnimationShowType.FromLeft)
@@ -140,7 +149,12 @@ export class MovingShow extends BaseUI {
         {
             return;
         }
+        if(this.mShowing == false)
+        {
+            return;
+        }
         this.mMoving = true;
+        this.mShowing = false;
         this.StopAllTween();
         switch(this.mAnimationShowType)
         {

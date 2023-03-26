@@ -376,7 +376,17 @@ export abstract class GameData extends MultipleNotify
 
     public SetActions(_actions : Array<ActionInfo>)
     {
-        this.GetDynamicData().actions = _actions;
+        let actionWithoutAnte = new Array<ActionInfo>();
+        for(let i = 0 ; i < _actions.length ; i++)
+        {
+            let current = _actions[i];
+            if(current.actionType!= ActionType.ActionType_Ante)
+            {
+                actionWithoutAnte.push(current);
+            }
+        }
+
+        this.GetDynamicData().actions = actionWithoutAnte;
     }
 
     public IsSelfBySeat(_seatId : number) : boolean

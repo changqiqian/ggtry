@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { UIMgr } from '../../../base/UIMgr';
+import { CommonNotify } from '../../../CommonNotify';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
@@ -76,15 +77,26 @@ export class Game_TopUI extends BaseUI
             this.mObBtn.SetTitle(_data.obSize + "");
         })
 
-        this.StartSecondsTimer(1000000,1,()=>
+        gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
-            let seconds = this.GetRestSeconds();
-            if(seconds%30 == 0)
+            this.StartSecondsTimer(1000000,1,()=>
             {
-                let msgID = gameData.OBSizeMsgId();
-                NetworkSend.Instance.GetObNum(msgID , gameStruct.mGameId);
+                let seconds = this.GetRestSeconds();
+                if(seconds%30 == 0)
+                {
+                    let msgID = gameData.OBSizeMsgId();
+                    NetworkSend.Instance.GetObNum(msgID , gameStruct.mGameId);
+                }
+            })
+        });
+        CommonNotify.Instance.Data_SocketClose.AddListenner(this,(_data)=>
+        {
+            if(_data == true)
+            {
+                this.StopSecondsTimer();
             }
-        })
+
+        });
     }
 }
 

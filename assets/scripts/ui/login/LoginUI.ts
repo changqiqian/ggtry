@@ -138,6 +138,10 @@ export class LoginUI extends BaseUI
         
         CommonNotify.Instance.Data_SocketOpen.AddListenner(this,(_data)=>
         {
+            if(_data == false)
+            {
+                return;
+            }
             MultipleTableCtr.TryToEnterGame(GameConfig.GetTopGameId() , GameType.GameType_TexasCash,"",GameConfig.GetTopUid());
 
             // if(GameConfig.DebugMode)

@@ -1,6 +1,8 @@
-import { _decorator, Component, Node, Sprite, Label } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, Widget } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Tool } from '../../../Tool';
+import { Poker } from '../../common/Poker';
 import { GameReplayData } from '../GameReplayData';
 import { Game_BetAmount } from './Game_BetAmount';
 const { ccclass, property } = _decorator;
@@ -37,7 +39,13 @@ export class Game_MiniPlayer extends BaseUI
     }
     BindUI()
     {
-
+        let widget = this.node.getComponent(Widget);
+        if(widget != null)
+        {
+            widget.updateAlignment();
+            widget.enabled = false;
+            widget.destroy();
+        }
     }
     RegDataNotify()
     {
@@ -67,7 +75,7 @@ export class Game_MiniPlayer extends BaseUI
         let playerInfo = GameReplayData.Instance.GetPlayerBySeat(_seatId);
         if(playerInfo == null)
         {
-            this.mEmptyNode.active = true;
+            //this.mEmptyNode.active = true;
             return;
         }
 
@@ -83,6 +91,32 @@ export class Game_MiniPlayer extends BaseUI
 
         this.mDealer.active = GameReplayData.Instance.Data_CopyReplayData.mData.dealerUid == playerInfo.uid;
 
+
+        this.mCards.active = true;
+        for(let i = 0 ; i < this.mCards.children.length ; i++)
+        {
+            let currentPoker = this.mCards.children[i].getComponent(Poker);
+            currentPoker.ShowBack();
+        }
+
+
+        let cardsInfo = GameReplayData.Instance.GetCardsByUid(playerInfo.uid);
+        this.ShowCards(cardsInfo);
+    }
+
+    ShowCards(_cards : Array<CardInfo>)
+    {
+        if(_cards == null)
+        {
+            return;
+        }
+        for(let i = 0 ; i < _cards.length ; i++)
+        {
+            let currentCard = _cards[i];
+            let currentPoker = this.mCards.children[i].getComponent(Poker);
+            currentPoker.SetFrontByCardInfo(currentCard);
+            currentPoker.ShowFront();
+        }
     }
 }
 

@@ -9,7 +9,9 @@ import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
 import { BriefRecordItem } from '../../common/BriefRecordItem';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { GameReplayData } from '../GameReplayData';
 import { Game_CashReplay } from './Game_CashReplay';
+import { Game_MiniReplay } from './Game_MiniReplay';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_RecipeLayer')
@@ -123,12 +125,14 @@ export class Game_RecipeLayer  extends ListViewCtr<SimpleReplayRecord>
 
         gameData.Data_S2CCommonDetailReplayResp.AddListenner(this,(_data)=>
         {
-            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_CashReplay",true,(_script)=>
+            GameReplayData.Instance.InitData(_data.detailReplayRecord);
+            UIMgr.Instance.ShowLayer("gamePage","prefab/Game_MiniReplay",true , (_script)=>
             {
-                let tempScript = _script as Game_CashReplay;
-                tempScript.InitWithData(_data.detailReplayRecord);
+                let temp = _script as Game_MiniReplay;
+                temp.InitWithData(this.mIndex);
             });      
         });
+
     }
 
     Refresh()

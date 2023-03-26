@@ -37,7 +37,6 @@ export class Game_BottomUI extends BaseUI
 
         this.mHistoryBtn.SetClickCallback(()=>
         {
-            //UIMgr.Instance.ShowToast("不要乱点，别点这个按钮");
             UIMgr.Instance.ShowLayer("gamePage","prefab/Game_RecipeLayer",true,(_script)=>
             {
                 let tempScript = _script as Game_RecipeLayer;

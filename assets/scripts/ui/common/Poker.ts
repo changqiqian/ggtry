@@ -33,6 +33,10 @@ export class Poker extends BaseUI
         this.ShowBack();
         this.mShowBtn.SetClickCallback(()=>
         {
+            if(this.mBack.activeInHierarchy == true)
+            {
+                return;
+            }
             this.mIcon.active = !this.mIcon.active;
             if(this.mClickCallBack)
             {
@@ -287,5 +291,9 @@ export class Poker extends BaseUI
         this.mRoot.active = _value;
     }
 
+    public ShowEye(_value :boolean)
+    {
+        this.mIcon.active = _value;
+    }
 }
 

@@ -38,7 +38,7 @@ export class Game_Pot extends BaseUI
 
     CustmoerDestory() 
     {
-
+     
     }
 
     SetTotalPot(_amount : number)

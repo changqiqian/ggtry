@@ -94,7 +94,6 @@ export class Game_ProfileLayer extends BaseUI
         {
             let record = _data.playerStatistic;
             this.mTotalHands.string = record.totalHands + "";
-
             if(record.totalHands == 0)
             {
                 this.ResetUI();

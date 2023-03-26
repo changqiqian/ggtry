@@ -986,7 +986,17 @@ export class Game_Player extends BaseUI
         this.mCards.active = true;
         for(let i = 0 ; i < _cards.length ; i++)
         {
-            let currentPoker = cardNodes[i].getComponent(Poker);
+            let step = i;
+            let currentPoker = cardNodes[step].getComponent(Poker);
+            while(currentPoker.node.active)
+            {
+                step++;
+                if(step >= cardNodes.length)
+                {
+                    return;
+                }
+                currentPoker = cardNodes[step].getComponent(Poker);
+            }
             currentPoker.ResetAndHide();
             currentPoker.ShowBack(); 
             currentPoker.SetFrontByCardInfo(_cards[i]);

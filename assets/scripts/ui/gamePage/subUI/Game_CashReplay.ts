@@ -47,36 +47,13 @@ export class Game_CashReplay extends BaseUI {
         {
             
         })
-    }
 
-    RegDataNotify() 
-    {
-
-    }
-    LateInit() 
-    {
-        
-    }
-
-    CustmoerDestory() 
-    {
-        GameReplayData.Instance.Clear();
-    }
-
-    public InitWithData(_data : DetailReplayRecord)
-    {
-        GameReplayData.Instance.InitData(_data);
-        this.InitSubView();
-    }
-
-    InitSubView()
-    {
         this.AddSubView("gamePage","prefab/Game_ReplayCtr" , (_script)=>
         {
             let tempScript = _script as Game_ReplayCtr;
             tempScript.SetExitCallback(()=>
             {
-                UIMgr.Instance.DeleteUIByTarget(this);
+                this.Show(false);
             })
         },this.mMovingShow.node);
         this.AddSubView("gamePage","prefab/Game_Pot", (_script)=>
@@ -97,8 +74,8 @@ export class Game_CashReplay extends BaseUI {
 
         },this.mBG.node);
         
-        let testData = GameReplayData.Instance.Data_ReplayData.mData;
-        let seatNum = testData.texasConfig.seatNum
+        let replayData = GameReplayData.Instance.Data_ReplayData.mData;
+        let seatNum = replayData.texasConfig.seatNum
 
         let prefabName = "prefab/Game_SeatUI" + seatNum;
         this.AddSubView("gamePage",  prefabName  , (_script) =>
@@ -107,5 +84,19 @@ export class Game_CashReplay extends BaseUI {
             tempScript.InitWithReplayData();
         },this.mBG.node);
     }
+
+    RegDataNotify() 
+    {
+
+    }
+    LateInit() 
+    {
+        
+    }
+
+    CustmoerDestory() 
+    {
+    }
+
 }
 

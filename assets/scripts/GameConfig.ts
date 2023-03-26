@@ -1,4 +1,5 @@
 
+import { Localization } from "./base/Localization";
 import { Tool } from "./Tool";
 import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
@@ -546,6 +547,54 @@ export class GameConfig
         return Number(result) == 1 ? true : false;
     }
 
+    public static GetActionTypeName(_actionType : ActionType) : string
+    {
+        switch(_actionType)
+        {
+            case ActionType.ActionType_Ante:
+            {
+                return Localization.GetString("00211");
+            }
+            case ActionType.ActionType_SB:
+            {
+                return Localization.GetString("00252");
+            }
+            case ActionType.ActionType_BB:
+            {
+                return Localization.GetString("00253");
+            }
+            case ActionType.ActionType_Straddle:
+            {
+                return Localization.GetString("00210");
+            }
+            case ActionType.ActionType_Bet:
+            {
+                return Localization.GetString("00254");
+            }
+            case ActionType.ActionType_Raise:
+            {
+                return Localization.GetString("00068");
+            }
+            case ActionType.ActionType_AllIn:
+            {
+                return Localization.GetString("00069");
+            }
+            case ActionType.ActionType_Check:
+            {
+                return Localization.GetString("00066");
+            }
+            case ActionType.ActionType_Fold:
+            {
+                return Localization.GetString("00065");
+            }
+            case ActionType.ActionType_Call:
+            {
+                return Localization.GetString("00067");
+            }
+        }
+
+        return "None";
+    }
 
     public static uid : string;
 

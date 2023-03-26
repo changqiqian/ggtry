@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager, sys, view, Widget, UITransform, Vec3, Size, TweenSystem, game, Game } from 'cc';
 import { CommonNotify } from '../CommonNotify';
 import { CowboyData } from '../ui/cowboy/CowboyData';
+import { GameReplayData } from '../ui/gamePage/GameReplayData';
 import { HallData } from '../ui/hall/HallData';
 import { LoadingData } from '../ui/loading/LoadingData';
 import { LoginData } from '../ui/login/LoginData';
@@ -87,7 +88,7 @@ export abstract class BaseUI extends Component {
         HallData.Instance.RemoveAllDataListennerByTarget(this);
         LocalPlayerData.Instance.RemoveAllDataListennerByTarget(this);
         CommonNotify.Instance.RemoveAllDataListennerByTarget(this);
-
+        GameReplayData.Instance.RemoveAllDataListennerByTarget(this);
         // for(let i = 0 ; i < MultipleTableCtr.GameStruct.length ; i++)
         // {
         //     let current = MultipleTableCtr.GameStruct[i];

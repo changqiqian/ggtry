@@ -24,22 +24,19 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
 
     public InitData(_data : DetailReplayRecord)
     {
-        this.Data_CopyReplayData.mData = new DetailReplayRecord(_data);
-        this.DeepCopyReplayData();
+        let str = JSON.stringify(_data);
+        this.Data_ReplayData.mData = JSON.parse(str) as DetailReplayRecord;
+        this.Data_CopyReplayData.mData = JSON.parse(str) as DetailReplayRecord;
         this.ReStart();
 
     }
 
-    DeepCopyReplayData()
-    {
-        let str = JSON.stringify(this.Data_CopyReplayData.mData);
-        this.Data_ReplayData.mData = JSON.parse(str) as DetailReplayRecord;
-    }
 
     public ReStart()
     {
         this.Data_TotalPots.mData = 0;
-        this.DeepCopyReplayData();
+        let str = JSON.stringify(this.Data_CopyReplayData.mData);
+        this.Data_ReplayData.mData = JSON.parse(str) as DetailReplayRecord;
         this.Data_State.mData = TexasCashState.TexasCashState_RoundStart;
         this.Data_Step.mData = 0;
         this.Data_Auto.mData = false;
@@ -133,7 +130,6 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
         return null;
     }
 
-
     GetRoundStartActionUid(_uid : string) : ActionResult
     {
         let roundStartActions = this.GetRoundStartActions();
@@ -198,4 +194,197 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
    
     }
 
+
+    GetPosIndex(_uid : string)
+    {
+        let totalSeatNum = this.Data_CopyReplayData.mData.texasConfig.seatNum;
+        let dealerUid = this.Data_CopyReplayData.mData.dealerUid;
+        let dealerInfo = this.GetPlayerInfoByUid(dealerUid);
+        let standardSeat = dealerInfo.seat;
+        let targetPlayer = this.GetPlayerInfoByUid(_uid);
+        let targetSeatNum = targetPlayer.seat;
+        let result = 0;
+        while(standardSeat != targetSeatNum)
+        {
+            standardSeat++;
+            if(standardSeat >totalSeatNum)
+            {
+                standardSeat = 0;
+            }
+
+            let tempPlayer = this.GetPlayerBySeat(standardSeat);
+            if(tempPlayer == null)
+            {
+                continue;
+            }
+            
+            result++;
+        }
+
+        return result;
+    }
+
+    GetPosName(_uid : string) : string
+    {
+        let totalSeatNum = this.Data_CopyReplayData.mData.texasConfig.seatNum;
+        let straddle = this.Data_CopyReplayData.mData.texasConfig.straddle;
+        let PosNames : Array<string> = new Array<string>();
+
+        console.log("totalSeatNum==" + totalSeatNum);
+        let posNameIndex = this.GetPosIndex(_uid);
+        console.log("posNameIndex==" + posNameIndex);
+        if(straddle == false)
+        {
+            if(totalSeatNum == 2)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+            }
+            else if(totalSeatNum == 3)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+            }
+            else if(totalSeatNum == 4)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("CO");
+            }
+            else if(totalSeatNum == 5)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("UTG");
+                PosNames.push("CO");
+            }
+            else if(totalSeatNum == 6)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("UTG");
+                PosNames.push("MP");
+                PosNames.push("CO");
+            }
+            else if(totalSeatNum == 7)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("UTG");
+                PosNames.push("UTG+1");
+                PosNames.push("MP");
+                PosNames.push("CO");
+            }
+            else if(totalSeatNum == 8)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("UTG");
+                PosNames.push("UTG+1");
+                PosNames.push("MP");
+                PosNames.push("MP+1");
+                PosNames.push("CO");
+            }
+            else if(totalSeatNum == 9)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("UTG");
+                PosNames.push("UTG+1");
+                PosNames.push("MP");
+                PosNames.push("MP+1");
+                PosNames.push("MP+2");
+                PosNames.push("CO");
+            }
+        }
+        else
+        {
+            if(totalSeatNum == 2)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+            }
+            else if(totalSeatNum == 3)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+            }
+            else if(totalSeatNum == 4)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("Straddle");
+            }
+            else if(totalSeatNum == 5)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("Straddle");
+                PosNames.push("UTG");
+            }
+            else if(totalSeatNum == 6)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("Straddle");
+                PosNames.push("UTG");
+                PosNames.push("CO");
+            }
+            else if(totalSeatNum == 7)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("Straddle");
+                PosNames.push("UTG");
+                PosNames.push("MP");
+                PosNames.push("CO");
+            }
+            else if(totalSeatNum == 8)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("Straddle");
+                PosNames.push("UTG");
+                PosNames.push("UTG+1");
+                PosNames.push("MP");
+                PosNames.push("CO");
+            }
+            else if(totalSeatNum == 9)
+            {
+                PosNames.push("Btn");
+                PosNames.push("SB");
+                PosNames.push("BB");
+                PosNames.push("Straddle");
+                PosNames.push("UTG");
+                PosNames.push("UTG+1");
+                PosNames.push("MP");
+                PosNames.push("MP+1");
+                PosNames.push("CO");
+            }
+        }
+
+        return PosNames[posNameIndex];
+    }
+
 }
+
+// 庄位>小盲大盲struddle>CO>UTG>MP>UTG+1>MP+1>MP+2
+// 4人时：从大盲开始，命名为CO；
+// 5人时：从大盲开始，命名为UTG CO；
+// 6人时：从大盲开始，命名为UTG MP CO；
+// 7人时：从大盲开始，命名为UTG UTG+1 MP CO；
+// 8人时：从大盲开始，命名为UTG UTG+1 MP MP+1 CO；
+// 9人时：从大盲开始，命名为UTG UTG+1 MP MP+1 MP+2 CO；

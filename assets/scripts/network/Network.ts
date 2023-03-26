@@ -105,9 +105,14 @@ export class Network  extends Singleton<Network>()
     private OnOpen(event) {
         UIMgr.Instance.ShowLoading(false);
         console.log('Socket OnOpen = ');
+
+        console.log ("event===" + event);
+        console.log ("this.mWebSocket===" + this.mWebSocket);
+
         UIMgr.Instance.ShowToast(Localization.GetString("00236"));
         clearTimeout(this.mConnectTimer);
         CommonNotify.Instance.Data_SocketOpen.mData = true;
+        CommonNotify.Instance.Data_SocketClose.mData = false;
         this.SendPing();
     }
 
@@ -135,10 +140,12 @@ export class Network  extends Singleton<Network>()
             this.mWebSocket = null;
         }
 
+        CommonNotify.Instance.Data_SocketOpen.mData = false;
+        CommonNotify.Instance.Data_SocketClose.mData = true;
+
         if (this.mForceClose == false) 
         {
             UIMgr.Instance.ShowLoading(true, Localization.GetString("00366"));
-            CommonNotify.Instance.Data_SocketClose.mData = true;
             UIMgr.Instance.ShowToast(Localization.GetString("00113"));
             setTimeout(this.CreateWS.bind(this), 1000);
         }

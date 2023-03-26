@@ -219,7 +219,7 @@ export class UIMgr extends Singleton<UIMgr>()
             target.tag = _tag;
             let nodeCount = this.GetRootNode(LayerType.Layer).children.length;
             target.value.setSiblingIndex(nodeCount);
-            target.value.active = false;
+            //target.value.active = false;
             let tempScript = target.value.getComponent(BaseUI);
             tempScript.Show(_show);
             if(_finishFunction != null)

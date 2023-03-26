@@ -77,7 +77,6 @@ export class Game_SelfAction extends BaseUI
                 actionInfo.amount = this.mCallAmount;
                 actionInfo.actionType = ActionType.ActionType_Call;
             }
-            
             this.SendGameAction(actionInfo);
         });
 
