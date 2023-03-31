@@ -17,6 +17,8 @@ export class Game_ControlBtns extends BaseUI
     mShowHandsBtn: BaseButton = null;
     @property(BaseButton) 
     mBackToGameBtn: BaseButton = null;
+    @property(Node) 
+    mHalfDark: Node = null;
 
     private mIndex : number = null;
     InitParam() 
@@ -33,6 +35,7 @@ export class Game_ControlBtns extends BaseUI
             NetworkSend.Instance.AutoState(gameData.AutoMsgId(),gameStruct.mGameId);
         });
         this.mBackToGameBtn.node.active = false;
+        this.mHalfDark.active = false;
 
         this.mDealCardsBtn.SetClickCallback(()=>
         {
@@ -91,6 +94,7 @@ export class Game_ControlBtns extends BaseUI
             this.mDealCardsBtn.node.active = false;
             this.mShowHandsBtn.node.active = false;
             this.mBackToGameBtn.node.active = false;
+            this.mHalfDark.active = false;
             this.UpdateBackGameBtn();
         });
 
@@ -120,6 +124,7 @@ export class Game_ControlBtns extends BaseUI
             if(_data.actionUid == localUid)
             {
                 this.mBackToGameBtn.node.active = false;
+                this.mHalfDark.active = false;
             }
         });
 
@@ -153,6 +158,7 @@ export class Game_ControlBtns extends BaseUI
         if(selfPlayer.auto)
         {
             this.mBackToGameBtn.node.active = true;
+            this.mHalfDark.active = true;
             if(selfPlayer.autoLeftTime > 0)
             {
                 this.StartSecondsTimer(selfPlayer.autoLeftTime,1,()=>
@@ -169,6 +175,7 @@ export class Game_ControlBtns extends BaseUI
         else
         {
             this.mBackToGameBtn.node.active = false;
+            this.mHalfDark.active = false;
         }
     }
 }

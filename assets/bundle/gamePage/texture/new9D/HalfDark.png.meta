@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "f45fc4a7-930b-4b3e-9d21-6644640f87f6",
+  "uuid": "c515028a-9ce0-4308-b696-deca556ac62a",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "f45fc4a7-930b-4b3e-9d21-6644640f87f6@6c48a",
-      "displayName": "看手牌-按钮-实底",
+      "uuid": "c515028a-9ce0-4308-b696-deca556ac62a@6c48a",
+      "displayName": "HalfDark",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "f45fc4a7-930b-4b3e-9d21-6644640f87f6",
+        "imageUuidOrDatabaseUri": "c515028a-9ce0-4308-b696-deca556ac62a",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "f45fc4a7-930b-4b3e-9d21-6644640f87f6@f9941",
-      "displayName": "看手牌-按钮-实底",
+      "uuid": "c515028a-9ce0-4308-b696-deca556ac62a@f9941",
+      "displayName": "HalfDark",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": 0,
+        "offsetY": -9,
         "trimX": 0,
-        "trimY": 0,
-        "width": 390,
-        "height": 120,
-        "rawWidth": 390,
-        "rawHeight": 120,
+        "trimY": 18,
+        "width": 1125,
+        "height": 1422,
+        "rawWidth": 1125,
+        "rawHeight": 1440,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "f45fc4a7-930b-4b3e-9d21-6644640f87f6@6c48a",
+        "imageUuidOrDatabaseUri": "c515028a-9ce0-4308-b696-deca556ac62a@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "f45fc4a7-930b-4b3e-9d21-6644640f87f6@f9941"
+    "redirect": "c515028a-9ce0-4308-b696-deca556ac62a@f9941"
   }
 }
