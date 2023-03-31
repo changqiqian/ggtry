@@ -11,7 +11,7 @@
     "6c48a": {
       "importer": "texture",
       "uuid": "95f0ccc5-98a3-44dd-97a1-5ce1178a6893@6c48a",
-      "displayName": "实时战绩-选中",
+      "displayName": "SelfIcon",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -34,7 +34,7 @@
     "f9941": {
       "importer": "sprite-frame",
       "uuid": "95f0ccc5-98a3-44dd-97a1-5ce1178a6893@f9941",
-      "displayName": "实时战绩-选中",
+      "displayName": "SelfIcon",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {

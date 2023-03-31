@@ -16,6 +16,8 @@ export class Game_MatchInfoItem extends BaseUI
     @property(Label) 
     mHands: Label = null;
     @property(Label) 
+    mVPIP: Label = null;
+    @property(Label) 
     mBringIn: Label = null;
     @property(Label) 
     mWinLose: Label = null;
@@ -47,6 +49,15 @@ export class Game_MatchInfoItem extends BaseUI
         this.mNickName.string = _data.name;
         this.mHands.string = _data.totalHands + "";
         this.mBringIn.string = Tool.ConvertMoney_S2C(_data.totalBringIn) + "";
+
+        if(_data.totalHands == 0)
+        {
+            this.mVPIP.string = "0%";
+        }
+        else
+        {
+            this.mVPIP.string = (_data.totalHands/_data.totalFlopHands).toFixed(1) + "%";
+        }
 
         
         if(_data.winLose >=0)
