@@ -154,10 +154,27 @@ export class Game_CustomerRaise extends BaseUI
         let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
         let lastBetAct = gameData.FindBiggestBetAction();
         let bb = gameData.GetStaticData().smallBlind * 2;
+
+        let buttonCount = LocalPlayerData.Instance.CustomerRaiseSetting.length;
+        
+
         for(let i = 0 ; i < this.mRaiseByPot.children.length ; i++)
         {
-            let ratio = GameConfig.GetCustomerRaiseRatio(i);
-            let title = GameConfig.GetCustomerRaiseTitle(i);
+            let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
+            if(i < buttonCount)
+            {
+                currentBtn.Show(true);
+            }
+            else
+            {
+                currentBtn.Show(false);
+                continue;
+            }
+
+            let raiseIndex = LocalPlayerData.Instance.CustomerRaiseSetting[i];
+
+            let ratio = GameConfig.GetDefaultCustomerRaiseRatio(raiseIndex);
+            let title = GameConfig.GetDefaultCustomerRaiseTitle(raiseIndex);
             let amount = ratio *  totalPot; 	
             amount = Tool.CeilServerMoney(amount);
             if(amount <  bb)
@@ -165,9 +182,7 @@ export class Game_CustomerRaise extends BaseUI
                 amount = bb;
             }
             
-            let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
             currentBtn.node.getChildByName("Describe").getComponent(Label).string = title;
-
             if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
             {
                 

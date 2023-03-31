@@ -25,7 +25,7 @@ export class Game_MiniReplay extends BaseUI {
     mBackBtn: BaseButton = null;
 
     @property(Node) 
-    mTable: Node = null;
+    mSeatContainer: Node = null;
 
     @property(Node) 
     mPublicCards: Node = null;
@@ -204,7 +204,7 @@ export class Game_MiniReplay extends BaseUI {
 
             this.LoadPrefab("gamePage",prefabName,(_node)=>
             {
-                this.mTable.addChild(_node);
+                this.mSeatContainer.addChild(_node);
                 let script = _node.getComponent(Game_MiniSeatUI);
                 script.InitSeat();
             })
@@ -233,7 +233,7 @@ export class Game_MiniReplay extends BaseUI {
     ResetUI()
     {
         this.HidePublicCards();
-        this.mTable.destroyAllChildren();
+        this.mSeatContainer.destroyAllChildren();
         for(let i = Phase.Blinds ; i <= Phase.Turn ; i++)
         {
             this.GetPotAmountLabel(i).string = "0";

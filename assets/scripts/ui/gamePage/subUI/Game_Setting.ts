@@ -1,6 +1,8 @@
 import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
+import { UIMgr } from '../../../base/UIMgr';
 import { GameConfig } from '../../../GameConfig';
 import { BaseButton } from '../../common/BaseButton';
 import { ToggleBtn } from '../../common/ToggleBtn';
@@ -17,11 +19,8 @@ export class Game_Setting extends BaseUI
     mPokerToggleGroup: Node = null;
     
     @property(Node) 
-    RaiseToggleGroup0: Node = null;
-    @property(Node) 
-    RaiseToggleGroup1: Node = null;
-    @property(Node) 
-    RaiseToggleGroup2: Node = null;
+    RaiseToggleGroup: Node = null;
+
     
     @property(ToggleBtn) 
     mSliderToggle: ToggleBtn = null;
@@ -47,27 +46,17 @@ export class Game_Setting extends BaseUI
             let currentToggle = this.mPokerToggleGroup.children[i].getComponent(ToggleBtn);
             currentToggle.SetDataNotify(LocalPlayerData.Instance.Data_PokerSetting,i);
         }
-        for(let i = 0 ; i < this.RaiseToggleGroup0.children.length ; i++)
+        for(let i = 0 ; i < this.RaiseToggleGroup.children.length ; i++)
         {
-            let currentToggle = this.RaiseToggleGroup0.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(LocalPlayerData.Instance.Data_CustomerRaise0,i);
+            let currentToggle = this.RaiseToggleGroup.children[i].getComponent(ToggleBtn);
+            currentToggle.SetClickCallback((_selected , _index)=>
+            {
+                this.RaiseBtnLogic(_selected , _index);
+            },i)
             let currentTitle = GameConfig.GetDefaultCustomerRaiseTitle(i);
             currentToggle.SetTitle(currentTitle);
         }
-        for(let i = 0 ; i < this.RaiseToggleGroup1.children.length ; i++)
-        {
-            let currentToggle = this.RaiseToggleGroup1.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(LocalPlayerData.Instance.Data_CustomerRaise1,i);
-            let currentTitle = GameConfig.GetDefaultCustomerRaiseTitle(i);
-            currentToggle.SetTitle(currentTitle);
-        }
-        for(let i = 0 ; i < this.RaiseToggleGroup2.children.length ; i++)
-        {
-            let currentToggle = this.RaiseToggleGroup2.children[i].getComponent(ToggleBtn);
-            currentToggle.SetDataNotify(LocalPlayerData.Instance.Data_CustomerRaise2,i);
-            let currentTitle = GameConfig.GetDefaultCustomerRaiseTitle(i);
-            currentToggle.SetTitle(currentTitle);
-        }
+        this.UpdateRaiseBtn();
 
         this.mSliderToggle.SetClickCallback((_value)=>
         {
@@ -78,8 +67,8 @@ export class Game_Setting extends BaseUI
         {
             LocalPlayerData.Instance.Data_BBModeSetting.mData = _value;
         })
-
     }
+
     RegDataNotify()
     {
         LocalPlayerData.Instance.Data_BGSetting.AddListenner(this,(_data)=>
@@ -90,18 +79,7 @@ export class Game_Setting extends BaseUI
         {
             GameConfig.SaveGamePokerSetting(_data);
         })
-        LocalPlayerData.Instance.Data_CustomerRaise0.AddListenner(this,(_data)=>
-        {
-            GameConfig.SaveCustomerRaise(0,_data);
-        })
-        LocalPlayerData.Instance.Data_CustomerRaise1.AddListenner(this,(_data)=>
-        {
-            GameConfig.SaveCustomerRaise(1,_data);
-        })
-        LocalPlayerData.Instance.Data_CustomerRaise2.AddListenner(this,(_data)=>
-        {
-            GameConfig.SaveCustomerRaise(2,_data);
-        })
+
         LocalPlayerData.Instance.Data_CustomerSliderSetting.AddListenner(this,(_data)=>
         {
             this.mSliderToggle.SetShowStauts(_data);
@@ -112,8 +90,6 @@ export class Game_Setting extends BaseUI
             this.mBBModeToggle.SetShowStauts(_data);
             GameConfig.SaveBBToggle(_data);
         })
-
-
     }
     LateInit()
     {
@@ -122,6 +98,60 @@ export class Game_Setting extends BaseUI
     CustmoerDestory()
     {
 
+    }
+
+    RaiseBtnLogic(_selected : boolean , _toggleIndex : number)
+    {
+        let selectedCount = LocalPlayerData.Instance.CustomerRaiseSetting.length;
+        let currentToggle = this.RaiseToggleGroup.children[_toggleIndex].getComponent(ToggleBtn);
+        if(_selected == true)
+        {
+            if(selectedCount >=4)
+            {
+                currentToggle.ShowUnselected();
+                UIMgr.Instance.ShowToast(Localization.GetString("00392"));
+                return;
+            }
+        }
+        else
+        {
+            if(selectedCount <=2)
+            {
+                currentToggle.ShowSelected();
+                UIMgr.Instance.ShowToast(Localization.GetString("00393"));
+                return;
+            }
+        }
+
+        let index = LocalPlayerData.Instance.CustomerRaiseSetting.findIndex((_item) => _item === _toggleIndex);
+        if(_selected == true)
+        {
+            LocalPlayerData.Instance.CustomerRaiseSetting.push(_toggleIndex);
+            LocalPlayerData.Instance.CustomerRaiseSetting.sort();
+        }
+        else if(_selected == false)
+        {
+            LocalPlayerData.Instance.CustomerRaiseSetting.splice(index , 1);
+        }
+
+        GameConfig.SaveAllCustomerRaise(LocalPlayerData.Instance.CustomerRaiseSetting);
+    }
+
+    UpdateRaiseBtn()
+    {
+        for(let i = 0 ; i < this.RaiseToggleGroup.children.length ; i++)
+        {
+            let currentToggle = this.RaiseToggleGroup.children[i].getComponent(ToggleBtn);
+            let index = LocalPlayerData.Instance.CustomerRaiseSetting.findIndex((_item) => _item === i);
+            if(index < 0)
+            {
+                currentToggle.ShowUnselected();
+            }
+            else
+            {
+                currentToggle.ShowSelected();
+            }
+        }
     }
 }
 

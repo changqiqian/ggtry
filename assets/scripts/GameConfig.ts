@@ -306,44 +306,59 @@ export class GameConfig
         return GameConfig.ReadSimpleData_Bool(key);
     }
 
+    public static MinRaiseBtn = 2;
+    public static MaxRaiseBtn = 4;
     public static GetDefaultCustomerRaiseTitle(_index : number) : string
     {
-        let defualtTitle = ["1/4" , "1/3" , "1/2" , "2/3" , "1x"];
+        let defualtTitle = ["1/4", "1/3" ,"2/5" , "1/2" , "3/5" , "2/3" , "3/4" ,  "4/5" , "1x" , "1.5x"];
         return defualtTitle[_index];
     }
 
     public static GetDefaultCustomerRaiseRatio(_option : number) : number
     {
-        let defualtRatio = [1/4 , 1/3 , 1/2 , 2/3 , 1];
+        let defualtRatio = [1/4 , 1/3 ,2/5 , 1/2 , 3/5 , 2/3 , 3/4 ,  4/5 , 1 , 1.5];
         return defualtRatio[_option];
     }
 
     public static SaveCustomerRaise(_index : number , _optionNum : number)
     {
-        if(_index >= 3)//我们只有3个自定义加注按钮
+        if(_index >= GameConfig.MaxRaiseBtn)//我们只有4个自定义加注按钮
         {
             console.log("我们只有3个自定义加注按钮 你当前想修改_index===" + _index);
             return;
         }
-        let ratioName = "CUSTOMER_RAISE_RATIO" + _index;
-        GameConfig.WriteSimpleData(ratioName, _optionNum);
-        
-        let titleName = "CUSTOMER_RAISE_TITLE" + _index; 
-        GameConfig.WriteSimpleData(titleName, _optionNum);
+        let Title = "CUSTOMER_RAISE_Index" + _index;
+        GameConfig.WriteSimpleData(Title, _optionNum);
+    }
+
+    public static SaveAllCustomerRaise(_value : Array<number>)
+    {
+        for(let i = 0 ; i <  GameConfig.MaxRaiseBtn ; i++)
+        {
+            if(i < _value.length)
+            {
+                GameConfig.SaveCustomerRaise(i , _value[i]);
+            }
+            else
+            {
+                GameConfig.SaveCustomerRaise(i , GameConfig.WrongIndex);
+            }
+
+        }
     }
 
     public static GetCustomerRaise(_index : number) :number
     {
-        if(_index >= 3)//我们只有3个自定义加注按钮
+        if(_index >= GameConfig.MaxRaiseBtn)//我们只有4个自定义加注按钮
         {
-            console.log("我们只有3个自定义加注按钮 你当前想获取_index===" + _index);
+            console.log("我们只有4个自定义加注按钮 你当前想获取_index===" + _index);
             return;
         }
-        let titleName = "CUSTOMER_RAISE_RATIO" + _index;
-        let optionNum = GameConfig.ReadSimpleData(titleName, null);
+        let Title = "CUSTOMER_RAISE_Index" + _index;
+        let optionNum = GameConfig.ReadSimpleData(Title, null);
         if(optionNum == null)
         {
-            return _index;
+            return GameConfig.WrongIndex;
         }
         else
         {
@@ -351,29 +366,28 @@ export class GameConfig
         }
     }
 
-    public static GetCustomerRaiseRatio(_index : number) : number
+    public static GetAllCustomerRaise() : Array<number>
     {
-        if(_index >= 3)//我们只有3个自定义加注按钮
+        let result = new Array<number>();
+        for(let i = 0 ; i <  GameConfig.MaxRaiseBtn ; i++)
         {
-            console.log("我们只有3个自定义加注按钮 你当前想获取_index===" + _index);
-            return 0;
+            let current = GameConfig.GetCustomerRaise(i);
+            if(current != GameConfig.WrongIndex)
+            {
+                result.push(current);
+            }
         }
 
-        let optionNum = GameConfig.GetCustomerRaise(_index);
-        let result = GameConfig.GetDefaultCustomerRaiseRatio(Number(optionNum));
-        return result;
-    }
-
-    public static GetCustomerRaiseTitle(_index : number) : string
-    {
-        if(_index >= 3)//我们只有3个自定义加注按钮
+        if(result.length == 0) //从来没有设置过快捷加注按钮
         {
-            console.log("我们只有3个自定义加注按钮 你当前想获取_index===" + _index);
-            return "None";
+            for(let i = 0 ; i < GameConfig.MaxRaiseBtn ; i++)
+            {
+                result.push(i);
+                GameConfig.SaveCustomerRaise(i,i);
+            }
         }
 
-        let optionNum = GameConfig.GetCustomerRaise(_index);
-        let result = GameConfig.GetDefaultCustomerRaiseTitle(Number(optionNum));
+        result.sort();
         return result;
     }
 
@@ -606,16 +620,16 @@ export class GameConfig
 
     public static GetTopUid() : string
     {
-        return top.USER_ID;
-        //return GameConfig.uid;
+        //return top.USER_ID;
+        return GameConfig.uid;
         //return "9527"
     }
 
     public static GetTopGameId() : string
     {
-        return top.GAME_ID;
+        //return top.GAME_ID;
         
-        //return "3300";
+        return "3300";
     }
     
     

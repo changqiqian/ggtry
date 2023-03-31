@@ -5,6 +5,7 @@ import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { Tool } from '../../../Tool';
 import { BaseButton } from '../../common/BaseButton';
+import { CircleTimer } from '../../common/CircleTimer';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Poker } from '../../common/Poker';
 import { ProgressSlider } from '../../common/ProgressSlider';
@@ -62,8 +63,8 @@ export class Game_InsuranceLayer extends BaseUI
     @property(BaseButton) 
     mConfirmBtn: BaseButton = null;
 
-    @property(Label) 
-    mCountDown: Label = null;
+    @property(CircleTimer) 
+    mCircleTimer: CircleTimer = null;
 
     mControlAble : boolean  = false;
     mIndex : number;
@@ -244,15 +245,10 @@ export class Game_InsuranceLayer extends BaseUI
                 current.SetTitle(title);
             }
 
-            this.StartSecondsTimer(_data.leftTime,1 , ()=>
-            {
-                let restTime = this.GetRestSeconds();
-                this.mCountDown.string = restTime + "S";
-                // if(restTime == 0)
-                // {
-                //     this.CloseAsWindow();
-                // }
-            });
+
+            this.mCircleTimer.StartTimer(_data.leftTime);
+
+
 
             if(_data.buyBack > 0)
             {
@@ -327,13 +323,13 @@ export class Game_InsuranceLayer extends BaseUI
         this.mShortcutBtn.children[1].getChildByName("Title2").getComponent(Label).string = Localization.GetString("00317")
         this.mShortcutBtn.children[2].getChildByName("Title2").getComponent(Label).string = Localization.GetString("00318")
 
-        this.mCountDown.string = "0";
+        this.mCircleTimer.StopTimer();
         this.StopSecondsTimer();
     }
 
     GetShortCutMultiple(_index : number) : number
     {
-        let array = [0.25, 0.5 , 1];
+        let array = [1/3, 0.5 , 1];
         return array[_index];
     }
 }

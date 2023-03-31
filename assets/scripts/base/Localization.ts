@@ -400,7 +400,7 @@ export class Localization {
         { name: '00313', ch: '出张', en: 'Outs' , korea :""},
         { name: '00314', ch: '赔率', en: 'Ratio' , korea :""},
         { name: '00315', ch: '赔付', en: 'pay' , korea :""},
-        { name: '00316', ch: '1/4池', en: '1/4 pots' , korea :""},
+        { name: '00316', ch: '1/3池', en: '1/3 pots' , korea :""},
         { name: '00317', ch: '1/2池', en: '1/2 pots' , korea :""},
         { name: '00318', ch: '满池', en: 'full pots' , korea :""},
         { name: '00319', ch: '本次购买需要带回: xxx', en: 'You need buy back: xxx' , korea :""},
@@ -476,10 +476,13 @@ export class Localization {
         { name: '00389', ch: '站起围观', en: 'Stand up' , korea :""},
         { name: '00390', ch: '赢取', en: 'Win amout' , korea :""},
         { name: '00391', ch: '3 Bet', en: '3 Bet' , korea :"3 Bet"},
+        { name: '00392', ch: '最多设置4个快捷按钮', en: 'Shortcut setting maximum is 4' , korea :""},
+        { name: '00393', ch: '最少设置2个快捷按钮', en: 'Shortcut setting minimum is 2' , korea :""},
+        { name: '00394', ch: '投保额度：', en: 'Insurance:' , korea :""},
         
 
         
-        
+
         { name: '01000', ch: '公告', en: 'Notification' , korea :""},
         { name: '01001', ch: '消息', en: 'MESSAGES' , korea :""},
         { name: '01002', ch: '收支记录', en: 'Bill' , korea :""},

@@ -65,8 +65,9 @@ export class ToggleBtn extends BaseUI {
     }
 
     //不需要数据驱动的toggle用这个初始化
-    public SetClickCallback(_callback : Function)
+    public SetClickCallback(_callback : Function ,_custmoerData : number = 0)
     {
+        this.mCustmoerData = _custmoerData;
         this.mClickCallback = _callback;
         if(this.mClickCallback != null)
         {
@@ -74,13 +75,13 @@ export class ToggleBtn extends BaseUI {
             {
                 AudioManager.Instance.PlayMusicOneShot("Btn");
                 this.ShowUnselected();
-                this.mClickCallback(false);
+                this.mClickCallback(false,this.mCustmoerData);
             },this);
             this.mDisabled.node.on(Node.EventType.TOUCH_END,()=>
             {
                 AudioManager.Instance.PlayMusicOneShot("Btn");
                 this.ShowSelected();
-                this.mClickCallback(true);
+                this.mClickCallback(true,this.mCustmoerData);
             },this);
         }
     }

@@ -22,8 +22,8 @@ export class Game_MiniPlayer extends BaseUI
     mName: Label = null;
     @property(Node) 
     mDealer: Node = null;
-    @property(Game_BetAmount) 
-    mGame_BetAmount: Game_BetAmount = null;
+    @property(Label) 
+    mWinLose: Label = null;
     @property(Node) 
     mCards: Node = null;
     
@@ -64,13 +64,13 @@ export class Game_MiniPlayer extends BaseUI
     {
         this.mEmptyNode.active = false;
         this.mInfoNode.active = false;
-        this.mGame_BetAmount.Show(false);
         this.mCards.active = false;
     }
 
     public InitSeat(_seatId : number)
     {
         this.mSeatID = _seatId;
+        this.mWinLose.node.active = false;
         this.ResetUI();
         let playerInfo = GameReplayData.Instance.GetPlayerBySeat(_seatId);
         if(playerInfo == null)

@@ -158,9 +158,7 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     //自定义设置 本地存储变量读取
     LoadLocalConfig()
     {
-        this.Data_CustomerRaise0.mData = GameConfig.GetCustomerRaise(0);
-        this.Data_CustomerRaise1.mData = GameConfig.GetCustomerRaise(1);
-        this.Data_CustomerRaise2.mData = GameConfig.GetCustomerRaise(2);
+        this.CustomerRaiseSetting = GameConfig.GetAllCustomerRaise();
         this.Data_BGSetting.mData = GameConfig.GetBGSetting();
         this.Data_PokerSetting.mData = GameConfig.GetPokerSetting();
         this.Data_CustomerSliderSetting.mData = GameConfig.GetCustomerSliderSetting();
@@ -168,9 +166,8 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
         this.Data_BGMSetting.mData = GameConfig.GetBGMSetting();
         this.Data_ChatSetting.mData = GameConfig.GetChatSetting();
     }
-    Data_CustomerRaise0 :BaseData<number> = new BaseData<number>();
-    Data_CustomerRaise1 : BaseData<number> = new BaseData<number>();
-    Data_CustomerRaise2 : BaseData<number> = new BaseData<number>();
+
+    CustomerRaiseSetting : Array<number>;
     Data_BGSetting : BaseData<number> = new BaseData<number>();
     Data_PokerSetting : BaseData<number> = new BaseData<number>();
     Data_CustomerSliderSetting : BaseData<boolean> = new BaseData<boolean>();
