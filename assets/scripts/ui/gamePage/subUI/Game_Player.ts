@@ -31,8 +31,6 @@ export class Game_Player extends BaseUI
     mName: Label = null;
     @property(Label) 
     mAmount: Label = null;
-    @property(Node) 
-    mMiniCard: Node = null;
     @property(CircleTimer) 
     mCircleTimer: CircleTimer = null;
     @property(Node) 
@@ -85,12 +83,11 @@ export class Game_Player extends BaseUI
         this.mHead.node.active = false;
         this.mName.node.active = false;
         this.mAmount.node.active = false;
-        this.mMiniCard.active = false;
         this.mCircleTimer.StopTimer();
         this.mDealer.active = false;
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
-        this.HideHandsCard();
+        this.HideCard();
         this.mSelfBtn.node.active = false;
         this.mConbination.active = false;
         this.mInsuranceBG.active = false;
@@ -98,7 +95,7 @@ export class Game_Player extends BaseUI
         this.StopSecondsTimer();
     }
 
-    HideHandsCard()
+    HideCard()
     {
         this.mCards.active = false;
         for(let i = 0 ; i < this.mCards.children.length ; i++)
@@ -158,7 +155,7 @@ export class Game_Player extends BaseUI
             }
 
 
-            this.HideHandsCard();
+            this.HideCard();
             this.mSelfBtn.node.active = false;
             this.mBG.active = true;
             this.UpdateName(playerInfo.nickName);
@@ -168,11 +165,11 @@ export class Game_Player extends BaseUI
 
             if(playerInfo.uid == selfUid)
             {
-                this.ShowCards(playerInfo.cards , true);
+                this.ShowCards(playerInfo.cards);
             }
             else
             {
-                this.ShowMiniCard(true , true);
+                this.ShowCardBack();
             }
 
 
@@ -202,7 +199,7 @@ export class Game_Player extends BaseUI
                 }
                 if(winResult.cardInfo!=null && winResult.cardInfo.length > 0)
                 {
-                    this.ShowCards(winResult.cardInfo , true);
+                    this.ShowCards(winResult.cardInfo);
                 }
 
                 if(winResult.winLose > 0)
@@ -288,7 +285,19 @@ export class Game_Player extends BaseUI
             this.RestoreAction();
             this.RestoreTurn();
             this.UpdateDealer(gameData.GetDynamicData().dealerUid , playerInfo );
-            this.UpdatePlayerPlayingState(playerInfo);
+
+            if(playerInfo.currencyNum)
+            {
+                this.RestoreCards();
+            }
+            else
+            {
+                if(playerInfo.currencyNum == 0 && playerInfo.bringInNum == 0)
+                {
+                    this.UpdateBuyInCountDown();
+                }
+                
+            }
         });
 
         gameData.Data_S2CCommonAutoOperatorNotify.AddListenner(this,(_data)=>
@@ -368,9 +377,7 @@ export class Game_Player extends BaseUI
                 return;
             }
 
-            
-            this.ShowMiniCard(gameData.IsPlayerPlaying(currentPlayer.uid),false);
-
+            this.RestoreCards();
             let lastBet = gameData.FindLastActionByUid(currentPlayer.uid);
             if(lastBet != null)
             {
@@ -391,28 +398,21 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            if(gameData.IsPlayerPlaying(playerInfo.uid) == false)
-            {
-                return;
-            }
-            this.ShowMiniCard(true , false);
+
         })
 
         gameData.Data_S2CCommonFlopRoundNotify.AddListenner(this,(_data)=>
         {
-            this.ShowLocalPlayerLogic(true);
             this.CleanTable();
         })
 
         gameData.Data_S2CCommonTurnRoundNotify.AddListenner(this,(_data)=>
         {
-            this.ShowLocalPlayerLogic(true);
             this.CleanTable();
         })
 
         gameData.Data_S2CCommonRiverRoundNotify.AddListenner(this,(_data)=>
         {
-            this.ShowLocalPlayerLogic(true);
             this.CleanTable();
         })
         
@@ -446,12 +446,6 @@ export class Game_Player extends BaseUI
                 return;
             }
 
-            if(currentPlayer.uid == _data.actionInfo.uid)
-            {
-                this.ShowLocalPlayerLogic(true);
-            }
-
-            
             this.ExcutiveAction(false);
             this.UpdateMoney(false,currentPlayer);
         })
@@ -497,8 +491,6 @@ export class Game_Player extends BaseUI
                 return;
             }
 
-            this.ShowLocalPlayerLogic(true);
-
             let winLoseInfos = _data.result;
             let index = winLoseInfos.findIndex((_item) => _item.uid === playerInfo.uid);
             if(index < 0)
@@ -511,7 +503,7 @@ export class Game_Player extends BaseUI
             let currentWinLose = winLoseInfos[index];
             if(playerInfo.fold == false && playerInfo.uid != selfUid)
             {
-                this.ShowCards(currentWinLose.cardInfo , false);
+                this.ShowCards(currentWinLose.cardInfo);
             }
             if(currentWinLose.combinationResult != null)
             {
@@ -554,12 +546,8 @@ export class Game_Player extends BaseUI
                 return;
             }
 
-            if(currentPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
             let hands = currentPlayer.cards;
-            this.ShowCards(hands , false);
+            this.ShowCards(hands );
         });
 
         gameData.Data_S2CCommonOpenCardNotify.AddListenner(this,(_data)=>
@@ -580,14 +568,8 @@ export class Game_Player extends BaseUI
             {
                 return;
             }
-            this.ShowLocalPlayerLogic(true);
-
-            if(currentPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
             let hands = currentPlayer.cards;
-            this.ShowCards(hands , false);
+            this.ShowCards(hands);
         });
 
         gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
@@ -691,7 +673,7 @@ export class Game_Player extends BaseUI
             }
             if(_data.cardList != null && _data.cardList.length > 0)
             {
-                this.ShowCards(_data.cardList,false);
+                this.ShowCards(_data.cardList);
             }
             
         });
@@ -766,12 +748,11 @@ export class Game_Player extends BaseUI
 
     PrepareRoundStart()
     {
-        this.mMiniCard.active = false;
         this.mCircleTimer.StopTimer();
         this.mDealer.active = false;
         this.mGame_ActionTag.node.active = false;
         this.mGame_BetAmount.node.active = false;
-        this.HideHandsCard();
+        this.HideCard();
         this.mConbination.active = false;
     }
 
@@ -793,25 +774,6 @@ export class Game_Player extends BaseUI
         this.UpdateUIDirection();
     }
 
-    UpdatePlayerPlayingState(_playerInfo : PlayerInfo)
-    {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
-        let playerPlaying = gameData.IsPlayerPlaying(_playerInfo.uid);
-        if(_playerInfo.currencyNum)
-        {
-            this.ShowMiniCard(playerPlaying && _playerInfo.fold == false,false);
-            this.mGame_PlayerState.ShowAuto(_playerInfo.autoLeftTime,_playerInfo.auto);
-        }
-        else
-        {
-            if(_playerInfo.currencyNum == 0 && _playerInfo.bringInNum == 0)
-            {
-                this.UpdateBuyInCountDown();
-            }
-            
-        }
-    }
     UpdateBuyInCountDown()
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
@@ -920,8 +882,6 @@ export class Game_Player extends BaseUI
         {
             this.mCircleTimer.StartTimer(actionLeftTime);
         }
-
-        this.ShowLocalPlayerLogic(currentActionUid != LocalPlayerData.Instance.Data_Uid.mData);
     }
 
     UpdateName(_name : string)
@@ -979,28 +939,22 @@ export class Game_Player extends BaseUI
         }
     }
 
-    ShowCards(_cards : Array<CardInfo> , _replay : boolean)
+    //亮牌
+    ShowCards(_cards : Array<CardInfo>)
     {
         if(_cards == null || _cards.length == 0)
         {
-            this.HideHandsCard();
+            this.HideCard();
             return;
         }
-        this.ShowMiniCard(false , _replay);
         let cardNodes = this.mCards.children;
         this.mCards.active = true;
         for(let i = 0 ; i < _cards.length ; i++)
         {
-            let step = i;
-            let currentPoker = cardNodes[step].getComponent(Poker);
-            while(currentPoker.node.active)
+            let currentPoker = cardNodes[i].getComponent(Poker);
+            if(currentPoker.AlreadyShow())
             {
-                step++;
-                if(step >= cardNodes.length)
-                {
-                    return;
-                }
-                currentPoker = cardNodes[step].getComponent(Poker);
+                continue;
             }
             currentPoker.ResetAndHide();
             currentPoker.ShowBack(); 
@@ -1009,7 +963,18 @@ export class Game_Player extends BaseUI
         }
     }
 
-    ShowFoldCard()
+    //展示牌背面
+    ShowCardBack()
+    {
+        this.mCards.active = true;
+        for(let i = 0 ; i < this.mCards.children.length ; i++)
+        {
+            let currentPoker = this.mCards.children[i].getComponent(Poker);
+            currentPoker.ShowBack();
+        }
+    }
+
+    ShowDarkCards()
     {
         let cardNodes = this.mCards.children;
         this.mCards.active = true;
@@ -1018,6 +983,68 @@ export class Game_Player extends BaseUI
             let currentPoker = cardNodes[i].getComponent(Poker);
             currentPoker.ShowFront();
             currentPoker.SetGary(true);
+        }
+    }
+
+    RestoreCards()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let currentPlayer = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        let playerPlaying = gameData.IsPlayerPlaying(currentPlayer.uid);
+        let selfUid = LocalPlayerData.Instance.Data_Uid.mData;
+        if(playerPlaying == false)
+        {
+            this.HideCard();
+            return;
+        }
+
+        if(currentPlayer.fold)
+        {
+            if(currentPlayer.uid == selfUid)
+            {
+                this.ShowDarkCards();
+            }
+            else
+            {
+                this.HideCard();
+            }
+            return;
+        }
+
+        if(currentPlayer.uid == selfUid)
+        {
+            this.ShowCards(currentPlayer.cards);
+        }
+        else
+        {
+            this.ShowCardBack();
+        }
+        
+    }
+
+    //牌设置成灰色
+    TryToFold( _replay : boolean)
+    {
+
+        let currentPlayer = null;
+        if(_replay)
+        {
+            currentPlayer = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID);
+        }
+        else
+        {
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            currentPlayer = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        }
+        if(currentPlayer.uid == LocalPlayerData.Instance.Data_Uid.mData)
+        {
+            this.ShowDarkCards();
+        }
+        else
+        {
+            this.HideCard();
         }
     }
 
@@ -1077,27 +1104,10 @@ export class Game_Player extends BaseUI
 
     ShowActionType(_actionType : ActionType , _replay : boolean)
     {
-        let isFold = _actionType == ActionType.ActionType_Fold;
-        this.ShowMiniCard(!isFold , _replay);
-        
-        if(_replay == false)
-        {
-
-        }
-        else
-        {
-            if(isFold)
-            {
-                let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID);
-                if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-                {
-                    this.ShowFoldCard();
-                }
-            }
-        }
-
+        let isFold = _actionType == ActionType.ActionType_Fold;        
         if(isFold)
         {
+            this.TryToFold(_replay);
             this.LoadPrefab("gamePage","prefab/Game_MovingCards",(_node)=>
             {
                 this.node.addChild(_node);
@@ -1108,31 +1118,6 @@ export class Game_Player extends BaseUI
             })
         }
         this.mGame_ActionTag.SetType(_actionType);
-    }
-
-    ShowMiniCard(_value : boolean , _replay : boolean)
-    {
-        let selfUid = LocalPlayerData.Instance.Data_Uid.mData;
-        let isSelf;
-        if(_replay)
-        {
-            let playerInfo = GameReplayData.Instance.GetPlayerBySeat(this.mSeatID);
-            isSelf = playerInfo.uid == selfUid;
-        }
-        else
-        {
-            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            let gameData = gameStruct.mGameData;
-            let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
-            isSelf = playerInfo.uid == selfUid;
-        }
-
-        if(isSelf)
-        {
-            this.mMiniCard.active = false;
-            return;
-        }
-        this.mMiniCard.active = _value;
     }
 
     ShowConbination(_conbination : Combiantion)
@@ -1147,26 +1132,6 @@ export class Game_Player extends BaseUI
         }
         this.mConbination.active = true;
         this.mConbination.getChildByName("Conbination").getComponent(Label).string = Poker.GetConbinationName(_conbination);
-    }
-
-    ShowLocalPlayerLogic(_value : boolean)
-    {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
-        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
-        if(playerInfo == null)
-        {
-            return;
-        }
-        if(gameData.IsPlayerPlaying(playerInfo.uid) == false)
-        {
-            return;
-        }
-
-        if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-        {
-            this.node.active = _value;
-        }
     }
 }
 

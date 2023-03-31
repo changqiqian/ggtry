@@ -21,7 +21,7 @@ export class Poker extends BaseUI
     @property(Node) 
     mIcon: Node = null;
     mClickCallBack : Function;
-    mCardStruct : CardStruct = null;
+    mCardInfo : CardInfo = null;
     mServerData : number = null;
     mPokerIndex : number = null;
     InitParam() 
@@ -149,36 +149,8 @@ export class Poker extends BaseUI
         }
     }
 
-    // public SetFrontByServerData(_serverData : number)
-    // {
-    //     this.mServerData = _serverData;
-    //     var type = Math.floor(_serverData / 16)
-    //     switch (type) 
-    //     {
-    //         case 0:
-    //             type = CardType.Diamond;
-    //             break;
-    //         case 1:
-    //             type = CardType.Club;
-    //             break;
-    //         case 2:
-    //             type = CardType.Heart;
-    //             break;
-    //         case 3:
-    //             type = CardType.Speades;
-    //             break;
-    //         default:
-    //             break;
-    //     }
-
-    //     var num = _serverData % 16;
-    //     let cardStruct = new CardStruct(num , type);
-    //     this.SetFront(cardStruct);
-    // }
-
     public SetFront(_card : CardStruct)
     {
-        this.mCardStruct = _card;
         let bundleName = Poker.GetPokerTexutureBundleName();
         let path = Poker.GetPokerTexturePath(_card);
         this.LoadSprite(bundleName,path,(_spirteFrame)=>
@@ -189,6 +161,7 @@ export class Poker extends BaseUI
 
     public SetFrontByCardInfo(_cardInfo : CardInfo)
     {
+        this.mCardInfo = _cardInfo;
         let cardStruct = new CardStruct(_cardInfo.number,_cardInfo.type);
         this.SetFront(cardStruct);
     }
@@ -262,8 +235,7 @@ export class Poker extends BaseUI
         this.mIcon.active = false;
         this.mBack.active = false;
         this.mFront.active = false;
-        // this.mCardInfo = null;
-        // this.mCardStruct = null;
+        this.mCardInfo = null;
         this.SetGary(false);
     }
 
@@ -294,6 +266,11 @@ export class Poker extends BaseUI
     public ShowEye(_value :boolean)
     {
         this.mIcon.active = _value;
+    }
+
+    public AlreadyShow() : boolean
+    {
+        return this.mCardInfo != null;
     }
 }
 
