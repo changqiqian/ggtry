@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "87e2105f-a3a4-4477-8309-3803b247e86e",
+  "uuid": "081a8998-bf21-4c92-abd5-cdebb84e0b8e",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "87e2105f-a3a4-4477-8309-3803b247e86e@6c48a",
-      "displayName": "侧边icon-规则",
+      "uuid": "081a8998-bf21-4c92-abd5-cdebb84e0b8e@6c48a",
+      "displayName": "BackHallIcon",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "87e2105f-a3a4-4477-8309-3803b247e86e",
+        "imageUuidOrDatabaseUri": "081a8998-bf21-4c92-abd5-cdebb84e0b8e",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "87e2105f-a3a4-4477-8309-3803b247e86e@f9941",
-      "displayName": "侧边icon-规则",
+      "uuid": "081a8998-bf21-4c92-abd5-cdebb84e0b8e@f9941",
+      "displayName": "BackHallIcon",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,9 +45,9 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 48,
+        "width": 50,
         "height": 48,
-        "rawWidth": 48,
+        "rawWidth": 50,
         "rawHeight": 48,
         "borderTop": 0,
         "borderBottom": 0,
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "87e2105f-a3a4-4477-8309-3803b247e86e@6c48a",
+        "imageUuidOrDatabaseUri": "081a8998-bf21-4c92-abd5-cdebb84e0b8e@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "87e2105f-a3a4-4477-8309-3803b247e86e@f9941"
+    "redirect": "081a8998-bf21-4c92-abd5-cdebb84e0b8e@f9941"
   }
 }

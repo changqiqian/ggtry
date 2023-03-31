@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "7ffa73d1-fe85-4d43-9c41-01d1cacad059",
+  "uuid": "1cfe05f5-43b2-483b-9912-aae1a5a84fe4",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "7ffa73d1-fe85-4d43-9c41-01d1cacad059@6c48a",
-      "displayName": "侧边icon-邀请分享",
+      "uuid": "1cfe05f5-43b2-483b-9912-aae1a5a84fe4@6c48a",
+      "displayName": "StandIcon",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "7ffa73d1-fe85-4d43-9c41-01d1cacad059",
+        "imageUuidOrDatabaseUri": "1cfe05f5-43b2-483b-9912-aae1a5a84fe4",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "7ffa73d1-fe85-4d43-9c41-01d1cacad059@f9941",
-      "displayName": "侧边icon-邀请分享",
+      "uuid": "1cfe05f5-43b2-483b-9912-aae1a5a84fe4@f9941",
+      "displayName": "StandIcon",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": 0,
-        "trimX": 2,
+        "offsetY": -0.5,
+        "trimX": 0,
         "trimY": 1,
-        "width": 44,
+        "width": 42,
         "height": 46,
-        "rawWidth": 48,
-        "rawHeight": 48,
+        "rawWidth": 42,
+        "rawHeight": 47,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "7ffa73d1-fe85-4d43-9c41-01d1cacad059@6c48a",
+        "imageUuidOrDatabaseUri": "1cfe05f5-43b2-483b-9912-aae1a5a84fe4@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "7ffa73d1-fe85-4d43-9c41-01d1cacad059@f9941"
+    "redirect": "1cfe05f5-43b2-483b-9912-aae1a5a84fe4@f9941"
   }
 }

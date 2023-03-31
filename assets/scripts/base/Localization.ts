@@ -479,8 +479,8 @@ export class Localization {
         { name: '00392', ch: '最多设置4个快捷按钮', en: 'Shortcut setting maximum is 4' , korea :""},
         { name: '00393', ch: '最少设置2个快捷按钮', en: 'Shortcut setting minimum is 2' , korea :""},
         { name: '00394', ch: '投保额度：', en: 'Insurance:' , korea :""},
+        { name: '00395', ch: '邀请分享', en: 'Invite:' , korea :""},
         
-
         
 
         { name: '01000', ch: '公告', en: 'Notification' , korea :""},

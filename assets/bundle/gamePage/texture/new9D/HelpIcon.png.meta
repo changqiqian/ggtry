@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "752ade95-8fba-4b0b-bf45-7bb0cf89ffb5",
+  "uuid": "8ed91b0e-18a6-4ebb-b027-679a8a66d2ef",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "752ade95-8fba-4b0b-bf45-7bb0cf89ffb5@6c48a",
-      "displayName": "侧边icon-游戏设置",
+      "uuid": "8ed91b0e-18a6-4ebb-b027-679a8a66d2ef@6c48a",
+      "displayName": "HelpIcon",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "752ade95-8fba-4b0b-bf45-7bb0cf89ffb5",
+        "imageUuidOrDatabaseUri": "8ed91b0e-18a6-4ebb-b027-679a8a66d2ef",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "752ade95-8fba-4b0b-bf45-7bb0cf89ffb5@f9941",
-      "displayName": "侧边icon-游戏设置",
+      "uuid": "8ed91b0e-18a6-4ebb-b027-679a8a66d2ef@f9941",
+      "displayName": "HelpIcon",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,9 +45,9 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 42,
+        "width": 48,
         "height": 48,
-        "rawWidth": 42,
+        "rawWidth": 48,
         "rawHeight": 48,
         "borderTop": 0,
         "borderBottom": 0,
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "752ade95-8fba-4b0b-bf45-7bb0cf89ffb5@6c48a",
+        "imageUuidOrDatabaseUri": "8ed91b0e-18a6-4ebb-b027-679a8a66d2ef@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "752ade95-8fba-4b0b-bf45-7bb0cf89ffb5@f9941"
+    "redirect": "8ed91b0e-18a6-4ebb-b027-679a8a66d2ef@f9941"
   }
 }
