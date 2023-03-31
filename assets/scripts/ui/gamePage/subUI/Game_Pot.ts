@@ -69,7 +69,7 @@ export class Game_Pot extends BaseUI
 
         GameReplayData.Instance.Data_State.AddListenner(this,(_data)=>
         {
-            this.UpdateSubPotsReplay(_data);
+            //this.UpdateSubPotsReplay(_data);
         })
 
         GameReplayData.Instance.Data_TotalPots.AddListenner(this,(_data)=>
@@ -104,7 +104,7 @@ export class Game_Pot extends BaseUI
             {
                 return;
             }
-            this.UpdateSubPots();
+            //this.UpdateSubPots();
             this.UpdateTotalPot();
         })
 
@@ -115,19 +115,19 @@ export class Game_Pot extends BaseUI
 
         gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateSubPots();
+            //this.UpdateSubPots();
             this.UpdateTotalPot();
         })
 
         gameData.Data_S2CCommonPotsNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateSubPots();
+            //this.UpdateSubPots();
             this.UpdateTotalPot();
         })
 
         gameData.Data_S2CCommonActionNotify.AddListenner(this,(_data)=>
         {
-            this.UpdateSubPots();
+            //this.UpdateSubPots();
             this.UpdateTotalPot();
         })
         

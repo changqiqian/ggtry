@@ -38,7 +38,6 @@ export class GameBase extends BaseUI
     InitParam() 
     {
         this.OffsetTop();
-        this.MaxScreen(this.mBG.node);
     }
     BindUI() 
     {
@@ -50,8 +49,7 @@ export class GameBase extends BaseUI
     {
         LocalPlayerData.Instance.Data_BGSetting.AddListenner(this,(_data)=>
         {
-            let name = "BG" + _data;
-            this.LoadSprite("gamePage","texture/bg/" + name ,(_spriteFrame)=>
+            this.LoadSprite("gamePage","texture/bg/Table" + _data ,(_spriteFrame)=>
             {
                 this.mBG.spriteFrame = _spriteFrame;
             })
@@ -79,7 +77,6 @@ export class GameBase extends BaseUI
         this.InitSubView();
         this.InitSeatUI(_seatNum);
         this.InitChatCtr();
-        this.InitBG();
         this.BindData();
     }
 
@@ -433,13 +430,6 @@ export class GameBase extends BaseUI
         });
     }
 
-    InitBG()
-    {
-        this.LoadSprite("gamePage" , "texture/bg/BG" + this.mIndex,(_spriteFrame)=>
-        {
-            this.mBG.spriteFrame = _spriteFrame;
-        });
-    }
 
 
 }

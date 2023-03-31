@@ -39,8 +39,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 48.788,
-      "y": -7.096,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -67,7 +67,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "MiniCard",
+    "_name": "Sprite",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -87,7 +87,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -10,
+      "x": -15,
       "y": 0,
       "z": 0
     },
@@ -126,8 +126,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 72,
-      "height": 108
+      "width": 86,
+      "height": 125
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -138,7 +138,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "c3POpSUbVGmZsb8hZYhVUY"
+    "fileId": "decn4tzmBDdbzSYbigszpj"
   },
   {
     "__type__": "cc.Sprite",
@@ -183,7 +183,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "45zqxIXq9Do6jxEv9faI0B"
+    "fileId": "a5S2SBjyxOZIBEUAbxg7Tk"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -193,11 +193,11 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "f9YOyfrndCOocqYGGMUn5K"
+    "fileId": "a5SVRjKdRN/JZXGB836ggf"
   },
   {
     "__type__": "cc.Node",
-    "_name": "MiniCard-001",
+    "_name": "Sprite-001",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -217,7 +217,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 10,
+      "x": 15,
       "y": 0,
       "z": 0
     },
@@ -256,8 +256,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 72,
-      "height": 108
+      "width": 86,
+      "height": 125
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -268,7 +268,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "38laxMGt5LgZvBUeK30FJU"
+    "fileId": "50sjRIc9hHD7IVh9C/IOJh"
   },
   {
     "__type__": "cc.Sprite",
@@ -313,7 +313,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "25uHNzIMVEp7xpV7sjdw7Y"
+    "fileId": "56WEOY39lGb5YezIpy/B65"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -323,7 +323,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "68PKe+V5NEOIgURZxfp14w"
+    "fileId": "23QzyR3/NITYFRxVPNmi6V"
   },
   {
     "__type__": "cc.UITransform",

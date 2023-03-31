@@ -8,10 +8,16 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_ActionTag')
 export class Game_ActionTag extends BaseUI 
 {
-    @property(Sprite) 
-    mBG: Sprite = null;
-    @property(Label) 
-    mAction: Label = null;
+    @property(Node) 
+    mBGNode: Node = null;
+    @property(Node) 
+    mLeft: Node = null;
+    @property(Node) 
+    mRight: Node = null;
+    @property(Node) 
+    mActionName: Node = null;
+
+    mIsLeft : boolean;
 
     onDisable()
     {
@@ -39,11 +45,12 @@ export class Game_ActionTag extends BaseUI
 
     }
 
-    SetType(_actionType : ActionType)
+    SetType(_actionType : ActionType  )
     {
+        this.ShowLeftOrRight();
         this.node.active = true;
 
-        this.mAction.string = GameConfig.GetActionTypeName(_actionType);
+        this.ShowAction(_actionType);
         this.ShowAnimation();
     }
 
@@ -56,6 +63,41 @@ export class Game_ActionTag extends BaseUI
         tempTween.to(0.15,{scale : new Vec3(bigScale,bigScale,bigScale)});
         tempTween.to(0.15,{scale : Vec3.ONE});
         tempTween.start();
+    }
+
+    ShowLeftOrRight( )
+    {
+        this.mLeft.active = this.mIsLeft;
+        this.mRight.active = ! this.mIsLeft;
+    }
+
+    ShowAction(_actionType : ActionType)
+    {
+        for(let i = 0 ; i < this.mLeft.children.length ; i++)
+        {
+            this.mLeft.children[i].active =false;
+        }
+
+        this.mLeft.getChildByName("Action" + _actionType).active = true;
+
+        for(let i = 0 ; i < this.mRight.children.length ; i++)
+        {
+            this.mRight.children[i].active =false;
+        }
+
+        this.mRight.getChildByName("Action" + _actionType).active = true;
+
+        for(let i = 0 ; i < this.mActionName.children.length ; i++)
+        {
+            this.mActionName.children[i].active =false;
+        }
+
+        this.mActionName.getChildByName("ActionName" + _actionType).active = true;
+    }
+
+    SetLeft(_left :boolean)
+    {
+        this.mIsLeft = _left;
     }
 }
 
