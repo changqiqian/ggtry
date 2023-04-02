@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "28c05b87-16ed-41a5-99d3-b68487be5ad9",
+  "uuid": "c355d891-e68c-4025-b674-4e21028bca6b",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "28c05b87-16ed-41a5-99d3-b68487be5ad9@6c48a",
-      "displayName": "游戏内-滑杆-文字框-描边",
+      "uuid": "c355d891-e68c-4025-b674-4e21028bca6b@6c48a",
+      "displayName": "SliderTipsBtn2",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "28c05b87-16ed-41a5-99d3-b68487be5ad9",
+        "imageUuidOrDatabaseUri": "c355d891-e68c-4025-b674-4e21028bca6b",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,20 +33,20 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "28c05b87-16ed-41a5-99d3-b68487be5ad9@f9941",
-      "displayName": "游戏内-滑杆-文字框-描边",
+      "uuid": "c355d891-e68c-4025-b674-4e21028bca6b@f9941",
+      "displayName": "SliderTipsBtn2",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 0,
+        "offsetX": 0.5,
         "offsetY": -6,
-        "trimX": 0,
-        "trimY": 12,
-        "width": 264,
-        "height": 132,
+        "trimX": 3,
+        "trimY": 14,
+        "width": 259,
+        "height": 128,
         "rawWidth": 264,
         "rawHeight": 144,
         "borderTop": 0,
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "28c05b87-16ed-41a5-99d3-b68487be5ad9@6c48a",
+        "imageUuidOrDatabaseUri": "c355d891-e68c-4025-b674-4e21028bca6b@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "28c05b87-16ed-41a5-99d3-b68487be5ad9@f9941"
+    "redirect": "c355d891-e68c-4025-b674-4e21028bca6b@f9941"
   }
 }

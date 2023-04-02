@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "18e70b3d-e4ae-48ba-b050-b07bd66f830c",
+  "uuid": "a37d3ba6-9130-4704-9a30-3bda5e7f9f0b",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "18e70b3d-e4ae-48ba-b050-b07bd66f830c@6c48a",
-      "displayName": "游戏内-icon-弃牌",
+      "uuid": "a37d3ba6-9130-4704-9a30-3bda5e7f9f0b@6c48a",
+      "displayName": "SliderRaiseBtn",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "18e70b3d-e4ae-48ba-b050-b07bd66f830c",
+        "imageUuidOrDatabaseUri": "a37d3ba6-9130-4704-9a30-3bda5e7f9f0b",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "18e70b3d-e4ae-48ba-b050-b07bd66f830c@f9941",
-      "displayName": "游戏内-icon-弃牌",
+      "uuid": "a37d3ba6-9130-4704-9a30-3bda5e7f9f0b@f9941",
+      "displayName": "SliderRaiseBtn",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "18e70b3d-e4ae-48ba-b050-b07bd66f830c@6c48a",
+        "imageUuidOrDatabaseUri": "a37d3ba6-9130-4704-9a30-3bda5e7f9f0b@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "18e70b3d-e4ae-48ba-b050-b07bd66f830c@f9941"
+    "redirect": "a37d3ba6-9130-4704-9a30-3bda5e7f9f0b@f9941"
   }
 }

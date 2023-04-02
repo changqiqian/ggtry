@@ -50,7 +50,6 @@ export class Game_AddTime extends BaseUI
 
     SetButtonTitle(_title : string)
     {
-        this.mDiamond.active = false;
         this.mDiamond.active = true;
         this.mAddBtn.SetTitle(_title);
     }

@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "c355d891-e68c-4025-b674-4e21028bca6b",
+  "uuid": "132a0957-5181-436e-b785-8130771e117d",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "c355d891-e68c-4025-b674-4e21028bca6b@6c48a",
-      "displayName": "游戏内-滑杆-文字框-实底",
+      "uuid": "132a0957-5181-436e-b785-8130771e117d@6c48a",
+      "displayName": "CustomerRaiseBtn",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "c355d891-e68c-4025-b674-4e21028bca6b",
+        "imageUuidOrDatabaseUri": "132a0957-5181-436e-b785-8130771e117d",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,29 +33,29 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "c355d891-e68c-4025-b674-4e21028bca6b@f9941",
-      "displayName": "游戏内-滑杆-文字框-实底",
+      "uuid": "132a0957-5181-436e-b785-8130771e117d@f9941",
+      "displayName": "CustomerRaiseBtn",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 0.5,
-        "offsetY": -6,
-        "trimX": 3,
-        "trimY": 14,
-        "width": 259,
-        "height": 128,
-        "rawWidth": 264,
-        "rawHeight": 144,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 108,
+        "height": 108,
+        "rawWidth": 108,
+        "rawHeight": 108,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "c355d891-e68c-4025-b674-4e21028bca6b@6c48a",
+        "imageUuidOrDatabaseUri": "132a0957-5181-436e-b785-8130771e117d@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "c355d891-e68c-4025-b674-4e21028bca6b@f9941"
+    "redirect": "132a0957-5181-436e-b785-8130771e117d@f9941"
   }
 }

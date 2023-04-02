@@ -8,6 +8,7 @@ import { BaseButton } from '../../common/BaseButton';
 import { CircleTimer } from '../../common/CircleTimer';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Game_PreCheckOrFold } from '../GameData';
+import { Game_AddTime } from './Game_AddTime';
 import { Game_CustomerRaise } from './Game_CustomerRaise';
 import { Game_Slider } from './Game_Slider';
 const { ccclass, property } = _decorator;
@@ -29,6 +30,8 @@ export class Game_SelfAction extends BaseUI
     mGame_Slider: Game_Slider = null;
     @property(CircleTimer) 
     mCircleTimer: CircleTimer = null;
+    @property(Game_AddTime) 
+    mGame_AddTime: Game_AddTime = null;
 
     mCallAmount : number = GameConfig.WrongIndex;
     private mIndex : number = GameConfig.WrongIndex;
@@ -57,6 +60,14 @@ export class Game_SelfAction extends BaseUI
         this.mCheckBtn.SetClickCallback(()=>
         {
             this.ExcutiveCheck();
+        });
+
+        this.mGame_AddTime.SetCallback(()=>
+        {
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            let msgId = gameData.ExtraThinkingTimeMsgId();
+            NetworkSend.Instance.SendExtraThinkingTime(msgId,gameStruct.mGameId);
         });
 
         this.mCallBtn.SetClickCallback(()=>
@@ -537,5 +548,6 @@ export class Game_SelfAction extends BaseUI
         NetworkSend.Instance.SendGameAction(gameData.ActionSendMsgId(),gameStruct.mGameId,_action);
         this.HideAll();
     }
+
 }
 

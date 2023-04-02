@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "feb3e544-35a4-46b2-9e18-739f3811df00",
+  "uuid": "ee5396a9-078f-43b4-8b57-d5b6db359b2f",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "feb3e544-35a4-46b2-9e18-739f3811df00@6c48a",
-      "displayName": "游戏内-滑杆-按钮",
+      "uuid": "ee5396a9-078f-43b4-8b57-d5b6db359b2f@6c48a",
+      "displayName": "SliderProgress",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "feb3e544-35a4-46b2-9e18-739f3811df00",
+        "imageUuidOrDatabaseUri": "ee5396a9-078f-43b4-8b57-d5b6db359b2f",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,29 +33,29 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "feb3e544-35a4-46b2-9e18-739f3811df00@f9941",
-      "displayName": "游戏内-滑杆-按钮",
+      "uuid": "ee5396a9-078f-43b4-8b57-d5b6db359b2f@f9941",
+      "displayName": "SliderProgress",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -0.5,
-        "offsetY": -6,
-        "trimX": 3,
-        "trimY": 14,
-        "width": 203,
-        "height": 128,
-        "rawWidth": 210,
-        "rawHeight": 144,
+        "offsetX": 0,
+        "offsetY": -33.5,
+        "trimX": 0,
+        "trimY": 67,
+        "width": 162,
+        "height": 566,
+        "rawWidth": 162,
+        "rawHeight": 633,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "feb3e544-35a4-46b2-9e18-739f3811df00@6c48a",
+        "imageUuidOrDatabaseUri": "ee5396a9-078f-43b4-8b57-d5b6db359b2f@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "feb3e544-35a4-46b2-9e18-739f3811df00@f9941"
+    "redirect": "ee5396a9-078f-43b4-8b57-d5b6db359b2f@f9941"
   }
 }

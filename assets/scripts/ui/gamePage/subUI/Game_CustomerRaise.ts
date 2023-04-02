@@ -148,6 +148,10 @@ export class Game_CustomerRaise extends BaseUI
     ShowRaiseByPot()
     {
         this.mRaiseByPot.active = true;
+        for(let i = 0 ; i < this.mRaiseByPot.children.length ; i++)
+        {
+            this.mRaiseByPot.children[i].active = false;
+        }
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let totalPot = gameData.GetTotalPotAmount();
@@ -156,20 +160,12 @@ export class Game_CustomerRaise extends BaseUI
         let bb = gameData.GetStaticData().smallBlind * 2;
 
         let buttonCount = LocalPlayerData.Instance.CustomerRaiseSetting.length;
-        
-
-        for(let i = 0 ; i < this.mRaiseByPot.children.length ; i++)
+        let targetBtnParent = this.mRaiseByPot.getChildByName("RaiseByPot" + buttonCount);
+        targetBtnParent.active = true;
+        for(let i = 0 ; i < targetBtnParent.children.length ; i++)
         {
-            let currentBtn = this.mRaiseByPot.children[i].getComponent(BaseButton);
-            if(i < buttonCount)
-            {
-                currentBtn.Show(true);
-            }
-            else
-            {
-                currentBtn.Show(false);
-                continue;
-            }
+            let currentBtn = targetBtnParent.children[i].getComponent(BaseButton);
+
 
             let raiseIndex = LocalPlayerData.Instance.CustomerRaiseSetting[i];
 

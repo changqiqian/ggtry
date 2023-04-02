@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "132a0957-5181-436e-b785-8130771e117d",
+  "uuid": "28c05b87-16ed-41a5-99d3-b68487be5ad9",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "132a0957-5181-436e-b785-8130771e117d@6c48a",
-      "displayName": "游戏内--自己按钮",
+      "uuid": "28c05b87-16ed-41a5-99d3-b68487be5ad9@6c48a",
+      "displayName": "SliderTipsBtn",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "132a0957-5181-436e-b785-8130771e117d",
+        "imageUuidOrDatabaseUri": "28c05b87-16ed-41a5-99d3-b68487be5ad9",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "132a0957-5181-436e-b785-8130771e117d@f9941",
-      "displayName": "游戏内--自己按钮",
+      "uuid": "28c05b87-16ed-41a5-99d3-b68487be5ad9@f9941",
+      "displayName": "SliderTipsBtn",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": 0,
+        "offsetY": -6,
         "trimX": 0,
-        "trimY": 0,
-        "width": 108,
-        "height": 108,
-        "rawWidth": 108,
-        "rawHeight": 108,
+        "trimY": 12,
+        "width": 264,
+        "height": 132,
+        "rawWidth": 264,
+        "rawHeight": 144,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "132a0957-5181-436e-b785-8130771e117d@6c48a",
+        "imageUuidOrDatabaseUri": "28c05b87-16ed-41a5-99d3-b68487be5ad9@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "132a0957-5181-436e-b785-8130771e117d@f9941"
+    "redirect": "28c05b87-16ed-41a5-99d3-b68487be5ad9@f9941"
   }
 }

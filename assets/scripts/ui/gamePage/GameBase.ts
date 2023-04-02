@@ -21,7 +21,6 @@ import { Game_PublicCards } from './subUI/Game_PublicCards';
 import { Game_SeatUI } from './subUI/Game_SeatUI';
 import { Game_SelfAction } from './subUI/Game_SelfAction';
 import { Game_SelfPreAction } from './subUI/Game_SelfPreAction';
-import { Game_SelfUI } from './subUI/Game_SelfUI';
 import { Game_TopUI } from './subUI/Game_TopUI';
 
 const { ccclass, property } = _decorator;
@@ -394,11 +393,7 @@ export class GameBase extends BaseUI
         //     let tempScript = _script as Game_SelfPreAction;
         //     tempScript.InitWithData(this.mIndex);
         // });
-        this.AddSubView("gamePage","prefab/Game_SelfUI", (_script)=>
-        {
-            let tempScript = _script as Game_SelfUI;
-            tempScript.InitWithData(this.mIndex);
-        });
+
         this.AddSubView("gamePage","prefab/Game_TopUI", (_script)=>
         {
             let tempScript = _script as Game_TopUI;

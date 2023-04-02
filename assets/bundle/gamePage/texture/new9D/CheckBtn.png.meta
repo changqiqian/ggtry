@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "ee5396a9-078f-43b4-8b57-d5b6db359b2f",
+  "uuid": "20e1b82c-6954-46e9-bf54-1bf9aff1c750",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "ee5396a9-078f-43b4-8b57-d5b6db359b2f@6c48a",
-      "displayName": "游戏内-滑杆-背景",
+      "uuid": "20e1b82c-6954-46e9-bf54-1bf9aff1c750@6c48a",
+      "displayName": "CheckBtn",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "ee5396a9-078f-43b4-8b57-d5b6db359b2f",
+        "imageUuidOrDatabaseUri": "20e1b82c-6954-46e9-bf54-1bf9aff1c750",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "ee5396a9-078f-43b4-8b57-d5b6db359b2f@f9941",
-      "displayName": "游戏内-滑杆-背景",
+      "uuid": "20e1b82c-6954-46e9-bf54-1bf9aff1c750@f9941",
+      "displayName": "CheckBtn",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -42,20 +42,20 @@
         "trimThreshold": 1,
         "rotated": false,
         "offsetX": 0,
-        "offsetY": -33.5,
+        "offsetY": 0,
         "trimX": 0,
-        "trimY": 67,
-        "width": 162,
-        "height": 566,
-        "rawWidth": 162,
-        "rawHeight": 633,
+        "trimY": 0,
+        "width": 132,
+        "height": 132,
+        "rawWidth": 132,
+        "rawHeight": 132,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ee5396a9-078f-43b4-8b57-d5b6db359b2f@6c48a",
+        "imageUuidOrDatabaseUri": "20e1b82c-6954-46e9-bf54-1bf9aff1c750@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "ee5396a9-078f-43b4-8b57-d5b6db359b2f@f9941"
+    "redirect": "20e1b82c-6954-46e9-bf54-1bf9aff1c750@f9941"
   }
 }

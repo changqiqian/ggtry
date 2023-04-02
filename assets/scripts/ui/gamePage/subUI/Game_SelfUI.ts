@@ -407,21 +407,7 @@ export class Game_SelfUI extends BaseUI
             
         }
     }
-    UpdateAddTimeBtn(_show : boolean , _delaySpend : string)
-    {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        let gameData = gameStruct.mGameData;
-        let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        if(selfPlayer == null)
-        {
-            return;
-        }
-        this.mGame_AddTime.node.active = _show;
-        if(_show)
-        {
-            this.mGame_AddTime.SetButtonTitle(_delaySpend);
-        }
-    }
+
     RestoreAction()
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
