@@ -16,10 +16,7 @@ export class LoginUI extends BaseUI
 {
     @property(Label) 
     mVersion: Label = null;
-    @property(BaseButton) 
-    mLoginBtn: BaseButton = null;
-    @property(BaseButton) 
-    mSignBtn: BaseButton = null;
+
     @property(Node) 
     DebugFunction: Node = null;
     @property(BaseButton) 
@@ -47,26 +44,14 @@ export class LoginUI extends BaseUI
         LocalPlayerData.Instance.Data_AreaCode.mData = 1;
         UIMgr.Instance.ShowMultipleTable(true);
         this.mVersion.string = GameConfig.Version;
-        this.mLoginBtn.SetClickCallback(()=>
-        {
-            //UIMgr.Instance.ShowLayer("login","prefab/Login_LoginView");  
-            // UIMgr.Instance.ShowLayer("clubPage","prefab/Club_RecordLayer",true,(_script)=>
-            // {
-            //     let temp = _script as Club_RecordLayer;
-            //     temp.InitWitData("");
-            // });  
 
-        });
 
         this.TurnOff.SetClickCallback(()=>
         {
             setDisplayStats(false);            
         });
 
-        this.mSignBtn.SetClickCallback(()=>
-        {
-            //UIMgr.Instance.ShowLayer("login","prefab/Login_SignView");
-        });
+
    
 
         //debug mode
@@ -118,23 +103,7 @@ export class LoginUI extends BaseUI
     }
     RegDataNotify() 
     {
-        // LoginData.Instance.Data_LoginSuccessData.AddListenner(this,(_data)=>
-        // {
-        //     if(_data == true)
-        //     {
-        //         UIMgr.Instance.ChangeScene(SceneType.Hall);
-        //     }
-        // });
 
-        // LoginData.Instance.Data_RegisterSuccessData.AddListenner(this,(_data)=>
-        // {
-        //     if(_data == true)
-        //     {
-        //         let pwd = LocalPlayerData.Instance.Data_LastInputPwd.mData
-        //         let fullPhoneNumber = LocalPlayerData.Instance.GetFullPhoneNumber();
-        //         NetworkSend.Instance.LoginWithPwd(fullPhoneNumber,pwd);
-        //     }
-        // });
         
         CommonNotify.Instance.Data_SocketOpen.AddListenner(this,(_data)=>
         {

@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Sprite } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { UIMgr } from '../../../base/UIMgr';
 import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { GameReplayData } from '../GameReplayData';
@@ -16,6 +17,8 @@ export class Game_CashReplay extends BaseUI {
 
     @property(Sprite) 
     mBG: Sprite = null;
+    @property(Sprite) 
+    mTable: Sprite = null;
     @property(MovingShow) 
     mMovingShow: MovingShow = null;
 
@@ -87,7 +90,13 @@ export class Game_CashReplay extends BaseUI {
 
     RegDataNotify() 
     {
-
+        LocalPlayerData.Instance.Data_BGSetting.AddListenner(this,(_data)=>
+        {
+            this.LoadSprite("gamePage","texture/bg/Table" + _data ,(_spriteFrame)=>
+            {
+                this.mTable.spriteFrame = _spriteFrame;
+            })
+        });
     }
     LateInit() 
     {

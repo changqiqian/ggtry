@@ -842,7 +842,10 @@
       "b": 124,
       "a": 255
     },
-    "_normalSprite": null,
+    "_normalSprite": {
+      "__uuid__": "feb3e544-35a4-46b2-9e18-739f3811df00@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_hoverSprite": null,
     "_pressedSprite": null,
     "_disabledSprite": null,
@@ -1459,10 +1462,7 @@
     "propertyPath": [
       "_spriteFrame"
     ],
-    "value": {
-      "__uuid__": "2318bea3-618b-4665-9458-d582302e876f@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    }
+    "value": {}
   },
   {
     "__type__": "cc.TargetInfo",
@@ -1496,7 +1496,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 80,
+      "width": 88,
       "height": 63
     }
   },
@@ -1514,7 +1514,7 @@
     "propertyPath": [
       "_fontSize"
     ],
-    "value": 40
+    "value": 44
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -1524,7 +1524,7 @@
     "propertyPath": [
       "_actualFontSize"
     ],
-    "value": 40
+    "value": 44
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -1565,7 +1565,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "2318bea3-618b-4665-9458-d582302e876f@f9941",
+      "__uuid__": "f45fc4a7-930b-4b3e-9d21-6644640f87f6@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -1585,8 +1585,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 180,
-      "height": 81
+      "width": 390,
+      "height": 120
     }
   },
   {
@@ -1603,7 +1603,7 @@
     "propertyPath": [
       "_sizeMode"
     ],
-    "value": 0
+    "value": 1
   },
   {
     "__type__": "CCPropertyOverrideInfo",

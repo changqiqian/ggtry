@@ -1,6 +1,7 @@
-import { _decorator, Component, Node, Label } from 'cc';
+import { _decorator, Component, Node, Label, Color } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { Localization } from '../../../base/Localization';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { Tool } from '../../../Tool';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { GameReplayData } from '../GameReplayData';
@@ -9,6 +10,8 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_TableInfo')
 export class Game_TableInfo extends BaseUI 
 {
+    @property(Label) 
+    mDuration: Label = null;
     @property(Label) 
     mRoomName: Label = null;
     @property(Label) 
@@ -29,7 +32,25 @@ export class Game_TableInfo extends BaseUI
     }
     RegDataNotify() 
     {
-       
+        LocalPlayerData.Instance.Data_BGSetting.AddListenner(this,(_data)=>
+        {
+            if(_data == 0)
+            {
+                this.mDuration.color = new Color(108,117,126);
+                this.mRoomName.color = new Color(91,90,100);
+                this.mRoomID.color = new Color(91,90,100);
+                this.mBlindInfo.color = new Color(91,90,100);
+                this.mOtherInfo.color = new Color(91,90,100);
+            }
+            else
+            {
+                this.mDuration.color = new Color(122,130,142);
+                this.mRoomName.color = new Color(122,130,142);
+                this.mRoomID.color = new Color(122,130,142);
+                this.mBlindInfo.color = new Color(122,130,142);
+                this.mOtherInfo.color = new Color(122,130,142);
+            }
+        });
     }
     LateInit() 
     {

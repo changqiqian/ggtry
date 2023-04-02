@@ -154,9 +154,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 251,
-      "g": 160,
-      "b": 2,
+      "r": 0,
+      "g": 255,
+      "b": 0,
       "a": 255
     },
     "_string": "+0",

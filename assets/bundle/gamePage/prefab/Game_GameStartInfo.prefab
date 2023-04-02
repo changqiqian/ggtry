@@ -279,7 +279,7 @@
     "propertyPath": [
       "_fontSize"
     ],
-    "value": 34
+    "value": 36
   },
   {
     "__type__": "cc.TargetInfo",
@@ -297,7 +297,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 136,
+      "width": 144,
       "height": 50.4
     }
   },
@@ -315,7 +315,7 @@
     "propertyPath": [
       "_actualFontSize"
     ],
-    "value": 34
+    "value": 36
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -336,7 +336,7 @@
       "_spriteFrame"
     ],
     "value": {
-      "__uuid__": "2318bea3-618b-4665-9458-d582302e876f@f9941",
+      "__uuid__": "f45fc4a7-930b-4b3e-9d21-6644640f87f6@f9941",
       "__expectedType__": "cc.SpriteFrame"
     }
   },
@@ -356,7 +356,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 250,
       "height": 81
     }
   },
@@ -374,7 +374,7 @@
     "propertyPath": [
       "_sizeMode"
     ],
-    "value": 1
+    "value": 0
   },
   {
     "__type__": "cc.Node",

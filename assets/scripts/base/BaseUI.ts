@@ -1,6 +1,5 @@
 import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager, sys, view, Widget, UITransform, Vec3, Size, TweenSystem, game, Game } from 'cc';
 import { CommonNotify } from '../CommonNotify';
-import { CowboyData } from '../ui/cowboy/CowboyData';
 import { GameReplayData } from '../ui/gamePage/GameReplayData';
 import { HallData } from '../ui/hall/HallData';
 import { LoadingData } from '../ui/loading/LoadingData';
@@ -82,7 +81,6 @@ export abstract class BaseUI extends Component {
     {
         game.off(Game.EVENT_SHOW,this.OnGameShow,this);
         game.off(Game.EVENT_HIDE,this.OnGameHide,this);
-        CowboyData.Instance.RemoveAllDataListennerByTarget(this);
         LoadingData.Instance.RemoveAllDataListennerByTarget(this);
         LoginData.Instance.RemoveAllDataListennerByTarget(this);
         HallData.Instance.RemoveAllDataListennerByTarget(this);

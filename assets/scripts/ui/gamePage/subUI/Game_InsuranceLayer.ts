@@ -190,6 +190,10 @@ export class Game_InsuranceLayer extends BaseUI
                 this.mTieCount.string = tieCards.length + "";
                 for(let i = 0 ; i < tieCards.length ; i++)
                 {
+                    if(i >= 14)
+                    {
+                        break;
+                    }
                     let current = tieCards[i];
                     this.LoadPrefab("common" , "prefab/Poker",(_node)=>
                     {
@@ -202,31 +206,31 @@ export class Game_InsuranceLayer extends BaseUI
                 }
             }
 
-            let publicCards = _data.publicCards;
-            for(let i = 0 ; i < publicCards.length ; i++)
-            {
-                let current = publicCards[i];
-                this.LoadPrefab("common" , "prefab/Poker",(_node)=>
-                {
-                    this.mPublicCards.addChild(_node);
-                    let tempScript = _node.getComponent(Poker);
-                    tempScript.ResetAndHide();
-                    tempScript.SetFrontByCardInfo(current);
-                    tempScript.ShowFront();
-                });
-            }
+            // let publicCards = _data.publicCards;
+            // for(let i = 0 ; i < publicCards.length ; i++)
+            // {
+            //     let current = publicCards[i];
+            //     this.LoadPrefab("common" , "prefab/Poker",(_node)=>
+            //     {
+            //         this.mPublicCards.addChild(_node);
+            //         let tempScript = _node.getComponent(Poker);
+            //         tempScript.ResetAndHide();
+            //         tempScript.SetFrontByCardInfo(current);
+            //         tempScript.ShowFront();
+            //     });
+            // }
 
-            let loserPlayer = _data.losePlayerInfo;
-            for(let i = 0 ; i < loserPlayer.length ; i++)
-            {
-                let current = loserPlayer[i];
-                this.LoadPrefab("gamePage" , "prefab/Game_InsuranceOpponentCards",(_node)=>
-                {
-                    this.mOpponentCards.addChild(_node);
-                    let tempScript = _node.getComponent(Game_InsuranceOpponentCards);
-                    tempScript.SetCards(current.cards);
-                });
-            }
+            // let loserPlayer = _data.losePlayerInfo;
+            // for(let i = 0 ; i < loserPlayer.length ; i++)
+            // {
+            //     let current = loserPlayer[i];
+            //     this.LoadPrefab("gamePage" , "prefab/Game_InsuranceOpponentCards",(_node)=>
+            //     {
+            //         this.mOpponentCards.addChild(_node);
+            //         let tempScript = _node.getComponent(Game_InsuranceOpponentCards);
+            //         tempScript.SetCards(current.cards);
+            //     });
+            // }
 
 
 
