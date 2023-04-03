@@ -10,6 +10,8 @@ export class Game_PublicCards extends BaseUI
 {
 
     private mIndex : number = null;
+    @property(Node) 
+    mPokerNode: Node = null;
 
     mPos : Array<Vec3>;
     InitParam() 
@@ -53,9 +55,9 @@ export class Game_PublicCards extends BaseUI
         {
             this.mPos = new Array<Vec3>();
         }
-        for(let i = 0 ; i < this.node.children.length ; i++)
+        for(let i = 0 ; i < this.mPokerNode.children.length ; i++)
         {
-            let pos = this.node.children[i].getPosition();
+            let pos = this.mPokerNode.children[i].getPosition();
             this.mPos.push(pos);
         }
     }
@@ -137,7 +139,7 @@ export class Game_PublicCards extends BaseUI
 
     ClearPublicCards()
     {
-        for(let i = 0 ; i < this.node.children.length ; i++)
+        for(let i = 0 ; i < this.mPokerNode.children.length ; i++)
         {
             let poker = this.GetCardNode(i);
             poker.ResetAndHide();
@@ -161,11 +163,12 @@ export class Game_PublicCards extends BaseUI
         poker.ShowBack();
         poker.SetFrontByCardInfo(_cardInfo);
         poker.FlipToFront();
+        
     }
 
     GetCardNode(_index : number) : Poker
     {
-        return this.node.children[_index].getComponent(Poker);
+        return this.mPokerNode.children[_index].getComponent(Poker);
     }
 
     InitWithReplayData()

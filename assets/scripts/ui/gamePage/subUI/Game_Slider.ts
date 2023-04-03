@@ -8,6 +8,8 @@ const { ccclass, property } = _decorator;
 @ccclass('Game_Slider')
 export class Game_Slider extends BaseUI 
 {
+    @property(Node) 
+    mDark: Node = null;
     @property(Slider) 
     mSlider: Slider = null;
     @property(Node) 
@@ -35,11 +37,10 @@ export class Game_Slider extends BaseUI
 
     InitParam() 
     {
-
     }
     BindUI() 
     {
-
+        this.AddTouchCloseEvent(this.mDark);
         this.mConfirmBtn.SetClickCallback(()=>
         {            
             this.TryToBet();

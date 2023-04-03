@@ -281,6 +281,7 @@ export class Game_SelfAction extends BaseUI
         this.mSliderRaiseBtn.node.active = false;
         this.mGame_Slider.node.active = false;
         this.mCircleTimer.StopTimer();
+        this.mGame_AddTime.Show(false);
     }
 
 
@@ -305,6 +306,7 @@ export class Game_SelfAction extends BaseUI
         if(gameState == TexasCashState.TexasCashState_RoundStart)
         {
             return;
+            
         }
         
         if(actUid != selfPlayer.uid)

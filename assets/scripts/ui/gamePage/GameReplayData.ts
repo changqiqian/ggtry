@@ -230,9 +230,7 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
         let straddle = this.Data_CopyReplayData.mData.texasConfig.straddle;
         let PosNames : Array<string> = new Array<string>();
 
-        console.log("totalSeatNum==" + totalSeatNum);
         let posNameIndex = this.GetPosIndex(_uid);
-        console.log("posNameIndex==" + posNameIndex);
         if(straddle == false)
         {
             if(totalSeatNum == 2)

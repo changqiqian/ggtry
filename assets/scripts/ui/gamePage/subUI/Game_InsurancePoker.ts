@@ -10,15 +10,14 @@ export class Game_InsurancePoker extends BaseUI
 
     @property(Poker) 
     mPoker: Poker = null;
-    @property(Node) 
-    mIcon: Node = null;
+
     InitParam()
     {
 
     }
     BindUI()
     {
-        this.mIcon.active = false;
+
     }
     RegDataNotify()
     {

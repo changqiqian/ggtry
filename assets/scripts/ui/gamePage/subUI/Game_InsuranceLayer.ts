@@ -11,6 +11,7 @@ import { Poker } from '../../common/Poker';
 import { ProgressSlider } from '../../common/ProgressSlider';
 import { ToggleBtn } from '../../common/ToggleBtn';
 import { Game_InsuranceOpponentCards } from './Game_InsuranceOpponentCards';
+import { Game_InsurancePoker } from './Game_InsurancePoker';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_InsuranceLayer')
@@ -172,13 +173,11 @@ export class Game_InsuranceLayer extends BaseUI
                 for(let i = 0 ; i < fanchaoCards.length ; i++)
                 {
                     let current = fanchaoCards[i];
-                    this.LoadPrefab("common" , "prefab/Poker",(_node)=>
+                    this.LoadPrefab("gamePage" , "prefab/Game_InsurancePoker",(_node)=>
                     {
                         this.mFanChaoCards.addChild(_node);
-                        let tempScript = _node.getComponent(Poker);
-                        tempScript.ResetAndHide();
-                        tempScript.SetFrontByCardInfo(current);
-                        tempScript.ShowFront();
+                        let tempScript = _node.getComponent(Game_InsurancePoker);
+                        tempScript.SetCard(current);
                     });
                 }
             }
@@ -195,13 +194,11 @@ export class Game_InsuranceLayer extends BaseUI
                         break;
                     }
                     let current = tieCards[i];
-                    this.LoadPrefab("common" , "prefab/Poker",(_node)=>
+                    this.LoadPrefab("gamePage" , "prefab/Game_InsurancePoker",(_node)=>
                     {
                         this.mTieCards.addChild(_node);
-                        let tempScript = _node.getComponent(Poker);
-                        tempScript.ResetAndHide();
-                        tempScript.SetFrontByCardInfo(current);
-                        tempScript.ShowFront();
+                        let tempScript = _node.getComponent(Game_InsurancePoker);
+                        tempScript.SetCard(current);
                     });
                 }
             }
@@ -291,12 +288,17 @@ export class Game_InsuranceLayer extends BaseUI
     CalculateControlMoney(_ratio : number) : number
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let bb = gameStruct.mGameData.GetStaticData().smallBlind * 2;
         let gameData = gameStruct.mGameData;
         let fullPot = gameData.Data_BuyInsuranceTurn.mData.buyFullPot;
         //let min = gameData.Data_S2CCommonInsuranceTurnNotify.mData.buyBack;
         let min = 0;
         let max = Tool.CeilServerMoney(fullPot * _ratio);
         let currentAmount = min + max;
+        if(currentAmount < bb)
+        {
+            currentAmount = bb;
+        }
         return currentAmount;
     }
 

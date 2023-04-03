@@ -32,8 +32,6 @@ export class Game_Menu extends BaseUI
     @property(BaseButton) 
     mStandBtn: BaseButton = null;
     @property(BaseButton) 
-    mExitBtn: BaseButton = null;
-    @property(BaseButton) 
     mSettlementBtn: BaseButton = null;
     @property(BaseButton) 
     mAddInsBtn: BaseButton = null;
@@ -97,14 +95,7 @@ export class Game_Menu extends BaseUI
             }
 
         });
-        this.mExitBtn.SetClickCallback(()=>
-        {
-            HallData.Instance.Data_MultipeIndex.mData = MultipleTableCtr.HomeIndex;
-            // let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-            // let gameData = gameStruct.mGameData;
-            // let gameId = gameStruct.mGameId;
-            // NetworkSend.Instance.ExitGame(gameId,gameData.GetStaticData().gameType);
-        });
+
         this.mSettlementBtn.SetClickCallback(()=>
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
@@ -198,10 +189,12 @@ export class Game_Menu extends BaseUI
         {
             return;
         }
+        
         let gameData = gameStruct.mGameData;
         let uid = LocalPlayerData.Instance.Data_Uid.mData;
         let selfPlayer = gameData.GetPlayerInfoByUid(uid);
         this.mStandBtn.Show(selfPlayer != null);
+        this.mBringInBtn.Show(selfPlayer != null);
     }
 
     UpdateSettlementBtn()

@@ -28,8 +28,10 @@ const { ccclass, property } = _decorator;
 @ccclass('GameBase')
 export class GameBase extends BaseUI 
 {
+    @property(Node) 
+    mBG: Node = null;
     @property(Sprite) 
-    mBG: Sprite = null;
+    mTable: Sprite = null;
 
     mIndex : number = null;
     mMovingShow: MovingShow = null;
@@ -50,7 +52,7 @@ export class GameBase extends BaseUI
         {
             this.LoadSprite("gamePage","texture/bg/Table" + _data ,(_spriteFrame)=>
             {
-                this.mBG.spriteFrame = _spriteFrame;
+                this.mTable.spriteFrame = _spriteFrame;
             })
         });
     }
@@ -413,7 +415,7 @@ export class GameBase extends BaseUI
         {
             let tempScript = _script as Game_SeatUI;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mBG);
     }
 
     InitChatCtr()

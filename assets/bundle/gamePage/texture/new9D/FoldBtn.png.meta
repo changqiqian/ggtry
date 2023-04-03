@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "18e70b3d-e4ae-48ba-b050-b07bd66f830c",
+  "uuid": "2334fd92-585d-45f5-8373-bccf580df5ce",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "18e70b3d-e4ae-48ba-b050-b07bd66f830c@6c48a",
+      "uuid": "2334fd92-585d-45f5-8373-bccf580df5ce@6c48a",
       "displayName": "FoldBtn",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "18e70b3d-e4ae-48ba-b050-b07bd66f830c",
+        "imageUuidOrDatabaseUri": "2334fd92-585d-45f5-8373-bccf580df5ce",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "18e70b3d-e4ae-48ba-b050-b07bd66f830c@f9941",
+      "uuid": "2334fd92-585d-45f5-8373-bccf580df5ce@f9941",
       "displayName": "FoldBtn",
       "id": "f9941",
       "name": "spriteFrame",
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "18e70b3d-e4ae-48ba-b050-b07bd66f830c@6c48a",
+        "imageUuidOrDatabaseUri": "2334fd92-585d-45f5-8373-bccf580df5ce@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "18e70b3d-e4ae-48ba-b050-b07bd66f830c@f9941"
+    "redirect": "2334fd92-585d-45f5-8373-bccf580df5ce@f9941"
   }
 }
