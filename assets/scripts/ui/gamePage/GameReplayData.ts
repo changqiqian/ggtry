@@ -170,6 +170,11 @@ export class GameReplayData extends SingletonBaseNotify<GameReplayData>()
         return this.Data_ReplayData.mData.riverActions;
     }
 
+    GetAllWinlose() : Array<PlayerWinLose>
+    {
+        return this.Data_ReplayData.mData.correspondSettlementResult;
+    }
+
     GetWinResult(_seat : number) : PlayerWinLose
     {
         let index = this.Data_ReplayData.mData.players.findIndex((_item) => _item.seat === _seat);

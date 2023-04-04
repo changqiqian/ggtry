@@ -390,6 +390,7 @@ export class Game_SelfAction extends BaseUI
         }
         let actionTime = gameData.GetDynamicData().actionLeftTime;
         this.mCircleTimer.StartTimer(actionTime);
+        this.mGame_AddTime.Show(true);
     }
 
     UpdateCallBtn()

@@ -1725,6 +1725,9 @@ export class BasicTexasConfig implements IBasicTexasConfig {
     /** BasicTexasConfig autoStartNum. */
     public autoStartNum: number;
 
+    /** BasicTexasConfig public. */
+    public public: boolean;
+
     /** BasicTexasConfig gpsLimit. */
     public gpsLimit: boolean;
 

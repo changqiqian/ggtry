@@ -21,6 +21,7 @@ import { Game_PublicCards } from './subUI/Game_PublicCards';
 import { Game_SeatUI } from './subUI/Game_SeatUI';
 import { Game_SelfAction } from './subUI/Game_SelfAction';
 import { Game_SelfPreAction } from './subUI/Game_SelfPreAction';
+import { Game_ShowPokerUI } from './subUI/Game_ShowPokerUI';
 import { Game_TopUI } from './subUI/Game_TopUI';
 
 const { ccclass, property } = _decorator;
@@ -209,8 +210,6 @@ export class GameBase extends BaseUI
                 let tips = player.nickName + " " + Localization.GetString("00337") + amount;
                 temp.ShowTips(tips);
             });
-
-
         })
 
         gameData.Data_S2CCommonInsuranceLotteryNotify.AddListenner(this,(_data)=>
@@ -404,6 +403,12 @@ export class GameBase extends BaseUI
         this.AddSubView("gamePage","prefab/Game_ControlBtns", (_script)=>
         {
             let tempScript = _script as Game_ControlBtns;
+            tempScript.InitWithData(this.mIndex);
+        });
+
+        this.AddSubView("gamePage","prefab/Game_ShowPokerUI", (_script)=>
+        {
+            let tempScript = _script as Game_ShowPokerUI;
             tempScript.InitWithData(this.mIndex);
         });
     }

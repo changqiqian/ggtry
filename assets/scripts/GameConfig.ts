@@ -393,13 +393,13 @@ export class GameConfig
 
     public static SaveGameBGSetting(_index : number)
     {
-        let Key = "CUSTOMER_BG";
+        let Key = "CUSTOMER_BG_New";
         GameConfig.WriteSimpleData(Key, _index);
     }
 
     public static GetBGSetting() : number
     {
-        let Key = "CUSTOMER_BG";
+        let Key = "CUSTOMER_BG_New";
         let value = GameConfig.ReadSimpleData(Key, null);
         if(value == null)
         {

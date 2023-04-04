@@ -10,6 +10,7 @@ import { Game_Pot } from './subUI/Game_Pot';
 import { Game_PublicCards } from './subUI/Game_PublicCards';
 import { Game_SelfAction } from './subUI/Game_SelfAction';
 import { Game_SelfPreAction } from './subUI/Game_SelfPreAction';
+import { Game_ShowPokerUI } from './subUI/Game_ShowPokerUI';
 import { Game_TableInfo } from './subUI/Game_TableInfo';
 import { Game_TopUI } from './subUI/Game_TopUI';
 const { ccclass, property } = _decorator;
@@ -65,6 +66,12 @@ export class Game_Cash extends GameBase
         this.AddSubView("gamePage","prefab/Game_ControlBtns", (_script)=>
         {
             let tempScript = _script as Game_ControlBtns;
+            tempScript.InitWithData(this.mIndex);
+        });
+
+        this.AddSubView("gamePage","prefab/Game_ShowPokerUI", (_script)=>
+        {
+            let tempScript = _script as Game_ShowPokerUI;
             tempScript.InitWithData(this.mIndex);
         });
     }

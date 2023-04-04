@@ -272,5 +272,21 @@ export class Poker extends BaseUI
     {
         return this.mCardInfo != null;
     }
+
+    public IsSamePoker(_cardInfo : CardInfo) : boolean
+    {
+        if(this.mCardInfo == null)
+        {
+            return false;
+        }
+
+        if(this.mCardInfo.number == _cardInfo.number && 
+            this.mCardInfo.type == _cardInfo.type)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
 

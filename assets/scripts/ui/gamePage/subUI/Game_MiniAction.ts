@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Sprite, Label } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { Localization } from '../../../base/Localization';
 import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { GameConfig } from '../../../GameConfig';
 import { Tool } from '../../../Tool';
@@ -85,6 +86,31 @@ export class Game_MiniAction extends BaseUI {
                 return;
             }
             this.mSelfActAmount.string = Tool.ConvertMoney_S2C(_act.amount) + "";
+        }
+    }
+
+    public InitWithWinner(_playerWinLose : PlayerWinLose)
+    {
+        this.mOther.active = false;
+        this.mSelfBG.active = false;
+        if(_playerWinLose.uid != LocalPlayerData.Instance.Data_Uid.mData)
+        {
+            this.mOther.active = true;
+            this.ShowPosBG(ActionType.ActionType_Check);
+            this.LoadLocalHead(parseInt(_playerWinLose.head) , (_spriteFrame)=>
+            {
+                this.mHead.spriteFrame = _spriteFrame;
+            })
+            this.mPosName.string = GameReplayData.Instance.GetPosName(_playerWinLose.uid);
+            this.mNickName.string = _playerWinLose.nickName;
+            this.mActName.string =  Localization.GetString("00390");
+            this.mActAmount.string = Tool.ConvertMoney_S2C(_playerWinLose.winLose) + "";
+        }
+        else
+        {
+            this.mSelfBG.active = true;
+            this.mSelfActName.string =  Localization.GetString("00390");
+            this.mSelfActAmount.string = Tool.ConvertMoney_S2C(_playerWinLose.winLose) + "";
         }
     }
 

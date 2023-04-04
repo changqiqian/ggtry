@@ -45,14 +45,14 @@ export class Game_MiniReplay extends BaseUI {
     @property(ProgressSlider) 
     mProgressSlider: ProgressSlider = null;
 
-
-
     @property(Prefab) 
     mPrefab: Prefab = null;
 
     mCurrentPage : number ;
     mCurrentPageCache : number;
 
+    mTotalPots : number;
+    mLastPhase : Phase;
     mIndex : number = GameConfig.WrongIndex;
     
     public Show(_val : boolean)
@@ -104,8 +104,7 @@ export class Game_MiniReplay extends BaseUI {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             let msgId = gameData.ReplayDetailMsgId();
-    
-            NetworkSend.Instance.GetReplayDetail(msgId,gameStruct.mGameId,tempPage);
+            NetworkSend.Instance.GetReplayDetail(msgId,gameStruct.mGameId,tempPage + 1);
             
         });
 
@@ -119,9 +118,9 @@ export class Game_MiniReplay extends BaseUI {
         {
             let page = this.mCurrentPage;
             page--;
-            if(page <= 0)
+            if(page < 0)
             {
-                page = 1;
+                page = 0;
             }
 
             if(page == this.mCurrentPageCache)
@@ -132,7 +131,9 @@ export class Game_MiniReplay extends BaseUI {
             let gameData = gameStruct.mGameData;
             let msgId = gameData.ReplayDetailMsgId();
             this.UpdatePageUI(page);
-            NetworkSend.Instance.GetReplayDetail(msgId,gameStruct.mGameId,page);
+            let totalReplayCount = gameData.Data_S2CCommonSimpleReplayResp.mData.totalNum;
+            this.mProgressSlider.SetPercent((this.mCurrentPage) / (totalReplayCount - 1));
+            NetworkSend.Instance.GetReplayDetail(msgId,gameStruct.mGameId,page + 1);
         });
 
         this.mNextBtn.SetClickCallback(()=>
@@ -144,9 +145,9 @@ export class Game_MiniReplay extends BaseUI {
 
             let page = this.mCurrentPage;
             page++;
-            if(page >= totalReplayCount)
+            if(page >= totalReplayCount -1)
             {
-                page = totalReplayCount;
+                page = totalReplayCount - 1;
             }
 
             if(page == this.mCurrentPageCache)
@@ -154,7 +155,8 @@ export class Game_MiniReplay extends BaseUI {
                 return;
             }
             this.UpdatePageUI(page);
-            NetworkSend.Instance.GetReplayDetail(msgId,gameStruct.mGameId,page);
+            this.mProgressSlider.SetPercent((this.mCurrentPage) / (totalReplayCount - 1));
+            NetworkSend.Instance.GetReplayDetail(msgId,gameStruct.mGameId,page + 1);
         });
         
     }
@@ -164,15 +166,21 @@ export class Game_MiniReplay extends BaseUI {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let totalReplayCount = gameData.Data_S2CCommonSimpleReplayResp.mData.totalNum;
-        let tempPage = Math.floor(_ratio*totalReplayCount);
-        if(tempPage == 0)
+        let space = 1/(totalReplayCount - 1) ;
+        // console.log("space===" + space);
+        // console.log("totalReplayCount===" + totalReplayCount);
+        // console.log("_ratio===" + _ratio);
+        let tempPage = 0;
+        let minDistance = 10;
+        for(let i = 0 ; i < totalReplayCount ; i++)
         {
-            tempPage = 1;
-        }
-
-        if(tempPage > totalReplayCount)
-        {
-            tempPage = totalReplayCount;
+            let currentPos = space * i;
+            let currentDistance = Math.abs(_ratio - currentPos);
+            if(currentDistance <= minDistance)
+            {
+                minDistance = currentDistance;
+                tempPage = i;
+            }
         }
 
         return tempPage;
@@ -225,13 +233,17 @@ export class Game_MiniReplay extends BaseUI {
 
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
-            this.mCurrentPageCache = gameData.Data_S2CCommonDetailReplayResp.mData.detailReplayRecord.index;
+            this.mCurrentPageCache = gameData.Data_S2CCommonDetailReplayResp.mData.detailReplayRecord.index - 1;
+            let totalReplayCount = gameData.Data_S2CCommonSimpleReplayResp.mData.totalNum;
             this.UpdatePageUI(this.mCurrentPageCache);
+            this.mProgressSlider.SetPercent((this.mCurrentPage) / (totalReplayCount - 1));
         });
     }
 
     ResetUI()
     {
+        this.mLastPhase = Phase.Blinds;
+        this.mTotalPots = 0;
         this.HidePublicCards();
         this.mSeatContainer.destroyAllChildren();
         for(let i = Phase.Blinds ; i <= Phase.Turn ; i++)
@@ -255,8 +267,7 @@ export class Game_MiniReplay extends BaseUI {
         let gameData = gameStruct.mGameData;
         let totalReplayCount = gameData.Data_S2CCommonSimpleReplayResp.mData.totalNum;
         this.mCurrentPage = _currentPage;
-        this.mPageNum.string = this.mCurrentPage  + "/" + totalReplayCount;
-        this.mProgressSlider.SetPercent(this.mCurrentPage / totalReplayCount);
+        this.mPageNum.string = (this.mCurrentPage + 1)  + "/" + totalReplayCount;
     }
 
     GetPotAmountLabel(_Phase : Phase) : Label
@@ -269,6 +280,25 @@ export class Game_MiniReplay extends BaseUI {
         return this.mScrollView.content.children[_Phase];
     }
 
+    InsertMiniAction(_action : Array<ActionResult> , _phase : Phase)
+    {
+        for(let i = 0 ; i < _action.length ; i++)
+        {
+            let currentAct =  _action[i];
+            this.mTotalPots +=currentAct.actionInfo.amount;
+            let tempNode = instantiate(this.mPrefab);
+            this.GetReplayList(_phase).addChild(tempNode);
+            let tempScript = tempNode.getComponent(Game_MiniAction);
+            tempScript.InitWithData(currentAct.actionInfo);
+        }
+        this.GetPotAmountLabel(_phase).string  = "";
+        if(_action.length != 0)
+        {
+            this.GetPotAmountLabel(_phase).string = Tool.ConvertMoney_S2C(this.mTotalPots) + "";
+            this.mLastPhase = _phase;
+        }
+    }
+
     InitActions()
     {
         let blinds = GameReplayData.Instance.GetRoundStartActions();
@@ -277,73 +307,24 @@ export class Game_MiniReplay extends BaseUI {
         let turn = GameReplayData.Instance.GetTurnActions();
         let river = GameReplayData.Instance.GetRiverActions();
 
-        //翻前行动
-        let blindsAmount = 0;
-        for(let i = 0 ; i < blinds.length ; i++)
+        this.InsertMiniAction(blinds , Phase.Blinds);
+        this.InsertMiniAction(preflop , Phase.Preflop);
+        this.InsertMiniAction(flop , Phase.Flop);
+        this.InsertMiniAction(turn , Phase.Turn);
+        this.InsertMiniAction(river , Phase.River);
+
+        let winloseInfos = GameReplayData.Instance.GetAllWinlose();
+        for(let i = 0 ; i < winloseInfos.length ; i++)
         {
-            let currentAct =  blinds[i];
-            blindsAmount +=currentAct.actionInfo.amount;
-            let tempNode = instantiate(this.mPrefab);
-            this.GetReplayList(Phase.Blinds).addChild(tempNode);
-            let tempScript = tempNode.getComponent(Game_MiniAction);
-            tempScript.InitWithData(currentAct.actionInfo);
+            let current : PlayerWinLose = winloseInfos[i];
+            if(current.winLose > 0)
+            {
+                let tempNode = instantiate(this.mPrefab);
+                this.GetReplayList(this.mLastPhase).addChild(tempNode);
+                let tempScript = tempNode.getComponent(Game_MiniAction);
+                tempScript.InitWithWinner(current);
+            }
         }
-        this.GetPotAmountLabel(Phase.Blinds).string = Tool.ConvertMoney_S2C(blindsAmount) + "";
-
-        //pre flop行动
-        let PreflopAmount = 0;
-        for(let i = 0 ; i < preflop.length ; i++)
-        {
-            let currentAct =  preflop[i];
-            PreflopAmount +=currentAct.actionInfo.amount;
-            let tempNode = instantiate(this.mPrefab);
-            this.GetReplayList(Phase.Preflop).addChild(tempNode);
-            let tempScript = tempNode.getComponent(Game_MiniAction);
-            tempScript.InitWithData(currentAct.actionInfo);
-        }
-        this.GetPotAmountLabel(Phase.Preflop).string = Tool.ConvertMoney_S2C(PreflopAmount) + "";
-        
-
-        //flop行动
-        let flopAmount = 0;
-        for(let i = 0 ; i < flop.length ; i++)
-        {
-            let currentAct =  flop[i];
-            flopAmount +=currentAct.actionInfo.amount;
-            let tempNode = instantiate(this.mPrefab);
-            this.GetReplayList(Phase.Flop).addChild(tempNode);
-            let tempScript = tempNode.getComponent(Game_MiniAction);
-            tempScript.InitWithData(currentAct.actionInfo);
-        }
-        this.GetPotAmountLabel(Phase.Flop).string = Tool.ConvertMoney_S2C(flopAmount) + "";
-
-        // turn行动
-        let turnAmount = 0;
-        for(let i = 0 ; i < turn.length ; i++)
-        {
-            let currentAct =  turn[i];
-            turnAmount +=currentAct.actionInfo.amount;
-
-            let tempNode = instantiate(this.mPrefab);
-            this.GetReplayList(Phase.Turn).addChild(tempNode);
-            let tempScript = tempNode.getComponent(Game_MiniAction);
-            tempScript.InitWithData(currentAct.actionInfo);
-        }
-        this.GetPotAmountLabel(Phase.Turn).string = Tool.ConvertMoney_S2C(turnAmount) + "";
-
-        //river 行动
-        let riverAmount = 0;
-        for(let i = 0 ; i < river.length ; i++)
-        {
-            let currentAct =  river[i];
-            riverAmount +=currentAct.actionInfo.amount;
-            let tempNode = instantiate(this.mPrefab);
-            this.GetReplayList(Phase.River).addChild(tempNode);
-            let tempScript = tempNode.getComponent(Game_MiniAction);
-            tempScript.InitWithData(currentAct.actionInfo);
-        }
-        this.GetPotAmountLabel(Phase.River).string = Tool.ConvertMoney_S2C(riverAmount) + "";
-
         let height = 0;
         for(let i = Phase.Blinds ; i <= Phase.Turn ; i++)
         {

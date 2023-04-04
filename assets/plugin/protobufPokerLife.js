@@ -5312,6 +5312,7 @@ $root.BasicTexasConfig = (function() {
      * @property {number|null} [thinkingTime] BasicTexasConfig thinkingTime
      * @property {number|null} [seatNum] BasicTexasConfig seatNum
      * @property {number|null} [autoStartNum] BasicTexasConfig autoStartNum
+     * @property {boolean|null} ["public"] BasicTexasConfig public
      * @property {boolean|null} [gpsLimit] BasicTexasConfig gpsLimit
      * @property {boolean|null} [ipLimit] BasicTexasConfig ipLimit
      */
@@ -5476,6 +5477,14 @@ $root.BasicTexasConfig = (function() {
     BasicTexasConfig.prototype.autoStartNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
     /**
+     * BasicTexasConfig public.
+     * @member {boolean} public
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype["public"] = false;
+
+    /**
      * BasicTexasConfig gpsLimit.
      * @member {boolean} gpsLimit
      * @memberof BasicTexasConfig
@@ -5539,10 +5548,12 @@ $root.BasicTexasConfig = (function() {
             w.uint32(136).int64(m.seatNum);
         if (m.autoStartNum != null && Object.hasOwnProperty.call(m, "autoStartNum"))
             w.uint32(144).int64(m.autoStartNum);
+        if (m["public"] != null && Object.hasOwnProperty.call(m, "public"))
+            w.uint32(152).bool(m["public"]);
         if (m.gpsLimit != null && Object.hasOwnProperty.call(m, "gpsLimit"))
-            w.uint32(152).bool(m.gpsLimit);
+            w.uint32(160).bool(m.gpsLimit);
         if (m.ipLimit != null && Object.hasOwnProperty.call(m, "ipLimit"))
-            w.uint32(160).bool(m.ipLimit);
+            w.uint32(168).bool(m.ipLimit);
         return w;
     };
 
@@ -5619,9 +5630,12 @@ $root.BasicTexasConfig = (function() {
                 m.autoStartNum = r.int64();
                 break;
             case 19:
-                m.gpsLimit = r.bool();
+                m["public"] = r.bool();
                 break;
             case 20:
+                m.gpsLimit = r.bool();
+                break;
+            case 21:
                 m.ipLimit = r.bool();
                 break;
             default:

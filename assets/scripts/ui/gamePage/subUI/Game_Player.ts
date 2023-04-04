@@ -53,7 +53,6 @@ export class Game_Player extends BaseUI
     @property(Game_PlayerState) 
     mGame_PlayerState: Game_PlayerState = null;
 
-    mAlreadyShowCards : boolean = false;
     mSeatID : number = null; //座位编号
     private mIndex : number = null;
     InitParam() 
@@ -104,7 +103,6 @@ export class Game_Player extends BaseUI
             let currentPoker = this.mCards.children[i].getComponent(Poker);
             currentPoker.ResetAndHide();
         }
-        this.mAlreadyShowCards = false;
     }
 
     RegDataNotify() 
@@ -267,6 +265,7 @@ export class Game_Player extends BaseUI
             let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
             if(playerInfo == null)
             {
+                this.HideAllUI();
                 return;
             }
             this.PlayerSit();
@@ -655,17 +654,19 @@ export class Game_Player extends BaseUI
                 return;
             }
 
-            if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
-
             if(playerInfo.uid != _data.uid)
             {
                 return;
             }
-            this.ShowCards(_data.cardList);
-            
+
+            if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+            {
+                this.ForceShowCards(_data.cardList);
+            }
+            else
+            {
+                this.ShowCards(_data.cardList);
+            }
         });
 
         LocalPlayerData.Instance.Data_BBModeSetting.AddListenner(this,(_data)=>
@@ -926,21 +927,67 @@ export class Game_Player extends BaseUI
             //this.HideCard();
             return;
         }
-        let cardNodes = this.mCards.children;
+
         this.mCards.active = true;
         for(let i = 0 ; i < _cards.length ; i++)
         {
-            let currentPoker = cardNodes[i].getComponent(Poker);
-            if(currentPoker.AlreadyShow())
+            let currentPoker = this.GetPokerDidntShow();
+            if(currentPoker== null)
             {
-                continue;
+                return;
             }
             currentPoker.ResetAndHide();
             currentPoker.ShowBack(); 
             currentPoker.SetFrontByCardInfo(_cards[i]);
             currentPoker.FlipToFront();
         }
-        this.mAlreadyShowCards = true;
+    }
+
+    ForceShowCards(_cards : Array<CardInfo>)
+    {
+        for(let i = 0 ; i < _cards.length ; i++)
+        {
+            let currentPoker = this.GetSamePoker(_cards[i]);
+            if(currentPoker == null)
+            {
+                return;
+            }
+
+            currentPoker.ResetAndHide();
+            currentPoker.ShowBack(); 
+            currentPoker.SetFrontByCardInfo(_cards[i]);
+            currentPoker.FlipToFront();
+        }
+    }
+
+    GetSamePoker(_cardInfo : CardInfo): Poker
+    {
+        let result = null;
+        for(let i = 0 ; i < this.mCards.children.length ; i++)
+        {
+            let currentPoker = this.mCards.children[i].getComponent(Poker);
+            if(currentPoker.AlreadyShow() && currentPoker.IsSamePoker(_cardInfo))
+            {
+                result = currentPoker;
+                break;
+            }
+        }
+        return result;
+    }
+
+    GetPokerDidntShow() : Poker
+    {
+        let result = null;
+        for(let i = 0 ; i < this.mCards.children.length ; i++)
+        {
+            let currentPoker = this.mCards.children[i].getComponent(Poker);
+            if(currentPoker.AlreadyShow() == false)
+            {
+                result = currentPoker;
+                break;
+            }
+        }
+        return result;
     }
 
     //展示牌背面
@@ -999,16 +1046,13 @@ export class Game_Player extends BaseUI
 
         if(currentPlayer.uid == selfUid)
         {
-            if(this.mAlreadyShowCards == true)
+            if(this.GetPokerDidntShow() == null)
             {
                 return;
             }
 
             let state = gameData.GetGameState();
             let lastAct = gameData.FindLastActionByUid(selfUid)
-            let cardNodes = this.mCards.children;
-    
-            let cards = currentPlayer.cards;
             if(state <= TexasCashState.TexasCashState_PreFlopRound)
             {
                 if(lastAct == null ||
@@ -1158,15 +1202,13 @@ export class Game_Player extends BaseUI
         {
             return;
         }
-
         if(playerInfo.totalHands == 0)
         {
             this.mVPIP.string = "0%";
             return;
         }
-        this.mVPIP.string =  (playerInfo.totalHands/playerInfo.totalFlopHands).toFixed(1) + "%";
-        
-        
+
+        this.mVPIP.string =  (100 * playerInfo.totalFlopHands/playerInfo.totalHands).toFixed(1) + "%";
     }
 }
 
