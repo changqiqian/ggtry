@@ -7,23 +7,24 @@
     "outputName": "web-mobile1.15",
     "mainBundleCompressionType": "merge_dep",
     "platform": "web-mobile",
-    "debug": true,
+    "debug": false,
     "replaceSplashScreen": true,
-    "name": "9D"
+    "name": "9D",
+    "md5Cache": true
   },
   "BuildTaskManager": {
     "taskMap": {
-      "1680607936310": {
-        "id": "1680607936310",
-        "progress": 1,
-        "state": "success",
-        "message": "4-4-2023 19:32 Build success in 18236 ms!",
+      "1680611460043": {
+        "id": "1680611460043",
+        "progress": 0.175,
+        "state": "processing",
+        "message": "构建引擎",
         "options": {
           "name": "9D",
           "platform": "web-mobile",
           "buildPath": "project://build",
-          "debug": true,
-          "md5Cache": false,
+          "debug": false,
+          "md5Cache": true,
           "skipCompressTexture": false,
           "sourceMaps": false,
           "replaceSplashScreen": true,
@@ -56,7 +57,7 @@
             "hot-update": null
           }
         },
-        "time": "4-4-2023 19:32",
+        "time": "4-4-2023 20:31",
         "dirty": false
       }
     }

@@ -167,9 +167,6 @@ export class Game_MiniReplay extends BaseUI {
         let gameData = gameStruct.mGameData;
         let totalReplayCount = gameData.Data_S2CCommonSimpleReplayResp.mData.totalNum;
         let space = 1/(totalReplayCount - 1) ;
-        // console.log("space===" + space);
-        // console.log("totalReplayCount===" + totalReplayCount);
-        // console.log("_ratio===" + _ratio);
         let tempPage = 0;
         let minDistance = 10;
         for(let i = 0 ; i < totalReplayCount ; i++)
@@ -246,7 +243,7 @@ export class Game_MiniReplay extends BaseUI {
         this.mTotalPots = 0;
         this.HidePublicCards();
         this.mSeatContainer.destroyAllChildren();
-        for(let i = Phase.Blinds ; i <= Phase.Turn ; i++)
+        for(let i = Phase.Blinds ; i <= Phase.River ; i++)
         {
             this.GetPotAmountLabel(i).string = "0";
             this.GetReplayList(i).destroyAllChildren();

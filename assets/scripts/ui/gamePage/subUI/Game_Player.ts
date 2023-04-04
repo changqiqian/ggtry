@@ -708,11 +708,13 @@ export class Game_Player extends BaseUI
         let dealerPos = this.mDealer.position;
         let insPos = this.mInsuranceBG.position;
         let actionPos = this.mGame_ActionTag.node.position;
+        let betActPos = this.mGame_BetAmount.node.position;
         if(posX >= getVisibleSize.width/2)
         {
             this.mDealer.setPosition(-Math.abs(dealerPos.x) , dealerPos.y , dealerPos.z);
             this.mInsuranceBG.setPosition(-Math.abs(insPos.x) , insPos.y , insPos.z);
             this.mGame_ActionTag.node.setPosition(-Math.abs(actionPos.x) , actionPos.y , actionPos.z);
+            this.mGame_BetAmount.node.setPosition(-Math.abs(betActPos.x) , betActPos.y , betActPos.z);
             this.mGame_ActionTag.SetLeft(true);
         }
         else 
@@ -720,6 +722,7 @@ export class Game_Player extends BaseUI
             this.mDealer.setPosition(Math.abs(dealerPos.x) , dealerPos.y , dealerPos.z);
             this.mInsuranceBG.setPosition(Math.abs(insPos.x) , insPos.y , insPos.z);
             this.mGame_ActionTag.node.setPosition(Math.abs(actionPos.x) , actionPos.y , actionPos.z);
+            this.mGame_BetAmount.node.setPosition(Math.abs(betActPos.x) , betActPos.y , betActPos.z);
             this.mGame_ActionTag.SetLeft(false);
         }
     }
@@ -1153,7 +1156,7 @@ export class Game_Player extends BaseUI
             script.Fly(startWorldPos ,entWorldPos);
         })
 
-
+        this.UpdateUIDirection();
         this.mGame_BetAmount.Bet(_roundAmount , bb , _replay);
 
     }

@@ -628,7 +628,6 @@ export class GameConfig
     public static GetTopGameId() : string
     {
         return top.GAME_ID;
-        
         //return "3300";
     }
     
