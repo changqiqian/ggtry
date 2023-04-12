@@ -164,7 +164,7 @@ export class Game_BuyInWindow extends BaseUI
 
         LocalPlayerData.Instance.Data_Coin.AddListenner(this,(_data)=>
         {
-            this.UpdateTotalMoney();
+            //this.UpdateTotalMoney();
         })
 
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);

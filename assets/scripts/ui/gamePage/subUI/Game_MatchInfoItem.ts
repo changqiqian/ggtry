@@ -44,7 +44,7 @@ export class Game_MatchInfoItem extends BaseUI
 
     public InitWithData(_index : number , _data : PlayerStatistic)
     {
-        this.mBG.active = _index%2 == 0;
+        this.mBG.active = _data.uid == LocalPlayerData.Instance.Data_Uid.mData;
         this.mSelfTag.active = _data.uid == LocalPlayerData.Instance.Data_Uid.mData;
         this.mNickName.string = _data.name;
         this.mHands.string = _data.totalHands + "";
@@ -59,16 +59,15 @@ export class Game_MatchInfoItem extends BaseUI
             this.mVPIP.string = (_data.totalHands/_data.totalFlopHands).toFixed(1) + "%";
         }
 
-        
         if(_data.winLose >=0)
         {
             this.mWinLose.string = "+" + Tool.ConvertMoney_S2C(_data.winLose);
-            this.mWinLose.color = Color.RED
+            this.mWinLose.color = Color.GREEN
         }
         else
         {
             this.mWinLose.string = Tool.ConvertMoney_S2C(_data.winLose) + "";
-            this.mWinLose.color = Color.GREEN
+            this.mWinLose.color = Color.RED
         }
     }
 }

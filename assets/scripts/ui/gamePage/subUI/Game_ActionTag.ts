@@ -47,9 +47,12 @@ export class Game_ActionTag extends BaseUI
 
     SetType(_actionType : ActionType  )
     {
+        if(_actionType == ActionType.ActionType_SB || _actionType == ActionType.ActionType_BB)
+        {
+            return;
+        }
         this.ShowLeftOrRight();
         this.node.active = true;
-
         this.ShowAction(_actionType);
         this.ShowAnimation();
     }

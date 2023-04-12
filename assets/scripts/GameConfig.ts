@@ -303,7 +303,7 @@ export class GameConfig
     public static GetChatSetting() : boolean
     {
         let key = "CHAT_SETTING";
-        return GameConfig.ReadSimpleData_Bool(key);
+        return GameConfig.ReadSimpleData_Bool(key , true);
     }
 
     public static MinRaiseBtn = 2;
@@ -551,12 +551,12 @@ export class GameConfig
         GameConfig.WriteSimpleData(_key, _data == true ? 1 : 0);
     }
 
-    public static ReadSimpleData_Bool(_key : string) : boolean
+    public static ReadSimpleData_Bool(_key : string , _defualtValue = false) : boolean
     {
         let result = GameConfig.ReadSimpleData(_key, null);
         if(result == null)
         {
-            return false;
+            return _defualtValue;
         }
         return Number(result) == 1 ? true : false;
     }

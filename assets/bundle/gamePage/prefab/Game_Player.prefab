@@ -576,8 +576,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 50
+      "width": 80,
+      "height": 80
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3823,7 +3823,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60.04,
+      "width": 33.37,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -3859,7 +3859,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "46%",
+    "_string": "37",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 30,

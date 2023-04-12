@@ -203,19 +203,17 @@ export class Game_InsuranceLayer extends BaseUI
                 }
             }
 
-            // let publicCards = _data.publicCards;
-            // for(let i = 0 ; i < publicCards.length ; i++)
-            // {
-            //     let current = publicCards[i];
-            //     this.LoadPrefab("common" , "prefab/Poker",(_node)=>
-            //     {
-            //         this.mPublicCards.addChild(_node);
-            //         let tempScript = _node.getComponent(Poker);
-            //         tempScript.ResetAndHide();
-            //         tempScript.SetFrontByCardInfo(current);
-            //         tempScript.ShowFront();
-            //     });
-            // }
+            let publicCards = _data.publicCards;
+            for(let i = 0 ; i < publicCards.length ; i++)
+            {
+                let current = publicCards[i];
+                this.LoadPrefab("common" , "prefab/Game_InsurancePoker",(_node)=>
+                {
+                    this.mPublicCards.addChild(_node);
+                    let tempScript = _node.getComponent(Game_InsurancePoker);
+                    tempScript.SetCard(current);
+                });
+            }
 
             // let loserPlayer = _data.losePlayerInfo;
             // for(let i = 0 ; i < loserPlayer.length ; i++)

@@ -11,6 +11,8 @@ export class Game_PublicCards extends BaseUI
 
     private mIndex : number = null;
     @property(Node) 
+    mPokerPosNode: Node = null;
+    @property(Node) 
     mPokerNode: Node = null;
 
     mPos : Array<Vec3>;

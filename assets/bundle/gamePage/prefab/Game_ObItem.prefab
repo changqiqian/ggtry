@@ -422,7 +422,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 84.04,
+      "width": 180,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -458,14 +458,14 @@
       "b": 171,
       "a": 255
     },
-    "_string": "Rose",
+    "_string": "我我我我我",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 36,
     "_fontSize": 36,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
-    "_overflow": 0,
+    "_overflow": 1,
     "_enableWrapText": false,
     "_font": null,
     "_isSystemFontUsed": true,

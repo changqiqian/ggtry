@@ -41,12 +41,12 @@ export class Game_SingleChat extends BaseUI
         this.mContent.updateRenderData(true);
         let contentWidth = this.mContent.getComponent(UITransform).contentSize.width;
         this.mTotalDistance = _moveDistance + contentWidth;
-        this.StartToMove();
-    }
-
-    StartToMove()
-    {
         this.mMoving = true;
+
+        this.StartSecondsTimer(10,1,()=>
+        {
+            this.ForceEnd();
+        });
     }
 
     MovingLogic(_dt : number)
@@ -56,16 +56,20 @@ export class Game_SingleChat extends BaseUI
         let newPosX = currentPosX - changePosX;
         let posY = this.node.getPosition().y;
         this.node.setPosition(newPosX,posY);
-
         this.mTotalDistance -= changePosX;
         if(this.mTotalDistance < 0)
         {
-            this.mMoving = false;
-            if( this.mCallback!=null)
-            {
-                this.mCallback(this.mIndex);
-                this.DeleteSelf();
-            }
+            this.ForceEnd();
+        }
+    }
+
+    ForceEnd()
+    {
+        this.mMoving = false;
+        if( this.mCallback!=null)
+        {
+            this.mCallback(this.mIndex);
+            this.DeleteSelf();
         }
     }
 
@@ -75,7 +79,6 @@ export class Game_SingleChat extends BaseUI
         {
             return;
         }
-
         this.MovingLogic(_dt);
     }
 }

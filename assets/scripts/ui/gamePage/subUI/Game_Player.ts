@@ -1111,10 +1111,6 @@ export class Game_Player extends BaseUI
     {
         let currentUid = _playerInfo.uid;
         this.mDealer.active = currentUid == _dealerId;
-        if(currentUid == LocalPlayerData.Instance.Data_Uid.mData)
-        {
-            this.mDealer.active = false;
-        }
         this.UpdateUIDirection();
     }
 
@@ -1197,7 +1193,6 @@ export class Game_Player extends BaseUI
 
     UpdateVPIP()
     {
-
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
@@ -1207,11 +1202,11 @@ export class Game_Player extends BaseUI
         }
         if(playerInfo.totalHands == 0)
         {
-            this.mVPIP.string = "0%";
+            this.mVPIP.string = "0";
             return;
         }
 
-        this.mVPIP.string =  (100 * playerInfo.totalFlopHands/playerInfo.totalHands).toFixed(1) + "%";
+        this.mVPIP.string =  (100 * playerInfo.totalFlopHands/playerInfo.totalHands).toFixed(0);
     }
 }
 

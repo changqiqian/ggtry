@@ -172,10 +172,10 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 122,
-      "g": 130,
-      "b": 142,
-      "a": 255
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 50
     },
     "_string": "02:46",
     "_horizontalAlign": 1,
@@ -302,10 +302,10 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 122,
-      "g": 130,
-      "b": 142,
-      "a": 255
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 50
     },
     "_string": "房间名字",
     "_horizontalAlign": 1,
@@ -432,10 +432,10 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 122,
-      "g": 130,
-      "b": 142,
-      "a": 255
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 50
     },
     "_string": "ID:2555",
     "_horizontalAlign": 1,
@@ -562,10 +562,10 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 122,
-      "g": 130,
-      "b": 142,
-      "a": 255
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 50
     },
     "_string": "100/200(5)",
     "_horizontalAlign": 1,
@@ -692,10 +692,10 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 122,
-      "g": 130,
-      "b": 142,
-      "a": 255
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 50
     },
     "_string": "保險  GPS  IP",
     "_horizontalAlign": 1,

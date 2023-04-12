@@ -2,6 +2,7 @@ import { _decorator, Component, Node, instantiate, UITransform } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Game_SingleChat } from './Game_SingleChat';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_ChatingCtr')
@@ -63,6 +64,11 @@ export class Game_ChatingCtr extends BaseUI
     {
         let aviliableLaneIndex = this.GetAviliableLane();
         let posY = this.UsingLane(aviliableLaneIndex);
+
+        if(LocalPlayerData.Instance.Data_ChatSetting.mData == false)
+        {
+            return;
+        }
 
         this.LoadPrefab("gamePage","prefab/Game_SingleChat",(_node)=>
         {

@@ -355,7 +355,7 @@ export class Localization {
         { name: '00267', ch: '公厅游戏', en: 'Public Game' , korea :""},
         { name: '00268', ch: '实时战绩', en: 'Details' , korea :""},
         { name: '00269', ch: '昵称', en: 'Name' , korea :""},
-        { name: '00270', ch: '退出结算', en: 'Settlement' , korea :""},
+        { name: '00270', ch: '退出游戏', en: 'Exit' , korea :""},
         { name: '00271', ch: '编号.', en: 'No.' , korea :""},
         { name: '00272', ch: '开始播放', en: 'Auto play' , korea :""},
         { name: '00273', ch: '停止播放', en: 'Stop play' , korea :""},
@@ -457,7 +457,7 @@ export class Localization {
         { name: '00370', ch: '托管中无法站起', en: 'Back to game first' , korea :""},
         { name: '00371', ch: '桌面设置', en: 'BG setting' , korea :""},
         { name: '00372', ch: '扑克设置', en: 'Poker setting' , korea :""},
-        { name: '00373', ch: '默认加注设定', en: 'Bet setting' , korea :""},
+        { name: '00373', ch: '快捷投注(2-4个)', en: 'Bet setting(2-4)' , korea :""},
         { name: '00374', ch: '个人设置', en: 'Setting' , korea :""},
         { name: '00375', ch: '拉杆确认', en: 'Slider Comfirm' , korea :""},
         { name: '00376', ch: '显示bb', en: 'BB MODE' , korea :""},
@@ -476,8 +476,8 @@ export class Localization {
         { name: '00389', ch: '站起围观', en: 'Stand up' , korea :""},
         { name: '00390', ch: '赢取', en: 'Win' , korea :""},
         { name: '00391', ch: '3 Bet', en: '3 Bet' , korea :"3 Bet"},
-        { name: '00392', ch: '最多设置4个快捷按钮', en: 'Shortcut setting maximum is 4' , korea :""},
-        { name: '00393', ch: '最少设置2个快捷按钮', en: 'Shortcut setting minimum is 2' , korea :""},
+        { name: '00392', ch: '请先取消已选中', en: 'Unselected first' , korea :""},
+        { name: '00393', ch: '至少设置2个快捷按钮', en: 'the minimum Shortcut setting is 2' , korea :""},
         { name: '00394', ch: '投保额度：', en: 'Insurance:' , korea :""},
         { name: '00395', ch: '邀请分享', en: 'Invite' , korea :""},
         { name: '00396', ch: '亮牌', en: 'Show' , korea :""},
@@ -485,7 +485,7 @@ export class Localization {
         { name: '00398', ch: '同意', en: 'Agree' , korea :""},
         { name: '00399', ch: '好友申请', en: 'New friends' , korea :""},
         { name: '00400', ch: '申请成为好友', en: 'Friend request' , korea :""},
-        
+        { name: '00401', ch: '保险战绩', en: 'Insurance profit' , korea :""},
         
 
         //////////////////////////////////////////////////////////////////////////////////////////

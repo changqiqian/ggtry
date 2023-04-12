@@ -1913,16 +1913,16 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 187,
-      "g": 187,
-      "b": 187,
+      "r": 146,
+      "g": 159,
+      "b": 175,
       "a": 255
     },
     "_string": "请输入金额",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
-    "_actualFontSize": 40,
-    "_fontSize": 40,
+    "_actualFontSize": 36,
+    "_fontSize": 36,
     "_fontFamily": "Arial",
     "_lineHeight": 120,
     "_overflow": 1,
@@ -3788,7 +3788,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 184,
       "height": 100.8
     }
   },
@@ -3816,7 +3816,7 @@
     "propertyPath": [
       "_fontSize"
     ],
-    "value": 50
+    "value": 46
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -3826,7 +3826,7 @@
     "propertyPath": [
       "_actualFontSize"
     ],
-    "value": 50
+    "value": 46
   },
   {
     "__type__": "CCPropertyOverrideInfo",

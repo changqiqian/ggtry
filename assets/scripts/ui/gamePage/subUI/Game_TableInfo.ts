@@ -32,25 +32,25 @@ export class Game_TableInfo extends BaseUI
     }
     RegDataNotify() 
     {
-        LocalPlayerData.Instance.Data_BGSetting.AddListenner(this,(_data)=>
-        {
-            if(_data == 0)
-            {
-                this.mDuration.color = new Color(108,117,126);
-                this.mRoomName.color = new Color(91,90,100);
-                this.mRoomID.color = new Color(91,90,100);
-                this.mBlindInfo.color = new Color(91,90,100);
-                this.mOtherInfo.color = new Color(91,90,100);
-            }
-            else
-            {
-                this.mDuration.color = new Color(122,130,142);
-                this.mRoomName.color = new Color(122,130,142);
-                this.mRoomID.color = new Color(122,130,142);
-                this.mBlindInfo.color = new Color(122,130,142);
-                this.mOtherInfo.color = new Color(122,130,142);
-            }
-        });
+        // LocalPlayerData.Instance.Data_BGSetting.AddListenner(this,(_data)=>
+        // {
+        //     if(_data == 0)
+        //     {
+        //         this.mDuration.color = new Color(108,117,126);
+        //         this.mRoomName.color = new Color(91,90,100);
+        //         this.mRoomID.color = new Color(91,90,100);
+        //         this.mBlindInfo.color = new Color(91,90,100);
+        //         this.mOtherInfo.color = new Color(91,90,100);
+        //     }
+        //     else
+        //     {
+        //         this.mDuration.color = new Color(122,130,142);
+        //         this.mRoomName.color = new Color(122,130,142);
+        //         this.mRoomID.color = new Color(122,130,142);
+        //         this.mBlindInfo.color = new Color(122,130,142);
+        //         this.mOtherInfo.color = new Color(122,130,142);
+        //     }
+        // });
     }
     LateInit() 
     {

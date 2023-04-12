@@ -2561,7 +2561,7 @@
         "__id__": 144
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 150
@@ -3387,7 +3387,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 92,
       "height": 100.8
     }
   },
@@ -3421,7 +3421,7 @@
     "propertyPath": [
       "_fontSize"
     ],
-    "value": 50
+    "value": 46
   },
   {
     "__type__": "cc.TargetInfo",
@@ -3437,7 +3437,7 @@
     "propertyPath": [
       "_actualFontSize"
     ],
-    "value": 50
+    "value": 46
   },
   {
     "__type__": "cc.TargetInfo",
