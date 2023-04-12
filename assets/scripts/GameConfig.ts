@@ -614,21 +614,21 @@ export class GameConfig
 
     public static CreateUID()
     {
-        let rand = Tool.Random(100,1000);
+        let rand = Tool.Random(100,9000);
         GameConfig.uid = rand.toString();
     }
 
     public static GetTopUid() : string
     {
-        return top.USER_ID;
-        //return GameConfig.uid;
+        //return top.USER_ID;
+        return GameConfig.uid;
         //return "9527"
     }
 
     public static GetTopGameId() : string
     {
-        return top.GAME_ID;
-        //return "3300";
+        //return top.GAME_ID;
+        return "3300";
     }
     
     

@@ -60,7 +60,7 @@ export class Game_MiniAction extends BaseUI {
         {
             this.mOther.active = true;
             this.ShowPosBG(_act.actionType);
-            this.LoadLocalHead(parseInt(playerInfo.head) , (_spriteFrame)=>
+            this.LoadHead(playerInfo.head , (_spriteFrame)=>
             {
                 this.mHead.spriteFrame = _spriteFrame;
             })
@@ -97,7 +97,7 @@ export class Game_MiniAction extends BaseUI {
         {
             this.mOther.active = true;
             this.ShowPosBG(ActionType.ActionType_Check);
-            this.LoadLocalHead(parseInt(_playerWinLose.head) , (_spriteFrame)=>
+            this.LoadHead(_playerWinLose.head , (_spriteFrame)=>
             {
                 this.mHead.spriteFrame = _spriteFrame;
             })

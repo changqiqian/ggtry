@@ -48,7 +48,7 @@ export class Game_ObItem extends BaseUI
     public InitWithData(_playerInfo : PlayerInfo)
     {
         this.mPlayerInfo = _playerInfo;
-        this.LoadLocalHead(parseInt(_playerInfo.head) , (_spriteFrame)=>
+        this.LoadHead(_playerInfo.head, (_spriteFrame)=>
         {
             this.mHead.node.active = true;
             this.mHead.spriteFrame = _spriteFrame;

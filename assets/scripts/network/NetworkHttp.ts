@@ -1,16 +1,18 @@
 import { LocalPlayerData } from "../base/LocalPlayerData";
 import { Singleton } from "../base/Singleton";
 import { UIMgr } from "../base/UIMgr";
+import { MultipleTableCtr } from "../ui/common/MultipleTableCtr";
 
 export class NetworkHttp extends Singleton<NetworkHttp>()
 {
+    public static SuccesCode = "0";
     public HttpSend( _xhr : XMLHttpRequest , _param  ,_success: Function, _error: Function ) 
     {
-        let token = "BearereyJhbGciOiJIUzI1NiIsInppcCI6IkRFRiJ9.eNqqViouTVKyUkpMyc3MMzAwVNJRKi1OLYrPTFGyMjQw1FEqTs4vSIUpAMpmJpYAZczMzY0MLcwNTWsBAAAA__8.zDHnip5yjb9ElXCnZaAV6nDNw_ivlWFYXyogQ6acajg"
+        //let token = "BearereyJhbGciOiJIUzI1NiIsInppcCI6IkRFRiJ9.eNqqViouTVKyUkpMyc3MMzAwVNJRKi1OLYrPTFGyMjQw1FEqTs4vSIUpAMpmJpYAZczMzY0MLcwNTWsBAAAA__8.zDHnip5yjb9ElXCnZaAV6nDNw_ivlWFYXyogQ6acajg"
         _xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        _xhr.setRequestHeader("token", token);
-        _xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
-        _xhr.setRequestHeader("timestamp", "1672821524273");
+        // _xhr.setRequestHeader("token", token);
+        // _xhr.setRequestHeader("sign", "c2cc32c87bb51fd49a8fea4e5bb23f57");
+        // _xhr.setRequestHeader("timestamp", "1672821524273");
         _xhr.onreadystatechange = function () 
         {
             if (_xhr.readyState == 4) 
@@ -21,35 +23,47 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
 
         _xhr.onerror = function (_err) 
         {
-            console.log('HttpGet err ====' + _err);
+            console.log('Http err ====' + _err);
             UIMgr.Instance.ShowToast("http error");
             _error && _error(_err);
         };
 
-        _param.userId = "6743682430";
         _xhr.send(JSON.stringify(_param));
     }
 
-    //获取 今日，本周，本月 总战绩概括
-    public PostTotalRecordData(_gameType : GameType , _day : HTTP_Date, _clubId : string = "")
+    //房主查询买入请求
+    public PostBuyInRequest(_approveStatus : HTTP_BuyInStates , _createGameUserId : string, _gameId : string)
     {
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/record/sum");
+        xhr.open('POST', "http://54.169.147.71:8082/api/amount/sy/query/buy/request");
 
-        console.log("http 获取 今日，本周，本月 总战绩概括==");
+        console.log("http post  房主查询买入请求==");
         let param = 
         {
-            gameType : _gameType,
-            day : _day,
-            clubId : _clubId
+            approveStatus : _approveStatus,
+            createGameUserId : _createGameUserId,
+            gameId : _gameId
         }
 
         this.HttpSend(xhr,param,(_result)=>
         {
-            console.log("_收到http==今日，本周，本月 总战绩概括==" + _result);
+            console.log("_收到http==房主查询买入请求==" + _result);
             let json = JSON.parse(_result);
-            let protoData = json.data as RecordData;
-            LocalPlayerData.Instance.Data_RecordData.mData = protoData;
+            let classData : HTTP_BuyInRequest = json as HTTP_BuyInRequest;
+
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast( classData.msg);
+                return;
+            }
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(param.gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_HTTPBuyInRequest.mData = classData;
+            }
+
         },
         (_err)=>
         {
@@ -57,117 +71,114 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         }) 
     }
 
-    //获取战绩细节入口数据
-    public PostRecordData(_gameType:GameType ,_day : HTTP_Date, _pageNum : number , _pageSize : number , _clubId : string = "")
+    //房主 处理买入请求
+    public PostDealBuyInRequest(_approveStatus : HTTP_ApproveStatus , _approveUserId : string , _buyRequestId : string , _gameId : string)
     {
-        console.log("http 获取战绩细节入口数据==");
         let xhr = new XMLHttpRequest();
-        let url = "http://54.169.147.71:8080/api/game/sy/record?page=" + _pageNum + "&limit=" + _pageSize;
-        xhr.open('POST', url);
+        xhr.open('POST', "http://54.169.147.71:8082/api/amount/sy/approve/buy/request");
+
+        console.log("http post  房主 处理买入请求==");
         let param = 
         {
-            gameType : _gameType,
-            day : _day,
-            clubId : _clubId
+            approveStatus : _approveStatus,
+            approveUserId : _approveUserId,
+            buyRequestId : _buyRequestId,
         }
+
         this.HttpSend(xhr,param,(_result)=>
         {
-            console.log("_收到http==获取战绩细节入口数据==" + _result);
+            console.log("_收到http== 房主 处理买入请求==" + _result);
             let json = JSON.parse(_result);
-            let protoData = json.data as RecordSingleData;
-            LocalPlayerData.Instance.Data_RecordSingleData.mData = protoData;
-        
+            let classData : HTT_BaseResponse = json as HTT_BaseResponse;
+
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast(classData.msg);
+                return;
+            }
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                let tempData = new HTTP_ApproveResponse();
+                tempData.status = _approveStatus;
+                tempData.approveUserId = _approveUserId;
+                tempData.buyRequestId = _buyRequestId;
+                gameData.Data_HTTPApproveResponse.mData = tempData;
+                gameData.RemoveApproveRequest(tempData);
+
+                let tips = "";
+                if(tempData.status == HTTP_ApproveStatus.Agree)
+                {
+                    tips = "已同意用户:"+ tempData.approveUserId +"的买入请求";
+                }
+                else
+                {
+                    tips = "已拒绝用户:"+ tempData.approveUserId +"的买入请求";
+                }
+                UIMgr.Instance.ShowToast(tips);
+            }
+
         },
         (_err)=>
         {
 
-        })
+        }) 
     }
 
-    //获取战绩细节数据
-    public PostRecordDetailData(_gameId : string , _date : string  , _gameType : GameType)
-    {
-        console.log("http 获取战绩细节数据==");
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/game/detail");
-        let param = 
-        {
-            gameId : _gameId,
-            endDate : _date,
-            gameType : _gameType
-        }
-        this.HttpSend(xhr,param,(_result)=>
-        {
-            console.log("_收到http==获取战绩细节数据==" + _result);
-            let json = JSON.parse(_result);
-            let protoData = json.data as RecordDetail;
-            LocalPlayerData.Instance.Data_RecordDetail.mData = protoData;
-        },
-        (_err)=>
-        {
 
-        })
-    }
 
-    //获取简单手牌数据
-    public PostSimpleReplay(_gameType : GameType, _gameId : string , _pageNum : number , _pageSize : number , _date : string )
-    {
-        console.log("http 获取简单手牌数据==");
-        let xhr = new XMLHttpRequest();
-        let url = "http://54.169.147.71:8080/api/game/sy/hand?page="+_pageNum+"&limit=" + _pageSize;
-
-        xhr.open('POST', url);
-        let param = 
-        {
-            gameId : "G1001",
-            endDate : _date,
-            gameType : _gameType
-        }
-        this.HttpSend(xhr,param,(_result)=>
-        {
-            console.log("_收到http==获取简单手牌数据==" + _result);
-            let json = JSON.parse(_result);
-            let protoData = json.data as SimpleReplayRecord;
-            LocalPlayerData.Instance.Data_SimpleReplayData.mData = protoData;
-        },
-        (_err)=>
-        {
-
-        })
-    }
-
-    //获取详细手牌数据
-    public PostReplayDetail(_gameId : string , _index : number ,_date : string)
-    {
-        console.log("http 获取详细手牌数据==");
-        let xhr = new XMLHttpRequest();
-
-        xhr.open('POST', "http://54.169.147.71:8080/api/game/sy/hand/detail");
-        let param = 
-        {
-            gameId : "G1001",
-            index : _index,
-            endDate : _date,
-        }
-        this.HttpSend(xhr,param,(_result)=>
-        {
-            console.log("_收到http==获取详细手牌数据==" + _result);
-            let json = JSON.parse(_result);
-            let protoData = json.data as DetailReplayRecord;
-
-            LocalPlayerData.Instance.Data_ReplayData.mData = protoData;
-        },
-        (_err)=>
-        {
-
-        })
-    }
 }
 
 
-export enum HTTP_Date
+
+
+// 审批状态查询 0 未审批 1 已审批 2 已拒绝
+export enum HTTP_BuyInStates
 {
-    Today = 0,
-    Week,
-    Month ,
+    Waiting = 0,
+    Finish,
+    Reject ,
+}
+
+//审批状态确认 1 审批 2 拒绝
+export enum HTTP_ApproveStatus
+{
+    Agree = 1, 
+    Reject = 2
+}
+
+export class HTTP_ApproveResponse
+{
+    status:HTTP_ApproveStatus;
+    approveUserId : string;
+    buyRequestId : string;
+}
+
+export class HTT_BaseResponse
+{
+    code : string;
+    msg: string;
+}
+
+export class HTTP_BuyInRequest
+{
+    code : string;
+    msg: string
+    data : Array<HTTP_BuyInData>;
+}
+
+export class HTTP_BuyInData
+{
+    amount: number;
+    approvalStatus: number;
+    createGameUserId: string
+    createdTime: string
+    diamond: number;
+    gameId: string
+    id: number;
+    userId: string
+    userName: string
+    headUrl : string
 }

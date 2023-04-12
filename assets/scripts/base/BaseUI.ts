@@ -143,9 +143,22 @@ export abstract class BaseUI extends Component {
         });
     }
 
-    LoadLocalHead(_headIndex: number, _loadFinish: Function) 
+    LoadHead(_head : string ,  _loadFinish: Function)
     {
-        this.LoadSprite('common', 'texture/head/' + _headIndex.toString(), (_spriteFrame) => 
+        let isUrl = _head.startsWith("http");
+        if(isUrl)
+        {
+            this.LoadRemoteSprite(_head,_loadFinish);
+        }
+        else
+        {
+            this.LoadLocalHead(_head.toString() , _loadFinish);
+        }
+    }
+
+    LoadLocalHead(_headIndex: string, _loadFinish: Function) 
+    {
+        this.LoadSprite('common', 'texture/head/' + _headIndex, (_spriteFrame) => 
         {
             if (_loadFinish) 
             {

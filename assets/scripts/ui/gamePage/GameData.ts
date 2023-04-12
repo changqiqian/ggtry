@@ -6,6 +6,7 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { MultipleNotify, SingletonBaseNotify } from '../../base/Singleton';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
+import { HTTP_ApproveResponse, HTTP_BuyInRequest } from '../../network/NetworkHttp';
 
 
 
@@ -73,6 +74,30 @@ export abstract class GameData extends MultipleNotify
     Data_Refresh : BaseData<boolean> = new BaseData<boolean>(true);  //刷新场景
 
     mChatHistroy : Array<S2CCommonChatNotify> = new Array<S2CCommonChatNotify>(); //聊天历史
+
+    
+
+    //HttpData
+    Data_HTTPBuyInRequest: BaseData<HTTP_BuyInRequest> = new BaseData<HTTP_BuyInRequest>(); //买入请求列表
+    Data_HTTPApproveResponse: BaseData<HTTP_ApproveResponse> = new BaseData<HTTP_ApproveResponse>(); //处理买入结果
+
+    public RemoveApproveRequest(_data : HTTP_ApproveResponse)
+    {
+        let tempData = this.Data_HTTPBuyInRequest.mData.data;
+        if(tempData == null || tempData.length == 0)
+        {
+            return;
+        }
+
+        let index = tempData.findIndex((_item) => _item.id.toString() === _data.buyRequestId);
+        if(index < 0)
+        {
+            return;
+        }
+        tempData.splice(index , 1);
+        this.Data_HTTPBuyInRequest.mData.data = tempData;
+    }
+
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
     {
         let act = new ActionInfo();
@@ -82,6 +107,10 @@ export abstract class GameData extends MultipleNotify
         return act;
     }
 
+    public GetOwnerId() : string
+    {
+        return this.Data_S2CCommonEnterGameResp.mData.gameDynamic.creatorUid;
+    }
     
     public SetGameInfo(_S2CCommonEnterGameResp : S2CCommonEnterGameResp)
     {

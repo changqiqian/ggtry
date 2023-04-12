@@ -7,6 +7,8 @@ import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Game_Menu } from './Game_Menu';
 import { Game_ObLayer } from './Game_ObLayer';
+import { HTTP_BuyInStates, NetworkHttp } from '../../../network/NetworkHttp';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_TopUI')
@@ -84,8 +86,7 @@ export class Game_TopUI extends BaseUI
                 let seconds = this.GetRestSeconds();
                 if(seconds%30 == 0)
                 {
-                    let msgID = gameData.OBSizeMsgId();
-                    NetworkSend.Instance.GetObNum(msgID , gameStruct.mGameId);
+                    this.RequestData();
                 }
             })
         });
@@ -95,8 +96,20 @@ export class Game_TopUI extends BaseUI
             {
                 this.StopSecondsTimer();
             }
-
         });
+    }
+
+    RequestData()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let msgID = gameData.OBSizeMsgId();
+        NetworkSend.Instance.GetObNum(msgID , gameStruct.mGameId);
+        let ownnerId = gameData.GetOwnerId();
+        if(LocalPlayerData.Instance.Data_Uid.mData == ownnerId)
+        {
+            NetworkHttp.Instance.PostBuyInRequest(HTTP_BuyInStates.Waiting ,ownnerId,gameStruct.mGameId);
+        }
     }
 }
 

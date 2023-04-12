@@ -81,7 +81,7 @@ export class Game_MiniPlayer extends BaseUI
 
         this.mInfoNode.active = true;
 
-        this.LoadLocalHead(parseInt(playerInfo.head) , (_spriteFrame)=>
+        this.LoadHead(playerInfo.head , (_spriteFrame)=>
         {
             this.mHead.spriteFrame = _spriteFrame;
         })

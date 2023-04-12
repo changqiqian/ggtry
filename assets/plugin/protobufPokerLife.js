@@ -120,12 +120,12 @@ $root.AccountLevel = (function() {
  * @exports AccountStatus
  * @enum {number}
  * @property {number} AccountStatus_Normal=0 AccountStatus_Normal value
- * @property {number} AccountStatus_Frozen=1 AccountStatus_Frozen value
+ * @property {number} AccountStatus_Lock=1 AccountStatus_Lock value
  */
 $root.AccountStatus = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "AccountStatus_Normal"] = 0;
-    values[valuesById[1] = "AccountStatus_Frozen"] = 1;
+    values[valuesById[1] = "AccountStatus_Lock"] = 1;
     return values;
 })();
 
@@ -3426,5280 +3426,6 @@ $root.S2CTexasCowboyGameSettlementNotify = (function() {
 })();
 
 /**
- * AmountChangeType enum.
- * @exports AmountChangeType
- * @enum {number}
- * @property {number} AmountType_Other=0 AmountType_Other value
- * @property {number} AmountType_Charge=1 AmountType_Charge value
- * @property {number} AmountType_Grant=2 AmountType_Grant value
- * @property {number} AmountType_Prop=3 AmountType_Prop value
- * @property {number} AmountType_Commission=4 AmountType_Commission value
- * @property {number} AmountType_Return=5 AmountType_Return value
- * @property {number} AmountType_Insurance=6 AmountType_Insurance value
- * @property {number} AmountType_InsuranceReturn=7 AmountType_InsuranceReturn value
- * @property {number} AmountType_BringIn=8 AmountType_BringIn value
- * @property {number} AmountType_BringOut=9 AmountType_BringOut value
- * @property {number} AmountType_JackpotIn=10 AmountType_JackpotIn value
- * @property {number} AmountType_Jackpot=11 AmountType_Jackpot value
- * @property {number} AmountType_CowboyBet=12 AmountType_CowboyBet value
- * @property {number} AmountType_CowboyReturn=13 AmountType_CowboyReturn value
- */
-$root.AmountChangeType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "AmountType_Other"] = 0;
-    values[valuesById[1] = "AmountType_Charge"] = 1;
-    values[valuesById[2] = "AmountType_Grant"] = 2;
-    values[valuesById[3] = "AmountType_Prop"] = 3;
-    values[valuesById[4] = "AmountType_Commission"] = 4;
-    values[valuesById[5] = "AmountType_Return"] = 5;
-    values[valuesById[6] = "AmountType_Insurance"] = 6;
-    values[valuesById[7] = "AmountType_InsuranceReturn"] = 7;
-    values[valuesById[8] = "AmountType_BringIn"] = 8;
-    values[valuesById[9] = "AmountType_BringOut"] = 9;
-    values[valuesById[10] = "AmountType_JackpotIn"] = 10;
-    values[valuesById[11] = "AmountType_Jackpot"] = 11;
-    values[valuesById[12] = "AmountType_CowboyBet"] = 12;
-    values[valuesById[13] = "AmountType_CowboyReturn"] = 13;
-    return values;
-})();
-
-/**
- * PropType enum.
- * @exports PropType
- * @enum {number}
- * @property {number} PropType_Other=0 PropType_Other value
- * @property {number} PropType_ForceHand=1 PropType_ForceHand value
- * @property {number} PropType_RubbingCards=2 PropType_RubbingCards value
- * @property {number} PropType_PublicCard=3 PropType_PublicCard value
- * @property {number} PropType_DelayThinking=4 PropType_DelayThinking value
- * @property {number} PropType_Interaction=5 PropType_Interaction value
- */
-$root.PropType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "PropType_Other"] = 0;
-    values[valuesById[1] = "PropType_ForceHand"] = 1;
-    values[valuesById[2] = "PropType_RubbingCards"] = 2;
-    values[valuesById[3] = "PropType_PublicCard"] = 3;
-    values[valuesById[4] = "PropType_DelayThinking"] = 4;
-    values[valuesById[5] = "PropType_Interaction"] = 5;
-    return values;
-})();
-
-/**
- * JackpotType enum.
- * @exports JackpotType
- * @enum {number}
- * @property {number} JackpotType_Other=0 JackpotType_Other value
- * @property {number} JackpotType_RoyalStraightFlash=1 JackpotType_RoyalStraightFlash value
- * @property {number} JackpotType_RoyalStraightFlash6=2 JackpotType_RoyalStraightFlash6 value
- * @property {number} JackpotType_RoyalStraightFlash7=3 JackpotType_RoyalStraightFlash7 value
- */
-$root.JackpotType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "JackpotType_Other"] = 0;
-    values[valuesById[1] = "JackpotType_RoyalStraightFlash"] = 1;
-    values[valuesById[2] = "JackpotType_RoyalStraightFlash6"] = 2;
-    values[valuesById[3] = "JackpotType_RoyalStraightFlash7"] = 3;
-    return values;
-})();
-
-$root.Game2LoggerGameRecord = (function() {
-
-    /**
-     * Properties of a Game2LoggerGameRecord.
-     * @exports IGame2LoggerGameRecord
-     * @interface IGame2LoggerGameRecord
-     * @property {GameType|null} [gameType] Game2LoggerGameRecord gameType
-     * @property {string|null} [gameId] Game2LoggerGameRecord gameId
-     * @property {string|null} [creator] Game2LoggerGameRecord creator
-     * @property {string|null} [beginTime] Game2LoggerGameRecord beginTime
-     * @property {string|null} [endTime] Game2LoggerGameRecord endTime
-     * @property {number|null} [configAnte] Game2LoggerGameRecord configAnte
-     * @property {number|null} [configSmallBet] Game2LoggerGameRecord configSmallBet
-     * @property {number|null} [configBigBet] Game2LoggerGameRecord configBigBet
-     * @property {number|null} [configStraddleBet] Game2LoggerGameRecord configStraddleBet
-     * @property {number|null} [configPlayerNum] Game2LoggerGameRecord configPlayerNum
-     * @property {number|null} [totalPlayerNum] Game2LoggerGameRecord totalPlayerNum
-     * @property {Array.<IGameSubRecord>|null} [gameSubRecord] Game2LoggerGameRecord gameSubRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerGameRecord.
-     * @exports Game2LoggerGameRecord
-     * @classdesc Represents a Game2LoggerGameRecord.
-     * @implements IGame2LoggerGameRecord
-     * @constructor
-     * @param {IGame2LoggerGameRecord=} [p] Properties to set
-     */
-    function Game2LoggerGameRecord(p) {
-        this.gameSubRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerGameRecord gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerGameRecord gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.gameId = "";
-
-    /**
-     * Game2LoggerGameRecord creator.
-     * @member {string} creator
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.creator = "";
-
-    /**
-     * Game2LoggerGameRecord beginTime.
-     * @member {string} beginTime
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.beginTime = "";
-
-    /**
-     * Game2LoggerGameRecord endTime.
-     * @member {string} endTime
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.endTime = "";
-
-    /**
-     * Game2LoggerGameRecord configAnte.
-     * @member {number} configAnte
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.configAnte = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Game2LoggerGameRecord configSmallBet.
-     * @member {number} configSmallBet
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.configSmallBet = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Game2LoggerGameRecord configBigBet.
-     * @member {number} configBigBet
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.configBigBet = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Game2LoggerGameRecord configStraddleBet.
-     * @member {number} configStraddleBet
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.configStraddleBet = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Game2LoggerGameRecord configPlayerNum.
-     * @member {number} configPlayerNum
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.configPlayerNum = 0;
-
-    /**
-     * Game2LoggerGameRecord totalPlayerNum.
-     * @member {number} totalPlayerNum
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.totalPlayerNum = 0;
-
-    /**
-     * Game2LoggerGameRecord gameSubRecord.
-     * @member {Array.<IGameSubRecord>} gameSubRecord
-     * @memberof Game2LoggerGameRecord
-     * @instance
-     */
-    Game2LoggerGameRecord.prototype.gameSubRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerGameRecord message. Does not implicitly {@link Game2LoggerGameRecord.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerGameRecord
-     * @static
-     * @param {IGame2LoggerGameRecord} m Game2LoggerGameRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerGameRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(8).int32(m.gameType);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.creator != null && Object.hasOwnProperty.call(m, "creator"))
-            w.uint32(26).string(m.creator);
-        if (m.beginTime != null && Object.hasOwnProperty.call(m, "beginTime"))
-            w.uint32(34).string(m.beginTime);
-        if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
-            w.uint32(42).string(m.endTime);
-        if (m.configAnte != null && Object.hasOwnProperty.call(m, "configAnte"))
-            w.uint32(48).int64(m.configAnte);
-        if (m.configSmallBet != null && Object.hasOwnProperty.call(m, "configSmallBet"))
-            w.uint32(56).int64(m.configSmallBet);
-        if (m.configBigBet != null && Object.hasOwnProperty.call(m, "configBigBet"))
-            w.uint32(64).int64(m.configBigBet);
-        if (m.configStraddleBet != null && Object.hasOwnProperty.call(m, "configStraddleBet"))
-            w.uint32(72).int64(m.configStraddleBet);
-        if (m.configPlayerNum != null && Object.hasOwnProperty.call(m, "configPlayerNum"))
-            w.uint32(80).int32(m.configPlayerNum);
-        if (m.totalPlayerNum != null && Object.hasOwnProperty.call(m, "totalPlayerNum"))
-            w.uint32(88).int32(m.totalPlayerNum);
-        if (m.gameSubRecord != null && m.gameSubRecord.length) {
-            for (var i = 0; i < m.gameSubRecord.length; ++i)
-                $root.GameSubRecord.encode(m.gameSubRecord[i], w.uint32(98).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerGameRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerGameRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerGameRecord} Game2LoggerGameRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerGameRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerGameRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameType = r.int32();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                m.creator = r.string();
-                break;
-            case 4:
-                m.beginTime = r.string();
-                break;
-            case 5:
-                m.endTime = r.string();
-                break;
-            case 6:
-                m.configAnte = r.int64();
-                break;
-            case 7:
-                m.configSmallBet = r.int64();
-                break;
-            case 8:
-                m.configBigBet = r.int64();
-                break;
-            case 9:
-                m.configStraddleBet = r.int64();
-                break;
-            case 10:
-                m.configPlayerNum = r.int32();
-                break;
-            case 11:
-                m.totalPlayerNum = r.int32();
-                break;
-            case 12:
-                if (!(m.gameSubRecord && m.gameSubRecord.length))
-                    m.gameSubRecord = [];
-                m.gameSubRecord.push($root.GameSubRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerGameRecord;
-})();
-
-$root.GameSubRecord = (function() {
-
-    /**
-     * Properties of a GameSubRecord.
-     * @exports IGameSubRecord
-     * @interface IGameSubRecord
-     * @property {number|null} [subRoundId] GameSubRecord subRoundId
-     * @property {string|null} [subBeginTime] GameSubRecord subBeginTime
-     * @property {string|null} [subEndTime] GameSubRecord subEndTime
-     * @property {number|null} [subTotalPlayerNum] GameSubRecord subTotalPlayerNum
-     * @property {number|null} [subTotalBringin] GameSubRecord subTotalBringin
-     * @property {number|null} [subTotalBringout] GameSubRecord subTotalBringout
-     * @property {number|null} [subTotalCommission] GameSubRecord subTotalCommission
-     * @property {number|null} [subTotalReturn] GameSubRecord subTotalReturn
-     * @property {number|null} [subTotalInsurance] GameSubRecord subTotalInsurance
-     * @property {number|null} [jackpot] GameSubRecord jackpot
-     * @property {number|null} [jackpotCommission] GameSubRecord jackpotCommission
-     */
-
-    /**
-     * Constructs a new GameSubRecord.
-     * @exports GameSubRecord
-     * @classdesc Represents a GameSubRecord.
-     * @implements IGameSubRecord
-     * @constructor
-     * @param {IGameSubRecord=} [p] Properties to set
-     */
-    function GameSubRecord(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * GameSubRecord subRoundId.
-     * @member {number} subRoundId
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subRoundId = 0;
-
-    /**
-     * GameSubRecord subBeginTime.
-     * @member {string} subBeginTime
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subBeginTime = "";
-
-    /**
-     * GameSubRecord subEndTime.
-     * @member {string} subEndTime
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subEndTime = "";
-
-    /**
-     * GameSubRecord subTotalPlayerNum.
-     * @member {number} subTotalPlayerNum
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalPlayerNum = 0;
-
-    /**
-     * GameSubRecord subTotalBringin.
-     * @member {number} subTotalBringin
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalBringin = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord subTotalBringout.
-     * @member {number} subTotalBringout
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalBringout = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord subTotalCommission.
-     * @member {number} subTotalCommission
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalCommission = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord subTotalReturn.
-     * @member {number} subTotalReturn
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalReturn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord subTotalInsurance.
-     * @member {number} subTotalInsurance
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.subTotalInsurance = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord jackpot.
-     * @member {number} jackpot
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.jackpot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * GameSubRecord jackpotCommission.
-     * @member {number} jackpotCommission
-     * @memberof GameSubRecord
-     * @instance
-     */
-    GameSubRecord.prototype.jackpotCommission = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified GameSubRecord message. Does not implicitly {@link GameSubRecord.verify|verify} messages.
-     * @function encode
-     * @memberof GameSubRecord
-     * @static
-     * @param {IGameSubRecord} m GameSubRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    GameSubRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.subRoundId != null && Object.hasOwnProperty.call(m, "subRoundId"))
-            w.uint32(8).int32(m.subRoundId);
-        if (m.subBeginTime != null && Object.hasOwnProperty.call(m, "subBeginTime"))
-            w.uint32(18).string(m.subBeginTime);
-        if (m.subEndTime != null && Object.hasOwnProperty.call(m, "subEndTime"))
-            w.uint32(26).string(m.subEndTime);
-        if (m.subTotalPlayerNum != null && Object.hasOwnProperty.call(m, "subTotalPlayerNum"))
-            w.uint32(32).int32(m.subTotalPlayerNum);
-        if (m.subTotalBringin != null && Object.hasOwnProperty.call(m, "subTotalBringin"))
-            w.uint32(40).int64(m.subTotalBringin);
-        if (m.subTotalBringout != null && Object.hasOwnProperty.call(m, "subTotalBringout"))
-            w.uint32(48).int64(m.subTotalBringout);
-        if (m.subTotalCommission != null && Object.hasOwnProperty.call(m, "subTotalCommission"))
-            w.uint32(56).int64(m.subTotalCommission);
-        if (m.subTotalReturn != null && Object.hasOwnProperty.call(m, "subTotalReturn"))
-            w.uint32(64).int64(m.subTotalReturn);
-        if (m.subTotalInsurance != null && Object.hasOwnProperty.call(m, "subTotalInsurance"))
-            w.uint32(72).int64(m.subTotalInsurance);
-        if (m.jackpot != null && Object.hasOwnProperty.call(m, "jackpot"))
-            w.uint32(80).int64(m.jackpot);
-        if (m.jackpotCommission != null && Object.hasOwnProperty.call(m, "jackpotCommission"))
-            w.uint32(88).int64(m.jackpotCommission);
-        return w;
-    };
-
-    /**
-     * Decodes a GameSubRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof GameSubRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {GameSubRecord} GameSubRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    GameSubRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.GameSubRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.subRoundId = r.int32();
-                break;
-            case 2:
-                m.subBeginTime = r.string();
-                break;
-            case 3:
-                m.subEndTime = r.string();
-                break;
-            case 4:
-                m.subTotalPlayerNum = r.int32();
-                break;
-            case 5:
-                m.subTotalBringin = r.int64();
-                break;
-            case 6:
-                m.subTotalBringout = r.int64();
-                break;
-            case 7:
-                m.subTotalCommission = r.int64();
-                break;
-            case 8:
-                m.subTotalReturn = r.int64();
-                break;
-            case 9:
-                m.subTotalInsurance = r.int64();
-                break;
-            case 10:
-                m.jackpot = r.int64();
-                break;
-            case 11:
-                m.jackpotCommission = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return GameSubRecord;
-})();
-
-$root.Game2LoggerReplayRecord = (function() {
-
-    /**
-     * Properties of a Game2LoggerReplayRecord.
-     * @exports IGame2LoggerReplayRecord
-     * @interface IGame2LoggerReplayRecord
-     * @property {GameType|null} [gameType] Game2LoggerReplayRecord gameType
-     * @property {string|null} [gameId] Game2LoggerReplayRecord gameId
-     * @property {string|null} [endTime] Game2LoggerReplayRecord endTime
-     * @property {Array.<IReplayRecord>|null} [replayRecord] Game2LoggerReplayRecord replayRecord
-     */
-
-    /**
-     * Constructs a new Game2LoggerReplayRecord.
-     * @exports Game2LoggerReplayRecord
-     * @classdesc Represents a Game2LoggerReplayRecord.
-     * @implements IGame2LoggerReplayRecord
-     * @constructor
-     * @param {IGame2LoggerReplayRecord=} [p] Properties to set
-     */
-    function Game2LoggerReplayRecord(p) {
-        this.replayRecord = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerReplayRecord gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerReplayRecord
-     * @instance
-     */
-    Game2LoggerReplayRecord.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerReplayRecord gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerReplayRecord
-     * @instance
-     */
-    Game2LoggerReplayRecord.prototype.gameId = "";
-
-    /**
-     * Game2LoggerReplayRecord endTime.
-     * @member {string} endTime
-     * @memberof Game2LoggerReplayRecord
-     * @instance
-     */
-    Game2LoggerReplayRecord.prototype.endTime = "";
-
-    /**
-     * Game2LoggerReplayRecord replayRecord.
-     * @member {Array.<IReplayRecord>} replayRecord
-     * @memberof Game2LoggerReplayRecord
-     * @instance
-     */
-    Game2LoggerReplayRecord.prototype.replayRecord = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerReplayRecord message. Does not implicitly {@link Game2LoggerReplayRecord.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerReplayRecord
-     * @static
-     * @param {IGame2LoggerReplayRecord} m Game2LoggerReplayRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerReplayRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(8).int32(m.gameType);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
-            w.uint32(26).string(m.endTime);
-        if (m.replayRecord != null && m.replayRecord.length) {
-            for (var i = 0; i < m.replayRecord.length; ++i)
-                $root.ReplayRecord.encode(m.replayRecord[i], w.uint32(34).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerReplayRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerReplayRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerReplayRecord} Game2LoggerReplayRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerReplayRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerReplayRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameType = r.int32();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                m.endTime = r.string();
-                break;
-            case 4:
-                if (!(m.replayRecord && m.replayRecord.length))
-                    m.replayRecord = [];
-                m.replayRecord.push($root.ReplayRecord.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerReplayRecord;
-})();
-
-$root.ReplayRecord = (function() {
-
-    /**
-     * Properties of a ReplayRecord.
-     * @exports IReplayRecord
-     * @interface IReplayRecord
-     * @property {string|null} [happenTime] ReplayRecord happenTime
-     * @property {string|null} [userName] ReplayRecord userName
-     * @property {string|null} [userId] ReplayRecord userId
-     * @property {string|null} [clubName] ReplayRecord clubName
-     * @property {string|null} [clubId] ReplayRecord clubId
-     * @property {number|null} [index] ReplayRecord index
-     * @property {Array.<ICardInfo>|null} [publicCards] ReplayRecord publicCards
-     * @property {Array.<ICardInfo>|null} [myCards] ReplayRecord myCards
-     * @property {number|null} [myResult] ReplayRecord myResult
-     * @property {Array.<ICardInfo>|null} [winnerCards] ReplayRecord winnerCards
-     * @property {string|null} [winnerName] ReplayRecord winnerName
-     * @property {string|null} [winnerHead] ReplayRecord winnerHead
-     * @property {number|null} [winnerResult] ReplayRecord winnerResult
-     * @property {IBasicTexasConfig|null} [texasConfig] ReplayRecord texasConfig
-     * @property {Array.<IPlayerInfo>|null} [players] ReplayRecord players
-     * @property {string|null} [dealerUid] ReplayRecord dealerUid
-     * @property {number|null} [antes] ReplayRecord antes
-     * @property {Array.<IActionResult>|null} [roundStartActions] ReplayRecord roundStartActions
-     * @property {Array.<IActionResult>|null} [preFlopActions] ReplayRecord preFlopActions
-     * @property {Array.<IActionResult>|null} [flopActions] ReplayRecord flopActions
-     * @property {Array.<IActionResult>|null} [turnActions] ReplayRecord turnActions
-     * @property {Array.<IActionResult>|null} [riverActions] ReplayRecord riverActions
-     * @property {Array.<IPlayerWinLose>|null} [result] ReplayRecord result
-     * @property {Array.<IPotInfo>|null} [potInfoFlop] ReplayRecord potInfoFlop
-     * @property {Array.<IPotInfo>|null} [potInfoTurn] ReplayRecord potInfoTurn
-     * @property {Array.<IPotInfo>|null} [potInfoRiver] ReplayRecord potInfoRiver
-     */
-
-    /**
-     * Constructs a new ReplayRecord.
-     * @exports ReplayRecord
-     * @classdesc Represents a ReplayRecord.
-     * @implements IReplayRecord
-     * @constructor
-     * @param {IReplayRecord=} [p] Properties to set
-     */
-    function ReplayRecord(p) {
-        this.publicCards = [];
-        this.myCards = [];
-        this.winnerCards = [];
-        this.players = [];
-        this.roundStartActions = [];
-        this.preFlopActions = [];
-        this.flopActions = [];
-        this.turnActions = [];
-        this.riverActions = [];
-        this.result = [];
-        this.potInfoFlop = [];
-        this.potInfoTurn = [];
-        this.potInfoRiver = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ReplayRecord happenTime.
-     * @member {string} happenTime
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.happenTime = "";
-
-    /**
-     * ReplayRecord userName.
-     * @member {string} userName
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.userName = "";
-
-    /**
-     * ReplayRecord userId.
-     * @member {string} userId
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.userId = "";
-
-    /**
-     * ReplayRecord clubName.
-     * @member {string} clubName
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.clubName = "";
-
-    /**
-     * ReplayRecord clubId.
-     * @member {string} clubId
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.clubId = "";
-
-    /**
-     * ReplayRecord index.
-     * @member {number} index
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReplayRecord publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * ReplayRecord myCards.
-     * @member {Array.<ICardInfo>} myCards
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.myCards = $util.emptyArray;
-
-    /**
-     * ReplayRecord myResult.
-     * @member {number} myResult
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.myResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReplayRecord winnerCards.
-     * @member {Array.<ICardInfo>} winnerCards
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.winnerCards = $util.emptyArray;
-
-    /**
-     * ReplayRecord winnerName.
-     * @member {string} winnerName
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.winnerName = "";
-
-    /**
-     * ReplayRecord winnerHead.
-     * @member {string} winnerHead
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.winnerHead = "";
-
-    /**
-     * ReplayRecord winnerResult.
-     * @member {number} winnerResult
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.winnerResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReplayRecord texasConfig.
-     * @member {IBasicTexasConfig|null|undefined} texasConfig
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.texasConfig = null;
-
-    /**
-     * ReplayRecord players.
-     * @member {Array.<IPlayerInfo>} players
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.players = $util.emptyArray;
-
-    /**
-     * ReplayRecord dealerUid.
-     * @member {string} dealerUid
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.dealerUid = "";
-
-    /**
-     * ReplayRecord antes.
-     * @member {number} antes
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.antes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ReplayRecord roundStartActions.
-     * @member {Array.<IActionResult>} roundStartActions
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.roundStartActions = $util.emptyArray;
-
-    /**
-     * ReplayRecord preFlopActions.
-     * @member {Array.<IActionResult>} preFlopActions
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.preFlopActions = $util.emptyArray;
-
-    /**
-     * ReplayRecord flopActions.
-     * @member {Array.<IActionResult>} flopActions
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.flopActions = $util.emptyArray;
-
-    /**
-     * ReplayRecord turnActions.
-     * @member {Array.<IActionResult>} turnActions
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.turnActions = $util.emptyArray;
-
-    /**
-     * ReplayRecord riverActions.
-     * @member {Array.<IActionResult>} riverActions
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.riverActions = $util.emptyArray;
-
-    /**
-     * ReplayRecord result.
-     * @member {Array.<IPlayerWinLose>} result
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.result = $util.emptyArray;
-
-    /**
-     * ReplayRecord potInfoFlop.
-     * @member {Array.<IPotInfo>} potInfoFlop
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.potInfoFlop = $util.emptyArray;
-
-    /**
-     * ReplayRecord potInfoTurn.
-     * @member {Array.<IPotInfo>} potInfoTurn
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.potInfoTurn = $util.emptyArray;
-
-    /**
-     * ReplayRecord potInfoRiver.
-     * @member {Array.<IPotInfo>} potInfoRiver
-     * @memberof ReplayRecord
-     * @instance
-     */
-    ReplayRecord.prototype.potInfoRiver = $util.emptyArray;
-
-    /**
-     * Encodes the specified ReplayRecord message. Does not implicitly {@link ReplayRecord.verify|verify} messages.
-     * @function encode
-     * @memberof ReplayRecord
-     * @static
-     * @param {IReplayRecord} m ReplayRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ReplayRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(18).string(m.userName);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(26).string(m.userId);
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(34).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(42).string(m.clubId);
-        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
-            w.uint32(48).int64(m.index);
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
-        }
-        if (m.myCards != null && m.myCards.length) {
-            for (var i = 0; i < m.myCards.length; ++i)
-                $root.CardInfo.encode(m.myCards[i], w.uint32(66).fork()).ldelim();
-        }
-        if (m.myResult != null && Object.hasOwnProperty.call(m, "myResult"))
-            w.uint32(72).int64(m.myResult);
-        if (m.winnerCards != null && m.winnerCards.length) {
-            for (var i = 0; i < m.winnerCards.length; ++i)
-                $root.CardInfo.encode(m.winnerCards[i], w.uint32(82).fork()).ldelim();
-        }
-        if (m.winnerName != null && Object.hasOwnProperty.call(m, "winnerName"))
-            w.uint32(90).string(m.winnerName);
-        if (m.winnerHead != null && Object.hasOwnProperty.call(m, "winnerHead"))
-            w.uint32(98).string(m.winnerHead);
-        if (m.winnerResult != null && Object.hasOwnProperty.call(m, "winnerResult"))
-            w.uint32(104).int64(m.winnerResult);
-        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
-            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(114).fork()).ldelim();
-        if (m.players != null && m.players.length) {
-            for (var i = 0; i < m.players.length; ++i)
-                $root.PlayerInfo.encode(m.players[i], w.uint32(122).fork()).ldelim();
-        }
-        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
-            w.uint32(130).string(m.dealerUid);
-        if (m.antes != null && Object.hasOwnProperty.call(m, "antes"))
-            w.uint32(136).int64(m.antes);
-        if (m.roundStartActions != null && m.roundStartActions.length) {
-            for (var i = 0; i < m.roundStartActions.length; ++i)
-                $root.ActionResult.encode(m.roundStartActions[i], w.uint32(146).fork()).ldelim();
-        }
-        if (m.preFlopActions != null && m.preFlopActions.length) {
-            for (var i = 0; i < m.preFlopActions.length; ++i)
-                $root.ActionResult.encode(m.preFlopActions[i], w.uint32(154).fork()).ldelim();
-        }
-        if (m.flopActions != null && m.flopActions.length) {
-            for (var i = 0; i < m.flopActions.length; ++i)
-                $root.ActionResult.encode(m.flopActions[i], w.uint32(162).fork()).ldelim();
-        }
-        if (m.turnActions != null && m.turnActions.length) {
-            for (var i = 0; i < m.turnActions.length; ++i)
-                $root.ActionResult.encode(m.turnActions[i], w.uint32(170).fork()).ldelim();
-        }
-        if (m.riverActions != null && m.riverActions.length) {
-            for (var i = 0; i < m.riverActions.length; ++i)
-                $root.ActionResult.encode(m.riverActions[i], w.uint32(178).fork()).ldelim();
-        }
-        if (m.result != null && m.result.length) {
-            for (var i = 0; i < m.result.length; ++i)
-                $root.PlayerWinLose.encode(m.result[i], w.uint32(186).fork()).ldelim();
-        }
-        if (m.potInfoFlop != null && m.potInfoFlop.length) {
-            for (var i = 0; i < m.potInfoFlop.length; ++i)
-                $root.PotInfo.encode(m.potInfoFlop[i], w.uint32(194).fork()).ldelim();
-        }
-        if (m.potInfoTurn != null && m.potInfoTurn.length) {
-            for (var i = 0; i < m.potInfoTurn.length; ++i)
-                $root.PotInfo.encode(m.potInfoTurn[i], w.uint32(202).fork()).ldelim();
-        }
-        if (m.potInfoRiver != null && m.potInfoRiver.length) {
-            for (var i = 0; i < m.potInfoRiver.length; ++i)
-                $root.PotInfo.encode(m.potInfoRiver[i], w.uint32(210).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a ReplayRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof ReplayRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ReplayRecord} ReplayRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ReplayRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ReplayRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userName = r.string();
-                break;
-            case 3:
-                m.userId = r.string();
-                break;
-            case 4:
-                m.clubName = r.string();
-                break;
-            case 5:
-                m.clubId = r.string();
-                break;
-            case 6:
-                m.index = r.int64();
-                break;
-            case 7:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 8:
-                if (!(m.myCards && m.myCards.length))
-                    m.myCards = [];
-                m.myCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 9:
-                m.myResult = r.int64();
-                break;
-            case 10:
-                if (!(m.winnerCards && m.winnerCards.length))
-                    m.winnerCards = [];
-                m.winnerCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 11:
-                m.winnerName = r.string();
-                break;
-            case 12:
-                m.winnerHead = r.string();
-                break;
-            case 13:
-                m.winnerResult = r.int64();
-                break;
-            case 14:
-                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
-                break;
-            case 15:
-                if (!(m.players && m.players.length))
-                    m.players = [];
-                m.players.push($root.PlayerInfo.decode(r, r.uint32()));
-                break;
-            case 16:
-                m.dealerUid = r.string();
-                break;
-            case 17:
-                m.antes = r.int64();
-                break;
-            case 18:
-                if (!(m.roundStartActions && m.roundStartActions.length))
-                    m.roundStartActions = [];
-                m.roundStartActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 19:
-                if (!(m.preFlopActions && m.preFlopActions.length))
-                    m.preFlopActions = [];
-                m.preFlopActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 20:
-                if (!(m.flopActions && m.flopActions.length))
-                    m.flopActions = [];
-                m.flopActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 21:
-                if (!(m.turnActions && m.turnActions.length))
-                    m.turnActions = [];
-                m.turnActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 22:
-                if (!(m.riverActions && m.riverActions.length))
-                    m.riverActions = [];
-                m.riverActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 23:
-                if (!(m.result && m.result.length))
-                    m.result = [];
-                m.result.push($root.PlayerWinLose.decode(r, r.uint32()));
-                break;
-            case 24:
-                if (!(m.potInfoFlop && m.potInfoFlop.length))
-                    m.potInfoFlop = [];
-                m.potInfoFlop.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 25:
-                if (!(m.potInfoTurn && m.potInfoTurn.length))
-                    m.potInfoTurn = [];
-                m.potInfoTurn.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 26:
-                if (!(m.potInfoRiver && m.potInfoRiver.length))
-                    m.potInfoRiver = [];
-                m.potInfoRiver.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ReplayRecord;
-})();
-
-$root.Game2LoggerAmountChange = (function() {
-
-    /**
-     * Properties of a Game2LoggerAmountChange.
-     * @exports IGame2LoggerAmountChange
-     * @interface IGame2LoggerAmountChange
-     * @property {GameType|null} [gameType] Game2LoggerAmountChange gameType
-     * @property {string|null} [gameId] Game2LoggerAmountChange gameId
-     * @property {Array.<IAmountChangeInfo>|null} [amountChangeInfo] Game2LoggerAmountChange amountChangeInfo
-     */
-
-    /**
-     * Constructs a new Game2LoggerAmountChange.
-     * @exports Game2LoggerAmountChange
-     * @classdesc Represents a Game2LoggerAmountChange.
-     * @implements IGame2LoggerAmountChange
-     * @constructor
-     * @param {IGame2LoggerAmountChange=} [p] Properties to set
-     */
-    function Game2LoggerAmountChange(p) {
-        this.amountChangeInfo = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * Game2LoggerAmountChange gameType.
-     * @member {GameType} gameType
-     * @memberof Game2LoggerAmountChange
-     * @instance
-     */
-    Game2LoggerAmountChange.prototype.gameType = 0;
-
-    /**
-     * Game2LoggerAmountChange gameId.
-     * @member {string} gameId
-     * @memberof Game2LoggerAmountChange
-     * @instance
-     */
-    Game2LoggerAmountChange.prototype.gameId = "";
-
-    /**
-     * Game2LoggerAmountChange amountChangeInfo.
-     * @member {Array.<IAmountChangeInfo>} amountChangeInfo
-     * @memberof Game2LoggerAmountChange
-     * @instance
-     */
-    Game2LoggerAmountChange.prototype.amountChangeInfo = $util.emptyArray;
-
-    /**
-     * Encodes the specified Game2LoggerAmountChange message. Does not implicitly {@link Game2LoggerAmountChange.verify|verify} messages.
-     * @function encode
-     * @memberof Game2LoggerAmountChange
-     * @static
-     * @param {IGame2LoggerAmountChange} m Game2LoggerAmountChange message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    Game2LoggerAmountChange.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(8).int32(m.gameType);
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(18).string(m.gameId);
-        if (m.amountChangeInfo != null && m.amountChangeInfo.length) {
-            for (var i = 0; i < m.amountChangeInfo.length; ++i)
-                $root.AmountChangeInfo.encode(m.amountChangeInfo[i], w.uint32(26).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a Game2LoggerAmountChange message from the specified reader or buffer.
-     * @function decode
-     * @memberof Game2LoggerAmountChange
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {Game2LoggerAmountChange} Game2LoggerAmountChange
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    Game2LoggerAmountChange.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.Game2LoggerAmountChange();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameType = r.int32();
-                break;
-            case 2:
-                m.gameId = r.string();
-                break;
-            case 3:
-                if (!(m.amountChangeInfo && m.amountChangeInfo.length))
-                    m.amountChangeInfo = [];
-                m.amountChangeInfo.push($root.AmountChangeInfo.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return Game2LoggerAmountChange;
-})();
-
-$root.AmountChangeInfo = (function() {
-
-    /**
-     * Properties of an AmountChangeInfo.
-     * @exports IAmountChangeInfo
-     * @interface IAmountChangeInfo
-     * @property {string|null} [happenTime] AmountChangeInfo happenTime
-     * @property {string|null} [userId] AmountChangeInfo userId
-     * @property {string|null} [userName] AmountChangeInfo userName
-     * @property {string|null} [head] AmountChangeInfo head
-     * @property {number|null} [amountChange] AmountChangeInfo amountChange
-     * @property {number|null} [preChange] AmountChangeInfo preChange
-     * @property {number|null} [afterChange] AmountChangeInfo afterChange
-     * @property {AmountChangeType|null} [amountChangeType] AmountChangeInfo amountChangeType
-     * @property {IAmountChangeGenerics|null} [amountChangeGenerics] AmountChangeInfo amountChangeGenerics
-     */
-
-    /**
-     * Constructs a new AmountChangeInfo.
-     * @exports AmountChangeInfo
-     * @classdesc Represents an AmountChangeInfo.
-     * @implements IAmountChangeInfo
-     * @constructor
-     * @param {IAmountChangeInfo=} [p] Properties to set
-     */
-    function AmountChangeInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * AmountChangeInfo happenTime.
-     * @member {string} happenTime
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.happenTime = "";
-
-    /**
-     * AmountChangeInfo userId.
-     * @member {string} userId
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.userId = "";
-
-    /**
-     * AmountChangeInfo userName.
-     * @member {string} userName
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.userName = "";
-
-    /**
-     * AmountChangeInfo head.
-     * @member {string} head
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.head = "";
-
-    /**
-     * AmountChangeInfo amountChange.
-     * @member {number} amountChange
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.amountChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeInfo preChange.
-     * @member {number} preChange
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.preChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeInfo afterChange.
-     * @member {number} afterChange
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.afterChange = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeInfo amountChangeType.
-     * @member {AmountChangeType} amountChangeType
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.amountChangeType = 0;
-
-    /**
-     * AmountChangeInfo amountChangeGenerics.
-     * @member {IAmountChangeGenerics|null|undefined} amountChangeGenerics
-     * @memberof AmountChangeInfo
-     * @instance
-     */
-    AmountChangeInfo.prototype.amountChangeGenerics = null;
-
-    /**
-     * Encodes the specified AmountChangeInfo message. Does not implicitly {@link AmountChangeInfo.verify|verify} messages.
-     * @function encode
-     * @memberof AmountChangeInfo
-     * @static
-     * @param {IAmountChangeInfo} m AmountChangeInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    AmountChangeInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.happenTime != null && Object.hasOwnProperty.call(m, "happenTime"))
-            w.uint32(10).string(m.happenTime);
-        if (m.userId != null && Object.hasOwnProperty.call(m, "userId"))
-            w.uint32(18).string(m.userId);
-        if (m.userName != null && Object.hasOwnProperty.call(m, "userName"))
-            w.uint32(26).string(m.userName);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(34).string(m.head);
-        if (m.amountChange != null && Object.hasOwnProperty.call(m, "amountChange"))
-            w.uint32(40).int64(m.amountChange);
-        if (m.preChange != null && Object.hasOwnProperty.call(m, "preChange"))
-            w.uint32(48).int64(m.preChange);
-        if (m.afterChange != null && Object.hasOwnProperty.call(m, "afterChange"))
-            w.uint32(56).int64(m.afterChange);
-        if (m.amountChangeType != null && Object.hasOwnProperty.call(m, "amountChangeType"))
-            w.uint32(64).int32(m.amountChangeType);
-        if (m.amountChangeGenerics != null && Object.hasOwnProperty.call(m, "amountChangeGenerics"))
-            $root.AmountChangeGenerics.encode(m.amountChangeGenerics, w.uint32(74).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes an AmountChangeInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof AmountChangeInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {AmountChangeInfo} AmountChangeInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    AmountChangeInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.AmountChangeInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.happenTime = r.string();
-                break;
-            case 2:
-                m.userId = r.string();
-                break;
-            case 3:
-                m.userName = r.string();
-                break;
-            case 4:
-                m.head = r.string();
-                break;
-            case 5:
-                m.amountChange = r.int64();
-                break;
-            case 6:
-                m.preChange = r.int64();
-                break;
-            case 7:
-                m.afterChange = r.int64();
-                break;
-            case 8:
-                m.amountChangeType = r.int32();
-                break;
-            case 9:
-                m.amountChangeGenerics = $root.AmountChangeGenerics.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return AmountChangeInfo;
-})();
-
-$root.AmountChangeGenerics = (function() {
-
-    /**
-     * Properties of an AmountChangeGenerics.
-     * @exports IAmountChangeGenerics
-     * @interface IAmountChangeGenerics
-     * @property {string|null} [clubName] AmountChangeGenerics clubName
-     * @property {string|null} [clubId] AmountChangeGenerics clubId
-     * @property {number|null} [baseProfit] AmountChangeGenerics baseProfit
-     * @property {number|null} [propRate] AmountChangeGenerics propRate
-     * @property {PropType|null} [propType] AmountChangeGenerics propType
-     * @property {number|null} [preSettlement] AmountChangeGenerics preSettlement
-     * @property {string|null} [handId] AmountChangeGenerics handId
-     * @property {number|null} [poolRate] AmountChangeGenerics poolRate
-     * @property {number|null} [currentHandCount] AmountChangeGenerics currentHandCount
-     * @property {number|null} [currentWinCount] AmountChangeGenerics currentWinCount
-     * @property {CowboyAreaType|null} [betType] AmountChangeGenerics betType
-     * @property {number|null} [levelRate] AmountChangeGenerics levelRate
-     * @property {JackpotType|null} [jackpotType] AmountChangeGenerics jackpotType
-     * @property {number|null} [jackpotRate] AmountChangeGenerics jackpotRate
-     * @property {number|null} [jackpotPool] AmountChangeGenerics jackpotPool
-     */
-
-    /**
-     * Constructs a new AmountChangeGenerics.
-     * @exports AmountChangeGenerics
-     * @classdesc Represents an AmountChangeGenerics.
-     * @implements IAmountChangeGenerics
-     * @constructor
-     * @param {IAmountChangeGenerics=} [p] Properties to set
-     */
-    function AmountChangeGenerics(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * AmountChangeGenerics clubName.
-     * @member {string} clubName
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.clubName = "";
-
-    /**
-     * AmountChangeGenerics clubId.
-     * @member {string} clubId
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.clubId = "";
-
-    /**
-     * AmountChangeGenerics baseProfit.
-     * @member {number} baseProfit
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.baseProfit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeGenerics propRate.
-     * @member {number} propRate
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.propRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeGenerics propType.
-     * @member {PropType} propType
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.propType = 0;
-
-    /**
-     * AmountChangeGenerics preSettlement.
-     * @member {number} preSettlement
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.preSettlement = 0;
-
-    /**
-     * AmountChangeGenerics handId.
-     * @member {string} handId
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.handId = "";
-
-    /**
-     * AmountChangeGenerics poolRate.
-     * @member {number} poolRate
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.poolRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeGenerics currentHandCount.
-     * @member {number} currentHandCount
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.currentHandCount = 0;
-
-    /**
-     * AmountChangeGenerics currentWinCount.
-     * @member {number} currentWinCount
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.currentWinCount = 0;
-
-    /**
-     * AmountChangeGenerics betType.
-     * @member {CowboyAreaType} betType
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.betType = 0;
-
-    /**
-     * AmountChangeGenerics levelRate.
-     * @member {number} levelRate
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.levelRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeGenerics jackpotType.
-     * @member {JackpotType} jackpotType
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.jackpotType = 0;
-
-    /**
-     * AmountChangeGenerics jackpotRate.
-     * @member {number} jackpotRate
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.jackpotRate = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AmountChangeGenerics jackpotPool.
-     * @member {number} jackpotPool
-     * @memberof AmountChangeGenerics
-     * @instance
-     */
-    AmountChangeGenerics.prototype.jackpotPool = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified AmountChangeGenerics message. Does not implicitly {@link AmountChangeGenerics.verify|verify} messages.
-     * @function encode
-     * @memberof AmountChangeGenerics
-     * @static
-     * @param {IAmountChangeGenerics} m AmountChangeGenerics message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    AmountChangeGenerics.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.clubName != null && Object.hasOwnProperty.call(m, "clubName"))
-            w.uint32(10).string(m.clubName);
-        if (m.clubId != null && Object.hasOwnProperty.call(m, "clubId"))
-            w.uint32(18).string(m.clubId);
-        if (m.baseProfit != null && Object.hasOwnProperty.call(m, "baseProfit"))
-            w.uint32(24).int64(m.baseProfit);
-        if (m.propRate != null && Object.hasOwnProperty.call(m, "propRate"))
-            w.uint32(32).int64(m.propRate);
-        if (m.propType != null && Object.hasOwnProperty.call(m, "propType"))
-            w.uint32(40).int32(m.propType);
-        if (m.preSettlement != null && Object.hasOwnProperty.call(m, "preSettlement"))
-            w.uint32(48).int32(m.preSettlement);
-        if (m.handId != null && Object.hasOwnProperty.call(m, "handId"))
-            w.uint32(58).string(m.handId);
-        if (m.poolRate != null && Object.hasOwnProperty.call(m, "poolRate"))
-            w.uint32(64).int64(m.poolRate);
-        if (m.currentHandCount != null && Object.hasOwnProperty.call(m, "currentHandCount"))
-            w.uint32(72).int32(m.currentHandCount);
-        if (m.currentWinCount != null && Object.hasOwnProperty.call(m, "currentWinCount"))
-            w.uint32(80).int32(m.currentWinCount);
-        if (m.betType != null && Object.hasOwnProperty.call(m, "betType"))
-            w.uint32(88).int32(m.betType);
-        if (m.levelRate != null && Object.hasOwnProperty.call(m, "levelRate"))
-            w.uint32(96).int64(m.levelRate);
-        if (m.jackpotType != null && Object.hasOwnProperty.call(m, "jackpotType"))
-            w.uint32(104).int32(m.jackpotType);
-        if (m.jackpotRate != null && Object.hasOwnProperty.call(m, "jackpotRate"))
-            w.uint32(112).int64(m.jackpotRate);
-        if (m.jackpotPool != null && Object.hasOwnProperty.call(m, "jackpotPool"))
-            w.uint32(120).int64(m.jackpotPool);
-        return w;
-    };
-
-    /**
-     * Decodes an AmountChangeGenerics message from the specified reader or buffer.
-     * @function decode
-     * @memberof AmountChangeGenerics
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {AmountChangeGenerics} AmountChangeGenerics
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    AmountChangeGenerics.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.AmountChangeGenerics();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.clubName = r.string();
-                break;
-            case 2:
-                m.clubId = r.string();
-                break;
-            case 3:
-                m.baseProfit = r.int64();
-                break;
-            case 4:
-                m.propRate = r.int64();
-                break;
-            case 5:
-                m.propType = r.int32();
-                break;
-            case 6:
-                m.preSettlement = r.int32();
-                break;
-            case 7:
-                m.handId = r.string();
-                break;
-            case 8:
-                m.poolRate = r.int64();
-                break;
-            case 9:
-                m.currentHandCount = r.int32();
-                break;
-            case 10:
-                m.currentWinCount = r.int32();
-                break;
-            case 11:
-                m.betType = r.int32();
-                break;
-            case 12:
-                m.levelRate = r.int64();
-                break;
-            case 13:
-                m.jackpotType = r.int32();
-                break;
-            case 14:
-                m.jackpotRate = r.int64();
-                break;
-            case 15:
-                m.jackpotPool = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return AmountChangeGenerics;
-})();
-
-/**
- * ActionType enum.
- * @exports ActionType
- * @enum {number}
- * @property {number} ActionType_Init=0 ActionType_Init value
- * @property {number} ActionType_Fold=1 ActionType_Fold value
- * @property {number} ActionType_Check=2 ActionType_Check value
- * @property {number} ActionType_Bet=3 ActionType_Bet value
- * @property {number} ActionType_Ante=4 ActionType_Ante value
- * @property {number} ActionType_SB=5 ActionType_SB value
- * @property {number} ActionType_BB=6 ActionType_BB value
- * @property {number} ActionType_Straddle=7 ActionType_Straddle value
- * @property {number} ActionType_Raise=8 ActionType_Raise value
- * @property {number} ActionType_AllIn=9 ActionType_AllIn value
- * @property {number} ActionType_Call=10 ActionType_Call value
- */
-$root.ActionType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "ActionType_Init"] = 0;
-    values[valuesById[1] = "ActionType_Fold"] = 1;
-    values[valuesById[2] = "ActionType_Check"] = 2;
-    values[valuesById[3] = "ActionType_Bet"] = 3;
-    values[valuesById[4] = "ActionType_Ante"] = 4;
-    values[valuesById[5] = "ActionType_SB"] = 5;
-    values[valuesById[6] = "ActionType_BB"] = 6;
-    values[valuesById[7] = "ActionType_Straddle"] = 7;
-    values[valuesById[8] = "ActionType_Raise"] = 8;
-    values[valuesById[9] = "ActionType_AllIn"] = 9;
-    values[valuesById[10] = "ActionType_Call"] = 10;
-    return values;
-})();
-
-/**
- * SettlementType enum.
- * @exports SettlementType
- * @enum {number}
- * @property {number} SettlementType_AdvanceFold=0 SettlementType_AdvanceFold value
- * @property {number} SettlementType_AdvanceSettlement=1 SettlementType_AdvanceSettlement value
- * @property {number} SettlementType_NormalSettlement=2 SettlementType_NormalSettlement value
- */
-$root.SettlementType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "SettlementType_AdvanceFold"] = 0;
-    values[valuesById[1] = "SettlementType_AdvanceSettlement"] = 1;
-    values[valuesById[2] = "SettlementType_NormalSettlement"] = 2;
-    return values;
-})();
-
-/**
- * WinLoseType enum.
- * @exports WinLoseType
- * @enum {number}
- * @property {number} WinLoseType_Win=0 WinLoseType_Win value
- * @property {number} WinLoseType_Lose=1 WinLoseType_Lose value
- */
-$root.WinLoseType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "WinLoseType_Win"] = 0;
-    values[valuesById[1] = "WinLoseType_Lose"] = 1;
-    return values;
-})();
-
-/**
- * GameTaxType enum.
- * @exports GameTaxType
- * @enum {number}
- * @property {number} GameTaxType_EveryRound=0 GameTaxType_EveryRound value
- * @property {number} GameTaxType_WholeGameEnd=1 GameTaxType_WholeGameEnd value
- */
-$root.GameTaxType = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "GameTaxType_EveryRound"] = 0;
-    values[valuesById[1] = "GameTaxType_WholeGameEnd"] = 1;
-    return values;
-})();
-
-/**
- * TexasCashState enum.
- * @exports TexasCashState
- * @enum {number}
- * @property {number} TexasCashState_Create=0 TexasCashState_Create value
- * @property {number} TexasCashState_WaitStart=1 TexasCashState_WaitStart value
- * @property {number} TexasCashState_RoundStart=2 TexasCashState_RoundStart value
- * @property {number} TexasCashState_PreFlopRound=3 TexasCashState_PreFlopRound value
- * @property {number} TexasCashState_FlopRound=4 TexasCashState_FlopRound value
- * @property {number} TexasCashState_TurnRound=5 TexasCashState_TurnRound value
- * @property {number} TexasCashState_RiverRound=6 TexasCashState_RiverRound value
- * @property {number} TexasCashState_Settlement=7 TexasCashState_Settlement value
- */
-$root.TexasCashState = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "TexasCashState_Create"] = 0;
-    values[valuesById[1] = "TexasCashState_WaitStart"] = 1;
-    values[valuesById[2] = "TexasCashState_RoundStart"] = 2;
-    values[valuesById[3] = "TexasCashState_PreFlopRound"] = 3;
-    values[valuesById[4] = "TexasCashState_FlopRound"] = 4;
-    values[valuesById[5] = "TexasCashState_TurnRound"] = 5;
-    values[valuesById[6] = "TexasCashState_RiverRound"] = 6;
-    values[valuesById[7] = "TexasCashState_Settlement"] = 7;
-    return values;
-})();
-
-/**
- * GameRole enum.
- * @exports GameRole
- * @enum {number}
- * @property {number} GameRole_Observer=0 GameRole_Observer value
- * @property {number} GameRole_Player=1 GameRole_Player value
- */
-$root.GameRole = (function() {
-    var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "GameRole_Observer"] = 0;
-    values[valuesById[1] = "GameRole_Player"] = 1;
-    return values;
-})();
-
-$root.BasicTexasConfig = (function() {
-
-    /**
-     * Properties of a BasicTexasConfig.
-     * @exports IBasicTexasConfig
-     * @interface IBasicTexasConfig
-     * @property {GameType|null} [gameType] BasicTexasConfig gameType
-     * @property {string|null} [gameName] BasicTexasConfig gameName
-     * @property {GameCurrencyType|null} [currencyType] BasicTexasConfig currencyType
-     * @property {GameTaxType|null} [taxType] BasicTexasConfig taxType
-     * @property {number|null} [taxRatio] BasicTexasConfig taxRatio
-     * @property {number|null} [smallBlind] BasicTexasConfig smallBlind
-     * @property {boolean|null} [straddle] BasicTexasConfig straddle
-     * @property {number|null} [ante] BasicTexasConfig ante
-     * @property {number|null} [maxTotalBuyIn] BasicTexasConfig maxTotalBuyIn
-     * @property {number|null} [minBringIn] BasicTexasConfig minBringIn
-     * @property {number|null} [maxBringIn] BasicTexasConfig maxBringIn
-     * @property {boolean|null} [allowBringOut] BasicTexasConfig allowBringOut
-     * @property {number|null} [minScoreAfterBringOut] BasicTexasConfig minScoreAfterBringOut
-     * @property {boolean|null} [insurance] BasicTexasConfig insurance
-     * @property {number|null} [gameDuration] BasicTexasConfig gameDuration
-     * @property {number|null} [thinkingTime] BasicTexasConfig thinkingTime
-     * @property {number|null} [seatNum] BasicTexasConfig seatNum
-     * @property {number|null} [autoStartNum] BasicTexasConfig autoStartNum
-     * @property {boolean|null} ["public"] BasicTexasConfig public
-     * @property {boolean|null} [gpsLimit] BasicTexasConfig gpsLimit
-     * @property {boolean|null} [ipLimit] BasicTexasConfig ipLimit
-     */
-
-    /**
-     * Constructs a new BasicTexasConfig.
-     * @exports BasicTexasConfig
-     * @classdesc Represents a BasicTexasConfig.
-     * @implements IBasicTexasConfig
-     * @constructor
-     * @param {IBasicTexasConfig=} [p] Properties to set
-     */
-    function BasicTexasConfig(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * BasicTexasConfig gameType.
-     * @member {GameType} gameType
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.gameType = 0;
-
-    /**
-     * BasicTexasConfig gameName.
-     * @member {string} gameName
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.gameName = "";
-
-    /**
-     * BasicTexasConfig currencyType.
-     * @member {GameCurrencyType} currencyType
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.currencyType = 0;
-
-    /**
-     * BasicTexasConfig taxType.
-     * @member {GameTaxType} taxType
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.taxType = 0;
-
-    /**
-     * BasicTexasConfig taxRatio.
-     * @member {number} taxRatio
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.taxRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig smallBlind.
-     * @member {number} smallBlind
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.smallBlind = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig straddle.
-     * @member {boolean} straddle
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.straddle = false;
-
-    /**
-     * BasicTexasConfig ante.
-     * @member {number} ante
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.ante = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig maxTotalBuyIn.
-     * @member {number} maxTotalBuyIn
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.maxTotalBuyIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig minBringIn.
-     * @member {number} minBringIn
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.minBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig maxBringIn.
-     * @member {number} maxBringIn
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.maxBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig allowBringOut.
-     * @member {boolean} allowBringOut
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.allowBringOut = false;
-
-    /**
-     * BasicTexasConfig minScoreAfterBringOut.
-     * @member {number} minScoreAfterBringOut
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.minScoreAfterBringOut = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig insurance.
-     * @member {boolean} insurance
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.insurance = false;
-
-    /**
-     * BasicTexasConfig gameDuration.
-     * @member {number} gameDuration
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.gameDuration = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig thinkingTime.
-     * @member {number} thinkingTime
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.thinkingTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig seatNum.
-     * @member {number} seatNum
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.seatNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig autoStartNum.
-     * @member {number} autoStartNum
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.autoStartNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BasicTexasConfig public.
-     * @member {boolean} public
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype["public"] = false;
-
-    /**
-     * BasicTexasConfig gpsLimit.
-     * @member {boolean} gpsLimit
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.gpsLimit = false;
-
-    /**
-     * BasicTexasConfig ipLimit.
-     * @member {boolean} ipLimit
-     * @memberof BasicTexasConfig
-     * @instance
-     */
-    BasicTexasConfig.prototype.ipLimit = false;
-
-    /**
-     * Encodes the specified BasicTexasConfig message. Does not implicitly {@link BasicTexasConfig.verify|verify} messages.
-     * @function encode
-     * @memberof BasicTexasConfig
-     * @static
-     * @param {IBasicTexasConfig} m BasicTexasConfig message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    BasicTexasConfig.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(8).int32(m.gameType);
-        if (m.gameName != null && Object.hasOwnProperty.call(m, "gameName"))
-            w.uint32(18).string(m.gameName);
-        if (m.currencyType != null && Object.hasOwnProperty.call(m, "currencyType"))
-            w.uint32(24).int32(m.currencyType);
-        if (m.taxType != null && Object.hasOwnProperty.call(m, "taxType"))
-            w.uint32(32).int32(m.taxType);
-        if (m.taxRatio != null && Object.hasOwnProperty.call(m, "taxRatio"))
-            w.uint32(40).int64(m.taxRatio);
-        if (m.smallBlind != null && Object.hasOwnProperty.call(m, "smallBlind"))
-            w.uint32(48).int64(m.smallBlind);
-        if (m.straddle != null && Object.hasOwnProperty.call(m, "straddle"))
-            w.uint32(56).bool(m.straddle);
-        if (m.ante != null && Object.hasOwnProperty.call(m, "ante"))
-            w.uint32(64).int64(m.ante);
-        if (m.maxTotalBuyIn != null && Object.hasOwnProperty.call(m, "maxTotalBuyIn"))
-            w.uint32(72).int64(m.maxTotalBuyIn);
-        if (m.minBringIn != null && Object.hasOwnProperty.call(m, "minBringIn"))
-            w.uint32(80).int64(m.minBringIn);
-        if (m.maxBringIn != null && Object.hasOwnProperty.call(m, "maxBringIn"))
-            w.uint32(88).int64(m.maxBringIn);
-        if (m.allowBringOut != null && Object.hasOwnProperty.call(m, "allowBringOut"))
-            w.uint32(96).bool(m.allowBringOut);
-        if (m.minScoreAfterBringOut != null && Object.hasOwnProperty.call(m, "minScoreAfterBringOut"))
-            w.uint32(104).int64(m.minScoreAfterBringOut);
-        if (m.insurance != null && Object.hasOwnProperty.call(m, "insurance"))
-            w.uint32(112).bool(m.insurance);
-        if (m.gameDuration != null && Object.hasOwnProperty.call(m, "gameDuration"))
-            w.uint32(120).int64(m.gameDuration);
-        if (m.thinkingTime != null && Object.hasOwnProperty.call(m, "thinkingTime"))
-            w.uint32(128).int64(m.thinkingTime);
-        if (m.seatNum != null && Object.hasOwnProperty.call(m, "seatNum"))
-            w.uint32(136).int64(m.seatNum);
-        if (m.autoStartNum != null && Object.hasOwnProperty.call(m, "autoStartNum"))
-            w.uint32(144).int64(m.autoStartNum);
-        if (m["public"] != null && Object.hasOwnProperty.call(m, "public"))
-            w.uint32(152).bool(m["public"]);
-        if (m.gpsLimit != null && Object.hasOwnProperty.call(m, "gpsLimit"))
-            w.uint32(160).bool(m.gpsLimit);
-        if (m.ipLimit != null && Object.hasOwnProperty.call(m, "ipLimit"))
-            w.uint32(168).bool(m.ipLimit);
-        return w;
-    };
-
-    /**
-     * Decodes a BasicTexasConfig message from the specified reader or buffer.
-     * @function decode
-     * @memberof BasicTexasConfig
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {BasicTexasConfig} BasicTexasConfig
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    BasicTexasConfig.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.BasicTexasConfig();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameType = r.int32();
-                break;
-            case 2:
-                m.gameName = r.string();
-                break;
-            case 3:
-                m.currencyType = r.int32();
-                break;
-            case 4:
-                m.taxType = r.int32();
-                break;
-            case 5:
-                m.taxRatio = r.int64();
-                break;
-            case 6:
-                m.smallBlind = r.int64();
-                break;
-            case 7:
-                m.straddle = r.bool();
-                break;
-            case 8:
-                m.ante = r.int64();
-                break;
-            case 9:
-                m.maxTotalBuyIn = r.int64();
-                break;
-            case 10:
-                m.minBringIn = r.int64();
-                break;
-            case 11:
-                m.maxBringIn = r.int64();
-                break;
-            case 12:
-                m.allowBringOut = r.bool();
-                break;
-            case 13:
-                m.minScoreAfterBringOut = r.int64();
-                break;
-            case 14:
-                m.insurance = r.bool();
-                break;
-            case 15:
-                m.gameDuration = r.int64();
-                break;
-            case 16:
-                m.thinkingTime = r.int64();
-                break;
-            case 17:
-                m.seatNum = r.int64();
-                break;
-            case 18:
-                m.autoStartNum = r.int64();
-                break;
-            case 19:
-                m["public"] = r.bool();
-                break;
-            case 20:
-                m.gpsLimit = r.bool();
-                break;
-            case 21:
-                m.ipLimit = r.bool();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return BasicTexasConfig;
-})();
-
-$root.PlayerInfo = (function() {
-
-    /**
-     * Properties of a PlayerInfo.
-     * @exports IPlayerInfo
-     * @interface IPlayerInfo
-     * @property {string|null} [uid] PlayerInfo uid
-     * @property {string|null} [nickName] PlayerInfo nickName
-     * @property {string|null} [head] PlayerInfo head
-     * @property {number|null} [currencyNum] PlayerInfo currencyNum
-     * @property {number|null} [bringInNum] PlayerInfo bringInNum
-     * @property {boolean|null} [online] PlayerInfo online
-     * @property {GameRole|null} [gameRole] PlayerInfo gameRole
-     * @property {Array.<ICardInfo>|null} [cards] PlayerInfo cards
-     * @property {number|null} [seat] PlayerInfo seat
-     * @property {number|null} [buyInLeftTime] PlayerInfo buyInLeftTime
-     * @property {boolean|null} [fold] PlayerInfo fold
-     * @property {number|null} [autoLeftTime] PlayerInfo autoLeftTime
-     * @property {boolean|null} [auto] PlayerInfo auto
-     * @property {number|null} [totalHands] PlayerInfo totalHands
-     * @property {number|null} [totalFlopHands] PlayerInfo totalFlopHands
-     */
-
-    /**
-     * Constructs a new PlayerInfo.
-     * @exports PlayerInfo
-     * @classdesc Represents a PlayerInfo.
-     * @implements IPlayerInfo
-     * @constructor
-     * @param {IPlayerInfo=} [p] Properties to set
-     */
-    function PlayerInfo(p) {
-        this.cards = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * PlayerInfo uid.
-     * @member {string} uid
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.uid = "";
-
-    /**
-     * PlayerInfo nickName.
-     * @member {string} nickName
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.nickName = "";
-
-    /**
-     * PlayerInfo head.
-     * @member {string} head
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.head = "";
-
-    /**
-     * PlayerInfo currencyNum.
-     * @member {number} currencyNum
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.currencyNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PlayerInfo bringInNum.
-     * @member {number} bringInNum
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.bringInNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PlayerInfo online.
-     * @member {boolean} online
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.online = false;
-
-    /**
-     * PlayerInfo gameRole.
-     * @member {GameRole} gameRole
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.gameRole = 0;
-
-    /**
-     * PlayerInfo cards.
-     * @member {Array.<ICardInfo>} cards
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.cards = $util.emptyArray;
-
-    /**
-     * PlayerInfo seat.
-     * @member {number} seat
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.seat = 0;
-
-    /**
-     * PlayerInfo buyInLeftTime.
-     * @member {number} buyInLeftTime
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.buyInLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PlayerInfo fold.
-     * @member {boolean} fold
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.fold = false;
-
-    /**
-     * PlayerInfo autoLeftTime.
-     * @member {number} autoLeftTime
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.autoLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PlayerInfo auto.
-     * @member {boolean} auto
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.auto = false;
-
-    /**
-     * PlayerInfo totalHands.
-     * @member {number} totalHands
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.totalHands = 0;
-
-    /**
-     * PlayerInfo totalFlopHands.
-     * @member {number} totalFlopHands
-     * @memberof PlayerInfo
-     * @instance
-     */
-    PlayerInfo.prototype.totalFlopHands = 0;
-
-    /**
-     * Encodes the specified PlayerInfo message. Does not implicitly {@link PlayerInfo.verify|verify} messages.
-     * @function encode
-     * @memberof PlayerInfo
-     * @static
-     * @param {IPlayerInfo} m PlayerInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    PlayerInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(10).string(m.uid);
-        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
-            w.uint32(18).string(m.nickName);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(26).string(m.head);
-        if (m.currencyNum != null && Object.hasOwnProperty.call(m, "currencyNum"))
-            w.uint32(32).int64(m.currencyNum);
-        if (m.bringInNum != null && Object.hasOwnProperty.call(m, "bringInNum"))
-            w.uint32(40).int64(m.bringInNum);
-        if (m.online != null && Object.hasOwnProperty.call(m, "online"))
-            w.uint32(48).bool(m.online);
-        if (m.gameRole != null && Object.hasOwnProperty.call(m, "gameRole"))
-            w.uint32(56).int32(m.gameRole);
-        if (m.cards != null && m.cards.length) {
-            for (var i = 0; i < m.cards.length; ++i)
-                $root.CardInfo.encode(m.cards[i], w.uint32(66).fork()).ldelim();
-        }
-        if (m.seat != null && Object.hasOwnProperty.call(m, "seat"))
-            w.uint32(72).int32(m.seat);
-        if (m.buyInLeftTime != null && Object.hasOwnProperty.call(m, "buyInLeftTime"))
-            w.uint32(80).int64(m.buyInLeftTime);
-        if (m.fold != null && Object.hasOwnProperty.call(m, "fold"))
-            w.uint32(88).bool(m.fold);
-        if (m.autoLeftTime != null && Object.hasOwnProperty.call(m, "autoLeftTime"))
-            w.uint32(96).int64(m.autoLeftTime);
-        if (m.auto != null && Object.hasOwnProperty.call(m, "auto"))
-            w.uint32(104).bool(m.auto);
-        if (m.totalHands != null && Object.hasOwnProperty.call(m, "totalHands"))
-            w.uint32(112).int32(m.totalHands);
-        if (m.totalFlopHands != null && Object.hasOwnProperty.call(m, "totalFlopHands"))
-            w.uint32(120).int32(m.totalFlopHands);
-        return w;
-    };
-
-    /**
-     * Decodes a PlayerInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof PlayerInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {PlayerInfo} PlayerInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    PlayerInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.PlayerInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.uid = r.string();
-                break;
-            case 2:
-                m.nickName = r.string();
-                break;
-            case 3:
-                m.head = r.string();
-                break;
-            case 4:
-                m.currencyNum = r.int64();
-                break;
-            case 5:
-                m.bringInNum = r.int64();
-                break;
-            case 6:
-                m.online = r.bool();
-                break;
-            case 7:
-                m.gameRole = r.int32();
-                break;
-            case 8:
-                if (!(m.cards && m.cards.length))
-                    m.cards = [];
-                m.cards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 9:
-                m.seat = r.int32();
-                break;
-            case 10:
-                m.buyInLeftTime = r.int64();
-                break;
-            case 11:
-                m.fold = r.bool();
-                break;
-            case 12:
-                m.autoLeftTime = r.int64();
-                break;
-            case 13:
-                m.auto = r.bool();
-                break;
-            case 14:
-                m.totalHands = r.int32();
-                break;
-            case 15:
-                m.totalFlopHands = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return PlayerInfo;
-})();
-
-$root.PlayerHistoryInfo = (function() {
-
-    /**
-     * Properties of a PlayerHistoryInfo.
-     * @exports IPlayerHistoryInfo
-     * @interface IPlayerHistoryInfo
-     * @property {string|null} [uid] PlayerHistoryInfo uid
-     * @property {string|null} [nickName] PlayerHistoryInfo nickName
-     * @property {string|null} [head] PlayerHistoryInfo head
-     * @property {number|null} [totalGames] PlayerHistoryInfo totalGames
-     * @property {number|null} [totalBringIn] PlayerHistoryInfo totalBringIn
-     * @property {number|null} [totalWinLose] PlayerHistoryInfo totalWinLose
-     */
-
-    /**
-     * Constructs a new PlayerHistoryInfo.
-     * @exports PlayerHistoryInfo
-     * @classdesc Represents a PlayerHistoryInfo.
-     * @implements IPlayerHistoryInfo
-     * @constructor
-     * @param {IPlayerHistoryInfo=} [p] Properties to set
-     */
-    function PlayerHistoryInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * PlayerHistoryInfo uid.
-     * @member {string} uid
-     * @memberof PlayerHistoryInfo
-     * @instance
-     */
-    PlayerHistoryInfo.prototype.uid = "";
-
-    /**
-     * PlayerHistoryInfo nickName.
-     * @member {string} nickName
-     * @memberof PlayerHistoryInfo
-     * @instance
-     */
-    PlayerHistoryInfo.prototype.nickName = "";
-
-    /**
-     * PlayerHistoryInfo head.
-     * @member {string} head
-     * @memberof PlayerHistoryInfo
-     * @instance
-     */
-    PlayerHistoryInfo.prototype.head = "";
-
-    /**
-     * PlayerHistoryInfo totalGames.
-     * @member {number} totalGames
-     * @memberof PlayerHistoryInfo
-     * @instance
-     */
-    PlayerHistoryInfo.prototype.totalGames = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PlayerHistoryInfo totalBringIn.
-     * @member {number} totalBringIn
-     * @memberof PlayerHistoryInfo
-     * @instance
-     */
-    PlayerHistoryInfo.prototype.totalBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PlayerHistoryInfo totalWinLose.
-     * @member {number} totalWinLose
-     * @memberof PlayerHistoryInfo
-     * @instance
-     */
-    PlayerHistoryInfo.prototype.totalWinLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified PlayerHistoryInfo message. Does not implicitly {@link PlayerHistoryInfo.verify|verify} messages.
-     * @function encode
-     * @memberof PlayerHistoryInfo
-     * @static
-     * @param {IPlayerHistoryInfo} m PlayerHistoryInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    PlayerHistoryInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(10).string(m.uid);
-        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
-            w.uint32(18).string(m.nickName);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(26).string(m.head);
-        if (m.totalGames != null && Object.hasOwnProperty.call(m, "totalGames"))
-            w.uint32(32).int64(m.totalGames);
-        if (m.totalBringIn != null && Object.hasOwnProperty.call(m, "totalBringIn"))
-            w.uint32(40).int64(m.totalBringIn);
-        if (m.totalWinLose != null && Object.hasOwnProperty.call(m, "totalWinLose"))
-            w.uint32(48).int64(m.totalWinLose);
-        return w;
-    };
-
-    /**
-     * Decodes a PlayerHistoryInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof PlayerHistoryInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {PlayerHistoryInfo} PlayerHistoryInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    PlayerHistoryInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.PlayerHistoryInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.uid = r.string();
-                break;
-            case 2:
-                m.nickName = r.string();
-                break;
-            case 3:
-                m.head = r.string();
-                break;
-            case 4:
-                m.totalGames = r.int64();
-                break;
-            case 5:
-                m.totalBringIn = r.int64();
-                break;
-            case 6:
-                m.totalWinLose = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return PlayerHistoryInfo;
-})();
-
-$root.ActionInfo = (function() {
-
-    /**
-     * Properties of an ActionInfo.
-     * @exports IActionInfo
-     * @interface IActionInfo
-     * @property {string|null} [uid] ActionInfo uid
-     * @property {ActionType|null} [actionType] ActionInfo actionType
-     * @property {number|null} [amount] ActionInfo amount
-     * @property {number|null} [roundAmount] ActionInfo roundAmount
-     */
-
-    /**
-     * Constructs a new ActionInfo.
-     * @exports ActionInfo
-     * @classdesc Represents an ActionInfo.
-     * @implements IActionInfo
-     * @constructor
-     * @param {IActionInfo=} [p] Properties to set
-     */
-    function ActionInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ActionInfo uid.
-     * @member {string} uid
-     * @memberof ActionInfo
-     * @instance
-     */
-    ActionInfo.prototype.uid = "";
-
-    /**
-     * ActionInfo actionType.
-     * @member {ActionType} actionType
-     * @memberof ActionInfo
-     * @instance
-     */
-    ActionInfo.prototype.actionType = 0;
-
-    /**
-     * ActionInfo amount.
-     * @member {number} amount
-     * @memberof ActionInfo
-     * @instance
-     */
-    ActionInfo.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * ActionInfo roundAmount.
-     * @member {number} roundAmount
-     * @memberof ActionInfo
-     * @instance
-     */
-    ActionInfo.prototype.roundAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified ActionInfo message. Does not implicitly {@link ActionInfo.verify|verify} messages.
-     * @function encode
-     * @memberof ActionInfo
-     * @static
-     * @param {IActionInfo} m ActionInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ActionInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(10).string(m.uid);
-        if (m.actionType != null && Object.hasOwnProperty.call(m, "actionType"))
-            w.uint32(16).int32(m.actionType);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(24).int64(m.amount);
-        if (m.roundAmount != null && Object.hasOwnProperty.call(m, "roundAmount"))
-            w.uint32(32).int64(m.roundAmount);
-        return w;
-    };
-
-    /**
-     * Decodes an ActionInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof ActionInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ActionInfo} ActionInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ActionInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ActionInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.uid = r.string();
-                break;
-            case 2:
-                m.actionType = r.int32();
-                break;
-            case 3:
-                m.amount = r.int64();
-                break;
-            case 4:
-                m.roundAmount = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ActionInfo;
-})();
-
-$root.PotInfo = (function() {
-
-    /**
-     * Properties of a PotInfo.
-     * @exports IPotInfo
-     * @interface IPotInfo
-     * @property {number|null} [pot] PotInfo pot
-     * @property {number|null} [potId] PotInfo potId
-     */
-
-    /**
-     * Constructs a new PotInfo.
-     * @exports PotInfo
-     * @classdesc Represents a PotInfo.
-     * @implements IPotInfo
-     * @constructor
-     * @param {IPotInfo=} [p] Properties to set
-     */
-    function PotInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * PotInfo pot.
-     * @member {number} pot
-     * @memberof PotInfo
-     * @instance
-     */
-    PotInfo.prototype.pot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PotInfo potId.
-     * @member {number} potId
-     * @memberof PotInfo
-     * @instance
-     */
-    PotInfo.prototype.potId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified PotInfo message. Does not implicitly {@link PotInfo.verify|verify} messages.
-     * @function encode
-     * @memberof PotInfo
-     * @static
-     * @param {IPotInfo} m PotInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    PotInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.pot != null && Object.hasOwnProperty.call(m, "pot"))
-            w.uint32(8).int64(m.pot);
-        if (m.potId != null && Object.hasOwnProperty.call(m, "potId"))
-            w.uint32(16).int64(m.potId);
-        return w;
-    };
-
-    /**
-     * Decodes a PotInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof PotInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {PotInfo} PotInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    PotInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.PotInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.pot = r.int64();
-                break;
-            case 2:
-                m.potId = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return PotInfo;
-})();
-
-$root.CombinationResult = (function() {
-
-    /**
-     * Properties of a CombinationResult.
-     * @exports ICombinationResult
-     * @interface ICombinationResult
-     * @property {Array.<ICardInfo>|null} [cards] CombinationResult cards
-     * @property {number|null} [Combination] CombinationResult Combination
-     */
-
-    /**
-     * Constructs a new CombinationResult.
-     * @exports CombinationResult
-     * @classdesc Represents a CombinationResult.
-     * @implements ICombinationResult
-     * @constructor
-     * @param {ICombinationResult=} [p] Properties to set
-     */
-    function CombinationResult(p) {
-        this.cards = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * CombinationResult cards.
-     * @member {Array.<ICardInfo>} cards
-     * @memberof CombinationResult
-     * @instance
-     */
-    CombinationResult.prototype.cards = $util.emptyArray;
-
-    /**
-     * CombinationResult Combination.
-     * @member {number} Combination
-     * @memberof CombinationResult
-     * @instance
-     */
-    CombinationResult.prototype.Combination = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-
-    /**
-     * Encodes the specified CombinationResult message. Does not implicitly {@link CombinationResult.verify|verify} messages.
-     * @function encode
-     * @memberof CombinationResult
-     * @static
-     * @param {ICombinationResult} m CombinationResult message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    CombinationResult.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.cards != null && m.cards.length) {
-            for (var i = 0; i < m.cards.length; ++i)
-                $root.CardInfo.encode(m.cards[i], w.uint32(10).fork()).ldelim();
-        }
-        if (m.Combination != null && Object.hasOwnProperty.call(m, "Combination"))
-            w.uint32(16).uint64(m.Combination);
-        return w;
-    };
-
-    /**
-     * Decodes a CombinationResult message from the specified reader or buffer.
-     * @function decode
-     * @memberof CombinationResult
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {CombinationResult} CombinationResult
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    CombinationResult.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.CombinationResult();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                if (!(m.cards && m.cards.length))
-                    m.cards = [];
-                m.cards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 2:
-                m.Combination = r.uint64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return CombinationResult;
-})();
-
-$root.PlayerWinLose = (function() {
-
-    /**
-     * Properties of a PlayerWinLose.
-     * @exports IPlayerWinLose
-     * @interface IPlayerWinLose
-     * @property {string|null} [uid] PlayerWinLose uid
-     * @property {string|null} [nickName] PlayerWinLose nickName
-     * @property {string|null} [head] PlayerWinLose head
-     * @property {SettlementType|null} [settlementType] PlayerWinLose settlementType
-     * @property {WinLoseType|null} [winLoseType] PlayerWinLose winLoseType
-     * @property {number|null} [winLose] PlayerWinLose winLose
-     * @property {number|null} [amount] PlayerWinLose amount
-     * @property {Array.<ICardInfo>|null} [cardInfo] PlayerWinLose cardInfo
-     * @property {ICombinationResult|null} [combinationResult] PlayerWinLose combinationResult
-     */
-
-    /**
-     * Constructs a new PlayerWinLose.
-     * @exports PlayerWinLose
-     * @classdesc Represents a PlayerWinLose.
-     * @implements IPlayerWinLose
-     * @constructor
-     * @param {IPlayerWinLose=} [p] Properties to set
-     */
-    function PlayerWinLose(p) {
-        this.cardInfo = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * PlayerWinLose uid.
-     * @member {string} uid
-     * @memberof PlayerWinLose
-     * @instance
-     */
-    PlayerWinLose.prototype.uid = "";
-
-    /**
-     * PlayerWinLose nickName.
-     * @member {string} nickName
-     * @memberof PlayerWinLose
-     * @instance
-     */
-    PlayerWinLose.prototype.nickName = "";
-
-    /**
-     * PlayerWinLose head.
-     * @member {string} head
-     * @memberof PlayerWinLose
-     * @instance
-     */
-    PlayerWinLose.prototype.head = "";
-
-    /**
-     * PlayerWinLose settlementType.
-     * @member {SettlementType} settlementType
-     * @memberof PlayerWinLose
-     * @instance
-     */
-    PlayerWinLose.prototype.settlementType = 0;
-
-    /**
-     * PlayerWinLose winLoseType.
-     * @member {WinLoseType} winLoseType
-     * @memberof PlayerWinLose
-     * @instance
-     */
-    PlayerWinLose.prototype.winLoseType = 0;
-
-    /**
-     * PlayerWinLose winLose.
-     * @member {number} winLose
-     * @memberof PlayerWinLose
-     * @instance
-     */
-    PlayerWinLose.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PlayerWinLose amount.
-     * @member {number} amount
-     * @memberof PlayerWinLose
-     * @instance
-     */
-    PlayerWinLose.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PlayerWinLose cardInfo.
-     * @member {Array.<ICardInfo>} cardInfo
-     * @memberof PlayerWinLose
-     * @instance
-     */
-    PlayerWinLose.prototype.cardInfo = $util.emptyArray;
-
-    /**
-     * PlayerWinLose combinationResult.
-     * @member {ICombinationResult|null|undefined} combinationResult
-     * @memberof PlayerWinLose
-     * @instance
-     */
-    PlayerWinLose.prototype.combinationResult = null;
-
-    /**
-     * Encodes the specified PlayerWinLose message. Does not implicitly {@link PlayerWinLose.verify|verify} messages.
-     * @function encode
-     * @memberof PlayerWinLose
-     * @static
-     * @param {IPlayerWinLose} m PlayerWinLose message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    PlayerWinLose.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(10).string(m.uid);
-        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
-            w.uint32(18).string(m.nickName);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(26).string(m.head);
-        if (m.settlementType != null && Object.hasOwnProperty.call(m, "settlementType"))
-            w.uint32(32).int32(m.settlementType);
-        if (m.winLoseType != null && Object.hasOwnProperty.call(m, "winLoseType"))
-            w.uint32(40).int32(m.winLoseType);
-        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(48).int64(m.winLose);
-        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
-            w.uint32(56).int64(m.amount);
-        if (m.cardInfo != null && m.cardInfo.length) {
-            for (var i = 0; i < m.cardInfo.length; ++i)
-                $root.CardInfo.encode(m.cardInfo[i], w.uint32(66).fork()).ldelim();
-        }
-        if (m.combinationResult != null && Object.hasOwnProperty.call(m, "combinationResult"))
-            $root.CombinationResult.encode(m.combinationResult, w.uint32(74).fork()).ldelim();
-        return w;
-    };
-
-    /**
-     * Decodes a PlayerWinLose message from the specified reader or buffer.
-     * @function decode
-     * @memberof PlayerWinLose
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {PlayerWinLose} PlayerWinLose
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    PlayerWinLose.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.PlayerWinLose();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.uid = r.string();
-                break;
-            case 2:
-                m.nickName = r.string();
-                break;
-            case 3:
-                m.head = r.string();
-                break;
-            case 4:
-                m.settlementType = r.int32();
-                break;
-            case 5:
-                m.winLoseType = r.int32();
-                break;
-            case 6:
-                m.winLose = r.int64();
-                break;
-            case 7:
-                m.amount = r.int64();
-                break;
-            case 8:
-                if (!(m.cardInfo && m.cardInfo.length))
-                    m.cardInfo = [];
-                m.cardInfo.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 9:
-                m.combinationResult = $root.CombinationResult.decode(r, r.uint32());
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return PlayerWinLose;
-})();
-
-$root.AboutTexasGameInfo = (function() {
-
-    /**
-     * Properties of an AboutTexasGameInfo.
-     * @exports IAboutTexasGameInfo
-     * @interface IAboutTexasGameInfo
-     * @property {number|null} [currentPlayerNum] AboutTexasGameInfo currentPlayerNum
-     * @property {number|null} [leftTime] AboutTexasGameInfo leftTime
-     */
-
-    /**
-     * Constructs a new AboutTexasGameInfo.
-     * @exports AboutTexasGameInfo
-     * @classdesc Represents an AboutTexasGameInfo.
-     * @implements IAboutTexasGameInfo
-     * @constructor
-     * @param {IAboutTexasGameInfo=} [p] Properties to set
-     */
-    function AboutTexasGameInfo(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * AboutTexasGameInfo currentPlayerNum.
-     * @member {number} currentPlayerNum
-     * @memberof AboutTexasGameInfo
-     * @instance
-     */
-    AboutTexasGameInfo.prototype.currentPlayerNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * AboutTexasGameInfo leftTime.
-     * @member {number} leftTime
-     * @memberof AboutTexasGameInfo
-     * @instance
-     */
-    AboutTexasGameInfo.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified AboutTexasGameInfo message. Does not implicitly {@link AboutTexasGameInfo.verify|verify} messages.
-     * @function encode
-     * @memberof AboutTexasGameInfo
-     * @static
-     * @param {IAboutTexasGameInfo} m AboutTexasGameInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    AboutTexasGameInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.currentPlayerNum != null && Object.hasOwnProperty.call(m, "currentPlayerNum"))
-            w.uint32(8).int64(m.currentPlayerNum);
-        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
-            w.uint32(16).int64(m.leftTime);
-        return w;
-    };
-
-    /**
-     * Decodes an AboutTexasGameInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof AboutTexasGameInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {AboutTexasGameInfo} AboutTexasGameInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    AboutTexasGameInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.AboutTexasGameInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.currentPlayerNum = r.int64();
-                break;
-            case 2:
-                m.leftTime = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return AboutTexasGameInfo;
-})();
-
-$root.TexasDynamicData = (function() {
-
-    /**
-     * Properties of a TexasDynamicData.
-     * @exports ITexasDynamicData
-     * @interface ITexasDynamicData
-     * @property {TexasCashState|null} [state] TexasDynamicData state
-     * @property {Array.<IPlayerInfo>|null} [seatInfos] TexasDynamicData seatInfos
-     * @property {string|null} [actionUid] TexasDynamicData actionUid
-     * @property {number|null} [actionLeftTime] TexasDynamicData actionLeftTime
-     * @property {Array.<IPotInfo>|null} [potInfo] TexasDynamicData potInfo
-     * @property {Array.<IActionInfo>|null} [actions] TexasDynamicData actions
-     * @property {Array.<ICardInfo>|null} [publicCards] TexasDynamicData publicCards
-     * @property {string|null} [dealerUid] TexasDynamicData dealerUid
-     * @property {IBuyInsuranceTurn|null} [buyInsuranceTurn] TexasDynamicData buyInsuranceTurn
-     * @property {number|null} [totalPot] TexasDynamicData totalPot
-     */
-
-    /**
-     * Constructs a new TexasDynamicData.
-     * @exports TexasDynamicData
-     * @classdesc Represents a TexasDynamicData.
-     * @implements ITexasDynamicData
-     * @constructor
-     * @param {ITexasDynamicData=} [p] Properties to set
-     */
-    function TexasDynamicData(p) {
-        this.seatInfos = [];
-        this.potInfo = [];
-        this.actions = [];
-        this.publicCards = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * TexasDynamicData state.
-     * @member {TexasCashState} state
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.state = 0;
-
-    /**
-     * TexasDynamicData seatInfos.
-     * @member {Array.<IPlayerInfo>} seatInfos
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.seatInfos = $util.emptyArray;
-
-    /**
-     * TexasDynamicData actionUid.
-     * @member {string} actionUid
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.actionUid = "";
-
-    /**
-     * TexasDynamicData actionLeftTime.
-     * @member {number} actionLeftTime
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.actionLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * TexasDynamicData potInfo.
-     * @member {Array.<IPotInfo>} potInfo
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.potInfo = $util.emptyArray;
-
-    /**
-     * TexasDynamicData actions.
-     * @member {Array.<IActionInfo>} actions
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.actions = $util.emptyArray;
-
-    /**
-     * TexasDynamicData publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * TexasDynamicData dealerUid.
-     * @member {string} dealerUid
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.dealerUid = "";
-
-    /**
-     * TexasDynamicData buyInsuranceTurn.
-     * @member {IBuyInsuranceTurn|null|undefined} buyInsuranceTurn
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.buyInsuranceTurn = null;
-
-    /**
-     * TexasDynamicData totalPot.
-     * @member {number} totalPot
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.totalPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified TexasDynamicData message. Does not implicitly {@link TexasDynamicData.verify|verify} messages.
-     * @function encode
-     * @memberof TexasDynamicData
-     * @static
-     * @param {ITexasDynamicData} m TexasDynamicData message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    TexasDynamicData.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.state != null && Object.hasOwnProperty.call(m, "state"))
-            w.uint32(8).int32(m.state);
-        if (m.seatInfos != null && m.seatInfos.length) {
-            for (var i = 0; i < m.seatInfos.length; ++i)
-                $root.PlayerInfo.encode(m.seatInfos[i], w.uint32(18).fork()).ldelim();
-        }
-        if (m.actionUid != null && Object.hasOwnProperty.call(m, "actionUid"))
-            w.uint32(26).string(m.actionUid);
-        if (m.actionLeftTime != null && Object.hasOwnProperty.call(m, "actionLeftTime"))
-            w.uint32(32).int64(m.actionLeftTime);
-        if (m.potInfo != null && m.potInfo.length) {
-            for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(42).fork()).ldelim();
-        }
-        if (m.actions != null && m.actions.length) {
-            for (var i = 0; i < m.actions.length; ++i)
-                $root.ActionInfo.encode(m.actions[i], w.uint32(50).fork()).ldelim();
-        }
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
-        }
-        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
-            w.uint32(66).string(m.dealerUid);
-        if (m.buyInsuranceTurn != null && Object.hasOwnProperty.call(m, "buyInsuranceTurn"))
-            $root.BuyInsuranceTurn.encode(m.buyInsuranceTurn, w.uint32(74).fork()).ldelim();
-        if (m.totalPot != null && Object.hasOwnProperty.call(m, "totalPot"))
-            w.uint32(80).int64(m.totalPot);
-        return w;
-    };
-
-    /**
-     * Decodes a TexasDynamicData message from the specified reader or buffer.
-     * @function decode
-     * @memberof TexasDynamicData
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {TexasDynamicData} TexasDynamicData
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    TexasDynamicData.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.TexasDynamicData();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.state = r.int32();
-                break;
-            case 2:
-                if (!(m.seatInfos && m.seatInfos.length))
-                    m.seatInfos = [];
-                m.seatInfos.push($root.PlayerInfo.decode(r, r.uint32()));
-                break;
-            case 3:
-                m.actionUid = r.string();
-                break;
-            case 4:
-                m.actionLeftTime = r.int64();
-                break;
-            case 5:
-                if (!(m.potInfo && m.potInfo.length))
-                    m.potInfo = [];
-                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 6:
-                if (!(m.actions && m.actions.length))
-                    m.actions = [];
-                m.actions.push($root.ActionInfo.decode(r, r.uint32()));
-                break;
-            case 7:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 8:
-                m.dealerUid = r.string();
-                break;
-            case 9:
-                m.buyInsuranceTurn = $root.BuyInsuranceTurn.decode(r, r.uint32());
-                break;
-            case 10:
-                m.totalPot = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return TexasDynamicData;
-})();
-
-$root.BuyInsuranceTurn = (function() {
-
-    /**
-     * Properties of a BuyInsuranceTurn.
-     * @exports IBuyInsuranceTurn
-     * @interface IBuyInsuranceTurn
-     * @property {string|null} [gameId] BuyInsuranceTurn gameId
-     * @property {string|null} [actionUid] BuyInsuranceTurn actionUid
-     * @property {Array.<ICardInfo>|null} [outsCards] BuyInsuranceTurn outsCards
-     * @property {Array.<ICardInfo>|null} [tieCards] BuyInsuranceTurn tieCards
-     * @property {Array.<ICardInfo>|null} [publicCards] BuyInsuranceTurn publicCards
-     * @property {Array.<IPlayerInfo>|null} [losePlayerInfo] BuyInsuranceTurn losePlayerInfo
-     * @property {number|null} [ratios] BuyInsuranceTurn ratios
-     * @property {number|null} [pots] BuyInsuranceTurn pots
-     * @property {number|null} [buyFullPot] BuyInsuranceTurn buyFullPot
-     * @property {number|null} [buyBack] BuyInsuranceTurn buyBack
-     * @property {number|null} [leftTime] BuyInsuranceTurn leftTime
-     */
-
-    /**
-     * Constructs a new BuyInsuranceTurn.
-     * @exports BuyInsuranceTurn
-     * @classdesc Represents a BuyInsuranceTurn.
-     * @implements IBuyInsuranceTurn
-     * @constructor
-     * @param {IBuyInsuranceTurn=} [p] Properties to set
-     */
-    function BuyInsuranceTurn(p) {
-        this.outsCards = [];
-        this.tieCards = [];
-        this.publicCards = [];
-        this.losePlayerInfo = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * BuyInsuranceTurn gameId.
-     * @member {string} gameId
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.gameId = "";
-
-    /**
-     * BuyInsuranceTurn actionUid.
-     * @member {string} actionUid
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.actionUid = "";
-
-    /**
-     * BuyInsuranceTurn outsCards.
-     * @member {Array.<ICardInfo>} outsCards
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.outsCards = $util.emptyArray;
-
-    /**
-     * BuyInsuranceTurn tieCards.
-     * @member {Array.<ICardInfo>} tieCards
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.tieCards = $util.emptyArray;
-
-    /**
-     * BuyInsuranceTurn publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * BuyInsuranceTurn losePlayerInfo.
-     * @member {Array.<IPlayerInfo>} losePlayerInfo
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.losePlayerInfo = $util.emptyArray;
-
-    /**
-     * BuyInsuranceTurn ratios.
-     * @member {number} ratios
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.ratios = 0;
-
-    /**
-     * BuyInsuranceTurn pots.
-     * @member {number} pots
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.pots = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BuyInsuranceTurn buyFullPot.
-     * @member {number} buyFullPot
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.buyFullPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BuyInsuranceTurn buyBack.
-     * @member {number} buyBack
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.buyBack = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * BuyInsuranceTurn leftTime.
-     * @member {number} leftTime
-     * @memberof BuyInsuranceTurn
-     * @instance
-     */
-    BuyInsuranceTurn.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified BuyInsuranceTurn message. Does not implicitly {@link BuyInsuranceTurn.verify|verify} messages.
-     * @function encode
-     * @memberof BuyInsuranceTurn
-     * @static
-     * @param {IBuyInsuranceTurn} m BuyInsuranceTurn message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    BuyInsuranceTurn.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.actionUid != null && Object.hasOwnProperty.call(m, "actionUid"))
-            w.uint32(18).string(m.actionUid);
-        if (m.outsCards != null && m.outsCards.length) {
-            for (var i = 0; i < m.outsCards.length; ++i)
-                $root.CardInfo.encode(m.outsCards[i], w.uint32(26).fork()).ldelim();
-        }
-        if (m.tieCards != null && m.tieCards.length) {
-            for (var i = 0; i < m.tieCards.length; ++i)
-                $root.CardInfo.encode(m.tieCards[i], w.uint32(34).fork()).ldelim();
-        }
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(42).fork()).ldelim();
-        }
-        if (m.losePlayerInfo != null && m.losePlayerInfo.length) {
-            for (var i = 0; i < m.losePlayerInfo.length; ++i)
-                $root.PlayerInfo.encode(m.losePlayerInfo[i], w.uint32(50).fork()).ldelim();
-        }
-        if (m.ratios != null && Object.hasOwnProperty.call(m, "ratios"))
-            w.uint32(56).int32(m.ratios);
-        if (m.pots != null && Object.hasOwnProperty.call(m, "pots"))
-            w.uint32(64).int64(m.pots);
-        if (m.buyFullPot != null && Object.hasOwnProperty.call(m, "buyFullPot"))
-            w.uint32(72).int64(m.buyFullPot);
-        if (m.buyBack != null && Object.hasOwnProperty.call(m, "buyBack"))
-            w.uint32(80).int64(m.buyBack);
-        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
-            w.uint32(88).int64(m.leftTime);
-        return w;
-    };
-
-    /**
-     * Decodes a BuyInsuranceTurn message from the specified reader or buffer.
-     * @function decode
-     * @memberof BuyInsuranceTurn
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {BuyInsuranceTurn} BuyInsuranceTurn
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    BuyInsuranceTurn.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.BuyInsuranceTurn();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.actionUid = r.string();
-                break;
-            case 3:
-                if (!(m.outsCards && m.outsCards.length))
-                    m.outsCards = [];
-                m.outsCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 4:
-                if (!(m.tieCards && m.tieCards.length))
-                    m.tieCards = [];
-                m.tieCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 5:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 6:
-                if (!(m.losePlayerInfo && m.losePlayerInfo.length))
-                    m.losePlayerInfo = [];
-                m.losePlayerInfo.push($root.PlayerInfo.decode(r, r.uint32()));
-                break;
-            case 7:
-                m.ratios = r.int32();
-                break;
-            case 8:
-                m.pots = r.int64();
-                break;
-            case 9:
-                m.buyFullPot = r.int64();
-                break;
-            case 10:
-                m.buyBack = r.int64();
-                break;
-            case 11:
-                m.leftTime = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return BuyInsuranceTurn;
-})();
-
-$root.ActionResult = (function() {
-
-    /**
-     * Properties of an ActionResult.
-     * @exports IActionResult
-     * @interface IActionResult
-     * @property {IActionInfo|null} [actionInfo] ActionResult actionInfo
-     * @property {Array.<IPotInfo>|null} [potInfo] ActionResult potInfo
-     * @property {number|null} [totalNUm] ActionResult totalNUm
-     */
-
-    /**
-     * Constructs a new ActionResult.
-     * @exports ActionResult
-     * @classdesc Represents an ActionResult.
-     * @implements IActionResult
-     * @constructor
-     * @param {IActionResult=} [p] Properties to set
-     */
-    function ActionResult(p) {
-        this.potInfo = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * ActionResult actionInfo.
-     * @member {IActionInfo|null|undefined} actionInfo
-     * @memberof ActionResult
-     * @instance
-     */
-    ActionResult.prototype.actionInfo = null;
-
-    /**
-     * ActionResult potInfo.
-     * @member {Array.<IPotInfo>} potInfo
-     * @memberof ActionResult
-     * @instance
-     */
-    ActionResult.prototype.potInfo = $util.emptyArray;
-
-    /**
-     * ActionResult totalNUm.
-     * @member {number} totalNUm
-     * @memberof ActionResult
-     * @instance
-     */
-    ActionResult.prototype.totalNUm = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified ActionResult message. Does not implicitly {@link ActionResult.verify|verify} messages.
-     * @function encode
-     * @memberof ActionResult
-     * @static
-     * @param {IActionResult} m ActionResult message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    ActionResult.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.actionInfo != null && Object.hasOwnProperty.call(m, "actionInfo"))
-            $root.ActionInfo.encode(m.actionInfo, w.uint32(10).fork()).ldelim();
-        if (m.potInfo != null && m.potInfo.length) {
-            for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(18).fork()).ldelim();
-        }
-        if (m.totalNUm != null && Object.hasOwnProperty.call(m, "totalNUm"))
-            w.uint32(24).int64(m.totalNUm);
-        return w;
-    };
-
-    /**
-     * Decodes an ActionResult message from the specified reader or buffer.
-     * @function decode
-     * @memberof ActionResult
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {ActionResult} ActionResult
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    ActionResult.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.ActionResult();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.actionInfo = $root.ActionInfo.decode(r, r.uint32());
-                break;
-            case 2:
-                if (!(m.potInfo && m.potInfo.length))
-                    m.potInfo = [];
-                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 3:
-                m.totalNUm = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return ActionResult;
-})();
-
-$root.PlayerStatistic = (function() {
-
-    /**
-     * Properties of a PlayerStatistic.
-     * @exports IPlayerStatistic
-     * @interface IPlayerStatistic
-     * @property {string|null} [uid] PlayerStatistic uid
-     * @property {string|null} [head] PlayerStatistic head
-     * @property {string|null} [name] PlayerStatistic name
-     * @property {number|null} [totalHands] PlayerStatistic totalHands
-     * @property {number|null} [totalFlopHands] PlayerStatistic totalFlopHands
-     * @property {number|null} [totalPreFlopRaiseCount] PlayerStatistic totalPreFlopRaiseCount
-     * @property {number|null} [totalPreFlopAgainRaiseCount] PlayerStatistic totalPreFlopAgainRaiseCount
-     * @property {number|null} [totalBringIn] PlayerStatistic totalBringIn
-     * @property {number|null} [totalBringOut] PlayerStatistic totalBringOut
-     * @property {number|null} [winLose] PlayerStatistic winLose
-     */
-
-    /**
-     * Constructs a new PlayerStatistic.
-     * @exports PlayerStatistic
-     * @classdesc Represents a PlayerStatistic.
-     * @implements IPlayerStatistic
-     * @constructor
-     * @param {IPlayerStatistic=} [p] Properties to set
-     */
-    function PlayerStatistic(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * PlayerStatistic uid.
-     * @member {string} uid
-     * @memberof PlayerStatistic
-     * @instance
-     */
-    PlayerStatistic.prototype.uid = "";
-
-    /**
-     * PlayerStatistic head.
-     * @member {string} head
-     * @memberof PlayerStatistic
-     * @instance
-     */
-    PlayerStatistic.prototype.head = "";
-
-    /**
-     * PlayerStatistic name.
-     * @member {string} name
-     * @memberof PlayerStatistic
-     * @instance
-     */
-    PlayerStatistic.prototype.name = "";
-
-    /**
-     * PlayerStatistic totalHands.
-     * @member {number} totalHands
-     * @memberof PlayerStatistic
-     * @instance
-     */
-    PlayerStatistic.prototype.totalHands = 0;
-
-    /**
-     * PlayerStatistic totalFlopHands.
-     * @member {number} totalFlopHands
-     * @memberof PlayerStatistic
-     * @instance
-     */
-    PlayerStatistic.prototype.totalFlopHands = 0;
-
-    /**
-     * PlayerStatistic totalPreFlopRaiseCount.
-     * @member {number} totalPreFlopRaiseCount
-     * @memberof PlayerStatistic
-     * @instance
-     */
-    PlayerStatistic.prototype.totalPreFlopRaiseCount = 0;
-
-    /**
-     * PlayerStatistic totalPreFlopAgainRaiseCount.
-     * @member {number} totalPreFlopAgainRaiseCount
-     * @memberof PlayerStatistic
-     * @instance
-     */
-    PlayerStatistic.prototype.totalPreFlopAgainRaiseCount = 0;
-
-    /**
-     * PlayerStatistic totalBringIn.
-     * @member {number} totalBringIn
-     * @memberof PlayerStatistic
-     * @instance
-     */
-    PlayerStatistic.prototype.totalBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PlayerStatistic totalBringOut.
-     * @member {number} totalBringOut
-     * @memberof PlayerStatistic
-     * @instance
-     */
-    PlayerStatistic.prototype.totalBringOut = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * PlayerStatistic winLose.
-     * @member {number} winLose
-     * @memberof PlayerStatistic
-     * @instance
-     */
-    PlayerStatistic.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified PlayerStatistic message. Does not implicitly {@link PlayerStatistic.verify|verify} messages.
-     * @function encode
-     * @memberof PlayerStatistic
-     * @static
-     * @param {IPlayerStatistic} m PlayerStatistic message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    PlayerStatistic.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-            w.uint32(10).string(m.uid);
-        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
-            w.uint32(18).string(m.head);
-        if (m.name != null && Object.hasOwnProperty.call(m, "name"))
-            w.uint32(26).string(m.name);
-        if (m.totalHands != null && Object.hasOwnProperty.call(m, "totalHands"))
-            w.uint32(32).int32(m.totalHands);
-        if (m.totalFlopHands != null && Object.hasOwnProperty.call(m, "totalFlopHands"))
-            w.uint32(40).int32(m.totalFlopHands);
-        if (m.totalPreFlopRaiseCount != null && Object.hasOwnProperty.call(m, "totalPreFlopRaiseCount"))
-            w.uint32(48).int32(m.totalPreFlopRaiseCount);
-        if (m.totalPreFlopAgainRaiseCount != null && Object.hasOwnProperty.call(m, "totalPreFlopAgainRaiseCount"))
-            w.uint32(56).int32(m.totalPreFlopAgainRaiseCount);
-        if (m.totalBringIn != null && Object.hasOwnProperty.call(m, "totalBringIn"))
-            w.uint32(64).int64(m.totalBringIn);
-        if (m.totalBringOut != null && Object.hasOwnProperty.call(m, "totalBringOut"))
-            w.uint32(72).int64(m.totalBringOut);
-        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(80).int64(m.winLose);
-        return w;
-    };
-
-    /**
-     * Decodes a PlayerStatistic message from the specified reader or buffer.
-     * @function decode
-     * @memberof PlayerStatistic
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {PlayerStatistic} PlayerStatistic
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    PlayerStatistic.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.PlayerStatistic();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.uid = r.string();
-                break;
-            case 2:
-                m.head = r.string();
-                break;
-            case 3:
-                m.name = r.string();
-                break;
-            case 4:
-                m.totalHands = r.int32();
-                break;
-            case 5:
-                m.totalFlopHands = r.int32();
-                break;
-            case 6:
-                m.totalPreFlopRaiseCount = r.int32();
-                break;
-            case 7:
-                m.totalPreFlopAgainRaiseCount = r.int32();
-                break;
-            case 8:
-                m.totalBringIn = r.int64();
-                break;
-            case 9:
-                m.totalBringOut = r.int64();
-                break;
-            case 10:
-                m.winLose = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return PlayerStatistic;
-})();
-
-$root.MySimpleInfo = (function() {
-
-    /**
-     * Properties of a MySimpleInfo.
-     * @exports IMySimpleInfo
-     * @interface IMySimpleInfo
-     * @property {Array.<ICardInfo>|null} [myCards] MySimpleInfo myCards
-     * @property {number|null} [myResult] MySimpleInfo myResult
-     */
-
-    /**
-     * Constructs a new MySimpleInfo.
-     * @exports MySimpleInfo
-     * @classdesc Represents a MySimpleInfo.
-     * @implements IMySimpleInfo
-     * @constructor
-     * @param {IMySimpleInfo=} [p] Properties to set
-     */
-    function MySimpleInfo(p) {
-        this.myCards = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * MySimpleInfo myCards.
-     * @member {Array.<ICardInfo>} myCards
-     * @memberof MySimpleInfo
-     * @instance
-     */
-    MySimpleInfo.prototype.myCards = $util.emptyArray;
-
-    /**
-     * MySimpleInfo myResult.
-     * @member {number} myResult
-     * @memberof MySimpleInfo
-     * @instance
-     */
-    MySimpleInfo.prototype.myResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * Encodes the specified MySimpleInfo message. Does not implicitly {@link MySimpleInfo.verify|verify} messages.
-     * @function encode
-     * @memberof MySimpleInfo
-     * @static
-     * @param {IMySimpleInfo} m MySimpleInfo message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    MySimpleInfo.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.myCards != null && m.myCards.length) {
-            for (var i = 0; i < m.myCards.length; ++i)
-                $root.CardInfo.encode(m.myCards[i], w.uint32(10).fork()).ldelim();
-        }
-        if (m.myResult != null && Object.hasOwnProperty.call(m, "myResult"))
-            w.uint32(16).int64(m.myResult);
-        return w;
-    };
-
-    /**
-     * Decodes a MySimpleInfo message from the specified reader or buffer.
-     * @function decode
-     * @memberof MySimpleInfo
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {MySimpleInfo} MySimpleInfo
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    MySimpleInfo.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.MySimpleInfo();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                if (!(m.myCards && m.myCards.length))
-                    m.myCards = [];
-                m.myCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 2:
-                m.myResult = r.int64();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return MySimpleInfo;
-})();
-
-$root.SimpleReplayRecord = (function() {
-
-    /**
-     * Properties of a SimpleReplayRecord.
-     * @exports ISimpleReplayRecord
-     * @interface ISimpleReplayRecord
-     * @property {string|null} [gameId] SimpleReplayRecord gameId
-     * @property {number|null} [index] SimpleReplayRecord index
-     * @property {Array.<ICardInfo>|null} [publicCards] SimpleReplayRecord publicCards
-     * @property {Array.<IPlayerWinLose>|null} [winnerSettlementResult] SimpleReplayRecord winnerSettlementResult
-     * @property {IMySimpleInfo|null} [mySimpleInfo] SimpleReplayRecord mySimpleInfo
-     * @property {string|null} [date] SimpleReplayRecord date
-     * @property {Array.<IPlayerWinLose>|null} [intactSettlementResults] SimpleReplayRecord intactSettlementResults
-     */
-
-    /**
-     * Constructs a new SimpleReplayRecord.
-     * @exports SimpleReplayRecord
-     * @classdesc Represents a SimpleReplayRecord.
-     * @implements ISimpleReplayRecord
-     * @constructor
-     * @param {ISimpleReplayRecord=} [p] Properties to set
-     */
-    function SimpleReplayRecord(p) {
-        this.publicCards = [];
-        this.winnerSettlementResult = [];
-        this.intactSettlementResults = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * SimpleReplayRecord gameId.
-     * @member {string} gameId
-     * @memberof SimpleReplayRecord
-     * @instance
-     */
-    SimpleReplayRecord.prototype.gameId = "";
-
-    /**
-     * SimpleReplayRecord index.
-     * @member {number} index
-     * @memberof SimpleReplayRecord
-     * @instance
-     */
-    SimpleReplayRecord.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * SimpleReplayRecord publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof SimpleReplayRecord
-     * @instance
-     */
-    SimpleReplayRecord.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * SimpleReplayRecord winnerSettlementResult.
-     * @member {Array.<IPlayerWinLose>} winnerSettlementResult
-     * @memberof SimpleReplayRecord
-     * @instance
-     */
-    SimpleReplayRecord.prototype.winnerSettlementResult = $util.emptyArray;
-
-    /**
-     * SimpleReplayRecord mySimpleInfo.
-     * @member {IMySimpleInfo|null|undefined} mySimpleInfo
-     * @memberof SimpleReplayRecord
-     * @instance
-     */
-    SimpleReplayRecord.prototype.mySimpleInfo = null;
-
-    /**
-     * SimpleReplayRecord date.
-     * @member {string} date
-     * @memberof SimpleReplayRecord
-     * @instance
-     */
-    SimpleReplayRecord.prototype.date = "";
-
-    /**
-     * SimpleReplayRecord intactSettlementResults.
-     * @member {Array.<IPlayerWinLose>} intactSettlementResults
-     * @memberof SimpleReplayRecord
-     * @instance
-     */
-    SimpleReplayRecord.prototype.intactSettlementResults = $util.emptyArray;
-
-    /**
-     * Encodes the specified SimpleReplayRecord message. Does not implicitly {@link SimpleReplayRecord.verify|verify} messages.
-     * @function encode
-     * @memberof SimpleReplayRecord
-     * @static
-     * @param {ISimpleReplayRecord} m SimpleReplayRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    SimpleReplayRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
-            w.uint32(16).int64(m.index);
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(26).fork()).ldelim();
-        }
-        if (m.winnerSettlementResult != null && m.winnerSettlementResult.length) {
-            for (var i = 0; i < m.winnerSettlementResult.length; ++i)
-                $root.PlayerWinLose.encode(m.winnerSettlementResult[i], w.uint32(34).fork()).ldelim();
-        }
-        if (m.mySimpleInfo != null && Object.hasOwnProperty.call(m, "mySimpleInfo"))
-            $root.MySimpleInfo.encode(m.mySimpleInfo, w.uint32(42).fork()).ldelim();
-        if (m.date != null && Object.hasOwnProperty.call(m, "date"))
-            w.uint32(50).string(m.date);
-        if (m.intactSettlementResults != null && m.intactSettlementResults.length) {
-            for (var i = 0; i < m.intactSettlementResults.length; ++i)
-                $root.PlayerWinLose.encode(m.intactSettlementResults[i], w.uint32(58).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a SimpleReplayRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof SimpleReplayRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {SimpleReplayRecord} SimpleReplayRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    SimpleReplayRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.SimpleReplayRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.index = r.int64();
-                break;
-            case 3:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 4:
-                if (!(m.winnerSettlementResult && m.winnerSettlementResult.length))
-                    m.winnerSettlementResult = [];
-                m.winnerSettlementResult.push($root.PlayerWinLose.decode(r, r.uint32()));
-                break;
-            case 5:
-                m.mySimpleInfo = $root.MySimpleInfo.decode(r, r.uint32());
-                break;
-            case 6:
-                m.date = r.string();
-                break;
-            case 7:
-                if (!(m.intactSettlementResults && m.intactSettlementResults.length))
-                    m.intactSettlementResults = [];
-                m.intactSettlementResults.push($root.PlayerWinLose.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return SimpleReplayRecord;
-})();
-
-$root.DetailReplayRecord = (function() {
-
-    /**
-     * Properties of a DetailReplayRecord.
-     * @exports IDetailReplayRecord
-     * @interface IDetailReplayRecord
-     * @property {string|null} [gameId] DetailReplayRecord gameId
-     * @property {number|null} [index] DetailReplayRecord index
-     * @property {IBasicTexasConfig|null} [texasConfig] DetailReplayRecord texasConfig
-     * @property {string|null} [dealerUid] DetailReplayRecord dealerUid
-     * @property {Array.<IPlayerInfo>|null} [players] DetailReplayRecord players
-     * @property {Array.<ICardInfo>|null} [publicCards] DetailReplayRecord publicCards
-     * @property {Array.<IActionResult>|null} [roundStartActions] DetailReplayRecord roundStartActions
-     * @property {Array.<IActionResult>|null} [preFlopActions] DetailReplayRecord preFlopActions
-     * @property {Array.<IActionResult>|null} [flopActions] DetailReplayRecord flopActions
-     * @property {Array.<IActionResult>|null} [turnActions] DetailReplayRecord turnActions
-     * @property {Array.<IActionResult>|null} [riverActions] DetailReplayRecord riverActions
-     * @property {Array.<IPlayerWinLose>|null} [correspondSettlementResult] DetailReplayRecord correspondSettlementResult
-     * @property {Array.<IPotInfo>|null} [potInfoFlop] DetailReplayRecord potInfoFlop
-     * @property {Array.<IPotInfo>|null} [potInfoTurn] DetailReplayRecord potInfoTurn
-     * @property {Array.<IPotInfo>|null} [potInfoRiver] DetailReplayRecord potInfoRiver
-     * @property {Array.<IPlayerWinLose>|null} [intactSettlementResults] DetailReplayRecord intactSettlementResults
-     */
-
-    /**
-     * Constructs a new DetailReplayRecord.
-     * @exports DetailReplayRecord
-     * @classdesc Represents a DetailReplayRecord.
-     * @implements IDetailReplayRecord
-     * @constructor
-     * @param {IDetailReplayRecord=} [p] Properties to set
-     */
-    function DetailReplayRecord(p) {
-        this.players = [];
-        this.publicCards = [];
-        this.roundStartActions = [];
-        this.preFlopActions = [];
-        this.flopActions = [];
-        this.turnActions = [];
-        this.riverActions = [];
-        this.correspondSettlementResult = [];
-        this.potInfoFlop = [];
-        this.potInfoTurn = [];
-        this.potInfoRiver = [];
-        this.intactSettlementResults = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * DetailReplayRecord gameId.
-     * @member {string} gameId
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.gameId = "";
-
-    /**
-     * DetailReplayRecord index.
-     * @member {number} index
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * DetailReplayRecord texasConfig.
-     * @member {IBasicTexasConfig|null|undefined} texasConfig
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.texasConfig = null;
-
-    /**
-     * DetailReplayRecord dealerUid.
-     * @member {string} dealerUid
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.dealerUid = "";
-
-    /**
-     * DetailReplayRecord players.
-     * @member {Array.<IPlayerInfo>} players
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.players = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord roundStartActions.
-     * @member {Array.<IActionResult>} roundStartActions
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.roundStartActions = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord preFlopActions.
-     * @member {Array.<IActionResult>} preFlopActions
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.preFlopActions = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord flopActions.
-     * @member {Array.<IActionResult>} flopActions
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.flopActions = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord turnActions.
-     * @member {Array.<IActionResult>} turnActions
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.turnActions = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord riverActions.
-     * @member {Array.<IActionResult>} riverActions
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.riverActions = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord correspondSettlementResult.
-     * @member {Array.<IPlayerWinLose>} correspondSettlementResult
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.correspondSettlementResult = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord potInfoFlop.
-     * @member {Array.<IPotInfo>} potInfoFlop
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.potInfoFlop = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord potInfoTurn.
-     * @member {Array.<IPotInfo>} potInfoTurn
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.potInfoTurn = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord potInfoRiver.
-     * @member {Array.<IPotInfo>} potInfoRiver
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.potInfoRiver = $util.emptyArray;
-
-    /**
-     * DetailReplayRecord intactSettlementResults.
-     * @member {Array.<IPlayerWinLose>} intactSettlementResults
-     * @memberof DetailReplayRecord
-     * @instance
-     */
-    DetailReplayRecord.prototype.intactSettlementResults = $util.emptyArray;
-
-    /**
-     * Encodes the specified DetailReplayRecord message. Does not implicitly {@link DetailReplayRecord.verify|verify} messages.
-     * @function encode
-     * @memberof DetailReplayRecord
-     * @static
-     * @param {IDetailReplayRecord} m DetailReplayRecord message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    DetailReplayRecord.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-            w.uint32(10).string(m.gameId);
-        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
-            w.uint32(16).int64(m.index);
-        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
-            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(26).fork()).ldelim();
-        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
-            w.uint32(34).string(m.dealerUid);
-        if (m.players != null && m.players.length) {
-            for (var i = 0; i < m.players.length; ++i)
-                $root.PlayerInfo.encode(m.players[i], w.uint32(42).fork()).ldelim();
-        }
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(50).fork()).ldelim();
-        }
-        if (m.roundStartActions != null && m.roundStartActions.length) {
-            for (var i = 0; i < m.roundStartActions.length; ++i)
-                $root.ActionResult.encode(m.roundStartActions[i], w.uint32(58).fork()).ldelim();
-        }
-        if (m.preFlopActions != null && m.preFlopActions.length) {
-            for (var i = 0; i < m.preFlopActions.length; ++i)
-                $root.ActionResult.encode(m.preFlopActions[i], w.uint32(66).fork()).ldelim();
-        }
-        if (m.flopActions != null && m.flopActions.length) {
-            for (var i = 0; i < m.flopActions.length; ++i)
-                $root.ActionResult.encode(m.flopActions[i], w.uint32(74).fork()).ldelim();
-        }
-        if (m.turnActions != null && m.turnActions.length) {
-            for (var i = 0; i < m.turnActions.length; ++i)
-                $root.ActionResult.encode(m.turnActions[i], w.uint32(82).fork()).ldelim();
-        }
-        if (m.riverActions != null && m.riverActions.length) {
-            for (var i = 0; i < m.riverActions.length; ++i)
-                $root.ActionResult.encode(m.riverActions[i], w.uint32(90).fork()).ldelim();
-        }
-        if (m.correspondSettlementResult != null && m.correspondSettlementResult.length) {
-            for (var i = 0; i < m.correspondSettlementResult.length; ++i)
-                $root.PlayerWinLose.encode(m.correspondSettlementResult[i], w.uint32(98).fork()).ldelim();
-        }
-        if (m.potInfoFlop != null && m.potInfoFlop.length) {
-            for (var i = 0; i < m.potInfoFlop.length; ++i)
-                $root.PotInfo.encode(m.potInfoFlop[i], w.uint32(106).fork()).ldelim();
-        }
-        if (m.potInfoTurn != null && m.potInfoTurn.length) {
-            for (var i = 0; i < m.potInfoTurn.length; ++i)
-                $root.PotInfo.encode(m.potInfoTurn[i], w.uint32(114).fork()).ldelim();
-        }
-        if (m.potInfoRiver != null && m.potInfoRiver.length) {
-            for (var i = 0; i < m.potInfoRiver.length; ++i)
-                $root.PotInfo.encode(m.potInfoRiver[i], w.uint32(122).fork()).ldelim();
-        }
-        if (m.intactSettlementResults != null && m.intactSettlementResults.length) {
-            for (var i = 0; i < m.intactSettlementResults.length; ++i)
-                $root.PlayerWinLose.encode(m.intactSettlementResults[i], w.uint32(130).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a DetailReplayRecord message from the specified reader or buffer.
-     * @function decode
-     * @memberof DetailReplayRecord
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {DetailReplayRecord} DetailReplayRecord
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    DetailReplayRecord.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.DetailReplayRecord();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameId = r.string();
-                break;
-            case 2:
-                m.index = r.int64();
-                break;
-            case 3:
-                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
-                break;
-            case 4:
-                m.dealerUid = r.string();
-                break;
-            case 5:
-                if (!(m.players && m.players.length))
-                    m.players = [];
-                m.players.push($root.PlayerInfo.decode(r, r.uint32()));
-                break;
-            case 6:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 7:
-                if (!(m.roundStartActions && m.roundStartActions.length))
-                    m.roundStartActions = [];
-                m.roundStartActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 8:
-                if (!(m.preFlopActions && m.preFlopActions.length))
-                    m.preFlopActions = [];
-                m.preFlopActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 9:
-                if (!(m.flopActions && m.flopActions.length))
-                    m.flopActions = [];
-                m.flopActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 10:
-                if (!(m.turnActions && m.turnActions.length))
-                    m.turnActions = [];
-                m.turnActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 11:
-                if (!(m.riverActions && m.riverActions.length))
-                    m.riverActions = [];
-                m.riverActions.push($root.ActionResult.decode(r, r.uint32()));
-                break;
-            case 12:
-                if (!(m.correspondSettlementResult && m.correspondSettlementResult.length))
-                    m.correspondSettlementResult = [];
-                m.correspondSettlementResult.push($root.PlayerWinLose.decode(r, r.uint32()));
-                break;
-            case 13:
-                if (!(m.potInfoFlop && m.potInfoFlop.length))
-                    m.potInfoFlop = [];
-                m.potInfoFlop.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 14:
-                if (!(m.potInfoTurn && m.potInfoTurn.length))
-                    m.potInfoTurn = [];
-                m.potInfoTurn.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 15:
-                if (!(m.potInfoRiver && m.potInfoRiver.length))
-                    m.potInfoRiver = [];
-                m.potInfoRiver.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 16:
-                if (!(m.intactSettlementResults && m.intactSettlementResults.length))
-                    m.intactSettlementResults = [];
-                m.intactSettlementResults.push($root.PlayerWinLose.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return DetailReplayRecord;
-})();
-
-$root.RecordData = (function() {
-
-    /**
-     * Properties of a RecordData.
-     * @exports IRecordData
-     * @interface IRecordData
-     * @property {number|null} [day] RecordData day
-     * @property {number|null} [winLose] RecordData winLose
-     * @property {number|null} [hands] RecordData hands
-     * @property {number|null} [vpip] RecordData vpip
-     * @property {GameType|null} [gameType] RecordData gameType
-     */
-
-    /**
-     * Constructs a new RecordData.
-     * @exports RecordData
-     * @classdesc Represents a RecordData.
-     * @implements IRecordData
-     * @constructor
-     * @param {IRecordData=} [p] Properties to set
-     */
-    function RecordData(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * RecordData day.
-     * @member {number} day
-     * @memberof RecordData
-     * @instance
-     */
-    RecordData.prototype.day = 0;
-
-    /**
-     * RecordData winLose.
-     * @member {number} winLose
-     * @memberof RecordData
-     * @instance
-     */
-    RecordData.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * RecordData hands.
-     * @member {number} hands
-     * @memberof RecordData
-     * @instance
-     */
-    RecordData.prototype.hands = 0;
-
-    /**
-     * RecordData vpip.
-     * @member {number} vpip
-     * @memberof RecordData
-     * @instance
-     */
-    RecordData.prototype.vpip = 0;
-
-    /**
-     * RecordData gameType.
-     * @member {GameType} gameType
-     * @memberof RecordData
-     * @instance
-     */
-    RecordData.prototype.gameType = 0;
-
-    /**
-     * Encodes the specified RecordData message. Does not implicitly {@link RecordData.verify|verify} messages.
-     * @function encode
-     * @memberof RecordData
-     * @static
-     * @param {IRecordData} m RecordData message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    RecordData.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.day != null && Object.hasOwnProperty.call(m, "day"))
-            w.uint32(8).int32(m.day);
-        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(16).int64(m.winLose);
-        if (m.hands != null && Object.hasOwnProperty.call(m, "hands"))
-            w.uint32(24).int32(m.hands);
-        if (m.vpip != null && Object.hasOwnProperty.call(m, "vpip"))
-            w.uint32(32).int32(m.vpip);
-        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
-            w.uint32(40).int32(m.gameType);
-        return w;
-    };
-
-    /**
-     * Decodes a RecordData message from the specified reader or buffer.
-     * @function decode
-     * @memberof RecordData
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {RecordData} RecordData
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    RecordData.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.RecordData();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.day = r.int32();
-                break;
-            case 2:
-                m.winLose = r.int64();
-                break;
-            case 3:
-                m.hands = r.int32();
-                break;
-            case 4:
-                m.vpip = r.int32();
-                break;
-            case 5:
-                m.gameType = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return RecordData;
-})();
-
-$root.RecordSingleData = (function() {
-
-    /**
-     * Properties of a RecordSingleData.
-     * @exports IRecordSingleData
-     * @interface IRecordSingleData
-     * @property {Array.<IRecordSingle>|null} [list] RecordSingleData list
-     * @property {number|null} [pageNum] RecordSingleData pageNum
-     * @property {number|null} [size] RecordSingleData size
-     * @property {number|null} [total] RecordSingleData total
-     */
-
-    /**
-     * Constructs a new RecordSingleData.
-     * @exports RecordSingleData
-     * @classdesc Represents a RecordSingleData.
-     * @implements IRecordSingleData
-     * @constructor
-     * @param {IRecordSingleData=} [p] Properties to set
-     */
-    function RecordSingleData(p) {
-        this.list = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * RecordSingleData list.
-     * @member {Array.<IRecordSingle>} list
-     * @memberof RecordSingleData
-     * @instance
-     */
-    RecordSingleData.prototype.list = $util.emptyArray;
-
-    /**
-     * RecordSingleData pageNum.
-     * @member {number} pageNum
-     * @memberof RecordSingleData
-     * @instance
-     */
-    RecordSingleData.prototype.pageNum = 0;
-
-    /**
-     * RecordSingleData size.
-     * @member {number} size
-     * @memberof RecordSingleData
-     * @instance
-     */
-    RecordSingleData.prototype.size = 0;
-
-    /**
-     * RecordSingleData total.
-     * @member {number} total
-     * @memberof RecordSingleData
-     * @instance
-     */
-    RecordSingleData.prototype.total = 0;
-
-    /**
-     * Encodes the specified RecordSingleData message. Does not implicitly {@link RecordSingleData.verify|verify} messages.
-     * @function encode
-     * @memberof RecordSingleData
-     * @static
-     * @param {IRecordSingleData} m RecordSingleData message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    RecordSingleData.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.list != null && m.list.length) {
-            for (var i = 0; i < m.list.length; ++i)
-                $root.RecordSingle.encode(m.list[i], w.uint32(10).fork()).ldelim();
-        }
-        if (m.pageNum != null && Object.hasOwnProperty.call(m, "pageNum"))
-            w.uint32(16).int32(m.pageNum);
-        if (m.size != null && Object.hasOwnProperty.call(m, "size"))
-            w.uint32(24).int32(m.size);
-        if (m.total != null && Object.hasOwnProperty.call(m, "total"))
-            w.uint32(32).int32(m.total);
-        return w;
-    };
-
-    /**
-     * Decodes a RecordSingleData message from the specified reader or buffer.
-     * @function decode
-     * @memberof RecordSingleData
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {RecordSingleData} RecordSingleData
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    RecordSingleData.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.RecordSingleData();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                if (!(m.list && m.list.length))
-                    m.list = [];
-                m.list.push($root.RecordSingle.decode(r, r.uint32()));
-                break;
-            case 2:
-                m.pageNum = r.int32();
-                break;
-            case 3:
-                m.size = r.int32();
-                break;
-            case 4:
-                m.total = r.int32();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return RecordSingleData;
-})();
-
-$root.RecordSingle = (function() {
-
-    /**
-     * Properties of a RecordSingle.
-     * @exports IRecordSingle
-     * @interface IRecordSingle
-     * @property {string|null} [gameCode] RecordSingle gameCode
-     * @property {IBasicTexasConfig|null} [texasConfig] RecordSingle texasConfig
-     * @property {number|null} [winLose] RecordSingle winLose
-     * @property {string|null} [date] RecordSingle date
-     */
-
-    /**
-     * Constructs a new RecordSingle.
-     * @exports RecordSingle
-     * @classdesc Represents a RecordSingle.
-     * @implements IRecordSingle
-     * @constructor
-     * @param {IRecordSingle=} [p] Properties to set
-     */
-    function RecordSingle(p) {
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * RecordSingle gameCode.
-     * @member {string} gameCode
-     * @memberof RecordSingle
-     * @instance
-     */
-    RecordSingle.prototype.gameCode = "";
-
-    /**
-     * RecordSingle texasConfig.
-     * @member {IBasicTexasConfig|null|undefined} texasConfig
-     * @memberof RecordSingle
-     * @instance
-     */
-    RecordSingle.prototype.texasConfig = null;
-
-    /**
-     * RecordSingle winLose.
-     * @member {number} winLose
-     * @memberof RecordSingle
-     * @instance
-     */
-    RecordSingle.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * RecordSingle date.
-     * @member {string} date
-     * @memberof RecordSingle
-     * @instance
-     */
-    RecordSingle.prototype.date = "";
-
-    /**
-     * Encodes the specified RecordSingle message. Does not implicitly {@link RecordSingle.verify|verify} messages.
-     * @function encode
-     * @memberof RecordSingle
-     * @static
-     * @param {IRecordSingle} m RecordSingle message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    RecordSingle.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameCode != null && Object.hasOwnProperty.call(m, "gameCode"))
-            w.uint32(10).string(m.gameCode);
-        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
-            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(18).fork()).ldelim();
-        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
-            w.uint32(24).int64(m.winLose);
-        if (m.date != null && Object.hasOwnProperty.call(m, "date"))
-            w.uint32(34).string(m.date);
-        return w;
-    };
-
-    /**
-     * Decodes a RecordSingle message from the specified reader or buffer.
-     * @function decode
-     * @memberof RecordSingle
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {RecordSingle} RecordSingle
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    RecordSingle.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.RecordSingle();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameCode = r.string();
-                break;
-            case 2:
-                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
-                break;
-            case 3:
-                m.winLose = r.int64();
-                break;
-            case 4:
-                m.date = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return RecordSingle;
-})();
-
-$root.RecordDetail = (function() {
-
-    /**
-     * Properties of a RecordDetail.
-     * @exports IRecordDetail
-     * @interface IRecordDetail
-     * @property {string|null} [gameCode] RecordDetail gameCode
-     * @property {IBasicTexasConfig|null} [texasConfig] RecordDetail texasConfig
-     * @property {string|null} [creator] RecordDetail creator
-     * @property {string|null} [date] RecordDetail date
-     * @property {number|null} [insurance] RecordDetail insurance
-     * @property {number|null} [jackpot] RecordDetail jackpot
-     * @property {number|null} [totalHands] RecordDetail totalHands
-     * @property {number|null} [totalBuyIn] RecordDetail totalBuyIn
-     * @property {Array.<IPlayerStatistic>|null} [playerStatisticList] RecordDetail playerStatisticList
-     */
-
-    /**
-     * Constructs a new RecordDetail.
-     * @exports RecordDetail
-     * @classdesc Represents a RecordDetail.
-     * @implements IRecordDetail
-     * @constructor
-     * @param {IRecordDetail=} [p] Properties to set
-     */
-    function RecordDetail(p) {
-        this.playerStatisticList = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * RecordDetail gameCode.
-     * @member {string} gameCode
-     * @memberof RecordDetail
-     * @instance
-     */
-    RecordDetail.prototype.gameCode = "";
-
-    /**
-     * RecordDetail texasConfig.
-     * @member {IBasicTexasConfig|null|undefined} texasConfig
-     * @memberof RecordDetail
-     * @instance
-     */
-    RecordDetail.prototype.texasConfig = null;
-
-    /**
-     * RecordDetail creator.
-     * @member {string} creator
-     * @memberof RecordDetail
-     * @instance
-     */
-    RecordDetail.prototype.creator = "";
-
-    /**
-     * RecordDetail date.
-     * @member {string} date
-     * @memberof RecordDetail
-     * @instance
-     */
-    RecordDetail.prototype.date = "";
-
-    /**
-     * RecordDetail insurance.
-     * @member {number} insurance
-     * @memberof RecordDetail
-     * @instance
-     */
-    RecordDetail.prototype.insurance = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * RecordDetail jackpot.
-     * @member {number} jackpot
-     * @memberof RecordDetail
-     * @instance
-     */
-    RecordDetail.prototype.jackpot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * RecordDetail totalHands.
-     * @member {number} totalHands
-     * @memberof RecordDetail
-     * @instance
-     */
-    RecordDetail.prototype.totalHands = 0;
-
-    /**
-     * RecordDetail totalBuyIn.
-     * @member {number} totalBuyIn
-     * @memberof RecordDetail
-     * @instance
-     */
-    RecordDetail.prototype.totalBuyIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * RecordDetail playerStatisticList.
-     * @member {Array.<IPlayerStatistic>} playerStatisticList
-     * @memberof RecordDetail
-     * @instance
-     */
-    RecordDetail.prototype.playerStatisticList = $util.emptyArray;
-
-    /**
-     * Encodes the specified RecordDetail message. Does not implicitly {@link RecordDetail.verify|verify} messages.
-     * @function encode
-     * @memberof RecordDetail
-     * @static
-     * @param {IRecordDetail} m RecordDetail message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    RecordDetail.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.gameCode != null && Object.hasOwnProperty.call(m, "gameCode"))
-            w.uint32(10).string(m.gameCode);
-        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
-            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(18).fork()).ldelim();
-        if (m.creator != null && Object.hasOwnProperty.call(m, "creator"))
-            w.uint32(26).string(m.creator);
-        if (m.date != null && Object.hasOwnProperty.call(m, "date"))
-            w.uint32(34).string(m.date);
-        if (m.insurance != null && Object.hasOwnProperty.call(m, "insurance"))
-            w.uint32(40).int64(m.insurance);
-        if (m.jackpot != null && Object.hasOwnProperty.call(m, "jackpot"))
-            w.uint32(48).int64(m.jackpot);
-        if (m.totalHands != null && Object.hasOwnProperty.call(m, "totalHands"))
-            w.uint32(56).int32(m.totalHands);
-        if (m.totalBuyIn != null && Object.hasOwnProperty.call(m, "totalBuyIn"))
-            w.uint32(64).int64(m.totalBuyIn);
-        if (m.playerStatisticList != null && m.playerStatisticList.length) {
-            for (var i = 0; i < m.playerStatisticList.length; ++i)
-                $root.PlayerStatistic.encode(m.playerStatisticList[i], w.uint32(74).fork()).ldelim();
-        }
-        return w;
-    };
-
-    /**
-     * Decodes a RecordDetail message from the specified reader or buffer.
-     * @function decode
-     * @memberof RecordDetail
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {RecordDetail} RecordDetail
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    RecordDetail.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.RecordDetail();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.gameCode = r.string();
-                break;
-            case 2:
-                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
-                break;
-            case 3:
-                m.creator = r.string();
-                break;
-            case 4:
-                m.date = r.string();
-                break;
-            case 5:
-                m.insurance = r.int64();
-                break;
-            case 6:
-                m.jackpot = r.int64();
-                break;
-            case 7:
-                m.totalHands = r.int32();
-                break;
-            case 8:
-                m.totalBuyIn = r.int64();
-                break;
-            case 9:
-                if (!(m.playerStatisticList && m.playerStatisticList.length))
-                    m.playerStatisticList = [];
-                m.playerStatisticList.push($root.PlayerStatistic.decode(r, r.uint32()));
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return RecordDetail;
-})();
-
-/**
  * MessageId enum.
  * @exports MessageId
  * @enum {number}
@@ -11151,6 +5877,3617 @@ $root.C2SGetPlayerStatistics = (function() {
     };
 
     return C2SGetPlayerStatistics;
+})();
+
+/**
+ * ActionType enum.
+ * @exports ActionType
+ * @enum {number}
+ * @property {number} ActionType_Init=0 ActionType_Init value
+ * @property {number} ActionType_Fold=1 ActionType_Fold value
+ * @property {number} ActionType_Check=2 ActionType_Check value
+ * @property {number} ActionType_Bet=3 ActionType_Bet value
+ * @property {number} ActionType_Ante=4 ActionType_Ante value
+ * @property {number} ActionType_SB=5 ActionType_SB value
+ * @property {number} ActionType_BB=6 ActionType_BB value
+ * @property {number} ActionType_Straddle=7 ActionType_Straddle value
+ * @property {number} ActionType_Raise=8 ActionType_Raise value
+ * @property {number} ActionType_AllIn=9 ActionType_AllIn value
+ * @property {number} ActionType_Call=10 ActionType_Call value
+ */
+$root.ActionType = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "ActionType_Init"] = 0;
+    values[valuesById[1] = "ActionType_Fold"] = 1;
+    values[valuesById[2] = "ActionType_Check"] = 2;
+    values[valuesById[3] = "ActionType_Bet"] = 3;
+    values[valuesById[4] = "ActionType_Ante"] = 4;
+    values[valuesById[5] = "ActionType_SB"] = 5;
+    values[valuesById[6] = "ActionType_BB"] = 6;
+    values[valuesById[7] = "ActionType_Straddle"] = 7;
+    values[valuesById[8] = "ActionType_Raise"] = 8;
+    values[valuesById[9] = "ActionType_AllIn"] = 9;
+    values[valuesById[10] = "ActionType_Call"] = 10;
+    return values;
+})();
+
+/**
+ * SettlementType enum.
+ * @exports SettlementType
+ * @enum {number}
+ * @property {number} SettlementType_AdvanceFold=0 SettlementType_AdvanceFold value
+ * @property {number} SettlementType_AdvanceSettlement=1 SettlementType_AdvanceSettlement value
+ * @property {number} SettlementType_NormalSettlement=2 SettlementType_NormalSettlement value
+ */
+$root.SettlementType = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "SettlementType_AdvanceFold"] = 0;
+    values[valuesById[1] = "SettlementType_AdvanceSettlement"] = 1;
+    values[valuesById[2] = "SettlementType_NormalSettlement"] = 2;
+    return values;
+})();
+
+/**
+ * WinLoseType enum.
+ * @exports WinLoseType
+ * @enum {number}
+ * @property {number} WinLoseType_Win=0 WinLoseType_Win value
+ * @property {number} WinLoseType_Lose=1 WinLoseType_Lose value
+ */
+$root.WinLoseType = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "WinLoseType_Win"] = 0;
+    values[valuesById[1] = "WinLoseType_Lose"] = 1;
+    return values;
+})();
+
+/**
+ * GameTaxType enum.
+ * @exports GameTaxType
+ * @enum {number}
+ * @property {number} GameTaxType_EveryRound=0 GameTaxType_EveryRound value
+ * @property {number} GameTaxType_WholeGameEnd=1 GameTaxType_WholeGameEnd value
+ */
+$root.GameTaxType = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "GameTaxType_EveryRound"] = 0;
+    values[valuesById[1] = "GameTaxType_WholeGameEnd"] = 1;
+    return values;
+})();
+
+/**
+ * TexasCashState enum.
+ * @exports TexasCashState
+ * @enum {number}
+ * @property {number} TexasCashState_Create=0 TexasCashState_Create value
+ * @property {number} TexasCashState_WaitStart=1 TexasCashState_WaitStart value
+ * @property {number} TexasCashState_RoundStart=2 TexasCashState_RoundStart value
+ * @property {number} TexasCashState_PreFlopRound=3 TexasCashState_PreFlopRound value
+ * @property {number} TexasCashState_FlopRound=4 TexasCashState_FlopRound value
+ * @property {number} TexasCashState_TurnRound=5 TexasCashState_TurnRound value
+ * @property {number} TexasCashState_RiverRound=6 TexasCashState_RiverRound value
+ * @property {number} TexasCashState_Settlement=7 TexasCashState_Settlement value
+ */
+$root.TexasCashState = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "TexasCashState_Create"] = 0;
+    values[valuesById[1] = "TexasCashState_WaitStart"] = 1;
+    values[valuesById[2] = "TexasCashState_RoundStart"] = 2;
+    values[valuesById[3] = "TexasCashState_PreFlopRound"] = 3;
+    values[valuesById[4] = "TexasCashState_FlopRound"] = 4;
+    values[valuesById[5] = "TexasCashState_TurnRound"] = 5;
+    values[valuesById[6] = "TexasCashState_RiverRound"] = 6;
+    values[valuesById[7] = "TexasCashState_Settlement"] = 7;
+    return values;
+})();
+
+/**
+ * GameRole enum.
+ * @exports GameRole
+ * @enum {number}
+ * @property {number} GameRole_Observer=0 GameRole_Observer value
+ * @property {number} GameRole_Player=1 GameRole_Player value
+ */
+$root.GameRole = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "GameRole_Observer"] = 0;
+    values[valuesById[1] = "GameRole_Player"] = 1;
+    return values;
+})();
+
+$root.BasicTexasConfig = (function() {
+
+    /**
+     * Properties of a BasicTexasConfig.
+     * @exports IBasicTexasConfig
+     * @interface IBasicTexasConfig
+     * @property {GameType|null} [gameType] BasicTexasConfig gameType
+     * @property {string|null} [gameName] BasicTexasConfig gameName
+     * @property {GameCurrencyType|null} [currencyType] BasicTexasConfig currencyType
+     * @property {GameTaxType|null} [taxType] BasicTexasConfig taxType
+     * @property {number|null} [taxRatio] BasicTexasConfig taxRatio
+     * @property {number|null} [taxLimitAmount] BasicTexasConfig taxLimitAmount
+     * @property {number|null} [returnRatio] BasicTexasConfig returnRatio
+     * @property {number|null} [smallBlind] BasicTexasConfig smallBlind
+     * @property {boolean|null} [straddle] BasicTexasConfig straddle
+     * @property {number|null} [ante] BasicTexasConfig ante
+     * @property {number|null} [maxTotalBuyIn] BasicTexasConfig maxTotalBuyIn
+     * @property {number|null} [minBringIn] BasicTexasConfig minBringIn
+     * @property {number|null} [maxBringIn] BasicTexasConfig maxBringIn
+     * @property {boolean|null} [allowBringOut] BasicTexasConfig allowBringOut
+     * @property {number|null} [minScoreAfterBringOut] BasicTexasConfig minScoreAfterBringOut
+     * @property {boolean|null} [insurance] BasicTexasConfig insurance
+     * @property {number|null} [insuranceTaxRatio] BasicTexasConfig insuranceTaxRatio
+     * @property {number|null} [insuranceSecurityAmount] BasicTexasConfig insuranceSecurityAmount
+     * @property {number|null} [insuranceReturnRatio] BasicTexasConfig insuranceReturnRatio
+     * @property {number|null} [gameDuration] BasicTexasConfig gameDuration
+     * @property {number|null} [thinkingTime] BasicTexasConfig thinkingTime
+     * @property {number|null} [seatNum] BasicTexasConfig seatNum
+     * @property {number|null} [autoStartNum] BasicTexasConfig autoStartNum
+     * @property {boolean|null} ["public"] BasicTexasConfig public
+     * @property {boolean|null} [gpsLimit] BasicTexasConfig gpsLimit
+     * @property {boolean|null} [ipLimit] BasicTexasConfig ipLimit
+     */
+
+    /**
+     * Constructs a new BasicTexasConfig.
+     * @exports BasicTexasConfig
+     * @classdesc Represents a BasicTexasConfig.
+     * @implements IBasicTexasConfig
+     * @constructor
+     * @param {IBasicTexasConfig=} [p] Properties to set
+     */
+    function BasicTexasConfig(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * BasicTexasConfig gameType.
+     * @member {GameType} gameType
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.gameType = 0;
+
+    /**
+     * BasicTexasConfig gameName.
+     * @member {string} gameName
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.gameName = "";
+
+    /**
+     * BasicTexasConfig currencyType.
+     * @member {GameCurrencyType} currencyType
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.currencyType = 0;
+
+    /**
+     * BasicTexasConfig taxType.
+     * @member {GameTaxType} taxType
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.taxType = 0;
+
+    /**
+     * BasicTexasConfig taxRatio.
+     * @member {number} taxRatio
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.taxRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig taxLimitAmount.
+     * @member {number} taxLimitAmount
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.taxLimitAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig returnRatio.
+     * @member {number} returnRatio
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.returnRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig smallBlind.
+     * @member {number} smallBlind
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.smallBlind = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig straddle.
+     * @member {boolean} straddle
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.straddle = false;
+
+    /**
+     * BasicTexasConfig ante.
+     * @member {number} ante
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.ante = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig maxTotalBuyIn.
+     * @member {number} maxTotalBuyIn
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.maxTotalBuyIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig minBringIn.
+     * @member {number} minBringIn
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.minBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig maxBringIn.
+     * @member {number} maxBringIn
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.maxBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig allowBringOut.
+     * @member {boolean} allowBringOut
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.allowBringOut = false;
+
+    /**
+     * BasicTexasConfig minScoreAfterBringOut.
+     * @member {number} minScoreAfterBringOut
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.minScoreAfterBringOut = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig insurance.
+     * @member {boolean} insurance
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.insurance = false;
+
+    /**
+     * BasicTexasConfig insuranceTaxRatio.
+     * @member {number} insuranceTaxRatio
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.insuranceTaxRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig insuranceSecurityAmount.
+     * @member {number} insuranceSecurityAmount
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.insuranceSecurityAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig insuranceReturnRatio.
+     * @member {number} insuranceReturnRatio
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.insuranceReturnRatio = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig gameDuration.
+     * @member {number} gameDuration
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.gameDuration = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig thinkingTime.
+     * @member {number} thinkingTime
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.thinkingTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig seatNum.
+     * @member {number} seatNum
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.seatNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig autoStartNum.
+     * @member {number} autoStartNum
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.autoStartNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BasicTexasConfig public.
+     * @member {boolean} public
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype["public"] = false;
+
+    /**
+     * BasicTexasConfig gpsLimit.
+     * @member {boolean} gpsLimit
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.gpsLimit = false;
+
+    /**
+     * BasicTexasConfig ipLimit.
+     * @member {boolean} ipLimit
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.ipLimit = false;
+
+    /**
+     * Encodes the specified BasicTexasConfig message. Does not implicitly {@link BasicTexasConfig.verify|verify} messages.
+     * @function encode
+     * @memberof BasicTexasConfig
+     * @static
+     * @param {IBasicTexasConfig} m BasicTexasConfig message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    BasicTexasConfig.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
+            w.uint32(8).int32(m.gameType);
+        if (m.gameName != null && Object.hasOwnProperty.call(m, "gameName"))
+            w.uint32(18).string(m.gameName);
+        if (m.currencyType != null && Object.hasOwnProperty.call(m, "currencyType"))
+            w.uint32(24).int32(m.currencyType);
+        if (m.taxType != null && Object.hasOwnProperty.call(m, "taxType"))
+            w.uint32(32).int32(m.taxType);
+        if (m.taxRatio != null && Object.hasOwnProperty.call(m, "taxRatio"))
+            w.uint32(40).int64(m.taxRatio);
+        if (m.taxLimitAmount != null && Object.hasOwnProperty.call(m, "taxLimitAmount"))
+            w.uint32(48).int64(m.taxLimitAmount);
+        if (m.returnRatio != null && Object.hasOwnProperty.call(m, "returnRatio"))
+            w.uint32(56).int64(m.returnRatio);
+        if (m.smallBlind != null && Object.hasOwnProperty.call(m, "smallBlind"))
+            w.uint32(64).int64(m.smallBlind);
+        if (m.straddle != null && Object.hasOwnProperty.call(m, "straddle"))
+            w.uint32(72).bool(m.straddle);
+        if (m.ante != null && Object.hasOwnProperty.call(m, "ante"))
+            w.uint32(80).int64(m.ante);
+        if (m.maxTotalBuyIn != null && Object.hasOwnProperty.call(m, "maxTotalBuyIn"))
+            w.uint32(88).int64(m.maxTotalBuyIn);
+        if (m.minBringIn != null && Object.hasOwnProperty.call(m, "minBringIn"))
+            w.uint32(96).int64(m.minBringIn);
+        if (m.maxBringIn != null && Object.hasOwnProperty.call(m, "maxBringIn"))
+            w.uint32(104).int64(m.maxBringIn);
+        if (m.allowBringOut != null && Object.hasOwnProperty.call(m, "allowBringOut"))
+            w.uint32(112).bool(m.allowBringOut);
+        if (m.minScoreAfterBringOut != null && Object.hasOwnProperty.call(m, "minScoreAfterBringOut"))
+            w.uint32(120).int64(m.minScoreAfterBringOut);
+        if (m.insurance != null && Object.hasOwnProperty.call(m, "insurance"))
+            w.uint32(128).bool(m.insurance);
+        if (m.insuranceTaxRatio != null && Object.hasOwnProperty.call(m, "insuranceTaxRatio"))
+            w.uint32(136).int64(m.insuranceTaxRatio);
+        if (m.insuranceSecurityAmount != null && Object.hasOwnProperty.call(m, "insuranceSecurityAmount"))
+            w.uint32(144).int64(m.insuranceSecurityAmount);
+        if (m.insuranceReturnRatio != null && Object.hasOwnProperty.call(m, "insuranceReturnRatio"))
+            w.uint32(152).int64(m.insuranceReturnRatio);
+        if (m.gameDuration != null && Object.hasOwnProperty.call(m, "gameDuration"))
+            w.uint32(160).int64(m.gameDuration);
+        if (m.thinkingTime != null && Object.hasOwnProperty.call(m, "thinkingTime"))
+            w.uint32(168).int64(m.thinkingTime);
+        if (m.seatNum != null && Object.hasOwnProperty.call(m, "seatNum"))
+            w.uint32(176).int64(m.seatNum);
+        if (m.autoStartNum != null && Object.hasOwnProperty.call(m, "autoStartNum"))
+            w.uint32(184).int64(m.autoStartNum);
+        if (m["public"] != null && Object.hasOwnProperty.call(m, "public"))
+            w.uint32(192).bool(m["public"]);
+        if (m.gpsLimit != null && Object.hasOwnProperty.call(m, "gpsLimit"))
+            w.uint32(200).bool(m.gpsLimit);
+        if (m.ipLimit != null && Object.hasOwnProperty.call(m, "ipLimit"))
+            w.uint32(208).bool(m.ipLimit);
+        return w;
+    };
+
+    /**
+     * Decodes a BasicTexasConfig message from the specified reader or buffer.
+     * @function decode
+     * @memberof BasicTexasConfig
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {BasicTexasConfig} BasicTexasConfig
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    BasicTexasConfig.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.BasicTexasConfig();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameType = r.int32();
+                break;
+            case 2:
+                m.gameName = r.string();
+                break;
+            case 3:
+                m.currencyType = r.int32();
+                break;
+            case 4:
+                m.taxType = r.int32();
+                break;
+            case 5:
+                m.taxRatio = r.int64();
+                break;
+            case 6:
+                m.taxLimitAmount = r.int64();
+                break;
+            case 7:
+                m.returnRatio = r.int64();
+                break;
+            case 8:
+                m.smallBlind = r.int64();
+                break;
+            case 9:
+                m.straddle = r.bool();
+                break;
+            case 10:
+                m.ante = r.int64();
+                break;
+            case 11:
+                m.maxTotalBuyIn = r.int64();
+                break;
+            case 12:
+                m.minBringIn = r.int64();
+                break;
+            case 13:
+                m.maxBringIn = r.int64();
+                break;
+            case 14:
+                m.allowBringOut = r.bool();
+                break;
+            case 15:
+                m.minScoreAfterBringOut = r.int64();
+                break;
+            case 16:
+                m.insurance = r.bool();
+                break;
+            case 17:
+                m.insuranceTaxRatio = r.int64();
+                break;
+            case 18:
+                m.insuranceSecurityAmount = r.int64();
+                break;
+            case 19:
+                m.insuranceReturnRatio = r.int64();
+                break;
+            case 20:
+                m.gameDuration = r.int64();
+                break;
+            case 21:
+                m.thinkingTime = r.int64();
+                break;
+            case 22:
+                m.seatNum = r.int64();
+                break;
+            case 23:
+                m.autoStartNum = r.int64();
+                break;
+            case 24:
+                m["public"] = r.bool();
+                break;
+            case 25:
+                m.gpsLimit = r.bool();
+                break;
+            case 26:
+                m.ipLimit = r.bool();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return BasicTexasConfig;
+})();
+
+$root.PlayerInfo = (function() {
+
+    /**
+     * Properties of a PlayerInfo.
+     * @exports IPlayerInfo
+     * @interface IPlayerInfo
+     * @property {string|null} [uid] PlayerInfo uid
+     * @property {string|null} [nickName] PlayerInfo nickName
+     * @property {string|null} [head] PlayerInfo head
+     * @property {number|null} [currencyNum] PlayerInfo currencyNum
+     * @property {number|null} [bringInNum] PlayerInfo bringInNum
+     * @property {boolean|null} [online] PlayerInfo online
+     * @property {GameRole|null} [gameRole] PlayerInfo gameRole
+     * @property {Array.<ICardInfo>|null} [cards] PlayerInfo cards
+     * @property {number|null} [seat] PlayerInfo seat
+     * @property {number|null} [buyInLeftTime] PlayerInfo buyInLeftTime
+     * @property {boolean|null} [fold] PlayerInfo fold
+     * @property {number|null} [autoLeftTime] PlayerInfo autoLeftTime
+     * @property {boolean|null} [auto] PlayerInfo auto
+     * @property {number|null} [totalHands] PlayerInfo totalHands
+     * @property {number|null} [totalFlopHands] PlayerInfo totalFlopHands
+     */
+
+    /**
+     * Constructs a new PlayerInfo.
+     * @exports PlayerInfo
+     * @classdesc Represents a PlayerInfo.
+     * @implements IPlayerInfo
+     * @constructor
+     * @param {IPlayerInfo=} [p] Properties to set
+     */
+    function PlayerInfo(p) {
+        this.cards = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * PlayerInfo uid.
+     * @member {string} uid
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.uid = "";
+
+    /**
+     * PlayerInfo nickName.
+     * @member {string} nickName
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.nickName = "";
+
+    /**
+     * PlayerInfo head.
+     * @member {string} head
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.head = "";
+
+    /**
+     * PlayerInfo currencyNum.
+     * @member {number} currencyNum
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.currencyNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerInfo bringInNum.
+     * @member {number} bringInNum
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.bringInNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerInfo online.
+     * @member {boolean} online
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.online = false;
+
+    /**
+     * PlayerInfo gameRole.
+     * @member {GameRole} gameRole
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.gameRole = 0;
+
+    /**
+     * PlayerInfo cards.
+     * @member {Array.<ICardInfo>} cards
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.cards = $util.emptyArray;
+
+    /**
+     * PlayerInfo seat.
+     * @member {number} seat
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.seat = 0;
+
+    /**
+     * PlayerInfo buyInLeftTime.
+     * @member {number} buyInLeftTime
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.buyInLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerInfo fold.
+     * @member {boolean} fold
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.fold = false;
+
+    /**
+     * PlayerInfo autoLeftTime.
+     * @member {number} autoLeftTime
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.autoLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerInfo auto.
+     * @member {boolean} auto
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.auto = false;
+
+    /**
+     * PlayerInfo totalHands.
+     * @member {number} totalHands
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.totalHands = 0;
+
+    /**
+     * PlayerInfo totalFlopHands.
+     * @member {number} totalFlopHands
+     * @memberof PlayerInfo
+     * @instance
+     */
+    PlayerInfo.prototype.totalFlopHands = 0;
+
+    /**
+     * Encodes the specified PlayerInfo message. Does not implicitly {@link PlayerInfo.verify|verify} messages.
+     * @function encode
+     * @memberof PlayerInfo
+     * @static
+     * @param {IPlayerInfo} m PlayerInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    PlayerInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(10).string(m.uid);
+        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
+            w.uint32(18).string(m.nickName);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(26).string(m.head);
+        if (m.currencyNum != null && Object.hasOwnProperty.call(m, "currencyNum"))
+            w.uint32(32).int64(m.currencyNum);
+        if (m.bringInNum != null && Object.hasOwnProperty.call(m, "bringInNum"))
+            w.uint32(40).int64(m.bringInNum);
+        if (m.online != null && Object.hasOwnProperty.call(m, "online"))
+            w.uint32(48).bool(m.online);
+        if (m.gameRole != null && Object.hasOwnProperty.call(m, "gameRole"))
+            w.uint32(56).int32(m.gameRole);
+        if (m.cards != null && m.cards.length) {
+            for (var i = 0; i < m.cards.length; ++i)
+                $root.CardInfo.encode(m.cards[i], w.uint32(66).fork()).ldelim();
+        }
+        if (m.seat != null && Object.hasOwnProperty.call(m, "seat"))
+            w.uint32(72).int32(m.seat);
+        if (m.buyInLeftTime != null && Object.hasOwnProperty.call(m, "buyInLeftTime"))
+            w.uint32(80).int64(m.buyInLeftTime);
+        if (m.fold != null && Object.hasOwnProperty.call(m, "fold"))
+            w.uint32(88).bool(m.fold);
+        if (m.autoLeftTime != null && Object.hasOwnProperty.call(m, "autoLeftTime"))
+            w.uint32(96).int64(m.autoLeftTime);
+        if (m.auto != null && Object.hasOwnProperty.call(m, "auto"))
+            w.uint32(104).bool(m.auto);
+        if (m.totalHands != null && Object.hasOwnProperty.call(m, "totalHands"))
+            w.uint32(112).int32(m.totalHands);
+        if (m.totalFlopHands != null && Object.hasOwnProperty.call(m, "totalFlopHands"))
+            w.uint32(120).int32(m.totalFlopHands);
+        return w;
+    };
+
+    /**
+     * Decodes a PlayerInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof PlayerInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {PlayerInfo} PlayerInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    PlayerInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.PlayerInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.uid = r.string();
+                break;
+            case 2:
+                m.nickName = r.string();
+                break;
+            case 3:
+                m.head = r.string();
+                break;
+            case 4:
+                m.currencyNum = r.int64();
+                break;
+            case 5:
+                m.bringInNum = r.int64();
+                break;
+            case 6:
+                m.online = r.bool();
+                break;
+            case 7:
+                m.gameRole = r.int32();
+                break;
+            case 8:
+                if (!(m.cards && m.cards.length))
+                    m.cards = [];
+                m.cards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 9:
+                m.seat = r.int32();
+                break;
+            case 10:
+                m.buyInLeftTime = r.int64();
+                break;
+            case 11:
+                m.fold = r.bool();
+                break;
+            case 12:
+                m.autoLeftTime = r.int64();
+                break;
+            case 13:
+                m.auto = r.bool();
+                break;
+            case 14:
+                m.totalHands = r.int32();
+                break;
+            case 15:
+                m.totalFlopHands = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return PlayerInfo;
+})();
+
+$root.PlayerHistoryInfo = (function() {
+
+    /**
+     * Properties of a PlayerHistoryInfo.
+     * @exports IPlayerHistoryInfo
+     * @interface IPlayerHistoryInfo
+     * @property {string|null} [uid] PlayerHistoryInfo uid
+     * @property {string|null} [nickName] PlayerHistoryInfo nickName
+     * @property {string|null} [head] PlayerHistoryInfo head
+     * @property {number|null} [totalGames] PlayerHistoryInfo totalGames
+     * @property {number|null} [totalBringIn] PlayerHistoryInfo totalBringIn
+     * @property {number|null} [totalWinLose] PlayerHistoryInfo totalWinLose
+     */
+
+    /**
+     * Constructs a new PlayerHistoryInfo.
+     * @exports PlayerHistoryInfo
+     * @classdesc Represents a PlayerHistoryInfo.
+     * @implements IPlayerHistoryInfo
+     * @constructor
+     * @param {IPlayerHistoryInfo=} [p] Properties to set
+     */
+    function PlayerHistoryInfo(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * PlayerHistoryInfo uid.
+     * @member {string} uid
+     * @memberof PlayerHistoryInfo
+     * @instance
+     */
+    PlayerHistoryInfo.prototype.uid = "";
+
+    /**
+     * PlayerHistoryInfo nickName.
+     * @member {string} nickName
+     * @memberof PlayerHistoryInfo
+     * @instance
+     */
+    PlayerHistoryInfo.prototype.nickName = "";
+
+    /**
+     * PlayerHistoryInfo head.
+     * @member {string} head
+     * @memberof PlayerHistoryInfo
+     * @instance
+     */
+    PlayerHistoryInfo.prototype.head = "";
+
+    /**
+     * PlayerHistoryInfo totalGames.
+     * @member {number} totalGames
+     * @memberof PlayerHistoryInfo
+     * @instance
+     */
+    PlayerHistoryInfo.prototype.totalGames = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerHistoryInfo totalBringIn.
+     * @member {number} totalBringIn
+     * @memberof PlayerHistoryInfo
+     * @instance
+     */
+    PlayerHistoryInfo.prototype.totalBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerHistoryInfo totalWinLose.
+     * @member {number} totalWinLose
+     * @memberof PlayerHistoryInfo
+     * @instance
+     */
+    PlayerHistoryInfo.prototype.totalWinLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified PlayerHistoryInfo message. Does not implicitly {@link PlayerHistoryInfo.verify|verify} messages.
+     * @function encode
+     * @memberof PlayerHistoryInfo
+     * @static
+     * @param {IPlayerHistoryInfo} m PlayerHistoryInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    PlayerHistoryInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(10).string(m.uid);
+        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
+            w.uint32(18).string(m.nickName);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(26).string(m.head);
+        if (m.totalGames != null && Object.hasOwnProperty.call(m, "totalGames"))
+            w.uint32(32).int64(m.totalGames);
+        if (m.totalBringIn != null && Object.hasOwnProperty.call(m, "totalBringIn"))
+            w.uint32(40).int64(m.totalBringIn);
+        if (m.totalWinLose != null && Object.hasOwnProperty.call(m, "totalWinLose"))
+            w.uint32(48).int64(m.totalWinLose);
+        return w;
+    };
+
+    /**
+     * Decodes a PlayerHistoryInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof PlayerHistoryInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {PlayerHistoryInfo} PlayerHistoryInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    PlayerHistoryInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.PlayerHistoryInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.uid = r.string();
+                break;
+            case 2:
+                m.nickName = r.string();
+                break;
+            case 3:
+                m.head = r.string();
+                break;
+            case 4:
+                m.totalGames = r.int64();
+                break;
+            case 5:
+                m.totalBringIn = r.int64();
+                break;
+            case 6:
+                m.totalWinLose = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return PlayerHistoryInfo;
+})();
+
+$root.ActionInfo = (function() {
+
+    /**
+     * Properties of an ActionInfo.
+     * @exports IActionInfo
+     * @interface IActionInfo
+     * @property {string|null} [uid] ActionInfo uid
+     * @property {ActionType|null} [actionType] ActionInfo actionType
+     * @property {number|null} [amount] ActionInfo amount
+     * @property {number|null} [roundAmount] ActionInfo roundAmount
+     */
+
+    /**
+     * Constructs a new ActionInfo.
+     * @exports ActionInfo
+     * @classdesc Represents an ActionInfo.
+     * @implements IActionInfo
+     * @constructor
+     * @param {IActionInfo=} [p] Properties to set
+     */
+    function ActionInfo(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * ActionInfo uid.
+     * @member {string} uid
+     * @memberof ActionInfo
+     * @instance
+     */
+    ActionInfo.prototype.uid = "";
+
+    /**
+     * ActionInfo actionType.
+     * @member {ActionType} actionType
+     * @memberof ActionInfo
+     * @instance
+     */
+    ActionInfo.prototype.actionType = 0;
+
+    /**
+     * ActionInfo amount.
+     * @member {number} amount
+     * @memberof ActionInfo
+     * @instance
+     */
+    ActionInfo.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * ActionInfo roundAmount.
+     * @member {number} roundAmount
+     * @memberof ActionInfo
+     * @instance
+     */
+    ActionInfo.prototype.roundAmount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified ActionInfo message. Does not implicitly {@link ActionInfo.verify|verify} messages.
+     * @function encode
+     * @memberof ActionInfo
+     * @static
+     * @param {IActionInfo} m ActionInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    ActionInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(10).string(m.uid);
+        if (m.actionType != null && Object.hasOwnProperty.call(m, "actionType"))
+            w.uint32(16).int32(m.actionType);
+        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
+            w.uint32(24).int64(m.amount);
+        if (m.roundAmount != null && Object.hasOwnProperty.call(m, "roundAmount"))
+            w.uint32(32).int64(m.roundAmount);
+        return w;
+    };
+
+    /**
+     * Decodes an ActionInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof ActionInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {ActionInfo} ActionInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    ActionInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.ActionInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.uid = r.string();
+                break;
+            case 2:
+                m.actionType = r.int32();
+                break;
+            case 3:
+                m.amount = r.int64();
+                break;
+            case 4:
+                m.roundAmount = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return ActionInfo;
+})();
+
+$root.PotInfo = (function() {
+
+    /**
+     * Properties of a PotInfo.
+     * @exports IPotInfo
+     * @interface IPotInfo
+     * @property {number|null} [pot] PotInfo pot
+     * @property {number|null} [potId] PotInfo potId
+     */
+
+    /**
+     * Constructs a new PotInfo.
+     * @exports PotInfo
+     * @classdesc Represents a PotInfo.
+     * @implements IPotInfo
+     * @constructor
+     * @param {IPotInfo=} [p] Properties to set
+     */
+    function PotInfo(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * PotInfo pot.
+     * @member {number} pot
+     * @memberof PotInfo
+     * @instance
+     */
+    PotInfo.prototype.pot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PotInfo potId.
+     * @member {number} potId
+     * @memberof PotInfo
+     * @instance
+     */
+    PotInfo.prototype.potId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified PotInfo message. Does not implicitly {@link PotInfo.verify|verify} messages.
+     * @function encode
+     * @memberof PotInfo
+     * @static
+     * @param {IPotInfo} m PotInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    PotInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.pot != null && Object.hasOwnProperty.call(m, "pot"))
+            w.uint32(8).int64(m.pot);
+        if (m.potId != null && Object.hasOwnProperty.call(m, "potId"))
+            w.uint32(16).int64(m.potId);
+        return w;
+    };
+
+    /**
+     * Decodes a PotInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof PotInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {PotInfo} PotInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    PotInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.PotInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.pot = r.int64();
+                break;
+            case 2:
+                m.potId = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return PotInfo;
+})();
+
+$root.CombinationResult = (function() {
+
+    /**
+     * Properties of a CombinationResult.
+     * @exports ICombinationResult
+     * @interface ICombinationResult
+     * @property {Array.<ICardInfo>|null} [cards] CombinationResult cards
+     * @property {number|null} [Combination] CombinationResult Combination
+     */
+
+    /**
+     * Constructs a new CombinationResult.
+     * @exports CombinationResult
+     * @classdesc Represents a CombinationResult.
+     * @implements ICombinationResult
+     * @constructor
+     * @param {ICombinationResult=} [p] Properties to set
+     */
+    function CombinationResult(p) {
+        this.cards = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * CombinationResult cards.
+     * @member {Array.<ICardInfo>} cards
+     * @memberof CombinationResult
+     * @instance
+     */
+    CombinationResult.prototype.cards = $util.emptyArray;
+
+    /**
+     * CombinationResult Combination.
+     * @member {number} Combination
+     * @memberof CombinationResult
+     * @instance
+     */
+    CombinationResult.prototype.Combination = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+    /**
+     * Encodes the specified CombinationResult message. Does not implicitly {@link CombinationResult.verify|verify} messages.
+     * @function encode
+     * @memberof CombinationResult
+     * @static
+     * @param {ICombinationResult} m CombinationResult message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    CombinationResult.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.cards != null && m.cards.length) {
+            for (var i = 0; i < m.cards.length; ++i)
+                $root.CardInfo.encode(m.cards[i], w.uint32(10).fork()).ldelim();
+        }
+        if (m.Combination != null && Object.hasOwnProperty.call(m, "Combination"))
+            w.uint32(16).uint64(m.Combination);
+        return w;
+    };
+
+    /**
+     * Decodes a CombinationResult message from the specified reader or buffer.
+     * @function decode
+     * @memberof CombinationResult
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {CombinationResult} CombinationResult
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    CombinationResult.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.CombinationResult();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                if (!(m.cards && m.cards.length))
+                    m.cards = [];
+                m.cards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 2:
+                m.Combination = r.uint64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return CombinationResult;
+})();
+
+$root.PlayerWinLose = (function() {
+
+    /**
+     * Properties of a PlayerWinLose.
+     * @exports IPlayerWinLose
+     * @interface IPlayerWinLose
+     * @property {string|null} [uid] PlayerWinLose uid
+     * @property {string|null} [nickName] PlayerWinLose nickName
+     * @property {string|null} [head] PlayerWinLose head
+     * @property {SettlementType|null} [settlementType] PlayerWinLose settlementType
+     * @property {WinLoseType|null} [winLoseType] PlayerWinLose winLoseType
+     * @property {number|null} [winLose] PlayerWinLose winLose
+     * @property {number|null} [amount] PlayerWinLose amount
+     * @property {Array.<ICardInfo>|null} [cardInfo] PlayerWinLose cardInfo
+     * @property {ICombinationResult|null} [combinationResult] PlayerWinLose combinationResult
+     */
+
+    /**
+     * Constructs a new PlayerWinLose.
+     * @exports PlayerWinLose
+     * @classdesc Represents a PlayerWinLose.
+     * @implements IPlayerWinLose
+     * @constructor
+     * @param {IPlayerWinLose=} [p] Properties to set
+     */
+    function PlayerWinLose(p) {
+        this.cardInfo = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * PlayerWinLose uid.
+     * @member {string} uid
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.uid = "";
+
+    /**
+     * PlayerWinLose nickName.
+     * @member {string} nickName
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.nickName = "";
+
+    /**
+     * PlayerWinLose head.
+     * @member {string} head
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.head = "";
+
+    /**
+     * PlayerWinLose settlementType.
+     * @member {SettlementType} settlementType
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.settlementType = 0;
+
+    /**
+     * PlayerWinLose winLoseType.
+     * @member {WinLoseType} winLoseType
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.winLoseType = 0;
+
+    /**
+     * PlayerWinLose winLose.
+     * @member {number} winLose
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerWinLose amount.
+     * @member {number} amount
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.amount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerWinLose cardInfo.
+     * @member {Array.<ICardInfo>} cardInfo
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.cardInfo = $util.emptyArray;
+
+    /**
+     * PlayerWinLose combinationResult.
+     * @member {ICombinationResult|null|undefined} combinationResult
+     * @memberof PlayerWinLose
+     * @instance
+     */
+    PlayerWinLose.prototype.combinationResult = null;
+
+    /**
+     * Encodes the specified PlayerWinLose message. Does not implicitly {@link PlayerWinLose.verify|verify} messages.
+     * @function encode
+     * @memberof PlayerWinLose
+     * @static
+     * @param {IPlayerWinLose} m PlayerWinLose message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    PlayerWinLose.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(10).string(m.uid);
+        if (m.nickName != null && Object.hasOwnProperty.call(m, "nickName"))
+            w.uint32(18).string(m.nickName);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(26).string(m.head);
+        if (m.settlementType != null && Object.hasOwnProperty.call(m, "settlementType"))
+            w.uint32(32).int32(m.settlementType);
+        if (m.winLoseType != null && Object.hasOwnProperty.call(m, "winLoseType"))
+            w.uint32(40).int32(m.winLoseType);
+        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
+            w.uint32(48).int64(m.winLose);
+        if (m.amount != null && Object.hasOwnProperty.call(m, "amount"))
+            w.uint32(56).int64(m.amount);
+        if (m.cardInfo != null && m.cardInfo.length) {
+            for (var i = 0; i < m.cardInfo.length; ++i)
+                $root.CardInfo.encode(m.cardInfo[i], w.uint32(66).fork()).ldelim();
+        }
+        if (m.combinationResult != null && Object.hasOwnProperty.call(m, "combinationResult"))
+            $root.CombinationResult.encode(m.combinationResult, w.uint32(74).fork()).ldelim();
+        return w;
+    };
+
+    /**
+     * Decodes a PlayerWinLose message from the specified reader or buffer.
+     * @function decode
+     * @memberof PlayerWinLose
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {PlayerWinLose} PlayerWinLose
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    PlayerWinLose.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.PlayerWinLose();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.uid = r.string();
+                break;
+            case 2:
+                m.nickName = r.string();
+                break;
+            case 3:
+                m.head = r.string();
+                break;
+            case 4:
+                m.settlementType = r.int32();
+                break;
+            case 5:
+                m.winLoseType = r.int32();
+                break;
+            case 6:
+                m.winLose = r.int64();
+                break;
+            case 7:
+                m.amount = r.int64();
+                break;
+            case 8:
+                if (!(m.cardInfo && m.cardInfo.length))
+                    m.cardInfo = [];
+                m.cardInfo.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 9:
+                m.combinationResult = $root.CombinationResult.decode(r, r.uint32());
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return PlayerWinLose;
+})();
+
+$root.AboutTexasGameInfo = (function() {
+
+    /**
+     * Properties of an AboutTexasGameInfo.
+     * @exports IAboutTexasGameInfo
+     * @interface IAboutTexasGameInfo
+     * @property {number|null} [currentPlayerNum] AboutTexasGameInfo currentPlayerNum
+     * @property {number|null} [leftTime] AboutTexasGameInfo leftTime
+     */
+
+    /**
+     * Constructs a new AboutTexasGameInfo.
+     * @exports AboutTexasGameInfo
+     * @classdesc Represents an AboutTexasGameInfo.
+     * @implements IAboutTexasGameInfo
+     * @constructor
+     * @param {IAboutTexasGameInfo=} [p] Properties to set
+     */
+    function AboutTexasGameInfo(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * AboutTexasGameInfo currentPlayerNum.
+     * @member {number} currentPlayerNum
+     * @memberof AboutTexasGameInfo
+     * @instance
+     */
+    AboutTexasGameInfo.prototype.currentPlayerNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * AboutTexasGameInfo leftTime.
+     * @member {number} leftTime
+     * @memberof AboutTexasGameInfo
+     * @instance
+     */
+    AboutTexasGameInfo.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified AboutTexasGameInfo message. Does not implicitly {@link AboutTexasGameInfo.verify|verify} messages.
+     * @function encode
+     * @memberof AboutTexasGameInfo
+     * @static
+     * @param {IAboutTexasGameInfo} m AboutTexasGameInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    AboutTexasGameInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.currentPlayerNum != null && Object.hasOwnProperty.call(m, "currentPlayerNum"))
+            w.uint32(8).int64(m.currentPlayerNum);
+        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
+            w.uint32(16).int64(m.leftTime);
+        return w;
+    };
+
+    /**
+     * Decodes an AboutTexasGameInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof AboutTexasGameInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {AboutTexasGameInfo} AboutTexasGameInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    AboutTexasGameInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.AboutTexasGameInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.currentPlayerNum = r.int64();
+                break;
+            case 2:
+                m.leftTime = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return AboutTexasGameInfo;
+})();
+
+$root.TexasDynamicData = (function() {
+
+    /**
+     * Properties of a TexasDynamicData.
+     * @exports ITexasDynamicData
+     * @interface ITexasDynamicData
+     * @property {TexasCashState|null} [state] TexasDynamicData state
+     * @property {Array.<IPlayerInfo>|null} [seatInfos] TexasDynamicData seatInfos
+     * @property {string|null} [actionUid] TexasDynamicData actionUid
+     * @property {number|null} [actionLeftTime] TexasDynamicData actionLeftTime
+     * @property {Array.<IPotInfo>|null} [potInfo] TexasDynamicData potInfo
+     * @property {Array.<IActionInfo>|null} [actions] TexasDynamicData actions
+     * @property {Array.<ICardInfo>|null} [publicCards] TexasDynamicData publicCards
+     * @property {string|null} [dealerUid] TexasDynamicData dealerUid
+     * @property {IBuyInsuranceTurn|null} [buyInsuranceTurn] TexasDynamicData buyInsuranceTurn
+     * @property {number|null} [totalPot] TexasDynamicData totalPot
+     * @property {string|null} [creatorUid] TexasDynamicData creatorUid
+     */
+
+    /**
+     * Constructs a new TexasDynamicData.
+     * @exports TexasDynamicData
+     * @classdesc Represents a TexasDynamicData.
+     * @implements ITexasDynamicData
+     * @constructor
+     * @param {ITexasDynamicData=} [p] Properties to set
+     */
+    function TexasDynamicData(p) {
+        this.seatInfos = [];
+        this.potInfo = [];
+        this.actions = [];
+        this.publicCards = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * TexasDynamicData state.
+     * @member {TexasCashState} state
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.state = 0;
+
+    /**
+     * TexasDynamicData seatInfos.
+     * @member {Array.<IPlayerInfo>} seatInfos
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.seatInfos = $util.emptyArray;
+
+    /**
+     * TexasDynamicData actionUid.
+     * @member {string} actionUid
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.actionUid = "";
+
+    /**
+     * TexasDynamicData actionLeftTime.
+     * @member {number} actionLeftTime
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.actionLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * TexasDynamicData potInfo.
+     * @member {Array.<IPotInfo>} potInfo
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.potInfo = $util.emptyArray;
+
+    /**
+     * TexasDynamicData actions.
+     * @member {Array.<IActionInfo>} actions
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.actions = $util.emptyArray;
+
+    /**
+     * TexasDynamicData publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * TexasDynamicData dealerUid.
+     * @member {string} dealerUid
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.dealerUid = "";
+
+    /**
+     * TexasDynamicData buyInsuranceTurn.
+     * @member {IBuyInsuranceTurn|null|undefined} buyInsuranceTurn
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.buyInsuranceTurn = null;
+
+    /**
+     * TexasDynamicData totalPot.
+     * @member {number} totalPot
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.totalPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * TexasDynamicData creatorUid.
+     * @member {string} creatorUid
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.creatorUid = "";
+
+    /**
+     * Encodes the specified TexasDynamicData message. Does not implicitly {@link TexasDynamicData.verify|verify} messages.
+     * @function encode
+     * @memberof TexasDynamicData
+     * @static
+     * @param {ITexasDynamicData} m TexasDynamicData message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    TexasDynamicData.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.state != null && Object.hasOwnProperty.call(m, "state"))
+            w.uint32(8).int32(m.state);
+        if (m.seatInfos != null && m.seatInfos.length) {
+            for (var i = 0; i < m.seatInfos.length; ++i)
+                $root.PlayerInfo.encode(m.seatInfos[i], w.uint32(18).fork()).ldelim();
+        }
+        if (m.actionUid != null && Object.hasOwnProperty.call(m, "actionUid"))
+            w.uint32(26).string(m.actionUid);
+        if (m.actionLeftTime != null && Object.hasOwnProperty.call(m, "actionLeftTime"))
+            w.uint32(32).int64(m.actionLeftTime);
+        if (m.potInfo != null && m.potInfo.length) {
+            for (var i = 0; i < m.potInfo.length; ++i)
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(42).fork()).ldelim();
+        }
+        if (m.actions != null && m.actions.length) {
+            for (var i = 0; i < m.actions.length; ++i)
+                $root.ActionInfo.encode(m.actions[i], w.uint32(50).fork()).ldelim();
+        }
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
+        }
+        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
+            w.uint32(66).string(m.dealerUid);
+        if (m.buyInsuranceTurn != null && Object.hasOwnProperty.call(m, "buyInsuranceTurn"))
+            $root.BuyInsuranceTurn.encode(m.buyInsuranceTurn, w.uint32(74).fork()).ldelim();
+        if (m.totalPot != null && Object.hasOwnProperty.call(m, "totalPot"))
+            w.uint32(80).int64(m.totalPot);
+        if (m.creatorUid != null && Object.hasOwnProperty.call(m, "creatorUid"))
+            w.uint32(90).string(m.creatorUid);
+        return w;
+    };
+
+    /**
+     * Decodes a TexasDynamicData message from the specified reader or buffer.
+     * @function decode
+     * @memberof TexasDynamicData
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {TexasDynamicData} TexasDynamicData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    TexasDynamicData.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.TexasDynamicData();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.state = r.int32();
+                break;
+            case 2:
+                if (!(m.seatInfos && m.seatInfos.length))
+                    m.seatInfos = [];
+                m.seatInfos.push($root.PlayerInfo.decode(r, r.uint32()));
+                break;
+            case 3:
+                m.actionUid = r.string();
+                break;
+            case 4:
+                m.actionLeftTime = r.int64();
+                break;
+            case 5:
+                if (!(m.potInfo && m.potInfo.length))
+                    m.potInfo = [];
+                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 6:
+                if (!(m.actions && m.actions.length))
+                    m.actions = [];
+                m.actions.push($root.ActionInfo.decode(r, r.uint32()));
+                break;
+            case 7:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 8:
+                m.dealerUid = r.string();
+                break;
+            case 9:
+                m.buyInsuranceTurn = $root.BuyInsuranceTurn.decode(r, r.uint32());
+                break;
+            case 10:
+                m.totalPot = r.int64();
+                break;
+            case 11:
+                m.creatorUid = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return TexasDynamicData;
+})();
+
+$root.BuyInsuranceTurn = (function() {
+
+    /**
+     * Properties of a BuyInsuranceTurn.
+     * @exports IBuyInsuranceTurn
+     * @interface IBuyInsuranceTurn
+     * @property {string|null} [gameId] BuyInsuranceTurn gameId
+     * @property {string|null} [actionUid] BuyInsuranceTurn actionUid
+     * @property {Array.<ICardInfo>|null} [outsCards] BuyInsuranceTurn outsCards
+     * @property {Array.<ICardInfo>|null} [tieCards] BuyInsuranceTurn tieCards
+     * @property {Array.<ICardInfo>|null} [publicCards] BuyInsuranceTurn publicCards
+     * @property {Array.<IPlayerInfo>|null} [losePlayerInfo] BuyInsuranceTurn losePlayerInfo
+     * @property {number|null} [ratios] BuyInsuranceTurn ratios
+     * @property {number|null} [pots] BuyInsuranceTurn pots
+     * @property {number|null} [buyFullPot] BuyInsuranceTurn buyFullPot
+     * @property {number|null} [buyBack] BuyInsuranceTurn buyBack
+     * @property {number|null} [leftTime] BuyInsuranceTurn leftTime
+     */
+
+    /**
+     * Constructs a new BuyInsuranceTurn.
+     * @exports BuyInsuranceTurn
+     * @classdesc Represents a BuyInsuranceTurn.
+     * @implements IBuyInsuranceTurn
+     * @constructor
+     * @param {IBuyInsuranceTurn=} [p] Properties to set
+     */
+    function BuyInsuranceTurn(p) {
+        this.outsCards = [];
+        this.tieCards = [];
+        this.publicCards = [];
+        this.losePlayerInfo = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * BuyInsuranceTurn gameId.
+     * @member {string} gameId
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.gameId = "";
+
+    /**
+     * BuyInsuranceTurn actionUid.
+     * @member {string} actionUid
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.actionUid = "";
+
+    /**
+     * BuyInsuranceTurn outsCards.
+     * @member {Array.<ICardInfo>} outsCards
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.outsCards = $util.emptyArray;
+
+    /**
+     * BuyInsuranceTurn tieCards.
+     * @member {Array.<ICardInfo>} tieCards
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.tieCards = $util.emptyArray;
+
+    /**
+     * BuyInsuranceTurn publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * BuyInsuranceTurn losePlayerInfo.
+     * @member {Array.<IPlayerInfo>} losePlayerInfo
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.losePlayerInfo = $util.emptyArray;
+
+    /**
+     * BuyInsuranceTurn ratios.
+     * @member {number} ratios
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.ratios = 0;
+
+    /**
+     * BuyInsuranceTurn pots.
+     * @member {number} pots
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.pots = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BuyInsuranceTurn buyFullPot.
+     * @member {number} buyFullPot
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.buyFullPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BuyInsuranceTurn buyBack.
+     * @member {number} buyBack
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.buyBack = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * BuyInsuranceTurn leftTime.
+     * @member {number} leftTime
+     * @memberof BuyInsuranceTurn
+     * @instance
+     */
+    BuyInsuranceTurn.prototype.leftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified BuyInsuranceTurn message. Does not implicitly {@link BuyInsuranceTurn.verify|verify} messages.
+     * @function encode
+     * @memberof BuyInsuranceTurn
+     * @static
+     * @param {IBuyInsuranceTurn} m BuyInsuranceTurn message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    BuyInsuranceTurn.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.actionUid != null && Object.hasOwnProperty.call(m, "actionUid"))
+            w.uint32(18).string(m.actionUid);
+        if (m.outsCards != null && m.outsCards.length) {
+            for (var i = 0; i < m.outsCards.length; ++i)
+                $root.CardInfo.encode(m.outsCards[i], w.uint32(26).fork()).ldelim();
+        }
+        if (m.tieCards != null && m.tieCards.length) {
+            for (var i = 0; i < m.tieCards.length; ++i)
+                $root.CardInfo.encode(m.tieCards[i], w.uint32(34).fork()).ldelim();
+        }
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(42).fork()).ldelim();
+        }
+        if (m.losePlayerInfo != null && m.losePlayerInfo.length) {
+            for (var i = 0; i < m.losePlayerInfo.length; ++i)
+                $root.PlayerInfo.encode(m.losePlayerInfo[i], w.uint32(50).fork()).ldelim();
+        }
+        if (m.ratios != null && Object.hasOwnProperty.call(m, "ratios"))
+            w.uint32(56).int32(m.ratios);
+        if (m.pots != null && Object.hasOwnProperty.call(m, "pots"))
+            w.uint32(64).int64(m.pots);
+        if (m.buyFullPot != null && Object.hasOwnProperty.call(m, "buyFullPot"))
+            w.uint32(72).int64(m.buyFullPot);
+        if (m.buyBack != null && Object.hasOwnProperty.call(m, "buyBack"))
+            w.uint32(80).int64(m.buyBack);
+        if (m.leftTime != null && Object.hasOwnProperty.call(m, "leftTime"))
+            w.uint32(88).int64(m.leftTime);
+        return w;
+    };
+
+    /**
+     * Decodes a BuyInsuranceTurn message from the specified reader or buffer.
+     * @function decode
+     * @memberof BuyInsuranceTurn
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {BuyInsuranceTurn} BuyInsuranceTurn
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    BuyInsuranceTurn.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.BuyInsuranceTurn();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.actionUid = r.string();
+                break;
+            case 3:
+                if (!(m.outsCards && m.outsCards.length))
+                    m.outsCards = [];
+                m.outsCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 4:
+                if (!(m.tieCards && m.tieCards.length))
+                    m.tieCards = [];
+                m.tieCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 5:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 6:
+                if (!(m.losePlayerInfo && m.losePlayerInfo.length))
+                    m.losePlayerInfo = [];
+                m.losePlayerInfo.push($root.PlayerInfo.decode(r, r.uint32()));
+                break;
+            case 7:
+                m.ratios = r.int32();
+                break;
+            case 8:
+                m.pots = r.int64();
+                break;
+            case 9:
+                m.buyFullPot = r.int64();
+                break;
+            case 10:
+                m.buyBack = r.int64();
+                break;
+            case 11:
+                m.leftTime = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return BuyInsuranceTurn;
+})();
+
+$root.ActionResult = (function() {
+
+    /**
+     * Properties of an ActionResult.
+     * @exports IActionResult
+     * @interface IActionResult
+     * @property {IActionInfo|null} [actionInfo] ActionResult actionInfo
+     * @property {Array.<IPotInfo>|null} [potInfo] ActionResult potInfo
+     * @property {number|null} [totalNUm] ActionResult totalNUm
+     */
+
+    /**
+     * Constructs a new ActionResult.
+     * @exports ActionResult
+     * @classdesc Represents an ActionResult.
+     * @implements IActionResult
+     * @constructor
+     * @param {IActionResult=} [p] Properties to set
+     */
+    function ActionResult(p) {
+        this.potInfo = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * ActionResult actionInfo.
+     * @member {IActionInfo|null|undefined} actionInfo
+     * @memberof ActionResult
+     * @instance
+     */
+    ActionResult.prototype.actionInfo = null;
+
+    /**
+     * ActionResult potInfo.
+     * @member {Array.<IPotInfo>} potInfo
+     * @memberof ActionResult
+     * @instance
+     */
+    ActionResult.prototype.potInfo = $util.emptyArray;
+
+    /**
+     * ActionResult totalNUm.
+     * @member {number} totalNUm
+     * @memberof ActionResult
+     * @instance
+     */
+    ActionResult.prototype.totalNUm = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified ActionResult message. Does not implicitly {@link ActionResult.verify|verify} messages.
+     * @function encode
+     * @memberof ActionResult
+     * @static
+     * @param {IActionResult} m ActionResult message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    ActionResult.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.actionInfo != null && Object.hasOwnProperty.call(m, "actionInfo"))
+            $root.ActionInfo.encode(m.actionInfo, w.uint32(10).fork()).ldelim();
+        if (m.potInfo != null && m.potInfo.length) {
+            for (var i = 0; i < m.potInfo.length; ++i)
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(18).fork()).ldelim();
+        }
+        if (m.totalNUm != null && Object.hasOwnProperty.call(m, "totalNUm"))
+            w.uint32(24).int64(m.totalNUm);
+        return w;
+    };
+
+    /**
+     * Decodes an ActionResult message from the specified reader or buffer.
+     * @function decode
+     * @memberof ActionResult
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {ActionResult} ActionResult
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    ActionResult.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.ActionResult();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.actionInfo = $root.ActionInfo.decode(r, r.uint32());
+                break;
+            case 2:
+                if (!(m.potInfo && m.potInfo.length))
+                    m.potInfo = [];
+                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 3:
+                m.totalNUm = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return ActionResult;
+})();
+
+$root.PlayerStatistic = (function() {
+
+    /**
+     * Properties of a PlayerStatistic.
+     * @exports IPlayerStatistic
+     * @interface IPlayerStatistic
+     * @property {string|null} [uid] PlayerStatistic uid
+     * @property {string|null} [head] PlayerStatistic head
+     * @property {string|null} [name] PlayerStatistic name
+     * @property {number|null} [totalHands] PlayerStatistic totalHands
+     * @property {number|null} [totalFlopHands] PlayerStatistic totalFlopHands
+     * @property {number|null} [totalPreFlopRaiseCount] PlayerStatistic totalPreFlopRaiseCount
+     * @property {number|null} [totalPreFlopAgainRaiseCount] PlayerStatistic totalPreFlopAgainRaiseCount
+     * @property {number|null} [totalBringIn] PlayerStatistic totalBringIn
+     * @property {number|null} [totalBringOut] PlayerStatistic totalBringOut
+     * @property {number|null} [winLose] PlayerStatistic winLose
+     */
+
+    /**
+     * Constructs a new PlayerStatistic.
+     * @exports PlayerStatistic
+     * @classdesc Represents a PlayerStatistic.
+     * @implements IPlayerStatistic
+     * @constructor
+     * @param {IPlayerStatistic=} [p] Properties to set
+     */
+    function PlayerStatistic(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * PlayerStatistic uid.
+     * @member {string} uid
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.uid = "";
+
+    /**
+     * PlayerStatistic head.
+     * @member {string} head
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.head = "";
+
+    /**
+     * PlayerStatistic name.
+     * @member {string} name
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.name = "";
+
+    /**
+     * PlayerStatistic totalHands.
+     * @member {number} totalHands
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalHands = 0;
+
+    /**
+     * PlayerStatistic totalFlopHands.
+     * @member {number} totalFlopHands
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalFlopHands = 0;
+
+    /**
+     * PlayerStatistic totalPreFlopRaiseCount.
+     * @member {number} totalPreFlopRaiseCount
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalPreFlopRaiseCount = 0;
+
+    /**
+     * PlayerStatistic totalPreFlopAgainRaiseCount.
+     * @member {number} totalPreFlopAgainRaiseCount
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalPreFlopAgainRaiseCount = 0;
+
+    /**
+     * PlayerStatistic totalBringIn.
+     * @member {number} totalBringIn
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalBringIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerStatistic totalBringOut.
+     * @member {number} totalBringOut
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.totalBringOut = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * PlayerStatistic winLose.
+     * @member {number} winLose
+     * @memberof PlayerStatistic
+     * @instance
+     */
+    PlayerStatistic.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified PlayerStatistic message. Does not implicitly {@link PlayerStatistic.verify|verify} messages.
+     * @function encode
+     * @memberof PlayerStatistic
+     * @static
+     * @param {IPlayerStatistic} m PlayerStatistic message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    PlayerStatistic.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+            w.uint32(10).string(m.uid);
+        if (m.head != null && Object.hasOwnProperty.call(m, "head"))
+            w.uint32(18).string(m.head);
+        if (m.name != null && Object.hasOwnProperty.call(m, "name"))
+            w.uint32(26).string(m.name);
+        if (m.totalHands != null && Object.hasOwnProperty.call(m, "totalHands"))
+            w.uint32(32).int32(m.totalHands);
+        if (m.totalFlopHands != null && Object.hasOwnProperty.call(m, "totalFlopHands"))
+            w.uint32(40).int32(m.totalFlopHands);
+        if (m.totalPreFlopRaiseCount != null && Object.hasOwnProperty.call(m, "totalPreFlopRaiseCount"))
+            w.uint32(48).int32(m.totalPreFlopRaiseCount);
+        if (m.totalPreFlopAgainRaiseCount != null && Object.hasOwnProperty.call(m, "totalPreFlopAgainRaiseCount"))
+            w.uint32(56).int32(m.totalPreFlopAgainRaiseCount);
+        if (m.totalBringIn != null && Object.hasOwnProperty.call(m, "totalBringIn"))
+            w.uint32(64).int64(m.totalBringIn);
+        if (m.totalBringOut != null && Object.hasOwnProperty.call(m, "totalBringOut"))
+            w.uint32(72).int64(m.totalBringOut);
+        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
+            w.uint32(80).int64(m.winLose);
+        return w;
+    };
+
+    /**
+     * Decodes a PlayerStatistic message from the specified reader or buffer.
+     * @function decode
+     * @memberof PlayerStatistic
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {PlayerStatistic} PlayerStatistic
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    PlayerStatistic.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.PlayerStatistic();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.uid = r.string();
+                break;
+            case 2:
+                m.head = r.string();
+                break;
+            case 3:
+                m.name = r.string();
+                break;
+            case 4:
+                m.totalHands = r.int32();
+                break;
+            case 5:
+                m.totalFlopHands = r.int32();
+                break;
+            case 6:
+                m.totalPreFlopRaiseCount = r.int32();
+                break;
+            case 7:
+                m.totalPreFlopAgainRaiseCount = r.int32();
+                break;
+            case 8:
+                m.totalBringIn = r.int64();
+                break;
+            case 9:
+                m.totalBringOut = r.int64();
+                break;
+            case 10:
+                m.winLose = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return PlayerStatistic;
+})();
+
+$root.MySimpleInfo = (function() {
+
+    /**
+     * Properties of a MySimpleInfo.
+     * @exports IMySimpleInfo
+     * @interface IMySimpleInfo
+     * @property {Array.<ICardInfo>|null} [myCards] MySimpleInfo myCards
+     * @property {number|null} [myResult] MySimpleInfo myResult
+     */
+
+    /**
+     * Constructs a new MySimpleInfo.
+     * @exports MySimpleInfo
+     * @classdesc Represents a MySimpleInfo.
+     * @implements IMySimpleInfo
+     * @constructor
+     * @param {IMySimpleInfo=} [p] Properties to set
+     */
+    function MySimpleInfo(p) {
+        this.myCards = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * MySimpleInfo myCards.
+     * @member {Array.<ICardInfo>} myCards
+     * @memberof MySimpleInfo
+     * @instance
+     */
+    MySimpleInfo.prototype.myCards = $util.emptyArray;
+
+    /**
+     * MySimpleInfo myResult.
+     * @member {number} myResult
+     * @memberof MySimpleInfo
+     * @instance
+     */
+    MySimpleInfo.prototype.myResult = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * Encodes the specified MySimpleInfo message. Does not implicitly {@link MySimpleInfo.verify|verify} messages.
+     * @function encode
+     * @memberof MySimpleInfo
+     * @static
+     * @param {IMySimpleInfo} m MySimpleInfo message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    MySimpleInfo.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.myCards != null && m.myCards.length) {
+            for (var i = 0; i < m.myCards.length; ++i)
+                $root.CardInfo.encode(m.myCards[i], w.uint32(10).fork()).ldelim();
+        }
+        if (m.myResult != null && Object.hasOwnProperty.call(m, "myResult"))
+            w.uint32(16).int64(m.myResult);
+        return w;
+    };
+
+    /**
+     * Decodes a MySimpleInfo message from the specified reader or buffer.
+     * @function decode
+     * @memberof MySimpleInfo
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {MySimpleInfo} MySimpleInfo
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    MySimpleInfo.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.MySimpleInfo();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                if (!(m.myCards && m.myCards.length))
+                    m.myCards = [];
+                m.myCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 2:
+                m.myResult = r.int64();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return MySimpleInfo;
+})();
+
+$root.SimpleReplayRecord = (function() {
+
+    /**
+     * Properties of a SimpleReplayRecord.
+     * @exports ISimpleReplayRecord
+     * @interface ISimpleReplayRecord
+     * @property {string|null} [gameId] SimpleReplayRecord gameId
+     * @property {number|null} [index] SimpleReplayRecord index
+     * @property {Array.<ICardInfo>|null} [publicCards] SimpleReplayRecord publicCards
+     * @property {Array.<IPlayerWinLose>|null} [winnerSettlementResult] SimpleReplayRecord winnerSettlementResult
+     * @property {IMySimpleInfo|null} [mySimpleInfo] SimpleReplayRecord mySimpleInfo
+     * @property {string|null} [date] SimpleReplayRecord date
+     * @property {Array.<IPlayerWinLose>|null} [intactSettlementResults] SimpleReplayRecord intactSettlementResults
+     */
+
+    /**
+     * Constructs a new SimpleReplayRecord.
+     * @exports SimpleReplayRecord
+     * @classdesc Represents a SimpleReplayRecord.
+     * @implements ISimpleReplayRecord
+     * @constructor
+     * @param {ISimpleReplayRecord=} [p] Properties to set
+     */
+    function SimpleReplayRecord(p) {
+        this.publicCards = [];
+        this.winnerSettlementResult = [];
+        this.intactSettlementResults = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * SimpleReplayRecord gameId.
+     * @member {string} gameId
+     * @memberof SimpleReplayRecord
+     * @instance
+     */
+    SimpleReplayRecord.prototype.gameId = "";
+
+    /**
+     * SimpleReplayRecord index.
+     * @member {number} index
+     * @memberof SimpleReplayRecord
+     * @instance
+     */
+    SimpleReplayRecord.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * SimpleReplayRecord publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof SimpleReplayRecord
+     * @instance
+     */
+    SimpleReplayRecord.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * SimpleReplayRecord winnerSettlementResult.
+     * @member {Array.<IPlayerWinLose>} winnerSettlementResult
+     * @memberof SimpleReplayRecord
+     * @instance
+     */
+    SimpleReplayRecord.prototype.winnerSettlementResult = $util.emptyArray;
+
+    /**
+     * SimpleReplayRecord mySimpleInfo.
+     * @member {IMySimpleInfo|null|undefined} mySimpleInfo
+     * @memberof SimpleReplayRecord
+     * @instance
+     */
+    SimpleReplayRecord.prototype.mySimpleInfo = null;
+
+    /**
+     * SimpleReplayRecord date.
+     * @member {string} date
+     * @memberof SimpleReplayRecord
+     * @instance
+     */
+    SimpleReplayRecord.prototype.date = "";
+
+    /**
+     * SimpleReplayRecord intactSettlementResults.
+     * @member {Array.<IPlayerWinLose>} intactSettlementResults
+     * @memberof SimpleReplayRecord
+     * @instance
+     */
+    SimpleReplayRecord.prototype.intactSettlementResults = $util.emptyArray;
+
+    /**
+     * Encodes the specified SimpleReplayRecord message. Does not implicitly {@link SimpleReplayRecord.verify|verify} messages.
+     * @function encode
+     * @memberof SimpleReplayRecord
+     * @static
+     * @param {ISimpleReplayRecord} m SimpleReplayRecord message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    SimpleReplayRecord.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
+            w.uint32(16).int64(m.index);
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(26).fork()).ldelim();
+        }
+        if (m.winnerSettlementResult != null && m.winnerSettlementResult.length) {
+            for (var i = 0; i < m.winnerSettlementResult.length; ++i)
+                $root.PlayerWinLose.encode(m.winnerSettlementResult[i], w.uint32(34).fork()).ldelim();
+        }
+        if (m.mySimpleInfo != null && Object.hasOwnProperty.call(m, "mySimpleInfo"))
+            $root.MySimpleInfo.encode(m.mySimpleInfo, w.uint32(42).fork()).ldelim();
+        if (m.date != null && Object.hasOwnProperty.call(m, "date"))
+            w.uint32(50).string(m.date);
+        if (m.intactSettlementResults != null && m.intactSettlementResults.length) {
+            for (var i = 0; i < m.intactSettlementResults.length; ++i)
+                $root.PlayerWinLose.encode(m.intactSettlementResults[i], w.uint32(58).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a SimpleReplayRecord message from the specified reader or buffer.
+     * @function decode
+     * @memberof SimpleReplayRecord
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {SimpleReplayRecord} SimpleReplayRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    SimpleReplayRecord.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.SimpleReplayRecord();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.index = r.int64();
+                break;
+            case 3:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 4:
+                if (!(m.winnerSettlementResult && m.winnerSettlementResult.length))
+                    m.winnerSettlementResult = [];
+                m.winnerSettlementResult.push($root.PlayerWinLose.decode(r, r.uint32()));
+                break;
+            case 5:
+                m.mySimpleInfo = $root.MySimpleInfo.decode(r, r.uint32());
+                break;
+            case 6:
+                m.date = r.string();
+                break;
+            case 7:
+                if (!(m.intactSettlementResults && m.intactSettlementResults.length))
+                    m.intactSettlementResults = [];
+                m.intactSettlementResults.push($root.PlayerWinLose.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return SimpleReplayRecord;
+})();
+
+$root.DetailReplayRecord = (function() {
+
+    /**
+     * Properties of a DetailReplayRecord.
+     * @exports IDetailReplayRecord
+     * @interface IDetailReplayRecord
+     * @property {string|null} [gameId] DetailReplayRecord gameId
+     * @property {number|null} [index] DetailReplayRecord index
+     * @property {IBasicTexasConfig|null} [texasConfig] DetailReplayRecord texasConfig
+     * @property {string|null} [dealerUid] DetailReplayRecord dealerUid
+     * @property {Array.<IPlayerInfo>|null} [players] DetailReplayRecord players
+     * @property {Array.<ICardInfo>|null} [publicCards] DetailReplayRecord publicCards
+     * @property {Array.<IActionResult>|null} [roundStartActions] DetailReplayRecord roundStartActions
+     * @property {Array.<IActionResult>|null} [preFlopActions] DetailReplayRecord preFlopActions
+     * @property {Array.<IActionResult>|null} [flopActions] DetailReplayRecord flopActions
+     * @property {Array.<IActionResult>|null} [turnActions] DetailReplayRecord turnActions
+     * @property {Array.<IActionResult>|null} [riverActions] DetailReplayRecord riverActions
+     * @property {Array.<IPlayerWinLose>|null} [correspondSettlementResult] DetailReplayRecord correspondSettlementResult
+     * @property {Array.<IPotInfo>|null} [potInfoFlop] DetailReplayRecord potInfoFlop
+     * @property {Array.<IPotInfo>|null} [potInfoTurn] DetailReplayRecord potInfoTurn
+     * @property {Array.<IPotInfo>|null} [potInfoRiver] DetailReplayRecord potInfoRiver
+     * @property {Array.<IPlayerWinLose>|null} [intactSettlementResults] DetailReplayRecord intactSettlementResults
+     */
+
+    /**
+     * Constructs a new DetailReplayRecord.
+     * @exports DetailReplayRecord
+     * @classdesc Represents a DetailReplayRecord.
+     * @implements IDetailReplayRecord
+     * @constructor
+     * @param {IDetailReplayRecord=} [p] Properties to set
+     */
+    function DetailReplayRecord(p) {
+        this.players = [];
+        this.publicCards = [];
+        this.roundStartActions = [];
+        this.preFlopActions = [];
+        this.flopActions = [];
+        this.turnActions = [];
+        this.riverActions = [];
+        this.correspondSettlementResult = [];
+        this.potInfoFlop = [];
+        this.potInfoTurn = [];
+        this.potInfoRiver = [];
+        this.intactSettlementResults = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * DetailReplayRecord gameId.
+     * @member {string} gameId
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.gameId = "";
+
+    /**
+     * DetailReplayRecord index.
+     * @member {number} index
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.index = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * DetailReplayRecord texasConfig.
+     * @member {IBasicTexasConfig|null|undefined} texasConfig
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.texasConfig = null;
+
+    /**
+     * DetailReplayRecord dealerUid.
+     * @member {string} dealerUid
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.dealerUid = "";
+
+    /**
+     * DetailReplayRecord players.
+     * @member {Array.<IPlayerInfo>} players
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.players = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord roundStartActions.
+     * @member {Array.<IActionResult>} roundStartActions
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.roundStartActions = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord preFlopActions.
+     * @member {Array.<IActionResult>} preFlopActions
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.preFlopActions = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord flopActions.
+     * @member {Array.<IActionResult>} flopActions
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.flopActions = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord turnActions.
+     * @member {Array.<IActionResult>} turnActions
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.turnActions = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord riverActions.
+     * @member {Array.<IActionResult>} riverActions
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.riverActions = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord correspondSettlementResult.
+     * @member {Array.<IPlayerWinLose>} correspondSettlementResult
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.correspondSettlementResult = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord potInfoFlop.
+     * @member {Array.<IPotInfo>} potInfoFlop
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.potInfoFlop = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord potInfoTurn.
+     * @member {Array.<IPotInfo>} potInfoTurn
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.potInfoTurn = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord potInfoRiver.
+     * @member {Array.<IPotInfo>} potInfoRiver
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.potInfoRiver = $util.emptyArray;
+
+    /**
+     * DetailReplayRecord intactSettlementResults.
+     * @member {Array.<IPlayerWinLose>} intactSettlementResults
+     * @memberof DetailReplayRecord
+     * @instance
+     */
+    DetailReplayRecord.prototype.intactSettlementResults = $util.emptyArray;
+
+    /**
+     * Encodes the specified DetailReplayRecord message. Does not implicitly {@link DetailReplayRecord.verify|verify} messages.
+     * @function encode
+     * @memberof DetailReplayRecord
+     * @static
+     * @param {IDetailReplayRecord} m DetailReplayRecord message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    DetailReplayRecord.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
+            w.uint32(10).string(m.gameId);
+        if (m.index != null && Object.hasOwnProperty.call(m, "index"))
+            w.uint32(16).int64(m.index);
+        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
+            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(26).fork()).ldelim();
+        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
+            w.uint32(34).string(m.dealerUid);
+        if (m.players != null && m.players.length) {
+            for (var i = 0; i < m.players.length; ++i)
+                $root.PlayerInfo.encode(m.players[i], w.uint32(42).fork()).ldelim();
+        }
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(50).fork()).ldelim();
+        }
+        if (m.roundStartActions != null && m.roundStartActions.length) {
+            for (var i = 0; i < m.roundStartActions.length; ++i)
+                $root.ActionResult.encode(m.roundStartActions[i], w.uint32(58).fork()).ldelim();
+        }
+        if (m.preFlopActions != null && m.preFlopActions.length) {
+            for (var i = 0; i < m.preFlopActions.length; ++i)
+                $root.ActionResult.encode(m.preFlopActions[i], w.uint32(66).fork()).ldelim();
+        }
+        if (m.flopActions != null && m.flopActions.length) {
+            for (var i = 0; i < m.flopActions.length; ++i)
+                $root.ActionResult.encode(m.flopActions[i], w.uint32(74).fork()).ldelim();
+        }
+        if (m.turnActions != null && m.turnActions.length) {
+            for (var i = 0; i < m.turnActions.length; ++i)
+                $root.ActionResult.encode(m.turnActions[i], w.uint32(82).fork()).ldelim();
+        }
+        if (m.riverActions != null && m.riverActions.length) {
+            for (var i = 0; i < m.riverActions.length; ++i)
+                $root.ActionResult.encode(m.riverActions[i], w.uint32(90).fork()).ldelim();
+        }
+        if (m.correspondSettlementResult != null && m.correspondSettlementResult.length) {
+            for (var i = 0; i < m.correspondSettlementResult.length; ++i)
+                $root.PlayerWinLose.encode(m.correspondSettlementResult[i], w.uint32(98).fork()).ldelim();
+        }
+        if (m.potInfoFlop != null && m.potInfoFlop.length) {
+            for (var i = 0; i < m.potInfoFlop.length; ++i)
+                $root.PotInfo.encode(m.potInfoFlop[i], w.uint32(106).fork()).ldelim();
+        }
+        if (m.potInfoTurn != null && m.potInfoTurn.length) {
+            for (var i = 0; i < m.potInfoTurn.length; ++i)
+                $root.PotInfo.encode(m.potInfoTurn[i], w.uint32(114).fork()).ldelim();
+        }
+        if (m.potInfoRiver != null && m.potInfoRiver.length) {
+            for (var i = 0; i < m.potInfoRiver.length; ++i)
+                $root.PotInfo.encode(m.potInfoRiver[i], w.uint32(122).fork()).ldelim();
+        }
+        if (m.intactSettlementResults != null && m.intactSettlementResults.length) {
+            for (var i = 0; i < m.intactSettlementResults.length; ++i)
+                $root.PlayerWinLose.encode(m.intactSettlementResults[i], w.uint32(130).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a DetailReplayRecord message from the specified reader or buffer.
+     * @function decode
+     * @memberof DetailReplayRecord
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {DetailReplayRecord} DetailReplayRecord
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    DetailReplayRecord.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.DetailReplayRecord();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameId = r.string();
+                break;
+            case 2:
+                m.index = r.int64();
+                break;
+            case 3:
+                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
+                break;
+            case 4:
+                m.dealerUid = r.string();
+                break;
+            case 5:
+                if (!(m.players && m.players.length))
+                    m.players = [];
+                m.players.push($root.PlayerInfo.decode(r, r.uint32()));
+                break;
+            case 6:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 7:
+                if (!(m.roundStartActions && m.roundStartActions.length))
+                    m.roundStartActions = [];
+                m.roundStartActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 8:
+                if (!(m.preFlopActions && m.preFlopActions.length))
+                    m.preFlopActions = [];
+                m.preFlopActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 9:
+                if (!(m.flopActions && m.flopActions.length))
+                    m.flopActions = [];
+                m.flopActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 10:
+                if (!(m.turnActions && m.turnActions.length))
+                    m.turnActions = [];
+                m.turnActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 11:
+                if (!(m.riverActions && m.riverActions.length))
+                    m.riverActions = [];
+                m.riverActions.push($root.ActionResult.decode(r, r.uint32()));
+                break;
+            case 12:
+                if (!(m.correspondSettlementResult && m.correspondSettlementResult.length))
+                    m.correspondSettlementResult = [];
+                m.correspondSettlementResult.push($root.PlayerWinLose.decode(r, r.uint32()));
+                break;
+            case 13:
+                if (!(m.potInfoFlop && m.potInfoFlop.length))
+                    m.potInfoFlop = [];
+                m.potInfoFlop.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 14:
+                if (!(m.potInfoTurn && m.potInfoTurn.length))
+                    m.potInfoTurn = [];
+                m.potInfoTurn.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 15:
+                if (!(m.potInfoRiver && m.potInfoRiver.length))
+                    m.potInfoRiver = [];
+                m.potInfoRiver.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 16:
+                if (!(m.intactSettlementResults && m.intactSettlementResults.length))
+                    m.intactSettlementResults = [];
+                m.intactSettlementResults.push($root.PlayerWinLose.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return DetailReplayRecord;
+})();
+
+$root.RecordData = (function() {
+
+    /**
+     * Properties of a RecordData.
+     * @exports IRecordData
+     * @interface IRecordData
+     * @property {number|null} [day] RecordData day
+     * @property {number|null} [winLose] RecordData winLose
+     * @property {number|null} [hands] RecordData hands
+     * @property {number|null} [vpip] RecordData vpip
+     * @property {GameType|null} [gameType] RecordData gameType
+     */
+
+    /**
+     * Constructs a new RecordData.
+     * @exports RecordData
+     * @classdesc Represents a RecordData.
+     * @implements IRecordData
+     * @constructor
+     * @param {IRecordData=} [p] Properties to set
+     */
+    function RecordData(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * RecordData day.
+     * @member {number} day
+     * @memberof RecordData
+     * @instance
+     */
+    RecordData.prototype.day = 0;
+
+    /**
+     * RecordData winLose.
+     * @member {number} winLose
+     * @memberof RecordData
+     * @instance
+     */
+    RecordData.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * RecordData hands.
+     * @member {number} hands
+     * @memberof RecordData
+     * @instance
+     */
+    RecordData.prototype.hands = 0;
+
+    /**
+     * RecordData vpip.
+     * @member {number} vpip
+     * @memberof RecordData
+     * @instance
+     */
+    RecordData.prototype.vpip = 0;
+
+    /**
+     * RecordData gameType.
+     * @member {GameType} gameType
+     * @memberof RecordData
+     * @instance
+     */
+    RecordData.prototype.gameType = 0;
+
+    /**
+     * Encodes the specified RecordData message. Does not implicitly {@link RecordData.verify|verify} messages.
+     * @function encode
+     * @memberof RecordData
+     * @static
+     * @param {IRecordData} m RecordData message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    RecordData.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.day != null && Object.hasOwnProperty.call(m, "day"))
+            w.uint32(8).int32(m.day);
+        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
+            w.uint32(16).int64(m.winLose);
+        if (m.hands != null && Object.hasOwnProperty.call(m, "hands"))
+            w.uint32(24).int32(m.hands);
+        if (m.vpip != null && Object.hasOwnProperty.call(m, "vpip"))
+            w.uint32(32).int32(m.vpip);
+        if (m.gameType != null && Object.hasOwnProperty.call(m, "gameType"))
+            w.uint32(40).int32(m.gameType);
+        return w;
+    };
+
+    /**
+     * Decodes a RecordData message from the specified reader or buffer.
+     * @function decode
+     * @memberof RecordData
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {RecordData} RecordData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    RecordData.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.RecordData();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.day = r.int32();
+                break;
+            case 2:
+                m.winLose = r.int64();
+                break;
+            case 3:
+                m.hands = r.int32();
+                break;
+            case 4:
+                m.vpip = r.int32();
+                break;
+            case 5:
+                m.gameType = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return RecordData;
+})();
+
+$root.RecordSingleData = (function() {
+
+    /**
+     * Properties of a RecordSingleData.
+     * @exports IRecordSingleData
+     * @interface IRecordSingleData
+     * @property {Array.<IRecordSingle>|null} [list] RecordSingleData list
+     * @property {number|null} [pageNum] RecordSingleData pageNum
+     * @property {number|null} [size] RecordSingleData size
+     * @property {number|null} [total] RecordSingleData total
+     */
+
+    /**
+     * Constructs a new RecordSingleData.
+     * @exports RecordSingleData
+     * @classdesc Represents a RecordSingleData.
+     * @implements IRecordSingleData
+     * @constructor
+     * @param {IRecordSingleData=} [p] Properties to set
+     */
+    function RecordSingleData(p) {
+        this.list = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * RecordSingleData list.
+     * @member {Array.<IRecordSingle>} list
+     * @memberof RecordSingleData
+     * @instance
+     */
+    RecordSingleData.prototype.list = $util.emptyArray;
+
+    /**
+     * RecordSingleData pageNum.
+     * @member {number} pageNum
+     * @memberof RecordSingleData
+     * @instance
+     */
+    RecordSingleData.prototype.pageNum = 0;
+
+    /**
+     * RecordSingleData size.
+     * @member {number} size
+     * @memberof RecordSingleData
+     * @instance
+     */
+    RecordSingleData.prototype.size = 0;
+
+    /**
+     * RecordSingleData total.
+     * @member {number} total
+     * @memberof RecordSingleData
+     * @instance
+     */
+    RecordSingleData.prototype.total = 0;
+
+    /**
+     * Encodes the specified RecordSingleData message. Does not implicitly {@link RecordSingleData.verify|verify} messages.
+     * @function encode
+     * @memberof RecordSingleData
+     * @static
+     * @param {IRecordSingleData} m RecordSingleData message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    RecordSingleData.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.list != null && m.list.length) {
+            for (var i = 0; i < m.list.length; ++i)
+                $root.RecordSingle.encode(m.list[i], w.uint32(10).fork()).ldelim();
+        }
+        if (m.pageNum != null && Object.hasOwnProperty.call(m, "pageNum"))
+            w.uint32(16).int32(m.pageNum);
+        if (m.size != null && Object.hasOwnProperty.call(m, "size"))
+            w.uint32(24).int32(m.size);
+        if (m.total != null && Object.hasOwnProperty.call(m, "total"))
+            w.uint32(32).int32(m.total);
+        return w;
+    };
+
+    /**
+     * Decodes a RecordSingleData message from the specified reader or buffer.
+     * @function decode
+     * @memberof RecordSingleData
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {RecordSingleData} RecordSingleData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    RecordSingleData.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.RecordSingleData();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                if (!(m.list && m.list.length))
+                    m.list = [];
+                m.list.push($root.RecordSingle.decode(r, r.uint32()));
+                break;
+            case 2:
+                m.pageNum = r.int32();
+                break;
+            case 3:
+                m.size = r.int32();
+                break;
+            case 4:
+                m.total = r.int32();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return RecordSingleData;
+})();
+
+$root.RecordSingle = (function() {
+
+    /**
+     * Properties of a RecordSingle.
+     * @exports IRecordSingle
+     * @interface IRecordSingle
+     * @property {string|null} [gameCode] RecordSingle gameCode
+     * @property {IBasicTexasConfig|null} [texasConfig] RecordSingle texasConfig
+     * @property {number|null} [winLose] RecordSingle winLose
+     * @property {string|null} [date] RecordSingle date
+     */
+
+    /**
+     * Constructs a new RecordSingle.
+     * @exports RecordSingle
+     * @classdesc Represents a RecordSingle.
+     * @implements IRecordSingle
+     * @constructor
+     * @param {IRecordSingle=} [p] Properties to set
+     */
+    function RecordSingle(p) {
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * RecordSingle gameCode.
+     * @member {string} gameCode
+     * @memberof RecordSingle
+     * @instance
+     */
+    RecordSingle.prototype.gameCode = "";
+
+    /**
+     * RecordSingle texasConfig.
+     * @member {IBasicTexasConfig|null|undefined} texasConfig
+     * @memberof RecordSingle
+     * @instance
+     */
+    RecordSingle.prototype.texasConfig = null;
+
+    /**
+     * RecordSingle winLose.
+     * @member {number} winLose
+     * @memberof RecordSingle
+     * @instance
+     */
+    RecordSingle.prototype.winLose = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * RecordSingle date.
+     * @member {string} date
+     * @memberof RecordSingle
+     * @instance
+     */
+    RecordSingle.prototype.date = "";
+
+    /**
+     * Encodes the specified RecordSingle message. Does not implicitly {@link RecordSingle.verify|verify} messages.
+     * @function encode
+     * @memberof RecordSingle
+     * @static
+     * @param {IRecordSingle} m RecordSingle message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    RecordSingle.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameCode != null && Object.hasOwnProperty.call(m, "gameCode"))
+            w.uint32(10).string(m.gameCode);
+        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
+            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(18).fork()).ldelim();
+        if (m.winLose != null && Object.hasOwnProperty.call(m, "winLose"))
+            w.uint32(24).int64(m.winLose);
+        if (m.date != null && Object.hasOwnProperty.call(m, "date"))
+            w.uint32(34).string(m.date);
+        return w;
+    };
+
+    /**
+     * Decodes a RecordSingle message from the specified reader or buffer.
+     * @function decode
+     * @memberof RecordSingle
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {RecordSingle} RecordSingle
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    RecordSingle.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.RecordSingle();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameCode = r.string();
+                break;
+            case 2:
+                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
+                break;
+            case 3:
+                m.winLose = r.int64();
+                break;
+            case 4:
+                m.date = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return RecordSingle;
+})();
+
+$root.RecordDetail = (function() {
+
+    /**
+     * Properties of a RecordDetail.
+     * @exports IRecordDetail
+     * @interface IRecordDetail
+     * @property {string|null} [gameCode] RecordDetail gameCode
+     * @property {IBasicTexasConfig|null} [texasConfig] RecordDetail texasConfig
+     * @property {string|null} [creator] RecordDetail creator
+     * @property {string|null} [date] RecordDetail date
+     * @property {number|null} [insurance] RecordDetail insurance
+     * @property {number|null} [jackpot] RecordDetail jackpot
+     * @property {number|null} [totalHands] RecordDetail totalHands
+     * @property {number|null} [totalBuyIn] RecordDetail totalBuyIn
+     * @property {Array.<IPlayerStatistic>|null} [playerStatisticList] RecordDetail playerStatisticList
+     */
+
+    /**
+     * Constructs a new RecordDetail.
+     * @exports RecordDetail
+     * @classdesc Represents a RecordDetail.
+     * @implements IRecordDetail
+     * @constructor
+     * @param {IRecordDetail=} [p] Properties to set
+     */
+    function RecordDetail(p) {
+        this.playerStatisticList = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * RecordDetail gameCode.
+     * @member {string} gameCode
+     * @memberof RecordDetail
+     * @instance
+     */
+    RecordDetail.prototype.gameCode = "";
+
+    /**
+     * RecordDetail texasConfig.
+     * @member {IBasicTexasConfig|null|undefined} texasConfig
+     * @memberof RecordDetail
+     * @instance
+     */
+    RecordDetail.prototype.texasConfig = null;
+
+    /**
+     * RecordDetail creator.
+     * @member {string} creator
+     * @memberof RecordDetail
+     * @instance
+     */
+    RecordDetail.prototype.creator = "";
+
+    /**
+     * RecordDetail date.
+     * @member {string} date
+     * @memberof RecordDetail
+     * @instance
+     */
+    RecordDetail.prototype.date = "";
+
+    /**
+     * RecordDetail insurance.
+     * @member {number} insurance
+     * @memberof RecordDetail
+     * @instance
+     */
+    RecordDetail.prototype.insurance = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * RecordDetail jackpot.
+     * @member {number} jackpot
+     * @memberof RecordDetail
+     * @instance
+     */
+    RecordDetail.prototype.jackpot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * RecordDetail totalHands.
+     * @member {number} totalHands
+     * @memberof RecordDetail
+     * @instance
+     */
+    RecordDetail.prototype.totalHands = 0;
+
+    /**
+     * RecordDetail totalBuyIn.
+     * @member {number} totalBuyIn
+     * @memberof RecordDetail
+     * @instance
+     */
+    RecordDetail.prototype.totalBuyIn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * RecordDetail playerStatisticList.
+     * @member {Array.<IPlayerStatistic>} playerStatisticList
+     * @memberof RecordDetail
+     * @instance
+     */
+    RecordDetail.prototype.playerStatisticList = $util.emptyArray;
+
+    /**
+     * Encodes the specified RecordDetail message. Does not implicitly {@link RecordDetail.verify|verify} messages.
+     * @function encode
+     * @memberof RecordDetail
+     * @static
+     * @param {IRecordDetail} m RecordDetail message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    RecordDetail.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.gameCode != null && Object.hasOwnProperty.call(m, "gameCode"))
+            w.uint32(10).string(m.gameCode);
+        if (m.texasConfig != null && Object.hasOwnProperty.call(m, "texasConfig"))
+            $root.BasicTexasConfig.encode(m.texasConfig, w.uint32(18).fork()).ldelim();
+        if (m.creator != null && Object.hasOwnProperty.call(m, "creator"))
+            w.uint32(26).string(m.creator);
+        if (m.date != null && Object.hasOwnProperty.call(m, "date"))
+            w.uint32(34).string(m.date);
+        if (m.insurance != null && Object.hasOwnProperty.call(m, "insurance"))
+            w.uint32(40).int64(m.insurance);
+        if (m.jackpot != null && Object.hasOwnProperty.call(m, "jackpot"))
+            w.uint32(48).int64(m.jackpot);
+        if (m.totalHands != null && Object.hasOwnProperty.call(m, "totalHands"))
+            w.uint32(56).int32(m.totalHands);
+        if (m.totalBuyIn != null && Object.hasOwnProperty.call(m, "totalBuyIn"))
+            w.uint32(64).int64(m.totalBuyIn);
+        if (m.playerStatisticList != null && m.playerStatisticList.length) {
+            for (var i = 0; i < m.playerStatisticList.length; ++i)
+                $root.PlayerStatistic.encode(m.playerStatisticList[i], w.uint32(74).fork()).ldelim();
+        }
+        return w;
+    };
+
+    /**
+     * Decodes a RecordDetail message from the specified reader or buffer.
+     * @function decode
+     * @memberof RecordDetail
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {RecordDetail} RecordDetail
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    RecordDetail.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.RecordDetail();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.gameCode = r.string();
+                break;
+            case 2:
+                m.texasConfig = $root.BasicTexasConfig.decode(r, r.uint32());
+                break;
+            case 3:
+                m.creator = r.string();
+                break;
+            case 4:
+                m.date = r.string();
+                break;
+            case 5:
+                m.insurance = r.int64();
+                break;
+            case 6:
+                m.jackpot = r.int64();
+                break;
+            case 7:
+                m.totalHands = r.int32();
+                break;
+            case 8:
+                m.totalBuyIn = r.int64();
+                break;
+            case 9:
+                if (!(m.playerStatisticList && m.playerStatisticList.length))
+                    m.playerStatisticList = [];
+                m.playerStatisticList.push($root.PlayerStatistic.decode(r, r.uint32()));
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return RecordDetail;
 })();
 
 $root.S2CCommonEnterGameResp = (function() {

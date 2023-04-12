@@ -39,9 +39,9 @@ export class PlayerInfo extends BaseUI
         });
     }
 
-    public SetLocalHead(_headIndex : number)
+    public SetLocalHead(_headIndex : string)
     {
-        this.LoadLocalHead(_headIndex , (_spriteFrame)=>
+        this.LoadHead(_headIndex , (_spriteFrame)=>
         {
             this.mHead.spriteFrame = _spriteFrame;
         })

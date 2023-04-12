@@ -16,9 +16,9 @@
     "taskMap": {
       "1680611460043": {
         "id": "1680611460043",
-        "progress": 0.175,
-        "state": "processing",
-        "message": "构建引擎",
+        "progress": 1,
+        "state": "success",
+        "message": "4-4-2023 20:33 Build success in 120487 ms!",
         "options": {
           "name": "9D",
           "platform": "web-mobile",

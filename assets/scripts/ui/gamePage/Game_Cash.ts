@@ -13,6 +13,7 @@ import { Game_SelfPreAction } from './subUI/Game_SelfPreAction';
 import { Game_ShowPokerUI } from './subUI/Game_ShowPokerUI';
 import { Game_TableInfo } from './subUI/Game_TableInfo';
 import { Game_TopUI } from './subUI/Game_TopUI';
+import { Game_Notify } from './subUI/Game_Notify';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Cash')
@@ -74,6 +75,13 @@ export class Game_Cash extends GameBase
             let tempScript = _script as Game_ShowPokerUI;
             tempScript.InitWithData(this.mIndex);
         });
+
+        this.AddSubView("gamePage","prefab/Game_Notify", (_script)=>
+        {
+            let tempScript = _script as Game_Notify;
+            tempScript.InitWithData(this.mIndex);
+        });
+
     }
 
 }

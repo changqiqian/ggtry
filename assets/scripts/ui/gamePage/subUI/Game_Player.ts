@@ -875,7 +875,7 @@ export class Game_Player extends BaseUI
 
     UpdateHead(_head : string)
     {
-        this.LoadLocalHead(parseInt(_head) , (_spriteFrame)=>
+        this.LoadHead(_head , (_spriteFrame)=>
         {
             this.mHead.node.active = true;
             this.mHead.spriteFrame = _spriteFrame;

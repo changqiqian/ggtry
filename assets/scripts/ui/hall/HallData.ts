@@ -1,10 +1,6 @@
 import { BaseData } from '../../base/BaseData';
-import { DataNotify } from '../../base/DataNotify';
 import { SingletonBaseNotify } from '../../base/Singleton';
 import { GameConfig } from '../../GameConfig';
-import { Network } from '../../network/Network';
-import { HTTP_Date } from '../../network/NetworkHttp';
-import { Tool } from '../../Tool';
 
 export class HallData extends SingletonBaseNotify<HallData>()
 {
@@ -73,7 +69,6 @@ export class HallData extends SingletonBaseNotify<HallData>()
     Data_ClubRecordSubPage : BaseData<GameType> = new BaseData<GameType>();//俱乐部战绩 子页面
     Data_ClubRecordDetailSubPage : BaseData<Club_RecordDetailSubPage> = new BaseData<Club_RecordDetailSubPage>();//俱乐部战绩详情 子页面
     Data_ClubRecordCoinType : BaseData<GameCurrencyType> = new BaseData<GameCurrencyType>();//俱乐部战绩 货币类型
-    Data_ClubRecordDateType : BaseData<HTTP_Date> = new BaseData<HTTP_Date>();//俱乐部战绩 战绩时间段
     Data_ClubLogoIndex : BaseData<number> = new BaseData<number>(false,0); //创建俱乐部时候选择的logo编号
     Data_ClubStampIndex : BaseData<number> = new BaseData<number>(false,0); //创建俱乐部时候选的封面编号
     //Data_ClubCreateData : BaseData<ClubDetailsInfo> = new BaseData<ClubDetailsInfo>(); //生产一个新俱乐部

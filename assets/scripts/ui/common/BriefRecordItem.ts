@@ -74,7 +74,7 @@ export class BriefRecordItem extends BaseUI
        
         let winner : PlayerWinLose = this.GetBigestWinner(_data.winnerSettlementResult);
         
-        this.mWinnerPlayerInfo.SetLocalHead(parseInt(winner.head));
+        this.mWinnerPlayerInfo.SetLocalHead(winner.head);
         this.mWinnerPlayerInfo.SetName(winner.nickName);
         this.mWinnerProfit.string = Tool.ConvertMoney_S2C(winner.winLose) + "";
 

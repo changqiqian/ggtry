@@ -80,7 +80,24 @@ export class Game_ProfileLayer extends BaseUI
         let gameData = gameStruct.mGameData;
         let playerInfo = gameData.GetPlayerInfoByUid(_targetUid);
 
-        this.LoadLocalHead(parseInt(playerInfo.head),(_spriteFrame)=>
+        let ownnerId = gameData.GetOwnerId();
+        if(_targetUid == ownnerId)
+        {
+            this.mKickBtn.Show(false);
+        }
+        else
+        {
+            if(LocalPlayerData.Instance.Data_Uid.mData == ownnerId)
+            {
+                this.mKickBtn.Show(true);
+            }
+            else
+            {
+                this.mKickBtn.Show(false);
+            }
+        }
+
+        this.LoadHead(playerInfo.head,(_spriteFrame)=>
         {
             this.mHead.spriteFrame = _spriteFrame;
         });

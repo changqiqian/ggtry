@@ -7,7 +7,6 @@ import { GameConfig } from '../../GameConfig';
 import {  Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { MultipleTableCtr } from '../common/MultipleTableCtr';
-
 import { LoginData } from './LoginData';
 const { ccclass, property } = _decorator;
 
@@ -48,11 +47,9 @@ export class LoginUI extends BaseUI
 
         this.TurnOff.SetClickCallback(()=>
         {
-            setDisplayStats(false);            
+            setDisplayStats(false);  
         });
 
-
-   
 
         //debug mode
         this.DebugFunction.active = GameConfig.DebugMode;
