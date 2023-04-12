@@ -2201,6 +2201,9 @@ export class BasicTexasConfig implements IBasicTexasConfig {
     /** BasicTexasConfig public. */
     public public: boolean;
 
+    /** BasicTexasConfig delayOpenHandCards. */
+    public delayOpenHandCards: boolean;
+
     /** BasicTexasConfig gpsLimit. */
     public gpsLimit: boolean;
 
@@ -2224,6 +2227,67 @@ export class BasicTexasConfig implements IBasicTexasConfig {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): BasicTexasConfig;
+}
+
+/** Represents a TexasDynamicData. */
+export class TexasDynamicData implements ITexasDynamicData {
+
+    /**
+     * Constructs a new TexasDynamicData.
+     * @param [p] Properties to set
+     */
+    constructor(p?: ITexasDynamicData);
+
+    /** TexasDynamicData state. */
+    public state: TexasCashState;
+
+    /** TexasDynamicData seatInfos. */
+    public seatInfos: IPlayerInfo[];
+
+    /** TexasDynamicData actionUid. */
+    public actionUid: string;
+
+    /** TexasDynamicData actionLeftTime. */
+    public actionLeftTime: number;
+
+    /** TexasDynamicData potInfo. */
+    public potInfo: IPotInfo[];
+
+    /** TexasDynamicData actions. */
+    public actions: IActionInfo[];
+
+    /** TexasDynamicData publicCards. */
+    public publicCards: ICardInfo[];
+
+    /** TexasDynamicData dealerUid. */
+    public dealerUid: string;
+
+    /** TexasDynamicData buyInsuranceTurn. */
+    public buyInsuranceTurn?: (IBuyInsuranceTurn|null);
+
+    /** TexasDynamicData totalPot. */
+    public totalPot: number;
+
+    /** TexasDynamicData creatorUid. */
+    public creatorUid: string;
+
+    /**
+     * Encodes the specified TexasDynamicData message. Does not implicitly {@link TexasDynamicData.verify|verify} messages.
+     * @param m TexasDynamicData message or plain object to encode
+     * @param [w] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(m: ITexasDynamicData, w?: protobuf.Writer): protobuf.Writer;
+
+    /**
+     * Decodes a TexasDynamicData message from the specified reader or buffer.
+     * @param r Reader or buffer to decode from
+     * @param [l] Message length if known beforehand
+     * @returns TexasDynamicData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): TexasDynamicData;
 }
 
 /** Represents a PlayerInfo. */
@@ -2540,67 +2604,6 @@ export class AboutTexasGameInfo implements IAboutTexasGameInfo {
      * @throws {protobuf.util.ProtocolError} If required fields are missing
      */
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): AboutTexasGameInfo;
-}
-
-/** Represents a TexasDynamicData. */
-export class TexasDynamicData implements ITexasDynamicData {
-
-    /**
-     * Constructs a new TexasDynamicData.
-     * @param [p] Properties to set
-     */
-    constructor(p?: ITexasDynamicData);
-
-    /** TexasDynamicData state. */
-    public state: TexasCashState;
-
-    /** TexasDynamicData seatInfos. */
-    public seatInfos: IPlayerInfo[];
-
-    /** TexasDynamicData actionUid. */
-    public actionUid: string;
-
-    /** TexasDynamicData actionLeftTime. */
-    public actionLeftTime: number;
-
-    /** TexasDynamicData potInfo. */
-    public potInfo: IPotInfo[];
-
-    /** TexasDynamicData actions. */
-    public actions: IActionInfo[];
-
-    /** TexasDynamicData publicCards. */
-    public publicCards: ICardInfo[];
-
-    /** TexasDynamicData dealerUid. */
-    public dealerUid: string;
-
-    /** TexasDynamicData buyInsuranceTurn. */
-    public buyInsuranceTurn?: (IBuyInsuranceTurn|null);
-
-    /** TexasDynamicData totalPot. */
-    public totalPot: number;
-
-    /** TexasDynamicData creatorUid. */
-    public creatorUid: string;
-
-    /**
-     * Encodes the specified TexasDynamicData message. Does not implicitly {@link TexasDynamicData.verify|verify} messages.
-     * @param m TexasDynamicData message or plain object to encode
-     * @param [w] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(m: ITexasDynamicData, w?: protobuf.Writer): protobuf.Writer;
-
-    /**
-     * Decodes a TexasDynamicData message from the specified reader or buffer.
-     * @param r Reader or buffer to decode from
-     * @param [l] Message length if known beforehand
-     * @returns TexasDynamicData
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(r: (protobuf.Reader|Uint8Array), l?: number): TexasDynamicData;
 }
 
 /** Represents a BuyInsuranceTurn. */

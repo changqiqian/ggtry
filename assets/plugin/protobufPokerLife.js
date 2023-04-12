@@ -6025,6 +6025,7 @@ $root.BasicTexasConfig = (function() {
      * @property {number|null} [seatNum] BasicTexasConfig seatNum
      * @property {number|null} [autoStartNum] BasicTexasConfig autoStartNum
      * @property {boolean|null} ["public"] BasicTexasConfig public
+     * @property {boolean|null} [delayOpenHandCards] BasicTexasConfig delayOpenHandCards
      * @property {boolean|null} [gpsLimit] BasicTexasConfig gpsLimit
      * @property {boolean|null} [ipLimit] BasicTexasConfig ipLimit
      */
@@ -6237,6 +6238,14 @@ $root.BasicTexasConfig = (function() {
     BasicTexasConfig.prototype["public"] = false;
 
     /**
+     * BasicTexasConfig delayOpenHandCards.
+     * @member {boolean} delayOpenHandCards
+     * @memberof BasicTexasConfig
+     * @instance
+     */
+    BasicTexasConfig.prototype.delayOpenHandCards = false;
+
+    /**
      * BasicTexasConfig gpsLimit.
      * @member {boolean} gpsLimit
      * @memberof BasicTexasConfig
@@ -6312,10 +6321,12 @@ $root.BasicTexasConfig = (function() {
             w.uint32(184).int64(m.autoStartNum);
         if (m["public"] != null && Object.hasOwnProperty.call(m, "public"))
             w.uint32(192).bool(m["public"]);
+        if (m.delayOpenHandCards != null && Object.hasOwnProperty.call(m, "delayOpenHandCards"))
+            w.uint32(200).bool(m.delayOpenHandCards);
         if (m.gpsLimit != null && Object.hasOwnProperty.call(m, "gpsLimit"))
-            w.uint32(200).bool(m.gpsLimit);
+            w.uint32(208).bool(m.gpsLimit);
         if (m.ipLimit != null && Object.hasOwnProperty.call(m, "ipLimit"))
-            w.uint32(208).bool(m.ipLimit);
+            w.uint32(216).bool(m.ipLimit);
         return w;
     };
 
@@ -6410,9 +6421,12 @@ $root.BasicTexasConfig = (function() {
                 m["public"] = r.bool();
                 break;
             case 25:
-                m.gpsLimit = r.bool();
+                m.delayOpenHandCards = r.bool();
                 break;
             case 26:
+                m.gpsLimit = r.bool();
+                break;
+            case 27:
                 m.ipLimit = r.bool();
                 break;
             default:
@@ -6424,6 +6438,247 @@ $root.BasicTexasConfig = (function() {
     };
 
     return BasicTexasConfig;
+})();
+
+$root.TexasDynamicData = (function() {
+
+    /**
+     * Properties of a TexasDynamicData.
+     * @exports ITexasDynamicData
+     * @interface ITexasDynamicData
+     * @property {TexasCashState|null} [state] TexasDynamicData state
+     * @property {Array.<IPlayerInfo>|null} [seatInfos] TexasDynamicData seatInfos
+     * @property {string|null} [actionUid] TexasDynamicData actionUid
+     * @property {number|null} [actionLeftTime] TexasDynamicData actionLeftTime
+     * @property {Array.<IPotInfo>|null} [potInfo] TexasDynamicData potInfo
+     * @property {Array.<IActionInfo>|null} [actions] TexasDynamicData actions
+     * @property {Array.<ICardInfo>|null} [publicCards] TexasDynamicData publicCards
+     * @property {string|null} [dealerUid] TexasDynamicData dealerUid
+     * @property {IBuyInsuranceTurn|null} [buyInsuranceTurn] TexasDynamicData buyInsuranceTurn
+     * @property {number|null} [totalPot] TexasDynamicData totalPot
+     * @property {string|null} [creatorUid] TexasDynamicData creatorUid
+     */
+
+    /**
+     * Constructs a new TexasDynamicData.
+     * @exports TexasDynamicData
+     * @classdesc Represents a TexasDynamicData.
+     * @implements ITexasDynamicData
+     * @constructor
+     * @param {ITexasDynamicData=} [p] Properties to set
+     */
+    function TexasDynamicData(p) {
+        this.seatInfos = [];
+        this.potInfo = [];
+        this.actions = [];
+        this.publicCards = [];
+        if (p)
+            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                if (p[ks[i]] != null)
+                    this[ks[i]] = p[ks[i]];
+    }
+
+    /**
+     * TexasDynamicData state.
+     * @member {TexasCashState} state
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.state = 0;
+
+    /**
+     * TexasDynamicData seatInfos.
+     * @member {Array.<IPlayerInfo>} seatInfos
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.seatInfos = $util.emptyArray;
+
+    /**
+     * TexasDynamicData actionUid.
+     * @member {string} actionUid
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.actionUid = "";
+
+    /**
+     * TexasDynamicData actionLeftTime.
+     * @member {number} actionLeftTime
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.actionLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * TexasDynamicData potInfo.
+     * @member {Array.<IPotInfo>} potInfo
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.potInfo = $util.emptyArray;
+
+    /**
+     * TexasDynamicData actions.
+     * @member {Array.<IActionInfo>} actions
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.actions = $util.emptyArray;
+
+    /**
+     * TexasDynamicData publicCards.
+     * @member {Array.<ICardInfo>} publicCards
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.publicCards = $util.emptyArray;
+
+    /**
+     * TexasDynamicData dealerUid.
+     * @member {string} dealerUid
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.dealerUid = "";
+
+    /**
+     * TexasDynamicData buyInsuranceTurn.
+     * @member {IBuyInsuranceTurn|null|undefined} buyInsuranceTurn
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.buyInsuranceTurn = null;
+
+    /**
+     * TexasDynamicData totalPot.
+     * @member {number} totalPot
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.totalPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+    /**
+     * TexasDynamicData creatorUid.
+     * @member {string} creatorUid
+     * @memberof TexasDynamicData
+     * @instance
+     */
+    TexasDynamicData.prototype.creatorUid = "";
+
+    /**
+     * Encodes the specified TexasDynamicData message. Does not implicitly {@link TexasDynamicData.verify|verify} messages.
+     * @function encode
+     * @memberof TexasDynamicData
+     * @static
+     * @param {ITexasDynamicData} m TexasDynamicData message or plain object to encode
+     * @param {protobuf.Writer} [w] Writer to encode to
+     * @returns {protobuf.Writer} Writer
+     */
+    TexasDynamicData.encode = function encode(m, w) {
+        if (!w)
+            w = $Writer.create();
+        if (m.state != null && Object.hasOwnProperty.call(m, "state"))
+            w.uint32(8).int32(m.state);
+        if (m.seatInfos != null && m.seatInfos.length) {
+            for (var i = 0; i < m.seatInfos.length; ++i)
+                $root.PlayerInfo.encode(m.seatInfos[i], w.uint32(18).fork()).ldelim();
+        }
+        if (m.actionUid != null && Object.hasOwnProperty.call(m, "actionUid"))
+            w.uint32(26).string(m.actionUid);
+        if (m.actionLeftTime != null && Object.hasOwnProperty.call(m, "actionLeftTime"))
+            w.uint32(32).int64(m.actionLeftTime);
+        if (m.potInfo != null && m.potInfo.length) {
+            for (var i = 0; i < m.potInfo.length; ++i)
+                $root.PotInfo.encode(m.potInfo[i], w.uint32(42).fork()).ldelim();
+        }
+        if (m.actions != null && m.actions.length) {
+            for (var i = 0; i < m.actions.length; ++i)
+                $root.ActionInfo.encode(m.actions[i], w.uint32(50).fork()).ldelim();
+        }
+        if (m.publicCards != null && m.publicCards.length) {
+            for (var i = 0; i < m.publicCards.length; ++i)
+                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
+        }
+        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
+            w.uint32(66).string(m.dealerUid);
+        if (m.buyInsuranceTurn != null && Object.hasOwnProperty.call(m, "buyInsuranceTurn"))
+            $root.BuyInsuranceTurn.encode(m.buyInsuranceTurn, w.uint32(74).fork()).ldelim();
+        if (m.totalPot != null && Object.hasOwnProperty.call(m, "totalPot"))
+            w.uint32(80).int64(m.totalPot);
+        if (m.creatorUid != null && Object.hasOwnProperty.call(m, "creatorUid"))
+            w.uint32(90).string(m.creatorUid);
+        return w;
+    };
+
+    /**
+     * Decodes a TexasDynamicData message from the specified reader or buffer.
+     * @function decode
+     * @memberof TexasDynamicData
+     * @static
+     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
+     * @param {number} [l] Message length if known beforehand
+     * @returns {TexasDynamicData} TexasDynamicData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {protobuf.util.ProtocolError} If required fields are missing
+     */
+    TexasDynamicData.decode = function decode(r, l) {
+        if (!(r instanceof $Reader))
+            r = $Reader.create(r);
+        var c = l === undefined ? r.len : r.pos + l, m = new $root.TexasDynamicData();
+        while (r.pos < c) {
+            var t = r.uint32();
+            switch (t >>> 3) {
+            case 1:
+                m.state = r.int32();
+                break;
+            case 2:
+                if (!(m.seatInfos && m.seatInfos.length))
+                    m.seatInfos = [];
+                m.seatInfos.push($root.PlayerInfo.decode(r, r.uint32()));
+                break;
+            case 3:
+                m.actionUid = r.string();
+                break;
+            case 4:
+                m.actionLeftTime = r.int64();
+                break;
+            case 5:
+                if (!(m.potInfo && m.potInfo.length))
+                    m.potInfo = [];
+                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
+                break;
+            case 6:
+                if (!(m.actions && m.actions.length))
+                    m.actions = [];
+                m.actions.push($root.ActionInfo.decode(r, r.uint32()));
+                break;
+            case 7:
+                if (!(m.publicCards && m.publicCards.length))
+                    m.publicCards = [];
+                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
+                break;
+            case 8:
+                m.dealerUid = r.string();
+                break;
+            case 9:
+                m.buyInsuranceTurn = $root.BuyInsuranceTurn.decode(r, r.uint32());
+                break;
+            case 10:
+                m.totalPot = r.int64();
+                break;
+            case 11:
+                m.creatorUid = r.string();
+                break;
+            default:
+                r.skipType(t & 7);
+                break;
+            }
+        }
+        return m;
+    };
+
+    return TexasDynamicData;
 })();
 
 $root.PlayerInfo = (function() {
@@ -7468,247 +7723,6 @@ $root.AboutTexasGameInfo = (function() {
     };
 
     return AboutTexasGameInfo;
-})();
-
-$root.TexasDynamicData = (function() {
-
-    /**
-     * Properties of a TexasDynamicData.
-     * @exports ITexasDynamicData
-     * @interface ITexasDynamicData
-     * @property {TexasCashState|null} [state] TexasDynamicData state
-     * @property {Array.<IPlayerInfo>|null} [seatInfos] TexasDynamicData seatInfos
-     * @property {string|null} [actionUid] TexasDynamicData actionUid
-     * @property {number|null} [actionLeftTime] TexasDynamicData actionLeftTime
-     * @property {Array.<IPotInfo>|null} [potInfo] TexasDynamicData potInfo
-     * @property {Array.<IActionInfo>|null} [actions] TexasDynamicData actions
-     * @property {Array.<ICardInfo>|null} [publicCards] TexasDynamicData publicCards
-     * @property {string|null} [dealerUid] TexasDynamicData dealerUid
-     * @property {IBuyInsuranceTurn|null} [buyInsuranceTurn] TexasDynamicData buyInsuranceTurn
-     * @property {number|null} [totalPot] TexasDynamicData totalPot
-     * @property {string|null} [creatorUid] TexasDynamicData creatorUid
-     */
-
-    /**
-     * Constructs a new TexasDynamicData.
-     * @exports TexasDynamicData
-     * @classdesc Represents a TexasDynamicData.
-     * @implements ITexasDynamicData
-     * @constructor
-     * @param {ITexasDynamicData=} [p] Properties to set
-     */
-    function TexasDynamicData(p) {
-        this.seatInfos = [];
-        this.potInfo = [];
-        this.actions = [];
-        this.publicCards = [];
-        if (p)
-            for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                if (p[ks[i]] != null)
-                    this[ks[i]] = p[ks[i]];
-    }
-
-    /**
-     * TexasDynamicData state.
-     * @member {TexasCashState} state
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.state = 0;
-
-    /**
-     * TexasDynamicData seatInfos.
-     * @member {Array.<IPlayerInfo>} seatInfos
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.seatInfos = $util.emptyArray;
-
-    /**
-     * TexasDynamicData actionUid.
-     * @member {string} actionUid
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.actionUid = "";
-
-    /**
-     * TexasDynamicData actionLeftTime.
-     * @member {number} actionLeftTime
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.actionLeftTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * TexasDynamicData potInfo.
-     * @member {Array.<IPotInfo>} potInfo
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.potInfo = $util.emptyArray;
-
-    /**
-     * TexasDynamicData actions.
-     * @member {Array.<IActionInfo>} actions
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.actions = $util.emptyArray;
-
-    /**
-     * TexasDynamicData publicCards.
-     * @member {Array.<ICardInfo>} publicCards
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.publicCards = $util.emptyArray;
-
-    /**
-     * TexasDynamicData dealerUid.
-     * @member {string} dealerUid
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.dealerUid = "";
-
-    /**
-     * TexasDynamicData buyInsuranceTurn.
-     * @member {IBuyInsuranceTurn|null|undefined} buyInsuranceTurn
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.buyInsuranceTurn = null;
-
-    /**
-     * TexasDynamicData totalPot.
-     * @member {number} totalPot
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.totalPot = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-    /**
-     * TexasDynamicData creatorUid.
-     * @member {string} creatorUid
-     * @memberof TexasDynamicData
-     * @instance
-     */
-    TexasDynamicData.prototype.creatorUid = "";
-
-    /**
-     * Encodes the specified TexasDynamicData message. Does not implicitly {@link TexasDynamicData.verify|verify} messages.
-     * @function encode
-     * @memberof TexasDynamicData
-     * @static
-     * @param {ITexasDynamicData} m TexasDynamicData message or plain object to encode
-     * @param {protobuf.Writer} [w] Writer to encode to
-     * @returns {protobuf.Writer} Writer
-     */
-    TexasDynamicData.encode = function encode(m, w) {
-        if (!w)
-            w = $Writer.create();
-        if (m.state != null && Object.hasOwnProperty.call(m, "state"))
-            w.uint32(8).int32(m.state);
-        if (m.seatInfos != null && m.seatInfos.length) {
-            for (var i = 0; i < m.seatInfos.length; ++i)
-                $root.PlayerInfo.encode(m.seatInfos[i], w.uint32(18).fork()).ldelim();
-        }
-        if (m.actionUid != null && Object.hasOwnProperty.call(m, "actionUid"))
-            w.uint32(26).string(m.actionUid);
-        if (m.actionLeftTime != null && Object.hasOwnProperty.call(m, "actionLeftTime"))
-            w.uint32(32).int64(m.actionLeftTime);
-        if (m.potInfo != null && m.potInfo.length) {
-            for (var i = 0; i < m.potInfo.length; ++i)
-                $root.PotInfo.encode(m.potInfo[i], w.uint32(42).fork()).ldelim();
-        }
-        if (m.actions != null && m.actions.length) {
-            for (var i = 0; i < m.actions.length; ++i)
-                $root.ActionInfo.encode(m.actions[i], w.uint32(50).fork()).ldelim();
-        }
-        if (m.publicCards != null && m.publicCards.length) {
-            for (var i = 0; i < m.publicCards.length; ++i)
-                $root.CardInfo.encode(m.publicCards[i], w.uint32(58).fork()).ldelim();
-        }
-        if (m.dealerUid != null && Object.hasOwnProperty.call(m, "dealerUid"))
-            w.uint32(66).string(m.dealerUid);
-        if (m.buyInsuranceTurn != null && Object.hasOwnProperty.call(m, "buyInsuranceTurn"))
-            $root.BuyInsuranceTurn.encode(m.buyInsuranceTurn, w.uint32(74).fork()).ldelim();
-        if (m.totalPot != null && Object.hasOwnProperty.call(m, "totalPot"))
-            w.uint32(80).int64(m.totalPot);
-        if (m.creatorUid != null && Object.hasOwnProperty.call(m, "creatorUid"))
-            w.uint32(90).string(m.creatorUid);
-        return w;
-    };
-
-    /**
-     * Decodes a TexasDynamicData message from the specified reader or buffer.
-     * @function decode
-     * @memberof TexasDynamicData
-     * @static
-     * @param {protobuf.Reader|Uint8Array} r Reader or buffer to decode from
-     * @param {number} [l] Message length if known beforehand
-     * @returns {TexasDynamicData} TexasDynamicData
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {protobuf.util.ProtocolError} If required fields are missing
-     */
-    TexasDynamicData.decode = function decode(r, l) {
-        if (!(r instanceof $Reader))
-            r = $Reader.create(r);
-        var c = l === undefined ? r.len : r.pos + l, m = new $root.TexasDynamicData();
-        while (r.pos < c) {
-            var t = r.uint32();
-            switch (t >>> 3) {
-            case 1:
-                m.state = r.int32();
-                break;
-            case 2:
-                if (!(m.seatInfos && m.seatInfos.length))
-                    m.seatInfos = [];
-                m.seatInfos.push($root.PlayerInfo.decode(r, r.uint32()));
-                break;
-            case 3:
-                m.actionUid = r.string();
-                break;
-            case 4:
-                m.actionLeftTime = r.int64();
-                break;
-            case 5:
-                if (!(m.potInfo && m.potInfo.length))
-                    m.potInfo = [];
-                m.potInfo.push($root.PotInfo.decode(r, r.uint32()));
-                break;
-            case 6:
-                if (!(m.actions && m.actions.length))
-                    m.actions = [];
-                m.actions.push($root.ActionInfo.decode(r, r.uint32()));
-                break;
-            case 7:
-                if (!(m.publicCards && m.publicCards.length))
-                    m.publicCards = [];
-                m.publicCards.push($root.CardInfo.decode(r, r.uint32()));
-                break;
-            case 8:
-                m.dealerUid = r.string();
-                break;
-            case 9:
-                m.buyInsuranceTurn = $root.BuyInsuranceTurn.decode(r, r.uint32());
-                break;
-            case 10:
-                m.totalPot = r.int64();
-                break;
-            case 11:
-                m.creatorUid = r.string();
-                break;
-            default:
-                r.skipType(t & 7);
-                break;
-            }
-        }
-        return m;
-    };
-
-    return TexasDynamicData;
 })();
 
 $root.BuyInsuranceTurn = (function() {

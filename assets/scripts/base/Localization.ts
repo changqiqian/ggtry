@@ -481,12 +481,10 @@ export class Localization {
         { name: '00394', ch: '投保额度：', en: 'Insurance:' , korea :""},
         { name: '00395', ch: '邀请分享', en: 'Invite' , korea :""},
         { name: '00396', ch: '亮牌', en: 'Show' , korea :""},
-
-        { name: '01000', ch: '公告', en: 'Notification' , korea :""},
-        { name: '01001', ch: '消息', en: 'MESSAGES' , korea :""},
-        { name: '01002', ch: '收支记录', en: 'Bill' , korea :""},
-        { name: '01003', ch: '游戏战绩', en: 'Game records' , korea :""},
-
+        { name: '00397', ch: '买入申请', en: 'Buyin request' , korea :""},
+        { name: '00398', ch: '同意', en: 'Agree' , korea :""},
+        { name: '00399', ch: '好友申请', en: 'New friends' , korea :""},
+        { name: '00400', ch: '申请成为好友', en: 'Friend request' , korea :""},
         
         
 

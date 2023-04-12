@@ -1,17 +1,13 @@
 import { _decorator, Component, Label, Node } from 'cc';
-import { BaseUI } from '../../../base/BaseUI';
-import { BaseButton } from '../../common/BaseButton';
 import { ListViewCtr } from '../../../UiTool/ListViewCtr';
-import { HTTP_ApproveStatus, HTTP_BuyInData, NetworkHttp } from '../../../network/NetworkHttp';
-import { Game_BuyInApproveItem } from './Game_BuyInApproveItem';
+import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { Game_FriendApproveItem } from './Game_FriendApproveItem';
 const { ccclass, property } = _decorator;
 
-@ccclass('Game_BuyInApprove')
-export class Game_BuyInApprove  extends ListViewCtr<HTTP_BuyInData>  
+@ccclass('Game_FriendApprove')
+export class Game_FriendApprove extends ListViewCtr<any>  
 {
-    @property(Label) 
-    mGameID: Label = null;
     @property(BaseButton) 
     mCloseBtn: BaseButton = null;
     private mIndex : number = null;
@@ -51,17 +47,7 @@ export class Game_BuyInApprove  extends ListViewCtr<HTTP_BuyInData>
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-        gameData.Data_HTTPBuyInRequest.AddListenner(this,(_data)=>
-        {
-            this.mCurrentData = _data.data;
-            this.RefreshData();
-        });
 
-        gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
-        {
-            this.mGameID.string = "NO:" + _data.gameId;
-
-        });
         
     }
 
@@ -72,13 +58,12 @@ export class Game_BuyInApprove  extends ListViewCtr<HTTP_BuyInData>
 
     RenderEvent(_item: Node , _index: number)
     {
-        _item.getComponent(Game_BuyInApproveItem).InitWithData(this.mCurrentData[_index] , this.OnItemClicked);
+        _item.getComponent(Game_FriendApproveItem).InitWithData(this.mCurrentData[_index] , this.OnItemClicked);
     }
 
-    OnItemClicked(_status : HTTP_ApproveStatus , _data : HTTP_BuyInData)
+    OnItemClicked(_agree : boolean , _data : any)
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        NetworkHttp.Instance.PostDealBuyInRequest(_status ,_data.userId  ,_data.id.toString() , gameStruct.mGameId);
     }
 }
 

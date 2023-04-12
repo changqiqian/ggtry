@@ -13,7 +13,6 @@ export class LoginData extends SingletonBaseNotify<LoginData>()
     
     Data_LoginSuccessData : BaseData<boolean> = new BaseData<boolean>(true);
     Data_RegisterSuccessData : BaseData<boolean> = new BaseData<boolean>(true);
-    Data_SmsCodeType : BaseData<SmsCodeType> = new BaseData<SmsCodeType>();
     Data_ShowAreaCodeView : BaseData<boolean> = new BaseData<boolean>(true);
     Data_InSignInProgress : BaseData<boolean> = new BaseData<boolean>();
     Data_VerifyPhoneNumber : BaseData<boolean> = new BaseData<boolean>();

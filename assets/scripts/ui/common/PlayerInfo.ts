@@ -33,7 +33,7 @@ export class PlayerInfo extends BaseUI
 
     public SetRomoteHead(_url : string)
     {
-        this.LoadRemoteSprite(_url,(_spriteFrame)=>
+        this.LoadHead(_url,(_spriteFrame)=>
         {
             this.mHead.spriteFrame = _spriteFrame;
         });

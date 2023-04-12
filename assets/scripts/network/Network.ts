@@ -1,7 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import { Writer } from '../../plugin/protobuf';
 import { Localization } from '../base/Localization';
-import { Gender } from '../base/LocalPlayerData';
 import { Singleton } from '../base/Singleton';
 import { UIMgr } from '../base/UIMgr';
 import { CommonNotify } from '../CommonNotify';

@@ -40,9 +40,13 @@ export class LoginUI extends BaseUI
     }
     BindUI() 
     {
-        LocalPlayerData.Instance.Data_AreaCode.mData = 1;
         UIMgr.Instance.ShowMultipleTable(true);
         this.mVersion.string = GameConfig.Version;
+
+        if(!GameConfig.DebugMode)
+        {
+            setDisplayStats(false);  
+        }
 
 
         this.TurnOff.SetClickCallback(()=>
@@ -100,8 +104,6 @@ export class LoginUI extends BaseUI
     }
     RegDataNotify() 
     {
-
-        
         CommonNotify.Instance.Data_SocketOpen.AddListenner(this,(_data)=>
         {
             if(_data == false)
@@ -122,10 +124,6 @@ export class LoginUI extends BaseUI
             // }
         });
 
-        // LoginData.Instance.Data_SmsCodeType.AddListenner(this,(_data)=>
-        // {
-        //     UIMgr.Instance.ShowLayer("common","prefab/SMSCodeView");
-        // });
     }
     LateInit() 
     {
