@@ -1,10 +1,13 @@
-import { _decorator, Component, Node, Label, UITransform } from 'cc';
+import { _decorator, Component, Node, Label, UITransform, Color } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_SingleChat')
 export class Game_SingleChat extends BaseUI 
 {
+    @property(Label) 
+    mName: Label = null;
     @property(Label) 
     mContent: Label = null;
     mMoving : boolean = false;
@@ -33,17 +36,31 @@ export class Game_SingleChat extends BaseUI
 
     }
 
-    public InitWithData(_content : string , _moveDistance : number , _index : number , _callback : Function)
+    public InitWithData(_userName : string , _content:string , _uid : string , _moveDistance : number , _index : number , _callback : Function)
     {
         this.mCallback = _callback;
         this.mIndex = _index;
+        this.mName.string = _userName + "：";
         this.mContent.string = _content;
         this.mContent.updateRenderData(true);
-        let contentWidth = this.mContent.getComponent(UITransform).contentSize.width;
+        this.mName.updateRenderData(true);
+        let contentWidth = this.mContent.getComponent(UITransform).contentSize.width + this.mName.getComponent(UITransform).contentSize.width
         this.mTotalDistance = _moveDistance + contentWidth;
         this.mMoving = true;
 
-        this.StartSecondsTimer(10,1,()=>
+        let isSelf = _uid == LocalPlayerData.Instance.Data_Uid.mData
+        if(isSelf)
+        {
+            this.mContent.color = Color.WHITE;
+            this.mName.color = new Color(177,140,68);
+        }
+        else
+        {
+            this.mContent.color = new Color(146,159,176);
+            this.mName.color = new Color(86,191,141);
+        }
+
+        this.StartSecondsTimer(15,1,()=>
         {
             this.ForceEnd();
         });

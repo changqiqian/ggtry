@@ -188,7 +188,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 221.414,
+    "_top": 467.43600000000004,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -273,7 +273,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 429,
-      "y": 946.586,
+      "y": 700.564,
       "z": 0
     }
   },
@@ -406,7 +406,7 @@
     "propertyPath": [
       "_fontSize"
     ],
-    "value": 30
+    "value": 36
   },
   {
     "__type__": "cc.TargetInfo",
@@ -424,7 +424,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 120,
+      "width": 144,
       "height": 50.4
     }
   },
@@ -442,7 +442,7 @@
     "propertyPath": [
       "_actualFontSize"
     ],
-    "value": 30
+    "value": 36
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -574,7 +574,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 338.85299999999995,
+    "_top": 344.96500000000003,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -659,7 +659,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 429,
-      "y": 829.147,
+      "y": 823.035,
       "z": 0
     }
   },
@@ -792,7 +792,7 @@
     "propertyPath": [
       "_fontSize"
     ],
-    "value": 30
+    "value": 35
   },
   {
     "__type__": "cc.TargetInfo",
@@ -810,7 +810,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 120,
+      "width": 140,
       "height": 50.4
     }
   },
@@ -828,7 +828,7 @@
     "propertyPath": [
       "_actualFontSize"
     ],
-    "value": 30
+    "value": 35
   },
   {
     "__type__": "CCPropertyOverrideInfo",

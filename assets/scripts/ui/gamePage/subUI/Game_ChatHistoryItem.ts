@@ -47,11 +47,13 @@ export class Game_ChatHistoryItem extends BaseUI
         let isSelf = _chatMsg.actionUid == LocalPlayerData.Instance.Data_Uid.mData
         if(isSelf)
         {
-            this.mContent.color = new Color(146,150,171);
+            this.mContent.color = Color.WHITE;
+            this.mName.color = new Color(177,140,68);
         }
         else
         {
-            this.mContent.color = Color.WHITE;
+            this.mContent.color = new Color(146,159,176);
+            this.mName.color = new Color(86,191,141);
         }
     }
 }

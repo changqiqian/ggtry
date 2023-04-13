@@ -55,12 +55,12 @@ export class Game_ChatingCtr extends BaseUI
         {
             let userName = _data.playerName;
             let content = _data.content;
-            let final = userName + " : " + content;
-            this.CreateChat(final);
+            let uid = _data.actionUid;
+            this.CreateChat(userName , content , uid);
         });
     }
 
-    CreateChat(_content : string)
+    CreateChat(_userName : string , _content:string , _uid : string)
     {
         let aviliableLaneIndex = this.GetAviliableLane();
         let posY = this.UsingLane(aviliableLaneIndex);
@@ -76,7 +76,7 @@ export class Game_ChatingCtr extends BaseUI
             let width = this.node.getComponent(UITransform).contentSize.width;
             _node.setPosition(width/2 , posY);
             let tempScript = _node.getComponent(Game_SingleChat);
-            tempScript.InitWithData(_content,width,aviliableLaneIndex,(_index)=>
+            tempScript.InitWithData(_userName,_content,_uid,width,aviliableLaneIndex,(_index)=>
             {
                 this.ReleaseLane(_index);
             });

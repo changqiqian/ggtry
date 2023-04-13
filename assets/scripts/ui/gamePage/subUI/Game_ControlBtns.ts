@@ -108,15 +108,15 @@ export class Game_ControlBtns extends BaseUI
             this.mDealCardsBtn.node.active = false;
             this.mShowHandsBtn.node.active = false;
         });
-        gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
-        {
-            let publicCards = gameData.GetDynamicData().publicCards;
-            this.mDealCardsBtn.node.active = publicCards.length< 5;
-            if(gameData.Data_S2CCommonOpenCardNotify.mData == null)
-            {
-                this.mShowHandsBtn.node.active = true;
-            }
-        });
+        // gameData.Data_S2CCommonSettlementNotify.AddListenner(this,(_data)=>
+        // {
+        //     let publicCards = gameData.GetDynamicData().publicCards;
+        //     this.mDealCardsBtn.node.active = publicCards.length< 5;
+        //     if(gameData.Data_S2CCommonOpenCardNotify.mData == null)
+        //     {
+        //         this.mShowHandsBtn.node.active = true;
+        //     }
+        // });
 
         gameData.Data_S2CCommonStandUpNotify.AddListenner(this,(_data)=>
         {

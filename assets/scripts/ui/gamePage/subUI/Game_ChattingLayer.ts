@@ -47,7 +47,7 @@ export class Game_ChattingLayer extends BaseUI
     BindUI()
     {
         this.AddTouchCloseEvent(this.node);
-        this.mEditBox.placeholder = Localization.GetString("00324");
+        //this.mEditBox.placeholder = Localization.GetString("00324");
 
 
         this.mEditBox.node.on(EditBox.EventType.EDITING_RETURN,this.OnEditBoxReturn.bind(this) ) 
