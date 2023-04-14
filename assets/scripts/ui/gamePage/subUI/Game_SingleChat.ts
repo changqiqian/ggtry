@@ -44,9 +44,14 @@ export class Game_SingleChat extends BaseUI
         this.mContent.string = _content;
         this.mContent.updateRenderData(true);
         this.mName.updateRenderData(true);
-        let contentWidth = this.mContent.getComponent(UITransform).contentSize.width + this.mName.getComponent(UITransform).contentSize.width
+        let contentWidth2 = this.mContent.getComponent(UITransform).contentSize.width + this.mName.getComponent(UITransform).contentSize.width
+        let contentWidth = this.node.getComponent(UITransform).contentSize.width;
         this.mTotalDistance = _moveDistance + contentWidth;
         this.mMoving = true;
+
+
+        console.log("contentWidth2==" + contentWidth2)
+        console.log("contentWidth==" + contentWidth)
 
         let isSelf = _uid == LocalPlayerData.Instance.Data_Uid.mData
         if(isSelf)
@@ -62,7 +67,10 @@ export class Game_SingleChat extends BaseUI
 
         this.StartSecondsTimer(15,1,()=>
         {
-            this.ForceEnd();
+            if(this.GetRestSeconds()== 0)
+            {
+                this.ForceEnd();
+            }
         });
     }
 

@@ -110,6 +110,12 @@ export class Game_ProfileLayer extends BaseUI
         gameData.Data_S2CCommonGetPlayerStatisticsResp.AddListenner(this,(_data)=>
         {
             let record = _data.playerStatistic;
+
+            if(record == null)
+            {
+                this.ResetUI();
+                return;
+            }
             this.mTotalHands.string = record.totalHands + "";
             if(record.totalHands == 0)
             {

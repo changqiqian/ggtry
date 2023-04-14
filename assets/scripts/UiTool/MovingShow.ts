@@ -65,7 +65,10 @@ export class MovingShow extends BaseUI {
         let widget = this.node.getComponent(Widget);
         if(widget)
         {
-            widget.updateAlignment();
+            if(widget.enabled == true)
+            {
+                widget.updateAlignment();
+            }
             widget.enabled = false;
             widget.destroy();
         }

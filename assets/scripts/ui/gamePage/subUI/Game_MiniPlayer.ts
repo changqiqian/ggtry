@@ -42,7 +42,10 @@ export class Game_MiniPlayer extends BaseUI
         let widget = this.node.getComponent(Widget);
         if(widget != null)
         {
-            widget.updateAlignment();
+            if(widget.enabled == true)
+            {
+                widget.updateAlignment();
+            }
             widget.enabled = false;
             widget.destroy();
         }

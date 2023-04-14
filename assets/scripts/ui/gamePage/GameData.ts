@@ -95,7 +95,12 @@ export abstract class GameData extends MultipleNotify
             return;
         }
         tempData.splice(index , 1);
-        this.Data_HTTPBuyInRequest.mData.data = tempData;
+
+        let newData = new HTTP_BuyInRequest();
+        newData.code = this.Data_HTTPBuyInRequest.mData.code;
+        newData.msg = this.Data_HTTPBuyInRequest.mData.msg;
+        newData.data = tempData;
+        this.Data_HTTPBuyInRequest.mData = newData;
     }
 
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo

@@ -51,7 +51,10 @@ export class Poker extends BaseUI
             let widget = this.mRoot.children[i].getComponent(Widget);
             if(widget != null)
             {
-                widget.updateAlignment();
+                if(widget.enabled == true)
+                {
+                    widget.updateAlignment();
+                }
                 widget.enabled = false;
                 widget.destroy();
             }
@@ -60,7 +63,10 @@ export class Poker extends BaseUI
         let rootWidget = this.mRoot.getComponent(Widget);
         if(rootWidget != null)
         {
-            rootWidget.updateAlignment();
+            if(rootWidget.enabled == true)
+            {
+                rootWidget.updateAlignment();
+            }
             rootWidget.enabled = false;
             rootWidget.destroy();
         }

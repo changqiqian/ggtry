@@ -620,15 +620,15 @@ export class GameConfig
 
     public static GetTopUid() : string
     {
-        //return top.USER_ID;
-        return GameConfig.uid;
+        return top.USER_ID;
+        //return GameConfig.uid;
         //return "9527"
     }
 
     public static GetTopGameId() : string
     {
-        //return top.GAME_ID;
-        return "1234567890";
+        return top.GAME_ID;
+        //return "5555555555";
     }
     
     

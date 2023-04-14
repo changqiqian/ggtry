@@ -403,7 +403,10 @@ export abstract class BaseUI extends Component {
         let widget = _target.getComponent(Widget);
         if(widget != null)
         {
-            widget.updateAlignment();
+            if(widget.enabled == true)
+            {
+                widget.updateAlignment();
+            }
             widget.enabled = false;
             widget.destroy();
         }

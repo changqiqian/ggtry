@@ -16,7 +16,7 @@ export class Game_PlayerState extends BaseUI {
     }
     BindUI()
     {
-
+        this.HideAll();
     }
     RegDataNotify()
     {
@@ -36,8 +36,6 @@ export class Game_PlayerState extends BaseUI {
         this.StopSecondsTimer();
 
         this.mDarkBG.active = _auto;
-        this.StateTitle.node.active = _auto;
-        this.mCountDown.node.active = _auto;
         if(_auto)
         {
             if(_leftTime > 0)
@@ -68,8 +66,6 @@ export class Game_PlayerState extends BaseUI {
         this.StopSecondsTimer();
 
         this.mDarkBG.active = show;
-        this.StateTitle.node.active = show;
-        this.mCountDown.node.active = show;
         if(show)
         {
             this.StateTitle.string = Localization.GetString("00248");
@@ -85,8 +81,6 @@ export class Game_PlayerState extends BaseUI {
     {
         this.StopSecondsTimer();
         this.mDarkBG.active = false;
-        this.StateTitle.node.active = false;
-        this.mCountDown.node.active = false;
     }
     
 }

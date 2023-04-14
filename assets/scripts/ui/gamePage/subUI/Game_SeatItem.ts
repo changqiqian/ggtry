@@ -29,7 +29,10 @@ export class Game_SeatItem extends BaseUI
         let widget = this.node.getComponent(Widget);
         if(widget != null)
         {
-            widget.updateAlignment();
+            if(widget.enabled == true)
+            {
+                widget.updateAlignment();
+            }
             widget.enabled = false;
             widget.destroy();
         }

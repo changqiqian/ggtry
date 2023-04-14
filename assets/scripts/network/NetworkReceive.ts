@@ -260,7 +260,7 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     }
                     else if(msg.approvalStatus == ApprovalStatus.ApprovalStatus_Success)
                     {
-                        UIMgr.Instance.ShowToast(Localization.GetString("00404"));
+                        //UIMgr.Instance.ShowToast(Localization.GetString("00404"));
                     }
                     else if(msg.approvalStatus == ApprovalStatus.ApprovalStatus_Wait)
                     {

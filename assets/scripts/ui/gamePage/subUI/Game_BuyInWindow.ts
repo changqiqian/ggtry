@@ -116,8 +116,9 @@ export class Game_BuyInWindow extends BaseUI
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
             let gameData = gameStruct.mGameData;
             NetworkSend.Instance.BringIn(gameData.BringInSendMsgId() , gameStruct.mGameId,bringInMoney);
+            this.StopCountDown();
+            this.CloseAsWindow();
         });
-
 
         this.mProgressSlider.SetEndCallback((_ratio)=>
         {
@@ -150,7 +151,6 @@ export class Game_BuyInWindow extends BaseUI
         {
             return;
         }
-        this.mCountNode.active = false;
         this.StopCountDown();
         this.BindData();
     }

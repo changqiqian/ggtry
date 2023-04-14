@@ -348,8 +348,8 @@ export class Game_Player extends BaseUI
             }
             if(selfPlayer.seat == this.mSeatID)
             {
-                this.mGame_PlayerState.ShowBuyin(0);
-                this.UpdateMoney(false , selfPlayer);
+                //this.mGame_PlayerState.ShowBuyin(0);
+                //this.UpdateMoney(false , selfPlayer);
             }
         })
 
