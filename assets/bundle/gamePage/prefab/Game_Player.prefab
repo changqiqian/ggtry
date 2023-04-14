@@ -3823,7 +3823,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 33.37,
+      "width": 50.05,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -3854,12 +3854,12 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 181,
+      "g": 181,
+      "b": 183,
       "a": 255
     },
-    "_string": "37",
+    "_string": "100",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
@@ -3905,8 +3905,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 72,
-      "height": 36
+      "width": 63,
+      "height": 45
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

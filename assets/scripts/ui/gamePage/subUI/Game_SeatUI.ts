@@ -201,6 +201,7 @@ export class Game_SeatUI extends BaseUI
         {
             let current = _movePathConfigArray[i];
             let movingSeat = this.GetSeatNodeBySeatId(current.mTargetId);
+            movingSeat.RestoreScale();
             if(_anmation)
             {
                 let totalDuration = 0.3;
@@ -215,7 +216,6 @@ export class Game_SeatUI extends BaseUI
             }
             else
             {
-
                 movingSeat.node.position =  current.mPath[current.mPath.length - 1];
                 movingSeat.UpdatePlayerUIDirection();
             }

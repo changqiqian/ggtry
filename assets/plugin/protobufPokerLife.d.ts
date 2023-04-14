@@ -2068,6 +2068,13 @@ export class C2SGetPlayerStatistics implements IC2SGetPlayerStatistics {
     public static decode(r: (protobuf.Reader|Uint8Array), l?: number): C2SGetPlayerStatistics;
 }
 
+/** ApprovalStatus enum. */
+export enum ApprovalStatus {
+    ApprovalStatus_Wait = 0,
+    ApprovalStatus_Success = 1,
+    ApprovalStatus_Fail = 2
+}
+
 /** ActionType enum. */
 export enum ActionType {
     ActionType_Init = 0,
@@ -3255,6 +3262,9 @@ export class S2CCommonBringInResp implements IS2CCommonBringInResp {
 
     /** S2CCommonBringInResp gameId. */
     public gameId: string;
+
+    /** S2CCommonBringInResp approvalStatus. */
+    public approvalStatus: ApprovalStatus;
 
     /** S2CCommonBringInResp bringInNum. */
     public bringInNum: number;

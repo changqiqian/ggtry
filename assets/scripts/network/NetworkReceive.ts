@@ -253,14 +253,26 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     // {
                     //     LocalPlayerData.Instance.Data_Coin.mData -= msg.bringInNum;
                     // }
-                    
 
-                    if(selfPlayer!=null)
+                    if(msg.approvalStatus == ApprovalStatus.ApprovalStatus_Fail)
                     {
-                        selfPlayer.bringInNum = msg.totalBringInNum;
+                        UIMgr.Instance.ShowToast(Localization.GetString("00405"));
                     }
-                    gameData.Data_S2CCommonBringInResp.mData = msg;
-                    UIMgr.Instance.ShowToast(Localization.GetString("00245"));
+                    else if(msg.approvalStatus == ApprovalStatus.ApprovalStatus_Success)
+                    {
+                        UIMgr.Instance.ShowToast(Localization.GetString("00404"));
+                    }
+                    else if(msg.approvalStatus == ApprovalStatus.ApprovalStatus_Wait)
+                    {
+                        UIMgr.Instance.ShowToast(Localization.GetString("00404"));
+                    }
+
+                    // if(selfPlayer!=null)
+                    // {
+                    //     selfPlayer.bringInNum = msg.totalBringInNum;
+                    // }
+                    // gameData.Data_S2CCommonBringInResp.mData = msg;
+                    // UIMgr.Instance.ShowToast(Localization.GetString("00245"));
                 }
             }
             else

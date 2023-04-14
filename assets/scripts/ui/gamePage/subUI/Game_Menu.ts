@@ -11,6 +11,7 @@ import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { HallData } from '../../hall/HallData';
 import { Game_BuyInWindow } from './Game_BuyInWindow';
 import { Game_RuleLayer } from './Game_RuleLayer';
+import { Game_FriendsShare } from './Game_FriendsShare';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Menu')
@@ -29,6 +30,8 @@ export class Game_Menu extends BaseUI
     mBringInBtn: BaseButton = null;
     @property(BaseButton) 
     mSettingBtn: BaseButton = null;
+    @property(BaseButton) 
+    mInviteBtn: BaseButton = null;
     @property(BaseButton) 
     mStandBtn: BaseButton = null;
     @property(BaseButton) 
@@ -78,8 +81,22 @@ export class Game_Menu extends BaseUI
         this.mSettingBtn.SetClickCallback(()=>
         {
             this.Show(false);
-            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_Setting");
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_Setting",true,(_script)=>
+            {
+
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
+        this.mInviteBtn.SetClickCallback(()=>
+        {
+            this.Show(false);
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_FriendsShare",true,(_script)=>
+            {
+                let temp = _script as Game_FriendsShare;
+                temp.InitWithData(this.mIndex);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+        });
+        
+
         this.mStandBtn.SetClickCallback(()=>
         {
             let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
@@ -93,7 +110,6 @@ export class Game_Menu extends BaseUI
             {
                 NetworkSend.Instance.StandUp(msgId,gameId);
             }
-
         });
 
         this.mSettlementBtn.SetClickCallback(()=>
@@ -107,7 +123,10 @@ export class Game_Menu extends BaseUI
 
         this.mAddInsBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_AddInsWindow");
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_AddInsWindow",true,(_script)=>
+            {
+
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
     }
     RegDataNotify()

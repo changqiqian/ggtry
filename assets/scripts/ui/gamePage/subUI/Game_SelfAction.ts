@@ -51,7 +51,7 @@ export class Game_SelfAction extends BaseUI
     BindUI() 
     {
         this.HideAll();
-        this.mCircleTimer.SetColor(new Color(251,160,2));
+        //this.mCircleTimer.SetColor(new Color(251,160,2));
         this.mFoldBtn.SetClickCallback(()=>
         {
             this.ExcutiveFold();
@@ -216,20 +216,20 @@ export class Game_SelfAction extends BaseUI
             }
         })
 
-        gameData.Data_S2CCommonExtraThinkNotify.AddListenner(this,(_data)=>
-        {
-            let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
-            if(playerInfo == null)
-            {
-                return;
-            }
+        // gameData.Data_S2CCommonExtraThinkNotify.AddListenner(this,(_data)=>
+        // {
+        //     let playerInfo = gameData.GetPlayerInfoByUid(_data.actionUid);
+        //     if(playerInfo == null)
+        //     {
+        //         return;
+        //     }
 
-            if(playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
-            {
-                return;
-            }
-            this.mCircleTimer.StartTimer(_data.totalTime);
-        })
+        //     if(playerInfo.uid != LocalPlayerData.Instance.Data_Uid.mData)
+        //     {
+        //         return;
+        //     }
+        //     this.mCircleTimer.StartTimer(_data.totalTime);
+        // })
 
         gameData.Data_BuyInsuranceTurn.AddListenner(this,(_data)=>
         {
@@ -280,7 +280,7 @@ export class Game_SelfAction extends BaseUI
         this.mGame_CustomerRaise.node.active = false;
         this.mSliderRaiseBtn.node.active = false;
         this.mGame_Slider.node.active = false;
-        this.mCircleTimer.StopTimer();
+        //this.mCircleTimer.StopTimer();
         this.mGame_AddTime.Show(false);
     }
 
@@ -357,7 +357,7 @@ export class Game_SelfAction extends BaseUI
         let gameData = gameStruct.mGameData;
         let lastBigBetAction = gameData.FindBiggestBetAction();
         let selfLastAction = gameData.FindLastActionByUid(LocalPlayerData.Instance.Data_Uid.mData);
-        this.mCircleTimer.StopTimer();
+        //this.mCircleTimer.StopTimer();
         if(lastBigBetAction == null)
         {
             this.ShowCheckUI();
@@ -389,7 +389,7 @@ export class Game_SelfAction extends BaseUI
             
         }
         let actionTime = gameData.GetDynamicData().actionLeftTime;
-        this.mCircleTimer.StartTimer(actionTime);
+        //this.mCircleTimer.StartTimer(actionTime);
         this.mGame_AddTime.Show(true);
     }
 
@@ -409,7 +409,7 @@ export class Game_SelfAction extends BaseUI
         let alreadyBetAmount;
 
         let lastBigBetAction = gameData.FindBiggestBetAction();
-        this.mCircleTimer.StopTimer();
+        //this.mCircleTimer.StopTimer();
         let bb = gameData.GetStaticData().smallBlind * 2;
 
         let bigestBet = lastBigBetAction.roundAmount;
@@ -516,14 +516,14 @@ export class Game_SelfAction extends BaseUI
         }
     }
 
-    UpdateTimer(_show : boolean , _leftTime : number)
-    {
-        this.mCircleTimer.StopTimer();
-        if(_show)
-        {
-            this.mCircleTimer.StartTimer(_leftTime);
-        }
-    }
+    // UpdateTimer(_show : boolean , _leftTime : number)
+    // {
+    //     this.mCircleTimer.StopTimer();
+    //     if(_show)
+    //     {
+    //         this.mCircleTimer.StartTimer(_leftTime);
+    //     }
+    // }
 
     ExcutiveFold()
     {

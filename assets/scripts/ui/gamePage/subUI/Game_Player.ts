@@ -155,7 +155,7 @@ export class Game_Player extends BaseUI
                 playerInfo.cards = GameReplayData.Instance.GetCardsByUid(selfUid);
             }
 
-
+            
             this.HideCard();
             this.mSelfBtn.node.active = false;
             this.mBG.active = true;
@@ -700,6 +700,30 @@ export class Game_Player extends BaseUI
         this.mGame_BetAmount.node.active = false;
     }
 
+    public RestoreScale()
+    {
+        this.node.scale = Vec3.ONE;
+    }
+
+    public TryToScale()
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        let gameData = gameStruct.mGameData;
+        let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
+        if(playerInfo == null)
+        {
+            return;
+        }
+
+        if(playerInfo.uid == LocalPlayerData.Instance.Data_Uid.mData)
+        {
+            this.node.scale = new Vec3(1.3 , 1.3 , 1.3);
+        }
+        else
+        {
+            this.RestoreScale();
+        }
+    }
 
     public UpdateUIDirection()
     {
@@ -747,6 +771,8 @@ export class Game_Player extends BaseUI
         {
             return;
         }
+
+        this.RestoreScale();
         this.mGame_PlayerState.ShowAuto(playerInfo.autoLeftTime , playerInfo.auto);
         this.mSelfBtn.node.active = true;
         this.UpdateName(playerInfo.nickName);

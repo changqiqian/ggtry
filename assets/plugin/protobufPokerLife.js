@@ -5880,6 +5880,22 @@ $root.C2SGetPlayerStatistics = (function() {
 })();
 
 /**
+ * ApprovalStatus enum.
+ * @exports ApprovalStatus
+ * @enum {number}
+ * @property {number} ApprovalStatus_Wait=0 ApprovalStatus_Wait value
+ * @property {number} ApprovalStatus_Success=1 ApprovalStatus_Success value
+ * @property {number} ApprovalStatus_Fail=2 ApprovalStatus_Fail value
+ */
+$root.ApprovalStatus = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "ApprovalStatus_Wait"] = 0;
+    values[valuesById[1] = "ApprovalStatus_Success"] = 1;
+    values[valuesById[2] = "ApprovalStatus_Fail"] = 2;
+    return values;
+})();
+
+/**
  * ActionType enum.
  * @exports ActionType
  * @enum {number}
@@ -9920,6 +9936,7 @@ $root.S2CCommonBringInResp = (function() {
      * @interface IS2CCommonBringInResp
      * @property {ICommonResult|null} [result] S2CCommonBringInResp result
      * @property {string|null} [gameId] S2CCommonBringInResp gameId
+     * @property {ApprovalStatus|null} [approvalStatus] S2CCommonBringInResp approvalStatus
      * @property {number|null} [bringInNum] S2CCommonBringInResp bringInNum
      * @property {number|null} [totalBringInNum] S2CCommonBringInResp totalBringInNum
      * @property {number|null} [currencyNum] S2CCommonBringInResp currencyNum
@@ -9955,6 +9972,14 @@ $root.S2CCommonBringInResp = (function() {
      * @instance
      */
     S2CCommonBringInResp.prototype.gameId = "";
+
+    /**
+     * S2CCommonBringInResp approvalStatus.
+     * @member {ApprovalStatus} approvalStatus
+     * @memberof S2CCommonBringInResp
+     * @instance
+     */
+    S2CCommonBringInResp.prototype.approvalStatus = 0;
 
     /**
      * S2CCommonBringInResp bringInNum.
@@ -9996,12 +10021,14 @@ $root.S2CCommonBringInResp = (function() {
             $root.CommonResult.encode(m.result, w.uint32(10).fork()).ldelim();
         if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
             w.uint32(18).string(m.gameId);
+        if (m.approvalStatus != null && Object.hasOwnProperty.call(m, "approvalStatus"))
+            w.uint32(24).int32(m.approvalStatus);
         if (m.bringInNum != null && Object.hasOwnProperty.call(m, "bringInNum"))
-            w.uint32(24).int64(m.bringInNum);
+            w.uint32(32).int64(m.bringInNum);
         if (m.totalBringInNum != null && Object.hasOwnProperty.call(m, "totalBringInNum"))
-            w.uint32(32).int64(m.totalBringInNum);
+            w.uint32(40).int64(m.totalBringInNum);
         if (m.currencyNum != null && Object.hasOwnProperty.call(m, "currencyNum"))
-            w.uint32(40).int64(m.currencyNum);
+            w.uint32(48).int64(m.currencyNum);
         return w;
     };
 
@@ -10030,12 +10057,15 @@ $root.S2CCommonBringInResp = (function() {
                 m.gameId = r.string();
                 break;
             case 3:
-                m.bringInNum = r.int64();
+                m.approvalStatus = r.int32();
                 break;
             case 4:
-                m.totalBringInNum = r.int64();
+                m.bringInNum = r.int64();
                 break;
             case 5:
+                m.totalBringInNum = r.int64();
+                break;
+            case 6:
                 m.currencyNum = r.int64();
                 break;
             default:

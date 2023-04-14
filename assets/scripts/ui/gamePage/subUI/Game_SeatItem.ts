@@ -124,15 +124,20 @@ export class Game_SeatItem extends BaseUI
 
     UpdatePlayerUIDirection()
     {
-        this.StartSecondsTimer(0.5,0.1,()=>
+        this.StartSecondsTimer(0.1,0.1,()=>
         {
             let restTime = this.GetRestMillSeconds();
             if(restTime == 0)
             {
                 this.mGame_Player.UpdateUIDirection();
+                this.mGame_Player.TryToScale();
             }
         });
-        
+    }
+
+    RestoreScale()
+    {
+        this.mGame_Player.RestoreScale();
     }
 }
 

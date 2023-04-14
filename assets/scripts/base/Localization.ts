@@ -488,8 +488,15 @@ export class Localization {
         { name: '00401', ch: '保险战绩', en: 'Insurance profit' , korea :""},
         { name: '00402', ch: '查看', en: 'Details' , korea :""},
         { name: '00403', ch: '发送', en: 'Send' , korea :""},
-
-        
+        { name: '00404', ch: '等待审批', en: 'Pending approval' , korea :""},
+        { name: '00405', ch: '买入请求被拒绝', en: 'Buy in request reject' , korea :""},
+        { name: '00406', ch: '游戏ID：', en: 'Game ID：' , korea :""},
+        { name: '00407', ch: '游戏链接：', en: 'Link：' , korea :""},
+        { name: '00408', ch: '好友ID：', en: 'Friend ID：' , korea :""},
+        { name: '00409', ch: '请输入好友ID', en: 'Please input friend ID' , korea :""},
+        { name: '00410', ch: '从好友列表中邀请', en: 'Friends list' , korea :""},
+        { name: '00411', ch: '立即邀请', en: 'Invite' , korea :""},
+  
         //////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////
         //////////////                      热更     

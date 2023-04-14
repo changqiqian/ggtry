@@ -2933,7 +2933,7 @@
     "propertyPath": [
       "_active"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "cc.MountedComponentsInfo",
@@ -7172,7 +7172,7 @@
     "_originalHeight": 100,
     "_alignMode": 2,
     "_lockFlags": 0,
-    "_id": "4b2snbqtREUIKiD1CZBhE8"
+    "_id": "c2kx2deghDiqSjf681Bmjy"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -7227,7 +7227,7 @@
     "_originalHeight": 0,
     "_alignMode": 2,
     "_lockFlags": 0,
-    "_id": "20kG4Lf/JFn5rDxswpfxX1"
+    "_id": "62hSw9hotCoq+6lsiL2BOE"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -7735,7 +7735,7 @@
     "_originalHeight": 0,
     "_alignMode": 2,
     "_lockFlags": 0,
-    "_id": "f999VO9sRJvIRNUbzfdLeT"
+    "_id": "a1K0efFRlHFb8QqIIHxfay"
   },
   {
     "__type__": "cc.MountedComponentsInfo",

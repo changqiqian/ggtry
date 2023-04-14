@@ -144,12 +144,12 @@ export class Game_BuyInWindow extends BaseUI
 
     InitWithData(_index : number)
     {
+        this.mIndex = _index;
+        this.ResetSliderValue();
         if(this.CheckInitFlag())
         {
             return;
         }
-
-        this.mIndex = _index;
         this.mCountNode.active = false;
         this.StopCountDown();
         this.BindData();
@@ -260,6 +260,12 @@ export class Game_BuyInWindow extends BaseUI
         {
             //this.CloseAsWindow();
         }
+    }
+
+    ResetSliderValue()
+    {
+        this.mProgressSlider.SetPercent(0);
+        this.UpdateBringInAmount(0);
     }
 }
 
