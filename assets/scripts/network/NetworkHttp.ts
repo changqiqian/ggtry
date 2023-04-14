@@ -1,4 +1,5 @@
 import { LocalPlayerData } from "../base/LocalPlayerData";
+import { Localization } from "../base/Localization";
 import { Singleton } from "../base/Singleton";
 import { UIMgr } from "../base/UIMgr";
 import { MultipleTableCtr } from "../ui/common/MultipleTableCtr";
@@ -17,6 +18,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         {
             if (_xhr.readyState == 4) 
             {
+                console.log("_xhr.responseText====="+_xhr.responseText);
                 _success && _success(_xhr.responseText);
             }
         };
@@ -28,7 +30,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
             _error && _error(_err);
         };
 
-        _xhr.send(JSON.stringify(_param));
+        let httpSendParam = JSON.stringify(_param);
+        _xhr.send(httpSendParam);
     }
 
     //房主查询买入请求
@@ -111,11 +114,11 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
                 let tips = "";
                 if(tempData.status == HTTP_ApproveStatus.Agree)
                 {
-                    tips = "已同意用户:"+ tempData.approveUserId +"的买入请求";
+                    tips = Localization.ReplaceString("00412",tempData.approveUserId)
                 }
                 else
                 {
-                    tips = "已拒绝用户:"+ tempData.approveUserId +"的买入请求";
+                    tips = Localization.ReplaceString("00413",tempData.approveUserId)
                 }
                 UIMgr.Instance.ShowToast(tips);
             }

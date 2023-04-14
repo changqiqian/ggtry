@@ -145,15 +145,15 @@ export abstract class BaseUI extends Component {
 
     LoadHead(_head : string ,  _loadFinish: Function)
     {
-        let isUrl = _head.startsWith("http");
-        if(isUrl)
-        {
-            this.LoadRemoteSprite(_head,_loadFinish);
-        }
-        else
-        {
-            this.LoadLocalHead(_head.toString() , _loadFinish);
-        }
+        // let isUrl = _head.startsWith("http");
+        // if(isUrl)
+        // {
+        //     this.LoadRemoteSprite(_head,_loadFinish);
+        // }
+        // else
+        // {
+        //     this.LoadLocalHead(_head.toString() , _loadFinish);
+        // }
     }
 
     LoadLocalHead(_headIndex: string, _loadFinish: Function) 

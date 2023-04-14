@@ -5,6 +5,7 @@ import { ListViewCtr } from '../../../UiTool/ListViewCtr';
 import { HTTP_ApproveStatus, HTTP_BuyInData, NetworkHttp } from '../../../network/NetworkHttp';
 import { Game_BuyInApproveItem } from './Game_BuyInApproveItem';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { LocalPlayerData } from '../../../base/LocalPlayerData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_BuyInApprove')
@@ -77,8 +78,7 @@ export class Game_BuyInApprove  extends ListViewCtr<HTTP_BuyInData>
 
     OnItemClicked(_status : HTTP_ApproveStatus , _data : HTTP_BuyInData)
     {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        NetworkHttp.Instance.PostDealBuyInRequest(_status ,_data.userId  ,_data.id.toString() , gameStruct.mGameId);
+        NetworkHttp.Instance.PostDealBuyInRequest(_status ,LocalPlayerData.Instance.Data_Uid.mData  ,_data.id.toString() , _data.gameId);
     }
 }
 

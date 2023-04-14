@@ -139,12 +139,17 @@ export class UIMgr extends Singleton<UIMgr>()
         this.mToast.ShowToast(_tips , _duration);
     }
 
-    public AddLayerInTopRoot(_bundleName :string , _prefabPath:string)
+    public AddLayerInTopRoot(_bundleName :string , _prefabPath:string , _callback :Function = null)
     {
         this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
         {
             this.mTopRoot.addChild(_tempNode);
-            _tempNode.setSiblingIndex(0);
+            if(_callback != null)
+            {
+                let tempScript = _tempNode.getComponent(BaseUI);
+                _callback(tempScript)
+            }
+            //_tempNode.setSiblingIndex(0);
         });
     }
 
@@ -171,16 +176,6 @@ export class UIMgr extends Singleton<UIMgr>()
         }
     }
 
-
-
-    public AddLayerInWindowRoot(_bundleName :string , _prefabPath:string)
-    {
-        this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
-        {
-            this.mWindowRoot.addChild(_tempNode);
-            _tempNode.setSiblingIndex(0);
-        });
-    }
 
     public IsMultipleTableShow()
     {

@@ -62,12 +62,23 @@ export class Game_Notify extends BaseUI
 
     BindData()
     {
+
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         gameData.Data_HTTPBuyInRequest.AddListenner(this,(_data)=>
         {
-            let showValue = _data.data ! =null && _data.data.length > 0;
-            this.mBuyInNotifyBtn.Show(showValue);
+            if(_data.data  == null)
+            {
+                this.mBuyInNotifyBtn.Show(false);
+                return;
+            }
+
+            if(_data.data.length == 0)
+            {
+                this.mBuyInNotifyBtn.Show(false);
+                return;
+            }
+            this.mBuyInNotifyBtn.Show(true);
         });
 
     }

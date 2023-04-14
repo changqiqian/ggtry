@@ -496,7 +496,8 @@ export class Localization {
         { name: '00409', ch: '请输入好友ID', en: 'Please input friend ID' , korea :""},
         { name: '00410', ch: '从好友列表中邀请', en: 'Friends list' , korea :""},
         { name: '00411', ch: '立即邀请', en: 'Invite' , korea :""},
-  
+        { name: '00412', ch: '已同意用户：xxx的买入申请', en: 'Confirm buy in request of user:xxx' , korea :""},
+        { name: '00413', ch: '已拒绝用户：xxx的买入申请', en: 'Reject buy in request of user:xxx' , korea :""},
         //////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////
         //////////////                      热更     

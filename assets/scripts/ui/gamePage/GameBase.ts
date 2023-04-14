@@ -33,6 +33,13 @@ export class GameBase extends BaseUI
     mBG: Node = null;
     @property(Sprite) 
     mTable: Sprite = null;
+    @property(Node) 
+    mFirstLayer: Node = null;
+    @property(Node) 
+    mSecondLayer: Node = null;
+    @property(Node) 
+    mTopLayer: Node = null;
+
 
     mIndex : number = null;
     mMovingShow: MovingShow = null;
@@ -191,7 +198,7 @@ export class GameBase extends BaseUI
                 {
                     let tempScript = _script as Game_InsuranceLayer;
                     tempScript.InitWithData(this.mIndex);
-                });
+                },this.mSecondLayer);
             }
 
         });
@@ -209,7 +216,7 @@ export class GameBase extends BaseUI
                 let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
                 let tips = player.nickName + " " + Localization.GetString("00337") + amount;
                 temp.ShowTips(tips);
-            });
+            },this.mSecondLayer);
         })
 
         gameData.Data_S2CCommonInsuranceLotteryNotify.AddListenner(this,(_data)=>
@@ -225,7 +232,7 @@ export class GameBase extends BaseUI
                 let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
                 let tips = player.nickName + " " + Localization.GetString("00338") + amount;
                 temp.ShowTips(tips);
-            });
+            },this.mSecondLayer);
 
 
         })
@@ -242,7 +249,7 @@ export class GameBase extends BaseUI
                 let amount = Tool.ConvertMoney_S2C(_data.lotteryNum) + "";
                 let tips = player.nickName + " " + Localization.GetString("00343") + amount;
                 temp.ShowTips(tips);
-            });
+            },this.mSecondLayer);
 
         })
 
@@ -257,7 +264,7 @@ export class GameBase extends BaseUI
                     let temp = _script as Game_CommonTips;
                     let tips = Localization.GetString("00344");
                     temp.ShowTips(tips,_data.leftTime);
-                });
+                },this.mSecondLayer);
                 return;
             }
 
@@ -270,7 +277,7 @@ export class GameBase extends BaseUI
                     let temp = _script as Game_CommonTips;
                     let tips = Localization.GetString("00344");
                     temp.ShowTips(tips,_data.leftTime);
-                });
+                },this.mSecondLayer);
                 return;
             }
 
@@ -278,7 +285,7 @@ export class GameBase extends BaseUI
             {
                 let tempScript = _script as Game_CuoPaiTips;
                 tempScript.InitWithData(_data.leftTime , this.mIndex);
-            });
+            },this.mSecondLayer);
 
         })
 
@@ -288,7 +295,7 @@ export class GameBase extends BaseUI
             {
                 let tempScript = _script as CuoPai;
                 tempScript.InitWithData(this.mIndex ,_data.cardInfo  , _data.leftTime );
-            });
+            },this.mSecondLayer);
         })
 
         
@@ -364,53 +371,7 @@ export class GameBase extends BaseUI
 
     InitSubView()
     {
-        this.AddSubView("gamePage","prefab/Game_BottomUI" , (_script)=>
-        {
-            let tempScript = _script as Game_BottomUI;
-            tempScript.InitWithData(this.mIndex);
-        });
-        this.AddSubView("gamePage","prefab/Game_GameStartInfo", (_script)=>
-        {
-            let tempScript = _script as Game_GameStartInfo;
-            tempScript.InitWithData(this.mIndex);
-        });
-        this.AddSubView("gamePage","prefab/Game_Pot", (_script)=>
-        {
-            let tempScript = _script as Game_Pot;
-            tempScript.InitWithData(this.mIndex);
-        });
-        this.AddSubView("gamePage","prefab/Game_PublicCards", (_script)=>
-        {
-            let tempScript = _script as Game_PublicCards;
-            tempScript.InitWithData(this.mIndex);
-        });
-        this.AddSubView("gamePage","prefab/Game_SelfAction", (_script)=>
-        {
-            let tempScript = _script as Game_SelfAction;
-            tempScript.InitWithData(this.mIndex);
-        });
-        // this.AddSubView("gamePage","prefab/Game_SelfPreAction", (_script)=>
-        // {
-        //     let tempScript = _script as Game_SelfPreAction;
-        //     tempScript.InitWithData(this.mIndex);
-        // });
 
-        this.AddSubView("gamePage","prefab/Game_TopUI", (_script)=>
-        {
-            let tempScript = _script as Game_TopUI;
-            tempScript.InitWithData(this.mIndex);
-        });
-        this.AddSubView("gamePage","prefab/Game_ControlBtns", (_script)=>
-        {
-            let tempScript = _script as Game_ControlBtns;
-            tempScript.InitWithData(this.mIndex);
-        });
-
-        this.AddSubView("gamePage","prefab/Game_ShowPokerUI", (_script)=>
-        {
-            let tempScript = _script as Game_ShowPokerUI;
-            tempScript.InitWithData(this.mIndex);
-        });
     }
 
     InitSeatUI(_seatCount : number)
@@ -429,7 +390,7 @@ export class GameBase extends BaseUI
         {
             let tempScript = _script as Game_ChatingCtr;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mTopLayer);
     }
 
 

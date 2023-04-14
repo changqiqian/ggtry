@@ -1,13 +1,14 @@
-import { _decorator, Component, Node, Label, Tween } from 'cc';
+import { _decorator, Component, Node, Label, Tween, UITransform, Sprite } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 const { ccclass, property } = _decorator;
 
 @ccclass('Toast')
 export class Toast extends BaseUI 
 {
+    @property(Sprite) 
+    mBG: Sprite = null;
     @property(Label) 
     mTips: Label = null;
-    mDuration : number;
     InitParam() 
     {
 
@@ -27,27 +28,32 @@ export class Toast extends BaseUI
 
     CustmoerDestory() 
     {
-        this.StopAllTween();
+
     }
 
     ShowToast(_tips : string , _duration:number)
     {
         this.mTips.string = _tips;
         this.Show(true);
-        this.StartAnm();
-        this.mDuration = _duration;
+        this.StartSecondsTimer(0.5,_duration,()=>
+        {
+            if(this.GetRestMillSeconds() == 0)
+            {
+                this.Show(false);
+            }
+        })
+        //this.UpdateBGSize();
     }
 
-    StartAnm()
+    UpdateBGSize()
     {
-        this.StopAllTween();
-        let tempTween = new Tween(this.node); 
-        tempTween.delay( this.mDuration);
-        tempTween.call(()=>
-        {
-            this.Show(false);
-        });
-        tempTween.start();   
+        this.mTips.updateRenderData(true);
+        let contentWidth= this.mTips.getComponent(UITransform).contentSize.width;
+        let contentHeight= this.mTips.getComponent(UITransform).contentSize.height;
+        contentWidth += 200;
+        contentHeight += 20;
+
+        this.mBG.getComponent(UITransform).setContentSize(contentWidth,contentHeight);
     }
 }
 

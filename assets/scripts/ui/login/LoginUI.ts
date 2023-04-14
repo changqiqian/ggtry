@@ -132,6 +132,7 @@ export class LoginUI extends BaseUI
             GameConfig.SetSeverUrl(GameConfig.DevelopIP);
             Network.Instance.CreateWS();
         }
+
     }
 
     CustmoerDestory() 

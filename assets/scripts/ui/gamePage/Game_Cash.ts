@@ -14,6 +14,7 @@ import { Game_ShowPokerUI } from './subUI/Game_ShowPokerUI';
 import { Game_TableInfo } from './subUI/Game_TableInfo';
 import { Game_TopUI } from './subUI/Game_TopUI';
 import { Game_Notify } from './subUI/Game_Notify';
+import { UIMgr } from '../../base/UIMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Cash')
@@ -27,61 +28,59 @@ export class Game_Cash extends GameBase
         {
             let tempScript = _script as Game_TableInfo;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mSecondLayer);
         this.AddSubView("gamePage","prefab/Game_Pot", (_script)=>
         {
             let tempScript = _script as Game_Pot;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mSecondLayer);
         this.AddSubView("gamePage","prefab/Game_BottomUI" , (_script)=>
         {
             let tempScript = _script as Game_BottomUI;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mSecondLayer);
         this.AddSubView("gamePage","prefab/Game_GameStartInfo", (_script)=>
         {
             let tempScript = _script as Game_GameStartInfo;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mSecondLayer);
         this.AddSubView("gamePage","prefab/Game_PublicCards", (_script)=>
         {
             let tempScript = _script as Game_PublicCards;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mSecondLayer);
         this.AddSubView("gamePage","prefab/Game_SelfAction", (_script)=>
         {
             let tempScript = _script as Game_SelfAction;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mSecondLayer);
         // this.AddSubView("gamePage","prefab/Game_SelfPreAction", (_script)=>
         // {
         //     let tempScript = _script as Game_SelfPreAction;
         //     tempScript.InitWithData(this.mIndex);
-        // });
-
+        // },this.mSecondLayer);
         this.AddSubView("gamePage","prefab/Game_TopUI", (_script)=>
         {
             let tempScript = _script as Game_TopUI;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mSecondLayer);
         this.AddSubView("gamePage","prefab/Game_ControlBtns", (_script)=>
         {
             let tempScript = _script as Game_ControlBtns;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mSecondLayer);
 
         this.AddSubView("gamePage","prefab/Game_ShowPokerUI", (_script)=>
         {
             let tempScript = _script as Game_ShowPokerUI;
             tempScript.InitWithData(this.mIndex);
-        });
+        },this.mSecondLayer);
 
         this.AddSubView("gamePage","prefab/Game_Notify", (_script)=>
         {
             let tempScript = _script as Game_Notify;
             tempScript.InitWithData(this.mIndex);
-        });
-
+        },this.mTopLayer);
     }
 
 }
