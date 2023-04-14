@@ -493,7 +493,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 95.03,
+      "x": -101.644,
       "y": 14.404,
       "z": 0
     },
@@ -541,7 +541,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 16.5,
+      "x": -16.5,
       "y": 0,
       "z": 0
     },
@@ -671,7 +671,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 71.365,
+      "x": -43,
       "y": 0,
       "z": 0
     },
@@ -710,12 +710,12 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 56.73,
+      "width": 75.64,
       "height": 50.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 1,
       "y": 0.5
     },
     "_id": ""
@@ -746,8 +746,8 @@
       "b": 171,
       "a": 255
     },
-    "_string": "200",
-    "_horizontalAlign": 1,
+    "_string": "2000",
+    "_horizontalAlign": 2,
     "_verticalAlign": 1,
     "_actualFontSize": 34,
     "_fontSize": 34,
@@ -797,7 +797,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 1,
       "y": 0.5
     },
     "_id": ""
@@ -832,7 +832,7 @@
     "_spacingX": 10,
     "_spacingY": 0,
     "_verticalDirection": 1,
-    "_horizontalDirection": 0,
+    "_horizontalDirection": 1,
     "_constraint": 0,
     "_constraintNum": 2,
     "_affectedByScale": false,

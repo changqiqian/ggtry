@@ -3,6 +3,7 @@ import { BaseUI } from '../../base/BaseUI';
 import { CardStruct, CardType, Combiantion } from '../../base/Calculator';
 import { Localization } from '../../base/Localization';
 import { BaseButton } from './BaseButton';
+import { LocalPlayerData } from '../../base/LocalPlayerData';
 const { ccclass, property } = _decorator;
 
 @ccclass('Poker')
@@ -66,6 +67,14 @@ export class Poker extends BaseUI
     }
     RegDataNotify() 
     {
+        LocalPlayerData.Instance.Data_PokerSetting.AddListenner(this , (_data)=>
+        {
+
+            if(this.mCardInfo != null)
+            {
+                this.SetFrontByCardInfo(this.mCardInfo);
+            }
+        });
     }
     LateInit() 
     {
@@ -77,7 +86,7 @@ export class Poker extends BaseUI
 
     public static GetPokerTexturePath(_card : CardStruct) : string
     {
-        let path = "texture/poker/";
+        let path = "texture/poker" +LocalPlayerData.Instance.Data_PokerSetting.mData + "/";
         let num = _card.mNum;
         let type = "";
         switch(_card.mType)
