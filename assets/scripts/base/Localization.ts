@@ -498,6 +498,15 @@ export class Localization {
         { name: '00411', ch: '立即邀请', en: 'Invite' , korea :""},
         { name: '00412', ch: '已同意用户：xxx的买入申请', en: 'Confirm buy in request of user:xxx' , korea :""},
         { name: '00413', ch: '已拒绝用户：xxx的买入申请', en: 'Reject buy in request of user:xxx' , korea :""},
+        { name: '00414', ch: '最近上线', en: 'Last online' , korea :""},
+        { name: '00415', ch: '邀请已发送', en: 'Invitation sent' , korea :""},
+        { name: '00416', ch: '未选择好友', en: 'No friends selected' , korea :""},
+        { name: '00417', ch: '好友已删除', en: 'Friends deleted' , korea :""},
+        { name: '00418', ch: '申请已发送', en: 'Friend requested' , korea :""},
+        { name: '00419', ch: '好友申请列表', en: 'Friend request list' , korea :""},
+        { name: '00420', ch: '立即申请', en: 'Add friend' , korea :""},
+        { name: '00421', ch: '已同意用户：xxx的好友申请', en: 'Confirm friend request of user:xxx' , korea :""},
+        { name: '00422', ch: '已拒绝用户：xxx的好友申请', en: 'Reject friend request of user:xxx' , korea :""},
         //////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////
         //////////////                      热更     

@@ -4,6 +4,7 @@ import { LocalPlayerData } from '../../../base/LocalPlayerData';
 import { NetworkSend } from '../../../network/NetworkSend';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { NetworkHttp } from '../../../network/NetworkHttp';
 
 const { ccclass, property } = _decorator;
 
@@ -53,7 +54,9 @@ export class Game_ProfileLayer extends BaseUI
 
         this.mAddFriendBtn.SetClickCallback(()=>
         {
-         
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            NetworkHttp.Instance.PostAddFriends(this.mTargetUid , gameStruct.mGameId);
+            
         })
 
     }
@@ -81,12 +84,15 @@ export class Game_ProfileLayer extends BaseUI
         let playerInfo = gameData.GetPlayerInfoByUid(_targetUid);
 
         let ownnerId = gameData.GetOwnerId();
-        if(_targetUid == ownnerId)
+
+        if(LocalPlayerData.Instance.Data_Uid.mData == _targetUid)
         {
             this.mKickBtn.Show(false);
+            this.mAddFriendBtn.Show(false);
         }
         else
         {
+            this.mAddFriendBtn.Show(true);
             if(LocalPlayerData.Instance.Data_Uid.mData == ownnerId)
             {
                 this.mKickBtn.Show(true);
@@ -96,6 +102,7 @@ export class Game_ProfileLayer extends BaseUI
                 this.mKickBtn.Show(false);
             }
         }
+
 
         this.LoadHead(playerInfo.head,(_spriteFrame)=>
         {

@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "752cbe87-d623-4668-bc49-2d14d19b56c4",
+  "uuid": "07507d78-d4a2-403f-8ba5-63100a2757ca",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "752cbe87-d623-4668-bc49-2d14d19b56c4@6c48a",
-      "displayName": "Circle",
+      "uuid": "07507d78-d4a2-403f-8ba5-63100a2757ca@6c48a",
+      "displayName": "菜单-弹窗6",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "752cbe87-d623-4668-bc49-2d14d19b56c4",
+        "imageUuidOrDatabaseUri": "07507d78-d4a2-403f-8ba5-63100a2757ca",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "752cbe87-d623-4668-bc49-2d14d19b56c4@f9941",
-      "displayName": "Circle",
+      "uuid": "07507d78-d4a2-403f-8ba5-63100a2757ca@f9941",
+      "displayName": "菜单-弹窗6",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 144,
-        "height": 144,
-        "rawWidth": 144,
-        "rawHeight": 144,
+        "width": 1125,
+        "height": 2436,
+        "rawWidth": 1125,
+        "rawHeight": 2436,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "752cbe87-d623-4668-bc49-2d14d19b56c4@6c48a",
+        "imageUuidOrDatabaseUri": "07507d78-d4a2-403f-8ba5-63100a2757ca@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "752cbe87-d623-4668-bc49-2d14d19b56c4@f9941"
+    "redirect": "07507d78-d4a2-403f-8ba5-63100a2757ca@f9941"
   }
 }

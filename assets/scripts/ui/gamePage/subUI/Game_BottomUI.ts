@@ -31,7 +31,6 @@ export class Game_BottomUI extends BaseUI
             {
                 let tempScript = _script as Game_MatchInfoLayer;
                 tempScript.InitWithData(this.mIndex);
-                tempScript.Refresh();
             },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
 

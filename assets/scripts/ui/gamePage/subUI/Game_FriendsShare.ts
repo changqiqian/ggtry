@@ -1,6 +1,11 @@
 import { _decorator, Component, EditBox, Label, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { BaseButton } from '../../common/BaseButton';
+import { UIMgr } from '../../../base/UIMgr';
+import { Game_FriendsList } from './Game_FriendsList';
+import { MultipleTableCtr } from '../../common/MultipleTableCtr';
+import { Tool } from '../../../Tool';
+import { NetworkHttp } from '../../../network/NetworkHttp';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_FriendsShare')
@@ -23,6 +28,12 @@ export class Game_FriendsShare extends BaseUI
     @property(BaseButton) 
     mConfirmBtn: BaseButton = null;
     mIndex : number = null;
+
+    protected onEnable(): void 
+    {
+        this.mEditBox.string = "";
+    }
+
     InitParam()
     {
 
@@ -43,11 +54,21 @@ export class Game_FriendsShare extends BaseUI
         });
         this.mFriendsListBtn.SetClickCallback(()=>
         {
-
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_FriendsList",true,(_script)=>
+            {
+                let tempScript = _script as Game_FriendsList;
+                tempScript.InitWithData(this.mIndex);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
         this.mConfirmBtn.SetClickCallback(()=>
         {
-
+            if(Tool.IdTest(this.mEditBox.string))
+            {
+                let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+                let IdList = new Array<string>();
+                IdList.push(this.mEditBox.string);
+                NetworkHttp.Instance.PostInviteFriends( IdList, gameStruct.mGameId);
+            }
         });
     }
     RegDataNotify()

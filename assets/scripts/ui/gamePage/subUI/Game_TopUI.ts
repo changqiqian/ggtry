@@ -110,6 +110,8 @@ export class Game_TopUI extends BaseUI
         {
             NetworkHttp.Instance.PostBuyInRequest(HTTP_BuyInStates.Waiting ,ownnerId,gameStruct.mGameId);
         }
+
+        NetworkHttp.Instance.GetAddFriendsRequestList(gameStruct.mGameId);
     }
 }
 

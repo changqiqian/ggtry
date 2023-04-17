@@ -6,7 +6,7 @@ import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { MultipleNotify, SingletonBaseNotify } from '../../base/Singleton';
 import { GameConfig } from '../../GameConfig';
 import { Network } from '../../network/Network';
-import { HTTP_ApproveResponse, HTTP_BuyInRequest } from '../../network/NetworkHttp';
+import { HTTP_ApproveResponse, HTTP_BuyInResponse, HTTP_FriendsData, HTTP_FriendsRequestListResponse } from '../../network/NetworkHttp';
 
 
 
@@ -68,40 +68,18 @@ export abstract class GameData extends MultipleNotify
     Data_S2CCommonSqueezeRoundNotify: BaseData<S2CCommonSqueezeRoundNotify> = new BaseData<S2CCommonSqueezeRoundNotify>();  //搓牌推送
     Data_S2CCommonAutoOperatorNotify: BaseData<S2CCommonAutoOperatorNotify> = new BaseData<S2CCommonAutoOperatorNotify>();  //托管推送
     Data_S2CCommonShowSelfCardNotify: BaseData<S2CCommonShowSelfCardNotify> = new BaseData<S2CCommonShowSelfCardNotify>();  //亮手牌推送
-
-
     Data_PreCheckOrFold : BaseData<number> = new BaseData<number>();  //提前check 或者 fold  0代表没选中，1代表选中
     Data_Refresh : BaseData<boolean> = new BaseData<boolean>(true);  //刷新场景
 
     mChatHistroy : Array<S2CCommonChatNotify> = new Array<S2CCommonChatNotify>(); //聊天历史
 
-    
-
     //HttpData
-    Data_HTTPBuyInRequest: BaseData<HTTP_BuyInRequest> = new BaseData<HTTP_BuyInRequest>(); //买入请求列表
+    Data_HTTPBuyInRequest: BaseData<HTTP_BuyInResponse> = new BaseData<HTTP_BuyInResponse>(); //买入请求列表
     Data_HTTPApproveResponse: BaseData<HTTP_ApproveResponse> = new BaseData<HTTP_ApproveResponse>(); //处理买入结果
+    Data_HTTP_FriendsData :  BaseData<HTTP_FriendsData > = new BaseData<HTTP_FriendsData >(); //好友列表数据
+    Data_HTTP_RefreshFriendList :  BaseData<boolean > = new BaseData<boolean >(true); //刷新好友列表
+    Data_HTTP_FriendsRequestListResponse :  BaseData<HTTP_FriendsRequestListResponse > = new BaseData<HTTP_FriendsRequestListResponse >(); //好友申请列表
 
-    public RemoveApproveRequest(_data : HTTP_ApproveResponse)
-    {
-        let tempData = this.Data_HTTPBuyInRequest.mData.data;
-        if(tempData == null || tempData.length == 0)
-        {
-            return;
-        }
-
-        let index = tempData.findIndex((_item) => _item.id.toString() === _data.buyRequestId);
-        if(index < 0)
-        {
-            return;
-        }
-        tempData.splice(index , 1);
-
-        let newData = new HTTP_BuyInRequest();
-        newData.code = this.Data_HTTPBuyInRequest.mData.code;
-        newData.msg = this.Data_HTTPBuyInRequest.mData.msg;
-        newData.data = tempData;
-        this.Data_HTTPBuyInRequest.mData = newData;
-    }
 
     public static CreateAction(_actionType : ActionType , _uid : string , _amount : number):ActionInfo
     {

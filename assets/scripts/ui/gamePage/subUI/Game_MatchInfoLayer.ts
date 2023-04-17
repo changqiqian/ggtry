@@ -73,11 +73,12 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerStatistic>
 
     public InitWithData(_index : number)
     {
+        this.mIndex = _index;
+        this.OnDragTop();
         if(this.CheckInitFlag() )
         {
             return;
         }
-        this.mIndex = _index;
         this.BindData();
     }
 

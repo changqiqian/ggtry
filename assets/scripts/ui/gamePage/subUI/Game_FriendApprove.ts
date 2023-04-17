@@ -3,10 +3,11 @@ import { ListViewCtr } from '../../../UiTool/ListViewCtr';
 import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Game_FriendApproveItem } from './Game_FriendApproveItem';
+import { HTTP_FriendsRequestList, NetworkHttp } from '../../../network/NetworkHttp';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_FriendApprove')
-export class Game_FriendApprove extends ListViewCtr<any>  
+export class Game_FriendApprove extends ListViewCtr<HTTP_FriendsRequestList>  
 {
     @property(BaseButton) 
     mCloseBtn: BaseButton = null;
@@ -47,7 +48,11 @@ export class Game_FriendApprove extends ListViewCtr<any>
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
-
+        gameData.Data_HTTP_FriendsRequestListResponse.AddListenner(this,(_data)=>
+        {
+            this.mCurrentData = _data.data;
+            this.RefreshData();
+        });
         
     }
 
@@ -61,9 +66,19 @@ export class Game_FriendApprove extends ListViewCtr<any>
         _item.getComponent(Game_FriendApproveItem).InitWithData(this.mCurrentData[_index] , this.OnItemClicked);
     }
 
-    OnItemClicked(_agree : boolean , _data : any)
+    OnItemClicked(_agree : boolean , _data : HTTP_FriendsRequestList)
     {
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+
+        if(_agree)
+        {
+            NetworkHttp.Instance.GetAgreeFriendsRequest(gameStruct.mGameId , _data.userId);
+        }
+        else
+        {
+            NetworkHttp.Instance.GetRejectFriendsRequest(gameStruct.mGameId , _data.userId);
+        }
+
     }
 }
 

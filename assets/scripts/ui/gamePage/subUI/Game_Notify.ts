@@ -4,6 +4,7 @@ import { BaseButton } from '../../common/BaseButton';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { UIMgr } from '../../../base/UIMgr';
 import { Game_BuyInApprove } from './Game_BuyInApprove';
+import { Game_FriendApprove } from './Game_FriendApprove';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Notify')
@@ -23,7 +24,11 @@ export class Game_Notify extends BaseUI
     {
         this.mFriendNotifyBtn.SetClickCallback(()=>
         {
-
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_FriendApprove",true,(_script)=>
+            {
+                let temp = _script as Game_FriendApprove;
+                temp.InitWithData(this.mIndex);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
         this.mBuyInNotifyBtn.SetClickCallback(()=>
         {
@@ -72,13 +77,27 @@ export class Game_Notify extends BaseUI
                 this.mBuyInNotifyBtn.Show(false);
                 return;
             }
-
             if(_data.data.length == 0)
             {
                 this.mBuyInNotifyBtn.Show(false);
                 return;
             }
             this.mBuyInNotifyBtn.Show(true);
+        });
+
+        gameData.Data_HTTP_FriendsRequestListResponse.AddListenner(this,(_data)=>
+        {
+            if(_data.data  == null)
+            {
+                this.mFriendNotifyBtn.Show(false);
+                return;
+            }
+            if(_data.data.length == 0)
+            {
+                this.mFriendNotifyBtn.Show(false);
+                return;
+            }
+            this.mFriendNotifyBtn.Show(true);
         });
 
     }

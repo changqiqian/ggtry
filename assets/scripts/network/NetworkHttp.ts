@@ -52,7 +52,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         {
             console.log("_收到http==房主查询买入请求==" + _result);
             let json = JSON.parse(_result);
-            let classData : HTTP_BuyInRequest = json as HTTP_BuyInRequest;
+            let classData : HTTP_BuyInResponse = json as HTTP_BuyInResponse;
 
             if(classData.code != NetworkHttp.SuccesCode)
             {
@@ -103,22 +103,14 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
             if(gameStruct != null)
             {
-                let gameData = gameStruct.mGameData;
-                let tempData = new HTTP_ApproveResponse();
-                tempData.status = _approveStatus;
-                tempData.approveUserId = _approveUserId;
-                tempData.buyRequestId = _buyRequestId;
-                gameData.Data_HTTPApproveResponse.mData = tempData;
-                gameData.RemoveApproveRequest(tempData);
-
                 let tips = "";
-                if(tempData.status == HTTP_ApproveStatus.Agree)
+                if(_approveStatus == HTTP_ApproveStatus.Agree)
                 {
-                    tips = Localization.ReplaceString("00412",tempData.approveUserId)
+                    tips = Localization.ReplaceString("00412",_approveUserId)
                 }
                 else
                 {
-                    tips = Localization.ReplaceString("00413",tempData.approveUserId)
+                    tips = Localization.ReplaceString("00413",_approveUserId)
                 }
                 UIMgr.Instance.ShowToast(tips);
             }
@@ -130,8 +122,253 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         }) 
     }
 
+    //获取好友列表
+    public GetFriendsList( _gameId : string ,_page : number , _limit : number)
+    {
+        let xhr = new XMLHttpRequest();
+        let url = "http://54.169.147.71:8082/api/hall/sy/user/friend/";
+        url += LocalPlayerData.Instance.Data_Uid.mData;
+        url += "?";
+        url += "page=" + _page +"&";
+        url += "limit=" + _limit;
+        xhr.open('GET', url);
+        console.log("http get  获取好友列表==");
+        this.HttpSend(xhr,{},(_result)=>
+        {
+            console.log("_收到http== 获取好友列表===" + _result);
+            let json = JSON.parse(_result);
+            let classData : HTTP_FriendsListResponse = json as HTTP_FriendsListResponse;
 
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast(classData.msg);
+                return;
+            }
 
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_HTTP_FriendsData.mData = classData.data;
+            }
+
+        },
+        (_err)=>
+        {
+
+        }) 
+    }
+
+    //邀请好友
+    public PostInviteFriends(_friendsUids : Array<string>, _gameId : string)
+    {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', "http://54.169.147.71:8082/api/hall/sy/user/game/invite");
+
+        console.log("http post  邀请好友==");
+        let param = 
+        {
+            friendIds : _friendsUids,
+            gameId : _gameId,
+            userId : LocalPlayerData.Instance.Data_Uid.mData
+        }
+
+        this.HttpSend(xhr,param,(_result)=>
+        {
+            console.log("_收到http==邀请好友==" + _result);
+            let json = JSON.parse(_result);
+            let classData : HTT_BaseResponseWithData = json as HTT_BaseResponseWithData;
+
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast( classData.msg);
+                return;
+            }
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(param.gameId);
+            if(gameStruct != null)
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00415"));
+            }
+
+        },
+        (_err)=>
+        {
+
+        }) 
+    }
+
+    //删除好友
+    public PostDeleteFriends(_friendsUids : Array<string>, _gameId : string)
+    {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', "http://54.169.147.71:8082/api/hall/sy/user/friend/delete");
+
+        console.log("http post  删除好友==");
+        let param = 
+        {
+            friendIds : _friendsUids,
+            userId : LocalPlayerData.Instance.Data_Uid.mData
+        }
+
+        this.HttpSend(xhr,param,(_result)=>
+        {
+            console.log("_收到http==删除好友==" + _result);
+            let json = JSON.parse(_result);
+            let classData : HTT_BaseResponseWithData = json as HTT_BaseResponseWithData;
+
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast( classData.msg);
+                return;
+            }
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
+            if(gameStruct != null)
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00417"));
+                let gameData = gameStruct.mGameData;
+                gameData.Data_HTTP_RefreshFriendList.mData = true;
+            }
+        },
+        (_err)=>
+        {
+
+        }) 
+    }
+
+    //添加好友
+    public PostAddFriends(_friendUi : string, _gameId : string)
+    {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', "http://54.169.147.71:8082/api/hall/sy/user/friend/send");
+
+        console.log("http post  添加好友==");
+        let param = 
+        {
+            friendId : _friendUi,
+            userId : LocalPlayerData.Instance.Data_Uid.mData
+        }
+
+        this.HttpSend(xhr,param,(_result)=>
+        {
+            console.log("_收到http==添加好友==" + _result);
+            let json = JSON.parse(_result);
+            let classData : HTT_BaseResponseWithData = json as HTT_BaseResponseWithData;
+
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast( classData.msg);
+                return;
+            }
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
+            if(gameStruct != null)
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00418"));
+            }
+
+        },
+        (_err)=>
+        {
+
+        }) 
+    }
+
+    //获取好友请求列表
+    public GetAddFriendsRequestList( _gameId : string)
+    {
+        let xhr = new XMLHttpRequest();
+        let url = "http://54.169.147.71:8082/api/hall/sy/user/friend/request?userId=" + LocalPlayerData.Instance.Data_Uid.mData;
+        xhr.open('GET', url);
+        console.log("http GET  获取好友请求==");
+        this.HttpSend(xhr,{},(_result)=>
+        {
+            console.log("_收到http==获取好友请求==" + _result);
+            let json = JSON.parse(_result);
+            let classData : HTTP_FriendsRequestListResponse = json as HTTP_FriendsRequestListResponse;
+
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast( classData.msg);
+                return;
+            }
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
+            if(gameStruct != null)
+            {
+                let gameData = gameStruct.mGameData;
+                gameData.Data_HTTP_FriendsRequestListResponse.mData = classData;
+            }
+        },
+        (_err)=>
+        {
+
+        }) 
+    }
+
+    //接受好友请求
+    public GetAgreeFriendsRequest( _gameId : string , _targetUid : string)
+    {
+        let xhr = new XMLHttpRequest();
+        let url = "http://54.169.147.71:8082/api/hall/sy/user/friend/accept/" + _targetUid;
+        xhr.open('GET', url);
+        console.log("http GET  接受好友请求==");
+        this.HttpSend(xhr,{},(_result)=>
+        {
+            console.log("_收到http==接受好友请求==" + _result);
+            let json = JSON.parse(_result);
+            let classData : HTT_BaseResponseWithData = json as HTT_BaseResponseWithData;
+
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast(classData.msg);
+                return;
+            }
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
+            if(gameStruct != null)
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00421"));
+
+            }
+        },
+        (_err)=>
+        {
+
+        }) 
+    }
+
+    //拒绝好友请求
+    public GetRejectFriendsRequest( _gameId : string , _targetUid : string)
+    {
+        let xhr = new XMLHttpRequest();
+        let url = "http://54.169.147.71:8082/api/hall/sy/user/friend/refuse/" + _targetUid;
+        xhr.open('GET', url);
+        console.log("http GET  拒绝好友请求==");
+        this.HttpSend(xhr,{},(_result)=>
+        {
+            console.log("_收到http==拒绝好友请求==" + _result);
+            let json = JSON.parse(_result);
+            let classData : HTT_BaseResponseWithData = json as HTT_BaseResponseWithData;
+
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast(classData.msg);
+                return;
+            }
+
+            let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
+            if(gameStruct != null)
+            {
+                UIMgr.Instance.ShowToast(Localization.GetString("00422"));
+            }
+        },
+        (_err)=>
+        {
+
+        }) 
+    }
 }
 
 
@@ -165,7 +402,14 @@ export class HTT_BaseResponse
     msg: string;
 }
 
-export class HTTP_BuyInRequest
+export class HTT_BaseResponseWithData
+{
+    code : string;
+    msg: string;
+    data: string
+}
+
+export class HTTP_BuyInResponse
 {
     code : string;
     msg: string
@@ -184,4 +428,53 @@ export class HTTP_BuyInData
     userId: string
     userName: string
     headUrl : string
+}
+
+export class HTTP_FriendsListResponse
+{
+    code : string;
+    msg: string
+    data : HTTP_FriendsData
+}
+
+export class HTTP_FriendsData
+{
+    total: number;
+    pageNum: number;
+    size: number;
+    list : Array<HTTP_FriendsList>;
+}
+
+export class HTTP_FriendsList
+{
+    userId: string;
+    userName:  string;
+    coin:  string;
+    diamond:  string;
+    nation:  string;
+    headUrl:  string;
+    pinCode:  string;
+    lastLoginTime:  string;
+    lastLogoutTime:  string;
+    selected : boolean = false;
+}
+
+
+export class HTTP_FriendsRequestListResponse
+{
+    code : string;
+    msg: string
+    data : Array<HTTP_FriendsRequestList>
+}
+
+
+export class HTTP_FriendsRequestList
+{
+    createTime: string
+    friendId: string;
+    headUrl: string;
+    id: number;
+    state: number
+    userId: string;
+    userName: string;
 }

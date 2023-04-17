@@ -3,6 +3,7 @@ import { BaseUI } from '../../../base/BaseUI';
 import { BaseButton } from '../../common/BaseButton';
 import { HTTP_ApproveStatus, HTTP_BuyInData } from '../../../network/NetworkHttp';
 import { Tool } from '../../../Tool';
+import { Localization } from '../../../base/Localization';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_BuyInApproveItem')
@@ -21,6 +22,9 @@ export class Game_BuyInApproveItem extends BaseUI
     @property(BaseButton) 
     mRejectBtn: BaseButton = null;
 
+    @property(Label) 
+    mTips: Label = null;
+
     mClickCallback : Function = null;
     mData : HTTP_BuyInData = null;
     InitParam()
@@ -35,7 +39,7 @@ export class Game_BuyInApproveItem extends BaseUI
             {
                 this.mClickCallback(HTTP_ApproveStatus.Agree , this.mData);
             }
-
+            this.ShowTips(true);
         });
 
         this.mRejectBtn.SetClickCallback(()=>
@@ -44,8 +48,12 @@ export class Game_BuyInApproveItem extends BaseUI
             {
                 this.mClickCallback(HTTP_ApproveStatus.Reject , this.mData);
             }
-            
+            this.ShowTips(false);
         });
+
+        this.mAgreeBtn.Show(true);
+        this.mRejectBtn.Show(true);
+        this.mTips.node.active = false;
     }
     RegDataNotify()
     {
@@ -71,6 +79,22 @@ export class Game_BuyInApproveItem extends BaseUI
         {
             this.mHead.spriteFrame = _spriteFrame;
         });
+    }
+
+    ShowTips(_value:boolean)
+    {
+        this.mAgreeBtn.Show(false);
+        this.mRejectBtn.Show(false);
+        this.mTips.node.active = true;
+        if(_value)
+        {
+            this.mTips.string = Localization.GetString("00107");
+        }
+        else
+        {
+            this.mTips.string = Localization.GetString("00108");
+        }
+
     }
 }
 
