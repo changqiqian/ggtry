@@ -63,7 +63,7 @@ export class Game_FriendApprove extends ListViewCtr<HTTP_FriendsRequestList>
 
     RenderEvent(_item: Node , _index: number)
     {
-        _item.getComponent(Game_FriendApproveItem).InitWithData(this.mCurrentData[_index] , this.OnItemClicked);
+        _item.getComponent(Game_FriendApproveItem).InitWithData(this.mCurrentData[_index] , this.OnItemClicked.bind(this));
     }
 
     OnItemClicked(_agree : boolean , _data : HTTP_FriendsRequestList)

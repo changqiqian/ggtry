@@ -507,6 +507,13 @@ export class Localization {
         { name: '00420', ch: '立即申请', en: 'Add friend' , korea :""},
         { name: '00421', ch: '已同意用户：xxx的好友申请', en: 'Confirm friend request of user:xxx' , korea :""},
         { name: '00422', ch: '已拒绝用户：xxx的好友申请', en: 'Reject friend request of user:xxx' , korea :""},
+        { name: '00423', ch: '购买钻石', en: 'Diamond shop' , korea :""},
+        { name: '00424', ch: '立即购买', en: 'Buy' , korea :""},
+        { name: '00425', ch: '请选择要购买的钻石', en: 'Select diamond first' , korea :""},
+        { name: '00426', ch: '读取中', en: 'Loading' , korea :""},
+        { name: '00427', ch: '购买成功', en: 'Purchased' , korea :""},
+    
+        
         //////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////
         //////////////                      热更     

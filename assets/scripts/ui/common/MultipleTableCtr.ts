@@ -11,6 +11,7 @@ import { Game_Cash } from '../gamePage/Game_Cash';
 import { HallData } from '../hall/HallData';
 import { MultipleTableBtn } from './MultipleTableBtn';
 import { ToggleBtn } from './ToggleBtn';
+import { NetworkHttp } from '../../network/NetworkHttp';
 const { ccclass, property } = _decorator;
 
 class GameStruct
@@ -140,7 +141,8 @@ export class MultipleTableCtr extends BaseUI
 
         HallData.Instance.Data_S2CExitGame.AddListenner(this,(_data)=>
         {
-            this.DeleteGameUI(_data.gameId);
+            NetworkHttp.Instance.BackHome();
+            //this.DeleteGameUI(_data.gameId);
         });
         // HallData.Instance.Data_S2CDismissClubGame.AddListenner(this,(_data)=>
         // {

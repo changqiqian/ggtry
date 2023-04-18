@@ -1875,7 +1875,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 550,
-      "height": 112.99999999999999
+      "height": 63
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1910,7 +1910,7 @@
       "b": 171,
       "a": 255
     },
-    "_string": "httpshttpshttpshttpshttpshttpshttpshttpshttpshttpshttpshttpsht",
+    "_string": "www.Baidu.com",
     "_horizontalAlign": 0,
     "_verticalAlign": 0,
     "_actualFontSize": 40,

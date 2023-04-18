@@ -81,6 +81,7 @@ export class Game_TopUI extends BaseUI
 
         gameData.Data_S2CCommonEnterGameResp.AddListenner(this,(_data)=>
         {
+            this.RequestData();
             this.StartSecondsTimer(1000000,1,()=>
             {
                 let seconds = this.GetRestSeconds();

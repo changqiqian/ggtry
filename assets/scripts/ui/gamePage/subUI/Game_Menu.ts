@@ -12,6 +12,7 @@ import { HallData } from '../../hall/HallData';
 import { Game_BuyInWindow } from './Game_BuyInWindow';
 import { Game_RuleLayer } from './Game_RuleLayer';
 import { Game_FriendsShare } from './Game_FriendsShare';
+import { Game_BuyDiamond } from './Game_BuyDiamond';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_Menu')
@@ -28,6 +29,8 @@ export class Game_Menu extends BaseUI
     mServiceBtn: BaseButton = null;
     @property(BaseButton) 
     mBringInBtn: BaseButton = null;
+    @property(BaseButton) 
+    mDiamondBtn: BaseButton = null;
     @property(BaseButton) 
     mSettingBtn: BaseButton = null;
     @property(BaseButton) 
@@ -78,6 +81,16 @@ export class Game_Menu extends BaseUI
                 temp.StopCountDown();
             },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
         });
+        this.mDiamondBtn.SetClickCallback(()=>
+        {
+            this.Show(false);
+            UIMgr.Instance.ShowWindow("gamePage","prefab/Game_BuyDiamond",true,(_script)=>
+            {
+                let temp = _script as Game_BuyDiamond;
+                temp.InitWithData(this.mIndex);
+            },MultipleTableCtr.GetUiTag(this.mIndex),this.mIndex.toString());
+        });
+        
         this.mSettingBtn.SetClickCallback(()=>
         {
             this.Show(false);

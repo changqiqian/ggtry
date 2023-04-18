@@ -19,7 +19,6 @@ export class GameConfig
     }
     //发布的版本号
     public static Version = "1.1.6"
-
       
     public static LOGIN_TOKEN;
 
@@ -610,6 +609,7 @@ export class GameConfig
         return "None";
     }
 
+
     public static uid : string;
 
     public static CreateUID()
@@ -622,13 +622,12 @@ export class GameConfig
     {
         return top.USER_ID;
         //return GameConfig.uid;
-        //return "9527"
     }
 
     public static GetTopGameId() : string
     {
         return top.GAME_ID;
-        //return "5555555555";
+        //return "9999999990";
     }
     
     

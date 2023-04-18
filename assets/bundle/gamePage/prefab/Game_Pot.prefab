@@ -522,10 +522,10 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 146,
-      "g": 159,
-      "b": 175,
-      "a": 255
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 76
     },
     "_string": "底池：0",
     "_horizontalAlign": 1,

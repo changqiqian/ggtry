@@ -23,6 +23,12 @@ export class Game_FriendsList extends ListViewCtr<HTTP_FriendsList>
 
     }
 
+    protected onDisable(): void 
+    {
+        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+        NetworkHttp.Instance.GetAddFriendsRequestList(gameStruct.mGameId);
+    }
+
     BindUI()
     {
         this.mCloseBtn.SetClickCallback(()=>
@@ -127,7 +133,7 @@ export class Game_FriendsList extends ListViewCtr<HTTP_FriendsList>
 
     RenderEvent(_item: Node , _index: number)
     {
-        _item.getComponent(Game_FriendItem).InitWithData(this.mCurrentData[_index] , _index, this.OnItemClicked);
+        _item.getComponent(Game_FriendItem).InitWithData(this.mCurrentData[_index] , _index, this.OnItemClicked.bind(this));
     }
 
     OnItemClicked(_selected : boolean , _index: number )

@@ -33,8 +33,13 @@ export class Game_WinEffect extends BaseUI
              
     }
 
-    public InitWithData(_amount : number)
+    public InitWithData(_amount : number , _parentScale : Vec3)
     {
+        if(_parentScale != Vec3.ONE)
+        {
+            this.node.scale = new Vec3(0.8 , 0.8 , 0.8);
+        }
+
         let clientAmount = Tool.ConvertMoney_S2C(_amount)
         if(clientAmount >= 0)
         {

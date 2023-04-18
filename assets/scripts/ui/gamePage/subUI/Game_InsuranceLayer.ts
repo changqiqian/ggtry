@@ -207,7 +207,7 @@ export class Game_InsuranceLayer extends BaseUI
             for(let i = 0 ; i < publicCards.length ; i++)
             {
                 let current = publicCards[i];
-                this.LoadPrefab("common" , "prefab/Game_InsurancePoker",(_node)=>
+                this.LoadPrefab("gamePage" , "prefab/Game_InsurancePoker",(_node)=>
                 {
                     this.mPublicCards.addChild(_node);
                     let tempScript = _node.getComponent(Game_InsurancePoker);

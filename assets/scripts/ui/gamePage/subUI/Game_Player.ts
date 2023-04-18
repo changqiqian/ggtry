@@ -205,7 +205,7 @@ export class Game_Player extends BaseUI
                     this.LoadPrefab("gamePage","prefab/Game_WinEffect",(_node)=>
                     {
                         this.node.addChild(_node);
-                        let script = _node.getComponent(Game_WinEffect);
+                        let script = _node.getComponent(Game_WinEffect , this.node.scale);
                         script.InitWithData(winResult.winLose);
                     })
                 }
@@ -712,6 +712,7 @@ export class Game_Player extends BaseUI
         let playerInfo = gameData.GetPlayerInfoBySeatId(this.mSeatID);
         if(playerInfo == null)
         {
+            this.RestoreScale();
             return;
         }
 

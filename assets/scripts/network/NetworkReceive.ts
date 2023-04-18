@@ -234,26 +234,6 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                 if(gameStruct != null)
                 {
                     let gameData = gameStruct.mGameData;
-                    let selfPlayer = gameData.GetPlayerInfoByUid(LocalPlayerData.Instance.Data_Uid.mData);
-                    
-                    // if(gameStruct.mIsClubGame)
-                    // {
-                    //     let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId);
-                    //     if(enterClub != null)
-                    //     {
-                    //         enterClub.clubMember.clubPoint -= msg.bringInNum;
-                    //         let pointNotify = new S2CClubPlayerPointNotify();
-                    //         pointNotify.amount = msg.bringInNum;
-                    //         pointNotify.clubId = enterClub.clubInfo.id;
-                    //         pointNotify.playerRestAmount = enterClub.clubMember.clubPoint;
-                    //         HallData.Instance.Data_S2CClubPlayerPointNotify.mData = pointNotify;
-                    //     }
-                    // }
-                    // else
-                    // {
-                    //     LocalPlayerData.Instance.Data_Coin.mData -= msg.bringInNum;
-                    // }
-
                     if(msg.approvalStatus == ApprovalStatus.ApprovalStatus_Fail)
                     {
                         UIMgr.Instance.ShowToast(Localization.GetString("00405"));
@@ -264,15 +244,9 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
                     }
                     else if(msg.approvalStatus == ApprovalStatus.ApprovalStatus_Wait)
                     {
-                        UIMgr.Instance.ShowToast(Localization.GetString("00404"));
+                        //UIMgr.Instance.ShowToast(Localization.GetString("00404"));
                     }
 
-                    // if(selfPlayer!=null)
-                    // {
-                    //     selfPlayer.bringInNum = msg.totalBringInNum;
-                    // }
-                    // gameData.Data_S2CCommonBringInResp.mData = msg;
-                    // UIMgr.Instance.ShowToast(Localization.GetString("00245"));
                 }
             }
             else

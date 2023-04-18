@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, Button, sys, SafeArea, setDisplayStats, EditBox } from 'cc';
+import { _decorator, Component, Node, Label, Button, sys, SafeArea, setDisplayStats, EditBox, Vec2, Vec3 } from 'cc';
 import { BaseUI } from '../../base/BaseUI';
 import { LocalPlayerData } from '../../base/LocalPlayerData';
 import { SceneType, UIMgr } from '../../base/UIMgr';
@@ -8,6 +8,8 @@ import {  Network } from '../../network/Network';
 import { BaseButton } from '../common/BaseButton';
 import { MultipleTableCtr } from '../common/MultipleTableCtr';
 import { LoginData } from './LoginData';
+import { Tool } from '../../Tool';
+import { Game_WinEffect } from '../gamePage/subUI/Game_WinEffect';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoginUI')

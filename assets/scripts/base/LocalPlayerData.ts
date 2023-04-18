@@ -17,11 +17,13 @@ export class LocalPlayerData extends SingletonBaseNotify<LocalPlayerData>()
     Data_Uid : BaseData<string> = new BaseData<string>(false,"selfUid"); //玩家uid
     Data_NickName : BaseData<string> = new BaseData<string>(); //玩家姓名
     Data_Head : BaseData<string> = new BaseData<string>(false , null); //头像地址
-    Data_Coin : BaseData<number> = new BaseData<number>(); //玩家金币
+    Data_Coin : BaseData<number> = new BaseData<number>(); //玩家大厅金币
     Data_Diamond : BaseData<number> = new BaseData<number>(); //玩家g钻石
     Data_AccountLevel : BaseData<AccountLevel> = new BaseData<AccountLevel>(); //账户等级
     Data_AccountStatus : BaseData<AccountStatus> = new BaseData<AccountStatus>(); //账户状态
+    Data_DiamondSelectIndex : BaseData<number> = new BaseData<number>(); //想要购买的钻石编号
 
+    Data_UpdateHallMoney : BaseData<boolean> = new BaseData<boolean>(true); //更新大厅金币
     UpdateUserInfo(_userInfo : UserInfo)
     {
         this.Data_Uid.mData = _userInfo.uid;

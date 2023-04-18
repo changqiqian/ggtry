@@ -103,6 +103,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
             if(gameStruct != null)
             {
+                let gameData = gameStruct.mGameData;
                 let tips = "";
                 if(_approveStatus == HTTP_ApproveStatus.Agree)
                 {
@@ -112,6 +113,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
                 {
                     tips = Localization.ReplaceString("00413",_approveUserId)
                 }
+                let ownnerId = gameData.GetOwnerId();
                 UIMgr.Instance.ShowToast(tips);
             }
 
@@ -330,7 +332,6 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
             if(gameStruct != null)
             {
                 UIMgr.Instance.ShowToast(Localization.GetString("00421"));
-
             }
         },
         (_err)=>
@@ -368,6 +369,79 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
         {
 
         }) 
+    }
+
+    //购买钻石
+    public POSTBuyDiamondRequest(_price : number , _diamondAmount : number)
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let xhr = new XMLHttpRequest();
+        let url = "http://54.169.147.71:8082/api/hall/sy/user/buy/diamond"
+        xhr.open('POST', url);
+        console.log("http POST  购买钻石==");
+
+        let param = 
+        {
+            buyAmount : _price,
+            buyCount: _diamondAmount,
+            userId: LocalPlayerData.Instance.Data_Uid.mData
+        }
+        this.HttpSend(xhr,param,(_result)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            console.log("_收到http==购买钻石==" + _result);
+            let json = JSON.parse(_result);
+            let classData : HTT_BaseResponseWithData = json as HTT_BaseResponseWithData;
+
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast(classData.msg);
+                return;
+            }
+            UIMgr.Instance.ShowToast(Localization.GetString("00427"));
+            NetworkHttp.Instance.GetUserInfoRequest();
+        },
+        (_err)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+        }) 
+    }
+
+    //获取用户信息
+    public GetUserInfoRequest()
+    {
+        UIMgr.Instance.ShowLoading(true);
+        let xhr = new XMLHttpRequest();
+        let url = "http://54.169.147.71:8082/api/hall/sy/user/" + LocalPlayerData.Instance.Data_Uid.mData;
+        xhr.open('GET', url);
+        console.log("http GET  获取用户信息==");
+        this.HttpSend(xhr,{},(_result)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+            console.log("_收到http==获取用户信息==" + _result);
+            let json = JSON.parse(_result);
+            let classData : HTTP_UserInfoResponse = json as HTTP_UserInfoResponse;
+
+            if(classData.code != NetworkHttp.SuccesCode)
+            {
+                UIMgr.Instance.ShowToast(classData.msg);
+                return;
+            }
+
+            LocalPlayerData.Instance.Data_Coin.mData = classData.data.coin;
+            LocalPlayerData.Instance.Data_UpdateHallMoney.mData  = true;
+            
+        },
+        (_err)=>
+        {
+            UIMgr.Instance.ShowLoading(false);
+        }) 
+    }
+
+    public BackHome()
+    {
+        let url = "http://test-h5.9dhub.com?userId=" + LocalPlayerData.Instance.Data_Uid.mData;
+        top.location.href=url
     }
 }
 
@@ -478,3 +552,31 @@ export class HTTP_FriendsRequestList
     userId: string;
     userName: string;
 }
+
+export class HTTP_UserInfoResponse
+{
+    code: string;
+    msg:  string;
+    data : HTTP_UserInfo;
+}
+
+export class HTTP_UserInfo
+{
+    userId: string;
+    userName: string;
+    coin: number
+    diamond: number
+    nation: string;
+    headUrl: string;
+    pinCode: string;
+    state:number
+    higherLevel: string;
+    createTime: string;
+    updateTime: string;
+    lastLoginTime: string;
+    lastLogoutTime: string;
+    friendGameRatio:string;
+    lobbyGameRatio: string;
+    insuranceRatio: string;
+}
+

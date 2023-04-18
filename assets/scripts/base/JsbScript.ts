@@ -22,7 +22,7 @@ export class JsbScript
                 return LanguageType.HK;
             }
         } 
-        else if (cc.sys.os === sys.OS.IOS) 
+        else if (sys.os === sys.OS.IOS) 
         {
             if (-1 != currentLanguage.indexOf('en')) 
             {
@@ -43,7 +43,7 @@ export class JsbScript
 
     public static KeepScreenOn(_value : boolean)
     {
-        if (cc.sys.isNative) 
+        if (sys.isNative) 
         {
             console.log('设置屏幕常亮')
             jsb.Device.setKeepScreenOn(_value);

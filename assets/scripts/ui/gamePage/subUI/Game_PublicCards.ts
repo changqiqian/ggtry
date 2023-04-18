@@ -74,8 +74,10 @@ export class Game_PublicCards extends BaseUI
 
             if(gameData.IsGamePlayingNow() == false)
             {
+                this.mPokerPosNode.active = false;
                 return;
             }
+            this.mPokerPosNode.active = true;
             let cards = gameData.GetDynamicData().publicCards;
             for(let i = 0 ; i < cards.length ; i++)
             {
@@ -86,10 +88,12 @@ export class Game_PublicCards extends BaseUI
         gameData.Data_S2CCommonWaitStartNotify.AddListenner(this,(_data)=>
         {
             this.ClearPublicCards();
+            this.mPokerPosNode.active = false;
         });
 
         gameData.Data_S2CCommonRoundStartNotify.AddListenner(this,(_data)=>
         {
+            this.mPokerPosNode.active = true;
             //this.ClearPublicCards();
         });
 

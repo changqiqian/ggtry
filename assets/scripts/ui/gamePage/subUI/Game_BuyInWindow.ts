@@ -10,6 +10,7 @@ import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { ProgressSlider } from '../../common/ProgressSlider';
 import { HallData } from '../../hall/HallData';
 import { GameData } from '../GameData';
+import { NetworkHttp } from '../../../network/NetworkHttp';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_BuyInWindow')
@@ -50,14 +51,6 @@ export class Game_BuyInWindow extends BaseUI
 
     mIndex : number = null;
 
-    onEnable()
-    {
-        // if(this.mIndex == null)
-        // {
-        //     return;
-        // }
-        // this.UpdateTotalMoney();
-    }
 
     onDisable()
     {
@@ -147,6 +140,7 @@ export class Game_BuyInWindow extends BaseUI
     {
         this.mIndex = _index;
         this.ResetSliderValue();
+        NetworkHttp.Instance.GetUserInfoRequest();
         if(this.CheckInitFlag())
         {
             return;
@@ -157,15 +151,11 @@ export class Game_BuyInWindow extends BaseUI
 
     BindData()
     {
-        // HallData.Instance.Data_S2CClubPlayerPointNotify.AddListenner(this,(_data)=>
-        // {
-        //     this.UpdateTotalMoney();
-        // })
-
-        LocalPlayerData.Instance.Data_Coin.AddListenner(this,(_data)=>
+        LocalPlayerData.Instance.Data_UpdateHallMoney.AddListenner(this , (_data)=>
         {
-            //this.UpdateTotalMoney();
-        })
+            let coin = LocalPlayerData.Instance.Data_Coin.mData;
+            this.mTotalAmount.string = Tool.ConvertMoney_S2C(coin) + "";
+        });
 
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
@@ -190,25 +180,6 @@ export class Game_BuyInWindow extends BaseUI
 
         let staticData = gameData.GetStaticData();
         this.mBlindInfo.string = Tool.GetBlindInfo(staticData.smallBlind,staticData.straddle , staticData.ante);
-    }
-
-    UpdateTotalMoney()
-    {
-        let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
-        this.mProgressSlider.SetPercent(0);
-        this.UpdateBringInAmount(0);
-        let currentMoney;
-        //let enterClub = LocalPlayerData.Instance.GetClubInfoByClubId(gameStruct.mClubId)
-        if(gameStruct.mIsClubGame)
-        {
-            //currentMoney = enterClub.clubMember.clubPoint;
-        }
-        else 
-        {
-            currentMoney = LocalPlayerData.Instance.Data_Coin.mData;
-        }
-
-        this.mTotalAmount.string = Tool.ConvertMoney_S2C(currentMoney) + "";
     }
 
     CalculateControlMoney(_ratio : number) : number
@@ -264,6 +235,7 @@ export class Game_BuyInWindow extends BaseUI
 
     ResetSliderValue()
     {
+        this.mTotalAmount.string = Localization.GetString("00426");
         this.mProgressSlider.SetPercent(0);
         this.UpdateBringInAmount(0);
     }

@@ -46,11 +46,11 @@ export class Game_FriendsShare extends BaseUI
         });
         this.mCopyGameIDBtn.SetClickCallback(()=>
         {
-
+            Tool.CopyText(this.mGameID.string);
         });
         this.mCopyLinkBtn.SetClickCallback(()=>
         {
-
+            Tool.CopyText(this.mLink.string);
         });
         this.mFriendsListBtn.SetClickCallback(()=>
         {

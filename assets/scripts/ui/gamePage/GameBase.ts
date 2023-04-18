@@ -381,7 +381,7 @@ export class GameBase extends BaseUI
         {
             let tempScript = _script as Game_SeatUI;
             tempScript.InitWithData(this.mIndex);
-        },this.mBG);
+        },this.mSecondLayer);
     }
 
     InitChatCtr()

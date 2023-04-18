@@ -53,7 +53,7 @@ export class Game_Cash extends GameBase
         {
             let tempScript = _script as Game_SelfAction;
             tempScript.InitWithData(this.mIndex);
-        },this.mSecondLayer);
+        },this.mTopLayer);
         // this.AddSubView("gamePage","prefab/Game_SelfPreAction", (_script)=>
         // {
         //     let tempScript = _script as Game_SelfPreAction;

@@ -22,6 +22,8 @@ export class Game_Slider extends BaseUI
     mTotalAmount: Label = null;
     @property(Node) 
     mTotalBG: Node = null;
+    @property(Node) 
+    mAllInTips: Node = null;
     @property(BaseButton) 
     mConfirmBtn: BaseButton = null;
     
@@ -93,6 +95,7 @@ export class Game_Slider extends BaseUI
 
     ResetSlider()
     {
+        this.mAllInTips.active = false;
         this.mAmount.string = "0";
         this.mProgress.fillRange = 0;
         this.mSlider.progress = 0;
@@ -103,6 +106,7 @@ export class Game_Slider extends BaseUI
     {
         this.mProgress.fillRange = this.mSlider.progress;
         this.mTotalBG.active = this.mProgress.fillRange < 1;
+        this.mAllInTips.active = this.mProgress.fillRange >= 1;
         let currentAmount = this.CalculateCurrentAmount(this.mProgress.fillRange);
         this.mAmount.string = Tool.ConvertMoney_S2C(currentAmount) + "";
         return currentAmount;
