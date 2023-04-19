@@ -6,6 +6,7 @@ import { Game_FriendsList } from './Game_FriendsList';
 import { MultipleTableCtr } from '../../common/MultipleTableCtr';
 import { Tool } from '../../../Tool';
 import { NetworkHttp } from '../../../network/NetworkHttp';
+import { GameConfig } from '../../../GameConfig';
 const { ccclass, property } = _decorator;
 
 @ccclass('Game_FriendsShare')
@@ -70,6 +71,8 @@ export class Game_FriendsShare extends BaseUI
                 NetworkHttp.Instance.PostInviteFriends( IdList, gameStruct.mGameId);
             }
         });
+
+        this.mLink.string = GameConfig.NetConfig.HOME_URL;
     }
     RegDataNotify()
     {

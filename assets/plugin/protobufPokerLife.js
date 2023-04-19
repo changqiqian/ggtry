@@ -133,13 +133,13 @@ $root.AccountStatus = (function() {
  * GameCurrencyType enum.
  * @exports GameCurrencyType
  * @enum {number}
- * @property {number} GameCurrencyType_Point=0 GameCurrencyType_Point value
- * @property {number} GameCurrencyType_Coin=1 GameCurrencyType_Coin value
+ * @property {number} GameCurrencyType_Coin=0 GameCurrencyType_Coin value
+ * @property {number} GameCurrencyType_Diamond=1 GameCurrencyType_Diamond value
  */
 $root.GameCurrencyType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
-    values[valuesById[0] = "GameCurrencyType_Point"] = 0;
-    values[valuesById[1] = "GameCurrencyType_Coin"] = 1;
+    values[valuesById[0] = "GameCurrencyType_Coin"] = 0;
+    values[valuesById[1] = "GameCurrencyType_Diamond"] = 1;
     return values;
 })();
 

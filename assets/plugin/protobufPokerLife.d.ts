@@ -60,8 +60,8 @@ export enum AccountStatus {
 
 /** GameCurrencyType enum. */
 export enum GameCurrencyType {
-    GameCurrencyType_Point = 0,
-    GameCurrencyType_Coin = 1
+    GameCurrencyType_Coin = 0,
+    GameCurrencyType_Diamond = 1
 }
 
 /** Represents a C2SHeartbeatPing. */

@@ -1,3 +1,4 @@
+import { GameConfig } from "../GameConfig";
 import { LocalPlayerData } from "../base/LocalPlayerData";
 import { Localization } from "../base/Localization";
 import { Singleton } from "../base/Singleton";
@@ -38,7 +39,9 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     public PostBuyInRequest(_approveStatus : HTTP_BuyInStates , _createGameUserId : string, _gameId : string)
     {
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', "http://54.169.147.71:8082/api/amount/sy/query/buy/request");
+        let url = GameConfig.NetConfig.HTTP_API;
+        url += "/api/amount/sy/query/buy/request";
+        xhr.open('POST', url);
 
         console.log("http post  房主查询买入请求==");
         let param = 
@@ -78,7 +81,9 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     public PostDealBuyInRequest(_approveStatus : HTTP_ApproveStatus , _approveUserId : string , _buyRequestId : string , _gameId : string)
     {
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', "http://54.169.147.71:8082/api/amount/sy/approve/buy/request");
+        let url = GameConfig.NetConfig.HTTP_API;
+        url += "/api/amount/sy/approve/buy/request";
+        xhr.open('POST', url);
 
         console.log("http post  房主 处理买入请求==");
         let param = 
@@ -128,7 +133,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     public GetFriendsList( _gameId : string ,_page : number , _limit : number)
     {
         let xhr = new XMLHttpRequest();
-        let url = "http://54.169.147.71:8082/api/hall/sy/user/friend/";
+        let url = GameConfig.NetConfig.HTTP_API;
+        url += "/api/hall/sy/user/friend/"
         url += LocalPlayerData.Instance.Data_Uid.mData;
         url += "?";
         url += "page=" + _page +"&";
@@ -165,7 +171,9 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     public PostInviteFriends(_friendsUids : Array<string>, _gameId : string)
     {
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', "http://54.169.147.71:8082/api/hall/sy/user/game/invite");
+        let url = GameConfig.NetConfig.HTTP_API
+        url += "/api/hall/sy/user/game/invite";
+        xhr.open('POST', url);
 
         console.log("http post  邀请好友==");
         let param = 
@@ -204,7 +212,9 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     public PostDeleteFriends(_friendsUids : Array<string>, _gameId : string)
     {
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', "http://54.169.147.71:8082/api/hall/sy/user/friend/delete");
+        let url = GameConfig.NetConfig.HTTP_API
+        url += "/api/hall/sy/user/friend/delete"
+        xhr.open('POST', url);
 
         console.log("http post  删除好友==");
         let param = 
@@ -243,7 +253,9 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     public PostAddFriends(_friendUi : string, _gameId : string)
     {
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', "http://54.169.147.71:8082/api/hall/sy/user/friend/send");
+        let url = GameConfig.NetConfig.HTTP_API
+        url += "/api/hall/sy/user/friend/send";
+        xhr.open('POST', url);
 
         console.log("http post  添加好友==");
         let param = 
@@ -281,7 +293,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     public GetAddFriendsRequestList( _gameId : string)
     {
         let xhr = new XMLHttpRequest();
-        let url = "http://54.169.147.71:8082/api/hall/sy/user/friend/request?userId=" + LocalPlayerData.Instance.Data_Uid.mData;
+        let url = GameConfig.NetConfig.HTTP_API
+        url += "/api/hall/sy/user/friend/request?userId=" + LocalPlayerData.Instance.Data_Uid.mData;
         xhr.open('GET', url);
         console.log("http GET  获取好友请求==");
         this.HttpSend(xhr,{},(_result)=>
@@ -313,7 +326,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     public GetAgreeFriendsRequest( _gameId : string , _targetUid : string)
     {
         let xhr = new XMLHttpRequest();
-        let url = "http://54.169.147.71:8082/api/hall/sy/user/friend/accept/" + _targetUid;
+        let url = GameConfig.NetConfig.HTTP_API
+        url += "/api/hall/sy/user/friend/accept/" + _targetUid;
         xhr.open('GET', url);
         console.log("http GET  接受好友请求==");
         this.HttpSend(xhr,{},(_result)=>
@@ -344,7 +358,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     public GetRejectFriendsRequest( _gameId : string , _targetUid : string)
     {
         let xhr = new XMLHttpRequest();
-        let url = "http://54.169.147.71:8082/api/hall/sy/user/friend/refuse/" + _targetUid;
+        let url = GameConfig.NetConfig.HTTP_API
+        url += "/api/hall/sy/user/friend/refuse/" + _targetUid;
         xhr.open('GET', url);
         console.log("http GET  拒绝好友请求==");
         this.HttpSend(xhr,{},(_result)=>
@@ -376,7 +391,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     {
         UIMgr.Instance.ShowLoading(true);
         let xhr = new XMLHttpRequest();
-        let url = "http://54.169.147.71:8082/api/hall/sy/user/buy/diamond"
+        let url = GameConfig.NetConfig.HTTP_API
+        url += "/api/hall/sy/user/buy/diamond"
         xhr.open('POST', url);
         console.log("http POST  购买钻石==");
 
@@ -412,7 +428,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     {
         UIMgr.Instance.ShowLoading(true);
         let xhr = new XMLHttpRequest();
-        let url = "http://54.169.147.71:8082/api/hall/sy/user/" + LocalPlayerData.Instance.Data_Uid.mData;
+        let url = GameConfig.NetConfig.HTTP_API
+        url += "/api/hall/sy/user/" + LocalPlayerData.Instance.Data_Uid.mData;
         xhr.open('GET', url);
         console.log("http GET  获取用户信息==");
         this.HttpSend(xhr,{},(_result)=>
@@ -440,7 +457,8 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
 
     public BackHome()
     {
-        let url = "http://test-h5.9dhub.com?userId=" + LocalPlayerData.Instance.Data_Uid.mData;
+        let url = GameConfig.NetConfig.HOME_URL;
+        url += "?userId=" + LocalPlayerData.Instance.Data_Uid.mData;
         top.location.href=url
     }
 }

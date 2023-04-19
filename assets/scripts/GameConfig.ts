@@ -1,28 +1,49 @@
 
 import { Localization } from "./base/Localization";
 import { Tool } from "./Tool";
-import { Club_CreateTexasConfig } from "./ui/hall/HallData";
 
+
+export class NetWorkConfig
+{
+    HTTP_API :string
+    HOME_URL  :string
+    WEBSOCKET_ADDR  :string
+}
+
+export enum NetWorkRoute
+{
+    Test = 0 , //--测试
+    JiuDing = 1 , //--九鼎
+}
 
 export class GameConfig
-{
-    public static readonly DebugMode =  true;
-    public static DevelopIP = "18.142.179.150:9501"; //开发环境ip 可选
-    public static JackIP = "18.142.179.150:9001"; //测试环境ip 可选
-    public static UsingIp = "13.229.222.39:9008"; //当前真实用的ip 上面选项选择后，会赋值给UsingIp
-    public static SeverUrl = "ws://13.229.222.39:9008/pokerlife"; //完整的地址长这样
-    public static SetSeverUrl(_ip : string)
+{   
+    public static readonly DebugMode =  false;   //调试模式
+    public static Route;  //渠道
+    public static NetConfig  : NetWorkConfig;
+    public static InitNetWorkConfig(_route : NetWorkRoute)
     {
-        GameConfig.UsingIp = _ip;
-        GameConfig.SeverUrl = "ws://" + _ip +"/pokerlife";
-
+        GameConfig.Route = _route;
+        GameConfig.NetConfig = new NetWorkConfig();
+        if(GameConfig.Route == NetWorkRoute.Test)
+        {
+            GameConfig.NetConfig.HTTP_API = "http://54.169.147.71:8082";
+            GameConfig.NetConfig.HOME_URL = "http://test-h5.9dhub.com";
+            GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://" +"18.142.179.150:9501" +"/pokerlife";
+        }
+        else if(GameConfig.Route == NetWorkRoute.JiuDing)
+        {
+            GameConfig.NetConfig.HTTP_API = "https://jd-texas-game-lobby-api.star-link-rel.cc";
+            GameConfig.NetConfig.HOME_URL = "https://jd-texas-game-lobby.star-link-rel.cc";
+            GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://" + "jd-texas-game-api.star-link-rel.cc";
+        }
     }
+
+
     //发布的版本号
     public static Version = "1.1.6"
       
     public static LOGIN_TOKEN;
-
-    public static WebberAddr= "http://18.142.237.115:9487"; //打开收银台web
 
     public static readonly MultipleUIHeight = 150;//多桌ui 占用屏幕顶部的高度
     public static readonly ClubLogoNumber = 8; //俱乐部logo数量
@@ -440,94 +461,6 @@ export class GameConfig
     {
         let key = "CUSTOMER_SLIDER";
         return GameConfig.ReadSimpleData_Bool(key);
-    }
-
-    public static MaxModule = 10; //最大储存的创建房间模版数量
-    public static TryToSaveCreateRoomModule(_data : Club_CreateTexasConfig , _index : number) : boolean
-    {
-        let newIndex;
-
-        if(_index !=  GameConfig.WrongIndex)
-        {
-            newIndex = _index;
-        }
-        else
-        {
-            newIndex =GameConfig.GetCreateRoomModuleNewIndex();
-        }
-
-        if(newIndex ==  GameConfig.WrongIndex)
-        {
-            return false;
-        }
-        GameConfig.SaveCreateRoomModule(JSON.stringify(_data) , newIndex);
-        return true;
-    }
-
-    public static GetCreateRoomModuleNewIndex()
-    {
-        for(let i = 0 ; i < GameConfig.MaxModule ; i++)
-        {
-            let value = GameConfig.GetCreateRoomModule(i);
-            if(value == null)
-            {
-                return i;
-            }
-        }
-
-        console.log("模版空间已满")
-        return  GameConfig.WrongIndex;
-    }
-
-    public static DeleteCreateRoomModule(_index : number)
-    {
-        GameConfig.SaveCreateRoomModule( null , _index);
-    }
-
-    public static SaveCreateRoomModule(_data : string , _index : number)
-    {
-        let preffix = "CREATE_GAME_MODULE";
-        let currentKey = preffix + _index;
-        GameConfig.WriteSimpleData(currentKey, _data);
-    }
-
-    public static GetCreateRoomModule(_index : number)
-    {
-        let preffix = "CREATE_GAME_MODULE";
-        let currentKey = preffix + _index;
-        let value = GameConfig.ReadSimpleData(currentKey, null);
-        return value;
-    }
-    //删除模版后，把模版重新排序，往前补齐，让模版占用索引永远从0开始，依次排列
-    //例如目前有5个模版，用户删除了第三个模版，然么第三个模版就处于空缺状态，于是用这个方法把后面的模版依次往前挪动一格
-    public static ReoderCreateRoomModuleData()
-    {
-        let step = 0;
-        while(step < GameConfig.MaxModule)
-        {
-            let currentModule = GameConfig.GetCreateRoomModule(step);
-            if(currentModule == null)
-            {
-                let nextModuleIndex =  GameConfig.WrongIndex;
-                for(let i = step + 1 ; i < GameConfig.MaxModule ; i++)
-                {
-                    let tempModuleData = GameConfig.GetCreateRoomModule(i);
-                    if(tempModuleData == null)
-                    {
-                        continue;
-                    }
-                    nextModuleIndex = i;
-                    break;
-                }
-                if(nextModuleIndex !=  GameConfig.WrongIndex)
-                {
-                    let nextModuleData = GameConfig.GetCreateRoomModule(nextModuleIndex); 
-                    GameConfig.DeleteCreateRoomModule(nextModuleIndex);
-                    GameConfig.SaveCreateRoomModule(nextModuleData , step);
-                }
-            }
-            step++;
-        }
     }
 
     public static WriteSimpleData(key, data)

@@ -73,10 +73,10 @@ export class Network  extends Singleton<Network>()
             console.log('上一根ws还没有清理，不能重新连接');
             return;
         }
-        console.log('连接ws====' + GameConfig.SeverUrl);
+        console.log('连接ws====' + GameConfig.NetConfig.WEBSOCKET_ADDR);
         this.mForceClose = false;
         UIMgr.Instance.ShowLoading(true, '连接服务器中...');
-        this.mWebSocket = new WebSocket(GameConfig.SeverUrl);
+        this.mWebSocket = new WebSocket(GameConfig.NetConfig.WEBSOCKET_ADDR);
         this.mWebSocket.onopen = this.OnOpen.bind(this);
         this.mWebSocket.onmessage = this.OnMessage.bind(this);
         this.mWebSocket.onerror = this.OnError.bind(this);
