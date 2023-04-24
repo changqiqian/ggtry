@@ -75,14 +75,14 @@ export class Network  extends Singleton<Network>()
         }
         console.log('连接ws====' + GameConfig.NetConfig.WEBSOCKET_ADDR);
         this.mForceClose = false;
-        UIMgr.Instance.ShowLoading(true, '连接服务器中...');
+        UIMgr.Instance.ShowLoading(true, Localization.GetString("00428"));
         this.mWebSocket = new WebSocket(GameConfig.NetConfig.WEBSOCKET_ADDR);
         this.mWebSocket.onopen = this.OnOpen.bind(this);
         this.mWebSocket.onmessage = this.OnMessage.bind(this);
         this.mWebSocket.onerror = this.OnError.bind(this);
         this.mWebSocket.onclose = this.OnClose.bind(this);
         this.mWebSocket.binaryType = "arraybuffer";
-        this.mConnectTimer = setTimeout(this.OnConnectTimeOut.bind(this), 3000);
+        this.mConnectTimer = setTimeout(this.OnConnectTimeOut.bind(this), 5000);
     }
 
     public ClearWS(_forceClose: boolean = true) {
@@ -104,9 +104,6 @@ export class Network  extends Singleton<Network>()
     private OnOpen(event) {
         UIMgr.Instance.ShowLoading(false);
         console.log('Socket OnOpen = ');
-
-        console.log ("event===" + event);
-        console.log ("this.mWebSocket===" + this.mWebSocket);
 
         UIMgr.Instance.ShowToast(Localization.GetString("00236"));
         clearTimeout(this.mConnectTimer);

@@ -35,7 +35,10 @@ export class GameConfig
         {
             GameConfig.NetConfig.HTTP_API = "https://jd-texas-game-lobby-api.star-link-rel.cc";
             GameConfig.NetConfig.HOME_URL = "https://jd-texas-game-lobby.star-link-rel.cc";
-            GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://" + "jd-texas-game-api.star-link-rel.cc";
+            //GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://" + "jd-texas-game-api.star-link-rel.cc";
+            GameConfig.NetConfig.WEBSOCKET_ADDR ="wss://jd-texas-game-api.star-link-rel.cc";
+
+            
         }
     }
 
