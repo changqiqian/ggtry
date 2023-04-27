@@ -1,0 +1,146 @@
+
+bw_particle_c.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bw_particle_c_01
+  rotate: false
+  xy: 2, 154
+  size: 198, 220
+  orig: 198, 220
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_00
+  rotate: false
+  xy: 2, 2
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_01
+  rotate: false
+  xy: 202, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_02
+  rotate: false
+  xy: 354, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_03
+  rotate: false
+  xy: 506, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_04
+  rotate: false
+  xy: 658, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_05
+  rotate: false
+  xy: 810, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_06
+  rotate: false
+  xy: 962, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_07
+  rotate: false
+  xy: 1114, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_08
+  rotate: false
+  xy: 1266, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_09
+  rotate: false
+  xy: 1418, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_10
+  rotate: false
+  xy: 1570, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_11
+  rotate: false
+  xy: 1722, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_12
+  rotate: false
+  xy: 1874, 224
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_13
+  rotate: false
+  xy: 202, 72
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_14
+  rotate: false
+  xy: 354, 72
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_15
+  rotate: false
+  xy: 506, 72
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_16
+  rotate: false
+  xy: 658, 72
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_17
+  rotate: false
+  xy: 810, 72
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+win_vfx_a_1x1_18
+  rotate: false
+  xy: 962, 72
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1

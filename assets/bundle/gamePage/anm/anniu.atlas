@@ -1,0 +1,174 @@
+
+anniu.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bonus_button
+  rotate: false
+  xy: 2, 2
+  size: 384, 143
+  orig: 384, 143
+  offset: 0, 0
+  index: -1
+collect
+  rotate: true
+  xy: 1937, 1849
+  size: 150, 71
+  orig: 150, 71
+  offset: 0, 0
+  index: -1
+collect_pressed
+  rotate: false
+  xy: 1628, 848
+  size: 147, 67
+  orig: 147, 67
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_00
+  rotate: false
+  xy: 2, 1692
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_01
+  rotate: false
+  xy: 2, 1383
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_02
+  rotate: false
+  xy: 544, 1692
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_03
+  rotate: false
+  xy: 2, 1074
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_04
+  rotate: false
+  xy: 544, 1383
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_05
+  rotate: false
+  xy: 1086, 1692
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_06
+  rotate: false
+  xy: 2, 765
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_07
+  rotate: false
+  xy: 544, 1074
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_08
+  rotate: false
+  xy: 1086, 1383
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_09
+  rotate: true
+  xy: 1628, 1459
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_10
+  rotate: false
+  xy: 2, 456
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_11
+  rotate: false
+  xy: 544, 765
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_12
+  rotate: false
+  xy: 1086, 1074
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_13
+  rotate: false
+  xy: 2, 147
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_14
+  rotate: false
+  xy: 544, 456
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_15
+  rotate: false
+  xy: 1086, 765
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_16
+  rotate: true
+  xy: 1628, 917
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_17
+  rotate: false
+  xy: 544, 147
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+gx/bonus_button_vfx_18
+  rotate: false
+  xy: 1086, 456
+  size: 540, 307
+  orig: 540, 307
+  offset: 0, 0
+  index: -1
+start
+  rotate: false
+  xy: 1086, 385
+  size: 143, 69
+  orig: 143, 69
+  offset: 0, 0
+  index: -1
+start_pressed
+  rotate: false
+  xy: 388, 80
+  size: 139, 65
+  orig: 139, 65
+  offset: 0, 0
+  index: -1

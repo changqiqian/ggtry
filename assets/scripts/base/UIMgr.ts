@@ -1,7 +1,6 @@
 
 import { instantiate } from "cc";
 import { LoadingMask } from "../ui/common/LoadingMask";
-import { MultipleTableCtr } from "../ui/common/MultipleTableCtr";
 import { Toast } from "../ui/common/Toast";
 import { BaseUI } from "./BaseUI";
 import { BaseWindow } from "./BaseWindow";
@@ -48,8 +47,6 @@ export enum SceneType
 {
     None,
     Loading,
-    Login,
-    Hall,
     Game,
 }
 
@@ -61,7 +58,6 @@ export class UIMgr extends Singleton<UIMgr>()
     mLayerRoot : cc.Node = null;
     mWindowRoot : cc.Node = null;
     mTopRoot : cc.Node = null;
-    mMultipleTableCtr : MultipleTableCtr = null;
     mLayerList : Array<LayerKeyPair>;
     mWindowList  : Array<LayerKeyPair>;
     mCurrentScene : SceneType;
@@ -79,17 +75,14 @@ export class UIMgr extends Singleton<UIMgr>()
         this.mSceneConfig = new Array<SceneConfig>();
 
         //场景配置
-        UIMgr.ResFolder = ["anm","font","music","prefab","texture"];
+        UIMgr.ResFolder = ["anm","font","music","prefab","texture","particular"];
         UIMgr.InitialBundle = ["common","loading"];
-        UIMgr.RestBundle = ["gamePage","login"];
+        UIMgr.RestBundle = ["gamePage"];
         let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,"loading" ,[]);
-        let loginConfig = new SceneConfig(SceneType.Login, "prefab/LoginUI" ,"login",[]);
-        let hallConfig = new SceneConfig(SceneType.Hall, "prefab/HallUI" ,"hall",[]);
 
+        let gameConfig = new SceneConfig(SceneType.Game, "prefab/GameUI" ,"gamePage",[]);
         this.mSceneConfig.push(loadingConfig);
-        this.mSceneConfig.push(loginConfig);
-        this.mSceneConfig.push(hallConfig);
-
+        this.mSceneConfig.push(gameConfig);
         this.LoadInitRes(_loadFinish);
 
     }
@@ -151,40 +144,6 @@ export class UIMgr extends Singleton<UIMgr>()
             }
             //_tempNode.setSiblingIndex(0);
         });
-    }
-
-    public ShowMultipleTable(_value : boolean)
-    {
-        if(this.mMultipleTableCtr == null)
-        {
-            if(_value == false)
-            {
-                return;
-            }
-
-            this.CreatePrefab("common","prefab/MultipleTableCtr" , (_tempNode)=>
-            {
-                this.mMultipleTableCtr = _tempNode.getComponent(MultipleTableCtr);
-                this.mWindowRoot.addChild(_tempNode);
-                _tempNode.setSiblingIndex(0);
-            });
-        }
-        else
-        {
-            this.mMultipleTableCtr.DeleteSelf();
-            this.mMultipleTableCtr = null;
-        }
-    }
-
-
-    public IsMultipleTableShow()
-    {
-        if(this.mMultipleTableCtr == null)
-        {
-            return false;
-        }
-
-        return this.mMultipleTableCtr.node.active;
     }
     
     public HaveLayer(_bundleName :string , _prefabPath:string , _tag : string = "", _aka : string  = "")

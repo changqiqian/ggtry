@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "0f0b2690-5277-4bd4-a261-c3acec6cebc3",
+  "uuid": "380547db-f34c-4cd6-bb85-bca597df7d6c",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "0f0b2690-5277-4bd4-a261-c3acec6cebc3@6c48a",
+      "uuid": "380547db-f34c-4cd6-bb85-bca597df7d6c@6c48a",
       "displayName": "ProgressBG",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "0f0b2690-5277-4bd4-a261-c3acec6cebc3",
+        "imageUuidOrDatabaseUri": "380547db-f34c-4cd6-bb85-bca597df7d6c",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "0f0b2690-5277-4bd4-a261-c3acec6cebc3@f9941",
+      "uuid": "380547db-f34c-4cd6-bb85-bca597df7d6c@f9941",
       "displayName": "ProgressBG",
       "id": "f9941",
       "name": "spriteFrame",
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 933,
-        "height": 9,
-        "rawWidth": 933,
-        "rawHeight": 9,
+        "width": 426,
+        "height": 28,
+        "rawWidth": 426,
+        "rawHeight": 28,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "0f0b2690-5277-4bd4-a261-c3acec6cebc3@6c48a",
+        "imageUuidOrDatabaseUri": "380547db-f34c-4cd6-bb85-bca597df7d6c@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "0f0b2690-5277-4bd4-a261-c3acec6cebc3@f9941"
+    "redirect": "380547db-f34c-4cd6-bb85-bca597df7d6c@f9941"
   }
 }

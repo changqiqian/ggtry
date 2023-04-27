@@ -3,7 +3,7 @@ import { JsbScript } from './base/JsbScript';
 import { Localization } from './base/Localization';
 import { LocalPlayerData } from './base/LocalPlayerData';
 import { SceneType, UIMgr } from './base/UIMgr';
-import { GameConfig, NetWorkRoute } from './GameConfig';
+import { GameConfig } from './GameConfig';
 import { NetworkReceive } from './network/NetworkReceive';
 
 // macro.CLEANUP_IMAGE_CACHE = false;
@@ -24,7 +24,6 @@ export class Start extends Component
         NetworkReceive.Instance.RegisterMsg();
         //读取本地存储的登录token
         GameConfig.LoadToken();
-        GameConfig.InitNetWorkConfig(NetWorkRoute.Test);
         //保持屏幕常亮
         JsbScript.KeepScreenOn(true);
         //获取系统语言设置

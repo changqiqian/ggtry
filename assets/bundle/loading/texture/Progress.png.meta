@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "447a713b-b32d-4711-a65e-24587e4679b4",
+  "uuid": "a3b0b879-a9a1-4407-b0b8-796e12f96ad6",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "447a713b-b32d-4711-a65e-24587e4679b4@6c48a",
+      "uuid": "a3b0b879-a9a1-4407-b0b8-796e12f96ad6@6c48a",
       "displayName": "Progress",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "447a713b-b32d-4711-a65e-24587e4679b4",
+        "imageUuidOrDatabaseUri": "a3b0b879-a9a1-4407-b0b8-796e12f96ad6",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,7 +33,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "447a713b-b32d-4711-a65e-24587e4679b4@f9941",
+      "uuid": "a3b0b879-a9a1-4407-b0b8-796e12f96ad6@f9941",
       "displayName": "Progress",
       "id": "f9941",
       "name": "spriteFrame",
@@ -45,17 +45,17 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 933,
-        "height": 9,
-        "rawWidth": 933,
-        "rawHeight": 9,
+        "width": 420,
+        "height": 22,
+        "rawWidth": 420,
+        "rawHeight": 22,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "447a713b-b32d-4711-a65e-24587e4679b4@6c48a",
+        "imageUuidOrDatabaseUri": "a3b0b879-a9a1-4407-b0b8-796e12f96ad6@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "447a713b-b32d-4711-a65e-24587e4679b4@f9941"
+    "redirect": "a3b0b879-a9a1-4407-b0b8-796e12f96ad6@f9941"
   }
 }

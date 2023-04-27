@@ -1,9 +1,6 @@
 import { _decorator, Component, Node, instantiate, SpriteFrame, ImageAsset, assetManager, sys, view, Widget, UITransform, Vec3, Size, TweenSystem, game, Game } from 'cc';
 import { CommonNotify } from '../CommonNotify';
-import { GameReplayData } from '../ui/gamePage/GameReplayData';
-import { HallData } from '../ui/hall/HallData';
 import { LoadingData } from '../ui/loading/LoadingData';
-import { LoginData } from '../ui/login/LoginData';
 import { LocalPlayerData } from './LocalPlayerData';
 import { ResMgr } from './ResMgr';
 import { UIMgr } from './UIMgr';
@@ -82,16 +79,8 @@ export abstract class BaseUI extends Component {
         game.off(Game.EVENT_SHOW,this.OnGameShow,this);
         game.off(Game.EVENT_HIDE,this.OnGameHide,this);
         LoadingData.Instance.RemoveAllDataListennerByTarget(this);
-        LoginData.Instance.RemoveAllDataListennerByTarget(this);
-        HallData.Instance.RemoveAllDataListennerByTarget(this);
         LocalPlayerData.Instance.RemoveAllDataListennerByTarget(this);
         CommonNotify.Instance.RemoveAllDataListennerByTarget(this);
-        GameReplayData.Instance.RemoveAllDataListennerByTarget(this);
-        // for(let i = 0 ; i < MultipleTableCtr.GameStruct.length ; i++)
-        // {
-        //     let current = MultipleTableCtr.GameStruct[i];
-        //     current.mGameData.RemoveAllDataListennerByTarget(this);
-        // }
 
         this.StopSecondsTimer();
         this.CustmoerDestory();

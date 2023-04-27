@@ -73,10 +73,10 @@ export class Network  extends Singleton<Network>()
             console.log('上一根ws还没有清理，不能重新连接');
             return;
         }
-        console.log('连接ws====' + GameConfig.NetConfig.WEBSOCKET_ADDR);
+        console.log('连接ws====' + GameConfig.WEBSOCKET_ADDR);
         this.mForceClose = false;
         UIMgr.Instance.ShowLoading(true, Localization.GetString("00428"));
-        this.mWebSocket = new WebSocket(GameConfig.NetConfig.WEBSOCKET_ADDR);
+        this.mWebSocket = new WebSocket(GameConfig.WEBSOCKET_ADDR);
         this.mWebSocket.onopen = this.OnOpen.bind(this);
         this.mWebSocket.onmessage = this.OnMessage.bind(this);
         this.mWebSocket.onerror = this.OnError.bind(this);
@@ -150,78 +150,78 @@ export class Network  extends Singleton<Network>()
     static HeaderLength = 12;
     public SendMsg(_msgID: number, _protoBytes : Uint8Array) 
     {
-        let totalLength = Network.HeaderLength +  _protoBytes.length;
-        let currentOffset = 0;
+        // let totalLength = Network.HeaderLength +  _protoBytes.length;
+        // let currentOffset = 0;
 
-        let totalBuffer = new ArrayBuffer(totalLength);
-        let flagDataView = new DataView(totalBuffer,currentOffset,2);
-        flagDataView.setUint16(0,99);
-        currentOffset += 2;
+        // let totalBuffer = new ArrayBuffer(totalLength);
+        // let flagDataView = new DataView(totalBuffer,currentOffset,2);
+        // flagDataView.setUint16(0,99);
+        // currentOffset += 2;
 
-        let lengthDataView = new DataView(totalBuffer , currentOffset , 4);
-        lengthDataView.setUint32(0, totalLength);
-        currentOffset += 4;
+        // let lengthDataView = new DataView(totalBuffer , currentOffset , 4);
+        // lengthDataView.setUint32(0, totalLength);
+        // currentOffset += 4;
 
-        let extensionDataView = new DataView(totalBuffer,currentOffset,2);
-        extensionDataView.setUint16(0,0);
-        currentOffset += 2;
+        // let extensionDataView = new DataView(totalBuffer,currentOffset,2);
+        // extensionDataView.setUint16(0,0);
+        // currentOffset += 2;
 
-        let msgIdDataView = new DataView(totalBuffer,currentOffset,4);
-        msgIdDataView.setUint32(0,_msgID);
-        currentOffset += 4;
+        // let msgIdDataView = new DataView(totalBuffer,currentOffset,4);
+        // msgIdDataView.setUint32(0,_msgID);
+        // currentOffset += 4;
 
-        for(let i = 0 ; i < _protoBytes.length ; i++)
-        {
-            let msgDataView = new DataView(totalBuffer , currentOffset , 1);
-            msgDataView.setUint8(0,_protoBytes[i]);
-            currentOffset++;
-        }
-        if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) 
-        {
-            this.mWebSocket.send(totalBuffer);
-            if(_msgID == MessageId.C2S_HeartbeatPing)
-            {
-                return;
-            }
-            console.log('给服务器发送消息：' + _msgID);
-        } 
-        else 
-        {
-            console.log('给服务器发送消息失败：' + _msgID);
-        }
+        // for(let i = 0 ; i < _protoBytes.length ; i++)
+        // {
+        //     let msgDataView = new DataView(totalBuffer , currentOffset , 1);
+        //     msgDataView.setUint8(0,_protoBytes[i]);
+        //     currentOffset++;
+        // }
+        // if (this.mWebSocket != null && this.mWebSocket.readyState === WebSocket.OPEN) 
+        // {
+        //     this.mWebSocket.send(totalBuffer);
+        //     if(_msgID == MessageId.C2S_HeartbeatPing)
+        //     {
+        //         return;
+        //     }
+        //     console.log('给服务器发送消息：' + _msgID);
+        // } 
+        // else 
+        // {
+        //     console.log('给服务器发送消息失败：' + _msgID);
+        // }
     }
     
     private OnMessage(event) 
     {
-        let currentOffset = 0;
-        var dataView = new DataView(event.data);
-        let flag = dataView.getUint16(currentOffset);
-        currentOffset += 2;
-        let Totallength = dataView.getUint32(currentOffset);
-        currentOffset += 4;
-        let extension = dataView.getUint16(currentOffset);
-        currentOffset += 2;
-        let msgId = dataView.getUint32(currentOffset);
-        currentOffset += 4;
+        // let currentOffset = 0;
+        // var dataView = new DataView(event.data);
+        // let flag = dataView.getUint16(currentOffset);
+        // currentOffset += 2;
+        // let Totallength = dataView.getUint32(currentOffset);
+        // currentOffset += 4;
+        // let extension = dataView.getUint16(currentOffset);
+        // currentOffset += 2;
+        // let msgId = dataView.getUint32(currentOffset);
+        // currentOffset += 4;
 
-        let msgLength = Totallength - Network.HeaderLength;
-        let msgDataArray = new Uint8Array(msgLength);
-        for(let i = 0 ; i < msgLength ; i++)
-        {
-            msgDataArray[i] = dataView.getUint8(i + currentOffset);
-        }
-        if(msgId == MessageId.S2C_HeartbeatPong)
-        {
-            this.RecvPing();
-            return;
-        }
+        // let msgLength = Totallength - Network.HeaderLength;
+        // let msgDataArray = new Uint8Array(msgLength);
+        // for(let i = 0 ; i < msgLength ; i++)
+        // {
+        //     msgDataArray[i] = dataView.getUint8(i + currentOffset);
+        // }
+        // if(msgId == MessageId.S2C_HeartbeatPong)
+        // {
+        //     this.RecvPing();
+        //     return;
+        // }
 
 
-        console.log('收到 消息  msgId====' + msgId);
-        for (let i = 0; i < this.mMsgListenner.length; i++) 
-        {
-            this.mMsgListenner[i].TryToTriggerMsg(msgId, msgDataArray);
-        }
+        // console.log('收到 消息  msgId====' + msgId);
+        // for (let i = 0; i < this.mMsgListenner.length; i++) 
+        // {
+        //     this.mMsgListenner[i].TryToTriggerMsg(msgId, msgDataArray);
+        // }
     }
 
     public AddMsgListenner(_msgID: number, _callback: Function, _target: any) {
@@ -265,18 +265,18 @@ export class Network  extends Singleton<Network>()
     /////                               心跳
     ////////////////////////////////////////////////////////////////////////////////////
     public SendPing() {
-        this.StopPing();
-        clearTimeout(this.mPingSendTimer);
-        this.mPingRevTimer = setTimeout(this.OnPingTimeOut.bind(this), this.mPingSpace);
-        let msg = new C2SHeartbeatPing();
-        this.SendMsg(MessageId.C2S_HeartbeatPing , C2SHeartbeatPing.encode(msg).finish());
+        // this.StopPing();
+        // clearTimeout(this.mPingSendTimer);
+        // this.mPingRevTimer = setTimeout(this.OnPingTimeOut.bind(this), this.mPingSpace);
+        // let msg = new C2SHeartbeatPing();
+        // this.SendMsg(MessageId.C2S_HeartbeatPing , C2SHeartbeatPing.encode(msg).finish());
         //console.log('发送 心跳');
     }
 
     private RecvPing() {
         //console.log('收到 心跳');
-        clearTimeout(this.mPingRevTimer);
-        this.mPingSendTimer = setTimeout(this.SendPing.bind(this), this.mPingSpace);
+        // clearTimeout(this.mPingRevTimer);
+        // this.mPingSendTimer = setTimeout(this.SendPing.bind(this), this.mPingSpace);
     }
 
     private StopPing() {
