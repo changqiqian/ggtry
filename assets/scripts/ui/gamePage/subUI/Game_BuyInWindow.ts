@@ -154,7 +154,26 @@ export class Game_BuyInWindow extends BaseUI
         LocalPlayerData.Instance.Data_UpdateHallMoney.AddListenner(this , (_data)=>
         {
             let coin = LocalPlayerData.Instance.Data_Coin.mData;
-            this.mTotalAmount.string = Tool.ConvertMoney_S2C(coin) + "";
+            this.mTotalAmount.string = Tool.ConvertMoneyTo_K(coin)
+
+            let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
+            let gameData = gameStruct.mGameData;
+            let texasConfig = gameData.GetStaticData();
+            let maxBringIn = texasConfig.maxBringIn
+            let minBringin =  texasConfig.minBringIn;
+            if(maxBringIn == 0)
+            {
+                maxBringIn = LocalPlayerData.Instance.Data_Coin.mData;
+            }
+    
+            if(maxBringIn < minBringin)
+            {
+                this.mConfirmBtn.SetInteractableWithGray(false);
+            }
+            else
+            {
+                this.mConfirmBtn.SetInteractableWithGray(true);
+            }
         });
 
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
@@ -187,15 +206,27 @@ export class Game_BuyInWindow extends BaseUI
         let gameStruct = MultipleTableCtr.FindGameStruct(this.mIndex);
         let gameData = gameStruct.mGameData;
         let texasConfig = gameData.GetStaticData();
+        let maxBringIn = texasConfig.maxBringIn
+        let minBringin =  texasConfig.minBringIn;
+        if(maxBringIn == 0)
+        {
+            maxBringIn = LocalPlayerData.Instance.Data_Coin.mData;
+        }
+
+        if(maxBringIn < minBringin)
+        {
+            return 0;
+        }
+
         let currentAmount;
         if(_ratio == 1)
         {
-            currentAmount = texasConfig.maxBringIn;
+            currentAmount = maxBringIn;
         }
         else
         {
-            let min = texasConfig.minBringIn;
-            let max = (texasConfig.maxBringIn - texasConfig.minBringIn) * _ratio;
+            let min = minBringin;
+            let max = (maxBringIn - minBringin) * _ratio;
             let sb100 = texasConfig.smallBlind * 20;
             let roundMax = Math.floor( max/sb100);
             max = roundMax * sb100;
@@ -207,7 +238,7 @@ export class Game_BuyInWindow extends BaseUI
     UpdateBringInAmount(_ratio : number)
     {
         let amount = this.CalculateControlMoney(_ratio);
-        this.mCurrentAmount.string = Tool.ConvertMoney_S2C(amount) + "";
+        this.mCurrentAmount.string = Tool.ConvertMoneyTo_K(amount)
     }
 
     StartCountDown(_totalTime : number)

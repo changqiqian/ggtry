@@ -16,7 +16,7 @@ export class Start extends Component
 {
     onLoad()
     {
-        setDisplayStats(GameConfig.DebugMode);  
+        setDisplayStats(false);  
     }
     start() 
     {
@@ -24,7 +24,7 @@ export class Start extends Component
         NetworkReceive.Instance.RegisterMsg();
         //读取本地存储的登录token
         GameConfig.LoadToken();
-        GameConfig.InitNetWorkConfig(NetWorkRoute.JiuDing);
+        GameConfig.InitNetWorkConfig(NetWorkRoute.Test);
         //保持屏幕常亮
         JsbScript.KeepScreenOn(true);
         //获取系统语言设置

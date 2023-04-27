@@ -85,7 +85,7 @@ export class Game_MiniSeatUI extends BaseUI {
     {
         let localSeat = this.GetSeatNodeBySeatId(_LocalPlayerSeatId);
         let bottomSeat = this.FindBottomSeat();
-        if(localSeat.mSeatID == bottomSeat.mSeatID) //自己已经是最底部的座位了
+        if(localSeat.mSeatID == bottomSeat.mSeatID) 
         {
             console.log("Game_MiniSeatUI 自己已经是最底部的座位了");
             return;

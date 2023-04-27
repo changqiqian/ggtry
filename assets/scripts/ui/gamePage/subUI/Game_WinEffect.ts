@@ -40,15 +40,14 @@ export class Game_WinEffect extends BaseUI
             this.node.scale = new Vec3(0.8 , 0.8 , 0.8);
         }
 
-        let clientAmount = Tool.ConvertMoney_S2C(_amount)
-        if(clientAmount >= 0)
+        if(_amount >= 0)
         {
-            this.mWinAmount.string =   "+" + clientAmount;
+            this.mWinAmount.string =   "+" + Tool.ConvertMoneyTo_K(_amount);
             this.mWinAmount.color = Color.GREEN;
         }
         else
         {
-            this.mWinAmount.string =   "" + clientAmount;
+            this.mWinAmount.string =  Tool.ConvertMoneyTo_K(_amount);
             this.mWinAmount.color = Color.RED;
         }
 

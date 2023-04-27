@@ -231,7 +231,7 @@ export class Game_InsuranceLayer extends BaseUI
 
             this.mOutsCount.string = fanchaoCards.length + "";
             this.mRatio.string = (_data.ratios / 10).toFixed(1);
-            this.mPot.string = Tool.ConvertMoney_S2C(_data.pots) + "";
+            this.mPot.string = Tool.ConvertMoneyTo_K(_data.pots)
             this.mPay.string = "0";
 
             for(let i = 0 ; i < this.mShortcutBtn.children.length ; i++)
@@ -240,7 +240,7 @@ export class Game_InsuranceLayer extends BaseUI
                 let multiple = this.GetShortCutMultiple(i);
                 let amount =  Tool.CeilServerMoney(multiple * _data.buyFullPot);
                 amount = Tool.CeilServerMoney(amount);
-                let title = Tool.ConvertMoney_S2C(amount) + "";
+                let title = Tool.ConvertMoneyTo_K(amount)
                 current.SetTitle(title);
             }
 
@@ -252,7 +252,7 @@ export class Game_InsuranceLayer extends BaseUI
             if(_data.buyBack > 0)
             {
                 this.mBuyBackTips.active = true;
-                this.mTips.string = Localization.ReplaceString("00319",Tool.ConvertMoney_S2C(_data.buyBack)+"");
+                this.mTips.string = Localization.ReplaceString("00319",Tool.ConvertMoneyTo_K(_data.buyBack));
             }
 
             this.mProgressSlider.SetPercent(0.5);
@@ -278,9 +278,9 @@ export class Game_InsuranceLayer extends BaseUI
         let payRatio = gameData.Data_BuyInsuranceTurn.mData.ratios;
         payRatio = payRatio/10;
         let amount = this.CalculateControlMoney(_ratio);
-        let payAmount = Tool.ConvertMoney_S2C(amount * payRatio) ;
-        this.mAmount.string = Tool.ConvertMoney_S2C(amount) + "";
-        this.mPay.string = payAmount + "";
+        let payAmount = Tool.ConvertMoneyTo_K(amount * payRatio) ;
+        this.mAmount.string = Tool.ConvertMoneyTo_K(amount)
+        this.mPay.string = payAmount;
     }
 
     CalculateControlMoney(_ratio : number) : number

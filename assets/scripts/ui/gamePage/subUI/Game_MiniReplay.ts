@@ -291,7 +291,7 @@ export class Game_MiniReplay extends BaseUI {
         this.GetPotAmountLabel(_phase).string  = "";
         if(_action.length != 0)
         {
-            this.GetPotAmountLabel(_phase).string = Tool.ConvertMoney_S2C(this.mTotalPots) + "";
+            this.GetPotAmountLabel(_phase).string = Tool.ConvertMoneyTo_K(this.mTotalPots)
             this.mLastPhase = _phase;
         }
     }

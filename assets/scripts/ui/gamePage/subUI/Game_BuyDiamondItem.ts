@@ -41,8 +41,8 @@ export class Game_BuyDiamondItem extends BaseUI
     public InitWithData(_index : number , _dataNotify : BaseData<number> , _diamondData : DiamondData)
     {
         this.mToggleBtn.SetDataNotify(_dataNotify , _index);
-        this.mPrice.string = Tool.ConvertMoney_S2C(_diamondData.mPrice) + "";
-        this.mToggleBtn.SetTitle(Tool.ConvertMoney_S2C(_diamondData.mDiamondAmount) + "");
+        this.mPrice.string = Tool.ConvertMoneyTo_K(_diamondData.mPrice)
+        this.mToggleBtn.SetTitle(Tool.ConvertMoneyTo_K(_diamondData.mDiamondAmount));
         if(_diamondData.mDiscount == 0)
         {
             this.mDiscountBG.active = false;

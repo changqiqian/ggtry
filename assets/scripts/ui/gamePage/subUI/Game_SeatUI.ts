@@ -175,8 +175,9 @@ export class Game_SeatUI extends BaseUI
     {
         let localSeat = this.GetSeatNodeBySeatId(_LocalPlayerSeatId);
         let bottomSeat = this.FindBottomSeat();
-        if(localSeat.mSeatID == bottomSeat.mSeatID) //自己已经是最底部的座位了
+        if(localSeat.mSeatID == bottomSeat.mSeatID)
         {
+            localSeat.UpdatePlayerUIDirection();
             console.log("Game_SeatUI 自己已经是最底部的座位了");
             return;
         }

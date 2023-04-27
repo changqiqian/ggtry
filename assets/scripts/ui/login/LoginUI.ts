@@ -23,17 +23,35 @@ export class LoginUI extends BaseUI
     @property(Label) 
     mGameID: Label = null;
 
+    @property(BaseButton) 
+    mEnterBtn: BaseButton = null;
+
+    @property(BaseButton) 
+    mLocalBtn: BaseButton = null;
+
     @property(EditBox) 
     mEditBox: EditBox = null;
 
     InitParam() 
     {
         GameConfig.CreateUID();
+        
     }
     BindUI() 
     {
         UIMgr.Instance.ShowMultipleTable(true);
         this.mVersion.string = GameConfig.Version;
+
+        this.mEnterBtn.SetClickCallback(()=>
+        {
+            Network.Instance.CreateWS();
+        });
+
+        this.mLocalBtn.SetClickCallback(()=>
+        {
+            GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://127.0.0.1:9001/pokerlife";
+            Network.Instance.CreateWS();
+        });
 
 
         this.mEditBox.node.on(EditBox.EventType.EDITING_RETURN,this.OnEditBoxReturn.bind(this) ) 
@@ -49,6 +67,16 @@ export class LoginUI extends BaseUI
         LocalPlayerData.Instance.UpdateUserInfo(userData);
         this.mUid.string = "Uid=====" + GameConfig.GetTopUid()
         this.mGameID.string = "GameID====" + GameConfig.GetTopGameId();
+
+        if(!GameConfig.DebugMode)
+        {
+            this.mVersion.node.active = false;
+            this.mUid.node.active = false;
+            this.mGameID.node.active = false;
+            this.mEnterBtn.node.active = false;
+            this.mLocalBtn.node.active = false;
+            this.mEditBox.node.active = false;
+        }
     }
 
     OnEditBoxReturn()

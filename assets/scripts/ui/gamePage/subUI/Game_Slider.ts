@@ -90,7 +90,7 @@ export class Game_Slider extends BaseUI
         this.mSmallBlind = _smallBlind;
         this.mTotalNum = _totalAmount;
         this.mMinRaiseNum = _minRaise;
-        this.mTotalAmount.string = Tool.ConvertMoney_S2C(_totalAmount) + "";
+        this.mTotalAmount.string = Tool.ConvertMoneyTo_K(_totalAmount) 
     }
 
     ResetSlider()
@@ -108,7 +108,7 @@ export class Game_Slider extends BaseUI
         this.mTotalBG.active = this.mProgress.fillRange < 1;
         this.mAllInTips.active = this.mProgress.fillRange >= 1;
         let currentAmount = this.CalculateCurrentAmount(this.mProgress.fillRange);
-        this.mAmount.string = Tool.ConvertMoney_S2C(currentAmount) + "";
+        this.mAmount.string = Tool.ConvertMoneyTo_K(currentAmount) 
         return currentAmount;
     }
 

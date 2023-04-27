@@ -117,24 +117,24 @@ export class Game_TableInfo extends BaseUI
         this.mRoomName.string = staticData.gameName;
         this.mRoomID.string = "ID:" + replayData.gameId;
 
-        let ante = Tool.ConvertMoney_S2C(staticData.ante);
-        let sb = Tool.ConvertMoney_S2C(staticData.smallBlind);
+        let ante = staticData.ante
+        let sb = staticData.smallBlind
         let bb = sb * 2;
         let straddle = staticData.straddle;
-
+        let straddleAmount = bb * 2;
         let bindInfo = "";
         if(straddle)
         {
-            bindInfo = sb + "/" + bb + "/" + bb*2;
+            bindInfo = Tool.ConvertMoneyTo_K(sb) + "/" + Tool.ConvertMoneyTo_K(bb) + "/" + Tool.ConvertMoneyTo_K(straddleAmount) 
         }
-        else
+        else  
         {
-            bindInfo = sb + "/" + bb;
+            bindInfo = Tool.ConvertMoneyTo_K(sb) + "/" + Tool.ConvertMoneyTo_K(bb);
         }
 
         if(ante > 0)
         {
-            bindInfo += "("+ ante +")";
+            bindInfo += "("+ Tool.ConvertMoneyTo_K(ante) +")";
         }
         this.mBlindInfo.string = bindInfo;
 

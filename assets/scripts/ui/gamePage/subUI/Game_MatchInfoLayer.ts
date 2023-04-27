@@ -103,8 +103,8 @@ export class Game_MatchInfoLayer extends ListViewCtr<PlayerStatistic>
 
         gameData.Data_S2CCommonGetStatisticsResp.AddListenner(this,(_data)=>
         {
-            this.mInsAmount.string = Tool.ConvertMoney_S2C(_data.insuranceWinlose) + "";
-            this.mJackpotAmount.string = Tool.ConvertMoney_S2C(_data.jackpotWinlose) + "";
+            this.mInsAmount.string = Tool.ConvertMoneyTo_K(_data.insuranceWinlose) 
+            this.mJackpotAmount.string = Tool.ConvertMoneyTo_K(_data.jackpotWinlose)
             this.ForceSetData(_data.playerStatisticList);
             this.RefreshData();
         })

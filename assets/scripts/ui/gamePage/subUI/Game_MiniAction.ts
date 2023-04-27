@@ -73,7 +73,7 @@ export class Game_MiniAction extends BaseUI {
                 this.mActAmount.node.active = false;
                 return;
             }
-            this.mActAmount.string = Tool.ConvertMoney_S2C(_act.amount) + "";
+            this.mActAmount.string = Tool.ConvertMoneyTo_K(_act.amount) 
         }
         else
         {
@@ -85,7 +85,7 @@ export class Game_MiniAction extends BaseUI {
                 this.mSelfActAmount.node.active = false;
                 return;
             }
-            this.mSelfActAmount.string = Tool.ConvertMoney_S2C(_act.amount) + "";
+            this.mSelfActAmount.string = Tool.ConvertMoneyTo_K(_act.amount) 
         }
     }
 
@@ -104,13 +104,13 @@ export class Game_MiniAction extends BaseUI {
             this.mPosName.string = GameReplayData.Instance.GetPosName(_playerWinLose.uid);
             this.mNickName.string = _playerWinLose.nickName;
             this.mActName.string =  Localization.GetString("00390");
-            this.mActAmount.string = Tool.ConvertMoney_S2C(_playerWinLose.winLose) + "";
+            this.mActAmount.string = Tool.ConvertMoneyTo_K(_playerWinLose.winLose) 
         }
         else
         {
             this.mSelfBG.active = true;
             this.mSelfActName.string =  Localization.GetString("00390");
-            this.mSelfActAmount.string = Tool.ConvertMoney_S2C(_playerWinLose.winLose) + "";
+            this.mSelfActAmount.string = Tool.ConvertMoneyTo_K(_playerWinLose.winLose) 
         }
     }
 

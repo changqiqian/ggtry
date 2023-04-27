@@ -389,7 +389,7 @@ export class Game_SelfUI extends BaseUI
             }
             else
             {
-                this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum + selfPlayer.bringInNum) + "";
+                this.mMoney.string = Tool.ConvertMoneyTo_K(selfPlayer.currencyNum + selfPlayer.bringInNum) 
             }
         }
         else
@@ -402,7 +402,7 @@ export class Game_SelfUI extends BaseUI
             }
             else
             {
-                this.mMoney.string = Tool.ConvertMoney_S2C(selfPlayer.currencyNum) + "";
+                this.mMoney.string = Tool.ConvertMoneyTo_K(selfPlayer.currencyNum)
             }
             
         }

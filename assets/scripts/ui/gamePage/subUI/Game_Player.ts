@@ -927,25 +927,25 @@ export class Game_Player extends BaseUI
                 }
                 else
                 {
-                    this.mAmount.string =  Tool.ConvertMoney_S2C(totalMoney) + "";
+                    this.mAmount.string =  Tool.ConvertMoneyTo_K(totalMoney) 
                 }
             }
             else
             {
-                this.mAmount.string =  Tool.ConvertMoney_S2C(_playerInfo.currencyNum) + "";
+                this.mAmount.string =  Tool.ConvertMoneyTo_K(_playerInfo.currencyNum) 
                 if(LocalPlayerData.Instance.Data_BBModeSetting.mData)
                 {
                     this.mAmount.string = Tool.ConvertToBB(_playerInfo.currencyNum , bb);
                 }
                 else
                 {
-                    this.mAmount.string =  Tool.ConvertMoney_S2C(_playerInfo.currencyNum) + "";
+                    this.mAmount.string =  Tool.ConvertMoneyTo_K(_playerInfo.currencyNum) 
                 }
             }
         }
         else
         {
-            this.mAmount.string =  Tool.ConvertMoney_S2C(_playerInfo.currencyNum) + "";
+            this.mAmount.string =  Tool.ConvertMoneyTo_K(_playerInfo.currencyNum) 
         }
     }
 

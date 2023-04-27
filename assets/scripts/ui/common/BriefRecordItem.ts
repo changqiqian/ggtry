@@ -76,14 +76,14 @@ export class BriefRecordItem extends BaseUI
         
         this.mWinnerPlayerInfo.SetLocalHead(winner.head);
         this.mWinnerPlayerInfo.SetName(winner.nickName);
-        this.mWinnerProfit.string = Tool.ConvertMoney_S2C(winner.winLose) + "";
+        this.mWinnerProfit.string = Tool.ConvertMoneyTo_K(winner.winLose) 
 
         let selfInfo = _data.mySimpleInfo
         if(selfInfo !=null)
         {
             if(selfInfo.myResult != 0)
             {
-                this.mMyProfit.string = Tool.ConvertMoney_S2C(selfInfo.myResult) + "";
+                this.mMyProfit.string = Tool.ConvertMoneyTo_K(selfInfo.myResult) 
             }
             for(let i = 0 ; i < selfInfo.myCards.length ; i++)
             {

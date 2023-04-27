@@ -48,7 +48,7 @@ export class Game_MatchInfoItem extends BaseUI
         this.mSelfTag.active = _data.uid == LocalPlayerData.Instance.Data_Uid.mData;
         this.mNickName.string = _data.name;
         this.mHands.string = _data.totalHands + "";
-        this.mBringIn.string = Tool.ConvertMoney_S2C(_data.totalBringIn) + "";
+        this.mBringIn.string = Tool.ConvertMoneyTo_K(_data.totalBringIn)
 
         if(_data.totalHands == 0)
         {
@@ -61,12 +61,12 @@ export class Game_MatchInfoItem extends BaseUI
 
         if(_data.winLose >=0)
         {
-            this.mWinLose.string = "+" + Tool.ConvertMoney_S2C(_data.winLose);
+            this.mWinLose.string = "+" + Tool.ConvertMoneyTo_K(_data.winLose);
             this.mWinLose.color = Color.GREEN
         }
         else
         {
-            this.mWinLose.string = Tool.ConvertMoney_S2C(_data.winLose) + "";
+            this.mWinLose.string = Tool.ConvertMoneyTo_K(_data.winLose)
             this.mWinLose.color = Color.RED
         }
     }

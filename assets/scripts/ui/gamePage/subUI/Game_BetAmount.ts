@@ -59,7 +59,7 @@ export class Game_BetAmount extends BaseUI
 
         if(LocalPlayerData.Instance.Data_BBModeSetting.mData == false || this.mReplay )
         {
-            let amountS2C = Tool.ConvertMoney_S2C(this.mData);
+            let amountS2C = Tool.ConvertMoneyTo_K(this.mData);
             this.mAmount.string = amountS2C + "";
             return;
         }

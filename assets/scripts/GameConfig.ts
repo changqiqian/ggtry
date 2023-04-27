@@ -18,7 +18,7 @@ export enum NetWorkRoute
 
 export class GameConfig
 {   
-    public static readonly DebugMode =  false;   //调试模式
+    public static readonly DebugMode =  true;   //调试模式
     public static Route;  //渠道
     public static NetConfig  : NetWorkConfig;
     public static InitNetWorkConfig(_route : NetWorkRoute)
@@ -29,19 +29,22 @@ export class GameConfig
         {
             GameConfig.NetConfig.HTTP_API = "http://54.169.147.71:8082";
             GameConfig.NetConfig.HOME_URL = "http://test-h5.9dhub.com";
-            GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://" +"18.142.179.150:9501" +"/pokerlife";
+            GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://" +"18.142.179.150:9001" +"/pokerlife";
         }
         else if(GameConfig.Route == NetWorkRoute.JiuDing)
         {
             GameConfig.NetConfig.HTTP_API = "https://jd-texas-game-lobby-api.star-link-rel.cc";
             GameConfig.NetConfig.HOME_URL = "https://jd-texas-game-lobby.star-link-rel.cc";
             //GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://" + "jd-texas-game-api.star-link-rel.cc";
-            GameConfig.NetConfig.WEBSOCKET_ADDR ="wss://jd-texas-game-api.star-link-rel.cc";
-
-            
+            //GameConfig.NetConfig.WEBSOCKET_ADDR ="wss://jd-texas-game-api.star-link-rel.cc";
+            //GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://jd-texas-game-api.star-link-rel.cc:9001";
+            //GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://16.162.90.249:9001";
+            //GameConfig.NetConfig.WEBSOCKET_ADDR = "ws://16.162.90.249:9001/pokerlife";
+            //GameConfig.NetConfig.WEBSOCKET_ADDR ="wss://16.162.90.249:9001/pokerlife";
+            GameConfig.NetConfig.WEBSOCKET_ADDR ="wss://jd-texas-game-api.star-link-rel.cc/pokerlife";
         }
     }
-
+    
 
     //发布的版本号
     public static Version = "1.1.6"
@@ -403,13 +406,11 @@ export class GameConfig
 
         if(result.length == 0) //从来没有设置过快捷加注按钮
         {
-            for(let i = 0 ; i < GameConfig.MaxRaiseBtn ; i++)
-            {
-                result.push(i);
-                GameConfig.SaveCustomerRaise(i,i);
-            }
+            GameConfig.SaveCustomerRaise(0,1);
+            GameConfig.SaveCustomerRaise(1,3);
+            GameConfig.SaveCustomerRaise(0,5);
+            GameConfig.SaveCustomerRaise(0,8);
         }
-
         result.sort();
         return result;
     }
@@ -563,8 +564,6 @@ export class GameConfig
     public static GetTopGameId() : string
     {
         return top.GAME_ID;
-        //return "9999999990";
+        //return "3213213213";
     }
-    
-    
 } 

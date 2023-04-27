@@ -110,8 +110,8 @@ export class Game_MiniPlayer extends BaseUI
         if(winloseInfo !=null && winloseInfo.winLose > 0)
         {
             this.mWinLose.node.active = true;
-            this.mAmount.string =  Tool.ConvertMoney_S2C(winloseInfo.amount) + "";
-            this.mWinLose.string =  "+" + Tool.ConvertMoney_S2C(winloseInfo.winLose);
+            this.mAmount.string =  Tool.ConvertMoneyTo_K(winloseInfo.amount) 
+            this.mWinLose.string =  "+" + Tool.ConvertMoneyTo_K(winloseInfo.winLose);
             return;
         }
 
@@ -128,7 +128,7 @@ export class Game_MiniPlayer extends BaseUI
         this.CalculateAmountByActions(turn , _playerInfo.uid);
         this.CalculateAmountByActions(river , _playerInfo.uid);
 
-        this.mAmount.string =  Tool.ConvertMoney_S2C(this.mFinalAmount) + "";
+        this.mAmount.string =  Tool.ConvertMoneyTo_K(this.mFinalAmount)
     }
 
     CalculateAmountByActions(_actions : Array<ActionResult> , _uid : string)

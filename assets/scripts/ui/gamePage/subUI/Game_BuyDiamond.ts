@@ -72,7 +72,7 @@ export class Game_BuyDiamond extends BaseUI
         LocalPlayerData.Instance.Data_UpdateHallMoney.AddListenner(this , (_data)=>
         {
             let coin = LocalPlayerData.Instance.Data_Coin.mData;
-            this.mAmount.string = Tool.ConvertMoney_S2C(coin) + "";
+            this.mAmount.string = Tool.ConvertMoneyTo_K(coin);
         });
     }
     LateInit()

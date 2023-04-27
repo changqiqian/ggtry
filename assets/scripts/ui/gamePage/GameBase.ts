@@ -213,7 +213,7 @@ export class GameBase extends BaseUI
                     return;
                 }
                 let temp = _script as Game_CommonTips;
-                let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
+                let amount = Tool.ConvertMoneyTo_K(_data.amount)
                 let tips = player.nickName + " " + Localization.GetString("00337") + amount;
                 temp.ShowTips(tips);
             },this.mSecondLayer);
@@ -229,7 +229,7 @@ export class GameBase extends BaseUI
                     return;
                 }
                 let temp = _script as Game_CommonTips;
-                let amount = Tool.ConvertMoney_S2C(_data.amount) + "";
+                let amount = Tool.ConvertMoneyTo_K(_data.amount)
                 let tips = player.nickName + " " + Localization.GetString("00338") + amount;
                 temp.ShowTips(tips);
             },this.mSecondLayer);
@@ -246,7 +246,7 @@ export class GameBase extends BaseUI
                     return;
                 }
                 let temp = _script as Game_CommonTips;
-                let amount = Tool.ConvertMoney_S2C(_data.lotteryNum) + "";
+                let amount = Tool.ConvertMoneyTo_K(_data.lotteryNum)
                 let tips = player.nickName + " " + Localization.GetString("00343") + amount;
                 temp.ShowTips(tips);
             },this.mSecondLayer);

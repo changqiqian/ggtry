@@ -78,7 +78,7 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
     }
 
     //房主 处理买入请求
-    public PostDealBuyInRequest(_approveStatus : HTTP_ApproveStatus , _approveUserId : string , _buyRequestId : string , _gameId : string)
+    public PostDealBuyInRequest(_approveStatus : HTTP_ApproveStatus , _approveUserId : string , _buyRequestId : string , _gameId : string ,_requestUserID : string)
     {
         let xhr = new XMLHttpRequest();
         let url = GameConfig.NetConfig.HTTP_API;
@@ -108,17 +108,15 @@ export class NetworkHttp extends Singleton<NetworkHttp>()
             let gameStruct = MultipleTableCtr.FindGameStructByGameId(_gameId);
             if(gameStruct != null)
             {
-                let gameData = gameStruct.mGameData;
                 let tips = "";
                 if(_approveStatus == HTTP_ApproveStatus.Agree)
                 {
-                    tips = Localization.ReplaceString("00412",_approveUserId)
+                    tips = Localization.ReplaceString("00412",_requestUserID)
                 }
                 else
                 {
-                    tips = Localization.ReplaceString("00413",_approveUserId)
+                    tips = Localization.ReplaceString("00413",_requestUserID)
                 }
-                let ownnerId = gameData.GetOwnerId();
                 UIMgr.Instance.ShowToast(tips);
             }
 

@@ -87,7 +87,8 @@ export class Game_BuyInApprove  extends ListViewCtr<HTTP_BuyInData>
 
     OnItemClicked(_status : HTTP_ApproveStatus , _data : HTTP_BuyInData)
     {
-        NetworkHttp.Instance.PostDealBuyInRequest(_status ,LocalPlayerData.Instance.Data_Uid.mData  ,_data.id.toString() , _data.gameId);
+        NetworkHttp.Instance.PostDealBuyInRequest(_status ,
+            LocalPlayerData.Instance.Data_Uid.mData  ,_data.id.toString() , _data.gameId , _data.userId);
     }
 }
 

@@ -51,9 +51,7 @@ export class Game_BuyInApproveItem extends BaseUI
             this.ShowTips(false);
         });
 
-        this.mAgreeBtn.Show(true);
-        this.mRejectBtn.Show(true);
-        this.mTips.node.active = false;
+        this.ResetUI();
     }
     RegDataNotify()
     {
@@ -74,11 +72,32 @@ export class Game_BuyInApproveItem extends BaseUI
         this.mClickCallback = _callback;
         this.mName.string = _data.userName;
         this.mID.string = _data.userId;
-        this.mAmount.string = Tool.ConvertMoney_S2C(_data.amount) + "";
+        this.mAmount.string = Tool.ConvertMoneyTo_K(_data.amount) 
         this.LoadHead(_data.headUrl,(_spriteFrame)=>
         {
             this.mHead.spriteFrame = _spriteFrame;
         });
+
+
+        if(_data.approvalStatus == ApprovalStatus.ApprovalStatus_Fail)
+        {
+            this.ShowTips(false);
+        }
+        else if(_data.approvalStatus == ApprovalStatus.ApprovalStatus_Success)
+        {
+            this.ShowTips(true);
+        }
+        else if(_data.approvalStatus == ApprovalStatus.ApprovalStatus_Wait)
+        {
+            this.ResetUI();
+        }
+    }
+
+    ResetUI()
+    {
+        this.mAgreeBtn.Show(true);
+        this.mRejectBtn.Show(true);
+        this.mTips.node.active = false;
     }
 
     ShowTips(_value:boolean)

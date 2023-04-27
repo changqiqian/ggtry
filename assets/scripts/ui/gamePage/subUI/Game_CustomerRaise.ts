@@ -101,9 +101,8 @@ export class Game_CustomerRaise extends BaseUI
             let bbRatio = i + 2;
             let amount = bbRatio * lastBetAct.roundAmount;
             amount = Tool.CeilServerMoney(amount);
-            let clientAmount = Tool.ConvertMoney_S2C(amount);
             let currentBtn = this.mRaiseByBB.children[i].getComponent(BaseButton);
-            currentBtn.SetTitle(clientAmount + "");
+            currentBtn.SetTitle(Tool.ConvertMoneyTo_K(amount));
             currentBtn.SetClickCallback((_data)=>
             {
                 let actionInfo = new ActionInfo();
@@ -187,8 +186,8 @@ export class Game_CustomerRaise extends BaseUI
             }
             else
             {
-                let clientAmount = Tool.ConvertMoney_S2C(amount);
-                currentBtn.SetTitle(clientAmount + "");
+                let clientAmount = Tool.ConvertMoneyTo_K(amount);
+                currentBtn.SetTitle(clientAmount);
             }
 
             currentBtn.SetClickCallback((_data)=>

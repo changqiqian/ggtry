@@ -35,7 +35,9 @@ export class NetworkReceive extends Singleton<NetworkReceive>()
             console.log("收到的内容 S2C_CommonEnterGameResp  进入游戏==" + JSON.stringify(msg));
             if(msg.result.resId == MsgResult.Success)
             {
+                let basicInfo : BasicTexasConfig =  msg.texasConfig
                 HallData.Instance.Data_S2CEnterGame.mData = msg;
+
             }
             else if(msg.result.resId == 113) //代表已经在游戏中，直接切换进入游戏画面
             {

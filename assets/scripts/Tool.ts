@@ -168,6 +168,20 @@ export class Tool
         return clientMoney;
     }
 
+    //服务器的钱转成客户端 K
+    public static ConvertMoneyTo_K(_money : number , _needDivide = true ) : string 
+    {
+        let clientMoney = _money;
+        if(_needDivide)
+        {
+            clientMoney = _money / Tool.GetMoneyMultiple();
+        }
+        let temp = clientMoney / 1000;
+        let result = temp.toFixed(1) + "k";
+        return result;
+    }
+    
+
     public static ConvertMoney_C2S(_clientMoney : number) : number
     {
         let serverMoney = _clientMoney * Tool.GetMoneyMultiple();
@@ -308,18 +322,18 @@ export class Tool
     public static GetBlindInfo(_sb :number , _straddle : boolean , _ante : number) : string
     {
         let blindInfo = "";
-        let sb = Tool.ConvertMoney_S2C(_sb);
+        let sb = _sb;
         let bb = sb*2;
         let straddle = bb * 2;
-        blindInfo += sb + "/";
-        blindInfo += bb;
+        blindInfo +=  Tool.ConvertMoneyTo_K(sb) + "/";
+        blindInfo += Tool.ConvertMoneyTo_K(bb);
         if(_straddle)
         {
-            blindInfo += "/" + straddle;
+            blindInfo += "/" + Tool.ConvertMoneyTo_K(straddle);
         }
         if(_ante > 0)
         {
-            blindInfo += "(" + Tool.ConvertMoney_S2C(_ante) + ")"
+            blindInfo += "(" + Tool.ConvertMoneyTo_K(_ante,) + ")"
         }
         return blindInfo;
     }

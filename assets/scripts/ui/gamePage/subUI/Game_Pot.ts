@@ -43,7 +43,7 @@ export class Game_Pot extends BaseUI
 
     SetTotalPot(_amount : number)
     {
-        this.mTotalAmount.string = Localization.GetString("00064")+":" + Tool.ConvertMoney_S2C(_amount);
+        this.mTotalAmount.string = Localization.GetString("00064")+":" + Tool.ConvertMoneyTo_K(_amount);
     }
 
 
@@ -171,7 +171,7 @@ export class Game_Pot extends BaseUI
             let potAmount = potInfos[i].pot;
             let subPotNode = this.mSubPots.children[i];
             subPotNode.active = true;
-            subPotNode.children[0].getComponent(Label).string = Tool.ConvertMoney_S2C(potAmount) + "";
+            subPotNode.children[0].getComponent(Label).string = Tool.ConvertMoneyTo_K(potAmount) 
         }
     }
 
@@ -224,7 +224,7 @@ export class Game_Pot extends BaseUI
             let potAmount = pots[i].pot;
             let subPotNode = this.mSubPots.children[i];
             subPotNode.active = true;
-            subPotNode.children[0].getComponent(Label).string = Tool.ConvertMoney_S2C(potAmount) + "";
+            subPotNode.children[0].getComponent(Label).string = Tool.ConvertMoneyTo_K(potAmount) 
         }
     
     }
