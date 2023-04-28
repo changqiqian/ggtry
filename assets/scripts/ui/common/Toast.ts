@@ -5,6 +5,8 @@ const { ccclass, property } = _decorator;
 @ccclass('Toast')
 export class Toast extends BaseUI 
 {
+    public static PrefabPath : string = "prefab/Toast";
+    public static Bunddle : string = "common";
     @property(Sprite) 
     mBG: Sprite = null;
     @property(Label) 

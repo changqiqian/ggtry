@@ -308,6 +308,7 @@ export class Tool
         return true;
     }
 
+    //包括 lower 和 upper
     public static Random(lower:number, upper : number) : number
     {
         return Math.floor(Math.random() * (upper - lower+1)) + lower;

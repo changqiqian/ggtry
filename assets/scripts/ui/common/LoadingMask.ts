@@ -4,6 +4,8 @@ const { ccclass, property } = _decorator;
 
 @ccclass('LoadingMask')
 export class LoadingMask extends BaseUI {
+    public static PrefabPath : string = "prefab/LoadingMask";
+    public static Bunddle : string = "common";
     @property([SpriteFrame]) 
     mLoadingFrames: [SpriteFrame];
     @property(Label) 

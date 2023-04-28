@@ -41,13 +41,10 @@
       },
       {
         "__id__": 72
-      },
-      {
-        "__id__": 74
       }
     ],
     "_prefab": {
-      "__id__": 76
+      "__id__": 74
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1323,30 +1320,6 @@
     "fileId": "a0hHUEuXtDn7F8uEj+DJ4T"
   },
   {
-    "__type__": "dddd42YZT9N8ItX01ZCopex",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 75
-    },
-    "mStartBtn": null,
-    "mProgressBG": {
-      "__id__": 10
-    },
-    "mProgress": {
-      "__id__": 14
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "e6yMn9OmlKwLjVtO7+ZipY"
-  },
-  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -1355,37 +1328,11 @@
       "__id__": 0
     },
     "fileId": "e5+BB9j3ZI+JSXb/q9avPi",
-    "targetOverrides": [
-      {
-        "__id__": 77
-      }
-    ],
+    "targetOverrides": [],
     "nestedPrefabInstanceRoots": [
       {
         "__id__": 40
       }
-    ]
-  },
-  {
-    "__type__": "cc.TargetOverrideInfo",
-    "source": {
-      "__id__": 74
-    },
-    "sourceInfo": null,
-    "propertyPath": [
-      "mStartBtn"
-    ],
-    "target": {
-      "__id__": 40
-    },
-    "targetInfo": {
-      "__id__": 78
-    }
-  },
-  {
-    "__type__": "cc.TargetInfo",
-    "localID": [
-      "eaLy0KjgNMzpJZxdZXV5DR"
     ]
   }
 ]

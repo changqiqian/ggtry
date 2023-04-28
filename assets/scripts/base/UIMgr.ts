@@ -6,6 +6,8 @@ import { BaseUI } from "./BaseUI";
 import { BaseWindow } from "./BaseWindow";
 import { ResMgr } from "./ResMgr";
 import { Singleton } from "./Singleton";
+import { LoadingUI } from "../ui/loading/LoadingUI";
+import { GameUI } from "../ui/gamePage/GameUI";
 
 class LayerKeyPair
 {
@@ -24,17 +26,19 @@ class LayerKeyPair
 
 class SceneConfig
 {
-    constructor(_type :SceneType ,_prefabPath : string, _defaultBundle : string , _bundles : Array<string>) 
+    constructor(_type :SceneType ,_prefabPath : string, _defaultBundle : string , _scriptName : string, _bundles : Array<string>) 
     {
         this.type = _type;
         this.bundleNames = _bundles;
         this.prefabPath = _prefabPath;
+        this.scriptName = _scriptName;
         this.defaultBundle = _defaultBundle;
     }
     type : SceneType;
     bundleNames : Array<string>; //依赖的所有bundle
     defaultBundle : string; //作为当前场景的prefab属于哪一个bundle
     prefabPath : string; //作为当前场景的prefab的路径
+    scriptName : string 
 }
 
 export enum LayerType
@@ -78,9 +82,8 @@ export class UIMgr extends Singleton<UIMgr>()
         UIMgr.ResFolder = ["anm","font","music","prefab","texture","particular"];
         UIMgr.InitialBundle = ["common","loading"];
         UIMgr.RestBundle = ["gamePage"];
-        let loadingConfig = new SceneConfig(SceneType.Loading , "prefab/LoadingUI" ,"loading" ,[]);
-
-        let gameConfig = new SceneConfig(SceneType.Game, "prefab/GameUI" ,"gamePage",[]);
+        let loadingConfig = new SceneConfig(SceneType.Loading , LoadingUI.PrefabPath ,LoadingUI.Bunddle ,"LoadingUI",[]);
+        let gameConfig = new SceneConfig(SceneType.Game,  GameUI.PrefabPath ,GameUI.Bunddle, "GameUI" ,[]);
         this.mSceneConfig.push(loadingConfig);
         this.mSceneConfig.push(gameConfig);
         this.LoadInitRes(_loadFinish);
@@ -92,7 +95,7 @@ export class UIMgr extends Singleton<UIMgr>()
         this.PreloadRes(UIMgr.InitialBundle, ()=>
         {
             //初始化菊花图
-            this.CreatePrefab("common","prefab/LoadingMask" , (_tempNode)=>
+            this.CreatePrefab("",LoadingMask.Bunddle,LoadingMask.PrefabPath , (_tempNode)=>
             {
                 let tempScript = _tempNode.getComponent(LoadingMask);
                 this.mTopRoot.addChild(_tempNode);
@@ -100,7 +103,7 @@ export class UIMgr extends Singleton<UIMgr>()
                 this.mLoadingMask.ShowLoading(false);
             });
             //初始化快捷提示
-            this.CreatePrefab("common","prefab/Toast" , (_tempNode)=>
+            this.CreatePrefab("",Toast.Bunddle , Toast.PrefabPath, (_tempNode)=>
             {
                 let tempScript = _tempNode.getComponent(Toast);
                 this.mTopRoot.addChild(_tempNode);
@@ -131,20 +134,6 @@ export class UIMgr extends Singleton<UIMgr>()
         this.mToast.node.setSiblingIndex(childCount);
         this.mToast.ShowToast(_tips , _duration);
     }
-
-    public AddLayerInTopRoot(_bundleName :string , _prefabPath:string , _callback :Function = null)
-    {
-        this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
-        {
-            this.mTopRoot.addChild(_tempNode);
-            if(_callback != null)
-            {
-                let tempScript = _tempNode.getComponent(BaseUI);
-                _callback(tempScript)
-            }
-            //_tempNode.setSiblingIndex(0);
-        });
-    }
     
     public HaveLayer(_bundleName :string , _prefabPath:string , _tag : string = "", _aka : string  = "")
     {
@@ -157,7 +146,7 @@ export class UIMgr extends Singleton<UIMgr>()
         return false;
     }
 
-    public ShowLayer(_bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null , _tag : string = "", _aka : string  = "")
+    public ShowLayer(_scriptName : string , _bundleName :string , _prefabPath:string , _show :boolean = true , _finishFunction : Function = null , _tag : string = "", _aka : string  = "")
     {
         let key = this.CreateKey(_bundleName,_prefabPath,_aka);
         let target = this.FindLayer(key,LayerType.Layer);
@@ -189,7 +178,7 @@ export class UIMgr extends Singleton<UIMgr>()
 
         
         this.CreateRecordItem(key, LayerType.Layer , _tag);
-        this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
+        this.CreatePrefab(_scriptName,_bundleName,_prefabPath , (_tempNode)=>
         {
             this.GetRootNode(LayerType.Layer).addChild(_tempNode);
             this.RecordLayer(key , _tempNode , LayerType.Layer);
@@ -204,7 +193,7 @@ export class UIMgr extends Singleton<UIMgr>()
         });
     }
 
-    public ShowWindow(_bundleName :string , _prefabPath:string , _show : boolean = true, _finishFunction : Function = null, _tag : string = "",_aka : string  = "")
+    public ShowWindow(_scriptName :string,  _bundleName :string , _prefabPath:string , _show : boolean = true, _finishFunction : Function = null, _tag : string = "",_aka : string  = "")
     {
         let key = this.CreateKey(_bundleName,_prefabPath,_aka);
         let target = this.FindLayer(key,LayerType.Window);
@@ -235,9 +224,9 @@ export class UIMgr extends Singleton<UIMgr>()
         }
 
         this.CreateRecordItem(key , LayerType.Window , _tag);
-        this.CreatePrefab("common","prefab/BaseWindow" , (_tempWindow)=>
+        this.CreatePrefab("",BaseWindow.Bunddle,BaseWindow.PrefabPath , (_tempWindow)=>
         {
-            this.CreatePrefab(_bundleName,_prefabPath , (_tempNode)=>
+            this.CreatePrefab(_scriptName,_bundleName,_prefabPath , (_tempNode)=>
             {
                 this.GetRootNode(LayerType.Window).addChild(_tempWindow);
                 this.RecordLayer(key , _tempWindow , LayerType.Window);
@@ -255,13 +244,17 @@ export class UIMgr extends Singleton<UIMgr>()
         });
     }
 
-    public CreatePrefab(_bundleName :string , _prefabPath:string, _loadFinish:Function)
+    public CreatePrefab(_scriptName : string , _bundleName :string , _prefabPath:string, _loadFinish:Function)
     {
         ResMgr.GetAssetInBundle(_bundleName , _prefabPath , cc.Prefab , (_prefab)=>
         {
             if(_loadFinish)
             {
                 let tempNode = instantiate(_prefab);
+                if(_scriptName != "")
+                {
+                    tempNode.addComponent(_scriptName);
+                }
                 _loadFinish(tempNode);
             }
         });
@@ -294,7 +287,7 @@ export class UIMgr extends Singleton<UIMgr>()
 
         this.mCurrentScene = _sceneType;
         let configNewScene = this.GetSceneConfig(_sceneType);
-        this.ShowLayer(configNewScene.defaultBundle,configNewScene.prefabPath);
+        this.ShowLayer(configNewScene.scriptName, configNewScene.defaultBundle,configNewScene.prefabPath);
         // this.PreloadRes(configNewScene.bundleNames  , ()=>
         // {
         //     this.ShowLayer(configNewScene.defaultBundle,configNewScene.prefabPath);

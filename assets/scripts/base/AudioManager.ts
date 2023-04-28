@@ -6,6 +6,10 @@ const { ccclass, property } = _decorator;
 export class AudioManager extends BaseUI 
 {
     public static Instance : AudioManager = null;
+    mCurrentBGM : AudioSource = null;
+    mCurrentEffect : AudioSource = null;
+    mMuteBGM : boolean = false;
+    mMuteEffect  : boolean = false;
     InitParam()
     {
         AudioManager.Instance = this;
@@ -34,23 +38,68 @@ export class AudioManager extends BaseUI
         return audio;
     }
 
-    public PlayMusicOneShot(_name : string)
+    public PlayEffectOneShot(_name : string)
     {
-        let audio = this.GetAudioSource(_name)
-        audio.playOneShot(audio.clip);
+        if(this.mMuteEffect)
+        {
+            return;
+        }
+        this.mCurrentEffect = this.GetAudioSource(_name)
+        this.mCurrentEffect.playOneShot(this.mCurrentEffect.clip);
     }
 
-    public PlayMusic(_name : string , _loop : boolean = false)
+    public PlayBGMMusic(_name : string , _loop : boolean = false)
     {
-        let audio = this.GetAudioSource(_name);
-        audio.loop = _loop;
-        audio.play();
+        this.mCurrentBGM = this.GetAudioSource(_name);
+        this.mCurrentBGM.loop = _loop;
+        this.mCurrentBGM.play();
     }
 
-    public StopMusic(_name : string)
+    public StopBGMMusic()
     {
-        let audio = this.GetAudioSource(_name);
-        audio.stop();
+        if(this.mCurrentBGM != null)
+        {
+            this.mCurrentBGM.stop();
+        }
+    }
+
+    public RewindBGMMusic()
+    {
+        if(this.mCurrentBGM != null)
+        {
+            this.mCurrentBGM.play();
+        }
+    }
+
+    public MuteBGM(_value : boolean)
+    {
+        this.mMuteBGM = _value;
+        if(_value)
+        {
+            this.StopBGMMusic();
+        }
+        else
+        {
+            this.RewindBGMMusic();
+        }
+    }
+
+    public MuteEffect(_value : boolean)
+    {
+        this.mMuteEffect = _value;
+        if(_value)
+        {
+            if(this.mCurrentEffect != null)
+            {
+                this.mCurrentEffect.stop();
+            }
+        }
+    }
+
+    public MuteAll(_value : boolean)
+    {
+        this.MuteBGM(_value);
+        this.MuteEffect(_value);
     }
 }
 

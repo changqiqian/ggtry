@@ -131,7 +131,7 @@ export class BaseButton extends BaseUI {
         {
             return;
         }
-        AudioManager.Instance.PlayMusicOneShot("Btn");
+        AudioManager.Instance.PlayEffectOneShot("Btn");
         if(this.mProtectDoubleClick == true)
         {
             if(this.mClickProtecting == true)

@@ -19,7 +19,6 @@ export class ToggleBtn extends BaseUI {
 
     mCustmoerData:number = 0;
     mDataNotify : BaseData<number> = null;
-    mForbidden : boolean = false;
 
     mClickCallback : Function = null;
     InitParam() 
@@ -73,13 +72,13 @@ export class ToggleBtn extends BaseUI {
         {
             this.mSelected.node.on(Node.EventType.TOUCH_END,()=>
             {
-                AudioManager.Instance.PlayMusicOneShot("Btn");
+                AudioManager.Instance.PlayEffectOneShot("Btn");
                 this.ShowUnselected();
                 this.mClickCallback(false,this.mCustmoerData);
             },this);
             this.mDisabled.node.on(Node.EventType.TOUCH_END,()=>
             {
-                AudioManager.Instance.PlayMusicOneShot("Btn");
+                AudioManager.Instance.PlayEffectOneShot("Btn");
                 this.ShowSelected();
                 this.mClickCallback(true,this.mCustmoerData);
             },this);
@@ -103,12 +102,11 @@ export class ToggleBtn extends BaseUI {
         this.mDisabled.node.getChildByName("Icon").getComponent(Sprite).spriteFrame = _spriteFrame;
     }
 
-    public SetForbidden(_val : boolean)
+
+    public SetInteractable(_val : boolean)
     {
-        this.mForbidden = _val;
-        this.mSelected.interactable = !this.mForbidden;
-        this.mDisabled.interactable = !this.mForbidden;
-        this.SetGray(_val);
+        this.mSelected.interactable = _val;
+        this.mDisabled.interactable = _val;
     }
 
     public SetGray(_val : boolean)
@@ -119,20 +117,20 @@ export class ToggleBtn extends BaseUI {
 
     OnSelected()
     {
-        if(this.mForbidden)
+        if(!this.mSelected.interactable)
         {
-            return;
+            return
         }
-        AudioManager.Instance.PlayMusicOneShot("Btn");
+        AudioManager.Instance.PlayEffectOneShot("Btn");
     }
 
     OnDisabled()
     {
-        if(this.mForbidden)
+        if(!this.mSelected.interactable)
         {
-            return;
+            return
         }
-        AudioManager.Instance.PlayMusicOneShot("Btn");
+        AudioManager.Instance.PlayEffectOneShot("Btn");
         if(this.mDataNotify == null)
         {
             return;

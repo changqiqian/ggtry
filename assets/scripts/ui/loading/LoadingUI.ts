@@ -9,24 +9,28 @@ const { ccclass, property } = _decorator;
 @ccclass('LoadingUI')
 export class LoadingUI extends BaseUI 
 {
-    @property(BaseButton) 
+    public static PrefabPath : string = "prefab/LoadingUI";
+    public static Bunddle : string = "loading";
+
     mStartBtn: BaseButton = null;
-    @property(Node) 
     mProgressBG: Node = null;
-    @property(Sprite) 
     mProgress: Sprite = null;
     InitParam() 
     {
-        this.mProgress.fillRange = 0;
     }
     BindUI() 
     {
+        this.mStartBtn = this.node.getChildByPath("StartBtn").getComponent(BaseButton);
+        this.mProgressBG = this.node.getChildByPath("ProgressBG");
+        this.mProgress = this.node.getChildByPath("ProgressBG/Progress").getComponent(Sprite);
+
         this.mStartBtn.SetClickCallback(()=>
         {
             UIMgr.Instance.ChangeScene(SceneType.Game);
         })
 
 
+        this.mProgress.fillRange = 0;
         this.mProgressBG.active = true;
         this.mStartBtn.Show(false);
     }

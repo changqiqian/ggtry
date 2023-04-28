@@ -7,6 +7,8 @@ const { ccclass, property } = _decorator;
 @ccclass('DropBoxItem')
 export class DropBoxItem extends BaseUI 
 {
+    public static PrefabPath : string = "prefab/DropBoxItem";
+    public static Bunddle : string = "common";
     @property(ToggleBtn) 
     mToggleBtn: ToggleBtn = null;
     InitParam()

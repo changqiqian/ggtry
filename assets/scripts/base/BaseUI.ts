@@ -4,6 +4,7 @@ import { LoadingData } from '../ui/loading/LoadingData';
 import { LocalPlayerData } from './LocalPlayerData';
 import { ResMgr } from './ResMgr';
 import { UIMgr } from './UIMgr';
+import { GameData } from '../ui/gamePage/GameData';
 
 class SubViewKeyPair {
     constructor(_key: string, _value: Node) {
@@ -81,6 +82,7 @@ export abstract class BaseUI extends Component {
         LoadingData.Instance.RemoveAllDataListennerByTarget(this);
         LocalPlayerData.Instance.RemoveAllDataListennerByTarget(this);
         CommonNotify.Instance.RemoveAllDataListennerByTarget(this);
+        GameData.Instance.RemoveAllDataListennerByTarget(this);
 
         this.StopSecondsTimer();
         this.CustmoerDestory();
@@ -180,9 +182,9 @@ export abstract class BaseUI extends Component {
         });
     }
 
-    LoadPrefab(_bundleName: string, _assetPath: string, _loadFinish: Function) 
+    LoadPrefab(_scriptName : string ,_bundleName: string, _assetPath: string, _loadFinish: Function) 
     {
-        UIMgr.Instance.CreatePrefab(_bundleName, _assetPath, (_prefab) => 
+        UIMgr.Instance.CreatePrefab(_scriptName,_bundleName, _assetPath, (_prefab) => 
         {
             if (cc.isValid(this.node, true) == false) 
             {
@@ -212,7 +214,7 @@ export abstract class BaseUI extends Component {
     }
 
 
-    AddSubView(_bundleName : string, _assetPath : string ,  _loadFinish : Function = null , _parent : Node = null)
+    AddSubView(_scriptName : string , _bundleName : string, _assetPath : string ,  _loadFinish : Function = null , _parent : Node = null)
     {
         let key = _bundleName + _assetPath;
         let index = this.mLayerList.findIndex((_item) => _item.key === key);
@@ -228,7 +230,7 @@ export abstract class BaseUI extends Component {
         } 
         else 
         {
-            this.LoadPrefab(_bundleName, _assetPath, (_node) => 
+            this.LoadPrefab(_scriptName , _bundleName, _assetPath, (_node) => 
             {
                 if (cc.isValid(this.node, true) == false) 
                 {

@@ -3,16 +3,9 @@
 export class GameConfig
 {   
     public static readonly DebugMode =  true;   //调试模式
-    
-
-    //发布的版本号
     public static Version = "1.1.6"
-      
     public static LOGIN_TOKEN;
-
-
     public static readonly WrongIndex = -99;//错误编号
-
     public static WEBSOCKET_ADDR = "www.baidu.com";
 
 

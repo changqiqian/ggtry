@@ -80,7 +80,7 @@ export class DropBox extends BaseUI
     {
         for(let i = 0 ; i < this.mTitles.length ; i++)
         {
-            this.LoadPrefab("common" , "prefab/DropBoxItem" , (_node)=>
+            this.LoadPrefab("DropBoxItem" , DropBoxItem.Bunddle,DropBoxItem.PrefabPath , (_node)=>
             {
                 let currentTitle = this.mTitles[i];
                 this.mDropDown.addChild(_node);

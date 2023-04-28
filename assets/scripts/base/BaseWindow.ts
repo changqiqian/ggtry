@@ -4,8 +4,11 @@ import { BaseUI } from './BaseUI';
 const { ccclass, property } = _decorator;
 
 @ccclass('BaseWindow')
-export class BaseWindow extends BaseUI {
+export class BaseWindow extends BaseUI 
+{
 
+    public static PrefabPath : string = "prefab/BaseWindow";
+    public static Bunddle : string = "common";
     @property(Node) 
     mDarkBG: Node = null;
     mAnimating : boolean  = false;
