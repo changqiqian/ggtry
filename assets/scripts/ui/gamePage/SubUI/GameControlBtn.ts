@@ -2,11 +2,12 @@ import { _decorator, Component, Node } from 'cc';
 import { BaseUI } from '../../../base/BaseUI';
 import { ToggleBtn } from '../../common/ToggleBtn';
 import { BaseButton } from '../../common/BaseButton';
-import { GameData } from '../GameData';
+import { BottomUIEnum, GameData } from '../GameData';
 import { GameStartBtn } from './GameStartBtn';
 import { AudioManager } from '../../../base/AudioManager';
 import { UIMgr } from '../../../base/UIMgr';
 import { GameMenu } from './GameMenu';
+import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameControlBtn')
@@ -15,35 +16,46 @@ export class GameControlBtn  extends BaseUI
     public static PrefabPath : string = "prefab/GameControlBtn";
     public static Bunddle : string = "gamePage";
 
+    mMovingShow : MovingShow = null;
     mFastModeToggle : ToggleBtn = null;
     mMinusBtn : BaseButton = null;
     mAddBtn : BaseButton = null;
-    mAutoToggle : ToggleBtn = null;
+    mAutoBtn : BaseButton = null;
     mMenuBtn : BaseButton = null;
+    public Show(_val : boolean)
+    {
+        if(_val)
+        {
+            this.node.active = true;
+        }
+        else
+        {
+            this.mMovingShow.HideAnimation();
+        }
+    }
     InitParam()
     {
         
     }
     BindUI()
     {
-        this.AddSubView("GameStartBtn" , GameStartBtn.Bunddle , GameStartBtn.PrefabPath);
+        this.mMovingShow = this.node.getChildByPath("MovingShow").getComponent(MovingShow);
+        this.mFastModeToggle = this.node.getChildByPath("MovingShow/FastModeToggle").getComponent(ToggleBtn);
+        this.mMinusBtn = this.node.getChildByPath("MovingShow/MinusBtn").getComponent(BaseButton);
+        this.mAddBtn = this.node.getChildByPath("MovingShow/AddBtn").getComponent(BaseButton);
+        this.mAutoBtn = this.node.getChildByPath("MovingShow/AutoBtn").getComponent(BaseButton);
+        this.mMenuBtn = this.node.getChildByPath("MovingShow/MenuBtn").getComponent(BaseButton);
 
-        this.mFastModeToggle = this.node.getChildByPath("FastModeToggle").getComponent(ToggleBtn);
-        this.mMinusBtn = this.node.getChildByPath("MinusBtn").getComponent(BaseButton);
-        this.mAddBtn = this.node.getChildByPath("AddBtn").getComponent(BaseButton);
-        this.mAutoToggle = this.node.getChildByPath("AutoToggle").getComponent(ToggleBtn);
-        this.mMenuBtn = this.node.getChildByPath("MenuBtn").getComponent(BaseButton);
+        this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
+        this.mMovingShow.SetRoot(this.node);
+        this.AddSubView("GameStartBtn" , GameStartBtn.Bunddle , GameStartBtn.PrefabPath,null,this.mMovingShow.node);
 
         this.mFastModeToggle.ShowUnselected();
         this.mFastModeToggle.SetClickCallback((_data)=>
         {
             GameData.Instance.Data_FastMode.mData = _data;
         });
-        this.mAutoToggle.ShowUnselected();
-        this.mAutoToggle.SetClickCallback((_data)=>
-        {
-            GameData.Instance.Data_AutoMode.mData = _data;
-        });
+
 
         this.mMinusBtn.SetClickCallback(()=>
         {
@@ -53,9 +65,13 @@ export class GameControlBtn  extends BaseUI
         {
             GameData.Instance.AddSingleBetAmount();
         });
+        this.mAutoBtn.SetClickCallback(()=>
+        {
+            GameData.Instance.Data_BottomUIEnum.mData = BottomUIEnum.AutoSettingUI;
+        });
         this.mMenuBtn.SetClickCallback(()=>
         {
-            UIMgr.Instance.ShowLayer("GameMenu",GameMenu.Bunddle,GameMenu.PrefabPath);
+            GameData.Instance.Data_BottomUIEnum.mData = BottomUIEnum.MenuUI;
         });
         GameData.Instance.Data_SingleBetIndex.mData = 0;
 

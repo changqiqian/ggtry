@@ -4,6 +4,7 @@ import { AnimationShowType, MovingShow } from '../../../UiTool/MovingShow';
 import { BaseButton } from '../../common/BaseButton';
 import { ToggleBtn } from '../../common/ToggleBtn';
 import { AudioManager } from '../../../base/AudioManager';
+import { BottomUIEnum, GameData } from '../GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameMenu')
@@ -49,7 +50,10 @@ export class GameMenu  extends BaseUI
         this.mMovingShow.SetAnimationType(AnimationShowType.FromBottom);
         this.mMovingShow.SetRoot(this.node);
 
-        this.AddTouchCloseEvent(this.mTouchCloseBG);
+        this.mTouchCloseBG.on(Node.EventType.TOUCH_END,()=>
+        {
+            GameData.Instance.Data_BottomUIEnum.mData = BottomUIEnum.PlayingUI;
+        },this);
 
         this.mExitBtn.SetClickCallback((_data)=>
         {
@@ -69,7 +73,7 @@ export class GameMenu  extends BaseUI
         });
         this.mCloseBtn.SetClickCallback((_data)=>
         {
-            this.Show(false);
+            GameData.Instance.Data_BottomUIEnum.mData = BottomUIEnum.PlayingUI;
         });
 
         this.mMusicToggle.SetClickCallback((_data)=>

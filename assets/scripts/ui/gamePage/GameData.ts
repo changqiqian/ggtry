@@ -11,8 +11,9 @@ export class GameData extends SingletonBaseNotify<GameData>()
     }
     Data_CurrentRewardRatioIndex : BaseData<number> = new BaseData<number>(); //游戏画面最顶部的基础奖励倍数选项
     Data_FastMode : BaseData<boolean> = new BaseData<boolean>(); //快速模式
-    Data_AutoMode : BaseData<boolean> = new BaseData<boolean>(); //自动模式
+    Data_AutoCountLeft : BaseData<number> = new BaseData<number>(); //自动模式剩余次数
     Data_SingleBetIndex : BaseData<number> = new BaseData<number>();//单次下注额选项
+    Data_BottomUIEnum : BaseData<BottomUIEnum> = new BaseData<BottomUIEnum>();//底部ui显示哪一个
 
 
     public AddSingleBetAmount()
@@ -52,4 +53,12 @@ export class GameData extends SingletonBaseNotify<GameData>()
     public static RewardRatioConfig = [1 , 2 , 3 , 5];
     //单次下注额度配置
     public static SingleBetConfig = [10 , 20 , 30 , 50 , 100 , 500 , 1000];
+}
+
+
+export enum BottomUIEnum
+{
+    PlayingUI = 0,
+    MenuUI ,
+    AutoSettingUI,
 }
