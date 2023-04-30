@@ -1,0 +1,65 @@
+{
+    "saveName": "BonusFont",
+    "bitMapCfg": [
+        {
+            "image": "/Users/yamiwang/Desktop/游戏BONUS/0.png",
+            "char": "0",
+            "width": 113,
+            "height": 136
+        },
+        {
+            "image": "/Users/yamiwang/Desktop/游戏BONUS/1.png",
+            "char": "1",
+            "width": 81,
+            "height": 134
+        },
+        {
+            "image": "/Users/yamiwang/Desktop/游戏BONUS/2.png",
+            "char": "2",
+            "width": 113,
+            "height": 136
+        },
+        {
+            "image": "/Users/yamiwang/Desktop/游戏BONUS/3.png",
+            "char": "3",
+            "width": 111,
+            "height": 138
+        },
+        {
+            "image": "/Users/yamiwang/Desktop/游戏BONUS/4.png",
+            "char": "4",
+            "width": 112,
+            "height": 141
+        },
+        {
+            "image": "/Users/yamiwang/Desktop/游戏BONUS/5.png",
+            "char": "5",
+            "width": 111,
+            "height": 139
+        },
+        {
+            "image": "/Users/yamiwang/Desktop/游戏BONUS/6.png",
+            "char": "6",
+            "width": 108,
+            "height": 137
+        },
+        {
+            "image": "/Users/yamiwang/Desktop/游戏BONUS/7.png",
+            "char": "7",
+            "width": 102,
+            "height": 133
+        },
+        {
+            "image": "/Users/yamiwang/Desktop/游戏BONUS/8.png",
+            "char": "8",
+            "width": 111,
+            "height": 137
+        },
+        {
+            "image": "/Users/yamiwang/Desktop/游戏BONUS/9.png",
+            "char": "9",
+            "width": 108,
+            "height": 137
+        }
+    ]
+}

@@ -12,6 +12,9 @@ export class GameTop extends BaseUI
     public static Bunddle : string = "gamePage";
 
     mLayout : Node = null;
+
+    mBonusBG : Node = null;
+    mLayoutBonus : Node = null;
     InitParam()
     {
 
@@ -26,11 +29,27 @@ export class GameTop extends BaseUI
             currentToggle.SetInteractable(false);
         }
 
+        this.mBonusBG = this.node.getChildByPath("TopBG1/BonusTopBG");
+        this.mLayoutBonus = this.node.getChildByPath("TopBG1/BonusTopBG/LayoutBonus");
+        for(let i = 0 ; i < this.mLayoutBonus.children.length ; i++)
+        {
+            let currentToggle = this.mLayoutBonus.children[i].getComponent(ToggleBtn);
+            currentToggle.SetDataNotify(GameData.Instance.Data_CurrentBonusRewardRatioIndex , i);
+            currentToggle.SetInteractable(false);
+        }
+
+        this.mBonusBG.active = false;
         GameData.Instance.Data_CurrentRewardRatioIndex.mData = 0;
+        GameData.Instance.Data_CurrentBonusRewardRatioIndex.mData = 0;
+
+        
     }
     RegDataNotify()
     {
-
+        GameData.Instance.Data_BonusMode.AddListenner(this,(_data)=>
+        {
+            this.mBonusBG.active = _data;
+        });
     }
     LateInit()
     {

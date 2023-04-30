@@ -7,6 +7,7 @@ import { GameControlBtn } from './SubUI/GameControlBtn';
 import { BottomUIEnum, GameData } from './GameData';
 import { GameMenu } from './SubUI/GameMenu';
 import { GameAutoSetting } from './SubUI/GameAutoSetting';
+import { GameBonusUI } from './SubUI/GameBonusUI';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameUI')
@@ -42,6 +43,11 @@ export class GameUI extends BaseUI
             {
                 UIMgr.Instance.ShowLayer("GameControlBtn" , GameControlBtn.Bunddle , GameControlBtn.PrefabPath)
             }
+        });
+
+        GameData.Instance.Data_BonusMode.AddListenner(this , (_data)=>
+        {
+            UIMgr.Instance.ShowLayer("GameBonusUI",GameBonusUI.Bunddle,GameBonusUI.PrefabPath,_data);
         });
     }
     LateInit()

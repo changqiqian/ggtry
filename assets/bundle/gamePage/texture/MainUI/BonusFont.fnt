@@ -1,0 +1,14 @@
+info face="face" size=141
+common lineHeight=141 scaleW=453 scaleH=418 pages=1
+page id=0 file="BonusFont.png"
+chars count=10
+char id=48 x=227 y=0 width=113 height=136 xoffset=0 yoffset=0 xadvance=113 page=0 chnl=15
+char id=49 x=220 y=281 width=81 height=134 xoffset=0 yoffset=0 xadvance=81 page=0 chnl=15
+char id=50 x=0 y=143 width=113 height=136 xoffset=0 yoffset=0 xadvance=113 page=0 chnl=15
+char id=51 x=342 y=0 width=111 height=138 xoffset=0 yoffset=0 xadvance=111 page=0 chnl=15
+char id=52 x=0 y=0 width=112 height=141 xoffset=0 yoffset=0 xadvance=112 page=0 chnl=15
+char id=53 x=114 y=0 width=111 height=139 xoffset=0 yoffset=0 xadvance=111 page=0 chnl=15
+char id=54 x=0 y=281 width=108 height=137 xoffset=0 yoffset=0 xadvance=108 page=0 chnl=15
+char id=55 x=115 y=143 width=102 height=133 xoffset=0 yoffset=0 xadvance=102 page=0 chnl=15
+char id=56 x=342 y=140 width=111 height=137 xoffset=0 yoffset=0 xadvance=111 page=0 chnl=15
+char id=57 x=110 y=281 width=108 height=137 xoffset=0 yoffset=0 xadvance=108 page=0 chnl=15

@@ -10,7 +10,7 @@
   "userData": {
     "maxWidth": 2048,
     "maxHeight": 2048,
-    "padding": 2,
+    "padding": 1,
     "allowRotation": true,
     "forceSquared": false,
     "powerOfTwo": false,
